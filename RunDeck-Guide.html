@@ -12548,11 +12548,13 @@ providers:
       ><p
       >You can use these metadata entries to declare configuration properties for your plugin:</p
       ><p
-      >For each configuration property you want to define, declare:</p
+      >Create a <code
+	>config</code
+	> entry in each provider definition, containing a sequence of map entries for each configuration property you want to define. In the map entry include:</p
       ><ul
       ><li
 	><code
-	  >config.X.type</code
+	  >type</code
 	  > - The type of property. Must be one of:<ul
 	  ><li
 	    ><code
@@ -12582,33 +12584,29 @@ providers:
 	  ></li
 	><li
 	><code
-	  >config.X.name</code
+	  >name</code
 	  > - Name to identify the property</li
 	><li
 	><code
-	  >config.X.title</code
+	  >title</code
 	  > - Title to display in the GUI (optional)</li
 	><li
 	><code
-	  >config.X.description</code
+	  >description</code
 	  > - Description to display in the GUI (optional)</li
 	><li
 	><code
-	  >config.X.required</code
+	  >required</code
 	  > - (true/false) if true, require a non-empty value (optional)</li
 	><li
 	><code
-	  >config.X.default</code
+	  >default</code
 	  > - A default value to use (optional)</li
 	><li
 	><code
-	  >config.X.values</code
+	  >values</code
 	  > - A comma-separated list of values to use for Select or FreeSelect. Required for Select/FreeSelect.</li
 	></ul
-      ><p
-      >Where X is a number starting at <code
-	>1</code
-	>, up to the number of configuration properties you want.</p
       ><p
       >When your script is invoked, each configuration property defined for the plugin will be set as <code
 	>config.NAME</code
@@ -12626,17 +12624,18 @@ providers:
       script-interpreter: bash -c
       script-file: generate.sh
       resource-format: resourceyaml
-      config.1.type: Integer
-      config.1.name: count
-      config.1.title: Count
-      config.1.description: Enter the number of nodes to generate
-      config.2.type: FreeSelect
-      config.2.name: flavor
-      config.2.title: Flavor
-      config.2.description: Select a flavor
-      config.2.required: true
-      config.2.default: vanilla
-      config.2.values: vanilla,blueberry,strawberry,chocolate
+      config:
+        - type: Integer
+          name: count
+          title: Count
+          description: Enter the number of nodes to generate
+        - type: FreeSelect
+          name: flavor
+          title: Flavor
+          description: Select a flavor
+          required: true
+          default: vanilla
+          values: vanilla,blueberry,strawberry,chocolate
 </code
 	></pre
       ></div
