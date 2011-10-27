@@ -1023,6 +1023,14 @@
 	  ><span class="toc-section-number"
 	    >8.4</span
 	    > Backup and recovery</a
+	  ><ul
+	  ><li
+	    ><a href="#recovery"
+	      ><span class="toc-section-number"
+		>8.4.1</span
+		> Recovery</a
+	      ></li
+	    ></ul
 	  ></li
 	><li
 	><a href="#relational-database"
@@ -6779,7 +6787,7 @@ grails.mail.default.from=deployer@domain.com
 	> Backup and recovery</a
       ></h2
     ><p
-    >RunDeck backup should only be done with the server down.</p
+    >While running, export the Job definitions if you do not have these in source control:</p
     ><ol style="list-style-type: decimal;"
     ><li
       ><p
@@ -6796,7 +6804,7 @@ rd-jobs list -f /path/to/backup/dir/project2/jobs.xml -p project2
       ><p
 	>Stop the server. See: <a href="#startup-and-shtudown"
 	  >startup and shutdown</a
-	  ></p
+	  >. (RunDeck data file backup should only be done with the server down.)</p
 	><pre
 	><code
 	  >rundeckd stop
@@ -6818,7 +6826,28 @@ rd-jobs list -f /path/to/backup/dir/project2/jobs.xml -p project2
 	      ></p
 	    ><pre
 	    ><code
-	      > cp -r data /path/to/backup/dir
+	      >cp -r data /path/to/backup/dir
+</code
+	      ></pre
+	    ></li
+	  ></ul
+	></li
+      ><li
+      ><p
+	>Copy the log (execution output) files.</p
+	><ul
+	><li
+	  >RPM install: <code
+	    >/var/lib/rundeck/logs</code
+	    ></li
+	  ><li
+	  ><p
+	    >Launcher install: <code
+	      >$RDECK_BASE/var/logs</code
+	      ></p
+	    ><pre
+	    ><code
+	      >cp -r logs /path/to/backup/dir
 </code
 	      ></pre
 	    ></li
@@ -6829,11 +6858,61 @@ rd-jobs list -f /path/to/backup/dir/project2/jobs.xml -p project2
 	>Start the server</p
 	><pre
 	><code
-	  > rundeckd start    
+	  > rundeckd start
 </code
 	  ></pre
 	></li
       ></ol
+    ><div id="recovery"
+    ><h3
+      ><a href="#TOC"
+	><span class="header-section-number"
+	  >8.4.1</span
+	  > Recovery</a
+	></h3
+      ><ol style="list-style-type: decimal;"
+      ><li
+	><p
+	  >Stop the server. See: <a href="#startup-and-shtudown"
+	    >startup and shutdown</a
+	    >. (RunDeck recovery should only be done with the server down.)</p
+	  ><pre
+	  ><code
+	    >rundeckd stop
+</code
+	    ></pre
+	  ></li
+	><li
+	><p
+	  >Restore data/logs dir from backup (Refer to above for appropriate log/data path):</p
+	  ><pre
+	  ><code
+	    >cp -r /path/to/backup/logs logspath
+cp -r /path/to/backup/data datapath
+</code
+	    ></pre
+	  ></li
+	><li
+	><p
+	  >Start the server:</p
+	  ><pre
+	  ><code
+	    >rundeckd start
+</code
+	    ></pre
+	  ></li
+	><li
+	><p
+	  >Reload the Job definitions. You will have to do this for each project:</p
+	  ><pre
+	  ><code
+	    >rd-jobs load -f /path/to/backup/dir/project1/jobs.xml -p project1
+rd-jobs load -f /path/to/backup/dir/project2/jobs.xml -p project2
+</code
+	    ></pre
+	  ></li
+	></ol
+      ></div
     ></div
   ><div id="relational-database"
   ><h2
@@ -7248,7 +7327,23 @@ CRYPT:jsnDAc2Xk4W4o
 </code
 	    ></pre
 	  ></li
-	><li
+	></ol
+      ><p
+      ><strong
+	>Note</strong
+	>: The <code
+	>bindDn</code
+	> and <code
+	>bindPassword</code
+	> must escape any special characters with <code
+	>\</code
+	> character. Special characters include <code
+	>\</code
+	> (backslash), as well as <code
+	>!</code
+	> (exclamation).</p
+      ><ol start="2" style="list-style-type: decimal;"
+      ><li
 	><p
 	  >To override the default JAAS configuration file, you will need to supply the RunDeck server with the proper path to the new one, and a <code
 	    >loginmodule.name</code
