@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title>RunDeck 1.4.0 Upgrade Guide</title>
+  <title>RunDeck 1.4.0.2 Upgrade Guide</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="Greg Schueler" />
@@ -10,7 +10,7 @@
 </head>
 <body>
 <div id="docbody">
-<h1 class="title">RunDeck 1.4.0 Upgrade Guide</h1>
+<h1 class="title">RunDeck 1.4.0.2 Upgrade Guide</h1>
 <div id="TOC"
 ><ul
   ><li
@@ -20,75 +20,95 @@
 	> Important Changes in RunDeck 1.4</a
       ></li
     ><li
-    ><a href="#database-changes"
+    ><a href="#upgrade-procedure"
       ><span class="toc-section-number"
 	>2</span
+	> Upgrade procedure</a
+      ><ul
+      ><li
+	><a href="#system-packaging"
+	  ><span class="toc-section-number"
+	    >2.1</span
+	    > System packaging</a
+	  ></li
+	><li
+	><a href="#launcher-jar"
+	  ><span class="toc-section-number"
+	    >2.2</span
+	    > Launcher Jar</a
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#database-changes"
+      ><span class="toc-section-number"
+	>3</span
 	> Database changes</a
       ></li
     ><li
     ><a href="#acl-policy-changes"
       ><span class="toc-section-number"
-	>3</span
+	>4</span
 	> ACL Policy changes</a
       ><ul
       ><li
 	><a href="#shortest-path"
 	  ><span class="toc-section-number"
-	    >3.1</span
+	    >4.1</span
 	    > Shortest Path</a
 	  ></li
 	><li
 	><a href="#authorization-and-acl-policy-changes"
 	  ><span class="toc-section-number"
-	    >3.2</span
+	    >4.2</span
 	    > Authorization and Acl Policy changes</a
 	  ></li
 	><li
 	><a href="#managing-acl-policy-files"
 	  ><span class="toc-section-number"
-	    >3.3</span
+	    >4.3</span
 	    > Managing ACL Policy files</a
 	  ></li
 	><li
 	><a href="#format"
 	  ><span class="toc-section-number"
-	    >3.4</span
+	    >4.4</span
 	    > Format</a
 	  ></li
 	><li
 	><a href="#action-names"
 	  ><span class="toc-section-number"
-	    >3.5</span
+	    >4.5</span
 	    > Action names</a
 	  ></li
 	><li
 	><a href="#converting-xml-aclpolicy-files"
 	  ><span class="toc-section-number"
-	    >3.6</span
+	    >4.6</span
 	    > Converting XML aclpolicy files</a
 	  ></li
 	><li
 	><a href="#converting-older-yaml-files"
 	  ><span class="toc-section-number"
-	    >3.7</span
+	    >4.7</span
 	    > Converting older YAML files</a
 	  ></li
 	><li
 	><a href="#adding-the-new-authorizations"
 	  ><span class="toc-section-number"
-	    >3.8</span
+	    >4.8</span
 	    > Adding the new Authorizations</a
 	  ></li
 	><li
 	><a href="#converting-mapped-roles"
 	  ><span class="toc-section-number"
-	    >3.9</span
+	    >4.9</span
 	    > Converting Mapped Roles</a
 	  ></li
 	><li
 	><a href="#example-admin.aclpolicy"
 	  ><span class="toc-section-number"
-	    >3.10</span
+	    >4.10</span
 	    > Example admin.aclpolicy</a
 	  ></li
 	></ul
@@ -115,12 +135,80 @@
       >ACL Policy file format and behavior changes</a
       ></li
     ></ol
+  ><p
+  ><strong
+    >Note:</strong
+    > before upgrading, it is a good idea to back up your RunDeck installation using the instructions here: <a href="http://rundeck.org/docs/RunDeck-Guide.html#backup-and-recovery"
+    >Backup and Recovery</a
+    >.</p
+  ></div
+><div id="upgrade-procedure"
+><h1
+  ><a href="#TOC"
+    ><span class="header-section-number"
+      >2</span
+      > Upgrade procedure</a
+    ></h1
+  ><div id="system-packaging"
+  ><h2
+    ><a href="#TOC"
+      ><span class="header-section-number"
+	>2.1</span
+	> System packaging</a
+      ></h2
+    ><p
+    >If you are using RPM or Debian packaging, refer to the basic <a href="http://rundeck.org/downloads.html"
+      >Install Instructions</a
+      >, and simply upgrade the package.</p
+    ></div
+  ><div id="launcher-jar"
+  ><h2
+    ><a href="#TOC"
+      ><span class="header-section-number"
+	>2.2</span
+	> Launcher Jar</a
+      ></h2
+    ><p
+    >For the Rundeck Launcher jar, you can follow this basic procedure:</p
+    ><ol style="list-style-type: decimal;"
+    ><li
+      >Stop the currently running RunDeck java process</li
+      ><li
+      >Copy the new <code
+	>rundeck-launcher-1.4x.jar</code
+	> file either to your <code
+	>$RDECK_BASE</code
+	> directory, or wherever you had your previous jar</li
+      ><li
+      >Remove these directories from your previous <code
+	>$RDECK_BASE</code
+	>:<ul
+	><li
+	  ><code
+	    >$RDECK_BASE/server/lib</code
+	    ></li
+	  ><li
+	  ><code
+	    >$RDECK_BASE/server/exp</code
+	    ></li
+	  ><li
+	  ><code
+	    >$RDECK_BASE/tools</code
+	    ></li
+	  ></ul
+	></li
+      ><li
+      >You can now start Rundeck with the new launcher jar, either specifying the <code
+	>-b basedir</code
+	> option, or leaving it off to use the directory the launcher jar is in.</li
+      ></ol
+    ></div
   ></div
 ><div id="database-changes"
 ><h1
   ><a href="#TOC"
     ><span class="header-section-number"
-      >2</span
+      >3</span
       > Database changes</a
     ></h1
   ><p
@@ -149,7 +237,7 @@
 ><h1
   ><a href="#TOC"
     ><span class="header-section-number"
-      >3</span
+      >4</span
       > ACL Policy changes</a
     ></h1
   ><p
@@ -158,7 +246,7 @@
   ><h2
     ><a href="#TOC"
       ><span class="header-section-number"
-	>3.1</span
+	>4.1</span
 	> Shortest Path</a
       ></h2
     ><p
@@ -172,7 +260,7 @@
   ><h2
     ><a href="#TOC"
       ><span class="header-section-number"
-	>3.2</span
+	>4.2</span
 	> Authorization and Acl Policy changes</a
       ></h2
     ><p
@@ -226,7 +314,7 @@
   ><h2
     ><a href="#TOC"
       ><span class="header-section-number"
-	>3.3</span
+	>4.3</span
 	> Managing ACL Policy files</a
       ></h2
     ><p
@@ -256,7 +344,7 @@
   ><h2
     ><a href="#TOC"
       ><span class="header-section-number"
-	>3.4</span
+	>4.4</span
 	> Format</a
       ></h2
     ><p
@@ -342,7 +430,7 @@
   ><h2
     ><a href="#TOC"
       ><span class="header-section-number"
-	>3.5</span
+	>4.5</span
 	> Action names</a
       ></h2
     ><p
@@ -394,7 +482,7 @@
   ><h2
     ><a href="#TOC"
       ><span class="header-section-number"
-	>3.6</span
+	>4.6</span
 	> Converting XML aclpolicy files</a
       ></h2
     ><p
@@ -462,7 +550,7 @@ xmlstarlet sel -t --match '//policy' -o '---' -n -o 'description: ' -v '@descrip
   ><h2
     ><a href="#TOC"
       ><span class="header-section-number"
-	>3.7</span
+	>4.7</span
 	> Converting older YAML files</a
       ></h2
     ><p
@@ -521,7 +609,7 @@ by:
   ><h2
     ><a href="#TOC"
       ><span class="header-section-number"
-	>3.8</span
+	>4.8</span
 	> Adding the new Authorizations</a
       ></h2
     ><p
@@ -641,7 +729,7 @@ by:
   ><h2
     ><a href="#TOC"
       ><span class="header-section-number"
-	>3.9</span
+	>4.9</span
 	> Converting Mapped Roles</a
       ></h2
     ><p
@@ -717,7 +805,7 @@ by:
   ><h2
     ><a href="#TOC"
       ><span class="header-section-number"
-	>3.10</span
+	>4.10</span
 	> Example admin.aclpolicy</a
       ></h2
     ><p
@@ -741,7 +829,7 @@ for:
   adhoc:
     - allow: [run,kill] # allow running/killing adhoc jobs
   job: 
-    - allow: [read,update,delete,run,kill] # allow read/write/delete/run/kill of all jobs
+    - allow: [create,read,update,delete,run,kill] # allow create/read/write/delete/run/kill of all jobs
   node:
     - allow: [read,run] # allow read/run for nodes
 by:
