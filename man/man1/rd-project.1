@@ -1,0 +1,77 @@
+.TH RD-PROJECT 1 "August 17, 2011" "RunDeck User Manuals" "Version 1.4.1"
+.SH NAME
+.PP
+rd-project - Create projects.
+.SH SYNOPSIS
+.PP
+rd-project [-vh] -a create -p projectname [ --property=value ]\&...
+.SH DESCRIPTION
+.PP
+The rd-project command is used to create projects in the RunDeck
+base directory.
+.PP
+The command will create the necessary directory structure and
+configuration files, and can be used to configure the project's
+properties.
+.SH OPTIONS
+.TP
+.B \f[B]-h\f[]
+displays the usage information presented above.
+.RS
+.RE
+.TP
+.B \f[B]-v\f[]
+run verbose.
+.RS
+.RE
+.TP
+.B \f[B]-a\f[]
+The action name.
+Only \[lq]create\[rq] is supported.
+.RS
+.RE
+.TP
+.B \f[B]-p\f[]
+The project name
+.RS
+.RE
+.TP
+.B \f[B]--property=value\f[]
+Specify property values for the project's configuration file.
+Include one or more --property=value combinations.
+.RS
+.RE
+.SH ENVIRONMENT VARIABLES
+.PP
+The following environment variables are assumed during the
+execution of rd-setup:
+.IP \[bu] 2
+JAVA_HOME :Java installation directory
+.IP \[bu] 2
+RDECK_BASE : RunDeck framework instance directory
+.SH EXECUTION
+.PP
+\f[I]Examples\f[]
+.PP
+Create a new project named \[lq]production\[rq]:
+.PP
+\f[CR]
+      rd-project\ -a\ create\ -p\ production
+\f[]
+.PP
+Create a new project and specify the \[lq]project.ssh-keypath\[rq]
+value as well as a URL for the \[lq]project.resources.url\[rq]
+.PP
+\f[CR]
+      rd-project\ -a\ create\ -p\ production\ --project.ssh-keypath=/path/to/keyfile\ \\
+      --project.resources.url=http://example.com/nodes
+\f[]
+.SH SEE ALSO
+.PP
+\f[B]rundeck\f[] (1), \f[B]rd-setup\f[] (1).
+.PP
+The RunDeck source code and all documentation may be downloaded
+from <https://github.com/dtolabs/rundeck/>.
+.SH AUTHORS
+Greg Schueler.
+
