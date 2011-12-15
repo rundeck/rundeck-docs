@@ -14,27 +14,33 @@
 <div id="TOC"
 ><ul
   ><li
-    ><a href="#important-changes-in-rundeck-1.4"
+    ><a href="#important-changes-in-rundeck-1.4.1"
       ><span class="toc-section-number"
 	>1</span
+	> Important Changes in RunDeck 1.4.1</a
+      ></li
+    ><li
+    ><a href="#important-changes-in-rundeck-1.4"
+      ><span class="toc-section-number"
+	>2</span
 	> Important Changes in RunDeck 1.4</a
       ></li
     ><li
     ><a href="#upgrade-procedure"
       ><span class="toc-section-number"
-	>2</span
+	>3</span
 	> Upgrade procedure</a
       ><ul
       ><li
 	><a href="#system-packaging"
 	  ><span class="toc-section-number"
-	    >2.1</span
+	    >3.1</span
 	    > System packaging</a
 	  ></li
 	><li
 	><a href="#launcher-jar"
 	  ><span class="toc-section-number"
-	    >2.2</span
+	    >3.2</span
 	    > Launcher Jar</a
 	  ></li
 	></ul
@@ -42,73 +48,73 @@
     ><li
     ><a href="#database-changes"
       ><span class="toc-section-number"
-	>3</span
+	>4</span
 	> Database changes</a
       ></li
     ><li
     ><a href="#acl-policy-changes"
       ><span class="toc-section-number"
-	>4</span
+	>5</span
 	> ACL Policy changes</a
       ><ul
       ><li
 	><a href="#shortest-path"
 	  ><span class="toc-section-number"
-	    >4.1</span
+	    >5.1</span
 	    > Shortest Path</a
 	  ></li
 	><li
 	><a href="#authorization-and-acl-policy-changes"
 	  ><span class="toc-section-number"
-	    >4.2</span
+	    >5.2</span
 	    > Authorization and Acl Policy changes</a
 	  ></li
 	><li
 	><a href="#managing-acl-policy-files"
 	  ><span class="toc-section-number"
-	    >4.3</span
+	    >5.3</span
 	    > Managing ACL Policy files</a
 	  ></li
 	><li
 	><a href="#format"
 	  ><span class="toc-section-number"
-	    >4.4</span
+	    >5.4</span
 	    > Format</a
 	  ></li
 	><li
 	><a href="#action-names"
 	  ><span class="toc-section-number"
-	    >4.5</span
+	    >5.5</span
 	    > Action names</a
 	  ></li
 	><li
 	><a href="#converting-xml-aclpolicy-files"
 	  ><span class="toc-section-number"
-	    >4.6</span
+	    >5.6</span
 	    > Converting XML aclpolicy files</a
 	  ></li
 	><li
 	><a href="#converting-older-yaml-files"
 	  ><span class="toc-section-number"
-	    >4.7</span
+	    >5.7</span
 	    > Converting older YAML files</a
 	  ></li
 	><li
 	><a href="#adding-the-new-authorizations"
 	  ><span class="toc-section-number"
-	    >4.8</span
+	    >5.8</span
 	    > Adding the new Authorizations</a
 	  ></li
 	><li
 	><a href="#converting-mapped-roles"
 	  ><span class="toc-section-number"
-	    >4.9</span
+	    >5.9</span
 	    > Converting Mapped Roles</a
 	  ></li
 	><li
 	><a href="#example-admin.aclpolicy"
 	  ><span class="toc-section-number"
-	    >4.10</span
+	    >5.10</span
 	    > Example admin.aclpolicy</a
 	  ></li
 	></ul
@@ -116,11 +122,36 @@
     ></ul
   ></div
 >
-<div id="important-changes-in-rundeck-1.4"
+<div id="important-changes-in-rundeck-1.4.1"
 ><h1
   ><a href="#TOC"
     ><span class="header-section-number"
       >1</span
+      > Important Changes in RunDeck 1.4.1</a
+    ></h1
+  ><p
+  >In RunDeck 1.4.0.x, the new ACL Policy format used an incorrect property key (&quot;job&quot;) to check Job Authorizations by name. The correct key was used in all documentation, but not in the underlying code. The correct key is &quot;name&quot;.</p
+  ><p
+  >This issue has been fixed in RunDeck 1.4.1, however if you were using the incorrect key previously, you will have to change your aclpolicy files to the correct key.</p
+  ><p
+  >The <a href="../RunDeck-Guide.html#project-scope-resources-and-actions"
+    >Project Scope Resources and Actions</a
+    > section shows the correct way to authorize Job resources by name:</p
+  ><pre
+  ><code
+    >for:
+  job:
+    - equals:
+        name: bob
+      allow: [run]
+</code
+    ></pre
+  ></div
+><div id="important-changes-in-rundeck-1.4"
+><h1
+  ><a href="#TOC"
+    ><span class="header-section-number"
+      >2</span
       > Important Changes in RunDeck 1.4</a
     ></h1
   ><p
@@ -146,14 +177,14 @@
 ><h1
   ><a href="#TOC"
     ><span class="header-section-number"
-      >2</span
+      >3</span
       > Upgrade procedure</a
     ></h1
   ><div id="system-packaging"
   ><h2
     ><a href="#TOC"
       ><span class="header-section-number"
-	>2.1</span
+	>3.1</span
 	> System packaging</a
       ></h2
     ><p
@@ -165,7 +196,7 @@
   ><h2
     ><a href="#TOC"
       ><span class="header-section-number"
-	>2.2</span
+	>3.2</span
 	> Launcher Jar</a
       ></h2
     ><p
@@ -208,7 +239,7 @@
 ><h1
   ><a href="#TOC"
     ><span class="header-section-number"
-      >3</span
+      >4</span
       > Database changes</a
     ></h1
   ><p
@@ -237,7 +268,7 @@
 ><h1
   ><a href="#TOC"
     ><span class="header-section-number"
-      >4</span
+      >5</span
       > ACL Policy changes</a
     ></h1
   ><p
@@ -246,7 +277,7 @@
   ><h2
     ><a href="#TOC"
       ><span class="header-section-number"
-	>4.1</span
+	>5.1</span
 	> Shortest Path</a
       ></h2
     ><p
@@ -260,7 +291,7 @@
   ><h2
     ><a href="#TOC"
       ><span class="header-section-number"
-	>4.2</span
+	>5.2</span
 	> Authorization and Acl Policy changes</a
       ></h2
     ><p
@@ -314,7 +345,7 @@
   ><h2
     ><a href="#TOC"
       ><span class="header-section-number"
-	>4.3</span
+	>5.3</span
 	> Managing ACL Policy files</a
       ></h2
     ><p
@@ -344,7 +375,7 @@
   ><h2
     ><a href="#TOC"
       ><span class="header-section-number"
-	>4.4</span
+	>5.4</span
 	> Format</a
       ></h2
     ><p
@@ -430,7 +461,7 @@
   ><h2
     ><a href="#TOC"
       ><span class="header-section-number"
-	>4.5</span
+	>5.5</span
 	> Action names</a
       ></h2
     ><p
@@ -482,7 +513,7 @@
   ><h2
     ><a href="#TOC"
       ><span class="header-section-number"
-	>4.6</span
+	>5.6</span
 	> Converting XML aclpolicy files</a
       ></h2
     ><p
@@ -550,7 +581,7 @@ xmlstarlet sel -t --match '//policy' -o '---' -n -o 'description: ' -v '@descrip
   ><h2
     ><a href="#TOC"
       ><span class="header-section-number"
-	>4.7</span
+	>5.7</span
 	> Converting older YAML files</a
       ></h2
     ><p
@@ -609,7 +640,7 @@ by:
   ><h2
     ><a href="#TOC"
       ><span class="header-section-number"
-	>4.8</span
+	>5.8</span
 	> Adding the new Authorizations</a
       ></h2
     ><p
@@ -729,7 +760,7 @@ by:
   ><h2
     ><a href="#TOC"
       ><span class="header-section-number"
-	>4.9</span
+	>5.9</span
 	> Converting Mapped Roles</a
       ></h2
     ><p
@@ -805,7 +836,7 @@ by:
   ><h2
     ><a href="#TOC"
       ><span class="header-section-number"
-	>4.10</span
+	>5.10</span
 	> Example admin.aclpolicy</a
       ></h2
     ><p
