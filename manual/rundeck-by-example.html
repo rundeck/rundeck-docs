@@ -10,23 +10,23 @@
   <link rel="stylesheet" href="../style.css" type="text/css" />
 </head>
 <body>
-<header>
-<nav>
+
+
+<nav class="breadcrumb top">
     <ul>
-        <li><a class="toppage" href="../index.html">Rundeck Documentation 1.4.1</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.1)</a></li>
     </ul>
 </nav>
-</header>
-<div id="docbody">
 
 <nav class="page top">
     <ul>
         <li class="current"><a href="rundeck-by-example.html">Rundeck by Example</a></li>
-        <li class="toc"><a href="index.html">Rundeck User Manual</a></li>
+        <li class="toc"><a href="index.html">User Manual</a></li>
         <li class="prev"><a href="job-options.html">Job Options</a></li>
         <li class="next"><a href="plugins.html">Plugins</a></li>
     </ul>
 </nav>
+<div id="docbody">
 <h1 class="title">Rundeck by Example</h1>
 <div id="TOC"
 ><ul
@@ -120,7 +120,7 @@
 ><p
 >A project called &quot;anvils&quot; is created to manage the application support activities.</p
 ><p
->The administrator creates the project using the <a href="../rd-project.html"
+>The administrator creates the project using the <a href="../manpages/man1/rd-project.html"
   >rd-project</a
   > shell tool though this could be done with the Rundeck GUI (see (<a href="rundeck-basics.html#project-setup"
   >project setup</a
@@ -139,9 +139,9 @@
 ><p
 >Additionally, the administrator decides to incorporate a recent convention to use different system logins to execute SSH commands to control running application components. The web component are run as the &quot;www&quot; user while the app and database components run as user &quot;anvils&quot;.</p
 ><p
->With this information in hand, the administrator prepares the project resource model using the <a href="../resource-v13.html"
+>With this information in hand, the administrator prepares the project resource model using the <a href="../manpages/man5/resource-v13.html"
   >resource-v13(5) XML</a
-  > or <a href="../resource-yaml-v13.html"
+  > or <a href="../manpages/man5/resource-yaml-v13.html"
   >resource-v13(5) YAML</a
   > document format. The file listing below contains the node definitions for the five nodes -- anv1, anv2, anv3, anv4, anv5:</p
 ><p
@@ -206,7 +206,7 @@
   >Tag classification and command dispatching</a
   ></h2
 ><p
->With tags that describe application role, commands can be targeted to specific sub sets of nodes without hard coding any hostnames. The <a href="../dispatch.html"
+>With tags that describe application role, commands can be targeted to specific sub sets of nodes without hard coding any hostnames. The <a href="../manpages/man1/dispatch.html"
   >dispatch</a
   > command's listing feature illustrates how tag filtering selects particular node sets in the shell:</p
 ><p
@@ -417,7 +417,7 @@ echo Web stopped with method: $1.
 ><p
 >With an understanding of the scripts and the option needed to control the restart operation, the final step is to compose the Job definitions.</p
 ><p
->While each job can be defined graphically in Rundeck, each can succinctly be defined using an XML file conforming to the <a href="../job-v20.html"
+>While each job can be defined graphically in Rundeck, each can succinctly be defined using an XML file conforming to the <a href="../manpages/man5/job-v20.html"
   >job-v20(5)</a
   > document format. This document contains a set of tags corresponding to the choices seen in the Rundeck GUI form.</p
 ><p
@@ -545,7 +545,7 @@ echo Web stopped with method: $1.]]&gt;&lt;/script&gt;
   >once</strong
   >, on the server node. The Job references will each be called once, and the &quot;start&quot; and &quot;stop&quot; Jobs will each be dispatched to the nodes they define.</p
 ><p
->Saving the XML definitions files located on the Rundeck server, one can load them using the <a href="../rd-jobs.html"
+>Saving the XML definitions files located on the Rundeck server, one can load them using the <a href="../manpages/man1/rd-jobs.html"
   >rd-jobs</a
   > command.</p
 ><p
@@ -597,7 +597,7 @@ Found 3 jobs:
   >Restart run page</p
   ></div
 ><p
->The jobs can also be started from the command line using the <a href="../run.html"
+>The jobs can also be started from the command line using the <a href="../manpages/man1/run.html"
   >run</a
   > shell tool. The job group and name are specified using the &quot;-j&quot; parameter. Any options the Job supports are supplied after the &quot;--&quot; (double dash) parameter. (The &quot;-p&quot; parameter specifies the project, but it can be left out if there is only one project available.)</p
 ><p
@@ -619,7 +619,7 @@ Found 3 jobs:
   >Job access control</a
   ></h2
 ><p
->Access to running or modifying Jobs is managed in an access control policy defined using the aclpolicy document format (<a href="../aclpolicy-v10.html"
+>Access to running or modifying Jobs is managed in an access control policy defined using the aclpolicy document format (<a href="../manpages/man5/aclpolicy-v10.html"
   >aclpolicy-v10(5)</a
   >). This file contains a number of policy elements that describe what user group is allowed to perform which actions. The <a href="getting-started.html#authorization"
   >Authorization</a
@@ -699,16 +699,22 @@ Found 3 jobs:
   >Chapter 9 - Option Model Provider</a
   >.</p
 >
+</div>
+
+<nav class="breadcrumb bottom">
+    <ul>
+        <li><a href="../index.html">Rundeck Documentation (1.4.1)</a></li>
+    </ul>
+</nav>
 
 <nav class="page bottom">
     <ul>
         <li class="current"><a href="rundeck-by-example.html">Rundeck by Example</a></li>
-        <li class="toc"><a href="index.html">Rundeck User Manual</a></li>
+        <li class="toc"><a href="index.html">User Manual</a></li>
         <li class="prev"><a href="job-options.html">Job Options</a></li>
         <li class="next"><a href="plugins.html">Plugins</a></li>
     </ul>
 </nav>
-</div>
 <footer class="copy">
 
 <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">DTO Solutions</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.

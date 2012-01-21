@@ -10,23 +10,23 @@
   <link rel="stylesheet" href="../style.css" type="text/css" />
 </head>
 <body>
-<header>
-<nav>
+
+
+<nav class="breadcrumb top">
     <ul>
-        <li><a class="toppage" href="../index.html">Rundeck Documentation 1.4.1</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.1)</a></li>
     </ul>
 </nav>
-</header>
-<div id="docbody">
 
 <nav class="page top">
     <ul>
         <li class="current"><a href="job-workflows.html">Job Workflows</a></li>
-        <li class="toc"><a href="index.html">Rundeck User Manual</a></li>
+        <li class="toc"><a href="index.html">User Manual</a></li>
         <li class="prev"><a href="jobs.html">Jobs</a></li>
         <li class="next"><a href="job-options.html">Job Options</a></li>
     </ul>
 </nav>
+<div id="docbody">
 <h1 class="title">Job Workflows</h1>
 <div id="TOC"
 ><ul
@@ -93,18 +93,18 @@
 >Users preferring to define Jobs in a text format should refer to the two format definitions:</p
 ><ul
 ><li
-  >XML: <a href="../job-v20.html"
+  >XML: <a href="../manpages/man5/job-v20.html"
     >job-v20(5)</a
     ></li
   ><li
-  >YAML: <a href="../job-yaml-v12.5.html"
+  >YAML: <a href="../manpages/man5/job-yaml-v12.html"
     >job-yaml-v12(5)</a
     ></li
   ></ul
 ><p
 >It is also possible to author Jobs inside the graphical console and then export the definition as a file using the <code
   >rd-jobs</code
-  > shell tool (<a href="../rd-jobs.html"
+  > shell tool (<a href="../manpages/man1/rd-jobs.html"
   >rd-jobs(1)</a
   >).</p
 ><p
@@ -300,7 +300,7 @@ EOF
 ><p
 >This would set the value &quot;something&quot; for the Job's &quot;opt1&quot; option, and then pass the &quot;opt2&quot; option directly from the top-level job to the Job reference.</p
 ><p
->This is similar to calling the other Job with <a href="../run.html"
+>This is similar to calling the other Job with <a href="../manpages/man1/run.html"
   >run</a
   >:</p
 ><pre
@@ -344,16 +344,22 @@ EOF
 ><p
 >Next, we'll cover more about Rundeck's Job Option features.</p
 >
+</div>
+
+<nav class="breadcrumb bottom">
+    <ul>
+        <li><a href="../index.html">Rundeck Documentation (1.4.1)</a></li>
+    </ul>
+</nav>
 
 <nav class="page bottom">
     <ul>
         <li class="current"><a href="job-workflows.html">Job Workflows</a></li>
-        <li class="toc"><a href="index.html">Rundeck User Manual</a></li>
+        <li class="toc"><a href="index.html">User Manual</a></li>
         <li class="prev"><a href="jobs.html">Jobs</a></li>
         <li class="next"><a href="job-options.html">Job Options</a></li>
     </ul>
 </nav>
-</div>
 <footer class="copy">
 
 <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">DTO Solutions</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.

@@ -10,23 +10,23 @@
   <link rel="stylesheet" href="../style.css" type="text/css" />
 </head>
 <body>
-<header>
-<nav>
+
+
+<nav class="breadcrumb top">
     <ul>
-        <li><a class="toppage" href="../index.html">Rundeck Documentation 1.4.1</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.1)</a></li>
     </ul>
 </nav>
-</header>
-<div id="docbody">
 
 <nav class="page top">
     <ul>
         <li class="current"><a href="job-options.html">Job Options</a></li>
-        <li class="toc"><a href="index.html">Rundeck User Manual</a></li>
+        <li class="toc"><a href="index.html">User Manual</a></li>
         <li class="prev"><a href="job-workflows.html">Job Workflows</a></li>
         <li class="next"><a href="rundeck-by-example.html">Rundeck by Example</a></li>
     </ul>
 </nav>
+<div id="docbody">
 <h1 class="title">Job Options</h1>
 <div id="TOC"
 ><ul
@@ -184,11 +184,11 @@
 ><p
 >Moving the mouse over any row in the options editor reveals links to delete or edit the highlighted option. Pressing the remove icon will display a prompt confirming you want to delete that option from the Job. Clicking the &quot;edit&quot; link opens a new form that lets you modify all aspects of that option.</p
 ><p
->Options can also be defined as part of a job definition and later loaded to the Rundeck server. See <a href="../job-v20.html"
+>Options can also be defined as part of a job definition and later loaded to the Rundeck server. See <a href="../manpages/man5/job-v20.html"
   >job-v20(5)</a
-  >(XML) and <a href="../job-yaml-v12.html"
+  >(XML) and <a href="../manpages/man5/job-yaml-v12.html"
   >job-yaml-v12(5)</a
-  >(YAML) and <a href="../rd-jobs.html"
+  >(YAML) and <a href="../manpages/man1/rd-jobs.html"
   >rd-jobs(1)</a
   > manual pages if you prefer using an textual Job definition.</p
 ><h2 id="defining-an-option"
@@ -430,9 +430,9 @@ run -j group/name -p project -- -paramA valA -paramB valB
 </code
   ></pre
 ><p
->Consult the <a href="../run.html"
+>Consult the <a href="../manpages/man1/run.html"
   >run(1)</a
-  > and <a href="../job-v20.html"
+  > and <a href="../manpages/man5/job-v20.html"
   >job-v20(5)</a
   > manual pages for additional information.</p
 ><h2 id="option-model-provider"
@@ -474,7 +474,7 @@ run -j group/name -p project -- -paramA valA -paramB valB
   >Configuration</a
   ></h3
 ><p
->Each Option entry for a Job can be configured to get the set of possible values from a remote URL. If you are authoring the Jobs via <a href="../job-v20.html#option"
+>Each Option entry for a Job can be configured to get the set of possible values from a remote URL. If you are authoring the Jobs via <a href="../manpages/man5/job-v20.html#option"
   >job.xml file format</a
   >, simply add a <code
   >valuesUrl</code
@@ -797,16 +797,22 @@ echo '}'
     ></ol
   ></div
 >
+</div>
+
+<nav class="breadcrumb bottom">
+    <ul>
+        <li><a href="../index.html">Rundeck Documentation (1.4.1)</a></li>
+    </ul>
+</nav>
 
 <nav class="page bottom">
     <ul>
         <li class="current"><a href="job-options.html">Job Options</a></li>
-        <li class="toc"><a href="index.html">Rundeck User Manual</a></li>
+        <li class="toc"><a href="index.html">User Manual</a></li>
         <li class="prev"><a href="job-workflows.html">Job Workflows</a></li>
         <li class="next"><a href="rundeck-by-example.html">Rundeck by Example</a></li>
     </ul>
 </nav>
-</div>
 <footer class="copy">
 
 <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">DTO Solutions</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.

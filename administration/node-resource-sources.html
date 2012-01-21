@@ -7,23 +7,23 @@
   <link rel="stylesheet" href="../style.css" type="text/css" />
 </head>
 <body>
-<header>
-<nav>
+
+
+<nav class="breadcrumb top">
     <ul>
-        <li><a class="toppage" href="../index.html">Rundeck Documentation 1.4.1</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.1)</a></li>
     </ul>
 </nav>
-</header>
-<div id="docbody">
 
 <nav class="page top">
     <ul>
-        <li class="current"><a href="node-resource-sources.html">Chapter 4: Node Resource Sources</a></li>
-        <li class="toc"><a href="index.html">Rundeck Administration Guide</a></li>
-        <li class="prev"><a href="configuration.html">Chapter 3: Configuration</a></li>
-        <li class="next"><a href="logs.html">Chapter 5: Logs</a></li>
+        <li class="current"><a href="node-resource-sources.html">Node Resource Sources</a></li>
+        <li class="toc"><a href="index.html">Administration Guide</a></li>
+        <li class="prev"><a href="configuration.html">Configuration</a></li>
+        <li class="next"><a href="logs.html">Logs</a></li>
     </ul>
 </nav>
+<div id="docbody">
 <h1 class="title">Node Resource Sources</h1>
 <div id="TOC"
 ><ul
@@ -378,9 +378,9 @@ secretKey=&lt;your secret key&gt;
   >Definition</a
   ></h3
 ><p
->The <a href="../resource-v13.html"
+>The <a href="../manpages/man5/resource-v13.html"
   >Rundeck resource model document format</a
-  > and the <a href="../resource-yaml-v13.html"
+  > and the <a href="../manpages/man5/resource-yaml-v13.html"
   >resource-yaml-v13</a
   > format provide two attributes that help connect the dots between the Rundeck UI and the editing interface provided by the external data management tool. They can use <code
   >editUrl</code
@@ -728,16 +728,22 @@ secretKey=&lt;your secret key&gt;
 ><p
 >To complete the round-trip of editing a Node and then showing the results back in Rundeck, the ndbtest project would have to export XML formatted Resource data, and then your Rundeck project.properties file would have to point to the appropriate URL. (This is left as an exercise to the reader.)</p
 >
+</div>
+
+<nav class="breadcrumb bottom">
+    <ul>
+        <li><a href="../index.html">Rundeck Documentation (1.4.1)</a></li>
+    </ul>
+</nav>
 
 <nav class="page bottom">
     <ul>
-        <li class="current"><a href="node-resource-sources.html">Chapter 4: Node Resource Sources</a></li>
-        <li class="toc"><a href="index.html">Rundeck Administration Guide</a></li>
-        <li class="prev"><a href="configuration.html">Chapter 3: Configuration</a></li>
-        <li class="next"><a href="logs.html">Chapter 5: Logs</a></li>
+        <li class="current"><a href="node-resource-sources.html">Node Resource Sources</a></li>
+        <li class="toc"><a href="index.html">Administration Guide</a></li>
+        <li class="prev"><a href="configuration.html">Configuration</a></li>
+        <li class="next"><a href="logs.html">Logs</a></li>
     </ul>
 </nav>
-</div>
 <footer class="copy">
 
 <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">DTO Solutions</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.

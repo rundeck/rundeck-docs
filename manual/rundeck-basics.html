@@ -10,23 +10,23 @@
   <link rel="stylesheet" href="../style.css" type="text/css" />
 </head>
 <body>
-<header>
-<nav>
+
+
+<nav class="breadcrumb top">
     <ul>
-        <li><a class="toppage" href="../index.html">Rundeck Documentation 1.4.1</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.1)</a></li>
     </ul>
 </nav>
-</header>
-<div id="docbody">
 
 <nav class="page top">
     <ul>
         <li class="current"><a href="rundeck-basics.html">Rundeck Basics</a></li>
-        <li class="toc"><a href="index.html">Rundeck User Manual</a></li>
+        <li class="toc"><a href="index.html">User Manual</a></li>
         <li class="prev"><a href="getting-started.html">Getting Started</a></li>
         <li class="next"><a href="jobs.html">Jobs</a></li>
     </ul>
 </nav>
+<div id="docbody">
 <h1 class="title">Rundeck Basics</h1>
 <div id="TOC"
 ><ul
@@ -550,13 +550,13 @@
 >Rundeck currently has two resource model document formats built in:</p
 ><ul
 ><li
-  >XML: <a href="../resource-v13.html"
+  >XML: <a href="../manpages/man5/resource-v13.html"
     >resource-v13(5) XML</a
     >. Format name: <code
     >resourcexml</code
     >.</li
   ><li
-  >Yaml: <a href="../resource-yaml-v13.html"
+  >Yaml: <a href="../manpages/man5/resource-yaml-v13.html"
     >resource-v13(5) YAML</a
     >. Format name: <code
     >resourceyaml</code
@@ -711,7 +711,7 @@
 </code
   ></pre
 ><p
->Consult the <a href="../rd-options.html"
+>Consult the <a href="../manpages/man1/rd-options.html"
   >rd-options(1)</a
   > manual page for the complete reference on available dispatcher options.</p
 ><h3 id="ad-hoc-commands"
@@ -786,9 +786,9 @@ Queued job ID: 7 &lt;http://strongbad:4440/execution/follow/7&gt;
   >dispatch</code
   > commands. That feature can be handy when Nodes serve different roles and therefore, use different logins to manage processes. See the <code
   >username</code
-  > attribute in <a href="../resource-v13.html"
+  > attribute in <a href="../manpages/man5/resource-v13.html"
   >resource-v13(5) XML</a
-  > or <a href="../resource-yaml-v13.html"
+  > or <a href="../manpages/man5/resource-yaml-v13.html"
   >resource-v13(5) YAML</a
   > manual page.</p
 ><p
@@ -1028,7 +1028,7 @@ $ dispatch -I centos54 -s ~/bin/checkagain.sh -- $iters $secs $ports
   >Now Running</a
   >&quot; area at the top of the page.</p
 ><p
->Execution can also be tracked using the <a href="../rd-queue.html"
+>Execution can also be tracked using the <a href="../manpages/man1/rd-queue.html"
   >rd-queue</a
   > shell tool.</p
 ><pre
@@ -1261,16 +1261,22 @@ rd-queue kill: success. [5] Job status: killed
     ></ol
   ></div
 >
+</div>
+
+<nav class="breadcrumb bottom">
+    <ul>
+        <li><a href="../index.html">Rundeck Documentation (1.4.1)</a></li>
+    </ul>
+</nav>
 
 <nav class="page bottom">
     <ul>
         <li class="current"><a href="rundeck-basics.html">Rundeck Basics</a></li>
-        <li class="toc"><a href="index.html">Rundeck User Manual</a></li>
+        <li class="toc"><a href="index.html">User Manual</a></li>
         <li class="prev"><a href="getting-started.html">Getting Started</a></li>
         <li class="next"><a href="jobs.html">Jobs</a></li>
     </ul>
 </nav>
-</div>
 <footer class="copy">
 
 <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">DTO Solutions</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
