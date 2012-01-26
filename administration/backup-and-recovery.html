@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Backup and Recovery</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body>
+
+
+<nav class="breadcrumb top">
+    <ul>
+        <li><a href="../index.html">Rundeck Documentation (1.4.2)</a></li>
+    </ul>
+</nav>
+
+<nav class="page top">
+    <ul>
+        <li class="current"><a href="backup-and-recovery.html">Backup and Recovery</a></li>
+        <li class="toc"><a href="index.html">Administration Guide</a></li>
+        <li class="prev"><a href="scaling-rundeck.html">Scaling Rundeck</a></li>
+        <li class="next"><a href="node-resource-sources.html">Node Resource Sources</a></li>
+    </ul>
+</nav>
+<div id="docbody">
+<h1 class="title">Backup and Recovery</h1>
+<div id="TOC"
+><ul
+  ><li
+    ><a href="#backup"
+      >Backup</a
+      ></li
+    ><li
+    ><a href="#recovery"
+      >Recovery</a
+      ></li
+    ></ul
+  ></div
+>
+<div id="backup"
+><h2
+  ><a href="#TOC"
+    >Backup</a
+    ></h2
+  ><p
+  >While running, export the Job definitions if you do not have these in source control:</p
+  ><ol style="list-style-type: decimal;"
+  ><li
+    ><p
+      >Export the jobs. You will have to do this for each project</p
+      ><pre
+      ><code
+	>rd-jobs list -f /path/to/backup/dir/project1/jobs.xml -p project1
+rd-jobs list -f /path/to/backup/dir/project2/jobs.xml -p project2
+...
+</code
+	></pre
+      ></li
+    ><li
+    ><p
+      >Stop the server. See: <a href="#startup-and-shtudown"
+	>startup and shutdown</a
+	>. (Rundeck data file backup should only be done with the server down.)</p
+      ><pre
+      ><code
+	>rundeckd stop
+</code
+	></pre
+      ></li
+    ><li
+    ><p
+      >Copy the data files. (Assumes file datastore configuration). The location of the data directory depends on the installation method:</p
+      ><ul
+      ><li
+	>RPM install: <code
+	  >/var/lib/rundeck/data</code
+	  ></li
+	><li
+	><p
+	  >Launcher install: <code
+	    >$RDECK_BASE/server/data</code
+	    ></p
+	  ><pre
+	  ><code
+	    >cp -r data /path/to/backup/dir
+</code
+	    ></pre
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><p
+      >Copy the log (execution output) files.</p
+      ><ul
+      ><li
+	>RPM install: <code
+	  >/var/lib/rundeck/logs</code
+	  ></li
+	><li
+	><p
+	  >Launcher install: <code
+	    >$RDECK_BASE/var/logs</code
+	    ></p
+	  ><pre
+	  ><code
+	    >cp -r logs /path/to/backup/dir
+</code
+	    ></pre
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><p
+      >Start the server</p
+      ><pre
+      ><code
+	> rundeckd start
+</code
+	></pre
+      ></li
+    ></ol
+  ></div
+><div id="recovery"
+><h2
+  ><a href="#TOC"
+    >Recovery</a
+    ></h2
+  ><ol style="list-style-type: decimal;"
+  ><li
+    ><p
+      >Stop the server. See: <a href="#startup-and-shtudown"
+	>startup and shutdown</a
+	>. (Rundeck recovery should only be done with the server down.)</p
+      ><pre
+      ><code
+	>rundeckd stop
+</code
+	></pre
+      ></li
+    ><li
+    ><p
+      >Restore data/logs dir from backup (Refer to above for appropriate log/data path):</p
+      ><pre
+      ><code
+	>cp -r /path/to/backup/logs logspath
+cp -r /path/to/backup/data datapath
+</code
+	></pre
+      ></li
+    ><li
+    ><p
+      >Start the server:</p
+      ><pre
+      ><code
+	>rundeckd start
+</code
+	></pre
+      ></li
+    ><li
+    ><p
+      >Reload the Job definitions. You will have to do this for each project:</p
+      ><pre
+      ><code
+	>rd-jobs load -f /path/to/backup/dir/project1/jobs.xml -p project1
+rd-jobs load -f /path/to/backup/dir/project2/jobs.xml -p project2
+</code
+	></pre
+      ></li
+    ></ol
+  ></div
+>
+</div>
+
+<nav class="page bottom">
+    <ul>
+        <li class="current"><a href="backup-and-recovery.html">Backup and Recovery</a></li>
+        <li class="toc"><a href="index.html">Administration Guide</a></li>
+        <li class="prev"><a href="scaling-rundeck.html">Scaling Rundeck</a></li>
+        <li class="next"><a href="node-resource-sources.html">Node Resource Sources</a></li>
+    </ul>
+</nav>
+<nav class="breadcrumb bottom">
+    <ul>
+        <li><a href="../index.html">Rundeck Documentation (1.4.2)</a></li>
+    </ul>
+</nav>
+<footer class="copy">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">DTO Solutions</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+
+<br/>
+&copy;2012 DTO Solutions
+
+</footer>
+</body>
+</html>

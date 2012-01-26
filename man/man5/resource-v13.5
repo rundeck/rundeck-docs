@@ -1,0 +1,194 @@
+.TH RESOURCE-V13 5 "November 20, 2010" "Rundeck User Manuals" "Version 1.3"
+.SH NAME
+.PP
+resource-v13 - describes the Rundeck resource model document
+.PP
+The Resource Model XML document declares a resource model that can
+also be uploaded to a project hosted on the Rundeck server.
+This document describes the format and necessary elements.
+.SH Elements
+.PP
+The root (aka \[lq]top-level\[rq]) element of the resource file is
+called \f[B]project\f[].
+.SS project
+.PP
+Project defines all the resources.
+.PP
+Can contain the following elements:
+.TP
+.B node (#node)
+A node resource element.
+.RS
+.RE
+.PP
+\f[I]Example\f[]
+.PP
+\f[CR]
+      <project>
+      \ \ <node\ .../>
+      </project>
+\f[]
+.SS node
+.PP
+The node element defines a Node resource.
+.PP
+\f[I]Attributes\f[]
+.TP
+.B name
+The node name.
+This is a logical identifier from the node.
+(required)
+.RS
+.RE
+.TP
+.B description
+A brief description about the node.
+(optional)
+.RS
+.RE
+.TP
+.B hostname
+The hostname or IP address of the remote host.
+(required)
+.RS
+.RE
+.TP
+.B osArch
+The operating system architecture.
+(optional)
+.RS
+.RE
+.TP
+.B osFamily
+The operating system family, such as unix or windows.
+(optional)
+.RS
+.RE
+.TP
+.B osName
+The operating system name such as Linux or Mac OS X.
+(optional)
+.RS
+.RE
+.TP
+.B tags
+Comma separated list of filtering tags.
+(optional)
+.RS
+.RE
+.TP
+.B username
+The username used for the remote connection.
+(required)
+.RS
+.RE
+.TP
+.B editUrl
+URL to an external resource model editor service (optional)
+.RS
+.RE
+.TP
+.B remoteUrl
+URL to an external resource model service.
+(optional)
+.RS
+.RE
+.TP
+.B \f[I]anything\f[]
+Any user-supplied attributes can be specified to add additional
+metadata about a node.
+.RS
+.RE
+.PP
+\f[I]Nested Elements\f[]
+.TP
+.B attribute (#attribute)
+Further user defined attributes.
+.RS
+.RE
+.SS attribute
+.PP
+Defines a single metadata attribute for the node, as an alternative
+to specifying it as a XML attribute on the \f[B]<node>\f[] element
+itself.
+.PP
+\f[I]Attributes\f[]
+.TP
+.B name
+The name of the attribute
+.RS
+.RE
+.TP
+.B value
+The value of the attribute
+.RS
+.RE
+.PP
+Alternatively, the value can be specified as nested text content.
+.PP
+Examples:
+.PP
+\f[CR]
+      <attribute\ name="server-path"\ value="/var/myapp"/>
+      
+      <attribute\ name="server-port">9010</attribute>
+\f[]
+.SS Examples
+.PP
+Define a node named \[lq]strongbad\[rq]:
+.PP
+\f[CR]
+      <node\ name="strongbad"\ type="Node"
+      \ \ \ \ description="a\ development\ host"
+      \ \ \ \ hostname="strongbad.local"
+      \ \ \ \ osArch="i386"\ osFamily="unix"\ osName="Darwin"\ osVersion="9.2.2"
+      \ \ \ \ username="alexh"/>
+\f[]
+.PP
+Define a node of the type LinuxNode that has a \f[B]https-port\f[]
+attribute:
+.PP
+\f[CR]
+      <node\ type="LinuxNode"\ name="centos54"\ hostname="centos54.local"
+      \ \ \ \ \ \ description="Sample\ Linux\ node"\ tags="sample,linux"
+      \ \ \ \ \ \ >
+      \ \ \ \ <attribute\ name="https-port"\ value="435"/>
+      </node>
+\f[]
+.PP
+Define a node named that uses a non standard SSH port.
+The \[lq]hostname\[rq] value is overloaded to include the port
+(192.168.1.106:4022):
+.PP
+\f[CR]
+      <node\ name="centos54"\ type="Node"
+      \ \ \ \ description="a\ centos\ host"
+      \ \ \ \ hostname="192.168.1.106:4022"
+      \ \ \ \ username="deploy"
+      \ \ \ \ />
+\f[]
+.PP
+An example using just the required attributes:
+.PP
+\f[CR]
+      <node\ name="centos54"\ type="Node"
+      \ \ \ \ hostname="192.168.1.106:4022"
+      \ \ \ \ username="deploy"/>
+\f[]
+.PP
+An example with a custom attribute \[lq]appname\[rq] specified in
+the \f[B]<node>\f[] element:
+.PP
+\f[CR]
+      <node\ name="centos54"\ type="Node"
+      \ \ \ \ hostname="192.168.1.106:4022"
+      \ \ \ \ username="deploy"
+      \ \ \ \ appname="CoolApp"
+      \ \ \ \ />
+\f[]
+.PP
+The Rundeck source code and all documentation may be downloaded
+from <https://github.com/dtolabs/rundeck/>.
+.SH AUTHORS
+Alex Honor.
+
