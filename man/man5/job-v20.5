@@ -72,6 +72,11 @@ group name
 .RS
 .RE
 .TP
+.B multipleExecutions (#multipleexecutions)
+If the job can be executed multiple times simultaneously
+.RS
+.RE
+.TP
 .B context (#context)
 command context
 .RS
@@ -124,7 +129,6 @@ Execute the Unix `who' command
       \ \ <job>
       \ \ \ \ <name>who\[aq]s\ logged\ in?</name>
       \ \ \ \ <description>Runs\ the\ unix\ who\ command</description>
-      \ \ \ \ <additional/>
       \ \ \ \ <group>sysadm/users</group>
       \ \ \ \ <context>
       \ \ \ \ \ \ <project>default</project>
@@ -155,7 +159,6 @@ Execute a Bash script
       \ \ <job>
       \ \ \ \ <name>a\ simple\ script</name>
       \ \ \ \ <description>Runs\ a\ trivial\ bash\ script</description>
-      \ \ \ \ <additional/>
       \ \ \ \ <group>sysadm/users</group>
       \ \ \ \ <context>
       \ \ \ \ \ \ <project>default</project>
@@ -183,7 +186,6 @@ Execute a sequence of other commands, scripts and jobs:
       \ \ <job>
       \ \ \ \ <name>test\ coreutils</name>
       \ \ \ \ <description/>
-      \ \ \ \ <additional/>
       \ \ \ \ <context>
       \ \ \ \ \ \ <project>default</project>
       \ \ \ \ </context>
@@ -223,10 +225,6 @@ must be unique if the uuid (#uuid) identifier is not included.
 .PP
 The job description is a sub-element of job (#job) and allows a
 short description of the job.
-.SS additional
-.PP
-The additional element is a sub-element of job (#job) and provides
-a place to declare additional user information.
 .SS group
 .PP
 The group is a sub-element of job (#job) and defines the job's
@@ -240,8 +238,21 @@ directory structure.
       <job>
       \ \ \ \ <name>who</name>
       \ \ \ \ <description>who\ is\ logged\ in?</description>
-      \ \ \ \ <additional/>
       \ \ \ \ <group>/sysadm/users</group>
+      </job>
+\f[]
+.SS multipleExecutions
+.PP
+Boolean value: `true/false'.
+If `true', then the job can be run multiple times at once.
+Otherwise, the Job can only have a single execution at a time.
+.PP
+\f[CR]
+      <job>
+      \ \ \ \ <name>who</name>
+      \ \ \ \ <description>who\ is\ logged\ in?</description>
+      \ \ \ \ <group>/sysadm/users</group>
+      \ \ \ \ <multipleExecutions>true</multipleExecutions>
       </job>
 \f[]
 .SS schedule

@@ -62,12 +62,12 @@
 	  >description</a
 	  ></li
 	><li
-	><a href="#additional"
-	  >additional</a
-	  ></li
-	><li
 	><a href="#group"
 	  >group</a
+	  ></li
+	><li
+	><a href="#multipleexecutions"
+	  >multipleExecutions</a
 	  ></li
 	><li
 	><a href="#schedule"
@@ -332,6 +332,14 @@
 	>group name</p
 	></dd
       ><dt
+      ><a href="#multipleexecutions"
+	>multipleExecutions</a
+	></dt
+      ><dd
+      ><p
+	>If the job can be executed multiple times simultaneously</p
+	></dd
+      ><dt
       ><a href="#context"
 	>context</a
 	></dt
@@ -408,7 +416,6 @@
   &lt;job&gt;
     &lt;name&gt;who's logged in?&lt;/name&gt;
     &lt;description&gt;Runs the unix who command&lt;/description&gt;
-    &lt;additional/&gt;
     &lt;group&gt;sysadm/users&lt;/group&gt;
     &lt;context&gt;
       &lt;project&gt;default&lt;/project&gt;
@@ -440,7 +447,6 @@
   &lt;job&gt;
     &lt;name&gt;a simple script&lt;/name&gt;
     &lt;description&gt;Runs a trivial bash script&lt;/description&gt;
-    &lt;additional/&gt;
     &lt;group&gt;sysadm/users&lt;/group&gt;
     &lt;context&gt;
       &lt;project&gt;default&lt;/project&gt;
@@ -469,7 +475,6 @@ exit 0 ]]&gt;&lt;/script&gt;
   &lt;job&gt;
     &lt;name&gt;test coreutils&lt;/name&gt;
     &lt;description/&gt;
-    &lt;additional/&gt;
     &lt;context&gt;
       &lt;project&gt;default&lt;/project&gt;
     &lt;/context&gt;
@@ -530,16 +535,6 @@ exit 0 ]]&gt;&lt;/script&gt;
       >job</a
       > and allows a short description of the job.</p
     ></div
-  ><div id="additional"
-  ><h2
-    ><a href="#TOC"
-      >additional</a
-      ></h2
-    ><p
-    >The additional element is a sub-element of <a href="#job"
-      >job</a
-      > and provides a place to declare additional user information.</p
-    ></div
   ><div id="group"
   ><h2
     ><a href="#TOC"
@@ -558,8 +553,25 @@ exit 0 ]]&gt;&lt;/script&gt;
       >&lt;job&gt;
     &lt;name&gt;who&lt;/name&gt;
     &lt;description&gt;who is logged in?&lt;/description&gt;
-    &lt;additional/&gt;
     &lt;group&gt;/sysadm/users&lt;/group&gt;
+&lt;/job&gt;
+</code
+      ></pre
+    ></div
+  ><div id="multipleexecutions"
+  ><h2
+    ><a href="#TOC"
+      >multipleExecutions</a
+      ></h2
+    ><p
+    >Boolean value: 'true/false'. If 'true', then the job can be run multiple times at once. Otherwise, the Job can only have a single execution at a time.</p
+    ><pre
+    ><code
+      >&lt;job&gt;
+    &lt;name&gt;who&lt;/name&gt;
+    &lt;description&gt;who is logged in?&lt;/description&gt;
+    &lt;group&gt;/sysadm/users&lt;/group&gt;
+    &lt;multipleExecutions&gt;true&lt;/multipleExecutions&gt;
 &lt;/job&gt;
 </code
       ></pre

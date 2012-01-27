@@ -83,10 +83,30 @@
 	  >Simple saved job</a
 	  ></li
 	><li
+	><a href="#multiple-executions"
+	  >Multiple Executions</a
+	  ></li
+	><li
 	><a href="#node-dispatching-and-filtering"
 	  >Node dispatching and filtering</a
 	  ><ul
 	  ><li
+	    ><a href="#filters"
+	      >Filters</a
+	      ></li
+	    ><li
+	    ><a href="#threadcount"
+	      >Threadcount</a
+	      ></li
+	    ><li
+	    ><a href="#rank-order"
+	      >Rank order</a
+	      ></li
+	    ><li
+	    ><a href="#keepgoing"
+	      >Keepgoing</a
+	      ></li
+	    ><li
 	    ><a href="#dynamic-node-filters"
 	      >Dynamic node filters</a
 	      ></li
@@ -478,6 +498,23 @@ Job execution started:
 	></li
       ></ol
     ></div
+  ><div id="multiple-executions"
+  ><h3
+    ><a href="#TOC"
+      >Multiple Executions</a
+      ></h3
+    ><p
+    >By default, a saved job is &quot;Single Execution&quot;: it can only have a single execution running at a time. This is useful if the steps the Job performs might be interfered with if another separate process was also performing them on the same Node(s).</p
+    ><p
+    >However, in some cases it is useful to allow a Job to be executed more than once simultaneously.</p
+    ><p
+    >You can make a job allow &quot;Multiple Executions&quot; by toggling the value to Yes in the Job editor field shown below:</p
+    ><div class="figure"
+    ><img src="../figures/fig-manual-jobs-multiexec.png" alt="Multiple executions"
+       /><p class="caption"
+      >Multiple executions</p
+      ></div
+    ></div
   ><div id="node-dispatching-and-filtering"
   ><h3
     ><a href="#TOC"
@@ -492,14 +529,44 @@ Job execution started:
        /><p class="caption"
       >Node Filtering interface</p
       ></div
-    ><p
-    >You can click the different filter fields &quot;Name&quot;, and &quot;Tags&quot; to enter filter values for those fields. As you update the values you will see the &quot;Matched Nodes&quot; section updated to reflect the list of nodes that will match the inputs. You can click &quot;More&quot; to see more of the available inclusion filters, and you can click &quot;Extended Filters&quot; to enter exclusion filters for the same fields.</p
-    ><p
-    >You can set the maximum number of simultaneous threads to use by changing the &quot;Thread Count&quot; box. A value of 1 means all node dispatches happen sequentially, and any greater value means that the node dispatches will happen in parallel.</p
-    ><p
-    >If you set &quot;Keep going on error?&quot; to &quot;Yes&quot;, then if any node dispatches fail for any reason, the rest will continue to be executed until all have been executed. At the end of the workflow for all nodes, the Job Execution will fail if any of the nodes had failed.</p
-    ><p
-    >If you leave it at the default value of &quot;No&quot;, then if any node dispatches fail for any reason, no further dispatches will be executed and the Job Execution will fail immediately.</p
+    ><div id="filters"
+    ><h4
+      ><a href="#TOC"
+	>Filters</a
+	></h4
+      ><p
+      >You can click the different filter fields &quot;Name&quot;, and &quot;Tags&quot; to enter filter values for those fields. As you update the values you will see the &quot;Matched Nodes&quot; section updated to reflect the list of nodes that will match the inputs. You can click &quot;More&quot; to see more of the available inclusion filters, and you can click &quot;Extended Filters&quot; to enter exclusion filters for the same fields.</p
+      ></div
+    ><div id="threadcount"
+    ><h4
+      ><a href="#TOC"
+	>Threadcount</a
+	></h4
+      ><p
+      >You can set the maximum number of simultaneous threads to use by changing the &quot;Thread Count&quot; box. A value of 1 means all node dispatches happen sequentially, and any greater value means that the node dispatches will happen in parallel.</p
+      ></div
+    ><div id="rank-order"
+    ><h4
+      ><a href="#TOC"
+	>Rank order</a
+	></h4
+      ><p
+      >You can change the order in which nodes are executed on by setting the &quot;Rank Attribute&quot; and &quot;Rank Order&quot;. By default nodes are ordered by name (&quot;nodename&quot; attribute) in ascending order. You can change the node attribute to sort on by entering it here, for example &quot;rank&quot;, and you can change the order to descending to sort in reverse.</p
+      ><p
+      >If the attribute you use has an integer number value, then the nodes will be sorted numerically by that attribute, rather than lexically. Otherwise the sort is based on the string value rather than the integer value.</p
+      ><p
+      >Any nodes without the specified attribute will then be sorted by their names.</p
+      ></div
+    ><div id="keepgoing"
+    ><h4
+      ><a href="#TOC"
+	>Keepgoing</a
+	></h4
+      ><p
+      >If you set &quot;Keep going on error?&quot; to &quot;Yes&quot;, then if any node dispatches fail for any reason, the rest will continue to be executed until all have been executed. At the end of the workflow for all nodes, the Job Execution will fail if any of the nodes had failed.</p
+      ><p
+      >If you leave it at the default value of &quot;No&quot;, then if any node dispatches fail for any reason, no further dispatches will be executed and the Job Execution will fail immediately.</p
+      ></div
     ><div id="dynamic-node-filters"
     ><h4
       ><a href="#TOC"
