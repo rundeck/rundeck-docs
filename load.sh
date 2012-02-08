@@ -2,12 +2,15 @@
 
 JAR=$1
 VERS=$2
+SKIPBRANCH=$3
 
 if [ -z "$JAR" -o -z "$VERS" ] ; then
   echo "Usage: load.sh <path to launcher.jar> <version>"
   exit 2
 fi
-git checkout -b docs$VERS
+if [ "--skip" neq "${SKIPBRANCH}" ] ; then
+    git checkout -b docs$VERS
+fi
 
 mkdir temp
 pushd temp
