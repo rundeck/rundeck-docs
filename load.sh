@@ -8,12 +8,13 @@ if [ -z "$JAR" -o -z "$VERS" ] ; then
   echo "Usage: load.sh <path to launcher.jar> <version>"
   exit 2
 fi
-if [ "--skip" neq "${SKIPBRANCH}" ] ; then
+if [ "--skip" != "${SKIPBRANCH}" ] ; then
     git checkout -b docs$VERS
 fi
 
 mkdir temp
 pushd temp
+echo jar xvf $JAR docs
 jar xvf $JAR docs
 popd
 cp -r temp/docs/* .
