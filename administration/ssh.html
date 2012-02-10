@@ -11,7 +11,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.2)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.2-rc3)</a></li>
     </ul>
 </nav>
 
@@ -76,13 +76,13 @@
     ><li
     >For public/private key authentication:<ul
       ><li
-	>No passphrase should be set on the private key.</li
-	><li
-	>SSH should not prompt for a password. There are many resources available on how to configure ssh to use public key authentication instead of passwords such as: <a href="http://www.debian-administration.org/articles/152"
+	>There are many resources available on how to configure ssh to use public key authentication instead of passwords such as: <a href="http://www.debian-administration.org/articles/152"
 	  >Password-less logins with OpenSSH</a
 	  > or <a href="http://www.cs.wustl.edu/~mdeters/how-to/ssh/"
 	  >How-To: Password-less SSH</a
-	  ></li
+	  >.</li
+	><li
+	>If your private key file has a passphrase, each Job definition that will execute on the node must be configured correctly.</li
 	></ul
       ></li
     ><li
@@ -94,6 +94,10 @@
 	></ul
       ></li
     ></ul
+  ><p
+  >For information on configuring Nodes, Jobs and Password options for jobs, see the <a href="../manual/plugins.html#ssh-provider"
+    >User Manual - Plugins - SSH Provider</a
+    > section.</p
   ></div
 ><div id="ssh-key-generation"
 ><h2
@@ -219,7 +223,7 @@ AcceptEnv RD_*
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.2)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.2-rc3)</a></li>
     </ul>
 </nav>
 <footer class="copy">
@@ -229,7 +233,7 @@ AcceptEnv RD_*
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2012-02-08T20:55:56UTC">2012-02-08T20:55:56UTC</span>
+<span class="generated-date" title="2012-02-10T02:55:59UTC">2012-02-10T02:55:59UTC</span>
 
 </footer>
 </body>
