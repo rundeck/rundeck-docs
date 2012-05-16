@@ -13,7 +13,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.2)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.3-rc1)</a></li>
     </ul>
 </nav>
 
@@ -617,6 +617,14 @@ providers:
       ><code
 	>script-args</code
 	> - the arguments to use when executing the script file.</li
+      ><li
+      ><code
+	>interpreter-args-quoted</code
+	> - true/false - (default false). If true, the execution will be done by passing the file and args as a single argument to the interpreter: <code
+	>${interpreter} &quot;${file} ${arg1} ${arg2}...&quot;</code
+	>. If false, the execution will be done by passing the file and args as separate arguments: <code
+	>${interpreter} ${file} ${arg1} ${arg2}...</code
+	></li
       ></ul
     ></div
   ><div id="configurable-resource-model-source-script-plugin"
@@ -761,6 +769,38 @@ providers:
 	> for each configuration property KEY that is defined.</li
       ></ul
     ><p
+    >All script-plugins will also be provided with these context entries:</p
+    ><ul
+    ><li
+      ><code
+	>rundeck.base</code
+	> - base directory of the Rundeck installation</li
+      ><li
+      ><code
+	>rundeck.project</code
+	> - project name</li
+      ><li
+      ><code
+	>plugin.base</code
+	> - base directory of the expanded 'contents' dir of the plugin</li
+      ><li
+      ><code
+	>plugin.file</code
+	> - the plugin file itself</li
+      ><li
+      ><code
+	>plugin.scriptfile</code
+	> - the path to the script file being executed for the plugin</li
+      ><li
+      ><code
+	>plugin.vardir</code
+	> - var dir the plugin can use for caching data, local to the project</li
+      ><li
+      ><code
+	>plugin.tmpdir</code
+	> - temp dir the plugin can use</li
+      ></ul
+    ><p
     >In addition, all of the data-context properties that are available in the <code
       >script-args</code
       > are provided as environment variables to the script or interpreter when it is executed.</p
@@ -854,7 +894,11 @@ providers:
       ><p
 	>All output on <code
 	  >STDOUT</code
-	  > will be captured and passed to the p</p
+	  > will be captured and passed to a <code
+	  >ResourceFormatParser</code
+	  > for the specified <code
+	  >resource-format</code
+	  > to create the Node definitions.</p
 	></dd
       ></dl
     ></div
@@ -872,7 +916,7 @@ providers:
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.2)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.3-rc1)</a></li>
     </ul>
 </nav>
 <footer class="copy">
@@ -882,7 +926,7 @@ providers:
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2012-02-10T21:06:39UTC">2012-02-10T21:06:39UTC</span>
+<span class="generated-date" title="2012-05-16T16:56:52EDT">2012-05-16T16:56:52EDT</span>
 
 </footer>
 </body>

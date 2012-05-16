@@ -14,7 +14,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.2)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.3-rc1)</a></li>
     </ul>
 </nav>
 
@@ -35,8 +35,22 @@
       >Prompting the user</a
       ></li
     ><li
+    ><a href="#input-types"
+      >Input Types</a
+      ></li
+    ><li
     ><a href="#secure-options"
       >Secure Options</a
+      ><ul
+      ><li
+	><a href="#secure-remote-authentication-options"
+	  >Secure Remote Authentication Options</a
+	  ></li
+	><li
+	><a href="#using-secure-options-with-job-references"
+	  >Using Secure Options with Job References</a
+	  ></li
+	></ul
       ></li
     ><li
     ><a href="#options-editor"
@@ -141,27 +155,160 @@
     >Input restrictions and validation: If you need to make the option value be somewhat open ended consider how you can create safeguards to control their choice.</li
     ></ul
   ></div
+><div id="input-types"
+><h2
+  ><a href="#TOC"
+    >Input Types</a
+    ></h2
+  ><p
+  >Option Input Types define how the option is presented in the GUI, and how it is used when the Job executes.</p
+  ><p
+  >Input types:</p
+  ><ul
+  ><li
+    >&quot;Plain&quot; - a normal option which is shown in clear text</li
+    ><li
+    >&quot;Secure&quot; - a secure option which is obscured at user input time, and the value of which is not stored in the database</li
+    ><li
+    >&quot;Secure Remote Authentication&quot; - a secure option which is used only for remote authentication and is not exposed in scripts or commands.</li
+    ></ul
+  ></div
 ><div id="secure-options"
 ><h2
   ><a href="#TOC"
     >Secure Options</a
     ></h2
   ><p
-  >The built-in <a href="plugins.html#ssh-provider"
-    >SSH Provider</a
-    > for node execution allows using passwords for SSH and/or Sudo authentication mechanisms, and the passwords are supplied by Secure Options defined in a Job.</p
+  >Options can be marked as Secure, to show a password prompt in the GUI, instead of a normal text field or drop down menu. Secure option values are not stored with the Execution as are the other option values.</p
   ><p
-  >A Secure Option will always show a password prompt in the GUI, instead of a normal text field or drop down menu.</p
-  ><p
-  >Secure Options have some limitations compared to regular options:</p
+  >There are two types of Secure options:</p
   ><ul
   ><li
-    >The values entered by the user are not available for normal script and command option value expansion. This means that they can only be used for the purposes of the SSH Provider at the moment.</li
+    >Secure - these option values are exposed in scripts and commands.</li
     ><li
-    >Secure Options do not support allow Multi-valued input</li
-    ><li
-    >Secure option values are not stored with the Execution as are the other option values.</li
+    >Secure Remote Authentication - these option values <em
+      >are not</em
+      > exposed in scripts and commands, and are only used by Node Executors to authenticate to Nodes and execute commands.</li
     ></ul
+  ><p
+  >Secure Options do not support Multi-valued input.</p
+  ><p
+  >Secure Options cannot be used as authentication input to Node Executors, you must use a Secure Remote Authentication option described below.</p
+  ><p
+  ><strong
+    >Important Note</strong
+    ></p
+  ><p
+  >&quot;Secure&quot; option values are not stored in the Rundeck database when the Job is executed, but the value that is entered is exposed to use in scripts and commands. Make sure you acknowledge these security implications before using them. Secure options are available for use in scripts and command like any other option value:</p
+  ><ul
+  ><li
+    >as plaintext arguments using <code
+      >${option.name}</code
+      ><ul
+      ><li
+	>Using the option value as an argument to a command could expose the plaintext value in the system process table</li
+	></ul
+      ></li
+    ><li
+    >as plaintext environment variables in remote and local script execution as <code
+      >$RD_OPTION_NAME</code
+      ><ul
+      ><li
+	>Local and possibly remote scripts may be passed this value into their environment</li
+	></ul
+      ></li
+    ><li
+    >as plaintext tokens expanded in remote scripts as <code
+      >@option.name@</code
+      >.<ul
+      ><li
+	>Inline Script workflow steps that contain a token expansion will be expanded into a temporary file, and the temp file will contain the plaintext option value.</li
+	></ul
+      ></li
+    ></ul
+  ><p
+  >Note: that when passed as arguments to Job References, they can only be passed as the value of another Secure option. See <a href="#using-secure-options-with-job-references"
+    >Using Secure Options with Job References</a
+    >.</p
+  ><div id="secure-remote-authentication-options"
+  ><h3
+    ><a href="#TOC"
+      >Secure Remote Authentication Options</a
+      ></h3
+    ><p
+    >The built-in <a href="plugins.html#ssh-provider"
+      >SSH Provider</a
+      > for node execution allows using passwords for SSH and/or Sudo authentication mechanisms, and the passwords are supplied by Secure Remote Authentication Options defined in a Job.</p
+    ><p
+    >Secure Remote Authentication Options have some limitations compared to Plain and Secure options:</p
+    ><ul
+    ><li
+      >The values entered by the user are not available for normal script and command option value expansion. This means that they can only be used for the purposes of the Remote Authentication.</li
+      ></ul
+    ></div
+  ><div id="using-secure-options-with-job-references"
+  ><h3
+    ><a href="#TOC"
+      >Using Secure Options with Job References</a
+      ></h3
+    ><p
+    >When you <a href="job-workflows.html#job-reference-step"
+      >define a Job Reference step in a workflow</a
+      >, you can specify the arguments that are passed to it. You can pass Secure Option values and Secure Remote Authentication Option values from a top-level job to a Job Reference, but option values <em
+      >cannot be passed into another option of a different type</em
+      >. So a parent job can only pass option values to the Job reference if the option type is the same between the jobs.</p
+    ><p
+    >This constraint is to maintain the security design of these options:</p
+    ><ol style="list-style-type: decimal;"
+    ><li
+      >Secure options should not to be stored in the Rundeck execution database, so must not be used as plain option values.</li
+      ><li
+      >Secure Remote Authentication options should not be used in scripts/commands, so must not be used as Secure or Plain option values.</li
+      ></ol
+    ><p
+    >As an example, here is are two jobs, Job A and Job B, which define some options:</p
+    ><ul
+    ><li
+      >Job A<ul
+	><li
+	  >Option &quot;plain1&quot; - Plain</li
+	  ><li
+	  >Option &quot;secure1&quot; - Secure</li
+	  ><li
+	  >Option &quot;auth1&quot; - Secure remote authentication</li
+	  ></ul
+	></li
+      ><li
+      >Job B<ul
+	><li
+	  >Option &quot;plain2&quot; - Plain</li
+	  ><li
+	  >Option &quot;secure2&quot; - Secure</li
+	  ><li
+	  >Option &quot;auth2&quot; - Secure remote authentication</li
+	  ></ul
+	></li
+      ></ul
+    ><p
+    >If Job A defines a Job reference to call Job B, then the only valid mapping is shown below:</p
+    ><ul
+    ><li
+      >plain1 -&gt; plain2</li
+      ><li
+      >secure1 -&gt; secure2</li
+      ><li
+      >auth1 -&gt; auth2</li
+      ></ul
+    ><p
+    >So the arguments for the Job Reference might look like this:</p
+    ><pre
+    ><code
+      >-plain2 ${option.plain1} -secure2 ${option.secure1} -auth2 ${option.auth1}
+</code
+      ></pre
+    ><p
+    >Note: If you define arguments in the wrong manner, then the Secure and Secure Remote Authentication options will not be set when the Job reference is called. Plain options will behave the way they do in Command or Script arguments, and be left as-is as uninterpreted property references.</p
+    ></div
   ></div
 ><div id="options-editor"
 ><h2
@@ -221,10 +368,10 @@
       >The Default Value will be pre-selected in the GUI when the option is presented.</p
       ></dd
     ><dt
-    >Secure Input</dt
+    >Input Type</dt
     ><dd
     ><p
-      >Set to true to define a Secure Option. The multi-valued option will be disabled.</p
+      >Choose between &quot;Plain&quot;, &quot;Secure&quot; and &quot;Secure Remote Authentication&quot;. For input types other than &quot;Plain&quot;, the multi-valued option will be disabled.</p
       ></dd
     ><dt
     >Allowed values</dt
@@ -893,7 +1040,7 @@ echo '}'
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.2)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.3-rc1)</a></li>
     </ul>
 </nav>
 <footer class="copy">
@@ -903,7 +1050,7 @@ echo '}'
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2012-02-10T21:06:39UTC">2012-02-10T21:06:39UTC</span>
+<span class="generated-date" title="2012-05-16T16:56:52EDT">2012-05-16T16:56:52EDT</span>
 
 </footer>
 </body>

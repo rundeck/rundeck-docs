@@ -11,7 +11,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.2)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.3-rc1)</a></li>
     </ul>
 </nav>
 
@@ -160,6 +160,8 @@ CRYPT:jsnDAc2Xk4W4o
     ><a href="#TOC"
       >Configuration</a
       ></h4
+    ><p
+    >Configuring LDAP consists of defining a JAAS config file (e.g. &quot;jaas-ldap.conf&quot;), and changing the server startup script to use this file and use the correct Login Module configuration inside it.</p
     ><ol style="list-style-type: decimal;"
     ><li
       ><p
@@ -178,6 +180,17 @@ CRYPT:jsnDAc2Xk4W4o
 	  ><li
 	  >Launcher install: $RDECK_BASE/server/config</li
 	  ></ul
+	><p
+	>Make sure the name of your Login Module configuration is the same as you use in the next step. The Login Module configuration is defined like this:</p
+	><pre
+	><code
+	  >myloginmodule {
+    ...
+}
+</code
+	  ></pre
+	><p
+	>Where &quot;myloginmodule&quot; is the name.</p
 	></li
       ><li
       ><p
@@ -277,7 +290,7 @@ CRYPT:jsnDAc2Xk4W4o
     >Here is an example configuration file:</p
     ><pre
     ><code
-      >rundecklogin {
+      >ldap {
     com.dtolabs.rundeck.jetty.jaas.JettyCachingLdapLoginModule required
       debug=&quot;true&quot;
       contextFactory=&quot;com.sun.jndi.ldap.LdapCtxFactory&quot;
@@ -676,7 +689,7 @@ SSL-Session:
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.2)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.3-rc1)</a></li>
     </ul>
 </nav>
 <footer class="copy">
@@ -686,7 +699,7 @@ SSL-Session:
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2012-02-10T21:06:39UTC">2012-02-10T21:06:39UTC</span>
+<span class="generated-date" title="2012-05-16T16:56:52EDT">2012-05-16T16:56:52EDT</span>
 
 </footer>
 </body>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>API Reference | Version 3</title>
+  <title>API Reference | Version 4</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="Alex Honor" />
@@ -14,25 +14,31 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.2)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.3-rc1)</a></li>
     </ul>
 </nav>
 
 <nav class="page top">
     <ul>
-        <li class="current"><a href="index.html">API Reference | Version 3</a></li>
+        <li class="current"><a href="index.html">API Reference | Version 4</a></li>
         
         
         
     </ul>
 </nav>
 <div id="docbody">
-<h1 class="title">API Reference | Version 3</h1>
+<h1 class="title">API Reference | Version 4</h1>
 <div id="TOC"
 ><ul
   ><li
     ><a href="#api-version-number"
       >API Version Number</a
+      ><ul
+      ><li
+	><a href="#changes"
+	  >Changes</a
+	  ></li
+	></ul
       ></li
     ><li
     ><a href="#urls"
@@ -131,6 +137,10 @@
 	  >Running Adhoc Scripts</a
 	  ></li
 	><li
+	><a href="#running-adhoc-script-urls"
+	  >Running Adhoc Script URLs</a
+	  ></li
+	><li
 	><a href="#listing-projects"
 	  >Listing Projects</a
 	  ></li
@@ -192,7 +202,7 @@
     ></h2
   ><p
   >The current API version is <code
-    >3</code
+    >4</code
     >.</p
   ><p
   >For API endpoints described in this document, the <em
@@ -223,6 +233,106 @@
 &lt;/result&gt;
 </code
     ></pre
+  ><div id="changes"
+  ><h3
+    ><a href="#TOC"
+      >Changes</a
+      ></h3
+    ><p
+    >Changes introduced by API Version number:</p
+    ><p
+    ><strong
+      >Version 4</strong
+      >:</p
+    ><ul
+    ><li
+      >New endpoint<ul
+	><li
+	  ><code
+	    >/api/4/run/url</code
+	    > - <a href="#running-adhoc-script-urls"
+	    >Running Adhoc Script URLs</a
+	    ></li
+	  ></ul
+	></li
+      ></ul
+    ><p
+    ><strong
+      >Version 3</strong
+      >:</p
+    ><ul
+    ><li
+      >Updated endpoints<ul
+	><li
+	  ><code
+	    >/api/1/resources</code
+	    > - <a href="#listing-resources"
+	    >Listing Resources</a
+	    ><ul
+	    ><li
+	      ><code
+		>format</code
+		> parameter can now use any supported Resource Format Parser format name.</li
+	      ></ul
+	    ></li
+	  ><li
+	  ><code
+	    >/api/2/project/[NAME]/resources</code
+	    > - <a href="#updating-and-listing-resources-for-a-project"
+	    >Updating and Listing Resources for a Project</a
+	    ><ul
+	    ><li
+	      ><code
+		>POST</code
+		> request Content-Type can be any MIME type supported by a Resource Format Parser plugin.</li
+	      ></ul
+	    ></li
+	  ></ul
+	></li
+      ></ul
+    ><p
+    ><strong
+      >Version 2</strong
+      >:</p
+    ><ul
+    ><li
+      >New endpoints<ul
+	><li
+	  ><code
+	    >/api/2/project/[NAME]/jobs</code
+	    > - <a href="#listing-jobs-for-a-project"
+	    >Listing Jobs for a Project</a
+	    ></li
+	  ><li
+	  ><code
+	    >/api/2/project/[NAME]/resources</code
+	    > - <a href="#updating-and-listing-resources-for-a-project"
+	    >Updating and Listing Resources for a Project</a
+	    ></li
+	  ><li
+	  ><code
+	    >/api/2/project/[NAME]/resources/refresh</code
+	    > - <a href="#refreshing-resources-for-a-project"
+	    >Refreshing Resources for a Project</a
+	    ></li
+	  ></ul
+	></li
+      ><li
+      >Updated endpoints<ul
+	><li
+	  ><code
+	    >/api/1/jobs</code
+	    > - <a href="#listing-jobs"
+	    >Listing Jobs</a
+	    ><ul
+	    ><li
+	      >Additional parameters added</li
+	      ></ul
+	    ></li
+	  ></ul
+	></li
+      ></ul
+    ></div
   ></div
 ><div id="urls"
 ><h2
@@ -1460,6 +1570,76 @@ X-Rundeck-Auth-Token: E4rNvVRV378knO9dp3d73O0cs1kd0kCd
 </code
       ></pre
     ></div
+  ><div id="running-adhoc-script-urls"
+  ><h3
+    ><a href="#TOC"
+      >Running Adhoc Script URLs</a
+      ></h3
+    ><p
+    >Run a script downloaded from a URL. (<strong
+      >API version 4</strong
+      > required.)</p
+    ><p
+    >URL:</p
+    ><pre
+    ><code
+      >/api/4/run/url
+</code
+      ></pre
+    ><p
+    >Method: <code
+      >POST</code
+      ></p
+    ><p
+    >Expected Content-Type: <code
+      >application/x-www-form-urlencoded</code
+      ></p
+    ><p
+    >Required Parameters:</p
+    ><ul
+    ><li
+      ><code
+	>project</code
+	>: the project name</li
+      ></ul
+    ><p
+    >Required Content:</p
+    ><ul
+    ><li
+      ><code
+	>scriptURL</code
+	>: A URL pointing to a script file</li
+      ></ul
+    ><p
+    >Optional Parameters:</p
+    ><ul
+    ><li
+      ><code
+	>argString</code
+	>: Arguments to pass to the script when executed.</li
+      ><li
+      ><code
+	>nodeThreadcount</code
+	>: threadcount to use</li
+      ><li
+      ><code
+	>nodeKeepgoing</code
+	>: if &quot;true&quot;, continue executing on other nodes even if some fail.</li
+      ></ul
+    ><p
+    >Node filter parameters as described under <a href="#using-node-filters"
+      >Using Node Filters</a
+      ></p
+    ><p
+    >Result: A success message, and a single <code
+      >&lt;execution&gt;</code
+      > item identifying the new execution by ID:</p
+    ><pre
+    ><code
+      >&lt;execution id=&quot;X&quot;/&gt;
+</code
+      ></pre
+    ></div
   ><div id="listing-projects"
   ><h3
     ><a href="#TOC"
@@ -2194,7 +2374,7 @@ project.resources.allowedURL.1=^http://server2:9090/resources/.*$
 
 <nav class="page bottom">
     <ul>
-        <li class="current"><a href="index.html">API Reference | Version 3</a></li>
+        <li class="current"><a href="index.html">API Reference | Version 4</a></li>
         
         
         
@@ -2202,7 +2382,7 @@ project.resources.allowedURL.1=^http://server2:9090/resources/.*$
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.2)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.3-rc1)</a></li>
     </ul>
 </nav>
 <footer class="copy">
@@ -2212,7 +2392,7 @@ project.resources.allowedURL.1=^http://server2:9090/resources/.*$
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2012-02-10T21:06:39UTC">2012-02-10T21:06:39UTC</span>
+<span class="generated-date" title="2012-05-16T16:56:52EDT">2012-05-16T16:56:52EDT</span>
 
 </footer>
 </body>

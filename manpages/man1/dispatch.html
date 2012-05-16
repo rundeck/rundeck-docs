@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>dispatch(1) | Version 1.4.2</title>
+  <title>dispatch(1) | Version 1.4.3-rc1</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="Alex Honor" />
@@ -13,7 +13,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../../index.html">Rundeck Documentation (1.4.2)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (1.4.3-rc1)</a></li>
     
         <li><a href="../index.html">Man Pages</a></li>
     </ul>
@@ -28,7 +28,7 @@
     </ul>
 </nav>
 <div id="docbody">
-<h1 class="title">dispatch(1) | Version 1.4.2</h1>
+<h1 class="title">dispatch(1) | Version 1.4.3-rc1</h1>
 <div id="TOC"
 ><ul
   ><li
@@ -58,6 +58,10 @@
 	><li
 	><a href="#script--s"
 	  >SCRIPT (-s)</a
+	  ></li
+	><li
+	><a href="#url--u"
+	  >URL (-u)</a
 	  ></li
 	><li
 	><a href="#stdin--s"
@@ -158,6 +162,10 @@
     >SCRIPT</em
     > : Dispatch specified script file</p
   ><p
+  >-u, --url <em
+    >URL</em
+    > : Download a URL and dispatch it as a script</p
+  ><p
   >-S, --stdin : Execute input read from <em
     >STDIN</em
     ></p
@@ -226,6 +234,29 @@
       ></pre
     ><p
     >Note: The script file is copied to a temporary directory on the target machines (on unix it is /tmp and on Windows c:)</p
+    ></div
+  ><div id="url--u"
+  ><h2
+    ><a href="#TOC"
+      >URL (-u)</a
+      ></h2
+    ><p
+    >Downloads a URL and then dispatches it for execution as a script on the target nodes.</p
+    ><p
+    ><em
+      >Examples</em
+      ></p
+    ><p
+    >Execute a shell script available at a URL across the Nodes tagged &quot;web&quot;:</p
+    ><pre
+    ><code
+      >dispatch -I tags=web -u http://ops.example.com/scripts/myscript.sh
+</code
+      ></pre
+    ><p
+    >Note: The script file is copied to a temporary directory on the target machines (on unix it is /tmp and on Windows c:)</p
+    ><p
+    >The URL can contain property references expanded in the execution context.</p
     ></div
   ><div id="stdin--s"
   ><h2
@@ -368,7 +399,7 @@ daffy porky
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../../index.html">Rundeck Documentation (1.4.2)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (1.4.3-rc1)</a></li>
     
         <li><a href="../index.html">Man Pages</a></li>
     </ul>
@@ -380,7 +411,7 @@ daffy porky
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2012-02-10T21:06:39UTC">2012-02-10T21:06:39UTC</span>
+<span class="generated-date" title="2012-05-16T16:56:52EDT">2012-05-16T16:56:52EDT</span>
 
 </footer>
 </body>

@@ -14,7 +14,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.2)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.3-rc1)</a></li>
     </ul>
 </nav>
 
@@ -1247,25 +1247,21 @@ resources.source.2.directory=/home/rundeck/projects/example/resources
 	><p
 	>To enable Sudo Password Authentication, set the <code
 	  >sudo-command-enabled</code
-	  > to <code
+	  > property/attribute to <code
 	  >true</code
-	  > for each node.</p
-	><ul
-	><li
-	  ><code
-	    >sudo-command-enabled</code
-	    > - set to &quot;true&quot; to enable Sudo Password Authentication: <em
-	    >required</em
-	    >.</li
-	  ></ul
+	  >.</p
 	><p
-	>You can also configure these attributes, which also have equivalent properties to set at the Project and Rundeck scopes. Simply set the <code
+	>You can configure the way the Sudo Password Authentication works by setting these properties at the Node, Project or Rundeck scopes. Simply set the attribute name on a Node, the <code
 	  >project.NAME</code
 	  > in project.properties, or <code
 	  >framework.NAME</code
 	  > in framework.properties:</p
 	><ul
 	><li
+	  ><code
+	    >sudo-command-enabled</code
+	    > - set to &quot;true&quot; to enable Sudo Password Authentication.</li
+	  ><li
 	  ><code
 	    >sudo-command-pattern</code
 	    > - a regular expression to detect when a command execution should expect to require Sudo authentication. Default pattern is <code
@@ -2600,7 +2596,7 @@ plugin.script-copy.default.remote-filepath: ${node.destdir}/${file-copy.filename
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.2)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.3-rc1)</a></li>
     </ul>
 </nav>
 <footer class="copy">
@@ -2610,7 +2606,7 @@ plugin.script-copy.default.remote-filepath: ${node.destdir}/${file-copy.filename
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2012-02-10T21:06:39UTC">2012-02-10T21:06:39UTC</span>
+<span class="generated-date" title="2012-05-16T16:56:52EDT">2012-05-16T16:56:52EDT</span>
 
 </footer>
 </body>

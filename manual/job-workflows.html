@@ -14,7 +14,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.2)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.3-rc1)</a></li>
     </ul>
 </nav>
 
@@ -53,6 +53,10 @@
 	><li
 	><a href="#script-file-step"
 	  >Script file step</a
+	  ></li
+	><li
+	><a href="#script-url-step"
+	  >Script URL step</a
 	  ></li
 	><li
 	><a href="#job-reference-step"
@@ -289,6 +293,30 @@ EOF
 </code
       ></pre
     ></div
+  ><div id="script-url-step"
+  ><h3
+    ><a href="#TOC"
+      >Script URL step</a
+      ></h3
+    ><p
+    >Downloads a script from a URL, and executes it to the filtered Node set. Arguments can be passed to the script by specifying them in the lower text field.</p
+    ><div class="figure"
+    ><img src="../figures/fig0406.png" alt="Script URL step type"
+       /><p class="caption"
+      >Script URL step type</p
+      ></div
+    ><p
+    >This is similar to calling the script URL with <code>dispatch</code>:</p
+    ><pre
+    ><code
+      >dispatch [filter-options] -u URL -- args
+</code
+      ></pre
+    ><p
+    >The URL can contain <a href="#context-variables"
+      >Context Variables</a
+      > that will be expanded at runtime.</p
+    ></div
   ><div id="job-reference-step"
   ><h3
     ><a href="#TOC"
@@ -391,6 +419,10 @@ EOF
     ><code
       >job.id</code
       >: ID of the Job</li
+    ><li
+    ><code
+      >job.execid</code
+      >: ID of the current Execution</li
     ><li
     ><code
       >job.username</code
@@ -530,7 +562,7 @@ EOF
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.2)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.3-rc1)</a></li>
     </ul>
 </nav>
 <footer class="copy">
@@ -540,7 +572,7 @@ EOF
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2012-02-10T21:06:39UTC">2012-02-10T21:06:39UTC</span>
+<span class="generated-date" title="2012-05-16T16:56:52EDT">2012-05-16T16:56:52EDT</span>
 
 </footer>
 </body>

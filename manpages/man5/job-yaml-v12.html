@@ -13,7 +13,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../../index.html">Rundeck Documentation (1.4.2)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (1.4.3-rc1)</a></li>
     
         <li><a href="../index.html">Man Pages</a></li>
     </ul>
@@ -66,6 +66,10 @@
 		><li
 		><a href="#script-file-execution-entry"
 		  >Script File Execution Entry</a
+		  ></li
+		><li
+		><a href="#script-url-execution-entry"
+		  >Script URL Execution Entry</a
 		  ></li
 		><li
 		><a href="#job-reference-entry"
@@ -336,6 +340,8 @@ sequence:
     args: ...
   - scriptfile: ...
     args:
+  - scripturl: ...
+    args:
   - jobref:
       name: jobname
       group: group
@@ -492,6 +498,42 @@ sequence:
 	><pre
 	><code
 	  >- scriptfile: /path/to/script
+  args: arguments to script
+</code
+	  ></pre
+	></div
+      ><div id="script-url-execution-entry"
+      ><h4
+	><a href="#TOC"
+	  >Script URL Execution Entry</a
+	  ></h4
+	><p
+	>This <a href="#command"
+	  >Command</a
+	  > downloads a script file from a URL and executes it.</p
+	><dl
+	><dt
+	  ><code
+	    >scripturl</code
+	    ></dt
+	  ><dd
+	  ><p
+	    >URL to the script file</p
+	    ></dd
+	  ><dt
+	  ><code
+	    >args</code
+	    ></dt
+	  ><dd
+	  ><p
+	    >optional arguments to the script</p
+	    ></dd
+	  ></dl
+	><p
+	>Example:</p
+	><pre
+	><code
+	  >- scripturl: http://example.com/path/to/script
   args: arguments to script
 </code
 	  ></pre
@@ -1091,7 +1133,7 @@ sequence:
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../../index.html">Rundeck Documentation (1.4.2)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (1.4.3-rc1)</a></li>
     
         <li><a href="../index.html">Man Pages</a></li>
     </ul>
@@ -1103,7 +1145,7 @@ sequence:
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2012-02-10T21:06:39UTC">2012-02-10T21:06:39UTC</span>
+<span class="generated-date" title="2012-05-16T16:56:52EDT">2012-05-16T16:56:52EDT</span>
 
 </footer>
 </body>

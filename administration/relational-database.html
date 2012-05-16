@@ -11,7 +11,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.2)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.3-rc1)</a></li>
     </ul>
 </nav>
 
@@ -99,11 +99,19 @@ dataSource.dialect = org.hibernate.dialect.Oracle10gDialect
   >Here is an example configuration to use Mysql:</p
   ><pre
   ><code
-    >dataSource.url = jdbc:mysql://myserver/rundeckdb
+    >dataSource.url = jdbc:mysql://myserver/rundeckdb?autoReconnect=true
 dataSource.username = dbuser
 dataSource.password = dbpass
 </code
     ></pre
+  ><p
+  >NB: for Mysql, the <code
+    >autoReconnect=true</code
+    > will fix a common problem where the Rundeck server's connection to Mysql is dropped after a period of inactivity, resulting in an error message: &quot;Message: Can not read response from server. Expected to read 4 bytes, read 0 bytes before connection was unexpectedly lost.&quot;</p
+  ><p
+  >See more about <a href="http://dev.mysql.com/doc/refman/5.1/en/connector-j-reference-configuration-properties.html"
+    >configuring the Mysql JDBC Connector/J URL</a
+    >.</p
   ></div
 ><div id="add-the-jdbc-driver"
 ><h2
@@ -140,7 +148,7 @@ dataSource.password = dbpass
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.2)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.3-rc1)</a></li>
     </ul>
 </nav>
 <footer class="copy">
@@ -150,7 +158,7 @@ dataSource.password = dbpass
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2012-02-10T21:06:39UTC">2012-02-10T21:06:39UTC</span>
+<span class="generated-date" title="2012-05-16T16:56:52EDT">2012-05-16T16:56:52EDT</span>
 
 </footer>
 </body>
