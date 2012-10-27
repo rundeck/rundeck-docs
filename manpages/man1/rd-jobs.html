@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>rd-jobs(1) | Version 1.4.3</title>
+  <title>rd-jobs(1) | Version 1.4.4</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="Greg Schueler" />
@@ -14,7 +14,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../../index.html">Rundeck Documentation (1.4.3)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (1.4.4)</a></li>
     
         <li><a href="../index.html">Man Pages</a></li>
     </ul>
@@ -29,7 +29,7 @@
     </ul>
 </nav>
 <div id="docbody">
-<h1 class="title">rd-jobs(1) | Version 1.4.3</h1>
+<h1 class="title">rd-jobs(1) | Version 1.4.4</h1>
 <div id="TOC"
 ><ul
   ><li
@@ -52,11 +52,15 @@
 	><a href="#list-action-options"
 	  >LIST ACTION OPTIONS</a
 	  ></li
+	><li
+	><a href="#load-action-options"
+	  >LOAD ACTION OPTIONS</a
+	  ></li
+	><li
+	><a href="#purge-action-options"
+	  >PURGE ACTION OPTIONS</a
+	  ></li
 	></ul
-      ></li
-    ><li
-    ><a href="#load-action-options"
-      >LOAD ACTION OPTIONS</a
       ></li
     ><li
     ><a href="#list-action"
@@ -65,6 +69,10 @@
     ><li
     ><a href="#load-action"
       >LOAD ACTION</a
+      ></li
+    ><li
+    ><a href="#purge-action"
+      >PURGE ACTION</a
       ></li
     ><li
     ><a href="#see-also"
@@ -79,7 +87,7 @@
     >NAME</a
     ></h1
   ><p
-  >rd-jobs - List or load jobs to the Rundeck server</p
+  >rd-jobs - List, load or delete jobs from the Rundeck server</p
   ></div
 ><div id="synopsis"
 ><h1
@@ -112,6 +120,10 @@
     ><li
     ><p
       >load : upload job definitions up to the server</p
+      ></li
+    ><li
+    ><p
+      >purge : delete job definitions on the server</p
       ></li
     ></ul
   ></div
@@ -154,24 +166,34 @@
       >FORMAT</em
       > : File Format. For list action, format for the output document. Values: &quot;xml&quot; or &quot;yaml&quot;. Default: &quot;xml&quot;.</p
     ></div
-  ></div
-><div id="load-action-options"
-><h1
-  ><a href="#TOC"
-    >LOAD ACTION OPTIONS</a
-    ></h1
-  ><p
-  >-d, --duplicate <em
-    >update|skip|create</em
-    > : Duplicate job behavior option. When loading jobs, treat definitions that already exist on the server in the given manner: 'update' existing jobs,'skip' the uploaded definitions, or 'create' them anyway. (load action. default: update)</p
-  ><p
-  >-f, --file <em
-    >FILE</em
-    > : File path. For load action, path to a FILE to upload.</p
-  ><p
-  >-F, --format <em
-    >FORMAT</em
-    > : File Format. For load action, format for the input document. Values: &quot;xml&quot; or &quot;yaml&quot;. Default: &quot;xml&quot;.</p
+  ><div id="load-action-options"
+  ><h2
+    ><a href="#TOC"
+      >LOAD ACTION OPTIONS</a
+      ></h2
+    ><p
+    >-d, --duplicate <em
+      >update|skip|create</em
+      > : Duplicate job behavior option. When loading jobs, treat definitions that already exist on the server in the given manner: 'update' existing jobs,'skip' the uploaded definitions, or 'create' them anyway. (load action. default: update)</p
+    ><p
+    >-f, --file <em
+      >FILE</em
+      > : File path. For load action, path to a FILE to upload.</p
+    ><p
+    >-F, --format <em
+      >FORMAT</em
+      > : File Format. For load action, format for the input document. Values: &quot;xml&quot; or &quot;yaml&quot;. Default: &quot;xml&quot;.</p
+    ></div
+  ><div id="purge-action-options"
+  ><h2
+    ><a href="#TOC"
+      >PURGE ACTION OPTIONS</a
+      ></h2
+    ><p
+    >The purge action uses the same set of options as the <em
+      >list</em
+      > action.</p
+    ></div
   ></div
 ><div id="list-action"
 ><h1
@@ -315,6 +337,24 @@ Skipped 2 Jobs:
 </code
     ></pre
   ></div
+><div id="purge-action"
+><h1
+  ><a href="#TOC"
+    >PURGE ACTION</a
+    ></h1
+  ><p
+  >The Purge action queries the server for a list of matching jobs, and then requests that the server delete those jobs. Optionally the definitions of the matching jobs can be stored in a file if <code
+    >-f</code
+    > is specified.</p
+  ><p
+  >The jobs can be specified explicitly by ID using the <code
+    >-i/--idlist</code
+    > option. Otherwise they are searched using the options as filter criteria, and all matching Jobs are deleted.</p
+  ><p
+  >If no <code
+    >-p/--project</code
+    > option is specified, and only one project exists, the single project is used. Otherwise the option is required.</p
+  ></div
 ><div id="see-also"
 ><h1
   ><a href="#TOC"
@@ -346,7 +386,7 @@ Skipped 2 Jobs:
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../../index.html">Rundeck Documentation (1.4.3)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (1.4.4)</a></li>
     
         <li><a href="../index.html">Man Pages</a></li>
     </ul>
@@ -358,7 +398,7 @@ Skipped 2 Jobs:
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2012-06-21T18:52:54EDT">2012-06-21T18:52:54EDT</span>
+<span class="generated-date" title="2012-10-26T18:11:39EDT">2012-10-26T18:11:39EDT</span>
 
 </footer>
 </body>

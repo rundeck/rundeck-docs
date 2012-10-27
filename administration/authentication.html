@@ -11,7 +11,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.3)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.4)</a></li>
     </ul>
 </nav>
 
@@ -56,6 +56,10 @@
 	  >Redundant Connection Options</a
 	  ></li
 	></ul
+      ></li
+    ><li
+    ><a href="#multiple-authentication-modules"
+      >Multiple Authentication Modules</a
       ></li
     ></ul
   ></div
@@ -676,6 +680,83 @@ SSL-Session:
     >Use this to provide connection redundancy if a particular host is unavailable.</p
     ></div
   ></div
+><div id="multiple-authentication-modules"
+><h3
+  ><a href="#TOC"
+    >Multiple Authentication Modules</a
+    ></h3
+  ><p
+  >JAAS configurations can contain multiple LoginModule definitions, which are processed in order and according to the logic of the configuration Flag.</p
+  ><p
+  >In your config file, separate the LoginModule definitions with a <code
+    >;</code
+    > and be sure to select the appropriate Flag for the module, one of <code
+    >required</code
+    >, <code
+    >requisite</code
+    >, <code
+    >sufficient</code
+    >, or <code
+    >optional</code
+    >.</p
+  ><p
+  >The full syntax and the description of how these Flags work is described in more detail under the <a href="http://docs.oracle.com/javase/6/docs/api/javax/security/auth/login/Configuration.html"
+    >JAAS Configuration Documentation</a
+    >.</p
+  ><p
+  >Here is an example combining an LDAP module flagged as <code
+    >sufficient</code
+    >, and a flat file realm.properties config flagged as <code
+    >required</code
+    >:</p
+  ><pre
+  ><code
+    >multiauth {
+
+  com.dtolabs.rundeck.jetty.jaas.JettyCachingLdapLoginModule sufficient
+    debug=&quot;true&quot;
+    contextFactory=&quot;com.sun.jndi.ldap.LdapCtxFactory&quot;
+    providerUrl=&quot;ldap://server:389&quot;
+    bindDn=&quot;cn=Manager,dc=example,dc=com&quot;
+    bindPassword=&quot;secrent&quot;
+    authenticationMethod=&quot;simple&quot;
+    forceBindingLogin=&quot;false&quot;
+    userBaseDn=&quot;ou=People,dc=test1,dc=example,dc=com&quot;
+    userRdnAttribute=&quot;uid&quot;
+    userIdAttribute=&quot;uid&quot;
+    userPasswordAttribute=&quot;userPassword&quot;
+    userObjectClass=&quot;account&quot;
+    roleBaseDn=&quot;ou=Groups,dc=test1,dc=example,dc=com&quot;
+    roleNameAttribute=&quot;cn&quot;
+    roleUsernameMemberAttribute=&quot;memberUid&quot;
+    roleMemberAttribute=&quot;memberUid&quot;
+    roleObjectClass=&quot;posixGroup&quot;
+    cacheDurationMillis=&quot;300000&quot;
+    reportStatistics=&quot;true&quot;;
+
+  org.mortbay.jetty.plus.jaas.spi.PropertyFileLoginModule required
+    debug=&quot;true&quot;
+    file=&quot;/etc/rundeck/realm.properties&quot;;
+};
+</code
+    ></pre
+  ><p
+  >Based on the flags, JAAS would attempt the following for authentication:</p
+  ><ol style="list-style-type: decimal;"
+  ><li
+    >Check username/pass against LDAP</li
+    ><li
+    >If auth succeeds, finish with successful authentication</li
+    ><li
+    >If auth fails, continue to the next module</li
+    ><li
+    >Check username/pass against the properties file</li
+    ><li
+    >If auth succeeds, finish with successful authentication</li
+    ><li
+    >If auth fails, finish with failed authentication</li
+    ></ol
+  ></div
 >
 </div>
 
@@ -689,7 +770,7 @@ SSL-Session:
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.3)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.4)</a></li>
     </ul>
 </nav>
 <footer class="copy">
@@ -699,7 +780,7 @@ SSL-Session:
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2012-06-21T18:52:54EDT">2012-06-21T18:52:54EDT</span>
+<span class="generated-date" title="2012-10-26T18:11:39EDT">2012-10-26T18:11:39EDT</span>
 
 </footer>
 </body>

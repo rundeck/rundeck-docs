@@ -11,7 +11,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.3)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.4)</a></li>
     </ul>
 </nav>
 
@@ -34,6 +34,20 @@
     ><li
     ><a href="#recovery"
       >Recovery</a
+      ></li
+    ><li
+    ><a href="#project-import-and-export"
+      >Project Import and Export</a
+      ><ul
+      ><li
+	><a href="#export-an-archive"
+	  >Export an archive</a
+	  ></li
+	><li
+	><a href="#import-an-archive"
+	  >Import an archive</a
+	  ></li
+	></ul
       ></li
     ></ul
   ></div
@@ -169,6 +183,94 @@ rd-jobs load -f /path/to/backup/dir/project2/jobs.xml -p project2
       ></li
     ></ol
   ></div
+><div id="project-import-and-export"
+><h2
+  ><a href="#TOC"
+    >Project Import and Export</a
+    ></h2
+  ><p
+  >As of Rundeck 1.4.4, you can export a Project's database contents into an archive file, and later import it into another project.</p
+  ><p
+  >You can use this mechanism for:</p
+  ><ul
+  ><li
+    >backup</li
+    ><li
+    >migration from one database backend to another</li
+    ><li
+    >upgrading from one rundeck version to another</li
+    ></ul
+  ><div id="export-an-archive"
+  ><h3
+    ><a href="#TOC"
+      >Export an archive</a
+      ></h3
+    ><p
+    >To export, visit the &quot;Admin&quot; link in the Rundeck page header.</p
+    ><p
+    >Click on the link under &quot;Export Archive&quot; to download an archive containing the project Jobs, Executions and History.</p
+    ><p
+    >This archive can be imported into any other Rundeck project.</p
+    ><p
+    >The archive will contain:</p
+    ><ul
+    ><li
+      >All Job definitions from the project</li
+      ><li
+      >All Executions from the project (both Job and Adhoc executions)</li
+      ><li
+      >All Execution log files (output logs)</li
+      ><li
+      >All History reports from the project</li
+      ></ul
+    ><p
+    >Note that the archive <strong
+      >will not contain</strong
+      >:</p
+    ><ul
+    ><li
+      >The Project config file <code
+	>project.properties</code
+	> located under your <code
+	>$RDECK_BASE/projects/[name]/etc</code
+	></li
+      ><li
+      >Resource definitions (such as <code
+	>resources.xml</code
+	> or resources received from external providers.)</li
+      ></ul
+    ><p
+    >You should back up those contents separately if necessary.</p
+    ></div
+  ><div id="import-an-archive"
+  ><h3
+    ><a href="#TOC"
+      >Import an archive</a
+      ></h3
+    ><p
+    >To import the contents of an exported archive, visit the &quot;Admin&quot; link in the Rundeck page header.</p
+    ><p
+    >Click on &quot;Import Archive&quot; to display the import form.</p
+    ><p
+    >Choose the rundeck archive file to import (should end with &quot;.rdproject.jar&quot;).</p
+    ><p
+    >Click &quot;Import&quot;.</p
+    ><p
+    >The import process:</p
+    ><ul
+    ><li
+      >Creates any Jobs in the archive not found in this project with a new unique UUID</li
+      ><li
+      >Updates any Jobs in the archive that match Jobs found in the project (group and name match)</li
+      ><li
+      >Creates new Executions for the imported Jobs, and creates the output log files on disk</li
+      ><li
+      >Creates new History reports for imported Executions and Jobs</li
+      ></ul
+    ><p
+    >Note that because the archive does not contain the project configuration or resource definitions, you will have to configure those separately for the new or updated project.</p
+    ></div
+  ></div
 >
 </div>
 
@@ -182,7 +284,7 @@ rd-jobs load -f /path/to/backup/dir/project2/jobs.xml -p project2
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.3)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.4)</a></li>
     </ul>
 </nav>
 <footer class="copy">
@@ -192,7 +294,7 @@ rd-jobs load -f /path/to/backup/dir/project2/jobs.xml -p project2
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2012-06-21T18:52:54EDT">2012-06-21T18:52:54EDT</span>
+<span class="generated-date" title="2012-10-26T18:11:39EDT">2012-10-26T18:11:39EDT</span>
 
 </footer>
 </body>

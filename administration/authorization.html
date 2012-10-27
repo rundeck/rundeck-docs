@@ -11,7 +11,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.3)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.4)</a></li>
     </ul>
 </nav>
 
@@ -137,7 +137,7 @@ for:
         kind: event
       allow: [read,create] # allow read/create events
   adhoc:
-    - allow: [run,kill] # allow running/killing adhoc jobs
+    - allow: [read,run,kill] # allow running/killing adhoc jobs
   job: 
     - allow: [read,update,delete,run,kill] # allow read/write/delete/run/kill of all jobs
   node:
@@ -559,12 +559,24 @@ by:
 	  ></td
 	  ><td align="left"
 	  ><code
+	    >read</code
+	    ></td
+	  ><td align="left"
+	  >Read adhoc execution output</td
+	  ></tr
+	><tr class="even"
+	><td align="left"
+	  >&quot;</td
+	  ><td align="left"
+	  ></td
+	  ><td align="left"
+	  ><code
 	    >run</code
 	    ></td
 	  ><td align="left"
-	  >Run and adhoc execution</td
+	  >Run an adhoc execution</td
 	  ></tr
-	><tr class="even"
+	><tr class="odd"
 	><td align="left"
 	  >&quot;</td
 	  ><td align="left"
@@ -576,7 +588,7 @@ by:
 	  ><td align="left"
 	  >Kill an adhoc execution</td
 	  ></tr
-	><tr class="odd"
+	><tr class="even"
 	><td align="left"
 	  ><code
 	    >job</code
@@ -588,9 +600,9 @@ by:
 	    >read</code
 	    ></td
 	  ><td align="left"
-	  >View a Job</td
+	  >View a Job and its executions</td
 	  ></tr
-	><tr class="even"
+	><tr class="odd"
 	><td align="left"
 	  >&quot;</td
 	  ><td align="left"
@@ -602,7 +614,7 @@ by:
 	  ><td align="left"
 	  >Modify a job</td
 	  ></tr
-	><tr class="odd"
+	><tr class="even"
 	><td align="left"
 	  >&quot;</td
 	  ><td align="left"
@@ -614,7 +626,7 @@ by:
 	  ><td align="left"
 	  >Delete a job</td
 	  ></tr
-	><tr class="even"
+	><tr class="odd"
 	><td align="left"
 	  >&quot;</td
 	  ><td align="left"
@@ -626,7 +638,7 @@ by:
 	  ><td align="left"
 	  >Run a job</td
 	  ></tr
-	><tr class="odd"
+	><tr class="even"
 	><td align="left"
 	  >&quot;</td
 	  ><td align="left"
@@ -638,7 +650,7 @@ by:
 	  ><td align="left"
 	  >Kill a running job</td
 	  ></tr
-	><tr class="even"
+	><tr class="odd"
 	><td align="left"
 	  >&quot;</td
 	  ><td align="left"
@@ -650,7 +662,7 @@ by:
 	  ><td align="left"
 	  >Create the matching job</td
 	  ></tr
-	><tr class="odd"
+	><tr class="even"
 	><td align="left"
 	  ><code
 	    >node</code
@@ -666,7 +678,7 @@ by:
 	    >Node resource properties</a
 	    >)</td
 	  ></tr
-	><tr class="even"
+	><tr class="odd"
 	><td align="left"
 	  >&quot;</td
 	  ><td align="left"
@@ -896,7 +908,7 @@ by:
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.3)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.4)</a></li>
     </ul>
 </nav>
 <footer class="copy">
@@ -906,7 +918,7 @@ by:
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2012-06-21T18:52:54EDT">2012-06-21T18:52:54EDT</span>
+<span class="generated-date" title="2012-10-26T18:11:39EDT">2012-10-26T18:11:39EDT</span>
 
 </footer>
 </body>

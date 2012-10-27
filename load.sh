@@ -14,10 +14,10 @@ fi
 
 mkdir temp
 pushd temp
-echo jar xvf $JAR docs
-jar xvf $JAR docs
+echo jar xvf $JAR pkgs/webapp/docs
+jar xvf $JAR pkgs/webapp/docs
 popd
-cp -r temp/docs/* .
+cp -r temp/pkgs/webapp/docs/* .
 rm -rf temp
 git add .
 cat <<END

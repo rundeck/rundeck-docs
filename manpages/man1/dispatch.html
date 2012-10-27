@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>dispatch(1) | Version 1.4.3</title>
+  <title>dispatch(1) | Version 1.4.4</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="Alex Honor" />
@@ -13,7 +13,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../../index.html">Rundeck Documentation (1.4.3)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (1.4.4)</a></li>
     
         <li><a href="../index.html">Man Pages</a></li>
     </ul>
@@ -28,7 +28,7 @@
     </ul>
 </nav>
 <div id="docbody">
-<h1 class="title">dispatch(1) | Version 1.4.3</h1>
+<h1 class="title">dispatch(1) | Version 1.4.4</h1>
 <div id="TOC"
 ><ul
   ><li
@@ -68,6 +68,10 @@
 	  >STDIN (-S)</a
 	  ></li
 	></ul
+      ></li
+    ><li
+    ><a href="#queued-execution"
+      >QUEUED EXECUTION</a
       ></li
     ><li
     ><a href="#listing-mode"
@@ -170,9 +174,13 @@
     >STDIN</em
     ></p
   ><p
-  >-Q, --queue : Queue this command to the dispatcher service and run it (deprecated)</p
+  >-Q, --queue : Queue this command to the dispatcher service and run it (default behavior)</p
   ><p
-  >-L, --noqueue : Execute the command locally not through the central dispatcher (experimental)</p
+  >-L, --noqueue : Execute the command locally not through the central dispatcher</p
+  ><p
+  >-f, --follow : Follow queued execution output</p
+  ><p
+  >-r, --progress : In follow mode, print progress indicator chars</p
   ></div
 ><div id="command-mode"
 ><h1
@@ -181,6 +189,28 @@
     ></h1
   ><p
   >Command mode occurs when the -p option is present (or there is only one Project), and one (and only one) of the following options are specified: --, -s, or -S</p
+  ><p
+  >The default behavior is to invoke the &quot;queue&quot; mode (<code
+    >-Q</code
+    >/<code
+    >--queue</code
+    >), which will send the desired command to the Rundeck server for execution, and return the ID of the queued Execution.</p
+  ><p
+  >If &quot;follow&quot; option is used (<code
+    >-f</code
+    >/<code
+    >--follow</code
+    >), then the output will be retrieved from the server as it is produced and echoed locally.</p
+  ><p
+  >This can be combined with either <code
+    >-q</code
+    >/<code
+    >--quiet</code
+    > to show no output and only wait until the execution finishes. Exit status will indicate if the execution succeeded or failed. If <code
+    >-r</code
+    >/<code
+    >--progress</code
+    > is used instead, then progress of the execution is indicated periodically by echoed '.' characters.</p
   ><div id="command-string---"
   ><h2
     ><a href="#TOC"
@@ -291,6 +321,18 @@ END
     >Note: The input read from stdin is saved to a temporary file and then content is called with the -s script mode described above to transfer and invoke the script.</p
     ></div
   ></div
+><div id="queued-execution"
+><h1
+  ><a href="#TOC"
+    >QUEUED EXECUTION</a
+    ></h1
+  ><p
+  >If <code
+    >-Q</code
+    >/<code
+    >--queue</code
+    ></p
+  ></div
 ><div id="listing-mode"
 ><h1
   ><a href="#TOC"
@@ -399,7 +441,7 @@ daffy porky
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../../index.html">Rundeck Documentation (1.4.3)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (1.4.4)</a></li>
     
         <li><a href="../index.html">Man Pages</a></li>
     </ul>
@@ -411,7 +453,7 @@ daffy porky
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2012-06-21T18:52:54EDT">2012-06-21T18:52:54EDT</span>
+<span class="generated-date" title="2012-10-26T18:11:39EDT">2012-10-26T18:11:39EDT</span>
 
 </footer>
 </body>

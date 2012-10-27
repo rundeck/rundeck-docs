@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>run(1) | Version 1.4.3</title>
+  <title>run(1) | Version 1.4.4</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="Alex Honor" />
@@ -13,7 +13,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../../index.html">Rundeck Documentation (1.4.3)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (1.4.4)</a></li>
     
         <li><a href="../index.html">Man Pages</a></li>
     </ul>
@@ -28,7 +28,7 @@
     </ul>
 </nav>
 <div id="docbody">
-<h1 class="title">run(1) | Version 1.4.3</h1>
+<h1 class="title">run(1) | Version 1.4.4</h1>
 <div id="TOC"
 ><ul
   ><li
@@ -50,6 +50,10 @@
     ><li
     ><a href="#execution"
       >EXECUTION</a
+      ></li
+    ><li
+    ><a href="#arguments"
+      >ARGUMENTS</a
       ><ul
       ><li
 	><a href="#examples"
@@ -89,6 +93,22 @@
   >The run command is used to start the execution of a Job defined in Rundeck. The Job is executed on the server, and the ID for the execution is displayed. This is equivalent to logging in to Rundeck and starting a Job within the web application GUI.</p
   ><p
   >The Job can either be specified by ID (-i), or by name and optional group (-j). The Node filters used for the execution of the job can also be specified on the commandline, and will be used instead of any already defined for the Job. Arguments to the Execution can be specified after (--).</p
+  ><p
+  >If the <code
+    >-f</code
+    >/<code
+    >--follow</code
+    > option is used, then the output will be retrieved from the server as it is produced and echoed locally.</p
+  ><p
+  >This can be combined with either <code
+    >-q</code
+    >/<code
+    >--quiet</code
+    > to show no output and only wait until the execution finishes. Exit status will indicate if the execution succeeded or failed. If <code
+    >-r</code
+    >/<code
+    >--progress</code
+    > is used instead, then progress of the execution is indicated periodically by echoed '.' characters.</p
   ></div
 ><div id="options"
 ><h1
@@ -139,6 +159,12 @@
   >-- <em
     >ARGUMENTS</em
     > : Pass the specified ARGUMENTS as options to the job</p
+  ><p
+  >-f, --follow : Follow queued execution output</p
+  ><p
+  >-r, --progress : In follow mode, print progress indicator chars</p
+  ><p
+  >-q, --quiet : In follow mode, do not show output from the execution, but wait until it completes.</p
   ></div
 ><div id="execution"
 ><h1
@@ -151,6 +177,25 @@
     >, or <code
     >-j group/name</code
     >. The group is optional if only one Job with the name exists.</p
+  ></div
+><div id="arguments"
+><h1
+  ><a href="#TOC"
+    >ARGUMENTS</a
+    ></h1
+  ><p
+  >Arguments can be passed to the Job that is being executed after the <code
+    >--</code
+    > separator. You must use this separator after all of the tool options that you specify on the commandline.</p
+  ><p
+  >Each argument that you pass should correspond to a defined Option for the Job. The syntax for passing these options is:</p
+  ><pre
+  ><code
+    >-optionname &lt;value&gt; -otheroption &lt;value&gt;
+</code
+    ></pre
+  ><p
+  >All Job Options in Rundeck require an argument value if specified.</p
   ><div id="examples"
   ><h2
     ><a href="#TOC"
@@ -163,6 +208,13 @@
     ><pre
     ><code
       >run -i 12
+</code
+      ></pre
+    ><p
+    >Run the same job and pass arguments &quot;name&quot; and &quot;color&quot; corresponding to the Job's Options:</p
+    ><pre
+    ><code
+      >run -i 12 -- -name Bob -color blue
 </code
       ></pre
     ><p
@@ -192,6 +244,13 @@ Error: Failed request to run a job: Server reported an error: No unique job matc
     ><pre
     ><code
       >run -I tags=dev -X os-family=windows -C 2 -K -j 'test/Job 1'
+</code
+      ></pre
+    ><p
+    >Run a job by name, and follow the output until it finishes.</p
+    ><pre
+    ><code
+      >run -j QA/Test/Full --follow
 </code
       ></pre
     ></div
@@ -231,7 +290,7 @@ Error: Failed request to run a job: Server reported an error: No unique job matc
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../../index.html">Rundeck Documentation (1.4.3)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (1.4.4)</a></li>
     
         <li><a href="../index.html">Man Pages</a></li>
     </ul>
@@ -243,7 +302,7 @@ Error: Failed request to run a job: Server reported an error: No unique job matc
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2012-06-21T18:52:54EDT">2012-06-21T18:52:54EDT</span>
+<span class="generated-date" title="2012-10-26T18:11:39EDT">2012-10-26T18:11:39EDT</span>
 
 </footer>
 </body>

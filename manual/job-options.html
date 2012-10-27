@@ -14,7 +14,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.3)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.4)</a></li>
     </ul>
 </nav>
 
@@ -87,6 +87,10 @@
 	><li
 	><a href="#json-format"
 	  >JSON format</a
+	  ></li
+	><li
+	><a href="#cascading-remote-options"
+	  >Cascading Remote Options</a
 	  ></li
 	><li
 	><a href="#variable-expansion-in-remote-urls"
@@ -675,7 +679,7 @@ run -j group/name -p project -- -paramA valA -paramB valB
 	>JSON formatted</a
 	>.</li
       ><li
-      >It must be accessible via HTTP or on the local disk for the Rundeck server.</li
+      >It must be accessible via HTTP(S) or on the local disk for the Rundeck server.</li
       ><li
       >It must be in one of two JSON structures, <em
 	>either</em
@@ -766,6 +770,34 @@ run -j group/name -p project -- -paramA valA -paramB valB
 </code
       ></pre
     ></div
+  ><div id="cascading-remote-options"
+  ><h3
+    ><a href="#TOC"
+      >Cascading Remote Options</a
+      ></h3
+    ><p
+    >Cascading options allow an option's Remote values URL to embed the values entered by the user for other options when executing a Job. When the user enters or selects a value for one of the other options, then the remote JSON is refreshed for the current option.</p
+    ><p
+    >This provides a mechanism for declaring hierarchical or dependent sets of option values.</p
+    ><p
+    >E.g. if you wanted one option to choose a &quot;repository&quot;, and another option to select a specific &quot;branch&quot; within that repository. Define your option provider to respond correctly based on the selected &quot;repository&quot; value, and define your Remote option URL to include a reference to the &quot;repository&quot; option value. The Rundeck GUI will then reload the JSON values from the remote URL and insert the correct value of the &quot;repository&quot; option when loading the &quot;branch&quot; option values. If the user changes the selected repository, then the branch values will be automatically refreshed.</p
+    ><p
+    >You can declare a dependency of one option to another by embedding property references within the remote values URL. The property reference is of the form <code
+      >${option.[name].value}</code
+      >. If you declare an option with a remote values URL like &quot;http://server/options?option2=${option.option2.value}&quot;, then that option will depend on the value of the &quot;option2&quot; option.</p
+    ><p
+    >In the GUI, when the options are loaded, option2 will be shown first, and the remote values for option1 will only be loaded once a value has been selected for option2, and the value will be placed in the URL when it is loaded.</p
+    ><p
+    >If an option has dependencies on other options that do not have a value set, then the embedded references will evaluate to &quot;&quot; (empty string) when loading the URL.</p
+    ><p
+    >If an option has dependencies on other options and the remote values <a href="#json-data"
+      >JSON data</a
+      > is empty (empty list or empty object), then the option shown in the GUI will indicate that the user should select values for the necessary options. This allows Option model providers to indicate that some or all of the dependent option values are necessary for the current option before showing the input for the option.</p
+    ><p
+    >It is possible to have dependencies on more than one option, and any change to one of the dependencies will cause the option values to be reloaded from the remote URL.</p
+    ><p
+    >Note: It is also possible to declare a cycle of dependencies between option values, which will cause the automatic reloading to be disabled. In this case the user must manually click the reload button to reload the option values if a dependency has changed.</p
+    ></div
   ><div id="variable-expansion-in-remote-urls"
   ><h3
     ><a href="#TOC"
@@ -816,6 +848,18 @@ run -j group/name -p project -- -paramA valA -paramB valB
 	>: Name of the current option</li
       ></ul
     ><p
+    >To include <a href="#cascading-remote-options"
+      >Cascading remote option</a
+      > values information in the URL, specify a variable of the form ${option.<em
+      >name</em
+      >.value}:</p
+    ><ul
+    ><li
+      ><code
+	>option.[name].value</code
+	>: substitutes the selected value of another option by name. If the option is not set, then a blank string (&quot;&quot;) will be substituted.</li
+      ></ul
+    ><p
     ><em
       >Examples</em
       ></p
@@ -833,6 +877,13 @@ run -j group/name -p project -- -paramA valA -paramB valB
       ></pre
     ><p
     >Passes the job name and group as query parameters.</p
+    ><pre
+    ><code
+      >http://server.com/branches?repository=${option.repository.value}
+</code
+      ></pre
+    ><p
+    >Passes the value of the selected &quot;repository&quot; option, or &quot;&quot; (blank) if it is not set. This option becomes a dependent of the &quot;repository&quot; option, and if the &quot;repository&quot; value changes, the remote option values for this option will be reloaded.</p
     ></div
   ><div id="remote-request-failures"
   ><h3
@@ -1040,7 +1091,7 @@ echo '}'
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.3)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.4)</a></li>
     </ul>
 </nav>
 <footer class="copy">
@@ -1050,7 +1101,7 @@ echo '}'
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2012-06-21T18:52:54EDT">2012-06-21T18:52:54EDT</span>
+<span class="generated-date" title="2012-10-26T18:11:39EDT">2012-10-26T18:11:39EDT</span>
 
 </footer>
 </body>

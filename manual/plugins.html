@@ -14,7 +14,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.3)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.4)</a></li>
     </ul>
 </nav>
 
@@ -141,6 +141,10 @@
 		><li
 		><a href="#configuring-secondary-sudo-password-authentication"
 		  >Configuring Secondary Sudo Password Authentication</a
+		  ></li
+		><li
+		><a href="#configuring-multiple-sudo-password-authentication"
+		  >Configuring Multiple Sudo Password Authentication</a
 		  ></li
 		></ul
 	      ></li
@@ -1391,6 +1395,48 @@ resources.source.2.directory=/home/rundeck/projects/example/resources
 </code
 	  ></pre
 	></div
+      ><div id="configuring-multiple-sudo-password-authentication"
+      ><h5
+	><a href="#TOC"
+	  >Configuring Multiple Sudo Password Authentication</a
+	  ></h5
+	><p
+	>You can enable a further level of sudo password support for a node. If you have the requirement of executing a chain of &quot;sudo&quot; commands, such as &quot;sudo -u user1 sudo -u user2 command&quot;, and need to enable password input for both levels of sudo. This is possible by configuring a secondary set of properties for your node/project/framework.</p
+	><p
+	>The configuration properties are the same as those for the first-level of sudo password authentication described in <a href="#configuring-secondary-sudo-password-authentication"
+	  >Configuring Secondary Sudo Password Authentication</a
+	  >, but with a prefix of &quot;sudo2-&quot; instead of &quot;sudo-&quot;, such as:</p
+	><pre
+	><code
+	  >sudo2-command-enabled=&quot;true&quot;
+sudo2-command-pattern=&quot;^sudo .+? sudo .*$&quot;
+</code
+	  ></pre
+	><p
+	>This would turn on a mechanism to expect and respond to another sudo password prompt when the command matches the given pattern.</p
+	><p
+	>If a value for &quot;sudo2-password-option&quot; is not set, then a default value of <code
+	  >option.sudo2Password</code
+	  > will be used.</p
+	><p
+	><strong
+	  >A note about the &quot;sudo2-command-pattern&quot;:</strong
+	  ></p
+	><p
+	>The sudo authentication mechanism uses two regular expressions to test whether it should be invoked.</p
+	><p
+	>For the first sudo authentication, the &quot;sudo-command-pattern&quot; value is matched against the <strong
+	  >first component of the command being executed</strong
+	  >. The default value for this pattern is <code
+	  >^sudo$</code
+	  >. So a command like &quot;sudo -u user1 some command&quot; will match correctly. You can modify the regular expression (e.g. to support &quot;su&quot;), but it will always only match against the first part of the command.</p
+	><p
+	>If &quot;sudo2-command-enabled&quot; is &quot;true&quot;, then the &quot;sudo2-command-pattern&quot; is also checked and if it matches then another sudo authentication is enabled. However this regular expression is tested against the <strong
+	  >entire command string</strong
+	  > to make it possible to determine whether it should be enabled. The default value is <code
+	  >^sudo .+? sudo .*$</code
+	  >. If necessary you should customize the value.</p
+	></div
       ></div
     ></div
   ><div id="resource-model-sources-1"
@@ -2596,7 +2642,7 @@ plugin.script-copy.default.remote-filepath: ${node.destdir}/${file-copy.filename
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.3)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.4.4)</a></li>
     </ul>
 </nav>
 <footer class="copy">
@@ -2606,7 +2652,7 @@ plugin.script-copy.default.remote-filepath: ${node.destdir}/${file-copy.filename
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2012-06-21T18:52:54EDT">2012-06-21T18:52:54EDT</span>
+<span class="generated-date" title="2012-10-26T18:11:39EDT">2012-10-26T18:11:39EDT</span>
 
 </footer>
 </body>
