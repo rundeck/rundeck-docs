@@ -13,7 +13,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../../index.html">Rundeck Documentation (1.4.5)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (1.5-SNAPSHOT)</a></li>
     
         <li><a href="../index.html">Man Pages</a></li>
     </ul>
@@ -54,28 +54,34 @@
 	    ><li
 	    ><a href="#command"
 	      >Command</a
-	      ><ul
-	      ><li
-		><a href="#simple-command-entry"
-		  >Simple Command Entry</a
-		  ></li
-		><li
-		><a href="#script-execution-entry"
-		  >Script Execution Entry</a
-		  ></li
-		><li
-		><a href="#script-file-execution-entry"
-		  >Script File Execution Entry</a
-		  ></li
-		><li
-		><a href="#script-url-execution-entry"
-		  >Script URL Execution Entry</a
-		  ></li
-		><li
-		><a href="#job-reference-entry"
-		  >Job Reference Entry</a
-		  ></li
-		></ul
+	      ></li
+	    ><li
+	    ><a href="#error-handler"
+	      >Error Handler</a
+	      ></li
+	    ><li
+	    ><a href="#simple-command-entry"
+	      >Simple Command Entry</a
+	      ></li
+	    ><li
+	    ><a href="#script-execution-entry"
+	      >Script Execution Entry</a
+	      ></li
+	    ><li
+	    ><a href="#script-file-execution-entry"
+	      >Script File Execution Entry</a
+	      ></li
+	    ><li
+	    ><a href="#script-url-execution-entry"
+	      >Script URL Execution Entry</a
+	      ></li
+	    ><li
+	    ><a href="#job-reference-entry"
+	      >Job Reference Entry</a
+	      ></li
+	    ><li
+	    ><a href="#plugin-step-entry"
+	      >Plugin Step Entry</a
 	      ></li
 	    ><li
 	    ><a href="#options"
@@ -346,6 +352,11 @@ sequence:
       name: jobname
       group: group
       args: args
+  - nodeStep: true/false
+    type: plugin-type
+    configuration: 
+      key: value
+      another: value
 </code
 	></pre
       ><p
@@ -407,193 +418,293 @@ sequence:
 	><a href="#job-reference-entry"
 	  >Job Reference entry</a
 	  ></li
+	><li
+	><a href="#plugin-step-entry"
+	  >Plugin step entry</a
+	  ></li
 	></ul
-      ><div id="simple-command-entry"
-      ><h4
-	><a href="#TOC"
-	  >Simple Command Entry</a
-	  ></h4
-	><p
-	>This <a href="#command"
-	  >Command</a
-	  > consists of a single entry:</p
-	><dl
-	><dt
-	  ><code
-	    >exec</code
-	    ></dt
-	  ><dd
-	  >the command to execute</dd
-	  ></dl
-	></div
-      ><div id="script-execution-entry"
-      ><h4
-	><a href="#TOC"
-	  >Script Execution Entry</a
-	  ></h4
-	><p
-	>This <a href="#command"
-	  >Command</a
-	  > executes the script content specified.</p
-	><dl
-	><dt
-	  ><code
-	    >script</code
-	    ></dt
-	  ><dd
-	  ><p
-	    >The script content. It is useful to use the YAML &quot;literal&quot; scalar syntax shown below</p
-	    ></dd
-	  ><dt
-	  ><code
-	    >args</code
-	    ></dt
-	  ><dd
-	  ><p
-	    >Optional string defining arguments to pass to the script.</p
-	    ></dd
-	  ></dl
-	><p
-	>Example:</p
-	><pre
+      ><p
+      >Each command can also embed an <a href="#error-handler"
+	>Error Handler</a
+	>.</p
+      ></div
+    ><div id="error-handler"
+    ><h3
+      ><a href="#TOC"
+	>Error Handler</a
+	></h3
+      ><p
+      >An Error Handler defines a secondary action in case the first one fails. An Error Handler is a map keyed with the name:</p
+      ><p
+      ><code
+	>errorhandler</code
+	></p
+      ><p
+      >The Error Handler contents can be exactly the same as a <a href="#command"
+	>Command</a
+	>, except it cannot contain another Error Handler. The contents are defined by one of these types:</p
+      ><ul
+      ><li
+	><a href="#simple-command-entry"
+	  >Simple command execution entry</a
+	  ></li
+	><li
+	><a href="#script-execution-entry"
+	  >Script execution entry</a
+	  ></li
+	><li
+	><a href="#script-file-execution-entry"
+	  >Script file execution entry</a
+	  ></li
+	><li
+	><a href="#job-reference-entry"
+	  >Job Reference entry</a
+	  ></li
+	></ul
+      ><p
+      >The errorhandler has this additional optional entry:</p
+      ><dl
+      ><dt
 	><code
-	  > - script: |-
+	  >keepgoingOnSuccess</code
+	  ></dt
+	><dd
+	>&quot;true/false&quot; - If true, and the error handler succeeds, the workflow sequence will continue even if the workflow <code
+	  >keepgoing</code
+	  > is false.</dd
+	></dl
+      ></div
+    ><div id="simple-command-entry"
+    ><h3
+      ><a href="#TOC"
+	>Simple Command Entry</a
+	></h3
+      ><p
+      >This <a href="#command"
+	>Command</a
+	> consists of a single entry:</p
+      ><dl
+      ><dt
+	><code
+	  >exec</code
+	  ></dt
+	><dd
+	>the command to execute</dd
+	></dl
+      ></div
+    ><div id="script-execution-entry"
+    ><h3
+      ><a href="#TOC"
+	>Script Execution Entry</a
+	></h3
+      ><p
+      >This <a href="#command"
+	>Command</a
+	> executes the script content specified.</p
+      ><dl
+      ><dt
+	><code
+	  >script</code
+	  ></dt
+	><dd
+	><p
+	  >The script content. It is useful to use the YAML &quot;literal&quot; scalar syntax shown below</p
+	  ></dd
+	><dt
+	><code
+	  >args</code
+	  ></dt
+	><dd
+	><p
+	  >Optional string defining arguments to pass to the script.</p
+	  ></dd
+	></dl
+      ><p
+      >Example:</p
+      ><pre
+      ><code
+	> - script: |-
     #!/bin/bash
 
     echo this is a script
     echo this is option value: @option.test@
   args: arguments passed to the script
 </code
-	  ></pre
-	></div
-      ><div id="script-file-execution-entry"
-      ><h4
-	><a href="#TOC"
-	  >Script File Execution Entry</a
-	  ></h4
-	><p
-	>This <a href="#command"
-	  >Command</a
-	  > executes a script file stored on the server.</p
-	><dl
-	><dt
-	  ><code
-	    >scriptfile</code
-	    ></dt
-	  ><dd
-	  ><p
-	    >path to the script file</p
-	    ></dd
-	  ><dt
-	  ><code
-	    >args</code
-	    ></dt
-	  ><dd
-	  ><p
-	    >optional arguments to the script</p
-	    ></dd
-	  ></dl
-	><p
-	>Example:</p
-	><pre
+	></pre
+      ></div
+    ><div id="script-file-execution-entry"
+    ><h3
+      ><a href="#TOC"
+	>Script File Execution Entry</a
+	></h3
+      ><p
+      >This <a href="#command"
+	>Command</a
+	> executes a script file stored on the server.</p
+      ><dl
+      ><dt
 	><code
-	  >- scriptfile: /path/to/script
+	  >scriptfile</code
+	  ></dt
+	><dd
+	><p
+	  >path to the script file</p
+	  ></dd
+	><dt
+	><code
+	  >args</code
+	  ></dt
+	><dd
+	><p
+	  >optional arguments to the script</p
+	  ></dd
+	></dl
+      ><p
+      >Example:</p
+      ><pre
+      ><code
+	>- scriptfile: /path/to/script
   args: arguments to script
 </code
-	  ></pre
-	></div
-      ><div id="script-url-execution-entry"
-      ><h4
-	><a href="#TOC"
-	  >Script URL Execution Entry</a
-	  ></h4
-	><p
-	>This <a href="#command"
-	  >Command</a
-	  > downloads a script file from a URL and executes it.</p
-	><dl
-	><dt
-	  ><code
-	    >scripturl</code
-	    ></dt
-	  ><dd
-	  ><p
-	    >URL to the script file</p
-	    ></dd
-	  ><dt
-	  ><code
-	    >args</code
-	    ></dt
-	  ><dd
-	  ><p
-	    >optional arguments to the script</p
-	    ></dd
-	  ></dl
-	><p
-	>Example:</p
-	><pre
+	></pre
+      ></div
+    ><div id="script-url-execution-entry"
+    ><h3
+      ><a href="#TOC"
+	>Script URL Execution Entry</a
+	></h3
+      ><p
+      >This <a href="#command"
+	>Command</a
+	> downloads a script file from a URL and executes it.</p
+      ><dl
+      ><dt
 	><code
-	  >- scripturl: http://example.com/path/to/script
+	  >scripturl</code
+	  ></dt
+	><dd
+	><p
+	  >URL to the script file</p
+	  ></dd
+	><dt
+	><code
+	  >args</code
+	  ></dt
+	><dd
+	><p
+	  >optional arguments to the script</p
+	  ></dd
+	></dl
+      ><p
+      >Example:</p
+      ><pre
+      ><code
+	>- scripturl: http://example.com/path/to/script
   args: arguments to script
 </code
-	  ></pre
-	></div
-      ><div id="job-reference-entry"
-      ><h4
-	><a href="#TOC"
-	  >Job Reference Entry</a
-	  ></h4
+	></pre
+      ></div
+    ><div id="job-reference-entry"
+    ><h3
+      ><a href="#TOC"
+	>Job Reference Entry</a
+	></h3
+      ><p
+      >This <a href="#command"
+	>Command</a
+	> executes another Rundeck Job.</p
+      ><dl
+      ><dt
+	><code
+	  >jobref</code
+	  ></dt
+	><dd
 	><p
-	>This <a href="#command"
-	  >Command</a
-	  > executes another Rundeck Job.</p
-	><dl
-	><dt
-	  ><code
-	    >jobref</code
-	    ></dt
-	  ><dd
-	  ><p
-	    >map consisting of these entries:</p
-	    ><dl
+	  >map consisting of these entries:</p
+	  ><dl
+	  ><dt
+	    ><code
+	      >name</code
+	      ></dt
+	    ><dd
+	    ><p
+	      >Name of the Job</p
+	      ></dd
 	    ><dt
-	      ><code
-		>name</code
-		></dt
-	      ><dd
-	      ><p
-		>Name of the Job</p
-		></dd
-	      ><dt
-	      ><code
-		>group</code
-		></dt
-	      ><dd
-	      ><p
-		>Group of the Job (optional)</p
-		></dd
-	      ><dt
-	      ><code
-		>args</code
-		></dt
-	      ><dd
-	      ><p
-		>Arguments to pass to the job when executed</p
-		></dd
-	      ></dl
-	    ></dd
-	  ></dl
-	><p
-	>Example:</p
-	><pre
-	><code
-	  >- jobref:
+	    ><code
+	      >group</code
+	      ></dt
+	    ><dd
+	    ><p
+	      >Group of the Job (optional)</p
+	      ></dd
+	    ><dt
+	    ><code
+	      >args</code
+	      ></dt
+	    ><dd
+	    ><p
+	      >Arguments to pass to the job when executed</p
+	      ></dd
+	    ></dl
+	  ></dd
+	></dl
+      ><p
+      >Example:</p
+      ><pre
+      ><code
+	>- jobref:
     group: test
     name: simple job test
     args: args for the job
 </code
-	  ></pre
-	></div
+	></pre
+      ></div
+    ><div id="plugin-step-entry"
+    ><h3
+      ><a href="#TOC"
+	>Plugin Step Entry</a
+	></h3
+      ><p
+      >This <a href="#command"
+	>Command</a
+	> executes a plugin. There are two types of step plugins: Node step, and Workflow step.</p
+      ><dl
+      ><dt
+	><code
+	  >nodeStep</code
+	  ></dt
+	><dd
+	><p
+	  >boolean: true indicates it is a Node step plugin, false indicates a Workflow step plugin.</p
+	  ></dd
+	><dt
+	><code
+	  >type</code
+	  ></dt
+	><dd
+	><p
+	  >The plugin provider type identifier.</p
+	  ></dd
+	><dt
+	><code
+	  >configuration</code
+	  ></dt
+	><dd
+	><p
+	  >map consisting of a single level of configuration entries for the plugin. Refer to the plugin documentation for appropriate configuration keys and values.</p
+	  ></dd
+	></dl
+      ><p
+      >Example:</p
+      ><pre
+      ><code
+	>- nodeStep: false
+  type: jenkins-build
+  configuration:
+    job: &quot;${option.job}&quot;
+</code
+	></pre
       ></div
     ><div id="options"
     ><h3
@@ -1133,7 +1244,7 @@ sequence:
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../../index.html">Rundeck Documentation (1.4.5)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (1.5-SNAPSHOT)</a></li>
     
         <li><a href="../index.html">Man Pages</a></li>
     </ul>
@@ -1145,7 +1256,7 @@ sequence:
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2013-01-10T13:41:42EST">2013-01-10T13:41:42EST</span>
+<span class="generated-date" title="2013-01-11T14:54:33EST">2013-01-11T14:54:33EST</span>
 
 </footer>
 </body>

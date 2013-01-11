@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>API Reference | Version 5</title>
+  <title>API Reference | Version 6</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="Alex Honor" />
@@ -14,20 +14,20 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.5)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.5-SNAPSHOT)</a></li>
     </ul>
 </nav>
 
 <nav class="page top">
     <ul>
-        <li class="current"><a href="index.html">API Reference | Version 5</a></li>
+        <li class="current"><a href="index.html">API Reference | Version 6</a></li>
         
         
         
     </ul>
 </nav>
 <div id="docbody">
-<h1 class="title">API Reference | Version 5</h1>
+<h1 class="title">API Reference | Version 6</h1>
 <div id="TOC"
 ><ul
   ><li
@@ -236,7 +236,7 @@
     ></h2
   ><p
   >The current API version is <code
-    >5</code
+    >6</code
     >.</p
   ><p
   >For API endpoints described in this document, the <em
@@ -274,6 +274,38 @@
       ></h3
     ><p
     >Changes introduced by API Version number:</p
+    ><p
+    ><strong
+      >Version 6</strong
+      >:</p
+    ><ul
+    ><li
+      >Updated endpoints<ul
+	><li
+	  ><code
+	    >/api/6/execution/[ID]/output</code
+	    > - <a href="#execution-output"
+	    >Execution Output</a
+	    ><ul
+	    ><li
+	      >XML format has changed for API v6: entry log content is now specified as a <code
+		>log</code
+		> attribute value</li
+	      ><li
+	      >The old XML format will still be used for queries using <code
+		>/api/5</code
+		></li
+	      ><li
+	      >Fixed invalid XML when no format was specified and XML was used by default</li
+	      ><li
+	      ><strong
+		>documentation typo fixed</strong
+		>: the JSON format incorrectly specified the log text key as 'mesg', corrected to 'log'</li
+	      ></ul
+	    ></li
+	  ></ul
+	></li
+      ></ul
     ><p
     ><strong
       >Version 5</strong
@@ -2178,8 +2210,8 @@ Accept: */xml
 	  >: Log level, one of: SEVERE,WARNING,INFO,CONFIG,FINEST</li
 	><li
 	><code
-	  >mesg</code
-	  >: The log message (JSON only)</li
+	  >log</code
+	  >: The log message</li
 	><li
 	><code
 	  >user</code
@@ -2194,9 +2226,17 @@ Accept: */xml
 	  >: Node name</li
 	></ul
       ><p
-      >The XML <code
+      ><strong
+	>Note for API version 5:</strong
+	></p
+      ><p
+      >For API requests using version <code
+	>5</code
+	> only, the XML <code
 	>entry</code
-	> will have the log message as the text value.</p
+	> will have the log message as the text value. Otherwise the log entry value will be within the <code
+	>log</code
+	> attribute.</p
       ></div
     ><div id="text-format-content"
     ><h4
@@ -3253,7 +3293,7 @@ project.resources.allowedURL.1=^http://server2:9090/resources/.*$
 
 <nav class="page bottom">
     <ul>
-        <li class="current"><a href="index.html">API Reference | Version 5</a></li>
+        <li class="current"><a href="index.html">API Reference | Version 6</a></li>
         
         
         
@@ -3261,7 +3301,7 @@ project.resources.allowedURL.1=^http://server2:9090/resources/.*$
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.5)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.5-SNAPSHOT)</a></li>
     </ul>
 </nav>
 <footer class="copy">
@@ -3271,7 +3311,7 @@ project.resources.allowedURL.1=^http://server2:9090/resources/.*$
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2013-01-10T13:41:42EST">2013-01-10T13:41:42EST</span>
+<span class="generated-date" title="2013-01-11T14:54:33EST">2013-01-11T14:54:33EST</span>
 
 </footer>
 </body>

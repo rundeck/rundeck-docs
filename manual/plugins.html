@@ -14,7 +14,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.5)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.5-SNAPSHOT)</a></li>
     </ul>
 </nav>
 
@@ -47,6 +47,10 @@
       >Types of Plugins</a
       ><ul
       ><li
+	><a href="#workflow-step-plugins"
+	  >Workflow Step Plugins</a
+	  ></li
+	><li
 	><a href="#node-execution-plugins"
 	  >Node Execution Plugins</a
 	  ></li
@@ -69,6 +73,10 @@
       >Using Providers</a
       ><ul
       ><li
+	><a href="#workflow-step-services"
+	  >Workflow Step Services</a
+	  ></li
+	><li
 	><a href="#node-execution-services"
 	  >Node Execution Services</a
 	  ><ul
@@ -328,6 +336,38 @@
     ></h2
   ><p
   >Rundeck supports several different types of plugins to perform different kinds of services.</p
+  ><div id="workflow-step-plugins"
+  ><h3
+    ><a href="#TOC"
+      >Workflow Step Plugins</a
+      ></h3
+    ><p
+    >These plugins define the behavior taken for a single step in a workflow.</p
+    ><p
+    >There are two types of steps that can be executed in a workflow, so there are two types of plugins that can be defined:</p
+    ><ol style="list-style-type: decimal;"
+    ><li
+      >Workflow Step - runs once in a workflow<ul
+	><li
+	  >Defined by a &quot;Workflow Step Plugin&quot;</li
+	  ></ul
+	></li
+      ><li
+      >Node Steps - runs once per Node in the Job definition<ul
+	><li
+	  >Defined by a &quot;Workflow Node Step Plugin&quot;</li
+	  ></ul
+	></li
+      ></ol
+    ><p
+    >More information:</p
+    ><ul
+    ><li
+      >Configuration: <a href="plugins.html#workflow-step-services"
+	>Workflow Step Services</a
+	></li
+      ></ul
+    ></div
   ><div id="node-execution-plugins"
   ><h3
     ><a href="#TOC"
@@ -406,11 +446,11 @@
   >The Rundeck core makes use of several different &quot;Services&quot; that provide functionality for the different steps necessary to execute workflows, jobs, and commands across multiple nodes.</p
   ><p
   >Each Service makes use of &quot;Providers&quot;. Each Provider has a unique &quot;Provider Name&quot; that is used to identify it, and most Services have default Providers unless you specify different ones to use.</p
-  ><div class="figure"
+  ><p
   ><img src="../figures/fig1101.png" alt="Rundeck Services and Providers"
-     /><p class="caption"
-    >Rundeck Services and Providers</p
-    ></div
+     /> <img src="../figures/fig1101_2.png" alt="Rundeck Services and Providers"
+     /> <img src="../figures/fig1101_3.png" alt="Rundeck Services and Providers"
+     /></p
   ><p
   >Services fall into different categories, which determine how and where they are used.</p
   ><p
@@ -452,17 +492,85 @@
 	>Resource Format Generators - these define document format generators</li
 	></ol
       ></li
+    ><li
+    ><p
+      ><strong
+	>Workflow services</strong
+	></p
+      ><ol style="list-style-type: decimal;"
+      ><li
+	>Workflow Step - providers define behavior for all nodes</li
+	><li
+	>Workflow Node Step - providers define behavior for a single node</li
+	><li
+	>Remote Script Node Step - a specific use-case for Node Step providers</li
+	></ol
+      ></li
     ></ol
   ><p
   >Specifics of how providers of these plugins work is listed below.</p
   ><p
-  >Rundeck Plugins can contain more than one Provider.</p
+  >Rundeck Plugin Files can contain more than one Provider.</p
   ></div
 ><div id="using-providers"
 ><h2
   ><a href="#TOC"
     >Using Providers</a
     ></h2
+  ><div id="workflow-step-services"
+  ><h3
+    ><a href="#TOC"
+      >Workflow Step Services</a
+      ></h3
+    ><p
+    >Workflow Step and Workflow Node Step providers are used to define custom steps that can be performed in Workflows.</p
+    ><p
+    >You can select a step plugin in the GUI when adding a new step to a Workflow. You will be prompted to enter any configuration properties for the step, and can save those configuration values into your workflow.</p
+    ><p
+    >If you are defining a workflow in an XML/Yaml-formatted file, you can specify the configuration properties there.</p
+    ><p
+    >Each configuration property has a &quot;scope&quot; defined by the provider. Scoped properties allow default values to be specified at Framework (application) or Project level configuration properties. Properties can also be defined to only exist at Framework or Project levels.</p
+    ><ol style="list-style-type: decimal;"
+    ><li
+      >Instance (Job) scope: the property values defined in the Job definition</li
+      ><li
+      >Project scope: property values defined in the Project's <em
+	>project.properties</em
+	> file</li
+      ><li
+      >Framework (Application) scope: property values defined in Rundeck's <em
+	>framework.properties</em
+	> file.</li
+      ></ol
+    ><p
+    >When determining the property value to use, Rundeck will evaluate the most-specific scope first (Instance level), and then widen the scope to Project, then Framework definitions.</p
+    ><p
+    >When you create a Job in the Rundeck GUI, you will be shown the Instance-scope properties as part of the GUI Workflow Builder for any plugin step that you add to your workflow.</p
+    ><p
+    >When a property can be configured at the framework/project level, you will be able to define it like this:</p
+    ><p
+    ><em
+      >Framework scope property definition in <code
+	>framework.properties</code
+	></em
+      ></p
+    ><pre
+    ><code
+      >framework.plugin.[ServiceName].[providerName].[property]=value
+</code
+      ></pre
+    ><p
+    ><em
+      >Project scope property definition in <code
+	>project.properties</code
+	></em
+      ></p
+    ><pre
+    ><code
+      >project.plugin.[ServiceName].[providerName].[property]=value
+</code
+      ></pre
+    ></div
   ><div id="node-execution-services"
   ><h3
     ><a href="#TOC"
@@ -2642,7 +2750,7 @@ plugin.script-copy.default.remote-filepath: ${node.destdir}/${file-copy.filename
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.5)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.5-SNAPSHOT)</a></li>
     </ul>
 </nav>
 <footer class="copy">
@@ -2652,7 +2760,7 @@ plugin.script-copy.default.remote-filepath: ${node.destdir}/${file-copy.filename
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2013-01-10T13:41:42EST">2013-01-10T13:41:42EST</span>
+<span class="generated-date" title="2013-01-11T14:54:33EST">2013-01-11T14:54:33EST</span>
 
 </footer>
 </body>

@@ -14,7 +14,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.5)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.5-SNAPSHOT)</a></li>
     </ul>
 </nav>
 
@@ -67,6 +67,16 @@
     ><li
     ><a href="#reordering-steps"
       >Reordering steps</a
+      ></li
+    ><li
+    ><a href="#error-handlers"
+      >Error Handlers</a
+      ><ul
+      ><li
+	><a href="#context-information"
+	  >Context information</a
+	  ></li
+	></ul
       ></li
     ><li
     ><a href="#save-the-changes"
@@ -383,6 +393,124 @@ EOF
   ><p
   >Press the &quot;Revert All Changes&quot; button to go back to the original step order.</p
   ></div
+><div id="error-handlers"
+><h2
+  ><a href="#TOC"
+    >Error Handlers</a
+    ></h2
+  ><p
+  >Each step in a Workflow can have an associated &quot;Error Handler&quot; action. This handler is a secondary step of any of the available types that will execute if the Workflow step fails. Error Handler steps can be used to recover the workflow from failure, or simply to execute a secondary action.</p
+  ><p
+  >This provides a few different ways to deal with a step's failure:</p
+  ><ul
+  ><li
+    >Print additional information about a failure</li
+    ><li
+    >Roll back a change</li
+    ><li
+    >Recover the workflow from failure, and continue normally</li
+    ></ul
+  ><p
+  >When a Workflow step has a failure, the behavior depends on whether it has an Error Handler or not, and the value of the &quot;keepgoing&quot; setting for the Workflow, and the value of the &quot;keepgoingOnSuccess&quot; for the Error Handler.</p
+  ><ul
+  ><li
+    >When a step fails <strong
+      >without an Error Handler</strong
+      ><ol style="list-style-type: decimal;"
+      ><li
+	>the Workflow is marked as &quot;failed&quot;</li
+	><li
+	>If <code
+	  >keepgoing=&quot;false&quot;</code
+	  ><ol style="list-style-type: decimal;"
+	  ><li
+	    >then the entire Workflow stops</li
+	    ></ol
+	  ></li
+	><li
+	>Otherwise, the remaining Workflow steps are executed in order</li
+	><li
+	>the Workflow ends with a &quot;failed&quot; result status</li
+	></ol
+      ></li
+    ></ul
+  ><p
+  >If you define an Error Handler for a step, then the behavior changes. The handler can recover the step's failure by executing successfully, and a secondary option &quot;keepgoingOnSuccess&quot; will let you override the Workflow's &quot;keepgoing&quot; value if it is false.</p
+  ><ul
+  ><li
+    >When a step fails <strong
+      >with an Error Handler</strong
+      ><ol style="list-style-type: decimal;"
+      ><li
+	>The Error Handler is executed</li
+	><li
+	>If the Error Handler was successful and has <code
+	  >keepgoingOnSuccess=&quot;true&quot;</code
+	  ><ol style="list-style-type: decimal;"
+	  ><li
+	    >The workflow <code
+	      >keepgoing</code
+	      > is ignored,</li
+	    ><li
+	    >The Workflow failure status is <em
+	      >not</em
+	      > marked, and it will continue to the next step</li
+	    ></ol
+	  ></li
+	><li
+	>Else if <code
+	  >keepgoing=&quot;false&quot;</code
+	  ><ol style="list-style-type: decimal;"
+	  ><li
+	    >The Workflow is marked as &quot;failed&quot;</li
+	    ><li
+	    >Then the entire Workflow stops</li
+	    ></ol
+	  ></li
+	><li
+	>Else if <code
+	  >keepgoing=&quot;true&quot;</code
+	  ><ol style="list-style-type: decimal;"
+	  ><li
+	    >If the Error Handler failed then the Workflow is marked as &quot;failed&quot;</li
+	    ><li
+	    >Otherwise, the Workflow is <em
+	      >not</em
+	      > additionally marked</li
+	    ></ol
+	  ></li
+	><li
+	>the remaining Workflow steps are executed in order (including other triggered Error Handlers)</li
+	><li
+	>when the Workflow ends, its status depends on if it is marked</li
+	></ol
+      ></li
+    ></ul
+  ><p
+  >Essentially, the result status of the Error Handler becomes the result status of its Step, if the Workflow has <code
+    >keepgoing=&quot;true&quot;</code
+    > or if the Error Handler overrides it with <code
+    >keepgoingOnSuccess=&quot;true&quot;</code
+    >. If the Error Handler succeeds, then the step is not considered to have failed. This includes scripts, commands, job references, etc. (Scripts and commands must have an exit status of <code
+    >0</code
+    > to return success.)</p
+  ><p
+  >It is a good practice, when you are defining Error Handlers, to <strong
+    >always</strong
+    > have them fail (e.g. scripts/commands return a non-zero exit-code), unless you specifically want them to be used for Recovery.</p
+  ><div id="context-information"
+  ><h3
+    ><a href="#TOC"
+      >Context information</a
+      ></h3
+    ><p
+    >When the Error-handler step is executed, its execution context will contain some information about the nature of the failure that occurred for the original step.</p
+    ><p
+    >See the section on <a href="#context-variables"
+      >Context Variables</a
+      > for more information.</p
+    ></div
+  ></div
 ><div id="save-the-changes"
 ><h2
   ><a href="#TOC"
@@ -471,6 +599,80 @@ EOF
     ><code
       >node.*</code
       >: All Node attributes defined on the Node.</li
+    ></ul
+  ><p
+  >Additional Error-handler context variables:</p
+  ><ul
+  ><li
+    ><code
+      >result.reason</code
+      >: A code indicating the reason the step failed<ul
+      ><li
+	>Common reason code strings used by node execution of commands or scripts:<ul
+	  ><li
+	    ><code
+	      >NonZeroResultCode</code
+	      > - the execution returned a non-zero code</li
+	    ><li
+	    ><code
+	      >SSHProtocolFailure</code
+	      > - SSH protocol failure</li
+	    ><li
+	    ><code
+	      >HostNotFound</code
+	      > - host not found</li
+	    ><li
+	    ><code
+	      >ConnectionTimeout</code
+	      > - connection timeout</li
+	    ><li
+	    ><code
+	      >ConnectionFailure</code
+	      > - connection failure (e.g. refused)</li
+	    ><li
+	    ><code
+	      >IOFailure</code
+	      > - IO error</li
+	    ><li
+	    ><code
+	      >AuthenticationFailure</code
+	      > - authentication was refused or incorrect</li
+	    ></ul
+	  ></li
+	><li
+	>Reason code strings used by Job references<ul
+	  ><li
+	    ><code
+	      >JobFailed</code
+	      > - referenced Job workflow failed</li
+	    ><li
+	    ><code
+	      >NotFound</code
+	      > - referenced Job not found</li
+	    ><li
+	    ><code
+	      >Unauthorized</code
+	      > - referenced Job not authorized</li
+	    ><li
+	    ><code
+	      >InvalidOptions</code
+	      > - referenced Job input options invalid</li
+	    ><li
+	    ><code
+	      >NoMatchedNodes</code
+	      > - referenced Job node dispatch filters had no match</li
+	    ></ul
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><code
+      >result.message</code
+      >: A string describing the failure</li
+    ><li
+    ><code
+      >result.resultCode</code
+      >: Exit code from an execution (if available)</li
     ></ul
   ><p
   >Option context variables are referred to as <code
@@ -562,7 +764,7 @@ EOF
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.5)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.5-SNAPSHOT)</a></li>
     </ul>
 </nav>
 <footer class="copy">
@@ -572,7 +774,7 @@ EOF
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2013-01-10T13:41:42EST">2013-01-10T13:41:42EST</span>
+<span class="generated-date" title="2013-01-11T14:54:33EST">2013-01-11T14:54:33EST</span>
 
 </footer>
 </body>

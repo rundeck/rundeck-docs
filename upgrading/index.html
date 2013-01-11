@@ -13,7 +13,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.5)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.5-SNAPSHOT)</a></li>
     </ul>
 </nav>
 
@@ -30,6 +30,28 @@
 <div id="TOC"
 ><ul
   ><li
+    ><a href="#important-changes-in-rundeck-1.5"
+      >Important Changes in Rundeck 1.5</a
+      ><ul
+      ><li
+	><a href="#database-changes"
+	  >Database changes</a
+	  ></li
+	><li
+	><a href="#default-database"
+	  >Default database</a
+	  ></li
+	><li
+	><a href="#maintaining-use-of-hsqldb"
+	  >Maintaining use of Hsqldb</a
+	  ></li
+	><li
+	><a href="#plugins"
+	  >Plugins</a
+	  ></li
+	></ul
+      ></li
+    ><li
     ><a href="#important-changes-in-rundeck-1.4.1"
       >Important Changes in Rundeck 1.4.1</a
       ></li
@@ -52,7 +74,7 @@
 	></ul
       ></li
     ><li
-    ><a href="#database-changes"
+    ><a href="#database-changes-1"
       >Database changes</a
       ></li
     ><li
@@ -104,7 +126,95 @@
     ></ul
   ></div
 >
-<div id="important-changes-in-rundeck-1.4.1"
+<div id="important-changes-in-rundeck-1.5"
+><h2
+  ><a href="#TOC"
+    >Important Changes in Rundeck 1.5</a
+    ></h2
+  ><p
+  >If you are upgrading from Rundeck 1.4.x, please follow the following directions to migrate your projects. It is also recommended that if you are using the default Hsqldb datastore, you should migrate to using H2 which is now the default.</p
+  ><div id="database-changes"
+  ><h3
+    ><a href="#TOC"
+      >Database changes</a
+      ></h3
+    ><p
+    >Rundeck has changed some of the schema used for the database since the 1.4 release. These changes can't be handled by the Grails automatic schema updating. To make a general solution to upgrade, we introduced the <a href="../administration/backup-and-recovery.html#project-import-and-export"
+      >Project Export</a
+      > feature in Rundeck 1.4.4. You can easily use this to export Rundeck 1.4.4+ projects and re-import them into a Rundeck 1.5 project.</p
+    ><ol style="list-style-type: decimal;"
+    ><li
+      >Before you install Rundeck 1.5, follow the instructions for <a href="../administration/backup-and-recovery.html#project-import-and-export"
+	>Project Import and Export</a
+	> feature for any projects you want to migrate.</li
+      ><li
+      >You should do the other <a href="../administration/backup-and-recovery.html#backup"
+	>Backup procedures</a
+	> of your data to ensure you have an operational backup of your 1.4.x intallation.</li
+      ><li
+      >(Optional) Configure your <code
+	>rundeck-config.properties</code
+	> file with a new database backend. It is recommended that you use H2 which is now the default database (see below), or you can use another <a href="../administration/relational-database.html"
+	>relational database</a
+	>.</li
+      ><li
+      >Drop or remove the previous 1.4.x database contents if you are using the same data store. (If you used the default hsqldb installation, you can remove the files located under <code
+	>$RDECK_BASE/server/data</code
+	>.)</li
+      ><li
+      >Remove the old log files located in <code
+	>$RDECK_BASE/var/logs/rundeck</code
+	>: these files will be recreated by the project import process.</li
+      ></ol
+    ><p
+    >Once you have done these steps, you can upgrade to Rundeck 1.5. Then you can import any project archives you created in step 1.</p
+    ></div
+  ><div id="default-database"
+  ><h3
+    ><a href="#TOC"
+      >Default database</a
+      ></h3
+    ><p
+    >The default database for new installations is now H2, instead of Hsqldb.</p
+    ><p
+    >If you are migrating from Rundeck 1.4 you can modify your <code
+      >rundeck-config.properties</code
+      > to specify the new dataSource URL:</p
+    ><pre
+    ><code
+      >dataSource.url = jdbc:h2:file:/path/to/datastore
+</code
+      ></pre
+    ></div
+  ><div id="maintaining-use-of-hsqldb"
+  ><h3
+    ><a href="#TOC"
+      >Maintaining use of Hsqldb</a
+      ></h3
+    ><p
+    >If you still want to use hsqldb, you will now have to manually specify the right JDBC driver classname, by adding this to your <code
+      >rundeck-config.properties</code
+      > since the default is now H2:</p
+    ><pre
+    ><code
+      >dataSource.driverClassName=org.hsqldb.jdbcDriver
+</code
+      ></pre
+    ></div
+  ><div id="plugins"
+  ><h3
+    ><a href="#TOC"
+      >Plugins</a
+      ></h3
+    ><p
+    >Rundeck plugins created for 1.4.x or earlier will not work with Rundeck 1.5 without some minor changes.</p
+    ><p
+    >For Plugin developers, please read the <a href="../developer/plugin-development.html#changes-in-rundeck-1.5"
+      >Plugin Development &gt; Changes in Rundeck 1.5</a
+      > section.</p
+    ></div
+  ></div
+><div id="important-changes-in-rundeck-1.4.1"
 ><h2
   ><a href="#TOC"
     >Important Changes in Rundeck 1.4.1</a
@@ -207,7 +317,7 @@
       ></ol
     ></div
   ></div
-><div id="database-changes"
+><div id="database-changes-1"
 ><h2
   ><a href="#TOC"
     >Database changes</a
@@ -853,7 +963,7 @@ by:
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.4.5)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.5-SNAPSHOT)</a></li>
     </ul>
 </nav>
 <footer class="copy">
@@ -863,7 +973,7 @@ by:
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2013-01-10T13:41:42EST">2013-01-10T13:41:42EST</span>
+<span class="generated-date" title="2013-01-11T14:54:33EST">2013-01-11T14:54:33EST</span>
 
 </footer>
 </body>

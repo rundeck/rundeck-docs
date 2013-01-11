@@ -13,7 +13,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../../index.html">Rundeck Documentation (1.4.5)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (1.5-SNAPSHOT)</a></li>
     
         <li><a href="../index.html">Man Pages</a></li>
     </ul>
@@ -166,20 +166,44 @@
 	  ><li
 	    ><a href="#command"
 	      >command</a
+	      ></li
+	    ><li
+	    ><a href="#errorhandler"
+	      >errorhandler</a
+	      ></li
+	    ><li
+	    ><a href="#script-sequence-step"
+	      >Script sequence step</a
+	      ></li
+	    ><li
+	    ><a href="#job-sequence-step"
+	      >Job sequence step</a
 	      ><ul
 	      ><li
-		><a href="#script-sequence-step"
-		  >Script sequence step</a
+		><a href="#jobref"
+		  >jobref</a
+		  ></li
+		></ul
+	      ></li
+	    ><li
+	    ><a href="#plugin-step"
+	      >Plugin step</a
+	      ><ul
+	      ><li
+		><a href="#node-step-plugin"
+		  >node-step-plugin</a
 		  ></li
 		><li
-		><a href="#job-sequence-step"
-		  >Job sequence step</a
-		  ><ul
-		  ><li
-		    ><a href="#jobref"
-		      >jobref</a
-		      ></li
-		    ></ul
+		><a href="#step-plugin"
+		  >step-plugin</a
+		  ></li
+		><li
+		><a href="#configuration"
+		  >configuration</a
+		  ></li
+		><li
+		><a href="#entry"
+		  >entry</a
 		  ></li
 		></ul
 	      ></li
@@ -1313,124 +1337,364 @@ exit 0 ]]&gt;&lt;/script&gt;
 	><a href="#job-sequence-step"
 	  >Job sequence step</a
 	  ></li
-	></ul
-      ><div id="script-sequence-step"
-      ><h4
-	><a href="#TOC"
-	  >Script sequence step</a
-	  ></h4
-	><p
-	>Script steps can be defined in three ways within a command element:</p
-	><ul
 	><li
-	  >Simple shell command using <code>exec</code> element.</li
-	  ><li
-	  >Embedded script using <code>script</code> element.</li
-	  ><li
-	  >Script file using <code>scriptfile</code> and <code>scriptargs</code> elements.</li
-	  ></ul
-	><p
-	>Example exec step:</p
-	><pre
+	><a href="#plugin-step"
+	  >Plugin step</a
+	  ></li
+	></ul
+      ><p
+      >A command can embed a <a href="#errorhandler"
+	>errorhandler</a
+	> to define an action to run if the step fails.</p
+      ></div
+    ><div id="errorhandler"
+    ><h3
+      ><a href="#TOC"
+	>errorhandler</a
+	></h3
+      ><p
+      >Defines an action to handle an error in a <a href="#command"
+	>command</a
+	>.</p
+      ><p
+      >The contents of an <code
+	>&lt;errorhandler&gt;</code
+	> are exactly the same as for a <a href="#command"
+	>command</a
+	> except it cannot contain any errorhandler itself.</p
+      ><p
+      >The different types of errorhandler steps are defined in different ways.</p
+      ><p
+      ><em
+	>Attributes</em
+	></p
+      ><dl
+      ><dt
 	><code
-	  >&lt;command&gt;
+	  >keepgoingOnSuccess</code
+	  ></dt
+	><dd
+	>true/false. (default false). If true, and the error handler succeeds, the workflow sequence will continue even if the workflow <code
+	  >keepgoing</code
+	  > is false.</dd
+	></dl
+      ><p
+      >See:</p
+      ><ul
+      ><li
+	><a href="#script-sequence-step"
+	  >Script sequence step</a
+	  ></li
+	><li
+	><a href="#job-sequence-step"
+	  >Job sequence step</a
+	  ></li
+	><li
+	><a href="#plugin-step"
+	  >Plugin step</a
+	  ></li
+	></ul
+      ><p
+      >Example:</p
+      ><pre
+      ><code
+	>&lt;errorhandler&gt;
+   &lt;exec&gt;echo this is a shell command&lt;/exec&gt;
+&lt;/errorhandler&gt;
+</code
+	></pre
+      ><p
+      >Inline script. Note that using CDATA section will preserve linebreaks in the script. Simply put the script within a <code>script</code> element:</p
+      ><pre
+      ><code
+	>&lt;errorhandler&gt;
+    &lt;script&gt;&lt;![CDATA[#!/bin/bash
+echo this is a test
+echo whatever
+exit 2 ]&gt;&lt;/script&gt;
+&lt;/errorhandler&gt;
+</code
+	></pre
+      ><p
+      >Script File:</p
+      ><pre
+      ><code
+	>&lt;errorhandler&gt;
+    &lt;scriptfile&gt;/path/to/a/script&lt;/scriptfile&gt;
+    &lt;scriptargs&gt;-whatever something&lt;/scriptargs&gt;
+&lt;/errorhandler&gt;      
+</code
+	></pre
+      ><p
+      >Example job reference:</p
+      ><pre
+      ><code
+	>&lt;errorhandler &gt;
+    &lt;jobref group=&quot;My group&quot; name=&quot;My Job&quot;&gt;
+       &lt;arg line=&quot;-option value -option2 value2&quot;/&gt;
+    &lt;/jobref&gt;
+&lt;/errorhandler&gt;      
+</code
+	></pre
+      ></div
+    ><div id="script-sequence-step"
+    ><h3
+      ><a href="#TOC"
+	>Script sequence step</a
+	></h3
+      ><p
+      >Script steps can be defined in three ways within a command element:</p
+      ><ul
+      ><li
+	>Simple shell command using <code>exec</code> element.</li
+	><li
+	>Embedded script using <code>script</code> element.</li
+	><li
+	>Script file using <code>scriptfile</code> and <code>scriptargs</code> elements.</li
+	></ul
+      ><p
+      >Example exec step:</p
+      ><pre
+      ><code
+	>&lt;command&gt;
    &lt;exec&gt;echo this is a shell command&lt;/exec&gt;
 &lt;/command&gt;
 </code
-	  ></pre
-	><p
-	>Inline script. Note that using CDATA section will preserve linebreaks in the script. Simply put the script within a <code>script</code> element:</p
-	><pre
-	><code
-	  >&lt;command&gt;
+	></pre
+      ><p
+      >Inline script. Note that using CDATA section will preserve linebreaks in the script. Simply put the script within a <code>script</code> element:</p
+      ><pre
+      ><code
+	>&lt;command&gt;
     &lt;script&gt;&lt;![CDATA[#!/bin/bash
 echo this is a test
 echo whatever
 exit 2 ]&gt;&lt;/script&gt;
 &lt;/command&gt;
 </code
-	  ></pre
-	><p
-	>Script File:</p
-	><pre
-	><code
-	  >&lt;command &gt;
+	></pre
+      ><p
+      >Script File:</p
+      ><pre
+      ><code
+	>&lt;command &gt;
     &lt;scriptfile&gt;/path/to/a/script&lt;/scriptfile&gt;
     &lt;scriptargs&gt;-whatever something&lt;/scriptargs&gt;
 &lt;/command&gt;      
 </code
-	  ></pre
-	><p
-	>Script URL:</p
-	><pre
-	><code
-	  >&lt;command &gt;
+	></pre
+      ><p
+      >Script URL:</p
+      ><pre
+      ><code
+	>&lt;command &gt;
     &lt;scripturl&gt;http://example.com/path/to/a/script&lt;/scripturl&gt;
     &lt;scriptargs&gt;-whatever something&lt;/scriptargs&gt;
 &lt;/command&gt;      
 </code
-	  ></pre
-	></div
-      ><div id="job-sequence-step"
+	></pre
+      ></div
+    ><div id="job-sequence-step"
+    ><h3
+      ><a href="#TOC"
+	>Job sequence step</a
+	></h3
+      ><p
+      >Define a <a href="#jobref"
+	>jobref</a
+	> element within the <a href="#command"
+	>command</a
+	> element</p
+      ><div id="jobref"
       ><h4
 	><a href="#TOC"
-	  >Job sequence step</a
+	  >jobref</a
 	  ></h4
 	><p
-	>Define a <a href="#jobref"
-	  >jobref</a
-	  > element within the <a href="#command"
-	  >command</a
-	  > element</p
-	><div id="jobref"
-	><h5
-	  ><a href="#TOC"
-	    >jobref</a
-	    ></h5
+	><em
+	  >Attributes</em
+	  ></p
+	><dl
+	><dt
+	  >name</dt
+	  ><dd
 	  ><p
-	  ><em
-	    >Attributes</em
-	    ></p
-	  ><dl
+	    >the job name</p
+	    ></dd
 	  ><dt
-	    >name</dt
-	    ><dd
-	    ><p
-	      >the job name</p
-	      ></dd
-	    ><dt
-	    >group</dt
-	    ><dd
-	    ><p
-	      >the group name</p
-	      ></dd
-	    ></dl
+	  >group</dt
+	  ><dd
 	  ><p
-	  ><em
-	    >Nested elements</em
-	    ></p
-	  ><p
-	  >Optional &quot;arg&quot; element can be embedded:</p
-	  ><dl
-	  ><dt
-	    ><a href="#arg"
-	      >arg</a
-	      ></dt
-	    ><dd
-	    >option arguments to the script or job</dd
-	    ></dl
-	  ><p
-	  >Example passing arguments to the job:</p
-	  ><pre
-	  ><code
-	    >&lt;command &gt;
+	    >the group name</p
+	    ></dd
+	  ></dl
+	><p
+	><em
+	  >Nested elements</em
+	  ></p
+	><p
+	>Optional &quot;arg&quot; element can be embedded:</p
+	><dl
+	><dt
+	  ><a href="#arg"
+	    >arg</a
+	    ></dt
+	  ><dd
+	  >option arguments to the script or job</dd
+	  ></dl
+	><p
+	>Example passing arguments to the job:</p
+	><pre
+	><code
+	  >&lt;command &gt;
     &lt;jobref group=&quot;My group&quot; name=&quot;My Job&quot;&gt;
        &lt;arg line=&quot;-option value -option2 value2&quot;/&gt;
     &lt;/jobref&gt;
 &lt;/command&gt;      
 </code
-	    ></pre
-	  ></div
+	  ></pre
+	></div
+      ></div
+    ><div id="plugin-step"
+    ><h3
+      ><a href="#TOC"
+	>Plugin step</a
+	></h3
+      ><p
+      >There are two types of plugin steps that can be defined: Node steps, and workflow steps.</p
+      ><p
+      >Define either one within the <a href="#command"
+	>command</a
+	> element:</p
+      ><ul
+      ><li
+	><a href="#node-step-plugin"
+	  >node-step-plugin</a
+	  ></li
+	><li
+	><a href="#step-plugin"
+	  >step-plugin</a
+	  ></li
+	></ul
+      ><p
+      >Both have the following contents:</p
+      ><p
+      ><em
+	>Attributes</em
+	></p
+      ><dl
+      ><dt
+	>type</dt
+	><dd
+	>The plugin provider type identifier</dd
+	></dl
+      ><p
+      ><em
+	>Nested elements</em
+	></p
+      ><p
+      >Optional 'configuration' can be embedded containing a list of 'entry' key/value pairs:</p
+      ><dl
+      ><dt
+	><a href="#configuration"
+	  >configuration</a
+	  ></dt
+	><dd
+	><p
+	  >Defines plugin configuration entries</p
+	  ></dd
+	><dt
+	><a href="#entry"
+	  >entry</a
+	  ></dt
+	><dd
+	><p
+	  >Defines a key/value pair for the configuration.</p
+	  ></dd
+	></dl
+      ><p
+      >Example node step plugin definition:</p
+      ><pre
+      ><code
+	>&lt;command&gt;
+    &lt;node-step-plugin type=&quot;my-node-step-plugin&quot;&gt;
+       &lt;configuration&gt;
+        &lt;entry key=&quot;someconfig&quot; value=&quot;a value&quot;/&gt;
+        &lt;entry key=&quot;timout&quot; value=&quot;2000&quot;/&gt;
+       &lt;/configuration&gt;
+    &lt;/node-step-plugin&gt;
+&lt;/command&gt; 
+</code
+	></pre
+      ><p
+      >Example workflow step plugin definition:</p
+      ><pre
+      ><code
+	>&lt;command&gt;
+    &lt;step-plugin type=&quot;my-step-plugin&quot;&gt;
+       &lt;configuration&gt;
+        &lt;entry key=&quot;repeat&quot; value=&quot;12&quot;/&gt;
+        &lt;entry key=&quot;debug&quot; value=&quot;true&quot;/&gt;
+       &lt;/configuration&gt;
+    &lt;/step-plugin&gt;
+&lt;/command&gt;     
+</code
+	></pre
+      ><div id="node-step-plugin"
+      ><h4
+	><a href="#TOC"
+	  >node-step-plugin</a
+	  ></h4
+	><p
+	>Defines a plugin step that executes for each node.</p
+	></div
+      ><div id="step-plugin"
+      ><h4
+	><a href="#TOC"
+	  >step-plugin</a
+	  ></h4
+	><p
+	>Defines a plugin step that executes once in a workflow.</p
+	></div
+      ><div id="configuration"
+      ><h4
+	><a href="#TOC"
+	  >configuration</a
+	  ></h4
+	><p
+	>Contains the key/value pair entries for plugin configuration, within a <a href="#node-step-plugin"
+	  >node-step-plugin</a
+	  > or <a href="#step-plugin"
+	  >step-plugin</a
+	  >.</p
+	></div
+      ><div id="entry"
+      ><h4
+	><a href="#TOC"
+	  >entry</a
+	  ></h4
+	><p
+	>Defines a key/value pair within a <a href="#configuration"
+	  >configuration</a
+	  >.</p
+	><p
+	><em
+	  >Attributes</em
+	  >:</p
+	><dl
+	><dt
+	  >key</dt
+	  ><dd
+	  ><p
+	    >Key for the pair</p
+	    ></dd
+	  ><dt
+	  >value</dt
+	  ><dd
+	  ><p
+	    >Textual value</p
+	    ></dd
+	  ></dl
 	></div
       ></div
     ></div
@@ -1617,7 +1881,7 @@ exit 2 ]&gt;&lt;/script&gt;
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../../index.html">Rundeck Documentation (1.4.5)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (1.5-SNAPSHOT)</a></li>
     
         <li><a href="../index.html">Man Pages</a></li>
     </ul>
@@ -1629,7 +1893,7 @@ exit 2 ]&gt;&lt;/script&gt;
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2013-01-10T13:41:42EST">2013-01-10T13:41:42EST</span>
+<span class="generated-date" title="2013-01-11T14:54:33EST">2013-01-11T14:54:33EST</span>
 
 </footer>
 </body>
