@@ -14,7 +14,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.5-SNAPSHOT)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.5)</a></li>
     </ul>
 </nav>
 
@@ -39,6 +39,22 @@
       >Input Types</a
       ></li
     ><li
+    ><a href="#options-editor"
+      >Options editor</a
+      ></li
+    ><li
+    ><a href="#defining-an-option"
+      >Defining an option</a
+      ></li
+    ><li
+    ><a href="#script-usage"
+      >Script usage</a
+      ></li
+    ><li
+    ><a href="#calling-a-job-with-options"
+      >Calling a Job with options</a
+      ></li
+    ><li
     ><a href="#secure-options"
       >Secure Options</a
       ><ul
@@ -53,24 +69,8 @@
 	></ul
       ></li
     ><li
-    ><a href="#options-editor"
-      >Options editor</a
-      ></li
-    ><li
-    ><a href="#defining-an-option"
-      >Defining an option</a
-      ></li
-    ><li
     ><a href="#remote-option-values"
       >Remote option values</a
-      ></li
-    ><li
-    ><a href="#script-usage"
-      >Script usage</a
-      ></li
-    ><li
-    ><a href="#calling-a-job-with-options"
-      >Calling a Job with options</a
       ></li
     ><li
     ><a href="#option-model-provider"
@@ -105,8 +105,8 @@
 	  >Implementations and Examples</a
 	  ><ul
 	  ><li
-	    ><a href="#hudson-artifacts-option-provider"
-	      >Hudson artifacts option provider</a
+	    ><a href="#jenkins-artifacts-option-provider"
+	      >Jenkins artifacts option provider</a
 	      ></li
 	    ><li
 	    ><a href="#yum-repoquery-option-model-provider"
@@ -124,10 +124,6 @@
   ></div
 >
 <p
->Any command or script can be wrapped as a Job. Creating a Job for every use case will proliferate a large number of Jobs differing only by how the Job calls the scripts. These differences are often environment or application version related. Other times only the person running the Job can provide the needed information to run the Job correctly.</p
-><p
->Making your scripts and commands data driven, will also make them more generic and therefore, reusable in different contexts. Rather than maintain variations of the same basic process, letting Jobs be driven by a model of options from externally provided data will lead to better abstraction and encapsulation of your process.</p
-><p
 >Rundeck Jobs can be configured to prompt a user for input by defining one or more named <em
   >options</em
   >. An <em
@@ -172,10 +168,331 @@
   ><li
     >&quot;Plain&quot; - a normal option which is shown in clear text</li
     ><li
-    >&quot;Secure&quot; - a secure option which is obscured at user input time, and the value of which is not stored in the database</li
+    >&quot;Secure&quot; - a secure option which is obscured at user input time, and the value of which is not stored in the database. See <a href="#secure-options"
+      >secure-options</a
+      >.</li
     ><li
-    >&quot;Secure Remote Authentication&quot; - a secure option which is used only for remote authentication and is not exposed in scripts or commands.</li
+    >&quot;Secure Remote Authentication&quot; - a secure option which is used only for remote authentication and is not exposed in scripts or commands. See <a href="#secure-remote-authentication-options"
+      >secure-remote-authentication-options</a
+      >.</li
     ></ul
+  ></div
+><div id="options-editor"
+><h2
+  ><a href="#TOC"
+    >Options editor</a
+    ></h2
+  ><p
+  >Options can be created for any stored Job. The Job edit page contains an area displaying a summary to existing options and a link to add new ones or edit existing ones.</p
+  ><div class="figure"
+  ><img src="../figures/fig0501.png" alt="Add option link"
+     /><p class="caption"
+    >Add option link</p
+    ></div
+  ><p
+  >The option summary shows each option and its default value if it defines them.</p
+  ><p
+  >Clicking the &quot;edit&quot; link opens the options editor.</p
+  ><div class="figure"
+  ><img src="../figures/fig0503.png" alt="Option editor"
+     /><p class="caption"
+    >Option editor</p
+    ></div
+  ><p
+  >The options editor displays an expanded summary for each defined option. Each option is listed with its usage summary, description, values list and any restrictions. Pressing the &quot;Add an option&quot; link will open a form to define a new parameter. Pressing the &quot;Close&quot; link will collapse the options editor and return back to the summary view.</p
+  ><p
+  >Moving the mouse over any row in the options editor reveals links to delete or edit the highlighted option. Pressing the remove icon will display a prompt confirming you want to delete that option from the Job. Clicking the &quot;edit&quot; link opens a new form that lets you modify all aspects of that option.</p
+  ><p
+  >Options can also be defined as part of a job definition and later loaded to the Rundeck server. See <a href="../manpages/man5/job-v20.html"
+    >job-v20(5)</a
+    >(XML) and <a href="../manpages/man5/job-yaml-v12.html"
+    >job-yaml-v12(5)</a
+    >(YAML) and <a href="../manpages/man1/rd-jobs.html"
+    >rd-jobs(1)</a
+    > manual pages if you prefer using an textual Job definition.</p
+  ></div
+><div id="defining-an-option"
+><h2
+  ><a href="#TOC"
+    >Defining an option</a
+    ></h2
+  ><p
+  >New options can be defined by pressing the &quot;Add an option&quot; link while existing ones can be changed by pressing their &quot;edit&quot; link.</p
+  ><div class="figure"
+  ><img src="../figures/fig0502.png" alt="Option edit form"
+     /><p class="caption"
+    >Option edit form</p
+    ></div
+  ><p
+  >The option definition form is organized into several areas:</p
+  ><dl
+  ><dt
+    >Identification</dt
+    ><dd
+    ><p
+      >Here you provide the option's name and description. The name becomes part of acceptable arguments to the Job while the description will be provided as help text to users running the Job.</p
+      ><p
+      >The Default Value will be pre-selected in the GUI when the option is presented.</p
+      ></dd
+    ><dt
+    >Input Type</dt
+    ><dd
+    ><p
+      >Choose between &quot;Plain&quot;, &quot;Secure&quot; and &quot;Secure Remote Authentication&quot;. For input types other than &quot;Plain&quot;, the multi-valued option will be disabled.</p
+      ></dd
+    ><dt
+    >Allowed values</dt
+    ><dd
+    ><p
+      >Allowed values provide a model of possible choices. This can contain a static list of values or a URL to a server providing option data. Values can be specified as a comma separated list as seen above but can also be requested from an external source using a &quot;remote URL&quot; <a href="job-options.html#remote-option-values"
+	>See below</a
+	>.</p
+      ></dd
+    ><dt
+    >Restrictions</dt
+    ><dd
+    ><p
+      >Defines criteria on which input to accept or present. Option choices can be controlled using the &quot;Enforced from values&quot; restriction. When set &quot;true&quot;, Rundeck will only present a popup menu. If set &quot;false&quot;, a text field will also be presented. Enter a regular expression in the &quot;Match Regular Expression&quot; field the Job will evaluate when run.</p
+      ></dd
+    ><dt
+    >Requirement</dt
+    ><dd
+    ><p
+      >Indicates if the Job can only run if a choice is provided for that Option. Choosing &quot;No&quot; states the option is not required Choose &quot;Yes&quot; to state the option is required.</p
+      ><p
+      >If a Default Value is set for the option, then this value will automatically be set for the option if it is Required, even if not specified among the arguments when executing a job via the command-line or API.</p
+      ></dd
+    ><dt
+    >Multi-valued</dt
+    ><dd
+    ><p
+      >Defines if the user input can consist of multiple values. Choosing &quot;No&quot; states that only a single value can chosen as input. Choosing &quot;Yes&quot; states that the user may select multiple input values from the Allowed values and/or enter multiple values of their own. The delimiter string will be used to separate the multiple values when the Job is run.</p
+      ></dd
+    ></dl
+  ><p
+  >Once satisfied with the option definition, press the &quot;Save&quot; button to add it to the Job definition. Pressing the &quot;Cancel&quot; button will dismiss the changes and close the form.</p
+  ></div
+><div id="script-usage"
+><h2
+  ><a href="#TOC"
+    >Script usage</a
+    ></h2
+  ><p
+  >Option values can be passed to scripts as an argument or referenced inside the script via a named token. Each option value is defined in the Options context variables as <code
+    >option.NAME</code
+    >.</p
+  ><p
+  >See the <a href="job-workflows.html#context-variables"
+    >Job Workflows - Context Variables</a
+    > Section.</p
+  ><p
+  ><strong
+    >Example:</strong
+    ></p
+  ><p
+  >A Job named &quot;hello&quot; and has an option named &quot;message&quot;.</p
+  ><p
+  >The &quot;hello&quot; Job option signature would be: <code
+    >-message &lt;&gt;</code
+    >.</p
+  ><div class="figure"
+  ><img src="../figures/fig0504.png" alt="Option usage"
+     /><p class="caption"
+    >Option usage</p
+    ></div
+  ><p
+  >The arguments passed to the script are defined as <code
+    >${option.message}</code
+    >.</p
+  ><p
+  >Here's the content of this simple script.</p
+  ><pre class="sourceCode bash"
+  ><code
+    ><span class="Normal NormalText"
+      >    </span
+      ><span class="Comment"
+      >#!/bin/sh    </span
+      ><br
+       /><span class="Normal NormalText"
+      >    </span
+      ><span class="Keyword Builtin"
+      >echo</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="Others Variable"
+      >envvar=$RD_OPTION_MESSAGE</span
+      ><span class="Normal NormalText"
+      > ;</span
+      ><span class="Comment"
+      ># read from environment</span
+      ><br
+       /><span class="Normal NormalText"
+      >    </span
+      ><span class="Keyword Builtin"
+      >echo</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="Others Variable"
+      >args=$1</span
+      ><span class="Normal NormalText"
+      >                   ;</span
+      ><span class="Comment"
+      ># comes from argument vector</span
+      ><br
+       /><span class="Normal NormalText"
+      >    </span
+      ><span class="Keyword Builtin"
+      >echo</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="Others Variable"
+      >message=</span
+      ><span class="Normal NormalText"
+      >@option.message@  ;</span
+      ><span class="Comment"
+      ># replacement token</span
+      ><br
+       /></code
+    ></pre
+  ><p
+  >When the user runs the &quot;hello&quot; job they will be prompted for the &quot;message&quot; value.</p
+  ><div class="figure"
+  ><img src="../figures/fig0505.png" alt="Option entered"
+     /><p class="caption"
+    >Option entered</p
+    ></div
+  ><p
+  >Let's assume they entered the word &quot;howdy&quot; in response. The output of the Job will be:</p
+  ><pre
+  ><code
+    >envar=howdy
+args=howdy    
+message=howdy    
+</code
+    ></pre
+  ><p
+  >It's important to know what happens if the option isn't set. This can happen if you define an option that is not required and do not give it a default value.</p
+  ><p
+  >Let's imagine the Job was run without a message option supplied, the output would look like this:</p
+  ><pre
+  ><code
+    >envar=
+args=
+message=@option.message@
+</code
+    ></pre
+  ><p
+  >Here are some tips to deal with this possibility:</p
+  ><dl
+  ><dt
+    >Environment variable:</dt
+    ><dd
+    ><p
+      >As a precaution you might test existence for the variable and perhaps set a default value. To test its existence you might use:</p
+      ><pre
+      ><code
+	> test -s &quot;$RD_OPTION_NAME&quot;
+</code
+	></pre
+      ><p
+      >You might also use a Bash feature that tests and defaults it to a value:</p
+      ><pre
+      ><code
+	> ${RD_OPTION_NAME:=mydefault} 
+</code
+	></pre
+      ></dd
+    ><dt
+    >Replacement token</dt
+    ><dd
+    ><p
+      >If the option is unset the token will be left alone inside the script. You might write your script a bit more defensively and change the implementation like so:</p
+      ><pre
+      ><code
+	>message=@option.message@
+atsign=&quot;@&quot;
+if [ &quot;$message&quot; == &quot;${atsign}option.message${atsign}&quot; ] ; then
+   message=mydefault
+fi
+</code
+	></pre
+      ></dd
+    ></dl
+  ></div
+><div id="calling-a-job-with-options"
+><h2
+  ><a href="#TOC"
+    >Calling a Job with options</a
+    ></h2
+  ><p
+  >Jobs can be invoked from the command line using the <code
+    >run</code
+    > shell tool or as a step in another Job's workflow.</p
+  ><p
+  >The format for specifying options is <code
+    >-name value</code
+    >.</p
+  ><p
+  >Using the <code
+    >run</code
+    > command pass them after the double hyphen:</p
+  ><pre
+  ><code
+    >run -i jobId -- -paramA valA -paramB valB
+run -j group/name -p project -- -paramA valA -paramB valB
+</code
+    ></pre
+  ><p
+  >Inside an XML definition, insert them as an <code
+    >arg</code
+    > element:</p
+  ><pre class="sourceCode xml"
+  ><code
+    ><span class="Keyword Element"
+      >&lt;command&gt;</span
+      ><br
+       /><span class="Normal NormalText"
+      >    </span
+      ><span class="Keyword Element"
+      >&lt;jobref</span
+      ><span class="Others Attribute"
+      > group=</span
+      ><span class="String Value"
+      >&quot;test&quot;</span
+      ><span class="Others Attribute"
+      > name=</span
+      ><span class="String Value"
+      >&quot;other tests&quot;</span
+      ><span class="Keyword Element"
+      >&gt;</span
+      ><br
+       /><span class="Normal NormalText"
+      >        </span
+      ><span class="Keyword Element"
+      >&lt;arg</span
+      ><span class="Others Attribute"
+      > line=</span
+      ><span class="String Value"
+      >&quot;-paramA valA -paramB valB&quot;</span
+      ><span class="Keyword Element"
+      >/&gt;</span
+      ><br
+       /><span class="Normal NormalText"
+      >    </span
+      ><span class="Keyword Element"
+      >&lt;/jobref&gt;</span
+      ><br
+       /><span class="Keyword Element"
+      >&lt;/command&gt;</span
+      ><br
+       /></code
+    ></pre
+  ><p
+  >Consult the <a href="../manpages/man1/run.html"
+    >run(1)</a
+    > and <a href="../manpages/man5/job-v20.html"
+    >job-v20(5)</a
+    > manual pages for additional information.</p
   ></div
 ><div id="secure-options"
 ><h2
@@ -314,117 +631,24 @@
     >Note: If you define arguments in the wrong manner, then the Secure and Secure Remote Authentication options will not be set when the Job reference is called. Plain options will behave the way they do in Command or Script arguments, and be left as-is as uninterpreted property references.</p
     ></div
   ></div
-><div id="options-editor"
-><h2
-  ><a href="#TOC"
-    >Options editor</a
-    ></h2
-  ><p
-  >Options can be created for any stored Job. The Job edit page contains an area displaying a summary to existing options and a link to add new ones or edit existing ones.</p
-  ><div class="figure"
-  ><img src="../figures/fig0501.png" alt="Add option link"
-     /><p class="caption"
-    >Add option link</p
-    ></div
-  ><p
-  >The option summary shows each option and its default value if it defines them.</p
-  ><p
-  >Clicking the &quot;edit&quot; link opens the options editor.</p
-  ><div class="figure"
-  ><img src="../figures/fig0503.png" alt="Option editor"
-     /><p class="caption"
-    >Option editor</p
-    ></div
-  ><p
-  >The options editor displays an expanded summary for each defined option. Each option is listed with its usage summary, description, values list and any restrictions. Pressing the &quot;Add an option&quot; link will open a form to define a new parameter. Pressing the &quot;Close&quot; link will collapse the options editor and return back to the summary view.</p
-  ><p
-  >Moving the mouse over any row in the options editor reveals links to delete or edit the highlighted option. Pressing the remove icon will display a prompt confirming you want to delete that option from the Job. Clicking the &quot;edit&quot; link opens a new form that lets you modify all aspects of that option.</p
-  ><p
-  >Options can also be defined as part of a job definition and later loaded to the Rundeck server. See <a href="../manpages/man5/job-v20.html"
-    >job-v20(5)</a
-    >(XML) and <a href="../manpages/man5/job-yaml-v12.html"
-    >job-yaml-v12(5)</a
-    >(YAML) and <a href="../manpages/man1/rd-jobs.html"
-    >rd-jobs(1)</a
-    > manual pages if you prefer using an textual Job definition.</p
-  ></div
-><div id="defining-an-option"
-><h2
-  ><a href="#TOC"
-    >Defining an option</a
-    ></h2
-  ><p
-  >New options can be defined by pressing the &quot;Add an option&quot; link while existing ones can be changed by pressing their &quot;edit&quot; link.</p
-  ><div class="figure"
-  ><img src="../figures/fig0502.png" alt="Option edit form"
-     /><p class="caption"
-    >Option edit form</p
-    ></div
-  ><p
-  >The option definition form is organized into several areas:</p
-  ><dl
-  ><dt
-    >Identification</dt
-    ><dd
-    ><p
-      >Here you provide the option's name and description. The name becomes part of acceptable arguments to the Job while the description will be provided as help text to users running the Job.</p
-      ><p
-      >The Default Value will be pre-selected in the GUI when the option is presented.</p
-      ></dd
-    ><dt
-    >Input Type</dt
-    ><dd
-    ><p
-      >Choose between &quot;Plain&quot;, &quot;Secure&quot; and &quot;Secure Remote Authentication&quot;. For input types other than &quot;Plain&quot;, the multi-valued option will be disabled.</p
-      ></dd
-    ><dt
-    >Allowed values</dt
-    ><dd
-    ><p
-      >Allowed values provide a model of possible choices. This can contain a static list of values or a URL to a server providing option data. Values can be specified as a comma separated list as seen above but can also be requested from an external source using a &quot;remote URL&quot; <a href="job-options.html#remote-option-values"
-	>See below</a
-	>.</p
-      ></dd
-    ><dt
-    >Restrictions</dt
-    ><dd
-    ><p
-      >Defines criteria on which input to accept or present. Option choices can be controlled using the &quot;Enforced from values&quot; restriction. When set &quot;true&quot;, Rundeck will only present a popup menu. If set &quot;false&quot;, a text field will also be presented. Enter a regular expression in the &quot;Match Regular Expression&quot; field the Job will evaluate when run.</p
-      ></dd
-    ><dt
-    >Requirement</dt
-    ><dd
-    ><p
-      >Indicates if the Job can only run if a choice is provided for that Option. Choosing &quot;No&quot; states the option is not required Choose &quot;Yes&quot; to state the option is required.</p
-      ><p
-      >If a Default Value is set for the option, then this value will automatically be set for the option if it is Required, even if not specified among the arguments when executing a job via the command-line or API.</p
-      ></dd
-    ><dt
-    >Multi-valued</dt
-    ><dd
-    ><p
-      >Defines if the user input can consist of multiple values. Choosing &quot;No&quot; states that only a single value can chosen as input. Choosing &quot;Yes&quot; states that the user may select multiple input values from the Allowed values and/or enter multiple values of their own. The delimiter string will be used to separate the multiple values when the Job is run.</p
-      ></dd
-    ></dl
-  ><p
-  >Once satisfied with the option definition, press the &quot;Save&quot; button to add it to the Job definition. Pressing the &quot;Cancel&quot; button will dismiss the changes and close the form.</p
-  ></div
 ><div id="remote-option-values"
 ><h2
   ><a href="#TOC"
     >Remote option values</a
     ></h2
   ><p
-  >A model of option values can be retrieved from an external source. When the <code
+  >A model of option values can be retrieved from an external source called an <em
+    >option model provider</em
+    >. When the <code
     >valuesUrl</code
     > is specified for an Option, then the model of allowed values is retrieved from the specified URL.</p
   ><p
   >This is useful in a couple of scenarios when Rundeck is used to coordinate process that depend on other systems:</p
   ><ul
   ><li
-    >Deploying packages or artifacts produced by a build or CI server, e.g. Hudson.<ul
+    >Deploying packages or artifacts produced by a build or CI server, e.g. Jenkins.<ul
       ><li
-	>A list of recent Hudson build artifacts can be imported as Options data, so that a User can pick an appropriate package name to deploy from a list.</li
+	>A list of recent Jenkins build artifacts can be imported as Options data, so that a User can pick an appropriate package name to deploy from a list.</li
 	></ul
       ></li
     ><li
@@ -432,232 +656,6 @@
     ><li
     >Any situation in which input variables for your Jobs must be selected from some set of values produced by a different system.</li
     ></ul
-  ><p
-  >See <a href="job-options.html#option-model-provider"
-    >Chapter 9 - Option Model Provider</a
-    >.</p
-  ></div
-><div id="script-usage"
-><h2
-  ><a href="#TOC"
-    >Script usage</a
-    ></h2
-  ><p
-  >Option values can be passed to scripts as an argument or referenced inside the script via a named token. Each option value is defined in the Options context variables as <code
-    >option.NAME</code
-    >.</p
-  ><p
-  >See the <a href="job-workflows.html#context-variables"
-    >Job Workflows - Context Variables</a
-    > Section.</p
-  ><p
-  ><strong
-    >Example:</strong
-    ></p
-  ><p
-  >A Job named &quot;hello&quot; and has an option named &quot;message&quot;.</p
-  ><p
-  >The &quot;hello&quot; Job option signature would be: <code
-    >-message &lt;&gt;</code
-    >.</p
-  ><div class="figure"
-  ><img src="../figures/fig0504.png" alt="Option usage"
-     /><p class="caption"
-    >Option usage</p
-    ></div
-  ><p
-  >The arguments passed to the script are defined as <code
-    >${option.message}</code
-    >.</p
-  ><p
-  >Here's the content of this simple script.</p
-  ><pre class="sourceCode bash"
-  ><code
-    ><span class="Normal NormalText"
-      >    </span
-      ><span class="Comment"
-      >#!/bin/sh    </span
-      ><br
-       /><span class="Normal NormalText"
-      >    </span
-      ><span class="Keyword Builtin"
-      >echo</span
-      ><span class="Normal NormalText"
-      > </span
-      ><span class="Others Variable"
-      >envvar=$RD_OPTION_MESSAGE</span
-      ><span class="Normal NormalText"
-      > ;</span
-      ><span class="Comment"
-      ># read from environment</span
-      ><br
-       /><span class="Normal NormalText"
-      >    </span
-      ><span class="Keyword Builtin"
-      >echo</span
-      ><span class="Normal NormalText"
-      > </span
-      ><span class="Others Variable"
-      >args=$1</span
-      ><span class="Normal NormalText"
-      >                   ;</span
-      ><span class="Comment"
-      ># comes from argument vector</span
-      ><br
-       /><span class="Normal NormalText"
-      >    </span
-      ><span class="Keyword Builtin"
-      >echo</span
-      ><span class="Normal NormalText"
-      > </span
-      ><span class="Others Variable"
-      >message=</span
-      ><span class="Normal NormalText"
-      >@option.message@  ;</span
-      ><span class="Comment"
-      ># replacement token</span
-      ><br
-       /></code
-    ></pre
-  ><p
-  >When the user runs the &quot;hello&quot; job they will be prompted for the &quot;message&quot; value.</p
-  ><div class="figure"
-  ><img src="../figures/fig0505.png" alt="Option entered"
-     /><p class="caption"
-    >Option entered</p
-    ></div
-  ><p
-  >Let's assume they entered the word &quot;howdy&quot; in response. The output of the Job will be:</p
-  ><pre
-  ><code
-    >envar=howdy
-args=howdy    
-message=howdy    
-</code
-    ></pre
-  ><p
-  >It's important to know what happens if the option isn't set. This can happen if you define an option that is not required and do not give it a default value.</p
-  ><p
-  >Let's imagine the Job was run without a message option supplied, the output would look like this:</p
-  ><pre
-  ><code
-    >envar=
-args=
-message=@option.message@
-</code
-    ></pre
-  ><p
-  >Here are some tips to deal with this possibility:</p
-  ><dl
-  ><dt
-    >Environment variable:</dt
-    ><dd
-    ><p
-      >As a precaution you might test existence for the variable and perhaps set a default value. To test its existence you might use:</p
-      ><pre
-      ><code
-	> test -s  $RD_OPTION_NAME
-</code
-	></pre
-      ><p
-      >You might also use a Bash feature that tests and defaults it to a value:</p
-      ><pre
-      ><code
-	> ${RD_OPTION_NAME:=mydefault} 
-</code
-	></pre
-      ></dd
-    ><dt
-    >Replacement token</dt
-    ><dd
-    ><p
-      >If the option is unset the token will be left alone inside the script. You might write your script a bit more defensively and change the implementation like so:</p
-      ><pre
-      ><code
-	>message=@option.message@
-atsign=&quot;@&quot;
-if [ &quot;$message&quot; == &quot;${atsign}option.message${atsign}&quot; ] ; then
-   message=mydefault
-fi
-</code
-	></pre
-      ></dd
-    ></dl
-  ></div
-><div id="calling-a-job-with-options"
-><h2
-  ><a href="#TOC"
-    >Calling a Job with options</a
-    ></h2
-  ><p
-  >Jobs can be invoked from the command line using the <code
-    >run</code
-    > shell tool or as a step in another Job's workflow.</p
-  ><p
-  >The format for specifying options is <code
-    >-name value</code
-    >.</p
-  ><p
-  >Using the <code
-    >run</code
-    > command pass them after the double hyphen:</p
-  ><pre
-  ><code
-    >run -i jobId -- -paramA valA -paramB valB
-run -j group/name -p project -- -paramA valA -paramB valB
-</code
-    ></pre
-  ><p
-  >Inside an XML definition, insert them as an <code
-    >arg</code
-    > element:</p
-  ><pre class="sourceCode xml"
-  ><code
-    ><span class="Keyword Element"
-      >&lt;command&gt;</span
-      ><br
-       /><span class="Normal NormalText"
-      >    </span
-      ><span class="Keyword Element"
-      >&lt;jobref</span
-      ><span class="Others Attribute"
-      > group=</span
-      ><span class="String Value"
-      >&quot;test&quot;</span
-      ><span class="Others Attribute"
-      > name=</span
-      ><span class="String Value"
-      >&quot;other tests&quot;</span
-      ><span class="Keyword Element"
-      >&gt;</span
-      ><br
-       /><span class="Normal NormalText"
-      >        </span
-      ><span class="Keyword Element"
-      >&lt;arg</span
-      ><span class="Others Attribute"
-      > line=</span
-      ><span class="String Value"
-      >&quot;-paramA valA -paramB valB&quot;</span
-      ><span class="Keyword Element"
-      >/&gt;</span
-      ><br
-       /><span class="Normal NormalText"
-      >    </span
-      ><span class="Keyword Element"
-      >&lt;/jobref&gt;</span
-      ><br
-       /><span class="Keyword Element"
-      >&lt;/command&gt;</span
-      ><br
-       /></code
-    ></pre
-  ><p
-  >Consult the <a href="../manpages/man1/run.html"
-    >run(1)</a
-    > and <a href="../manpages/man5/job-v20.html"
-    >job-v20(5)</a
-    > manual pages for additional information.</p
   ></div
 ><div id="option-model-provider"
 ><h2
@@ -905,164 +903,29 @@ run -j group/name -p project -- -paramA valA -paramB valB
     ><a href="#TOC"
       >Implementations and Examples</a
       ></h3
-    ><p
-    >The following two sections describe examples using simple CGI scripts that act as option model providers.</p
-    ><div id="hudson-artifacts-option-provider"
+    ><div id="jenkins-artifacts-option-provider"
     ><h4
       ><a href="#TOC"
-	>Hudson artifacts option provider</a
+	>Jenkins artifacts option provider</a
 	></h4
-      ><p
-      >An end-to-end release process often requires obtaining build artifacts and publishing them to a central repository for later distribution. A continuous integration server like <a href="http://hudson-ci.org/"
-	>Hudson</a
-	> makes identifying the build artifacts a simple Job configuration step. The <a href="http://wiki.hudson-ci.org/display/HUDSON/Remote+access+API"
-	>Hudson API</a
-	> provides a network interface to obtain the list of artifacts from successful builds via a simple HTTP GET request.</p
-      ><p
-      >Acme builds its artifacts as RPMs and has configured their build job to identify them. The operations team wants to create Jobs that would allow them to choose a version of these artifacts generated by the automated build.</p
-      ><p
-      >A simple CGI script that requests the information from Hudson and then generates a <a href="http://www.json.org/"
-	>JSON</a
-	> document is sufficient to accomplish this. The CGI script can use query parameters to specify the Hudson server, hudson job and artifact path. Job writers can then specify the parameterized URL to the CGI script to obtain the artifacts list as an options model and present the results as a menu to Job users.</p
-      ><p
-      >The code listing below shows the the CGI script essentially does a call to the [curl] command to retrieve the XML document containing the artifacts information and then parses it using [xmlstarlet].</p
-      ><p
-      >File listing: hudson-artifacts.cgi</p
-      ><pre
-      ><code
-	>#!/bin/bash
-# Requires: curl, xmlstarlet
-# Returns a JSON list of key/val pairs
-#
-# Query Params and their defaults
-hudsonUrl=https://build.acme.com:4440/job
-hudsonJob=ApplicationBuild
-artifactPath=/artifact/bin/dist/RPMS/noarch/
-
-echo Content-type: application/json
-echo &quot;&quot;
-for VAR in `echo $QUERY_STRING | tr &quot;&amp;&quot; &quot;\t&quot;`
-do
-  NAME=$(echo $VAR | tr = &quot; &quot; | awk '{print $1}';);
-  VALUE=$(echo $VAR | tr = &quot; &quot; | awk '{ print $2}' | tr + &quot; &quot;);
-  declare $NAME=&quot;$VALUE&quot;;
-done
-
-curl -s -L -k $hudsonUrl/${hudsonJob}/api/xml?depth=1 | \
-  xmlstarlet sel -t -o &quot;{&quot; \
-    -t -m &quot;//build[result/text()='SUCCESS']&quot; --sort A:T:L number  \
-    -m . -o &quot;&amp;quot;Release&quot; -m changeSet/item -o ' ' -v revision -b \
-    -m . -o &quot;, Hudson Build &quot; -v number -o &quot;&amp;quot;:&quot; \
-    -m 'artifact[position() = 1]' -o &quot;&amp;quot;&quot; -v '../number' -o $artifactPath -o &quot;{&quot; -b \
-    -m 'artifact[position() != last()]' -v 'fileName' -o &quot;,&quot; -b \
-    -m 'artifact[position() = last()]' -v 'fileName' -o &quot;}&amp;quot;,&quot; \
-    -t -o &quot;}&quot;
-</code
-	></pre
-      ><p
-      >After deploying this script to a CGI enabled directory on the operations web server, it can be tested directly by requesting it using <code
-	>curl</code
-	>.</p
-      ><pre
-      ><code
-	>curl -d &quot;hudsonJob=anvils&amp;artifactPath=/artifact/bin/dist/RPMS/noarch/&quot; \
-    --get http://opts.acme.com/cgi/hudson-artifacts.cgi
-</code
-	></pre
-      ><p
-      >The server response should return JSON data resembling the example below:</p
-      ><pre
-      ><code
-	>[ 
-  {name:&quot;anvils-1.1.rpm&quot;, value:&quot;/artifact/bin/dist/RPMS/noarch/anvils-1.1.rpm&quot;}, 
-  {name:&quot;anvils-1.2.rpm&quot;, value:&quot;/artifact/bin/dist/RPMS/noarch/anvils-1.2.rpm&quot;} 
-]   
-</code
-	></pre
-      ><p
-      >Now in place, jobs can request this option data like so:</p
-      ><pre
-      ><code
-	> &lt;option name=&quot;package&quot; enforcedvalues=&quot;true&quot; required=&quot;true&quot;
-    valuesUrl=&quot;http://ops.acme.com/cgi/hudson-artifacts.cgi?hudsonJob=anvils&quot;/&gt; 
-</code
-	></pre
-      ><p
-      >The Rundeck UI will display the package names in the menu and once selected the Job will have the path to the build artifact on the Hudson server.</p
+      ><ul
+      ><li
+	>See the <a href="https://wiki.jenkins-ci.org/display/JENKINS/RunDeck+Plugin"
+	  >Jenkins Rundeck plugin</a
+	  >.</li
+	></ul
       ></div
     ><div id="yum-repoquery-option-model-provider"
     ><h4
       ><a href="#TOC"
 	>Yum repoquery option model provider</a
 	></h4
-      ><p
-      ><a href="http://yum.baseurl.org/"
-	>Yum</a
-	> is a great tool for automating <a href="http://www.rpm.org/"
-	>RPM</a
-	> package management. With Yum, administrators can publish packages to the repository and then use the yum client tool to automate the installation of packages along with their declared dependencies. Yum includes a command called <a href="http://linux.die.net/man/1/repoquery"
-	>repoquery</a
-	> useful for querying Yum repositories similarly to rpm queries.</p
-      ><p
-      >Acme set up their own Yum repository to distribute application release packages. The Acme administrator wants to provide an option model to Jobs that need to know what packages provide a given capability.</p
-      ><p
-      >The code listing below shows it is a simple wrapper around the repoquery command that formats the results as JSON data.</p
-      ><p
-      >File listing: yum-repoquery.cgi</p
-      ><pre
-      ><code
-	>#!/bin/bash
-# Requires: repoquery
-# 
-# Query Params and their defaults
-repo=acme-staging
-label=&quot;Anvils Release&quot;
-package=anvils
-max=30
-#
-echo Content-type: application/json
-echo &quot;&quot;
-for VAR in `echo $QUERY_STRING | tr &quot;&amp;&quot; &quot;\t&quot;`
-do
-  NAME=$(echo $VAR | tr = &quot; &quot; | awk '{print $1}';);
-  VALUE=$(echo $VAR | tr = &quot; &quot; | awk '{ print $2}' | tr + &quot; &quot;);
-  declare $NAME=&quot;$VALUE&quot;;
-done
-
-echo '{'
-repoquery --enablerepo=$repo --show-dupes \
-  --qf='&quot;${label} %{VERSION}-%{RELEASE}&quot;:&quot;%{NAME}-%{VERSION}-%{RELEASE}&quot;,' \
-  -q --whatprovides ${package} | sort -t - -k 4,4nr | head -n${max}
-echo '}'
-</code
-	></pre
-      ><p
-      >After deploying this script to the CGI enabled directory on the operations web server, it can be tested directly by requesting it using <code
-	>curl</code
-	>.</p
-      ><pre
-      ><code
-	>curl -d &quot;repo=acme&amp;label=Anvils&amp;package=anvils&quot; \
-    --get http://ops.acme.com/cgi/yum-repoquery.cgi
-</code
-	></pre
-      ><p
-      >The server response should return JSON data resembling the example below:</p
-      ><pre
-      ><code
-	>TODO: include JSON example
-</code
-	></pre
-      ><p
-      >Now in place, jobs can request the option model data like so:</p
-      ><pre
-      ><code
-	> &lt;option name=&quot;package&quot; enforcedvalues=&quot;true&quot; required=&quot;true&quot;
-    valuesUrl=&quot;http://ops.acme.com/cgi/yum-repoquery.cgi?package=anvils&quot;/&gt; 
-</code
-	></pre
-      ><p
-      >The Rundeck UI will display the package names in the menu and once selected, the Job will have the matching package versions.</p
+      ><ul
+      ><li
+	><a href="rundeck-by-example.html#yum-repoquery-option-model-provider"
+	  >Rundeck by example: Yum option provider</a
+	  ></li
+	></ul
       ></div
     ></div
   ></div
@@ -1091,7 +954,7 @@ echo '}'
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.5-SNAPSHOT)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.5)</a></li>
     </ul>
 </nav>
 <footer class="copy">
@@ -1101,7 +964,7 @@ echo '}'
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2013-01-11T14:54:33EST">2013-01-11T14:54:33EST</span>
+<span class="generated-date" title="2013-02-21T13:56:34EST">2013-02-21T13:56:34EST</span>
 
 </footer>
 </body>

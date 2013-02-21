@@ -14,7 +14,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.5-SNAPSHOT)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.5)</a></li>
     </ul>
 </nav>
 
@@ -77,8 +77,8 @@
       >Command Execution</a
       ><ul
       ><li
-	><a href="#dispatcher-options"
-	  >Dispatcher options</a
+	><a href="#execution-options"
+	  >Execution options</a
 	  ><ul
 	  ><li
 	    ><a href="#filtering-nodes-graphically"
@@ -184,7 +184,7 @@
   ></div
 >
 <p
->This chapter covers the basics for using Rundeck. The chapter begins by describing the Rundeck user interfaces, both its graphical and command line. From there it will show you how to set up a project and learn about command execution. You will learn more about using the command dispatcher to control execution and finally, how to find and use history.</p
+>This chapter covers the basics for using Rundeck. The chapter begins by describing the Rundeck user interfaces, both its graphical and command line. From there it will show you how to set up a project and learn about command execution. You will learn more about how to control execution and finally, how to find and use history.</p
 ><div id="rundeck-interfaces"
 ><h2
   ><a href="#TOC"
@@ -194,14 +194,14 @@
   >Rundeck provides two primary user interfaces:</p
   ><ul
   ><li
-    >An HTML-based graphical console</li
+    >An HTML-based graphical console.</li
     ><li
-    >A suite of shell tools</li
+    >A suite of shell tools.</li
     ></ul
   ><p
   >Both interfaces allow you to view resources, dispatch commands, as well as, store and run jobs.</p
   ><p
-  >In addition Rundeck provides a Web API which can be used to interact with the server programattically. See <a href="../api/index.html"
+  >In addition Rundeck provides a Web API which can be used to interact with the server programatically. See <a href="../api/index.html"
     >Rundeck API</a
     >.</p
   ><div id="graphical-console"
@@ -222,11 +222,12 @@
 	></a
       ></p
     ><p
-    >You will be shown the Login page. The default username and password are <code
+    >You will be shown the Login page.<br
+       />The default username and password are <code
       >admin</code
       >/<code
       >admin</code
-      >, so enter those in the fields.</p
+      >.</p
     ><div id="navigation"
     ><h4
       ><a href="#TOC"
@@ -262,13 +263,13 @@
 	>Project menu</dt
 	><dd
 	><p
-	  >The top navigation bar contains a menu to select the desired project. If only one project exists, the menu will automatically be defaulted.</p
+	  >The top navigation bar contains a menu to select the desired project. If only one project exists, the menu will automatically be defaulted. You can create new projects from this menu, too.</p
 	  ></dd
 	><dt
 	>Admin</dt
 	><dd
 	><p
-	  >If your login belongs to the &quot;admin&quot; group and therefore granted &quot;admin&quot; privileges, a wrench icon will be displayed next to your login name. This page allows the admin to view group memberships for all users, as well as, edit their profile data.</p
+	  >If your login belongs to the &quot;admin&quot; group and therefore granted &quot;admin&quot; privileges, a wrench icon will be displayed next to your login name. This page allows the admin to view group memberships for all users, as well as, edit their profile data. Project configuration includes adding plugins and exporting/importing project archives.</p
 	  ></dd
 	><dt
 	>User profile</dt
@@ -286,7 +287,7 @@
 	>Help</dt
 	><dd
 	><p
-	  >Opens a page to the online help system.</p
+	  >Opens a page to this user manual.</p
 	  ></dd
 	></dl
       ></div
@@ -296,7 +297,7 @@
 	>Now running</a
 	></h4
       ><p
-      >The &quot;Now running&quot; section appears at the top of the Run and Jobs pages and provides a view into the execution queue. Any currently executing ad hoc command or Job will be listed and include information like the name of the job, when it started, who ran it, and a link to the execution output.</p
+      >The &quot;Now running&quot; section appears at the top of the Run and Jobs pages and provides a view into the execution queue. Any currently executing command executed from the Run page or any Job executed in the Jobs page will be listed. The &quot;Now running&quot; section will include information like the name of the job, when it started, who ran it, and a link to the execution output.</p
       ><div class="figure"
       ><img src="../figures/fig0215.png" alt="Now running"
 	 /><p class="caption"
@@ -319,38 +320,37 @@
 	>dispatch</a
 	></dt
       ><dd
-      >Execute ad hoc commands and scripts</dd
+      >Execute ad hoc commands and scripts.</dd
       ><dt
       ><a href="rd-queue.html"
 	>rd-queue</a
 	></dt
       ><dd
-      >Query the dispatcher for currently running Jobs and possibly kill them<br
-	 /></dd
+      >Query Rundeck for currently running Jobs and possibly kill them.</dd
       ><dt
       ><a href="rd-jobs.html"
 	>rd-jobs</a
 	></dt
       ><dd
-      >List defined jobs as well as load them from text file definitions</dd
+      >List defined jobs as well as load them from text file definitions.</dd
       ><dt
       ><a href="run.html"
 	>run</a
 	></dt
       ><dd
-      >Invoke the execution of a stored Job</dd
+      >Invoke the execution of a stored Job.</dd
       ><dt
       ><a href="rd-project.html"
 	>rd-project</a
 	></dt
       ><dd
-      >Setup a new Rundeck project</dd
+      >Setup a new Rundeck project.</dd
       ><dt
       ><a href="rd-setup.html"
 	>rd-setup</a
 	></dt
       ><dd
-      >(Re-)configure an instance of Rundeck</dd
+      >(Re-)configure an instance of Rundeck.</dd
       ></dl
     ><p
     >Consult the online manual pages for options and usage information.</p
@@ -454,15 +454,15 @@
 </code
       ></pre
     ><p
-    >Node resources have standard properties, such as &quot;hostname&quot; but these can be extended via attributes. One of the more useful properties is the &quot;tags&quot; property. A <em
+    >Node resources have standard properties, such as &quot;hostname&quot; but these can be extended via attributes. One of the more useful attributes is &quot;tags&quot;. A <em
       >tag</em
-      > is a text label that you give to the Node, perhaps denoting a classification, a role the node plays in the environment, or group membership. Multiple tags can be defined for a given node.</p
+      > is a text label that you give to the Node, perhaps denoting a classification, a role the node plays in the environment, or group membership. A list of tags can be defined for a given node.</p
     ><p
     >The output above shows the &quot;strongbad&quot; node currently has an empty tags property: <code
       >tags: ''</code
       >.</p
     ><p
-    >It is important to start thinking about node tagging for the nodes you manage because you will use them later when specifying filtering options to drive distributed command dispatch.</p
+    >It is important to start thinking about node tagging for the nodes you manage because you will use them later when specifying node filtering options.</p
     ><p
     >Each Project has a configuration file called <a href="../administration/configuration.html#project.properties"
       >project.properties</a
@@ -516,11 +516,11 @@
       >project</code
       > and there is a single node descriptor for &quot;strongbad&quot;. The <code
       >node</code
-      > tag has a number of required and optional attributes. Additional node descriptors can be added by defining new <code
+      > element has a number of required and optional attributes. Additional node descriptors can be added by defining new <code
       >node</code
       > elements inside the <code
       >project</code
-      > tag.</p
+      > root element.</p
     ><p
     >The strongbad host does not have any tags defined for it. One or more tags can be defined. Use comma for the delimiter (e.g, <code
       >tags=&quot;tag1,tag2&quot;</code
@@ -545,9 +545,9 @@
       >type</code
       > are used to define Node identity in the resource model. It is possible to overload the hostname value to include port information (eg, hostname=&quot;somehost:2022&quot;). This is useful if your run SSH on a different port.</p
     ><p
-    >Chances are you maintain information about your hosts within another tool, perhaps Chef, Puppet, Nagios, Amazon EC2, RightScale or even an in-house database. One of these tools might be considered the authority of knowledge about the nodes deployed in your network. Therefore, it is best to create an interface to the authoritative tool and expose it as Rundeck URL resource model source. This can be done as a simple CGI script that does a transformation from the tool's format to the one Rundeck understands.</p
+    >Chances are you maintain information about your hosts within another tool, perhaps Chef, Puppet, Nagios, Amazon EC2, RightScale or even an in-house database. One of these tools might be considered the authority of knowledge about the nodes deployed in your network. Therefore, it is best to create an interface to the authoritative tool and expose it as Rundeck URL resource model source. This can be done as a simple CGI script that does a transformation from the tool's format to the one Rundeck understands. You can also develop a plugin to interface with the external source.</p
     ><p
-    >Of course, a rudimentary alternative is to maintain this information as an XML document, storing it in a source repository that is periodically exported to Rundeck. This method could be practical if your host infrastructure infrequently changes.</p
+    >Of course, a rudimentary alternative is to maintain this information as an XML document, storing it in a source repository that is periodically exported to Rundeck. This method would be practical if your host infrastructure infrequently changes.</p
     ><p
     >Check the Rundeck web site for URL resource model sources. If you are interested in creating your own, see the <a href="../administration/node-resource-sources.html#resource-model-source"
       >Resource model source</a
@@ -610,24 +610,24 @@
   ><p
   >An <em
     >ad-hoc command</em
-    > is any system command or shell script executed via the command dispatcher. Ad hoc commands can be executed via a command line utility named <code
+    > is any system command or shell script executed via a node executor. Ad hoc commands can be executed via a command line utility named <code
     >dispatch</code
     > or run from the graphical console.</p
   ><p
   >A <em
     >Job</em
-    > specifies a sequence of one or more command invocations that can be run once (i.e, is temporary) or named and stored for later use. Stored jobs can be started via the shell tool, <code
-    >run</code
-    >, and their progress checked with <code
-    >rd-queue</code
-    >.</p
-  ><div id="dispatcher-options"
+    > specifies a sequence of one or more steps that can be run once (i.e, is temporary) or named and stored for later use.</p
+  ><p
+  >See <a href="jobs.html"
+    >Jobs</a
+    > to learn how to execute Rundeck jobs.</p
+  ><div id="execution-options"
   ><h3
     ><a href="#TOC"
-      >Dispatcher options</a
+      >Execution options</a
       ></h3
     ><p
-    >Dispatcher execution can be controlled by various types of options.</p
+    >Execution can be controlled by various types of options.</p
     ><dl
     ><dt
       >Execution control</dt
@@ -736,7 +736,7 @@
       ><p
       >Consult the <a href="../manpages/man1/rd-options.html"
 	>rd-options(1)</a
-	> manual page for the complete reference on available dispatcher options.</p
+	> manual page for the complete reference on available dispatch options.</p
       ></div
     ></div
   ><div id="ad-hoc-commands"
@@ -781,7 +781,7 @@ Queued job ID: 7 &lt;http://strongbad:4440/execution/follow/7&gt;
       ><pre
       ><code
 	>$ dispatch -I os-family=unix  --noqueue -- uptime
-[ctier@centos54 dispatch][INFO]  10:34:54 up 46 min,  2 users,  load average: 0.00, 0.00, 0.00
+[demo@centos54 dispatch][INFO]  10:34:54 up 46 min,  2 users,  load average: 0.00, 0.00, 0.00
 [alexh@strongbad dispatch][INFO] 10:34  up 2 days, 18:51, 2 users, load averages: 0.55 0.80 0.75
 [examples@ubuntu dispatch][INFO]  10:35:01 up 2 days, 18:40,  2 users,  load average: 0.00, 0.01, 0.00
 </code
@@ -803,7 +803,7 @@ Queued job ID: 7 &lt;http://strongbad:4440/execution/follow/7&gt;
       ><pre
       ><code
 	>$ dispatch -I os-family=unix --noqueue -- whoami
-[ctier@centos54 dispatch][INFO] ctier
+[demo@centos54 dispatch][INFO] demo
 [alexh@strongbad dispatch][INFO] alexh
 [examples@ubuntu dispatch][INFO] examples
 </code
@@ -979,7 +979,7 @@ echo  listening port=4440, host=`hostname`;
       >$ dispatch -I os-family=unix -s /tmp/listening.sh --noqueue
 [alexh@strongbad dispatch][INFO] Connecting to centos54:22
 [alexh@strongbad dispatch][INFO] done.
-[ctier@centos54 dispatch][INFO] not listening on 4440
+[demo@centos54 dispatch][INFO] not listening on 4440
 error: Remote command failed with exit status 1
 </code
       ></pre
@@ -992,8 +992,8 @@ error: Remote command failed with exit status 1
       >$ dispatch  --noqueue -K -I tags=web -s /tmp/listening.sh
 [alexh@strongbad dispatch][INFO] Connecting to centos54:22
 [alexh@strongbad dispatch][INFO] done.
-[ctier@centos54 dispatch][INFO] not listening on 4440
-[ctier@centos54 dispatch][ERROR] Failed execution for node: centos54: Remote command failed with exit status 1
+[demo@centos54 dispatch][INFO] not listening on 4440
+[demo@centos54 dispatch][ERROR] Failed execution for node: centos54: Remote command failed with exit status 1
 [alexh@strongbad dispatch][INFO] listening port=4440, host=strongbad
 [alexh@strongbad dispatch][INFO] Connecting to 172.16.167.211:22
 [alexh@strongbad dispatch][INFO] done.
@@ -1196,7 +1196,7 @@ rd-queue kill: success. [5] Job status: killed
     >History</a
     ></h2
   ><p
-  >History for queued ad-hoc commands, as well as, temporary and saved Job executions is stored by the Rundeck server. History data can be filtered and viewed inside the &quot;History&quot; page.</p
+  >History for queued ad-hoc commands, as well as, Job executions is stored by the Rundeck server. History data can be filtered and viewed inside the &quot;History&quot; page.</p
   ><div class="figure"
   ><img src="../figures/fig0211.png" alt="History page"
      /><p class="caption"
@@ -1208,7 +1208,7 @@ rd-queue kill: success. [5] Job status: killed
       >Filtering event history</a
       ></h3
     ><p
-    >By default, the History page will list history for the last day's executions. The page contains a filter control that can be used to expand or limit the executions.</p
+    >By default, the History page will list history for the 8 executions. The page contains a filter control that can be used to expand or limit the executions.</p
     ><p
     >The filter form contains a number of fields to limit search:</p
     ><ul
@@ -1313,7 +1313,7 @@ rd-queue kill: success. [5] Job status: killed
   ><p
   >At this point, you can do basic Rundeck operations - setup a project, define and query the project resource model, execute ad-hoc commands, run and save Jobs and view history.</p
   ><p
-  >Next, we'll cover one of Rundeck's core features: Jobs.</p
+  >Next, we'll cover Rundeck's core feature: Jobs.</p
   ></div
 >
 </div>
@@ -1328,7 +1328,7 @@ rd-queue kill: success. [5] Job status: killed
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.5-SNAPSHOT)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.5)</a></li>
     </ul>
 </nav>
 <footer class="copy">
@@ -1338,7 +1338,7 @@ rd-queue kill: success. [5] Job status: killed
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2013-01-11T14:54:33EST">2013-01-11T14:54:33EST</span>
+<span class="generated-date" title="2013-02-21T13:56:34EST">2013-02-21T13:56:34EST</span>
 
 </footer>
 </body>

@@ -14,7 +14,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.5-SNAPSHOT)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.5)</a></li>
     </ul>
 </nav>
 
@@ -93,12 +93,18 @@
     ><li
     ><a href="#option-model-provider-examples"
       >Option model provider examples</a
+      ><ul
+      ><li
+	><a href="#yum-repoquery-option-model-provider"
+	  >Yum repoquery option model provider</a
+	  ></li
+	></ul
       ></li
     ></ul
   ></div
 >
 <p
->This chapter presents working examples reflecting a variety of solutions you can create with Rundeck. Helping you apply concepts and features introduced in earlier chapters is the focus of these examples. Rather than make the examples abstract, they are set in the context of Acme Anvils, a fictitious organization that manages an online application.</p
+>This chapter presents working examples reflecting a variety of solutions you can create with Rundeck. Helping you apply concepts and features introduced in earlier chapters is the focus of these examples. To give them some context, the examples are about solutions used by Acme Anvils, a fictitious organization that manages an online e-commerce application.</p
 ><div id="acme-anvils"
 ><h2
   ><a href="#TOC"
@@ -127,7 +133,7 @@
     >rd-project</a
     > shell tool though this could be done with the Rundeck GUI (see (<a href="rundeck-basics.html#project-setup"
     >project setup</a
-    >). After logging into the Rundeck server, the command is run:</p
+    >):</p
   ><pre
   ><code
     >rd-project -p anvils -a create
@@ -144,8 +150,6 @@
   ><p
   >With this information in hand, the administrator prepares the project resource model using the <a href="../manpages/man5/resource-v13.html"
     >resource-v13(5) XML</a
-    > or <a href="../manpages/man5/resource-yaml-v13.html"
-    >resource-v13(5) YAML</a
     > document format. The file listing below contains the node definitions for the five nodes -- anv1, anv2, anv3, anv4, anv5:</p
   ><p
   >File listing: resources.xml</p
@@ -282,7 +286,7 @@ anv1 anv2 anv3 anv4 anv5
     >Jobs</a
     ></h2
   ><p
-  >Jobs are a convenient method to establish a library of routine procedures. By its nature, a saved Job encapsulates a process into a logically named interface. Jobs can begin as a single item workflow that calls a small or large shell script but evolve into a multi-step workflow. One job can also call another job as a step in its workflow. Using this approach one can view each Job as a reusable building block upon which more complex automation can be built.</p
+  >Jobs are a convenient method to establish a library of routine procedures. By its nature, a saved Job encapsulates a process into a logically named interface. Jobs can begin as a single step workflow that calls a small or large shell script but evolve into a multi-step workflow. One job can also call another job as a step in its workflow. Using this approach one can view each Job as a reusable building block upon which more complex automation can be built.</p
   ><p
   >The administrator decides Jobs can be used to encapsulate procedures to manage the restart process. Both developers and administrators can collaborate on their definition and evolution and maintenance.</p
   ><p
@@ -410,7 +414,7 @@ echo Web stopped with method: $1.
     >Value referenced as an environment variable:</p
     ><ul
     ><li
-      >Bash: $CT_OPTION_METHOD</li
+      >Bash: $RD_OPTION_METHOD</li
       ></ul
     ><p
     >Value passed in the argument vector to the executed script or command via the <code
@@ -811,10 +815,83 @@ Found 3 jobs:
   ><a href="#TOC"
     >Option model provider examples</a
     ></h2
-  ><p
-  >See <a href="job-options.html#option-model-provider"
-    >Job Options - Option Model Provider</a
-    >.</p
+  ><div id="yum-repoquery-option-model-provider"
+  ><h3
+    ><a href="#TOC"
+      >Yum repoquery option model provider</a
+      ></h3
+    ><p
+    ><a href="http://yum.baseurl.org/"
+      >Yum</a
+      > is a great tool for automating <a href="http://www.rpm.org/"
+      >RPM</a
+      > package management. With Yum, administrators can publish packages to the repository and then use the yum client tool to automate the installation of packages along with their declared dependencies. Yum includes a command called <a href="http://linux.die.net/man/1/repoquery"
+      >repoquery</a
+      > useful for querying Yum repositories similarly to rpm queries.</p
+    ><p
+    >Acme Anvils set up their own Yum repository to distribute application release packages. The Acme administrator wants to provide an option model to Jobs that need to know what packages provide a given capability.</p
+    ><p
+    >The code listing below shows it is a simple wrapper around the repoquery command that formats the results as JSON data.</p
+    ><p
+    >File listing: yum-repoquery.cgi</p
+    ><pre
+    ><code
+      >#!/bin/bash
+# Requires: repoquery
+# 
+# Query Params and their defaults
+repo=acme-staging
+label=&quot;Anvils Release&quot;
+package=anvils
+max=30
+#
+echo Content-type: application/json
+echo &quot;&quot;
+for VAR in `echo $QUERY_STRING | tr &quot;&amp;&quot; &quot;\t&quot;`
+do
+  NAME=$(echo $VAR | tr = &quot; &quot; | awk '{print $1}';);
+  VALUE=$(echo $VAR | tr = &quot; &quot; | awk '{ print $2}' | tr + &quot; &quot;);
+  declare $NAME=&quot;$VALUE&quot;;
+done
+
+echo '{'
+repoquery --enablerepo=$repo --show-dupes \
+  --qf='&quot;${label} %{VERSION}-%{RELEASE}&quot;:&quot;%{NAME}-%{VERSION}-%{RELEASE}&quot;,' \
+  -q --whatprovides ${package} | sort -t - -k 4,4nr | head -n${max}
+echo '}'
+</code
+      ></pre
+    ><p
+    >After deploying this script to the CGI enabled directory on the operations web server, it can be tested directly by requesting it using <code
+      >curl</code
+      >.</p
+    ><pre
+    ><code
+      >curl -d &quot;repo=acme&amp;label=Anvils&amp;package=anvils&quot; \
+    --get http://ops.acme.com/cgi/yum-repoquery.cgi
+</code
+      ></pre
+    ><p
+    >The server response should return JSON data resembling the example below:</p
+    ><pre
+    ><code
+      >[ 
+  {name:&quot;anvils-1.1.rpm&quot;, value:&quot;/dist/RPMS/noarch/anvils-1.1.rpm&quot;}, 
+  {name:&quot;anvils-1.2.rpm&quot;, value:&quot;/dist/RPMS/noarch/anvils-1.2.rpm&quot;} 
+]
+</code
+      ></pre
+    ><p
+    >Jobs can request the option model data like so:</p
+    ><pre
+    ><code
+      > &lt;option name=&quot;package&quot; enforcedvalues=&quot;true&quot; required=&quot;true&quot;
+    valuesUrl=&quot;http://ops.acme.com/cgi/yum-repoquery.cgi?package=anvils&quot;/&gt; 
+</code
+      ></pre
+    ><p
+    >The Rundeck UI will display the package names in the menu and once selected, the Job will have the matching package versions.</p
+    ></div
   ></div
 >
 </div>
@@ -829,7 +906,7 @@ Found 3 jobs:
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.5-SNAPSHOT)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.5)</a></li>
     </ul>
 </nav>
 <footer class="copy">
@@ -839,7 +916,7 @@ Found 3 jobs:
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2013-01-11T14:54:33EST">2013-01-11T14:54:33EST</span>
+<span class="generated-date" title="2013-02-21T13:56:34EST">2013-02-21T13:56:34EST</span>
 
 </footer>
 </body>

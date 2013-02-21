@@ -14,7 +14,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.5-SNAPSHOT)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.5)</a></li>
     </ul>
 </nav>
 
@@ -100,9 +100,9 @@
   ></div
 >
 <p
->The Job's most basic feature is its ability to execute one or more commands across a set of nodes. This sequence of commands is called a <em
+>The Job's most basic feature is its ability to execute one or more steps. This sequence of steps is called a <em
   >workflow</em
-  >, and each step in the workflow is defined as an invocation to a command.</p
+  >.</p
 ><p
 >The steps of the Job workflow are displayed when viewing a Job's detail from a Job listing or within the Job editor form.</p
 ><div id="workflow-definition"
@@ -161,9 +161,9 @@
     >: This manages what to do if a step incurs and error:</p
   ><ul
   ><li
-    >No: Fail immediately (default)</li
+    >No: Fail immediately (default).</li
     ><li
-    >Yes: Continue to next step</li
+    >Yes: Continue to next step.</li
     ></ul
   ><p
   >The default is to fail immediately but depending on the procedure at hand you can choose to have the execution continue.</p
@@ -229,7 +229,7 @@
     >Add a step</p
     ></div
   ><p
-  >To add new steps simply press the &quot;Add a step&quot; link inside the workflow editor form. This will prompt you with a dialog asking which kind of workflow step you would like to add. Each kind of step has its own form. When you are done filling out the form, press &quot;Save&quot; to add it to the sequence. Pressing &quot;Cancel&quot; will close the form and leave the sequence unchanged.</p
+  >To add new steps simply press the &quot;Add a step&quot; link inside the workflow editor form. This will prompt you with a dialog asking which kind of step you would like to add. Each kind of step has its own form. When you are done filling out the form, press &quot;Save&quot; to add it to the sequence. Pressing &quot;Cancel&quot; will close the form and leave the sequence unchanged.</p
   ><div class="figure"
   ><img src="../figures/fig0403.png" alt="Workflow step types"
      /><p class="caption"
@@ -240,14 +240,42 @@
     >Reordering steps</a
     > for directions on modifying the step order.</p
   ><p
-  >The next several sections describe the specification of each kind of command step.</p
+  >The next several sections describe the specification of each kind of workflow step.</p
+  ><p
+  ><strong
+    >Types of Steps</strong
+    ></p
+  ><p
+  >Steps in a workflow can be either <em
+    >Node Steps</em
+    > or <em
+    >Workflow Steps</em
+    >.</p
+  ><ul
+  ><li
+    >Node Steps operate once on each Node, which could be multiple times within a workflow</li
+    ><li
+    >Workflow Steps operate only once in the workflow</li
+    ></ul
+  ><p
+  ><strong
+    >Step Plugins</strong
+    ></p
+  ><p
+  >You can create or install third-party plugins which provide new Steps for your workflows.</p
+  ><ul
+  ><li
+    >See the chapter on <a href="plugins.html"
+      >Plugins</a
+      >.</li
+    ></ul
   ><div id="command-step"
   ><h3
     ><a href="#TOC"
       >Command step</a
       ></h3
     ><p
-    >Use the command step to call system commands. This is the default type of workflow step when creating a Job. Enter any command string you would type at the terminal on the remote hosts.</p
+    >Use the command step to call system commands. Enter any command string you would type at the terminal on the remote hosts.</p
     ><div class="figure"
     ><img src="../figures/fig0404.png" alt="Command step type"
        /><p class="caption"
@@ -370,6 +398,10 @@ EOF
       ></pre
     ><p
     >If the Job has required Options that are not specified on the arguments line, then a &quot;defaultValue&quot; of that option will be used if it is defined. If a required option does not have a default value, then the execution will fail because the option is not specified.</p
+    ><p
+    >Job References are <em
+      >Workflow Steps</em
+      >, and only operate once within a workflow.</p
     ></div
   ></div
 ><div id="reordering-steps"
@@ -498,6 +530,8 @@ EOF
   >It is a good practice, when you are defining Error Handlers, to <strong
     >always</strong
     > have them fail (e.g. scripts/commands return a non-zero exit-code), unless you specifically want them to be used for Recovery.</p
+  ><p
+  >Note that Error-handlers can be attached to either Node Steps or Workflow Steps, and the type of step and the Strategy of the Workflow determines what type of Error-handler steps can be attached to a step. The only restriction is in the case that the Workflow is &quot;Node-oriented&quot;, which means that the workflow is executed independently for each node. In this case, Node Steps can only have other Node steps as Error Handlers. In other cases, the Error Handler can be other Workflow steps.</p
   ><div id="context-information"
   ><h3
     ><a href="#TOC"
@@ -505,6 +539,8 @@ EOF
       ></h3
     ><p
     >When the Error-handler step is executed, its execution context will contain some information about the nature of the failure that occurred for the original step.</p
+    ><p
+    >In the case where a Node Step has a Workflow Step as an Error Handler, then the failure data for multiple nodes is rolled up into a single failure reason to be used by the Workflow Step.</p
     ><p
     >See the section on <a href="#context-variables"
       >Context Variables</a
@@ -559,6 +595,10 @@ EOF
     ><code
       >job.project</code
       >: Project name</li
+    ><li
+    ><code
+      >job.loglevel</code
+      >: Logging level, one of: 'ERROR','WARN','INFO','VERBOSE','DEBUG'</li
     ></ul
   ><p
   >Node context variables:</p
@@ -663,6 +703,14 @@ EOF
 	      > - referenced Job node dispatch filters had no match</li
 	    ></ul
 	  ></li
+	><li
+	>Reason code used from a failed Node Step if the handler is a Workflow Step<ul
+	  ><li
+	    ><code
+	      >NodeDispatchFailure</code
+	      > - one or more nodes failed the step</li
+	    ></ul
+	  ></li
 	></ul
       ></li
     ><li
@@ -673,6 +721,12 @@ EOF
     ><code
       >result.resultCode</code
       >: Exit code from an execution (if available)</li
+    ><li
+    ><code
+      >result.failedNodes</code
+      >: Comma-separated list of node names that failed for a <code
+      >NodeDispatchFailure</code
+      ></li
     ></ul
   ><p
   >Option context variables are referred to as <code
@@ -764,7 +818,7 @@ EOF
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.5-SNAPSHOT)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.5)</a></li>
     </ul>
 </nav>
 <footer class="copy">
@@ -774,7 +828,7 @@ EOF
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2013-01-11T14:54:33EST">2013-01-11T14:54:33EST</span>
+<span class="generated-date" title="2013-02-21T13:56:34EST">2013-02-21T13:56:34EST</span>
 
 </footer>
 </body>

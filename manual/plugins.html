@@ -14,7 +14,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.5-SNAPSHOT)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.5)</a></li>
     </ul>
 </nav>
 
@@ -2554,15 +2554,13 @@ resources.source.2.format=resourceyaml
 
 # args are [hostname] [username] -- [command to exec...]
 
-host=$1
-shift
-user=$1
-shift
-command=&quot;$*&quot;
+host=$1; shift
+user=$1; shift
+printf -v commands '%q ' &quot;$@&quot;
 
 REMOTECMD=ssh
 
-exec $REMOTECMD $user@$host $command
+exec &quot;$REMOTECMD&quot; &quot;$user@$host&quot; &quot;$command&quot;
 </code
 	></pre
       ><p
@@ -2597,20 +2595,17 @@ exec $REMOTECMD $user@$host $command
 
 # args are [hostname] [username] [destdir] [filepath]
 
-host=$1
-shift
-user=$1
-shift
-dir=$1
-shift
+host=$1; shift
+user=$1; shift
+dir=$1; shift
 file=$1
 
-name=`basename $file`
+name=${file##*/}
 
 # copy to node
 CPCMD=scp
 
-exec $CPCMD $file $user@$host:$dir/$name &gt; /dev/null || exit $?
+&quot;$CPCMD&quot; &quot;$file&quot; &quot;$user@$host:$dir/$name&quot; &gt;/dev/null || exit $?
 
 echo &quot;$dir/$name&quot;
 </code
@@ -2750,7 +2745,7 @@ plugin.script-copy.default.remote-filepath: ${node.destdir}/${file-copy.filename
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.5-SNAPSHOT)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.5)</a></li>
     </ul>
 </nav>
 <footer class="copy">
@@ -2760,7 +2755,7 @@ plugin.script-copy.default.remote-filepath: ${node.destdir}/${file-copy.filename
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2013-01-11T14:54:33EST">2013-01-11T14:54:33EST</span>
+<span class="generated-date" title="2013-02-21T13:56:34EST">2013-02-21T13:56:34EST</span>
 
 </footer>
 </body>

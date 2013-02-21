@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ジョブ</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Alex Honor" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="November 20, 2010" />
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body>
+
+
+<nav class="breadcrumb top">
+    <ul>
+        <li><a href="../index.html">Rundeck ドキュメント (1.5)</a></li>
+    </ul>
+</nav>
+
+<nav class="page top">
+    <ul>
+        <li class="current"><a href="04-jobs.html">ジョブについて</a></li>
+        <li class="toc"><a href="index.html">ユーザーマニュアル</a></li>
+        <li class="prev"><a href="03-basics.html">Rundeck の基本</a></li>
+        <li class="next"><a href="05-job-workflows.html">ジョブのワークフロー</a></li>
+    </ul>
+</nav>
+<div id="docbody">
+<h1 class="title">ジョブ</h1>
+<div id="TOC"
+><ul
+  ><li
+    ><a href="#&#12472;&#12519;&#12502;&#12464;&#12523;&#12540;&#12503;"
+      >ジョブグループ</a
+      ></li
+    ><li
+    ><a href="#&#12472;&#12519;&#12502;-uuid"
+      >ジョブ UUID</a
+      ></li
+    ><li
+    ><a href="#&#12472;&#12519;&#12502;&#12522;&#12473;&#12488;&#12392;&#12501;&#12451;&#12523;&#12479;&#12522;&#12531;&#12464;"
+      >ジョブリストとフィルタリング</a
+      ></li
+    ><li
+    ><a href="#&#12472;&#12519;&#12502;&#12398;&#12501;&#12451;&#12523;&#12479;&#12522;&#12531;&#12464;"
+      >ジョブのフィルタリング</a
+      ></li
+    ><li
+    ><a href="#&#12472;&#12519;&#12502;&#35443;&#32048;&#12398;&#30906;&#35469;"
+      >ジョブ詳細の確認</a
+      ></li
+    ><li
+    ><a href="#&#12472;&#12519;&#12502;&#12398;&#23455;&#34892;"
+      >ジョブの実行</a
+      ><ul
+      ><li
+	><a href="#&#23455;&#34892;&#12458;&#12503;&#12471;&#12519;&#12531;&#12398;&#36984;&#25246;"
+	  >実行オプションの選択</a
+	  ></li
+	><li
+	><a href="#&#23455;&#34892;&#20013;&#12472;&#12519;&#12502;&#12398;&#12501;&#12457;&#12525;&#12540;"
+	  >実行中ジョブのフォロー</a
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#&#12472;&#12519;&#12502;&#12398;&#20316;&#25104;"
+      >ジョブの作成</a
+      ><ul
+      ><li
+	><a href="#temporary-&#12472;&#12519;&#12502;"
+	  >Temporary ジョブ</a
+	  ></li
+	><li
+	><a href="#saved-&#12472;&#12519;&#12502;"
+	  >Saved ジョブ</a
+	  ></li
+	><li
+	><a href="#&#12471;&#12531;&#12502;&#12523;&#12394;-saved-&#12472;&#12519;&#12502;"
+	  >シンブルな Saved ジョブ</a
+	  ></li
+	><li
+	><a href="#&#20006;&#21015;&#23455;&#34892;"
+	  >並列実行</a
+	  ></li
+	><li
+	><a href="#&#12494;&#12540;&#12489;&#12487;&#12451;&#12473;&#12497;&#12483;&#12481;&#12392;&#12501;&#12451;&#12523;&#12479;&#12522;&#12531;&#12464;"
+	  >ノードディスパッチとフィルタリング</a
+	  ><ul
+	  ><li
+	    ><a href="#&#12501;&#12451;&#12523;&#12479;"
+	      >フィルタ</a
+	      ></li
+	    ><li
+	    ><a href="#&#12473;&#12524;&#12483;&#12489;&#12459;&#12454;&#12531;&#12488;"
+	      >スレッドカウント</a
+	      ></li
+	    ><li
+	    ><a href="#&#12521;&#12531;&#12463;&#12458;&#12540;&#12480;&#12540;"
+	      >ランクオーダー</a
+	      ></li
+	    ><li
+	    ><a href="#&#12461;&#12540;&#12503;&#12468;&#12540;&#12452;&#12531;&#12464;"
+	      >キープゴーイング</a
+	      ></li
+	    ><li
+	    ><a href="#&#12480;&#12452;&#12490;&#12511;&#12483;&#12463;&#12494;&#12540;&#12489;&#12501;&#12451;&#12523;&#12479;"
+	      >ダイナミックノードフィルタ</a
+	      ></li
+	    ></ul
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#&#12473;&#12465;&#12472;&#12517;&#12540;&#12523;&#20184;&#12365;&#12472;&#12519;&#12502;"
+      >スケジュール付きジョブ</a
+      ></li
+    ><li
+    ><a href="#&#12472;&#12519;&#12502;&#36890;&#30693;"
+      >ジョブ通知</a
+      ><ul
+      ><li
+	><a href="#webhooks"
+	  >Webhooks</a
+	  ><ul
+	  ><li
+	    ><a href="#&#23455;&#34892;&#36890;&#30693;&#12398;&#20869;&#23481;"
+	      >実行通知の内容</a
+	      ></li
+	    ><li
+	    ><a href="#&#23455;&#34892;&#36890;&#30693;&#12504;&#12483;&#12480;&#12540;"
+	      >実行通知ヘッダー</a
+	      ></li
+	    ><li
+	    ><a href="#&#23455;&#34892;&#36890;&#30693;-url-&#12488;&#12540;&#12463;&#12531;&#12398;&#23637;&#38283;"
+	      >実行通知 URL トークンの展開</a
+	      ></li
+	    ></ul
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#&#12472;&#12519;&#12502;&#12398;&#23455;&#34892;&#23653;&#27508;"
+      >ジョブの実行履歴</a
+      ></li
+    ><li
+    ><a href="#&#12472;&#12519;&#12502;&#12398;&#24375;&#21046;&#32066;&#20102;"
+      >ジョブの強制終了</a
+      ></li
+    ><li
+    ><a href="#&#12472;&#12519;&#12502;&#12398;&#21066;&#38500;"
+      >ジョブの削除</a
+      ></li
+    ><li
+    ><a href="#updating-and-copying-jobs"
+      >Updating and copying Jobs</a
+      ></li
+    ><li
+    ><a href="#&#12472;&#12519;&#12502;&#23450;&#32681;&#12398;&#12456;&#12463;&#12473;&#12509;&#12540;&#12488;"
+      >ジョブ定義のエクスポート</a
+      ></li
+    ><li
+    ><a href="#&#12472;&#12519;&#12502;&#23450;&#32681;&#12398;&#12452;&#12531;&#12509;&#12540;&#12488;"
+      >ジョブ定義のインポート</a
+      ></li
+    ><li
+    ><a href="#&#12414;&#12392;&#12417;"
+      >まとめ</a
+      ></li
+    ></ul
+  ></div
+>
+<p
+>前の章で、フィルタリングされたノードセットに横断的にアドホックコマンドを実行する方法を学びました。 この章では Rundeck の基本機能である <em
+  >ジョブ</em
+  > 機能を紹介します。 しかしその前に、アドホックコマンド実行機構の上に別のレイヤを導入する理由が気になると思います。</p
+><p
+>時間の経過と共に発生する可能性のある問題がいくつかあります：</p
+><ul
+><li
+  >ひとつは、アドホックコマンドは繰り返し実行されること。そしてたぶんそれがルーチンワークになること。</li
+  ><li
+  >あなたのチームの人は、ノードセットに向けて1人でプロシージャを実行できるシンプルなインターフェースが必要なこと。</li
+  ><li
+  >ルーチンプロシージャを他のルーチンプロシージャの要素とするために、カプセル化する必要があること。</li
+  ></ul
+><p
+>ジョブ機能はプロシージャを論理的にカプセル化して <em
+  >ジョブ</em
+  > と名付けます。 ジョブはプロシージャ内のステップ、ノードフィルタ、実行時の制御パラメータの設定です。 ジョブへのアクセスは、どのユーザがどのジョブをどう使うかを許可するか、という形式で記述されている ACL ポリシーで制御されます。</p
+><p
+>Rundeck はジョブの構築と実行、動作状況の確認をおこなえます。 現在実行中のジョブリストでは実行状況を動的に確認できます。 必要な時に停止することも可能です。</p
+><p
+>ジョブには、いつ実行されたかのログがひも付いており、その時のアウトプットを閲覧可能です。</p
+><p
+>次の章では既存ジョブの導入と実行について説明します。 最終的にはジョブ作成全般をカバーします。</p
+><p
+>もし先に進みたければ、<a href="jobs.html#%E3%82%B8%E3%83%A7%E3%83%96%E4%BD%9C%E6%88%90"
+  >ジョブ作成</a
+  >の部分へ進んで下さい。</p
+><div id="&#12472;&#12519;&#12502;&#12464;&#12523;&#12540;&#12503;"
+><h2
+  ><a href="#TOC"
+    >ジョブグループ</a
+    ></h2
+  ><p
+  >ジョブがたまってきたときは、ジョブをグループ化するのが有効です。 グループはジョブの論理的なまとまりで、さらに他のジョブグループの中に入れ子にすることもできます。 Rundeck はジョブに定義されたグループ構造をフォルダにしてジョブリストを表示します。</p
+  ><p
+  >ジョブを構造化してグループにすると、アクセスコントロールポリシーを定義しやすくなります。 これについては認証の章で説明します。</p
+  ></div
+><div id="&#12472;&#12519;&#12502;-uuid"
+><h2
+  ><a href="#TOC"
+    >ジョブ UUID</a
+    ></h2
+  ><p
+  >作成されたジョブにはユニークな UUID が付与されます。 対応するフォーマットをつかってジョブ定義をかけば、自分自身で UUID を付与することも可能です。</p
+  ><p
+  >UUID は、ジョブのリネームやジョブグループの変更を確かめるために使えます。 適切にジョブを編集できるでしょう。</p
+  ><p
+  >UUID は Rundeck 間でジョブ定義を移植するときにも便利です。</p
+  ><p
+  >注記：Rundeck は各ジョブに内部的な &quot;ID&quot; を付与していますが、これは Rundeck 間で移植できません。 Rundeck 1.3 以上では UUID を ID の代わりに利用するようになっています。</p
+  ></div
+><div id="&#12472;&#12519;&#12502;&#12522;&#12473;&#12488;&#12392;&#12501;&#12451;&#12523;&#12479;&#12522;&#12531;&#12464;"
+><h2
+  ><a href="#TOC"
+    >ジョブリストとフィルタリング</a
+    ></h2
+  ><p
+  >ジョブ操作は全て Rundeck の &quot;Jobs&quot; ページから開始します。 ログインしたら、ナビゲーションバーのトップにある &quot;Jobs&quot; ボタンをおせば、あなたの権限で見られるジョブの一覧が表示されます。</p
+  ><p
+  >もしジョブがグループ内に定義されていれば、フォルダライクな構造でグループ化されて表示されます。 フォルダは先述したジョブグループを表しています。 フォルダアイコンを押すことでその内部をたどっていくことができます。</p
+  ><p
+  >ジョブにたどりつくと、その名前、詳細、何回起動されたかのサマリが表示されるでしょう。</p
+  ><p
+  >ジョブ名をクリックすると、ウィンドウが開かれて、より詳細な情報が表示されます。 あなたが操作可能なアイコンが並んだバーも表示されるでしょう。 他に、実行時に走るコマンドやフィルタ定義、ディスパッチオプションもあるはずです。</p
+  ></div
+><div id="&#12472;&#12519;&#12502;&#12398;&#12501;&#12451;&#12523;&#12479;&#12522;&#12531;&#12464;"
+><h2
+  ><a href="#TOC"
+    >ジョブのフィルタリング</a
+    ></h2
+  ><p
+  >ジョブページではフィルタをかけてジョブを検索できます。</p
+  ><p
+  >&quot;Filter&quot; リンクを押下すればフィルタオプションが表示されます:</p
+  ><div class="figure"
+  ><img src="../figures/fig0317.png" alt="Job filter form"
+     /><p class="caption"
+    >Job filter form</p
+    ></div
+  ><p
+  >フィルタフィールドが出てくるので必要な箇所を入力して下さい:</p
+  ><ul
+  ><li
+    >Job Name: ジョブ名</li
+    ><li
+    >Group: ジョブグループ名</li
+    ><li
+    >Description: 説明文</li
+    ></ul
+  ><p
+  >部分文字列か正規表現を利用できます。</p
+  ><p
+  >&quot;Filter&quot; ボタンを押すと、ジョブリストはフィルタ条件にマッチしたリストになるでしょう。</p
+  ><div class="figure"
+  ><img src="../figures/fig0318.png" alt="Job filtered list"
+     /><p class="caption"
+    >Job filtered list</p
+    ></div
+  ><p
+  >フィルタを変更するには、青く囲われたフィルタ定義をクリックして再入力して下さい。</p
+  ><p
+  >フィルタをリセットするには全ジョブのページに、もどってフィルタフィールドにある &quot;Clear&quot; ボタンを押して下さい。</p
+  ></div
+><div id="&#12472;&#12519;&#12502;&#35443;&#32048;&#12398;&#30906;&#35469;"
+><h2
+  ><a href="#TOC"
+    >ジョブ詳細の確認</a
+    ></h2
+  ><p
+  >ジョブ一覧をフィルタリングしてから、ジョブ名にマウスポインタを合わせるとジョブ詳細をポップアップで確認することができます。 ポップアップの外をクリックすれば消えます。</p
+  ><div class="figure"
+  ><img src="../figures/fig0320.png" alt="Job detail popup"
+     /><p class="caption"
+    >Job detail popup</p
+    ></div
+  ><p
+  >ジョブ名のリンクをクリックすると、ジョブ詳細とコントロールバーがあるページに遷移します。 バーにはジョブの削除・コピー・編集・エクスポート・実行に対応するボタンが表示されます。</p
+  ><div class="figure"
+  ><img src="../figures/fig0321.png" alt="Job detail page"
+     /><p class="caption"
+    >Job detail page</p
+    ></div
+  ><p
+  >表示されるボタンは <a href="getting-started.html#%E6%A8%A9%E9%99%90%E3%81%AE%E4%BB%98%E4%B8%8E"
+    >権限の付与</a
+    > でユーザに設定した内容に対応します。</p
+  ><p
+  >ジョブ詳細ページには、以下の情報が含まれます:</p
+  ><ul
+  ><li
+    >名前・説明・グループ</li
+    ><li
+    >ジョブを最後に実行したときの統計（平均成功率や遅延など）</li
+    ><li
+    >プロジェクト名とワークフローステップ、ログレベルを含む詳細</li
+    ></ul
+  ><p
+  >&quot;Show Matches&quot; リンクからジョブ実行予定のノード一覧を見ることが出来ます。</p
+  ></div
+><div id="&#12472;&#12519;&#12502;&#12398;&#23455;&#34892;"
+><h2
+  ><a href="#TOC"
+    >ジョブの実行</a
+    ></h2
+  ><p
+  >ジョブはシェルか GUI から実行できます。</p
+  ><p
+  >コマンドラインからの場合、<a href="../manpages/man1/run.html"
+    >run</a
+    > というシェルツールを利用します。 たとえば &quot;myproject&quot; プロジェクトの &quot;apps/web&quot; ジョブグループに属する &quot;restart&quot; というジョブがあると仮定すればこのようなかんじです。</p
+  ><pre
+  ><code
+    >$ run -j apps/web/restart -p myproject
+Job execution started:
+[51] restart &lt;http://strongbad:4440/execution/follow/51&gt;
+</code
+    ></pre
+  ><p
+  >GUI からの場合、ジョブページからさまざまなジョブを実行できます。 フィルタリングで目的のジョブを探し出し、緑色の &quot;Run&quot; アイコンを押せば、 ただちにキューにジョブが入って実行されます。 Run アイコンがない場合はログインしていないか、あなたに &quot;run&quot; 権限がないということです。</p
+  ><div class="figure"
+  ><img src="../figures/fig0319.png" alt="Job run button"
+     /><p class="caption"
+    >Job run button</p
+    ></div
+  ><p
+  >ジョブ詳細ページにたどり着いたら、ここから &quot;Run&quot; ボタンをおせます。</p
+  ><div class="figure"
+  ><img src="../figures/fig0319-b.png" alt="Job run button"
+     /><p class="caption"
+    >Job run button</p
+    ></div
+  ><p
+  >Run ボタンが押されると、ダイアログが開いて実行オプションを選択できます。</p
+  ><div id="&#23455;&#34892;&#12458;&#12503;&#12471;&#12519;&#12531;&#12398;&#36984;&#25246;"
+  ><h3
+    ><a href="#TOC"
+      >実行オプションの選択</a
+      ></h3
+    ><p
+    >ジョブにはオプション入力用のプロンプトを定義することができます。 このページではジョブの様々なオプションを紹介します。</p
+    ><p
+    >いくつかのオプションはデフォルト値をもち、その他については選択肢が表示されます。 また、いくつかのオプションの入力は任意であり、他は必須になります。 最終的に、受け入れ可能な値を管理し、その中から選択させるパターンになるでしょう。</p
+    ><p
+    >いろいろなジョブオプションがあっても、ジョブが実行される前に変更可能です。</p
+    ><p
+    >準備ができたら &quot;Run Job Now&quot; を押しましょう。 ジョブが実行キューに入って <a href="rundeck-basics.html#now-running"
+      >Now running</a
+      > セクションで実行状況を追うことが出来るようになります。</p
+    ></div
+  ><div id="&#23455;&#34892;&#20013;&#12472;&#12519;&#12502;&#12398;&#12501;&#12457;&#12525;&#12540;"
+  ><h3
+    ><a href="#TOC"
+      >実行中ジョブのフォロー</a
+      ></h3
+    ><p
+    >ジョブ実行を開始したら実行詳細ページでアウトプットをフォローできます。</p
+    ><p
+    >ジョブページに &quot;Now running&quot; と表示されているとき、ジョブ名の行にある &quot;output &gt;&gt;&quot; リンクをクリックしてください。</p
+    ><p
+    >もしジョブ詳細ページから &quot;run&quot; ボタンを押していれば、ブラウザは実行詳細ページを表示するでしょう。</p
+    ></div
+  ></div
+><div id="&#12472;&#12519;&#12502;&#12398;&#20316;&#25104;"
+><h2
+  ><a href="#TOC"
+    >ジョブの作成</a
+    ></h2
+  ><p
+  >Rundeck では 2 種類のジョブをつくることができます。</p
+  ><ul
+  ><li
+    >Temporary : <em
+      >Temporary ジョブ</em
+      > は実行コマンドセットとノードフィルタ設定を定義します。</li
+    ><li
+    >Saved: <em
+      >Saved ジョブ</em
+      > は実行コマンドセットとディスパッチオプションを定義しますが、名前をつけることができ、ジョブグループに格納できます。さらに、Saved ジョブは実行スケジュールを持つことが出来ます。</li
+    ></ul
+  ><p
+  >ジョブを作成するには Jobs ページから「New Job」ボタンを押します。</p
+  ><div class="figure"
+  ><img src="../figures/fig0301.png" alt="New Job button"
+     /><p class="caption"
+    >New Job button</p
+    ></div
+  ><div id="temporary-&#12472;&#12519;&#12502;"
+  ><h3
+    ><a href="#TOC"
+      >Temporary ジョブ</a
+      ></h3
+    ><p
+    >Temporary ジョブはアドホックコマンドに少しだけ似ています。 違うのは、コマンドの実行方法について、より多くのコントロールが効くということと、Rundeck の Web アプリでよりよいトラッキングができるという点です。</p
+    ><p
+    >Temporary ジョブをつくるためには、まず Rundeck の画面にログインして &quot;Jobs&quot; タブを押してください。</p
+    ><ol style="list-style-type: decimal;"
+    ><li
+      >右のほうにある &quot;New Job&quot; ボタンをおして &quot;Create New Job&quot; フォームを表示させて下さい。</li
+      ><li
+      >ジョブは 1 つ以上のワークフローステップで定義されます。ワークフローエリアで &quot;Add a step&quot; リンクをクリックして下さい。</li
+      ><li
+      >ワークフローステップには数種類のタイプがあります。&quot;Script&quot; ワークフローステップタイプを選択して下さい。</li
+      ><li
+      >&quot;Script&quot; タイプは任意のスクリプトを対象のホストで実行できるタイプです。 ディスパッチを使う前には &quot;info&quot; シェルスクリプトが実行されています。</li
+      ><li
+      >フォームの下まできたら、実行開始するために &quot;Run and Forget&quot; ボタンを押して下さい。</li
+      ><li
+      >実行結果の出力がサブシーケンスページに表示されていきます。</li
+      ></ol
+    ><div class="figure"
+    ><img src="../figures/fig0302.png" alt="Temporary job form"
+       /><p class="caption"
+      >Temporary job form</p
+      ></div
+    ></div
+  ><div id="saved-&#12472;&#12519;&#12502;"
+  ><h3
+    ><a href="#TOC"
+      >Saved ジョブ</a
+      ></h3
+    ><p
+    >アドホックコマンドや Temporary ジョブの実行は管理者の日常業務の一部です。 時にはアドホックコマンドがルーチンワーク化し、再利用可能にすることで価値が出るようになるでしょう。 そのようなジョブはチームメンバから引き渡されたり、他のジョブから派生してくるかもしれません。 Rundeck はジョブを宣言して保存するために、グラフィカルもしくは XML ファイルで定義するインタフェースを提供します。</p
+    ></div
+  ><div id="&#12471;&#12531;&#12502;&#12523;&#12394;-saved-&#12472;&#12519;&#12502;"
+  ><h3
+    ><a href="#TOC"
+      >シンブルな Saved ジョブ</a
+      ></h3
+    ><p
+    >Saved ジョブの例として、内部でスクリプトを呼び出すジョブをつくってみます。</p
+    ><ol style="list-style-type: decimal;"
+    ><li
+      >これまでの例と同じく、&quot;New Job&quot; ボタンをクリックしてください。</li
+      ><li
+      >new job フォーム内で:<ul
+	><li
+	  >&quot;Save this job?&quot; プロンプトに対しては &quot;Yes&quot; を選択してください。すると、ジョブの名前とグループ、説明を記入するフォームが出ます。</li
+	  ><li
+	  >&quot;Job Name&quot; に &quot;info&quot;、&quot;Group&quot; に &quot;adm/resources&quot; を入力します。</li
+	  ><li
+	  >もし UUID を自分で定義したければ入力することが可能です。入れない場合は自動でセットされます。</li
+	  ><li
+	  >説明を記入しておくと他のユーザがそのジョブの意図・目的を理解するのに有用です。</li
+	  ><li
+	  >&quot;Dispatch to Nodes&quot; にチェックを入れます。</li
+	  ><li
+	  >&quot;Node Exclude Filters&quot; を選択して、Rundeck Server の名前を入れます。これでリモートノードのみにジョブが実行されるようになります。（たとえば centos54 や ubuntu）</li
+	  ><li
+	  >info script を入力します</li
+	  ><li
+	  >ワークフローステップを保存します</li
+	  ><li
+	  >ページ下部にある &quot;Create&quot; ボタンを押します。 <img src="../figures/fig0303.png" alt="Simple saved job form"
+	     /></li
+	  ></ul
+	></li
+      ><li
+      >ジョブが作成されると、ブラウザが Jobs ページにリダイレクトされます。グループ名のついたフォルダにジョブがあるでしょう。<ul
+	><li
+	  >フォルダボタンによって新しいジョブまでいけます</li
+	  ></ul
+	></li
+      ><li
+      >緑色の矢印のボタンがあります<ul
+	><li
+	  >ジョブを実行するにはこのボタンを押します <img src="../figures/fig0304.png" alt="Simple saved job"
+	     /></li
+	  ></ul
+	></li
+      ><li
+      >&quot;Run Job Now&quot; ボタンを押して実行開始します。<ul
+	><li
+	  >ジョブがキューに入って実行されます</li
+	  ></ul
+	></li
+      ><li
+      >&quot;Now Running&quot; セクションを見て下さい。<ul
+	><li
+	  >&quot;output &gt;&gt;&quot; リンクを押すことで実行フォローページにいけます <img src="../figures/fig0305.png" alt="Simple saved job output"
+	     /></li
+	  ></ul
+	></li
+      ></ol
+    ></div
+  ><div id="&#20006;&#21015;&#23455;&#34892;"
+  ><h3
+    ><a href="#TOC"
+      >並列実行</a
+      ></h3
+    ><p
+    >デフォルトでは saved job は &quot;Single Execution&quot; で1度に1回実行できます。 これは同じノード（群）で動作している他のプロセスにジョブのステップが妨害される可能性があるときに便利です。</p
+    ><p
+    >しかし、場合によっては同時に1つ以上のジョブを実行した方が便利なことがあります。</p
+    ><p
+    >以下のようにジョブエディタで &quot;Multiple Executions&quot; を Yes に切り替えることでそれが可能になります。</p
+    ><div class="figure"
+    ><img src="../figures/fig-manual-jobs-multiexec.png" alt="Multiple executions"
+       /><p class="caption"
+      >Multiple executions</p
+      ></div
+    ></div
+  ><div id="&#12494;&#12540;&#12489;&#12487;&#12451;&#12473;&#12497;&#12483;&#12481;&#12392;&#12501;&#12451;&#12523;&#12479;&#12522;&#12531;&#12464;"
+  ><h3
+    ><a href="#TOC"
+      >ノードディスパッチとフィルタリング</a
+      ></h3
+    ><p
+    >ジョブを作るときに、ローカルだけで動かすか（Rundeck Server 上のみ）、複数のノードで動かすか（Rundeck Server を含めることも可能）を選択することができます。</p
+    ><p
+    >GUI では、&quot;Dispatch to Nodes&quot; のチェックボックスでノードディスパッチを有効にできます。 有効にした場合、ノードフィルタリングインタフェースが表示されます。</p
+    ><div class="figure"
+    ><img src="../figures/fig0305-b.png" alt="Node Filtering interface"
+       /><p class="caption"
+      >Node Filtering interface</p
+      ></div
+    ><div id="&#12501;&#12451;&#12523;&#12479;"
+    ><h4
+      ><a href="#TOC"
+	>フィルタ</a
+	></h4
+      ><p
+      >フィルタ値を入力するため、&quot;Name&quot; と &quot;Tags&quot; の異なるフィルタフィールドをクリックできます。 条件を更新すると、&quot;Matched Nodes&quot; の欄にそれを反映したリストが表示されます。 より多くの組み込みフィルタを確認するには &quot;More&quot; をクリックします。 また、外部フィルタを同じフィールドに入力するには &quot;Extended Filters&quot; をクリックします。</p
+      ></div
+    ><div id="&#12473;&#12524;&#12483;&#12489;&#12459;&#12454;&#12531;&#12488;"
+    ><h4
+      ><a href="#TOC"
+	>スレッドカウント</a
+	></h4
+      ><p
+      >&quot;Thread Count&quot; ボックスを変更することで同時に実行されるスレッドの最大数を設定できます。 1を入れると全てのノードに対して直列で実行されます。 それ以上の値を入れればそれに応じた数で並行に実行されます。</p
+      ></div
+    ><div id="&#12521;&#12531;&#12463;&#12458;&#12540;&#12480;&#12540;"
+    ><h4
+      ><a href="#TOC"
+	>ランクオーダー</a
+	></h4
+      ><p
+      >&quot;Rank Attribute&quot; と &quot;Rank Order&quot; を設定することでノードの実行オーダーを変更することができます。デフォルトでは、ノードは &quot;nodename&quot; 属性値で昇順オーダーされます。 このノード属性値は、たとえば &quot;rank&quot; のように変更でき、オーダー順は降順にすることで逆転できます。</p
+      ><p
+      >もし属性値に整数値を利用する場合、ノードはレキシカルではなく数値でソートされるようになります。言い換えれば、ソートは基本的に整数値ではなく文字列で行われます。</p
+      ><p
+      >特に属性値が入力されていないノードの場合は、その名前がソートの基準となります。</p
+      ></div
+    ><div id="&#12461;&#12540;&#12503;&#12468;&#12540;&#12452;&#12531;&#12464;"
+    ><h4
+      ><a href="#TOC"
+	>キープゴーイング</a
+	></h4
+      ><p
+      >&quot;Keep going on error?&quot; を &quot;Yes&quot; に設定すると、ノードへのディスパッチが失敗しても、全てが実行されるまで動作が継続されます。 全てのノードのワークフローが終了したときに、いずれかのノードで失敗していれば実行結果は失敗となります。</p
+      ><p
+      >&quot;No&quot; に設定すると、残りのジョブの実行は継続されず、直ちに終了します。</p
+      ></div
+    ><div id="&#12480;&#12452;&#12490;&#12511;&#12483;&#12463;&#12494;&#12540;&#12489;&#12501;&#12451;&#12523;&#12479;"
+    ><h4
+      ><a href="#TOC"
+	>ダイナミックノードフィルタ</a
+	></h4
+      ><p
+      >ノードにマッチする為、静的な値のほかに動的な値を利用することも出来ます。</p
+      ><p
+      >ジョブ用にオプションを定義してあれば（詳細は<a href="#%E3%82%B8%E3%83%A7%E3%83%96%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3"
+	>ジョブオプション</a
+	>を参照）、ジョブ実行時にユーザが送信した値をノードフィルタリングの条件として利用できます。</p
+      ><p
+      ><code
+	>${option.name}</code
+	> のようにフィルタ値をいれてください。&quot;name&quot; にはオプション名が入ります。</p
+      ><p
+      >ジョブ実行時、ユーザにはオプション値を入力するプロンプトが表示されますが、それは同時にどのノードにディスパッチするかという条件にも使われるのです。</p
+      ><p
+      ><strong
+	>注</strong
+	>：動的オプションは値がまだセットされていない為、フィルタリング結果の &quot;Matched Nodes&quot; の欄でマッチ状況が &quot;None&quot; となるでしょう。 そのため、ジョブ実行時に &quot;Warning: このジョブが指定するフィルタにはノードがマッチしませんでした。実行が失敗する恐れがあります。&quot; とメッセージがでます。 このような場合はユーザがオプション値を入れた後にノードが決定されます。</p
+      ></div
+    ></div
+  ></div
+><div id="&#12473;&#12465;&#12472;&#12517;&#12540;&#12523;&#20184;&#12365;&#12472;&#12519;&#12502;"
+><h2
+  ><a href="#TOC"
+    >スケジュール付きジョブ</a
+    ></h2
+  ><p
+  >Saved ジョブは周期的な基準にそって実行されるよう設定できます。 そのようなスケジュールされたジョブをつくりたいのなら、&quot;Schedule to run repeatedly?&quot; の下を Yes にしてください。</p
+  ><div class="figure"
+  ><img src="../figures/fig0306.png" alt="Scheduled job simple form"
+     /><p class="caption"
+    >Scheduled job simple form</p
+    ></div
+  ><p
+  >スケジュールはシンプルなセレクタから選ぶか Unix Crontab フォーマット形式で定義します。</p
+  ><p
+  >セレクタを使う場合、時分を決めます。 デフォルトでは &quot;Every Day（毎日）&quot; となっていますが、そのチェックをはずせば個別に一週間のうちの日を指定できます。 同様に &quot;Every Month（毎月）&quot; がデフォルトですがチェックを外せば年のうちの月を指定できます。</p
+  ><p
+  >もし crontab のフォーマットが好きなら、cron 表現で入力します。</p
+  ><div class="figure"
+  ><img src="../figures/fig0307.png" alt="Scheduled job crontab form"
+     /><p class="caption"
+    >Scheduled job crontab form</p
+    ></div
+  ><p
+  >Crontab の文法についてはここを参照して下さい: <a href="http://www.quartz-scheduler.org/docs/api/1.8.1/org/quartz/CronExpression.html"
+    >CronExpresssion</a
+    ></p
+  ><p
+  >スケジュールを追加してアップデートすると、ジョブがリストに記載されたときに時計アイコンが出てきます。</p
+  ><div class="figure"
+  ><img src="../figures/fig0308.png" alt="Scheduled job icon"
+     /><p class="caption"
+    >Scheduled job icon</p
+    ></div
+  ></div
+><div id="&#12472;&#12519;&#12502;&#36890;&#30693;"
+><h2
+  ><a href="#TOC"
+    >ジョブ通知</a
+    ></h2
+  ><p
+  >ジョブが終了したときに成否を通知するよう設定できます。</p
+  ><p
+  >通知を受信したい場合は &quot;Send Notification?&quot; の下を Yes にしてください。</p
+  ><div class="figure"
+  ><img src="../figures/fig0322.png" alt="Notification form"
+     /><p class="caption"
+    >Notification form</p
+    ></div
+  ><p
+  >成否の通知を有効にし、email か webhooks で受信することができます。チェックボックスを有効にしたら通知タイプの欄にすすんでください。</p
+  ><div class="figure"
+  ><img src="../figures/fig0323.png" alt="Notifications enabled"
+     /><p class="caption"
+    >Notifications enabled</p
+    ></div
+  ><p
+  >email 通知用にはコンマ区切りで email アドレスを入力して下さい。webhook 通知用には同様に URL を入れます。</p
+  ><p
+  >ジョブ実行が完了すると、ジョブが成功したなら全ての &quot;success&quot; 通知が流れます。逆に、全ての &quot;failure&quot; 通知はジョブが失敗するかキャンセルされると流れます。</p
+  ><div id="webhooks"
+  ><h3
+    ><a href="#TOC"
+      >Webhooks</a
+      ></h3
+    ><p
+    >Rundeck のジョブは成否を webhook URL に POST するよう設定できます。</p
+    ><ul
+    ><li
+      >webhook 通知の設定手法については <a href="jobs.html#job-notifications"
+	>Jobs - Job Notifications</a
+	> を参考にして下さい</li
+      ><li
+      >webhook 全般については <a href="http://webhooks.pbwiki.com/"
+	><code
+	  >http://webhooks.pbwiki.com/</code
+	  ></a
+	> を参照して下さい</li
+      ></ul
+    ><p
+    >Rundeck ジョブの webhook 通知が起動されると、サーバは1つ以上の URL に POST リクエストを送信します。 そのリクエストは実行結果情報を含む XML コンテンツを持ち、通知と実行についての情報を含む特別なヘッダを持ちます。 同様に、webhook リクエストが送信される前に、ジョブや実行結果、通知に関する具体的な詳細と取り替えられるプロパティトークンを URL に設定することもできます。</p
+    ><div id="&#23455;&#34892;&#36890;&#30693;&#12398;&#20869;&#23481;"
+    ><h4
+      ><a href="#TOC"
+	>実行通知の内容</a
+	></h4
+      ><p
+      >POST リクエストの中身は <code
+	>&lt;notification&gt;</code
+	> をルート要素に持つ XML になります。 この要素の中身は <code
+	>&lt;executions..&gt;&lt;execution&gt;...&lt;/execution&gt;&lt;/executions&gt;</code
+	> になります。 これは実行情報の Web API が返す XML と同一のフォーマットです。 詳しくは <a href="../api/index.html#listing-running-executions"
+	>API - Listing Running Executions</a
+	> を参照して下さい。</p
+      ><p
+      ><code
+	>notification</code
+	> 要素の属性は以下のような者を含みます:</p
+      ><dl
+      ><dt
+	><code
+	  >trigger</code
+	  ></dt
+	><dd
+	><p
+	  >通知のトリガー種別。成功・失敗（&quot;success&quot; or &quot;failure&quot;)</p
+	  ></dd
+	><dt
+	><code
+	  >executionId</code
+	  ></dt
+	><dd
+	><p
+	  >実行 ID</p
+	  ></dd
+	><dt
+	><code
+	  >status</code
+	  ></dt
+	><dd
+	><p
+	  >実行結果。成功・失敗・中断（&quot;succeeded&quot;, &quot;failed&quot; or &quot;aborted&quot;)</p
+	  ></dd
+	></dl
+      ><p
+      ><em
+	>Example</em
+	></p
+      ><pre
+      ><code
+	>&lt;notification trigger=&quot;success&quot; executionId=&quot;[ID]&quot; status=&quot;[STATUS]&quot;&gt;
+    &lt;executions count=&quot;1&quot;&gt;
+        &lt;execution ...&gt;
+            ...
+        &lt;/execution&gt;
+    &lt;/executions&gt;
+&lt;/notification&gt;
+</code
+	></pre
+      ></div
+    ><div id="&#23455;&#34892;&#36890;&#30693;&#12504;&#12483;&#12480;&#12540;"
+    ><h4
+      ><a href="#TOC"
+	>実行通知ヘッダー</a
+	></h4
+      ><p
+      >POST リクエストはいくつかのカスタム HTTP ヘッダも含みます。webhook 情報を受信する別の手段を提供するためです:</p
+      ><dl
+      ><dt
+	><code
+	  >X-Rundeck-Notification-Trigger</code
+	  ></dt
+	><dd
+	><p
+	  >通知のトリガー種別。成功・失敗（&quot;success&quot; or &quot;failure&quot;)</p
+	  ></dd
+	><dt
+	><code
+	  >X-Rundeck-Notification-Execution-ID</code
+	  ></dt
+	><dd
+	><p
+	  >実行 ID</p
+	  ></dd
+	><dt
+	><code
+	  >X-Rundeck-Notification-Execution-Status</code
+	  ></dt
+	><dd
+	><p
+	  >実行結果。成功・失敗・中断（&quot;succeeded&quot;, &quot;failed&quot; or &quot;aborted&quot;)</p
+	  ></dd
+	></dl
+      ></div
+    ><div id="&#23455;&#34892;&#36890;&#30693;-url-&#12488;&#12540;&#12463;&#12531;&#12398;&#23637;&#38283;"
+    ><h4
+      ><a href="#TOC"
+	>実行通知 URL トークンの展開</a
+	></h4
+      ><p
+      >トークンを含んだ　webhook 通知用に URL は構成されます。 トークンは <code
+	>${job.name}</code
+	> などの関連づけられたジョブとその実行結果から取得した値で展開されます。</p
+      ><p
+      >展開可能なトークンは:</p
+      ><dl
+      ><dt
+	><code
+	  >job.PROPERTY</code
+	  ></dt
+	><dd
+	><p
+	  >ジョブに関するプロパティ。以下を含む:</p
+	  ><dl
+	  ><dt
+	    ><code
+	      >name</code
+	      ></dt
+	    ><dd
+	    ><p
+	      >ジョブ名</p
+	      ></dd
+	    ><dt
+	    ><code
+	      >group</code
+	      ></dt
+	    ><dd
+	    ><p
+	      >ジョブグループもしくは空文字列</p
+	      ></dd
+	    ><dt
+	    ><code
+	      >id</code
+	      ></dt
+	    ><dd
+	    ><p
+	      >ジョブ ID</p
+	      ></dd
+	    ><dt
+	    ><code
+	      >project</code
+	      ></dt
+	    ><dd
+	    ><p
+	      >プロジェクト名</p
+	      ></dd
+	    ></dl
+	  ></dd
+	><dt
+	><code
+	  >execution.PROPERTY</code
+	  ></dt
+	><dd
+	><p
+	  >実行に関するプロパティ。以下を含む:</p
+	  ><dl
+	  ><dt
+	    ><code
+	      >id</code
+	      ></dt
+	    ><dd
+	    ><p
+	      >実行 ID</p
+	      ></dd
+	    ><dt
+	    ><code
+	      >user</code
+	      ></dt
+	    ><dd
+	    ><p
+	      >ジョブを実行したユーザ</p
+	      ></dd
+	    ><dt
+	    ><code
+	      >status</code
+	      ></dt
+	    ><dd
+	    ><p
+	      >実行結果。成功・失敗・中断（&quot;succeeded&quot;, &quot;failed&quot; or &quot;aborted&quot;)</p
+	      ></dd
+	    ></dl
+	  ></dd
+	><dt
+	><code
+	  >notification.trigger</code
+	  ></dt
+	><dd
+	><p
+	  >&quot;success&quot;, &quot;failure&quot; 通知にひもづくトリガー</p
+	  ></dd
+	></dl
+      ><p
+      >たとえば、この URL の場合:</p
+      ><pre
+      ><code
+	>http://server/callback?id=${execution.id}&amp;status=${execution.status}&amp;trigger=${notification.trigger}
+</code
+	></pre
+      ><p
+      >トークンは webhook リクエストを作る前に適切な値にリプレースされます。</p
+      ></div
+    ></div
+  ></div
+><div id="&#12472;&#12519;&#12502;&#12398;&#23455;&#34892;&#23653;&#27508;"
+><h2
+  ><a href="#TOC"
+    >ジョブの実行履歴</a
+    ></h2
+  ><p
+  >ジョブページでは、&quot;Executions&quot; をクリックすると以前の実行結果を参照することができます。</p
+  ><div class="figure"
+  ><img src="../figures/fig0309.png" alt="Job executions link"
+     /><p class="caption"
+    >Job executions link</p
+    ></div
+  ><p
+  >そのジョブに関連するフィルタされたヒストリが返ってきます。 リスト内にある過去の実行をクリックすれば全ての状況を見ることができます。</p
+  ><div class="figure"
+  ><img src="../figures/fig0310.png" alt="Job executions matches"
+     /><p class="caption"
+    >Job executions matches</p
+    ></div
+  ><p
+  >ジョブ詳細ページからも、同様に過去の履歴を見ることができます。</p
+  ></div
+><div id="&#12472;&#12519;&#12502;&#12398;&#24375;&#21046;&#32066;&#20102;"
+><h2
+  ><a href="#TOC"
+    >ジョブの強制終了</a
+    ></h2
+  ><p
+  >実行中のジョブは、強制終了することができます。</p
+  ><p
+  >警告：この機能はジョブを実行している Java のスレッドを強制的に kill するので気をつけて下さい。実行すると Rundeck サーバはフレーキー（はぐれ者）になるでしょう。 Java で非推奨となっている機能なので、本当にどうしても必要な時以外は使わないで下さい。</p
+  ><p
+  >ヒストリビューの Now Running セクションか、ジョブ実行フォローページから、そのジョブの &quot;Kill Job Now&quot; ボタンを押して下さい。</p
+  ><p
+  >すると、&quot;Really kill this job?（本当にジョブを終了してもいいですか？）&quot; と尋ねられるので &quot;Yes&quot; を押してください。</p
+  ><p
+  >そのジョブは &quot;Killed&quot; 完了ステータスとして実行を打ち切られます。</p
+  ><p
+  >参照: <a href="../manpages/man1/rd-queue.html"
+    >rd-queue</a
+    >.</p
+  ></div
+><div id="&#12472;&#12519;&#12502;&#12398;&#21066;&#38500;"
+><h2
+  ><a href="#TOC"
+    >ジョブの削除</a
+    ></h2
+  ><p
+  >ジョブ詳細ページから、赤い &quot;X&quot; アイコンを押すとジョブを削除できます。</p
+  ><div class="figure"
+  ><img src="../figures/fig0311.png" alt="Job delete button"
+     /><p class="caption"
+    >Job delete button</p
+    ></div
+  ><p
+  >&quot;Really delete this job?（本当にジョブを削除してもいいですか？）&quot; と聞かれたら &quot;Yes&quot; を押して下さい。</p
+  ></div
+><div id="updating-and-copying-jobs"
+><h2
+  ><a href="#TOC"
+    >Updating and copying Jobs</a
+    ></h2
+  ><p
+  >ジョブを作るときにセットしたデータは UUID を除いて変更できます。 ジョブを編集するには、えんぴつアイコンをクリックしてください。</p
+  ><div class="figure"
+  ><img src="../figures/fig0312.png" alt="Job edit button"
+     /><p class="caption"
+    >Job edit button</p
+    ></div
+  ><p
+  >同じく、ジョブ定義を新しいジョブにコピーするときはコピーボタンを押して下さい。</p
+  ><div class="figure"
+  ><img src="../figures/fig0313.png" alt="Job copy button"
+     /><p class="caption"
+    >Job copy button</p
+    ></div
+  ></div
+><div id="&#12472;&#12519;&#12502;&#23450;&#32681;&#12398;&#12456;&#12463;&#12473;&#12509;&#12540;&#12488;"
+><h2
+  ><a href="#TOC"
+    >ジョブ定義のエクスポート</a
+    ></h2
+  ><p
+  >Rundeck のグラフィカルコンソールで作成されたジョブ定義は、XML や YAML ファイル形式にエクスポートできます。 また、それをインポートすることもできます。</p
+  ><p
+  >Rundeck のグラフィカルインタフェースか、<code>rd-jobs</code> シェルツールを通して、既存のジョブ定義を検索することができます。</p
+  ><p
+  >ジョブ詳細ページ内のツールバーにドキュメントシンボルアイコンがあります。 マウスカーソルをあわせると &quot;Download Job definition file（ジョブ定義ファイルのダウンロード）&quot; とラベルがでます。 アイコンをクリックすると、XML か YAML でのジョブ定義ダウンロードを選べます。</p
+  ><div class="figure"
+  ><img src="../figures/fig0314.png" alt="Job export button"
+     /><p class="caption"
+    >Job export button</p
+    ></div
+  ><p
+  >好きなフォーマットをクリックするとダウンロードがはじまります。</p
+  ><p
+  >コマンドラインを使いたい場合、まず Rundeck サーバでシェルを開いて下さい。 ディスクに書き込むために <code
+    >rd-jobs</code
+    > コマンドを実行します。 デフォルトでは rd-jobs は全てのジョブ定義を1つのファイルにダンプします。 特定のジョブのみに制限したい場合は、<code
+    >-n</code
+    > オプションで名前を指定するか、もしくは <code
+    >-i</code
+    > オプションで ID を指定します。</p
+  ><pre
+  ><code
+    >rd-jobs -p project -n &quot;job-name&quot; -f job.xml
+</code
+    ></pre
+  ><p
+  >この場合、job.xml に結果が保存されます。</p
+  ><p
+  >YAML 形式でエクスポートしたい場合は <code
+    >-F</code
+    > オプションを使います。</p
+  ><pre
+  ><code
+    >rd-jobs -p project -n &quot;job-name&quot; -F yaml -f job.yaml
+</code
+    ></pre
+  ><p
+  >この場合、YAML フォーマットファイルにエクスポートされます。</p
+  ><p
+  >XML および YAML フォーマットに関しては以下に記述されています。</p
+  ><ul
+  ><li
+    >XML: <a href="../manpages/man5/job-v20.html"
+      >job-v20(5)</a
+      ></li
+    ><li
+    >YAML: <a href="../manpages/man5/job-yaml-v12.html"
+      >job-yaml-v12(5)</a
+      ></li
+    ></ul
+  ><p
+  >他の使い方については <a href="../manpages/man1/rd-jobs.html"
+    >rd-jobs(1)</a
+    > を参照して下さい。</p
+  ></div
+><div id="&#12472;&#12519;&#12502;&#23450;&#32681;&#12398;&#12452;&#12531;&#12509;&#12540;&#12488;"
+><h2
+  ><a href="#TOC"
+    >ジョブ定義のインポート</a
+    ></h2
+  ><p
+  >job.xml ファイルは Web インタフェースからそれをアップロードすることができます。</p
+  ><p
+  >ジョブリスト内から &quot;New Job&quot; ボタンをクリックして下さい。</p
+  ><p
+  >&quot;Create New Job&quot; フォーム内の右サイドにある &quot;Upload Definition...&quot; というボタンをクリックしてください。</p
+  ><div class="figure"
+  ><img src="../figures/fig0315.png" alt="Job import button"
+     /><p class="caption"
+    >Job import button</p
+    ></div
+  ><p
+  >job.xml ファイルを選択してアップロードします。</p
+  ><div class="figure"
+  ><img src="../figures/fig0316.png" alt="Job import form"
+     /><p class="caption"
+    >Job import form</p
+    ></div
+  ><p
+  >&quot;同じ名前のジョブが既にあります（When a job with the same name already exists:）&quot; と言われたらオプションを選んで下さい。</p
+  ><ul
+  ><li
+    >Update - 同じ名前のジョブ定義を上書きしてアップデートします</li
+    ><li
+    >Skip - 何もせずに処理をスキップします</li
+    ><li
+    >Create - XML 内の情報を新規ジョブ作成用に利用します（同じ名前のジョブへの上書きはされません）</li
+    ></ul
+  ><p
+  >アップロードボタンをクリックして下さい。 もし XML にエラーがあれば、ページ内に表示されます。</p
+  ></div
+><div id="&#12414;&#12392;&#12417;"
+><h2
+  ><a href="#TOC"
+    >まとめ</a
+    ></h2
+  ><p
+  >この章を読んだあとは、あなたはジョブの概要について理解して、検索したり実行できるようになっていなければなりません。 また、Temporary ジョブや saved jobs の作成方法、その履歴検索についても理解していなければなりません。 最終的に、XML 形式でのジョブ定義のエクスポート・インポートについて理解しておくべきです。</p
+  ><p
+  >次は、Job Workflow を用いたマルチステップの実行について説明します。</p
+  ></div
+>
+</div>
+
+<nav class="page bottom">
+    <ul>
+        <li class="current"><a href="04-jobs.html">ジョブについて</a></li>
+        <li class="toc"><a href="index.html">ユーザーマニュアル</a></li>
+        <li class="prev"><a href="03-basics.html">Rundeck の基本</a></li>
+        <li class="next"><a href="05-job-workflows.html">ジョブのワークフロー</a></li>
+    </ul>
+</nav>
+<nav class="breadcrumb bottom">
+    <ul>
+        <li><a href="../index.html">Rundeck ドキュメント (1.5)</a></li>
+    </ul>
+</nav>
+<footer class="copy">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">DTO Solutions</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+
+<br/>
+&copy;2012 DTO Solutions
+<br/>
+<span class="generated-date" title="2013-02-21T13:56:47EST">2013-02-21T13:56:47EST</span>
+
+</footer>
+</body>
+</html>

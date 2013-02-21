@@ -14,7 +14,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.5-SNAPSHOT)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.5)</a></li>
     </ul>
 </nav>
 
@@ -35,8 +35,16 @@
       >Rundeck Basics</a
       ><ul
       ><li
-	><a href="#command-dispatching"
-	  >Command dispatching</a
+	><a href="#plugins"
+	  >Plugins</a
+	  ></li
+	><li
+	><a href="#node-execution"
+	  >Node execution</a
+	  ></li
+	><li
+	><a href="#jobs"
+	  >Jobs</a
 	  ></li
 	><li
 	><a href="#resource-model"
@@ -49,6 +57,10 @@
 	><li
 	><a href="#project"
 	  >Project</a
+	  ></li
+	><li
+	><a href="#api"
+	  >API</a
 	  ></li
 	></ul
       ></li
@@ -90,38 +102,41 @@
     ></h2
   ><p
   >Several fundamental concepts underly and drive the development of the Rundeck system. If you are a new user, knowing about them will help you use and integrate Rundeck into your environment.</p
-  ><div id="command-dispatching"
+  ><div id="plugins"
   ><h3
     ><a href="#TOC"
-      >Command dispatching</a
+      >Plugins</a
+      ></h3
+    ><p
+    >Most of what Rundeck does is via one of its plugins. Plugins exist to execute commands on nodes, perform a step in a workflow, gather information about the hosts in your network, copy a file to a remote server, or talk to a user directory.</p
+    ></div
+  ><div id="node-execution"
+  ><h3
+    ><a href="#TOC"
+      >Node execution</a
       ></h3
     ><p
     >Rundeck supports a notion called <em
-      >command dispatching</em
-      > wherein a user specifies dispatch criteria along with an action (called a command) and this specification is used to perform a distributed execution.</p
+      >node execution</em
+      > wherein a user specifies a &quot;command&quot; and a &quot;node filter&quot; to match a list of nodes. Rundeck uses the filter to produce a list of matching nodes and then dispatches the command to them. A <em
+      >node executor</em
+      > is a Rundeck plugin that implements how to communicate with the Node and how to invoke the command action.</p
     ><p
-    >The <em
-      >command dispatcher</em
-      > is an internal mechanism that looks up node resources meeting specified filtering criteria and then performs the distributed command execution. The command executes in a data context that contains information about the Node resource. Besides node filtering, dispatcher options include parameters to control parallel execution, ordering and error handling.</p
+    >The command executes in a data context that contains information about the Node resource, job, and job option data.</p
+    ></div
+  ><div id="jobs"
+  ><h3
+    ><a href="#TOC"
+      >Jobs</a
+      ></h3
     ><p
-    >The command dispatcher supports two methods of command execution:</p
-    ><ul
-    ><li
-      ><em
-	>Ad-hoc commands</em
-	>: Execute any shell command or shell script across a set of hosts.<br
-	 /></li
-      ><li
-      ><em
-	>Jobs</em
-	>: Encapsulate commands as a named Job and tie them together into multi-step workflows.</li
-      ></ul
+    ><em
+      >Jobs</em
+      > encapsulate a sequence of steps, node filter and job options to provide a single executable action. Jobs can be given a unique ID, a name and group to organize them to run any time or they may be declared and executed just once and forgotten.</p
     ><p
-    >Rundeck provides both graphical and command line interfaces to interact with the command dispatcher.</p
+    >Jobs take a number of parameters to control execution, including what to do when an error occurs in one of the steps or how many threads to execute actions across a list of nodes.</p
     ><p
-    >You can also use the Web API to interface with all aspects of the command dispatcher. (See the <a href="../api/index.html"
-      >Rundeck API</a
-      >.)</p
+    >Jobs can be composed out of other jobs. Each job can be a step in another job sequence.</p
     ></div
   ><div id="resource-model"
   ><h3
@@ -129,15 +144,17 @@
       >Resource model</a
       ></h3
     ><p
-    >The command dispatcher works in conjunction with a resource model. A <em
+    >The <em
       >resource model</em
       > is a representation of hosts deployed in your network. A <em
       >Node</em
       > is a resource that is either a physical or virtual instance of a network accessible host.</p
     ><p
-    >Nodes have a number of basic properties but these properties can be extended to include arbitrary named key value pairs.</p
+    >Nodes have a number of basic attributes but these attributes can be extended to include arbitrary named key/value pairs. Rundeck node filters let you match Nodes based on a pattern like &quot;tags&quot; or a node attribute.</p
     ><p
-    >You can configure Rundeck to retrieve and store resource model data from multiple sources, and Rundeck defines several resource model document formats to facilitate the transfer of this information.</p
+    >A <em
+      >resource model source</em
+      > is a Rundeck plugin that produces a set of node definitions for a project. You can configure Rundeck to retrieve and store resource model data from multiple sources, and Rundeck defines several resource model document formats to facilitate the transfer of this information.</p
     ><p
     >Resource Model data sources can be local files on disk, or remotely accessible services. A <em
       >URL resource model source</em
@@ -159,7 +176,7 @@
     ><p
     >Rundeck enforces an <em
       >access control policy</em
-      > that grants certain privileges to groups of users. Every action executed through the Rundeck command dispatcher must meet the requirements of an access control policy definition.</p
+      > that grants certain privileges to groups of users. Every action executed through the Rundeck node executor must meet the requirements of an access control policy definition.</p
     ><p
     >Since Rundeck respects the policy definition, you can define role-based authorization to restrict some users to only a subset of actions. This enables a self-service type interface, where some users have access to only a limited set of executable actions.</p
     ><p
@@ -179,6 +196,16 @@
     ><p
     >Multiple projects can be maintained on the same Rundeck server. Projects are independent from one another, so you can use them to organize unrelated systems within a single Rundeck installation. This can be useful for managing different infrastructures.</p
     ></div
+  ><div id="api"
+  ><h3
+    ><a href="#TOC"
+      >API</a
+      ></h3
+    ><p
+    >You can also use the Web API to interface with all aspects of node and Job execution. (See the <a href="../api/index.html"
+      >Rundeck API</a
+      >.)</p
+    ></div
   ></div
 ><div id="installing-rundeck"
 ><h2
@@ -190,14 +217,15 @@
     >Administration - Installation</a
     > chapter.</p
   ><p
-  >The simplest way to install is using the Launcher jar. Simply download it, and place it into a directory that will be the <code
-    >RD_BASE</code
+  >The simplest way to install is using the Launcher jar.<br
+     />Simply download it, and place it into a directory that will be the <code
+    >RDECK_BASE</code
     > base directory.</p
   ><p
   >Start the Rundeck server by running the jar using java:</p
   ><pre
   ><code
-    >java -jar rundeck-launcher-1.4.1.jar
+    >java -jar rundeck-launcher-1.5.0.jar
 </code
     ></pre
   ></div
@@ -296,7 +324,7 @@ log4j:ERROR setFile(null,true) call failed. java.io.FileNotFoundException: /var/
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.5-SNAPSHOT)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.5)</a></li>
     </ul>
 </nav>
 <footer class="copy">
@@ -306,7 +334,7 @@ log4j:ERROR setFile(null,true) call failed. java.io.FileNotFoundException: /var/
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2013-01-11T14:54:33EST">2013-01-11T14:54:33EST</span>
+<span class="generated-date" title="2013-02-21T13:56:34EST">2013-02-21T13:56:34EST</span>
 
 </footer>
 </body>
