@@ -4,16 +4,17 @@ JAR=$1
 VERS=$2
 
 if [ -z "$JAR" -o -z "$VERS" ] ; then
-  echo "Usage: load.sh <path to launcher.jar> <version>"
+  echo "Usage: load.sh <path to docs.zip> <version>"
   exit 2
 fi
 git checkout -b docs$VERS
 
 mkdir temp
 pushd temp
-jar xvf $JAR docs
+echo unzip $JAR html
+unzip $JAR
 popd
-cp -r temp/docs/* .
+cp -r temp/html/* .
 rm -rf temp
 git add .
 cat <<END
