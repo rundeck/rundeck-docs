@@ -5,7 +5,7 @@ VERS=$2
 SKIPBRANCH=$3
 
 if [ -z "$JAR" -o -z "$VERS" ] ; then
-  echo "Usage: load.sh <path to launcher.jar> <version>"
+  echo "Usage: load.sh <path to docs.zip> <version>"
   exit 2
 fi
 if [ "--skip" != "${SKIPBRANCH}" ] ; then
@@ -14,10 +14,10 @@ fi
 
 mkdir temp
 pushd temp
-echo jar xvf $JAR pkgs/webapp/docs
-jar xvf $JAR pkgs/webapp/docs
+echo unzip $JAR html
+unzip $JAR
 popd
-cp -r temp/pkgs/webapp/docs/* .
+cp -r temp/html/* .
 rm -rf temp
 git add .
 cat <<END
