@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>rd-setup(1) | Version 1.5</title>
+  <title>rd-setup(1) | Version 1.5.1</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="Alex Honor" />
@@ -15,13 +15,13 @@
     <li class="item index grid_4 alpha">
     <a href="http://rundeck.org/index.html">
       <h1>Rundeck</h1>
-      <p class="rd_version">Open-Source Process Automation</p>
+      <p class="rd_version">Open-Source Workflow Automation</p>
       </a>
     </li>
     <li class="item about grid_2 selected">
       <a href="http://rundeck.org/about.html">
         <h1>About</h1>
-        <p>Docs, Screencasts</p>
+        <p>News, Videos, Docs</p>
       </a>
     </li>
     <li class="item help grid_2">
@@ -39,7 +39,7 @@
     <li class="item downloads grid_2 omega">
     <a href="http://rundeck.org/downloads.html">
       <h1>Download</h1>
-      <p class="rd_version">1.5</p>
+      <p class="rd_version">1.5.1</p>
       </a>
     </li>
 <div class="clear"></div>
@@ -58,7 +58,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../../index.html">Rundeck ドキュメント (1.5)</a></li>
+        <li><a href="../../index.html">Rundeck ドキュメント (1.5.1)</a></li>
     
         <li><a href="../index.html">Man Pages</a></li>
     </ul>
@@ -73,7 +73,7 @@
     </ul>
 </nav>
 <div id="docbody">
-<h1 class="title">rd-setup(1) | Version 1.5</h1>
+<h1 class="title">rd-setup(1) | Version 1.5.1</h1>
 <div id="TOC"
 ><ul
   ><li
@@ -111,102 +111,118 @@
     ></ul
   ></div
 >
-<h1 id="name"
-><a href="#TOC"
-  >NAME</a
-  ></h1
-><p
->rd-setup - Setup the Rundeck software after the distribution has been extracted into its installation directory.</p
-><h1 id="synopsis"
-><a href="#TOC"
-  >SYNOPSIS</a
-  ></h1
-><p
->rd-setup [-fv] -n nodename [-N hostname] [-s serverhostname] [ --key=value ]...</p
-><h1 id="description"
-><a href="#TOC"
-  >DESCRIPTION</a
-  ></h1
-><p
->The rd-setup command is used to setup the Rundeck software after the distribution has been extracted into its installation directory.</p
-><p
->During the first time installation or if the -f flag is set rd-setup will create a new instance of the framework and generate all the configuration files found in $RDECK_BASE/etc.</p
-><h1 id="options"
-><a href="#TOC"
-  >OPTIONS</a
-  ></h1
-><p
->-h : displays the usage information presented above.</p
-><p
->-v : run verbose.</p
-><p
->-f : Force re-generation of configuration files</p
-><p
->-n : The nodename</p
-><p
->-N : The hostname</p
-><p
->--key=value : Override the default values during the installation by specifying one or more --key=value combinations.</p
-><h1 id="environment-variables"
-><a href="#TOC"
-  >ENVIRONMENT VARIABLES</a
-  ></h1
-><p
->The following environment variables are assumed during the execution of rd-setup:</p
-><ul
-><li
+<div id="name"
+><h1
+  ><a href="#TOC"
+    >NAME</a
+    ></h1
   ><p
-    >JAVA_HOME :Java installation directory</p
-    ></li
+  >rd-setup - Setup the Rundeck software after the distribution has been extracted into its installation directory.</p
+  ></div
+><div id="synopsis"
+><h1
+  ><a href="#TOC"
+    >SYNOPSIS</a
+    ></h1
+  ><p
+  >rd-setup [-fv] -n nodename [-N hostname] [-s serverhostname] [ --key=value ]...</p
+  ></div
+><div id="description"
+><h1
+  ><a href="#TOC"
+    >DESCRIPTION</a
+    ></h1
+  ><p
+  >The rd-setup command is used to setup the Rundeck software after the distribution has been extracted into its installation directory.</p
+  ><p
+  >During the first time installation or if the -f flag is set rd-setup will create a new instance of the framework and generate all the configuration files found in $RDECK_BASE/etc.</p
+  ></div
+><div id="options"
+><h1
+  ><a href="#TOC"
+    >OPTIONS</a
+    ></h1
+  ><p
+  >-h : displays the usage information presented above.</p
+  ><p
+  >-v : run verbose.</p
+  ><p
+  >-f : Force re-generation of configuration files</p
+  ><p
+  >-n : The nodename</p
+  ><p
+  >-N : The hostname</p
+  ><p
+  >--key=value : Override the default values during the installation by specifying one or more --key=value combinations.</p
+  ></div
+><div id="environment-variables"
+><h1
+  ><a href="#TOC"
+    >ENVIRONMENT VARIABLES</a
+    ></h1
+  ><p
+  >The following environment variables are assumed during the execution of rd-setup:</p
+  ><ul
   ><li
+    ><p
+      >JAVA_HOME :Java installation directory</p
+      ></li
+    ><li
+    ><p
+      >RDECK_BASE : Rundeck framework instance directory</p
+      ></li
+    ></ul
+  ></div
+><div id="execution"
+><h1
+  ><a href="#TOC"
+    >EXECUTION</a
+    ></h1
   ><p
-    >RDECK_BASE : Rundeck framework instance directory</p
-    ></li
-  ></ul
-><h1 id="execution"
-><a href="#TOC"
-  >EXECUTION</a
-  ></h1
-><p
-><em
-  >Examples</em
-  ></p
-><p
->Execute the rd-setup command defining the hostname setting as &quot;adminhost&quot;:</p
-><pre
-><code
-  >rd-setup -n adminhost
-</code
-  ></pre
-><p
->Execute the rd-setup command defining the framework hostname as &quot;localhost&quot; and specifies the framework.ssh.keypath value</p
-><pre
-><code
-  >rd-setup -n localhost --framework.ssh.keypath=/path/to/keyfile
-</code
-  ></pre
-><h1 id="files"
-><a href="#TOC"
-  >FILES</a
-  ></h1
-><p
->The rd-setup command generates a working configuration from a set of template files found in: $RDECK_BASE/lib/templates/etc. Additionally, initial configuration default values are maintained in rd-defaults.properties but these can be overridden using --key=value flags.</p
-><h1 id="see-also"
-><a href="#TOC"
-  >SEE ALSO</a
-  ></h1
-><p
-><a href="rd-project.html"
+  ><em
+    >Examples</em
+    ></p
+  ><p
+  >Execute the rd-setup command defining the hostname setting as &quot;adminhost&quot;:</p
+  ><pre
   ><code
-    >rd-project</code
-    > (1)</a
-  >.</p
-><p
->The Rundeck source code and all documentation may be downloaded from <a href="https://github.com/dtolabs/rundeck/"
+    >rd-setup -n adminhost
+</code
+    ></pre
+  ><p
+  >Execute the rd-setup command defining the framework hostname as &quot;localhost&quot; and specifies the framework.ssh.keypath value</p
+  ><pre
   ><code
-    >https://github.com/dtolabs/rundeck/</code
-    ></a
-  >.</p
+    >rd-setup -n localhost --framework.ssh.keypath=/path/to/keyfile
+</code
+    ></pre
+  ></div
+><div id="files"
+><h1
+  ><a href="#TOC"
+    >FILES</a
+    ></h1
+  ><p
+  >The rd-setup command generates a working configuration from a set of template files found in: $RDECK_BASE/lib/templates/etc. Additionally, initial configuration default values are maintained in rd-defaults.properties but these can be overridden using --key=value flags.</p
+  ></div
+><div id="see-also"
+><h1
+  ><a href="#TOC"
+    >SEE ALSO</a
+    ></h1
+  ><p
+  ><a href="rd-project.html"
+    ><code
+      >rd-project</code
+      > (1)</a
+    >.</p
+  ><p
+  >The Rundeck source code and all documentation may be downloaded from <a href="https://github.com/dtolabs/rundeck/"
+    ><code
+      >https://github.com/dtolabs/rundeck/</code
+      ></a
+    >.</p
+  ></div
 >
 </div>
 
@@ -220,7 +236,7 @@
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../../index.html">Rundeck ドキュメント (1.5)</a></li>
+        <li><a href="../../index.html">Rundeck ドキュメント (1.5.1)</a></li>
     
         <li><a href="../index.html">Man Pages</a></li>
     </ul>
@@ -232,7 +248,7 @@
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2013-03-08T11:04:47PST">2013-03-08T11:04:47PST</span>
+<span class="generated-date" title="2013-05-01T20:00:19EDT">2013-05-01T20:00:19EDT</span>
   <script type="text/javascript">
   
 

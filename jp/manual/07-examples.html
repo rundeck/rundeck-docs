@@ -16,13 +16,13 @@
     <li class="item index grid_4 alpha">
     <a href="http://rundeck.org/index.html">
       <h1>Rundeck</h1>
-      <p class="rd_version">Open-Source Process Automation</p>
+      <p class="rd_version">Open-Source Workflow Automation</p>
       </a>
     </li>
     <li class="item about grid_2 selected">
       <a href="http://rundeck.org/about.html">
         <h1>About</h1>
-        <p>Docs, Screencasts</p>
+        <p>News, Videos, Docs</p>
       </a>
     </li>
     <li class="item help grid_2">
@@ -40,7 +40,7 @@
     <li class="item downloads grid_2 omega">
     <a href="http://rundeck.org/downloads.html">
       <h1>Download</h1>
-      <p class="rd_version">1.5</p>
+      <p class="rd_version">1.5.1</p>
       </a>
     </li>
 <div class="clear"></div>
@@ -59,7 +59,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../index.html">Rundeck ドキュメント (1.5)</a></li>
+        <li><a href="../index.html">Rundeck ドキュメント (1.5.1)</a></li>
     </ul>
 </nav>
 
@@ -144,56 +144,59 @@
 >
 <p
 >この章では、Rundeck を用いた様々なソリューションを表す実践例を説明します。出てくる例は、これまでの章で紹介した概念や機能を実践する際の助けとなることに焦点を当てています。抽象的な例を挙げるのではなく、オンラインアプリケーションサービスを経営する架空の組織 Acme Avils の状況に合わせた例を挙げていきます。</p
-><h2 id="acme-anvils"
-><a href="#TOC"
-  >Acme Anvils</a
-  ></h2
-><p
->Acme Anvils はオンラインで新品・中古の金敷き台 (anvils) を売っている架空のスタートアップです。会社の中には金敷き台を売るアプリケーションの開発とサポートに関わる 2 つのチームが存在します。まだ新しい会社なので、本番環境へのアクセスはしっかり管理されていません。どちらのチームにもソースコードの変更によってミスや障害を起こす可能性があります。シニアマネージャー達がチームに新しい機能のリリースを出来る限り頻繁にさせようと夢中になっているからです。残念ながら、これは別の問題を引き起こしていました：Acme Anvil のウェブサイトは、メモリを大量に喰い、偶発的にリスタートが起こっていたのです。</p
-><p
->リスタート処理には 2 つの方法があります: &quot;kill&quot; と &quot;normal&quot; です。&quot;kill&quot; でのリスタートには、アプリケーションが一切レスポンスしなくても良い時間が必要になります。&quot;normal&quot; でのリスタートには、十分な量のメモリを必要とします。</p
-><p
->緊急事態または急いでいる状況下で、開発者がリスタートの実行を行うのか、システムの管理者がリスタートの実行を行うのかは全く別物です。なぜならソフトウェアを書いている開発者は、アプリケーションの観点からリスタートの必要性について理解しており、一方それらの必要性を知らされてないシステム管理社はシステムの観点からリスタートについて理解しています。これがやり方の違いを生む、顧客に対して影響を及ぼす主原因でした。</p
-><p
->あるシステム管理者はアプリケーションをリスタートさせるよう深夜に電話がかかってくることにうんざりしていました。また開発と運用の知識の溝にイライラしていました。彼はもっと良いアプローチでやっていくために先導を取っていくことを決めました。</p
-><h2 id="rundeck-&#12398;&#12475;&#12483;&#12488;&#12450;&#12483;&#12503;"
-><a href="#TOC"
-  >Rundeck のセットアップ</a
-  ></h2
-><p
->管理者は本番環境のサーバーにアクセスするためのマシンを用意してそこに Rundeck をインストールすることにしました。</p
-><p
->アプリケーションサポートに関することを管理するためにプロジェクト名 &quot;anvils&quot; を作りました。</p
-><p
->管理者はシェルツール <a href="../manpages/man1/rd-project.html"
-  >rd-project</a
-  > を使ってプロジェクトを作成します。これは Rundeck GUI (<a href="rundeck-basics.html#rundeck+%E3%81%AE%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97"
-  >プロジェクトのセットアップ</a
-  >を参照)からでも可能です。Rundeck サーバーにログインし、以下のコマンドを実行します:</p
-><pre
-><code
-  >rd-project -p anvils -a create
+><div id="acme-anvils"
+><h2
+  ><a href="#TOC"
+    >Acme Anvils</a
+    ></h2
+  ><p
+  >Acme Anvils はオンラインで新品・中古の金敷き台 (anvils) を売っている架空のスタートアップです。会社の中には金敷き台を売るアプリケーションの開発とサポートに関わる 2 つのチームが存在します。まだ新しい会社なので、本番環境へのアクセスはしっかり管理されていません。どちらのチームにもソースコードの変更によってミスや障害を起こす可能性があります。シニアマネージャー達がチームに新しい機能のリリースを出来る限り頻繁にさせようと夢中になっているからです。残念ながら、これは別の問題を引き起こしていました：Acme Anvil のウェブサイトは、メモリを大量に喰い、偶発的にリスタートが起こっていたのです。</p
+  ><p
+  >リスタート処理には 2 つの方法があります: &quot;kill&quot; と &quot;normal&quot; です。&quot;kill&quot; でのリスタートには、アプリケーションが一切レスポンスしなくても良い時間が必要になります。&quot;normal&quot; でのリスタートには、十分な量のメモリを必要とします。</p
+  ><p
+  >緊急事態または急いでいる状況下で、開発者がリスタートの実行を行うのか、システムの管理者がリスタートの実行を行うのかは全く別物です。なぜならソフトウェアを書いている開発者は、アプリケーションの観点からリスタートの必要性について理解しており、一方それらの必要性を知らされてないシステム管理社はシステムの観点からリスタートについて理解しています。これがやり方の違いを生む、顧客に対して影響を及ぼす主原因でした。</p
+  ><p
+  >あるシステム管理者はアプリケーションをリスタートさせるよう深夜に電話がかかってくることにうんざりしていました。また開発と運用の知識の溝にイライラしていました。彼はもっと良いアプローチでやっていくために先導を取っていくことを決めました。</p
+  ></div
+><div id="rundeck-&#12398;&#12475;&#12483;&#12488;&#12450;&#12483;&#12503;"
+><h2
+  ><a href="#TOC"
+    >Rundeck のセットアップ</a
+    ></h2
+  ><p
+  >管理者は本番環境のサーバーにアクセスするためのマシンを用意してそこに Rundeck をインストールすることにしました。</p
+  ><p
+  >アプリケーションサポートに関することを管理するためにプロジェクト名 &quot;anvils&quot; を作りました。</p
+  ><p
+  >管理者はシェルツール <a href="../manpages/man1/rd-project.html"
+    >rd-project</a
+    > を使ってプロジェクトを作成します。これは Rundeck GUI (<a href="rundeck-basics.html#rundeck+%E3%81%AE%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97"
+    >プロジェクトのセットアップ</a
+    >を参照)からでも可能です。Rundeck サーバーにログインし、以下のコマンドを実行します:</p
+  ><pre
+  ><code
+    >rd-project -p anvils -a create
 </code
-  ></pre
-><p
->このコマンドにより &quot;anvils&quot; プロジェクトが Rundeck 上に作られ、そこには Rundeck サーバーに当たるノード情報のみが含まれています。本番環境に置かれたノード情報の追加についてはこれから説明します。(<a href="getting-started.html#%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%83%A2%E3%83%87%E3%83%AB"
-  >リソースモデル</a
-  > を参照)</p
-><p
->本番環境には anv1 から anv5 までの 5 つのノードが存在します。アプリケーションは 3 階層あります。ウェブ、アプリケーション、データベースのコンポーネントが 5 つのノードにまたがってインストールされています。</p
-><p
->さらに管理者はアプリケーションのコンポーネントをコントロールする SSH コマンドを実行するのに、それぞれ違ったログインユーザーを使うようルールを敷くことに決めます。ウェブコンポーネントには &quot;www&quot; というユーザー、アプリケーションとデータベースコンポーネントには &quot;anvils&quot; というユーザーを用います。</p
-><p
->このルールをきちんと管理するために、管理者は <a href="../manpages/man5/resource-v13.html"
-  >resource-v13(5) XML</a
-  > または <a href="../manpages/man5/resource-yaml-v13.html"
-  >resource-v13(5) YAML</a
-  > を使ったプロジェクトリソースモデルを準備します。下記の定義ファイルには、5 つのノードの定義がリストアップされています -- anv1, anv2, anv3, anv4, anv5</p
-><p
->File listing: resources.xml</p
-><pre
-><code
-  >&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+    ></pre
+  ><p
+  >このコマンドにより &quot;anvils&quot; プロジェクトが Rundeck 上に作られ、そこには Rundeck サーバーに当たるノード情報のみが含まれています。本番環境に置かれたノード情報の追加についてはこれから説明します。(<a href="getting-started.html#%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%83%A2%E3%83%87%E3%83%AB"
+    >リソースモデル</a
+    > を参照)</p
+  ><p
+  >本番環境には anv1 から anv5 までの 5 つのノードが存在します。アプリケーションは 3 階層あります。ウェブ、アプリケーション、データベースのコンポーネントが 5 つのノードにまたがってインストールされています。</p
+  ><p
+  >さらに管理者はアプリケーションのコンポーネントをコントロールする SSH コマンドを実行するのに、それぞれ違ったログインユーザーを使うようルールを敷くことに決めます。ウェブコンポーネントには &quot;www&quot; というユーザー、アプリケーションとデータベースコンポーネントには &quot;anvils&quot; というユーザーを用います。</p
+  ><p
+  >このルールをきちんと管理するために、管理者は <a href="../manpages/man5/resource-v13.html"
+    >resource-v13(5) XML</a
+    > または <a href="../manpages/man5/resource-yaml-v13.html"
+    >resource-v13(5) YAML</a
+    > を使ったプロジェクトリソースモデルを準備します。下記の定義ファイルには、5 つのノードの定義がリストアップされています -- anv1, anv2, anv3, anv4, anv5</p
+  ><p
+  >File listing: resources.xml</p
+  ><pre
+  ><code
+    >&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 
 &lt;project&gt;
   &lt;node name=&quot;anv1&quot; type=&quot;Node&quot;
@@ -213,261 +216,277 @@
      hostname=&quot;anv5.acme.com&quot;  username=&quot;anvils&quot; tags=&quot;db&quot;/&gt; 
 &lt;/project&gt;
 </code
-  ></pre
-><p
->XML コンテンツを見てみると、全体に渡って XML タグでホスト情報が表されています。各ノードの論理名は、<code
-  >name</code
-  > 属性に定義します。(例 name=&quot;anv1&quot;) <code
-  >hostname</code
-  > 属性で定義されたアドレス(例 hostname=&quot;anv1.acme.com&quot;) は <code
-  >username</code
-  > 属性にて指定されたログインユーザー(例 username=&quot;www&quot;)が SSH コマンドを実行する際に利用されます。<code
-  >tags</code
-  > 属性で定義された値は、ノードの役割/機能を表しています。(例 tags=&quot;web&quot; vs tags=&quot;app&quot;)</p
-><p
->管理者は彼が決めたパスにファイルを保存します。Rundeck にそのファイルを認識させるために、プロジェクトの設定ファイルを編集する必要があります、<code
-  >$RDECK_BASE/projects/anvils/etc/project.properties</code
-  > の <code
-  >project.resources.file</code
-  > を編集します:</p
-><pre
-><code
-  >project.resources.file = /etc/rundeck/projects/anvils/resources.xml
+    ></pre
+  ><p
+  >XML コンテンツを見てみると、全体に渡って XML タグでホスト情報が表されています。各ノードの論理名は、<code
+    >name</code
+    > 属性に定義します。(例 name=&quot;anv1&quot;) <code
+    >hostname</code
+    > 属性で定義されたアドレス(例 hostname=&quot;anv1.acme.com&quot;) は <code
+    >username</code
+    > 属性にて指定されたログインユーザー(例 username=&quot;www&quot;)が SSH コマンドを実行する際に利用されます。<code
+    >tags</code
+    > 属性で定義された値は、ノードの役割/機能を表しています。(例 tags=&quot;web&quot; vs tags=&quot;app&quot;)</p
+  ><p
+  >管理者は彼が決めたパスにファイルを保存します。Rundeck にそのファイルを認識させるために、プロジェクトの設定ファイルを編集する必要があります、<code
+    >$RDECK_BASE/projects/anvils/etc/project.properties</code
+    > の <code
+    >project.resources.file</code
+    > を編集します:</p
+  ><pre
+  ><code
+    >project.resources.file = /etc/rundeck/projects/anvils/resources.xml
 </code
-  ></pre
-><p
->リソースファイルを置きプロジェクト設定を更新すれば、管理者としてのリソースモデルの準備とディスパッチコマンドを実行する準備が整ったことになります。</p
-><p
->フィルタを開け、<code
-  >.*</code
-  > を名前フィールドに入力し、&quot;Filter&quot; を押して、anvils プロジェクトのすべてのノードをリストアップします。6 つのノードが出ているはずです。</p
-><div class="figure"
-><img src="../figures/fig0601.png" alt="Anvils resources"
-   /><p class="caption"
-  >Anvils resources</p
+    ></pre
+  ><p
+  >リソースファイルを置きプロジェクト設定を更新すれば、管理者としてのリソースモデルの準備とディスパッチコマンドを実行する準備が整ったことになります。</p
+  ><p
+  >フィルタを開け、<code
+    >.*</code
+    > を名前フィールドに入力し、&quot;Filter&quot; を押して、anvils プロジェクトのすべてのノードをリストアップします。6 つのノードが出ているはずです。</p
+  ><div class="figure"
+  ><img src="../figures/fig0601.png" alt="Anvils resources"
+     /><p class="caption"
+    >Anvils resources</p
+    ></div
   ></div
-><h2 id="&#12479;&#12464;&#20184;&#12369;&#12392;&#12467;&#12510;&#12531;&#12489;&#12487;&#12451;&#12473;&#12497;&#12483;&#12481;&#12531;&#12464;"
-><a href="#TOC"
-  >タグ付けとコマンドディスパッチング</a
-  ></h2
-><p
->アプリケーションの役割を表すタグを使うと、ターゲットとなるホスト名を一切ハードコーディングせずにコマンド実行が可能になります。<a href="../manpages/man1/dispatch.html"
-  >dipatch</a
-  > コマンドにて、指定したタグによりフィルタリングされたノードセットをリストアップできます:</p
-><p
->web ノードをリストアップするタグのキーワードを使います:</p
-><pre
-><code
-  >dispatch -p anvils -I tags=web
+><div id="&#12479;&#12464;&#20184;&#12369;&#12392;&#12467;&#12510;&#12531;&#12489;&#12487;&#12451;&#12473;&#12497;&#12483;&#12481;&#12531;&#12464;"
+><h2
+  ><a href="#TOC"
+    >タグ付けとコマンドディスパッチング</a
+    ></h2
+  ><p
+  >アプリケーションの役割を表すタグを使うと、ターゲットとなるホスト名を一切ハードコーディングせずにコマンド実行が可能になります。<a href="../manpages/man1/dispatch.html"
+    >dipatch</a
+    > コマンドにて、指定したタグによりフィルタリングされたノードセットをリストアップできます:</p
+  ><p
+  >web ノードをリストアップするタグのキーワードを使います:</p
+  ><pre
+  ><code
+    >dispatch -p anvils -I tags=web
 anv1 anv2
 </code
-  ></pre
-><p
->app ノードのリストアップ:</p
-><pre
-><code
-  >dispatch -p anvils -I tags=app
+    ></pre
+  ><p
+  >app ノードのリストアップ:</p
+  ><pre
+  ><code
+    >dispatch -p anvils -I tags=app
 anv3 anv4
 </code
-  ></pre
-><p
->db ノードのリストアップ:</p
-><pre
-><code
-  >dispatch -p anvils -I tags=db
+    ></pre
+  ><p
+  >db ノードのリストアップ:</p
+  ><pre
+  ><code
+    >dispatch -p anvils -I tags=db
 anv5
 </code
-  ></pre
-><p
->&quot;+&quot; (AND) 演算子を使って web と app ノードをリストアップします:</p
-><pre
-><code
-  >dispatch -p anvils -I tags=web+app
+    ></pre
+  ><p
+  >&quot;+&quot; (AND) 演算子を使って web と app ノードをリストアップします:</p
+  ><pre
+  ><code
+    >dispatch -p anvils -I tags=web+app
 anv1 anv2 anv3 anv4
 </code
-  ></pre
-><p
->web と app ノードを除きます</p
-><pre
-><code
-  >dispatch -p anvils -X tags=web+app
+    ></pre
+  ><p
+  >web と app ノードを除きます</p
+  ><pre
+  ><code
+    >dispatch -p anvils -X tags=web+app
 anv5
 </code
-  ></pre
-><p
->ノード名にワイルドカードを使って、全てのノードをリストアップします:</p
-><pre
-><code
-  >dispatch -p anvils -I '.*' 
+    ></pre
+  ><p
+  >ノード名にワイルドカードを使って、全てのノードをリストアップします:</p
+  ><pre
+  ><code
+    >dispatch -p anvils -I '.*' 
 anv1 anv2 anv3 anv4 anv5 
 </code
-  ></pre
-><p
->以下の図はグラフィカルコンソールでのフィルタリングの使用例です。</p
-><div class="figure"
-><img src="../figures/fig0602.png" alt="Anvils filtered list"
-   /><p class="caption"
-  >Anvils filtered list</p
+    ></pre
+  ><p
+  >以下の図はグラフィカルコンソールでのフィルタリングの使用例です。</p
+  ><div class="figure"
+  ><img src="../figures/fig0602.png" alt="Anvils filtered list"
+     /><p class="caption"
+    >Anvils filtered list</p
+    ></div
+  ><p
+  >タグによるフィルタリング機能によってホスト郡が抽象化され、管理者はゆるやかな分類を使ったスクリプトの処理について考えられます。新しいノードの追加も可能ですし、既に役割を与えられているホスト郡からその役割を外すことも可能です、そして、それぞれフィルタリング条件に紐づけられるため、各役割における処理に影響はありません。</p
+  ><p
+  >この簡単な分類の仕組みは、開発者と管理者に Anvils アプリケーションのノードについて話す際の共通用語となります。</p
   ></div
-><p
->タグによるフィルタリング機能によってホスト郡が抽象化され、管理者はゆるやかな分類を使ったスクリプトの処理について考えられます。新しいノードの追加も可能ですし、既に役割を与えられているホスト郡からその役割を外すことも可能です、そして、それぞれフィルタリング条件に紐づけられるため、各役割における処理に影響はありません。</p
-><p
->この簡単な分類の仕組みは、開発者と管理者に Anvils アプリケーションのノードについて話す際の共通用語となります。</p
-><h2 id="&#12472;&#12519;&#12502;"
-><a href="#TOC"
-  >ジョブ</a
-  ></h2
-><p
->ジョブは繰り返し実行する処理のライブラリをつくる便利な方法です。その性質上、保存されたジョブは処理をカプセル化する働きをします。ジョブは小さな、または大きなシェルスクリプトを呼ぶような 1 つのワークフローから、マルチステップのワークフローまで扱う事が出来ます。各ジョブを再利用可能な処理のブロックとして捉えると、より複雑な自動化を構築することができます。</p
-><p
->起動とシャットダウンの処理の管理用として既に 2 つのスクリプトセットが存在していました。管理者は、どちらのスクリプトの方が優れているかといったことを強要することよりも、ジョブワークフローによってどのようにスクリプトがカプセル化されるかを簡単に示すために骨組みを作ることに専念しました。このシンプルなフレームワークについてのデモを行った後、管理者はジョブの定義に両方のスクリプト合わせた一番いいものを入れるにはどうしたらいいか議論することができます。</p
-><p
->管理者は、骨組みとして実行しようとしていることと、与えられた引数をただ echo するだけのシンプルなプレースホルダースクリプトを作りました - start.sh と stop.sh - リスタートの処理を 2 つのステップで表現しています。</p
-><p
->スクリプト:</p
-><p
->File listing: start.sh</p
-><pre
-><code
-  >#!/bin/sh
+><div id="&#12472;&#12519;&#12502;"
+><h2
+  ><a href="#TOC"
+    >ジョブ</a
+    ></h2
+  ><p
+  >ジョブは繰り返し実行する処理のライブラリをつくる便利な方法です。その性質上、保存されたジョブは処理をカプセル化する働きをします。ジョブは小さな、または大きなシェルスクリプトを呼ぶような 1 つのワークフローから、マルチステップのワークフローまで扱う事が出来ます。各ジョブを再利用可能な処理のブロックとして捉えると、より複雑な自動化を構築することができます。</p
+  ><p
+  >起動とシャットダウンの処理の管理用として既に 2 つのスクリプトセットが存在していました。管理者は、どちらのスクリプトの方が優れているかといったことを強要することよりも、ジョブワークフローによってどのようにスクリプトがカプセル化されるかを簡単に示すために骨組みを作ることに専念しました。このシンプルなフレームワークについてのデモを行った後、管理者はジョブの定義に両方のスクリプト合わせた一番いいものを入れるにはどうしたらいいか議論することができます。</p
+  ><p
+  >管理者は、骨組みとして実行しようとしていることと、与えられた引数をただ echo するだけのシンプルなプレースホルダースクリプトを作りました - start.sh と stop.sh - リスタートの処理を 2 つのステップで表現しています。</p
+  ><p
+  >スクリプト:</p
+  ><p
+  >File listing: start.sh</p
+  ><pre
+  ><code
+    >#!/bin/sh
 # Usage: $0 
 echo Web started.
 </code
-  ></pre
-><p
->File listing: stop.sh</p
-><pre
-><code
-  >#!/bin/sh
+    ></pre
+  ><p
+  >File listing: stop.sh</p
+  ><pre
+  ><code
+    >#!/bin/sh
 # Usage: $0 [normal|kill]
 echo Web stopped with method: $1.
 </code
-  ></pre
-><p
->&quot;method&quot; オプションにて normal または kill のどちらの方法か指定できるようになっているため、ユーザーはスクリプトに引数を与える必要があります。</p
-><p
->リスタート処理はジョブワークフローとして定義されるため、リスタートの処理にそのまま対応するスクリプトは存在しません。</p
-><h3 id="&#12472;&#12519;&#12502;&#12398;&#27083;&#36896;"
-><a href="#TOC"
-  >ジョブの構造</a
-  ></h3
-><p
->リスタートスクリプトのアイデアを念頭に置き、次のステップでは、リスタートの処理を含んだジョブの定義をします。最終的なゴールは、リスタートの処理をひとつ提供し、再利用できるように各ステップ毎にジョブを分けた方がいいでしょう。</p
-><p
->管理者は以下のようなアプローチをイメージしています:</p
-><ul
-><li
-  >スタート: ウェブサービスをスタートさせるために start.sh スクリプトを実行する</li
-  ><li
-  >ストップ: ウェブサービスをストップさせるために stop.sh スクリプトを実行する</li
-  ><li
-  >リスタート: ストップジョブ、スタートジョブの順番で実行する</li
-  ></ul
-><p
->リスタートの処理が優先的であるため、大文字にして差別化しています。</p
-><p
->後々の管理を考えて将来出てくるジョブと既存のジョブが結合できるようジョブを全ての個々のステップ毎に定義しようとすると大変複雑になってきますが、これは後からでもできることです。どのように処理を個々のジョブに分解するかは、保守性と再利用性のバランスを考えて決めます。</p
-><h3 id="&#12472;&#12519;&#12502;&#12398;&#12464;&#12523;&#12540;&#12500;&#12531;&#12464;"
-><a href="#TOC"
-  >ジョブのグルーピング</a
-  ></h3
-><p
->絶対必要というわけではないですが、ジョブのグルーピングとその命名規則を決めておくと便利です。優れた命名規則は名前を思い出しやすく、探している処理を見つけやすくしてくれます。</p
-><p
->管理者はウェブサービスのリスタートに関連するジョブが置かれるトップレベルのグループを &quot;/anvils/web&quot; という名前にしました。</p
-><pre
-><code
-  >anvils/
+    ></pre
+  ><p
+  >&quot;method&quot; オプションにて normal または kill のどちらの方法か指定できるようになっているため、ユーザーはスクリプトに引数を与える必要があります。</p
+  ><p
+  >リスタート処理はジョブワークフローとして定義されるため、リスタートの処理にそのまま対応するスクリプトは存在しません。</p
+  ><div id="&#12472;&#12519;&#12502;&#12398;&#27083;&#36896;"
+  ><h3
+    ><a href="#TOC"
+      >ジョブの構造</a
+      ></h3
+    ><p
+    >リスタートスクリプトのアイデアを念頭に置き、次のステップでは、リスタートの処理を含んだジョブの定義をします。最終的なゴールは、リスタートの処理をひとつ提供し、再利用できるように各ステップ毎にジョブを分けた方がいいでしょう。</p
+    ><p
+    >管理者は以下のようなアプローチをイメージしています:</p
+    ><ul
+    ><li
+      >スタート: ウェブサービスをスタートさせるために start.sh スクリプトを実行する</li
+      ><li
+      >ストップ: ウェブサービスをストップさせるために stop.sh スクリプトを実行する</li
+      ><li
+      >リスタート: ストップジョブ、スタートジョブの順番で実行する</li
+      ></ul
+    ><p
+    >リスタートの処理が優先的であるため、大文字にして差別化しています。</p
+    ><p
+    >後々の管理を考えて将来出てくるジョブと既存のジョブが結合できるようジョブを全ての個々のステップ毎に定義しようとすると大変複雑になってきますが、これは後からでもできることです。どのように処理を個々のジョブに分解するかは、保守性と再利用性のバランスを考えて決めます。</p
+    ></div
+  ><div id="&#12472;&#12519;&#12502;&#12398;&#12464;&#12523;&#12540;&#12500;&#12531;&#12464;"
+  ><h3
+    ><a href="#TOC"
+      >ジョブのグルーピング</a
+      ></h3
+    ><p
+    >絶対必要というわけではないですが、ジョブのグルーピングとその命名規則を決めておくと便利です。優れた命名規則は名前を思い出しやすく、探している処理を見つけやすくしてくれます。</p
+    ><p
+    >管理者はウェブサービスのリスタートに関連するジョブが置かれるトップレベルのグループを &quot;/anvils/web&quot; という名前にしました。</p
+    ><pre
+    ><code
+      >anvils/
 `-- web/
     |-- Restart
     |-- start
     `-- stop
 </code
-  ></pre
-><p
->&quot;anvils&quot; プロジェクトを選択後、このジョブグループがあることがわかります。</p
-><div class="figure"
-><img src="../figures/fig0604.png" alt="Anvils job group"
-   /><p class="caption"
-  >Anvils job group</p
+      ></pre
+    ><p
+    >&quot;anvils&quot; プロジェクトを選択後、このジョブグループがあることがわかります。</p
+    ><div class="figure"
+    ><img src="../figures/fig0604.png" alt="Anvils job group"
+       /><p class="caption"
+      >Anvils job group</p
+      ></div
+    ></div
   ></div
-><h2 id="&#12472;&#12519;&#12502;&#12398;&#12458;&#12503;&#12471;&#12519;&#12531;"
-><a href="#TOC"
-  >ジョブのオプション</a
-  ></h2
-><p
->スクリプトにてリスタートの方法を指定するために、先ほどの 3 つのジョブにて &quot;method&quot; というオプションを作ります。それらのパラメーターが無い場合、管理者は kill と normal の両方のストップ方法についてリスタートジョブを用意することになります。</p
-><p
->ジョブオプションを定義するもう一つのメリットは、ジョブを実行しようとした際に選択肢のひとつとしてメニューに表示されることです。選択するとメニューから選択した値がスクリプトに渡されます。</p
-><h3 id="&#35377;&#21487;&#12373;&#12428;&#12383;&#20516;"
-><a href="#TOC"
-  >許可された値</a
-  ></h3
-><p
->定義できるオプションは、指定されたリスト内にあるものに限ります。これは安全にスクリプトを利用できるようパラメーターの選択肢を制限してジョブを実行するセーフガードの役割を担います。</p
-><p
->管理者はこれを利用して、&quot;normal&quot; または &quot;kill&quot; のみ選択可能になるよう &quot;method&quot; オプションにて制限をかけます。</p
-><p
->以下のスクリーンショットは、&quot;method&quot; オプションを編集しているところです。フォームにはオプションの説明とデフォルトの値だけでなく、Allowed Values (許可された値) と Restrictions (制限) の項目が入っています。</p
-><div class="figure"
-><img src="../figures/fig0605.png" alt="Option editor for method"
-   /><p class="caption"
-  >Option editor for method</p
+><div id="&#12472;&#12519;&#12502;&#12398;&#12458;&#12503;&#12471;&#12519;&#12531;"
+><h2
+  ><a href="#TOC"
+    >ジョブのオプション</a
+    ></h2
+  ><p
+  >スクリプトにてリスタートの方法を指定するために、先ほどの 3 つのジョブにて &quot;method&quot; というオプションを作ります。それらのパラメーターが無い場合、管理者は kill と normal の両方のストップ方法についてリスタートジョブを用意することになります。</p
+  ><p
+  >ジョブオプションを定義するもう一つのメリットは、ジョブを実行しようとした際に選択肢のひとつとしてメニューに表示されることです。選択するとメニューから選択した値がスクリプトに渡されます。</p
+  ><div id="&#35377;&#21487;&#12373;&#12428;&#12383;&#20516;"
+  ><h3
+    ><a href="#TOC"
+      >許可された値</a
+      ></h3
+    ><p
+    >定義できるオプションは、指定されたリスト内にあるものに限ります。これは安全にスクリプトを利用できるようパラメーターの選択肢を制限してジョブを実行するセーフガードの役割を担います。</p
+    ><p
+    >管理者はこれを利用して、&quot;normal&quot; または &quot;kill&quot; のみ選択可能になるよう &quot;method&quot; オプションにて制限をかけます。</p
+    ><p
+    >以下のスクリーンショットは、&quot;method&quot; オプションを編集しているところです。フォームにはオプションの説明とデフォルトの値だけでなく、Allowed Values (許可された値) と Restrictions (制限) の項目が入っています。</p
+    ><div class="figure"
+    ><img src="../figures/fig0605.png" alt="Option editor for method"
+       /><p class="caption"
+      >Option editor for method</p
+      ></div
+    ><p
+    >上述のように 許可された値はカンマ区切りのリストで指定できます、また &quot;remote URL&quot; を使った外部リソースからも可能です。</p
+    ><p
+    >&quot;Enforced from Allowed values (許可された値のみという強要)&quot; という制約を使ってオプションの選択肢を管理できます。&quot;true&quot; をセットしたとき、Rundeck UI は許可された値のみ選択可能なようポップメニューだけ表示されます。&quot;false&quot; をセットしたときは、テキストフィールドも表示されます。&quot;Match Regular Expression&quot; を使って入力をバリデートすることもできます。</p
+    ><p
+    >Rundeck がどのようにメニューの選択肢を表示するかのスクリーンショットが以下になります。</p
+    ><div class="figure"
+    ><img src="../figures/fig0606.png" alt="Option menu for method"
+       /><p class="caption"
+      >Option menu for method</p
+      ></div
+    ></div
+  ><div id="&#12458;&#12503;&#12471;&#12519;&#12531;&#12487;&#12540;&#12479;&#12408;&#12398;&#12473;&#12463;&#12522;&#12503;&#12488;&#12363;&#12425;&#12398;&#12450;&#12463;&#12475;&#12473;"
+  ><h3
+    ><a href="#TOC"
+      >オプションデータへのスクリプトからのアクセス</a
+      ></h3
+    ><p
+    >オプション値は引数または参照値としてスクリプトに渡す事ができ、スクリプト内で名前を付けたトークンとして利用できます。例えば、&quot;method&quot; オプションの値にアクセスするにはいくつかの方法があります:</p
+    ><p
+    >環境変数として参照する:</p
+    ><ul
+    ><li
+      >Bash: $CT_OPTION_METHOD</li
+      ></ul
+    ><p
+    ><code
+      >srciptargs</code
+      > タグを使ってスクリプトやコマンドの引数として値を渡します:</p
+    ><ul
+    ><li
+      >Commandline Arguments: ${option.method}</li
+      ></ul
+    ><p
+    >スクリプト内である名前が作られたトークンとして値が展開され、実行前に置き換わります:</p
+    ><ul
+    ><li
+      >Script Content: @option.method@</li
+      ></ul
+    ></div
   ></div
-><p
->上述のように 許可された値はカンマ区切りのリストで指定できます、また &quot;remote URL&quot; を使った外部リソースからも可能です。</p
-><p
->&quot;Enforced from Allowed values (許可された値のみという強要)&quot; という制約を使ってオプションの選択肢を管理できます。&quot;true&quot; をセットしたとき、Rundeck UI は許可された値のみ選択可能なようポップメニューだけ表示されます。&quot;false&quot; をセットしたときは、テキストフィールドも表示されます。&quot;Match Regular Expression&quot; を使って入力をバリデートすることもできます。</p
-><p
->Rundeck がどのようにメニューの選択肢を表示するかのスクリーンショットが以下になります。</p
-><div class="figure"
-><img src="../figures/fig0606.png" alt="Option menu for method"
-   /><p class="caption"
-  >Option menu for method</p
-  ></div
-><h3 id="&#12458;&#12503;&#12471;&#12519;&#12531;&#12487;&#12540;&#12479;&#12408;&#12398;&#12473;&#12463;&#12522;&#12503;&#12488;&#12363;&#12425;&#12398;&#12450;&#12463;&#12475;&#12473;"
-><a href="#TOC"
-  >オプションデータへのスクリプトからのアクセス</a
-  ></h3
-><p
->オプション値は引数または参照値としてスクリプトに渡す事ができ、スクリプト内で名前を付けたトークンとして利用できます。例えば、&quot;method&quot; オプションの値にアクセスするにはいくつかの方法があります:</p
-><p
->環境変数として参照する:</p
-><ul
-><li
-  >Bash: $CT_OPTION_METHOD</li
-  ></ul
-><p
-><code
-  >srciptargs</code
-  > タグを使ってスクリプトやコマンドの引数として値を渡します:</p
-><ul
-><li
-  >Commandline Arguments: ${option.method}</li
-  ></ul
-><p
->スクリプト内である名前が作られたトークンとして値が展開され、実行前に置き換わります:</p
-><ul
-><li
-  >Script Content: @option.method@</li
-  ></ul
-><h2 id="&#12472;&#12519;&#12502;&#12527;&#12540;&#12463;&#12501;&#12525;&#12540;&#12434;&#20316;&#12427;"
-><a href="#TOC"
-  >ジョブワークフローを作る</a
-  ></h2
-><p
->リスタート処理を管理するのに必要なスクリプトとオプションを理解した上で、ジョブの定義を作っていくのが最後のステップになります。</p
-><p
->Rundeck の GUI からもドキュメントフォーマット <a href="../manpages/man5/job-v20.html"
-  >job-v20(5)</a
-  >に従った XML 形式で各ジョブを定義できます。このドキュメントフォーマットには Rundeck GUI フォームの中での選択肢に相当するタグセットについても書かれています。</p
-><p
->以下にあるのはジョブについての XML の定義です。1 つの XML ファイルに 1 つ以上のジョブが定義できますが、どのように定義するかはあなたが決めるルール次第です。ファイルも好きなように名前を付けることが出来ます、必ずしもジョブ名やそのグループに相当する名前である必要はありません。</p
-><p
->File listing: stop.xml</p
-><pre
-><code
-  >&lt;joblist&gt;   
+><div id="&#12472;&#12519;&#12502;&#12527;&#12540;&#12463;&#12501;&#12525;&#12540;&#12434;&#20316;&#12427;"
+><h2
+  ><a href="#TOC"
+    >ジョブワークフローを作る</a
+    ></h2
+  ><p
+  >リスタート処理を管理するのに必要なスクリプトとオプションを理解した上で、ジョブの定義を作っていくのが最後のステップになります。</p
+  ><p
+  >Rundeck の GUI からもドキュメントフォーマット <a href="../manpages/man5/job-v20.html"
+    >job-v20(5)</a
+    >に従った XML 形式で各ジョブを定義できます。このドキュメントフォーマットには Rundeck GUI フォームの中での選択肢に相当するタグセットについても書かれています。</p
+  ><p
+  >以下にあるのはジョブについての XML の定義です。1 つの XML ファイルに 1 つ以上のジョブが定義できますが、どのように定義するかはあなたが決めるルール次第です。ファイルも好きなように名前を付けることが出来ます、必ずしもジョブ名やそのグループに相当する名前である必要はありません。</p
+  ><p
+  >File listing: stop.xml</p
+  ><pre
+  ><code
+    >&lt;joblist&gt;   
     &lt;job&gt; 
        &lt;name&gt;stop&lt;/name&gt;  
        &lt;description&gt;the web stop procedure&lt;/description&gt;  
@@ -500,18 +519,18 @@ echo Web stopped with method: $1.]]&gt;&lt;/script&gt;
      &lt;/job&gt;
 &lt;/joblist&gt;
 </code
-  ></pre
-><p
->/anvils/web/stop というジョブを定義します、これは &quot;web&quot; というタグが付いたノードに対してシェルスクリプトを実行します。<code
-  >scripttags</code
-  > を使ってシェルスクリプトにジョブの実行フォームから選択された値を含んだ引数 <code
-  >${option.method}</code
-  > をひとつ渡します。</p
-><p
->File listing: start.xml</p
-><pre
-><code
-  >&lt;joblist&gt;   
+    ></pre
+  ><p
+  >/anvils/web/stop というジョブを定義します、これは &quot;web&quot; というタグが付いたノードに対してシェルスクリプトを実行します。<code
+    >scripttags</code
+    > を使ってシェルスクリプトにジョブの実行フォームから選択された値を含んだ引数 <code
+    >${option.method}</code
+    > をひとつ渡します。</p
+  ><p
+  >File listing: start.xml</p
+  ><pre
+  ><code
+    >&lt;joblist&gt;   
    &lt;job&gt; 
      &lt;name&gt;start&lt;/name&gt;  
      &lt;description&gt;the web start procedure&lt;/description&gt;  
@@ -538,14 +557,14 @@ echo Web stopped with method: $1.]]&gt;&lt;/script&gt;
   &lt;/job&gt;
 &lt;/joblist&gt;
 </code
-  ></pre
-><p
->/anvils/web/start というジョブを定義します、これは &quot;web&quot; というタグが付いたノードに対してシェルスクリプトを実行します。</p
-><p
->File listing: restart.xml</p
-><pre
-><code
-  >&lt;joblist&gt;   
+    ></pre
+  ><p
+  >/anvils/web/start というジョブを定義します、これは &quot;web&quot; というタグが付いたノードに対してシェルスクリプトを実行します。</p
+  ><p
+  >File listing: restart.xml</p
+  ><pre
+  ><code
+    >&lt;joblist&gt;   
    &lt;job&gt; 
      &lt;name&gt;Restart&lt;/name&gt;  
      &lt;description&gt;restart the web server&lt;/description&gt;  
@@ -572,173 +591,272 @@ echo Web stopped with method: $1.]]&gt;&lt;/script&gt;
    &lt;/job&gt;   
 &lt;/joblist&gt;
 </code
-  ></pre
-><p
->/anvils/web/Restart というジョブを定義します、これは <code
-  >jobref</code
-  > タグを用いて連続するジョブ郡を実行します</p
-><p
->今回は <code
-  >&lt;nodefilters&gt;</code
-  > または <code
-  >&lt;dispatch&gt;</code
-  > の項目を定義していないことに注意してください、今回はこの連続実行をサーバー上で<strong
-  >一度だけ</strong
-  >しか行わないからです。ジョブリファレンスはそれぞれ 1 回呼ばれ、&quot;start&quot; と &quot;stop&quot; ジョブはそれぞれ定義されているノードに対してディスパッチされます。</p
-><p
->XML の定義ファイルを Rundeck サーバーに保存すると、<a href="../manpages/man1/rd-jobs.html"
-  >rd-jobs</a
-  > コマンドを用いてそれらを読み込む事ができます。</p
-><p
-><code
-  >rd-jobs</code
-  > を実行して各ジョブの定義ファイルからコマンドを読み込みます:</p
-><pre
-><code
-  >rd-jobs load -f start.xml
+    ></pre
+  ><p
+  >/anvils/web/Restart というジョブを定義します、これは <code
+    >jobref</code
+    > タグを用いて連続するジョブ郡を実行します</p
+  ><p
+  >今回は <code
+    >&lt;nodefilters&gt;</code
+    > または <code
+    >&lt;dispatch&gt;</code
+    > の項目を定義していないことに注意してください、今回はこの連続実行をサーバー上で<strong
+    >一度だけ</strong
+    >しか行わないからです。ジョブリファレンスはそれぞれ 1 回呼ばれ、&quot;start&quot; と &quot;stop&quot; ジョブはそれぞれ定義されているノードに対してディスパッチされます。</p
+  ><p
+  >XML の定義ファイルを Rundeck サーバーに保存すると、<a href="../manpages/man1/rd-jobs.html"
+    >rd-jobs</a
+    > コマンドを用いてそれらを読み込む事ができます。</p
+  ><p
+  ><code
+    >rd-jobs</code
+    > を実行して各ジョブの定義ファイルからコマンドを読み込みます:</p
+  ><pre
+  ><code
+    >rd-jobs load -f start.xml
 rd-jobs load -f stop.xml
 rd-jobs load -f restart.xml
 </code
-  ></pre
-><p
-><code
-  >rd-jobs list</code
-  > コマンドは Rundeck に定義済みのジョブのリストを出力するよう問い合わせます:</p
-><pre
-><code
-  >rd-jobs list -p anvils
+    ></pre
+  ><p
+  ><code
+    >rd-jobs list</code
+    > コマンドは Rundeck に定義済みのジョブのリストを出力するよう問い合わせます:</p
+  ><pre
+  ><code
+    >rd-jobs list -p anvils
 Found 3 jobs:
 - Restart - 'the web restart procedure'
 - start - 'the web start procedure'
 - stop - 'the web stop procedure'
 </code
-  ></pre
-><p
->もちろん、これらのジョブは Rundeck のグラフィカルコンソールの Jobs ページからも見る事ができます。ジョブ名 &quot;Restart&quot; の上にホバリングオーバーしてジョブの詳細が表示されます。</p
-><div class="figure"
-><img src="../figures/fig0607.png" alt="Anvils restart jobs"
-   /><p class="caption"
-  >Anvils restart jobs</p
+    ></pre
+  ><p
+  >もちろん、これらのジョブは Rundeck のグラフィカルコンソールの Jobs ページからも見る事ができます。ジョブ名 &quot;Restart&quot; の上にホバリングオーバーしてジョブの詳細が表示されます。</p
+  ><div class="figure"
+  ><img src="../figures/fig0607.png" alt="Anvils restart jobs"
+     /><p class="caption"
+    >Anvils restart jobs</p
+    ></div
+  ><p
+  >ここまでで、各ジョブ(ストップとスタート)を呼ぶワークフローとして &quot;Restart&quot; ジョブの組み立て方を理解したことでしょう。&quot;Restart&quot; ジョブは <code
+    >-method</code
+    > オプションの値をより低レベルのストップジョブに渡します。</p
   ></div
-><p
->ここまでで、各ジョブ(ストップとスタート)を呼ぶワークフローとして &quot;Restart&quot; ジョブの組み立て方を理解したことでしょう。&quot;Restart&quot; ジョブは <code
-  >-method</code
-  > オプションの値をより低レベルのストップジョブに渡します。</p
-><h2 id="&#12472;&#12519;&#12502;&#12434;&#23455;&#34892;&#12377;&#12427;"
-><a href="#TOC"
-  >ジョブを実行する</a
-  ></h2
-><p
->ジョブは Rundeck のグラフィカルコンソールの &quot;Jobs&quot; ページから実行できます。ここから、3 つの保存済みジョブが表示される &quot;Anvils/web&quot; ジョブグループまでナビゲートします。</p
-><p
->&quot;Run&quot; ボタンをクリックしてジョブをリスタートさせます。するとオプションを選択するページが表示されます。&quot;method&quot; オプションについてのメニューが 2 つの選択肢 &quot;normal&quot; と &quot;kill&quot; を表示しています。他の選択肢や自由に入力できるテキストフィールドは利用できません、&quot;method&quot; オプションが選択肢を限定するように定義されているからです。</p
-><div class="figure"
-><img src="../figures/fig0608.png" alt="Restart run page"
-   /><p class="caption"
-  >Restart run page</p
+><div id="&#12472;&#12519;&#12502;&#12434;&#23455;&#34892;&#12377;&#12427;"
+><h2
+  ><a href="#TOC"
+    >ジョブを実行する</a
+    ></h2
+  ><p
+  >ジョブは Rundeck のグラフィカルコンソールの &quot;Jobs&quot; ページから実行できます。ここから、3 つの保存済みジョブが表示される &quot;Anvils/web&quot; ジョブグループまでナビゲートします。</p
+  ><p
+  >&quot;Run&quot; ボタンをクリックしてジョブをリスタートさせます。するとオプションを選択するページが表示されます。&quot;method&quot; オプションについてのメニューが 2 つの選択肢 &quot;normal&quot; と &quot;kill&quot; を表示しています。他の選択肢や自由に入力できるテキストフィールドは利用できません、&quot;method&quot; オプションが選択肢を限定するように定義されているからです。</p
+  ><div class="figure"
+  ><img src="../figures/fig0608.png" alt="Restart run page"
+     /><p class="caption"
+    >Restart run page</p
+    ></div
+  ><p
+  >シェルツール <a href="../manpages/man1/run.html"
+    >run</a
+    > を使ってコマンドラインからもジョブを起動することができます。&quot;-j&quot; パラメーターを使ってジョブグループとジョブ名を指定してください。ジョブがサポートするあらゆるオプションは &quot;--&quot; パラメーターの後に指定します。(&quot;-p&quot; パラメーターはプロジェクトの指定に用います、しかし利用可能なプロジェクトが 1 つしか無い場合は指定しなくてもよいです。)</p
+  ><p
+  >&quot;normal&quot; メソッドを指定してリスタートジョブを実行します:</p
+  ><pre
+  ><code
+    >run -j &quot;anvils/web/Restart&quot; -p anvils -- -method normal
+</code
+    ></pre
+  ><p
+  >&quot;kill&quot; メソッドを指定してリスタートジョブを実行します:</p
+  ><pre
+  ><code
+    >run -j &quot;anvils/web/Restart&quot; -p anvils -- -method kill
+</code
+    ></pre
   ></div
-><p
->シェルツール <a href="../manpages/man1/run.html"
-  >run</a
-  > を使ってコマンドラインからもジョブを起動することができます。&quot;-j&quot; パラメーターを使ってジョブグループとジョブ名を指定してください。ジョブがサポートするあらゆるオプションは &quot;--&quot; パラメーターの後に指定します。(&quot;-p&quot; パラメーターはプロジェクトの指定に用います、しかし利用可能なプロジェクトが 1 つしか無い場合は指定しなくてもよいです。)</p
-><p
->&quot;normal&quot; メソッドを指定してリスタートジョブを実行します:</p
-><pre
-><code
-  >run -j &quot;anvils/web/Restart&quot; -p anvils -- -method normal
+><div id="&#12472;&#12519;&#12502;&#12398;&#12450;&#12463;&#12475;&#12473;&#12467;&#12531;&#12488;&#12525;&#12540;&#12523;"
+><h2
+  ><a href="#TOC"
+    >ジョブのアクセスコントロール</a
+    ></h2
+  ><p
+  >ジョブの編集または実行へのアクセス管理は、ACL ポリシードキュメントフォーマット（<a href="../manpages/man5/aclpolicy-v10.html"
+    >aclpolicy-v10(5)</a
+    >） を使って定義できます。このファイルは、どのユーザーグループがどんなアクションが行えるのかを記述したポリシー要素で構成されています。この詳細は管理者向けガイドにおける<a href="../administration/authorization.html"
+    >権限の許可(Authorization)</a
+    > の章に載っています。</p
+  ><p
+  >管理者は 2 つのアクセスレベルを定義した ACL ポリシーを使いたいと思っています。最初のレベルはジョブをただ実行することだけが許されます。2 つ目のレベルは、管理者作業とジョブの定義を編集できます。</p
+  ><p
+  >ポリシー機能は、グループまたは利用パターンごとのアクセス管理情報をひとつまたは複数のポリシーファイルにまとめることができます。普通にインストールした Rundeck には 2 つのユーザーグループが定義されています: &quot;admin&quot; と &quot;user&quot; です。そして &quot;admin&quot; グループについてポリシーが作られています。</p
+  ><p
+  >Acme 社の管理者は、&quot;user&quot; グループに入っている人たちが &quot;anvils&quot; と &quot;anvlis/web&quot; ジョブグループの実行のみ許可されるようなポリシーを 1 つ作る事に決めました。私たちは Rundeck を普通どおりインストールしたときに入っている &quot;user&quot; ログイングループを利用する事が出来ます。</p
+  ><p
+  >&quot;user&quot; グループに対してのポリシーファイルを作る方法:</p
+  ><pre
+  ><code
+    >cp $RDECK_BASE/etc/admin.aclpolicy $RDECK_BASE/etc/user.aclpolicy
 </code
-  ></pre
-><p
->&quot;kill&quot; メソッドを指定してリスタートジョブを実行します:</p
-><pre
-><code
-  >run -j &quot;anvils/web/Restart&quot; -p anvils -- -method kill
+    ></pre
+  ><p
+  >以下の例にあるように <code
+    >&lt;command&gt;</code
+    > と <code
+    >&lt;group&gt;</code
+    > 要素を編集します。workflow_read と workflow_run アクションのみ許可されていることがわかります。</p
+  ><pre class="sourceCode xml"
+  ><code
+    ><span class="Normal NormalText"
+      >$ cat $RDECK_BASE/etc/user.aclpolicy</span
+      ><br
+       /><span class="Keyword Element"
+      >&lt;policies&gt;</span
+      ><br
+       /><span class="Normal NormalText"
+      >  </span
+      ><span class="Keyword Element"
+      >&lt;policy</span
+      ><span class="Others Attribute"
+      > description=</span
+      ><span class="String Value"
+      >&quot;User group access policy.&quot;</span
+      ><span class="Keyword Element"
+      >&gt;</span
+      ><br
+       /><span class="Normal NormalText"
+      >    </span
+      ><span class="Keyword Element"
+      >&lt;context</span
+      ><span class="Others Attribute"
+      > project=</span
+      ><span class="String Value"
+      >&quot;*&quot;</span
+      ><span class="Keyword Element"
+      >&gt;</span
+      ><br
+       /><span class="Normal NormalText"
+      >      </span
+      ><span class="Keyword Element"
+      >&lt;command</span
+      ><span class="Others Attribute"
+      > group=</span
+      ><span class="String Value"
+      >&quot;anvils&quot;</span
+      ><span class="Others Attribute"
+      > job=</span
+      ><span class="String Value"
+      >&quot;*&quot;</span
+      ><span class="Others Attribute"
+      > actions=</span
+      ><span class="String Value"
+      >&quot;workflow_read,workflow_run&quot;</span
+      ><span class="Keyword Element"
+      >/&gt;</span
+      ><br
+       /><span class="Normal NormalText"
+      >      </span
+      ><span class="Keyword Element"
+      >&lt;command</span
+      ><span class="Others Attribute"
+      > group=</span
+      ><span class="String Value"
+      >&quot;anvils/web&quot;</span
+      ><span class="Others Attribute"
+      > job=</span
+      ><span class="String Value"
+      >&quot;*&quot;</span
+      ><span class="Others Attribute"
+      > actions=</span
+      ><span class="String Value"
+      >&quot;workflow_read,workflow_run&quot;</span
+      ><span class="Keyword Element"
+      >/&gt;</span
+      ><br
+       /><span class="Normal NormalText"
+      >    </span
+      ><span class="Keyword Element"
+      >&lt;/context&gt;</span
+      ><br
+       /><span class="Normal NormalText"
+      >    </span
+      ><span class="Keyword Element"
+      >&lt;by&gt;</span
+      ><br
+       /><span class="Normal NormalText"
+      >      </span
+      ><span class="Keyword Element"
+      >&lt;group</span
+      ><span class="Others Attribute"
+      > name=</span
+      ><span class="String Value"
+      >&quot;user&quot;</span
+      ><span class="Keyword Element"
+      >/&gt;</span
+      ><br
+       /><span class="Normal NormalText"
+      >    </span
+      ><span class="Keyword Element"
+      >&lt;/by&gt;</span
+      ><br
+       /><span class="Normal NormalText"
+      >  </span
+      ><span class="Keyword Element"
+      >&lt;/policy&gt;</span
+      ><br
+       /><span class="Keyword Element"
+      >&lt;/policies&gt;</span
+      ><br
+       /></code
+    ></pre
+  ><p
+  >新しいポリシーファイルを読み込ませるために Rundeck をリスタートします。（<a href="../administration/startup-and-shutdown.html"
+    >管理者向けガイド - 起動とシャットダウン</a
+    > を参照してください）</p
+  ><pre
+  ><code
+    >rundeckd restart
 </code
-  ></pre
-><h2 id="&#12472;&#12519;&#12502;&#12398;&#12450;&#12463;&#12475;&#12473;&#12467;&#12531;&#12488;&#12525;&#12540;&#12523;"
-><a href="#TOC"
-  >ジョブのアクセスコントロール</a
-  ></h2
-><p
->ジョブの編集または実行へのアクセス管理は、ACL ポリシードキュメントフォーマット（<a href="../manpages/man5/aclpolicy-v10.html"
-  >aclpolicy-v10(5)</a
-  >） を使って定義できます。このファイルは、どのユーザーグループがどんなアクションが行えるのかを記述したポリシー要素で構成されています。この詳細は管理者向けガイドにおける<a href="../administration/authorization.html"
-  >権限の許可(Authorization)</a
-  > の章に載っています。</p
-><p
->管理者は 2 つのアクセスレベルを定義した ACL ポリシーを使いたいと思っています。最初のレベルはジョブをただ実行することだけが許されます。2 つ目のレベルは、管理者作業とジョブの定義を編集できます。</p
-><p
->ポリシー機能は、グループまたは利用パターンごとのアクセス管理情報をひとつまたは複数のポリシーファイルにまとめることができます。普通にインストールした Rundeck には 2 つのユーザーグループが定義されています: &quot;admin&quot; と &quot;user&quot; です。そして &quot;admin&quot; グループについてポリシーが作られています。</p
-><p
->Acme 社の管理者は、&quot;user&quot; グループに入っている人たちが &quot;anvils&quot; と &quot;anvlis/web&quot; ジョブグループの実行のみ許可されるようなポリシーを 1 つ作る事に決めました。私たちは Rundeck を普通どおりインストールしたときに入っている &quot;user&quot; ログイングループを利用する事が出来ます。</p
-><p
->&quot;user&quot; グループに対してのポリシーファイルを作る方法:</p
-><pre
-><code
-  >cp $RDECK_BASE/etc/admin.aclpolicy $RDECK_BASE/etc/user.aclpolicy
-</code
-  ></pre
-><p
->以下の例にあるように <code
-  >&lt;command&gt;</code
-  > と <code
-  >&lt;group&gt;</code
-  > 要素を編集します。workflow_read と workflow_run アクションのみ許可されていることがわかります。</p
-><pre class="xml"
-><code
-  >$ cat $RDECK_BASE/etc/user.aclpolicy
-&lt;policies&gt;
-  &lt;policy description=&quot;User group access policy.&quot;&gt;
-    &lt;context project=&quot;*&quot;&gt;
-      &lt;command group=&quot;anvils&quot; job=&quot;*&quot; actions=&quot;workflow_read,workflow_run&quot;/&gt;
-      &lt;command group=&quot;anvils/web&quot; job=&quot;*&quot; actions=&quot;workflow_read,workflow_run&quot;/&gt;
-    &lt;/context&gt;
-    &lt;by&gt;
-      &lt;group name=&quot;user&quot;/&gt;
-    &lt;/by&gt;
-  &lt;/policy&gt;
-&lt;/policies&gt;
-</code
-  ></pre
-><p
->新しいポリシーファイルを読み込ませるために Rundeck をリスタートします。（<a href="../administration/startup-and-shutdown.html"
-  >管理者向けガイド - 起動とシャットダウン</a
-  > を参照してください）</p
-><pre
-><code
-  >rundeckd restart
-</code
-  ></pre
-><p
->Rundeck ウェブアプリケーションを起動して、&quot;user&quot; ユーザーとしてログインします (パスワードは多分 &quot;user&quot; )。起動すると Jobs ページに &quot;anvils&quot; グループだけ表示されています。&quot;user&quot; ユーザーは &quot;/anvils&quot; グループ以外のジョブへのアクセス権限はありません。</p
-><p
->&quot;admin&quot; としてログインすると表示される &quot;New Job&quot; ボタンがないことに気付きます。ジョブの作成権限は &quot;user&quot; には付与されていません。また、リストアップされたジョブについてのボタンバーにジョブの編集や削除アイコンが付いていないことにも気付きます。<code
-  >user.aclpolicy</code
-  > ファイルにて workflow_read と workflow_actions のみ許可されています。</p
-><h2 id="&#12522;&#12477;&#12540;&#12473;&#12514;&#12487;&#12523;&#12477;&#12540;&#12473;&#12398;&#20363;"
-><a href="#TOC"
-  >リソースモデルソースの例</a
-  ></h2
-><p
-><a href="../administration/node-resource-sources.html#%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%83%A2%E3%83%87%E3%83%AB%E3%82%BD%E3%83%BC%E3%82%B9"
-  >管理者向けガイド - ノードリソースソース - リソースモデルソース</a
-  > を参照してください。</p
-><h2 id="&#12522;&#12477;&#12540;&#12473;&#12456;&#12487;&#12451;&#12479;&#12398;&#20363;"
-><a href="#TOC"
-  >リソースエディタの例</a
-  ></h2
-><p
-><a href="../administration/node-resource-sources.html#%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%A8%E3%83%87%E3%82%A3%E3%82%BF"
-  >管理者向けガイド- ノードリソースソース - リソースエディタ</a
-  > を参照してください。</p
-><h2 id="&#12458;&#12503;&#12471;&#12519;&#12531;&#12514;&#12487;&#12523;&#12503;&#12525;&#12496;&#12452;&#12480;&#12540;&#12398;&#20363;"
-><a href="#TOC"
-  >オプションモデルプロバイダーの例</a
-  ></h2
-><p
-><a href="http://rundeck.org/docs/manual/job-options.html#%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%A2%E3%83%87%E3%83%AB%E3%83%97%E3%83%AD%E3%83%90%E3%82%A4%E3%83%80"
-  >ジョブオプション - オプションモデルプロバイダ</a
-  > を参照してください。</p
+    ></pre
+  ><p
+  >Rundeck ウェブアプリケーションを起動して、&quot;user&quot; ユーザーとしてログインします (パスワードは多分 &quot;user&quot; )。起動すると Jobs ページに &quot;anvils&quot; グループだけ表示されています。&quot;user&quot; ユーザーは &quot;/anvils&quot; グループ以外のジョブへのアクセス権限はありません。</p
+  ><p
+  >&quot;admin&quot; としてログインすると表示される &quot;New Job&quot; ボタンがないことに気付きます。ジョブの作成権限は &quot;user&quot; には付与されていません。また、リストアップされたジョブについてのボタンバーにジョブの編集や削除アイコンが付いていないことにも気付きます。<code
+    >user.aclpolicy</code
+    > ファイルにて workflow_read と workflow_actions のみ許可されています。</p
+  ></div
+><div id="&#12522;&#12477;&#12540;&#12473;&#12514;&#12487;&#12523;&#12477;&#12540;&#12473;&#12398;&#20363;"
+><h2
+  ><a href="#TOC"
+    >リソースモデルソースの例</a
+    ></h2
+  ><p
+  ><a href="../administration/node-resource-sources.html#%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%83%A2%E3%83%87%E3%83%AB%E3%82%BD%E3%83%BC%E3%82%B9"
+    >管理者向けガイド - ノードリソースソース - リソースモデルソース</a
+    > を参照してください。</p
+  ></div
+><div id="&#12522;&#12477;&#12540;&#12473;&#12456;&#12487;&#12451;&#12479;&#12398;&#20363;"
+><h2
+  ><a href="#TOC"
+    >リソースエディタの例</a
+    ></h2
+  ><p
+  ><a href="../administration/node-resource-sources.html#%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%A8%E3%83%87%E3%82%A3%E3%82%BF"
+    >管理者向けガイド- ノードリソースソース - リソースエディタ</a
+    > を参照してください。</p
+  ></div
+><div id="&#12458;&#12503;&#12471;&#12519;&#12531;&#12514;&#12487;&#12523;&#12503;&#12525;&#12496;&#12452;&#12480;&#12540;&#12398;&#20363;"
+><h2
+  ><a href="#TOC"
+    >オプションモデルプロバイダーの例</a
+    ></h2
+  ><p
+  ><a href="http://rundeck.org/docs/manual/job-options.html#%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%A2%E3%83%87%E3%83%AB%E3%83%97%E3%83%AD%E3%83%90%E3%82%A4%E3%83%80"
+    >ジョブオプション - オプションモデルプロバイダ</a
+    > を参照してください。</p
+  ></div
 >
 </div>
 
@@ -752,7 +870,7 @@ Found 3 jobs:
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../index.html">Rundeck ドキュメント (1.5)</a></li>
+        <li><a href="../index.html">Rundeck ドキュメント (1.5.1)</a></li>
     </ul>
 </nav>
 <footer class="copy">
@@ -762,7 +880,7 @@ Found 3 jobs:
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2013-03-08T11:04:47PST">2013-03-08T11:04:47PST</span>
+<span class="generated-date" title="2013-05-01T20:00:19EDT">2013-05-01T20:00:19EDT</span>
   <script type="text/javascript">
   
 

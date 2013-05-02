@@ -13,13 +13,13 @@
     <li class="item index grid_4 alpha">
     <a href="http://rundeck.org/index.html">
       <h1>Rundeck</h1>
-      <p class="rd_version">Open-Source Process Automation</p>
+      <p class="rd_version">Open-Source Workflow Automation</p>
       </a>
     </li>
     <li class="item about grid_2 selected">
       <a href="http://rundeck.org/about.html">
         <h1>About</h1>
-        <p>Docs, Screencasts</p>
+        <p>News, Videos, Docs</p>
       </a>
     </li>
     <li class="item help grid_2">
@@ -37,7 +37,7 @@
     <li class="item downloads grid_2 omega">
     <a href="http://rundeck.org/downloads.html">
       <h1>Download</h1>
-      <p class="rd_version">1.5</p>
+      <p class="rd_version">1.5.1</p>
       </a>
     </li>
 <div class="clear"></div>
@@ -56,7 +56,7 @@
 
 <nav class="breadcrumb top">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.5)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.5.1)</a></li>
     </ul>
 </nav>
 
@@ -96,78 +96,84 @@
   >rundeckd [start|stop|restart|condrestart|status]
 </code
   ></pre
-><h3 id="rpm"
-><a href="#TOC"
-  >RPM</a
-  ></h3
-><p
->The RPM installation includes the placement of the boot control script that will automatically start Rundeck when the system boots.</p
-><p
->The script is located here: <code
-  >/etc/init.d/rundeckd</code
-  ></p
-><p
-><em
-  >Startup</em
-  ></p
-><pre
-><code
-  >/etc/init.d/rundeckd start
+><div id="rpm"
+><h3
+  ><a href="#TOC"
+    >RPM</a
+    ></h3
+  ><p
+  >The RPM installation includes the placement of the boot control script that will automatically start Rundeck when the system boots.</p
+  ><p
+  >The script is located here: <code
+    >/etc/init.d/rundeckd</code
+    ></p
+  ><p
+  ><em
+    >Startup</em
+    ></p
+  ><pre
+  ><code
+    >/etc/init.d/rundeckd start
 </code
-  ></pre
-><p
-><em
-  >Shutdown</em
-  ></p
-><pre
-><code
-  >/etc/initd./rundeckd stop
+    ></pre
+  ><p
+  ><em
+    >Shutdown</em
+    ></p
+  ><pre
+  ><code
+    >/etc/initd./rundeckd stop
 </code
-  ></pre
-><h4 id="setting-java_home"
-><a href="#TOC"
-  >Setting JAVA_HOME</a
-  ></h4
-><p
->When using the RPM, by default rundeck will use <em
-  >java</em
-  > found in your path. Various RPM based distributions provide ways of managing which version of java is found. CentOS uses <em
-  >/usr/sbin/alternatives</em
-  > and the processing of setting alternatives can be found here: <a href="http://wiki.centos.org/HowTos/JavaOnCentO"
-  >http://wiki.centos.org/HowTos/JavaOnCentOS</a
-  >.</p
-><p
->If you have installed a JDK or JRE in a unique directory and do not want to alter the global system configuration, then simply setting JAVA_HOME before running any command will use the version of java found in JAVA_HOME/bin. Updating /etc/rundeck/profile with JAVA_HOME is another option as well.</p
-><h3 id="launcher"
-><a href="#TOC"
-  >Launcher</a
-  ></h3
-><p
->The Launcher installation generates the script into the RDECK_BASE directory.</p
-><p
->The script is located here: <code
-  >$RDECK_BASE/server/sbin/rundeckd</code
-  >.</p
-><p
-><em
-  >Startup</em
-  ></p
-><pre
-><code
-  >$RDECK_BASE/server/sbin/rundeckd start
+    ></pre
+  ><div id="setting-java_home"
+  ><h4
+    ><a href="#TOC"
+      >Setting JAVA_HOME</a
+      ></h4
+    ><p
+    >When using the RPM, by default rundeck will use <em
+      >java</em
+      > found in your path. Various RPM based distributions provide ways of managing which version of java is found. CentOS uses <em
+      >/usr/sbin/alternatives</em
+      > and the processing of setting alternatives can be found here: <a href="http://wiki.centos.org/HowTos/JavaOnCentO"
+      >http://wiki.centos.org/HowTos/JavaOnCentOS</a
+      >.</p
+    ><p
+    >If you have installed a JDK or JRE in a unique directory and do not want to alter the global system configuration, then simply setting JAVA_HOME before running any command will use the version of java found in JAVA_HOME/bin. Updating /etc/rundeck/profile with JAVA_HOME is another option as well.</p
+    ></div
+  ></div
+><div id="launcher"
+><h3
+  ><a href="#TOC"
+    >Launcher</a
+    ></h3
+  ><p
+  >The Launcher installation generates the script into the RDECK_BASE directory.</p
+  ><p
+  >The script is located here: <code
+    >$RDECK_BASE/server/sbin/rundeckd</code
+    >.</p
+  ><p
+  ><em
+    >Startup</em
+    ></p
+  ><pre
+  ><code
+    >$RDECK_BASE/server/sbin/rundeckd start
 </code
-  ></pre
-><p
-><em
-  >Shutdown</em
-  ></p
-><pre
-><code
-  >$RDECK_BASE/server/sbin/rundeckd stop
+    ></pre
+  ><p
+  ><em
+    >Shutdown</em
+    ></p
+  ><pre
+  ><code
+    >$RDECK_BASE/server/sbin/rundeckd stop
 </code
-  ></pre
-><p
->You may choose to incorporate this script into your server's operating system specific boot process.</p
+    ></pre
+  ><p
+  >You may choose to incorporate this script into your server's operating system specific boot process.</p
+  ></div
 >
 </div>
 
@@ -181,7 +187,7 @@
 </nav>
 <nav class="breadcrumb bottom">
     <ul>
-        <li><a href="../index.html">Rundeck Documentation (1.5)</a></li>
+        <li><a href="../index.html">Rundeck Documentation (1.5.1)</a></li>
     </ul>
 </nav>
 <footer class="copy">
@@ -191,7 +197,7 @@
 <br/>
 &copy;2012 DTO Solutions
 <br/>
-<span class="generated-date" title="2013-03-08T11:04:41PST">2013-03-08T11:04:41PST</span>
+<span class="generated-date" title="2013-05-01T20:00:03EDT">2013-05-01T20:00:03EDT</span>
   <script type="text/javascript">
   
 
