@@ -1,19 +1,25 @@
 #!/bin/bash
 
+set -e
+
 JAR=$1
 VERS=$2
-
+SKIPBRANCH=$3
+ 
 if [ -z "$JAR" -o -z "$VERS" ] ; then
   echo "Usage: load.sh <path to docs.zip> <version>"
   exit 2
 fi
-git checkout -b docs$VERS
+if [ "--skip" != "${SKIPBRANCH}" ] ; then
+    git checkout -b docs$VERS
+fi
+
 
 mkdir temp
-pushd temp
+cd temp
 echo unzip $JAR html
 unzip $JAR
-popd
+cd -
 cp -r temp/html/* .
 rm -rf temp
 git add .
