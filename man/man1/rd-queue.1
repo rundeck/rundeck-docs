@@ -1,0 +1,135 @@
+.TH rd-queue 1 "July 7, 2011" "" "Version ${VERSION}"
+.SH NAME
+.PP
+rd-queue - Lists and kills executions in the Rundeck queue
+.SH SYNOPSIS
+.PP
+rd-queue [\f[I]action\f[]] [-h] [-e id] [-p project]
+.SH DESCRIPTION
+.PP
+The rd-queue command is used to query the Central Dispatcher for a
+list of currently running Executions, or to Kill a currently
+running execution.
+.PP
+The tool provides two actions:
+.IP \[bu] 2
+\f[B]list\f[] : list the currently running executions on the server
+(default action)
+.IP \[bu] 2
+\f[B]follow\f[] : Follow the output of the execution specified by
+ID
+.IP \[bu] 2
+\f[B]kill\f[] : kill the execution specified by ID
+.SH OPTIONS
+.TP
+.B -h, --help
+Print usage message.
+.RS
+.RE
+.TP
+.B -e, --eid
+ID of the execution (kill or follow action only)
+.RS
+.RE
+.TP
+.B -p
+Project name (list action only)
+.RS
+.RE
+.SS follow mode
+.TP
+.B -q, --quiet
+Do not show output from the execution, but wait until it completes.
+.RS
+.RE
+.TP
+.B -r, --progress
+Show execution progress.
+For Jobs with a known average duration, `#' will indicate
+percentage complete, otherwise '.' will indicate continued
+progress.
+.RS
+.RE
+.TP
+.B -t, --restart
+If specified, all output from the Execution is retrieved from the
+beginning, rather than resuming from the current point in time.
+.RS
+.RE
+.SH LIST ACTION
+.PP
+This is the default action of the tool, so to list all running
+Executions for a project, simply use:
+.PP
+\f[CR]
+      rd-queue\ -p\ project
+\f[]
+.PP
+The output will display the number of executions, and their IDs and
+identifying names or descriptions, as well as a link to the Rundeck
+page to follow the output.
+.PP
+If there is only one project, the \f[B]-p\f[] option can be left
+out.
+.PP
+\f[I]Example\f[]
+.PP
+\f[CR]
+      rd-queue\ -p\ test
+      Queue:\ 1\ items
+      [160]\ adhoc\ script\ job\ <http://localhost:8080/rundeck/execution/follow/160>
+\f[]
+.SH FOLLOW ACTION
+.PP
+This action allows you to specify the Execution ID of a currently
+running execution that you want to follow the progress of.
+The output of the execution will be retrieved from the current
+point in time onward and echoed locally to the console.
+.PP
+If \f[B]-t\f[]/\f[B]--restart\f[] is used, then all output of the
+execution is retrieved from the beginning.
+.PP
+If \f[B]-r\f[]/\f[B]--progress\f[] is used, then the output is not
+echoed, and a progress indicator bar is printed.
+.PP
+If \f[B]-q\f[]/\f[B]--quiet\f[] is used, then no output is echoed,
+and the tool will wait until the execution completes, and exit with
+a non-zero exit status if the execution was not successful.
+.PP
+\f[I]Example\f[]
+.PP
+\f[CR]
+      rd-queue\ follow\ -e\ 160
+      Output\ from\ the\ job
+      ...
+      Final\ output
+      [160]\ execution\ status:\ failed
+\f[]
+.PP
+\f[I]Example using \[em]progress\f[]
+.PP
+\f[CR]
+      rd-queue\ follow\ -e\ 160\ --progress
+      ####################.....
+      [160]\ execution\ status:\ failed
+\f[]
+.SH KILL ACTION
+.PP
+This action allows you to specify the Execution ID of a currently
+running execution that you want to stop.
+.PP
+\f[I]Example\f[]
+.PP
+\f[CR]
+      rd-queue\ kill\ -e\ 160
+      rd-queue\ kill:\ success.\ [160]\ Job\ status:\ killed
+\f[]
+.SH SEE ALSO
+.PP
+\f[B]dispatch\f[] (1) (dispatch.html), \f[B]run\f[] (1) (run.html).
+.PP
+The Rundeck source code and all documentation may be downloaded
+from <https://github.com/dtolabs/rundeck/>.
+.SH AUTHORS
+Greg Schueler; Alex Honor.
+
