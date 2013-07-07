@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Job Workflows</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Alex Honor" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="November 20, 2010" />
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body>
+<div class="rundecksite">
+<nav class="site" >
+      <ul  class="container_12">
+    <li class="item index grid_4 alpha">
+    <a href="http://rundeck.org/index.html">
+      <h1>Rundeck</h1>
+      <p class="rd_version">Open-Source Workflow Automation</p>
+      </a>
+    </li>
+    <li class="item about grid_2 selected">
+      <a href="http://rundeck.org/about.html">
+        <h1>About</h1>
+        <p>News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help grid_2">
+      <a href="http://rundeck.org/help.html">
+        <h1>Get Help</h1>
+        <p>IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins grid_2">
+      <a href="http://rundeck.org/plugins/index.html">
+        <h1>Plugins</h1>
+        <p>Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads grid_2 omega">
+    <a href="http://rundeck.org/downloads.html">
+      <h1>Download</h1>
+      <p class="rd_version">1.6.0</p>
+      </a>
+    </li>
+<div class="clear"></div>
+</ul>
+    </nav>
+    <div class="container_12 searchbox">
+    <div class="grid_4 prefix_8">
+        <form action="http://rundeck.org/search/">
+            <input type="search" name="q"/>
+            <input type="submit" value="Search"/>
+        </form>
+    </div>
+<div class="clear"></div>
+</div>
+</div>
+
+<nav class="breadcrumb top">
+    <ul>
+        <li><a href="../index.html">Rundeck Documentation (1.6.0)</a></li>
+    </ul>
+</nav>
+
+<nav class="page top">
+    <ul>
+        <li class="current"><a href="job-workflows.html">Job Workflows</a></li>
+        <li class="toc"><a href="index.html">User Manual</a></li>
+        <li class="prev"><a href="jobs.html">Jobs</a></li>
+        <li class="next"><a href="job-options.html">Job Options</a></li>
+    </ul>
+</nav>
+<div id="docbody">
+<h1 class="title">Job Workflows</h1>
+<div id="TOC"
+><ul
+  ><li
+    ><a href="#workflow-definition"
+      >Workflow definition</a
+      ></li
+    ><li
+    ><a href="#workflow-control-settings"
+      >Workflow control settings</a
+      ></li
+    ><li
+    ><a href="#workflow-steps"
+      >Workflow steps</a
+      ><ul
+      ><li
+	><a href="#command-step"
+	  >Command step</a
+	  ></li
+	><li
+	><a href="#script-step"
+	  >Script step</a
+	  ></li
+	><li
+	><a href="#script-file-step"
+	  >Script file step</a
+	  ></li
+	><li
+	><a href="#script-url-step"
+	  >Script URL step</a
+	  ></li
+	><li
+	><a href="#advanced-script-options"
+	  >Advanced Script options</a
+	  ></li
+	><li
+	><a href="#job-reference-step"
+	  >Job reference step</a
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#quoting-arguments-to-steps"
+      >Quoting arguments to steps</a
+      ></li
+    ><li
+    ><a href="#reordering-steps"
+      >Reordering steps</a
+      ></li
+    ><li
+    ><a href="#error-handlers"
+      >Error Handlers</a
+      ><ul
+      ><li
+	><a href="#context-information"
+	  >Context information</a
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#save-the-changes"
+      >Save the changes</a
+      ></li
+    ><li
+    ><a href="#context-variables"
+      >Context Variables</a
+      ><ul
+      ><li
+	><a href="#context-variable-usage"
+	  >Context Variable Usage</a
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#summary"
+      >Summary</a
+      ></li
+    ></ul
+  ></div
+>
+<p
+>The Job's most basic feature is its ability to execute one or more steps. This sequence of steps is called a <em
+  >workflow</em
+  >.</p
+><p
+>The steps of the Job workflow are displayed when viewing a Job's detail from a Job listing or within the Job editor form.</p
+><div id="workflow-definition"
+><h2
+  ><a href="#TOC"
+    >Workflow definition</a
+    ></h2
+  ><p
+  >Workflows can be defined within the Rundeck graphical console or as an XML or YAML document that is loaded to the server.</p
+  ><p
+  >The graphical console provides an authoring environment where steps can be added, edited, removed or reordered.</p
+  ><p
+  >Users preferring to define Jobs in a text format should refer to the two format definitions:</p
+  ><ul
+  ><li
+    >XML: <a href="../manpages/man5/job-v20.html"
+      >job-v20(5)</a
+      ></li
+    ><li
+    >YAML: <a href="../manpages/man5/job-yaml-v12.html"
+      >job-yaml-v12(5)</a
+      ></li
+    ></ul
+  ><p
+  >It is also possible to author Jobs inside the graphical console and then export the definition as a file using the <code
+    >rd-jobs</code
+    > shell tool (<a href="../manpages/man1/rd-jobs.html"
+    >rd-jobs(1)</a
+    >).</p
+  ><p
+  >See <a href="#exporting-job-definitions"
+    >Exporting Job definitions</a
+    > and <a href="#importing-job-definitions"
+    >Importing Job definitions</a
+    >.</p
+  ></div
+><div id="workflow-control-settings"
+><h2
+  ><a href="#TOC"
+    >Workflow control settings</a
+    ></h2
+  ><p
+  >Workflow execution is controlled by two important settings: <em
+    >Keepgoing</em
+    > and <em
+    >Strategy</em
+    >.</p
+  ><div class="figure"
+  ><img src="../figures/fig0401.png" alt="Workflow controls"
+     /><p class="caption"
+    >Workflow controls</p
+    ></div
+  ><p
+  ><em
+    >Keepgoing</em
+    >: This manages what to do if a step incurs and error:</p
+  ><ul
+  ><li
+    >No: Fail immediately (default).</li
+    ><li
+    >Yes: Continue to next step.</li
+    ></ul
+  ><p
+  >The default is to fail immediately but depending on the procedure at hand you can choose to have the execution continue.</p
+  ><p
+  ><em
+    >Strategy</em
+    >: Controls the order of execution of steps and command dispatch to nodes: <em
+    >Node-oriented</em
+    > and <em
+    >Step-oriented</em
+    >.</p
+  ><ul
+  ><li
+    ><em
+      >Node-oriented</em
+      >: Executes the full workflow on each node before the next node. (default)</li
+    ><li
+    ><em
+      >Step-oriented</em
+      >: Executes each step on all nodes before the next node.</li
+    ></ul
+  ><p
+  >The following illustrations contrast the strategies showing how three steps proceed across two nodes.</p
+  ><p
+  >Node-oriented flow illustrated:</p
+  ><pre
+  ><code
+    >1.   NodeA    step#1
+2.     &quot;      step#2
+3.     &quot;      step#3
+4.   NodeB    step#1
+5.     &quot;      step#2
+6.     &quot;      step#3
+</code
+    ></pre
+  ><p
+  >Step-oriented flow illustrated:</p
+  ><pre
+  ><code
+    >1.   NodeA    step#1
+2.   NodeB      &quot;
+3.   NodeA    step#2
+4.   NodeB      &quot;
+5.   NodeA    step#1
+6.   NodeB      &quot;
+</code
+    ></pre
+  ><p
+  >The process you are automating will determine which strategy is correct, though the node-oriented flow is more commonplace.</p
+  ></div
+><div id="workflow-steps"
+><h2
+  ><a href="#TOC"
+    >Workflow steps</a
+    ></h2
+  ><p
+  >The following sections describe how to construct a workflow as a set of steps that call commands of different types.</p
+  ><p
+  >When creating a new Job definition, the Workflow form will be set with defaults and have no workflow steps defined. The workflow editor will have a form open asking to enter a shell command as the first step.</p
+  ><div class="figure"
+  ><img src="../figures/fig0402.png" alt="Add a step"
+     /><p class="caption"
+    >Add a step</p
+    ></div
+  ><p
+  >To add new steps simply press the &quot;Add a step&quot; link inside the workflow editor form. This will prompt you with a dialog asking which kind of step you would like to add. Each kind of step has its own form. When you are done filling out the form, press &quot;Save&quot; to add it to the sequence. Pressing &quot;Cancel&quot; will close the form and leave the sequence unchanged.</p
+  ><div class="figure"
+  ><img src="../figures/fig0403.png" alt="Workflow step types"
+     /><p class="caption"
+    >Workflow step types</p
+    ></div
+  ><p
+  >New steps are always added to the end of the sequence. See <a href="job-workflows.html#reordering-steps"
+    >Reordering steps</a
+    > for directions on modifying the step order.</p
+  ><p
+  >The next several sections describe the specification of each kind of workflow step.</p
+  ><p
+  ><strong
+    >Types of Steps</strong
+    ></p
+  ><p
+  >Steps in a workflow can be either <em
+    >Node Steps</em
+    > or <em
+    >Workflow Steps</em
+    >.</p
+  ><ul
+  ><li
+    >Node Steps operate once on each Node, which could be multiple times within a workflow</li
+    ><li
+    >Workflow Steps operate only once in the workflow</li
+    ></ul
+  ><p
+  ><strong
+    >Step Plugins</strong
+    ></p
+  ><p
+  >You can create or install third-party plugins which provide new Steps for your workflows.</p
+  ><ul
+  ><li
+    >See the chapter on <a href="plugins.html"
+      >Plugins</a
+      >.</li
+    ></ul
+  ><div id="command-step"
+  ><h3
+    ><a href="#TOC"
+      >Command step</a
+      ></h3
+    ><p
+    >Use the command step to call system commands. Enter any command string you would type at the terminal on the remote hosts.</p
+    ><div class="figure"
+    ><img src="../figures/fig0404.png" alt="Command step type"
+       /><p class="caption"
+      >Command step type</p
+      ></div
+    ><p
+    >This is similar to calling the command with <code>dispatch</code>:</p
+    ><pre
+    ><code
+      >dispatch [filter-options] -- command
+</code
+      ></pre
+    ></div
+  ><div id="script-step"
+  ><h3
+    ><a href="#TOC"
+      >Script step</a
+      ></h3
+    ><p
+    >Execute the supplied shell script content. Optionally, can pass an argument to the script specified in the lower text field.</p
+    ><div class="figure"
+    ><img src="../figures/fig0405.png" alt="Script step type"
+       /><p class="caption"
+      >Script step type</p
+      ></div
+    ><p
+    >This is similar to calling the command with <code>dispatch</code>:</p
+    ><pre
+    ><code
+      >dispatch [filter-options] --stdin -- args &lt;&lt;EOF 
+script content here 
+EOF
+</code
+      ></pre
+    ></div
+  ><div id="script-file-step"
+  ><h3
+    ><a href="#TOC"
+      >Script file step</a
+      ></h3
+    ><p
+    >Executes the script file local to the sever to the filtered Node set. Arguments can be passed to the script by specifying them in the lower text field.</p
+    ><div class="figure"
+    ><img src="../figures/fig0406.png" alt="Script file step type"
+       /><p class="caption"
+      >Script file step type</p
+      ></div
+    ><p
+    >This is similar to calling the script file with <code>dispatch</code>:</p
+    ><pre
+    ><code
+      >dispatch [filter-options] -s scriptfile -- args
+</code
+      ></pre
+    ></div
+  ><div id="script-url-step"
+  ><h3
+    ><a href="#TOC"
+      >Script URL step</a
+      ></h3
+    ><p
+    >Downloads a script from a URL, and executes it to the filtered Node set. Arguments can be passed to the script by specifying them in the lower text field.</p
+    ><div class="figure"
+    ><img src="../figures/fig0406.png" alt="Script URL step type"
+       /><p class="caption"
+      >Script URL step type</p
+      ></div
+    ><p
+    >This is similar to calling the script URL with <code>dispatch</code>:</p
+    ><pre
+    ><code
+      >dispatch [filter-options] -u URL -- args
+</code
+      ></pre
+    ><p
+    >The URL can contain <a href="#context-variables"
+      >Context Variables</a
+      > that will be expanded at runtime.</p
+    ></div
+  ><div id="advanced-script-options"
+  ><h3
+    ><a href="#TOC"
+      >Advanced Script options</a
+      ></h3
+    ><p
+    >For <a href="#script-step"
+      >Script steps</a
+      >, <a href="#script-file-step"
+      >Script file steps</a
+      >, and <a href="#script-url-step"
+      >Script URL steps</a
+      >, you can specify an optional <em
+      >Interpreter</em
+      > string to declare how the script should be executed.</p
+    ><p
+    >Click on the &quot;Advanced&quot; link to reveal the input.</p
+    ><div class="figure"
+    ><img src="../figures/job_workflow_script_interpreter.png" alt="Script interpreter input"
+       /><p class="caption"
+      >Script interpreter input</p
+      ></div
+    ><p
+    >Enter a command that will be used as the <em
+      >interpreter</em
+      > to run the script. For example, you can execute the script using <code
+      >sudo</code
+      > by entering:</p
+    ><pre
+    ><code
+      >sudo -u username
+</code
+      ></pre
+    ><p
+    >This will then allow your script to make use of <a href="plugins.html#configuring-secondary-sudo-password-authentication"
+      >Sudo authentication</a
+      >.</p
+    ><p
+    >The effecitve commandline for your script will become:</p
+    ><pre
+    ><code
+      >sudo -u username [scriptfile] arguments ...
+</code
+      ></pre
+    ><p
+    >If necessary, you can check the &quot;Quote arguments to interpreter?&quot; checkbox, which will then quote both the scriptfile and arguments before passing to the interpreter command:</p
+    ><pre
+    ><code
+      >interpreter &quot;[scriptfile] arguments ...&quot;
+</code
+      ></pre
+    ></div
+  ><div id="job-reference-step"
+  ><h3
+    ><a href="#TOC"
+      >Job reference step</a
+      ></h3
+    ><p
+    >To call another saved Job, create a Job Reference step. Enter the name of the Job and its group.</p
+    ><div class="figure"
+    ><img src="../figures/fig0407.png" alt="Job step type"
+       /><p class="caption"
+      >Job step type</p
+      ></div
+    ><p
+    >The Job Reference form provides a Job browser to make it easier to select from the existing set of saved Jobs. Click the &quot;Choose A Job...&quot; link and navigate to the desired Job.</p
+    ><p
+    >Finally, if the Job defines Options, you can specify them in the commandline arguments text field and can include variable expansion to pass any input options for the current job. Format:</p
+    ><pre
+    ><code
+      >-optname &lt;value&gt; -optname &lt;value&gt; ...
+</code
+      ></pre
+    ><p
+    >The format for specifying options is exactly the same as you would pass to the <code
+      >run</code
+      > commandline tool, and you can substitute values of input options to the current job. For example:</p
+    ><pre
+    ><code
+      >-opt1 something -opt2 ${option.opt2}
+</code
+      ></pre
+    ><p
+    >This would set the value &quot;something&quot; for the Job's &quot;opt1&quot; option, and then pass the &quot;opt2&quot; option directly from the top-level job to the Job reference.</p
+    ><p
+    >This is similar to calling the other Job with <a href="../manpages/man1/run.html"
+      >run</a
+      >:</p
+    ><pre
+    ><code
+      >run [filter-options] -j group/jobname -- -opt1 something -opt2 somethingelse
+</code
+      ></pre
+    ><p
+    >If the Job has required Options that are not specified on the arguments line, then a &quot;defaultValue&quot; of that option will be used if it is defined. If a required option does not have a default value, then the execution will fail because the option is not specified.</p
+    ><p
+    >Job References are <em
+      >Workflow Steps</em
+      >, and only operate once within a workflow.</p
+    ></div
+  ></div
+><div id="quoting-arguments-to-steps"
+><h2
+  ><a href="#TOC"
+    >Quoting arguments to steps</a
+    ></h2
+  ><p
+  >When you define a <a href="#command-step"
+    >Command</a
+    > or arguments to any Script or Job reference step, your arguments are interpreted as a space-separated sequence of strings. If you need to use spaces or quotes within the argument, here are some rules for quoting arguments:</p
+  ><ul
+  ><li
+    >If you have an argument with a space character, you can use either double or single quotes:<ul
+      ><li
+	><code
+	  >&quot;my argument&quot;</code
+	  >: interpreted as <code
+	  >my argument</code
+	  ></li
+	><li
+	><code
+	  >'my argument'</code
+	  >: interpreted as <code
+	  >my argument</code
+	  ></li
+	></ul
+      ></li
+    ><li
+    >If you need to embed quotes within a quoted argument, you can wrap it in the opposite kind of quote (double or single):<ul
+      ><li
+	><code
+	  >'&quot;double quotes&quot;'</code
+	  >: interpreted as <code
+	  >&quot;double quotes&quot;</code
+	  ></li
+	><li
+	><code
+	  >&quot;'single quotes'&quot;</code
+	  >: interpreted as <code
+	  >'single quotes'</code
+	  ></li
+	></ul
+      ></li
+    ><li
+    >Or use doubled-up quote characters<ul
+      ><li
+	><code
+	  >&quot;&quot;&quot;double quotes&quot;&quot;&quot;</code
+	  >: interpreted as <code
+	  >&quot;double quotes&quot;</code
+	  ></li
+	><li
+	><code
+	  >'''single quotes'''</code
+	  >: interpreted as <code
+	  >'single quotes'</code
+	  ></li
+	></ul
+      ></li
+    ></ul
+  ></div
+><div id="reordering-steps"
+><h2
+  ><a href="#TOC"
+    >Reordering steps</a
+    ></h2
+  ><p
+  >The order of the Workflow steps can be modified by hovering over any step and then clicking and dragging the double arrow icon to the desired position. A blue horizontal bar helps highlight the position where the Job will land.</p
+  ><div class="figure"
+  ><img src="../figures/fig0408.png" alt="Job step reorder"
+     /><p class="caption"
+    >Job step reorder</p
+    ></div
+  ><p
+  >After releasing the select Job, it will land in the desired position and the step order will be updated.</p
+  ><p
+  >If you wish to Undo the step reordering, press the &quot;Undo&quot; link above the steps.</p
+  ><p
+  >The &quot;Redo&quot; button can be pressed to reapply the last undone change.</p
+  ><p
+  >Press the &quot;Revert All Changes&quot; button to go back to the original step order.</p
+  ></div
+><div id="error-handlers"
+><h2
+  ><a href="#TOC"
+    >Error Handlers</a
+    ></h2
+  ><p
+  >Each step in a Workflow can have an associated &quot;Error Handler&quot; action. This handler is a secondary step of any of the available types that will execute if the Workflow step fails. Error Handler steps can be used to recover the workflow from failure, or simply to execute a secondary action.</p
+  ><p
+  >This provides a few different ways to deal with a step's failure:</p
+  ><ul
+  ><li
+    >Print additional information about a failure</li
+    ><li
+    >Roll back a change</li
+    ><li
+    >Recover the workflow from failure, and continue normally</li
+    ></ul
+  ><p
+  >When a Workflow step has a failure, the behavior depends on whether it has an Error Handler or not, and the value of the &quot;keepgoing&quot; setting for the Workflow, and the value of the &quot;keepgoingOnSuccess&quot; for the Error Handler.</p
+  ><ul
+  ><li
+    >When a step fails <strong
+      >without an Error Handler</strong
+      ><ol style="list-style-type: decimal;"
+      ><li
+	>the Workflow is marked as &quot;failed&quot;</li
+	><li
+	>If <code
+	  >keepgoing=&quot;false&quot;</code
+	  ><ol style="list-style-type: decimal;"
+	  ><li
+	    >then the entire Workflow stops</li
+	    ></ol
+	  ></li
+	><li
+	>Otherwise, the remaining Workflow steps are executed in order</li
+	><li
+	>the Workflow ends with a &quot;failed&quot; result status</li
+	></ol
+      ></li
+    ></ul
+  ><p
+  >If you define an Error Handler for a step, then the behavior changes. The handler can recover the step's failure by executing successfully, and a secondary option &quot;keepgoingOnSuccess&quot; will let you override the Workflow's &quot;keepgoing&quot; value if it is false.</p
+  ><ul
+  ><li
+    >When a step fails <strong
+      >with an Error Handler</strong
+      ><ol style="list-style-type: decimal;"
+      ><li
+	>The Error Handler is executed</li
+	><li
+	>If the Error Handler was successful and has <code
+	  >keepgoingOnSuccess=&quot;true&quot;</code
+	  ><ol style="list-style-type: decimal;"
+	  ><li
+	    >The workflow <code
+	      >keepgoing</code
+	      > is ignored,</li
+	    ><li
+	    >The Workflow failure status is <em
+	      >not</em
+	      > marked, and it will continue to the next step</li
+	    ></ol
+	  ></li
+	><li
+	>Else if <code
+	  >keepgoing=&quot;false&quot;</code
+	  ><ol style="list-style-type: decimal;"
+	  ><li
+	    >The Workflow is marked as &quot;failed&quot;</li
+	    ><li
+	    >Then the entire Workflow stops</li
+	    ></ol
+	  ></li
+	><li
+	>Else if <code
+	  >keepgoing=&quot;true&quot;</code
+	  ><ol style="list-style-type: decimal;"
+	  ><li
+	    >If the Error Handler failed then the Workflow is marked as &quot;failed&quot;</li
+	    ><li
+	    >Otherwise, the Workflow is <em
+	      >not</em
+	      > additionally marked</li
+	    ></ol
+	  ></li
+	><li
+	>the remaining Workflow steps are executed in order (including other triggered Error Handlers)</li
+	><li
+	>when the Workflow ends, its status depends on if it is marked</li
+	></ol
+      ></li
+    ></ul
+  ><p
+  >Essentially, the result status of the Error Handler becomes the result status of its Step, if the Workflow has <code
+    >keepgoing=&quot;true&quot;</code
+    > or if the Error Handler overrides it with <code
+    >keepgoingOnSuccess=&quot;true&quot;</code
+    >. If the Error Handler succeeds, then the step is not considered to have failed. This includes scripts, commands, job references, etc. (Scripts and commands must have an exit status of <code
+    >0</code
+    > to return success.)</p
+  ><p
+  >It is a good practice, when you are defining Error Handlers, to <strong
+    >always</strong
+    > have them fail (e.g. scripts/commands return a non-zero exit-code), unless you specifically want them to be used for Recovery.</p
+  ><p
+  >Note that Error-handlers can be attached to either Node Steps or Workflow Steps, and the type of step and the Strategy of the Workflow determines what type of Error-handler steps can be attached to a step. The only restriction is in the case that the Workflow is &quot;Node-oriented&quot;, which means that the workflow is executed independently for each node. In this case, Node Steps can only have other Node steps as Error Handlers. In other cases, the Error Handler can be other Workflow steps.</p
+  ><div id="context-information"
+  ><h3
+    ><a href="#TOC"
+      >Context information</a
+      ></h3
+    ><p
+    >When the Error-handler step is executed, its execution context will contain some information about the nature of the failure that occurred for the original step.</p
+    ><p
+    >In the case where a Node Step has a Workflow Step as an Error Handler, then the failure data for multiple nodes is rolled up into a single failure reason to be used by the Workflow Step.</p
+    ><p
+    >See the section on <a href="#context-variables"
+      >Context Variables</a
+      > for more information.</p
+    ></div
+  ></div
+><div id="save-the-changes"
+><h2
+  ><a href="#TOC"
+    >Save the changes</a
+    ></h2
+  ><p
+  >Once the Workflow steps have been defined and order, changes are permanently saved after pressing the &quot;Create&quot; button if new or the &quot;Update&quot; button if the Job is being modified.</p
+  ></div
+><div id="context-variables"
+><h2
+  ><a href="#TOC"
+    >Context Variables</a
+    ></h2
+  ><p
+  >When a Job step is executed, it has a set of &quot;context&quot; variables that you can access in the Job step. There are several sets of context variables, including: the Job context <code
+    >job</code
+    >, the Node context <code
+    >node</code
+    >, and the Option context <code
+    >option</code
+    >.</p
+  ><p
+  >Job context variables:</p
+  ><ul
+  ><li
+    ><code
+      >job.name</code
+      >: Name of the Job</li
+    ><li
+    ><code
+      >job.group</code
+      >: Group of the Job</li
+    ><li
+    ><code
+      >job.id</code
+      >: ID of the Job</li
+    ><li
+    ><code
+      >job.execid</code
+      >: ID of the current Execution</li
+    ><li
+    ><code
+      >job.username</code
+      >: Username of the user executing the Job</li
+    ><li
+    ><code
+      >job.project</code
+      >: Project name</li
+    ><li
+    ><code
+      >job.loglevel</code
+      >: Logging level, one of: 'ERROR','WARN','INFO','VERBOSE','DEBUG'</li
+    ></ul
+  ><p
+  >Node context variables:</p
+  ><ul
+  ><li
+    ><code
+      >node.name</code
+      >: Name of the Node being executed on</li
+    ><li
+    ><code
+      >node.hostname</code
+      >: Hostname of the Node</li
+    ><li
+    ><code
+      >node.username</code
+      >: Usernae of the remote user</li
+    ><li
+    ><code
+      >node.description</code
+      >: Description of the node</li
+    ><li
+    ><code
+      >node.tags</code
+      >: Comma-separated list of tags</li
+    ><li
+    ><code
+      >node.os-*</code
+      >: OS properties of the Node: <code
+      >name</code
+      >,<code
+      >version</code
+      >,<code
+      >arch</code
+      >,<code
+      >family</code
+      ></li
+    ><li
+    ><code
+      >node.*</code
+      >: All Node attributes defined on the Node.</li
+    ></ul
+  ><p
+  >Additional Error-handler context variables:</p
+  ><ul
+  ><li
+    ><code
+      >result.reason</code
+      >: A code indicating the reason the step failed<ul
+      ><li
+	>Common reason code strings used by node execution of commands or scripts:<ul
+	  ><li
+	    ><code
+	      >NonZeroResultCode</code
+	      > - the execution returned a non-zero code</li
+	    ><li
+	    ><code
+	      >SSHProtocolFailure</code
+	      > - SSH protocol failure</li
+	    ><li
+	    ><code
+	      >HostNotFound</code
+	      > - host not found</li
+	    ><li
+	    ><code
+	      >ConnectionTimeout</code
+	      > - connection timeout</li
+	    ><li
+	    ><code
+	      >ConnectionFailure</code
+	      > - connection failure (e.g. refused)</li
+	    ><li
+	    ><code
+	      >IOFailure</code
+	      > - IO error</li
+	    ><li
+	    ><code
+	      >AuthenticationFailure</code
+	      > - authentication was refused or incorrect</li
+	    ></ul
+	  ></li
+	><li
+	>Reason code strings used by Job references<ul
+	  ><li
+	    ><code
+	      >JobFailed</code
+	      > - referenced Job workflow failed</li
+	    ><li
+	    ><code
+	      >NotFound</code
+	      > - referenced Job not found</li
+	    ><li
+	    ><code
+	      >Unauthorized</code
+	      > - referenced Job not authorized</li
+	    ><li
+	    ><code
+	      >InvalidOptions</code
+	      > - referenced Job input options invalid</li
+	    ><li
+	    ><code
+	      >NoMatchedNodes</code
+	      > - referenced Job node dispatch filters had no match</li
+	    ></ul
+	  ></li
+	><li
+	>Reason code used from a failed Node Step if the handler is a Workflow Step<ul
+	  ><li
+	    ><code
+	      >NodeDispatchFailure</code
+	      > - one or more nodes failed the step</li
+	    ></ul
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><code
+      >result.message</code
+      >: A string describing the failure</li
+    ><li
+    ><code
+      >result.resultCode</code
+      >: Exit code from an execution (if available)</li
+    ><li
+    ><code
+      >result.failedNodes</code
+      >: Comma-separated list of node names that failed for a <code
+      >NodeDispatchFailure</code
+      ></li
+    ></ul
+  ><p
+  >Option context variables are referred to as <code
+    >option.NAME</code
+    > (more about <a href="job-options.html"
+    >Job Options</a
+    > in the next chapter.)</p
+  ><div id="context-variable-usage"
+  ><h3
+    ><a href="#TOC"
+      >Context Variable Usage</a
+      ></h3
+    ><p
+    >Context variables can be used in a few ways in a Job step, with slightly different sytanxes:</p
+    ><ul
+    ><li
+      ><dl
+	><dt
+	  >Commands, Script Arguments and Job Reference Arguments</dt
+	  ><dd
+	  ><code
+	    >${ctx.name}</code
+	    ></dd
+	  ></dl
+	></li
+      ><li
+      ><dl
+	><dt
+	  >Inline Script Content (<em
+	    >see note</em
+	    >)</dt
+	  ><dd
+	  ><code
+	    >@ctx.name@</code
+	    ></dd
+	  ></dl
+	><p
+	><strong
+	  >Note</strong
+	  >: The &quot;Inline Script Content&quot; variable expansion is <strong
+	  >not</strong
+	  > available for &quot;Script File&quot; steps. The Script File is not rewritten at all when used for execution.</p
+	></li
+      ><li
+      ><dl
+	><dt
+	  >Environment Variables (<em
+	    >see note</em
+	    >)</dt
+	  ><dd
+	  ><code
+	    >$RD_CTX_NAME</code
+	    ></dd
+	  ></dl
+	><p
+	>The syntax for Environment variables is that all letters become uppercase, punctuation is replaced with underscore, and the name is prefixed with <code
+	  >RD_</code
+	  >.</p
+	><p
+	><strong
+	  >Note</strong
+	  >: See the chapter <a href="../administration/ssh.html#passing-environment-variables-through-remote-command"
+	  >Administration - SSH - Passing Environment Variables Through Remote Commands</a
+	  > for information about requirements of the SSH server.</p
+	></li
+      ></ul
+    ></div
+  ></div
+><div id="summary"
+><h2
+  ><a href="#TOC"
+    >Summary</a
+    ></h2
+  ><p
+  >At this point you should understand what a Job workflow is, the kinds of steps they can contain and how to define a workflow.</p
+  ><p
+  >Next, we'll cover more about Rundeck's Job Option features.</p
+  ></div
+>
+</div>
+
+<nav class="page bottom">
+    <ul>
+        <li class="current"><a href="job-workflows.html">Job Workflows</a></li>
+        <li class="toc"><a href="index.html">User Manual</a></li>
+        <li class="prev"><a href="jobs.html">Jobs</a></li>
+        <li class="next"><a href="job-options.html">Job Options</a></li>
+    </ul>
+</nav>
+<nav class="breadcrumb bottom">
+    <ul>
+        <li><a href="../index.html">Rundeck Documentation (1.6.0)</a></li>
+    </ul>
+</nav>
+<footer class="copy">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+
+<br/>
+&copy;2013 <a href="http://simplifyops.com">#SimplifyOps</a>
+<br/>
+<span class="generated-date" title="2013-07-05T18:16:48EDT">2013-07-05T18:16:48EDT</span>
+  <script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</footer>
+</body>
+</html>
