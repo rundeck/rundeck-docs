@@ -97,189 +97,183 @@
     ></ul
   ></div
 >
-<div id="name"
-><h1
-  ><a href="#TOC"
-    >NAME</a
-    ></h1
-  ><p
-  >resource-yaml-v13 - describes the Rundeck resource model document Yaml format</p
-  ><p
-  >The <code
-    >resource</code
-    > YAML document declares a resource model used by a Rundeck Project to define the set of Nodes that are available.</p
-  ><p
-  >See <a href="http://yaml.org"
-    ><code
-      >http://yaml.org</code
-      ></a
-    > for more information about YAML.</p
-  ><div id="structure"
-  ><h2
-    ><a href="#TOC"
-      >Structure</a
-      ></h2
-    ><p
-    >The resource format supports two structures: either a Yaml Sequence of <a href="#node-definition"
-      >Node definitions</a
-      >, or a Yaml Map of node names with <a href="#node-definition"
-      >Node definitions</a
-      > as values.</p
-    ><p
-    >Example:</p
-    ><pre
-    ><code
-      >- somenode: ...
+<h1 id="name"
+><a href="#TOC"
+  >NAME</a
+  ></h1
+><p
+>resource-yaml-v13 - describes the Rundeck resource model document Yaml format</p
+><p
+>The <code
+  >resource</code
+  > YAML document declares a resource model used by a Rundeck Project to define the set of Nodes that are available.</p
+><p
+>See <a href="http://yaml.org"
+  ><code
+    >http://yaml.org</code
+    ></a
+  > for more information about YAML.</p
+><h2 id="structure"
+><a href="#TOC"
+  >Structure</a
+  ></h2
+><p
+>The resource format supports two structures: either a Yaml Sequence of <a href="#node-definition"
+  >Node definitions</a
+  >, or a Yaml Map of node names with <a href="#node-definition"
+  >Node definitions</a
+  > as values.</p
+><p
+>Example:</p
+><pre
+><code
+  >- somenode: ...
   ...
 - somenode2: ...
 </code
-      ></pre
-    ><p
-    >OR</p
-    ><pre
-    ><code
-      >somenode:
+  ></pre
+><p
+>OR</p
+><pre
+><code
+  >somenode:
    hostname: ...
    ...
 somenode2:
    hostname: ...
 </code
-      ></pre
-    ><p
-    >In the second case, the <code
-      >nodename</code
-      > entry is not required.</p
-    ></div
-  ><div id="node-definition"
-  ><h2
-    ><a href="#TOC"
-      >Node Definition</a
-      ></h2
-    ><p
-    >A Node definition consists of a Map with some required and some optional entries.</p
-    ><p
-    >Required Entries:</p
-    ><dl
-    ><dt
-      ><code
-	>nodename</code
-	></dt
-      ><dd
-      ><p
-	>Name of the node, this must be a unique Identifier across nodes within a project</p
-	></dd
-      ><dt
-      ><code
-	>hostname</code
-	></dt
-      ><dd
-      ><p
-	>Hostname of the node. This can be any IP Address or hostname to address the node. Since hostname is used to make SSH connections, it is possible to overload the value to include port number. (eg, hostname:port).</p
-	></dd
-      ><dt
-      ><code
-	>username</code
-	></dt
-      ><dd
-      ><p
-	>User name to connect to the node via SSH.</p
-	></dd
-      ></dl
-    ><p
-    >Optional Entries:</p
-    ><dl
-    ><dt
-      ><code
-	>description</code
-	></dt
-      ><dd
-      ><p
-	>A description of the Node</p
-	></dd
-      ><dt
-      ><code
-	>tags</code
-	></dt
-      ><dd
-      ><p
-	>A literal with comma-separated tag strings, or a Sequence of literals</p
-	></dd
-      ><dt
-      ><code
-	>osFamily</code
-	></dt
-      ><dd
-      ><p
-	>OS Family</p
-	></dd
-      ><dt
-      ><code
-	>osArch</code
-	></dt
-      ><dd
-      ><p
-	>OS Architecture</p
-	></dd
-      ><dt
-      ><code
-	>osName</code
-	></dt
-      ><dd
-      ><p
-	>OS Name</p
-	></dd
-      ><dt
-      ><code
-	>osVersion</code
-	></dt
-      ><dd
-      ><p
-	>OS Version</p
-	></dd
-      ><dt
-      ><code
-	>editUrl</code
-	></dt
-      ><dd
-      ><p
-	>URL to an external resource model service.</p
-	></dd
-      ><dt
-      ><code
-	>remoteUrl</code
-	></dt
-      ><dd
-      ><p
-	>URL to an external resource model editor service.</p
-	></dd
-      ><dt
-      ><em
-	>Anything</em
-	></dt
-      ><dd
-      ><p
-	>Specify any custom attributes about node using a string value.</p
-	></dd
-      ></dl
-    ><ul
-    ><li
-      >For more information about using the <code
-	>editUrl</code
-	>/<code
-	>remoteUrl</code
-	> see the <a href="administration/node-resource-sources.html#resource-editor"
-	>Rundeck User Manual</a
-	>.</li
-      ></ul
-    ></div
-  ><div id="examples"
-  ><h2
-    ><a href="#TOC"
-      >Examples</a
-      ></h2
-    ><pre
-    ><code
-      >Venkman.local:
+  ></pre
+><p
+>In the second case, the <code
+  >nodename</code
+  > entry is not required.</p
+><h2 id="node-definition"
+><a href="#TOC"
+  >Node Definition</a
+  ></h2
+><p
+>A Node definition consists of a Map with some required and some optional entries.</p
+><p
+>Required Entries:</p
+><dl
+><dt
+  ><code
+    >nodename</code
+    ></dt
+  ><dd
+  ><p
+    >Name of the node, this must be a unique Identifier across nodes within a project</p
+    ></dd
+  ><dt
+  ><code
+    >hostname</code
+    ></dt
+  ><dd
+  ><p
+    >Hostname of the node. This can be any IP Address or hostname to address the node. Since hostname is used to make SSH connections, it is possible to overload the value to include port number. (eg, hostname:port).</p
+    ></dd
+  ><dt
+  ><code
+    >username</code
+    ></dt
+  ><dd
+  ><p
+    >User name to connect to the node via SSH.</p
+    ></dd
+  ></dl
+><p
+>Optional Entries:</p
+><dl
+><dt
+  ><code
+    >description</code
+    ></dt
+  ><dd
+  ><p
+    >A description of the Node</p
+    ></dd
+  ><dt
+  ><code
+    >tags</code
+    ></dt
+  ><dd
+  ><p
+    >A literal with comma-separated tag strings, or a Sequence of literals</p
+    ></dd
+  ><dt
+  ><code
+    >osFamily</code
+    ></dt
+  ><dd
+  ><p
+    >OS Family</p
+    ></dd
+  ><dt
+  ><code
+    >osArch</code
+    ></dt
+  ><dd
+  ><p
+    >OS Architecture</p
+    ></dd
+  ><dt
+  ><code
+    >osName</code
+    ></dt
+  ><dd
+  ><p
+    >OS Name</p
+    ></dd
+  ><dt
+  ><code
+    >osVersion</code
+    ></dt
+  ><dd
+  ><p
+    >OS Version</p
+    ></dd
+  ><dt
+  ><code
+    >editUrl</code
+    ></dt
+  ><dd
+  ><p
+    >URL to an external resource model service.</p
+    ></dd
+  ><dt
+  ><code
+    >remoteUrl</code
+    ></dt
+  ><dd
+  ><p
+    >URL to an external resource model editor service.</p
+    ></dd
+  ><dt
+  ><em
+    >Anything</em
+    ></dt
+  ><dd
+  ><p
+    >Specify any custom attributes about node using a string value.</p
+    ></dd
+  ></dl
+><ul
+><li
+  >For more information about using the <code
+    >editUrl</code
+    >/<code
+    >remoteUrl</code
+    > see the <a href="administration/node-resource-sources.html#resource-editor"
+    >Rundeck User Manual</a
+    >.</li
+  ></ul
+><h2 id="examples"
+><a href="#TOC"
+  >Examples</a
+  ></h2
+><pre
+><code
+  >Venkman.local:
   description: Rundeck server node
   hostname: Venkman.local
   nodename: Venkman.local
@@ -290,12 +284,12 @@ somenode2:
   tags: ''
   username: greg
 </code
-      ></pre
-    ><p
-    >Specify some custom attributes:</p
-    ><pre
-    ><code
-      >bartholemew:
+  ></pre
+><p
+>Specify some custom attributes:</p
+><pre
+><code
+  >bartholemew:
   description: Webapp node
   hostname: bartholemew
   nodename: bartholemew
@@ -304,15 +298,13 @@ somenode2:
   app-port: 550
   https-port: 553
 </code
-      ></pre
-    ><p
-    >The Rundeck source code and all documentation may be downloaded from <a href="https://github.com/dtolabs/rundeck/"
-      ><code
-	>https://github.com/dtolabs/rundeck/</code
-	></a
-      >.</p
-    ></div
-  ></div
+  ></pre
+><p
+>The Rundeck source code and all documentation may be downloaded from <a href="https://github.com/dtolabs/rundeck/"
+  ><code
+    >https://github.com/dtolabs/rundeck/</code
+    ></a
+  >.</p
 >
 </div>
 
@@ -338,7 +330,7 @@ somenode2:
 <br/>
 &copy;2013 <a href="http://simplifyops.com">#SimplifyOps</a>
 <br/>
-<span class="generated-date" title="2013-08-02T22:16:24EDT">2013-08-02T22:16:24EDT</span>
+<span class="generated-date" title="2013-08-03T08:13:56PDT">2013-08-03T08:13:56PDT</span>
   <script type="text/javascript">
   
 

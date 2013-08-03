@@ -81,172 +81,170 @@
     ></ul
   ></div
 >
-<div id="release-1.5"
-><h1
-  ><a href="#TOC"
-    >Release 1.5</a
-    ></h1
-  ><p
-  >Date: 2/21/2013</p
-  ><p
-  >This release introduces a few new features and some bug fixes. The new features required some schema changes to the database, so direct upgrading from 1.4 to 1.5 is not possible. Please read the Upgrading document for upgrade information.</p
-  ><p
-  >There is now a new type of plugin, the Workflow Step Plugin, which should allow rundeck workflows to integrate with more systems in a more direct fashion. These plugins can be either &quot;Workflow Steps&quot; (run once per workflow) or &quot;Node Steps&quot; (run once per node in a workflow.)</p
-  ><p
-  >Steps can now have Error Handlers which run if the step fails. They will be provided with context data about the reason the step failed.</p
-  ><p
-  >Notable Changes:</p
-  ><ul
+<h1 id="release-1.5"
+><a href="#TOC"
+  >Release 1.5</a
+  ></h1
+><p
+>Date: 2/21/2013</p
+><p
+>This release introduces a few new features and some bug fixes. The new features required some schema changes to the database, so direct upgrading from 1.4 to 1.5 is not possible. Please read the Upgrading document for upgrade information.</p
+><p
+>There is now a new type of plugin, the Workflow Step Plugin, which should allow rundeck workflows to integrate with more systems in a more direct fashion. These plugins can be either &quot;Workflow Steps&quot; (run once per workflow) or &quot;Node Steps&quot; (run once per node in a workflow.)</p
+><p
+>Steps can now have Error Handlers which run if the step fails. They will be provided with context data about the reason the step failed.</p
+><p
+>Notable Changes:</p
+><ul
+><li
+  >Step Plugins - Plugins can now be created and used for workflow or node steps.</li
   ><li
-    >Step Plugins - Plugins can now be created and used for workflow or node steps.</li
-    ><li
-    >Error Handlers - Each step in a workflow can now have an error handler that</li
-    ><li
-    >will be run if the step fails. bug fix: Job references in a workflow will now</li
-    ><li
-    >only run once, and not operate as a node-step.</li
-    ></ul
-  ><p
-  >Plugin developers:</p
-  ><p
-  >You will need to update your plugins to work in Rundeck 1.5. Refer to the Developer Guide for more information.</p
-  ><p
-  >Issues:</p
-  ><ul
+  >Error Handlers - Each step in a workflow can now have an error handler that</li
   ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/308"
-      >User profile page broken</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/307"
-      >Update docs for 1.5 release</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/297"
-      >Update sample scripts in plugin docs for best practices conformance</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/296"
-      >allow optional build parameter to rundeckapp to specify use of a local copy of the grails zip</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/293"
-      >expose loglevel for executions</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/290"
-      >script based plugin caching issue</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/289"
-      >rpm/deb rundeck-config needs to be udpated</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/282"
-      >Node dispatch threadcount can be set to blank</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/281"
-      >job import: threadcount does not get set</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/273"
-      >Now running and History views don't use Job view filter</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/272"
-      >History views default to recentFilter=1d, should be all events</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/271"
-      >History project filter is not exact</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/270"
-      >Allow group path in URL of jobs page to filter groups</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/269"
-      >Node dispatch threadcount can be set to blank. export+import fails.</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/268"
-      >Bulk delete of jobs via GUI</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/264"
-      >add release notes to generated docs</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/263"
-      >more compatible rpm dependency for java</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/262"
-      >remove unneeded &quot;rdbsupport&quot; config property for 1.5</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/261"
-      >API: Now running execution project filter is not exact</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/259"
-      >execution output api: xml content problems</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/258"
-      >don't combine spaces for scripts output</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/255"
-      >Job reference picker has incorrect behavior when clicking a group name</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/248"
-      >Error handler failure reason as context data</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/246"
-      >Workflow step plugins</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/241"
-      >Job folder/group display still buggy</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/228"
-      >dispatch -s scriptfile is broken</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/227"
-      >can't delete job option</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/225"
-      >dispatch with url option don't work</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/224"
-      >Job references should run only once within a workflow</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/221"
-      >divide by zero error on system info page</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/218"
-      >workflow step failure handlers</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/183"
-      >make H2 the default rundeck database backend</a
-      ></li
-    ><li
-    ><a href="https://github.com/dtolabs/rundeck/issues/171"
-      >UUID permits spaces</a
-      ></li
-    ></ul
-  ></div
+  >will be run if the step fails. bug fix: Job references in a workflow will now</li
+  ><li
+  >only run once, and not operate as a node-step.</li
+  ></ul
+><p
+>Plugin developers:</p
+><p
+>You will need to update your plugins to work in Rundeck 1.5. Refer to the Developer Guide for more information.</p
+><p
+>Issues:</p
+><ul
+><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/308"
+    >User profile page broken</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/307"
+    >Update docs for 1.5 release</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/297"
+    >Update sample scripts in plugin docs for best practices conformance</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/296"
+    >allow optional build parameter to rundeckapp to specify use of a local copy of the grails zip</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/293"
+    >expose loglevel for executions</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/290"
+    >script based plugin caching issue</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/289"
+    >rpm/deb rundeck-config needs to be udpated</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/282"
+    >Node dispatch threadcount can be set to blank</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/281"
+    >job import: threadcount does not get set</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/273"
+    >Now running and History views don't use Job view filter</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/272"
+    >History views default to recentFilter=1d, should be all events</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/271"
+    >History project filter is not exact</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/270"
+    >Allow group path in URL of jobs page to filter groups</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/269"
+    >Node dispatch threadcount can be set to blank. export+import fails.</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/268"
+    >Bulk delete of jobs via GUI</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/264"
+    >add release notes to generated docs</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/263"
+    >more compatible rpm dependency for java</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/262"
+    >remove unneeded &quot;rdbsupport&quot; config property for 1.5</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/261"
+    >API: Now running execution project filter is not exact</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/259"
+    >execution output api: xml content problems</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/258"
+    >don't combine spaces for scripts output</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/255"
+    >Job reference picker has incorrect behavior when clicking a group name</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/248"
+    >Error handler failure reason as context data</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/246"
+    >Workflow step plugins</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/241"
+    >Job folder/group display still buggy</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/228"
+    >dispatch -s scriptfile is broken</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/227"
+    >can't delete job option</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/225"
+    >dispatch with url option don't work</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/224"
+    >Job references should run only once within a workflow</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/221"
+    >divide by zero error on system info page</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/218"
+    >workflow step failure handlers</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/183"
+    >make H2 the default rundeck database backend</a
+    ></li
+  ><li
+  ><a href="https://github.com/dtolabs/rundeck/issues/171"
+    >UUID permits spaces</a
+    ></li
+  ></ul
 >
 </div>
 
@@ -270,7 +268,7 @@
 <br/>
 &copy;2013 <a href="http://simplifyops.com">#SimplifyOps</a>
 <br/>
-<span class="generated-date" title="2013-08-02T22:16:07EDT">2013-08-02T22:16:07EDT</span>
+<span class="generated-date" title="2013-08-03T08:13:48PDT">2013-08-03T08:13:48PDT</span>
   <script type="text/javascript">
   
 

@@ -66,8 +66,8 @@
     <ul>
         <li class="current"><a href="workflow-step-plugin-development.html">Workflow Step Plugin Development</a></li>
         <li class="toc"><a href="index.html">Developer Guide</a></li>
-        
-        <li class="next"><a href="logging-plugin-development.html">Logging Plugin Development</a></li>
+        <li class="prev"><a href="plugin-development.html">Plugin Development</a></li>
+        <li class="next"><a href="notification-plugin-development.html">Notification Plugin Development</a></li>
     </ul>
 </nav>
 <div id="docbody">
@@ -143,129 +143,119 @@
     ></ul
   ></div
 >
-<div id="about-rundeck-workflow-steps"
-><h2
-  ><a href="#TOC"
-    >About Rundeck Workflow Steps</a
-    ></h2
-  ><p
-  >There are two types of steps in a workflow:</p
-  ><ol style="list-style-type: decimal;"
-  ><li
-    ><strong
-      >Node Steps</strong
-      > - executed on multiple nodes<ul
-      ><li
-	>example: a command or script execution</li
-	></ul
-      ></li
+<h2 id="about-rundeck-workflow-steps"
+><a href="#TOC"
+  >About Rundeck Workflow Steps</a
+  ></h2
+><p
+>There are two types of steps in a workflow:</p
+><ol style="list-style-type: decimal;"
+><li
+  ><strong
+    >Node Steps</strong
+    > - executed on multiple nodes<ul
     ><li
-    ><strong
-      >Workflow Steps</strong
-      > - only executes once in a workflow<ul
-      ><li
-	>example: a Job-Reference step</li
-	></ul
-      ></li
-    ></ol
-  ><p
-  >When there are multiple Nodes to execute on, the Node Steps execute multiple times, although the Workflow Steps will execute only once. Workflow steps are always executed in order, so any sequence of steps will be completed before the next step is executed even if they run on multiple nodes or threads.</p
-  ><p
-  >You can create a plugin to execute either type of step.</p
-  ></div
-><div id="use-cases"
-><h2
-  ><a href="#TOC"
-    >Use cases</a
-    ></h2
-  ><p
-  >There are several reasons to create a Rundeck Step Plugin:</p
-  ><ul
+      >example: a command or script execution</li
+      ></ul
+    ></li
   ><li
-    >You want to take the set of nodes defined for a Job, and use them with some other batch processing system, such as another kind of remote dispatcher or orchestration tool, rather than executing commands on them directly.<ul
-      ><li
-	>You would implement a <a href="#workflow-step-plugin"
-	  >Workflow Step Plugin</a
-	  > plugin which is provided with the set of Nodes</li
-	></ul
-      ></li
+  ><strong
+    >Workflow Steps</strong
+    > - only executes once in a workflow<ul
     ><li
-    >You want to interact with another system on a per-node basis, such as for updating or reporting the state of a Node or process, rather than executing a command on the node<ul
-      ><li
-	>You would implement a <a href="#workflow-node-step-plugin"
-	  >Workflow Node Step Plugin</a
-	  ></li
-	></ul
-      ></li
+      >example: a Job-Reference step</li
+      ></ul
+    ></li
+  ></ol
+><p
+>When there are multiple Nodes to execute on, the Node Steps execute multiple times, although the Workflow Steps will execute only once. Workflow steps are always executed in order, so any sequence of steps will be completed before the next step is executed even if they run on multiple nodes or threads.</p
+><p
+>You can create a plugin to execute either type of step.</p
+><h2 id="use-cases"
+><a href="#TOC"
+  >Use cases</a
+  ></h2
+><p
+>There are several reasons to create a Rundeck Step Plugin:</p
+><ul
+><li
+  >You want to take the set of nodes defined for a Job, and use them with some other batch processing system, such as another kind of remote dispatcher or orchestration tool, rather than executing commands on them directly.<ul
     ><li
-    >You want to wrap a command or script in a simplified user interface and have it executed remotely on nodes<ul
-      ><li
-	>You would implement a <a href="#remote-script-node-step-plugin"
-	  >Remote Script Node Step Plugin</a
-	  > which allows you to define a command or script and declare a custom set of input fields.</li
-	></ul
-      ></li
-    ></ul
-  ></div
-><div id="example-code"
-><h2
-  ><a href="#TOC"
-    >Example code</a
-    ></h2
-  ><p
-  >See the source directory <code
-    >examples/example-java-step-plugin</code
-    > for examples of all three provider types.</p
-  ><ul
+      >You would implement a <a href="#workflow-step-plugin"
+	>Workflow Step Plugin</a
+	> plugin which is provided with the set of Nodes</li
+      ></ul
+    ></li
   ><li
-    >On github: <a href="https://github.com/dtolabs/rundeck/tree/development/examples/example-java-step-plugin"
-      >example-java-step-plugin</a
-      ></li
-    ></ul
-  ></div
-><div id="define-a-plugin-provider-class"
-><h2
-  ><a href="#TOC"
-    >Define a plugin provider class</a
-    ></h2
-  ><p
-  >Refer to the <a href="plugin-development.html#java-plugin-development"
-    >Plugin Development - Java Plugin Development</a
-    > section for information about correct definition of a Plugin class, including packaging as a Jar and annotation.</p
-  ><p
-  >Be sure to use the <code
-    >@Plugin</code
-    > annotation on your provider implementation class to let it be recognized by Rundeck. Your <code
-    >service</code
-    > name should be one of the three listed below. The class <code
-    >com.dtolabs.rundeck.plugins.ServiceNameConstants</code
-    > contains static definitions of all Rundeck Service names.</p
-  ></div
-><div id="workflow-step-plugin-types"
-><h2
-  ><a href="#TOC"
-    >Workflow Step Plugin types</a
-    ></h2
-  ><p
-  >Your plugins can be one of three types. Each plugin type has an associated Java interface.</p
-  ><div id="workflow-step-plugin"
-  ><h3
-    ><a href="#TOC"
-      >Workflow Step Plugin</a
-      ></h3
-    ><p
-    >Annotate your class with <code
-      >@Plugin</code
-      > and use the service name <code
-      >WorkflowStep</code
-      >.</p
-    ><p
-    >Implement the interface <code
-      >com.dtolabs.rundeck.plugins.step.StepPlugin</code
-      >:</p
-    ><pre
-    ><code
-      >/**
+  >You want to interact with another system on a per-node basis, such as for updating or reporting the state of a Node or process, rather than executing a command on the node<ul
+    ><li
+      >You would implement a <a href="#workflow-node-step-plugin"
+	>Workflow Node Step Plugin</a
+	></li
+      ></ul
+    ></li
+  ><li
+  >You want to wrap a command or script in a simplified user interface and have it executed remotely on nodes<ul
+    ><li
+      >You would implement a <a href="#remote-script-node-step-plugin"
+	>Remote Script Node Step Plugin</a
+	> which allows you to define a command or script and declare a custom set of input fields.</li
+      ></ul
+    ></li
+  ></ul
+><h2 id="example-code"
+><a href="#TOC"
+  >Example code</a
+  ></h2
+><p
+>See the source directory <code
+  >examples/example-java-step-plugin</code
+  > for examples of all three provider types.</p
+><ul
+><li
+  >On github: <a href="https://github.com/dtolabs/rundeck/tree/development/examples/example-java-step-plugin"
+    >example-java-step-plugin</a
+    ></li
+  ></ul
+><h2 id="define-a-plugin-provider-class"
+><a href="#TOC"
+  >Define a plugin provider class</a
+  ></h2
+><p
+>Refer to the <a href="plugin-development.html#java-plugin-development"
+  >Plugin Development - Java Plugin Development</a
+  > section for information about correct definition of a Plugin class, including packaging as a Jar and annotation.</p
+><p
+>Be sure to use the <code
+  >@Plugin</code
+  > annotation on your provider implementation class to let it be recognized by Rundeck. Your <code
+  >service</code
+  > name should be one of the three listed below. The class <code
+  >com.dtolabs.rundeck.plugins.ServiceNameConstants</code
+  > contains static definitions of all Rundeck Service names.</p
+><h2 id="workflow-step-plugin-types"
+><a href="#TOC"
+  >Workflow Step Plugin types</a
+  ></h2
+><p
+>Your plugins can be one of three types. Each plugin type has an associated Java interface.</p
+><h3 id="workflow-step-plugin"
+><a href="#TOC"
+  >Workflow Step Plugin</a
+  ></h3
+><p
+>Annotate your class with <code
+  >@Plugin</code
+  > and use the service name <code
+  >WorkflowStep</code
+  >.</p
+><p
+>Implement the interface <code
+  >com.dtolabs.rundeck.plugins.step.StepPlugin</code
+  >:</p
+><pre
+><code
+  >/**
  * Execute the step, return true if the step succeeded.
  *
  * @param context       the plugin step context
@@ -274,32 +264,30 @@
 public boolean executeStep(final PluginStepContext context, final Map&lt;String, Object&gt; configuration)
     throws StepException;
 </code
-      ></pre
-    ><p
-    >Your implementation should return <code
-      >true</code
-      > if it was successful, and <code
-      >false</code
-      > otherwise.</p
-    ></div
-  ><div id="workflow-node-step-plugin"
-  ><h3
-    ><a href="#TOC"
-      >Workflow Node Step Plugin</a
-      ></h3
-    ><p
-    >Annotate your class with <code
-      >@Plugin</code
-      > and use the service name <code
-      >WorkflowNodeStep</code
-      >.</p
-    ><p
-    >Implement the interface <code
-      >com.dtolabs.rundeck.plugins.step.NodeStepPlugin</code
-      ></p
-    ><pre
-    ><code
-      >/**
+  ></pre
+><p
+>Your implementation should return <code
+  >true</code
+  > if it was successful, and <code
+  >false</code
+  > otherwise.</p
+><h3 id="workflow-node-step-plugin"
+><a href="#TOC"
+  >Workflow Node Step Plugin</a
+  ></h3
+><p
+>Annotate your class with <code
+  >@Plugin</code
+  > and use the service name <code
+  >WorkflowNodeStep</code
+  >.</p
+><p
+>Implement the interface <code
+  >com.dtolabs.rundeck.plugins.step.NodeStepPlugin</code
+  ></p
+><pre
+><code
+  >/**
  * Execute the plugin step logic for the given node.
  *
  * @param context       the step context
@@ -313,34 +301,32 @@ public boolean executeNodeStep(final PluginStepContext context,
                                final INodeEntry entry)
     throws NodeStepException;
 </code
-      ></pre
-    ><p
-    >Your implementation should return <code
-      >true</code
-      > if it was successful, and <code
-      >false</code
-      > otherwise.</p
-    ></div
-  ><div id="remote-script-node-step-plugin"
-  ><h3
-    ><a href="#TOC"
-      >Remote Script Node Step Plugin</a
-      ></h3
-    ><p
-    >These are a specialized use-case of the Node Step plugin. They allow you to simply define a command or a script that should be executed on the remote nodes, and Rundeck will handle the remote execution of the command/script via the appropriate services.</p
-    ><p
-    >Annotate your class with <code
-      >@Plugin</code
-      > and use the service name <code
-      >RemoteScriptNodeStep</code
-      ></p
-    ><p
-    >Implement the interface <code
-      >com.dtolabs.rundeck.plugins.step.RemoteScriptNodeStepPlugin</code
-      ></p
-    ><pre
-    ><code
-      >/**
+  ></pre
+><p
+>Your implementation should return <code
+  >true</code
+  > if it was successful, and <code
+  >false</code
+  > otherwise.</p
+><h3 id="remote-script-node-step-plugin"
+><a href="#TOC"
+  >Remote Script Node Step Plugin</a
+  ></h3
+><p
+>These are a specialized use-case of the Node Step plugin. They allow you to simply define a command or a script that should be executed on the remote nodes, and Rundeck will handle the remote execution of the command/script via the appropriate services.</p
+><p
+>Annotate your class with <code
+  >@Plugin</code
+  > and use the service name <code
+  >RemoteScriptNodeStep</code
+  ></p
+><p
+>Implement the interface <code
+  >com.dtolabs.rundeck.plugins.step.RemoteScriptNodeStepPlugin</code
+  ></p
+><pre
+><code
+  >/**
  * Generate a full script or command string to execute on the remote node
  *
  * @param context       the step context
@@ -354,16 +340,16 @@ public GeneratedScript generateScript(final PluginStepContext context,
                                       final INodeEntry entry)
     throws NodeStepException;
 </code
-      ></pre
-    ><p
-    >Your implementation should return a <code
-      >GeneratedScript</code
-      > object. You can make use of the <code
-      >com.dtolabs.rundeck.plugins.step.GeneratedScriptBuilder</code
-      > class to generate the appropriate return type using these two factory methods:</p
-    ><pre
-    ><code
-      >/**
+  ></pre
+><p
+>Your implementation should return a <code
+  >GeneratedScript</code
+  > object. You can make use of the <code
+  >com.dtolabs.rundeck.plugins.step.GeneratedScriptBuilder</code
+  > class to generate the appropriate return type using these two factory methods:</p
+><pre
+><code
+  >/**
  * Create a script
  *
  * @param script the script text
@@ -378,20 +364,18 @@ public static GeneratedScript script(final String script, final String[] args);
  */
 public static GeneratedScript command(final String... command);
 </code
-      ></pre
-    ></div
-  ><div id="step-context-information"
-  ><h3
-    ><a href="#TOC"
-      >Step context information</a
-      ></h3
-    ><p
-    >Each plugin is passed a <code
-      >PluginStepContext</code
-      > instance that provides access to details about the step and its configuration:</p
-    ><pre
-    ><code
-      >public interface PluginStepContext {
+  ></pre
+><h3 id="step-context-information"
+><a href="#TOC"
+  >Step context information</a
+  ></h3
+><p
+>Each plugin is passed a <code
+  >PluginStepContext</code
+  > instance that provides access to details about the step and its configuration:</p
+><pre
+><code
+  >public interface PluginStepContext {
     /**
      * Return the logger
      */
@@ -419,181 +403,173 @@ public static GeneratedScript command(final String... command);
     public List&lt;Integer&gt; getStepContext();
 }
 </code
-      ></pre
-    ></div
-  ></div
-><div id="plugin-descriptions"
-><h2
-  ><a href="#TOC"
-    >Plugin Descriptions</a
-    ></h2
-  ><p
-  >To define a plugin that presents custom GUI configuration properties and/or uses Project/Framework level configuration, you need to provide a Description of your plugin. The Description defines metadata about the plugin, such as the display name and descriptive text, as well as the list of all configuration Properties that it supports.</p
-  ><p
-  >There are several ways to declare your plugin's Description:</p
-  ><p
-  ><strong
-    >Annotations</strong
-    ></p
-  ><p
-  >The simplest way to declare your plugin description is via <a href="#description-annotations"
-    >Description Annotations</a
-    > as described in the following section.</p
-  ><p
-  ><strong
-    >Collaborator interface</strong
-    ></p
-  ><p
-  >Implement the <code
-    >com.dtolabs.rundeck.plugins.util.DescriptionBuilder#Collaborator</code
-    > interface in your plugin class, and it will be given an opportunity to perform actions on the Builder object before it finally constructs a Description.</p
-  ><p
-  >You can use this in addition to the <em
-    >Annotations</em
-    > method if you want to modify the static annotation values.</p
-  ><p
-  ><strong
-    >Describable interface</strong
-    ></p
-  ><p
-  >If you want to build the Description object yourself, you can do so by implementing the <code
-    >com.dtolabs.rundeck.core.plugins.configuration.Describable</code
-    > interface. Return a <code
-    >com.dtolabs.rundeck.core.plugins.configuration.Description</code
-    > instance. You can construct one by using the <code
-    >com.dtolabs.rundeck.plugins.util.DescriptionBuilder</code
-    > builder class.</p
-  ><p
-  >This mechanism will bypass the use of Annotations to provide the description.</p
-  ></div
-><div id="description-annotations"
-><h2
-  ><a href="#TOC"
-    >Description Annotations</a
-    ></h2
-  ><p
-  >You can use annotations to add metadata about your plugin to the class definition itself, and Rundeck will extract that metadata for use in displaying the plugin information and configuration properties in the GUI, as well as for applying the runtime configuration values to your plugin class instance when it is being executed.</p
-  ><div id="plugin-information"
-  ><h3
-    ><a href="#TOC"
-      >Plugin information</a
-      ></h3
-    ><p
-    >You can define the display name, and descriptive text about your plugin by adding a <code
-      >com.dtolabs.rundeck.plugins.descriptions.PluginDescription</code
-      > annotation to your plugin class.</p
-    ><p
-    >Attributes of <code
-      >@PluginDescription</code
-      >:</p
-    ><ul
-    ><li
-      ><code
-	>title</code
-	> - the display name for your plugin</li
-      ><li
-      ><code
-	>description</code
-	> - descriptive text shown next to the display name</li
-      ></ul
-    ><p
-    >Example:</p
-    ><pre
-    ><code
-      >@Plugin(name=&quot;myplugin&quot;, service=ServiceNameConstants.WorkflowStep)
+  ></pre
+><h2 id="plugin-descriptions"
+><a href="#TOC"
+  >Plugin Descriptions</a
+  ></h2
+><p
+>To define a plugin that presents custom GUI configuration properties and/or uses Project/Framework level configuration, you need to provide a Description of your plugin. The Description defines metadata about the plugin, such as the display name and descriptive text, as well as the list of all configuration Properties that it supports.</p
+><p
+>There are several ways to declare your plugin's Description:</p
+><p
+><strong
+  >Annotations</strong
+  ></p
+><p
+>The simplest way to declare your plugin description is via <a href="#description-annotations"
+  >Description Annotations</a
+  > as described in the following section.</p
+><p
+><strong
+  >Collaborator interface</strong
+  ></p
+><p
+>Implement the <code
+  >com.dtolabs.rundeck.plugins.util.DescriptionBuilder#Collaborator</code
+  > interface in your plugin class, and it will be given an opportunity to perform actions on the Builder object before it finally constructs a Description.</p
+><p
+>You can use this in addition to the <em
+  >Annotations</em
+  > method if you want to modify the static annotation values.</p
+><p
+><strong
+  >Describable interface</strong
+  ></p
+><p
+>If you want to build the Description object yourself, you can do so by implementing the <code
+  >com.dtolabs.rundeck.core.plugins.configuration.Describable</code
+  > interface. Return a <code
+  >com.dtolabs.rundeck.core.plugins.configuration.Description</code
+  > instance. You can construct one by using the <code
+  >com.dtolabs.rundeck.plugins.util.DescriptionBuilder</code
+  > builder class.</p
+><p
+>This mechanism will bypass the use of Annotations to provide the description.</p
+><h2 id="description-annotations"
+><a href="#TOC"
+  >Description Annotations</a
+  ></h2
+><p
+>You can use annotations to add metadata about your plugin to the class definition itself, and Rundeck will extract that metadata for use in displaying the plugin information and configuration properties in the GUI, as well as for applying the runtime configuration values to your plugin class instance when it is being executed.</p
+><h3 id="plugin-information"
+><a href="#TOC"
+  >Plugin information</a
+  ></h3
+><p
+>You can define the display name, and descriptive text about your plugin by adding a <code
+  >com.dtolabs.rundeck.plugins.descriptions.PluginDescription</code
+  > annotation to your plugin class.</p
+><p
+>Attributes of <code
+  >@PluginDescription</code
+  >:</p
+><ul
+><li
+  ><code
+    >title</code
+    > - the display name for your plugin</li
+  ><li
+  ><code
+    >description</code
+    > - descriptive text shown next to the display name</li
+  ></ul
+><p
+>Example:</p
+><pre
+><code
+  >@Plugin(name=&quot;myplugin&quot;, service=ServiceNameConstants.WorkflowStep)
 @PluginDescription(title=&quot;My Plugin&quot;, description=&quot;Performs a custom step&quot;)
 public class MyPlugin implements StepPlugin{
     ...
 }
 </code
-      ></pre
-    ><p
-    ><em
-      >Note:</em
-      > If you do not add this annotation, the plugin display name will be the same as the provider name, and will have no descriptive text when displayed.</p
-    ></div
-  ><div id="properties"
-  ><h3
-    ><a href="#TOC"
-      >Properties</a
-      ></h3
-    ><p
-    >You can annotate individual fields in your class to define the configuration properties of your class. These are the supported Java types for annotated fields:</p
+  ></pre
+><p
+><em
+  >Note:</em
+  > If you do not add this annotation, the plugin display name will be the same as the provider name, and will have no descriptive text when displayed.</p
+><h3 id="properties"
+><a href="#TOC"
+  >Properties</a
+  ></h3
+><p
+>You can annotate individual fields in your class to define the configuration properties of your class. These are the supported Java types for annotated fields:</p
+><ul
+><li
+  >String</li
+  ><li
+  >Boolean/boolean</li
+  ><li
+  >Integer/integer, Long/long</li
+  ></ul
+><p
+>When your plugin is executed, the fields will be set to the appropriate values based on their default value, scope, and any value set by the user in the workflow configuration.</p
+><p
+>These annotation classes are used:</p
+><ul
+><li
+  ><code
+    >com.dtolabs.rundeck.plugins.descriptions.PluginProperty</code
+    > - Declares a class field as a plugin configuration property</li
+  ><li
+  ><code
+    >com.dtolabs.rundeck.plugins.descriptions.SelectValues</code
+    > - Declares a String property to be a &quot;Select&quot; property, which defines a set of input values that can be chosen from a list</li
+  ></ul
+><p
+>Attributes:</p
+><ul
+><li
+  ><code
+    >@PluginProperty</code
     ><ul
     ><li
-      >String</li
+      ><code
+	>name</code
+	> - the property identifier name</li
       ><li
-      >Boolean/boolean</li
+      ><code
+	>title</code
+	> - the property display name</li
       ><li
-      >Integer/integer, Long/long</li
+      ><code
+	>description</code
+	> - descriptive text</li
+      ><li
+      ><code
+	>defaultValue</code
+	> - default value</li
+      ><li
+      ><code
+	>required</code
+	> - (boolean) whether the property is required to have an input value. Default: false.</li
+      ><li
+      ><code
+	>scope</code
+	> (PropertyScope) the resolution scope for the property value</li
       ></ul
-    ><p
-    >When your plugin is executed, the fields will be set to the appropriate values based on their default value, scope, and any value set by the user in the workflow configuration.</p
-    ><p
-    >These annotation classes are used:</p
+    ></li
+  ><li
+  ><code
+    >@SelectValues</code
     ><ul
     ><li
       ><code
-	>com.dtolabs.rundeck.plugins.descriptions.PluginProperty</code
-	> - Declares a class field as a plugin configuration property</li
+	>values</code
+	> (String[]) the set of values that can be chosen</li
       ><li
       ><code
-	>com.dtolabs.rundeck.plugins.descriptions.SelectValues</code
-	> - Declares a String property to be a &quot;Select&quot; property, which defines a set of input values that can be chosen from a list</li
+	>freeSelect</code
+	> (boolean) whether the user can enter values not in the list. Default: false.</li
       ></ul
-    ><p
-    >Attributes:</p
-    ><ul
-    ><li
-      ><code
-	>@PluginProperty</code
-	><ul
-	><li
-	  ><code
-	    >name</code
-	    > - the property identifier name</li
-	  ><li
-	  ><code
-	    >title</code
-	    > - the property display name</li
-	  ><li
-	  ><code
-	    >description</code
-	    > - descriptive text</li
-	  ><li
-	  ><code
-	    >defaultValue</code
-	    > - default value</li
-	  ><li
-	  ><code
-	    >required</code
-	    > - (boolean) whether the property is required to have an input value. Default: false.</li
-	  ><li
-	  ><code
-	    >scope</code
-	    > (PropertyScope) the resolution scope for the property value</li
-	  ></ul
-	></li
-      ><li
-      ><code
-	>@SelectValues</code
-	><ul
-	><li
-	  ><code
-	    >values</code
-	    > (String[]) the set of values that can be chosen</li
-	  ><li
-	  ><code
-	    >freeSelect</code
-	    > (boolean) whether the user can enter values not in the list. Default: false.</li
-	  ></ul
-	></li
-      ></ul
-    ><p
-    >Examples:</p
-    ><pre
-    ><code
-      >@PluginProperty(title = &quot;Name&quot;, description = &quot;What is your name?&quot;, required = true)
+    ></li
+  ></ul
+><p
+>Examples:</p
+><pre
+><code
+  >@PluginProperty(title = &quot;Name&quot;, description = &quot;What is your name?&quot;, required = true)
 private String name;
 
 @PluginProperty(title = &quot;Age&quot;, description = &quot;How old are you?&quot;)
@@ -605,133 +581,127 @@ private int amount;
 @SelectValues(values = {&quot;banana&quot;, &quot;lemon&quot;, &quot;orange&quot;}, freeSelect = true)
 private String fruit;
 </code
-      ></pre
-    ><div id="property-scopes"
-    ><h4
-      ><a href="#TOC"
-	>Property Scopes</a
-	></h4
-      ><p
-      >You can define the scope for a property by adding <code
-	>scope</code
-	> to the PluginProperty annotation. Refer to the class <code
-	>com.dtolabs.rundeck.core.plugins.configuration.PropertyScope</code
-	>. These are the available scopes and how the property values can be resolved:</p
-      ><ul
-      ><li
-	><code
-	  >Framework</code
-	  > - Only framework properties</li
-	><li
-	><code
-	  >ProjectOnly</code
-	  > - Only Project properties</li
-	><li
-	><code
-	  >Project</code
-	  > - Project and Framework properties</li
-	><li
-	><code
-	  >InstanceOnly</code
-	  > - Only instance properties</li
-	><li
-	><code
-	  >Instance</code
-	  > - Instance and all earlier levels</li
-	></ul
-      ><p
-      >The default effective scope if you do not specify it in the annotation is <code
-	>InstanceOnly</code
-	>.</p
-      ><p
-      >When resolving a property in a Project or Framework scope, the following properties will be searched:</p
-      ><ul
-      ><li
-	>Framework scope<ul
-	  ><li
-	    >file: <code
-	      >$RDBASE/etc/framework.properties</code
-	      ></li
-	    ><li
-	    >property: <code
-	      >framework.plugin.[ServiceName].[providerName].[propertyname]</code
-	      ></li
-	    ></ul
-	  ></li
-	><li
-	>Project scope<ul
-	  ><li
-	    >file: <code
-	      >$RDBASE/projects/[ProjectName]/etc/project.properties</code
-	      ></li
-	    ><li
-	    >property: <code
-	      >project.plugin.[ServiceName].[providerName].[propertyname]</code
-	      ></li
-	    ></ul
-	  ></li
-	></ul
-      ></div
-    ></div
-  ></div
-><div id="script-based-step-plugins"
-><h2
-  ><a href="#TOC"
-    >Script-based Step Plugins</a
-    ></h2
-  ><p
-  ><em
-    >Note:</em
-    > Currently these type of plugins can be implemented as script-based plugins:</p
-  ><ul
-  ><li
-    >Node Steps - the plugin will execute the script <em
-      >locally</em
-      > on the Rundeck server for each node</li
-    ><li
-    >Remote Script Node Steps - the plugin will execute the script <em
-      >remotely</em
-      > on each node</li
-    ></ul
-  ><p
-  >See the <a href="plugin-development.html#script-plugin-development"
-    >Plugin Development - Script Plugin Development</a
-    > for the basics of developing script-based plugins for Rundeck.</p
-  ><p
-  >Use the service name for the plugin type:</p
-  ><ul
-  ><li
-    ><code
-      >WorkflowNodeStep</code
-      ></li
-    ><li
-    ><code
-      >RemoteScriptNodeStep</code
-      ></li
-    ></ul
-  ><p
-  >For configuration properties, see the <a href="plugin-development.html#configurable-resource-model-source-script-plugin"
-    >Plugin Development - Configurable Resource Model Source Script Plugin</a
-    >.</p
-  ><p
-  >To define property scopes, add a <code
-    >scope</code
-    > entry in the map for a configuration property:</p
-  ><pre
+  ></pre
+><h4 id="property-scopes"
+><a href="#TOC"
+  >Property Scopes</a
+  ></h4
+><p
+>You can define the scope for a property by adding <code
+  >scope</code
+  > to the PluginProperty annotation. Refer to the class <code
+  >com.dtolabs.rundeck.core.plugins.configuration.PropertyScope</code
+  >. These are the available scopes and how the property values can be resolved:</p
+><ul
+><li
   ><code
-    >      config:
+    >Framework</code
+    > - Only framework properties</li
+  ><li
+  ><code
+    >ProjectOnly</code
+    > - Only Project properties</li
+  ><li
+  ><code
+    >Project</code
+    > - Project and Framework properties</li
+  ><li
+  ><code
+    >InstanceOnly</code
+    > - Only instance properties</li
+  ><li
+  ><code
+    >Instance</code
+    > - Instance and all earlier levels</li
+  ></ul
+><p
+>The default effective scope if you do not specify it in the annotation is <code
+  >InstanceOnly</code
+  >.</p
+><p
+>When resolving a property in a Project or Framework scope, the following properties will be searched:</p
+><ul
+><li
+  >Framework scope<ul
+    ><li
+      >file: <code
+	>$RDBASE/etc/framework.properties</code
+	></li
+      ><li
+      >property: <code
+	>framework.plugin.[ServiceName].[providerName].[propertyname]</code
+	></li
+      ></ul
+    ></li
+  ><li
+  >Project scope<ul
+    ><li
+      >file: <code
+	>$RDBASE/projects/[ProjectName]/etc/project.properties</code
+	></li
+      ><li
+      >property: <code
+	>project.plugin.[ServiceName].[providerName].[propertyname]</code
+	></li
+      ></ul
+    ></li
+  ></ul
+><h2 id="script-based-step-plugins"
+><a href="#TOC"
+  >Script-based Step Plugins</a
+  ></h2
+><p
+><em
+  >Note:</em
+  > Currently these type of plugins can be implemented as script-based plugins:</p
+><ul
+><li
+  >Node Steps - the plugin will execute the script <em
+    >locally</em
+    > on the Rundeck server for each node</li
+  ><li
+  >Remote Script Node Steps - the plugin will execute the script <em
+    >remotely</em
+    > on each node</li
+  ></ul
+><p
+>See the <a href="plugin-development.html#script-plugin-development"
+  >Plugin Development - Script Plugin Development</a
+  > for the basics of developing script-based plugins for Rundeck.</p
+><p
+>Use the service name for the plugin type:</p
+><ul
+><li
+  ><code
+    >WorkflowNodeStep</code
+    ></li
+  ><li
+  ><code
+    >RemoteScriptNodeStep</code
+    ></li
+  ></ul
+><p
+>For configuration properties, see the <a href="plugin-development.html#configurable-resource-model-source-script-plugin"
+  >Plugin Development - Configurable Resource Model Source Script Plugin</a
+  >.</p
+><p
+>To define property scopes, add a <code
+  >scope</code
+  > entry in the map for a configuration property:</p
+><pre
+><code
+  >      config:
         - type: Integer
           name: count
           title: Count
           description: Enter the number of nodes to generate
           scope: Project
 </code
-    ></pre
-  ><p
-  >The scope can be one of those defined in the <a href="#property-scopes"
-    >Property Scopes</a
-    > section.</p
-  ></div
+  ></pre
+><p
+>The scope can be one of those defined in the <a href="#property-scopes"
+  >Property Scopes</a
+  > section.</p
 >
 </div>
 
@@ -739,8 +709,8 @@ private String fruit;
     <ul>
         <li class="current"><a href="workflow-step-plugin-development.html">Workflow Step Plugin Development</a></li>
         <li class="toc"><a href="index.html">Developer Guide</a></li>
-        
-        <li class="next"><a href="logging-plugin-development.html">Logging Plugin Development</a></li>
+        <li class="prev"><a href="plugin-development.html">Plugin Development</a></li>
+        <li class="next"><a href="notification-plugin-development.html">Notification Plugin Development</a></li>
     </ul>
 </nav>
 <nav class="breadcrumb bottom">
@@ -755,7 +725,7 @@ private String fruit;
 <br/>
 &copy;2013 <a href="http://simplifyops.com">#SimplifyOps</a>
 <br/>
-<span class="generated-date" title="2013-08-02T22:16:07EDT">2013-08-02T22:16:07EDT</span>
+<span class="generated-date" title="2013-08-03T08:13:48PDT">2013-08-03T08:13:48PDT</span>
   <script type="text/javascript">
   
 

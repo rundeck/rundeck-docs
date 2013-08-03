@@ -220,71 +220,65 @@
   >Started SslSocketConnector@0.0.0.0:4443
 </code
   ></pre
-><div id="securing-passwords"
-><h3
-  ><a href="#TOC"
-    >Securing passwords</a
-    ></h3
-  ><p
-  >Passwords do not have to be stored in the ssl.config. If they are not set, then the server will prompt on the console for a user to enter the passwords.</p
-  ><p
-  >If you want the server to start without prompting then you need to set the passwords in the config file.</p
-  ><p
-  >The passwords stored in ssl.properties can be obfuscated so they are not in plaintext:</p
-  ><p
-  >Run the jetty &quot;Password&quot; utility:</p
-  ><pre
-  ><code
-    >$ java -cp server/lib/jetty-6.1.21.jar:server/lib/jetty-util-6.1.21.jar org.mortbay.jetty.security.Password &lt;password&gt;
+><h3 id="securing-passwords"
+><a href="#TOC"
+  >Securing passwords</a
+  ></h3
+><p
+>Passwords do not have to be stored in the ssl.config. If they are not set, then the server will prompt on the console for a user to enter the passwords.</p
+><p
+>If you want the server to start without prompting then you need to set the passwords in the config file.</p
+><p
+>The passwords stored in ssl.properties can be obfuscated so they are not in plaintext:</p
+><p
+>Run the jetty &quot;Password&quot; utility:</p
+><pre
+><code
+  >$ java -cp server/lib/jetty-6.1.21.jar:server/lib/jetty-util-6.1.21.jar org.mortbay.jetty.security.Password &lt;password&gt;
 </code
-    ></pre
-  ><p
-  >This will produce two lines, one starting with &quot;OBF:&quot;</p
-  ><p
-  >Use the entire OBF: output as the password in the ssl.properties file, eg:</p
-  ><pre
-  ><code
-    >key.password=OBF:1lk2j1lkj321lj13lj
+  ></pre
+><p
+>This will produce two lines, one starting with &quot;OBF:&quot;</p
+><p
+>Use the entire OBF: output as the password in the ssl.properties file, eg:</p
+><pre
+><code
+  >key.password=OBF:1lk2j1lkj321lj13lj
 </code
-    ></pre
-  ></div
-><div id="troubleshooting-keystore"
-><h3
-  ><a href="#TOC"
-    >Troubleshooting keystore</a
-    ></h3
+  ></pre
+><h3 id="troubleshooting-keystore"
+><a href="#TOC"
+  >Troubleshooting keystore</a
+  ></h3
+><p
+>Some common error messages and causes:</p
+><dl
+><dt
+  >java.io.IOException: Keystore was tampered with, or password was incorrect</dt
+  ><dd
   ><p
-  >Some common error messages and causes:</p
-  ><dl
+    >A password specified in the file was incorrect.</p
+    ></dd
   ><dt
-    >java.io.IOException: Keystore was tampered with, or password was incorrect</dt
-    ><dd
-    ><p
-      >A password specified in the file was incorrect.</p
-      ></dd
-    ><dt
-    >2010-12-02 10:07:29.958::WARN: failed SslSocketConnector@0.0.0.0:4443: java.io.FileNotFoundException: /Users/greg/rundeck/etc/keystore (No such file or directory)</dt
-    ><dd
-    ><p
-      >The keystore/truststore file specified in ssl.properties doesn't exist</p
-      ></dd
-    ></dl
-  ></div
-><div id="optional-pem-export"
-><h3
-  ><a href="#TOC"
-    >Optional PEM export</a
-    ></h3
+  >2010-12-02 10:07:29.958::WARN: failed SslSocketConnector@0.0.0.0:4443: java.io.FileNotFoundException: /Users/greg/rundeck/etc/keystore (No such file or directory)</dt
+  ><dd
   ><p
-  >You can export the PEM formatted server certificate for use by HTTPS clients (web browsers or e.g. curl).</p
-  ><p
-  >Export pem cacert for use by e.g. curl:</p
-  ><pre
-  ><code
-    >keytool -export -keystore etc/keystore -rfc -alias rundeck &gt; rundeck.server.pem
+    >The keystore/truststore file specified in ssl.properties doesn't exist</p
+    ></dd
+  ></dl
+><h3 id="optional-pem-export"
+><a href="#TOC"
+  >Optional PEM export</a
+  ></h3
+><p
+>You can export the PEM formatted server certificate for use by HTTPS clients (web browsers or e.g. curl).</p
+><p
+>Export pem cacert for use by e.g. curl:</p
+><pre
+><code
+  >keytool -export -keystore etc/keystore -rfc -alias rundeck &gt; rundeck.server.pem
 </code
-    ></pre
-  ></div
+  ></pre
 >
 </div>
 
@@ -308,7 +302,7 @@
 <br/>
 &copy;2013 <a href="http://simplifyops.com">#SimplifyOps</a>
 <br/>
-<span class="generated-date" title="2013-08-02T22:16:07EDT">2013-08-02T22:16:07EDT</span>
+<span class="generated-date" title="2013-08-03T08:13:48PDT">2013-08-03T08:13:48PDT</span>
   <script type="text/javascript">
   
 

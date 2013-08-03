@@ -107,141 +107,127 @@
     ></ul
   ></div
 >
-<div id="name"
-><h1
-  ><a href="#TOC"
-    >NAME</a
-    ></h1
+<h1 id="name"
+><a href="#TOC"
+  >NAME</a
+  ></h1
+><p
+>rd-project - Create projects.</p
+><h1 id="synopsis"
+><a href="#TOC"
+  >SYNOPSIS</a
+  ></h1
+><p
+>rd-project [-vh] -a create -p projectname [ --property=value ]...</p
+><h1 id="description"
+><a href="#TOC"
+  >DESCRIPTION</a
+  ></h1
+><p
+>The rd-project command is used to create projects in the Rundeck base directory.</p
+><p
+>The command will create the necessary directory structure and configuration files, and can be used to configure the project's properties.</p
+><h1 id="options"
+><a href="#TOC"
+  >OPTIONS</a
+  ></h1
+><dl
+><dt
+  ><code
+    >-h</code
+    ></dt
+  ><dd
   ><p
-  >rd-project - Create projects.</p
-  ></div
-><div id="synopsis"
-><h1
-  ><a href="#TOC"
-    >SYNOPSIS</a
-    ></h1
-  ><p
-  >rd-project [-vh] -a create -p projectname [ --property=value ]...</p
-  ></div
-><div id="description"
-><h1
-  ><a href="#TOC"
-    >DESCRIPTION</a
-    ></h1
-  ><p
-  >The rd-project command is used to create projects in the Rundeck base directory.</p
-  ><p
-  >The command will create the necessary directory structure and configuration files, and can be used to configure the project's properties.</p
-  ></div
-><div id="options"
-><h1
-  ><a href="#TOC"
-    >OPTIONS</a
-    ></h1
-  ><dl
+    >displays the usage information presented above.</p
+    ></dd
   ><dt
-    ><code
-      >-h</code
-      ></dt
-    ><dd
-    ><p
-      >displays the usage information presented above.</p
-      ></dd
-    ><dt
-    ><code
-      >-v</code
-      ></dt
-    ><dd
-    ><p
-      >run verbose.</p
-      ></dd
-    ><dt
-    ><code
-      >-a</code
-      ></dt
-    ><dd
-    ><p
-      >The action name. Only &quot;create&quot; is supported.</p
-      ></dd
-    ><dt
-    ><code
-      >-p</code
-      ></dt
-    ><dd
-    ><p
-      >The project name</p
-      ></dd
-    ><dt
-    ><code
-      >--property=value</code
-      ></dt
-    ><dd
-    ><p
-      >Specify property values for the project's configuration file. Include one or more --property=value combinations.</p
-      ></dd
-    ></dl
-  ></div
-><div id="environment-variables"
-><h1
-  ><a href="#TOC"
-    >ENVIRONMENT VARIABLES</a
-    ></h1
+  ><code
+    >-v</code
+    ></dt
+  ><dd
   ><p
-  >The following environment variables are assumed during the execution of rd-setup:</p
-  ><ul
+    >run verbose.</p
+    ></dd
+  ><dt
+  ><code
+    >-a</code
+    ></dt
+  ><dd
+  ><p
+    >The action name. Only &quot;create&quot; is supported.</p
+    ></dd
+  ><dt
+  ><code
+    >-p</code
+    ></dt
+  ><dd
+  ><p
+    >The project name</p
+    ></dd
+  ><dt
+  ><code
+    >--property=value</code
+    ></dt
+  ><dd
+  ><p
+    >Specify property values for the project's configuration file. Include one or more --property=value combinations.</p
+    ></dd
+  ></dl
+><h1 id="environment-variables"
+><a href="#TOC"
+  >ENVIRONMENT VARIABLES</a
+  ></h1
+><p
+>The following environment variables are assumed during the execution of rd-setup:</p
+><ul
+><li
+  ><p
+    >JAVA_HOME :Java installation directory</p
+    ></li
   ><li
-    ><p
-      >JAVA_HOME :Java installation directory</p
-      ></li
-    ><li
-    ><p
-      >RDECK_BASE : Rundeck framework instance directory</p
-      ></li
-    ></ul
-  ></div
-><div id="execution"
-><h1
-  ><a href="#TOC"
-    >EXECUTION</a
-    ></h1
   ><p
-  ><em
-    >Examples</em
-    ></p
-  ><p
-  >Create a new project named &quot;production&quot;:</p
-  ><pre
-  ><code
-    >rd-project -a create -p production
+    >RDECK_BASE : Rundeck framework instance directory</p
+    ></li
+  ></ul
+><h1 id="execution"
+><a href="#TOC"
+  >EXECUTION</a
+  ></h1
+><p
+><em
+  >Examples</em
+  ></p
+><p
+>Create a new project named &quot;production&quot;:</p
+><pre
+><code
+  >rd-project -a create -p production
 </code
-    ></pre
-  ><p
-  >Create a new project and specify the &quot;project.ssh-keypath&quot; value as well as a URL for the &quot;project.resources.url&quot;</p
-  ><pre
-  ><code
-    >rd-project -a create -p production --project.ssh-keypath=/path/to/keyfile \
+  ></pre
+><p
+>Create a new project and specify the &quot;project.ssh-keypath&quot; value as well as a URL for the &quot;project.resources.url&quot;</p
+><pre
+><code
+  >rd-project -a create -p production --project.ssh-keypath=/path/to/keyfile \
 --project.resources.url=http://example.com/nodes
 </code
-    ></pre
-  ></div
-><div id="see-also"
-><h1
-  ><a href="#TOC"
-    >SEE ALSO</a
-    ></h1
-  ><p
-  ><a href="rd-setup.html"
-    ><code
-      >rd-setup</code
-      > (1)</a
-    >.</p
-  ><p
-  >The Rundeck source code and all documentation may be downloaded from <a href="https://github.com/dtolabs/rundeck/"
-    ><code
-      >https://github.com/dtolabs/rundeck/</code
-      ></a
-    >.</p
-  ></div
+  ></pre
+><h1 id="see-also"
+><a href="#TOC"
+  >SEE ALSO</a
+  ></h1
+><p
+><a href="rd-setup.html"
+  ><code
+    >rd-setup</code
+    > (1)</a
+  >.</p
+><p
+>The Rundeck source code and all documentation may be downloaded from <a href="https://github.com/dtolabs/rundeck/"
+  ><code
+    >https://github.com/dtolabs/rundeck/</code
+    ></a
+  >.</p
 >
 </div>
 
@@ -267,7 +253,7 @@
 <br/>
 &copy;2013 <a href="http://simplifyops.com">#SimplifyOps</a>
 <br/>
-<span class="generated-date" title="2013-08-02T22:16:24EDT">2013-08-02T22:16:24EDT</span>
+<span class="generated-date" title="2013-08-03T08:13:56PDT">2013-08-03T08:13:56PDT</span>
   <script type="text/javascript">
   
 
