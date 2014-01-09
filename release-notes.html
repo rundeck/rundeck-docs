@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<div class="rundecksite">
+<nav class="site" >
+      <ul  class="container_12">
+    <li class="item index grid_2 alpha">
+    <a href="http://rundeck.org/index.html">
+      <h1 class="brand">Rundeck</h1>
+      <p class="rd_version">Open-Source Workflow Automation</p>
+      </a>
+    </li>
+    <li class="item about grid_2 selected">
+      <a href="http://rundeck.org/about.html">
+        <h1>About</h1>
+        <p>News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help grid_2">
+      <a href="http://rundeck.org/help.html">
+        <h1>Get Help</h1>
+        <p>IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins grid_2">
+      <a href="http://rundeck.org/plugins/index.html">
+        <h1>Plugins</h1>
+        <p>Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads grid_2 omega">
+    <a href="http://rundeck.org/downloads.html">
+      <h1>Download</h1>
+      <p class="rd_version">2.0.0-beta1</p>
+      </a>
+    </li>
+    <li class="grid_2">
+        <form action="http://rundeck.org/search/">
+            <input type="search" name="q" placeholder="search docs"/>
+        </form>
+    </li>
+<div class="clear"></div>
+</ul>
+    </nav>
+    
+</div>
+
+<nav class="page top">
+    <ul>
+        <li class="current"><a href="release-notes.html">Release Notes</a></li>
+        <li class="toc"><a href="index.html">Rundeck Documentation (2.0.0-beta1)</a></li>
+        
+        
+    </ul>
+</nav>
+<div id="docbody">
+<div id="TOC"
+><ul
+  ><li
+    ><a href="#release-2.0.0-beta1"
+      >Release 2.0.0-beta1</a
+      ><ul
+      ><li
+	><a href="#beta1"
+	  >Beta1</a
+	  ></li
+	><li
+	><a href="#notable-changes"
+	  >Notable Changes</a
+	  ></li
+	><li
+	><a href="#enhancements"
+	  >Enhancements</a
+	  ></li
+	><li
+	><a href="#acknowledgements"
+	  >Acknowledgements</a
+	  ></li
+	><li
+	><a href="#issues"
+	  >Issues</a
+	  ></li
+	></ul
+      ></li
+    ></ul
+  ></div
+>
+<div id="release-2.0.0-beta1"
+><h1
+  ><a href="#TOC"
+    >Release 2.0.0-beta1</a
+    ></h1
+  ><p
+  >Date: 2014-01-09</p
+  ><p
+  >Rundeck 2.0.0-beta1 introduces a large number of major changes, both enhancements and bug fixes, that build on top of the work done for Rundeck 2.0.0-alpha1</p
+  ><div id="beta1"
+  ><h2
+    ><a href="#TOC"
+      >Beta1</a
+      ></h2
+    ><p
+    >This is the first &quot;beta&quot; for Rundeck 2.0, please read these notes:</p
+    ><ul
+    ><li
+      >Upgrading from Rundeck 1.6 is not yet described in the documentation. As such, if you want to use your 1.6 projects, please do a project Export and then an import into a clean install of rundeck 2.0 beta1.</li
+      ><li
+      >There are probably some bugs due to some of the new features and updates</li
+      ></ul
+    ><p
+    >Please report bugs you find:</p
+    ><ul
+    ><li
+      >Github Issues: <a href="https://github.com/dtolabs/rundeck/issues"
+	><code
+	  >https://github.com/dtolabs/rundeck/issues</code
+	  ></a
+	></li
+      ><li
+      >Mailing list: <script type="text/javascript"
+	>
+<!--
+h='&#x67;&#x6f;&#x6f;&#x67;&#108;&#x65;&#x67;&#114;&#x6f;&#x75;&#112;&#x73;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#114;&#x75;&#110;&#100;&#x65;&#x63;&#x6b;&#x2d;&#100;&#x69;&#x73;&#x63;&#x75;&#x73;&#x73;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'<code>'+e+'</code>'+'<\/'+'a'+'>');
+// -->
+</script
+	><noscript
+	>&#114;&#x75;&#110;&#100;&#x65;&#x63;&#x6b;&#x2d;&#100;&#x69;&#x73;&#x63;&#x75;&#x73;&#x73;&#32;&#x61;&#116;&#32;&#x67;&#x6f;&#x6f;&#x67;&#108;&#x65;&#x67;&#114;&#x6f;&#x75;&#112;&#x73;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;</noscript
+	></li
+      ><li
+      >IRC: #rundeck on freenode.net (<a href="http://webchat.freenode.net/?nick=rundeckuser.&amp;channels=rundeck&amp;prompt=1"
+	>webchat link</a
+	>)</li
+      ><li
+      >Twitter: <a href="https://twitter.com/rundeck"
+	>@rundeck</a
+	></li
+      ></ul
+    ></div
+  ><div id="notable-changes"
+  ><h2
+    ><a href="#TOC"
+      >Notable Changes</a
+      ></h2
+    ><ul
+    ><li
+      >New feature: live execution state view<ul
+	><li
+	  >Live view of your job execution to see what step is running where.</li
+	  ><li
+	  >Collates the output by node and step.</li
+	  ><li
+	  >Instantly drill in to view the output for the step and node that failed</li
+	  ><li
+	  >View node metrics and collated output.</li
+	  ><li
+	  ><strong
+	    >Please give a big thank-you to (an anonymous) &quot;sponsored development client&quot; for funding the work for this feature!</strong
+	    ></li
+	  ></ul
+	></li
+      ><li
+      >New Projects home page displays readme and message of the day files that can be customized with markdown to display notices to users</li
+      ><li
+      >Improved Node filter<ul
+	><li
+	  >Now supports attribute searches</li
+	  ><li
+	  >New filter expression syntax, simple examples:<ul
+	    ><li
+	      ><code
+		>tags: a+b</code
+		> filters by tags</li
+	      ><li
+	      ><code
+		>environment: (prod|qa)</code
+		> Regular expression filter on an attribute called <code
+		>environment</code
+		></li
+	      ></ul
+	    ></li
+	  ><li
+	  >New simpler UI</li
+	  ></ul
+	></li
+      ><li
+      >Improved Nodes page to better navigate the data about the nodes in your infrastructure<ul
+	><li
+	  >Navigate nodes through attribute links</li
+	  ><li
+	  >Run a job or execute a command from filter sets</li
+	  ></ul
+	></li
+      ><li
+      >New Commands page dedicated to ad hoc command execution.<ul
+	><li
+	  >Controls over thread count and error handling</li
+	  ><li
+	  >Reference saved defined filters or express your own.</li
+	  ></ul
+	></li
+      ><li
+      >Improved Activity views with tabbed views for common queries<ul
+	><li
+	  >Tabs for Now running, recent, errors and executions by you.</li
+	  ></ul
+	></li
+      ><li
+      >Box score metrics for executions. Use Rundeck as an information radiator.<ul
+	><li
+	  >Percent completed and Success/Failure metrics displayed for each execution</li
+	  ></ul
+	></li
+      ></ul
+    ></div
+  ><div id="enhancements"
+  ><h2
+    ><a href="#TOC"
+      >Enhancements</a
+      ></h2
+    ><ul
+    ><li
+      >Knockout JS, Bootstrap 3, flatly</li
+      ><li
+      >Caching and error catching for resource model source plugins</li
+      ><li
+      >New node filter expressions</li
+      ><li
+      >Execution model API and json representation stored with log output</li
+      ><li
+      >Optimized internals to reduce service loading time</li
+      ><li
+      >Cruft removal (legacy formats and syntaxes)</li
+      ><li
+      >Step descriptions for job steps. Give your step a brief description to show your users during execution.</li
+      ><li
+      >Copy file step plugin copies files from rundeck server to remote nodes.</li
+      ><li
+      >API<ul
+	><li
+	  >Better REST-ful behavior</li
+	  ><li
+	  >removed use of 302 redirects between requests and some responses</li
+	  ></ul
+	></li
+      ></ul
+    ></div
+  ><div id="acknowledgements"
+  ><h2
+    ><a href="#TOC"
+      >Acknowledgements</a
+      ></h2
+    ><ul
+    ><li
+      >Alex Honor</li
+      ><li
+      >Greg Schueler</li
+      ><li
+      >Damon Edwards</li
+      ><li
+      >John Burbridge</li
+      ><li
+      >Matt Wise at Nextdoor.com</li
+      ><li
+      >Etienne Grignon at Disney</li
+      ><li
+      >Srinivas Peri and Aya Ivtan at Adobe</li
+      ><li
+      >Mark Maun and Eddie Wizelman at Ticketmaster</li
+      ></ul
+    ></div
+  ><div id="issues"
+  ><h2
+    ><a href="#TOC"
+      >Issues</a
+      ></h2
+    ><ul
+    ><li
+      ><a href="https://github.com/dtolabs/rundeck/issues/609"
+	>Rundeck should catch errors and cache node data from Resource Model Source providers</a
+	></li
+      ><li
+      ><a href="https://github.com/dtolabs/rundeck/issues/607"
+	>MS IE / Rundeck Nodes Page: &quot;Enter a shell command&quot; caption not visible</a
+	></li
+      ><li
+      ><a href="https://github.com/dtolabs/rundeck/pull/604"
+	>Refactor some execution finalization code for #511</a
+	></li
+      ><li
+      ><a href="https://github.com/dtolabs/rundeck/issues/603"
+	>Node attributes with &quot;:&quot; character breaks XML serialization.</a
+	></li
+      ><li
+      ><a href="https://github.com/dtolabs/rundeck/issues/601"
+	>Remove rpm java dependency</a
+	></li
+      ><li
+      ><a href="https://github.com/dtolabs/rundeck/issues/600"
+	>rundeck does not output spaces/tabs properly</a
+	></li
+      ><li
+      ><a href="https://github.com/dtolabs/rundeck/issues/598"
+	>edit job and duplicate to a new job buttons not-clickable in 2.0.0-1-alpha1</a
+	></li
+      ><li
+      ><a href="https://github.com/dtolabs/rundeck/issues/594"
+	>Send Notification not saved</a
+	></li
+      ><li
+      ><a href="https://github.com/dtolabs/rundeck/issues/592"
+	>Delete job</a
+	></li
+      ><li
+      ><a href="https://github.com/dtolabs/rundeck/issues/589"
+	>Missing username causes failure with &quot;Execution failed: X: null&quot;, even if project.ssh.user is set</a
+	></li
+      ><li
+      ><a href="https://github.com/dtolabs/rundeck/issues/577"
+	>Default Option values are ignored when a jobs is referenced from another job..</a
+	></li
+      ><li
+      ><a href="https://github.com/dtolabs/rundeck/issues/575"
+	>Remove dead/unused keys from framework.properties</a
+	></li
+      ><li
+      ><a href="https://github.com/dtolabs/rundeck/issues/574"
+	>Remove auto-project creation from Setup</a
+	></li
+      ><li
+      ><a href="https://github.com/dtolabs/rundeck/issues/510"
+	>The quick 'Run' page should allow for thread count adjustment as well as 'on failure' behavior changes.</a
+	></li
+      ><li
+      ><a href="https://github.com/dtolabs/rundeck/issues/508"
+	>obsolete RDECK_HOME and rdeck.home</a
+	></li
+      ><li
+      ><a href="https://github.com/dtolabs/rundeck/issues/359"
+	>'group' and 'user' field should be wildcard-able in the aclpolicy files</a
+	></li
+      ><li
+      ><a href="https://github.com/dtolabs/rundeck/issues/219"
+	>upgrade grails to 2.x</a
+	></li
+      ></ul
+    ></div
+  ></div
+>
+</div>
+
+<nav class="page bottom">
+    <ul>
+        <li class="current"><a href="release-notes.html">Release Notes</a></li>
+        <li class="toc"><a href="index.html">Rundeck Documentation (2.0.0-beta1)</a></li>
+        
+        
+    </ul>
+</nav>
+<footer class="copy">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+
+<br/>
+&copy;2013 <a href="http://simplifyops.com">#SimplifyOps</a>
+<br/>
+<span class="generated-date" title="2014-01-09T18:50:26EST">2014-01-09T18:50:26EST</span>
+  <script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</footer>
+</body>
+</html>
