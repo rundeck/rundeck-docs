@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Version 1.5</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="greg" />
+  <meta name="date" content="02/20/2013" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Open-Source Workflow Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.0.0</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.0.0)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-1.5.html">Version 1.5 (2013-2-21)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-1.4.5.html">Version 1.4.5 (2013-1-10) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<div id="TOC"
+><ul
+  ><li
+    ><a href="#release-1.5"
+      >Release 1.5</a
+      ></li
+    ></ul
+  ></div
+>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Version 1.5</h1>
+</div>
+<div id="release-1.5"
+><h1
+  ><a href="#TOC"
+    >Release 1.5</a
+    ></h1
+  ><p
+  >Date: 2/21/2013</p
+  ><p
+  >This release introduces a few new features and some bug fixes. The new features required some schema changes to the database, so direct upgrading from 1.4 to 1.5 is not possible. Please read the Upgrading document for upgrade information.</p
+  ><p
+  >There is now a new type of plugin, the Workflow Step Plugin, which should allow rundeck workflows to integrate with more systems in a more direct fashion. These plugins can be either &quot;Workflow Steps&quot; (run once per workflow) or &quot;Node Steps&quot; (run once per node in a workflow.)</p
+  ><p
+  >Steps can now have Error Handlers which run if the step fails. They will be provided with context data about the reason the step failed.</p
+  ><p
+  >Notable Changes:</p
+  ><ul
+  ><li
+    >Step Plugins - Plugins can now be created and used for workflow or node steps.</li
+    ><li
+    >Error Handlers - Each step in a workflow can now have an error handler that</li
+    ><li
+    >will be run if the step fails. bug fix: Job references in a workflow will now</li
+    ><li
+    >only run once, and not operate as a node-step.</li
+    ></ul
+  ><p
+  >Plugin developers:</p
+  ><p
+  >You will need to update your plugins to work in Rundeck 1.5. Refer to the Developer Guide for more information.</p
+  ><p
+  >Issues:</p
+  ><ul
+  ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/308"
+      >User profile page broken</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/307"
+      >Update docs for 1.5 release</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/297"
+      >Update sample scripts in plugin docs for best practices conformance</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/296"
+      >allow optional build parameter to rundeckapp to specify use of a local copy of the grails zip</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/293"
+      >expose loglevel for executions</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/290"
+      >script based plugin caching issue</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/289"
+      >rpm/deb rundeck-config needs to be udpated</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/282"
+      >Node dispatch threadcount can be set to blank</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/281"
+      >job import: threadcount does not get set</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/273"
+      >Now running and History views don't use Job view filter</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/272"
+      >History views default to recentFilter=1d, should be all events</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/271"
+      >History project filter is not exact</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/270"
+      >Allow group path in URL of jobs page to filter groups</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/269"
+      >Node dispatch threadcount can be set to blank. export+import fails.</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/268"
+      >Bulk delete of jobs via GUI</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/264"
+      >add release notes to generated docs</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/263"
+      >more compatible rpm dependency for java</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/262"
+      >remove unneeded &quot;rdbsupport&quot; config property for 1.5</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/261"
+      >API: Now running execution project filter is not exact</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/259"
+      >execution output api: xml content problems</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/258"
+      >don't combine spaces for scripts output</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/255"
+      >Job reference picker has incorrect behavior when clicking a group name</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/248"
+      >Error handler failure reason as context data</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/246"
+      >Workflow step plugins</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/241"
+      >Job folder/group display still buggy</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/228"
+      >dispatch -s scriptfile is broken</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/227"
+      >can't delete job option</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/225"
+      >dispatch with url option don't work</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/224"
+      >Job references should run only once within a workflow</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/221"
+      >divide by zero error on system info page</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/218"
+      >workflow step failure handlers</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/183"
+      >make H2 the default rundeck database backend</a
+      ></li
+    ><li
+    ><a href="https://github.com/dtolabs/rundeck/issues/171"
+      >UUID permits spaces</a
+      ></li
+    ></ul
+  ></div
+>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.0.0)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-1.5.html">Version 1.5 (2013-2-21)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-1.4.5.html">Version 1.4.5 (2013-1-10) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2014 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<span class="generated-date" title="2014-01-31T17:54:04EST">2014-01-31T17:54:04EST</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
