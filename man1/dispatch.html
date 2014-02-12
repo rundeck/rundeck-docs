@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>dispatch</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Alex Honor" />
+  <meta name="date" content="November 20, 2010" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Enables Self-Service Operations</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.0.1</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.0.1)</a></li>
+    
+    
+    <li ><a href="index.html">Command Line Tools</a></li>
+    <li class="active"><a href="dispatch.html">dispatch</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="rd-jobs.html">rd-jobs <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<div id="TOC"
+><ul
+  ><li
+    ><a href="#name"
+      >NAME</a
+      ></li
+    ><li
+    ><a href="#synopsis"
+      >SYNOPSIS</a
+      ></li
+    ><li
+    ><a href="#description"
+      >DESCRIPTION</a
+      ></li
+    ><li
+    ><a href="#options"
+      >OPTIONS</a
+      ></li
+    ><li
+    ><a href="#command-mode"
+      >COMMAND MODE</a
+      ><ul
+      ><li
+	><a href="#command-string---"
+	  >COMMAND STRING (<code
+	    >--</code
+	    >)</a
+	  ></li
+	><li
+	><a href="#script--s"
+	  >SCRIPT (<code
+	    >-s</code
+	    >)</a
+	  ></li
+	><li
+	><a href="#url--u"
+	  >URL (<code
+	    >-u</code
+	    >)</a
+	  ></li
+	><li
+	><a href="#stdin--s"
+	  >STDIN (<code
+	    >-S</code
+	    >)</a
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#queued-execution"
+      >QUEUED EXECUTION</a
+      ></li
+    ><li
+    ><a href="#listing-mode"
+      >LISTING MODE</a
+      ></li
+    ><li
+    ><a href="#examples"
+      >Examples</a
+      ><ul
+      ><li
+	><a href="#shell-tool-command-execution"
+	  >Shell tool command execution</a
+	  ></li
+	><li
+	><a href="#controlling-command-execution"
+	  >Controlling command execution</a
+	  ></li
+	><li
+	><a href="#queuing-commands"
+	  >Queuing commands</a
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#error-code"
+      >ERROR CODE</a
+      ></li
+    ><li
+    ><a href="#see-also"
+      >SEE ALSO</a
+      ></li
+    ></ul
+  ></div
+>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">dispatch</h1>
+</div>
+<div id="name"
+><h1
+  ><a href="#TOC"
+    >NAME</a
+    ></h1
+  ><p
+  >dispatch - execute commands across nodes via the rundeck dispatcher</p
+  ></div
+><div id="synopsis"
+><h1
+  ><a href="#TOC"
+    >SYNOPSIS</a
+    ></h1
+  ><p
+  ><code
+    >dispatch [*options*]</code
+    ></p
+  ></div
+><div id="description"
+><h1
+  ><a href="#TOC"
+    >DESCRIPTION</a
+    ></h1
+  ><p
+  >The dispatch command is used to remotely execute ad-hoc shell commands on a set of nodes which are specified by the filter options.</p
+  ></div
+><div id="options"
+><h1
+  ><a href="#TOC"
+    >OPTIONS</a
+    ></h1
+  ><p
+  ><code
+    >-h, --help</code
+    > : Print usage message.</p
+  ><p
+  ><code
+    >-v</code
+    > : Run verbosely.</p
+  ><p
+  ><code
+    >-V</code
+    > : Turn on debug messages.</p
+  ><p
+  ><code
+    >-q, --quiet</code
+    > : Show only error messages.</p
+  ><p
+  ><code
+    >-C, --threadcount *COUNT*</code
+    > : Dispatch execution to Nodes using <em
+    >COUNT</em
+    > threads.</p
+  ><p
+  ><code
+    >-K, --keepgoing</code
+    > : Keep going when an error occurs on multiple dispatch.</p
+  ><p
+  ><code
+    >-F, --filter *FILTER*</code
+    > : A node filter string</p
+  ><p
+  ><code
+    >-filter-exclude-precedence *true|false*</code
+    > : Set the exclusion filter to have precedence or not.</p
+  ><p
+  ><code
+    >-p *NAME*</code
+    > : Project name</p
+  ><p
+  ><code
+    >-- *COMMAND_STRING*</code
+    > : Dispatch specified command string</p
+  ><p
+  ><code
+    >-s, --script *SCRIPT*</code
+    > : Dispatch specified script file</p
+  ><p
+  ><code
+    >-u, --url *URL*</code
+    > : Download a URL and dispatch it as a script</p
+  ><p
+  ><code
+    >-S, --stdin</code
+    > : Execute input read from <em
+    >STDIN</em
+    ></p
+  ><p
+  ><code
+    >-f, --follow</code
+    > : Follow queued execution output</p
+  ><p
+  ><code
+    >-r, --progress</code
+    > : In follow mode, print progress indicator chars</p
+  ></div
+><div id="command-mode"
+><h1
+  ><a href="#TOC"
+    >COMMAND MODE</a
+    ></h1
+  ><p
+  >Command mode occurs when the <code
+    >-p</code
+    > option is present (or there is only one Project), and one (and only one) of the following options are specified: <code
+    >--, -s, or -S</code
+    ></p
+  ><p
+  >The default behavior is to invoke the &quot;queue&quot; mode, which will send the desired command to the Rundeck server for execution, and return the ID of the queued Execution.</p
+  ><p
+  >If &quot;follow&quot; option is used (<code
+    >-f</code
+    >/<code
+    >--follow</code
+    >), then the output will be retrieved from the server as it is produced and echoed locally.</p
+  ><p
+  >This can be combined with either <code
+    >-q</code
+    >/<code
+    >--quiet</code
+    > to show no output and only wait until the execution finishes. Exit status will indicate if the execution succeeded or failed. If <code
+    >-r</code
+    >/<code
+    >--progress</code
+    > is used instead, then progress of the execution is indicated periodically by echoed '.' characters.</p
+  ><p
+  >The <code
+    >-F</code
+    >/<code
+    >--filter</code
+    > option can be used to specify a node filter string. See <a href="../manual/node-filters.html"
+    >User Guide - Node Filters</a
+    >.</p
+  ><div id="command-string---"
+  ><h2
+    ><a href="#TOC"
+      >COMMAND STRING (<code
+	>--</code
+	>)</a
+      ></h2
+    ><p
+    >The remote (or locally) shell command that is invoked is specified after the <code
+      >--</code
+      > on the command-line. This string should begin with the command name and be followed by any arguments you want to pass to it.</p
+    ><p
+    ><em
+      >Examples</em
+      ></p
+    ><p
+    >Execute the apachectl restart command across Nodes tagged &quot;web&quot;:</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Normal NormalText"
+	>dispatch </span
+	><span class="Normal Option"
+	>-F</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="String StringSingleQ"
+	>'tags: web'</span
+	><span class="Normal NormalText"
+	> -- </span
+	><span class="Keyword Command"
+	>sudo</span
+	><span class="Normal NormalText"
+	> apachectl restart</span
+	><br
+	 /></code
+      ></pre
+    ><p
+    >Execute apachectl status using the &quot;keepgoing&quot; flag across nodes that have a hostname that begin with &quot;web&quot;:</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Normal NormalText"
+	>dispatch </span
+	><span class="Normal Option"
+	>-F</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="String StringSingleQ"
+	>'hostname: web.*'</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Option"
+	>-K</span
+	><span class="Normal NormalText"
+	> -- apachectl status</span
+	><br
+	 /></code
+      ></pre
+    ><p
+    >Run the locally installed update.sh script in three threads and keepgoing if an error occurs:</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Normal NormalText"
+	>dispatch </span
+	><span class="Normal Option"
+	>-F</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="String StringSingleQ"
+	>'tags: dev'</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Option"
+	>-K</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Option"
+	>-C</span
+	><span class="Normal NormalText"
+	> 3 -- </span
+	><span class="Keyword Command"
+	>sh</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Option"
+	>-c</span
+	><span class="Normal NormalText"
+	> update.sh </span
+	><br
+	 /></code
+      ></pre
+    ></div
+  ><div id="script--s"
+  ><h2
+    ><a href="#TOC"
+      >SCRIPT (<code
+	>-s</code
+	>)</a
+      ></h2
+    ><p
+    >Sometimes it is preferable to save a sequence of command statements into a file on the admin host and then execute that file across a number of target hosts. The script specified via the -s option is a script local to where the dispatch command is executed but that script file is copied to the remote target machines and then executed.</p
+    ><p
+    ><em
+      >Examples</em
+      ></p
+    ><p
+    >Execute the &quot;myscript.sh&quot; shell script across the Nodes tagged &quot;web&quot;:</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Normal NormalText"
+	>dispatch </span
+	><span class="Normal Option"
+	>-F</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="String StringSingleQ"
+	>'tags: web'</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Option"
+	>-s</span
+	><span class="Normal NormalText"
+	> myscript.sh</span
+	><br
+	 /></code
+      ></pre
+    ><p
+    >Note: The script file is copied to a temporary directory on the target machines (on unix it is /tmp and on Windows c:)</p
+    ></div
+  ><div id="url--u"
+  ><h2
+    ><a href="#TOC"
+      >URL (<code
+	>-u</code
+	>)</a
+      ></h2
+    ><p
+    >Downloads a URL and then dispatches it for execution as a script on the target nodes.</p
+    ><p
+    ><em
+      >Examples</em
+      ></p
+    ><p
+    >Execute a shell script available at a URL across the Nodes tagged &quot;web&quot;:</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Normal NormalText"
+	>dispatch </span
+	><span class="Normal Option"
+	>-F</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="String StringSingleQ"
+	>'tags: dev'</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Option"
+	>-u</span
+	><span class="Normal NormalText"
+	> http:</span
+	><span class="Normal Path"
+	>//ops.example.com/scripts/myscript.sh</span
+	><br
+	 /></code
+      ></pre
+    ><p
+    >Note: The script file is copied to a temporary directory on the target machines (on unix it is /tmp and on Windows c:)</p
+    ><p
+    >The URL can contain property references expanded in the execution context.</p
+    ></div
+  ><div id="stdin--s"
+  ><h2
+    ><a href="#TOC"
+      >STDIN (<code
+	>-S</code
+	>)</a
+      ></h2
+    ><p
+    >As an alternative to specifying the commands either as deferred arguments after the double hyphen (&quot;--&quot;) or as a saved script (&quot;-s script&quot;), dispatch can also read command input from stdin.</p
+    ><p
+    ><em
+      >Examples</em
+      ></p
+    ><p
+    >Execute the uname command across all Unix nodes</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Keyword Builtin"
+	>echo</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="String StringDoubleQ"
+	>&quot;uname -a&quot;</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Keyword Control"
+	>|</span
+	><span class="Normal NormalText"
+	> dispatch </span
+	><span class="Normal Option"
+	>-F</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="String StringSingleQ"
+	>'os-family: unix'</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Option"
+	>--stdin</span
+	><br
+	 /></code
+      ></pre
+    ><p
+    >Multi-line scripts are easier to write using a here document:</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Normal NormalText"
+	>dispatch </span
+	><span class="Normal Option"
+	>--stdin</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal NormalText"
+	>&lt;&lt;END</span
+	><br
+	 /><span class="Normal NormalText"
+	>  statement 1;</span
+	><br
+	 /><span class="Normal NormalText"
+	>  statement 2;</span
+	><br
+	 /><span class="Normal NormalText"
+	>  statement 3;</span
+	><br
+	 /><span class="Normal NormalText"
+	>END</span
+	><br
+	 /></code
+      ></pre
+    ><p
+    >Note: The input read from stdin is saved to a temporary file and then content is called with the -s script mode described above to transfer and invoke the script.</p
+    ></div
+  ></div
+><div id="queued-execution"
+><h1
+  ><a href="#TOC"
+    >QUEUED EXECUTION</a
+    ></h1
+  ><p
+  >The execution will be sent to the Rundeck server, and the execution ID echoed.</p
+  ></div
+><div id="listing-mode"
+><h1
+  ><a href="#TOC"
+    >LISTING MODE</a
+    ></h1
+  ><p
+  >dispatch will enter Listing Mode when no Command String is specified on the command line.</p
+  ><p
+  >In this mode, dispatch will output the list of available nodes.</p
+  ><p
+  ><em
+    >Example</em
+    ></p
+  ><pre class="sourceCode bash"
+  ><code
+    ><span class="Normal NormalText"
+      >dispatch</span
+      ><br
+       /></code
+    ></pre
+  ><pre
+  ><code
+    >daffy porky
+</code
+    ></pre
+  ><p
+  >When the -v (verbose) option is specified, the node listing will include the details about the nodes that can be used for filtering: hostname, os-arch, os-family, os-version, os-name, tags.</p
+  ><p
+  ><em
+    >Example</em
+    ></p
+  ><pre class="sourceCode bash"
+  ><code
+    ><span class="Normal NormalText"
+      >dispatch </span
+      ><span class="Normal Option"
+      >-v</span
+      ><br
+       /></code
+    ></pre
+  ><pre
+  ><code
+    >daffy:
+   hostname: daffy.local
+   os-arch: i386
+   os-family: unix
+   os-name: Mac OS X
+   os-version: 10.5.2
+   tags: [development]
+porky:
+   hostname: porky
+   os-arch: x86
+   os-family: windows
+   os-name: Windows XP
+   os-version: 5.1
+   tags: [testing]
+</code
+    ></pre
+  ><p
+  >When combined with the -F Node Filter option, you can easily determine which nodes will be the target of any remotely executed command prior to invoking it:</p
+  ><pre class="sourceCode bash"
+  ><code
+    ><span class="Normal NormalText"
+      >dispatch </span
+      ><span class="Normal Option"
+      >-v</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="Normal Option"
+      >-F</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="String StringSingleQ"
+      >'!os-family: unix'</span
+      ><br
+       /></code
+    ></pre
+  ><pre
+  ><code
+    >porky:
+   hostname: porky
+   os-arch: x86
+   os-family: windows
+   os-name: Windows XP
+   os-version: 5.1
+   tags: [testing]
+</code
+    ></pre
+  ></div
+><div id="examples"
+><h1
+  ><a href="#TOC"
+    >Examples</a
+    ></h1
+  ><p
+  >Typically, an ad-hoc command is a shell script or system executable that you run at an interactive terminal. Ad-hoc commands can be executed via the <code
+    >dispatch</code
+    > shell command or from the Nodes page in the GUI.</p
+  ><div id="shell-tool-command-execution"
+  ><h4
+    ><a href="#TOC"
+      >Shell tool command execution</a
+      ></h4
+    ><p
+    >Use <code
+      >dispatch</code
+      > to execute individual commands or shell script files.</p
+    ><p
+    >Here <code
+      >dispatch</code
+      > is used to run the Unix <code
+      >uptime</code
+      > command to print system status:</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Normal NormalText"
+	>dispatch </span
+	><span class="Normal Option"
+	>-F</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="String StringSingleQ"
+	>'os-family: unix'</span
+	><span class="Normal NormalText"
+	> -- </span
+	><span class="Keyword Command"
+	>uptime</span
+	><br
+	 /></code
+      ></pre
+    ><pre
+    ><code
+      >Succeeded queueing Workflow execution: Workflow:(threadcount:1){ [command( exec: uptime)] }
+Queued job ID: 7 &lt;http://strongbad:4440/execution/follow/7&gt;
+</code
+      ></pre
+    ><p
+    >The <code
+      >uptime</code
+      > command is queued and executed. The output can be followed by going to the URL returned in the output (eg, http://strongbad:4440/execution/follow/7).</p
+    ><p
+    >Sometimes it is desirable to execute the command and follow the output from the console. Use the <code
+      >-f</code
+      > flag to echo the output as the command is executed by the server:</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Normal NormalText"
+	>dispatch </span
+	><span class="Normal Option"
+	>-F</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="String StringSingleQ"
+	>'os-family: unix'</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Option"
+	>-f</span
+	><span class="Normal NormalText"
+	> -- </span
+	><span class="Keyword Command"
+	>uptime</span
+	><br
+	 /></code
+      ></pre
+    ><pre
+    ><code
+      >[demo@centos54 dispatch][INFO]  10:34:54 up 46 min,  2 users,  load average: 0.00, 0.00, 0.00
+[alexh@strongbad dispatch][INFO] 10:34  up 2 days, 18:51, 2 users, load averages: 0.55 0.80 0.75
+[examples@ubuntu dispatch][INFO]  10:35:01 up 2 days, 18:40,  2 users,  load average: 0.00, 0.01, 0.00
+</code
+      ></pre
+    ><p
+    >Notice, the <code
+      >dispatch</code
+      > command prepends the message output with a header that helps understand from where the output originates. The header format includes the login and node where the <code
+      >dispatch</code
+      > execution occurred.</p
+    ><p
+    >Execute the Unix <code
+      >whoami</code
+      > command to see what user ID is used by that Node to run dispatched commands:</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Normal NormalText"
+	>dispatch </span
+	><span class="Normal Option"
+	>-F</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="String StringSingleQ"
+	>'os-family: unix'</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Option"
+	>-f</span
+	><span class="Normal NormalText"
+	> -- </span
+	><span class="Keyword Command"
+	>whoami</span
+	><br
+	 /></code
+      ></pre
+    ><pre
+    ><code
+      >[demo@centos54 dispatch][INFO] demo
+[alexh@strongbad dispatch][INFO] alexh
+[examples@ubuntu dispatch][INFO] examples
+</code
+      ></pre
+    ><p
+    >You can see that the resource model defines each Node to use a different login to execute <code
+      >dispatch</code
+      > commands. That feature can be handy when Nodes serve different roles and therefore, use different logins to manage processes. See the <code
+      >username</code
+      > attribute in <a href="../man5/resource-xml.html"
+      >resource-XML</a
+      > or <a href="../man5/resource-yaml.html"
+      >resource-YAML</a
+      > manual page.</p
+    ><p
+    >The <code
+      >dispatch</code
+      > command can also execute shell scripts. Here's a trivial script that generates a bit of system info:</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Comment"
+	>#!/bin/sh</span
+	><br
+	 /><span class="Keyword Builtin"
+	>echo</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="String StringDoubleQ"
+	>&quot;info script&quot;</span
+	><br
+	 /><span class="Keyword Builtin"
+	>echo</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Others Variable"
+	>uptime=</span
+	><span class="Keyword Backquote"
+	>`</span
+	><span class="Keyword Command"
+	>uptime</span
+	><span class="Keyword Backquote"
+	>`</span
+	><br
+	 /><span class="Keyword Builtin"
+	>echo</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Others Variable"
+	>whoami=</span
+	><span class="Keyword Backquote"
+	>`</span
+	><span class="Keyword Command"
+	>whoami</span
+	><span class="Keyword Backquote"
+	>`</span
+	><br
+	 /><span class="Keyword Builtin"
+	>echo</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Others Variable"
+	>uname=</span
+	><span class="Keyword Backquote"
+	>`</span
+	><span class="Keyword Command"
+	>uname</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Option"
+	>-a</span
+	><span class="Keyword Backquote"
+	>`</span
+	><br
+	 /></code
+      ></pre
+    ><p
+    >Use the -s option to specify the &quot;info.sh&quot; script file:</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Normal NormalText"
+	>dispatch </span
+	><span class="Normal Option"
+	>-F</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="String StringSingleQ"
+	>'os-family: unix'</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Option"
+	>-s</span
+	><span class="Normal NormalText"
+	> info.sh</span
+	><br
+	 /></code
+      ></pre
+    ><p
+    >The <code
+      >dispatch</code
+      > command copies the &quot;info.sh&quot; script located on the server to each &quot;unix&quot; Node and then executes it.</p
+    ></div
+  ><div id="controlling-command-execution"
+  ><h3
+    ><a href="#TOC"
+      >Controlling command execution</a
+      ></h3
+    ><p
+    >Parallel execution is managed using thread count via &quot;-C&quot; option. The &quot;-C&quot; option specifies the number of execution threads. Here's an example that runs the uptime command across the Linux hosts with two threads:</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Normal NormalText"
+	>dispatch </span
+	><span class="Normal Option"
+	>-F</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="String StringSingleQ"
+	>'os-name: Linux'</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Option"
+	>-C</span
+	><span class="Normal NormalText"
+	> 2 -- </span
+	><span class="Keyword Command"
+	>uptime</span
+	><br
+	 /></code
+      ></pre
+    ><p
+    >The keepgoing and retry flags control when to exit incase an error occurs. Use &quot;-K/-R&quot; flags. Here's an example script that checks if the host has port 4440 in the listening state. If it does not, it will exit with code 1.</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Comment"
+	>#!/bin/bash</span
+	><br
+	 /><span class="Keyword Command"
+	>netstat</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Option"
+	>-an</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Keyword Control"
+	>|</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Keyword Command"
+	>grep</span
+	><span class="Normal NormalText"
+	> 4440 </span
+	><span class="Keyword Control"
+	>|</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Keyword Command"
+	>grep</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Option"
+	>-q</span
+	><span class="Normal NormalText"
+	> LISTEN</span
+	><br
+	 /><span class="Keyword"
+	>if</span
+	><span class="Keyword Builtin"
+	> [</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="String StringDoubleQ"
+	>&quot;</span
+	><span class="Others Variable"
+	>$?</span
+	><span class="String StringDoubleQ"
+	>&quot;</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Others Expression"
+	>!=</span
+	><span class="Normal NormalText"
+	> 0</span
+	><span class="Keyword Builtin"
+	> ]</span
+	><br
+	 /><span class="Keyword"
+	>then</span
+	><br
+	 /><span class="Normal NormalText"
+	>  </span
+	><span class="Keyword Builtin"
+	>echo</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="String StringDoubleQ"
+	>&quot;not listening on 4440&quot;</span
+	><br
+	 /><span class="Normal NormalText"
+	>  </span
+	><span class="Keyword Builtin"
+	>exit</span
+	><span class="Normal NormalText"
+	> 1</span
+	><br
+	 /><span class="Keyword"
+	>fi</span
+	><br
+	 /><span class="Keyword Builtin"
+	>echo</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="String StringDoubleQ"
+	>&quot;listening port=4440, host=</span
+	><span class="Others Variable"
+	>$(</span
+	><span class="Keyword Command"
+	>hostname</span
+	><span class="Others Variable"
+	>)</span
+	><span class="String StringDoubleQ"
+	>&quot;</span
+	><span class="Normal NormalText"
+	>;</span
+	><br
+	 /></code
+      ></pre
+    ><p
+    >Commands or scripts that exit with a non-zero exit code will cause the dispatch to fail unless the keepgoing flag is set.</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Normal NormalText"
+	>dispatch </span
+	><span class="Normal Option"
+	>-F</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="String StringSingleQ"
+	>'os-family: unix'</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Option"
+	>-s</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Path"
+	>/tmp/listening.sh</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Option"
+	>-f</span
+	><br
+	 /></code
+      ></pre
+    ><pre
+    ><code
+      >[alexh@strongbad dispatch][INFO] Connecting to centos54:22
+[alexh@strongbad dispatch][INFO] done.
+[demo@centos54 dispatch][INFO] not listening on 4440
+error: Remote command failed with exit status 1
+</code
+      ></pre
+    ><p
+    >The script failed on centos54 and caused dispatch to error out immediately.</p
+    ><p
+    >Running the command again, but this time with the &quot;-K&quot; keepgoing flag will cause dispatch to continue and print on which nodes the script failed:</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Normal NormalText"
+	>dispatch </span
+	><span class="Normal Option"
+	>-f</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Option"
+	>-K</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Option"
+	>-F</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="String StringSingleQ"
+	>'tags: web'</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Option"
+	>-s</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Path"
+	>/tmp/listening.sh</span
+	><br
+	 /></code
+      ></pre
+    ><pre
+    ><code
+      >[alexh@strongbad dispatch][INFO] Connecting to centos54:22
+[alexh@strongbad dispatch][INFO] done.
+[demo@centos54 dispatch][INFO] not listening on 4440
+[demo@centos54 dispatch][ERROR] Failed execution for node: centos54: Remote command failed with exit status 1
+[alexh@strongbad dispatch][INFO] listening port=4440, host=strongbad
+[alexh@strongbad dispatch][INFO] Connecting to 172.16.167.211:22
+[alexh@strongbad dispatch][INFO] done.
+[examples@ubuntu dispatch][INFO] not listening on 4440
+[examples@ubuntu dispatch][ERROR] Failed execution for node: ubuntu: Remote command failed with exit status 1
+error: Execution failed on the following 2 nodes: [centos54, ubuntu]
+error: Execute this command to retry on the failed nodes:
+  dispatch -K -s /tmp/listening.sh -p examples -F  'centos54,ubuntu'
+</code
+      ></pre
+    ></div
+  ><div id="queuing-commands"
+  ><h3
+    ><a href="#TOC"
+      >Queuing commands</a
+      ></h3
+    ><p
+    >The script below is a long running check that will conduct a check periodically waiting a set time between each pass. The script can be run with or without arguments as the parameters are defaulted inside the script:</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Normal NormalText"
+	>$ </span
+	><span class="Keyword Command"
+	>cat</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Path"
+	>~/bin/checkagain.sh</span
+	><span class="Normal NormalText"
+	> </span
+	><br
+	 /><span class="Comment"
+	>#!/bin/bash</span
+	><br
+	 /><span class="Others Variable"
+	>iterations=$1</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Others Variable"
+	>secs=$2</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Others Variable"
+	>port=$3</span
+	><br
+	 /><span class="Keyword Builtin"
+	>echo</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="String StringDoubleQ"
+	>&quot;port </span
+	><span class="Others Variable"
+	>${port:=</span
+	><span class="Normal NormalText"
+	>4440</span
+	><span class="Others Variable"
+	>}</span
+	><span class="String StringDoubleQ"
+	> will be checked </span
+	><span class="Others Variable"
+	>${iterations:=</span
+	><span class="Normal NormalText"
+	>30</span
+	><span class="Others Variable"
+	>}</span
+	><span class="String StringDoubleQ"
+	> times waiting </span
+	><span class="Others Variable"
+	>${secs:=</span
+	><span class="Normal NormalText"
+	>5</span
+	><span class="Others Variable"
+	>}</span
+	><span class="String StringDoubleQ"
+	>s between each iteration&quot;</span
+	><span class="Normal NormalText"
+	> </span
+	><br
+	 /><span class="Others Variable"
+	>i=</span
+	><span class="Normal NormalText"
+	>0</span
+	><br
+	 /><span class="Keyword"
+	>while</span
+	><span class="Keyword Builtin"
+	> [</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Others Variable"
+	>$i</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Others Expression"
+	>-lt</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Others Variable"
+	>${iterations}</span
+	><span class="Keyword Builtin"
+	> ]</span
+	><br
+	 /><span class="Keyword"
+	>do</span
+	><br
+	 /><span class="Normal NormalText"
+	>  </span
+	><span class="Keyword Builtin"
+	>echo</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="String StringDoubleQ"
+	>&quot;iteration: #</span
+	><span class="Others Variable"
+	>${i}</span
+	><span class="String StringDoubleQ"
+	>&quot;</span
+	><br
+	 /><span class="Normal NormalText"
+	>  </span
+	><span class="Keyword Command"
+	>netstat</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Option"
+	>-an</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Keyword Control"
+	>|</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Keyword Command"
+	>grep</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Others Variable"
+	>$port</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Keyword Control"
+	>|</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Keyword Command"
+	>grep</span
+	><span class="Normal NormalText"
+	> LISTEN </span
+	><span class="Keyword Control"
+	>&amp;&amp;</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Keyword Builtin"
+	>exit</span
+	><span class="Normal NormalText"
+	> 0</span
+	><br
+	 /><span class="Normal NormalText"
+	>  </span
+	><span class="Keyword Builtin"
+	>echo</span
+	><span class="Normal NormalText"
+	> ----</span
+	><br
+	 /><span class="Normal NormalText"
+	>  </span
+	><span class="Keyword Command"
+	>sleep</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Others Variable"
+	>${secs}</span
+	><br
+	 /><span class="Normal NormalText"
+	>  </span
+	><span class="Others Variable"
+	>i=$(($i</span
+	><span class="Normal NormalText"
+	>+1</span
+	><span class="Others Variable"
+	>))</span
+	><br
+	 /><span class="Keyword"
+	>done</span
+	><br
+	 /><span class="Keyword Builtin"
+	>echo</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="String StringDoubleQ"
+	>&quot;Not listening on </span
+	><span class="Others Variable"
+	>$port</span
+	><span class="String StringDoubleQ"
+	> after </span
+	><span class="Others Variable"
+	>$i</span
+	><span class="String StringDoubleQ"
+	> checks&quot;</span
+	><span class="Normal NormalText"
+	> ; </span
+	><span class="Keyword Builtin"
+	>exit</span
+	><span class="Normal NormalText"
+	> 1</span
+	><br
+	 /></code
+      ></pre
+    ><p
+    >Running <code
+      >dispatch</code
+      > causes the execution to queue in Rundeck and controlled as temporary Job. The <code
+      >-F centos54</code
+      > limits execution to just the &quot;centos54&quot; node:</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Normal NormalText"
+	>dispatch </span
+	><span class="Normal Option"
+	>-F</span
+	><span class="Normal NormalText"
+	> centos54 </span
+	><span class="Normal Option"
+	>-s</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Path"
+	>~/bin/checkagain.sh</span
+	><span class="Normal NormalText"
+	> </span
+	><br
+	 /></code
+      ></pre
+    ><pre
+    ><code
+      >Succeeded queueing workflow: Workflow:(threadcount:1){ [command( scriptfile: /Users/alexh/bin/checkagain.sh)] }
+Queued job ID: 5 &lt;http://strongbad:4440/execution/follow/4&gt;
+</code
+      ></pre
+    ><p
+    >To pass arguments to the script pass them after the <code
+      >--</code
+      > (double dash):</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Others Variable"
+	>iters=</span
+	><span class="Normal NormalText"
+	>5</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Others Variable"
+	>secs=</span
+	><span class="Normal NormalText"
+	>60</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Others Variable"
+	>port=</span
+	><span class="Normal NormalText"
+	>4440</span
+	><br
+	 /><br
+	 /><span class="Normal NormalText"
+	>dispatch </span
+	><span class="Normal Option"
+	>-F</span
+	><span class="Normal NormalText"
+	> centos54 </span
+	><span class="Normal Option"
+	>-s</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Path"
+	>~/bin/checkagain.sh</span
+	><span class="Normal NormalText"
+	> -- </span
+	><span class="Others Variable"
+	>$iters</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Others Variable"
+	>$secs</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Others Variable"
+	>$ports</span
+	><br
+	 /></code
+      ></pre
+    ></div
+  ></div
+><div id="error-code"
+><h1
+  ><a href="#TOC"
+    >ERROR CODE</a
+    ></h1
+  ><p
+  >The dispatch command will exit non zero if a command dispatch error occurs.</p
+  ><p
+  >0 : All commands executed successfully</p
+  ><p
+  >1 : One or more commands failed</p
+  ><p
+  >127 : Unknown error case</p
+  ></div
+><div id="see-also"
+><h1
+  ><a href="#TOC"
+    >SEE ALSO</a
+    ></h1
+  ><ul
+  ><li
+    ><a href="rd-options.html"
+      ><code
+	>rd-filtering-options</code
+	></a
+      >, <a href="rd-queue.html"
+      ><code
+	>rd-queue</code
+	></a
+      >.</li
+    ><li
+    ><a href="../manual/node-filters.html"
+      >User Guide - Node Filters</a
+      ></li
+    ></ul
+  ></div
+>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.0.1)</a></li>
+    
+    
+    <li ><a href="index.html">Command Line Tools</a></li>
+    <li class="active"><a href="dispatch.html">dispatch</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="rd-jobs.html">rd-jobs <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2014 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<span class="generated-date" title="2014-02-11T19:57:38EST">2014-02-11T19:57:38EST</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
