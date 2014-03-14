@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Remote option provider</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Enables Self-Service Operations</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.0.2</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.0.2)</a></li>
+    
+    
+    <li ><a href="index.html">Tutorials</a></li>
+    <li class="active"><a href="option-provider.html">Option Provider</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="access-control.html"><i class="glyphicon glyphicon-arrow-left"></i> Access Control</a></li>
+      
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<div id="TOC"
+><ul
+  ><li
+    ><a href="#yum-package-list-cgi"
+      >Yum package list CGI</a
+      ></li
+    ></ul
+  ></div
+>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Remote option provider</h1>
+</div>
+<div id="yum-package-list-cgi"
+><h2
+  ><a href="#TOC"
+    >Yum package list CGI</a
+    ></h2
+  ><p
+  ><a href="http://yum.baseurl.org/"
+    >Yum</a
+    > is a great tool for automating <a href="http://www.rpm.org/"
+    >RPM</a
+    > package management. With Yum, administrators can publish packages to the repository and then use the yum client tool to automate the installation of packages along with their declared dependencies. Yum includes a command called <a href="http://linux.die.net/man/1/repoquery"
+    >repoquery</a
+    > useful for querying Yum repositories similarly to rpm queries.</p
+  ><p
+  >Acme Anvils set up their own Yum repository to distribute application release packages. The Acme administrator wants to provide an option model to Jobs that need to know what packages provide a given capability.</p
+  ><p
+  >The code listing below shows it is a simple wrapper around the repoquery command that formats the results as <a href="http://www.json.org"
+    >JSON</a
+    > data.</p
+  ><p
+  >File listing: repoquery.cgi</p
+  ><table class="sourceCode"
+  ><tr
+    ><td class="lineNumbers" title="Click to toggle line numbers" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"
+      ><pre
+	>1<br
+	   />2<br
+	   />3<br
+	   />4<br
+	   />5<br
+	   />6<br
+	   />7<br
+	   />8<br
+	   />9<br
+	   />10<br
+	   />11<br
+	   />12<br
+	   />13<br
+	   />14<br
+	   />15<br
+	   />16<br
+	   />17<br
+	   />18<br
+	   />19<br
+	   />20<br
+	   />21<br
+	   />22<br
+	   />23</pre
+	></td
+      ><td class="sourceCode"
+      ><pre class="sourceCode bash"
+	><code
+	  ><span class="Comment"
+	    >#!/bin/bash</span
+	    ><br
+	     /><span class="Comment"
+	    ># Requires: repoquery</span
+	    ><br
+	     /><span class="Comment"
+	    ># </span
+	    ><br
+	     /><span class="Comment"
+	    ># Query Params and their defaults</span
+	    ><br
+	     /><span class="Others Variable"
+	    >repo=</span
+	    ><span class="Normal NormalText"
+	    >acme-staging</span
+	    ><br
+	     /><span class="Others Variable"
+	    >label=</span
+	    ><span class="String StringDoubleQ"
+	    >&quot;Anvils Release&quot;</span
+	    ><br
+	     /><span class="Others Variable"
+	    >package=</span
+	    ><span class="Normal NormalText"
+	    >anvils</span
+	    ><br
+	     /><span class="Others Variable"
+	    >max=</span
+	    ><span class="Normal NormalText"
+	    >30</span
+	    ><br
+	     /><span class="Comment"
+	    >#</span
+	    ><br
+	     /><span class="Keyword Builtin"
+	    >echo</span
+	    ><span class="Normal NormalText"
+	    > Content</span
+	    ><span class="Normal Option"
+	    >-type</span
+	    ><span class="Normal NormalText"
+	    >: </span
+	    ><span class="Normal Path"
+	    >application/json</span
+	    ><br
+	     /><span class="Keyword Builtin"
+	    >echo</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="String StringDoubleQ"
+	    >&quot;&quot;</span
+	    ><br
+	     /><span class="Keyword"
+	    >for</span
+	    ><span class="Normal NormalText"
+	    > VAR </span
+	    ><span class="Keyword"
+	    >in</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Keyword Backquote"
+	    >`</span
+	    ><span class="Keyword Builtin"
+	    >echo</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Others Variable"
+	    >$QUERY_STRING</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Keyword Control"
+	    >|</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Keyword Command"
+	    >tr</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="String StringDoubleQ"
+	    >&quot;&amp;&quot;</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="String StringDoubleQ"
+	    >&quot;\t&quot;</span
+	    ><span class="Keyword Backquote"
+	    >`</span
+	    ><br
+	     /><span class="Keyword"
+	    >do</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >  </span
+	    ><span class="Others Variable"
+	    >NAME=$(</span
+	    ><span class="Keyword Builtin"
+	    >echo</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Others Variable"
+	    >$VAR</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Keyword Control"
+	    >|</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Keyword Command"
+	    >tr</span
+	    ><span class="Normal NormalText"
+	    > = </span
+	    ><span class="String StringDoubleQ"
+	    >&quot; &quot;</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Keyword Control"
+	    >|</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Keyword Command"
+	    >awk</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="String StringSingleQ"
+	    >'{print $1}'</span
+	    ><span class="Normal NormalText"
+	    >;</span
+	    ><span class="Others Variable"
+	    >)</span
+	    ><span class="Normal NormalText"
+	    >;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >  </span
+	    ><span class="Others Variable"
+	    >VALUE=$(</span
+	    ><span class="Keyword Builtin"
+	    >echo</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Others Variable"
+	    >$VAR</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Keyword Control"
+	    >|</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Keyword Command"
+	    >tr</span
+	    ><span class="Normal NormalText"
+	    > = </span
+	    ><span class="String StringDoubleQ"
+	    >&quot; &quot;</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Keyword Control"
+	    >|</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Keyword Command"
+	    >awk</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="String StringSingleQ"
+	    >'{ print $2}'</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Keyword Control"
+	    >|</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Keyword Command"
+	    >tr</span
+	    ><span class="Normal NormalText"
+	    > + </span
+	    ><span class="String StringDoubleQ"
+	    >&quot; &quot;</span
+	    ><span class="Others Variable"
+	    >)</span
+	    ><span class="Normal NormalText"
+	    >;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >  </span
+	    ><span class="Keyword Builtin"
+	    >declare</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Others Variable"
+	    >$NAME=</span
+	    ><span class="String StringDoubleQ"
+	    >&quot;</span
+	    ><span class="Others Variable"
+	    >$VALUE</span
+	    ><span class="String StringDoubleQ"
+	    >&quot;</span
+	    ><span class="Normal NormalText"
+	    >;</span
+	    ><br
+	     /><span class="Keyword"
+	    >done</span
+	    ><br
+	     /><br
+	     /><span class="Keyword Builtin"
+	    >echo</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="String StringSingleQ"
+	    >'{'</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >repoquery </span
+	    ><span class="Normal Option"
+	    >--enablerepo</span
+	    ><span class="Normal NormalText"
+	    >=</span
+	    ><span class="Others Variable"
+	    >$repo</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Normal Option"
+	    >--show-dupes</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Keyword"
+	    >\</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >  </span
+	    ><span class="Normal Option"
+	    >--qf</span
+	    ><span class="Normal NormalText"
+	    >=</span
+	    ><span class="String StringSingleQ"
+	    >'&quot;${label} %{VERSION}-%{RELEASE}&quot;:&quot;%{NAME}-%{VERSION}-%{RELEASE}&quot;,'</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Keyword"
+	    >\</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >  </span
+	    ><span class="Normal Option"
+	    >-q</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Normal Option"
+	    >--whatprovides</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Others Variable"
+	    >${package}</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Keyword Control"
+	    >|</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Keyword Command"
+	    >sort</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Normal Option"
+	    >-t</span
+	    ><span class="Normal NormalText"
+	    > - </span
+	    ><span class="Normal Option"
+	    >-k</span
+	    ><span class="Normal NormalText"
+	    > 4,4nr </span
+	    ><span class="Keyword Control"
+	    >|</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Keyword Command"
+	    >head</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Normal Option"
+	    >-n</span
+	    ><span class="Others Variable"
+	    >${max}</span
+	    ><br
+	     /><span class="Keyword Builtin"
+	    >echo</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="String StringSingleQ"
+	    >'}'</span
+	    ><br
+	     /></code
+	  ></pre
+	></td
+      ></tr
+    ></table
+  ><p
+  >After deploying this script to the CGI enabled directory on the operations web server, it can be tested directly by requesting it using <a href="http://linux.die.net/man/1/curl"
+    >curl</a
+    >.</p
+  ><pre class="sourceCode bash"
+  ><code
+    ><span class="Normal NormalText"
+      >curl </span
+      ><span class="Normal Option"
+      >-d</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="String StringDoubleQ"
+      >&quot;repo=acme&amp;label=Anvils&amp;package=anvils&quot;</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="Keyword"
+      >\</span
+      ><br
+       /><span class="Normal NormalText"
+      >    </span
+      ><span class="Normal Option"
+      >--get</span
+      ><span class="Normal NormalText"
+      > http:</span
+      ><span class="Normal Path"
+      >//yum.acme.com/cgi-bin/repoquery.cgi</span
+      ><br
+       /></code
+    ></pre
+  ><p
+  >The server response should return JSON data resembling the example below:</p
+  ><pre class="sourceCode json"
+  ><code
+    ><span class="Error Style_Error"
+      >[ </span
+      ><br
+       /><span class="Error Style_Error"
+      >  </span
+      ><span class="Normal Style_Seperator_Pair"
+      >{</span
+      ><span class="DataType Style_String_Key"
+      >&quot;name&quot;</span
+      ><span class="Normal Style_Seperator_Pair"
+      >:</span
+      ><span class="String Style_String_Value"
+      >&quot;anvils-1.1.rpm&quot;</span
+      ><span class="Normal Style_Seperator_Pair"
+      >,</span
+      ><span class="Normal Style_Normal"
+      > </span
+      ><span class="DataType Style_String_Key"
+      >&quot;value&quot;</span
+      ><span class="Normal Style_Seperator_Pair"
+      >:</span
+      ><span class="String Style_String_Value"
+      >&quot;/dist/RPMS/noarch/anvils-1.1.rpm&quot;</span
+      ><span class="Normal Style_Seperator_Pair"
+      >}</span
+      ><span class="Error Style_Error"
+      >, </span
+      ><br
+       /><span class="Error Style_Error"
+      >  </span
+      ><span class="Normal Style_Seperator_Pair"
+      >{</span
+      ><span class="DataType Style_String_Key"
+      >&quot;name&quot;</span
+      ><span class="Normal Style_Seperator_Pair"
+      >:</span
+      ><span class="String Style_String_Value"
+      >&quot;anvils-1.2.rpm&quot;</span
+      ><span class="Normal Style_Seperator_Pair"
+      >,</span
+      ><span class="Normal Style_Normal"
+      > </span
+      ><span class="DataType Style_String_Key"
+      >&quot;value&quot;</span
+      ><span class="Normal Style_Seperator_Pair"
+      >:</span
+      ><span class="String Style_String_Value"
+      >&quot;/dist/RPMS/noarch/anvils-1.2.rpm&quot;</span
+      ><span class="Normal Style_Seperator_Pair"
+      >}</span
+      ><span class="Error Style_Error"
+      > </span
+      ><br
+       /><span class="Error Style_Error"
+      >]</span
+      ><br
+       /></code
+    ></pre
+  ><p
+  >Jobs can request the option model data like so:</p
+  ><pre class="sourceCode xml"
+  ><code
+    ><span class="Keyword Element"
+      >&lt;option</span
+      ><span class="Others Attribute"
+      > name=</span
+      ><span class="String Value"
+      >&quot;package&quot;</span
+      ><span class="Others Attribute"
+      > enforcedvalues=</span
+      ><span class="String Value"
+      >&quot;true&quot;</span
+      ><span class="Others Attribute"
+      > required=</span
+      ><span class="String Value"
+      >&quot;true&quot;</span
+      ><br
+       /><span class="Others Attribute"
+      >    valuesUrl=</span
+      ><span class="String Value"
+      >&quot;http://yum.acme.com/cgi-bin/repoquery.cgi?package=anvils&quot;</span
+      ><span class="Keyword Element"
+      >/&gt;</span
+      ><span class="Normal NormalText"
+      > </span
+      ><br
+       /></code
+    ></pre
+  ><p
+  >The Rundeck UI will display the package names in the menu and once selected, the Job will have the matching package versions.</p
+  ></div
+>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.0.2)</a></li>
+    
+    
+    <li ><a href="index.html">Tutorials</a></li>
+    <li class="active"><a href="option-provider.html">Option Provider</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="access-control.html"><i class="glyphicon glyphicon-arrow-left"></i> Access Control</a></li>
+      
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2014 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<span class="generated-date" title="2014-03-13T23:41:48EDT">2014-03-13T23:41:48EDT</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
