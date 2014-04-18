@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Copier Plugin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler, Alex Honor" />
+  <meta name="date" content="November 20, 2010" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Enables Self-Service Operations</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.0.4</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.0.4)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="file-copier-plugin.html">File Copier Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="plugin-development.html"><i class="glyphicon glyphicon-arrow-left"></i> Plugin Development</a></li>
+      <li class="next"><a href="model-format-parser-and-generator-plugin.html">Model Format Parser and Generator Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<div id="TOC"
+><ul
+  ><li
+    ><a href="#about"
+      >About</a
+      ></li
+    ><li
+    ><a href="#java-plugin-type"
+      >Java Plugin Type</a
+      ><ul
+      ><li
+	><a href="#plugin-properties"
+	  >Plugin properties</a
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#script-plugin-type"
+      >Script Plugin Type</a
+      ><ul
+      ><li
+	><a href="#additional-data-context-properties"
+	  >Additional data context properties</a
+	  ></li
+	><li
+	><a href="#provider-script-requirements"
+	  >Provider Script Requirements</a
+	  ><ul
+	  ><li
+	    ><a href="#script-exit-code"
+	      >Script Exit Code</a
+	      ></li
+	    ><li
+	    ><a href="#script-output"
+	      >Script Output</a
+	      ></li
+	    ></ul
+	  ></li
+	></ul
+      ></li
+    ></ul
+  ></div
+>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">File Copier Plugin</h1>
+</div>
+<div id="about"
+><h2
+  ><a href="#TOC"
+    >About</a
+    ></h2
+  ><p
+  >A File Copier provider copies a file or script to a remote or local node.</p
+  ></div
+><div id="java-plugin-type"
+><h2
+  ><a href="#TOC"
+    >Java Plugin Type</a
+    ></h2
+  ><p
+  >Your provider class must implement the interface <a href="../javadoc/com/dtolabs/rundeck/core/execution/service/DestinationFileCopier.html"
+    >DestinationFileCopier</a
+    >:</p
+  ><pre class="sourceCode java"
+  ><code
+    ><span class="Keyword"
+      >public</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="Keyword"
+      >interface</span
+      ><span class="Normal NormalText"
+      > DestinationFileCopier </span
+      ><span class="Keyword"
+      >extends</span
+      ><span class="Normal NormalText"
+      > FileCopier </span
+      ><span class="Normal Symbol"
+      >{</span
+      ><br
+       /><br
+       /><span class="Normal NormalText"
+      >    </span
+      ><span class="Keyword"
+      >public</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="Normal Java15"
+      >String</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="Function"
+      >copyFileStream</span
+      ><span class="Normal Symbol"
+      >(</span
+      ><span class="Normal NormalText"
+      >ExecutionContext context</span
+      ><span class="Normal Symbol"
+      >,</span
+      ><span class="Normal NormalText"
+      > </span
+      ><br
+       /><span class="Normal NormalText"
+      >                                 </span
+      ><span class="Normal Java15"
+      >InputStream</span
+      ><span class="Normal NormalText"
+      > input</span
+      ><span class="Normal Symbol"
+      >,</span
+      ><span class="Normal NormalText"
+      > </span
+      ><br
+       /><span class="Normal NormalText"
+      >                                 INodeEntry node</span
+      ><span class="Normal Symbol"
+      >,</span
+      ><span class="Normal NormalText"
+      > </span
+      ><br
+       /><span class="Normal NormalText"
+      >                                 </span
+      ><span class="Normal Java15"
+      >String</span
+      ><span class="Normal NormalText"
+      > destination</span
+      ><span class="Normal Symbol"
+      >)</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="Keyword"
+      >throws</span
+      ><span class="Normal NormalText"
+      > FileCopierException</span
+      ><span class="Normal Symbol"
+      >;</span
+      ><br
+       /><br
+       /><span class="Normal NormalText"
+      >    </span
+      ><span class="Keyword"
+      >public</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="Normal Java15"
+      >String</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="Function"
+      >copyFile</span
+      ><span class="Normal Symbol"
+      >(</span
+      ><span class="Normal NormalText"
+      >ExecutionContext context</span
+      ><span class="Normal Symbol"
+      >,</span
+      ><span class="Normal NormalText"
+      > </span
+      ><br
+       /><span class="Normal NormalText"
+      >                           </span
+      ><span class="Normal Java15"
+      >File</span
+      ><span class="Normal NormalText"
+      > file</span
+      ><span class="Normal Symbol"
+      >,</span
+      ><span class="Normal NormalText"
+      > </span
+      ><br
+       /><span class="Normal NormalText"
+      >                           INodeEntry node</span
+      ><span class="Normal Symbol"
+      >,</span
+      ><span class="Normal NormalText"
+      > </span
+      ><br
+       /><span class="Normal NormalText"
+      >                           </span
+      ><span class="Normal Java15"
+      >String</span
+      ><span class="Normal NormalText"
+      > destination</span
+      ><span class="Normal Symbol"
+      >)</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="Keyword"
+      >throws</span
+      ><span class="Normal NormalText"
+      > FileCopierException</span
+      ><span class="Normal Symbol"
+      >;</span
+      ><br
+       /><br
+       /><span class="Normal NormalText"
+      >    </span
+      ><span class="Keyword"
+      >public</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="Normal Java15"
+      >String</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="Function"
+      >copyScriptContent</span
+      ><span class="Normal Symbol"
+      >(</span
+      ><span class="Normal NormalText"
+      >ExecutionContext context</span
+      ><span class="Normal Symbol"
+      >,</span
+      ><span class="Normal NormalText"
+      > </span
+      ><br
+       /><span class="Normal NormalText"
+      >                                    </span
+      ><span class="Normal Java15"
+      >String</span
+      ><span class="Normal NormalText"
+      > script</span
+      ><span class="Normal Symbol"
+      >,</span
+      ><span class="Normal NormalText"
+      > </span
+      ><br
+       /><span class="Normal NormalText"
+      >                                    INodeEntry node</span
+      ><span class="Normal Symbol"
+      >,</span
+      ><span class="Normal NormalText"
+      > </span
+      ><br
+       /><span class="Normal NormalText"
+      >                                    </span
+      ><span class="Normal Java15"
+      >String</span
+      ><span class="Normal NormalText"
+      > destination</span
+      ><span class="Normal Symbol"
+      >)</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="Keyword"
+      >throws</span
+      ><span class="Normal NormalText"
+      > FileCopierException</span
+      ><span class="Normal Symbol"
+      >;</span
+      ><br
+       /><span class="Normal Symbol"
+      >}</span
+      ><br
+       /></code
+    ></pre
+  ><div id="plugin-properties"
+  ><h3
+    ><a href="#TOC"
+      >Plugin properties</a
+      ></h3
+    ><p
+    >See <a href="plugin-development.html#plugin-descriptions"
+      >Plugin Development - Java Plugins - Descriptions</a
+      > to learn how to create configuration properties for your plugin.</p
+    ><blockquote
+    ><p
+      >Note, the <code
+	>destination</code
+	> parameter may or may not be specified. If it is not null, it indicates that the file must be copied to the requested destination filepath. If it is null, it indicates that the copied file is likely a script file, and it should be copied to a temporary file location. In either case, the resulting file path must be returned as the result of the method call.</p
+      ></blockquote
+    ></div
+  ></div
+><div id="script-plugin-type"
+><h2
+  ><a href="#TOC"
+    >Script Plugin Type</a
+    ></h2
+  ><p
+  >See the <a href="plugin-development.html#script-plugin-development"
+    >Script Plugin Development</a
+    > for the basics of developing script-based plugins for Rundeck.</p
+  ><div id="additional-data-context-properties"
+  ><h3
+    ><a href="#TOC"
+      >Additional data context properties</a
+      ></h3
+    ><p
+    >The data context used in the script plugin definition can use these additional properties:</p
+    ><dl
+    ><dt
+      ><code
+	>${file-copy.file}</code
+	></dt
+      ><dd
+      ><p
+	>The local path to the file that needs to be copied.</p
+	></dd
+      ><dt
+      ><code
+	>${file-copy.destination}</code
+	></dt
+      ><dd
+      ><p
+	>The remote destination path that is requested, if available.</p
+	></dd
+      ></dl
+    ></div
+  ><div id="provider-script-requirements"
+  ><h3
+    ><a href="#TOC"
+      >Provider Script Requirements</a
+      ></h3
+    ><p
+    >The specific service has expectations about the way your provider script behaves:</p
+    ><div id="script-exit-code"
+    ><h4
+      ><a href="#TOC"
+	>Script Exit Code</a
+	></h4
+      ><ul
+      ><li
+	>Exit code of 0 indicates success.</li
+	><li
+	>Any other exit code indicates failure.</li
+	></ul
+      ></div
+    ><div id="script-output"
+    ><h4
+      ><a href="#TOC"
+	>Script Output</a
+	></h4
+      ><p
+      >The first line of output of <code
+	>STDOUT</code
+	> MUST be the filepath of the file copied to the target node. Other output is ignored. All output to <code
+	>STDERR</code
+	> will be captured for the job's output.</p
+      ></div
+    ></div
+  ></div
+>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.0.4)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="file-copier-plugin.html">File Copier Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="plugin-development.html"><i class="glyphicon glyphicon-arrow-left"></i> Plugin Development</a></li>
+      <li class="next"><a href="model-format-parser-and-generator-plugin.html">Model Format Parser and Generator Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2014 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<span class="generated-date" title="2014-04-18T19:31:24EDT">2014-04-18T19:31:24EDT</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>

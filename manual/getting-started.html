@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Getting Started</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Alex Honor" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="November 20, 2010" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Enables Self-Service Operations</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.0.4</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.0.4)</a></li>
+    
+    
+    <li ><a href="index.html">User Guide</a></li>
+    <li class="active"><a href="getting-started.html">Getting Started</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="getting-help.html"><i class="glyphicon glyphicon-arrow-left"></i> Getting Help</a></li>
+      <li class="next"><a href="jobs.html">Jobs <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<div id="TOC"
+><ul
+  ><li
+    ><a href="#essential-concepts"
+      >Essential Concepts</a
+      ></li
+    ><li
+    ><a href="#download-and-installation"
+      >Download and Installation</a
+      ></li
+    ><li
+    ><a href="#login"
+      >Login</a
+      ></li
+    ><li
+    ><a href="#project-setup"
+      >Project setup</a
+      ></li
+    ><li
+    ><a href="#rundeck-graphical-console"
+      >Rundeck Graphical Console</a
+      ><ul
+      ><li
+	><a href="#navigation"
+	  >Navigation</a
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#command-line-tools"
+      >Command Line Tools</a
+      ></li
+    ><li
+    ><a href="#api"
+      >API</a
+      ></li
+    ><li
+    ><a href="#document-formats"
+      >Document Formats</a
+      ></li
+    ></ul
+  ></div
+>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Getting Started</h1>
+</div>
+<p
+>This chapter helps new users get started with Rundeck. We will begin by explaining a few essential Rundeck concepts and terminology and then discuss installation, project setup and introduce you to the top level navigation of the interface.</p
+><div id="essential-concepts"
+><h2
+  ><a href="#TOC"
+    >Essential Concepts</a
+    ></h2
+  ><p
+  >Several fundamental concepts underly and drive the Rundeck system. If you are a new user, knowing about them will help you use or integrate Rundeck into your environment.</p
+  ><ul
+  ><li
+    ><strong
+      >Role-based Access Control Policies</strong
+      >: A Rundeck <em
+      ><a href="../administration/access-control-policy.html"
+	>access control policy</a
+	></em
+      > grants users and user groups certain privileges to perform actions against rundeck resources like projects, jobs, nodes, commands and API.</li
+    ><li
+    ><strong
+      >Projects</strong
+      >: A <em
+      ><a href="../administration/project-setup.html"
+	>project</a
+	></em
+      > is a place to separate management activity. All Rundeck activities occur within the context of a project. Multiple projects can be maintained on the same Rundeck server.</li
+    ><li
+    >Jobs : A <em
+      ><a href="jobs.html"
+	>job</a
+	></em
+      > encapsulate a sequence of steps, job options and nodes where the steps execute.</li
+    ><li
+    ><strong
+      >Nodes</strong
+      >: A <em
+      ><a href="nodes.html"
+	>node</a
+	></em
+      > is a resource that is either a physical or virtual instance of a network accessible host. A <em
+      >resource model</em
+      > is a representation of Nodes in a project.</li
+    ><li
+    ><strong
+      >Commands</strong
+      >: A <em
+      ><a href="commands.html"
+	>command</a
+	></em
+      > is a single executable string executed on a Node. Rundeck invokes commands on nodes via a <em
+      >node executor</em
+      > which evaluates the command string and executes it.</li
+    ><li
+    ><strong
+      >Executions</strong
+      >: An <em
+      ><a href="executions.html"
+	>execution</a
+	></em
+      > is a representation of the activity of a running or completed command or job. The data about the execution is used in rundeck to monitor the progress of a job or command and later for reporting about what happened.</li
+    ><li
+    ><strong
+      >Plugins</strong
+      >: Most of what Rundeck does is via one of its <em
+      ><a href="../plugins-user-guide/index.html"
+	>plugins</a
+	></em
+      >. Plugins exist to execute commands on nodes, perform steps in a job, send a notification about job status, gather information about the hosts in your network, copy a file to a remote server, store and stream logs, or talk to a user directory.</li
+    ></ul
+  ></div
+><div id="download-and-installation"
+><h2
+  ><a href="#TOC"
+    >Download and Installation</a
+    ></h2
+  ><p
+  >If a running Rundeck instance isn't already available to you, there are a couple ways you can try it.</p
+  ><ul
+  ><li
+    >You can <a href="http://rundeck.org/downloads.html"
+      >download</a
+      > and install the Rundeck software. There are several package formats. Choose the one that best suits your infrastructure. After installation, be sure Rundeck has been started. See <a href="../administration/startup-and-shutdown.html"
+      >Startup</a
+      > to learn how to startup and shutdown rundeck.</li
+    ><li
+    >You can run the <a href="http://github.com/rundeck/anvils-demo"
+      >vagrant</a
+      > demo. The demo contains a project with tagged nodes, example job workflows with dynamic options, and a set of users, each with varying degrees of privilege.</li
+    ></ul
+  ><p
+  >The default port for the web interface is <code
+    >4440</code
+    >. If you installed Rundeck on your local machine, go to this URL: <a href="http://localhost:4440"
+    ><code
+      >http://localhost:4440</code
+      ></a
+    ></p
+  ></div
+><div id="login"
+><h2
+  ><a href="#TOC"
+    >Login</a
+    ></h2
+  ><p
+  >Rundeck requires every user to login. The default installation defines an &quot;admin&quot; user with access to perform all actions. Use &quot;admin&quot; for username and password.</p
+  ><div class="figure"
+  ><img src="../figures/fig0202.png" alt="Login form"
+     /><p class="caption"
+    >Login form</p
+    ></div
+  ></div
+><div id="project-setup"
+><h2
+  ><a href="#TOC"
+    >Project setup</a
+    ></h2
+  ><p
+  >A new installation will not contain any projects so Rundeck will present you with a dialog to create one. Press the &quot;New Project&quot; button to create a project. Fill the project creation form with a desired name. Project names can contain letters and numbers but do not use spaces or special characters. The <a href="../administration/project-setup.html"
+    >Project setup</a
+    > chapter in the Administrator guide will show you how to learn to add Nodes, automate the creation and maintenance of Rundeck projects.</p
+  ><p
+  >Once the project has been created you are ready to use your Rundeck instance.</p
+  ></div
+><div id="rundeck-graphical-console"
+><h2
+  ><a href="#TOC"
+    >Rundeck Graphical Console</a
+    ></h2
+  ><div id="navigation"
+  ><h3
+    ><a href="#TOC"
+      >Navigation</a
+      ></h3
+    ><p
+    >The Rundeck page header contains global navigation control to move between tabbed pages: Jobs, Nodes, Commands and Activity. It also has links to Configure the project, logout, view your user profile and a link to this online help.</p
+    ><div class="figure"
+    ><img src="../figures/fig0201.png" alt="Top navigation bar"
+       /><p class="caption"
+      >Top navigation bar</p
+      ></div
+    ><dl
+    ><dt
+      >Project menu</dt
+      ><dd
+      ><p
+	>The top navigation bar contains a menu to select the desired project. If only one project exists, the menu will automatically be selected. You can create new projects from this menu, too.</p
+	></dd
+      ><dt
+      >Jobs</dt
+      ><dd
+      ><p
+	>From the Jobs page, one can list, create and run Jobs. A configurable filter allows a user to limit the Job listing to those Jobs matching the filtering criteria. These filter settings can be saved to a Users profile. Only authorized jobs will be visible.</p
+	><p
+	>See <a href="jobs.html"
+	  >Jobs</a
+	  >.</p
+	></dd
+      ><dt
+      >Nodes</dt
+      ><dd
+      ><p
+	>The Nodes page is used to browse your Nodes configured in your Project resource model. A filter control can be used to limit the listing to just the Node resources matching the filter criteria. Given the appropriate authorization you can also execute ad hoc commands to your filtered node set.</p
+	><p
+	>See <a href="nodes.html"
+	  >Nodes</a
+	  >.</p
+	></dd
+      ><dt
+      >Commands</dt
+      ><dd
+      ><p
+	>The Commands page lets you execute abitrary commands against the nodes that match the node filter.</p
+	><p
+	>See <a href="commands.html"
+	  >Commands</a
+	  >.</p
+	></dd
+      ><dt
+      >Activity</dt
+      ><dd
+      ><p
+	>From the Activity page, one can view currently executing commands and Jobs or browse execution history. The execution history can be filtered based on user selected parameters. Once the filter has been set, the matching history is displayed. The current filter settings also configure an RSS link, found in the top right of the page (see Rundeck Administration to enable RSS).</p
+	><p
+	>See <a href="activity.html"
+	  >Activity</a
+	  >.</p
+	></dd
+      ><dt
+      >Configure</dt
+      ><dd
+      ><p
+	>If your login belongs to the &quot;admin&quot; group and therefore granted &quot;admin&quot; privileges, a &quot;Configure&quot; icon will be displayed in the top navigation bar. From the Configure page you can edit project configuration, export and import project archives, view system information, and see what plugins are installed.</p
+	><p
+	>See <a href="configure.html"
+	  >Configure</a
+	  ></p
+	></dd
+      ><dt
+      >User</dt
+      ><dd
+      ><p
+	>The User menu lets you logout and view your profile page. Your user profile lists your group memberships and a form to list and generate API tokens.</p
+	><p
+	>See <a href="user.html"
+	  >User</a
+	  ></p
+	></dd
+      ><dt
+      >Help</dt
+      ><dd
+      ><p
+	>Opens a page to this user manual.</p
+	></dd
+      ></dl
+    ></div
+  ></div
+><div id="command-line-tools"
+><h2
+  ><a href="#TOC"
+    >Command Line Tools</a
+    ></h2
+  ><p
+  >Rundeck includes a number of shell tools to dispatch commands, load and run Job definitions and interact with the dispatcher queue. These command tools are an alternative to functions accessible in the graphical console.</p
+  ><p
+  >See the <a href="../man1/index.html"
+    >Command line tools</a
+    >.</p
+  ></div
+><div id="api"
+><h2
+  ><a href="#TOC"
+    >API</a
+    ></h2
+  ><p
+  >You can also use the Web API to interface with all aspects of node and Job execution.</p
+  ><p
+  >See the <a href="../api/index.html"
+    >Rundeck API</a
+    > page for a reference on the endpoints and examples.</p
+  ></div
+><div id="document-formats"
+><h2
+  ><a href="#TOC"
+    >Document Formats</a
+    ></h2
+  ><p
+  >If you prefer to manage job and resource definitions using text files you can do so using XML or YAML formats.</p
+  ><p
+  >See the <a href="../man5/index.html"
+    >Document Format Reference</a
+    >.</p
+  ></div
+>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.0.4)</a></li>
+    
+    
+    <li ><a href="index.html">User Guide</a></li>
+    <li class="active"><a href="getting-started.html">Getting Started</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="getting-help.html"><i class="glyphicon glyphicon-arrow-left"></i> Getting Help</a></li>
+      <li class="next"><a href="jobs.html">Jobs <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2014 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<span class="generated-date" title="2014-04-18T19:31:24EDT">2014-04-18T19:31:24EDT</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
