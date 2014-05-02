@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Plugin Development</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler, Alex Honor" />
+  <meta name="date" content="November 20, 2010" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Enables Self-Service Operations</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.1.1</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.1.1)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="plugin-development.html">Plugin Development</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="notification-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> Notification Plugin</a></li>
+      <li class="next"><a href="file-copier-plugin.html">File Copier Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<div id="TOC"
+><ul
+  ><li
+    ><a href="#java-plugin-development"
+      >Java Plugin Development</a
+      ><ul
+      ><li
+	><a href="#build-dependencies"
+	  >Build dependencies</a
+	  ></li
+	><li
+	><a href="#available-services"
+	  >Available Services</a
+	  ></li
+	><li
+	><a href="#provider-classes"
+	  >Provider Classes</a
+	  ></li
+	><li
+	><a href="#provider-lifecycle"
+	  >Provider Lifecycle</a
+	  ></li
+	><li
+	><a href="#plugin-failure-results"
+	  >Plugin failure results</a
+	  ></li
+	><li
+	><a href="#plugin-descriptions"
+	  >Plugin Descriptions</a
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#script-plugin-development"
+      >Script Plugin Development</a
+      ><ul
+      ><li
+	><a href="#script-plugin-zip-structure"
+	  >Script plugin zip structure</a
+	  ></li
+	><li
+	><a href="#provider-metadata"
+	  >Provider metadata</a
+	  ></li
+	><li
+	><a href="#how-script-plugin-providers-are-invoked"
+	  >How script plugin providers are invoked</a
+	  ></li
+	><li
+	><a href="#script-provider-requirements"
+	  >Script provider requirements</a
+	  ><ul
+	  ><li
+	    ><a href="#exit-code"
+	      >Exit code</a
+	      ></li
+	    ><li
+	    ><a href="#output"
+	      >Output</a
+	      ></li
+	    ></ul
+	  ></li
+	></ul
+      ></li
+    ></ul
+  ></div
+>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Plugin Development</h1>
+</div>
+<p
+>There are currently two ways to develop plugins:</p
+><ol style="list-style-type: decimal;"
+><li
+  ><a href="#java-plugin-development"
+    >Java plugin development</a
+    >: Develop Java code that is distributed within a Jar file.</li
+  ><li
+  ><a href="#script-plugin-development"
+    >Script Plugin Development</a
+    >: Write shell/system scripts that implement your desired behavior and put them in a zip file with some metadata.</li
+  ><li
+  >Groovy Plugin Development: Write groovy scripts to implement Notification and Logging plugins.</li
+  ></ol
+><p
+>Either way, the resultant plugin archive file, either a .jar java archive, or a .zip file archive, will be placed in the plugin directory (Launcher: <code
+  >$RDECK_BASE/libext</code
+  >, RPM,DEB: <code
+  >/var/lib/rundeck/libext</code
+  >).</p
+><div id="java-plugin-development"
+><h2
+  ><a href="#TOC"
+    >Java Plugin Development</a
+    ></h2
+  ><p
+  >Java plugins are distributed as .jar files containing the necessary classes for one or more service provider, as well as any other java jar dependency files.</p
+  ><p
+  >The <code
+    >.jar</code
+    > file you distribute must have this metadata within the main Manifest for the jar file to be correctly loaded by the system:</p
+  ><ul
+  ><li
+    ><code
+      >Rundeck-Plugin-Version: 1.1</code
+      ></li
+    ><li
+    ><code
+      >Rundeck-Plugin-Archive: true</code
+      ></li
+    ><li
+    ><code
+      >Rundeck-Plugin-Classnames: classname,..</code
+      ></li
+    ><li
+    ><code
+      >Rundeck-Plugin-Libs: lib/something.jar ...</code
+      > <em
+      >(optional)</em
+      ></li
+    ></ul
+  ><p
+  >Each classname listed must be a valid &quot;<a href="#provider-classes"
+    >Provider Class</a
+    >&quot; as defined below.</p
+  ><p
+  >Additionally, you should include a manifest entry to indicate the plugin file's version:</p
+  ><ul
+  ><li
+    ><code
+      >Rundeck-Plugin-File-Version: 1.x</code
+      ></li
+    ></ul
+  ><p
+  >This version number will be used to load only the newest plugin file, if more than one provider of the same name and type is defined.</p
+  ><div id="build-dependencies"
+  ><h3
+    ><a href="#TOC"
+      >Build dependencies</a
+      ></h3
+    ><p
+    >Rundeck's core jar is published to the central Maven repository, so you can simply specify a dependency in your build file.</p
+    ><p
+    >For gradle, use:</p
+    ><pre class="sourceCode java"
+    ><code
+      ><span class="Function"
+	>compile</span
+	><span class="Normal Symbol"
+	>(</span
+	><span class="Normal NormalText"
+	>group</span
+	><span class="Normal Symbol"
+	>:</span
+	><span class="Normal NormalText"
+	>'org</span
+	><span class="Normal Symbol"
+	>.</span
+	><span class="Function"
+	>rundeck</span
+	><span class="Normal NormalText"
+	>'</span
+	><span class="Normal Symbol"
+	>,</span
+	><span class="Normal NormalText"
+	> name</span
+	><span class="Normal Symbol"
+	>:</span
+	><span class="Normal NormalText"
+	> 'rundeck</span
+	><span class="Normal Symbol"
+	>-</span
+	><span class="Normal NormalText"
+	>core'</span
+	><span class="Normal Symbol"
+	>,</span
+	><span class="Normal NormalText"
+	> version</span
+	><span class="Normal Symbol"
+	>:</span
+	><span class="Normal NormalText"
+	> '</span
+	><span class="Float"
+	>2.1.1</span
+	><span class="Normal NormalText"
+	>'</span
+	><span class="Normal Symbol"
+	>)</span
+	><br
+	 /></code
+      ></pre
+    ><p
+    >For maven use:</p
+    ><pre class="sourceCode xml"
+    ><code
+      ><span class="Keyword Element"
+	>&lt;dependencies&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>   </span
+	><span class="Keyword Element"
+	>&lt;dependency&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>      </span
+	><span class="Keyword Element"
+	>&lt;groupId&gt;</span
+	><span class="Normal NormalText"
+	>org.rundeck</span
+	><span class="Keyword Element"
+	>&lt;/groupId&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>      </span
+	><span class="Keyword Element"
+	>&lt;artifactId&gt;</span
+	><span class="Normal NormalText"
+	>rundeck-core</span
+	><span class="Keyword Element"
+	>&lt;/artifactId&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>      </span
+	><span class="Keyword Element"
+	>&lt;version&gt;</span
+	><span class="Normal NormalText"
+	>2.1.1</span
+	><span class="Keyword Element"
+	>&lt;/version&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>      </span
+	><span class="Keyword Element"
+	>&lt;scope&gt;</span
+	><span class="Normal NormalText"
+	>compile</span
+	><span class="Keyword Element"
+	>&lt;/scope&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>   </span
+	><span class="Keyword Element"
+	>&lt;/dependency&gt;</span
+	><br
+	 /><span class="Keyword Element"
+	>&lt;/dependencies&gt;</span
+	><br
+	 /></code
+      ></pre
+    ><ul
+    ><li
+      >Rundeck's core jar is published to the central Maven repository, so you can now declare a build dependency more easily.</li
+      ></ul
+    ><p
+    >If your Java classes require external libraries that are not included with the Rundeck runtime, you can include them in your .jar archive. (Look in <code
+      >$RDECK_BASE/tools/lib</code
+      > to see the set of third-party jars that are available for your classes by default at runtime).</p
+    ><p
+    >Specify the <code
+      >Rundeck-Plugin-Libs</code
+      > attribute in the Main attributes of the Manifest for the jar, set the value to a space-separated list of jar file names as you have included them in the jar.</p
+    ><p
+    >E.g.:</p
+    ><pre
+    ><code
+      >Rundeck-Plugin-Libs: lib/somejar-1.2.jar lib/anotherjar-1.3.jar
+</code
+      ></pre
+    ><p
+    >Then include the jar files in the Plugin's jar contents:</p
+    ><pre
+    ><code
+      >META-INF/
+META-INF/MANIFEST.MF
+com/
+com/mycompany/
+com/mycompany/rundeck/
+com/mycompany/rundeck/plugin/
+com/mycompany/rundeck/plugin/test/
+com/mycompany/rundeck/plugin/test/TestNodeExecutor.class
+lib/
+lib/somejar-1.2.jar
+lib/anotherjar-1.3.jar
+</code
+      ></pre
+    ></div
+  ><div id="available-services"
+  ><h3
+    ><a href="#TOC"
+      >Available Services</a
+      ></h3
+    ><p
+    >The Rundeck core makes use of several different &quot;Services&quot; that provide functionality for executing steps, getting information about Nodes or sending notifications.</p
+    ><p
+    >Plugins can contain one or more Service Provider implementations. Each plugin file could contain multiple Providers for different types of services, however typically each plugin file would contain only providers related in some fashion.</p
+    ><p
+    >Node Execution services:</p
+    ><ul
+    ><li
+      ><code
+	>NodeExecutor</code
+	> - executes a command on a node <a href="../javadoc/com/dtolabs/rundeck/core/execution/service/NodeExecutor.html"
+	>javadoc</a
+	>.</li
+      ><li
+      ><code
+	>FileCopier</code
+	> - copies a file to a node <a href="../javadoc/com/dtolabs/rundeck/core/execution/service/FileCopier.html"
+	>javadoc</a
+	>.</li
+      ></ul
+    ><p
+    >Resource model services:</p
+    ><ul
+    ><li
+      ><code
+	>ResourceModelSource</code
+	> - produces a set of Node definitions for a project <a href="../javadoc/com/dtolabs/rundeck/core/resources/ResourceModelSource.html"
+	>javadoc</a
+	>.</li
+      ><li
+      ><code
+	>ResourceFormatParser</code
+	> - parses a document into a set of Node resources <a href="../javadoc/com/dtolabs/rundeck/core/resources/format/ResourceFormatParser.html"
+	>javadoc</a
+	>.</li
+      ><li
+      ><code
+	>ResourceFormatGenerator</code
+	> - generates a document from a set of Node resources <a href="../javadoc/com/dtolabs/rundeck/core/resources/format/ResourceFormatGenerator.html"
+	>javadoc</a
+	>.</li
+      ></ul
+    ><p
+    >Workflow Step services (described in <a href="workflow-step-plugin.html"
+      >Workflow Step Plugin</a
+      >):</p
+    ><ul
+    ><li
+      ><code
+	>WorkflowStep</code
+	> - runs a single step in a workflow.</li
+      ><li
+      ><code
+	>WorkflowNodeStep</code
+	> - runs a single step for each node in a workflow.</li
+      ><li
+      ><code
+	>RemoteScriptNodeStep</code
+	> - generates a script or command to execute remotely for each node in a workflow.</li
+      ></ul
+    ><p
+    >Notification services (described in <a href="notification-plugin.html"
+      >Notification Plugin</a
+      >):</p
+    ><ul
+    ><li
+      ><code
+	>Notification</code
+	> - performs an action after a Job state trigger.</li
+      ></ul
+    ><p
+    >Storage services:</p
+    ><ul
+    ><li
+      ><code
+	>Storage</code
+	> - backend for storing data: <a href="storage-plugin.html"
+	>Storage Plugin</a
+	></li
+      ><li
+      ><code
+	>StorageConverter</code
+	> - modifies stored content or metadata: <a href="storage-converter-plugin.html"
+	>Storage Converter Plugin</a
+	></li
+      ></ul
+    ></div
+  ><div id="provider-classes"
+  ><h3
+    ><a href="#TOC"
+      >Provider Classes</a
+      ></h3
+    ><p
+    >A &quot;Provider Class&quot; is a java class that implements a particular interface and declares itself as a provider for a particular Rundeck &quot;Service&quot;.</p
+    ><p
+    >Each plugin also defines a &quot;Name&quot; that identifies it for use in Rundeck. The Name of a plugin is also referred to as a &quot;Provider Name&quot;, as the plugin class is a provider of a particular service.</p
+    ><p
+    >You should choose a unique but simple name for your provider.</p
+    ><p
+    >Each plugin class must have the <a href="../javadoc/com/dtolabs/rundeck/core/plugins/Plugin.html"
+      >Plugin</a
+      > annotation applied to it.</p
+    ><pre class="sourceCode java"
+    ><code
+      ><span class="Normal NormalText"
+	>@</span
+	><span class="Function"
+	>Plugin</span
+	><span class="Normal Symbol"
+	>(</span
+	><span class="Normal NormalText"
+	>name</span
+	><span class="Normal Symbol"
+	>=</span
+	><span class="String"
+	>&quot;myprovider&quot;</span
+	><span class="Normal Symbol"
+	>,</span
+	><span class="Normal NormalText"
+	> service</span
+	><span class="Normal Symbol"
+	>=</span
+	><span class="String"
+	>&quot;NodeExecutor&quot;</span
+	><span class="Normal Symbol"
+	>)</span
+	><br
+	 /><span class="Keyword"
+	>public</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Keyword"
+	>class</span
+	><span class="Normal NormalText"
+	> MyProvider </span
+	><span class="Keyword"
+	>implements</span
+	><span class="Normal NormalText"
+	> NodeExecutor </span
+	><span class="Normal Symbol"
+	>{</span
+	><br
+	 /><span class="Normal Symbol"
+	>.</span
+	><span class="Normal Symbol"
+	>.</span
+	><span class="Normal Symbol"
+	>.</span
+	><br
+	 /><span class="Normal Symbol"
+	>}</span
+	><br
+	 /></code
+      ></pre
+    ><p
+    >Your provider class must have at least a zero-argument constructor, and optionally can have a single-argument constructor with a <code
+      >com.dtolabs.rundeck.core.common.Framework</code
+      > parameter, in which case your class will be constructed with this constructor and passed the Framework instance.</p
+    ><p
+    >You may log messages to the ExecutionListener available via <a href="../javadoc/com/dtolabs/rundeck/core/execution/ExecutionContext.html"
+      >ExecutionContext#getExecutionListener()</a
+      > method.</p
+    ><p
+    >You can also send output to <code
+      >System.err</code
+      > and <code
+      >System.out</code
+      > and it will be captured as output of the execution.</p
+    ></div
+  ><div id="provider-lifecycle"
+  ><h3
+    ><a href="#TOC"
+      >Provider Lifecycle</a
+      ></h3
+    ><p
+    >Provider classes are instantiated when needed by the Framework object, and the instance is retained within the Service for future reuse. The Framework object may exist across multiple executions, and the provider instance may be reused.</p
+    ><p
+    >Provider instances may also be used by multiple threads.</p
+    ><p
+    >Your provider class should not use any instance fields and should be careful not to use un-threadsafe operations.</p
+    ></div
+  ><div id="plugin-failure-results"
+  ><h3
+    ><a href="#TOC"
+      >Plugin failure results</a
+      ></h3
+    ><p
+    >Some plugin methods return a &quot;Result&quot; interface which indicates the result status of the call to the plugin class. If there is an error, some plugins allow an Exception to be thrown or for the error to be included in the Result class. In both cases, there is a &quot;FailureReason&quot; that must be specified.<br
+       />See the javadoc: <a href="../javadoc/com/dtolabs/rundeck/core/execution/workflow/steps/FailureReason.html"
+      >FailureReason</a
+      >.</p
+    ><p
+    >This can be any implementation of the FailureReason interface, and this object's <code
+      >toString()</code
+      > method will be used to return the reason value (for example, it is passed to Error Handler steps in a Workflow as the &quot;result.reason&quot; string). The mechanism used internally is to provide an Enum implementation of the FailureReason interface, and to enumerate the possible reasons for failure within the enum.</p
+    ><p
+    >You are encouraged to re-use existing FailureReasons as much as possible as they provide some basic failure causes. Existing classes:</p
+    ><ul
+    ><li
+      ><a href="../javadoc/com/dtolabs/rundeck/core/execution/workflow/steps/node/NodeStepFailureReason.html"
+	>NodeStepFailureReason</a
+	></li
+      ><li
+      ><a href="../javadoc/com/dtolabs/rundeck/core/execution/workflow/steps/StepFailureReason.html"
+	>StepFailureReason</a
+	></li
+      ></ul
+    ></div
+  ><div id="plugin-descriptions"
+  ><h3
+    ><a href="#TOC"
+      >Plugin Descriptions</a
+      ></h3
+    ><p
+    >To define a plugin that presents custom GUI configuration properties and/or uses Project/Framework level configuration, you need to provide a Description of your plugin. The Description defines metadata about the plugin, such as the display name and descriptive text, as well as the list of all configuration Properties that it supports.</p
+    ><p
+    >There are several ways to declare your plugin's Description:</p
+    ><p
+    ><strong
+      >Collaborator interface</strong
+      ></p
+    ><p
+    >Implement the <a href="../javadoc/com/dtolabs/rundeck/plugins/util/DescriptionBuilder.Collaborator.html"
+      >DescriptionBuilder.Collaborator</a
+      > interface in your plugin class, and it will be given an opportunity to perform actions on the Builder object before it finally constructs a Description.</p
+    ><p
+    ><strong
+      >Describable interface</strong
+      ></p
+    ><p
+    >If you want to build the Description object yourself, you can do so by implementing the <a href="../javadoc/com/dtolabs/rundeck/core/plugins/configuration/Describable.html"
+      >Describable</a
+      > interface. Return a <a href="../javadoc/com/dtolabs/rundeck/core/plugins/configuration/Description.html"
+      >Description</a
+      > instance. You can construct one by using the <a href="../javadoc/com/dtolabs/rundeck/plugins/util/DescriptionBuilder.html"
+      >DescriptionBuilder</a
+      > builder class.</p
+    ><p
+    ><strong
+      >Description Annotations</strong
+      ></p
+    ><p
+    >Newer plugin types support using java annotations to create a Description object. See <a href="plugin-annotations.html"
+      >Plugin Annotations</a
+      >.</p
+    ></div
+  ></div
+><div id="script-plugin-development"
+><h2
+  ><a href="#TOC"
+    >Script Plugin Development</a
+    ></h2
+  ><p
+  >Script plugins can provide the same services as Java plugins, but they do so with a script that is invoked in an external system processes by the JVM.</p
+  ><p
+  >These Services support Script Plugins:</p
+  ><ul
+  ><li
+    ><a href="node-executor-plugin.html#script-plugin-type"
+      >NodeExecutor</a
+      ></li
+    ><li
+    ><a href="file-copier-plugin.html#script-plugin-type"
+      >FileCopier</a
+      ></li
+    ><li
+    ><a href="resource-model-source-plugin.html#script-plugin-type"
+      >ResourceModelSource</a
+      ></li
+    ><li
+    ><a href="workflow-step-plugin.html#script-plugin-type"
+      >WorkflowNodeStep</a
+      ></li
+    ></ul
+  ><blockquote
+  ><p
+    >Note, the ResourceFormatParser and ResourceFormatGenerator services <em
+      >do not</em
+      > support the Script Plugin type.</p
+    ></blockquote
+  ><div id="script-plugin-zip-structure"
+  ><h3
+    ><a href="#TOC"
+      >Script plugin zip structure</a
+      ></h3
+    ><p
+    >You must create a zip file with the following structure:</p
+    ><pre
+    ><code
+      >[name]-plugin.zip
+\- [name]-plugin/ -- root directory of zip contents, same name as zip file
+   |- plugin.yaml -- plugin metadata file
+   \- contents/
+      |- ...      -- script or resource files
+      \- ...
+</code
+      ></pre
+    ><p
+    >Here is an example:</p
+    ><pre
+    ><code
+      >$ unzip -l example-1.0-plugin.zip 
+Archive:  example-1.0-plugin.zip
+  Length     Date   Time    Name
+ --------    ----   ----    ----
+        0  04-12-11 11:31   example-1.0-plugin/
+        0  04-11-11 15:31   example-1.0-plugin/contents/
+     2142  04-11-11 15:31   example-1.0-plugin/contents/script1.sh
+     1591  04-11-11 13:10   example-1.0-plugin/contents/script2.sh
+      576  04-12-11 10:58   example-1.0-plugin/plugin.yaml
+ --------                   -------
+     4309                   5 files
+</code
+      ></pre
+    ><p
+    >The filename of the plugin zip must end with &quot;-plugin.zip&quot; to be recognized as a plugin archive. The zip must contain a top-level directory with the same base name as the zip file (sans &quot;.zip&quot;).</p
+    ><p
+    >The file <code
+      >plugin.yaml</code
+      > must have this structure:</p
+    ><pre class="yaml"
+    ><code
+      ># yaml plugin metadata
+
+name: plugin name
+version: plugin version
+rundeckPluginVersion: 1.0
+author: author name
+date: release date
+providers:
+    - name: provider
+      service: service name
+      plugin-type: script
+      script-interpreter: [interpreter]
+      script-file: [script file name]
+      script-args: [script file args]
+</code
+      ></pre
+    ><p
+    >The main metadata that is required:</p
+    ><ul
+    ><li
+      ><code
+	>name</code
+	> - name for the plugin</li
+      ><li
+      ><code
+	>version</code
+	> - version number of the plugin</li
+      ><li
+      ><code
+	>rundeckPluginVersion</code
+	> - Rundeck Plugin type version, currently &quot;1.0&quot;</li
+      ><li
+      ><code
+	>providers</code
+	> - list of provider metadata maps</li
+      ></ul
+    ><p
+    >These are optional:</p
+    ><ul
+    ><li
+      ><code
+	>author</code
+	> - optional author info</li
+      ><li
+      ><code
+	>date</code
+	> - optional release date info</li
+      ></ul
+    ><p
+    >This provides the necessary metadata about the plugin, including one or more entries in the <code
+      >providers</code
+      > list to declare those providers defined in the plugin.</p
+    ></div
+  ><div id="provider-metadata"
+  ><h3
+    ><a href="#TOC"
+      >Provider metadata</a
+      ></h3
+    ><p
+    >Required provider entries:</p
+    ><ul
+    ><li
+      ><code
+	>name</code
+	> - provider name</li
+      ><li
+      ><code
+	>service</code
+	> - service name, one of these valid services:<ul
+	><li
+	  ><code
+	    >NodeExecutor</code
+	    ></li
+	  ><li
+	  ><code
+	    >FileCopier</code
+	    ></li
+	  ><li
+	  ><code
+	    >ResourceModelSource</code
+	    ></li
+	  ></ul
+	></li
+      ><li
+      ><code
+	>plugin-type</code
+	> - must be &quot;script&quot; currently.</li
+      ><li
+      ><code
+	>script-file</code
+	> - must be the name of a file relative to the <code
+	>contents</code
+	> directory</li
+      ></ul
+    ><p
+    >For <code
+      >ResourceModelSource</code
+      > service, this additional entry is required:</p
+    ><ul
+    ><li
+      ><code
+	>resource-format</code
+	> - Must be the name of one of the supported [Resource Model Document Formats].</li
+      ></ul
+    ><p
+    >Optional entries:</p
+    ><ul
+    ><li
+      ><code
+	>script-interpreter</code
+	> - A system command that should be used to execute the script. This can be a single binary path, e.g. <code
+	>/bin/bash</code
+	>, or include any args to the command, such as <code
+	>/bin/bash -c</code
+	>.</li
+      ><li
+      ><code
+	>script-args</code
+	> - the arguments to use when executing the script file.</li
+      ><li
+      ><code
+	>interpreter-args-quoted</code
+	> - true/false - (default false). If true, the execution will be done by passing the file and args as a single argument to the interpreter: <code
+	>${interpreter} &quot;${file} ${arg1} ${arg2}...&quot;</code
+	>. If false, the execution will be done by passing the file and args as separate arguments: <code
+	>${interpreter} ${file} ${arg1} ${arg2}...</code
+	></li
+      ></ul
+    ></div
+  ><div id="how-script-plugin-providers-are-invoked"
+  ><h3
+    ><a href="#TOC"
+      >How script plugin providers are invoked</a
+      ></h3
+    ><p
+    >When the provider is used for node execution or file copying, the script file, interpreter, and args are combined into a commandline executed by the system in this pattern:</p
+    ><pre
+    ><code
+      >[interpreter] [filename] [args...]
+</code
+      ></pre
+    ><p
+    >If the interpreter is not specified, then the script file is executed directly, and that means it must be acceptable by the system to be executed directly (include any necessary <code
+      >#!</code
+      > line, etc).</p
+    ><p
+    ><code
+      >script-args</code
+      > can contain data-context properties such as <code
+      >${node.name}</code
+      >. Additionally, the specific Service will provide some additional context properties that can be used:</p
+    ><ul
+    ><li
+      >NodeExecutor will define <code
+	>${exec.command}</code
+	> containing the command to be executed</li
+      ><li
+      >FileCopier will define <code
+	>${file-copy.file}</code
+	> containing the local path to the file that needs to be copied, and <code
+	>${file-copy.destination}</code
+	> containing the remote destination path that is requested, if available.</li
+      ><li
+      >ResourceModelSource will define <code
+	>${config.KEY}</code
+	> for each configuration property KEY that is defined.</li
+      ></ul
+    ><p
+    >All script-plugins will also be provided with these context entries:</p
+    ><ul
+    ><li
+      ><code
+	>rundeck.base</code
+	> - base directory of the Rundeck installation</li
+      ><li
+      ><code
+	>rundeck.project</code
+	> - project name</li
+      ><li
+      ><code
+	>plugin.base</code
+	> - base directory of the expanded 'contents' dir of the plugin</li
+      ><li
+      ><code
+	>plugin.file</code
+	> - the plugin file itself</li
+      ><li
+      ><code
+	>plugin.scriptfile</code
+	> - the path to the script file being executed for the plugin</li
+      ><li
+      ><code
+	>plugin.vardir</code
+	> - var dir the plugin can use for caching data, local to the project</li
+      ><li
+      ><code
+	>plugin.tmpdir</code
+	> - temp dir the plugin can use</li
+      ></ul
+    ><p
+    >In addition, all of the data-context properties that are available in the <code
+      >script-args</code
+      > are provided as environment variables to the script or interpreter when it is executed.</p
+    ><p
+    >Environment variables are generated in all-caps with this format:</p
+    ><pre
+    ><code
+      >RD_[KEY]_[NAME]
+</code
+      ></pre
+    ><p
+    >The <code
+      >KEY</code
+      > and <code
+      >NAME</code
+      > are the same as <code
+      >${key.name}</code
+      >. Any characters in the key or name that are not valid Bash shell variable characters are replaced with underscore '_'.</p
+    ><p
+    >Examples:</p
+    ><ul
+    ><li
+      ><code
+	>${node.name}</code
+	> becomes <code
+	>$RD_NODE_NAME</code
+	></li
+      ><li
+      ><code
+	>${node.some-attribute}</code
+	> becomes <code
+	>$RD_NODE_SOME_ATTRIBUTE</code
+	></li
+      ><li
+      ><code
+	>${exec.command}</code
+	> becomes <code
+	>$RD_EXEC_COMMAND</code
+	></li
+      ><li
+      ><code
+	>${file-copy.file}</code
+	> becomes <code
+	>$RD_FILE_COPY_FILE</code
+	></li
+      ></ul
+    ></div
+  ><div id="script-provider-requirements"
+  ><h3
+    ><a href="#TOC"
+      >Script provider requirements</a
+      ></h3
+    ><p
+    >The specific service has expectations about the way your provider script behaves.</p
+    ><div id="exit-code"
+    ><h4
+      ><a href="#TOC"
+	>Exit code</a
+	></h4
+      ><ul
+      ><li
+	>Exit code of 0 indicates success</li
+	><li
+	>Any other exit code indicates failure</li
+	></ul
+      ></div
+    ><div id="output"
+    ><h4
+      ><a href="#TOC"
+	>Output</a
+	></h4
+      ><dl
+      ><dt
+	>For <code
+	  >NodeExecutor</code
+	  ></dt
+	><dd
+	><p
+	  >All output to <code
+	    >STDOUT</code
+	    >/<code
+	    >STDERR</code
+	    > will be captured for the job's output.</p
+	  ></dd
+	><dt
+	>For <code
+	  >FileCopier</code
+	  ></dt
+	><dd
+	><p
+	  >The first line of output of <code
+	    >STDOUT</code
+	    > MUST be the filepath of the file copied to the target node. Other output is ignored. All output to <code
+	    >STDERR</code
+	    > will be captured for the job's output.</p
+	  ></dd
+	><dt
+	>For <code
+	  >ResourceModelSource</code
+	  ></dt
+	><dd
+	><p
+	  >All output on <code
+	    >STDOUT</code
+	    > will be captured and passed to a <code
+	    >ResourceFormatParser</code
+	    > for the specified <code
+	    >resource-format</code
+	    > to create the Node definitions.</p
+	  ></dd
+	></dl
+      ></div
+    ></div
+  ></div
+>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.1.1)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="plugin-development.html">Plugin Development</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="notification-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> Notification Plugin</a></li>
+      <li class="next"><a href="file-copier-plugin.html">File Copier Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2014 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<span class="generated-date" title="2014-05-01T20:17:26EDT">2014-05-01T20:17:26EDT</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
+
