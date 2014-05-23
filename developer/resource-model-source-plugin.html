@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Resource Model Source Plugin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler, Alex Honor" />
+  <meta name="date" content="November 20, 2010" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Enables Self-Service Operations</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.1.2</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.1.2)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="resource-model-source-plugin.html">Resource Model Source Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="logging-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> Logging Plugin</a></li>
+      <li class="next"><a href="storage-converter-plugin.html">Storage Converter Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<div id="TOC"
+><ul
+  ><li
+    ><a href="#about"
+      >About</a
+      ></li
+    ><li
+    ><a href="#plugin-configuration"
+      >Plugin configuration</a
+      ></li
+    ><li
+    ><a href="#java-plugin-type"
+      >Java Plugin Type</a
+      ><ul
+      ><li
+	><a href="#plugin-properties"
+	  >Plugin properties</a
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#script-plugin-type"
+      >Script Plugin Type</a
+      ><ul
+      ><li
+	><a href="#plugin-properties-1"
+	  >Plugin properties</a
+	  ></li
+	><li
+	><a href="#provider-script-requirements"
+	  >Provider Script Requirements</a
+	  ></li
+	></ul
+      ></li
+    ></ul
+  ></div
+>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Resource Model Source Plugin</h1>
+</div>
+<div id="about"
+><h2
+  ><a href="#TOC"
+    >About</a
+    ></h2
+  ><p
+  >Resource Model Sources provide the means to retrieve Node resources for a Project. You can implement a Resource Model Source using a <a href="#java-plugin-type"
+    >Java Plugin Type</a
+    > or a <a href="#script-plugin-type"
+    >Script Plugin Type</a
+    >.</p
+  ></div
+><div id="plugin-configuration"
+><h2
+  ><a href="#TOC"
+    >Plugin configuration</a
+    ></h2
+  ><p
+  >The <code
+    >ResourceModelSource</code
+    > <a href="../javadoc/com/dtolabs/rundeck/core/resources/ResourceModelSource.html"
+    >(javadoc)</a
+    > service allows the plugins to be configured via the Rundeck Web GUI. You are thus able to declare configuration properties for your plugin, which will be displayed as a web form when the Project is configured, or can be manually configured in the <code
+    >project.properties</code
+    > file.</p
+  ></div
+><div id="java-plugin-type"
+><h2
+  ><a href="#TOC"
+    >Java Plugin Type</a
+    ></h2
+  ><p
+  >A ResourceModelSource provider is actually a Factory class.<br
+     />An instance of your ResourceModelSource provider will be re-used, so each time a new ResourceModelSource with a new configuration is required, your Factory class will be invoked to produce it.</p
+  ><p
+  >Your provider class must implement the interface <a href="../javadoc/com/dtolabs/rundeck/core/resources/ResourceModelSourceFactory.html"
+    >ResourceModelSourceFactory</a
+    >:</p
+  ><pre class="sourceCode java"
+  ><code
+    ><span class="Keyword"
+      >public</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="Keyword"
+      >interface</span
+      ><span class="Normal NormalText"
+      > ResourceModelSourceFactory </span
+      ><span class="Normal Symbol"
+      >{</span
+      ><br
+       /><span class="Normal NormalText"
+      >    </span
+      >/**<br
+       />     <span class="Normal Symbol"
+      >*</span
+      > Return a resource model source for the given configuration<br
+       />     */<br
+       /><span class="Normal NormalText"
+      >    </span
+      ><span class="Keyword"
+      >public</span
+      ><span class="Normal NormalText"
+      > ResourceModelSource </span
+      ><span class="Function"
+      >createResourceModelSource</span
+      ><span class="Normal Symbol"
+      >(</span
+      ><span class="Normal Java15"
+      >Properties</span
+      ><span class="Normal NormalText"
+      > configuration</span
+      ><span class="Normal Symbol"
+      >)</span
+      ><span class="Normal NormalText"
+      > </span
+      ><br
+       /><span class="Normal NormalText"
+      >       </span
+      ><span class="Keyword"
+      >throws</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="Normal Java15"
+      >ConfigurationException</span
+      ><span class="Normal Symbol"
+      >;</span
+      ><br
+       /><span class="Normal Symbol"
+      >}</span
+      ><br
+       /></code
+    ></pre
+  ><div id="plugin-properties"
+  ><h3
+    ><a href="#TOC"
+      >Plugin properties</a
+      ></h3
+    ><p
+    >See <a href="plugin-development.html#plugin-descriptions"
+      >Plugin Development - Java Plugins - Descriptions</a
+      > to learn how to create configuration properties for your ResourceModelSource plugin.</p
+    ></div
+  ></div
+><div id="script-plugin-type"
+><h2
+  ><a href="#TOC"
+    >Script Plugin Type</a
+    ></h2
+  ><p
+  >See the <a href="plugin-development.html#script-plugin-development"
+    >Script Plugin Development</a
+    > for the basics of developing script-based plugins for Rundeck.</p
+  ><div id="plugin-properties-1"
+  ><h3
+    ><a href="#TOC"
+      >Plugin properties</a
+      ></h3
+    ><p
+    >Script-based plugins are described using entries in the <code
+      >plugin.yaml</code
+      > file. You can use these metadata entries to declare properties about your plugin.</p
+    ><p
+    >Create a <code
+      >config</code
+      > entry in each provider definition, containing a sequence of map entries for each configuration property you want to define. In the map entry include:</p
+    ><ul
+    ><li
+      ><code
+	>type</code
+	> - The type of property. Must be one of:<ul
+	><li
+	  ><code
+	    >String</code
+	    ></li
+	  ><li
+	  ><code
+	    >Boolean</code
+	    > value must be &quot;true&quot; or &quot;false&quot;</li
+	  ><li
+	  ><code
+	    >Integer</code
+	    ></li
+	  ><li
+	  ><code
+	    >Long</code
+	    ></li
+	  ><li
+	  ><code
+	    >Select</code
+	    > must be on of a set of values</li
+	  ><li
+	  ><code
+	    >FreeSelect</code
+	    > may be one of a set of values</li
+	  ></ul
+	></li
+      ><li
+      ><code
+	>name</code
+	> - Name to identify the property</li
+      ><li
+      ><code
+	>title</code
+	> - Title to display in the GUI (optional)</li
+      ><li
+      ><code
+	>description</code
+	> - Description to display in the GUI (optional)</li
+      ><li
+      ><code
+	>required</code
+	> - (true/false) if true, require a non-empty value (optional)</li
+      ><li
+      ><code
+	>default</code
+	> - A default value to use (optional)</li
+      ><li
+      ><code
+	>values</code
+	> - A comma-separated list of values to use for Select or FreeSelect. Required for Select/FreeSelect.</li
+      ></ul
+    ><p
+    >When your script is invoked, each configuration property defined for the plugin will be set as <code
+      >RD_CONFIG_[PROPERTY]</code
+      > variables passed to your script (see below). &quot;<em
+      >PROPERTY</em
+      >&quot; refers to your plugin property name in uppercase. A plugin property named &quot;foo&quot; will translate to the shell variable <code
+      >RD_CONFIG_FOO</code
+      >.</p
+    ><p
+    >Here is an example <code
+      >plugin.yaml</code
+      > script-based ResourceModelSource plugin declaring a provider clled &quot;mysource&quot; that produces resource-format <code
+      >resourceyaml</code
+      > output. The provider declares three config properties (account, url, region) and illustrates the use of three different types (Integer, String, FreeSelect).</p
+    ><p
+    >Example: plugin.yaml</p
+    ><pre class="yaml numberLines"
+    ><code
+      >name: My Resource Model Source
+version: 1.0
+rundeckPluginVersion: 1.0
+author: alexh
+date: 05/10/12
+providers:
+    - name: mysource
+      service: ResourceModelSource
+      plugin-type: script
+      script-interpreter: bash -c
+      script-file: nodes.sh
+      resource-format: resourceyaml
+      config:
+        - type: Integer
+          name: account
+          title: Account
+          description: Enter the account number.
+        - type: String
+          name: url
+          title: URL
+          description: Enter the URL to the inventory service.
+        - type: FreeSelect
+          name: region
+          title: Region
+          description: Select a region.
+          required: true
+          default: east
+          values: east,north,south,west
+</code
+      ></pre
+    ><p
+    >The <code
+      >script-file</code
+      > entry on line 11 references a script called &quot;nodes.sh&quot; referencing the plugin properties (see script below).</p
+    ><p
+    >Example script-file: nodes.sh</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Comment"
+	>#!/usr/bin/env bash</span
+	><br
+	 /><br
+	 /><span class="Comment"
+	># variables set by plugin properties:</span
+	><br
+	 /><span class="Keyword Builtin"
+	>:</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Others Variable"
+	>${RD_CONFIG_ACCOUNT:?</span
+	><span class="String StringDoubleQ"
+	>&quot;account plugin property not specified&quot;</span
+	><span class="Others Variable"
+	>}</span
+	><br
+	 /><span class="Keyword Builtin"
+	>:</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Others Variable"
+	>${RD_CONFIG_REGION:?</span
+	><span class="String StringDoubleQ"
+	>&quot;region plugin property not specified&quot;</span
+	><span class="Others Variable"
+	>}</span
+	><br
+	 /><span class="Keyword Builtin"
+	>:</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Others Variable"
+	>${RD_CONFIG_URL:?</span
+	><span class="String StringDoubleQ"
+	>&quot;url plugin property not specified&quot;</span
+	><span class="Others Variable"
+	>}</span
+	><br
+	 /><br
+	 /><span class="Comment"
+	>#</span
+	><br
+	 /><span class="Comment"
+	># Generate node data here.</span
+	><br
+	 /><span class="Comment"
+	>#</span
+	><br
+	 /><span class="Keyword Builtin"
+	>exit</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Others Variable"
+	>$?</span
+	><br
+	 /></code
+      ></pre
+    ></div
+  ><div id="provider-script-requirements"
+  ><h3
+    ><a href="#TOC"
+      >Provider Script Requirements</a
+      ></h3
+    ><p
+    >The ResourceModelSource service has expectations about the way your provider script behaves.</p
+    ><p
+    >Exit code:</p
+    ><ul
+    ><li
+      >Exit code of 0 indicates success.</li
+      ><li
+      >Any other exit code indicates failure.</li
+      ></ul
+    ><p
+    >Script output:</p
+    ><ul
+    ><li
+      >All output on <code
+	>STDOUT</code
+	> will be captured and passed to a <a href="model-format-parser-and-generator-plugin.html#resourceformatparser"
+	>ResourceFormatParser</a
+	> for the specified <code
+	>resource-format</code
+	> to create the Node definitions.</li
+      ></ul
+    ></div
+  ></div
+>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.1.2)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="resource-model-source-plugin.html">Resource Model Source Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="logging-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> Logging Plugin</a></li>
+      <li class="next"><a href="storage-converter-plugin.html">Storage Converter Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2014 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<span class="generated-date" title="2014-05-23T18:32:57EDT">2014-05-23T18:32:57EDT</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
+
