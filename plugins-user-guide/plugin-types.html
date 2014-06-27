@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Enables Self-Service Operations</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.1.3</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.1.3)</a></li>
+    
+    
+    <li ><a href="index.html">Plugins User Guide</a></li>
+    <li class="active"><a href="plugin-types.html">Plugin Types</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="configuring.html"><i class="glyphicon glyphicon-arrow-left"></i> Configuring</a></li>
+      <li class="next"><a href="node-execution-plugins.html">Node Execution Plugins <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<div id="TOC"
+><ul
+  ><li
+    ><a href="#types-of-plugins"
+      >Types of Plugins</a
+      ></li
+    ><li
+    ><a href="#about-services-and-providers"
+      >About Services and Providers</a
+      ><ul
+      ><li
+	><a href="#service-categories"
+	  >Service Categories</a
+	  ></li
+	></ul
+      ></li
+    ></ul
+  ></div
+>
+</div>
+</div>
+<div class="col-sm-9">
+<div id="types-of-plugins"
+><h2
+  ><a href="#TOC"
+    >Types of Plugins</a
+    ></h2
+  ><p
+  >Plugins are files that contain one or more Service Provider implementations. Each plugin file could contain multiple Providers for different types of services, however typically each plugin file would contain only providers related in some fashion.</p
+  ><p
+  >Rundeck includes a number of &quot;built-in&quot; providers, as well as a few &quot;included&quot; plugin files.</p
+  ><p
+  >In this document &quot;plugin&quot; and &quot;provider&quot; are used somewhat interchangably. When referring to an actual file containing the provider implementations we will say &quot;plugin file&quot;.</p
+  ><div class="figure"
+  ><img src="../figures/fig1102.png" alt="Rundeck Providers and Plugin Files"
+     /><p class="caption"
+    >Rundeck Providers and Plugin Files</p
+    ></div
+  ><p
+  >Rundeck supports several different types of plugins to perform different kinds of services:</p
+  ><ul
+  ><li
+    >[Workflow Step] - defines an action that can be a distinct step within a workflow, either for an individual Node or a set of Nodes</li
+    ><li
+    >[Node Execution] - defines a mechanism to connect to a remote Node and execute a command</li
+    ><li
+    >[File Copier] - defines a mechanism to copy a file to a remote node</li
+    ><li
+    >[Resource Model Source]- defines a mechanism to retrieve Resource Model data (Node definitions) for use by a Rundeck project</li
+    ><li
+    >[Resource Format] - defines a data format for Resource Models</li
+    ><li
+    >[Notification] - defines a mechanism for notification that can be triggered when a Job starts or finishes</li
+    ><li
+    >[Streaming Logging] - defines a mechanism for reading and writing log events</li
+    ><li
+    >[Log File Storage] - defines a mechanism for storage of log files</li
+    ></ul
+  ></div
+><div id="about-services-and-providers"
+><h2
+  ><a href="#TOC"
+    >About Services and Providers</a
+    ></h2
+  ><p
+  >The Rundeck core makes use of several different &quot;Services&quot; that provide functionality for the different steps necessary to execute workflows, jobs, and commands across multiple nodes.</p
+  ><p
+  >Each Service makes use of &quot;Providers&quot;. Each Provider has a unique &quot;Provider Name&quot; that is used to identify it, and most Services have default Providers unless you specify different ones to use.</p
+  ><p
+  ><img src="../figures/fig1101.png" alt="Rundeck Services and Providers"
+     /> <img src="../figures/fig1101_2.png" alt="Rundeck Services and Providers"
+     /> <img src="../figures/fig1101_3.png" alt="Rundeck Services and Providers"
+     /></p
+  ><p
+  >Rundeck Plugin Files can contain more than one Provider.</p
+  ><div id="service-categories"
+  ><h3
+    ><a href="#TOC"
+      >Service Categories</a
+      ></h3
+    ><p
+    >Services fall into different categories, which determine how and where they are used.</p
+    ><ol style="list-style-type: decimal;"
+    ><li
+      ><p
+	><strong
+	  >Node Execution services</strong
+	  > - providers of these services operate in the context of a single Node definition, and can be configured at Node scope or higher:</p
+	><ol style="list-style-type: decimal;"
+	><li
+	  >Node Executor - these providers define ways of executing a command on a Node (local or remote)</li
+	  ><li
+	  >File Copier - these providers define ways of copying files to a Node.</li
+	  ></ol
+	></li
+      ><li
+      ><p
+	><strong
+	  >Project services</strong
+	  ></p
+	><ol style="list-style-type: decimal;"
+	><li
+	  >Resource Model Source - (aka &quot;Resource Providers&quot;) these define ways of retrieving Node resources for a Project</li
+	  ></ol
+	></li
+      ><li
+      ><p
+	><strong
+	  >Global services</strong
+	  > (framework level)</p
+	><ol style="list-style-type: decimal;"
+	><li
+	  >Resource Format Parser - these define document format parsers</li
+	  ><li
+	  >Resource Format Generators - these define document format generators</li
+	  ></ol
+	></li
+      ><li
+      ><p
+	><strong
+	  >Workflow services</strong
+	  ></p
+	><ol style="list-style-type: decimal;"
+	><li
+	  >Workflow Step - providers define behavior for all nodes</li
+	  ><li
+	  >Workflow Node Step - providers define behavior for a single node</li
+	  ><li
+	  >Remote Script Node Step - a specific use-case for Node Step providers</li
+	  ></ol
+	></li
+      ><li
+      ><p
+	><strong
+	  >Notification services</strong
+	  ></p
+	><ol style="list-style-type: decimal;"
+	><li
+	  >Notifications - external actions that are triggered when a Job starts or finishes.</li
+	  ></ol
+	></li
+      ></ol
+    ></div
+  ></div
+>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.1.3)</a></li>
+    
+    
+    <li ><a href="index.html">Plugins User Guide</a></li>
+    <li class="active"><a href="plugin-types.html">Plugin Types</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="configuring.html"><i class="glyphicon glyphicon-arrow-left"></i> Configuring</a></li>
+      <li class="next"><a href="node-execution-plugins.html">Node Execution Plugins <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2014 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<span class="generated-date" title="2014-06-27T17:41:29EDT">2014-06-27T17:41:29EDT</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
+

@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rundeck の基本</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Alex Honor" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="November 20, 2010" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Enables Self-Service Operations</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.1.3</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck ドキュメント (2.1.3)</a></li>
+    
+    
+    <li ><a href="index.html">ユーザーマニュアル</a></li>
+    <li class="active"><a href="03-basics.html">Rundeck の基本</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="02-getting-started.html"><i class="glyphicon glyphicon-arrow-left"></i> 始めに</a></li>
+      <li class="next"><a href="04-jobs.html">ジョブについて <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<div id="TOC"
+><ul
+  ><li
+    ><a href="#rundeck-&#12398;&#12452;&#12531;&#12479;&#12540;&#12501;&#12455;&#12452;&#12473;"
+      >Rundeck のインターフェイス</a
+      ><ul
+      ><li
+	><a href="#&#12464;&#12521;&#12501;&#12451;&#12459;&#12523;&#12467;&#12531;&#12477;&#12540;&#12523;"
+	  >グラフィカルコンソール</a
+	  ><ul
+	  ><li
+	    ><a href="#&#12490;&#12499;&#12466;&#12540;&#12471;&#12519;&#12531;"
+	      >ナビゲーション</a
+	      ></li
+	    ><li
+	    ><a href="#now-running"
+	      >Now running</a
+	      ></li
+	    ></ul
+	  ></li
+	><li
+	><a href="#shell-&#12484;&#12540;&#12523;"
+	  >Shell ツール</a
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#rundeck-&#12398;&#12475;&#12483;&#12488;&#12450;&#12483;&#12503;"
+      >Rundeck のセットアップ</a
+      ><ul
+      ><li
+	><a href="#&#12522;&#12477;&#12540;&#12473;&#12514;&#12487;&#12523;"
+	  >リソースモデル</a
+	  ></li
+	><li
+	><a href="#&#12522;&#12477;&#12540;&#12473;&#12514;&#12487;&#12523;&#12489;&#12461;&#12517;&#12513;&#12531;&#12488;&#12501;&#12457;&#12540;&#12510;&#12483;&#12488;"
+	  >リソースモデルドキュメントフォーマット</a
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#&#12503;&#12521;&#12460;&#12502;&#12523;&#12522;&#12477;&#12540;&#12473;&#12514;&#12487;&#12523;&#12477;&#12540;&#12473;"
+      >プラガブルリソースモデルソース</a
+      ></li
+    ><li
+    ><a href="#&#12467;&#12510;&#12531;&#12489;&#23455;&#34892;"
+      >コマンド実行</a
+      ></li
+    ><li
+    ><a href="#&#12487;&#12451;&#12473;&#12497;&#12483;&#12481;&#12515;-&#12458;&#12503;&#12471;&#12519;&#12531;"
+      >ディスパッチャ オプション</a
+      ><ul
+      ><li
+	><a href="#gui-&#12391;&#12398;&#12494;&#12540;&#12489;&#12501;&#12451;&#12523;&#12479;&#12522;&#12531;&#12464;"
+	  >GUI でのノードフィルタリング</a
+	  ></li
+	><li
+	><a href="#&#12471;&#12455;&#12523;&#12391;&#12398;&#12494;&#12540;&#12489;&#12501;&#12451;&#12523;&#12479;&#12522;&#12531;&#12464;"
+	  >シェルでのノードフィルタリング</a
+	  ></li
+	><li
+	><a href="#&#12450;&#12489;&#12507;&#12483;&#12463;&#12467;&#12510;&#12531;&#12489;"
+	  >アドホックコマンド</a
+	  ><ul
+	  ><li
+	    ><a href="#&#12471;&#12455;&#12523;&#12484;&#12540;&#12523;&#12391;&#12398;&#12467;&#12510;&#12531;&#12489;&#23455;&#34892;"
+	      >シェルツールでのコマンド実行</a
+	      ></li
+	    ><li
+	    ><a href="#&#12464;&#12521;&#12501;&#12451;&#12459;&#12523;&#12467;&#12510;&#12531;&#12489;&#12471;&#12455;&#12523;&#12391;&#12398;&#23455;&#34892;"
+	      >グラフィカルコマンドシェルでの実行</a
+	      ></li
+	    ><li
+	    ><a href="#&#12467;&#12510;&#12531;&#12489;&#23455;&#34892;&#32080;&#26524;&#12434;&#30906;&#35469;&#12377;&#12427;"
+	      >コマンド実行結果を確認する</a
+	      ><ul
+	      ><li
+		><a href="#&#12467;&#12510;&#12531;&#12489;&#23455;&#34892;&#12501;&#12457;&#12525;&#12540;&#12506;&#12540;&#12472;"
+		  >コマンド実行フォローページ</a
+		  ></li
+		></ul
+	      ></li
+	    ></ul
+	  ></li
+	><li
+	><a href="#&#12467;&#12510;&#12531;&#12489;&#23455;&#34892;&#12434;&#12467;&#12531;&#12488;&#12525;&#12540;&#12523;&#12377;&#12427;"
+	  >コマンド実行をコントロールする</a
+	  ></li
+	><li
+	><a href="#&#12467;&#12510;&#12531;&#12489;&#23455;&#34892;&#12434;&#12461;&#12517;&#12540;&#12395;&#20837;&#12428;&#12427;"
+	  >コマンド実行をキューに入れる</a
+	  ></li
+	><li
+	><a href="#&#12467;&#12510;&#12531;&#12489;&#23455;&#34892;&#29366;&#27841;&#12434;&#12488;&#12521;&#12483;&#12461;&#12531;&#12464;&#12377;&#12427;"
+	  >コマンド実行状況をトラッキングする</a
+	  ></li
+	><li
+	><a href="#&#12503;&#12521;&#12464;&#12452;&#12531;"
+	  >プラグイン</a
+	  ><ul
+	  ><li
+	    ><a href="#ssh-&#12503;&#12521;&#12464;&#12452;&#12531;"
+	      >SSH プラグイン</a
+	      ></li
+	    ><li
+	    ><a href="#&#32068;&#12415;&#36796;&#12415;&#12503;&#12521;&#12464;&#12452;&#12531;"
+	      >組み込みプラグイン</a
+	      ></li
+	    ></ul
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#&#23653;&#27508;"
+      >履歴</a
+      ><ul
+      ><li
+	><a href="#&#12452;&#12505;&#12531;&#12488;&#23653;&#27508;&#12398;&#12501;&#12451;&#12523;&#12479;&#12522;&#12531;&#12464;"
+	  >イベント履歴のフィルタリング</a
+	  ></li
+	><li
+	><a href="#&#12452;&#12505;&#12531;&#12488;&#12499;&#12517;&#12540;"
+	  >イベントビュー</a
+	  ></li
+	><li
+	><a href="#rss-&#12522;&#12531;&#12463;"
+	  >RSS リンク</a
+	  ></li
+	><li
+	><a href="#tips-&#12392;&#12488;&#12522;&#12483;&#12463;"
+	  >Tips とトリック</a
+	  ><ul
+	  ><li
+	    ><a href="#&#12501;&#12451;&#12523;&#12479;&#12522;&#12531;&#12464;&#12398;&#20445;&#23384;"
+	      >フィルタリングの保存</a
+	      ></li
+	    ></ul
+	  ></li
+	><li
+	><a href="#&#33258;&#21205;&#35036;&#23436;"
+	  >自動補完</a
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#&#12414;&#12392;&#12417;"
+      >まとめ</a
+      ></li
+    ></ul
+  ></div
+>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Rundeck の基本</h1>
+</div>
+<p
+>この章では Rundeck を使う上での基本をカバーします。まず Rundeck の GUI と CUI 両方のインターフェイスについて説明します。次にプロジェクトの準備からコマンド実行までの操作方法を説明します。そして実行制御に用いているコマンドディスパッチャについて理解を深め、最後に実行履歴の見方と利用方法を学びます。</p
+><div id="rundeck-&#12398;&#12452;&#12531;&#12479;&#12540;&#12501;&#12455;&#12452;&#12473;"
+><h2
+  ><a href="#TOC"
+    >Rundeck のインターフェイス</a
+    ></h2
+  ><p
+  >Rundeck には 2 つの主要なインターフェイスがあります。</p
+  ><ul
+  ><li
+    >GUI: HTML ベースのグラフィカルなコンソール</li
+    ><li
+    >CUI: Shell ツール</li
+    ></ul
+  ><p
+  >どちらのインターフェイスからも、リソースの閲覧・ディスパッチ(コマンドの発信)・ジョブの保存と実行が可能です。</p
+  ><p
+  >さらに Rundeck にはサーバーのプログラムとやり取りできる WebAPI も用意されています。<a href="../api/index.html"
+    >Rundeck API</a
+    > を参照して下さい。</p
+  ><div id="&#12464;&#12521;&#12501;&#12451;&#12459;&#12523;&#12467;&#12531;&#12477;&#12540;&#12523;"
+  ><h3
+    ><a href="#TOC"
+      >グラフィカルコンソール</a
+      ></h3
+    ><p
+    >Rundeck の使用を開始するにはまず、Rundeck サーバーの URL にアクセスします。そして Rundeck のユーザーディレクトリの設定によって定義されたアカウントでログインします。</p
+    ><p
+    >Web インターフェイスのデフォルトのポートは 4440 です。以下の URL にアクセスして下さい。</p
+    ><p
+    ><a href="http://localhost:4440"
+      ><code
+	>http://localhost:4440</code
+	></a
+      ></p
+    ><p
+    >アクセスするとログインページが表示されます。デフォルトのユーザー名とパスワードは <code
+      >admin/admin</code
+      > ですので、それらを入力してください。</p
+    ><div id="&#12490;&#12499;&#12466;&#12540;&#12471;&#12519;&#12531;"
+    ><h4
+      ><a href="#TOC"
+	>ナビゲーション</a
+	></h4
+      ><p
+      >Rundeck ページのヘッダーは、&quot;Run&quot;（実行）・&quot;Jobs&quot;（ジョブ）・&quot;History&quot;（履歴） タブページを行き来するためのグローバルナビゲーションになっています。また、ログアウト・ユーザーのプロフィール画面・オンラインヘルプへのリンクも載っています。</p
+      ><div class="figure"
+      ><img src="../figures/fig0201.png" alt="Top navigation bar"
+	 /><p class="caption"
+	>Top navigation bar</p
+	></div
+      ><dl
+      ><dt
+	>Run</dt
+	><dd
+	><p
+	  >Run ページは、アドホックコマンドを実行する際に使います。Run ページではあなたのプロジェクトのリソースモデルとして設定されたノードをフィルタリングした結果を表示しています。条件にマッチしたノードだけリストアップするというようにフィルタを使う事ができます。</p
+	  ></dd
+	><dt
+	>Jobs</dt
+	><dd
+	><p
+	  >Jobs ページでは、保存されたジョブの一覧・ジョブの作成・ジョブの実行を、権限のある人が行えます。Jobs ページでも条件にマッチしたジョブだけをリストアップすることができます。このジョブのフィルタリングはユーザープロフィールに保存することができます。そのユーザーに閲覧権限があるジョブのみが表示されます。</p
+	  ></dd
+	><dt
+	>History</dt
+	><dd
+	><p
+	  >History ページでは、現在実行中のコマンド・過去のコマンド実行履歴を、権限のある人が閲覧できます。履歴についても、選択したパラメーターにマッチする履歴のみリストアップできます。それらのフィルタリングも保存可能です。現在のフィルタリング設定はページ右上にある RSS リンクにも設定できます。</p
+	  ></dd
+	><dt
+	>Project menu</dt
+	><dd
+	><p
+	  >トップのナビゲーションバーの中に、プロジェクトを選択できるプルダウンメニューがあります。もし一つしかプロジェクトが存在しない場合は、デフォルトでそれが選択されています。</p
+	  ></dd
+	><dt
+	>Admin</dt
+	><dd
+	><p
+	  >&quot;admin&quot; グループに属するアカウントまたは &quot;admin&quot; 権限が付与されたアカウントでログインした場合は、右上のログイン名がある部分に、レンチのアイコンも表示されています。このページでは全てのグループ・ユーザーの閲覧やプロフィール情報の編集ができます。</p
+	  ></dd
+	><dt
+	>User profile</dt
+	><dd
+	><p
+	  >ユーザー名・メールアドレス・どのグループに属しているかといった情報が表示されます。編集も可能です。</p
+	  ></dd
+	><dt
+	>Logout</dt
+	><dd
+	><p
+	  >ログアウトのリンクを押すとログインセッションを終えてログアウトします。</p
+	  ></dd
+	><dt
+	>Help</dt
+	><dd
+	><p
+	  >オンラインヘルプページを開きます</p
+	  ></dd
+	></dl
+      ></div
+    ><div id="now-running"
+    ><h4
+      ><a href="#TOC"
+	>Now running</a
+	></h4
+      ><p
+      >&quot;Now runnig&quot; (実行中) という項目が Run ページと Jobs ページの上部の実行キュー内にあります。現在実行されているアドホックコマンドやジョブが、その名前や関連情報と共にリストアップされます。また誰が実行しているか表示され、出力結果へのリンクも表示されます。</p
+      ><div class="figure"
+      ><img src="../figures/fig0215.png" alt="Now running"
+	 /><p class="caption"
+	>Now running</p
+	></div
+      ><p
+      >過去に実行したことがあるジョブに関しては、進捗度合いがわかるバーが表示されます。</p
+      ></div
+    ></div
+  ><div id="shell-&#12484;&#12540;&#12523;"
+  ><h3
+    ><a href="#TOC"
+      >Shell ツール</a
+      ></h3
+    ><p
+    >Rundeck にはディスパッチ用の Shell ツールが数多く含まれています。ジョブの定義を読み込んで実行し、発信キューとやり取りできます。これらのコマンドツール群は、グラフィカルコンソールから利用できる機能の代わりとなります。</p
+    ><p
+    ><a href="dispatch.html"
+      >dispatch</a
+      > ~ アドホックコマンドやスクリプトを実行します <a href="rd-queue.html"
+      >rd-queue</a
+      > ~ 実行中のジョブに対して ディスパッチャに問い合わせることができます。ジョブを中断することもできます。 <a href="rd-jobs.html"
+      >rd-jobs</a
+      > ~ テキストファイルに定義されたジョブを読み込んでリストアップします。 <a href="run.html"
+      >run</a
+      > ~ Invoke the execution of a stored Job ~ 保存されているジョブを実行できます <a href="rd-project.html"
+      >rd-project</a
+      > ~ 新しい Rundeck プロジェクトをセットアップします <a href="rd-setup.html"
+      >rd-setup</a
+      > ~ Rundeck の設定を読み込み直します。</p
+    ><p
+    >コマンドの細かい使い方やオプションに付いては、オンラインマニュアルページを参照してください。</p
+    ></div
+  ></div
+><div id="rundeck-&#12398;&#12475;&#12483;&#12488;&#12450;&#12483;&#12503;"
+><h2
+  ><a href="#TOC"
+    >Rundeck のセットアップ</a
+    ></h2
+  ><p
+  >Rundeck のプロジェクト機能は、管理業務を遂行するためのスペースを提供します。</p
+  ><p
+  >プロジェクトはグラフィカルコンソールまたはシェルツール &quot;rd-project&quot; のどちらからでもセットアップできます。</p
+  ><p
+  >グラフィカルツールにログインした後、上部のナビゲーションバー内にプロジェクトメニューがあることに気付くでしょう。もしプロジェクトが存在しなければ、新しいプロジェクトを作るよう勧められます。</p
+  ><div class="figure"
+  ><img src="../figures/fig0203-a.png" alt="Create project prompt"
+     /><p class="caption"
+    >Create project prompt</p
+    ></div
+  ><p
+  >プロジェクト名を入力するだけでセットアップが開始できます。その他の項目に付いては後から <a href="../administration/configuration.html#GUI%20%E7%AE%A1%E7%90%86%E8%80%85%E3%83%9A%E3%83%BC%E3%82%B8"
+    >GUI 管理者ページ</a
+    >にて変更できます。</p
+  ><p
+  >プロジェクト名の入力が完了すると、Rundeck はその名前で初期化した後、&quot;Run&quot; ページに戻ります。</p
+  ><p
+  >プロジェクトの作成はナビゲーションバーのプロジェクトメニューから &quot;Create a new project...&quot; を選択する事でいつでも行うことができます。</p
+  ><div class="figure"
+  ><img src="../figures/fig0203.png" alt="Create project menu"
+     /><p class="caption"
+    >Create project menu</p
+    ></div
+  ><p
+  >シェルツール &quot;rd-project&quot; でもプロジェクトの作成ができます。</p
+  ><p
+  >Rundeck のサーバー上で &quot;rd-project&quot; コマンドを実行し、プロジェクト名の指定をします。ここでは例として、&quot;examples&quot; という名前を付けます:</p
+  ><pre
+  ><code
+    >rd-project -a create -p examples
+</code
+    ></pre
+  ><p
+  >コマンドの実行後、グラフィカルコンソールにてプロジェクトメニューに今作成したプロジェクトが追加されている事が分かります。</p
+  ><p
+  >プロジェクトを作る際に同時に他の項目も追加することができます:</p
+  ><pre
+  ><code
+    >rd-project -a create -p examples --project.ssh-keypath=/private/ssh.key
+</code
+    ></pre
+  ><p
+  >プロジェクトのセットアッププロセスが、サーバー内でプロジェクトの設定を生成し、リソースモデルを準備します。</p
+  ><div class="figure"
+  ><img src="../figures/fig0204.png" alt="Run page after new project"
+     /><p class="caption"
+    >Run page after new project</p
+    ></div
+  ><p
+  >Rundeck サーバー自身を指す 1 つのノードがリストアップされます。このノードについては赤文字の &quot;server&quot; という識別子が付きます。</p
+  ><div id="&#12522;&#12477;&#12540;&#12473;&#12514;&#12487;&#12523;"
+  ><h3
+    ><a href="#TOC"
+      >リソースモデル</a
+      ></h3
+    ><p
+    >リソースモデルとは Rundeck がコマンドをディスパッチでき、サーバーのメタデータが紐づけられているノードのことです。どの Rundeck プロジェクトもそれぞれリソースモデルを持つ事になります。</p
+    ><p
+    >初期状態のリソースモデルは Rundeck サーバー自身の情報だけを持っており、Rundeck サーバー自身にだけローカルコマンドが実行できます。プロジェクトごとのリソースモデルは &quot;Run&quot; ページで見ることができます。</p
+    ><p
+    >シェルツールからもノードリソースのリストアップができます。特定のプロジェクトを指定したい場合は <code
+      >-p &lt;project&gt;</code
+      > オプションを付けます。</p
+    ><p
+    >下記コマンドが &quot;examples&quot; というプロジェクトに登録されているサーバーのリストを列挙するディスパッチコマンドになります。<code
+      >-v</code
+      > オプションを付けるとリストの情報をより詳細に表示します:</p
+    ><pre
+    ><code
+      >$ dispatch -p examples -v   
+ strongbad:
+    hostname: strongbad
+    osArch: x86_64
+    osFamily: unix
+    osName: Mac OS X
+    osVersion: 10.6.2
+    tags: ''
+</code
+      ></pre
+    ><p
+    >ノードリソースは &quot;hostname&quot; のような標準のプロパティを持ち、プロパティは属性を通して拡張することもできます。便利なプロパティのひとつとして、&quot;tags&quot; プロパティがあります。ノードに付ける <em
+      >タグ</em
+      > はテキストのラベルのことで、ある環境におけるひとつの役割として使ったり、あるグループのメンバであることを示すことに使ったり等、ノードの分類に用います。一つのノードに複数の tags を付けることもできます。</p
+    ><p
+    >上記の出力では &quot;strongbad&quot; というノードに現在は空の tags プロパティ <code
+      >tags: ''</code
+      > が付いていることを示しています。</p
+    ><p
+    >後々コマンドディスパッチを行う際にノード群をフィルタリングするためにタグを用いるため、管理するノードにどんなタグを付けるか考えるのは重要なことです。</p
+    ><p
+    >どのプロジェクトにも <a href="../administration/configuration.html#project.properties"
+      >project.properties</a
+      > という名前の設定ファイルが存在し、<code
+      >$RDECK_BASE/projects/project/etc/project.properties</code
+      > というパスに置かれています。</p
+    ><p
+    >この設定ファイルはリソースモデルデータへのアクセス、取り込みのための 2 つの基本的なプロパティを持っています。</p
+    ><ul
+    ><li
+      ><code
+	>project.resources.file</code
+	>: リソースモデルドキュメントを読み込む際のローカルファイルパス</li
+      ><li
+      ><code
+	>project.resources.url</code
+	>: 外部のリソースモデルへの URL (オプション)</li
+      ></ul
+    ><p
+    >さらに、あるリソースモデルを他のソースから取り出してくることで、ひとつのプロジェクトで複数のリソースモデルを追加することができます。<a href="plugins.html#%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%83%A2%E3%83%87%E3%83%AB%E3%82%BD%E3%83%BC%E3%82%B9"
+      >リソースモデルソース</a
+      > を参照してください。</p
+    ><p
+    >Rundeck のリソースモデルドキュメントフォーマットに変換すれば、様々なソースから Rundeck にリソースモデルデータを取り込むことができます。(<a href="rundeck-basics.html#%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%83%A2%E3%83%87%E3%83%AB%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88"
+      >リソースモデルドキュメントフォーマット</a
+      >を参照して下さい) <code
+      >project.resource.url</code
+      > にお好みの URL リソースモデルソースをセットしてください。</p
+    ><p
+    >ここに、先ほどの <code
+      >dispatch -v</code
+      > コマンドの出力結果に該当する &quot;examples&quot; プロジェクトのための XML ドキュメントがあります:</p
+    ><pre
+    ><code
+      >&lt;project&gt;
+    &lt;node name=&quot;strongbad&quot; type=&quot;Node&quot; 
+      description=&quot;the Rundeck server host&quot; tags=&quot;&quot; 
+      hostname=&quot;strongbad&quot; 
+      osArch=&quot;x86_64&quot; osFamily=&quot;unix&quot; osName=&quot;Mac OS X&quot; osVersion=&quot;10.6.2&quot;
+      username=&quot;alexh&quot; 
+      editUrl=&quot;&quot; remoteUrl=&quot;&quot;/&gt;
+&lt;/project&gt;
+</code
+      ></pre
+    ><p
+    >XML のルートノードは project で、そこに &quot;strongbad&quot; に対する記述がひとつのノードとして書かれています。ノードの XML タグは数ある必須属性、オプション属性のうちのひとつになります。ノードを追加する際には project XML タグの内側に node XML タグを追加してください。</p
+    ><p
+    >ホスト strongbad はタグの定義が何もされていません。ひとつまたは複数のタグが定義できます。区切りにはカンマ（,）を使います。（例. <code
+      >tags=&quot;tag1,tag2&quot;</code
+      >）</p
+    ><p
+    >以下の例では &quot;homestar&quot; というノードが必須属性とともに記述されています:</p
+    ><pre
+    ><code
+      >    &lt;node name=&quot;homestar&quot; type=&quot;Node&quot; 
+      hostname=&quot;192.168.1.02&quot; 
+      username=&quot;alexh&quot; /&gt;
+</code
+      ></pre
+    ><p
+    ><code
+      >name</code
+      > と <code
+      >type</code
+      > の値がリソースモデルの中でノードを識別するために利用される一方、<code
+      >hostname</code
+      > と <code
+      >username</code
+      > の値は SSH コネクションに用いられます。ポート情報を加えて上書きする事も出来ます。(例. <code
+      >hostname=&quot;somehost:2022&quot;</code
+      > ) これはデフォルトと違うポートを使って SSH を使う際に便利です。</p
+    ><p
+    >Chef, Puppet, Nagios, Amazon EC2, RightScale または社内データベースなど、別のツール内でホストに関する情報をメンテナンスする機会があります。これらのツールは、ネットワーク内に配置されたノードの情報に関して認証を考慮しているでしょう。従って、認証ツールへのインタフェースをつくって Rundeck の URL リソースモデルソースとするのがベストです。ツールのフォーマットから Rundeck が理解可能なフォーマットへと変更するシンプルな CGI スクリプトで実現できます。</p
+    ><p
+    >もちろん、基本的な選択肢として XML ドキュメントとして情報をメンテナンスするというのもあります、それらは Rundeck に定期的にエクスポートされるソースリポジトリに取り込まれます。もしあなたの組織のホストインフラストラクチャが頻繁に変化するなら実用的な手段になります。</p
+    ><p
+    >Rundeck のウェブサイトで URL リソースモデルソースをチェックしてください。 自分たちのリソースモデルを作ることに興味がある場合は<a href="../administration/node-resource-sources.html#%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%83%A2%E3%83%87%E3%83%AB%E3%82%BD%E3%83%BC%E3%82%B9"
+      >リソースモデルソース</a
+      >の外部のデータプロバイダーとの統合項目を参照してください。</p
+    ></div
+  ><div id="&#12522;&#12477;&#12540;&#12473;&#12514;&#12487;&#12523;&#12489;&#12461;&#12517;&#12513;&#12531;&#12488;&#12501;&#12457;&#12540;&#12510;&#12483;&#12488;"
+  ><h3
+    ><a href="#TOC"
+      >リソースモデルドキュメントフォーマット</a
+      ></h3
+    ><p
+    >Rundeck には今のところ 2 種類のリソースモデルドキュメントフォーマットが組み込まれています。</p
+    ><ul
+    ><li
+      >XML: <a href="../manpages/man5/resource-v13.html"
+	>resource-v13(5) XML</a
+	>. Format name: <code
+	>resourcexml</code
+	>.</li
+      ><li
+      >Yaml: <a href="../manpages/man5/resource-yaml-v13.html"
+	>resource-v13(5) YAML</a
+	>. Format name: <code
+	>resourceyaml</code
+	>.</li
+      ></ul
+    ><p
+    ><a href="plugins.html#%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%83%A2%E3%83%87%E3%83%AB%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3"
+      >リソースフォーマットプラグイン</a
+      >により他のフォーマットを使うことも可能です。</p
+    ></div
+  ></div
+><div id="&#12503;&#12521;&#12460;&#12502;&#12523;&#12522;&#12477;&#12540;&#12473;&#12514;&#12487;&#12523;&#12477;&#12540;&#12473;"
+><h2
+  ><a href="#TOC"
+    >プラガブルリソースモデルソース</a
+    ></h2
+  ><p
+  >どのプロジェクトもリソースモデル情報のソースを複数持つことができます。そしてリソースモデルに、新しいソースとしてプラグインを使用または作ることができます。</p
+  ><p
+  >そのソースは GUI の管理者ページから設定できます（<a href="../administration/configuration.html#gui-%E7%AE%A1%E7%90%86%E8%80%85%E3%83%9A%E3%83%BC%E3%82%B8"
+    >GUI 管理者ページ</a
+    >を参照してください）。またはプロジェクトの設定ファイルから編集することもできます（<a href="plugins.html#%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%83%A2%E3%83%87%E3%83%AB%E3%82%BD%E3%83%BC%E3%82%B9"
+    >リソースモデルソース</a
+    >を参照してください）</p
+  ></div
+><div id="&#12467;&#12510;&#12531;&#12489;&#23455;&#34892;"
+><h2
+  ><a href="#TOC"
+    >コマンド実行</a
+    ></h2
+  ><p
+  >Rundeck は<em
+    >アドホック</em
+    >と<em
+    >ジョブ</em
+    >の2つの実行モードをサポートしています。</p
+  ><p
+  ><em
+    >アドホックコマンド</em
+    >はコマンドディスパッチャを通してあらゆるコマンドまたはシェルスクリプトを実行できます。<code
+    >dispatch</code
+    > という名前のコマンドツールとグラフィカルコンソール両方から実行可能です。</p
+  ><p
+  ><em
+    >ジョブ</em
+    >には 1 つのコマンドまたは連続した複数のコマンドを実行させる指令を指定することができます。それは一回実行するだけも良いですし、後から使う時のために名前を付けて保存もできます。保存されたジョブは <code
+    >rd-queue</code
+    > というシェルツールから実行を開始します、プロセス進捗の確認も可能です。</p
+  ></div
+><div id="&#12487;&#12451;&#12473;&#12497;&#12483;&#12481;&#12515;-&#12458;&#12503;&#12471;&#12519;&#12531;"
+><h2
+  ><a href="#TOC"
+    >ディスパッチャ オプション</a
+    ></h2
+  ><p
+  >ディスパッチャの処理は様々なタイプのオプションによりコントロールされます。</p
+  ><dl
+  ><dt
+    >実行コントロール</dt
+    ><dd
+    ><p
+      >&quot;threadcount&quot; を設定すると同時実行数をコントロールできます。また、&quot;keepgoing&quot; オプションが true になっていればいくつかのノードで処理に失敗しても実行を続けさせることができます。</p
+      ></dd
+    ><dt
+    >ノードフィルタ</dt
+    ><dd
+    ><p
+      >インクルードフィルタとエクスクルードフィルタリングをフィルタリングオプションで指定することで、プロジェクトリソースモデルの中でどのノードにコマンドを実行するのか決めることができます。</p
+      ></dd
+    ><dt
+    >フィルタキーワード</dt
+    ><dd
+    ><p
+      >フィルタリングのインクルードとエクスクルードパターンに用いられるキーワード。&quot;Tags&quot; キーワードはさらに、OR と AND といったブール演算子を条件の連結に使うことができます。</p
+      ></dd
+    ><dt
+    >フィルタコンビネーション</dt
+    ><dd
+    ><p
+      >すべてのキーワードはコマンドラインにて include と exclude オプションを指定することにより何個でも連結できます。</p
+      ></dd
+    ></dl
+  ><p
+  >グラフィカルコンソールからでも <code
+    >dispatch</code
+    > ツールからでもリソースモデルを問い合わせる事ができます。</p
+  ><div id="gui-&#12391;&#12398;&#12494;&#12540;&#12489;&#12501;&#12451;&#12523;&#12479;&#12522;&#12531;&#12464;"
+  ><h4
+    ><a href="#TOC"
+      >GUI でのノードフィルタリング</a
+      ></h4
+    ><p
+    >プロジェクトのノードリソースは Run ページに表示されます。ナビゲーションバーの中にあるプロジェクトメニューを使ってプロジェクトを選択します。そうするとデフォルトの状態でノードがフィルタリングされています。</p
+    ><p
+    >フィルタフォームからインクルード・エクスクルードパターンを使ってノードをフィルタリングできます。フォームは &quot;Filter&quot; ボタンを押すと出てきます。三角形のトグルアイコンを押してフォームを表示させてください。</p
+    ><div class="figure"
+    ><img src="../figures/fig0205.png" alt="Resource filter link"
+       /><p class="caption"
+      >Resource filter link</p
+      ></div
+    ><p
+    >フォームが表示されると、シンプルなインクルード表現を設定できる Include と、エクスクルード表現を作れる &quot;Extented Filters...&quot; リンクに分かれていることがわかります。</p
+    ><div class="figure"
+    ><img src="../figures/fig0206.png" alt="Resource filter form"
+       /><p class="caption"
+      >Resource filter form</p
+      ></div
+    ><p
+    >フィルタフォームを埋めた後、&quot;Filter&quot; ボタンを押して新たにフィルタリングされたノードリストを生成します。&quot;Clear&quot; ボタンを押すとフォームがリセットされます。</p
+    ><p
+    >インクルード・エクスクルードフィルタは次に示すキーワードごとにノードをフィルタリングすることができます：Name, Tags, Hostname, OS Name, OS Family, OS Architecture, OS Version and Type</p
+    ><p
+    >どのキーワードでも正規表現を使うことができます。<code
+      >.\*</code
+      > というパターンは何もマッチしません。</p
+    ><p
+    >フィルタリングの結果 20 以上のノードがマッチする場合は、結果がページングされます。</p
+    ></div
+  ><div id="&#12471;&#12455;&#12523;&#12391;&#12398;&#12494;&#12540;&#12489;&#12501;&#12451;&#12523;&#12479;&#12522;&#12531;&#12464;"
+  ><h4
+    ><a href="#TOC"
+      >シェルでのノードフィルタリング</a
+      ></h4
+    ><p
+    ><code
+      >dispatch</code
+      > コマンドは -I (include) と -X (exclude) オプションを使ってどのノードをインクルード・エクスクルードするか指定できます。これらのオプションで、ひとつの値/値のリスト/正規表現を利用できます。</p
+    ><p
+    ><em
+      >例</em
+      ></p
+    ><p
+    >OS name が Linux であるものをリストアップ(<code
+      >-p</code
+      > はプロジェクトの指定):</p
+    ><pre
+    ><code
+      >dispatch -p examples -I os-name=Linux
+</code
+      ></pre
+    ><p
+    >&quot;web&quot; という接頭辞が着いたものを除き、Linux のノードをリストアップ:</p
+    ><pre
+    ><code
+      >dispatch -p examples -I os-name=Linux -X &quot;web.*&quot;
+</code
+      ></pre
+    ><p
+    >&quot;web&quot; と &quot;prod&quot; というタグが着いたノードをリストアップ:</p
+    ><pre
+    ><code
+      >dispatch -p examples -I tags=web+prod
+</code
+      ></pre
+    ><p
+    >&quot;web&quot; というタグが着いたノード全てに対し、10 スレッド同時に apachectl をリスタートするコマンドを発行。エラーが起こっても続けるオプション付き:</p
+    ><pre
+    ><code
+      >dispatch -p examples -I tags=web -K -C 10 -- sudo apachectl restart 
+</code
+      ></pre
+    ><p
+    >ディスパッチャーコマンドで利用できるオプションについて完全なリファレンスが必要な場合は、<a href="../manpages/man1/rd-options.html"
+      >rd-options(1) マニュアルページ</a
+      > を参照してください。</p
+    ></div
+  ><div id="&#12450;&#12489;&#12507;&#12483;&#12463;&#12467;&#12510;&#12531;&#12489;"
+  ><h3
+    ><a href="#TOC"
+      >アドホックコマンド</a
+      ></h3
+    ><p
+    >一般的に、アドホックコマンドはシェルスクリプトやインタラクティブなターミナルにて実行されます。Rundeck ではアドホックコマンドは <code
+      >dispatch</code
+      > コマンドとグラフィカルコンソール両方にて実行可能です。</p
+    ><div id="&#12471;&#12455;&#12523;&#12484;&#12540;&#12523;&#12391;&#12398;&#12467;&#12510;&#12531;&#12489;&#23455;&#34892;"
+    ><h4
+      ><a href="#TOC"
+	>シェルツールでのコマンド実行</a
+	></h4
+      ><p
+      >個々のコマンドやシェルスクリプトファイルを実行するには <code
+	>dispatch</code
+	> を使います。</p
+      ><p
+      ><code
+	>dispatch</code
+	> を使って UNIX <code
+	>uptime</code
+	> コマンドを実行しシステムステータスを出力する例です:</p
+      ><pre
+      ><code
+	>$ dispatch -I os-family=unix -- uptime
+Succeeded queueing Workflow execution: Workflow:(threadcount:1){ [command( exec: uptime)] }
+Queued job ID: 7 &lt;http://strongbad:4440/execution/follow/7&gt;
+</code
+	></pre
+      ><p
+      >この <code
+	>uptime</code
+	> コマンドはキューに追加された後に実行されました。<code
+	>uptime</code
+	> コマンドの出力は <code
+	>dispatch</code
+	> コマンドの出力に出ている URL に載っています。(例, http://strongbed:4440/execution/follow/7)</p
+      ><p
+      >キューに追加せず、すぐにコマンドを実行したい場合があります。<code
+	>--noqueue</code
+	> オプションを使って実行し、コンソールの出力を追って下さい。</p
+      ><pre
+      ><code
+	>$ dispatch -I os-family=unix  --noqueue -- uptime
+[ctier@centos54 dispatch][INFO]  10:34:54 up 46 min,  2 users,  load average: 0.00, 0.00, 0.00
+[alexh@strongbad dispatch][INFO] 10:34  up 2 days, 18:51, 2 users, load averages: 0.55 0.80 0.75
+[examples@ubuntu dispatch][INFO]  10:35:01 up 2 days, 18:40,  2 users,  load average: 0.00, 0.01, 0.00
+</code
+	></pre
+      ><p
+      ><strong
+	>ノート</strong
+	> &quot;--noqueue&quot; フラッグは、テスト実行やデバッグ実行には便利ですが、中央管理の実行キューで管理されないやり方なため、コマンド実行状況が視覚化されません。</p
+      ><p
+      ><code
+	>dispatch</code
+	> コマンドは、そのノードでコマンドを実行したかのようにヘッダーを付けて出力メッセージを出してくれます。ヘッダーのフォーマットにはログインユーザーとコマンドが実行されているノード情報が含まれます。</p
+      ><p
+      >Unix <code
+	>whoami</code
+	> コマンドを実行して、各ノードごとにディスパッチされたコマンドを実行しているユーザー ID を見てみます。</p
+      ><pre
+      ><code
+	>$ dispatch -I os-family=unix --noqueue -- whoami
+[ctier@centos54 dispatch][INFO] ctier
+[alexh@strongbad dispatch][INFO] alexh
+[examples@ubuntu dispatch][INFO] examples
+</code
+	></pre
+      ><p
+      >リソースモデルは、ディスパッチコマンドを実行するログインユーザーをノード毎に定義していることがわかります。この機能により、ノードへそれぞれ違ったロールを割り当てることが簡単にできます、つまりプロセスの管理のためにログインユーザーを使い分けることができるということです。<a href="../manpages/man5/resource-v13.html"
+	>resource-v13(5) XML</a
+	> または <a href="../manpages/man5/resource-yaml-v13.html"
+	>resource-v13(5) YAML</a
+	> のユーザネーム属性について見てみてください。</p
+      ><p
+      ><code
+	>dispatch</code
+	> コマンドはシェルスクリプトも実行できます。ここにちょっとだけシステム情報を生成する簡単なシェルスクリプトがあります:</p
+      ><pre
+      ><code
+	>#!/bin/sh
+echo &quot;info script&quot;
+echo uptime=`uptime`
+echo whoami=`whoami`
+echo uname=`uname -a`
+</code
+	></pre
+      ><p
+      >-s オプションを使って &quot;info.sh&quot; というスクリプトファイルを指定します。</p
+      ><pre
+      ><code
+	>$ dispatch -I os-family=unix -s info.sh
+</code
+	></pre
+      ><p
+      ><code
+	>dispatch</code
+	> コマンドは &quot;info.sh&quot; スクリプトをコピーしてサーバーと &quot;unix&quot; 系ノードに置き、実行します。</p
+      ></div
+    ><div id="&#12464;&#12521;&#12501;&#12451;&#12459;&#12523;&#12467;&#12510;&#12531;&#12489;&#12471;&#12455;&#12523;&#12391;&#12398;&#23455;&#34892;"
+    ><h4
+      ><a href="#TOC"
+	>グラフィカルコマンドシェルでの実行</a
+	></h4
+      ><p
+      >Rundeck のグラフィカルコンソールでもフィルタリングしたノードリソースに対してアドホックコマンドを実行できます。コマンドプロンプトは SSH コマンドまたはディスパッチシェルツールで実行可能な様々なコマンド文字列を受け付けます。</p
+      ><p
+      >しかしながら、どんなコマンドを打つときでも、まずディスパッチしたいノードを含んだプロジェクトの選択をする必要があります。プロジェクトメニューから希望のプロジェクトを選んでください。プロジェクトを選択すると、&quot;Command&quot; というラベルが付いた水平なテキストフィールドがあるのがわかると思います。これが Rundeck のアドホックコマンドプロンプトになります。 <img src="../figures/fig0207.png" alt="Ad hoc command prompt"
+	 /></p
+      ><p
+      >コマンドプロンプトを利用するには、テキストフィールドに実行したいアドホックコマンドを入力し、&quot;Run&quot; ボタンを押してください。コマンドは現在コマンドプロンプトツールバーの下にリストアップされたノード全てに対してディスパッチされます。また、コマンドプロンプトはそのコマンド実行が完了するまで利用できなくなります。コマンド実行の出力は下記のように出力されます。(<a href="rundeck-basics.html#%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E5%AE%9F%E8%A1%8C%E7%B5%90%E6%9E%9C%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B"
+	>出力結果</a
+	>を見てみてください)</p
+      ><div class="figure"
+      ><img src="../figures/fig0208.png" alt="Ad hoc execution output"
+	 /><p class="caption"
+	>Ad hoc execution output</p
+	></div
+      ><p
+      >また、&quot;Now running&quot; と書かれた実行中のアドホックコマンドのリストがコマンドプロンプトの上部に表示されることにも気付くでしょう。全てのコマンド実行はそこにリストアップされます。リストアップされている実行中のコマンドにはどれも開始時間・経過時間・出力結果の別ページでの表示リンクが付いています。</p
+      ><div class="figure"
+      ><img src="../figures/fig0207-b.png" alt="Now running ad hoc command"
+	 /><p class="caption"
+	>Now running ad hoc command</p
+	></div
+      ><p
+      >ページの一番下には、選択されたプロジェクトにおける過去 24 時間の全てのコマンドの実行履歴がある &quot;History&quot; という項目があります。コマンドの実行完了後、&quot;History&quot; 項目に新しい履歴が追加されます。黄色でハイライトされた行は、&quot;History&quot; 項目に追加されかつまだ実行中のものであることを表しています。</p
+      ><div class="figure"
+      ><img src="../figures/fig0207-c.png" alt="Run history"
+	 /><p class="caption"
+	>Run history</p
+	></div
+      ><p
+      >&quot;History&quot; 項目のコマンド実行履歴は並び替える事も可能です。&quot;Summary&quot; カラムは実行されたコマンド/スクリプトを表しています。&quot;Node Failure Count&quot; カラムはエラーが起きたノードの数を表しています。エラーが 1 つもないときは、&quot;ok&quot; と表示されています。&quot;User&quot; と &quot;Time&quot; カラムは、&quot;いつ&quot; &quot;誰が&quot; コマンドを実行したかを表しています。</p
+      ></div
+    ><div id="&#12467;&#12510;&#12531;&#12489;&#23455;&#34892;&#32080;&#26524;&#12434;&#30906;&#35469;&#12377;&#12427;"
+    ><h4
+      ><a href="#TOC"
+	>コマンド実行結果を確認する</a
+	></h4
+      ><p
+      >アドホックコマンドの実行結果はコマンドプロンプトの下に表示されます。</p
+      ><p
+      >ここではコマンドの実行結果を様々なフォーマットで見る事ができます。</p
+      ><dl
+      ><dt
+	>Tail 出力モード</dt
+	><dd
+	><p
+	  >ログファイルに対して Unix の <code
+	    >tail -f</code
+	    > コマンドを実行しているかのような形でコマンドの実行結果を表示します。デフォルトでは 20 行表示されますが、&quot;-&quot; または &quot;+&quot; ボタンを押す事で変更できます。現在の表示行数が設定されているテキストフィールドを修正することでも変更可能です。 <img src="../figures/fig0208.png" alt="Ad hoc execution output"
+	     /></p
+	  ></dd
+	><dt
+	>注釈モード</dt
+	><dd
+	><p
+	  >注釈モードでは、選択されたラベル（&quot;Annotated&quot; を選択するとその右側に出てくるラベル）に沿った表示をします。昇順・降順にする &quot;Top&quot; &quot;Bottom&quot; や コマンドのまとまり毎に表示を区切る &quot;Group commands&quot; や出力結果の詳細を折りたたみ表示にする &quot;Collapse&quot; などです。折りたたんだものも右端の三角形または &quot;3-exec&quot; のように書かれたリンクを押す事で開くことができます。 <img src="../figures/fig0209.png" alt="Annotated output"
+	     /></p
+	  ></dd
+	><dt
+	>コンパクトモード</dt
+	><dd
+	><p
+	  >コンパクトモードでは、ノード毎に表示が区切られます。デフォルトでは出力結果の詳細は折りたたまれており、右端の三角形ボタンを押す事で開きます。 <img src="../figures/fig0210.png" alt="Node output"
+	     /></p
+	  ></dd
+	></dl
+      ><div id="&#12467;&#12510;&#12531;&#12489;&#23455;&#34892;&#12501;&#12457;&#12525;&#12540;&#12506;&#12540;&#12472;"
+      ><h5
+	><a href="#TOC"
+	  >コマンド実行フォローページ</a
+	  ></h5
+	><p
+	>コマンドの出力結果が別ページとして切り出されていると便利なときがあります。目的のひとつとして例えば、出力結果がどうなっているか知りたい人にリンクをシェアするためといったことがあります。&quot;Now running&quot; 項目の &quot;output &gt;&gt;&quot; リンクをクリックするとそのコマンド実行結果に関することのみが載っているページへ飛びます。</p
+	><p
+	>ブラウザのロケーションバーの URL にも気付くでしょう。URL を他の人にシェアすることも可能です。URL には実行 ID（EID）が入っています。</p
+	><pre
+	><code
+	  > http://rundeckserver/execution/follow/{EID}
+</code
+	  ></pre
+	><p
+	>実行が完了後、コマンドはあるステータスを取ります:</p
+	><ul
+	><li
+	  >成功: フィルタリングしたノードに対してのコマンド実行で一切エラーがない状態。</li
+	  ><li
+	  >失敗: ひとつ以上エラーが発生した状態。エラーが起きたノードが表示されます。同じコマンドを実行したいときのために、&quot;Retry Failed Nodes...&quot; というリンクも表示されます。</li
+	  ></ul
+	><p
+	>このページをテキストファイルとしてダウンロードすることも可能です。&quot;Download&quot; というリンクを押してデスクトップに保存してください。</p
+	></div
+      ></div
+    ></div
+  ><div id="&#12467;&#12510;&#12531;&#12489;&#23455;&#34892;&#12434;&#12467;&#12531;&#12488;&#12525;&#12540;&#12523;&#12377;&#12427;"
+  ><h3
+    ><a href="#TOC"
+      >コマンド実行をコントロールする</a
+      ></h3
+    ><p
+    >並列でコマンドを実行したい場合は、&quot;-C&quot; オプションを使い並列させたいスレッド数を指定します。Linux ホストに対して、2 スレッド平行で uptime コマンドを実行する例はこうなります:</p
+    ><pre
+    ><code
+      >dispatch -I os-name=Linux -C 2 -- uptime
+</code
+      ></pre
+    ><p
+    >エラーが起こったときに、構わず続けたい・リトライさせたい場合には &quot;-K/-R&quot; フラッグを使います。ここにホストが 4440 ポートをリッスンしていた状態であるか確認するスクリプトの例があります。4440 ポートがリッスンされていない場合にはコード 1 を取ります。</p
+    ><pre
+    ><code
+      >#!/bin/sh
+netstat -an | grep 4440 | grep -q LISTEN
+if [ &quot;$?&quot; != 0 ]; then
+echo &quot;not listening on 4440&quot;
+exit 1;
+fi
+echo  listening port=4440, host=`hostname`;
+</code
+      ></pre
+    ><p
+    >強制続行フラッグが設定されていない場合、コマンドまたはスクリプトにて 0 以外の終了コードが返ってくるとディスパッチは失敗と判断され終了します。</p
+    ><pre
+    ><code
+      >$ dispatch -I os-family=unix -s /tmp/listening.sh --noqueue
+[alexh@strongbad dispatch][INFO] Connecting to centos54:22
+[alexh@strongbad dispatch][INFO] done.
+[ctier@centos54 dispatch][INFO] not listening on 4440
+error: Remote command failed with exit status 1
+</code
+      ></pre
+    ><p
+    >centos54 でのスクリプト実行が失敗すると直ちにディスパッチもエラー終了となっています。</p
+    ><p
+    >もう一度コマンドを実行する際、今度は &quot;-K&quot; の強制続行フラッグを付けて、どのノードにおいてスクリプト実行が失敗したかを出力しつつ処理を続行させます。</p
+    ><pre
+    ><code
+      >$ dispatch  --noqueue -K -I tags=web -s /tmp/listening.sh
+[alexh@strongbad dispatch][INFO] Connecting to centos54:22
+[alexh@strongbad dispatch][INFO] done.
+[ctier@centos54 dispatch][INFO] not listening on 4440
+[ctier@centos54 dispatch][ERROR] Failed execution for node: centos54: Remote command failed with exit status 1
+[alexh@strongbad dispatch][INFO] listening port=4440, host=strongbad
+[alexh@strongbad dispatch][INFO] Connecting to 172.16.167.211:22
+[alexh@strongbad dispatch][INFO] done.
+[examples@ubuntu dispatch][INFO] not listening on 4440
+[examples@ubuntu dispatch][ERROR] Failed execution for node: ubuntu: Remote command failed with exit status 1
+error: Execution failed on the following 2 nodes: [centos54, ubuntu]
+error: Execute this command to retry on the failed nodes:
+    dispatch -K -s /tmp/listening.sh -p examples -I
+    name=centos54,ubuntu
+</code
+      ></pre
+    ></div
+  ><div id="&#12467;&#12510;&#12531;&#12489;&#23455;&#34892;&#12434;&#12461;&#12517;&#12540;&#12395;&#20837;&#12428;&#12427;"
+  ><h3
+    ><a href="#TOC"
+      >コマンド実行をキューに入れる</a
+      ></h3
+    ><p
+    >デフォルトでは、<code
+      >dispatch</code
+      > によるコマンドライン上でのコマンドまたはスクリプトの実行は Rundeck のテンポラリジョブにキューされます。<code
+      >dispatch</code
+      > コマンドは、グラフィカルコンソールでの &quot;その場限りの実行&quot; と同等です。</p
+    ><p
+    >下記のスクリプトは、それぞれの経路でポートがリッスンされているかを定期的に確認する長めの処理です。そして引数を渡しても渡さなくても実行できます。</p
+    ><pre
+    ><code
+      >$ cat ~/bin/checkagain.sh 
+#!/bin/bash
+iterations=$1 secs=$2 port=$3
+echo &quot;port ${port:=4440} will be checked ${iterations:=30} times waiting ${secs:=5}s between each iteration&quot; 
+i=0
+while [ $i -lt ${iterations} ]; do
+  echo &quot;iteration: #${i}&quot;
+  netstat -an | grep $port | grep LISTEN &amp;&amp; exit 0
+  echo ----
+  sleep ${secs}
+  i=$(($i+1))
+done
+echo &quot;Not listening on $port after $i checks&quot; ; exit 1
+</code
+      ></pre
+    ><p
+    ><code
+      >dispatch</code
+      > コマンドにより、コマンド実行処理が Rundeck のキューに入り、テンポラリジョブとして管理されます。<code
+      >-I centsos54</code
+      > の部分は &quot;centos54&quot; というノードのみに実行ということを意味しています。</p
+    ><pre
+    ><code
+      >$ dispatch -I centos54 -s ~/bin/checkagain.sh 
+Succeeded queueing workflow: Workflow:(threadcount:1){ [command( scriptfile: /Users/alexh/bin/checkagain.sh)] }
+Queued job ID: 5 &lt;http://strongbad:4440/execution/follow/4&gt;
+</code
+      ></pre
+    ><p
+    >引数を渡すには &quot;--&quot;（ダッシュ 2 つ）の後に指定します。</p
+    ><pre
+    ><code
+      >$ iters=5 secs=60 port=4440
+$ dispatch -I centos54 -s ~/bin/checkagain.sh -- $iters $secs $ports
+</code
+      ></pre
+    ></div
+  ><div id="&#12467;&#12510;&#12531;&#12489;&#23455;&#34892;&#29366;&#27841;&#12434;&#12488;&#12521;&#12483;&#12461;&#12531;&#12464;&#12377;&#12427;"
+  ><h3
+    ><a href="#TOC"
+      >コマンド実行状況をトラッキングする</a
+      ></h3
+    ><p
+    >&quot;Run&quot; ページの上部にある<a href="rundeck-basics.html#%E5%AE%9F%E8%A1%8C%E4%B8%AD"
+      >&quot;Now Running&quot;</a
+      >の部分から、キューに入っているアドホックコマンドや一時的なジョブまたは保存されたジョブの実行の経過を追うことができます。</p
+    ><p
+    >シェルツール <a href="http://rundeck.org/docs/manpages/man1/rd-queue.html"
+      >rd-queue</a
+      > を使う事でもコマンド実行の経過を追う事ができます。</p
+    ><pre
+    ><code
+      >$ rd-queue -p project
+Queue: 1 items
+[5] workflow: Workflow:(threadcount:1){[command( scriptfile: /Users/alexh/bin/checkagain.sh)]} &lt;http://strongbad:4440/execution/follow/5&gt;
+</code
+      ></pre
+    ><p
+    >実行キューに入っているジョブはどれも実行 ID というのを持っています。上記の例で言うと、キューに 1 つジョブが入っていて 5 というのが ID に当たります。</p
+    ><p
+    >実行中のジョブは <code
+      >rd-queue kill</code
+      > コマンドによって kill することもできます。&quot;-e&quot; オプションにて kill する実行 ID を指定してください。</p
+    ><pre
+    ><code
+      >$ rd-queue kill -e 5
+rd-queue kill: success. [5] Job status: killed
+</code
+      ></pre
+    ></div
+  ><div id="&#12503;&#12521;&#12464;&#12452;&#12531;"
+  ><h3
+    ><a href="#TOC"
+      >プラグイン</a
+      ></h3
+    ><p
+    >Rundeck はプラグインモデルを採用しており、それによって特定のノード・プロジェクト・Rundeck 本体がリモートで（またはローカルで）コマンドやスクリプトを実行する方法をフルカスタマイズできます。</p
+    ><p
+    >Rundeck はリモートノードとローカルの Rundeck サーバー自身へ SSH を通したコマンド実行を扱う内部プラグインをデフォルトで使っています。</p
+    ><p
+    >プラグインのインストールは、あなたがインストールした Rundeck の <code
+      >libext</code
+      > ディレクトリにプラグインをコピーすることで完了します。</p
+    ><p
+    >一般的なプラグインは、特定の&quot;サービス&quot;のために&quot;プロバイダ&quot;を追加します。&quot;サービス&quot;はノードでのコマンド実行を担うもので &quot;node-executor&quot; と &quot;file-copier&quot; サービスがあります。 Plugins are used to add new &quot;providers&quot; for particular &quot;services&quot;. The services used for command execution on nodes are the &quot;node-executor&quot; and &quot;file-copier&quot; services.</p
+    ><p
+    >特定のプラグインを使うには、<code
+      >framework.properties</code
+      > ファイル と <code
+      >project.properties</code
+      > ファイルを設定するか、またはプロジェクトリソースに定義されたノードへ属性を追加します。より詳細な設定については <a href="plugins.html#%E3%83%97%E3%83%AD%E3%83%90%E3%82%A4%E3%83%80%E3%82%92%E4%BD%BF%E3%81%86"
+      >プロバイダを使う</a
+      > を参照して下さい。</p
+    ><p
+    >内部の SSH コマンド実行プラグインについては下記で説明します、プラグインについての詳細は <a href="#rundeck-%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3"
+      >Rundeck プラグイン</a
+      >の章 に載っています。</p
+    ><div id="ssh-&#12503;&#12521;&#12464;&#12452;&#12531;"
+    ><h4
+      ><a href="#TOC"
+	>SSH プラグイン</a
+	></h4
+      ><p
+      >デフォルトでは Rundeck はリモートのノードでコマンドを実行するために SSH を使い、リモートノードへスクリプトをコピーするのに SCP を使い、ローカルのノード（Rundeck サーバー）に対してはローカルでコマンドやスクリプト実行を行います。</p
+      ><p
+      >SSH プラグインでは、SSH 接続を確立するために、以下のプロパティが定義されている必要があります：</p
+      ><ul
+      ><li
+	><code
+	  >hostname</code
+	  >：リモートノードのホスト名。デフォルトのポート以外を使う場合は &quot;hostname:port&quot; というフォーマットになります。デフォルトポートは 22 です。</li
+	><li
+	><code
+	  >username</code
+	  >：接続するリモートノードのユーザー名。</li
+	></ul
+      ><p
+      >リモートノードでスクリプトが実行される時、まず SCP にてスクリプトがコピーされた後、そのスクリプトが実行されます。SSH 接続プロパティに加えて、SCP についてもノードで定義しておくプロパティが存在します：</p
+      ><ul
+      ><li
+	><code
+	  >file-copy-destination-dir</code
+	  >：実行前にスクリプトファイルが置かれるリモートノード上のディレクトリ。デフォルトでは、Windowns のノードだと <code
+	  >C:/WINDOWS/TEMP/</code
+	  > その他のノードだと <code
+	  >/tmp</code
+	  > になります。</li
+	><li
+	><code
+	  >osFamily</code
+	  >：Windows のノードには &quot;windows&quot; と指定します。</li
+	></ul
+      ><p
+      >さらに、SSH と SCP 両方とも、SSH パスワード認証のために、リモートノードに公開鍵/秘密鍵の設定をしておく必要があります。</p
+      ><ul
+      ><li
+	>SSH サーバーの設定についてのより詳しい情報は <a href="../administration/ssh.html"
+	  >管理者向けガイド - SSH</a
+	  > ページを参照してください。</li
+	><li
+	>SSH のためのノードの設定についてのより詳しい情報は<a href="plugins.html#ssh-%E3%83%97%E3%83%AD%E3%83%90%E3%82%A4%E3%83%80"
+	  >SSH プロバイダ</a
+	  > ページを参照してください。</li
+	></ul
+      ></div
+    ><div id="&#32068;&#12415;&#36796;&#12415;&#12503;&#12521;&#12464;&#12452;&#12531;"
+    ><h4
+      ><a href="#TOC"
+	>組み込みプラグイン</a
+	></h4
+      ><p
+      >Rundeck にはテストや開発に利用するためのプラグインが 2 つデフォルトで入っています。(<a href="plugins.html#%E3%83%97%E3%83%AA%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3"
+	>プリインストールプラグイン</a
+	> を参照)</p
+      ><ul
+      ><li
+	><a href="plugins.html#%E3%82%B9%E3%82%BF%E3%83%96%E3%83%97%E3%83%A9%E3%82%B0%E3%83%B3"
+	  >スタブプラグイン</a
+	  > : 実行はせずに、ただコマンドやスクリプトを表示します。</li
+	><li
+	><a href="plugins.html#%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%83%97%E3%83%A9%E3%82%B0%E3%83%B3"
+	  >スクリプトプラグン</a
+	  > :外部スクリプトをコマンドのように扱います。自分の <a href="../developer/plugin-development.html#%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%83%97%E3%83%A9%E3%82%B0%E3%83%B3%E9%96%8B%E7%99%BA"
+	  >スクリプトプラグン開発</a
+	  > モデルを開発するのに便利です。</li
+	></ul
+      ></div
+    ></div
+  ></div
+><div id="&#23653;&#27508;"
+><h2
+  ><a href="#TOC"
+    >履歴</a
+    ></h2
+  ><p
+  >キューに入ったアドホックコマンドの履歴だけでなく、テンポラリ・保存したジョブの実行履歴が Rundeck サーバーに保存されています。履歴データは &quot;History&quot; ページ内にてフィルタリングして見る事ができます。</p
+  ><div class="figure"
+  ><img src="../figures/fig0211.png" alt="History page"
+     /><p class="caption"
+    >History page</p
+    ></div
+  ><div id="&#12452;&#12505;&#12531;&#12488;&#23653;&#27508;&#12398;&#12501;&#12451;&#12523;&#12479;&#12522;&#12531;&#12464;"
+  ><h3
+    ><a href="#TOC"
+      >イベント履歴のフィルタリング</a
+      ></h3
+    ><p
+    >History ページはデフォルトで直近一日分のコマンド実行履歴をリストアップしています。ページには履歴一覧を増やすまたは制限するフィルタリング機能が付いています。</p
+    ><p
+    >フィルタリング機能は、条件を指定できる項目がいくつもあります：</p
+    ><ul
+    ><li
+      >Within: 期間の指定。1 日間、1 週間、1 ヶ月、その他（いつからいつまでを指定）の中から選びます</li
+      ><li
+      >Name: ジョブの名前の指定</li
+      ><li
+      >Project: プロジェクト名の指定。プロジェクトメニューでプロジェクトが選択されていれば予めセットされているはずです</li
+      ><li
+      >User: ジョブを起動したユーザーの指定</li
+      ><li
+      >Summary: メッセージテキスト</li
+      ><li
+      >Result: 成功ステータスまたは失敗ステータス</li
+      ></ul
+    ><div class="figure"
+    ><img src="../figures/fig0212.png" alt="History filter form"
+       /><p class="caption"
+      >History filter form</p
+      ></div
+    ><p
+    >フィルタ項目を埋めて &quot;Filter&quot; ボタンを押すと、ページはフィルタリング条件にあったイベント（履歴）を表示します。</p
+    ><p
+    >より手軽に履歴のフィルタリングを行えるよう、フィルタリング結果はメニューに保存できます。&quot;save this filter...&quot;リンクをクリックしてフィルタリング設定を保存します。</p
+    ></div
+  ><div id="&#12452;&#12505;&#12531;&#12488;&#12499;&#12517;&#12540;"
+  ><h3
+    ><a href="#TOC"
+      >イベントビュー</a
+      ></h3
+    ><p
+    >どの履歴にも、実行したコマンド・ディスパッチオプション・成功失敗ステータス・出力メッセージを含んだファイルへのリンクが付いています。</p
+    ><div class="figure"
+    ><img src="../figures/fig0213.png" alt="Event view"
+       /><p class="caption"
+      >Event view</p
+      ></div
+    ><p
+    >ひとつでもエラーが起こったものの場合、&quot;Node Failure Count&quot; カラムが表示され、何台のノードが失敗したか赤味で表示されています。バーチャートは何 % が失敗だったのかを示しています。</p
+    ><div class="figure"
+    ><img src="../figures/fig0216.png" alt="Event view"
+       /><p class="caption"
+      >Event view</p
+      ></div
+    ></div
+  ><div id="rss-&#12522;&#12531;&#12463;"
+  ><h3
+    ><a href="#TOC"
+      >RSS リンク</a
+      ></h3
+    ><p
+    >RSS アイコンは現在のフィルタリング設定にマッチしたイベント（履歴）の一覧表示へのリンクになります。</p
+    ><p
+    >An RSS icon provides a link to an RSS view of the events that match the current filtering criteria.</p
+    ><div class="figure"
+    ><img src="../figures/fig0214.png" alt="RSS link"
+       /><p class="caption"
+      >RSS link</p
+      ></div
+    ></div
+  ><div id="tips-&#12392;&#12488;&#12522;&#12483;&#12463;"
+  ><h3
+    ><a href="#TOC"
+      >Tips とトリック</a
+      ></h3
+    ><div id="&#12501;&#12451;&#12523;&#12479;&#12522;&#12531;&#12464;&#12398;&#20445;&#23384;"
+    ><h4
+      ><a href="#TOC"
+	>フィルタリングの保存</a
+	></h4
+      ><p
+      >どのページのフィルタも、現在の設定を保存する機能がついています。&quot;save this filter...&quot; リンクを押して名前を付けて保存します。保存されたフィルタはどれも、次回フィルタ設定を行う際にはメニューに追加されています。</p
+      ></div
+    ></div
+  ><div id="&#33258;&#21205;&#35036;&#23436;"
+  ><h3
+    ><a href="#TOC"
+      >自動補完</a
+      ></h3
+    ><p
+    >あなたが Bash シェルを使っている場合、Rundeck はよい自動補完スクリプトの一つになりえます。以下の行をあなたの <code
+      >.bashrc</code
+      > ファイルに追加してみてください：</p
+    ><pre
+    ><code
+      >source $RDECK_BASE/etc/bash_completion.bash
+</code
+      ></pre
+    ><p
+    ><code
+      >dispatch</code
+      > コマンドを入力している際にタブキーを押すと、入力の続きの候補が出てきます:</p
+    ><pre
+    ><code
+      >$ dispatch &lt;tab&gt;&lt;tab&gt;
+</code
+      ></pre
+    ></div
+  ></div
+><div id="&#12414;&#12392;&#12417;"
+><h2
+  ><a href="#TOC"
+    >まとめ</a
+    ></h2
+  ><p
+  >ここまでであなたは基本的な Rundeck の操作、つまり &quot;プロジェクトのセットアップ・プロジェクトリソースモデルへのクエリの定義・アドホックコマンドの実行・ジョブの実行と保存と履歴の閲覧&quot; ができるようになっています。</p
+  ><p
+  >次は Rundeck の中心となる機能であるジョブについて学んでいきます。</p
+  ></div
+>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck ドキュメント (2.1.3)</a></li>
+    
+    
+    <li ><a href="index.html">ユーザーマニュアル</a></li>
+    <li class="active"><a href="03-basics.html">Rundeck の基本</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="02-getting-started.html"><i class="glyphicon glyphicon-arrow-left"></i> 始めに</a></li>
+      <li class="next"><a href="04-jobs.html">ジョブについて <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2014 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<span class="generated-date" title="2014-06-27T17:41:51EDT">2014-06-27T17:41:51EDT</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
+
