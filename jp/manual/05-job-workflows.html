@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ジョブのワークフロー</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Alex Honor" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="November 20, 2010" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Enables Self-Service Operations</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.2.2</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck ドキュメント (2.2.2)</a></li>
+    
+    
+    <li ><a href="index.html">ユーザーマニュアル</a></li>
+    <li class="active"><a href="05-job-workflows.html">ジョブのワークフロー</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="04-jobs.html"><i class="glyphicon glyphicon-arrow-left"></i> ジョブについて</a></li>
+      <li class="next"><a href="06-job-options.html">ジョブのオプション <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<div id="TOC"
+><ul
+  ><li
+    ><a href="#&#12527;&#12540;&#12463;&#12501;&#12525;&#12540;&#12398;&#23450;&#32681;"
+      >ワークフローの定義</a
+      ></li
+    ><li
+    ><a href="#&#12527;&#12540;&#12463;&#12501;&#12525;&#12540;&#12467;&#12531;&#12488;&#12525;&#12540;&#12523;&#12398;&#35373;&#23450;"
+      >ワークフローコントロールの設定</a
+      ></li
+    ><li
+    ><a href="#&#12527;&#12540;&#12463;&#12501;&#12525;&#12540;&#12398;&#21508;&#12473;&#12486;&#12483;&#12503;"
+      >ワークフローの各ステップ</a
+      ><ul
+      ><li
+	><a href="#&#12467;&#12510;&#12531;&#12489;&#12473;&#12486;&#12483;&#12503;"
+	  >コマンドステップ</a
+	  ></li
+	><li
+	><a href="#&#12473;&#12463;&#12522;&#12503;&#12488;&#12473;&#12486;&#12483;&#12503;"
+	  >スクリプトステップ</a
+	  ></li
+	><li
+	><a href="#&#12473;&#12463;&#12522;&#12503;&#12488;&#12501;&#12449;&#12452;&#12523;&#12473;&#12486;&#12483;&#12503;"
+	  >スクリプトファイルステップ</a
+	  ></li
+	><li
+	><a href="#&#12473;&#12463;&#12522;&#12503;&#12488;-url-&#12473;&#12486;&#12483;&#12503;"
+	  >スクリプト URL ステップ</a
+	  ></li
+	><li
+	><a href="#&#12472;&#12519;&#12502;&#12522;&#12501;&#12449;&#12524;&#12531;&#12473;&#12473;&#12486;&#12483;&#12503;"
+	  >ジョブリファレンスステップ</a
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#&#12473;&#12486;&#12483;&#12503;&#12398;&#38918;&#30058;&#12434;&#22793;&#12360;&#12427;"
+      >ステップの順番を変える</a
+      ></li
+    ><li
+    ><a href="#&#22793;&#26356;&#12398;&#20445;&#23384;"
+      >変更の保存</a
+      ></li
+    ><li
+    ><a href="#&#12467;&#12531;&#12486;&#12461;&#12473;&#12488;&#22793;&#25968;"
+      >コンテキスト変数</a
+      ><ul
+      ><li
+	><a href="#&#12467;&#12531;&#12486;&#12461;&#12473;&#12488;&#22793;&#25968;&#12398;&#20351;&#29992;&#26041;&#27861;"
+	  >コンテキスト変数の使用方法</a
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#&#12414;&#12392;&#12417;"
+      >まとめ</a
+      ></li
+    ></ul
+  ></div
+>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">ジョブのワークフロー</h1>
+</div>
+<p
+>ジョブの最も基本的な特徴は、1 つまたは複数のコマンドをあるノードセットに対してまとめて実行できることにあります。コマンドシーケンス（連続したコマンド）は_ワークフロー_と呼ばれ、ワークフローの各ステップには、コマンド呼び出しが定義されています。</p
+><p
+>ジョブワークフローの各ステップは、ジョブの一覧画面またはジョブの編集フォームにてジョブの詳細として表示されます。</p
+><div id="&#12527;&#12540;&#12463;&#12501;&#12525;&#12540;&#12398;&#23450;&#32681;"
+><h2
+  ><a href="#TOC"
+    >ワークフローの定義</a
+    ></h2
+  ><p
+  >ワークフローはグラフィカルコンソールから、または XML or YAML ドキュメントをサーバーに読み込ませることで定義できます。</p
+  ><p
+  >グラフィカルコンソールではステップの追加・編集・削除・順序の入れ替えが出来るようになっています。</p
+  ><p
+  >テキスト形式でジョブを定義することを好むユーザは、2 つの定義方法を参照するといいでしょう：</p
+  ><ul
+  ><li
+    >XML: <a href="../manpages/man5/job-v20.html"
+      >job-v20(5)</a
+      ></li
+    ><li
+    >YAML: <a href="../manpages/man5/job-yaml-v12.html"
+      >job-yaml-v12(5)</a
+      ></li
+    ></ul
+  ><p
+  >グラフィカルコンソールの中でジョブを定義しておいて、そこから <a href="../manpages/man1/rd-jobs.html"
+    >rd-jobs(1)</a
+    > Shell ツールが利用する定義ファイルをエクスポートすることも可能です。</p
+  ><p
+  ><a href="#%E3%82%B8%E3%83%A7%E3%83%96%E5%AE%9A%E7%BE%A9%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E3%82%A8%E3%82%AF%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%88"
+    >ジョブ定義ファイルのエクスポート</a
+    >および、<a href="#%E3%82%B8%E3%83%A7%E3%83%96%E5%AE%9A%E7%BE%A9%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88"
+    >ジョブ定義ファイルのインポート</a
+    >を参照してください。</p
+  ></div
+><div id="&#12527;&#12540;&#12463;&#12501;&#12525;&#12540;&#12467;&#12531;&#12488;&#12525;&#12540;&#12523;&#12398;&#35373;&#23450;"
+><h2
+  ><a href="#TOC"
+    >ワークフローコントロールの設定</a
+    ></h2
+  ><p
+  >ワークフローの実行は、<em
+    >Keepgoing</em
+    >（続行）と <em
+    >Strategy</em
+    >（計画）という 2 種類の重要な設定によってコントロールされています。</p
+  ><div class="figure"
+  ><img src="../figures/fig0401.png" alt="Workflow controls"
+     /><p class="caption"
+    >Workflow controls</p
+    ></div
+  ><p
+  ><em
+    >Keepgoing</em
+    >：これはあるステップにてエラーが起きた際どうするかをコントロールします：</p
+  ><ul
+  ><li
+    >No： 直ちに失敗とします。（デフォルト）</li
+    ><li
+    >Yes：次のステップに進みます。</li
+    ></ul
+  ><p
+  >デフォルトでは直ちに失敗となりますが、場合によっては実行を続けるよう設定することもできます。</p
+  ><p
+  ><em
+    >Strategy</em
+    >： 実行順序のオーダーとノードへのコマンドディスパッチをコントロールします:</p
+  ><ul
+  ><li
+    ><em
+      >Node-oriented</em
+      >： 次のノードに進む前にすべてのワークフローを実行します（デフォルト）</li
+    ><li
+    ><em
+      >Step-oriented</em
+      >： 次のノードの前にすべてのノード上の各ステップを実行します。</li
+    ></ul
+  ><p
+  >以下のイラストでは、2 つのノードに対して 3 つのステップがどのように進められるかを対比させています。</p
+  ><p
+  >Node-oriented フローはこうなります：</p
+  ><pre
+  ><code
+    >1.   NodeA    step#1
+2.     &quot;      step#2
+3.     &quot;      step#3
+4.   NodeB    step#1
+5.     &quot;      step#2
+6.     &quot;      step#3
+</code
+    ></pre
+  ><p
+  >Step-oriented フローはこうなります：</p
+  ><pre
+  ><code
+    >1.   NodeA    step#1
+2.   NodeB      &quot;
+3.   NodeA    step#2
+4.   NodeB      &quot;
+5.   NodeA    step#2
+6.   NodeB      &quot;
+</code
+    ></pre
+  ><p
+  >Node-oriented フローが一般的であることも踏まえて、あなたが自動化しているプロセスでどちらのフローを使うのが適切か決めることになります。</p
+  ></div
+><div id="&#12527;&#12540;&#12463;&#12501;&#12525;&#12540;&#12398;&#21508;&#12473;&#12486;&#12483;&#12503;"
+><h2
+  ><a href="#TOC"
+    >ワークフローの各ステップ</a
+    ></h2
+  ><p
+  >以下の章では、様々な種類のコマンドを呼び出す各ステップを 1 つのセットとして、どのようにワークフローを作るか説明します。</p
+  ><p
+  >新しいジョブ定義を作る際、ワークフローのフォームはデフォルトの状態であり、ワークフローステップの定義はされていません。ワークフローのエディターで最初のステップの定義としてフォームにシェルコマンドを入力するようになっています。</p
+  ><div class="figure"
+  ><img src="../figures/fig0402.png" alt="Add a step"
+     /><p class="caption"
+    >Add a step</p
+    ></div
+  ><p
+  >新しいステップを追加するには、ワークフローのエディターフォームの中の &quot;Add a step&quot; リンクを押すだけです。これで、どのような種類のワークフローステップを追加したいか選択するようダイアログが出ます。フォームの中を埋めたら、&quot;Save&quot; を押してシーケンスの中に保存します。&quot;Cancel&quot; を押すとフォームが閉じられ、シーケンスの変更は保存されません。</p
+  ><div class="figure"
+  ><img src="../figures/fig0403.png" alt="Workflow step types"
+     /><p class="caption"
+    >Workflow step types</p
+    ></div
+  ><p
+  >新しいステップは、常にシーケンスの最後に加えられます。ステップの順番を管理するには<a href="job-workflows.html#%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%E3%81%AE%E9%A0%86%E5%BA%8F%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B"
+    >ステップの順序を変更する</a
+    >を見てください。</p
+  ><p
+  >この先のいくつかの章ではコマンドステップの各種類の詳細について説明します。</p
+  ><div id="&#12467;&#12510;&#12531;&#12489;&#12473;&#12486;&#12483;&#12503;"
+  ><h3
+    ><a href="#TOC"
+      >コマンドステップ</a
+      ></h3
+    ><p
+    >システムコマンドを呼び出すには、コマンドステップを使ってください。これはジョブを作る際のデフォルトのワークフロータイプです。リモートホストで実行したいコマンドを入力してください。</p
+    ><div class="figure"
+    ><img src="../figures/fig0404.png" alt="Command step type"
+       /><p class="caption"
+      >Command step type</p
+      ></div
+    ><p
+    >これは <code>dispatch</code> を使ってコマンドを呼びだすことに似ています：</p
+    ><pre
+    ><code
+      >dispatch [filter-options] -- command
+</code
+      ></pre
+    ></div
+  ><div id="&#12473;&#12463;&#12522;&#12503;&#12488;&#12473;&#12486;&#12483;&#12503;"
+  ><h3
+    ><a href="#TOC"
+      >スクリプトステップ</a
+      ></h3
+    ><p
+    >入力されたシェルスクリプトを実行します。テキストフィールドからスクリプトに引数を渡すこともできます。</p
+    ><div class="figure"
+    ><img src="../figures/fig0405.png" alt="Script step type"
+       /><p class="caption"
+      >Script step type</p
+      ></div
+    ><p
+    >これは <code>dispatch</code> を用いてコマンドを呼びだすことに似ています：</p
+    ><pre
+    ><code
+      >dispatch [filter-options] --stdin -- args &lt;&lt;EOF 
+script content here 
+EOF
+</code
+      ></pre
+    ></div
+  ><div id="&#12473;&#12463;&#12522;&#12503;&#12488;&#12501;&#12449;&#12452;&#12523;&#12473;&#12486;&#12483;&#12503;"
+  ><h3
+    ><a href="#TOC"
+      >スクリプトファイルステップ</a
+      ></h3
+    ><p
+    >フィルタリングされたノードセットに対してのみローカルスクリプトを実行します。テキストフィールドにスクリプトへの引数を指定できます。</p
+    ><div class="figure"
+    ><img src="../figures/fig0406.png" alt="Script file step type"
+       /><p class="caption"
+      >Script file step type</p
+      ></div
+    ><p
+    >これは <code>dispatch</code> を使ってスクリプトファイルを呼びだすことに似ています：</p
+    ><pre
+    ><code
+      >dispatch [filter-options] -s scriptfile -- args
+</code
+      ></pre
+    ></div
+  ><div id="&#12473;&#12463;&#12522;&#12503;&#12488;-url-&#12473;&#12486;&#12483;&#12503;"
+  ><h3
+    ><a href="#TOC"
+      >スクリプト URL ステップ</a
+      ></h3
+    ><p
+    >URL からスクリプトをダウンロードし、フィルタリングされたノードセットに対してそれを実行します。テキストフィールドにスクリプトへの引数を指定できます。</p
+    ><div class="figure"
+    ><img src="../figures/fig0406.png" alt="Script URL step type"
+       /><p class="caption"
+      >Script URL step type</p
+      ></div
+    ><p
+    >これは <code>dispatch</code> を使ってスクリプト URL を呼びだすことに似ています：</p
+    ><pre
+    ><code
+      >dispatch [filter-options] -u URL -- args
+</code
+      ></pre
+    ><p
+    >URL には実行時に展開される<a href="#%E3%82%B3%E3%83%B3%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E5%A4%89%E6%95%B0"
+      >コンテキスト変数</a
+      >を入れることができます。</p
+    ></div
+  ><div id="&#12472;&#12519;&#12502;&#12522;&#12501;&#12449;&#12524;&#12531;&#12473;&#12473;&#12486;&#12483;&#12503;"
+  ><h3
+    ><a href="#TOC"
+      >ジョブリファレンスステップ</a
+      ></h3
+    ><p
+    >もう一つ保存されたジョブを呼ぶには、Job reference step（ジョブリファレンスステップ）を作成してください。ジョブの名前とそのジョブグループを入力します。</p
+    ><div class="figure"
+    ><img src="../figures/fig0407.png" alt="Job step type"
+       /><p class="caption"
+      >Job step type</p
+      ></div
+    ><p
+    >ジョブリファレンスのフォームは保存されているジョブの中から選択しやす閲覧画面を提供します。&quot;Choose A Job...&quot; リンクを押し、希望するジョブを選んでください。</p
+    ><p
+    >最後に、オプションが定義されたジョブならそれらをコマンドライン引数としてテキストフィールドに指定したり、現在のジョブへ入力オプションを渡すための変数として使うことができます。フォーマット：</p
+    ><pre
+    ><code
+      >-optname &lt;value&gt; -optname &lt;value&gt; ...
+</code
+      ></pre
+    ><p
+    >オプションを指定するためのフォーマットは <code
+      >run</code
+      > コマンドラインツールにてオプションを指定する場合と全く同じです、オプションに対して変数を指定することもできます。例えば：</p
+    ><pre
+    ><code
+      >-opt1 something -opt2 ${option.opt2}
+</code
+      ></pre
+    ><p
+    >この例では、&quot;opt1&quot; オプションに対して、&quot;something&quot; をセットし、&quot;opt2&quot; オプションをトップレベルのジョブからジョブリファレンスに直接渡しています。</p
+    ><p
+    >これは <a href="../manpages/man1/run.html"
+      >run</a
+      > を用いて他のジョブを呼ぶことに似ています：</p
+    ><pre
+    ><code
+      >run [filter-options] -j group/jobname -- -opt1 something -opt2 somethingelse
+</code
+      ></pre
+    ><p
+    >ジョブがオプションを必要としていて、それが指定されていない場合 &quot;defalutValue&quot; が定義されていればそれを使います。オプションが &quot;defaultValue&quot; を持っていない場合、必要なオプションが指定されていないということでジョブの実行は失敗します。</p
+    ></div
+  ></div
+><div id="&#12473;&#12486;&#12483;&#12503;&#12398;&#38918;&#30058;&#12434;&#22793;&#12360;&#12427;"
+><h2
+  ><a href="#TOC"
+    >ステップの順番を変える</a
+    ></h2
+  ><p
+  >ジョブのアローアイコンをドラッグ &amp; ドロップして好きな場所に移動することで各ステップの順番を編集できます。青い水平線バーは、ドラッグしているジョブがどこに置かれるか分かりやすくしてくれます。</p
+  ><div class="figure"
+  ><img src="../figures/fig0408.png" alt="Job step reorder"
+     /><p class="caption"
+    >Job step reorder</p
+    ></div
+  ><p
+  >選択したジョブをドロップすると希望する位置に着き、ステップの順番が更新されます。</p
+  ><p
+  >ステップの順番変更を元に戻したい場合は、各ステップの上にある &quot;Undo&quot; リンクを押してください。</p
+  ><p
+  >&quot;Redo&quot; ボタンは最新の &quot;Undo&quot; によって元に戻したものを再度変更しなおします。</p
+  ><p
+  >&quot;Revert All Changes&quot; ボタンを押すと、全ての変更を戻してオリジナルの状態に戻します。</p
+  ></div
+><div id="&#22793;&#26356;&#12398;&#20445;&#23384;"
+><h2
+  ><a href="#TOC"
+    >変更の保存</a
+    ></h2
+  ><p
+  >一旦ワークフローステップが定義され順番が決められると、ワークフローを新規作成する場合は &quot;Create&quot; ボタン、既にあるワークフローの編集の場合は &quot;Update&quot; ボタンによって変更を保存できます。</p
+  ></div
+><div id="&#12467;&#12531;&#12486;&#12461;&#12473;&#12488;&#22793;&#25968;"
+><h2
+  ><a href="#TOC"
+    >コンテキスト変数</a
+    ></h2
+  ><p
+  >あるジョブステップは実行される際、ジョブステップ自身にアクセス可能なある &quot;context&quot; 変数のセットを持っています。ジョブコンテキスト <code
+    >job</code
+    > ・ノードコンテキスト <code
+    >node</code
+    > ・オプションコンテキスト <code
+    >option</code
+    > といったいくつかのコンテキスト変数があります。</p
+  ><p
+  >ジョブコンテキスト変数:</p
+  ><ul
+  ><li
+    ><code
+      >job.name</code
+      >: ジョブの名前</li
+    ><li
+    ><code
+      >job.group</code
+      >: ジョブのグループ</li
+    ><li
+    ><code
+      >job.id</code
+      >: ジョブの ID</li
+    ><li
+    ><code
+      >job.execid</code
+      >: 現在の実行 ID</li
+    ><li
+    ><code
+      >job.username</code
+      >: ジョブを実行しているユーザー名</li
+    ><li
+    ><code
+      >job.project</code
+      >: プロジェクト名</li
+    ></ul
+  ><p
+  >ノードコンテキスト変数:</p
+  ><ul
+  ><li
+    ><code
+      >node.name</code
+      >: ジョブが実行されているノード名</li
+    ><li
+    ><code
+      >node.hostname</code
+      >: ノードのホスト名</li
+    ><li
+    ><code
+      >node.username</code
+      >: リモートユーザー名</li
+    ><li
+    ><code
+      >node.description</code
+      >: ノードの説明</li
+    ><li
+    ><code
+      >node.tags</code
+      >: カンマ区切りのタグ</li
+    ><li
+    ><code
+      >node.os-*</code
+      >: ノードの OS 属性 : <code
+      >name</code
+      >, <code
+      >version</code
+      >, <code
+      >arch</code
+      >, <code
+      >family</code
+      ></li
+    ><li
+    ><code
+      >node.*</code
+      >: ノードに定義されている全てのノード属性</li
+    ></ul
+  ><p
+  >オプションコンテキスト変数は、<code
+    >option.NAME</code
+    > として参照します（詳細については次のチャプターの<a href="job-options.html"
+    >ジョブオプション</a
+    >を見てください。）</p
+  ><div id="&#12467;&#12531;&#12486;&#12461;&#12473;&#12488;&#22793;&#25968;&#12398;&#20351;&#29992;&#26041;&#27861;"
+  ><h3
+    ><a href="#TOC"
+      >コンテキスト変数の使用方法</a
+      ></h3
+    ><p
+    >ジョブステップの中でコンテキスト変数を使う方法がいくつかあり、それぞれ文法が微妙に違います:</p
+    ><ul
+    ><li
+      ><dl
+	><dt
+	  >コマンドやスクリプトの引数とジョブリファレンスの引数</dt
+	  ><dd
+	  ><code
+	    >${ctx.name}</code
+	    ></dd
+	  ></dl
+	></li
+      ><li
+      ><dl
+	><dt
+	  >インラインのスクリプトコンテンツ （<em
+	    >注釈を参照</em
+	    >）</dt
+	  ><dd
+	  ><code
+	    >@ctx.name@</code
+	    ></dd
+	  ></dl
+	><p
+	><strong
+	  >注</strong
+	  > : インラインスクリプトコンテンツの変数展開は <em
+	  >Script File</em
+	  > ステップでは行え<strong
+	  >ません</strong
+	  >。スクリプトファイルは実行時に変数展開されるわけではないからです。</p
+	></li
+      ><li
+      ><dl
+	><dt
+	  >環境変数 （<em
+	    >注釈を参照</em
+	    >）</dt
+	  ><dd
+	  ><code
+	    >$RD_CTX_NAME</code
+	    ></dd
+	  ></dl
+	><p
+	>環境変数用の文法では、文字が全て大文字になり、句読点がアンダースコアに置き換えられ、名前に接頭辞 <code
+	  >RD_</code
+	  > が付きます。 <strong
+	  >注</strong
+	  > : SSH サーバーに必要なことについては、<a href="#%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%82%92%E9%80%9A%E3%81%97%E3%81%A6%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0%E3%82%92%E6%B8%A1%E3%81%99"
+	  >管理者向けガイドの SSH チャプター リモートコマンドを通して環境変数を渡す</a
+	  >を参照してください。</p
+	></li
+      ></ul
+    ></div
+  ></div
+><div id="&#12414;&#12392;&#12417;"
+><h2
+  ><a href="#TOC"
+    >まとめ</a
+    ></h2
+  ><p
+  >ここまでであなたはもうジョブワークフローがどういったものか、具体的にはワークフローの定義の仕方やどんなジョブステップを追加する事ができるかといったことを理解しています。</p
+  ><p
+  >次のチャプターでは、Rundeck のジョブオプションの機能をカバーしていきます。</p
+  ></div
+>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck ドキュメント (2.2.2)</a></li>
+    
+    
+    <li ><a href="index.html">ユーザーマニュアル</a></li>
+    <li class="active"><a href="05-job-workflows.html">ジョブのワークフロー</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="04-jobs.html"><i class="glyphicon glyphicon-arrow-left"></i> ジョブについて</a></li>
+      <li class="next"><a href="06-job-options.html">ジョブのオプション <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2014 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<span class="generated-date" title="2014-09-19T14:17:05EDT">2014-09-19T14:17:05EDT</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
+

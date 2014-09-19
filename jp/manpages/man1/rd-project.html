@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>rd-project(1) | Version 2.2.2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="August 17, 2011" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Enables Self-Service Operations</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.2.2</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../../index.html">Rundeck ドキュメント (2.2.2)</a></li>
+    
+        <li><a href="../index.html">Man Pages</a></li>
+    
+    
+    <li ><a href="index.html">Commands | Man(1)</a></li>
+    <li class="active"><a href="rd-project.html">rd-project(1)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="rd-options.html"><i class="glyphicon glyphicon-arrow-left"></i> rd-options(1)</a></li>
+      <li class="next"><a href="rd-queue.html">rd-queue(1) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<div id="TOC"
+><ul
+  ><li
+    ><a href="#name"
+      >NAME</a
+      ></li
+    ><li
+    ><a href="#synopsis"
+      >SYNOPSIS</a
+      ></li
+    ><li
+    ><a href="#description"
+      >DESCRIPTION</a
+      ></li
+    ><li
+    ><a href="#options"
+      >OPTIONS</a
+      ></li
+    ><li
+    ><a href="#environment-variables"
+      >ENVIRONMENT VARIABLES</a
+      ></li
+    ><li
+    ><a href="#execution"
+      >EXECUTION</a
+      ></li
+    ><li
+    ><a href="#see-also"
+      >SEE ALSO</a
+      ></li
+    ></ul
+  ></div
+>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">rd-project(1) | Version 2.2.2</h1>
+</div>
+<div id="name"
+><h1
+  ><a href="#TOC"
+    >NAME</a
+    ></h1
+  ><p
+  >rd-project - Create projects.</p
+  ></div
+><div id="synopsis"
+><h1
+  ><a href="#TOC"
+    >SYNOPSIS</a
+    ></h1
+  ><p
+  >rd-project [-vh] -a create -p projectname [ --property=value ]...</p
+  ></div
+><div id="description"
+><h1
+  ><a href="#TOC"
+    >DESCRIPTION</a
+    ></h1
+  ><p
+  >The rd-project command is used to create projects.</p
+  ><p
+  >The command will create the necessary directory structure and configuration files, and can be used to configure the project's properties.</p
+  ></div
+><div id="options"
+><h1
+  ><a href="#TOC"
+    >OPTIONS</a
+    ></h1
+  ><dl
+  ><dt
+    ><code
+      >-h</code
+      ></dt
+    ><dd
+    ><p
+      >displays the usage information presented above.</p
+      ></dd
+    ><dt
+    ><code
+      >-v</code
+      ></dt
+    ><dd
+    ><p
+      >run verbose.</p
+      ></dd
+    ><dt
+    ><code
+      >-a</code
+      ></dt
+    ><dd
+    ><p
+      >The action name. Only &quot;create&quot; is supported.</p
+      ></dd
+    ><dt
+    ><code
+      >-p</code
+      ></dt
+    ><dd
+    ><p
+      >The project name</p
+      ></dd
+    ><dt
+    ><code
+      >--property=value</code
+      ></dt
+    ><dd
+    ><p
+      >Specify property values for the project's configuration file. Include one or more --property=value combinations.</p
+      ></dd
+    ></dl
+  ></div
+><div id="environment-variables"
+><h1
+  ><a href="#TOC"
+    >ENVIRONMENT VARIABLES</a
+    ></h1
+  ><p
+  >The following environment variables are assumed during the execution of rd-setup:</p
+  ><ul
+  ><li
+    ><p
+      >JAVA_HOME :Java installation directory</p
+      ></li
+    ><li
+    ><p
+      >RDECK_BASE : Rundeck install directory</p
+      ></li
+    ></ul
+  ></div
+><div id="execution"
+><h1
+  ><a href="#TOC"
+    >EXECUTION</a
+    ></h1
+  ><p
+  ><em
+    >Examples</em
+    ></p
+  ><p
+  >Create a new project named &quot;production&quot;:</p
+  ><pre
+  ><code
+    >rd-project -a create -p production
+</code
+    ></pre
+  ><p
+  >Create a new project and specify the &quot;project.ssh-keypath&quot; value as well as a path for the nodes data.</p
+  ><pre
+  ><code
+    >rd-project -a create -p production --project.ssh-keypath=/path/to/keyfile \
+--resources.source.1.config.file=/path/to/nodesfile
+</code
+    ></pre
+  ></div
+><div id="see-also"
+><h1
+  ><a href="#TOC"
+    >SEE ALSO</a
+    ></h1
+  ><p
+  ><a href="rd-setup.html"
+    ><code
+      >rd-setup</code
+      > (1)</a
+    >.</p
+  ><p
+  >The Rundeck source code and all documentation may be downloaded from <a href="https://github.com/dtolabs/rundeck/"
+    ><code
+      >https://github.com/dtolabs/rundeck/</code
+      ></a
+    >.</p
+  ></div
+>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../../index.html">Rundeck ドキュメント (2.2.2)</a></li>
+    
+        <li><a href="../index.html">Man Pages</a></li>
+    
+    
+    <li ><a href="index.html">Commands | Man(1)</a></li>
+    <li class="active"><a href="rd-project.html">rd-project(1)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="rd-options.html"><i class="glyphicon glyphicon-arrow-left"></i> rd-options(1)</a></li>
+      <li class="next"><a href="rd-queue.html">rd-queue(1) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2014 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<span class="generated-date" title="2014-09-19T14:17:05EDT">2014-09-19T14:17:05EDT</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
+
