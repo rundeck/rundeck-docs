@@ -1,0 +1,2828 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>プラグイン</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Alex Honor" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="November 20, 2010" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Enables Self-Service Operations</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.2.3</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck ドキュメント (2.2.3)</a></li>
+    
+    
+    <li ><a href="index.html">ユーザーマニュアル</a></li>
+    <li class="active"><a href="08-plugins.html">プラグイン</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="07-examples.html"><i class="glyphicon glyphicon-arrow-left"></i> 例から学ぶ Rundeck</a></li>
+      
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<div id="TOC"
+><ul
+  ><li
+    ><a href="#&#12503;&#12521;&#12464;&#12452;&#12531;&#12398;&#12452;&#12531;&#12473;&#12488;&#12540;&#12523;"
+      >プラグインのインストール</a
+      ></li
+    ><li
+    ><a href="#&#12503;&#12521;&#12464;&#12452;&#12531;&#12398;&#12450;&#12531;&#12452;&#12531;&#12473;&#12488;&#12540;&#12523;&#12392;&#12450;&#12483;&#12503;&#12487;&#12540;&#12488;"
+      >プラグインのアンインストールとアップデート</a
+      ></li
+    ><li
+    ><a href="#&#12503;&#12521;&#12464;&#12452;&#12531;&#12395;&#12388;&#12356;&#12390;"
+      >プラグインについて</a
+      ></li
+    ><li
+    ><a href="#&#12503;&#12521;&#12464;&#12452;&#12531;&#12398;&#31278;&#39006;"
+      >プラグインの種類</a
+      ><ul
+      ><li
+	><a href="#node-executor-&#12503;&#12521;&#12464;&#12452;&#12531;"
+	  >Node-Executor プラグイン</a
+	  ></li
+	><li
+	><a href="#&#12522;&#12477;&#12540;&#12473;&#12514;&#12487;&#12523;&#12477;&#12540;&#12473;-&#12503;&#12521;&#12464;&#12452;&#12531;"
+	  >リソースモデルソース プラグイン</a
+	  ></li
+	><li
+	><a href="#&#12522;&#12477;&#12540;&#12473;&#12501;&#12457;&#12540;&#12510;&#12483;&#12488;-&#12503;&#12521;&#12464;&#12452;&#12531;"
+	  >リソースフォーマット プラグイン</a
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#&#21508;&#12469;&#12540;&#12499;&#12473;&#12392;&#21508;&#12503;&#12525;&#12496;&#12452;&#12480;&#12395;&#12388;&#12356;&#12390;"
+      >各サービスと各プロバイダについて</a
+      ></li
+    ><li
+    ><a href="#&#12503;&#12525;&#12496;&#12452;&#12480;&#12398;&#21033;&#29992;"
+      >プロバイダの利用</a
+      ><ul
+      ><li
+	><a href="#node-executor-&#12469;&#12540;&#12499;&#12473;"
+	  >Node Executor サービス</a
+	  ><ul
+	  ><li
+	    ><a href="#&#12494;&#12540;&#12489;&#12398;&#25351;&#23450;"
+	      >ノードの指定</a
+	      ></li
+	    ><li
+	    ><a href="#&#12503;&#12525;&#12472;&#12455;&#12463;&#12488;&#12414;&#12383;&#12399;&#12501;&#12524;&#12540;&#12512;&#12527;&#12540;&#12463;&#12398;&#12473;&#12467;&#12540;&#12503;"
+	      >プロジェクトまたはフレームワークのスコープ</a
+	      ></li
+	    ></ul
+	  ></li
+	><li
+	><a href="#&#12522;&#12477;&#12540;&#12473;&#12514;&#12487;&#12523;&#12477;&#12540;&#12473;"
+	  >リソースモデルソース</a
+	  ><ul
+	  ><li
+	    ><a href="#&#12522;&#12477;&#12540;&#12473;&#12514;&#12487;&#12523;&#12477;&#12540;&#12473;&#12398;&#35373;&#23450;"
+	      >リソースモデルソースの設定</a
+	      ></li
+	    ></ul
+	  ></li
+	><li
+	><a href="#&#12522;&#12477;&#12540;&#12473;&#12501;&#12457;&#12540;&#12510;&#12483;&#12488;&#12472;&#12455;&#12493;&#12524;&#12540;&#12479;&#12392;&#12497;&#12540;&#12469;"
+	  >リソースフォーマットジェネレータとパーサ</a
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#node-executor-&#12469;&#12540;&#12499;&#12473;&#12503;&#12525;&#12496;&#12452;&#12480;&#12364;&#21628;&#12400;&#12428;&#12383;&#12392;&#12365;"
+      >Node Executor サービスプロバイダが呼ばれたとき</a
+      ></li
+    ><li
+    ><a href="#&#12499;&#12523;&#12488;&#12452;&#12531;&#12503;&#12525;&#12496;&#12452;&#12480;"
+      >ビルトインプロバイダ</a
+      ><ul
+      ><li
+	><a href="#node-executor-&#12469;&#12540;&#12499;&#12473;-1"
+	  >Node Executor サービス</a
+	  ><ul
+	  ><li
+	    ><a href="#ssh-&#12503;&#12525;&#12496;&#12452;&#12480;"
+	      >SSH プロバイダ</a
+	      ><ul
+	      ><li
+		><a href="#scp-file-copier-&#12398;&#35373;&#23450;"
+		  >SCP File Copier の設定</a
+		  ></li
+		><li
+		><a href="#ssh-&#35469;&#35388;&#12479;&#12452;&#12503;&#12398;&#35373;&#23450;"
+		  >SSH 認証タイプの設定</a
+		  ></li
+		><li
+		><a href="#ssh-username"
+		  >SSH username</a
+		  ></li
+		><li
+		><a href="#ssh-&#31192;&#23494;&#37749;&#12398;&#35373;&#23450;"
+		  >SSH 秘密鍵の設定</a
+		  ></li
+		><li
+		><a href="#ssh-&#31192;&#23494;&#37749;&#12497;&#12473;&#12501;&#12524;&#12540;&#12474;&#12398;&#35373;&#23450;"
+		  >SSH 秘密鍵パスフレーズの設定</a
+		  ></li
+		><li
+		><a href="#ssh-&#12497;&#12473;&#12527;&#12540;&#12489;&#35469;&#35388;&#12398;&#35373;&#23450;"
+		  >SSH パスワード認証の設定</a
+		  ></li
+		><li
+		><a href="#&#12388;&#30446;&#12398;-sudo-&#12497;&#12473;&#12527;&#12540;&#12489;&#35469;&#35388;&#12398;&#35373;&#23450;"
+		  >2 つ目の Sudo パスワード認証の設定</a
+		  ></li
+		><li
+		><a href="#sudo-&#12497;&#12473;&#12527;&#12540;&#12489;&#35469;&#35388;&#12434;&#35079;&#25968;&#35373;&#23450;&#12377;&#12427;"
+		  >Sudo パスワード認証を複数設定する</a
+		  ></li
+		></ul
+	      ></li
+	    ></ul
+	  ></li
+	><li
+	><a href="#&#12522;&#12477;&#12540;&#12473;&#12514;&#12487;&#12523;&#12477;&#12540;&#12473;-1"
+	  >リソースモデルソース</a
+	  ><ul
+	  ><li
+	    ><a href="#&#12501;&#12449;&#12452;&#12523;&#12522;&#12477;&#12540;&#12473;&#12514;&#12487;&#12523;&#12477;&#12540;&#12473;&#12398;&#35373;&#23450;"
+	      >ファイルリソースモデルソースの設定</a
+	      ></li
+	    ><li
+	    ><a href="#url-&#12522;&#12477;&#12540;&#12473;&#12514;&#12487;&#12523;&#12477;&#12540;&#12473;&#35373;&#23450;"
+	      >URL リソースモデルソース設定</a
+	      ></li
+	    ><li
+	    ><a href="#&#12487;&#12451;&#12524;&#12463;&#12488;&#12522;&#12522;&#12477;&#12540;&#12473;&#12514;&#12487;&#12523;&#12477;&#12540;&#12473;&#35373;&#23450;"
+	      >ディレクトリリソースモデルソース設定</a
+	      ></li
+	    ><li
+	    ><a href="#&#12473;&#12463;&#12522;&#12503;&#12488;&#12522;&#12477;&#12540;&#12473;&#12514;&#12487;&#12523;&#12477;&#12540;&#12473;&#35373;&#23450;"
+	      >スクリプトリソースモデルソース設定</a
+	      ></li
+	    ></ul
+	  ></li
+	><li
+	><a href="#&#12522;&#12477;&#12540;&#12473;&#12501;&#12457;&#12540;&#12510;&#12483;&#12488;&#12469;&#12540;&#12499;&#12473;"
+	  >リソースフォーマットサービス</a
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#&#12503;&#12522;&#12452;&#12531;&#12473;&#12488;&#12540;&#12523;"
+      >プリインストール</a
+      ><ul
+      ><li
+	><a href="#script-plugin"
+	  >script-plugin</a
+	  ><ul
+	  ><li
+	    ><a href="#script-exec-&#12398;&#35373;&#23450;"
+	      >script-exec の設定</a
+	      ></li
+	    ><li
+	    ><a href="#script-exec-&#12398;&#12467;&#12510;&#12531;&#12489;&#12398;&#35373;&#23450;"
+	      >script-exec のコマンドの設定</a
+	      ></li
+	    ><li
+	    ><a href="#&#12527;&#12540;&#12461;&#12531;&#12464;&#12487;&#12451;&#12524;&#12463;&#12488;&#12522;&#12398;&#35373;&#23450;"
+	      >ワーキングディレクトリの設定</a
+	      ></li
+	    ><li
+	    ><a href="#&#23455;&#34892;&#12471;&#12455;&#12523;&#12398;&#35373;&#23450;"
+	      >実行シェルの設定</a
+	      ></li
+	    ><li
+	    ><a href="#script-exec-&#12467;&#12510;&#12531;&#12489;&#12398;&#23450;&#32681;"
+	      >script-exec コマンドの定義</a
+	      ></li
+	    ><li
+	    ><a href="#script-exec-&#12467;&#12510;&#12531;&#12489;&#12398;&#35201;&#20214;"
+	      >script-exec コマンドの要件</a
+	      ></li
+	    ><li
+	    ><a href="#script-copy-&#12398;&#35373;&#23450;"
+	      >script-copy の設定</a
+	      ></li
+	    ><li
+	    ><a href="#script-copy-&#12398;&#12467;&#12510;&#12531;&#12489;&#12398;&#35373;&#23450;"
+	      >script-copy のコマンドの設定</a
+	      ></li
+	    ><li
+	    ><a href="#&#12527;&#12540;&#12461;&#12531;&#12464;&#12487;&#12451;&#12524;&#12463;&#12488;&#12522;&#12398;&#35373;&#23450;-1"
+	      >ワーキングディレクトリの設定</a
+	      ></li
+	    ><li
+	    ><a href="#&#23455;&#34892;&#12471;&#12455;&#12523;&#12398;&#35373;&#23450;-1"
+	      >実行シェルの設定</a
+	      ></li
+	    ><li
+	    ><a href="#&#12522;&#12514;&#12540;&#12488;&#12501;&#12449;&#12452;&#12523;&#12497;&#12473;&#12398;&#35373;&#23450;"
+	      >リモートファイルパスの設定</a
+	      ></li
+	    ><li
+	    ><a href="#script-copy-&#12467;&#12510;&#12531;&#12489;&#12398;&#23450;&#32681;"
+	      >script-copy コマンドの定義</a
+	      ></li
+	    ><li
+	    ><a href="#script-copy-&#12501;&#12449;&#12452;&#12523;&#12497;&#12473;&#12398;&#23450;&#32681;"
+	      >script-copy ファイルパスの定義</a
+	      ></li
+	    ><li
+	    ><a href="#script-copy-&#12467;&#12510;&#12531;&#12489;&#12398;&#35201;&#20214;"
+	      >script-copy コマンドの要件</a
+	      ></li
+	    ><li
+	    ><a href="#&#12473;&#12463;&#12522;&#12503;&#12488;&#20363;"
+	      >スクリプト例</a
+	      ></li
+	    ></ul
+	  ></li
+	><li
+	><a href="#&#12473;&#12479;&#12502;&#12503;&#12521;&#12464;&#12452;&#12531;"
+	  >スタブプラグイン</a
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#&#12503;&#12521;&#12464;&#12452;&#12531;&#38283;&#30330;"
+      >プラグイン開発</a
+      ></li
+    ></ul
+  ></div
+>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">プラグイン</h1>
+</div>
+<p
+>Rundeck のプラグインは、Rundeck core で利用されるいくつかのサービスのための新しいプロバイダです。 Plugins for Rundeck contain new Providers for some of the Services used by the Rundeck core.</p
+><p
+>Rundeck にはビルトインのプロバイダがありますが、自分で開発したり、サードパーティ製のプラグインも使ってみましょう。</p
+><p
+>プリインストールされている script-plugin と stub-plugin については <a href="plugins.html#%E3%83%97%E3%83%AA%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3"
+  >プリインストールプラグイン</a
+  > を参照してください。</p
+><div id="&#12503;&#12521;&#12464;&#12452;&#12531;&#12398;&#12452;&#12531;&#12473;&#12488;&#12540;&#12523;"
+><h2
+  ><a href="#TOC"
+    >プラグインのインストール</a
+    ></h2
+  ><p
+  >プラグインのインストールはシンプルです:</p
+  ><p
+  ><code
+    >plugin.jar</code
+    > や <code
+    >some-plugin.zip</code
+    > のようなプラグインファイルを Rundeck サーバの libext ディレクトリに配置して下さい:</p
+  ><pre
+  ><code
+    >cp some-plugin.zip $RDECK_BASE/libext
+</code
+    ></pre
+  ><p
+  >これでプラグインが有効化されました。内部で定義されている provider をノードやプロジェクトで利用できるようになっています。</p
+  ><p
+  >Rundeck サーバをリスタートする必要はありません。</p
+  ></div
+><div id="&#12503;&#12521;&#12464;&#12452;&#12531;&#12398;&#12450;&#12531;&#12452;&#12531;&#12473;&#12488;&#12540;&#12523;&#12392;&#12450;&#12483;&#12503;&#12487;&#12540;&#12488;"
+><h2
+  ><a href="#TOC"
+    >プラグインのアンインストールとアップデート</a
+    ></h2
+  ><p
+  ><code
+    >$RDECK_BASE/libext</code
+    > から目的のファイルを削除すればアンインストールできます。</p
+  ><p
+  >アップデートの時には古いファイルを新しいファイルで上書きしてください。</p
+  ></div
+><div id="&#12503;&#12521;&#12464;&#12452;&#12531;&#12395;&#12388;&#12356;&#12390;"
+><h2
+  ><a href="#TOC"
+    >プラグインについて</a
+    ></h2
+  ><p
+  >プラグインは 1 つ以上のサービスプロバイダを実装したファイル群です。プラグインファイルそれぞれに、異なるタイプのサービス用プロバイダを複数含めることができますが、何らかの形で関連しているプロバイダのみをまとめるのが一般的です。</p
+  ><p
+  >Rundeck にはいくつかの &quot;built-in&quot; プロバイダと、&quot;included&quot; プラグインファイルが含まれています。</p
+  ><p
+  >このドキュメントでは、&quot;プラグイン&quot; と &quot;プロバイダ&quot; をほぼ同義に扱います。実際のプロバイダ実装ファイルを参照するときには &quot;プラグインファイル&quot; と言います。</p
+  ><div class="figure"
+  ><img src="../figures/fig1102.png" alt="Rundeck Providers and Plugin Files"
+     /><p class="caption"
+    >Rundeck Providers and Plugin Files</p
+    ></div
+  ></div
+><div id="&#12503;&#12521;&#12464;&#12452;&#12531;&#12398;&#31278;&#39006;"
+><h2
+  ><a href="#TOC"
+    >プラグインの種類</a
+    ></h2
+  ><p
+  >Rundeck は様々なサービスで動作させるためにいくつかの異なるプラグインタイプをサポートしています。</p
+  ><div id="node-executor-&#12503;&#12521;&#12464;&#12452;&#12531;"
+  ><h3
+    ><a href="#TOC"
+      >Node-Executor プラグイン</a
+      ></h3
+    ><p
+    >ノード上でのコマンド実行や、ノードへのファイルコピーの方法について定義するプラグインです。</p
+    ><p
+    >より詳細な情報については:</p
+    ><ul
+    ><li
+      >設定: <a href="plugins.html#node+executor+%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9"
+	>Node Executor サービス</a
+	></li
+      ><li
+      >ライフサイクル: <a href="plugins.html#node+executor+%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%83%97%E3%83%AD%E3%83%90%E3%82%A4%E3%83%80%E3%81%8C%E5%AE%9F%E8%A1%8C%E3%81%95%E3%82%8C%E3%81%9F%E3%81%A8%E3%81%8D"
+	>Node Executor サービスプロバイダが実行されたとき</a
+	></li
+      ><li
+      >組み込みプラグイン: <a href="plugins.html#node+executor+%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9"
+	>Node Executor サービス</a
+	></li
+      ><li
+      >付属プラグイン: <a href="plugins.html#%E3%83%97%E3%83%AA%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3"
+	>プリインストールプラグイン</a
+	></li
+      ></ul
+    ></div
+  ><div id="&#12522;&#12477;&#12540;&#12473;&#12514;&#12487;&#12523;&#12477;&#12540;&#12473;-&#12503;&#12521;&#12464;&#12452;&#12531;"
+  ><h3
+    ><a href="#TOC"
+      >リソースモデルソース プラグイン</a
+      ></h3
+    ><p
+    >リソースモデル情報を指定した種類のソース（たとえば URL、ファイル、ディレクトリ内のファイル群）から取得するメカニズムを定義するプラグインです。</p
+    ><p
+    >より詳細な情報については:</p
+    ><ul
+    ><li
+      >設定: <a href="plugins.html#%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%83%A2%E3%83%87%E3%83%AB%E3%82%BD%E3%83%BC%E3%82%B9"
+	>リソースモデルソース</a
+	></li
+      ><li
+      >ビルトインプロバイダ: <a href="plugins.html#%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%83%A2%E3%83%87%E3%83%AB%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9"
+	>リソースモデルサービス</a
+	></li
+      ></ul
+    ></div
+  ><div id="&#12522;&#12477;&#12540;&#12473;&#12501;&#12457;&#12540;&#12510;&#12483;&#12488;-&#12503;&#12521;&#12464;&#12452;&#12531;"
+  ><h3
+    ><a href="#TOC"
+      >リソースフォーマット プラグイン</a
+      ></h3
+    ><p
+    >このタイプのプラグインには異なるドキュメントフォーマットのリソースモデル情報に対するパーサとジェネレータを定義します。さらにこれらは Rundeck システムにおける他の部分と同じくリソースモデルソースプラグインから利用されます。</p
+    ><p
+    >より詳細な情報については:</p
+    ><ul
+    ><li
+      >設定: <a href="plugins.html#%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88%E3%82%B8%E3%82%A7%E3%83%8D%E3%83%AC%E3%83%BC%E3%82%BF%E3%81%A8%E3%83%91%E3%83%BC%E3%82%B5"
+	>リソースフォーマットジェネレータとパーサ</a
+	></li
+      ><li
+      >組み込みプラグイン: <a href="plugins.html#%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9"
+	>リソースフォーマットサービス</a
+	></li
+      ></ul
+    ></div
+  ></div
+><div id="&#21508;&#12469;&#12540;&#12499;&#12473;&#12392;&#21508;&#12503;&#12525;&#12496;&#12452;&#12480;&#12395;&#12388;&#12356;&#12390;"
+><h2
+  ><a href="#TOC"
+    >各サービスと各プロバイダについて</a
+    ></h2
+  ><p
+  >Rundeck のコアは、複数ノードに対して様々なワークフロー・ジョブ・コマンドを実行する機能を持ったいくつかの異なる &quot;サービス&quot; を利用します。</p
+  ><p
+  >各サービスは各 &quot;プロバイダ&quot; を利用しています。各プロバイダはそれぞれを識別するためのユニークな &quot;プロバイダ名&quot; を持っており、ほとんどのサービスはどれを使うか指定しなくてもいいようフォルトのプロバイダを持っています。</p
+  ><div class="figure"
+  ><img src="../figures/fig1101.png" alt="Rundeck Services and Providers"
+     /><p class="caption"
+    >Rundeck Services and Providers</p
+    ></div
+  ><p
+  >サービスはどのように・どこで使われるかによって異なるサービスに分類されます。</p
+  ><p
+  ><em
+    >サービスカテゴリ</em
+    >:</p
+  ><ol style="list-style-type: decimal;"
+  ><li
+    ><p
+      ><strong
+	>Node Executor サービス</strong
+	> - これらのサービスの各プロバイダはある一つのノード定義の条件下で処理を行います。そしてノードの範囲も設定可能です:</p
+      ><ol style="list-style-type: decimal;"
+      ><li
+	>Node Executor 実行 - これらのプロバイダでは、（ローカルまたはリモートの）あるノードに対して実行するコマンドを定義します。</li
+	><li
+	>ファイルコピー - これらのプロバイダではあるノードに対してファイルをどのようにコピーするか定義します。</li
+	></ol
+      ></li
+    ><li
+    ><p
+      ><strong
+	>プロジェクトサービス</strong
+	></p
+      ><ol style="list-style-type: decimal;"
+      ><li
+	>リソースモデルソース - (別名 &quot;リソースプロバイダ&quot; ）これらはあるプロジェクト用にノードリソースの取得方法を定義します。</li
+	></ol
+      ></li
+    ><li
+    ><p
+      ><strong
+	>グローバルサービス</strong
+	>（フレームワークレベル）</p
+      ><ol style="list-style-type: decimal;"
+      ><li
+	>リソースフォーマットパーサ - これらにはドキュメントフォーマットパーサを定義します。</li
+	><li
+	>リソースフォーマットジェネレータ - これらにはドキュメントフォーマットジェネレータを定義します。</li
+	></ol
+      ></li
+    ></ol
+  ><p
+  >これらのプラグインのプロバイダがどのように動作するかの詳細については以下で説明しています。</p
+  ><p
+  >なお、Rundeck のプラグインは 1 つ以上のプロバイダを持つことができます。</p
+  ></div
+><div id="&#12503;&#12525;&#12496;&#12452;&#12480;&#12398;&#21033;&#29992;"
+><h2
+  ><a href="#TOC"
+    >プロバイダの利用</a
+    ></h2
+  ><div id="node-executor-&#12469;&#12540;&#12499;&#12473;"
+  ><h3
+    ><a href="#TOC"
+      >Node Executor サービス</a
+      ></h3
+    ><p
+    >Node Executor と File Copier という 2 つの<em
+      >ノードサービス</em
+      >は共に似たような設定がされています。これは特定のノードに対して行われるよう設定されているか、またはあるプロジェクトまたはシステム用のデフォルトプロバイダとして設定されています。</p
+    ><p
+    >複数プロバイダが定義される場合には以下のようにほとんどの定義で各プロバイダに優先順位を付けます:</p
+    ><ol style="list-style-type: decimal;"
+    ><li
+      >ノードの指定</li
+      ><li
+      >プロジェクトスコープ</li
+      ><li
+      >フレームワークスコープ</li
+      ></ol
+    ><div id="&#12494;&#12540;&#12489;&#12398;&#25351;&#23450;"
+    ><h4
+      ><a href="#TOC"
+	>ノードの指定</a
+	></h4
+      ><p
+      >あるノードに対してプロバイダを有効にするには、そのノードの定義にあるアトリビュートを追加します。</p
+      ><p
+      ><em
+	>Node Executor プロバイダアトリビュート</em
+	>:</p
+      ><dl
+      ><dt
+	><code
+	  >node-executor</code
+	  ></dt
+	><dd
+	><p
+	  >ローカルではないノードに対してプロバイダ名を指定します。</p
+	  ></dd
+	><dt
+	><code
+	  >local-node-executor</code
+	  ></dt
+	><dd
+	><p
+	  >ローカル（Rundeck サーバー）ノードに対してプロバイダ名を指定します。</p
+	  ></dd
+	></dl
+      ><p
+      >ファイルコピープロバイダアトリビュート:</p
+      ><dl
+      ><dt
+	><code
+	  >file-copier</code
+	  ></dt
+	><dd
+	><p
+	  >ローカルではないノードに対してプロバイダ名を指定します。</p
+	  ></dd
+	><dt
+	><code
+	  >local-file-copier</code
+	  ></dt
+	><dd
+	><p
+	  >ローカル（Rundeck サーバー）ノードに対してプロバイダ名を指定します。</p
+	  ></dd
+	></dl
+      ><p
+      >サンプルのノードに対して、<code
+	>stub</code
+	> という Node Executor プロバイダと File Copier プロバイダを YAML フォーマットで指定した例になります:</p
+      ><pre
+      ><code
+	>remotehost:
+    hostname: remotehost
+    node-executor: stub
+    file-copier: stub
+</code
+	></pre
+      ></div
+    ><div id="&#12503;&#12525;&#12472;&#12455;&#12463;&#12488;&#12414;&#12383;&#12399;&#12501;&#12524;&#12540;&#12512;&#12527;&#12540;&#12463;&#12398;&#12473;&#12467;&#12540;&#12503;"
+    ><h4
+      ><a href="#TOC"
+	>プロジェクトまたはフレームワークのスコープ</a
+	></h4
+      ><p
+      ><em
+	>Node Executor</em
+	></p
+      ><p
+      >プロジェクトまたはフレームワーク（または両方）のスコープにてノード郡を利用するためにデフォルトで接続されるプロバイダを定義できます。そのために、<code
+	>project.properties</code
+	> または <code
+	>framework.properties</code
+	> ファイルに、次のいずれかのプロパティを設定します。</p
+      ><dl
+      ><dt
+	><code
+	  >service.NodeExecutor.default.provider</code
+	  ></dt
+	><dd
+	><p
+	  >リモートノードに対してデフォルトの Node Executor プロバイダを指定します。</p
+	  ></dd
+	><dt
+	><code
+	  >service.NodeExecutor.default.local.provider</code
+	  ></dt
+	><dd
+	><p
+	  >ローカルノードに対してデフォルトの Node Executor プロバイダを指定します。</p
+	  ></dd
+	></dl
+      ><p
+      ><em
+	>File Copier</em
+	></p
+      ><dl
+      ><dt
+	><code
+	  >service.FileCopier.default.provider</code
+	  ></dt
+	><dd
+	><p
+	  >リモートノードに対してデフォルトの File Copier プロバイダを指定します。</p
+	  ></dd
+	><dt
+	><code
+	  >service.FileCopier.default.local.provider</code
+	  ></dt
+	><dd
+	><p
+	  >ローカルノードに対してデフォルトの File Copier プロバイダを指定します。</p
+	  ></dd
+	></dl
+      ><p
+      >サンプルの <code
+	>project.properties</code
+	> に <code
+	>stub</code
+	> というデフォルトのローカルプロバイダを設定する例になります：</p
+      ><pre
+      ><code
+	>service.NodeExecutor.default.local.provider=stub
+service.FileCopier.default.local.provider=stub
+</code
+	></pre
+      ></div
+    ></div
+  ><div id="&#12522;&#12477;&#12540;&#12473;&#12514;&#12487;&#12523;&#12477;&#12540;&#12473;"
+  ><h3
+    ><a href="#TOC"
+      >リソースモデルソース</a
+      ></h3
+    ><p
+    ><em
+      >リソースモデルソース</em
+      >プロバイダはあるひとつのプロジェクト内の <code
+      >project.properties</code
+      > ファイルに対して設定することができます。</p
+    ><p
+    >そのプロジェクトに対して複数のリソースモデルソースの定義もできます。また必要に応じて指定した指定するプロバイダを混ぜたり組み合わせたり出来ます。</p
+    ><p
+    >あるプロジェクトで複数のソースプロバイダを定義しているときは、全てのソースのマージがノードセットの結果になり、それらは定義にされた順に並べられます。これは 2 つまたは複数のソースが同じ名前でノードを定義しているとき、一番下にある定義がリストに用いられるということを意味します。</p
+    ><p
+    >プロバイダが読み込まれノードがマージされたときの順番は:</p
+    ><ol style="list-style-type: decimal;"
+    ><li
+      ><code
+	>project.resources.file</code
+	>: デフォルト設定のファイルモデルソース</li
+      ><li
+      ><code
+	>project.resources.url</code
+	> : デフォルト設定の URL モデルソース（オプション）</li
+      ><li
+      >All <code
+	>resources.source.N</code
+	>: 1 から始まる順番の設定</li
+      ></ol
+    ><div id="&#12522;&#12477;&#12540;&#12473;&#12514;&#12487;&#12523;&#12477;&#12540;&#12473;&#12398;&#35373;&#23450;"
+    ><h4
+      ><a href="#TOC"
+	>リソースモデルソースの設定</a
+	></h4
+      ><p
+      >以下の方法で各プロジェクトの <code
+	>project.properties</code
+	> ファイルにてリソースモデルソースの設定ができます:</p
+      ><ol style="list-style-type: decimal;"
+      ><li
+	><code
+	  >project.resources.file</code
+	  > を定義する - このファイルパスはあるファイルソースパスとして用いられ、<em
+	  >autogenration</em
+	  > と <em
+	  >includeServerNode</em
+	  > はともに true になっています。</li
+	><li
+	><code
+	  >project.resources.url</code
+	  > を定義する - この URL は URL ソース url として用いられ、キャッシュは ON になっています。</li
+	></ol
+      ><p
+      >このようにより多くのソースのリストから定義することも可能です:</p
+      ><p
+      >インデックスは <code
+	>1</code
+	> から始まり、ナンバー <code
+	>N</code
+	> のソースについて以下のようなプロパティを定義します:</p
+      ><pre
+      ><code
+	>resources.source.N.type=&lt;provider-name&gt;
+resources.source.N.config.&lt;property&gt;=&lt;value&gt;
+resources.source.N.config.&lt;property2&gt;=&lt;value2&gt;
+...
+</code
+	></pre
+      ><p
+      ><code
+	>&lt;provider-name&gt;</code
+	> に有効なリソースモデルプロバイダ名を指定します。各リソースモデルプロバイダごとに、ソースについてのプロパティ設定が行えます。</p
+      ><p
+      >デフォルトのファイルプロバイダとその他 2 つのプロバイダの <code
+	>project.properties</code
+	> 設定の例:</p
+      ><pre
+      ><code
+	>project.resources.file=/home/rundeck/projects/example/etc/resources.xml
+
+resources.source.1.type=url
+resources.source.1.url=http://server/nodes.yaml
+
+resources.source.2.type=directory
+resources.source.2.directory=/home/rundeck/projects/example/resources
+</code
+	></pre
+      ></div
+    ></div
+  ><div id="&#12522;&#12477;&#12540;&#12473;&#12501;&#12457;&#12540;&#12510;&#12483;&#12488;&#12472;&#12455;&#12493;&#12524;&#12540;&#12479;&#12392;&#12497;&#12540;&#12469;"
+  ><h3
+    ><a href="#TOC"
+      >リソースフォーマットジェネレータとパーサ</a
+      ></h3
+    ><p
+    >リソースフォーマットジェネレータとパーサはリソースノードの定義セットにパースされるまたは、そこからジェネレートされるファイルフォーマットについてのサポートを定義します。</p
+    ><p
+    >これらはリソースモデルソースといった Rundeck の他のパーツから使われます。</p
+    ><p
+    >これらのプロバイダを使うのに一切設定は必要ありません。しかし各ジェネレータとパーサといった特定のプロバイダに関してはプロバイダを利用可能な状態にするためにプロバイダ名を知らせる必要があります。パーサまたはジェネレータを使いたいときその特定のプロバイダ名は &quot;フォーマット名&quot;として使われます。</p
+    ><p
+    >例えば、あるファイルリソースモデルソース（<a href="plugins.html#file-resource-model-source-configuration"
+      >ファイルリソースモデルソース設定</a
+      >を参照してください）に利用される特定のリソースフォーマットパーサを利用可能な状態にするために、そのプロバイダ名を指定します:</p
+    ><pre
+    ><code
+      >resources.source.1.format=myformat
+</code
+      ></pre
+    ><p
+    >これで &quot;myformat&quot; プロバイダを使うという指定になります。</p
+    ><p
+    >別のケースでは、実際のプロバイダ名は知られていないかもしれません（例えば、リモート URL からコンテンツを読み込む場合）。各ジェネレータとパーサはある MIME タイプとサポートされているファイルエクステンションのリストを定義していなければいけません。これらはどのパーサ/ジェネレータを使うか決める際に利用されます。</p
+    ></div
+  ></div
+><div id="node-executor-&#12469;&#12540;&#12499;&#12473;&#12503;&#12525;&#12496;&#12452;&#12480;&#12364;&#21628;&#12400;&#12428;&#12383;&#12392;&#12365;"
+><h2
+  ><a href="#TOC"
+    >Node Executor サービスプロバイダが呼ばれたとき</a
+    ></h2
+  ><p
+  >Rundeck がノード上でコマンドアイテムを実行します。そのコマンドはジョブ内のあるワークフローの一部かもしれません、また複数ノードに対して何度も実行されるコマンドかもしれません。</p
+  ><p
+  >今のところワークフローにて指定できるコマンドアイテムは 3 &quot;種類&quot; あります:</p
+  ><ol style="list-style-type: decimal;"
+  ><li
+    >&quot;exec&quot; コマンド - シンプルなシステムコマンド</li
+    ><li
+    >&quot;script&quot; コマンド - 組み込みスクリプトファイルや Rundeck サーバーに置いてあるスクリプトファイルが指定されたノードに配布され入力された引数セットを用いて実行されます。</li
+    ><li
+    >&quot;jobref&quot; コマンド - 入力された引数セットを用いて実行される他のジョブを名前から参照する</li
+    ></ol
+  ><p
+  >Rundeck はこれらのコマンドタイプを実行するプロセスの一部として Node Executor サービスと File Copier サービスを使います。</p
+  ><p
+  >&quot;exec&quot; コマンドを実行する一連の処理は以下のようになります:</p
+  ><ol style="list-style-type: decimal;"
+  ><li
+    >指定されたノードとコンテキストに合わせて Node Executor プロバイダを読み込みます</li
+    ><li
+    ><code
+      >NodeExecutor#executeCommand</code
+      > メソッドを呼びます</li
+    ></ol
+  ><p
+  >&quot;script&quot; コマンドを実行する一連の処理は以下のようになります:</p
+  ><ol style="list-style-type: decimal;"
+  ><li
+    >指定されたノードとコンテキストに合わせて File Copier プロバイダを読み込みます</li
+    ><li
+    ><code
+      >FileCopier#copy*</code
+      > メソッドを呼び出します</li
+    ><li
+    ><code
+      >NodeExecutor</code
+      > メソッドを呼び出します</li
+    ><li
+    >（ファイルをコピーする際の &quot;chmod +x&quot; のような）途中に行うコマンドを実行する場合もあります</li
+    ><li
+    >コピーするファイルのファイルパスと、スクリプトコマンドにて実行するあらゆる引数を渡して <code
+      >NodeExecutor#executeCommand</code
+      > メソッドを実行します</li
+    ></ol
+  ></div
+><div id="&#12499;&#12523;&#12488;&#12452;&#12531;&#12503;&#12525;&#12496;&#12452;&#12480;"
+><h2
+  ><a href="#TOC"
+    >ビルトインプロバイダ</a
+    ></h2
+  ><p
+  >Rundeck がデフォルトサービスを提供するためのわずかなビルトインプロバイダを使います。</p
+  ><div id="node-executor-&#12469;&#12540;&#12499;&#12473;-1"
+  ><h3
+    ><a href="#TOC"
+      >Node Executor サービス</a
+      ></h3
+    ><p
+    >Node Executor プロバイダ:</p
+    ><dl
+    ><dt
+      ><code
+	>local</code
+	></dt
+      ><dd
+      ><p
+	>ローカルでのコマンド実行。</p
+	></dd
+      ><dt
+      ><code
+	>jsch-ssh</code
+	></dt
+      ><dd
+      ><p
+	>SSH 経由のコマンドのリモート実行。ノードのアトリビュート &quot;hostname&quot; と &quot;username&quot; を必要とします。</p
+	></dd
+      ></dl
+    ><p
+    >File Copier プロバイダ:</p
+    ><dl
+    ><dt
+      ><code
+	>local</code
+	></dt
+      ><dd
+      ><p
+	>あるスクリプト用に一時的なローカルファイルを作ります</p
+	></dd
+      ><dt
+      ><code
+	>jsch-scp</code
+	></dt
+      ><dd
+      ><p
+	>SCP 経由のリモートへのコマンドのコピー。ノードのアトリビュート &quot;hostname&quot; と &quot;username&quot; を必要とします。</p
+	></dd
+      ></dl
+    ><div id="ssh-&#12503;&#12525;&#12496;&#12452;&#12480;"
+    ><h4
+      ><a href="#TOC"
+	>SSH プロバイダ</a
+	></h4
+      ><p
+      >SSH Node Executor と File Copier は Rundeck にデフォルトで付属しています。</p
+      ><p
+      >それらを使うための典型的なノード設定はシンプルです。</p
+      ><ul
+      ><li
+	>ノードの <code
+	  >hostname</code
+	  > アトリビュートをセットします。デフォルトポート 22 番以外を使っている場合は &quot;hostname:port&quot; というフォーマットも可能です。</li
+	><li
+	>リモートノードへ接続する際に用いる username をノードの <code
+	  >username</code
+	  > アトリビュートにセットします。</li
+	><li
+	>Rundeck サーバーからノード群に対して公開鍵/秘密鍵認証のセットアップを行います</li
+	></ul
+      ><p
+      >これでノード上でリモートコマンドを実行したり、スクリプトを実行できるようになります。</p
+      ><p
+      >設定のオプションについては以下を参照してください。</p
+      ><p
+      ><strong
+	>Sudo パスワード認証</strong
+	></p
+      ><p
+      >SSH プロバイダは、補助的に Sudo パスワード認証もサポートしています。これは &quot;sudo&quot; コマンドがパスワード認証を必要としたときに、あるユーザーがパスワードをターミナルのパスワードプロンプトに入力するといった認証をシミュレートするものです。</p
+      ><div id="scp-file-copier-&#12398;&#35373;&#23450;"
+      ><h5
+	><a href="#TOC"
+	  >SCP File Copier の設定</a
+	  ></h5
+	><p
+	>一般的な SSH 設定の記述に加えて、いくつか SCP 用に追加設定があります。</p
+	><p
+	>あるリモートノード上であるスクリプトが実行されたとき、まず SCP 経由でスクリプトファイルをコピーし、それから実行します。SSH コネクションプロパティに加えて SCP 用に以下のようなノードアトリビュートを設定できます。</p
+	><ul
+	><li
+	  ><code
+	    >file-copy-destination-dir</code
+	    >: 実行前にそのスクリプトファイルをコピーする先となるリモートノード上のディレクトリ。デフォルトの値は Windowns ノードだと <code
+	    >C:/WINDOWS/TEMP</code
+	    > 、それ以外は <code
+	    >/tmp</code
+	    > となります。</li
+	  ><li
+	  ><code
+	    >osFamily</code
+	    >: windows ノード用には &quot;windows&quot; と指定します。</li
+	  ></ul
+	></div
+      ><div id="ssh-&#35469;&#35388;&#12479;&#12452;&#12503;&#12398;&#35373;&#23450;"
+      ><h5
+	><a href="#TOC"
+	  >SSH 認証タイプの設定</a
+	  ></h5
+	><p
+	>SSH 認証は パスワードまたは公開鍵/秘密鍵認証の 2 つの方法で行われます。</p
+	><p
+	>デフォルトでは、公開鍵/秘密鍵認証方式が使われますが、フレームワークスコープ、プロジェクト、ノードによって変更できます。</p
+	><p
+	>どちらのメカニズムが使われるかは <code
+	  >ssh-authentication</code
+	  > プロパティによって決められます。このプロパティはどちらか 2 つの値を持ちます:</p
+	><ul
+	><li
+	  ><code
+	    >password</code
+	    ></li
+	  ><li
+	  ><code
+	    >privateKey</code
+	    > （デフォルト）</li
+	  ></ul
+	><p
+	>ある特定のノードに接続した時、正しい認証メカニズムが選ばれるようこのシーケンスが使われます。</p
+	><ol style="list-style-type: decimal;"
+	><li
+	  ><strong
+	    >ノードレベル</strong
+	    >: ノード上の <code
+	    >ssh-authentication</code
+	    > アトリビュートにターゲットノードにだけを適用します。</li
+	  ><li
+	  ><strong
+	    >プロジェクトレベル</strong
+	    >: <code
+	    >project.properties</code
+	    > 内の <code
+	    >project.ssh-authentication</code
+	    > プロパティ。 <code
+	    >project.properties</code
+	    > デフォルトでプロジェクト配下の全ノードに適用します。</li
+	  ><li
+	  ><strong
+	    >Rundeck レベル</strong
+	    >: <code
+	    >framework.properties</code
+	    > 内の <code
+	    >framework.ssh-authentication</code
+	    > プロパティ。デフォルトで全てのプロジェクトのノードに適用します。</li
+	  ></ol
+	><p
+	>これらの値が一切セットされてない場合はデフォルトで公開鍵/秘密鍵認証方式が使われます。</p
+	></div
+      ><div id="ssh-username"
+      ><h5
+	><a href="#TOC"
+	  >SSH username</a
+	  ></h5
+	><p
+	>SSH 経由で接続するための username は、ノードアトリビュート <code
+	  >username</code
+	  > から取得します:</p
+	><ul
+	><li
+	  ><code
+	    >username=&quot;user1&quot;</code
+	    ></li
+	  ></ul
+	><p
+	>動的にこの値を変化させたい場合はプロパティ参照を組み込むこともできます。例えば、現在の Rundeck 利用者またはジョブのオプション値として username を取得して参照するといったことです:</p
+	><ul
+	><li
+	  ><code
+	    >${job.username}</code
+	    > - Rundeck でジョブを実行している username を使います</li
+	  ><li
+	  ><code
+	    >${option.someUsername}</code
+	    > - &quot;someUsername&quot; というジョブオプションの値を使います</li
+	  ></ul
+	><p
+	>もしノードアトリビュート <code
+	  >username</code
+	  > がセットされていない場合はプロジェクトまたはフレームワーク設定で使われてる静的な値を使います。あるノードへの接続時の username は下記の順番で値を探しにいきます:</p
+	><ol style="list-style-type: decimal;"
+	><li
+	  ><strong
+	    >Node level</strong
+	    >: node attribute <code
+	    >username</code
+	    > 。実行時の値やオプションを参照出来る場合は利用します</li
+	  ><li
+	  ><strong
+	    >Project level</strong
+	    >: プロジェクト内の <code
+	    >project.properties</code
+	    > ファイル内の <code
+	    >project.ssh.user</code
+	    > プロパティ</li
+	  ><li
+	  ><strong
+	    >Rundeck level</strong
+	    >: <code
+	    >framework.properties</code
+	    > ファイル内の <code
+	    >framework.ssh.user</code
+	    > プロパティ</li
+	  ></ol
+	></div
+      ><div id="ssh-&#31192;&#23494;&#37749;&#12398;&#35373;&#23450;"
+      ><h5
+	><a href="#TOC"
+	  >SSH 秘密鍵の設定</a
+	  ></h5
+	><p
+	>デフォルトの認証メカニズムは公開鍵/秘密鍵認証です。</p
+	><p
+	>ビルトイン SSH コネクターにより秘密鍵を数種類の方法でできます。ノード毎、プロジェクト毎、Rundeck インスタンスごとにその方法を変えられます。</p
+	><p
+	>リモートノードに接続する時に、Rundeck は秘密鍵ファイルの場所を示したあるプロパティ/アトリビュート を探します。その際、以下の順番で最初にヒットするまで探します:</p
+	><ol style="list-style-type: decimal;"
+	><li
+	  ><strong
+	    >Node レベル</strong
+	    >: ノード上の <code
+	    >ssh-keypath</code
+	    > アトリビュート 。ターゲットノードにだけ適用します。</li
+	  ><li
+	  ><strong
+	    >Project レベル</strong
+	    >: <code
+	    >project.properties</code
+	    > 内の <code
+	    >project.ssh-keypath</code
+	    > プロパティ。 デフォルトでプロジェクト配下の全ノードに適用します。</li
+	  ><li
+	  ><strong
+	    >Rundeck レベル</strong
+	    >: <code
+	    >framework.properties</code
+	    > 内の <code
+	    >framework.ssh-keypath</code
+	    > プロパティ. デフォルトで全プロジェクトに適用します。</li
+	  ><li
+	  ><strong
+	    >Rundeck レベル</strong
+	    >: <code
+	    >framework.properties</code
+	    > 内の <code
+	    >framework.ssh.keypath</code
+	    > プロパティ。デフォルトで全プロジェクトに適用します。（1.3 より前の Rundeck にも互換性があります）（デフォルトの値は、<code
+	    >~/.ssh/id_rsa</code
+	    >）</li
+	  ></ol
+	><p
+	>暗号化したパスフレーズを使う秘密鍵の場合は、ノードで実行する際にパスフレーズを入力させるためにプロンプトをすする &quot;Secure Option&quot; が利用できます。下記の項目を参照してください。</p
+	></div
+      ><div id="ssh-&#31192;&#23494;&#37749;&#12497;&#12473;&#12501;&#12524;&#12540;&#12474;&#12398;&#35373;&#23450;"
+      ><h5
+	><a href="#TOC"
+	  >SSH 秘密鍵パスフレーズの設定</a
+	  ></h5
+	><p
+	>パスフレーズを使った秘密鍵認証は以下のように動作します:</p
+	><ul
+	><li
+	  >鍵のパスフレーズを入力させるプロンプトを出すようジョブにセキュアオプションについての定義がされていなければなりません。</li
+	  ><li
+	  >ターゲットノードは秘密鍵認証を使うよう設定されてなければなりません。</li
+	  ><li
+	  >ユーザがジョブを実行するとき、パスフレーズ入力用のプロンプトが表示されます。セキュアオプションの値はデータベースには保存されず、その実行にだけ利用されます。</li
+	  ></ul
+	><p
+	>さらに秘密鍵パスフレーズ認証にはいくつかの必要事項と制限があります:</p
+	><ol style="list-style-type: decimal;"
+	><li
+	  >秘密鍵認証にてパスフレーズを要求するノードには予め定義されたジョブを通してのみ実行が可能です。アドホックコマンドでは実行できません。（今のところ）</li
+	  ><li
+	  >そのようなノード上で実行される各ジョブには実行前にパスフレーズを入力してもらうようセキュアオプションの定義がされていなければなりません。</li
+	  ><li
+	  >秘密鍵パスフレーズ認証を使う全てのノードでは入力するパスフレーズと定義されたセキュアオプション定義とがマッチする必要があります。または同じパスフレーズを共有して使う場合は同じ Option 名（またはデフォルトのまま）を使う必要があります。（例えば、同じ秘密鍵を共有して使う場合など）</li
+	  ></ol
+	><p
+	>パスフレーズは GUI ・CUI どちらからも入力できます。CUI または API 経由でジョブを実行したい場合はジョブの引数としてパスフレーズを入力します。</p
+	><p
+	>SSH 秘密鍵認証を利用可能にするために、まず <code
+	  >ssh-authentication</code
+	  > の値が <a href="plugins.html#ssh-%E8%AA%8D%E8%A8%BC%E3%82%BF%E3%82%A4%E3%83%97%E3%81%AE%E8%A8%AD%E5%AE%9A"
+	  >SSH 認証タイプの設定</a
+	  >にて説明されているとおりに設定されてるか確かめてください。次に、<a href="plugins.html#ssh-%E7%A7%98%E5%AF%86%E9%8D%B5%E3%81%AE%E8%A8%AD%E5%AE%9A"
+	  >SSH 秘密鍵の設定</a
+	  >にて説明されているとおりに秘密鍵ファイルのパスが設定されているか確かめてください。</p
+	><p
+	>今度はジョブの設定を行います。オプションの定義 <code
+	  >secureInput</code
+	  > に <code
+	  >true</code
+	  > をセットします。このオプション名（ここでいう <code
+	  >secureInput</code
+	  >）は自由に決めて構いませんが、ノードの設定でデフォルト値として使われている <code
+	  >sshKeyPassphrase</code
+	  > を使うのが一番簡単です。</p
+	><p
+	>もしオプション名が <code
+	  >sshKeyPassphrase</code
+	  > で無い場合は、以下のアトリビュートがセットされているか確かめてください:</p
+	><ul
+	><li
+	  ><code
+	    >ssh-key-passphrase-option</code
+	    > = &quot;<code
+	    >option.NAME</code
+	    >&quot; <code
+	    >NAME</code
+	    > 部分にジョブのセキュアオプションの名前が入ります。</li
+	  ></ul
+	><p
+	>ノードとジョブオプションの設定の例です:</p
+	><pre
+	><code
+	  >&lt;node name=&quot;egon&quot; description=&quot;egon&quot; osFamily=&quot;unix&quot;
+    username=&quot;rundeck&quot;
+    hostname=&quot;egon&quot;
+    ssh-keypath=&quot;/path/to/privatekey_rsa&quot;
+    ssh-authentication=&quot;privateKey&quot;
+    ssh-password-option=&quot;option.sshKeyPassphrase&quot; /&gt;
+</code
+	  ></pre
+	><p
+	>ジョブ:</p
+	><pre
+	><code
+	  >&lt;joblist&gt;
+    &lt;job&gt;
+        ...
+        &lt;context&gt;
+          &lt;project&gt;project&lt;/project&gt;
+          &lt;options&gt;
+            &lt;option required='true' name='sshKeyPassphrase' secure='true'
+              description=&quot;Passphrase for SSH Private Key&quot;/&gt;
+          &lt;/options&gt;
+        &lt;/context&gt;
+        ...
+    &lt;/job&gt;
+&lt;/joblist&gt;
+</code
+	  ></pre
+	></div
+      ><div id="ssh-&#12497;&#12473;&#12527;&#12540;&#12489;&#35469;&#35388;&#12398;&#35373;&#23450;"
+      ><h5
+	><a href="#TOC"
+	  >SSH パスワード認証の設定</a
+	  ></h5
+	><p
+	>パスワード認証は以下のように動作します:</p
+	><ul
+	><li
+	  >ジョブにはユーザにパスワードを要求するセキュアオプションが定義されていなければいけません。</li
+	  ><li
+	  >ターゲットノードはパスワード認証するよう設定されていなければいけません。</li
+	  ><li
+	  ><p
+	    >ユーザがジョブを実行する際、パスワード入力用にプロンプトを表示します。パスワード用セキュアオプションの値はデータベースには保存されず、その実行のみに使われます。</p
+	    ></li
+	  ><li
+	  >パスワード認証を行うノードには予め定義されたジョブを通してのみ実行が可能です。アドホックコマンドでは実行できます。（今のところ）</li
+	  ><li
+	  >そのようなノード上で実行される各ジョブには実行前にパスワードを入力してもらうようセキュアオプションの定義がされていなければなりません。</li
+	  ><li
+	  ><p
+	    >パスワード認証を使う全てのノードでは入力するパスワードと定義されたセキュアオプション定義とがマッチする必要があります。または同じパスワードを共有して使う場合は同じ Option 名（またはデフォルトのまま）を使う必要があります。（例えば、同じ秘密鍵を共有して使う場合など）</p
+	    ></li
+	  ></ul
+	><p
+	>パスワードは GUI・CUI どちらからも入力できます。CUI または API 経由でジョブを実行したい場合はジョブの引数としてパスワードを入力します。</p
+	><p
+	>パスワード認証を利用可能にするために、まず <code
+	  >ssh-authentication</code
+	  > の値を <a href="plugins.html#ssh-%E8%AA%8D%E8%A8%BC%E3%82%BF%E3%82%A4%E3%83%97%E3%81%AE%E8%A8%AD%E5%AE%9A"
+	  >SSH 認証タイプの設定</a
+	  >にて説明されているとおりに設定されているか確かめてください。</p
+	><p
+	>次にジョブの設定をします。オプションの定義 <code
+	  >secureInput</code
+	  > に <code
+	  >true</code
+	  > をセットします。このオプション名（ここでいう <code
+	  >secureInput</code
+	  >）は自由に決めて構いませんが、ノードの設定でデフォルト値として使われている</p
+	><p
+	>SSH 秘密鍵認証を利用可能にするために、まず <code
+	  >ssh-authentication</code
+	  > の値が <a href="plugins.html#ssh-%E8%AA%8D%E8%A8%BC%E3%82%BF%E3%82%A4%E3%83%97%E3%81%AE%E8%A8%AD%E5%AE%9A"
+	  >SSH 認証タイプの設定</a
+	  >にて説明されているとおりに設定されてるか確かめてください。次に、<a href="plugins.html#ssh-%E7%A7%98%E5%AF%86%E9%8D%B5%E3%81%AE%E8%A8%AD%E5%AE%9A"
+	  >SSH 秘密鍵の設定</a
+	  >にて説明されているとおりに秘密鍵ファイルのパスが設定されているか確かめてください。</p
+	><p
+	>今度はジョブの設定を行います。オプションの定義 <code
+	  >secureInput</code
+	  > に <code
+	  >true</code
+	  > をセットします。このオプション名（ここでいう <code
+	  >secureInput</code
+	  >）は自由に決めて構いませんが、ノードの設定でデフォルト値として使われている <code
+	  >sshKeyPassphrase</code
+	  > を使うのが一番簡単です。</p
+	><p
+	>もしオプション名が <code
+	  >sshKeyPassword</code
+	  > で無い場合は、以下のアトリビュートが各ノードにセットされているか確かめてください:</p
+	><ul
+	><li
+	  ><code
+	    >ssh-password-option</code
+	    > = &quot;<code
+	    >option.NAME</code
+	    >&quot; : <code
+	    >NAME</code
+	    > 部分にジョブのセキュアオプションの名前が入ります。</li
+	  ></ul
+	><p
+	>ノードとジョブオプションの設定の例です:</p
+	><pre
+	><code
+	  >&lt;node name=&quot;egon&quot; description=&quot;egon&quot; osFamily=&quot;unix&quot;
+    username=&quot;rundeck&quot;
+    hostname=&quot;egon&quot;
+    ssh-authentication=&quot;password&quot;
+    ssh-password-option=&quot;option.sshPassword1&quot; /&gt;
+</code
+	  ></pre
+	><p
+	>ジョブ:</p
+	><pre
+	><code
+	  >&lt;joblist&gt;
+    &lt;job&gt;
+        ...
+        &lt;context&gt;
+          &lt;project&gt;project&lt;/project&gt;
+          &lt;options&gt;
+            &lt;option required='true' name='sshPassword1' secure='true' /&gt;
+          &lt;/options&gt;
+        &lt;/context&gt;
+        ...
+    &lt;/job&gt;
+&lt;/joblist&gt;
+</code
+	  ></pre
+	></div
+      ><div id="&#12388;&#30446;&#12398;-sudo-&#12497;&#12473;&#12527;&#12540;&#12489;&#35469;&#35388;&#12398;&#35373;&#23450;"
+      ><h5
+	><a href="#TOC"
+	  >2 つ目の Sudo パスワード認証の設定</a
+	  ></h5
+	><p
+	>SSH プロバイダは 2 つ目の Sudo パスワード認証を設定できるメカニズムをサポートしています。あなたの環境におけるセキュリティ要件で一般的な &quot;rundeck&quot; アカウントではなくそれぞれのユーザアカウントを使って SSH 接続させ、&quot;sudo&quot; レベルのコマンドを実行時にパスワードを要求するような場合に便利です。</p
+	><p
+	>このメカニズムは以下のように動作します:</p
+	><ul
+	><li
+	  >ジョブの実行時に、ユーザに Sudo パスワードを入力するようプロンプトが出されます。</li
+	  ><li
+	  >SSH 経由でリモートノードに接続後、例えば &quot;sudo -u otheruser /sbin/some-command&quot; のようなコマンドが &quot;sudo&quot; 認証を要求します。</li
+	  ><li
+	  >リモートノードがユーザの Sudo パスワードの入力を促します。</li
+	  ><li
+	  >SSH プロバイダがリモートノードにパスワードを入力します。</li
+	  ><li
+	  >ユーザがエンターを押すと sudo コマンドが実行されます。</li
+	  ></ul
+	><p
+	>SSH パスワード認証に同じように、Sudo パスワード認証にも必要事項があります:</p
+	><ul
+	><li
+	  >ジョブにはユーザにパスワードを入力させるようプロンプトを出すセキュアオプションの定義がされていなければなりません。</li
+	  ><li
+	  >ターゲットノードは Sudo 認証を行うよう設定されていなければなりません。</li
+	  ><li
+	  >ユーザがジョブを実行するとき、パスワード入力用のプロンプトが表示されます。セキュアオプションの値はデータベースには保存されず、その実行にだけ利用されます。</li
+	  ></ul
+	><p
+	>さらに Sudo パスワード認証にはいくつかの必要事項と制限があります:</p
+	><ol style="list-style-type: decimal;"
+	><li
+	  >秘密鍵認証にてパスワードを要求するノードには予め定義されたジョブを通してのみ実行が可能です。アドホックコマンドでは実行できません。（今のところ）</li
+	  ><li
+	  >そのようなノード上で実行される各ジョブには実行前にパスワードを入力してもらうようセキュアオプションの定義がされていなければなりません。</li
+	  ><li
+	  >秘密鍵パスワード認証を使う全てのノードでは入力するパスワードと定義されたセキュアオプション定義とがマッチする必要があります。または同じパスワードを共有して使う場合は同じ Option 名（またはデフォルトのまま）を使う必要があります。（例えば、同じ秘密鍵を共有して使う場合など）</li
+	  ></ol
+	><p
+	>パスワードは GUI ・CUI どちらからも入力できます。CUI または API 経由でジョブを実行したい場合はジョブの引数としてパスワードを入力します。</p
+	><p
+	>SSH パスワード認証を利用可能にするために、まず <code
+	  >ssh-authentication</code
+	  > の値が <a href="plugins.html#ssh-%E8%AA%8D%E8%A8%BC%E3%82%BF%E3%82%A4%E3%83%97%E3%81%AE%E8%A8%AD%E5%AE%9A"
+	  >SSH 認証タイプの設定</a
+	  >にて説明されているとおりに設定されてるか確かめてください。</p
+	><p
+	>今度はジョブの設定を行います。オプションの定義 <code
+	  >secureInput</code
+	  > に <code
+	  >true</code
+	  > をセットします。このオプション名（ここでいう <code
+	  >secureInput</code
+	  >）は自由に決めて構いませんが、ノードの設定でデフォルト値として使われている <code
+	  >sshKeyPassword</code
+	  > を使うのが一番簡単です。</p
+	><p
+	>ノードやプロジェクト、Rundeck システム単位にこれらのプロパティの設定を行う事で Sudo パスワード認証が動作するようになります。project.properties の中の <code
+	  >project.NAME</code
+	  > や framework.properties の中の <code
+	  >framework.NAME</code
+	  > というアトリビュート名をノードにセットします。</p
+	><ul
+	><li
+	  ><code
+	    >sudo-command-enabled</code
+	    > - &quot;true&quot; をセットし、Sudo パスワード認証を利用可能にします。</li
+	  ><li
+	  ><code
+	    >sudo-command-pattern</code
+	    > - Sudo 認証が必要なコマンドを見つけるための正規表現をセットします。デフォルトパターンは <code
+	    >^sudo$</code
+	    > です。</li
+	  ><li
+	  ><code
+	    >sudo-password-option</code
+	    > - どのセキュアオプション値（パスワードとして利用される）かを定義するオプションリファレンス (&quot;option.NAME&quot;) をセットします</li
+	  ><li
+	  ><code
+	    >sudo-prompt-pattern</code
+	    > - Sudo 認証の際のプロンプトを見つけるための正規表現をセットします。デフォルトパターンは <code
+	    >^\[sudo\] password for .+: .*</code
+	    > です。</li
+	  ><li
+	  ><code
+	    >sudo-failure-pattern</code
+	    > - 認証失敗時の出力を見つけるための正規表現をセットします。デフォルトパターンは <code
+	    >^.*try again.*</code
+	    > です。</li
+	  ><li
+	  ><code
+	    >sudo-prompt-max-lines</code
+	    > - 期待されるパスワードプロンプトは最大何行まで読む込むかをセットします。（デフォルトは <code
+	    >12</code
+	    > です）</li
+	  ><li
+	  ><code
+	    >sudo-prompt-max-timeout</code
+	    > - 期待されるパスワードプロンプトが表示されるまで何ミリ秒待つかをセットします。（デフォルト <code
+	    >5000</code
+	    > です）</li
+	  ><li
+	  ><code
+	    >sudo-response-max-lines</code
+	    > - 認証失敗時の出力を探す際何行読み込むかをセットします。（デフォルト <code
+	    >2</code
+	    > です）</li
+	  ><li
+	  ><code
+	    >sudo-response-max-timeout</code
+	    > - maximum milliseconds to wait for response when detecting the failure response. (default <code
+	    >5000</code
+	    >)</li
+	  ><li
+	  ><code
+	    >sudo-response-max-timeout</code
+	    > - 認証失敗時の出力が表示されるまで何ミリ秒待つかをセットします。（デフォルト <code
+	    >false</code
+	    > です）</li
+	  ><li
+	  ><code
+	    >sudo-success-on-prompt-threshold</code
+	    > - true/false. If true, succeed (without writing password), if the input max lines are reached without detecting password prompt. (default: <code
+	    >true</code
+	    >).</li
+	  ><li
+	  ><code
+	    >sudo-success-on-prompt-threshold</code
+	    > - true/false. true にすると、もしパスワードプロンプトを見つけられずに最大読み込み行数に達した場合に（パスワードを入力せずに）認証成功です。（デフォルトは <code
+	    >true</code
+	    > です）????</li
+	  ><li
+	  ><code
+	    >sudo-fail-on-prompt-timeout</code
+	    > - true/false. true にすると、パスワードプロンプトが表示される前にタイムアウトした場合はジョブの実行を失敗とします。（デフォルトは <code
+	    >true</code
+	    > です）</li
+	  ><li
+	  ><code
+	    >sudo-fail-on-response-timeout</code
+	    > - true/false. If true, fail on timeout looking for failure message. (default: <code
+	    >false</code
+	    >)</li
+	  ><li
+	  ><code
+	    >sudo-fail-on-response-timeout</code
+	    > - true/false. true にすると、認証失敗の出力を探し見つからないままタイムアウトした場合ジョブの実行は失敗となります。（デフォルトは <code
+	    >false</code
+	    > です）???</li
+	  ></ul
+	><p
+	>ノート: unix で &quot;sudo&quot; が必要なコマンドのデフォルト値は既に設定されていますが、もしインタラクションをカスタマイズする必要がある場合は上書きできます。</p
+	><p
+	>今度はジョブの設定を行います。オプションの定義 <code
+	  >secureInput</code
+	  > に <code
+	  >true</code
+	  > をセットします。このオプション名（ここでいう <code
+	  >secureInput</code
+	  >）は自由に決めて構いませんが、ノードの設定でデフォルト値として使われている <code
+	  >sudoPassword</code
+	  > を使うのが一番簡単です。</p
+	><p
+	>もしオプション名が <code
+	  >sudoPassword</code
+	  > で無い場合は、以下のアトリビュートがセットされているか確かめてください:</p
+	><ul
+	><li
+	  ><code
+	    >sudo-password-option</code
+	    > = &quot;<code
+	    >option.NAME</code
+	    >&quot; : <code
+	    >NAME</code
+	    > 部分にジョブのセキュアオプションの名前が入ります。</li
+	  ></ul
+	><p
+	>ノードとジョブオプションの設定の例です:</p
+	><pre
+	><code
+	  >&lt;node name=&quot;egon&quot; description=&quot;egon&quot; osFamily=&quot;unix&quot;
+    username=&quot;rundeck&quot;
+    hostname=&quot;egon&quot;
+    sudo-command-enabled=&quot;true&quot;
+    sudo-password-option=&quot;option.sudoPassword2&quot; /&gt;
+</code
+	  ></pre
+	><p
+	>ジョブ:</p
+	><pre
+	><code
+	  >&lt;joblist&gt;
+    &lt;job&gt;
+         &lt;sequence keepgoing='false' strategy='node-first'&gt;
+          &lt;command&gt;
+            &lt;exec&gt;sudo apachectl restart&lt;/exec&gt;
+          &lt;/command&gt;
+        &lt;/sequence&gt;
+
+        &lt;context&gt;
+          &lt;project&gt;project&lt;/project&gt;
+          &lt;options&gt;
+            &lt;option required='true' name='sudoPassword2' secure='true' description=&quot;Sudo authentication password&quot;/&gt;
+          &lt;/options&gt;
+        &lt;/context&gt;
+        ...
+    &lt;/job&gt;
+&lt;/joblist&gt;
+</code
+	  ></pre
+	></div
+      ><div id="sudo-&#12497;&#12473;&#12527;&#12540;&#12489;&#35469;&#35388;&#12434;&#35079;&#25968;&#35373;&#23450;&#12377;&#12427;"
+      ><h5
+	><a href="#TOC"
+	  >Sudo パスワード認証を複数設定する</a
+	  ></h5
+	><p
+	>ノードに対してさらに高度な sudo パスワード認証設定ができます。例えば &quot;sudo -u user1 sudo -u user2 command&quot; といったような &quot;sudo&quot; コマンドを連鎖的に実行する必要性があり、両方の &quot;sudo&quot; に対してパスワードを入力する必要性がある場合です。あなたの node/project/framework に合わせた 2 つ目のプロパティセットを設定できます。</p
+	><p
+	>プロパティの設定方法は、1 つ目の sudo パスワード認証と同じです。 <a href="#configuring-secondary-sudo-password-authentication"
+	  >2 つ目 sudo パスワード認証の設定</a
+	  >にて説明されています。しかし以下のように、&quot;sudo-&quot; の代わりに &quot;sudo2-&quot; というプリフィックスを使います:</p
+	><pre
+	><code
+	  >sudo2-command-enabled=&quot;true&quot;
+sudo2-command-pattern=&quot;^sudo .+? sudo .*$&quot;
+</code
+	  ></pre
+	><p
+	>こうすることにより実行しようとしているコマンドが設定されたパターンにマッチするときは 2 つ目の sudo パスワードプロンプトを表示するよう仕向けます。</p
+	><p
+	>&quot;sudo2-password-option&quot; の値が設定されていないときは、デフォルトの値 <code
+	  >option.sudo2Password</code
+	  > が利用されます。</p
+	><p
+	><strong
+	  >&quot;sudo2-command-pattern&quot; について一つ注意点があります:</strong
+	  ></p
+	><p
+	>sudo 認証メカニズムはどちらの設定が呼ばれたのかを確認するために 2 つの正規表現を使います。</p
+	><p
+	>1 つ目の sudo 認証かを判別するために、<strong
+	  >実行されているコマンドの最初の部分</strong
+	  >と &quot;sudo-command-pattern&quot; の値とマッチングします。このパターンのデフォルト値は <code
+	  >^sudo$</code
+	  > です。</p
+	><p
+	>そのため &quot;sudo -u user1 some command&quot; のようなコマンドは正しくマッチします。（例えば、&quot;su&quot; をサポートするよう）正規表現を編集できます。しかしマッチング対象とされるのは常にコマンドの最初の部分であることに注意してください。</p
+	><p
+	>&quot;sudo2-command-enabled&quot; が &quot;true&quot; に設定されているとき &quot;sudo2-command-pattern&quot; の値もマッチングします。正しくマッチした場合はもう 1 つの sudo 認証が利用されます。しかし、どちらの sudo 認証を使うべきか決められるよう、<strong
+	  >コマンド文字列全体</strong
+	  > を正規表現とのマッチング対象とします。デフォルトの正規表現は <code
+	  >^sudo .+? sudo .*$</code
+	  > です。必要に応じて正規表現はカスタマイズできます。</p
+	></div
+      ></div
+    ></div
+  ><div id="&#12522;&#12477;&#12540;&#12473;&#12514;&#12487;&#12523;&#12477;&#12540;&#12473;-1"
+  ><h3
+    ><a href="#TOC"
+      >リソースモデルソース</a
+      ></h3
+    ><p
+    >Rundeck は以下に示すビルトインプロバイダをコアに持っています:</p
+    ><dl
+    ><dt
+      ><code
+	>file</code
+	></dt
+      ><dd
+      ><p
+	>サポートされているリソースフォーマットのファイルを使うプロバイダ。</p
+	></dd
+      ><dt
+      ><code
+	>url</code
+	></dt
+      ><dd
+      ><p
+	>サポートされているリソースフォーマットのリソースを URL から GET して取得するプロバイダ。</p
+	></dd
+      ><dt
+      ><code
+	>directory</code
+	></dt
+      ><dd
+      ><p
+	>あるディレクトリ内のサポートされているファイルを全て読み込むプロバイダ。ファイルプロバイダのエクステンションであり、内部では <code
+	  >file</code
+	  > プロバイダを使っています。</p
+	></dd
+      ><dt
+      ><code
+	>script</code
+	></dt
+      ><dd
+      ><p
+	>あるスクリプトによりパースされた出力をサポートされているフォーマットとして使うプロバイダ。</p
+	></dd
+      ></dl
+    ><p
+    >これらのプロバイダの設定を行うには, <a href="plugins.html#%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%83%A2%E3%83%87%E3%83%AB%E3%81%AE%E8%A8%AD%E5%AE%9A"
+      >リソースモデルソースの設定</a
+      >を参照してください。そして以下の項目で出てくるプロパティを使ってください。</p
+    ><div id="&#12501;&#12449;&#12452;&#12523;&#12522;&#12477;&#12540;&#12473;&#12514;&#12487;&#12523;&#12477;&#12540;&#12473;&#12398;&#35373;&#23450;"
+    ><h4
+      ><a href="#TOC"
+	>ファイルリソースモデルソースの設定</a
+	></h4
+      ><p
+      ><code
+	>file</code
+	> リソースモデルソースプロバイダはサポートされている<a href="rundeck-basics.html#resource-model-document-formats"
+	>リソースモデルドキュメントフォーマット</a
+	>のファイルを読み込みます。</p
+      ><table
+      ><caption
+	><code
+	  >file</code
+	  > リソースモデルソースプロバイダのプロパティの設定</caption
+	><thead
+	><tr class="header"
+	  ><th align="left"
+	    >名前 値</th
+	    ><th align="center"
+	    >説明</th
+	    ><th align="left"
+	    ></th
+	    ></tr
+	  ></thead
+	><tbody
+	><tr class="odd"
+	  ><td align="left"
+	    ><code
+	      >file</code
+	      ></td
+	    ><td align="center"
+	    >ファイルパス ディスク上の</td
+	    ><td align="left"
+	    >ファイルパス</td
+	    ></tr
+	  ><tr class="even"
+	  ><td align="left"
+	    ><code
+	      >format</code
+	      ></td
+	    ><td align="center"
+	    >フォーマット名 明示的にフォー</td
+	    ><td align="left"
+	    >マットを宣言することができます。利用できるフォーマットは <code
+	      >file</code
+	      > エクステンションのものに限ります。</td
+	    ></tr
+	  ><tr class="odd"
+	  ><td align="left"
+	    ><code
+	      >requireFileExists</code
+	      ></td
+	    ><td align="center"
+	    >true/false</td
+	    ><td align="left"
+	    >値が true かつファイルが存在しないとき、ノードの読み込みは失敗となります。（デフォルト: false ）</td
+	    ></tr
+	  ><tr class="even"
+	  ><td align="left"
+	    ><code
+	      >includeServerNode</code
+	      ></td
+	    ><td align="center"
+	    >true/false</td
+	    ><td align="left"
+	    >値が true ならば Rundeck サーバーのノードを自動的に含めます（デフォルト: false ）</td
+	    ></tr
+	  ><tr class="odd"
+	  ><td align="left"
+	    ><code
+	      >generateFileAutomatically</code
+	      ></td
+	    ><td align="center"
+	    >true/false</td
+	    ><td align="left"
+	    >値が true ならば ファイルが存在しないとき、ファイルを自動で作成します。（デフォルト: false）</td
+	    ></tr
+	  ></tbody
+	></table
+      ><p
+      ><code
+	>format</code
+	> の値は<a href="rundeck-basics.html#%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%83%A2%E3%83%87%E3%83%AB%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%83%E3%83%88"
+	>リソースモデルドキュメントフォーマット</a
+	>にてサポートされているものでなければなりません。ビルトインフォーマットは <code
+	>resourcexml</code
+	> または <code
+	>resourceyaml</code
+	> の 2 つです。</p
+      ><p
+      ><em
+	>例:</em
+	></p
+      ><pre
+      ><code
+	>resources.source.1.type=file
+resources.source.1.file=/home/rundeck/projects/example/etc/resources2.xml
+resources.source.1.format=resourcexml
+resources.source.1.requireFileExists=true
+resources.source.1.includeServerNode=true
+resources.source.1.generateFileAutomatically=true
+</code
+	></pre
+      ></div
+    ><div id="url-&#12522;&#12477;&#12540;&#12473;&#12514;&#12487;&#12523;&#12477;&#12540;&#12473;&#35373;&#23450;"
+    ><h4
+      ><a href="#TOC"
+	>URL リソースモデルソース設定</a
+	></h4
+      ><p
+      ><code
+	>url</code
+	> リソースモデルソースプロバイダは HTTP GET リクエストでノードの定義を取得します。</p
+      ><p
+      >設定プロパティ:</p
+      ><table
+      ><thead
+	><tr class="header"
+	  ><th align="left"
+	    >Name</th
+	    ><th align="left"
+	    >Value</th
+	    ><th align="left"
+	    >Notes</th
+	    ></tr
+	  ></thead
+	><tbody
+	><tr class="odd"
+	  ><td align="left"
+	    ><code
+	      >url</code
+	      ></td
+	    ><td align="left"
+	    >URL</td
+	    ><td align="left"
+	    ><code
+	      >http:</code
+	      > または <code
+	      >https:</code
+	      > または <code
+	      >file:</code
+	      > プロトコルの正しい URL を記述します。</td
+	    ></tr
+	  ><tr class="even"
+	  ><td align="left"
+	    ><code
+	      >cache</code
+	      ></td
+	    ><td align="left"
+	    >true/false</td
+	    ><td align="left"
+	    >値が true ならばサーバーからの ETag/Last-Modified 情報を用い、変更があったときのみ新しいコンテンツをダウンロードします。false の場合は常にダウンロードしてきます。（デフォルト: true）</td
+	    ></tr
+	  ><tr class="odd"
+	  ><td align="left"
+	    ><code
+	      >timeout</code
+	      ></td
+	    ><td align="left"
+	    >秒 リ</td
+	    ><td align="left"
+	    >クエストをタイムアウトによる失敗とするまでの秒を指定します。<code
+	      >0</code
+	      > とするとタイムアウトは無しとなります。（デフォルト: 30）</td
+	    ></tr
+	  ></tbody
+	></table
+      ><p
+      >table: リソースモデルソースプロバイダ <code
+	>url</code
+	> 用の設定プロパティ。</p
+      ><p
+      ><a href="rundeck-basics.html#resource-model-document-formats"
+	>リソースモデルドキュメントフォーマット</a
+	> は リモートサーバに送信される MIME タイプを決定するのに利用されます。ビルトインフォーマットは &quot;*/xml&quot; と &quot;*/yaml&quot; と &quot;*/x-yaml&quot; を受け付けます. <a href="plugins.html#resource-format-plugins"
+	>リソースフォーマットプラグイン</a
+	> を参照してください。</p
+      ><p
+      ><em
+	>例:</em
+	></p
+      ><pre
+      ><code
+	>resources.source.1.type=url
+resources.source.1.url=file:/home/rundeck/projects/example/etc/resources2.xml
+resources.source.1.cache=true
+resources.source.1.timeout=0
+</code
+	></pre
+      ></div
+    ><div id="&#12487;&#12451;&#12524;&#12463;&#12488;&#12522;&#12522;&#12477;&#12540;&#12473;&#12514;&#12487;&#12523;&#12477;&#12540;&#12473;&#35373;&#23450;"
+    ><h4
+      ><a href="#TOC"
+	>ディレクトリリソースモデルソース設定</a
+	></h4
+      ><p
+      ><code
+	>derectory</code
+	> リソースモデルソースプロバイダはあるディレクトリにあるすべてのファイルの一覧を表示します。そしてすべてのデフォルト設定オプションを用いてファイルリソースモデルとしてサポートされたファイルエクステンションを持つ各ファイル読み込みます。</p
+      ><table
+      ><thead
+	><tr class="header"
+	  ><th align="left"
+	    >Name</th
+	    ><th align="left"
+	    >Value</th
+	    ><th align="left"
+	    >Notes</th
+	    ></tr
+	  ></thead
+	><tbody
+	><tr class="odd"
+	  ><td align="left"
+	    ><code
+	      >directory</code
+	      ></td
+	    ><td align="left"
+	    >ディレクトリパス ディレクトリ内の</td
+	    ><td align="left"
+	    >サポートされているファイルエクステンションを持つ全てのファイルが読み込まれます。</td
+	    ></tr
+	  ></tbody
+	></table
+      ><p
+      >table: <code
+	>directory</code
+	> リソースモデルソースプロバイダ用の設定プロパティ</p
+      ><p
+      ><em
+	>Example:</em
+	></p
+      ><pre
+      ><code
+	>resources.source.2.type=directory
+resources.source.2.directory=/home/rundeck/projects/example/resources
+</code
+	></pre
+      ></div
+    ><div id="&#12473;&#12463;&#12522;&#12503;&#12488;&#12522;&#12477;&#12540;&#12473;&#12514;&#12487;&#12523;&#12477;&#12540;&#12473;&#35373;&#23450;"
+    ><h4
+      ><a href="#TOC"
+	>スクリプトリソースモデルソース設定</a
+	></h4
+      ><p
+      ><code
+	>script</code
+	> リソースモデルソースプロバイダはあるスクリプトファイルを実行します。そしてサポートされている <a href="rundeck-basics.html#resource-model-document-formats"
+	>Resource Model Document Formats</a
+	>の一つとしてその実行結果を読み込みます。</p
+      ><table
+      ><caption
+	>Configuration properties for <code
+	  >script</code
+	  > Resource Model Source provider Table: <code
+	  >script</code
+	  > リソースモデルプロバイダの設定プロパティ</caption
+	><thead
+	><tr class="header"
+	  ><th align="left"
+	    >Name</th
+	    ><th align="left"
+	    >Value</th
+	    ><th align="left"
+	    >Notes</th
+	    ></tr
+	  ></thead
+	><tbody
+	><tr class="odd"
+	  ><td align="left"
+	    ><code
+	      >file</code
+	      ></td
+	    ><td align="left"
+	    >スクリプトファイルパス `interprete</td
+	    ><td align="left"
+	    >r` が必要とする場合、スクリプトファイルが実行可能であるべきです</td
+	    ></tr
+	  ><tr class="even"
+	  ><td align="left"
+	    ><code
+	      >interpreter</code
+	      ></td
+	    ><td align="left"
+	    >コマンドまたはインタプリタ 例. &quot;bash -c&quot;</td
+	    ><td align="left"
+	    ></td
+	    ></tr
+	  ><tr class="odd"
+	  ><td align="left"
+	    ><code
+	      >args</code
+	      ></td
+	    ><td align="left"
+	    >渡したい追加の引数 引数は実行されるコ</td
+	    ><td align="left"
+	    >マンドライン文字列の後ろに追加されます。</td
+	    ></tr
+	  ><tr class="even"
+	  ><td align="left"
+	    ><code
+	      >format</code
+	      ></td
+	    ><td align="left"
+	    >フォーマット名 利用するフォー</td
+	    ><td align="left"
+	    >マットを明記します</td
+	    ></tr
+	  ></tbody
+	></table
+      ><p
+      >スクリプトはこのように実行されます:</p
+      ><pre
+      ><code
+	>[interpreter] file [args]
+</code
+	></pre
+      ><p
+      >STDOUT 上のすべての出力はパースのためにリソースフォーマットパーサに渡されます。利用可能なフォーマットが指定されている必要があります。</p
+      ><p
+      ><em
+	>例:</em
+	></p
+      ><pre
+      ><code
+	>resources.source.2.type=script
+resources.source.2.file=/home/rundeck/projects/example/etc/generate.sh
+resources.source.2.interpreter=bash -c
+resources.source.2.args=-project example
+resources.source.2.format=resourceyaml
+</code
+	></pre
+      ></div
+    ></div
+  ><div id="&#12522;&#12477;&#12540;&#12473;&#12501;&#12457;&#12540;&#12510;&#12483;&#12488;&#12469;&#12540;&#12499;&#12473;"
+  ><h3
+    ><a href="#TOC"
+      >リソースフォーマットサービス</a
+      ></h3
+    ><p
+    >リソースフォーマットサービス（ジェネレータとパーサ）は一般的に同じフォーマット名に対して用いられるマッチするペアとなっています。</p
+    ><p
+    >Rundeck はこれらのビルトインプロバイダを含んでいます:</p
+    ><dl
+    ><dt
+      ><code
+	>resourcexml</code
+	></dt
+      ><dd
+      ><p
+	>リソース XML ドキュメントフォーマットをサポートしています: <a href="../manpages/man5/resource-v13.html"
+	  >resource-v13(5) XML</a
+	  >.</p
+	><p
+	>サポートされている MIME タイプ:</p
+	><ul
+	><li
+	  >Generator: &quot;text/xml&quot;</li
+	  ><li
+	  >Parser: &quot;*/xml&quot;</li
+	  ></ul
+	><p
+	>サポートされているファイルエクステンション:</p
+	><ul
+	><li
+	  >&quot;.xml&quot;</li
+	  ></ul
+	></dd
+      ><dt
+      ><code
+	>resourceyaml</code
+	></dt
+      ><dd
+      ><p
+	>リソース YAML ドキュメントフォーマットをサポートしています: <a href="../manpages/man5/resource-yaml-v13.html"
+	  >resource-v13(5) YAML</a
+	  ></p
+	><p
+	>サポートされている MIME types:</p
+	><ul
+	><li
+	  >Generator: &quot;text/yaml&quot;, &quot;text/x-yaml&quot;, &quot;application/yaml&quot;, &quot;application/x-yaml&quot;</li
+	  ><li
+	  >Parser: &quot;*/yaml&quot;, &quot;*/x-yaml&quot;</li
+	  ></ul
+	><p
+	>サポートされているファイルエクステンション:</p
+	><ul
+	><li
+	  >&quot;.yml&quot;, &quot;.yaml&quot;</li
+	  ></ul
+	></dd
+      ></dl
+    ></div
+  ></div
+><div id="&#12503;&#12522;&#12452;&#12531;&#12473;&#12488;&#12540;&#12523;"
+><h2
+  ><a href="#TOC"
+    >プリインストール</a
+    ></h2
+  ><p
+  >Rundeck には便利な 2 つのプリインストールプラグインが入っており、プラグイン開発およびプラグインの使い方の例としても役立ちます。</p
+  ><div id="script-plugin"
+  ><h3
+    ><a href="#TOC"
+      >script-plugin</a
+      ></h3
+    ><p
+    >The <code
+      >scirpt-plugin</code
+      > は以下のプロバイダを含んでいます:</p
+    ><ul
+    ><li
+      >NodeExecutor サービス向け <code
+	>script-exec</code
+	> プロバイダ</li
+      ><li
+      >FileCopier サービス向け <code
+	>script-copy</code
+	> プロバイダ</li
+      ></ul
+    ><p
+    >（これらを利用可能にするために <a href="plugins.html#%E3%83%97%E3%83%AD%E3%83%90%E3%82%A4%E3%83%80%E3%81%AE%E5%88%A9%E7%94%A8"
+      >Using Providers</a
+      > を参照してくだい）</p
+    ><p
+    >このプラグインはあるコマンドやローカルまたはリモートのスクリプトのファイルコピーとして実行させたい外部スクリプトやコマンドの指定を可能にします。</p
+    ><p
+    >この script プラグインによりビルトインの SSH ベースのリモート実行メカニズムや SCP ベースのファイルコピーメカニズムを置き換える事により、外部のどんなメカニズムでも利用可能になります。</p
+    ><p
+    >ノート: この plugin は <a href="../developer/plugin-development.html#%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%83%97%E3%83%A9%E3%82%B0%E3%82%A4%E3%83%B3%E9%96%8B%E7%99%BA"
+      >スクリプトプラグインの開発</a
+      > に似た機能を提供します。あなたが書いたスクリプトをテストするためにこのプラグインを使いたい、また後々スクリプトをスタンドアロンプラグインとしてパッケージングしたいと思うかもしれまぜん。</p
+    ><div id="script-exec-&#12398;&#35373;&#23450;"
+    ><h4
+      ><a href="#TOC"
+	>script-exec の設定</a
+	></h4
+      ><p
+      >このプラグインの設定を行うには、実行したいコマンドラインの文字列を指定する必要があります。オプションでそのコマンドラインを実行する作業ディレクトリとコマンドを発行させるシェルを指定する事もできます。</p
+      ><p
+      >プラグインの設定は特定の設定値を用い、全プロジェクトに（フレームワークワイド）、1 つのプロジェクトに（プロジェクトワイド）または特定のノードに対して設定できます。</p
+      ></div
+    ><div id="script-exec-&#12398;&#12467;&#12510;&#12531;&#12489;&#12398;&#35373;&#23450;"
+    ><h4
+      ><a href="#TOC"
+	>script-exec のコマンドの設定</a
+	></h4
+      ><p
+      >フレームワーク全体とプロジェクトごとの設定として framework.properties または project.properties ファイルにそれぞれの設定を行います:</p
+      ><dl
+      ><dt
+	><code
+	  >plugin.script-exec.default.command</code
+	  ></dt
+	><dd
+	>実行したいデフォルトのシステムコマンドを指定します。</dd
+	></dl
+      ><p
+      >特定ノードに対して設定する場合は <code
+	>script-exec</code
+	> という名前のアトリビュートをノードのリソース定義に追加します。</p
+      ><dl
+      ><dt
+	><code
+	  >script-exec</code
+	  ></dt
+	><dd
+	>実行したいデフォルトのシステムコマンドを指定します。</dd
+	></dl
+      ><p
+      >プロパティの詳細は <a href="plugins.html#script-exec%20%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E5%AE%9A%E7%BE%A9"
+	>script-exec コマンドの定義</a
+	>を参照してください。</p
+      ></div
+    ><div id="&#12527;&#12540;&#12461;&#12531;&#12464;&#12487;&#12451;&#12524;&#12463;&#12488;&#12522;&#12398;&#35373;&#23450;"
+    ><h4
+      ><a href="#TOC"
+	>ワーキングディレクトリの設定</a
+	></h4
+      ><p
+      >フレームワークワイド、プロジェクトワイドにて framework.properties または project.properties ファイルのいずれかの設定を行います:</p
+      ><dl
+      ><dt
+	><code
+	  >plugin.script-exec.default.dir</code
+	  ></dt
+	><dd
+	>実行時に利用するデフォルトの作業ディレクトリを指定します。</dd
+	></dl
+      ><p
+      >特定ノードに対して設定する場合は <code
+	>script-exec-dir</code
+	> という名前のアトリビュートをノードのリソース定義に追加します。</p
+      ><dl
+      ><dt
+	><code
+	  >script-exec-dir</code
+	  ></dt
+	><dd
+	>実行時に利用するデフォルトの作業ディレクトリを指定します（オプション）</dd
+	></dl
+      ></div
+    ><div id="&#23455;&#34892;&#12471;&#12455;&#12523;&#12398;&#35373;&#23450;"
+    ><h4
+      ><a href="#TOC"
+	>実行シェルの設定</a
+	></h4
+      ><p
+      >フレームワーク全体とプロジェクトごとの設定として framework.properties または project.properties ファイルにそれぞれの設定を行います:</p
+      ><dl
+      ><dt
+	><code
+	  >plugin.script-exec.default.shell</code
+	  ></dt
+	><dd
+	>コマンドをインタプリタさせるのに利用したいシェルを指定します。例. &quot;bash -c&quot; or &quot;cmd.exe /c&quot;</dd
+	></dl
+      ><p
+      >特定ノードに対して設定する場合は <code
+	>script-exec-shell</code
+	> というアトリビュートをノードのリソース定義に追加します。</p
+      ><dl
+      ><dt
+	><code
+	  >script-exec-shell</code
+	  ></dt
+	><dd
+	>コマンドをインタプリタさせるのに利用したいシェルを指定します。例. &quot;bash -c&quot; or &quot;cmd.exe /c&quot; （オプション）</dd
+	></dl
+      ></div
+    ><div id="script-exec-&#12467;&#12510;&#12531;&#12489;&#12398;&#23450;&#32681;"
+    ><h4
+      ><a href="#TOC"
+	>script-exec コマンドの定義</a
+	></h4
+      ><p
+      >このプロパティやアトリビュートの値は外部システムプロセス内で実行したい正確なコマンドライン文字列であるはずです。</p
+      ><p
+      ><code
+	>${node.name</code
+	> または <code
+	>${job.name}</code
+	> のように記述することで、Rundeck の一般的なコマンド実行として <em
+	>データコンテキストプロパティ</em
+	> を利用できます。</p
+      ><p
+      >さらに、このプラグインは新しいデータコンテキストプロパティを提供します:</p
+      ><dl
+      ><dt
+	><code
+	  >exec.command</code
+	  ></dt
+	><dd
+	><p
+	  >ワークフロー / ユーザーが指定されている実行したいコマンド</p
+	  ></dd
+	><dt
+	><code
+	  >exec.dir</code
+	  ></dt
+	><dd
+	><p
+	  >プロパティファイルまたはノード定義に設定されている場合の作業ディレクトリのパス</p
+	  ></dd
+	></dl
+      ><p
+      >例:</p
+      ><p
+      >ビルトイン SSH コマンドが存在する所で、それ他いくつかの外部のリモート接続コマンド (&quot;/bin/execremote&quot;) を実行したい場合、以下のアトリビュートを指定できます:</p
+      ><pre
+      ><code
+	>mynode:
+    node-executor: script-exec
+    script-exec: /bin/execremote -host ${node.hostname} -user ${node.username} -- ${exec.command}
+</code
+	></pre
+      ><p
+      >そのコマンドが特別なハンドリング（クオートや他の値の展開方法）を必要とする場合、シェルを使いたいと思うかもしれない。このケースではシェルを使うという指定ができます。</p
+      ><pre
+      ><code
+	>mynode:
+    node-executor: script-exec
+    script-exec-shell: bash -c
+    script-exec: ssh -o &quot;some quoted option&quot; ${node.username}@${node.hostname} ${exec.command}
+</code
+	></pre
+      ><p
+      >実行時、指定されたプロパティは実行するコマンド文字列や特定ノード用の値が展開されます。</p
+      ><p
+      >または <code
+	>$RDECK_BASE/projects/NAME/etc/project.properties</code
+	> に置かれた project.properties ファイル内にて、全てのノードに対してデフォルト設定を行うことも可能です。</p
+      ><pre
+      ><code
+	>script-exec.default.command= /bin/execremote -host ${node.hostname} \
+    -user ${node.username} -- ${exec.command}
+</code
+	></pre
+      ><p
+      >同様に <code
+	>$RDECK_BASE/etc/framework.properties</code
+	> ファイルにて全プロジェクトに対しての設定ができます。</p
+      ></div
+    ><div id="script-exec-&#12467;&#12510;&#12531;&#12489;&#12398;&#35201;&#20214;"
+    ><h4
+      ><a href="#TOC"
+	>script-exec コマンドの要件</a
+	></h4
+      ><p
+      >script plugin を使ったコマンドの実行では以下のマナーが守られていることが期待されます:</p
+      ><ul
+      ><li
+	>実行が成功した場合にはシステム終了コードが &quot;0&quot; で終わる</li
+	><li
+	>その他全ての終了コードは失敗を意味する</li
+	></ul
+      ><p
+      >ノート: STDOUT と STDERR からの全出力は Rundeck のジョブ実行の一部としてキャプチャされます</p
+      ></div
+    ><div id="script-copy-&#12398;&#35373;&#23450;"
+    ><h4
+      ><a href="#TOC"
+	>script-copy の設定</a
+	></h4
+      ><p
+      >script-copy の設定を行うには、実行したいコマンドラインの文字列を指定する必要があります。オプションでそのコマンドラインを実行する作業ディレクトリとコマンドを発行させるシェルを指定する事もできます。</p
+      ><p
+      >プラグインの設定は特定の設定値を用い、全プロジェクトに（フレームワークワイド）、1 つのプロジェクトに（プロジェクトワイド）または特定のノードに対して設定できます。</p
+      ><p
+      >ターゲットノード上のどこにファイルを置きたいかのファイルパスを設定する必要があります。これには 2 種類の方法があります。</p
+      ><p
+      >プラグインの設定は特定の設定値を用い、全プロジェクトに（フレームワークワイド）、1 つのプロジェクトに（プロジェクトワイド）または特定のノードに対して設定できます。</p
+      ></div
+    ><div id="script-copy-&#12398;&#12467;&#12510;&#12531;&#12489;&#12398;&#35373;&#23450;"
+    ><h4
+      ><a href="#TOC"
+	>script-copy のコマンドの設定</a
+	></h4
+      ><p
+      >フレームワーク全体とプロジェクトごとの設定として framework.properties または project.properties ファイルにそれぞれの設定を行います:</p
+      ><dl
+      ><dt
+	><code
+	  >plugin.script-copy.default.command</code
+	  ></dt
+	><dd
+	>実行時に利用するデフォルトのシステムコマンドを指定します。</dd
+	></dl
+      ><p
+      >特定ノードに対して設定する場合はこれらのアトリビュートをノードのリソース定義に追加します。</p
+      ><dl
+      ><dt
+	><code
+	  >script-copy</code
+	  ></dt
+	><dd
+	>実行時に利用するシステムコマンドを指定します。</dd
+	></dl
+      ><p
+      >プロパティの詳細は <a href="plugins.html#script-copy%20%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E5%AE%9A%E7%BE%A9"
+	>script-copy コマンドの定義</a
+	>を参照してください。</p
+      ></div
+    ><div id="&#12527;&#12540;&#12461;&#12531;&#12464;&#12487;&#12451;&#12524;&#12463;&#12488;&#12522;&#12398;&#35373;&#23450;-1"
+    ><h4
+      ><a href="#TOC"
+	>ワーキングディレクトリの設定</a
+	></h4
+      ><p
+      >フレームワーク全体とプロジェクトごとの設定として framework.properties または project.properties ファイルにそれぞれの設定を行います:</p
+      ><dl
+      ><dt
+	><code
+	  >plugin.script-copy.default.dir</code
+	  ></dt
+	><dd
+	>実行時のデフォルトワーキングディレクトリを指定します。</dd
+	></dl
+      ><p
+      >特定ノードに対して設定する場合は <code
+	>script-copy-dir</code
+	> アトリビュートをノードのリソース定義に追加します。</p
+      ><dl
+      ><dt
+	><code
+	  >script-copy-dir</code
+	  ></dt
+	><dd
+	>実行時のデフォルトワーキングディレクトリを指定します（オプション）</dd
+	></dl
+      ></div
+    ><div id="&#23455;&#34892;&#12471;&#12455;&#12523;&#12398;&#35373;&#23450;-1"
+    ><h4
+      ><a href="#TOC"
+	>実行シェルの設定</a
+	></h4
+      ><p
+      >フレームワーク全体とプロジェクトごとの設定として framework.properties または project.properties ファイルにそれぞれの設定を行います:</p
+      ><dl
+      ><dt
+	><code
+	  >plugin.script-copy.default.shell</code
+	  ></dt
+	><dd
+	>コマンドを実行するシェルを指定します。（オプション）</dd
+	></dl
+      ><p
+      >特定ノードに対して設定する場合は <code
+	>script-copy-shell</code
+	> アトリビュートをノードのリソース定義に追加します。</p
+      ><dl
+      ><dt
+	><code
+	  >script-copy-shell</code
+	  ></dt
+	><dd
+	>コマンドを実行するシェルを指定します。（オプション）</dd
+	></dl
+      ></div
+    ><div id="&#12522;&#12514;&#12540;&#12488;&#12501;&#12449;&#12452;&#12523;&#12497;&#12473;&#12398;&#35373;&#23450;"
+    ><h4
+      ><a href="#TOC"
+	>リモートファイルパスの設定</a
+	></h4
+      ><p
+      >フレームワーク全体とプロジェクトごとの設定として framework.properties または project.properties ファイルにそれぞれの設定を行います:</p
+      ><dl
+      ><dt
+	><code
+	  >plugin.script-copy.default.remote-filepath</code
+	  ></dt
+	><dd
+	>コピーされるファイルのフルパスを指定します。</dd
+	></dl
+      ><p
+      >特定ノードに対して設定する場合は <code
+	>script-copy-remote-filepath</code
+	> アトリビュートをノードのリソース定義に追加します。</p
+      ><dl
+      ><dt
+	><code
+	  >script-copy-remote-filepath</code
+	  ></dt
+	><dd
+	>コピーされるファイルのフルパスを指定します。</dd
+	></dl
+      ><p
+      >プロパティの詳細は <a href="plugins.html#script-copy%20%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%83%91%E3%82%B9%E3%81%AE%E5%AE%9A%E7%BE%A9"
+	>script-copy ファイルパスの定義</a
+	> を参照してください。</p
+      ></div
+    ><div id="script-copy-&#12467;&#12510;&#12531;&#12489;&#12398;&#23450;&#32681;"
+    ><h4
+      ><a href="#TOC"
+	>script-copy コマンドの定義</a
+	></h4
+      ><p
+      >このプロパティもしくは属性の値は、外部システムのプロセスで実行するコマンドライン文字列でなければなりません。</p
+      ><p
+      >通常の Rundeck のコマンド実行で利用できる <code
+	>${node.name}</code
+	> や <code
+	>${job.name}</code
+	> などのような <em
+	>データコンテキストプロパティ</em
+	> を利用できます。</p
+      ><p
+      >加えて、このプラグインは新たなデータコンテキストプロパティを提供します:</p
+      ><dl
+      ><dt
+	><code
+	  >file-copy.file</code
+	  ></dt
+	><dd
+	><p
+	  >リモートノードにコピーするローカルファイルのパス</p
+	  ></dd
+	><dt
+	><code
+	  >file-copy.filename</code
+	  ></dt
+	><dd
+	><p
+	  >パス情報を含まないファイル名</p
+	  ></dd
+	></dl
+      ><p
+      >例:</p
+      ><p
+      >標準の SCP コマンドの代わりに外部リモート接続コマンド (&quot;/bin/copyremote&quot;) を利用したいとき、ノードごとに以下の属性を指定できます。</p
+      ><pre
+      ><code
+	>mynode:
+    file-copier: script-copy
+    script-copy: /bin/copyremote -host ${node.hostname} -user ${node.username} -- ${file-copy.file} ${node.destdir}
+</code
+	></pre
+      ><p
+      >実行時、このプロパティは指定したノード用の値に展開され、実行用のコマンド文字列になります。</p
+      ><p
+      >もしくは、全てのノードに適用されるデフォルト値を <code
+	>$RDECK_BASE/projects/NAME/etc/project.properties</code
+	> にある project.properties ファイル内に定義することおｍできます。</p
+      ><pre
+      ><code
+	>script-copy.default.command= /bin/copyremote -host ${node.hostname} -user ${node.username} -- ${file-copy.file} ${node.destdir}
+</code
+	></pre
+      ><p
+      >同様に全てのプロジェクトに適用するために <code
+	>$RDECK_BASE/etc/framework.properties</code
+	> ファイルを利用できます。 projects.</p
+      ></div
+    ><div id="script-copy-&#12501;&#12449;&#12452;&#12523;&#12497;&#12473;&#12398;&#23450;&#32681;"
+    ><h4
+      ><a href="#TOC"
+	>script-copy ファイルパスの定義</a
+	></h4
+      ><p
+      >このプロパティもしくは属性の値は、対象のノード上にあるファイルのフルパスでなければなりません。 スクリプトがコピーしたファイルを後から実行できるので、それを FileCopier サービスに伝えるためのものです。</p
+      ><p
+      >これは <em
+	>2つ</em
+	> の方法で実現できます。ここに記載するように設定プロパティとするか、以下に記載する <a href="plugins.html#script-copy%20%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E8%A6%81%E4%BB%B6"
+	>script-copy コマンドの要件</a
+	> のようにスクリプトからの出力を通じるかです。</p
+      ><p
+      >通常の Rundeck のコマンド実行で利用できる <code
+	>${node.name}</code
+	> や <code
+	>${job.name}</code
+	> などのような <em
+	>データコンテキストプロパティ</em
+	> を利用できます。</p
+      ><p
+      >くわえて、プラグインは新たなデータコンテキストプロパティを提供します:</p
+      ><dl
+      ><dt
+	><code
+	  >file-copy.file</code
+	  ></dt
+	><dd
+	><p
+	  >リモートノードにコピーされる必要のあるローカルファイルパス</p
+	  ></dd
+	><dt
+	><code
+	  >file-copy.filename</code
+	  ></dt
+	><dd
+	><p
+	  >パス情報を含まないファイル名</p
+	  ></dd
+	></dl
+      ><p
+      >例:</p
+      ><p
+      >上記から &quot;/bin/copyremote&quot; を例にします。リモートノードのどこにファイルをコピーするかきめるため、<code
+	>script-copy-remote-filepath</code
+	> を設定する必要があります。この例では <code
+	>${file-copy.file}</code
+	> を <code
+	>${node.destdir}</code
+	> にコピーします。ノード上のこの属性にディレクトリパスを設定したと仮定します。</p
+      ><p
+      ><code
+	>script-copy-remote-filepath</code
+	> にファイルがコピーされた後のリモートノード上の場所を設定する必要があります。 ファイル名は <code
+	>${file-copy.filename}</code
+	> が利用可能なので、<code
+	>${node.destdir}/${file-copy.filename}</code
+	> とセットします:</p
+      ><pre
+      ><code
+	>mynode:
+    file-copier: script-copy
+    script-copy: /bin/copyremote -host ${node.hostname} -user ${node.username} -- ${file-copy.file} ${node.destdir}
+    script-copy-remote-filepath: ${node.destdir}/${file-copy.filename}
+</code
+	></pre
+      ><p
+      >実行時、このプロパティは指定したノード用の値に展開され、実行用のコマンド文字列になります。</p
+      ><p
+      >もしくは、全てのノードに適用されるデフォルト値を <code
+	>$RDECK_BASE/projects/NAME/etc/project.properties</code
+	> にある project.properties ファイル内に定義することおｍできます。</p
+      ><pre
+      ><code
+	>script-copy.default.remote-filepath= ${node.destdir}/${file-copy.filename}
+</code
+	></pre
+      ><p
+      >同様に全てのプロジェクトに適用するために <code
+	>$RDECK_BASE/etc/framework.properties</code
+	> ファイルを利用できます。</p
+      ></div
+    ><div id="script-copy-&#12467;&#12510;&#12531;&#12489;&#12398;&#35201;&#20214;"
+    ><h4
+      ><a href="#TOC"
+	>script-copy コマンドの要件</a
+	></h4
+      ><p
+      >script-copy によって実行されるコマンドは以下のマナーに沿うことを求められます。</p
+      ><ul
+      ><li
+	>問題なく成功したときは終了コード &quot;0&quot; を返すこと</li
+	><li
+	>失敗したときはそれ以外の終了コードを返すこと</li
+	><li
+	><strong
+	  >同義</strong
+	  ><ul
+	  ><li
+	    >ターゲットノード上にコピーされたファイルのパス出力を STDOUT の1行目に出すこと もしくは</li
+	    ><li
+	    >上記を &quot;remote-filepath&quot; として定義すること</li
+	    ></ul
+	  ></li
+	></ul
+      ></div
+    ><div id="&#12473;&#12463;&#12522;&#12503;&#12488;&#20363;"
+    ><h4
+      ><a href="#TOC"
+	>スクリプト例</a
+	></h4
+      ><p
+      >利用パターンの参考になるスクリプトの例をいくつか載せます。</p
+      ><p
+      ><strong
+	>script-exec</strong
+	>:</p
+      ><p
+      >ノード定義:</p
+      ><pre
+      ><code
+	>mynode:
+    node-executor: script-exec
+</code
+	></pre
+      ><p
+      >プロジェクト設定ファイル <code
+	>project.properties</code
+	>:</p
+      ><pre
+      ><code
+	>plugin.script-exec.default.command: /tmp/myexec.sh ${node.hostname} ${node.username} -- ${exec.command}
+</code
+	></pre
+      ><p
+      ><code
+	>/tmp/myexec.sh</code
+	> の内容:</p
+      ><pre
+      ><code
+	>#!/bin/bash
+
+# args are [hostname] [username] -- [command to exec...]
+
+host=$1
+shift
+user=$1
+shift
+command=&quot;$*&quot;
+
+REMOTECMD=ssh
+
+exec $REMOTECMD $user@$host $command
+</code
+	></pre
+      ><p
+      ><strong
+	>script-copy</strong
+	>:</p
+      ><p
+      >ノード定義:</p
+      ><pre
+      ><code
+	>mynode:
+    file-copier: script-copy
+    destdir: /some/node/dir
+</code
+	></pre
+      ><p
+      ><code
+	>framework.properties</code
+	> 内のシステムワイド設定:</p
+      ><pre
+      ><code
+	>plugin.script-copy.default.command: /tmp/mycopy.sh ${node.hostname} ${node.username} ${node.destdir} ${file-copy.file}
+</code
+	></pre
+      ><p
+      ><code
+	>/tmp/mycopy.sh</code
+	> の内容:</p
+      ><pre
+      ><code
+	>#!/bin/bash
+
+# args are [hostname] [username] [destdir] [filepath]
+
+host=$1
+shift
+user=$1
+shift
+dir=$1
+shift
+file=$1
+
+name=`basename $file`
+
+# copy to node
+CPCMD=scp
+
+exec $CPCMD $file $user@$host:$dir/$name &gt; /dev/null || exit $?
+
+echo &quot;$dir/$name&quot;
+</code
+	></pre
+      ><p
+      ><strong
+	>ssh リプレースシステム</strong
+	>:</p
+      ><p
+      >この例ではシステムの &quot;ssh&quot; と &quot;scp&quot; コマンドをノード実行とファイルのコピーに使っています。 また、外部スクリプトファイルは使用しません:</p
+      ><p
+      >Node-only configuration:</p
+      ><pre
+      ><code
+	>mynode:
+    hostname: mynode
+    username: user1
+    node-executor: script-exec
+    script-exec: ssh -o &quot;StrictHostKeyChecking no&quot; ${node.username}@${node.hostname} ${exec.command}
+    script-exec-shell: bash -c
+    file-copier: script-copy
+    destdir: /tmp
+    script-copy-shell: bash -c
+    script-copy: scp ${file-copy.file} ${node.username}@${node.hostname}:${node.destdir}
+    script-copy-remote-filepath: ${node.destdir}/${file-copy.filename}
+</code
+	></pre
+      ><p
+      >デフォルト値は全て以下のような project.properties ファイル内のものがセットされます:</p
+      ><pre
+      ><code
+	># set default node executor
+service.NodeExecutor.default.provider=script-exec
+
+# set script-exec defaults
+plugin.script-exec.default.command=ssh -o &quot;StrictHostKeyChecking no&quot; ${node.username}@${node.hostname} ${exec.command}
+plugin.script-exec.default.shell=bash -c
+
+#set default file copier
+service.FileCopier.default.provider=script-copy
+
+#set script-copy defaults
+plugin.script-copy.default.command=scp ${file-copy.file} ${node.username}@${node.hostname}:${node.destdir}
+plugin.script-copy.default.shell: bash -c
+plugin.script-copy.default.remote-filepath: ${node.destdir}/${file-copy.filename}
+</code
+	></pre
+      ><p
+      >このケースではノード定義は単純です:</p
+      ><pre
+      ><code
+	>mynode:
+    hostname: mynode
+    username: user1
+    destdir: /tmp
+</code
+	></pre
+      ></div
+    ></div
+  ><div id="&#12473;&#12479;&#12502;&#12503;&#12521;&#12464;&#12452;&#12531;"
+  ><h3
+    ><a href="#TOC"
+      >スタブプラグイン</a
+      ></h3
+    ><p
+    ><code
+      >&#12473;&#12479;&#12502;&#12503;&#12521;&#12464;&#12452;&#12531;</code
+      > は以下のプロパイダを含んでいます:</p
+    ><ul
+    ><li
+      >NodeExecutor サービスの<code
+	>&#12473;&#12479;&#12502;</code
+	></li
+      ><li
+      >FileCopier サービスの<code
+	>&#12473;&#12479;&#12502;</code
+	></li
+      ></ul
+    ><p
+    >(これらを有効にするには <a href="plugins.html#%E3%83%97%E3%83%AD%E3%83%91%E3%82%A4%E3%83%80%E3%81%AE%E5%88%A9%E7%94%A8"
+      >プロパイダの利用</a
+      > を参考にして下さい)</p
+    ><p
+    >このプラグインはリモートファイルのコピーやコマンド実行を実際に行うわけではありません。 コマンドが実行されたかのように単純なエコーを返したり、ファイルがコピーされたように振る舞います。</p
+    ><p
+    >これは新しいノードやジョブ、ワークフローシーケンスを実際の実行環境に影響を与えずにテストしたい時に利用することを想定しています。</p
+    ><p
+    >また、以下のノード属性を設定して障害シナリオをテストすることもできます。</p
+    ><dl
+    ><dt
+      ><code
+	>stub-exec-success</code
+	>=&quot;true/false&quot;</dt
+      ><dd
+      ><p
+	>false にセットした場合、スタブコマンドの実行は失敗としてシミュレートされます</p
+	></dd
+      ><dt
+      ><code
+	>stub-result-code</code
+	></dt
+      ><dd
+      ><p
+	>実行結果の戻り値をシミュレートします</p
+	></dd
+      ></dl
+    ><p
+    >たとえば、単に <code
+      >project.properties</code
+      >　ノード executor プロバイダを <code
+      >stub</code
+      > に設定するだけでプロジェクトのワークフローやジョブを一通りテストしたり無効化することができます。</p
+    ></div
+  ></div
+><div id="&#12503;&#12521;&#12464;&#12452;&#12531;&#38283;&#30330;"
+><h2
+  ><a href="#TOC"
+    >プラグイン開発</a
+    ></h2
+  ><p
+  >プラグインはスクリプトを使ってカンタンに開発できます。Java も利用可能です。</p
+  ><p
+  >詳細については <a href="../developer/plugin-development.html"
+    >デベロッパーガイド - プラグイン開発</a
+    > を参照して下さい。</p
+  ></div
+>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck ドキュメント (2.2.3)</a></li>
+    
+    
+    <li ><a href="index.html">ユーザーマニュアル</a></li>
+    <li class="active"><a href="08-plugins.html">プラグイン</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="07-examples.html"><i class="glyphicon glyphicon-arrow-left"></i> 例から学ぶ Rundeck</a></li>
+      
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2014 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<span class="generated-date" title="2014-09-24T17:58:36EDT">2014-09-24T17:58:36EDT</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
+
