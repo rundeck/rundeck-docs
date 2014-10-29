@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SSH Plugins</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.3.0</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.3.0)</a></li>
+    
+    
+    <li ><a href="index.html">Plugins User Guide</a></li>
+    <li class="active"><a href="ssh-plugins.html">SSH Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="custom-command-and-script-execution-with-the-script-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> Custom command and script execution with the script-plugin</a></li>
+      <li class="next"><a href="storage-plugins.html">Storage Plugins <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<div id="TOC"
+><ul
+  ><li
+    ><a href="#scp-file-copier"
+      >SCP File Copier</a
+      ></li
+    ><li
+    ><a href="#authentication-types"
+      >Authentication types</a
+      ></li
+    ><li
+    ><a href="#specifying-ssh-username"
+      >Specifying SSH Username</a
+      ></li
+    ><li
+    ><a href="#specifying-ssh-config-options"
+      >Specifying SSH Config options</a
+      ></li
+    ><li
+    ><a href="#ssh-private-keys-on-disk"
+      >SSH private keys on disk</a
+      ></li
+    ><li
+    ><a href="#ssh-private-key-storage"
+      >SSH private key storage</a
+      ></li
+    ><li
+    ><a href="#ssh-private-key-passphrase"
+      >SSH Private Key Passphrase</a
+      ></li
+    ><li
+    ><a href="#ssh-password-authentication"
+      >SSH Password Authentication</a
+      ><ul
+      ><li
+	><a href="#ssh-password-with-a-job-option"
+	  >SSH Password with a Job Option</a
+	  ></li
+	><li
+	><a href="#ssh-password-storage"
+	  >SSH Password Storage</a
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#secondary-sudo-password-authentication"
+      >Secondary Sudo Password Authentication</a
+      ></li
+    ><li
+    ><a href="#multiple-sudo-password-authentication"
+      >Multiple Sudo Password Authentication</a
+      ></li
+    ><li
+    ><a href="#ssh-system-configuration"
+      >SSH System Configuration</a
+      ><ul
+      ><li
+	><a href="#ssh-key-generation"
+	  >SSH key generation</a
+	  ></li
+	><li
+	><a href="#configuring-remote-machine-for-ssh"
+	  >Configuring remote machine for SSH</a
+	  ></li
+	><li
+	><a href="#passing-environment-variables-through-remote-command"
+	  >Passing environment variables through remote command</a
+	  ></li
+	></ul
+      ></li
+    ></ul
+  ></div
+>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">SSH Plugins</h1>
+</div>
+<p
+>Rundeck by default uses SSH to execute commands on remote nodes, SCP to copy scripts to remote nodes, and locally executes commands and scripts for the local (server) node.</p
+><p
+>The SSH plugin expects each node definition to have the following properties in order to create the SSH connection:</p
+><ul
+><li
+  ><code
+    >hostname</code
+    >: the hostname of the remote node. It can be in the format &quot;hostname:port&quot; to indicate that a non-default port should be used. The default port is 22.</li
+  ><li
+  ><code
+    >username</code
+    >: the username to connect to the remote node.</li
+  ></ul
+><p
+>When a Script is executed on a remote node, it is copied over via SCP first, and then executed. In addition to the SSH connection properties above, these node attributes can be configured for SCP:</p
+><ul
+><li
+  ><code
+    >file-copy-destination-dir</code
+    >: The directory on the remote node to copy the script file to before executing it. The default value is <code
+    >C:/WINDOWS/TEMP/</code
+    > on Windows nodes, and <code
+    >/tmp</code
+    > for other nodes.</li
+  ><li
+  ><code
+    >osFamily</code
+    >: specify &quot;windows&quot; for windows nodes.</li
+  ></ul
+><p
+>In addition, for both SSH and SCP, you must either configure a public/private keypair for the remote node or configure the node for SSH Password authentication.</p
+><p
+>Out of the box typical node configuration to make use of these is simple.</p
+><ul
+><li
+  >Set the <code
+    >hostname</code
+    > attribute for the nodes. It can be in the format &quot;hostname:port&quot; to indicate that a non-default port should be used. The default port is 22.</li
+  ><li
+  >Set the <code
+    >username</code
+    > attribute for the nodes to the username to connect to the remote node.</li
+  ><li
+  >set up public/private key authentication from the Rundeck server to the nodes</li
+  ></ul
+><p
+>This will allow remote command and script execution on the nodes.</p
+><p
+>See below for more configuration options.</p
+><p
+><strong
+  >Sudo Password Authentication</strong
+  ></p
+><p
+>The SSH plugin also includes support for a secondary Sudo Password Authentication. This simulates a user writing a password to the terminal into a password prompt when invoking a &quot;sudo&quot; command that requires password authentication.</p
+><div id="scp-file-copier"
+><h3
+  ><a href="#TOC"
+    >SCP File Copier</a
+    ></h3
+  ><p
+  >In addition to the general SSH configuration mentioned for in this section, some additional configuration can be done for SCP.</p
+  ><p
+  >When a Script is executed on a remote node, it is copied over via SCP first, and then executed. In addition to the SSH connection properties, these node attributes can be configured for SCP:</p
+  ><ul
+  ><li
+    ><code
+      >file-copy-destination-dir</code
+      >: The directory on the remote node to copy the script file to before executing it. The default value is <code
+      >C:/WINDOWS/TEMP/</code
+      > on Windows nodes, and <code
+      >/tmp</code
+      > for other nodes.</li
+    ><li
+    ><code
+      >osFamily</code
+      >: specify &quot;windows&quot; for windows nodes.</li
+    ></ul
+  ></div
+><div id="authentication-types"
+><h3
+  ><a href="#TOC"
+    >Authentication types</a
+    ></h3
+  ><p
+  >SSH authentication can be done in two ways, via password or public/private key.</p
+  ><p
+  >By default, public/private key is used, but this can be changed on a node, project, or framework scope.</p
+  ><p
+  >The mechanism used is determined by the <code
+    >ssh-authentication</code
+    > property. This property can have two different values:</p
+  ><ul
+  ><li
+    ><code
+      >password</code
+      ></li
+    ><li
+    ><code
+      >privateKey</code
+      > (default)</li
+    ></ul
+  ><p
+  >When connecting to a particular Node, this sequence is used to determine the correct authentication mechanism:</p
+  ><ol style="list-style-type: decimal;"
+  ><li
+    ><strong
+      >Node level</strong
+      >: <code
+      >ssh-authentication</code
+      > attribute on the Node. Applies only to the target node.</li
+    ><li
+    ><strong
+      >Project level</strong
+      >: <code
+      >project.ssh-authentication</code
+      > property in <code
+      >project.properties</code
+      >. Applies to any project node by default.</li
+    ><li
+    ><strong
+      >Rundeck level</strong
+      >: <code
+      >framework.ssh-authentication</code
+      > property in <code
+      >framework.properties</code
+      >. Applies to all projects by default.</li
+    ></ol
+  ><p
+  >If none of those values are set, then the default public/private key authentication is used.</p
+  ></div
+><div id="specifying-ssh-username"
+><h3
+  ><a href="#TOC"
+    >Specifying SSH Username</a
+    ></h3
+  ><p
+  >The username used to connect via SSH is taken from the <code
+    >username</code
+    > Node attribute:</p
+  ><ul
+  ><li
+    ><code
+      >username=&quot;user1&quot;</code
+      ></li
+    ></ul
+  ><p
+  >This value can also include a property reference if you want to dynamically change it, for example to the name of the current Rundeck user, or the username submitted as a Job Option value:</p
+  ><ul
+  ><li
+    ><code
+      >${job.username}</code
+      > - uses the username of the user executing the Rundeck execution.</li
+    ><li
+    ><code
+      >${option.someUsername}</code
+      > - uses the value of a job option named &quot;someUsername&quot;.</li
+    ></ul
+  ><p
+  >If the <code
+    >username</code
+    > node attribute is not set, then the static value provided via project or framework configuration is used. The username for a node is determined by looking for a value in this order:</p
+  ><ol style="list-style-type: decimal;"
+  ><li
+    ><strong
+      >Node level</strong
+      >: <code
+      >username</code
+      > node attribute. Can contain property references to dynamically set it from Option or Execution values.</li
+    ><li
+    ><strong
+      >Project level</strong
+      >: <code
+      >project.ssh.user</code
+      > property in <code
+      >project.properties</code
+      > file for the project.</li
+    ><li
+    ><strong
+      >Rundeck level</strong
+      >: <code
+      >framework.ssh.user</code
+      > property in <code
+      >framework.properties</code
+      > file for the Rundeck installation.</li
+    ></ol
+  ></div
+><div id="specifying-ssh-config-options"
+><h3
+  ><a href="#TOC"
+    >Specifying SSH Config options</a
+    ></h3
+  ><p
+  >Default config options:</p
+  ><ul
+  ><li
+    ><code
+      >PreferredAuthentications: publickey,password,keyboard-interactive</code
+      ></li
+    ><li
+    ><code
+      >MaxAuthTries: 1</code
+      ></li
+    ></ul
+  ><p
+  >SSH config options can be specified by setting the following properties:</p
+  ><ol style="list-style-type: decimal;"
+  ><li
+    ><strong
+      >Node level</strong
+      >: <code
+      >ssh-config-KEY</code
+      > attribute on the Node. Applies only to the target node.</li
+    ><li
+    ><strong
+      >Project level</strong
+      >: <code
+      >project.ssh-config-KEY</code
+      > property in <code
+      >project.properties</code
+      >. Applies to any project node by default.</li
+    ><li
+    ><strong
+      >Rundeck level</strong
+      >: <code
+      >framework.ssh-config-KEY</code
+      > property in <code
+      >framework.properties</code
+      >. Applies to all projects by default.</li
+    ></ol
+  ></div
+><div id="ssh-private-keys-on-disk"
+><h3
+  ><a href="#TOC"
+    >SSH private keys on disk</a
+    ></h3
+  ><p
+  >The default authentication mechanism is public/private key using a <strong
+    >private key file</strong
+    > stored locally on disk.</p
+  ><p
+  >The built-in SSH connector allows the private key file to be specified in several different ways. You can configure it per-node, per-project, or per-Rundeck instance.</p
+  ><p
+  >When connecting to the remote node, Rundeck will look for a property/attribute specifying the location of the <strong
+    >private key file</strong
+    >, in this order, with the first match having precedence:</p
+  ><ol style="list-style-type: decimal;"
+  ><li
+    ><strong
+      >Node level</strong
+      >: <code
+      >ssh-keypath</code
+      > attribute on the Node. Applies only to the target node.</li
+    ><li
+    ><strong
+      >Project level</strong
+      >: <code
+      >project.ssh-keypath</code
+      > property in <code
+      >project.properties</code
+      >. Applies to any project node by default.</li
+    ><li
+    ><strong
+      >Rundeck level</strong
+      >: <code
+      >framework.ssh-keypath</code
+      > property in <code
+      >framework.properties</code
+      >. Applies to all projects by default.</li
+    ></ol
+  ><p
+  >If you private key is encrypted with a passphrase, then you can use a &quot;Secure Remote Authentication Option&quot; to prompt the user to enter the passphrase when executing on the Node. See below.</p
+  ><p
+  >You can embed context property references within the keypath such as <code
+    >${job.project}</code
+    >. See <a href="../manual/jobs.html#context-variables"
+    >Context Variables</a
+    >.</p
+  ></div
+><div id="ssh-private-key-storage"
+><h3
+  ><a href="#TOC"
+    >SSH private key storage</a
+    ></h3
+  ><p
+  >An alternate method allows you to use a private key file you have uploaded via the Rundeck <a href="../administration/ssh-key-storage.html"
+    >SSH Key Storage API</a
+    > or the GUI. The storage facility can be configured to store the keys on disk, or in the database, and can use plugins to provide encryption of the data.</p
+  ><p
+  >When uploaded, private keys are identified by a <em
+    >path</em
+    > which locates them in the storage facility. The <em
+    >path</em
+    > looks similar to a unix filesystem path.</p
+  ><p
+  >All SSH Keys are stored under the <code
+    >keys/</code
+    > top-level path.</p
+  ><p
+  >You can configure the built-in SSH connector to load the private key file from the storage facility. You can configure it per-node, per-project, or per-Rundeck instance.</p
+  ><p
+  >When connecting to the remote node, Rundeck will look for a property/attribute specifying the location of the <strong
+    >private key storage path</strong
+    >, in this order, with the first match having precedence:</p
+  ><ol style="list-style-type: decimal;"
+  ><li
+    ><strong
+      >Node level</strong
+      >: <code
+      >ssh-key-storage-path</code
+      > attribute on the Node. Applies only to the target node.</li
+    ><li
+    ><strong
+      >Project level</strong
+      >: <code
+      >project.ssh-key-storage-path</code
+      > property in <code
+      >project.properties</code
+      >. Applies to any project node by default.</li
+    ><li
+    ><strong
+      >Rundeck level</strong
+      >: <code
+      >framework.ssh-key-storage-path</code
+      > property in <code
+      >framework.properties</code
+      >. Applies to all projects by default.</li
+    ></ol
+  ><p
+  >If you private key is encrypted with a passphrase, then you can use a &quot;Secure Remote Authentication Option&quot; to prompt the user to enter the passphrase when executing on the Node. See below.</p
+  ><p
+  ><strong
+    >Note:</strong
+    > If both <code
+    >ssh-key-storage-path</code
+    > and <code
+    >ssh-keypath</code
+    > resolve to a value, then the <code
+    >ssh-key-storage-path</code
+    > will be used.</p
+  ><p
+  >You can embed context property references within the key storage path such as <code
+    >${job.project}</code
+    >. See <a href="../manual/jobs.html#context-variables"
+    >Context Variables</a
+    >.</p
+  ></div
+><div id="ssh-private-key-passphrase"
+><h3
+  ><a href="#TOC"
+    >SSH Private Key Passphrase</a
+    ></h3
+  ><p
+  >Using a passphrase for privateKey authentication works in the following way:</p
+  ><ul
+  ><li
+    >A Job must be defined specifying a Secure Remote Authentication Option to prompt the user for the key's passphrase.</li
+    ><li
+    >Target nodes must be configured to use privateKey authentication.</li
+    ><li
+    >When the user executes the Job, they are prompted for the key's passphrase. The Secure Remote Authentication Option value for the passphrase is not stored in the database, and is used only for that execution.</li
+    ></ul
+  ><p
+  >Therefore Private Key Passphrase authentication has several requirements and some limitations:</p
+  ><ol style="list-style-type: decimal;"
+  ><li
+    >Private Key-authenticated nodes requiring passphrases can only be executed on via a defined Job, not via Ad-hoc commands (yet).</li
+    ><li
+    >Each Job that will execute on such Nodes must define a Secure Remote Authentication Option to prompt the user for the key's passphrase before execution.</li
+    ><li
+    >All Nodes using passphrase protected private keys for a Job must have a matching Secure Remote Authentication Option defined, or may use the same option name (or the default) if they share the key's passphrase (e.g. using the same private key).</li
+    ></ol
+  ><p
+  >Passphrases are input either via the GUI or arguments to the job if executed via CLI or API.</p
+  ><p
+  >To enable SSH Private Key authentication, first make sure the <code
+    >ssh-authentication</code
+    > value is set (<a href="#authentication-types"
+    >#authentication-types</a
+    >. Second, configure the path to the private key file (<a href="#ssh-private-keys"
+    >#ssh-private-keys</a
+    >).</p
+  ><p
+  >Next, configure a Job, and include an Option definition where <code
+    >secureInput</code
+    > is set to <code
+    >true</code
+    >. The name of this option can be anything you want, but the default value of <code
+    >sshKeyPassphrase</code
+    > assumed by the node configuration is easiest.</p
+  ><p
+  >If the value is not <code
+    >sshKeyPassphrase</code
+    >, then make sure to set the following attribute on each Node for password authentication:</p
+  ><ul
+  ><li
+    ><code
+      >ssh-key-passphrase-option</code
+      > = &quot;<code
+      >option.NAME</code
+      >&quot; where NAME is the name of the Job's Secure Remote Authentication Option.</li
+    ></ul
+  ><p
+  >An example Node and Job option configuration are below:</p
+  ><table class="sourceCode"
+  ><tr
+    ><td class="lineNumbers" title="Click to toggle line numbers" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"
+      ><pre
+	>1<br
+	   />2<br
+	   />3<br
+	   />4<br
+	   />5<br
+	   />6</pre
+	></td
+      ><td class="sourceCode"
+      ><pre class="sourceCode xml"
+	><code
+	  ><span class="Keyword Element"
+	    >&lt;node</span
+	    ><span class="Others Attribute"
+	    > name=</span
+	    ><span class="String Value"
+	    >&quot;egon&quot;</span
+	    ><span class="Others Attribute"
+	    > description=</span
+	    ><span class="String Value"
+	    >&quot;egon&quot;</span
+	    ><span class="Others Attribute"
+	    > osFamily=</span
+	    ><span class="String Value"
+	    >&quot;unix&quot;</span
+	    ><br
+	     /><span class="Others Attribute"
+	    >    username=</span
+	    ><span class="String Value"
+	    >&quot;rundeck&quot;</span
+	    ><br
+	     /><span class="Others Attribute"
+	    >    hostname=</span
+	    ><span class="String Value"
+	    >&quot;egon&quot;</span
+	    ><br
+	     /><span class="Others Attribute"
+	    >    ssh-keypath=</span
+	    ><span class="String Value"
+	    >&quot;/path/to/privatekey_rsa&quot;</span
+	    ><br
+	     /><span class="Others Attribute"
+	    >    ssh-authentication=</span
+	    ><span class="String Value"
+	    >&quot;privateKey&quot;</span
+	    ><br
+	     /><span class="Others Attribute"
+	    >    ssh-password-option=</span
+	    ><span class="String Value"
+	    >&quot;option.sshKeyPassphrase&quot;</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Keyword Element"
+	    >/&gt;</span
+	    ><br
+	     /></code
+	  ></pre
+	></td
+      ></tr
+    ></table
+  ><p
+  >Job:</p
+  ><table class="sourceCode"
+  ><tr
+    ><td class="lineNumbers" title="Click to toggle line numbers" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"
+      ><pre
+	>1<br
+	   />2<br
+	   />3<br
+	   />4<br
+	   />5<br
+	   />6<br
+	   />7<br
+	   />8<br
+	   />9<br
+	   />10<br
+	   />11<br
+	   />12<br
+	   />13</pre
+	></td
+      ><td class="sourceCode"
+      ><pre class="sourceCode xml"
+	><code
+	  ><span class="Keyword Element"
+	    >&lt;joblist&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >    </span
+	    ><span class="Keyword Element"
+	    >&lt;job&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >        </span
+	    ><span class="Comment"
+	    >&lt;!-- ... --&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >        </span
+	    ><span class="Keyword Element"
+	    >&lt;context&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >          </span
+	    ><span class="Keyword Element"
+	    >&lt;project&gt;</span
+	    ><span class="Normal NormalText"
+	    >project</span
+	    ><span class="Keyword Element"
+	    >&lt;/project&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >          </span
+	    ><span class="Keyword Element"
+	    >&lt;options&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >            </span
+	    ><span class="Keyword Element"
+	    >&lt;option</span
+	    ><span class="Others Attribute"
+	    > required=</span
+	    ><span class="String Value"
+	    >'true'</span
+	    ><span class="Others Attribute"
+	    > name=</span
+	    ><span class="String Value"
+	    >'sshKeyPassphrase'</span
+	    ><span class="Others Attribute"
+	    > secure=</span
+	    ><span class="String Value"
+	    >'true'</span
+	    ><br
+	     /><span class="Others Attribute"
+	    >              description=</span
+	    ><span class="String Value"
+	    >&quot;Passphrase for SSH Private Key&quot;</span
+	    ><span class="Keyword Element"
+	    >/&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >          </span
+	    ><span class="Keyword Element"
+	    >&lt;/options&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >        </span
+	    ><span class="Keyword Element"
+	    >&lt;/context&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >        </span
+	    ><span class="Comment"
+	    >&lt;!-- ... --&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >    </span
+	    ><span class="Keyword Element"
+	    >&lt;/job&gt;</span
+	    ><br
+	     /><span class="Keyword Element"
+	    >&lt;/joblist&gt;</span
+	    ><br
+	     /></code
+	  ></pre
+	></td
+      ></tr
+    ></table
+  ></div
+><div id="ssh-password-authentication"
+><h3
+  ><a href="#TOC"
+    >SSH Password Authentication</a
+    ></h3
+  ><p
+  >Password authentication works in one of two ways:</p
+  ><ol style="list-style-type: decimal;"
+  ><li
+    >Using a Job defined with a Secure Remote Authentication Option to prompt the user for the password</li
+    ><li
+    ><strong
+      >OR</strong
+      > Using a password stored using <a href="#ssh-password-storage"
+      >SSH Password Storage</a
+      >.</li
+    ></ol
+  ><p
+  >In both cases, to enable SSH Password authentication, first make sure the <code
+    >ssh-authentication</code
+    > value is set as described in <a href="#authentication-types"
+    >Authentication types</a
+    >.</p
+  ><p
+  >Both methods can be used for multiple nodes within a Job. I.e. some nodes could be authenticated via stored password, and others via Job option user input.</p
+  ><div id="ssh-password-with-a-job-option"
+  ><h4
+    ><a href="#TOC"
+      >SSH Password with a Job Option</a
+      ></h4
+    ><p
+    >Passwords for the nodes are input either via the GUI or arguments to the job if executed via CLI or API.</p
+    ><ol style="list-style-type: decimal;"
+    ><li
+      >The Job must define a Secure Remote Authentication Option to prompt the user for the password before execution.</li
+      ><li
+      >All Nodes using this method must have an equivalent Secure Remote Authentication Option defined, or may use the same option name (or the default) if they share authentication passwords.</li
+      ></ol
+    ><p
+    >First configure a Job and include one or more Option definitions where Secure Remote Authentication type is selected. (In XML/YAML, <code
+      >secure</code
+      > is set to <code
+      >true</code
+      >, and <code
+      >valueExposed</code
+      > is set to <code
+      >false</code
+      >.) The name of this option can be anything you want, but the default value of <code
+      >sshPassword</code
+      > assumed by the node configuration is easiest. If you need multiple different passwords for different nodes, you must define multiple options in this way.</p
+    ><p
+    >If the option name is not <code
+      >sshPassword</code
+      >, then make sure to set the following attribute on each Node for password authentication:</p
+    ><ul
+    ><li
+      ><code
+	>ssh-password-option</code
+	> = &quot;<code
+	>option.NAME</code
+	>&quot; where NAME is the name of the Job's Secure Remote Authentication Option.</li
+      ></ul
+    ><p
+    >An example Node and Job option configuration are below:</p
+    ><table class="sourceCode"
+    ><tr
+      ><td class="lineNumbers" title="Click to toggle line numbers" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"
+	><pre
+	  >1<br
+	     />2<br
+	     />3<br
+	     />4<br
+	     />5</pre
+	  ></td
+	><td class="sourceCode"
+	><pre class="sourceCode xml"
+	  ><code
+	    ><span class="Keyword Element"
+	      >&lt;node</span
+	      ><span class="Others Attribute"
+	      > name=</span
+	      ><span class="String Value"
+	      >&quot;egon&quot;</span
+	      ><span class="Others Attribute"
+	      > description=</span
+	      ><span class="String Value"
+	      >&quot;egon&quot;</span
+	      ><span class="Others Attribute"
+	      > osFamily=</span
+	      ><span class="String Value"
+	      >&quot;unix&quot;</span
+	      ><br
+	       /><span class="Others Attribute"
+	      >    username=</span
+	      ><span class="String Value"
+	      >&quot;rundeck&quot;</span
+	      ><br
+	       /><span class="Others Attribute"
+	      >    hostname=</span
+	      ><span class="String Value"
+	      >&quot;egon&quot;</span
+	      ><br
+	       /><span class="Others Attribute"
+	      >    ssh-authentication=</span
+	      ><span class="String Value"
+	      >&quot;password&quot;</span
+	      ><br
+	       /><span class="Others Attribute"
+	      >    ssh-password-option=</span
+	      ><span class="String Value"
+	      >&quot;option.sshPassword1&quot;</span
+	      ><span class="Normal NormalText"
+	      > </span
+	      ><span class="Keyword Element"
+	      >/&gt;</span
+	      ><br
+	       /></code
+	    ></pre
+	  ></td
+	></tr
+      ></table
+    ><p
+    >Job:</p
+    ><table class="sourceCode"
+    ><tr
+      ><td class="lineNumbers" title="Click to toggle line numbers" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"
+	><pre
+	  >1<br
+	     />2<br
+	     />3<br
+	     />4<br
+	     />5<br
+	     />6<br
+	     />7<br
+	     />8<br
+	     />9<br
+	     />10<br
+	     />11<br
+	     />12</pre
+	  ></td
+	><td class="sourceCode"
+	><pre class="sourceCode xml"
+	  ><code
+	    ><span class="Keyword Element"
+	      >&lt;joblist&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;job&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >        </span
+	      ><span class="Comment"
+	      >&lt;!-- ... --&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >        </span
+	      ><span class="Keyword Element"
+	      >&lt;context&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >          </span
+	      ><span class="Keyword Element"
+	      >&lt;project&gt;</span
+	      ><span class="Normal NormalText"
+	      >project</span
+	      ><span class="Keyword Element"
+	      >&lt;/project&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >          </span
+	      ><span class="Keyword Element"
+	      >&lt;options&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >            </span
+	      ><span class="Keyword Element"
+	      >&lt;option</span
+	      ><span class="Others Attribute"
+	      > required=</span
+	      ><span class="String Value"
+	      >'true'</span
+	      ><span class="Others Attribute"
+	      > name=</span
+	      ><span class="String Value"
+	      >'sshPassword1'</span
+	      ><span class="Others Attribute"
+	      > secure=</span
+	      ><span class="String Value"
+	      >'true'</span
+	      ><span class="Others Attribute"
+	      > valueExposed=</span
+	      ><span class="String Value"
+	      >&quot;false&quot;</span
+	      ><span class="Keyword Element"
+	      >/&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >          </span
+	      ><span class="Keyword Element"
+	      >&lt;/options&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >        </span
+	      ><span class="Keyword Element"
+	      >&lt;/context&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >        </span
+	      ><span class="Comment"
+	      >&lt;!-- ... --&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;/job&gt;</span
+	      ><br
+	       /><span class="Keyword Element"
+	      >&lt;/joblist&gt;</span
+	      ><br
+	       /></code
+	    ></pre
+	  ></td
+	></tr
+      ></table
+    ></div
+  ><div id="ssh-password-storage"
+  ><h4
+    ><a href="#TOC"
+      >SSH Password Storage</a
+      ></h4
+    ><p
+    >Just like the <a href="#ssh-private-key-storage"
+      >SSH Private Key Storage</a
+      >, passwords can also be stored in the Key Storage Facility and used for authentication.</p
+    ><p
+    >When connecting to the remote node, Rundeck will look for a property/attribute specifying the location of the <strong
+      >password storage path</strong
+      >, in this order, with the first match having precedence:</p
+    ><ol style="list-style-type: decimal;"
+    ><li
+      ><strong
+	>Node level</strong
+	>: <code
+	>ssh-password-storage-path</code
+	> attribute on the Node. Applies only to the target node.</li
+      ><li
+      ><strong
+	>Project level</strong
+	>: <code
+	>project.ssh-password-storage-path</code
+	> property in <code
+	>project.properties</code
+	>. Applies to any project node by default.</li
+      ><li
+      ><strong
+	>Rundeck level</strong
+	>: <code
+	>framework.ssh-password-storage-path</code
+	> property in <code
+	>framework.properties</code
+	>. Applies to all projects by default.</li
+      ></ol
+    ><p
+    ><strong
+      >Note:</strong
+      > If both <code
+      >ssh-password-storage-path</code
+      > and <code
+      >ssh-password-option</code
+      > resolve to a value, then the <code
+      >ssh-password-storage-path</code
+      > will be used.</p
+    ><p
+    >You can embed context property references within the password storage path such as <code
+      >${job.project}</code
+      > or <code
+      >${node.name}</code
+      >. See <a href="../manual/jobs.html#context-variables"
+      >Context Variables</a
+      >.</p
+    ><p
+    >An example Node using password storage:</p
+    ><table class="sourceCode"
+    ><tr
+      ><td class="lineNumbers" title="Click to toggle line numbers" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"
+	><pre
+	  >1<br
+	     />2<br
+	     />3<br
+	     />4<br
+	     />5</pre
+	  ></td
+	><td class="sourceCode"
+	><pre class="sourceCode xml"
+	  ><code
+	    ><span class="Keyword Element"
+	      >&lt;node</span
+	      ><span class="Others Attribute"
+	      > name=</span
+	      ><span class="String Value"
+	      >&quot;egon&quot;</span
+	      ><span class="Others Attribute"
+	      > description=</span
+	      ><span class="String Value"
+	      >&quot;egon&quot;</span
+	      ><span class="Others Attribute"
+	      > osFamily=</span
+	      ><span class="String Value"
+	      >&quot;unix&quot;</span
+	      ><br
+	       /><span class="Others Attribute"
+	      >    username=</span
+	      ><span class="String Value"
+	      >&quot;rundeck&quot;</span
+	      ><br
+	       /><span class="Others Attribute"
+	      >    hostname=</span
+	      ><span class="String Value"
+	      >&quot;egon&quot;</span
+	      ><br
+	       /><span class="Others Attribute"
+	      >    ssh-authentication=</span
+	      ><span class="String Value"
+	      >&quot;password&quot;</span
+	      ><br
+	       /><span class="Others Attribute"
+	      >    ssh-password-storage-path=</span
+	      ><span class="String Value"
+	      >&quot;keys/projects/${job.project}/nodes/${node.name}/rundeck.password&quot;</span
+	      ><span class="Normal NormalText"
+	      > </span
+	      ><span class="Keyword Element"
+	      >/&gt;</span
+	      ><br
+	       /></code
+	    ></pre
+	  ></td
+	></tr
+      ></table
+    ></div
+  ></div
+><div id="secondary-sudo-password-authentication"
+><h3
+  ><a href="#TOC"
+    >Secondary Sudo Password Authentication</a
+    ></h3
+  ><p
+  >The SSH provider supports a secondary authentication mechanism: Sudo password authentication. This is useful if your security requirements are such that you require the SSH connection to be under a specific user's account instead of a generic &quot;rundeck&quot; account, and you still need to allow &quot;sudo&quot; level commands to be executed requiring a password to be entered.</p
+  ><p
+  >This works in the following way:</p
+  ><ul
+  ><li
+    >On Job execution, the user is prompted to enter a Sudo password</li
+    ><li
+    >After connecting to the remote node via SSH, a command requiring &quot;sudo&quot; authentication is issued, such as &quot;sudo -u otheruser /sbin/some-command&quot;</li
+    ><li
+    >The remote node will prompt for a sudo password, expecting user input</li
+    ><li
+    >The SSH Provider will write the password to the remote node</li
+    ><li
+    >The sudo command will execute as if a user had entered the command</li
+    ></ul
+  ><p
+  >Similarly to SSH Password authentication, Sudo Password Authentication requires:</p
+  ><ul
+  ><li
+    >A Job must be defined specifying a Secure Remote Authentication Option to prompt the user for the password</li
+    ><li
+    >Target nodes must be configured for Sudo authentication</li
+    ><li
+    >When the user executes the Job, they are prompted for the password. The Secure Remote Authentication Option value for the password is not stored in the database, and is used only for that execution.</li
+    ></ul
+  ><p
+  >Therefore Sudo Password Authentication has several requirements and some limitations:</p
+  ><ol style="list-style-type: decimal;"
+  ><li
+    >Sudo Password authenticated nodes can only be executed on via a defined Job, not via Ad-hoc commands (yet).</li
+    ><li
+    >Each Job that will execute on Sudo Password Authenticated Nodes must define a Secure Remote Authentication Option to prompt the user for the Sudo password before execution.</li
+    ><li
+    >All Nodes using Sudo password authentication for a Job must have an equivalent Secure Remote Authentication Option defined, or may use the same option name (or the default) if they share sudo authentication passwords.</li
+    ></ol
+  ><p
+  >Passwords for the nodes are input either via the GUI or arguments to the job if executed via CLI or API.</p
+  ><p
+  >To enable Sudo Password Authentication, set the <code
+    >sudo-command-enabled</code
+    > property/attribute to <code
+    >true</code
+    >.</p
+  ><p
+  >You can configure the way the Sudo Password Authentication works by setting these properties at the Node, Project or Rundeck scopes. Simply set the attribute name on a Node, the <code
+    >project.NAME</code
+    > in project.properties, or <code
+    >framework.NAME</code
+    > in framework.properties:</p
+  ><ul
+  ><li
+    ><code
+      >sudo-command-enabled</code
+      > - set to &quot;true&quot; to enable Sudo Password Authentication.</li
+    ><li
+    ><code
+      >sudo-command-pattern</code
+      > - a regular expression to detect when a command execution should expect to require Sudo authentication. Default pattern is <code
+      >^sudo$</code
+      >.</li
+    ><li
+    ><code
+      >sudo-password-option</code
+      > - an option reference (&quot;option.NAME&quot;) to define which secure remote authentication option value to use as password. The default is <code
+      >option.sudoPassword</code
+      >.</li
+    ><li
+    ><code
+      >sudo-prompt-pattern</code
+      > - a regular expression to detect the password prompt for the Sudo authentication. The default pattern is <code
+      >^\[sudo\] password for .+: .*</code
+      ></li
+    ><li
+    ><code
+      >sudo-failure-pattern</code
+      > - a regular expression to detect the password failure response. The default pattern is <code
+      >^.*try again.*</code
+      >.</li
+    ><li
+    ><code
+      >sudo-prompt-max-lines</code
+      > - maximum lines to read when expecting the password prompt. (default: <code
+      >12</code
+      >).</li
+    ><li
+    ><code
+      >sudo-prompt-max-timeout</code
+      > - maximum milliseconds to wait for input when expecting the password prompt. (default <code
+      >5000</code
+      >)</li
+    ><li
+    ><code
+      >sudo-response-max-lines</code
+      > - maximum lines to read when looking for failure response. (default: <code
+      >2</code
+      >).</li
+    ><li
+    ><code
+      >sudo-response-max-timeout</code
+      > - maximum milliseconds to wait for response when detecting the failure response. (default <code
+      >5000</code
+      >)</li
+    ><li
+    ><code
+      >sudo-fail-on-prompt-max-lines</code
+      > - true/false. If true, fail execution if max lines are reached looking for password prompt. (default: <code
+      >false</code
+      >)</li
+    ><li
+    ><code
+      >sudo-success-on-prompt-threshold</code
+      > - true/false. If true, succeed (without writing password), if the input max lines are reached without detecting password prompt. (default: <code
+      >true</code
+      >).</li
+    ><li
+    ><code
+      >sudo-fail-on-prompt-timeout</code
+      > - true/false. If true, fail execution if timeout reached looking for password prompt. (default: <code
+      >true</code
+      >)</li
+    ><li
+    ><code
+      >sudo-fail-on-response-timeout</code
+      > - true/false. If true, fail on timeout looking for failure message. (default: <code
+      >false</code
+      >)</li
+    ></ul
+  ><p
+  >Note: the default values have been set for the unix &quot;sudo&quot; command, but can be overridden if you need to customize the interaction.</p
+  ><p
+  >Next, configure a Job, and include an Option definition where <code
+    >secureInput</code
+    > is set to <code
+    >true</code
+    >. The name of this option can be anything you want, but the default value of <code
+    >sudoPassword</code
+    > recognized by the plugin can be used.</p
+  ><p
+  >If the value is not <code
+    >sudoPassword</code
+    >, then make sure to set the following attribute on each Node for password authentication:</p
+  ><ul
+  ><li
+    ><code
+      >sudo-password-option</code
+      > = &quot;<code
+      >option.NAME</code
+      >&quot; where NAME is the name of the Job's Secure Remote Authentication Option.</li
+    ></ul
+  ><p
+  >An example Node and Job option configuration are below:</p
+  ><table class="sourceCode"
+  ><tr
+    ><td class="lineNumbers" title="Click to toggle line numbers" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"
+      ><pre
+	>1<br
+	   />2<br
+	   />3<br
+	   />4<br
+	   />5</pre
+	></td
+      ><td class="sourceCode"
+      ><pre class="sourceCode xml"
+	><code
+	  ><span class="Keyword Element"
+	    >&lt;node</span
+	    ><span class="Others Attribute"
+	    > name=</span
+	    ><span class="String Value"
+	    >&quot;egon&quot;</span
+	    ><span class="Others Attribute"
+	    > description=</span
+	    ><span class="String Value"
+	    >&quot;egon&quot;</span
+	    ><span class="Others Attribute"
+	    > osFamily=</span
+	    ><span class="String Value"
+	    >&quot;unix&quot;</span
+	    ><br
+	     /><span class="Others Attribute"
+	    >    username=</span
+	    ><span class="String Value"
+	    >&quot;rundeck&quot;</span
+	    ><br
+	     /><span class="Others Attribute"
+	    >    hostname=</span
+	    ><span class="String Value"
+	    >&quot;egon&quot;</span
+	    ><br
+	     /><span class="Others Attribute"
+	    >    sudo-command-enabled=</span
+	    ><span class="String Value"
+	    >&quot;true&quot;</span
+	    ><br
+	     /><span class="Others Attribute"
+	    >    sudo-password-option=</span
+	    ><span class="String Value"
+	    >&quot;option.sudoPassword2&quot;</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Keyword Element"
+	    >/&gt;</span
+	    ><br
+	     /></code
+	  ></pre
+	></td
+      ></tr
+    ></table
+  ><p
+  >Job:</p
+  ><table class="sourceCode"
+  ><tr
+    ><td class="lineNumbers" title="Click to toggle line numbers" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"
+      ><pre
+	>1<br
+	   />2<br
+	   />3<br
+	   />4<br
+	   />5<br
+	   />6<br
+	   />7<br
+	   />8<br
+	   />9<br
+	   />10<br
+	   />11<br
+	   />12<br
+	   />13<br
+	   />14<br
+	   />15<br
+	   />16<br
+	   />17<br
+	   />18</pre
+	></td
+      ><td class="sourceCode"
+      ><pre class="sourceCode xml"
+	><code
+	  ><span class="Keyword Element"
+	    >&lt;joblist&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >    </span
+	    ><span class="Keyword Element"
+	    >&lt;job&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >         </span
+	    ><span class="Keyword Element"
+	    >&lt;sequence</span
+	    ><span class="Others Attribute"
+	    > keepgoing=</span
+	    ><span class="String Value"
+	    >'false'</span
+	    ><span class="Others Attribute"
+	    > strategy=</span
+	    ><span class="String Value"
+	    >'node-first'</span
+	    ><span class="Keyword Element"
+	    >&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >          </span
+	    ><span class="Keyword Element"
+	    >&lt;command&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >            </span
+	    ><span class="Keyword Element"
+	    >&lt;exec&gt;</span
+	    ><span class="Normal NormalText"
+	    >sudo apachectl restart</span
+	    ><span class="Keyword Element"
+	    >&lt;/exec&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >          </span
+	    ><span class="Keyword Element"
+	    >&lt;/command&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >        </span
+	    ><span class="Keyword Element"
+	    >&lt;/sequence&gt;</span
+	    ><br
+	     /><br
+	     /><span class="Normal NormalText"
+	    >        </span
+	    ><span class="Keyword Element"
+	    >&lt;context&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >          </span
+	    ><span class="Keyword Element"
+	    >&lt;project&gt;</span
+	    ><span class="Normal NormalText"
+	    >project</span
+	    ><span class="Keyword Element"
+	    >&lt;/project&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >          </span
+	    ><span class="Keyword Element"
+	    >&lt;options&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >            </span
+	    ><span class="Keyword Element"
+	    >&lt;option</span
+	    ><span class="Others Attribute"
+	    > required=</span
+	    ><span class="String Value"
+	    >'true'</span
+	    ><span class="Others Attribute"
+	    > name=</span
+	    ><span class="String Value"
+	    >'sudoPassword2'</span
+	    ><span class="Others Attribute"
+	    > secure=</span
+	    ><span class="String Value"
+	    >'true'</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><br
+	     /><span class="Others Attribute"
+	    >                    description=</span
+	    ><span class="String Value"
+	    >&quot;Sudo authentication password&quot;</span
+	    ><span class="Keyword Element"
+	    >/&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >          </span
+	    ><span class="Keyword Element"
+	    >&lt;/options&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >        </span
+	    ><span class="Keyword Element"
+	    >&lt;/context&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >        ...</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >    </span
+	    ><span class="Keyword Element"
+	    >&lt;/job&gt;</span
+	    ><br
+	     /><span class="Keyword Element"
+	    >&lt;/joblist&gt;</span
+	    ><br
+	     /></code
+	  ></pre
+	></td
+      ></tr
+    ></table
+  ></div
+><div id="multiple-sudo-password-authentication"
+><h3
+  ><a href="#TOC"
+    >Multiple Sudo Password Authentication</a
+    ></h3
+  ><p
+  >You can enable a further level of sudo password support for a node. If you have the requirement of executing a chain of &quot;sudo&quot; commands, such as &quot;sudo -u user1 sudo -u user2 command&quot;, and need to enable password input for both levels of sudo. This is possible by configuring a secondary set of properties for your node/project/framework.</p
+  ><p
+  >The configuration properties are the same as those for the first-level of sudo password authentication described in <a href="#secondary-sudo-password-authentication"
+    >Configuring Secondary Sudo Password Authentication</a
+    >, but with a prefix of &quot;sudo2-&quot; instead of &quot;sudo-&quot;, such as:</p
+  ><pre
+  ><code
+    >sudo2-command-enabled=&quot;true&quot;
+sudo2-command-pattern=&quot;^sudo .+? sudo .*$&quot;
+</code
+    ></pre
+  ><p
+  >This would turn on a mechanism to expect and respond to another sudo password prompt when the command matches the given pattern.</p
+  ><p
+  >If a value for &quot;sudo2-password-option&quot; is not set, then a default value of <code
+    >option.sudo2Password</code
+    > will be used.</p
+  ><p
+  ><strong
+    >A note about the &quot;sudo2-command-pattern&quot;:</strong
+    ></p
+  ><p
+  >The sudo authentication mechanism uses two regular expressions to test whether it should be invoked.</p
+  ><p
+  >For the first sudo authentication, the &quot;sudo-command-pattern&quot; value is matched against the <strong
+    >first component of the command being executed</strong
+    >. The default value for this pattern is <code
+    >^sudo$</code
+    >. So a command like &quot;sudo -u user1 some command&quot; will match correctly. You can modify the regular expression (e.g. to support &quot;su&quot;), but it will always only match against the first part of the command.</p
+  ><p
+  >If &quot;sudo2-command-enabled&quot; is &quot;true&quot;, then the &quot;sudo2-command-pattern&quot; is also checked and if it matches then another sudo authentication is enabled. However this regular expression is tested against the <strong
+    >entire command string</strong
+    > to make it possible to determine whether it should be enabled. The default value is <code
+    >^sudo .+? sudo .*$</code
+    >. If necessary you should customize the value.</p
+  ></div
+><div id="ssh-system-configuration"
+><h2
+  ><a href="#TOC"
+    >SSH System Configuration</a
+    ></h2
+  ><ul
+  ><li
+    >The SSH configuration requires that the Rundeck server machine can ssh commands to the client machines.</li
+    ><li
+    >SSH is assumed to be installed and configured appropriately to allow this access.<br
+       /></li
+    ><li
+    >SSH can be configured for either <em
+      >password</em
+      > based authentication or <em
+      >public/private key</em
+      > based authentication.</li
+    ><li
+    >For public/private key authentication:<ul
+      ><li
+	>There are many resources available on how to configure ssh to use public key authentication instead of passwords such as: <a href="http://www.debian-administration.org/articles/152"
+	  >Password-less logins with OpenSSH</a
+	  >.</li
+	><li
+	>If your private key file has a passphrase, each Job definition that will execute on the node must be configured correctly.</li
+	></ul
+      ></li
+    ><li
+    >For password authentication:<ul
+      ><li
+	>each Node definition must be configured to allow password authentication</li
+	><li
+	>each Job definition that will use it must be configured correctly</li
+	></ul
+      ></li
+    ></ul
+  ><div id="ssh-key-generation"
+  ><h3
+    ><a href="#TOC"
+      >SSH key generation</a
+      ></h3
+    ><ul
+    ><li
+      >The Rundeck installation can be configured to use RSA <em
+	>or</em
+	> DSA type keys.</li
+      ></ul
+    ><p
+    >Here's an example of SSH RSA key generation on a Linux system:</p
+    ><pre
+    ><code
+      >$ ssh-keygen -t rsa
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/demo/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/demo/.ssh/id_rsa.
+Your public key has been saved in /home/demo/.ssh/id_rsa.pub.
+The key fingerprint is:
+a7:31:01:ca:f0:62:42:9d:ab:c8:b7:9c:d1:80:76:c6 demo@ubuntu
+The key's randomart image is:
++--[ RSA 2048]----+
+| .o . .          |
+|.  * . .         |
+|. = =   .        |
+| = E     .       |
+|+ + o   S .      |
+|.o o .   =       |
+|  o +   .        |
+|   +             |
+|                 |
++-----------------+
+</code
+      ></pre
+    ></div
+  ><div id="configuring-remote-machine-for-ssh"
+  ><h3
+    ><a href="#TOC"
+      >Configuring remote machine for SSH</a
+      ></h3
+    ><p
+    >To be able to directly ssh to remote machines, the SSH public key of the client should be shared to the remote machine.</p
+    ><p
+    >Follow the steps given below to enable ssh to remote machines.</p
+    ><p
+    >The ssh public key should be copied to the <code
+      >authorized_keys</code
+      > file of the remote machine. The public key will be available in <code
+      >~/.ssh/id_rsa.pub</code
+      > file.</p
+    ><p
+    >The <code
+      >authorized_keys</code
+      > file should be created in the <code
+      >.ssh</code
+      > directory of the remote machine.</p
+    ><p
+    >The file permission of the authorized key should be read/write for the user and nothing for group and others. To do this check the permission and change it as shown below.</p
+    ><pre
+    ><code
+      >$ cd ~/.ssh
+$ ls -la
+-rw-r--r--   1 raj  staff     0 Nov 22 18:14 authorized_keys
+
+$ chmod 600 authorized_keys 
+$ ls -la
+-rw-------   1 raj  staff     0 Nov 22 18:14 authorized_keys
+</code
+      ></pre
+    ><p
+    >The permission for the .ssh directory of the remote machine should be read/write/execute for the user and nothing for the group and others. To do this, check the permission and change it as shown below.</p
+    ><pre
+    ><code
+      >$ ls -la
+drwxr-xr-x   2 raj  staff    68 Nov 22 18:19 .ssh
+$ chmod 700 .ssh
+$ ls -la
+drwx------   2 raj  staff    68 Nov 22 18:19 .ssh
+</code
+      ></pre
+    ><p
+    >If you are running Rundeck on Windows, we heartily recommend using <a href="http://www.cygwin.org"
+      >Cygwin</a
+      > on Windows as it includes SSH and a number of Unix-like tools that are useful when you work in a command line environment.</p
+    ></div
+  ><div id="passing-environment-variables-through-remote-command"
+  ><h3
+    ><a href="#TOC"
+      >Passing environment variables through remote command</a
+      ></h3
+    ><p
+    >To pass environment variables through remote command dispatches, it is required to properly configure the SSH server on the remote end. See the <code
+      >AcceptEnv</code
+      > directive in the &quot;sshd_config(5)&quot; manual page for instructions.</p
+    ><p
+    >Use a wild card pattern to permit <code
+      >RD_</code
+      > prefixed variables to provide open access to Rundeck generated environment variables.</p
+    ><p
+    >Example in sshd_config:</p
+    ><pre
+    ><code
+      ># pass Rundeck variables
+AcceptEnv RD_*
+</code
+      ></pre
+    ></div
+  ></div
+>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.3.0)</a></li>
+    
+    
+    <li ><a href="index.html">Plugins User Guide</a></li>
+    <li class="active"><a href="ssh-plugins.html">SSH Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="custom-command-and-script-execution-with-the-script-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> Custom command and script execution with the script-plugin</a></li>
+      <li class="next"><a href="storage-plugins.html">Storage Plugins <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2014 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<span class="generated-date" title="2014-10-28T20:39:35EDT">2014-10-28T20:39:35EDT</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
+

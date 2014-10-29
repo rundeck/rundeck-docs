@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>run</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Alex Honor" />
+  <meta name="date" content="November 20, 2010" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.3.0</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.3.0)</a></li>
+    
+    
+    <li ><a href="index.html">Command Line Tools</a></li>
+    <li class="active"><a href="run.html">run</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="rd-setup.html"><i class="glyphicon glyphicon-arrow-left"></i> rd-setup</a></li>
+      
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<div id="TOC"
+><ul
+  ><li
+    ><a href="#name"
+      >NAME</a
+      ></li
+    ><li
+    ><a href="#synopsis"
+      >SYNOPSIS</a
+      ></li
+    ><li
+    ><a href="#description"
+      >DESCRIPTION</a
+      ></li
+    ><li
+    ><a href="#options"
+      >OPTIONS</a
+      ></li
+    ><li
+    ><a href="#execution"
+      >EXECUTION</a
+      ></li
+    ><li
+    ><a href="#arguments"
+      >ARGUMENTS</a
+      ><ul
+      ><li
+	><a href="#examples"
+	  >EXAMPLES</a
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#see-also"
+      >SEE ALSO</a
+      ></li
+    ></ul
+  ></div
+>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">run</h1>
+</div>
+<div id="name"
+><h1
+  ><a href="#TOC"
+    >NAME</a
+    ></h1
+  ><p
+  >run - execute a stored Job on the Rundeck server</p
+  ></div
+><div id="synopsis"
+><h1
+  ><a href="#TOC"
+    >SYNOPSIS</a
+    ></h1
+  ><p
+  ><code
+    >run [-h] [-v] [-l level] [-F nodefilters] [-i id] [-j group/name][-- arguments]</code
+    ></p
+  ></div
+><div id="description"
+><h1
+  ><a href="#TOC"
+    >DESCRIPTION</a
+    ></h1
+  ><p
+  >The run command is used to start the execution of a Job defined in Rundeck. The Job is executed on the server, and the ID for the execution is displayed. This is equivalent to logging in to Rundeck and starting a Job within the web application GUI.</p
+  ><p
+  >The Job can either be specified by ID (<code
+    >-i</code
+    >), or by name and optional group (<code
+    >-j</code
+    >). The Node filters used for the execution of the job can also be specified on the commandline, and will be used instead of any already defined for the Job. Arguments to the Execution can be specified after (<code
+    >--</code
+    >).</p
+  ><p
+  >If the <code
+    >-f</code
+    >,<code
+    >--follow</code
+    > option is used, then the output will be retrieved from the server as it is produced and echoed locally.</p
+  ><p
+  >This can be combined with either <code
+    >-q</code
+    >,<code
+    >--quiet</code
+    > to show no output and only wait until the execution finishes. Exit status will indicate if the execution succeeded or failed. If <code
+    >-r</code
+    >,<code
+    >--progress</code
+    > is used instead, then progress of the execution is indicated periodically by echoed '.' characters.</p
+  ><p
+  >The <code
+    >-F</code
+    >/<code
+    >--filter</code
+    > option can be used to specify a node filter string. See <a href="../manual/node-filters.html"
+    >User Guide - Node Filters</a
+    >.</p
+  ></div
+><div id="options"
+><h1
+  ><a href="#TOC"
+    >OPTIONS</a
+    ></h1
+  ><p
+  ><code
+    >-h, --help</code
+    > : Print usage message.</p
+  ><p
+  ><code
+    >-v</code
+    > : Run verbosely.</p
+  ><p
+  ><code
+    >-l, --loglevel *LEVEL*</code
+    > : Run the command using the specified LEVEL. <em
+    >LEVEL</em
+    > can be <code
+    >verbose</code
+    >, <code
+    >info</code
+    >, <code
+    >warning</code
+    >, <code
+    >error</code
+    >.</p
+  ><p
+  ><code
+    >-F, --filter *FILTER*</code
+    > : A node filter string</p
+  ><p
+  ><code
+    >-C *COUNT*</code
+    > : Threadcount, defaults to 1.</p
+  ><p
+  ><code
+    >-K</code
+    > : Keep going on node failure.</p
+  ><p
+  ><code
+    >-N</code
+    > : Do not keep going on node failures.</p
+  ><p
+  ><code
+    >-j, --job *NAME*</code
+    > : Job job (group and name). Run a Job specified by Job name and group. eg: 'group/name'.</p
+  ><p
+  ><code
+    >-i, --id *IDENTIFIER*</code
+    > : Run the Job with this IDENTIFIER</p
+  ><p
+  ><code
+    >-- *ARGUMENTS*</code
+    > : Pass the specified ARGUMENTS as options to the job</p
+  ><p
+  ><code
+    >-f, --follow</code
+    > : Follow queued execution output</p
+  ><p
+  ><code
+    >-r, --progress</code
+    > : In follow mode, print progress indicator chars</p
+  ><p
+  ><code
+    >-q, --quiet</code
+    > : In follow mode, do not show output from the execution, but wait until it completes.</p
+  ></div
+><div id="execution"
+><h1
+  ><a href="#TOC"
+    >EXECUTION</a
+    ></h1
+  ><p
+  >This tool requires a unique Job to be identified for execution. This is done either by using <code
+    >-i id</code
+    >, or <code
+    >-j group/name</code
+    >. The group is optional if only one Job with the name exists.</p
+  ></div
+><div id="arguments"
+><h1
+  ><a href="#TOC"
+    >ARGUMENTS</a
+    ></h1
+  ><p
+  >Arguments can be passed to the Job that is being executed after the <code
+    >--</code
+    > separator. You must use this separator after all of the tool options that you specify on the commandline.</p
+  ><p
+  >Each argument that you pass should correspond to a defined Option for the Job. The syntax for passing these options is:</p
+  ><pre
+  ><code
+    >-optionname &lt;value&gt; -otheroption &lt;value&gt;
+</code
+    ></pre
+  ><p
+  >All Job Options in Rundeck require an argument value if specified.</p
+  ><div id="examples"
+  ><h2
+    ><a href="#TOC"
+      >EXAMPLES</a
+      ></h2
+    ><p
+    >Run the Job that has ID <code
+      >12</code
+      >:</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Normal NormalText"
+	>run </span
+	><span class="Normal Option"
+	>-i</span
+	><span class="Normal NormalText"
+	> 12</span
+	><br
+	 /></code
+      ></pre
+    ><p
+    >Run the same job and pass arguments &quot;name&quot; and &quot;color&quot; corresponding to the Job's Options:</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Normal NormalText"
+	>run </span
+	><span class="Normal Option"
+	>-i</span
+	><span class="Normal NormalText"
+	> 12 -- </span
+	><span class="Normal Option"
+	>-name</span
+	><span class="Normal NormalText"
+	> Bob </span
+	><span class="Normal Option"
+	>-color</span
+	><span class="Normal NormalText"
+	> blue</span
+	><br
+	 /></code
+      ></pre
+    ><p
+    >Run the job named &quot;Full&quot; in the group &quot;QA/Test&quot;</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Normal NormalText"
+	>run </span
+	><span class="Normal Option"
+	>-g</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Path"
+	>QA/Test</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Option"
+	>-n</span
+	><span class="Normal NormalText"
+	> Full</span
+	><br
+	 /></code
+      ></pre
+    ><p
+    >Also runs the job &quot;Full&quot; in QA/Test group:</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Normal NormalText"
+	>run </span
+	><span class="Normal Option"
+	>-j</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Path"
+	>QA/Test/Full</span
+	><br
+	 /></code
+      ></pre
+    ><p
+    >If you try to run a job by name only, but it is not unique, you will get an error message like this:</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Normal NormalText"
+	>run </span
+	><span class="Normal Option"
+	>-j</span
+	><span class="Normal NormalText"
+	> testJob</span
+	><br
+	 /></code
+      ></pre
+    ><pre
+    ><code
+      >Error: Failed request to run a job: Server reported an error: No unique job matched the input: testJob, null. found (2)
+</code
+      ></pre
+    ><p
+    >Running a Job and specifying Node filters:</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Normal NormalText"
+	>run </span
+	><span class="Normal Option"
+	>-F</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="String StringSingleQ"
+	>'tags: dev !os-family: windows'</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Option"
+	>-C</span
+	><span class="Normal NormalText"
+	> 2 </span
+	><span class="Normal Option"
+	>-K</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Option"
+	>-j</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="String StringSingleQ"
+	>'test/Job 1'</span
+	><br
+	 /></code
+      ></pre
+    ><p
+    >Run a job by name, and follow the output until it finishes.</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Normal NormalText"
+	>run </span
+	><span class="Normal Option"
+	>-j</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Path"
+	>QA/Test/Full</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Option"
+	>--follow</span
+	><br
+	 /></code
+      ></pre
+    ></div
+  ></div
+><div id="see-also"
+><h1
+  ><a href="#TOC"
+    >SEE ALSO</a
+    ></h1
+  ><ul
+  ><li
+    ><a href="rd-queue.html"
+      ><code
+	>rd-queue</code
+	></a
+      >, <a href="rd-jobs.html"
+      ><code
+	>rd-jobs</code
+	></a
+      ></li
+    ><li
+    ><a href="../manual/node-filters.html"
+      >User Guide - Node Filters</a
+      ></li
+    ></ul
+  ></div
+>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.3.0)</a></li>
+    
+    
+    <li ><a href="index.html">Command Line Tools</a></li>
+    <li class="active"><a href="run.html">run</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="rd-setup.html"><i class="glyphicon glyphicon-arrow-left"></i> rd-setup</a></li>
+      
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2014 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<span class="generated-date" title="2014-10-28T20:39:35EDT">2014-10-28T20:39:35EDT</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
+
