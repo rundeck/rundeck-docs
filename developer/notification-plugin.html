@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Notification Plugin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="April 18, 2013" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.3.1</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.3.1)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="notification-plugin.html">Notification Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="storage-converter-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> Storage Converter Plugin</a></li>
+      <li class="next"><a href="plugin-development.html">Plugin Development <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<div id="TOC"
+><ul
+  ><li
+    ><a href="#about"
+      >About</a
+      ></li
+    ><li
+    ><a href="#plugin-execution"
+      >Plugin execution</a
+      ><ul
+      ><li
+	><a href="#configuration-data"
+	  >Configuration data</a
+	  ><ul
+	  ><li
+	    ><a href="#property-references"
+	      >Property References</a
+	      ></li
+	    ></ul
+	  ></li
+	><li
+	><a href="#execution-data"
+	  >Execution data</a
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#plugin-configuration-properties"
+      >Plugin configuration properties</a
+      ></li
+    ><li
+    ><a href="#plugin-types"
+      >Plugin types</a
+      ></li
+    ><li
+    ><a href="#example-code"
+      >Example code</a
+      ></li
+    ><li
+    ><a href="#java-plugin-type"
+      >Java Plugin Type</a
+      ></li
+    ><li
+    ><a href="#groovy-plugin-type"
+      >Groovy Plugin Type</a
+      ><ul
+      ><li
+	><a href="#groovy-dsl"
+	  >Groovy DSL</a
+	  ><ul
+	  ><li
+	    ><a href="#definition"
+	      >Definition</a
+	      ></li
+	    ></ul
+	  ></li
+	><li
+	><a href="#notification-handlers"
+	  >Notification handlers</a
+	  ></li
+	><li
+	><a href="#example"
+	  >Example</a
+	  ></li
+	></ul
+      ></li
+    ></ul
+  ></div
+>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Notification Plugin</h1>
+</div>
+<div id="about"
+><h2
+  ><a href="#TOC"
+    >About</a
+    ></h2
+  ><p
+  >Notifications are actions that are performed when a Job starts or finishes.</p
+  ><p
+  >Currently there are three conditions that can trigger notifications:</p
+  ><ul
+  ><li
+    ><code
+      >onstart</code
+      > - the Job started</li
+    ><li
+    ><code
+      >onsuccess</code
+      > - the Job completed without error</li
+    ><li
+    ><code
+      >onfailure</code
+      > - the Job failed or was aborted</li
+    ></ul
+  ><p
+  >Rundeck has two built-in notification types that can be configured for Jobs:</p
+  ><ol style="list-style-type: decimal;"
+  ><li
+    >Send an email to a list of addresses</li
+    ><li
+    >POST XML to a list of URLs</li
+    ></ol
+  ><p
+  >This chapter discusses how to create your own notification plugins.</p
+  ></div
+><div id="plugin-execution"
+><h2
+  ><a href="#TOC"
+    >Plugin execution</a
+    ></h2
+  ><p
+  >When a notification is defined for a Job, and the associated trigger occurs, your plugin will be executed and passed in two sets of Map data:</p
+  ><ol style="list-style-type: decimal;"
+  ><li
+    >Configuration data - the user-supplied configuration for the plugin</li
+    ><li
+    >Execution data - information about the Job and Execution for the notification</li
+    ></ol
+  ><div id="configuration-data"
+  ><h3
+    ><a href="#TOC"
+      >Configuration data</a
+      ></h3
+    ><p
+    >The Configuration data is fully custom depending on your plugin, and is described in the <a href="#plugin-configuration-properties"
+      >Plugin configuration properties</a
+      > section.</p
+    ><div id="property-references"
+    ><h4
+      ><a href="#TOC"
+	>Property References</a
+	></h4
+      ><p
+      >The specific data values of the Configuration section are allowed to have embedded Property References as described in the <a href="../manual/jobs.html#context-variables"
+	>Jobs - Context Variables</a
+	> section.</p
+      ><p
+      >For example, when a user configures your plugin, they could embed an option value using: <code
+	>${option.myoption}</code
+	>. This value will be replaced with the runtime option value before being passed to your plugin.</p
+      ><p
+      >When defining Configuration properties that use custom Validation, keep in mind that the value set by a user may have such an embedded property reference and therefore may not pass the validation rules you have defined. If you want to allow these property references for a Configuration property, it must be a String type property, and any custom validation code should allow the embedded property references, for example by looking for a '${' sequence and allowing the value.</p
+      ></div
+    ></div
+  ><div id="execution-data"
+  ><h3
+    ><a href="#TOC"
+      >Execution data</a
+      ></h3
+    ><p
+    >The execution data is included as a Map called <code
+      >execution</code
+      > containing the following keys and values:</p
+    ><p
+    ><code
+      >execution.id</code
+      >: ID of the execution</p
+    ><p
+    ><code
+      >execution.href</code
+      >: URL to the execution output view</p
+    ><p
+    ><code
+      >execution.status</code
+      >: Execution state ('running','failed','aborted','succeeded')</p
+    ><p
+    ><code
+      >execution.user</code
+      >: User who started the job</p
+    ><p
+    ><code
+      >execution.dateStarted</code
+      >: Start time (java.util.Date)</p
+    ><p
+    ><code
+      >execution.dateStartedUnixtime</code
+      >: Start time as milliseconds since epoch (long)</p
+    ><p
+    ><code
+      >execution.dateStartedW3c</code
+      >: Start time as a W3C formatted String</p
+    ><p
+    ><code
+      >execution.description</code
+      >: Summary string for the execution</p
+    ><p
+    ><code
+      >execution.argstring</code
+      >: Argument string for any job options</p
+    ><p
+    ><code
+      >execution.project</code
+      >: Project name</p
+    ><p
+    ><code
+      >execution.loglevel</code
+      >: Loglevel string ('ERROR','WARN','INFO','VERBOSE','DEBUG')</p
+    ><p
+    >The following values may be available after the job is finished (not available for <code
+      >onstart</code
+      > trigger):</p
+    ><p
+    ><code
+      >execution.failedNodeListString</code
+      >: Comma-separated list of any nodes that failed, if present</p
+    ><p
+    ><code
+      >execution.failedNodeList</code
+      >: Java List of any node names that failed, if present</p
+    ><p
+    ><code
+      >execution.dateEnded</code
+      >: End time (java.util.Date)</p
+    ><p
+    ><code
+      >execution.dateEndedUnixtime</code
+      >: End time as milliseconds since epoch (long)</p
+    ><p
+    ><code
+      >execution.dateEndedW3c</code
+      >: End time as W3C formatted string</p
+    ><p
+    ><code
+      >execution.abortedby</code
+      >: User who aborted the execution</p
+    ><p
+    ><code
+      >job</code
+      > information is in a <code
+      >job</code
+      > entry and contains another Map:</p
+    ><p
+    ><code
+      >job.id</code
+      >: Job ID</p
+    ><p
+    ><code
+      >job.href</code
+      >: URL to Job view page</p
+    ><p
+    ><code
+      >job.name</code
+      >: Job name</p
+    ><p
+    ><code
+      >job.group</code
+      >: Job group</p
+    ><p
+    ><code
+      >job.project</code
+      >: Project name</p
+    ><p
+    ><code
+      >job.description</code
+      >: Job Description</p
+    ><p
+    ><code
+      >job.averageDuration</code
+      >: Average job duration in Milliseconds, if available</p
+    ><p
+    ><code
+      >execution.context</code
+      > - this is a map containing all of the context variables available to the execution when it ran or will run, such as <a href="../manual/jobs.html#context-variables"
+      >Jobs - Context Variables</a
+      >. The contents of this Map are the specific context namespaces and variables.</p
+    ><p
+    ><code
+      >execution.context.option</code
+      >: a Map containing the Job Option keys/values.</p
+    ><p
+    ><code
+      >job</code
+      >: a Map containing the Job context data, as provided to executions. This map will contain some duplicate information as the <code
+      >execution.job</code
+      > map previously described.</p
+    ><p
+    >In Groovy, you can simply reference any values in the Execution data maps using <a href="http://groovy.codehaus.org/GPath"
+      >Groovy Gpath</a
+      >, e.g.:</p
+    ><pre class="sourceCode java"
+    ><code
+      ><span class="Normal NormalText"
+	>println execution</span
+	><span class="Normal Symbol"
+	>.</span
+	><span class="Function"
+	>context</span
+	><span class="Normal Symbol"
+	>.</span
+	><span class="Function"
+	>option</span
+	><span class="Normal Symbol"
+	>.</span
+	><span class="Function"
+	>myoption</span
+	><br
+	 /></code
+      ></pre
+    ></div
+  ></div
+><div id="plugin-configuration-properties"
+><h2
+  ><a href="#TOC"
+    >Plugin configuration properties</a
+    ></h2
+  ><p
+  >Each plugin can define a set of &quot;configuration&quot; properties which allow users to specify input that the plugin can use when it operates.</p
+  ><p
+  >Notification plugins support scoped properties, allowing some of the configuration to be defined, or defaulted, on a per-project or per-Rundeck instance basis.</p
+  ></div
+><div id="plugin-types"
+><h2
+  ><a href="#TOC"
+    >Plugin types</a
+    ></h2
+  ><p
+  >Rundeck supports two types of Notification plugins:</p
+  ><ol style="list-style-type: decimal;"
+  ><li
+    >Java-based development deployed as a Jar file.</li
+    ><li
+    >Groovy-based deployed as a single <code
+      >.groovy</code
+      > script.</li
+    ></ol
+  ><p
+  >Currently &quot;script-based&quot; plugins (shell scripts, that is) are not supported.</p
+  ></div
+><div id="example-code"
+><h2
+  ><a href="#TOC"
+    >Example code</a
+    ></h2
+  ><p
+  >See the source directory <code
+    >examples/example-groovy-notification-plugins</code
+    > for examples of Notification plugins written in Groovy.</p
+  ><ul
+  ><li
+    >On github: <a href="https://github.com/rundeck/rundeck/tree/development/examples/example-groovy-notification-plugins"
+      >example-groovy-notification-plugins</a
+      ></li
+    ></ul
+  ><p
+  >See the source directory <code
+    >examples/example-java-notification-plugin</code
+    > for Java examples.</p
+  ><ul
+  ><li
+    >On github: <a href="https://github.com/rundeck/rundeck/tree/development/examples/example-java-notification-plugin"
+      >example-java-notification-plugin</a
+      ></li
+    ></ul
+  ></div
+><div id="java-plugin-type"
+><h2
+  ><a href="#TOC"
+    >Java Plugin Type</a
+    ></h2
+  ><p
+  >Java-based plugins can be developed just as any other Rundeck plugin, as described in the chapter <a href="plugin-development.html#java-plugin-development"
+    >Plugin Development - Java Plugin Development</a
+    >.</p
+  ><p
+  >These plugin classes should implement the interface <a href="../javadoc/com/dtolabs/rundeck/plugins/notification/NotificationPlugin.html"
+    >NotificationPlugin</a
+    >:</p
+  ><pre class="sourceCode java"
+  ><code
+    ><span class="Keyword"
+      >public</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="Keyword"
+      >interface</span
+      ><span class="Normal NormalText"
+      > NotificationPlugin </span
+      ><span class="Normal Symbol"
+      >{</span
+      ><br
+       /><span class="Normal NormalText"
+      >    </span
+      >/**<br
+       />     <span class="Normal Symbol"
+      >*</span
+      > Post a notification for the given trigger<span class="Normal Symbol"
+      >,</span
+      > dataset<span class="Normal Symbol"
+      >,</span
+      > and configuration<br
+       />     <span class="Normal Symbol"
+      >*</span
+      > <span class="Normal NormalText"
+      >@</span
+      >param trigger event type causing notification<br
+       />     <span class="Normal Symbol"
+      >*</span
+      > <span class="Normal NormalText"
+      >@</span
+      >param executionData execution data<br
+       />     <span class="Normal Symbol"
+      >*</span
+      > <span class="Normal NormalText"
+      >@</span
+      >param config notification configuration<br
+       />     */<br
+       /><span class="Normal NormalText"
+      >    </span
+      ><span class="Keyword"
+      >public</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="DataType DataType"
+      >boolean</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="Function"
+      >postNotification</span
+      ><span class="Normal Symbol"
+      >(</span
+      ><span class="Normal Java15"
+      >String</span
+      ><span class="Normal NormalText"
+      > trigger</span
+      ><span class="Normal Symbol"
+      >,</span
+      ><span class="Normal Java15"
+      >Map</span
+      ><span class="Normal NormalText"
+      > executionData</span
+      ><span class="Normal Symbol"
+      >,</span
+      ><span class="Normal Java15"
+      >Map</span
+      ><span class="Normal NormalText"
+      > config</span
+      ><span class="Normal Symbol"
+      >);</span
+      ><br
+       /><span class="Normal Symbol"
+      >}</span
+      ><br
+       /></code
+    ></pre
+  ><p
+  >To define configuration properties for your plugin, you use the same mechanisms as for Workflow Steps, described under the chapter <a href="plugin-development.html#plugin-descriptions"
+    >Plugin Development - Plugin Descriptions</a
+    >.</p
+  ><p
+  >The simplest way to do this is to use <a href="plugin-annotations.html"
+    >Plugin Annotations</a
+    >. Here is an example class annotated to describe it to the Rundeck GUI:</p
+  ><pre class="sourceCode java"
+  ><code
+    ><span class="Normal NormalText"
+      >@</span
+      ><span class="Function"
+      >Plugin</span
+      ><span class="Normal Symbol"
+      >(</span
+      ><span class="Normal NormalText"
+      >service</span
+      ><span class="Normal Symbol"
+      >=</span
+      ><span class="String"
+      >&quot;Notification&quot;</span
+      ><span class="Normal Symbol"
+      >,</span
+      ><span class="Normal NormalText"
+      > name</span
+      ><span class="Normal Symbol"
+      >=</span
+      ><span class="String"
+      >&quot;example&quot;</span
+      ><span class="Normal Symbol"
+      >)</span
+      ><br
+       /><span class="Normal NormalText"
+      >@</span
+      ><span class="Function"
+      >PluginDescription</span
+      ><span class="Normal Symbol"
+      >(</span
+      ><span class="Normal NormalText"
+      >title</span
+      ><span class="Normal Symbol"
+      >=</span
+      ><span class="String"
+      >&quot;Example Plugin&quot;</span
+      ><span class="Normal Symbol"
+      >,</span
+      ><span class="Normal NormalText"
+      > description</span
+      ><span class="Normal Symbol"
+      >=</span
+      ><span class="String"
+      >&quot;An example Plugin for Rundeck Notifications.&quot;</span
+      ><span class="Normal Symbol"
+      >)</span
+      ><br
+       /><span class="Keyword"
+      >public</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="Keyword"
+      >class</span
+      ><span class="Normal NormalText"
+      > ExampleNotificationPlugin </span
+      ><span class="Keyword"
+      >implements</span
+      ><span class="Normal NormalText"
+      > NotificationPlugin</span
+      ><span class="Normal Symbol"
+      >{</span
+      ><br
+       /><br
+       /><span class="Normal NormalText"
+      >    @</span
+      ><span class="Function"
+      >PluginProperty</span
+      ><span class="Normal Symbol"
+      >(</span
+      ><span class="Normal NormalText"
+      >name </span
+      ><span class="Normal Symbol"
+      >=</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="String"
+      >&quot;test&quot;</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="Normal Symbol"
+      >,</span
+      ><span class="Normal NormalText"
+      >title </span
+      ><span class="Normal Symbol"
+      >=</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="String"
+      >&quot;Test String&quot;</span
+      ><span class="Normal Symbol"
+      >,</span
+      ><span class="Normal NormalText"
+      > description </span
+      ><span class="Normal Symbol"
+      >=</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="String"
+      >&quot;a description&quot;</span
+      ><span class="Normal Symbol"
+      >)</span
+      ><br
+       /><span class="Normal NormalText"
+      >    </span
+      ><span class="Keyword"
+      >private</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="Normal Java15"
+      >String</span
+      ><span class="Normal NormalText"
+      > test</span
+      ><span class="Normal Symbol"
+      >;</span
+      ><br
+       /><br
+       /><span class="Normal NormalText"
+      >    </span
+      ><span class="Keyword"
+      >public</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="DataType DataType"
+      >boolean</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="Function"
+      >postNotification</span
+      ><span class="Normal Symbol"
+      >(</span
+      ><span class="Normal Java15"
+      >String</span
+      ><span class="Normal NormalText"
+      > trigger</span
+      ><span class="Normal Symbol"
+      >,</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="Normal Java15"
+      >Map</span
+      ><span class="Normal NormalText"
+      > executionData</span
+      ><span class="Normal Symbol"
+      >,</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="Normal Java15"
+      >Map</span
+      ><span class="Normal NormalText"
+      > config</span
+      ><span class="Normal Symbol"
+      >)</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="Normal Symbol"
+      >{</span
+      ><br
+       /><span class="Normal NormalText"
+      >        </span
+      ><span class="Normal Java15"
+      >System</span
+      ><span class="Normal Symbol"
+      >.</span
+      ><span class="Function"
+      >err.printf</span
+      ><span class="Normal Symbol"
+      >(</span
+      ><span class="String"
+      >&quot;</span
+      ><span class="String PrintfString"
+      >Trigger </span
+      ><span class="Char StringChar"
+      >%s</span
+      ><span class="String PrintfString"
+      > fired for </span
+      ><span class="Char StringChar"
+      >%s</span
+      ><span class="String PrintfString"
+      >, configuration: </span
+      ><span class="Char StringChar"
+      >%s\n</span
+      ><span class="String"
+      >&quot;</span
+      ><span class="Normal Symbol"
+      >,</span
+      ><span class="Printf"
+      >trigger</span
+      ><span class="Normal Symbol"
+      >,</span
+      ><span class="Printf"
+      >executionData</span
+      ><span class="Normal Symbol"
+      >,</span
+      ><span class="Printf"
+      >config</span
+      ><span class="Normal Symbol"
+      >)</span
+      ><span class="Normal Symbol"
+      >;</span
+      ><br
+       /><span class="Normal NormalText"
+      >        </span
+      ><span class="Normal Java15"
+      >System</span
+      ><span class="Normal Symbol"
+      >.</span
+      ><span class="Function"
+      >err.printf</span
+      ><span class="Normal Symbol"
+      >(</span
+      ><span class="String"
+      >&quot;</span
+      ><span class="String PrintfString"
+      >Local field test is: </span
+      ><span class="Char StringChar"
+      >%s\n</span
+      ><span class="String"
+      >&quot;</span
+      ><span class="Normal Symbol"
+      >,</span
+      ><span class="Printf"
+      >test</span
+      ><span class="Normal Symbol"
+      >)</span
+      ><span class="Normal Symbol"
+      >;</span
+      ><br
+       /><span class="Normal NormalText"
+      >        </span
+      ><span class="Keyword"
+      >return</span
+      ><span class="Normal NormalText"
+      > </span
+      ><span class="Keyword"
+      >true</span
+      ><span class="Normal Symbol"
+      >;</span
+      ><br
+       /><span class="Normal NormalText"
+      >    </span
+      ><span class="Normal Symbol"
+      >}</span
+      ><br
+       /><span class="Normal Symbol"
+      >}</span
+      ><br
+       /></code
+    ></pre
+  ></div
+><div id="groovy-plugin-type"
+><h2
+  ><a href="#TOC"
+    >Groovy Plugin Type</a
+    ></h2
+  ><p
+  >For Notifications, we introduce a new way to develop plugins, using a simple Groovy-based DSL. This gives you a simpler way to develop plugins, but still provides the power of Java.</p
+  ><p
+  >To create a Groovy based plugin, create a file named <code
+    >MyNotificationPlugin.groovy</code
+    > in the plugins directory for Rundeck.</p
+  ><p
+  >You must restart rundeck to make the plugin available the first time, but you can subsequently update the .groovy script without restarting Rundeck.</p
+  ><div id="groovy-dsl"
+  ><h3
+    ><a href="#TOC"
+      >Groovy DSL</a
+      ></h3
+    ><p
+    >Within the Groovy script, you define your plugin by calling the <code
+      >rundeckPlugin</code
+      > method, and pass it both the Class of the type of plugin, and a Closure used to build the plugin object.</p
+    ><pre class="sourceCode java"
+    ><code
+      ><span class="Keyword"
+	>import</span
+	><span class="Normal NormalText"
+	>  com.dtolabs.rundeck.plugins.notification.NotificationPlugin</span
+	><br
+	 /><span class="Function"
+	>rundeckPlugin</span
+	><span class="Normal Symbol"
+	>(</span
+	><span class="Normal NormalText"
+	>NotificationPlugin</span
+	><span class="Normal Symbol"
+	>){</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Comment"
+	>//plugin definition goes here...</span
+	><br
+	 /><span class="Normal Symbol"
+	>}</span
+	><br
+	 /></code
+      ></pre
+    ><p
+    >In this case we use the same <code
+      >NotificationPlugin</code
+      > interface used for Java plugins.</p
+    ><div id="definition"
+    ><h4
+      ><a href="#TOC"
+	>Definition</a
+	></h4
+      ><p
+      >Within the definition section you can define your plugin's Description to be shown in the Rundeck GUI, as well as configuration properties to present to the user.</p
+      ><p
+      ><em
+	>Properties</em
+	></p
+      ><p
+      >Set these properties to change the GUI display of your plugin:</p
+      ><pre class="sourceCode java"
+      ><code
+	><span class="Normal NormalText"
+	  >title</span
+	  ><span class="Normal Symbol"
+	  >=</span
+	  ><span class="Normal NormalText"
+	  >'My Plugin'</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >description</span
+	  ><span class="Normal Symbol"
+	  >=</span
+	  ><span class="Normal NormalText"
+	  >'Does some action'</span
+	  ><br
+	   /></code
+	></pre
+      ><p
+      ><em
+	>Configuration</em
+	></p
+      ><p
+      >Use a <code
+	>configuration</code
+	> closure to define configuration properties:</p
+      ><pre class="sourceCode java"
+      ><code
+	><span class="Normal NormalText"
+	  >configuration</span
+	  ><span class="Normal Symbol"
+	  >{</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >    </span
+	  ><span class="Comment"
+	  >//property definitions go here...</span
+	  ><br
+	   /><span class="Normal Symbol"
+	  >}</span
+	  ><br
+	   /></code
+	></pre
+      ><p
+      ><em
+	>Property Definitions</em
+	></p
+      ><p
+      >User configuration properties can be defined in a few ways. To define a property within the <code
+	>configuration</code
+	> section, you can use either of these forms:</p
+      ><ol style="list-style-type: decimal;"
+      ><li
+	>method call form, specifying the attributes of the property:</li
+	></ol
+      ><pre class="sourceCode java"
+      ><code
+	><span class="Function"
+	  >myproperty</span
+	  ><span class="Normal NormalText"
+	  > </span
+	  ><span class="Normal Symbol"
+	  >(</span
+	  ><span class="Normal NormalText"
+	  >title</span
+	  ><span class="Normal Symbol"
+	  >:</span
+	  ><span class="Normal NormalText"
+	  > </span
+	  ><span class="String"
+	  >&quot;My Property&quot;</span
+	  ><span class="Normal Symbol"
+	  >,</span
+	  ><span class="Normal NormalText"
+	  > description</span
+	  ><span class="Normal Symbol"
+	  >:</span
+	  ><span class="Normal NormalText"
+	  > </span
+	  ><span class="String"
+	  >&quot;Something&quot;</span
+	  ><span class="Normal Symbol"
+	  >,</span
+	  ><span class="Normal NormalText"
+	  > type</span
+	  ><span class="Normal Symbol"
+	  >:</span
+	  ><span class="Normal NormalText"
+	  > 'Integer'</span
+	  ><span class="Normal Symbol"
+	  >)</span
+	  ><br
+	   /></code
+	></pre
+      ><ol start="2" style="list-style-type: decimal;"
+      ><li
+	>assignment form. This form guesses the data type and sets the defaultValue, but does not add any other attributes.</li
+	></ol
+      ><pre class="sourceCode java"
+      ><code
+	><span class="Normal NormalText"
+	  >myproperty2</span
+	  ><span class="Normal Symbol"
+	  >=</span
+	  ><span class="String"
+	  >&quot;default value&quot;</span
+	  ><br
+	   /><span class="Comment"
+	  >//the above is equivalent to:</span
+	  ><br
+	   /><span class="Function"
+	  >myproperty2</span
+	  ><span class="Normal Symbol"
+	  >(</span
+	  ><span class="Normal NormalText"
+	  >defaultValue</span
+	  ><span class="Normal Symbol"
+	  >:</span
+	  ><span class="String"
+	  >&quot;default value&quot;</span
+	  ><span class="Normal Symbol"
+	  >,</span
+	  ><span class="Normal NormalText"
+	  > type</span
+	  ><span class="Normal Symbol"
+	  >:</span
+	  ><span class="Normal NormalText"
+	  > 'String'</span
+	  ><span class="Normal Symbol"
+	  >)</span
+	  ><br
+	   /><br
+	   /><span class="Normal NormalText"
+	  >myproperty3</span
+	  ><span class="Normal Symbol"
+	  >=[</span
+	  ><span class="String"
+	  >&quot;value&quot;</span
+	  ><span class="Normal Symbol"
+	  >,</span
+	  ><span class="String"
+	  >&quot;another&quot;</span
+	  ><span class="Normal Symbol"
+	  >,</span
+	  ><span class="String"
+	  >&quot;text&quot;</span
+	  ><span class="Normal Symbol"
+	  >]</span
+	  ><br
+	   /><span class="Comment"
+	  >//the above is equivalent to:</span
+	  ><br
+	   /><span class="Function"
+	  >myproperty3</span
+	  ><span class="Normal Symbol"
+	  >(</span
+	  ><span class="Normal NormalText"
+	  >type</span
+	  ><span class="Normal Symbol"
+	  >:</span
+	  ><span class="Normal NormalText"
+	  >'FreeSelect'</span
+	  ><span class="Normal Symbol"
+	  >,</span
+	  ><span class="Normal NormalText"
+	  >values</span
+	  ><span class="Normal Symbol"
+	  >:[</span
+	  ><span class="String"
+	  >&quot;value&quot;</span
+	  ><span class="Normal Symbol"
+	  >,</span
+	  ><span class="String"
+	  >&quot;another&quot;</span
+	  ><span class="Normal Symbol"
+	  >,</span
+	  ><span class="String"
+	  >&quot;text&quot;</span
+	  ><span class="Normal Symbol"
+	  >])</span
+	  ><br
+	   /></code
+	></pre
+      ><p
+      >Each property has several attributes you can define, but only <code
+	>name</code
+	> and <code
+	>type</code
+	> are required:</p
+      ><ul
+      ><li
+	><code
+	  >name</code
+	  > - the unique identifier for this property</li
+	><li
+	><code
+	  >type</code
+	  > - the data type to use for the property, defaults to String. Available types:<ul
+	  ><li
+	    ><code
+	      >String</code
+	      > - user can enter text</li
+	    ><li
+	    ><code
+	      >Integer</code
+	      >, <code
+	      >Long</code
+	      > - user can enter a number</li
+	    ><li
+	    ><code
+	      >Boolean</code
+	      > - user is shown a checkbox</li
+	    ><li
+	    ><code
+	      >Select</code
+	      > or <code
+	      >FreeSelect</code
+	      > - user can choose from a list. With <code
+	      >FreeSelect</code
+	      >, the user can also type in any value</li
+	    ></ul
+	  ></li
+	><li
+	><code
+	  >title</code
+	  > - a user-readable string to describe the property</li
+	><li
+	><code
+	  >description</code
+	  > - a string describing the property</li
+	><li
+	><code
+	  >required</code
+	  > - whether the property is required to have a value</li
+	><li
+	><code
+	  >defaultValue</code
+	  > - any default value for the property</li
+	><li
+	><code
+	  >scope</code
+	  > - defines the scope for the property. Allowed values are described under the chapter <a href="plugin-annotations.html#property-scopes"
+	  >Plugin Annotations - Property Scopes</a
+	  >. You may also simply use a String matching the name of the scope, e.g. &quot;Instance&quot;. The default scope if unspecified is &quot;Instance&quot;.</li
+	></ul
+      ><p
+      >In addition to these properties, for <code
+	>Select</code
+	> or <code
+	>FreeSelect</code
+	> type, you can define:</p
+      ><ul
+      ><li
+	><code
+	  >values</code
+	  > - list of string values the user can select from</li
+	></ul
+      ><p
+      >To define a validation check for a property, use the first form and supply a closure. The implicit <code
+	>it</code
+	> variable will be the value of the property to check, and your closure should return <code
+	>true</code
+	> if the value is valid.</p
+      ><pre class="sourceCode java"
+      ><code
+	><span class="Function"
+	  >phone_number</span
+	  ><span class="Normal Symbol"
+	  >(</span
+	  ><span class="Normal NormalText"
+	  >title</span
+	  ><span class="Normal Symbol"
+	  >:</span
+	  ><span class="Normal NormalText"
+	  > </span
+	  ><span class="String"
+	  >&quot;Phone number&quot;</span
+	  ><span class="Normal Symbol"
+	  >){</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >   it</span
+	  ><span class="Normal Symbol"
+	  >.</span
+	  ><span class="Function"
+	  >replaceAll</span
+	  ><span class="Normal Symbol"
+	  >(/[^</span
+	  ><span class="Normal NormalText"
+	  >\d</span
+	  ><span class="Normal Symbol"
+	  >]/,</span
+	  ><span class="Normal NormalText"
+	  >''</span
+	  ><span class="Normal Symbol"
+	  >)==~/^</span
+	  ><span class="Normal NormalText"
+	  >\d</span
+	  ><span class="Normal Symbol"
+	  >{</span
+	  ><span class="DecVal Decimal"
+	  >10</span
+	  ><span class="Normal Symbol"
+	  >}</span
+	  ><span class="Normal NormalText"
+	  >$</span
+	  ><span class="Normal Symbol"
+	  >/</span
+	  ><br
+	   /><span class="Normal Symbol"
+	  >}</span
+	  ><br
+	   /></code
+	></pre
+      ><p
+      ><strong
+	>A Note about Scopes and Validation</strong
+	>:</p
+      ><p
+      >The user is presented with any <code
+	>Instance</code
+	> scoped properties in the Rundeck GUI when defining a Job, and any invalid configuration values will present an error when saving the Job. This includes failing to set a value for a &quot;required&quot; property. However, if you have properties that are scoped for <code
+	>Project</code
+	> or lower, those properties will not be shown in the GUI. In that case, the validation will not be checked for the properties when saving the Job definition, and will only be performed when the Notification is triggered.</p
+      ></div
+    ></div
+  ><div id="notification-handlers"
+  ><h3
+    ><a href="#TOC"
+      >Notification handlers</a
+      ></h3
+    ><p
+    >For a <code
+      >NotificationPlugin</code
+      >, you can define custom handlers for each of the notification triggers (<code
+      >onsuccess</code
+      >, <code
+      >onfailure</code
+      >, and <code
+      >onstart</code
+      >).</p
+    ><p
+    >Simply define a closure with the given trigger name, and return a true value if your action was successful:</p
+    ><pre class="sourceCode java"
+    ><code
+      ><span class="Normal NormalText"
+	>onstart</span
+	><span class="Normal Symbol"
+	>{</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Java15"
+	>Map</span
+	><span class="Normal NormalText"
+	> execution</span
+	><span class="Normal Symbol"
+	>,</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Java15"
+	>Map</span
+	><span class="Normal NormalText"
+	> configuration </span
+	><span class="Normal Symbol"
+	>-&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Comment"
+	>//perform an action using the execution and configuration</span
+	><br
+	 /><span class="Normal NormalText"
+	>    println </span
+	><span class="String"
+	>&quot;Job ${execution.job.name} has been started by ${execution.user}...&quot;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword"
+	>return</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Keyword"
+	>true</span
+	><br
+	 /><span class="Normal Symbol"
+	>}</span
+	><br
+	 /><span class="Normal NormalText"
+	>onsuccess</span
+	><span class="Normal Symbol"
+	>{</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Java15"
+	>Map</span
+	><span class="Normal NormalText"
+	> execution</span
+	><span class="Normal Symbol"
+	>,</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Java15"
+	>Map</span
+	><span class="Normal NormalText"
+	> configuration </span
+	><span class="Normal Symbol"
+	>-&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Comment"
+	>//perform an action using the execution and configuration</span
+	><br
+	 /><span class="Normal NormalText"
+	>    println </span
+	><span class="String"
+	>&quot;Success! Job ${execution.job.name} worked fine.&quot;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword"
+	>return</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Keyword"
+	>true</span
+	><br
+	 /><span class="Normal Symbol"
+	>}</span
+	><br
+	 /><span class="Normal NormalText"
+	>onfailure</span
+	><span class="Normal Symbol"
+	>{</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Java15"
+	>Map</span
+	><span class="Normal NormalText"
+	> execution</span
+	><span class="Normal Symbol"
+	>,</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Java15"
+	>Map</span
+	><span class="Normal NormalText"
+	> configuration </span
+	><span class="Normal Symbol"
+	>-&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Comment"
+	>//perform an action using the execution and configuration</span
+	><br
+	 /><span class="Normal NormalText"
+	>    println </span
+	><span class="String"
+	>&quot;Oh No! Job ${execution.job.name} didn't work out.&quot;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword"
+	>return</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Keyword"
+	>true</span
+	><br
+	 /><span class="Normal Symbol"
+	>}</span
+	><br
+	 /></code
+      ></pre
+    ><p
+    >If your closure returns a <code
+      >false</code
+      > value, then Rundeck will log an error in the server log.</p
+    ></div
+  ><div id="example"
+  ><h3
+    ><a href="#TOC"
+      >Example</a
+      ></h3
+    ><p
+    >Here is a minimal example:</p
+    ><p
+    ><strong
+      >MinimalNotificationPlugin.groovy</strong
+      >:</p
+    ><pre class="sourceCode java"
+    ><code
+      ><span class="Keyword"
+	>import</span
+	><span class="Keyword Imports"
+	> com.dtolabs.rundeck.plugins.notification.NotificationPlugin;</span
+	><br
+	 /><br
+	 /><span class="Function"
+	>rundeckPlugin</span
+	><span class="Normal Symbol"
+	>(</span
+	><span class="Normal NormalText"
+	>NotificationPlugin</span
+	><span class="Normal Symbol"
+	>){</span
+	><br
+	 /><span class="Normal NormalText"
+	>    onstart </span
+	><span class="Normal Symbol"
+	>{</span
+	><span class="Normal NormalText"
+	> </span
+	><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Function"
+	>println</span
+	><span class="Normal Symbol"
+	>(</span
+	><span class="String"
+	>&quot;success: data ${execution}&quot;</span
+	><span class="Normal Symbol"
+	>)</span
+	><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Keyword"
+	>true</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Normal Symbol"
+	>}</span
+	><br
+	 /><br
+	 /><span class="Normal NormalText"
+	>    onfailure </span
+	><span class="Normal Symbol"
+	>{</span
+	><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Function"
+	>println</span
+	><span class="Normal Symbol"
+	>(</span
+	><span class="String"
+	>&quot;failure: data ${execution}&quot;</span
+	><span class="Normal Symbol"
+	>)</span
+	><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Keyword"
+	>true</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Normal Symbol"
+	>}</span
+	><br
+	 /><br
+	 /><span class="Normal NormalText"
+	>    onsuccess </span
+	><span class="Normal Symbol"
+	>{</span
+	><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Function"
+	>println</span
+	><span class="Normal Symbol"
+	>(</span
+	><span class="String"
+	>&quot;job start: data ${execution}&quot;</span
+	><span class="Normal Symbol"
+	>)</span
+	><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Keyword"
+	>true</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Normal Symbol"
+	>}</span
+	><br
+	 /><span class="Normal Symbol"
+	>}</span
+	><br
+	 /></code
+      ></pre
+    ><p
+    >Here is a full example showing plugin GUI metadata, configuration properties, and alternate closure parameter lists:</p
+    ><p
+    ><strong
+      >MyNotificationPlugin.groovy</strong
+      >:</p
+    ><pre class="sourceCode java"
+    ><code
+      ><span class="Keyword"
+	>import</span
+	><span class="Keyword Imports"
+	> com.dtolabs.rundeck.plugins.notification.NotificationPlugin;</span
+	><br
+	 /><br
+	 /><span class="Function"
+	>rundeckPlugin</span
+	><span class="Normal Symbol"
+	>(</span
+	><span class="Normal NormalText"
+	>NotificationPlugin</span
+	><span class="Normal Symbol"
+	>)</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Symbol"
+	>{</span
+	><br
+	 /><span class="Normal NormalText"
+	>    title</span
+	><span class="Normal Symbol"
+	>=</span
+	><span class="String"
+	>&quot;Example Plugin&quot;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    description</span
+	><span class="Normal Symbol"
+	>=</span
+	><span class="String"
+	>&quot;An example&quot;</span
+	><br
+	 /><br
+	 /><span class="Normal NormalText"
+	>    configuration</span
+	><span class="Normal Symbol"
+	>{</span
+	><br
+	 /><br
+	 /><span class="Normal NormalText"
+	>        test1 title</span
+	><span class="Normal Symbol"
+	>:</span
+	><span class="String"
+	>&quot;Test1&quot;</span
+	><span class="Normal Symbol"
+	>,</span
+	><span class="Normal NormalText"
+	> description</span
+	><span class="Normal Symbol"
+	>:</span
+	><span class="String"
+	>&quot;Simple string&quot;</span
+	><br
+	 /><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Comment"
+	>//Validation can be added with a closure</span
+	><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Function"
+	>test2</span
+	><span class="Normal Symbol"
+	>(</span
+	><span class="Normal NormalText"
+	>title</span
+	><span class="Normal Symbol"
+	>:</span
+	><span class="Normal NormalText"
+	>'Test2'</span
+	><span class="Normal Symbol"
+	>,</span
+	><span class="Normal NormalText"
+	>description</span
+	><span class="Normal Symbol"
+	>:</span
+	><span class="String"
+	>&quot;Matches a regex&quot;</span
+	><span class="Normal Symbol"
+	>){</span
+	><br
+	 /><span class="Normal NormalText"
+	>            it</span
+	><span class="Normal Symbol"
+	>=~/^</span
+	><span class="Normal NormalText"
+	>\d</span
+	><span class="Normal Symbol"
+	>+</span
+	><span class="Normal NormalText"
+	>$</span
+	><span class="Normal Symbol"
+	>/</span
+	><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Normal Symbol"
+	>}</span
+	><br
+	 /><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Comment"
+	>//required select value, becomes a Select type</span
+	><br
+	 /><span class="Normal NormalText"
+	>        test3 values</span
+	><span class="Normal Symbol"
+	>:</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Symbol"
+	>[</span
+	><span class="String"
+	>&quot;a&quot;</span
+	><span class="Normal Symbol"
+	>,</span
+	><span class="String"
+	>&quot;b&quot;</span
+	><span class="Normal Symbol"
+	>,</span
+	><span class="String"
+	>&quot;c&quot;</span
+	><span class="Normal Symbol"
+	>],</span
+	><span class="Normal NormalText"
+	> required</span
+	><span class="Normal Symbol"
+	>:</span
+	><span class="Keyword"
+	>true</span
+	><br
+	 /><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Comment"
+	>//if not required, becomes a FreeSelect</span
+	><br
+	 /><span class="Normal NormalText"
+	>        test4 values</span
+	><span class="Normal Symbol"
+	>:</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Symbol"
+	>[</span
+	><span class="String"
+	>&quot;a&quot;</span
+	><span class="Normal Symbol"
+	>,</span
+	><span class="String"
+	>&quot;b&quot;</span
+	><span class="Normal Symbol"
+	>,</span
+	><span class="String"
+	>&quot;c&quot;</span
+	><span class="Normal Symbol"
+	>]</span
+	><br
+	 /><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Comment"
+	>//If type is not specified, the defaultValue will be used to guess</span
+	><br
+	 /><span class="Normal NormalText"
+	>        test5 defaultValue</span
+	><span class="Normal Symbol"
+	>:</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="DecVal Decimal"
+	>3</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Comment"
+	>//becomes Integer type</span
+	><br
+	 /><span class="Normal NormalText"
+	>        test6 defaultValue</span
+	><span class="Normal Symbol"
+	>:</span
+	><span class="Keyword"
+	>true</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Comment"
+	>//becomes Boolean type</span
+	><br
+	 /><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Comment"
+	>//these properties are assigned default values and automatically typed</span
+	><br
+	 /><span class="Normal NormalText"
+	>        test7</span
+	><span class="Normal Symbol"
+	>=</span
+	><span class="DecVal Decimal"
+	>123</span
+	><br
+	 /><span class="Normal NormalText"
+	>        test8</span
+	><span class="Normal Symbol"
+	>=</span
+	><span class="String"
+	>&quot;abc&quot;</span
+	><br
+	 /><span class="Normal NormalText"
+	>        test9</span
+	><span class="Normal Symbol"
+	>=</span
+	><span class="Keyword"
+	>true</span
+	><br
+	 /><span class="Normal NormalText"
+	>        test10</span
+	><span class="Normal Symbol"
+	>=</span
+	><span class="Keyword"
+	>false</span
+	><br
+	 /><span class="Normal NormalText"
+	>        test11</span
+	><span class="Normal Symbol"
+	>=[</span
+	><span class="String"
+	>&quot;x&quot;</span
+	><span class="Normal Symbol"
+	>,</span
+	><span class="String"
+	>&quot;y&quot;</span
+	><span class="Normal Symbol"
+	>,</span
+	><span class="String"
+	>&quot;z&quot;</span
+	><span class="Normal Symbol"
+	>]</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Comment"
+	>//becomes a FreeSelect</span
+	><br
+	 /><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Comment"
+	>//redefining the same property will modify it</span
+	><br
+	 /><span class="Normal NormalText"
+	>        test11 title</span
+	><span class="Normal Symbol"
+	>:</span
+	><span class="String"
+	>&quot;My Select Field&quot;</span
+	><span class="Normal Symbol"
+	>,</span
+	><span class="Normal NormalText"
+	> description</span
+	><span class="Normal Symbol"
+	>:</span
+	><span class="String"
+	>&quot;Free Select field&quot;</span
+	><span class="Normal Symbol"
+	>,</span
+	><span class="Normal NormalText"
+	> defaultValue</span
+	><span class="Normal Symbol"
+	>:</span
+	><span class="String"
+	>&quot;y&quot;</span
+	><span class="Normal Symbol"
+	>,</span
+	><span class="Normal NormalText"
+	> required</span
+	><span class="Normal Symbol"
+	>:</span
+	><span class="Keyword"
+	>true</span
+	><br
+	 /><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Comment"
+	>//the scope indicates the property will not show up in the GUI when configuring the Notification, but must be defined in the project.properties or framework.properties at runtime</span
+	><br
+	 /><span class="Normal NormalText"
+	>        test11 required</span
+	><span class="Normal Symbol"
+	>:</span
+	><span class="Keyword"
+	>true</span
+	><span class="Normal Symbol"
+	>,</span
+	><span class="Normal NormalText"
+	> scope</span
+	><span class="Normal Symbol"
+	>:</span
+	><span class="Normal NormalText"
+	> 'Project'</span
+	><br
+	 /><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Normal Symbol"
+	>}</span
+	><br
+	 /><br
+	 /><span class="Normal NormalText"
+	>    onstart </span
+	><span class="Normal Symbol"
+	>{</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Java15"
+	>Map</span
+	><span class="Normal NormalText"
+	> executionData</span
+	><span class="Normal Symbol"
+	>,</span
+	><span class="Normal Java15"
+	>Map</span
+	><span class="Normal NormalText"
+	> config </span
+	><span class="Normal Symbol"
+	>-&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Function"
+	>println</span
+	><span class="Normal Symbol"
+	>(</span
+	><span class="String"
+	>&quot;script, success: data ${executionData}, config: ${config}&quot;</span
+	><span class="Normal Symbol"
+	>)</span
+	><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Keyword"
+	>true</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Normal Symbol"
+	>}</span
+	><br
+	 /><br
+	 /><span class="Normal NormalText"
+	>    onfailure </span
+	><span class="Normal Symbol"
+	>{</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Java15"
+	>Map</span
+	><span class="Normal NormalText"
+	> executionData </span
+	><span class="Normal Symbol"
+	>-&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Comment"
+	>//Single argument, the configuration properties are available automatically</span
+	><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Function"
+	>println</span
+	><span class="Normal Symbol"
+	>(</span
+	><span class="String"
+	>&quot;script, failure: data ${executionData}, test1: ${test1}, test2: ${test2} test3: ${test3}&quot;</span
+	><span class="Normal Symbol"
+	>)</span
+	><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Keyword"
+	>true</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Normal Symbol"
+	>}</span
+	><br
+	 /><br
+	 /><span class="Normal NormalText"
+	>    onsuccess </span
+	><span class="Normal Symbol"
+	>{</span
+	><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Comment"
+	>//with no args, there is a &quot;configuration&quot; and an &quot;execution&quot; variable in the context</span
+	><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Function"
+	>println</span
+	><span class="Normal Symbol"
+	>(</span
+	><span class="String"
+	>&quot;script, start: data ${execution}, test1: ${configuration.test1}, test2: ${configuration.test2} test3: ${configuration.test3}&quot;</span
+	><span class="Normal Symbol"
+	>)</span
+	><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Keyword"
+	>true</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Normal Symbol"
+	>}</span
+	><br
+	 /><span class="Normal Symbol"
+	>}</span
+	><br
+	 /></code
+      ></pre
+    ></div
+  ></div
+>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.3.1)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="notification-plugin.html">Notification Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="storage-converter-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> Storage Converter Plugin</a></li>
+      <li class="next"><a href="plugin-development.html">Plugin Development <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2014 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<span class="generated-date" title="2014-10-31T17:05:50EDT">2014-10-31T17:05:50EDT</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
+

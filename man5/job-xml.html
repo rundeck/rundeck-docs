@@ -1,0 +1,4114 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JOB-XML</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Alex Honor" />
+  <meta name="date" content="November 20, 2010" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.3.1</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.3.1)</a></li>
+    
+    
+    <li ><a href="index.html">Document Format Reference</a></li>
+    <li class="active"><a href="job-xml.html">JOB-XML</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="aclpolicy.html"><i class="glyphicon glyphicon-arrow-left"></i> ACLPOLICY</a></li>
+      <li class="next"><a href="job-yaml.html">JOB-YAML <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<div id="TOC"
+><ul
+  ><li
+    ><a href="#name"
+      >NAME</a
+      ><ul
+      ><li
+	><a href="#loading-and-unloading"
+	  >Loading and unloading</a
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#joblist"
+      >joblist</a
+      ><ul
+      ><li
+	><a href="#job"
+	  >job</a
+	  ></li
+	><li
+	><a href="#uuid"
+	  >uuid</a
+	  ></li
+	><li
+	><a href="#name-1"
+	  >name</a
+	  ></li
+	><li
+	><a href="#description"
+	  >description</a
+	  ></li
+	><li
+	><a href="#group"
+	  >group</a
+	  ></li
+	><li
+	><a href="#multipleexecutions"
+	  >multipleExecutions</a
+	  ></li
+	><li
+	><a href="#timeout"
+	  >timeout</a
+	  ></li
+	><li
+	><a href="#retry"
+	  >retry</a
+	  ></li
+	><li
+	><a href="#schedule"
+	  >schedule</a
+	  ><ul
+	  ><li
+	    ><a href="#crontab"
+	      >crontab</a
+	      ></li
+	    ><li
+	    ><a href="#time"
+	      >time</a
+	      ></li
+	    ><li
+	    ><a href="#weekday"
+	      >weekday</a
+	      ></li
+	    ><li
+	    ><a href="#month"
+	      >month</a
+	      ></li
+	    ><li
+	    ><a href="#year"
+	      >year</a
+	      ></li
+	    ></ul
+	  ></li
+	><li
+	><a href="#context"
+	  >context</a
+	  ><ul
+	  ><li
+	    ><a href="#project"
+	      >project</a
+	      ></li
+	    ><li
+	    ><a href="#options"
+	      >options</a
+	      ><ul
+	      ><li
+		><a href="#option"
+		  >option</a
+		  ></li
+		><li
+		><a href="#valuesurl-json"
+		  >valuesUrl JSON</a
+		  ></li
+		></ul
+	      ></li
+	    ></ul
+	  ></li
+	><li
+	><a href="#dispatch"
+	  >dispatch</a
+	  ><ul
+	  ><li
+	    ><a href="#threadcount"
+	      >threadcount</a
+	      ></li
+	    ><li
+	    ><a href="#keepgoing"
+	      >keepgoing</a
+	      ></li
+	    ><li
+	    ><a href="#rankattribute"
+	      >rankAttribute</a
+	      ></li
+	    ><li
+	    ><a href="#rankorder"
+	      >rankOrder</a
+	      ></li
+	    ></ul
+	  ></li
+	><li
+	><a href="#loglevel"
+	  >loglevel</a
+	  ></li
+	><li
+	><a href="#nodefilters"
+	  >nodefilters</a
+	  ><ul
+	  ><li
+	    ><a href="#filter"
+	      >filter</a
+	      ></li
+	    ><li
+	    ><a href="#include"
+	      >include</a
+	      ></li
+	    ><li
+	    ><a href="#exclude"
+	      >exclude</a
+	      ></li
+	    ><li
+	    ><a href="#includeexclude-patterns"
+	      >Include/exclude patterns</a
+	      ></li
+	    ></ul
+	  ></li
+	><li
+	><a href="#sequence"
+	  >sequence</a
+	  ><ul
+	  ><li
+	    ><a href="#command"
+	      >command</a
+	      ></li
+	    ><li
+	    ><a href="#errorhandler"
+	      >errorhandler</a
+	      ></li
+	    ><li
+	    ><a href="#description-1"
+	      >description</a
+	      ></li
+	    ><li
+	    ><a href="#script-sequence-step"
+	      >Script sequence step</a
+	      ><ul
+	      ><li
+		><a href="#script-interpreter"
+		  >Script Interpreter</a
+		  ></li
+		></ul
+	      ></li
+	    ><li
+	    ><a href="#job-sequence-step"
+	      >Job sequence step</a
+	      ><ul
+	      ><li
+		><a href="#jobref"
+		  >jobref</a
+		  ><ul
+		  ><li
+		    ><a href="#arg"
+		      >arg</a
+		      ></li
+		    ></ul
+		  ></li
+		></ul
+	      ></li
+	    ><li
+	    ><a href="#plugin-step"
+	      >Plugin step</a
+	      ><ul
+	      ><li
+		><a href="#node-step-plugin"
+		  >node-step-plugin</a
+		  ></li
+		><li
+		><a href="#step-plugin"
+		  >step-plugin</a
+		  ></li
+		><li
+		><a href="#configuration"
+		  >configuration</a
+		  ></li
+		><li
+		><a href="#entry"
+		  >entry</a
+		  ></li
+		></ul
+	      ></li
+	    ></ul
+	  ></li
+	><li
+	><a href="#notification"
+	  >notification</a
+	  ><ul
+	  ><li
+	    ><a href="#onsuccess"
+	      >onsuccess</a
+	      ></li
+	    ><li
+	    ><a href="#onfailure"
+	      >onfailure</a
+	      ></li
+	    ><li
+	    ><a href="#onstart"
+	      >onstart</a
+	      ></li
+	    ><li
+	    ><a href="#email"
+	      >email</a
+	      ></li
+	    ><li
+	    ><a href="#webhook"
+	      >webhook</a
+	      ></li
+	    ><li
+	    ><a href="#plugin"
+	      >plugin</a
+	      ><ul
+	      ><li
+		><a href="#configuration-1"
+		  >configuration</a
+		  ></li
+		><li
+		><a href="#entry-1"
+		  >entry</a
+		  ></li
+		></ul
+	      ></li
+	    ></ul
+	  ></li
+	></ul
+      ></li
+    ><li
+    ><a href="#see-also"
+      >SEE ALSO</a
+      ></li
+    ></ul
+  ></div
+>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">JOB-XML</h1>
+</div>
+<div id="name"
+><h1
+  ><a href="#TOC"
+    >NAME</a
+    ></h1
+  ><p
+  >job-v20 - The 'job' XML file declares job entries for Rundeck.</p
+  ><p
+  >This is a demonstration document using all possible elements in the current Rundeck &quot;jobs&quot; XML.</p
+  ><div id="loading-and-unloading"
+  ><h2
+    ><a href="#TOC"
+      >Loading and unloading</a
+      ></h2
+    ><p
+    >This file can be batch loaded via [rd-jobs] load command:</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Normal NormalText"
+	>rd</span
+	><span class="Normal Option"
+	>-jobs</span
+	><span class="Normal NormalText"
+	> load </span
+	><span class="Normal Option"
+	>-p</span
+	><span class="Normal NormalText"
+	> project </span
+	><span class="Normal Option"
+	>--file</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Path"
+	>/path/to/jobs.xml</span
+	><br
+	 /></code
+      ></pre
+    ><p
+    >Rundeck job definitions can be dumped and saved to a file via rd-jobs list command:</p
+    ><pre class="sourceCode bash"
+    ><code
+      ><span class="Normal NormalText"
+	>rd</span
+	><span class="Normal Option"
+	>-jobs</span
+	><span class="Normal NormalText"
+	> list </span
+	><span class="Normal Option"
+	>-p</span
+	><span class="Normal NormalText"
+	> project </span
+	><span class="Normal Option"
+	>--file</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Normal Path"
+	>/tmp/jobs.xml</span
+	><br
+	 /></code
+      ></pre
+    ></div
+  ></div
+><div id="joblist"
+><h1
+  ><a href="#TOC"
+    >joblist</a
+    ></h1
+  ><p
+  >The root (aka &quot;top-level&quot;) element of the jobs XML file.</p
+  ><p
+  ><em
+    >Nested elements</em
+    ></p
+  ><dl
+  ><dt
+    ><a href="#job"
+      >job</a
+      >*</dt
+    ><dd
+    >declares a single job</dd
+    ></dl
+  ><p
+  ><em
+    >Example</em
+    ></p
+  ><pre class="sourceCode xml"
+  ><code
+    ><span class="Keyword Element"
+      >&lt;joblist&gt;</span
+      ><br
+       /><span class="Normal NormalText"
+      >  </span
+      ><span class="Keyword Element"
+      >&lt;job&gt;</span
+      ><br
+       /><span class="Normal NormalText"
+      >   ...</span
+      ><br
+       /><span class="Normal NormalText"
+      >  </span
+      ><span class="Keyword Element"
+      >&lt;/job&gt;</span
+      ><br
+       /><span class="Normal NormalText"
+      >  </span
+      ><span class="Keyword Element"
+      >&lt;job&gt;</span
+      ><br
+       /><span class="Normal NormalText"
+      >   ...</span
+      ><br
+       /><span class="Normal NormalText"
+      >  </span
+      ><span class="Keyword Element"
+      >&lt;/job&gt;</span
+      ><br
+       /><span class="Keyword Element"
+      >&lt;/joblist&gt;</span
+      ><br
+       /></code
+    ></pre
+  ><div id="job"
+  ><h2
+    ><a href="#TOC"
+      >job</a
+      ></h2
+    ><p
+    >The job element is a sub-element of <a href="#joblist"
+      >joblist</a
+      > and defines a job executable in Rundeck.</p
+    ><p
+    >The following elements are used to describe the job. Only one of each element is allowed.</p
+    ><p
+    ><em
+      >Nested elements</em
+      ></p
+    ><dl
+    ><dt
+      ><a href="#uuid"
+	>uuid</a
+	></dt
+      ><dd
+      ><p
+	>unique UUID to identify the job</p
+	></dd
+      ><dt
+      ><a href="#name-1"
+	>name</a
+	></dt
+      ><dd
+      ><p
+	>the job name</p
+	></dd
+      ><dt
+      ><a href="#description"
+	>description</a
+	></dt
+      ><dd
+      ><p
+	>the job description</p
+	></dd
+      ><dt
+      ><a href="#group"
+	>group</a
+	></dt
+      ><dd
+      ><p
+	>group name</p
+	></dd
+      ><dt
+      ><a href="#multipleexecutions"
+	>multipleExecutions</a
+	></dt
+      ><dd
+      ><p
+	>If the job can be executed multiple times simultaneously</p
+	></dd
+      ><dt
+      ><a href="#context"
+	>context</a
+	></dt
+      ><dd
+      ><p
+	>command context</p
+	></dd
+      ><dt
+      ><a href="#dispatch"
+	>dispatch</a
+	></dt
+      ><dd
+      ><p
+	>dispatch options</p
+	></dd
+      ><dt
+      ><a href="#sequence"
+	>sequence</a
+	></dt
+      ><dd
+      ><p
+	>workflow sequence</p
+	></dd
+      ><dt
+      ><a href="#notification"
+	>notification</a
+	></dt
+      ><dd
+      ><p
+	>notifications of execution success/failure, via email or webhook</p
+	></dd
+      ><dt
+      ><a href="#nodefilters"
+	>nodefilters</a
+	></dt
+      ><dd
+      ><p
+	>node filtering expressions</p
+	></dd
+      ><dt
+      ><a href="#loglevel"
+	>loglevel</a
+	></dt
+      ><dd
+      ><p
+	>the logging level</p
+	></dd
+      ></dl
+    ><p
+    ><em
+      >Job command modes</em
+      ></p
+    ><p
+    >Jobs execute a sequence of commands. Commands come in several styles:</p
+    ><ul
+    ><li
+      >System command</li
+      ><li
+      >A script</li
+      ><li
+      >A script file or URL</li
+      ><li
+      >Another defined job</li
+      ></ul
+    ><p
+    ><em
+      >Examples</em
+      ></p
+    ><p
+    >Execute the Unix 'who' command</p
+    ><table class="sourceCode"
+    ><tr
+      ><td class="lineNumbers" title="Click to toggle line numbers" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"
+	><pre
+	  >1<br
+	     />2<br
+	     />3<br
+	     />4<br
+	     />5<br
+	     />6<br
+	     />7<br
+	     />8<br
+	     />9<br
+	     />10<br
+	     />11<br
+	     />12<br
+	     />13<br
+	     />14<br
+	     />15<br
+	     />16<br
+	     />17<br
+	     />18<br
+	     />19<br
+	     />20<br
+	     />21<br
+	     />22<br
+	     />23<br
+	     />24<br
+	     />25</pre
+	  ></td
+	><td class="sourceCode"
+	><pre class="sourceCode xml"
+	  ><code
+	    ><span class="Keyword Element"
+	      >&lt;joblist&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >  </span
+	      ><span class="Keyword Element"
+	      >&lt;job&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;name&gt;</span
+	      ><span class="Normal NormalText"
+	      >who's logged in?</span
+	      ><span class="Keyword Element"
+	      >&lt;/name&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;description&gt;</span
+	      ><span class="Normal NormalText"
+	      >Runs the unix who command</span
+	      ><span class="Keyword Element"
+	      >&lt;/description&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;group&gt;</span
+	      ><span class="Normal NormalText"
+	      >sysadm/users</span
+	      ><span class="Keyword Element"
+	      >&lt;/group&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;context&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >      </span
+	      ><span class="Keyword Element"
+	      >&lt;project&gt;</span
+	      ><span class="Normal NormalText"
+	      >default</span
+	      ><span class="Keyword Element"
+	      >&lt;/project&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;/context&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;sequence&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >      </span
+	      ><span class="Keyword Element"
+	      >&lt;command&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >        </span
+	      ><span class="Comment"
+	      >&lt;!-- the Unix 'who' command --&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >        </span
+	      ><span class="Keyword Element"
+	      >&lt;exec&gt;</span
+	      ><span class="Normal NormalText"
+	      >who</span
+	      ><span class="Keyword Element"
+	      >&lt;/exec&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >      </span
+	      ><span class="Keyword Element"
+	      >&lt;/command&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >     </span
+	      ><span class="Keyword Element"
+	      >&lt;/sequence&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;nodefilters</span
+	      ><span class="Others Attribute"
+	      > excludeprecedence=</span
+	      ><span class="String Value"
+	      >&quot;true&quot;</span
+	      ><span class="Keyword Element"
+	      >&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >      </span
+	      ><span class="Keyword Element"
+	      >&lt;include&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >        </span
+	      ><span class="Keyword Element"
+	      >&lt;os-family&gt;</span
+	      ><span class="Normal NormalText"
+	      >unix</span
+	      ><span class="Keyword Element"
+	      >&lt;/os-family&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >      </span
+	      ><span class="Keyword Element"
+	      >&lt;/include&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;/nodefilters&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;dispatch&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >      </span
+	      ><span class="Keyword Element"
+	      >&lt;threadcount&gt;</span
+	      ><span class="Normal NormalText"
+	      >1</span
+	      ><span class="Keyword Element"
+	      >&lt;/threadcount&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >      </span
+	      ><span class="Keyword Element"
+	      >&lt;keepgoing&gt;</span
+	      ><span class="Normal NormalText"
+	      >true</span
+	      ><span class="Keyword Element"
+	      >&lt;/keepgoing&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;/dispatch&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >  </span
+	      ><span class="Keyword Element"
+	      >&lt;/job&gt;</span
+	      ><br
+	       /><span class="Keyword Element"
+	      >&lt;/joblist&gt;</span
+	      ><br
+	       /></code
+	    ></pre
+	  ></td
+	></tr
+      ></table
+    ><p
+    >Execute a Bash script</p
+    ><table class="sourceCode"
+    ><tr
+      ><td class="lineNumbers" title="Click to toggle line numbers" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"
+	><pre
+	  >1<br
+	     />2<br
+	     />3<br
+	     />4<br
+	     />5<br
+	     />6<br
+	     />7<br
+	     />8<br
+	     />9<br
+	     />10<br
+	     />11<br
+	     />12<br
+	     />13<br
+	     />14<br
+	     />15<br
+	     />16<br
+	     />17<br
+	     />18<br
+	     />19<br
+	     />20<br
+	     />21<br
+	     />22</pre
+	  ></td
+	><td class="sourceCode"
+	><pre class="sourceCode xml"
+	  ><code
+	    ><span class="Keyword Element"
+	      >&lt;joblist&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >  </span
+	      ><span class="Keyword Element"
+	      >&lt;job&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;name&gt;</span
+	      ><span class="Normal NormalText"
+	      >a simple script</span
+	      ><span class="Keyword Element"
+	      >&lt;/name&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;description&gt;</span
+	      ><span class="Normal NormalText"
+	      >Runs a trivial bash script</span
+	      ><span class="Keyword Element"
+	      >&lt;/description&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;group&gt;</span
+	      ><span class="Normal NormalText"
+	      >sysadm/users</span
+	      ><span class="Keyword Element"
+	      >&lt;/group&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;context&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >      </span
+	      ><span class="Keyword Element"
+	      >&lt;project&gt;</span
+	      ><span class="Normal NormalText"
+	      >default</span
+	      ><span class="Keyword Element"
+	      >&lt;/project&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;/context&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;sequence&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >      </span
+	      ><span class="Keyword Element"
+	      >&lt;command&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >        </span
+	      ><span class="Keyword Element"
+	      >&lt;script&gt;</span
+	      ><span class="BaseN CDATA"
+	      >&lt;![CDATA[</span
+	      ><span class="Normal NormalText"
+	      >#!/bin/bash</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >echo this is an example job running on $(hostname)</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >echo whatever</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >exit 0 </span
+	      ><span class="BaseN CDATA"
+	      >]]&gt;</span
+	      ><span class="Keyword Element"
+	      >&lt;/script&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >      </span
+	      ><span class="Keyword Element"
+	      >&lt;/command&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >     </span
+	      ><span class="Keyword Element"
+	      >&lt;/sequence&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;dispatch&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >      </span
+	      ><span class="Keyword Element"
+	      >&lt;threadcount&gt;</span
+	      ><span class="Normal NormalText"
+	      >1</span
+	      ><span class="Keyword Element"
+	      >&lt;/threadcount&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >      </span
+	      ><span class="Keyword Element"
+	      >&lt;keepgoing&gt;</span
+	      ><span class="Normal NormalText"
+	      >true</span
+	      ><span class="Keyword Element"
+	      >&lt;/keepgoing&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;/dispatch&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >  </span
+	      ><span class="Keyword Element"
+	      >&lt;/job&gt;</span
+	      ><br
+	       /><span class="Keyword Element"
+	      >&lt;/joblist&gt;</span
+	      ><br
+	       /></code
+	    ></pre
+	  ></td
+	></tr
+      ></table
+    ><p
+    >Execute a sequence of other commands, scripts and jobs:</p
+    ><table class="sourceCode"
+    ><tr
+      ><td class="lineNumbers" title="Click to toggle line numbers" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"
+	><pre
+	  >1<br
+	     />2<br
+	     />3<br
+	     />4<br
+	     />5<br
+	     />6<br
+	     />7<br
+	     />8<br
+	     />9<br
+	     />10<br
+	     />11<br
+	     />12<br
+	     />13<br
+	     />14<br
+	     />15<br
+	     />16<br
+	     />17<br
+	     />18<br
+	     />19<br
+	     />20<br
+	     />21<br
+	     />22<br
+	     />23</pre
+	  ></td
+	><td class="sourceCode"
+	><pre class="sourceCode xml"
+	  ><code
+	    ><span class="Keyword Element"
+	      >&lt;joblist&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >  </span
+	      ><span class="Keyword Element"
+	      >&lt;job&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;name&gt;</span
+	      ><span class="Normal NormalText"
+	      >test coreutils</span
+	      ><span class="Keyword Element"
+	      >&lt;/name&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;description/&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;context&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >      </span
+	      ><span class="Keyword Element"
+	      >&lt;project&gt;</span
+	      ><span class="Normal NormalText"
+	      >default</span
+	      ><span class="Keyword Element"
+	      >&lt;/project&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;/context&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;sequence&gt;</span
+	      ><span class="Normal NormalText"
+	      >         </span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >     </span
+	      ><span class="Comment"
+	      >&lt;!-- the Unix 'who' command --&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >     </span
+	      ><span class="Keyword Element"
+	      >&lt;command&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >        </span
+	      ><span class="Keyword Element"
+	      >&lt;exec&gt;</span
+	      ><span class="Normal NormalText"
+	      >who</span
+	      ><span class="Keyword Element"
+	      >&lt;/exec&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >     </span
+	      ><span class="Keyword Element"
+	      >&lt;/command&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >     </span
+	      ><span class="Comment"
+	      >&lt;!-- a Job named test/other tests --&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >     </span
+	      ><span class="Keyword Element"
+	      >&lt;command&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >        </span
+	      ><span class="Keyword Element"
+	      >&lt;jobref</span
+	      ><span class="Others Attribute"
+	      > group=</span
+	      ><span class="String Value"
+	      >&quot;test&quot;</span
+	      ><span class="Others Attribute"
+	      > name=</span
+	      ><span class="String Value"
+	      >&quot;other tests&quot;</span
+	      ><span class="Keyword Element"
+	      >/&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >     </span
+	      ><span class="Keyword Element"
+	      >&lt;/command&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;/sequence&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;dispatch&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >      </span
+	      ><span class="Keyword Element"
+	      >&lt;threadcount&gt;</span
+	      ><span class="Normal NormalText"
+	      >1</span
+	      ><span class="Keyword Element"
+	      >&lt;/threadcount&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >      </span
+	      ><span class="Keyword Element"
+	      >&lt;keepgoing&gt;</span
+	      ><span class="Normal NormalText"
+	      >false</span
+	      ><span class="Keyword Element"
+	      >&lt;/keepgoing&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;/dispatch&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >  </span
+	      ><span class="Keyword Element"
+	      >&lt;/job&gt;</span
+	      ><br
+	       /><span class="Keyword Element"
+	      >&lt;/joblist&gt;</span
+	      ><br
+	       /></code
+	    ></pre
+	  ></td
+	></tr
+      ></table
+    ></div
+  ><div id="uuid"
+  ><h2
+    ><a href="#TOC"
+      >uuid</a
+      ></h2
+    ><p
+    >The UUID is a sub-element of <a href="#job"
+      >job</a
+      >. This string can be set manually (if you are writing the job definition from scratch), or will be assigned at job creation time by the Rundeck server using a random UUID. This string should be as unique as possible if you set it manually.</p
+    ><p
+    >This identifier is used to uniquely identify jobs when ported between Rundeck instances.</p
+    ></div
+  ><div id="name-1"
+  ><h2
+    ><a href="#TOC"
+      >name</a
+      ></h2
+    ><p
+    >The job name is a sub-element of <a href="#job"
+      >job</a
+      >. The combination of 'name' and <a href="#group"
+      >group</a
+      > and <a href="#project"
+      >project</a
+      > must be unique if the <a href="#uuid"
+      >uuid</a
+      > identifier is not included.</p
+    ></div
+  ><div id="description"
+  ><h2
+    ><a href="#TOC"
+      >description</a
+      ></h2
+    ><p
+    >The job description is a sub-element of <a href="#job"
+      >job</a
+      > and allows a short description of the job.</p
+    ></div
+  ><div id="group"
+  ><h2
+    ><a href="#TOC"
+      >group</a
+      ></h2
+    ><p
+    >The group is a sub-element of <a href="#job"
+      >job</a
+      > and defines the job's group identifier. This is a &quot;/&quot; (slash) separated string that mimics a directory structure.</p
+    ><p
+    ><em
+      >Example</em
+      ></p
+    ><pre class="sourceCode xml"
+    ><code
+      ><span class="Keyword Element"
+	>&lt;job&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword Element"
+	>&lt;name&gt;</span
+	><span class="Normal NormalText"
+	>who</span
+	><span class="Keyword Element"
+	>&lt;/name&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword Element"
+	>&lt;description&gt;</span
+	><span class="Normal NormalText"
+	>who is logged in?</span
+	><span class="Keyword Element"
+	>&lt;/description&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword Element"
+	>&lt;group&gt;</span
+	><span class="Normal NormalText"
+	>/sysadm/users</span
+	><span class="Keyword Element"
+	>&lt;/group&gt;</span
+	><br
+	 /><span class="Keyword Element"
+	>&lt;/job&gt;</span
+	><br
+	 /></code
+      ></pre
+    ></div
+  ><div id="multipleexecutions"
+  ><h2
+    ><a href="#TOC"
+      >multipleExecutions</a
+      ></h2
+    ><p
+    >Boolean value: 'true/false'. If 'true', then the job can be run multiple times at once. Otherwise, the Job can only have a single execution at a time.</p
+    ><pre class="sourceCode xml"
+    ><code
+      ><span class="Keyword Element"
+	>&lt;job&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword Element"
+	>&lt;name&gt;</span
+	><span class="Normal NormalText"
+	>who</span
+	><span class="Keyword Element"
+	>&lt;/name&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword Element"
+	>&lt;description&gt;</span
+	><span class="Normal NormalText"
+	>who is logged in?</span
+	><span class="Keyword Element"
+	>&lt;/description&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword Element"
+	>&lt;group&gt;</span
+	><span class="Normal NormalText"
+	>/sysadm/users</span
+	><span class="Keyword Element"
+	>&lt;/group&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword Element"
+	>&lt;multipleExecutions&gt;</span
+	><span class="Normal NormalText"
+	>true</span
+	><span class="Keyword Element"
+	>&lt;/multipleExecutions&gt;</span
+	><br
+	 /><span class="Keyword Element"
+	>&lt;/job&gt;</span
+	><br
+	 /></code
+      ></pre
+    ></div
+  ><div id="timeout"
+  ><h2
+    ><a href="#TOC"
+      >timeout</a
+      ></h2
+    ><p
+    >Timeout string indicating the maximum allowed runtime for a job. After this time expires, the job will be aborted.</p
+    ><p
+    >The format is:</p
+    ><ul
+    ><li
+      ><code
+	>123</code
+	> a simple number, indicating seconds</li
+      ><li
+      ><code
+	>[number][unit]</code
+	> where &quot;number&quot; is a valid decimal number, and &quot;unit&quot; is one of:<ul
+	><li
+	  ><code
+	    >s</code
+	    > - seconds</li
+	  ><li
+	  ><code
+	    >m</code
+	    > - minutes</li
+	  ><li
+	  ><code
+	    >h</code
+	    > - hours</li
+	  ><li
+	  ><code
+	    >d</code
+	    > - days</li
+	  ></ul
+	></li
+      ><li
+      >Any sequence of <code
+	>[number][unit]</code
+	> pairs. The total time will be the added value of all the units. Any other text in the string is ignored, so the pairs can be separated by spaces or other descriptive text.</li
+      ></ul
+    ><p
+    >These are all valid values:</p
+    ><ul
+    ><li
+      ><code
+	>1d 6h</code
+	> - 1 day and 6 hours</li
+      ><li
+      ><code
+	>120m</code
+	> - 120 minutes</li
+      ><li
+      ><code
+	>${option.timeout}</code
+	> reference to a job option value</li
+      ></ul
+    ><pre class="sourceCode xml"
+    ><code
+      ><span class="Keyword Element"
+	>&lt;job&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword Element"
+	>&lt;name&gt;</span
+	><span class="Normal NormalText"
+	>who</span
+	><span class="Keyword Element"
+	>&lt;/name&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword Element"
+	>&lt;description&gt;</span
+	><span class="Normal NormalText"
+	>who is logged in?</span
+	><span class="Keyword Element"
+	>&lt;/description&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword Element"
+	>&lt;group&gt;</span
+	><span class="Normal NormalText"
+	>/sysadm/users</span
+	><span class="Keyword Element"
+	>&lt;/group&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword Element"
+	>&lt;timeout&gt;</span
+	><span class="Normal NormalText"
+	>1d 6h</span
+	><span class="Keyword Element"
+	>&lt;/timeout&gt;</span
+	><br
+	 /><span class="Keyword Element"
+	>&lt;/job&gt;</span
+	><br
+	 /></code
+      ></pre
+    ></div
+  ><div id="retry"
+  ><h2
+    ><a href="#TOC"
+      >retry</a
+      ></h2
+    ><p
+    >Retry count indicating the maximum number of times to retry the job if it fails or times out.</p
+    ><p
+    >Allowed values:</p
+    ><ul
+    ><li
+      >An integer number, indicating maximum number of retries</li
+      ><li
+      ><code
+	>${option.retry}</code
+	> reference to a job option value</li
+      ></ul
+    ><pre class="sourceCode xml"
+    ><code
+      ><span class="Keyword Element"
+	>&lt;job&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword Element"
+	>&lt;name&gt;</span
+	><span class="Normal NormalText"
+	>iffy job</span
+	><span class="Keyword Element"
+	>&lt;/name&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword Element"
+	>&lt;description&gt;</span
+	><span class="Normal NormalText"
+	>Job which might need to be retried</span
+	><span class="Keyword Element"
+	>&lt;/description&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword Element"
+	>&lt;retry&gt;</span
+	><span class="Normal NormalText"
+	>${option.retry}</span
+	><span class="Keyword Element"
+	>&lt;/retry&gt;</span
+	><br
+	 /><span class="Keyword Element"
+	>&lt;/job&gt;</span
+	><br
+	 /></code
+      ></pre
+    ></div
+  ><div id="schedule"
+  ><h2
+    ><a href="#TOC"
+      >schedule</a
+      ></h2
+    ><p
+    ><code>schedule</code> is a sub-element of <a href="#job"
+      >job</a
+      > and specifies periodic job execution using the stated schedule. The schedule can be specified using embedded elements as shown below, or using a single <a href="#crontab"
+      >crontab</a
+      > attribute to set a full crontab expression.</p
+    ><p
+    ><em
+      >Nested elements</em
+      ></p
+    ><dl
+    ><dt
+      ><a href="#time"
+	>time</a
+	></dt
+      ><dd
+      ><p
+	>the hour and minute and seconds</p
+	></dd
+      ><dt
+      ><a href="#weekday"
+	>weekday</a
+	></dt
+      ><dd
+      ><p
+	>day(s) of week</p
+	></dd
+      ><dt
+      ><a href="#month"
+	>month</a
+	></dt
+      ><dd
+      ><p
+	>month(s)</p
+	></dd
+      ><dt
+      ><a href="#year"
+	>year</a
+	></dt
+      ><dd
+      ><p
+	>year</p
+	></dd
+      ></dl
+    ><p
+    ><em
+      >Attributes</em
+      ></p
+    ><dl
+    ><dt
+      ><a href="#crontab"
+	>crontab</a
+	></dt
+      ><dd
+      >a full crontab expression</dd
+      ></dl
+    ><p
+    ><em
+      >Example</em
+      ></p
+    ><p
+    >Run the job every morning at 6AM, 7AM and 8AM.</p
+    ><pre class="sourceCode xml"
+    ><code
+      ><span class="Keyword Element"
+	>&lt;schedule&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>  </span
+	><span class="Keyword Element"
+	>&lt;time</span
+	><span class="Others Attribute"
+	> hour=</span
+	><span class="String Value"
+	>&quot;06,07,08&quot;</span
+	><span class="Others Attribute"
+	> minute=</span
+	><span class="String Value"
+	>&quot;00&quot;</span
+	><span class="Keyword Element"
+	>/&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>  </span
+	><span class="Keyword Element"
+	>&lt;weekday</span
+	><span class="Others Attribute"
+	> day=</span
+	><span class="String Value"
+	>&quot;*&quot;</span
+	><span class="Keyword Element"
+	>/&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>  </span
+	><span class="Keyword Element"
+	>&lt;month</span
+	><span class="Others Attribute"
+	> month=</span
+	><span class="String Value"
+	>&quot;*&quot;</span
+	><span class="Keyword Element"
+	>/&gt;</span
+	><br
+	 /><span class="Keyword Element"
+	>&lt;/schedule&gt;</span
+	><br
+	 /></code
+      ></pre
+    ><p
+    >Run the job every morning at 6:00:02AM, 7:00:02AM and 8:00:02AM only in the year 2010:</p
+    ><pre class="sourceCode xml"
+    ><code
+      ><span class="Keyword Element"
+	>&lt;schedule&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>  </span
+	><span class="Keyword Element"
+	>&lt;time</span
+	><span class="Others Attribute"
+	> hour=</span
+	><span class="String Value"
+	>&quot;06,07,08&quot;</span
+	><span class="Others Attribute"
+	> minute=</span
+	><span class="String Value"
+	>&quot;00&quot;</span
+	><span class="Others Attribute"
+	> seconds=</span
+	><span class="String Value"
+	>&quot;02&quot;</span
+	><span class="Keyword Element"
+	>/&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>  </span
+	><span class="Keyword Element"
+	>&lt;weekday</span
+	><span class="Others Attribute"
+	> day=</span
+	><span class="String Value"
+	>&quot;*&quot;</span
+	><span class="Keyword Element"
+	>/&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>  </span
+	><span class="Keyword Element"
+	>&lt;month</span
+	><span class="Others Attribute"
+	> month=</span
+	><span class="String Value"
+	>&quot;*&quot;</span
+	><span class="Keyword Element"
+	>/&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>  </span
+	><span class="Keyword Element"
+	>&lt;year</span
+	><span class="Others Attribute"
+	> year=</span
+	><span class="String Value"
+	>&quot;2010&quot;</span
+	><span class="Keyword Element"
+	>/&gt;</span
+	><br
+	 /><span class="Keyword Element"
+	>&lt;/schedule&gt;</span
+	><br
+	 /></code
+      ></pre
+    ><p
+    >Run the job every morning at 6:00:02AM, 7:00:02AM and 8:00:02AM only in the year 2010, using a single crontab attribute to express it:</p
+    ><pre
+    ><code
+      >&lt;schedule crontab=&quot;02 00 06,07,08 ? * * 2010&quot;/&gt;
+</code
+      ></pre
+    ><p
+    >For more information, see http://www.quartz-scheduler.org/docs/tutorials/crontrigger.html or http://www.stonebranch.com</p
+    ><div id="crontab"
+    ><h3
+      ><a href="#TOC"
+	>crontab</a
+	></h3
+      ><p
+      >Attribute of the <a href="#schedule"
+	>schedule</a
+	>, sets the schedule with a full crontab string. For more information, see http://www.quartz-scheduler.org/docs/tutorials/crontrigger.html.</p
+      ><p
+      >If specified, then the embedded schedule elements are not used.</p
+      ></div
+    ><div id="time"
+    ><h3
+      ><a href="#TOC"
+	>time</a
+	></h3
+      ><p
+      >The <a href="#schedule"
+	>schedule</a
+	> time to run the job</p
+      ><p
+      ><em
+	>Attributes</em
+	></p
+      ><dl
+      ><dt
+	>hour</dt
+	><dd
+	><p
+	  >values: 00-23</p
+	  ></dd
+	><dt
+	>minute</dt
+	><dd
+	><p
+	  >values: 00-59</p
+	  ></dd
+	></dl
+      ></div
+    ><div id="weekday"
+    ><h3
+      ><a href="#TOC"
+	>weekday</a
+	></h3
+      ><p
+      >The <a href="#schedule"
+	>schedule</a
+	> weekday to run the job</p
+      ><p
+      ><em
+	>Attributes</em
+	></p
+      ><dl
+      ><dt
+	>day</dt
+	><dd
+	>values: <code
+	  >*</code
+	  > - all ; <code
+	  >1-5</code
+	  > days &quot;sun-sat&quot; ; <code
+	  >1,2,3-5</code
+	  > - days &quot;sun,mon,tue-thu&quot;, etc</dd
+	></dl
+      ></div
+    ><div id="month"
+    ><h3
+      ><a href="#TOC"
+	>month</a
+	></h3
+      ><p
+      >The <a href="#schedule"
+	>schedule</a
+	> month to run the job</p
+      ><p
+      ><em
+	>Attributes</em
+	></p
+      ><dl
+      ><dt
+	>month</dt
+	><dd
+	><p
+	  >values: * - all 1-10 - month jan-oct 1,2,3-5 - months jan,feb,mar-may, etc.</p
+	  ></dd
+	><dt
+	>day</dt
+	><dd
+	><p
+	  >day of the month: * - all; 1-31 specific days</p
+	  ></dd
+	></dl
+      ></div
+    ><div id="year"
+    ><h3
+      ><a href="#TOC"
+	>year</a
+	></h3
+      ><p
+      >The <a href="#schedule"
+	>schedule</a
+	> year to run the job</p
+      ><p
+      ><em
+	>Attributes</em
+	></p
+      ><dl
+      ><dt
+	>year</dt
+	><dd
+	>year: * - all; specific year</dd
+	></dl
+      ></div
+    ></div
+  ><div id="context"
+  ><h2
+    ><a href="#TOC"
+      >context</a
+      ></h2
+    ><p
+    >The <a href="#job"
+      >job</a
+      > context.</p
+    ><p
+    ><em
+      >Nested elements</em
+      ></p
+    ><dl
+    ><dt
+      ><a href="#project"
+	>project</a
+	></dt
+      ><dd
+      ><p
+	>the project name (optional)</p
+	></dd
+      ><dt
+      ><a href="#options"
+	>options</a
+	></dt
+      ><dd
+      ><p
+	>job options. specifies one or more option elements</p
+	></dd
+      ></dl
+    ><div id="project"
+    ><h3
+      ><a href="#TOC"
+	>project</a
+	></h3
+      ><p
+      >The <a href="#context"
+	>context</a
+	> project name. Optional. If a project is not specified at import time, this value will be used.</p
+      ></div
+    ><div id="options"
+    ><h3
+      ><a href="#TOC"
+	>options</a
+	></h3
+      ><p
+      >The <a href="#context"
+	>context</a
+	> options for user input.</p
+      ><dl
+      ><dt
+	>preserveOrder</dt
+	><dd
+	>If set to &quot;true&quot;, then the order of the <a href="#option"
+	  >option</a
+	  > elements will be preserved in the Rundeck GUI. Otherwise the options will be shown in alphabetical order.</dd
+	></dl
+      ><p
+      ><em
+	>Nested elements</em
+	></p
+      ><dl
+      ><dt
+	><a href="#option"
+	  >option</a
+	  ></dt
+	><dd
+	>an option element</dd
+	></dl
+      ><p
+      ><em
+	>Example</em
+	></p
+      ><pre class="sourceCode xml"
+      ><code
+	><span class="Keyword Element"
+	  >&lt;options&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >    </span
+	  ><span class="Keyword Element"
+	  >&lt;option</span
+	  ><span class="Others Attribute"
+	  > name=</span
+	  ><span class="String Value"
+	  >&quot;detail&quot;</span
+	  ><span class="Others Attribute"
+	  > value=</span
+	  ><span class="String Value"
+	  >&quot;true&quot;</span
+	  ><span class="Keyword Element"
+	  >/&gt;</span
+	  ><br
+	   /><span class="Keyword Element"
+	  >&lt;/options&gt;</span
+	  ><br
+	   /></code
+	></pre
+      ><div id="option"
+      ><h4
+	><a href="#TOC"
+	  >option</a
+	  ></h4
+	><p
+	>Defines one option within the <a href="#options"
+	  >options</a
+	  >.</p
+	><p
+	><em
+	  >Attributes</em
+	  ></p
+	><dl
+	><dt
+	  >name</dt
+	  ><dd
+	  ><p
+	    >the option name</p
+	    ></dd
+	  ><dt
+	  >value</dt
+	  ><dd
+	  ><p
+	    >the default value</p
+	    ></dd
+	  ><dt
+	  >values</dt
+	  ><dd
+	  ><p
+	    >comma separated list of values</p
+	    ></dd
+	  ><dt
+	  >valuesUrl</dt
+	  ><dd
+	  ><p
+	    >URL to a list of JSON values</p
+	    ></dd
+	  ><dt
+	  >enforcedvalues</dt
+	  ><dd
+	  ><p
+	    >Boolean specifying that must pick from one of values</p
+	    ></dd
+	  ><dt
+	  >regex</dt
+	  ><dd
+	  ><p
+	    >Regex pattern of acceptable value</p
+	    ></dd
+	  ><dt
+	  >description</dt
+	  ><dd
+	  ><p
+	    >Description of the option</p
+	    ></dd
+	  ><dt
+	  >required</dt
+	  ><dd
+	  ><p
+	    >Boolean specifying that the option is required</p
+	    ></dd
+	  ><dt
+	  >multivalued</dt
+	  ><dd
+	  ><p
+	    >&quot;true/false&quot; - whether the option supports multiple input values</p
+	    ></dd
+	  ><dt
+	  >delimiter</dt
+	  ><dd
+	  ><p
+	    >A string used to conjoin multiple input values. (Required if <code
+	      >multivalued</code
+	      > is &quot;true&quot;)</p
+	    ></dd
+	  ><dt
+	  >secure</dt
+	  ><dd
+	  ><p
+	    >&quot;true/false&quot; - whether the option is a secure input option. Not compatible with &quot;multivalued&quot;</p
+	    ></dd
+	  ><dt
+	  >valueExposed</dt
+	  ><dd
+	  ><p
+	    >&quot;true/false&quot; - whether a secure input option value is exposed to scripts or not. <code
+	      >false</code
+	      > means the option will be used only as a Secure Remote Authentication option. default: <code
+	      >false</code
+	      >.</p
+	    ></dd
+	  ></dl
+	><p
+	><em
+	  >Example</em
+	  ></p
+	><p
+	>Define defaults for the &quot;port&quot; option, requiring regex match.</p
+	><pre class="sourceCode xml"
+	><code
+	  ><span class="Keyword Element"
+	    >&lt;option</span
+	    ><span class="Others Attribute"
+	    > name=</span
+	    ><span class="String Value"
+	    >&quot;port&quot;</span
+	    ><span class="Others Attribute"
+	    > value=</span
+	    ><span class="String Value"
+	    >&quot;80&quot;</span
+	    ><span class="Others Attribute"
+	    > values=</span
+	    ><span class="String Value"
+	    >&quot;80,8080,8888&quot;</span
+	    ><span class="Others Attribute"
+	    > regex=</span
+	    ><span class="String Value"
+	    >&quot;\d+&quot;</span
+	    ><span class="Keyword Element"
+	    >/&gt;</span
+	    ><br
+	     /></code
+	  ></pre
+	><p
+	>Define defaults for the &quot;port&quot; option, enforcing the values list.</p
+	><pre class="sourceCode xml"
+	><code
+	  ><span class="Keyword Element"
+	    >&lt;option</span
+	    ><span class="Others Attribute"
+	    > name=</span
+	    ><span class="String Value"
+	    >&quot;port&quot;</span
+	    ><span class="Others Attribute"
+	    > value=</span
+	    ><span class="String Value"
+	    >&quot;80&quot;</span
+	    ><span class="Others Attribute"
+	    > values=</span
+	    ><span class="String Value"
+	    >&quot;80,8080,8888&quot;</span
+	    ><span class="Others Attribute"
+	    > enforcedvalues=</span
+	    ><span class="String Value"
+	    >&quot;true&quot;</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Keyword Element"
+	    >/&gt;</span
+	    ><br
+	     /></code
+	  ></pre
+	><p
+	>Define defaults for the &quot;ports&quot; option, allowing multiple values separated by &quot;,&quot;.</p
+	><pre class="sourceCode xml"
+	><code
+	  ><span class="Keyword Element"
+	    >&lt;option</span
+	    ><span class="Others Attribute"
+	    > name=</span
+	    ><span class="String Value"
+	    >&quot;port&quot;</span
+	    ><span class="Others Attribute"
+	    > value=</span
+	    ><span class="String Value"
+	    >&quot;80&quot;</span
+	    ><span class="Others Attribute"
+	    > values=</span
+	    ><span class="String Value"
+	    >&quot;80,8080,8888&quot;</span
+	    ><span class="Others Attribute"
+	    > enforcedvalues=</span
+	    ><span class="String Value"
+	    >&quot;true&quot;</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><br
+	     /><span class="Others Attribute"
+	    >        multivalued=</span
+	    ><span class="String Value"
+	    >&quot;true&quot;</span
+	    ><span class="Others Attribute"
+	    > delimiter=</span
+	    ><span class="String Value"
+	    >&quot;,&quot;</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Keyword Element"
+	    >/&gt;</span
+	    ><br
+	     /></code
+	  ></pre
+	></div
+      ><div id="valuesurl-json"
+      ><h4
+	><a href="#TOC"
+	  >valuesUrl JSON</a
+	  ></h4
+	><p
+	>The data returned from the valuesUrl can be formatted as a list of values:</p
+	><pre class="sourceCode json"
+	><code
+	  ><span class="Error Style_Error"
+	    >[&quot;x value&quot;,&quot;y value&quot;]</span
+	    ><br
+	     /></code
+	  ></pre
+	><p
+	>or as Name-value list:</p
+	><table class="sourceCode"
+	><tr
+	  ><td class="lineNumbers" title="Click to toggle line numbers" onclick="with (this.firstChild.style) { display = (display == '') ? 'none' : '' }"
+	    ><pre
+	      >1<br
+		 />2<br
+		 />3<br
+		 />4<br
+		 />5</pre
+	      ></td
+	    ><td class="sourceCode"
+	    ><pre class="sourceCode json"
+	      ><code
+		><span class="Error Style_Error"
+		  >[</span
+		  ><br
+		   /><span class="Error Style_Error"
+		  >  </span
+		  ><span class="Normal Style_Seperator_Pair"
+		  >{</span
+		  ><span class="Error Style_Error"
+		  >name</span
+		  ><span class="Normal Style_Seperator_Pair"
+		  >:</span
+		  ><span class="String Style_String_Value"
+		  >&quot;X Label&quot;</span
+		  ><span class="Normal Style_Seperator_Pair"
+		  >,</span
+		  ><span class="Normal Style_Normal"
+		  > </span
+		  ><span class="Error Style_Error"
+		  >value</span
+		  ><span class="Normal Style_Seperator_Pair"
+		  >:</span
+		  ><span class="String Style_String_Value"
+		  >&quot;x value&quot;</span
+		  ><span class="Normal Style_Seperator_Pair"
+		  >}</span
+		  ><span class="Error Style_Error"
+		  >,</span
+		  ><br
+		   /><span class="Error Style_Error"
+		  >  </span
+		  ><span class="Normal Style_Seperator_Pair"
+		  >{</span
+		  ><span class="Error Style_Error"
+		  >name</span
+		  ><span class="Normal Style_Seperator_Pair"
+		  >:</span
+		  ><span class="String Style_String_Value"
+		  >&quot;Y Label&quot;</span
+		  ><span class="Normal Style_Seperator_Pair"
+		  >,</span
+		  ><span class="Normal Style_Normal"
+		  > </span
+		  ><span class="Error Style_Error"
+		  >value</span
+		  ><span class="Normal Style_Seperator_Pair"
+		  >:</span
+		  ><span class="String Style_String_Value"
+		  >&quot;y value&quot;</span
+		  ><span class="Normal Style_Seperator_Pair"
+		  >}</span
+		  ><span class="Error Style_Error"
+		  >,</span
+		  ><br
+		   /><span class="Error Style_Error"
+		  >  </span
+		  ><span class="Normal Style_Seperator_Pair"
+		  >{</span
+		  ><span class="Error Style_Error"
+		  >name</span
+		  ><span class="Normal Style_Seperator_Pair"
+		  >:</span
+		  ><span class="String Style_String_Value"
+		  >&quot;A Label&quot;</span
+		  ><span class="Normal Style_Seperator_Pair"
+		  >,</span
+		  ><span class="Normal Style_Normal"
+		  > </span
+		  ><span class="Error Style_Error"
+		  >value</span
+		  ><span class="Normal Style_Seperator_Pair"
+		  >:</span
+		  ><span class="String Style_String_Value"
+		  >&quot;a value&quot;</span
+		  ><span class="Normal Style_Seperator_Pair"
+		  >}</span
+		  ><br
+		   /><span class="Error Style_Error"
+		  >] </span
+		  ><br
+		   /></code
+		></pre
+	      ></td
+	    ></tr
+	  ></table
+	></div
+      ></div
+    ></div
+  ><div id="dispatch"
+  ><h2
+    ><a href="#TOC"
+      >dispatch</a
+      ></h2
+    ><p
+    >The <a href="#job"
+      >job</a
+      > dispatch options. See the [Dispatcher options] for general information.</p
+    ><p
+    ><em
+      >Nested elements</em
+      ></p
+    ><dl
+    ><dt
+      ><a href="#threadcount"
+	>threadcount</a
+	></dt
+      ><dd
+      ><p
+	>dispatch up to threadcount</p
+	></dd
+      ><dt
+      ><a href="#keepgoing"
+	>keepgoing</a
+	></dt
+      ><dd
+      ><p
+	>keep going flag</p
+	></dd
+      ><dt
+      ><a href="#rankattribute"
+	>rankAttribute</a
+	></dt
+      ><dd
+      ><p
+	>Name of the Node attribute to use for ordering the sequence of nodes (default is &quot;nodename&quot;)</p
+	></dd
+      ><dt
+      ><a href="#rankorder"
+	>rankOrder</a
+	></dt
+      ><dd
+      ><p
+	>Order direction for node ranking. Either &quot;ascending&quot; or &quot;descending&quot; (default &quot;ascending&quot;)</p
+	></dd
+      ></dl
+    ><p
+    ><em
+      >Example</em
+      ></p
+    ><pre class="sourceCode xml"
+    ><code
+      ><span class="Keyword Element"
+	>&lt;dispatch&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>  </span
+	><span class="Keyword Element"
+	>&lt;threadcount&gt;</span
+	><span class="Normal NormalText"
+	>1</span
+	><span class="Keyword Element"
+	>&lt;/threadcount&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>  </span
+	><span class="Keyword Element"
+	>&lt;keepgoing&gt;</span
+	><span class="Normal NormalText"
+	>false</span
+	><span class="Keyword Element"
+	>&lt;/keepgoing&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>  </span
+	><span class="Keyword Element"
+	>&lt;rankAttribute&gt;</span
+	><span class="Normal NormalText"
+	>nodename</span
+	><span class="Keyword Element"
+	>&lt;/rankAttribute&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>  </span
+	><span class="Keyword Element"
+	>&lt;rankOrder&gt;</span
+	><span class="Normal NormalText"
+	>descending</span
+	><span class="Keyword Element"
+	>&lt;/rankOrder&gt;</span
+	><br
+	 /><span class="Keyword Element"
+	>&lt;/dispatch&gt;</span
+	><br
+	 /></code
+      ></pre
+    ><div id="threadcount"
+    ><h3
+      ><a href="#TOC"
+	>threadcount</a
+	></h3
+      ><p
+      >Defines the number of threads to execute within <a href="#dispatch"
+	>dispatch</a
+	>. Must be a positive integer.</p
+      ></div
+    ><div id="keepgoing"
+    ><h3
+      ><a href="#TOC"
+	>keepgoing</a
+	></h3
+      ><p
+      >Boolean describing if the <a href="#dispatch"
+	>dispatch</a
+	> should continue of an error occurs (true/false). If true, continue if an error occurs.</p
+      ></div
+    ><div id="rankattribute"
+    ><h3
+      ><a href="#TOC"
+	>rankAttribute</a
+	></h3
+      ><p
+      >This is the name of a Node attribute that determines the order in which the Nodes are traversed. The default value of &quot;nodename&quot; will rank the nodes based on their names.</p
+      ><p
+      >This can be any attribute of a Node, even attributes that do not exist on some nodes. For example you can set it to &quot;rank&quot;, then any Nodes with a &quot;rank&quot; attribute will be ordered before any other nodes, and they will be used in the order of the rank attribute value.</p
+      ><p
+      >The values in the rank attribute are compared first numerically if they are valid integers, but otherwise they are compared alphanumerically. Nodes which do not have the specified rank attribute will be ordered by node name and treated as if they come after all nodes which do have the rank attribute (if in ascending order).</p
+      ></div
+    ><div id="rankorder"
+    ><h3
+      ><a href="#TOC"
+	>rankOrder</a
+	></h3
+      ><p
+      >This determines whether the rank attribute should be used to order the nodes in ascending or descending order.</p
+      ><p
+      >Possible values: &quot;ascending&quot;, or &quot;descending&quot;. The default if not specified is &quot;ascending&quot;.</p
+      ></div
+    ></div
+  ><div id="loglevel"
+  ><h2
+    ><a href="#TOC"
+      >loglevel</a
+      ></h2
+    ><p
+    >The <a href="#job"
+      >job</a
+      > logging level. The lower the more profuse the messages.</p
+    ><ul
+    ><li
+      >DEBUG</li
+      ><li
+      >VERBOSE</li
+      ><li
+      >INFO</li
+      ><li
+      >WARN</li
+      ><li
+      >ERROR</li
+      ></ul
+    ></div
+  ><div id="nodefilters"
+  ><h2
+    ><a href="#TOC"
+      >nodefilters</a
+      ></h2
+    ><p
+    >The <a href="#job"
+      >job</a
+      > nodefilters options. See <a href="#includeexclude-patterns"
+      >Include/exclude patterns</a
+      > for a general description.</p
+    ><p
+    ><em
+      >Attributes</em
+      ></p
+    ><dl
+    ><dt
+      >excludeprecedence</dt
+      ><dd
+      >boolean value: true or false</dd
+      ></dl
+    ><p
+    ><em
+      >Nested elements</em
+      ></p
+    ><dl
+    ><dt
+      ><a href="#filter"
+	>filter</a
+	></dt
+      ><dd
+      ><p
+	>node filter string</p
+	></dd
+      ><dt
+      ><a href="#include"
+	>include</a
+	></dt
+      ><dd
+      ><p
+	>include filter (deprecated)</p
+	></dd
+      ><dt
+      ><a href="#exclude"
+	>exclude</a
+	></dt
+      ><dd
+      ><p
+	>exclude filter (deprecated)</p
+	></dd
+      ></dl
+    ><p
+    ><em
+      >Example</em
+      ></p
+    ><pre class="sourceCode xml"
+    ><code
+      ><span class="Keyword Element"
+	>&lt;nodefilters</span
+	><span class="Others Attribute"
+	> excludeprecedence=</span
+	><span class="String Value"
+	>&quot;true&quot;</span
+	><span class="Keyword Element"
+	>&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>  </span
+	><span class="Keyword Element"
+	>&lt;filter&gt;</span
+	><span class="Normal NormalText"
+	>.*</span
+	><span class="Keyword Element"
+	>&lt;/filter&gt;</span
+	><br
+	 /><span class="Keyword Element"
+	>&lt;/nodefilters&gt;</span
+	><br
+	 /></code
+      ></pre
+    ><p
+    ><em
+      >Example</em
+      > (deprecated filter <code
+      >include</code
+      > element)</p
+    ><pre class="sourceCode xml"
+    ><code
+      ><span class="Keyword Element"
+	>&lt;nodefilters</span
+	><span class="Others Attribute"
+	> excludeprecedence=</span
+	><span class="String Value"
+	>&quot;true&quot;</span
+	><span class="Keyword Element"
+	>&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>  </span
+	><span class="Keyword Element"
+	>&lt;include&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword Element"
+	>&lt;hostname/&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword Element"
+	>&lt;type/&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword Element"
+	>&lt;tags&gt;</span
+	><span class="Normal NormalText"
+	>tomcats</span
+	><span class="Keyword Element"
+	>&lt;/tags&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword Element"
+	>&lt;os-name/&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword Element"
+	>&lt;os-family/&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword Element"
+	>&lt;os-arch/&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword Element"
+	>&lt;os-version/&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword Element"
+	>&lt;name/&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>  </span
+	><span class="Keyword Element"
+	>&lt;/include&gt;</span
+	><br
+	 /><span class="Keyword Element"
+	>&lt;/nodefilters&gt;</span
+	><br
+	 /></code
+      ></pre
+    ><div id="filter"
+    ><h3
+      ><a href="#TOC"
+	>filter</a
+	></h3
+      ><p
+      >The filter string to select matching nodes.</p
+      ><p
+      >The content of this element is the full node filter string. See <a href="../manual/node-filters.html"
+	>User Guide - Node Filters</a
+	>.</p
+      ></div
+    ><div id="include"
+    ><h3
+      ><a href="#TOC"
+	>include</a
+	></h3
+      ><p
+      >See <a href="#includeexclude-patterns"
+	>Include/exclude patterns</a
+	></p
+      ></div
+    ><div id="exclude"
+    ><h3
+      ><a href="#TOC"
+	>exclude</a
+	></h3
+      ><p
+      >See <a href="#includeexclude-patterns"
+	>Include/exclude patterns</a
+	></p
+      ></div
+    ><div id="includeexclude-patterns"
+    ><h3
+      ><a href="#TOC"
+	>Include/exclude patterns</a
+	></h3
+      ><p
+      >The <a href="#nodefilters"
+	>nodefilters</a
+	> include and exclude patterns.</p
+      ><p
+      ><strong
+	>Note:</strong
+	> These elements are deprecated and will be removed in a later version of Rundeck. Use the <a href="#filter"
+	>filter</a
+	> string.</p
+      ><p
+      ><em
+	>Nested elements</em
+	></p
+      ><dl
+      ><dt
+	>hostname</dt
+	><dd
+	><p
+	  >node hostname</p
+	  ></dd
+	><dt
+	>name</dt
+	><dd
+	><p
+	  >node resource name</p
+	  ></dd
+	><dt
+	>type</dt
+	><dd
+	><p
+	  >node type</p
+	  ></dd
+	><dt
+	>tags</dt
+	><dd
+	><p
+	  >node tags. comma separated</p
+	  ></dd
+	><dt
+	>os-name</dt
+	><dd
+	><p
+	  >operating system name (eg, Linux, Mac OS X)</p
+	  ></dd
+	><dt
+	>os-family</dt
+	><dd
+	><p
+	  >operating system family (eg, unix, windows)</p
+	  ></dd
+	><dt
+	>os-arch</dt
+	><dd
+	><p
+	  >operating system architecture (eg i386,sparc)</p
+	  ></dd
+	><dt
+	>os-version</dt
+	><dd
+	><p
+	  >operating system version</p
+	  ></dd
+	></dl
+      ></div
+    ></div
+  ><div id="sequence"
+  ><h2
+    ><a href="#TOC"
+      >sequence</a
+      ></h2
+    ><p
+    >The <a href="#job"
+      >job</a
+      > workflow sequence.</p
+    ><p
+    ><em
+      >Attributes</em
+      ></p
+    ><dl
+    ><dt
+      >keepgoing</dt
+      ><dd
+      ><p
+	>true/false. (default false). If true, the workflow sequence will continue even if there is a failure</p
+	></dd
+      ><dt
+      >strategy</dt
+      ><dd
+      ><p
+	>node-first/step-first. (default &quot;node-first&quot;). The strategy to use for executing the workflow across nodes.</p
+	></dd
+      ></dl
+    ><p
+    >The strategy attribute determines the way that the workflow is executed. &quot;node-first&quot; means execute the full workflow on each node prior to the next. &quot;step-first&quot; means execute each step across all nodes prior to the next step.</p
+    ><p
+    ><em
+      >Nested elements</em
+      ></p
+    ><dl
+    ><dt
+      ><a href="#command"
+	>command</a
+	></dt
+      ><dd
+      >a sequence step</dd
+      ></dl
+    ><div id="command"
+    ><h3
+      ><a href="#TOC"
+	>command</a
+	></h3
+      ><p
+      >Defines a step for a workflow <a href="#sequence"
+	>sequence</a
+	>.</p
+      ><p
+      >The different types of sequence steps are defined in different ways.</p
+      ><p
+      >See:</p
+      ><ul
+      ><li
+	><a href="#script-sequence-step"
+	  >Script sequence step</a
+	  ></li
+	><li
+	><a href="#job-sequence-step"
+	  >Job sequence step</a
+	  ></li
+	><li
+	><a href="#plugin-step"
+	  >Plugin step</a
+	  ></li
+	></ul
+      ><p
+      >A command can embed a <a href="#errorhandler"
+	>errorhandler</a
+	> to define an action to run if the step fails.</p
+      ><p
+      >A command can have a <a href="#description"
+	>description</a
+	> element to set the step description.</p
+      ></div
+    ><div id="errorhandler"
+    ><h3
+      ><a href="#TOC"
+	>errorhandler</a
+	></h3
+      ><p
+      >Defines an action to handle an error in a <a href="#command"
+	>command</a
+	>.</p
+      ><p
+      >The contents of an <code
+	>&lt;errorhandler&gt;</code
+	> are exactly the same as for a <a href="#command"
+	>command</a
+	> except it cannot contain any errorhandler itself.</p
+      ><p
+      >The different types of errorhandler steps are defined in different ways.</p
+      ><p
+      ><em
+	>Attributes</em
+	></p
+      ><dl
+      ><dt
+	><code
+	  >keepgoingOnSuccess</code
+	  ></dt
+	><dd
+	>true/false. (default false). If true, and the error handler succeeds, the workflow sequence will continue even if the workflow <code
+	  >keepgoing</code
+	  > is false.</dd
+	></dl
+      ><p
+      >See:</p
+      ><ul
+      ><li
+	><a href="#script-sequence-step"
+	  >Script sequence step</a
+	  ></li
+	><li
+	><a href="#job-sequence-step"
+	  >Job sequence step</a
+	  ></li
+	><li
+	><a href="#plugin-step"
+	  >Plugin step</a
+	  ></li
+	></ul
+      ><p
+      >Example:</p
+      ><pre class="sourceCode xml"
+      ><code
+	><span class="Keyword Element"
+	  >&lt;errorhandler&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >   </span
+	  ><span class="Keyword Element"
+	  >&lt;exec&gt;</span
+	  ><span class="Normal NormalText"
+	  >echo this is a shell command</span
+	  ><span class="Keyword Element"
+	  >&lt;/exec&gt;</span
+	  ><br
+	   /><span class="Keyword Element"
+	  >&lt;/errorhandler&gt;</span
+	  ><br
+	   /></code
+	></pre
+      ><p
+      >Inline script. Note that using CDATA section will preserve linebreaks in the script. Simply put the script within a <code>script</code> element:</p
+      ><pre class="sourceCode xml"
+      ><code
+	><span class="Keyword Element"
+	  >&lt;errorhandler&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >    </span
+	  ><span class="Keyword Element"
+	  >&lt;script&gt;</span
+	  ><span class="BaseN CDATA"
+	  >&lt;![CDATA[</span
+	  ><span class="Normal NormalText"
+	  >#!/bin/bash</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >echo this is a test</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >echo whatever</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >exit 2 ]&gt;&lt;/script&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >&lt;/errorhandler&gt;</span
+	  ><br
+	   /></code
+	></pre
+      ><p
+      >Script File:</p
+      ><pre class="sourceCode xml"
+      ><code
+	><span class="Keyword Element"
+	  >&lt;errorhandler&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >    </span
+	  ><span class="Keyword Element"
+	  >&lt;scriptfile&gt;</span
+	  ><span class="Normal NormalText"
+	  >/path/to/a/script</span
+	  ><span class="Keyword Element"
+	  >&lt;/scriptfile&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >    </span
+	  ><span class="Keyword Element"
+	  >&lt;scriptargs&gt;</span
+	  ><span class="Normal NormalText"
+	  >-whatever something</span
+	  ><span class="Keyword Element"
+	  >&lt;/scriptargs&gt;</span
+	  ><br
+	   /><span class="Keyword Element"
+	  >&lt;/errorhandler&gt;</span
+	  ><span class="Normal NormalText"
+	  >      </span
+	  ><br
+	   /></code
+	></pre
+      ><p
+      >Example job reference:</p
+      ><pre class="sourceCode xml"
+      ><code
+	><span class="Keyword Element"
+	  >&lt;errorhandler</span
+	  ><span class="Normal NormalText"
+	  > </span
+	  ><span class="Keyword Element"
+	  >&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >    </span
+	  ><span class="Keyword Element"
+	  >&lt;jobref</span
+	  ><span class="Others Attribute"
+	  > group=</span
+	  ><span class="String Value"
+	  >&quot;My group&quot;</span
+	  ><span class="Others Attribute"
+	  > name=</span
+	  ><span class="String Value"
+	  >&quot;My Job&quot;</span
+	  ><span class="Keyword Element"
+	  >&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >       </span
+	  ><span class="Keyword Element"
+	  >&lt;arg</span
+	  ><span class="Others Attribute"
+	  > line=</span
+	  ><span class="String Value"
+	  >&quot;-option value -option2 value2&quot;</span
+	  ><span class="Keyword Element"
+	  >/&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >    </span
+	  ><span class="Keyword Element"
+	  >&lt;/jobref&gt;</span
+	  ><br
+	   /><span class="Keyword Element"
+	  >&lt;/errorhandler&gt;</span
+	  ><span class="Normal NormalText"
+	  >      </span
+	  ><br
+	   /></code
+	></pre
+      ></div
+    ><div id="description-1"
+    ><h3
+      ><a href="#TOC"
+	>description</a
+	></h3
+      ><p
+      >Defines a description for a step.</p
+      ><p
+      >Example:</p
+      ><pre class="sourceCode xml"
+      ><code
+	><span class="Keyword Element"
+	  >&lt;command&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >   </span
+	  ><span class="Keyword Element"
+	  >&lt;exec&gt;</span
+	  ><span class="Normal NormalText"
+	  >echo this is a shell command</span
+	  ><span class="Keyword Element"
+	  >&lt;/exec&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >   </span
+	  ><span class="Keyword Element"
+	  >&lt;description&gt;</span
+	  ><span class="Normal NormalText"
+	  >Demonstrate echo command</span
+	  ><span class="Keyword Element"
+	  >&lt;/description&gt;</span
+	  ><br
+	   /><span class="Keyword Element"
+	  >&lt;/command&gt;</span
+	  ><br
+	   /></code
+	></pre
+      ></div
+    ><div id="script-sequence-step"
+    ><h3
+      ><a href="#TOC"
+	>Script sequence step</a
+	></h3
+      ><p
+      >Script steps can be defined in three ways within a command element:</p
+      ><ul
+      ><li
+	>Simple shell command using <code>exec</code> element.</li
+	><li
+	>Embedded script using <code>script</code> element.</li
+	><li
+	>Script file using <code>scriptfile</code> and <code>scriptargs</code> elements.</li
+	></ul
+      ><p
+      >Example exec step:</p
+      ><pre class="sourceCode xml"
+      ><code
+	><span class="Keyword Element"
+	  >&lt;command&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >   </span
+	  ><span class="Keyword Element"
+	  >&lt;exec&gt;</span
+	  ><span class="Normal NormalText"
+	  >echo this is a shell command</span
+	  ><span class="Keyword Element"
+	  >&lt;/exec&gt;</span
+	  ><br
+	   /><span class="Keyword Element"
+	  >&lt;/command&gt;</span
+	  ><br
+	   /></code
+	></pre
+      ><p
+      >Inline script. Note that using CDATA section will preserve linebreaks in the script. Simply put the script within a <code>script</code> element:</p
+      ><pre class="sourceCode xml"
+      ><code
+	><span class="Keyword Element"
+	  >&lt;command&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >    </span
+	  ><span class="Keyword Element"
+	  >&lt;script&gt;</span
+	  ><span class="BaseN CDATA"
+	  >&lt;![CDATA[</span
+	  ><span class="Normal NormalText"
+	  >#!/bin/bash</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >echo this is a test</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >echo whatever</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >exit 2 ]&gt;&lt;/script&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >&lt;/command&gt;</span
+	  ><br
+	   /></code
+	></pre
+      ><p
+      >Script File:</p
+      ><pre class="sourceCode xml"
+      ><code
+	><span class="Keyword Element"
+	  >&lt;command</span
+	  ><span class="Normal NormalText"
+	  > </span
+	  ><span class="Keyword Element"
+	  >&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >    </span
+	  ><span class="Keyword Element"
+	  >&lt;scriptfile&gt;</span
+	  ><span class="Normal NormalText"
+	  >/path/to/a/script</span
+	  ><span class="Keyword Element"
+	  >&lt;/scriptfile&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >    </span
+	  ><span class="Keyword Element"
+	  >&lt;scriptargs&gt;</span
+	  ><span class="Normal NormalText"
+	  >-whatever something</span
+	  ><span class="Keyword Element"
+	  >&lt;/scriptargs&gt;</span
+	  ><br
+	   /><span class="Keyword Element"
+	  >&lt;/command&gt;</span
+	  ><span class="Normal NormalText"
+	  >      </span
+	  ><br
+	   /></code
+	></pre
+      ><p
+      >Script URL:</p
+      ><pre class="sourceCode xml"
+      ><code
+	><span class="Keyword Element"
+	  >&lt;command</span
+	  ><span class="Normal NormalText"
+	  > </span
+	  ><span class="Keyword Element"
+	  >&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >    </span
+	  ><span class="Keyword Element"
+	  >&lt;scripturl&gt;</span
+	  ><span class="Normal NormalText"
+	  >http://example.com/path/to/a/script</span
+	  ><span class="Keyword Element"
+	  >&lt;/scripturl&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >    </span
+	  ><span class="Keyword Element"
+	  >&lt;scriptargs&gt;</span
+	  ><span class="Normal NormalText"
+	  >-whatever something</span
+	  ><span class="Keyword Element"
+	  >&lt;/scriptargs&gt;</span
+	  ><br
+	   /><span class="Keyword Element"
+	  >&lt;/command&gt;</span
+	  ><span class="Normal NormalText"
+	  >      </span
+	  ><br
+	   /></code
+	></pre
+      ><div id="script-interpreter"
+      ><h4
+	><a href="#TOC"
+	  >Script Interpreter</a
+	  ></h4
+	><p
+	>When using <code
+	  >&lt;script&gt;</code
+	  >, or <code
+	  >&lt;scriptfile&gt;</code
+	  >, you can declare an interpreter to use to execute the script and its args.</p
+	><p
+	>Add <code
+	  >&lt;scriptinterpreter&gt;</code
+	  > to the <code
+	  >&lt;command&gt;</code
+	  >:</p
+	><pre class="sourceCode xml"
+	><code
+	  ><span class="Keyword Element"
+	    >&lt;command</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Keyword Element"
+	    >&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >    </span
+	    ><span class="Keyword Element"
+	    >&lt;scriptinterpreter&gt;</span
+	    ><span class="Normal NormalText"
+	    >sudo -u usera</span
+	    ><span class="Keyword Element"
+	    >&lt;/scriptinterpreter&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >    </span
+	    ><span class="Keyword Element"
+	    >&lt;scripturl&gt;</span
+	    ><span class="Normal NormalText"
+	    >http://example.com/path/to/a/script</span
+	    ><span class="Keyword Element"
+	    >&lt;/scripturl&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >    </span
+	    ><span class="Keyword Element"
+	    >&lt;scriptargs&gt;</span
+	    ><span class="Normal NormalText"
+	    >-whatever something</span
+	    ><span class="Keyword Element"
+	    >&lt;/scriptargs&gt;</span
+	    ><br
+	     /><span class="Keyword Element"
+	    >&lt;/command&gt;</span
+	    ><br
+	     /></code
+	  ></pre
+	><p
+	>This will be executed effectively with this commandline:</p
+	><pre class="sourceCode bash"
+	><code
+	  ><span class="Keyword Command"
+	    >sudo</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Normal Option"
+	    >-u</span
+	    ><span class="Normal NormalText"
+	    > usera script.sh </span
+	    ><span class="Normal Option"
+	    >-whatever</span
+	    ><span class="Normal NormalText"
+	    > something</span
+	    ><br
+	     /></code
+	  ></pre
+	><p
+	>If the filename and arguments need to be quoted when passed to the interpreter, you can declare <code
+	  >argsQuoted='true'</code
+	  >:</p
+	><pre class="sourceCode xml"
+	><code
+	  ><span class="Keyword Element"
+	    >&lt;command</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Keyword Element"
+	    >&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >    </span
+	    ><span class="Keyword Element"
+	    >&lt;scriptinterpreter</span
+	    ><span class="Others Attribute"
+	    > argsquoted=</span
+	    ><span class="String Value"
+	    >'true'</span
+	    ><span class="Keyword Element"
+	    >&gt;</span
+	    ><span class="Normal NormalText"
+	    >sudo -u usera sh -c </span
+	    ><span class="Keyword Element"
+	    >&lt;/scriptinterpreter&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >    </span
+	    ><span class="Keyword Element"
+	    >&lt;scripturl&gt;</span
+	    ><span class="Normal NormalText"
+	    >http://example.com/path/to/a/script</span
+	    ><span class="Keyword Element"
+	    >&lt;/scripturl&gt;</span
+	    ><br
+	     /><span class="Normal NormalText"
+	    >    </span
+	    ><span class="Keyword Element"
+	    >&lt;scriptargs&gt;</span
+	    ><span class="Normal NormalText"
+	    >-whatever something</span
+	    ><span class="Keyword Element"
+	    >&lt;/scriptargs&gt;</span
+	    ><br
+	     /><span class="Keyword Element"
+	    >&lt;/command&gt;</span
+	    ><br
+	     /></code
+	  ></pre
+	><p
+	>This will execute as:</p
+	><pre class="sourceCode bash"
+	><code
+	  ><span class="Keyword Command"
+	    >sudo</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Normal Option"
+	    >-u</span
+	    ><span class="Normal NormalText"
+	    > usera </span
+	    ><span class="Keyword Command"
+	    >sh</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="Normal Option"
+	    >-c</span
+	    ><span class="Normal NormalText"
+	    > </span
+	    ><span class="String StringSingleQ"
+	    >'script.sh -whatever something'</span
+	    ><br
+	     /></code
+	  ></pre
+	></div
+      ></div
+    ><div id="job-sequence-step"
+    ><h3
+      ><a href="#TOC"
+	>Job sequence step</a
+	></h3
+      ><p
+      >Define a <a href="#jobref"
+	>jobref</a
+	> element within the <a href="#command"
+	>command</a
+	> element</p
+      ><div id="jobref"
+      ><h4
+	><a href="#TOC"
+	  >jobref</a
+	  ></h4
+	><p
+	><em
+	  >Attributes</em
+	  ></p
+	><dl
+	><dt
+	  >name</dt
+	  ><dd
+	  ><p
+	    >the job name</p
+	    ></dd
+	  ><dt
+	  >group</dt
+	  ><dd
+	  ><p
+	    >the group name</p
+	    ></dd
+	  ><dt
+	  >nodeStep</dt
+	  ><dd
+	  ><p
+	    ><code
+	      >true/false</code
+	      > whether the Job reference step should run for each node</p
+	    ></dd
+	  ></dl
+	><p
+	><em
+	  >Nested elements</em
+	  ></p
+	><p
+	>Optional &quot;arg&quot; element can be embedded:</p
+	><div id="arg"
+	><h5
+	  ><a href="#TOC"
+	    >arg</a
+	    ></h5
+	  ><p
+	  >: option arguments to the script or job</p
+	  ><p
+	  >Example passing arguments to the job:</p
+	  ><pre class="sourceCode xml"
+	  ><code
+	    ><span class="Keyword Element"
+	      >&lt;command</span
+	      ><span class="Normal NormalText"
+	      > </span
+	      ><span class="Keyword Element"
+	      >&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;jobref</span
+	      ><span class="Others Attribute"
+	      > group=</span
+	      ><span class="String Value"
+	      >&quot;My group&quot;</span
+	      ><span class="Others Attribute"
+	      > name=</span
+	      ><span class="String Value"
+	      >&quot;My Job&quot;</span
+	      ><span class="Keyword Element"
+	      >&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >       </span
+	      ><span class="Keyword Element"
+	      >&lt;arg</span
+	      ><span class="Others Attribute"
+	      > line=</span
+	      ><span class="String Value"
+	      >&quot;-option value -option2 value2&quot;</span
+	      ><span class="Keyword Element"
+	      >/&gt;</span
+	      ><br
+	       /><span class="Normal NormalText"
+	      >    </span
+	      ><span class="Keyword Element"
+	      >&lt;/jobref&gt;</span
+	      ><br
+	       /><span class="Keyword Element"
+	      >&lt;/command&gt;</span
+	      ><span class="Normal NormalText"
+	      >      </span
+	      ><br
+	       /></code
+	    ></pre
+	  ><p
+	  >If <code
+	    >nodeStep</code
+	    > is set to &quot;true&quot;, then the Job Reference step will operate as a <em
+	    >Node Step</em
+	    > instead of the default. As a <em
+	    >Node Step</em
+	    > it will execute once for each matched node in the containing Job workflow, and can use node attribute variable expansion in the arguments to the job reference.</p
+	  ></div
+	></div
+      ></div
+    ><div id="plugin-step"
+    ><h3
+      ><a href="#TOC"
+	>Plugin step</a
+	></h3
+      ><p
+      >There are two types of plugin steps that can be defined: Node steps, and workflow steps.</p
+      ><p
+      >Define either one within the <a href="#command"
+	>command</a
+	> element:</p
+      ><ul
+      ><li
+	><a href="#node-step-plugin"
+	  >node-step-plugin</a
+	  ></li
+	><li
+	><a href="#step-plugin"
+	  >step-plugin</a
+	  ></li
+	></ul
+      ><p
+      >Both have the following contents:</p
+      ><p
+      ><em
+	>Attributes</em
+	></p
+      ><dl
+      ><dt
+	>type</dt
+	><dd
+	>The plugin provider type identifier</dd
+	></dl
+      ><p
+      ><em
+	>Nested elements</em
+	></p
+      ><p
+      >Optional 'configuration' can be embedded containing a list of 'entry' key/value pairs:</p
+      ><dl
+      ><dt
+	><a href="#configuration"
+	  >configuration</a
+	  ></dt
+	><dd
+	><p
+	  >Defines plugin configuration entries</p
+	  ></dd
+	><dt
+	><a href="#entry"
+	  >entry</a
+	  ></dt
+	><dd
+	><p
+	  >Defines a key/value pair for the configuration.</p
+	  ></dd
+	></dl
+      ><p
+      >Example node step plugin definition:</p
+      ><pre class="sourceCode xml"
+      ><code
+	><span class="Keyword Element"
+	  >&lt;command&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >    </span
+	  ><span class="Keyword Element"
+	  >&lt;node-step-plugin</span
+	  ><span class="Others Attribute"
+	  > type=</span
+	  ><span class="String Value"
+	  >&quot;my-node-step-plugin&quot;</span
+	  ><span class="Keyword Element"
+	  >&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >       </span
+	  ><span class="Keyword Element"
+	  >&lt;configuration&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >        </span
+	  ><span class="Keyword Element"
+	  >&lt;entry</span
+	  ><span class="Others Attribute"
+	  > key=</span
+	  ><span class="String Value"
+	  >&quot;someconfig&quot;</span
+	  ><span class="Others Attribute"
+	  > value=</span
+	  ><span class="String Value"
+	  >&quot;a value&quot;</span
+	  ><span class="Keyword Element"
+	  >/&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >        </span
+	  ><span class="Keyword Element"
+	  >&lt;entry</span
+	  ><span class="Others Attribute"
+	  > key=</span
+	  ><span class="String Value"
+	  >&quot;timout&quot;</span
+	  ><span class="Others Attribute"
+	  > value=</span
+	  ><span class="String Value"
+	  >&quot;2000&quot;</span
+	  ><span class="Keyword Element"
+	  >/&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >       </span
+	  ><span class="Keyword Element"
+	  >&lt;/configuration&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >    </span
+	  ><span class="Keyword Element"
+	  >&lt;/node-step-plugin&gt;</span
+	  ><br
+	   /><span class="Keyword Element"
+	  >&lt;/command&gt;</span
+	  ><span class="Normal NormalText"
+	  > </span
+	  ><br
+	   /></code
+	></pre
+      ><p
+      >Example workflow step plugin definition:</p
+      ><pre class="sourceCode xml"
+      ><code
+	><span class="Keyword Element"
+	  >&lt;command&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >    </span
+	  ><span class="Keyword Element"
+	  >&lt;step-plugin</span
+	  ><span class="Others Attribute"
+	  > type=</span
+	  ><span class="String Value"
+	  >&quot;my-step-plugin&quot;</span
+	  ><span class="Keyword Element"
+	  >&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >       </span
+	  ><span class="Keyword Element"
+	  >&lt;configuration&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >        </span
+	  ><span class="Keyword Element"
+	  >&lt;entry</span
+	  ><span class="Others Attribute"
+	  > key=</span
+	  ><span class="String Value"
+	  >&quot;repeat&quot;</span
+	  ><span class="Others Attribute"
+	  > value=</span
+	  ><span class="String Value"
+	  >&quot;12&quot;</span
+	  ><span class="Keyword Element"
+	  >/&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >        </span
+	  ><span class="Keyword Element"
+	  >&lt;entry</span
+	  ><span class="Others Attribute"
+	  > key=</span
+	  ><span class="String Value"
+	  >&quot;debug&quot;</span
+	  ><span class="Others Attribute"
+	  > value=</span
+	  ><span class="String Value"
+	  >&quot;true&quot;</span
+	  ><span class="Keyword Element"
+	  >/&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >       </span
+	  ><span class="Keyword Element"
+	  >&lt;/configuration&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >    </span
+	  ><span class="Keyword Element"
+	  >&lt;/step-plugin&gt;</span
+	  ><br
+	   /><span class="Keyword Element"
+	  >&lt;/command&gt;</span
+	  ><span class="Normal NormalText"
+	  >     </span
+	  ><br
+	   /></code
+	></pre
+      ><div id="node-step-plugin"
+      ><h4
+	><a href="#TOC"
+	  >node-step-plugin</a
+	  ></h4
+	><p
+	>Defines a plugin step that executes for each node.</p
+	></div
+      ><div id="step-plugin"
+      ><h4
+	><a href="#TOC"
+	  >step-plugin</a
+	  ></h4
+	><p
+	>Defines a plugin step that executes once in a workflow.</p
+	></div
+      ><div id="configuration"
+      ><h4
+	><a href="#TOC"
+	  >configuration</a
+	  ></h4
+	><p
+	>Contains the key/value pair entries for plugin configuration, within a <a href="#node-step-plugin"
+	  >node-step-plugin</a
+	  > or <a href="#step-plugin"
+	  >step-plugin</a
+	  >.</p
+	></div
+      ><div id="entry"
+      ><h4
+	><a href="#TOC"
+	  >entry</a
+	  ></h4
+	><p
+	>Defines a key/value pair within a <a href="#configuration"
+	  >configuration</a
+	  >.</p
+	><p
+	><em
+	  >Attributes</em
+	  >:</p
+	><dl
+	><dt
+	  >key</dt
+	  ><dd
+	  ><p
+	    >Key for the pair</p
+	    ></dd
+	  ><dt
+	  >value</dt
+	  ><dd
+	  ><p
+	    >Textual value</p
+	    ></dd
+	  ></dl
+	></div
+      ></div
+    ></div
+  ><div id="notification"
+  ><h2
+    ><a href="#TOC"
+      >notification</a
+      ></h2
+    ><p
+    >Defines email, webhook or plugin notifications for Job success and failure, with in a <a href="#job"
+      >job</a
+      > definition.</p
+    ><p
+    ><em
+      >Nested elements</em
+      ></p
+    ><dl
+    ><dt
+      ><a href="#onsuccess"
+	>onsuccess</a
+	></dt
+      ><dd
+      ><p
+	>define notifications for success result</p
+	></dd
+      ><dt
+      ><a href="#onfailure"
+	>onfailure</a
+	></dt
+      ><dd
+      ><p
+	>define notifications for failure/kill result</p
+	></dd
+      ><dt
+      ><a href="#onstart"
+	>onstart</a
+	></dt
+      ><dd
+      ><p
+	>define notifications for job start</p
+	></dd
+      ></dl
+    ><p
+    ><em
+      >Example</em
+      ></p
+    ><pre class="sourceCode xml"
+    ><code
+      ><span class="Keyword Element"
+	>&lt;notification&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword Element"
+	>&lt;onfailure&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Keyword Element"
+	>&lt;email</span
+	><span class="Others Attribute"
+	> recipients=</span
+	><span class="String Value"
+	>&quot;test@example.com,foo@example.com&quot;</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Keyword Element"
+	>/&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword Element"
+	>&lt;/onfailure&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword Element"
+	>&lt;onsuccess&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Keyword Element"
+	>&lt;email</span
+	><span class="Others Attribute"
+	> recipients=</span
+	><span class="String Value"
+	>&quot;test@example.com&quot;</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Keyword Element"
+	>/&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Keyword Element"
+	>&lt;webhook</span
+	><span class="Others Attribute"
+	> urls=</span
+	><span class="String Value"
+	>&quot;http://example.com?id=${execution.id}&quot;</span
+	><span class="Normal NormalText"
+	> </span
+	><span class="Keyword Element"
+	>/&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>   </span
+	><span class="Keyword Element"
+	>&lt;/onsuccess&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>    </span
+	><span class="Keyword Element"
+	>&lt;onstart&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Keyword Element"
+	>&lt;plugin</span
+	><span class="Others Attribute"
+	> type=</span
+	><span class="String Value"
+	>&quot;MyPlugin&quot;</span
+	><span class="Keyword Element"
+	>&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>          </span
+	><span class="Keyword Element"
+	>&lt;configuration&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>            </span
+	><span class="Keyword Element"
+	>&lt;entry</span
+	><span class="Others Attribute"
+	> key=</span
+	><span class="String Value"
+	>&quot;customkey&quot;</span
+	><span class="Others Attribute"
+	> value=</span
+	><span class="String Value"
+	>&quot;customvalue&quot;</span
+	><span class="Keyword Element"
+	>/&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>          </span
+	><span class="Keyword Element"
+	>&lt;/configuration&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>        </span
+	><span class="Keyword Element"
+	>&lt;/plugin&gt;</span
+	><br
+	 /><span class="Normal NormalText"
+	>   </span
+	><span class="Keyword Element"
+	>&lt;/onstart&gt;</span
+	><br
+	 /><span class="Keyword Element"
+	>&lt;/notification&gt;</span
+	><span class="Normal NormalText"
+	>      </span
+	><br
+	 /></code
+      ></pre
+    ><div id="onsuccess"
+    ><h3
+      ><a href="#TOC"
+	>onsuccess</a
+	></h3
+      ><p
+      >Embed an <a href="#email"
+	>email</a
+	> element to send email on success, within <a href="#notification"
+	>notification</a
+	>.</p
+      ><p
+      >Embed an <a href="#webhook"
+	>webhook</a
+	> element to perform a HTTP POST to some URLs, within <a href="#notification"
+	>notification</a
+	>.</p
+      ><p
+      >Embed an <a href="#plugin"
+	>plugin</a
+	> element to perform a custom action, within <a href="#notification"
+	>notification</a
+	>.</p
+      ></div
+    ><div id="onfailure"
+    ><h3
+      ><a href="#TOC"
+	>onfailure</a
+	></h3
+      ><p
+      >Embed an <a href="#email"
+	>email</a
+	> element to send email on failure or kill, within <a href="#notification"
+	>notification</a
+	>.</p
+      ><p
+      >Embed an <a href="#webhook"
+	>webhook</a
+	> element to perform a HTTP POST to some URLs, within <a href="#notification"
+	>notification</a
+	>.</p
+      ><p
+      >Embed an <a href="#plugin"
+	>plugin</a
+	> element to perform a custom action, within <a href="#notification"
+	>notification</a
+	>.</p
+      ></div
+    ><div id="onstart"
+    ><h3
+      ><a href="#TOC"
+	>onstart</a
+	></h3
+      ><p
+      >Embed an <a href="#email"
+	>email</a
+	> element to send email on failure or kill, within <a href="#notification"
+	>notification</a
+	>.</p
+      ><p
+      >Embed an <a href="#webhook"
+	>webhook</a
+	> element to perform a HTTP POST to some URLs, within <a href="#notification"
+	>notification</a
+	>.</p
+      ><p
+      >Embed an <a href="#plugin"
+	>plugin</a
+	> element to perform a custom action, within <a href="#notification"
+	>notification</a
+	>.</p
+      ></div
+    ><div id="email"
+    ><h3
+      ><a href="#TOC"
+	>email</a
+	></h3
+      ><p
+      >Define email recipients for Job execution result, within <a href="#onsuccess"
+	>onsuccess</a
+	>, <a href="#onfailure"
+	>onfailure</a
+	> or <a href="#onstart"
+	>onstart</a
+	>.</p
+      ><p
+      ><em
+	>Attributes</em
+	></p
+      ><dl
+      ><dt
+	>recipients</dt
+	><dd
+	>comma-separated list of email addresses</dd
+	></dl
+      ><p
+      ><em
+	>Example</em
+	></p
+      ><pre
+      ><code
+	>        &lt;email recipients=&quot;test@example.com,dev@example.com&quot; /&gt;
+</code
+	></pre
+      ></div
+    ><div id="webhook"
+    ><h3
+      ><a href="#TOC"
+	>webhook</a
+	></h3
+      ><p
+      >Define URLs to submit a HTTP POST to containing the job execution result, within <a href="#onsuccess"
+	>onsuccess</a
+	>, <a href="#onfailure"
+	>onfailure</a
+	> or <a href="#onstart"
+	>onstart</a
+	>.</p
+      ><p
+      ><em
+	>Attributes</em
+	></p
+      ><dl
+      ><dt
+	>urls</dt
+	><dd
+	>comma-separated list of URLs</dd
+	></dl
+      ><p
+      ><em
+	>Example</em
+	></p
+      ><pre class="sourceCode xml"
+      ><code
+	><span class="Keyword Element"
+	  >&lt;webhook</span
+	  ><span class="Others Attribute"
+	  > urls=</span
+	  ><span class="String Value"
+	  >&quot;http://server/callback?id=${execution.id}</span
+	  ><span class="Error"
+	  >&amp;</span
+	  ><span class="String Value"
+	  >status=${execution.status}</span
+	  ><span class="Error"
+	  >&amp;</span
+	  ><span class="String Value"
+	  >trigger=${notification.trigger}&quot;</span
+	  ><span class="Keyword Element"
+	  >/&gt;</span
+	  ><br
+	   /></code
+	></pre
+      ><ul
+      ><li
+	>For more information about the Webhook mechanism used, see the chapter <a href="../manual/jobs.html#webhooks"
+	  >Integration - Webhooks</a
+	  >.</li
+	></ul
+      ></div
+    ><div id="plugin"
+    ><h3
+      ><a href="#TOC"
+	>plugin</a
+	></h3
+      ><p
+      >Defines a configuration for a plugin to perform a Notification, within <a href="#onsuccess"
+	>onsuccess</a
+	>, <a href="#onfailure"
+	>onfailure</a
+	> or <a href="#onstart"
+	>onstart</a
+	>.</p
+      ><p
+      ><em
+	>Attributes</em
+	></p
+      ><dl
+      ><dt
+	>type</dt
+	><dd
+	>The plugin provider type identifier</dd
+	></dl
+      ><p
+      ><em
+	>Nested elements</em
+	></p
+      ><p
+      >Optional 'configuration' can be embedded containing a list of 'entry' key/value pairs:</p
+      ><dl
+      ><dt
+	><a href="#configuration-1"
+	  >configuration</a
+	  ></dt
+	><dd
+	><p
+	  >Defines plugin configuration entries</p
+	  ></dd
+	><dt
+	><a href="#entry-1"
+	  >entry</a
+	  ></dt
+	><dd
+	><p
+	  >Defines a key/value pair for the configuration.</p
+	  ></dd
+	></dl
+      ><p
+      >Example notification plugin definition:</p
+      ><pre class="sourceCode xml"
+      ><code
+	><span class="Keyword Element"
+	  >&lt;onstart&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >    </span
+	  ><span class="Keyword Element"
+	  >&lt;plugin</span
+	  ><span class="Others Attribute"
+	  > type=</span
+	  ><span class="String Value"
+	  >&quot;my-notification-plugin&quot;</span
+	  ><span class="Keyword Element"
+	  >&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >       </span
+	  ><span class="Keyword Element"
+	  >&lt;configuration&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >        </span
+	  ><span class="Keyword Element"
+	  >&lt;entry</span
+	  ><span class="Others Attribute"
+	  > key=</span
+	  ><span class="String Value"
+	  >&quot;someconfig&quot;</span
+	  ><span class="Others Attribute"
+	  > value=</span
+	  ><span class="String Value"
+	  >&quot;a value&quot;</span
+	  ><span class="Keyword Element"
+	  >/&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >        </span
+	  ><span class="Keyword Element"
+	  >&lt;entry</span
+	  ><span class="Others Attribute"
+	  > key=</span
+	  ><span class="String Value"
+	  >&quot;timout&quot;</span
+	  ><span class="Others Attribute"
+	  > value=</span
+	  ><span class="String Value"
+	  >&quot;2000&quot;</span
+	  ><span class="Keyword Element"
+	  >/&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >       </span
+	  ><span class="Keyword Element"
+	  >&lt;/configuration&gt;</span
+	  ><br
+	   /><span class="Normal NormalText"
+	  >    </span
+	  ><span class="Keyword Element"
+	  >&lt;/plugin&gt;</span
+	  ><br
+	   /><span class="Keyword Element"
+	  >&lt;/onstart&gt;</span
+	  ><span class="Normal NormalText"
+	  > </span
+	  ><br
+	   /></code
+	></pre
+      ><div id="configuration-1"
+      ><h4
+	><a href="#TOC"
+	  >configuration</a
+	  ></h4
+	><p
+	>Contains the key/value pair entries for plugin configuration, within a <a href="#plugin"
+	  >plugin</a
+	  > notification definition.</p
+	></div
+      ><div id="entry-1"
+      ><h4
+	><a href="#TOC"
+	  >entry</a
+	  ></h4
+	><p
+	>Defines a key/value pair within a <a href="#configuration-1"
+	  >configuration</a
+	  >.</p
+	><p
+	><em
+	  >Attributes</em
+	  >:</p
+	><dl
+	><dt
+	  >key</dt
+	  ><dd
+	  ><p
+	    >Key for the pair</p
+	    ></dd
+	  ><dt
+	  >value</dt
+	  ><dd
+	  ><p
+	    >Textual value</p
+	    ></dd
+	  ></dl
+	></div
+      ></div
+    ></div
+  ></div
+><div id="see-also"
+><h1
+  ><a href="#TOC"
+    >SEE ALSO</a
+    ></h1
+  ><p
+  ><code
+    >[rd-jobs](../man1/rd-jobs.html)</code
+    ></p
+  ><p
+  >The Rundeck source code and all documentation may be downloaded from <a href="https://github.com/rundeck/rundeck/"
+    ><code
+      >https://github.com/rundeck/rundeck/</code
+      ></a
+    >.</p
+  ></div
+>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.3.1)</a></li>
+    
+    
+    <li ><a href="index.html">Document Format Reference</a></li>
+    <li class="active"><a href="job-xml.html">JOB-XML</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="aclpolicy.html"><i class="glyphicon glyphicon-arrow-left"></i> ACLPOLICY</a></li>
+      <li class="next"><a href="job-yaml.html">JOB-YAML <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2014 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<span class="generated-date" title="2014-10-31T17:05:50EDT">2014-10-31T17:05:50EDT</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
+
