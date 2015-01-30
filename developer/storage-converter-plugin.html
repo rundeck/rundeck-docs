@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Storage Converter Plugin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="March 29, 2014" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.4.1</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.4.1)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="storage-converter-plugin.html">Storage Converter Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="plugin-development.html"><i class="glyphicon glyphicon-arrow-left"></i> Plugin Development</a></li>
+      <li class="next"><a href="storage-plugin.html">Storage Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#configuring">Configuring</a></li>
+<li><a href="#java-plugin-type">Java Plugin Type</a></li>
+<li><a href="#example">Example</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Storage Converter Plugin</h1>
+</div>
+<h2 id="about"><a href="#about">About</a></h2>
+<p>Storage converters can modify file contents and metadata uploaded to the <a href="../administration/ssh-key-storage.html">SSH Key Storage</a> via the <a href="../api/index.html#ssh-key-storage">SSH Key Storage API</a>.</p>
+<p>When installed, Storage Converter plugins can be configured to apply to all storage requests for a certain Path, or matching a certain metadata selector. This lets you apply plugins to only a subset of storage requests.</p>
+<p>A typical example is to apply some form of encryption to the <a href="../administration/ssh-key-storage.html">SSH Key Storage</a> stored under the <code>/ssh-key</code> path. In this case you can also have the plugin apply only to Private keys, by using the metadata selector.</p>
+<h2 id="configuring"><a href="#configuring">Configuring</a></h2>
+<p>See: <a href="../administration/ssh-key-storage.html#configuring-the-storage-converter-plugin">Configuring the Storage Converter Plugin</a>.</p>
+<h2 id="java-plugin-type"><a href="#java-plugin-type">Java Plugin Type</a></h2>
+<ul>
+<li><em>Note</em>: Refer to <a href="plugin-development.html#java-plugin-development">Java Development</a> for information about developing a Java plugin for Rundeck.</li>
+</ul>
+<p>The plugin interface is <a href="../javadoc/com/dtolabs/rundeck/plugins/storage/StorageConverterPlugin.html">StorageConverterPlugin</a>.</p>
+<p>The service name is <a href="../javadoc/com/dtolabs/rundeck/plugins/ServiceNameConstants.html#StorageConverter"><code>StorageConverter</code></a>.</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="kw">import com.dtolabs.rundeck.core.plugins.Plugin;</span>
+<span class="kw">import com.dtolabs.rundeck.core.storage.ResourceMetaBuilder;</span>
+<span class="kw">import com.dtolabs.rundeck.plugins.ServiceNameConstants;</span>
+<span class="kw">import com.dtolabs.rundeck.plugins.storage.StorageConverterPlugin;</span>
+<span class="kw">import org.rundeck.storage.api.HasInputStream;</span>
+<span class="kw">import org.rundeck.storage.api.Path;</span>
+
+<span class="fu">@Plugin</span>(name=<span class="st">&quot;myprovider&quot;</span>, service=ServiceNameConstants.<span class="fu">StorageConverter</span>)
+<span class="kw">public</span> <span class="kw">class</span> MyProvider <span class="kw">implements</span> StorageConverterPlugin {
+    <span class="co">/** read the stored data, decrypt if necessary */</span>
+    HasInputStream <span class="fu">readResource</span>(Path path, ResourceMetaBuilder
+      resourceMetaBuilder, HasInputStream hasInputStream){
+      <span class="kw">return</span> <span class="kw">null</span>;
+  }
+
+    <span class="co">/** encrypt data to be stored if necessary */</span>
+    HasInputStream <span class="fu">createResource</span>(Path path, ResourceMetaBuilder 
+      resourceMetaBuilder, HasInputStream hasInputStream){
+      <span class="kw">return</span> <span class="kw">null</span>;
+  }
+
+    <span class="co">/** encrypt data to be stored if necessary */</span>
+    HasInputStream <span class="fu">updateResource</span>(Path path, ResourceMetaBuilder 
+      resourceMetaBuilder, HasInputStream hasInputStream){
+      <span class="kw">return</span> <span class="kw">null</span>;
+  }
+}</code></pre>
+<p>The three methods are called when a resource is read, created, or updated, respectively.</p>
+<p>Your plugin can do any of the following:</p>
+<ol style="list-style-type: decimal">
+<li>Do nothing and return null, this will result that no changes to the stored data or metadata will be made.</li>
+<li>Modify the content being written or read, by reading the incoming data via the <code>HasInputStream</code> object, and returning a new <code>HasInputStream</code> object which will provide the modified data.
+<ul>
+<li>If you are doing the typical &quot;encrypt/decrypt&quot;, you will want to <em>encrypt</em> during create, update, and <em>decrypt</em> during the read operation</li>
+</ul></li>
+<li>Modify the metadata being written or read, by calling methods on the <code>ResourceMetaBuilder</code> object. This object will provide the metadata values that would be written/read. You can change the values by setting new values in the object.</li>
+</ol>
+<h2 id="example"><a href="#example">Example</a></h2>
+<p>Example code under the <code>examples/</code> directory:</p>
+<ul>
+<li><code>example-java-storage-converter-plugin</code></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.4.1)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="storage-converter-plugin.html">Storage Converter Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="plugin-development.html"><i class="glyphicon glyphicon-arrow-left"></i> Plugin Development</a></li>
+      <li class="next"><a href="storage-plugin.html">Storage Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2014 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<span class="generated-date" title="2015-01-30T20:22:46UTC">2015-01-30T20:22:46UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
