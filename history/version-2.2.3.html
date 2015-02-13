@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Version 2.2.3</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="greg" />
+  <meta name="date" content="09/24/2014" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.4.2</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.4.2)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-2.2.3.html">Version 2.2.3 (2014-09-24)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.2.2.html">Version 2.2.2 (2014-09-19) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#release-2.2.3">Release 2.2.3</a><ul>
+<li><a href="#contributors">Contributors</a></li>
+<li><a href="#bug-reporters">Bug Reporters</a></li>
+<li><a href="#issues">Issues</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Version 2.2.3</h1>
+</div>
+<h1 id="release-2.2.3"><a href="#release-2.2.3">Release 2.2.3</a></h1>
+<p>Date: 2014-09-24</p>
+<p>Fix several issues found in 2.2.2:</p>
+<ul>
+<li><a href="https://github.com/rundeck/rundeck/issues/943">2.2.2: Workflow editor drag/drop or step delete doesn't work</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/940">Documentation: Sudo password option type incorrect: should specify Secure Remote Authentication option</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/939">plugin development: plugin properties using rendering options should allow String values</a></li>
+</ul>
+<p>Release notes from 2.2.2 follow:</p>
+<p>This release fixes a number of bugs and addresses several potential security issues:</p>
+<ol style="list-style-type: decimal">
+<li>Require a unique token for each form request from the GUI, which prevents replay and CSRF attacks</li>
+<li>Updated all pages to prevent unencoded data from being written to the response, preventing XSS style attacks.</li>
+<li>Prevent access to the /api URLs via the web GUI.</li>
+<li>Some plugins (Resource model, Node Executor and File Copier) now support using Password fields displayed in the Project config page. The field values once set are never revealed in clear text via the GUI.</li>
+</ol>
+<p>Please see the Notes below for some configuration information related to these changes.</p>
+<p><strong>A big Thank You to one of our clients for sponsoring the work for these enhancements.</strong></p>
+<p><em>Security Notes:</em></p>
+<p>The new form tokens used in all form requests by default will expire in 30 minutes. This means that if your session timeout is larger than 30 minutes and you attempt to e.g. run a job after your web page has been sitting open for longer than that, you will see an &quot;Invalid token&quot; error. If this becomes a problem for you you can either change the expiration time for these tokens, or switch to using non-expiring tokens. See <a href="http://rundeck.org/2.2.2/administration/configuration-file-reference.html#security">Administration - Configuration File Reference - Security</a>.</p>
+<p>To add a Password field definition to your plugin, see <a href="http://rundeck.org/2.2.2/developer/plugin-development.html#description-properties">Plugin Development - Description Properties</a>. (Note that currently using property annotations is not supported for the three plugin types that can use Password properties.)</p>
+<p><em>Upgrade notes:</em></p>
+<p>See the <a href="http://rundeck.org/2.2.2/upgrading/index.html">Upgrading Guide</a>.</p>
+<h2 id="contributors"><a href="#contributors">Contributors</a></h2>
+<ul>
+<li>Andreas Knifh (knifhen)</li>
+<li>Daniel Serodio (dserodio)</li>
+<li>Greg Schueler (gschueler)</li>
+</ul>
+<h2 id="bug-reporters"><a href="#bug-reporters">Bug Reporters</a></h2>
+<ul>
+<li>adolfocorreia</li>
+<li>ahonor</li>
+<li>arjones85</li>
+<li>danpilch</li>
+<li>dennis-benzinger-hybris</li>
+<li>dserodio</li>
+<li>garyhodgson</li>
+<li>gschueler</li>
+<li>jerome83136</li>
+<li>knifhen</li>
+<li>majkinetor</li>
+<li>rfletcher</li>
+<li>schicky</li>
+</ul>
+<h2 id="issues"><a href="#issues">Issues</a></h2>
+<ul>
+<li><a href="https://github.com/rundeck/rundeck/issues/934">dynamic node filter string incorrectly includes name: prefix</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/931">aclpolicy files are listed in random order in Configure page</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/925">Improve &quot;Authenticating Users&quot; docs re. logging</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/919">Security: allow plugins to specify password properties that are obscured in project config page</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/915">Job Variable Length is too low</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/910">Config toggle: Hide error page stacktrace</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/909">Security: CSRF prevention</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/908">Security: prevent XSS issues</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/907">Cannot pass multiple values to multivalued option with enforced values</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/905">Rundeck 2.1.1 scheduling bug</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/904">Selectively Disable metrics servlets features</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/903">Broken Link in Documentation</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/901">Machine tag style attributes don't get replaced</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/900">Scheduled job with retry never completes 2.2.1</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/898">API docs state latest version is 11, but it is 12</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/896">NPE: Cannot get property 'nodeSet' on null object since upgrade to 2.2.1-1</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/894">Powershell and script-exec - extension problem</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/892">Ldap nestedGroup examples</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/883">&quot;Retry failed nodes&quot; does not seem to work, when using dynamic nodes filters</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/861">UI job status incorrect</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/844">Odd page when not allowing node info access</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.4.2)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-2.2.3.html">Version 2.2.3 (2014-09-24)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.2.2.html">Version 2.2.2 (2014-09-19) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2014 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<span class="generated-date" title="2015-02-13T22:51:38UTC">2015-02-13T22:51:38UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Notification Plugin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="April 18, 2013" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.4.2</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.4.2)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="notification-plugin.html">Notification Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="logging-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> Logging Plugin</a></li>
+      <li class="next"><a href="resource-model-source-plugin.html">Resource Model Source Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#plugin-execution">Plugin execution</a><ul>
+<li><a href="#configuration-data">Configuration data</a></li>
+<li><a href="#execution-data">Execution data</a></li>
+</ul></li>
+<li><a href="#plugin-configuration-properties">Plugin configuration properties</a></li>
+<li><a href="#plugin-types">Plugin types</a></li>
+<li><a href="#example-code">Example code</a></li>
+<li><a href="#java-plugin-type">Java Plugin Type</a></li>
+<li><a href="#groovy-plugin-type">Groovy Plugin Type</a><ul>
+<li><a href="#groovy-dsl">Groovy DSL</a></li>
+<li><a href="#notification-handlers">Notification handlers</a></li>
+<li><a href="#example">Example</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Notification Plugin</h1>
+</div>
+<h2 id="about"><a href="#about">About</a></h2>
+<p>Notifications are actions that are performed when a Job starts or finishes.</p>
+<p>Currently there are three conditions that can trigger notifications:</p>
+<ul>
+<li><code>onstart</code> - the Job started</li>
+<li><code>onsuccess</code> - the Job completed without error</li>
+<li><code>onfailure</code> - the Job failed or was aborted</li>
+</ul>
+<p>Rundeck has two built-in notification types that can be configured for Jobs:</p>
+<ol style="list-style-type: decimal">
+<li>Send an email to a list of addresses</li>
+<li>POST XML to a list of URLs</li>
+</ol>
+<p>This chapter discusses how to create your own notification plugins.</p>
+<h2 id="plugin-execution"><a href="#plugin-execution">Plugin execution</a></h2>
+<p>When a notification is defined for a Job, and the associated trigger occurs, your plugin will be executed and passed in two sets of Map data:</p>
+<ol style="list-style-type: decimal">
+<li>Configuration data - the user-supplied configuration for the plugin</li>
+<li>Execution data - information about the Job and Execution for the notification</li>
+</ol>
+<h3 id="configuration-data"><a href="#configuration-data">Configuration data</a></h3>
+<p>The Configuration data is fully custom depending on your plugin, and is described in the <a href="#plugin-configuration-properties">Plugin configuration properties</a> section.</p>
+<h4 id="property-references"><a href="#property-references">Property References</a></h4>
+<p>The specific data values of the Configuration section are allowed to have embedded Property References as described in the <a href="../manual/jobs.html#context-variables">Jobs - Context Variables</a> section.</p>
+<p>For example, when a user configures your plugin, they could embed an option value using: <code>${option.myoption}</code>. This value will be replaced with the runtime option value before being passed to your plugin.</p>
+<p>When defining Configuration properties that use custom Validation, keep in mind that the value set by a user may have such an embedded property reference and therefore may not pass the validation rules you have defined. If you want to allow these property references for a Configuration property, it must be a String type property, and any custom validation code should allow the embedded property references, for example by looking for a '${' sequence and allowing the value.</p>
+<h3 id="execution-data"><a href="#execution-data">Execution data</a></h3>
+<p>The execution data is included as a Map called <code>execution</code> containing the following keys and values:</p>
+<p><code>execution.id</code>: ID of the execution</p>
+<p><code>execution.href</code>: URL to the execution output view</p>
+<p><code>execution.status</code>: Execution state ('running','failed','aborted','succeeded')</p>
+<p><code>execution.user</code>: User who started the job</p>
+<p><code>execution.dateStarted</code>: Start time (java.util.Date)</p>
+<p><code>execution.dateStartedUnixtime</code>: Start time as milliseconds since epoch (long)</p>
+<p><code>execution.dateStartedW3c</code>: Start time as a W3C formatted String</p>
+<p><code>execution.description</code>: Summary string for the execution</p>
+<p><code>execution.argstring</code>: Argument string for any job options</p>
+<p><code>execution.project</code>: Project name</p>
+<p><code>execution.loglevel</code>: Loglevel string ('ERROR','WARN','INFO','VERBOSE','DEBUG')</p>
+<p>The following values may be available after the job is finished (not available for <code>onstart</code> trigger):</p>
+<p><code>execution.failedNodeListString</code>: Comma-separated list of any nodes that failed, if present</p>
+<p><code>execution.failedNodeList</code>: Java List of any node names that failed, if present</p>
+<p><code>execution.dateEnded</code>: End time (java.util.Date)</p>
+<p><code>execution.dateEndedUnixtime</code>: End time as milliseconds since epoch (long)</p>
+<p><code>execution.dateEndedW3c</code>: End time as W3C formatted string</p>
+<p><code>execution.abortedby</code>: User who aborted the execution</p>
+<p><code>job</code> information is in a <code>job</code> entry and contains another Map:</p>
+<p><code>job.id</code>: Job ID</p>
+<p><code>job.href</code>: URL to Job view page</p>
+<p><code>job.name</code>: Job name</p>
+<p><code>job.group</code>: Job group</p>
+<p><code>job.project</code>: Project name</p>
+<p><code>job.description</code>: Job Description</p>
+<p><code>job.averageDuration</code>: Average job duration in Milliseconds, if available</p>
+<p><code>execution.context</code> - this is a map containing all of the context variables available to the execution when it ran or will run, such as <a href="../manual/jobs.html#context-variables">Jobs - Context Variables</a>. The contents of this Map are the specific context namespaces and variables.</p>
+<p><code>execution.context.option</code>: a Map containing the Job Option keys/values.</p>
+<p><code>job</code>: a Map containing the Job context data, as provided to executions. This map will contain some duplicate information as the <code>execution.job</code> map previously described.</p>
+<p>In Groovy, you can simply reference any values in the Execution data maps using <a href="http://groovy.codehaus.org/GPath">Groovy Gpath</a>, e.g.:</p>
+<pre class="sourceCode java"><code class="sourceCode java">println execution.<span class="fu">context</span>.<span class="fu">option</span>.<span class="fu">myoption</span></code></pre>
+<h2 id="plugin-configuration-properties"><a href="#plugin-configuration-properties">Plugin configuration properties</a></h2>
+<p>Each plugin can define a set of &quot;configuration&quot; properties which allow users to specify input that the plugin can use when it operates.</p>
+<p>Notification plugins support scoped properties, allowing some of the configuration to be defined, or defaulted, on a per-project or per-Rundeck instance basis.</p>
+<h2 id="plugin-types"><a href="#plugin-types">Plugin types</a></h2>
+<p>Rundeck supports two types of Notification plugins:</p>
+<ol style="list-style-type: decimal">
+<li>Java-based development deployed as a Jar file.</li>
+<li>Groovy-based deployed as a single <code>.groovy</code> script.</li>
+</ol>
+<p>Currently &quot;script-based&quot; plugins (shell scripts, that is) are not supported.</p>
+<h2 id="example-code"><a href="#example-code">Example code</a></h2>
+<p>See the source directory <code>examples/example-groovy-notification-plugins</code> for examples of Notification plugins written in Groovy.</p>
+<ul>
+<li>On github: <a href="https://github.com/rundeck/rundeck/tree/development/examples/example-groovy-notification-plugins">example-groovy-notification-plugins</a></li>
+</ul>
+<p>See the source directory <code>examples/example-java-notification-plugin</code> for Java examples.</p>
+<ul>
+<li>On github: <a href="https://github.com/rundeck/rundeck/tree/development/examples/example-java-notification-plugin">example-java-notification-plugin</a></li>
+</ul>
+<h2 id="java-plugin-type"><a href="#java-plugin-type">Java Plugin Type</a></h2>
+<p>Java-based plugins can be developed just as any other Rundeck plugin, as described in the chapter <a href="plugin-development.html#java-plugin-development">Plugin Development - Java Plugin Development</a>.</p>
+<p>These plugin classes should implement the interface <a href="../javadoc/com/dtolabs/rundeck/plugins/notification/NotificationPlugin.html">NotificationPlugin</a>:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">interface</span> NotificationPlugin {
+    <span class="co">/**</span>
+<span class="co">     * Post a notification for the given trigger, dataset, and configuration</span>
+<span class="co">     * </span><span class="kw">@param trigger </span><span class="co">event type causing notification</span>
+<span class="co">     * </span><span class="kw">@param executionData </span><span class="co">execution data</span>
+<span class="co">     * </span><span class="kw">@param config </span><span class="co">notification configuration</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">postNotification</span>(String trigger,Map executionData,Map config);
+}</code></pre>
+<p>To define configuration properties for your plugin, you use the same mechanisms as for Workflow Steps, described under the chapter <a href="plugin-development.html#plugin-descriptions">Plugin Development - Plugin Descriptions</a>.</p>
+<p>The simplest way to do this is to use <a href="plugin-annotations.html">Plugin Annotations</a>. Here is an example class annotated to describe it to the Rundeck GUI:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="fu">@Plugin</span>(service=<span class="st">&quot;Notification&quot;</span>, name=<span class="st">&quot;example&quot;</span>)
+<span class="fu">@PluginDescription</span>(title=<span class="st">&quot;Example Plugin&quot;</span>, description=<span class="st">&quot;An example Plugin for Rundeck Notifications.&quot;</span>)
+<span class="kw">public</span> <span class="kw">class</span> ExampleNotificationPlugin <span class="kw">implements</span> NotificationPlugin{
+ 
+    <span class="fu">@PluginProperty</span>(name = <span class="st">&quot;test&quot;</span> ,title = <span class="st">&quot;Test String&quot;</span>, description = <span class="st">&quot;a description&quot;</span>)
+    <span class="kw">private</span> String test;
+ 
+    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">postNotification</span>(String trigger, Map executionData, Map config) {
+        System.<span class="fu">err.printf</span>(<span class="st">&quot;Trigger </span><span class="ch">%s</span><span class="st"> fired for </span><span class="ch">%s</span><span class="st">, configuration: </span><span class="ch">%s\n</span><span class="st">&quot;</span>,trigger,executionData,config);
+        System.<span class="fu">err.printf</span>(<span class="st">&quot;Local field test is: </span><span class="ch">%s\n</span><span class="st">&quot;</span>,test);
+        <span class="kw">return</span> <span class="kw">true</span>;
+    }
+}</code></pre>
+<h2 id="groovy-plugin-type"><a href="#groovy-plugin-type">Groovy Plugin Type</a></h2>
+<p>For Notifications, we introduce a new way to develop plugins, using a simple Groovy-based DSL. This gives you a simpler way to develop plugins, but still provides the power of Java.</p>
+<p>To create a Groovy based plugin, create a file named <code>MyNotificationPlugin.groovy</code> in the plugins directory for Rundeck.</p>
+<p>You must restart rundeck to make the plugin available the first time, but you can subsequently update the .groovy script without restarting Rundeck.</p>
+<h3 id="groovy-dsl"><a href="#groovy-dsl">Groovy DSL</a></h3>
+<p>Within the Groovy script, you define your plugin by calling the <code>rundeckPlugin</code> method, and pass it both the Class of the type of plugin, and a Closure used to build the plugin object.</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="kw">import</span>  com.dtolabs.rundeck.plugins.notification.NotificationPlugin
+<span class="fu">rundeckPlugin</span>(NotificationPlugin){
+    <span class="co">//plugin definition goes here...</span>
+}</code></pre>
+<p>In this case we use the same <code>NotificationPlugin</code> interface used for Java plugins.</p>
+<h4 id="definition"><a href="#definition">Definition</a></h4>
+<p>Within the definition section you can define your plugin's Description to be shown in the Rundeck GUI, as well as configuration properties to present to the user.</p>
+<p><em>Properties</em></p>
+<p>Set these properties to change the GUI display of your plugin:</p>
+<pre class="sourceCode java"><code class="sourceCode java">title=&#39;My Plugin&#39;
+description=&#39;Does some action&#39;</code></pre>
+<p><em>Configuration</em></p>
+<p>Use a <code>configuration</code> closure to define configuration properties:</p>
+<pre class="sourceCode java"><code class="sourceCode java">configuration{
+    <span class="co">//property definitions go here...</span>
+}</code></pre>
+<p><em>Property Definitions</em></p>
+<p>User configuration properties can be defined in a few ways. To define a property within the <code>configuration</code> section, you can use either of these forms:</p>
+<ol style="list-style-type: decimal">
+<li>method call form, specifying the attributes of the property:</li>
+</ol>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="fu">myproperty</span> (title: <span class="st">&quot;My Property&quot;</span>, description: <span class="st">&quot;Something&quot;</span>, type: &#39;Integer&#39;)</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>assignment form. This form guesses the data type and sets the defaultValue, but does not add any other attributes.</li>
+</ol>
+<pre class="sourceCode java"><code class="sourceCode java">myproperty2=<span class="st">&quot;default value&quot;</span>
+<span class="co">//the above is equivalent to:</span>
+<span class="fu">myproperty2</span>(defaultValue:<span class="st">&quot;default value&quot;</span>, type: &#39;String&#39;)
+ 
+myproperty3=[<span class="st">&quot;value&quot;</span>,<span class="st">&quot;another&quot;</span>,<span class="st">&quot;text&quot;</span>]
+<span class="co">//the above is equivalent to:</span>
+<span class="fu">myproperty3</span>(type:&#39;FreeSelect&#39;,values:[<span class="st">&quot;value&quot;</span>,<span class="st">&quot;another&quot;</span>,<span class="st">&quot;text&quot;</span>])</code></pre>
+<p>Each property has several attributes you can define, but only <code>name</code> and <code>type</code> are required:</p>
+<ul>
+<li><code>name</code> - the unique identifier for this property</li>
+<li><code>type</code> - the data type to use for the property, defaults to String. Available types:
+<ul>
+<li><code>String</code> - user can enter text</li>
+<li><code>Integer</code>, <code>Long</code> - user can enter a number</li>
+<li><code>Boolean</code> - user is shown a checkbox</li>
+<li><code>Select</code> or <code>FreeSelect</code> - user can choose from a list. With <code>FreeSelect</code>, the user can also type in any value</li>
+</ul></li>
+<li><code>title</code> - a user-readable string to describe the property</li>
+<li><code>description</code> - a string describing the property</li>
+<li><code>required</code> - whether the property is required to have a value</li>
+<li><code>defaultValue</code> - any default value for the property</li>
+<li><code>scope</code> - defines the scope for the property. Allowed values are described under the chapter <a href="plugin-annotations.html#property-scopes">Plugin Annotations - Property Scopes</a>. You may also simply use a String matching the name of the scope, e.g. &quot;Instance&quot;. The default scope if unspecified is &quot;Instance&quot;.</li>
+</ul>
+<p>In addition to these properties, for <code>Select</code> or <code>FreeSelect</code> type, you can define:</p>
+<ul>
+<li><code>values</code> - list of string values the user can select from</li>
+</ul>
+<p>To define a validation check for a property, use the first form and supply a closure. The implicit <code>it</code> variable will be the value of the property to check, and your closure should return <code>true</code> if the value is valid.</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="fu">phone_number</span>(title: <span class="st">&quot;Phone number&quot;</span>){
+   it.<span class="fu">replaceAll</span>(/[^\d]/,&#39;&#39;)==~/^\d{<span class="dv">10</span>}$/
+}</code></pre>
+<p><strong>A Note about Scopes and Validation</strong>:</p>
+<p>The user is presented with any <code>Instance</code> scoped properties in the Rundeck GUI when defining a Job, and any invalid configuration values will present an error when saving the Job. This includes failing to set a value for a &quot;required&quot; property. However, if you have properties that are scoped for <code>Project</code> or lower, those properties will not be shown in the GUI. In that case, the validation will not be checked for the properties when saving the Job definition, and will only be performed when the Notification is triggered.</p>
+<h3 id="notification-handlers"><a href="#notification-handlers">Notification handlers</a></h3>
+<p>For a <code>NotificationPlugin</code>, you can define custom handlers for each of the notification triggers (<code>onsuccess</code>, <code>onfailure</code>, and <code>onstart</code>).</p>
+<p>Simply define a closure with the given trigger name, and return a true value if your action was successful:</p>
+<pre class="sourceCode java"><code class="sourceCode java">onstart{ Map execution, Map configuration -&gt;
+    <span class="co">//perform an action using the execution and configuration</span>
+    println <span class="st">&quot;Job ${execution.job.name} has been started by ${execution.user}...&quot;</span>
+    <span class="kw">return</span> <span class="kw">true</span>
+}
+onsuccess{ Map execution, Map configuration -&gt;
+    <span class="co">//perform an action using the execution and configuration</span>
+    println <span class="st">&quot;Success! Job ${execution.job.name} worked fine.&quot;</span>
+    <span class="kw">return</span> <span class="kw">true</span>
+}
+onfailure{ Map execution, Map configuration -&gt;
+    <span class="co">//perform an action using the execution and configuration</span>
+    println <span class="st">&quot;Oh No! Job ${execution.job.name} didn&#39;t work out.&quot;</span>
+    <span class="kw">return</span> <span class="kw">true</span>
+}</code></pre>
+<p>If your closure returns a <code>false</code> value, then Rundeck will log an error in the server log.</p>
+<h3 id="example"><a href="#example">Example</a></h3>
+<p>Here is a minimal example:</p>
+<p><strong>MinimalNotificationPlugin.groovy</strong>:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="kw">import com.dtolabs.rundeck.plugins.notification.NotificationPlugin;</span>
+ 
+<span class="fu">rundeckPlugin</span>(NotificationPlugin){
+    onstart { 
+        <span class="fu">println</span>(<span class="st">&quot;success: data ${execution}&quot;</span>)
+        <span class="kw">true</span>
+    }
+ 
+    onfailure {
+        <span class="fu">println</span>(<span class="st">&quot;failure: data ${execution}&quot;</span>)
+        <span class="kw">true</span>
+    }
+ 
+    onsuccess {
+        <span class="fu">println</span>(<span class="st">&quot;job start: data ${execution}&quot;</span>)
+        <span class="kw">true</span>
+    }
+}</code></pre>
+<p>Here is a full example showing plugin GUI metadata, configuration properties, and alternate closure parameter lists:</p>
+<p><strong>MyNotificationPlugin.groovy</strong>:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="kw">import com.dtolabs.rundeck.plugins.notification.NotificationPlugin;</span>
+ 
+<span class="fu">rundeckPlugin</span>(NotificationPlugin) {
+    title=<span class="st">&quot;Example Plugin&quot;</span>
+    description=<span class="st">&quot;An example&quot;</span>
+ 
+    configuration{
+ 
+        test1 title:<span class="st">&quot;Test1&quot;</span>, description:<span class="st">&quot;Simple string&quot;</span>
+        
+        <span class="co">//Validation can be added with a closure</span>
+        <span class="fu">test2</span>(title:&#39;Test2&#39;,description:<span class="st">&quot;Matches a regex&quot;</span>){
+            it=~/^\d+$/
+        }
+        
+        <span class="co">//required select value, becomes a Select type</span>
+        test3 values: [<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;c&quot;</span>], required:<span class="kw">true</span>
+        
+        <span class="co">//if not required, becomes a FreeSelect</span>
+        test4 values: [<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;c&quot;</span>]
+        
+        <span class="co">//If type is not specified, the defaultValue will be used to guess</span>
+        test5 defaultValue: <span class="dv">3</span> <span class="co">//becomes Integer type</span>
+        test6 defaultValue:<span class="kw">true</span> <span class="co">//becomes Boolean type</span>
+ 
+        <span class="co">//these properties are assigned default values and automatically typed</span>
+        test7=<span class="dv">123</span>
+        test8=<span class="st">&quot;abc&quot;</span>
+        test9=<span class="kw">true</span>
+        test10=<span class="kw">false</span>
+        test11=[<span class="st">&quot;x&quot;</span>,<span class="st">&quot;y&quot;</span>,<span class="st">&quot;z&quot;</span>] <span class="co">//becomes a FreeSelect</span>
+ 
+        <span class="co">//redefining the same property will modify it</span>
+        test11 title:<span class="st">&quot;My Select Field&quot;</span>, description:<span class="st">&quot;Free Select field&quot;</span>, defaultValue:<span class="st">&quot;y&quot;</span>, required:<span class="kw">true</span>
+ 
+        <span class="co">//the scope indicates the property will not show up in the GUI when configuring the Notification, but must be defined in the project.properties or framework.properties at runtime</span>
+        test11 required:<span class="kw">true</span>, scope: &#39;Project&#39;
+        
+    }
+ 
+    onstart { Map executionData,Map config -&gt;
+        <span class="fu">println</span>(<span class="st">&quot;script, success: data ${executionData}, config: ${config}&quot;</span>)
+        <span class="kw">true</span>
+    }
+ 
+    onfailure { Map executionData -&gt;
+        <span class="co">//Single argument, the configuration properties are available automatically</span>
+        <span class="fu">println</span>(<span class="st">&quot;script, failure: data ${executionData}, test1: ${test1}, test2: ${test2} test3: ${test3}&quot;</span>)
+        <span class="kw">true</span>
+    }
+ 
+    onsuccess {
+        <span class="co">//with no args, there is a &quot;configuration&quot; and an &quot;execution&quot; variable in the context</span>
+        <span class="fu">println</span>(<span class="st">&quot;script, start: data ${execution}, test1: ${configuration.test1}, test2: ${configuration.test2} test3: ${configuration.test3}&quot;</span>)
+        <span class="kw">true</span>
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.4.2)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="notification-plugin.html">Notification Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="logging-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> Logging Plugin</a></li>
+      <li class="next"><a href="resource-model-source-plugin.html">Resource Model Source Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2014 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<span class="generated-date" title="2015-02-13T22:51:38UTC">2015-02-13T22:51:38UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
