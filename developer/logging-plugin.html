@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Logging Plugin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="June 5, 2013" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.5.0</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.5.0)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="logging-plugin.html">Logging Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="file-copier-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> File Copier Plugin</a></li>
+      <li class="next"><a href="notification-plugin.html">Notification Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#about">About</a><ul>
+<li><a href="#about-rundeck-logging">About Rundeck Logging</a></li>
+</ul></li>
+<li><a href="#changes-since-rundeck-1.6">Changes since Rundeck 1.6</a></li>
+<li><a href="#types-of-logging-plugins">Types of Logging Plugins</a></li>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#plugin-development">Plugin Development</a><ul>
+<li><a href="#java-plugin-type">Java plugin type</a></li>
+<li><a href="#groovy-plugin-type">Groovy plugin type</a></li>
+</ul></li>
+<li><a href="#example-code">Example code</a></li>
+<li><a href="#execution-context-data">Execution Context Data</a></li>
+<li><a href="#streaminglogwriter">StreamingLogWriter</a><ul>
+<li><a href="#java-streaminglogwriter">Java StreamingLogWriter</a></li>
+<li><a href="#groovy-streaminglogwriter">Groovy StreamingLogWriter</a></li>
+</ul></li>
+<li><a href="#streaminglogreader">StreamingLogReader</a><ul>
+<li><a href="#java-streaminglogreader">Java StreamingLogReader</a></li>
+<li><a href="#groovy-streaminglogreader">Groovy StreamingLogReader</a></li>
+</ul></li>
+<li><a href="#executionfilestorage">ExecutionFileStorage</a><ul>
+<li><a href="#storage-behavior">Storage behavior</a></li>
+<li><a href="#retrieval-behavior">Retrieval behavior</a></li>
+<li><a href="#execution-file-availability">Execution File Availability</a></li>
+<li><a href="#java-executionfilestorage">Java ExecutionFileStorage</a></li>
+<li><a href="#groovy-executionfilestorage">Groovy ExecutionFileStorage</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Logging Plugin</h1>
+</div>
+<h2 id="about"><a href="#about">About</a></h2>
+<p>A Logging provider stores or forwards execution log data.</p>
+<h3 id="about-rundeck-logging"><a href="#about-rundeck-logging">About Rundeck Logging</a></h3>
+<p>When Rundeck executes a Job or adhoc execution, it runs workflow steps across multiple nodes and channels all output from these steps into a log for the execution. This log contains the output from each step, as well as metadata about the context that the event occurred in, such as the node name, date stamp, and contextual data about the step being executed.</p>
+<p>This logging system consists of these components:</p>
+<ul>
+<li><em>Streaming Log Writers</em> - One or more outputs for the log data</li>
+<li><em>Streaming Log Reader</em> - One input for reading the log data</li>
+</ul>
+<p>When an execution starts, it writes log events to all outputs until it is done. When a user views the execution log in the Rundeck GUI, or accesses it via the API, the input component is used to read the log events for the specific Execution.</p>
+<p>Rundeck provides a built-in Reader and Writer, by writing the log output to a formatted file on disk, stored in the <code>var/logs</code> directory. This is the <em>Local File Log</em>.</p>
+<p>In addition, in Rundeck 2.0+, each execution generates a <em>state</em> file, which contains information about how each step and node executed. This file is also stored on disk.</p>
+<p>However local storage of log files is not always ideal, such as when deploying of Rundeck in a cloud environment where local disk storage could be ephemeral, or when clustering multiple Rundeck servers. In those cases, it would be useful to have a way to store the log file and state file somewhere else, and retrieve them when necessary.</p>
+<p>Rundeck has another component:</p>
+<ul>
+<li><em>Execution File Storage</em> - A way of storing and retrieving file data in an external system</li>
+</ul>
+<p>Rundeck has a plugin mechanism for all three of these components, allowing the logging system and file storage system to be adapted to different needs.</p>
+<p>Log Events are written to all configured Writer plugins, as well as the <strong>Local File Log</strong> if not disabled:</p>
+<div class="figure">
+<img src="../figures/log%20storage1.png" alt="Writer plugins" /><p class="caption">Writer plugins</p>
+</div>
+<p>Events are read from either a Reader plugin, or the <strong>Local File Log</strong>:</p>
+<div class="figure">
+<img src="../figures/log%20storage2.png" alt="Reader plugins" /><p class="caption">Reader plugins</p>
+</div>
+<p>When the <strong>Local File Log</strong> is used, the logs can be asynchronously stored to a Storage plugin after they are completed. Later, the logs can be asynchronously retrieved via the Storage plugin to be used by the <strong>Local File Log</strong>:</p>
+<div class="figure">
+<img src="../figures/log%20storage3.png" alt="Storage plugins" /><p class="caption">Storage plugins</p>
+</div>
+<p>Here are some examples of how it can be used:</p>
+<ul>
+<li>replace the <strong>Local File Log</strong> entirely with another Reader and set of Writers</li>
+<li>duplicate all log output somewhere, in addition to using the <strong>Local File Log</strong></li>
+<li>Supplement the <strong>Local File Log</strong> with a secondary log file storage system, so that local files can be removed and restored as needed</li>
+</ul>
+<h2 id="changes-since-rundeck-1.6"><a href="#changes-since-rundeck-1.6">Changes since Rundeck 1.6</a></h2>
+<p>In Rundeck 1.6, there was an <code>LogFileStorage</code> service and plugin system. In Rundeck 2.0+, this has been replaced by the <code>ExecutionFileStorage</code> service and plugin system.</p>
+<p>Any plugins written for Rundeck 1.6 will <em>not</em> work in Rundeck 2.0, and need to be updated to use the new mechanism.</p>
+<h2 id="types-of-logging-plugins"><a href="#types-of-logging-plugins">Types of Logging Plugins</a></h2>
+<p>There are three types of plugins that can be created:</p>
+<ul>
+<li><a href="#streaminglogwriter">StreamingLogWriter</a> - provides a stream-like mechanism for writing log events (<a href="../javadoc/com/dtolabs/rundeck/core/logging/StreamingLogWriter.html">javadoc</a>).</li>
+<li><a href="#streaminglogreader">StreamingLogReader</a> - provides a stream-like mechanism for reading log events (<a href="../javadoc/com/dtolabs/rundeck/core/logging/StreamingLogReader.html">javadoc</a>).</li>
+<li><a href="#executionfilestorage">ExecutionFileStorage</a> - provides a way to both store and retrieve entire log files and execution state files (<a href="../javadoc/com/dtolabs/rundeck/core/logging/ExecutionFileStorage.html">javadoc</a>).</li>
+</ul>
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+<p>See the chapter <a href="../plugins-user-guide/configuring.html#logging-plugin-configuration">Plugins User Guide - Configuring - Logging</a>.</p>
+<h2 id="plugin-development"><a href="#plugin-development">Plugin Development</a></h2>
+<p>Rundeck supports two development modes for Logging plugins:</p>
+<ol style="list-style-type: decimal">
+<li>Java-based development deployed as a Jar file.</li>
+<li>Groovy-based deployed as a single <code>.groovy</code> script.</li>
+</ol>
+<blockquote>
+<p>Note, &quot;script-based&quot; plugins (shell scripts, that is) are not supported.</p>
+</blockquote>
+<h3 id="java-plugin-type"><a href="#java-plugin-type">Java plugin type</a></h3>
+<p>Java-based plugins can be developed just as any other Rundeck plugin, as described in the chapter <a href="plugin-development.html#java-plugin-development">Plugin Development - Java Plugin Development</a>.</p>
+<p>Your plugin class should implement the appropriate Java interface as described in the section for that plugin:</p>
+<ul>
+<li><a href="#streaminglogwriter">StreamingLogWriter</a></li>
+<li><a href="#streaminglogreader">StreamingLogReader</a></li>
+<li><a href="#executionfilestorage">ExecutionFileStorage</a></li>
+</ul>
+<p>To define configuration properties for your plugin, you use the same mechanisms as for Workflow Steps, described under the chapter <a href="plugin-annotations.html#plugin-description">Plugin Annotations - Plugin Descriptions</a>.</p>
+<p>The simplest way to do this is to use <a href="plugin-annotations.html#plugin-properties">Plugin Annotations - Plugin Properties</a>.</p>
+<h3 id="groovy-plugin-type"><a href="#groovy-plugin-type">Groovy plugin type</a></h3>
+<p>The Groovy plugin development method for Loggig Plugins is similar to <a href="notification-plugin.html#groovy-plugin-type">Notification Plugin - Groovy Plugins</a>.</p>
+<p>Create a Groovy script, and define your plugin by calling the <code>rundeckPlugin</code> method, and pass it both the Class of the type of plugin, and a Closure used to build the plugin object.</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="kw">import</span> com.dtolabs.rundeck.plugins.logging.StreamingLogWriterPlugin
+<span class="fu">rundeckPlugin</span>(StreamingLogWriterPlugin){
+    <span class="co">//plugin definition goes here...</span>
+}</code></pre>
+<h2 id="example-code"><a href="#example-code">Example code</a></h2>
+<p>See the source directory <code>examples/example-groovy-log-plugins</code> for examples of all three provider types written in Groovy.</p>
+<ul>
+<li>On github: <a href="https://github.com/rundeck/rundeck/tree/development/examples/example-groovy-log-plugins">example-groovy-log-plugins</a></li>
+</ul>
+<p>See the source directory <code>examples/example-java-logging-plugins</code> for Java examples.</p>
+<ul>
+<li>On github: <a href="https://github.com/rundeck/rundeck/tree/development/examples/example-java-logging-plugins">example-java-logging-plugins</a></li>
+</ul>
+<h2 id="execution-context-data"><a href="#execution-context-data">Execution Context Data</a></h2>
+<p>All three plugin types are given a Map of Execution &quot;context data&quot;. This is a dataset with information about the Execution that produced the log events.</p>
+<p>This data map is the same as the &quot;Job context variables&quot; available when you execute a job or adhoc script, as described in the chapter <a href="../manual/jobs.html#context-variables">Job Workflows - Context Variables</a>.</p>
+<p>Note that the Map keys will not start with <code>job.</code>, simply use the variable name, such as <code>execid</code>.</p>
+<p>In addition, for ExecutionFileStorage plugins, another map entry named <code>filetype</code> will be specified, which indicates which type of file is being stored. You need to use this filetype as part of the identifier for storing or retrieving the file.</p>
+<h2 id="streaminglogwriter"><a href="#streaminglogwriter">StreamingLogWriter</a></h2>
+<p>The <code>StreamingLogWriter</code> (<a href="../javadoc/com/dtolabs/rundeck/core/logging/StreamingLogWriter.html">javadoc</a>) system receives log events from an execution and writes them somewhere.</p>
+<h3 id="java-streaminglogwriter"><a href="#java-streaminglogwriter">Java StreamingLogWriter</a></h3>
+<p>Create a Java class that implements the interface <a href="../javadoc/com/dtolabs/rundeck/plugins/logging/StreamingLogWriterPlugin.html">StreamingLogWriterPlugin</a>:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+<span class="co"> * Plugin interface for streaming log writers</span>
+<span class="co"> */</span>
+<span class="kw">public</span> <span class="kw">interface</span> StreamingLogWriterPlugin <span class="kw">extends</span> StreamingLogWriter {
+    <span class="co">/**</span>
+<span class="co">     * Sets the execution context information for the log information </span>
+<span class="co">     * being written, will be called prior to other</span>
+<span class="co">     * methods </span><span class="kw">{@link #openStream()}</span>
+<span class="co">     *</span>
+<span class="co">     * </span><span class="kw">@param context</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">initialize</span>(Map&lt;String, ? <span class="kw">extends</span> Object&gt; context);
+}</code></pre>
+<p>This extends <code>StreamingLogWriter</code>:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+<span class="co"> * writes log entries in a streaming manner</span>
+<span class="co"> */</span>
+<span class="kw">public</span> <span class="kw">interface</span> StreamingLogWriter {
+    <span class="co">/**</span>
+<span class="co">     * Open a stream, called before addEvent is called</span>
+<span class="co">     */</span>
+    <span class="dt">void</span> <span class="fu">openStream</span>() <span class="kw">throws</span> IOException;
+ 
+    <span class="co">/**</span>
+<span class="co">     * Add a new event</span>
+<span class="co">     * </span><span class="kw">@param event</span>
+<span class="co">     */</span>
+    <span class="dt">void</span> <span class="fu">addEvent</span>(LogEvent event);
+ 
+    <span class="co">/**</span>
+<span class="co">     * Close the stream.</span>
+<span class="co">     */</span>
+    <span class="dt">void</span> <span class="fu">close</span>();
+}</code></pre>
+<p>The plugin is used in this manner:</p>
+<ol style="list-style-type: decimal">
+<li>When the plugin is instantiated, any configuration properties defined that have values to be resolved are set on the plugin instance</li>
+<li>the <code>initialize</code> method is called with a map of <a href="#execution-context-data">contextual data</a> about the execution</li>
+<li>When an execution starts, the <code>openStream</code> method is called</li>
+<li>For every log event that is emitted by the execution, each plugin's <code>addEvent</code> is called with the event</li>
+<li>After execution finishes, <code>close</code> is called.</li>
+</ol>
+<h3 id="groovy-streaminglogwriter"><a href="#groovy-streaminglogwriter">Groovy StreamingLogWriter</a></h3>
+<p>Create a groovy script that calls the <code>rundeckPlugin</code> method and passes the <code>StreamingLogWriterPlugin</code> as the type of plugin:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="kw">import</span> com.dtolabs.rundeck.plugins.logging.StreamingLogWriterPlugin
+<span class="fu">rundeckPlugin</span>(StreamingLogWriterPlugin){
+    <span class="co">//plugin definition</span>
+}</code></pre>
+<p>To define metadata about your plugin, and configuration properties, see the <a href="notification-plugin.html#definition">Notification Plugin - Groovy Notification Plugins - DSL - Definition</a> chapter.</p>
+<p>Define these closures inside your definition:</p>
+<p><code>open</code></p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+<span class="co"> * The &quot;open&quot; closure is called to open the stream for writing events.</span>
+<span class="co"> * It is passed two map arguments, the execution data, and the plugin configuration data.</span>
+<span class="co"> *</span>
+<span class="co"> * It should return a Map containing the stream context, which will be passed back for later</span>
+<span class="co"> * calls to the &quot;addEvent&quot; closure.</span>
+<span class="co"> */</span>
+open { Map execution, Map config -&gt;
+    <span class="co">//open a stream for writing</span>
+    <span class="co">//return a map containing any context you want to maintain</span>
+    [mycounter: ..., mystream: <span class="kw">... </span>]
+}</code></pre>
+<p><code>addEvent</code></p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+<span class="co"> * &quot;addEvent&quot; closure is called to append a new event to the stream.  </span>
+<span class="co"> * It is passed the Map of stream context created in the &quot;open&quot; closure, and a LogEvent</span>
+<span class="co"> * </span>
+<span class="co"> */</span>
+addEvent { Map context, LogEvent event-&gt;
+   <span class="co">// write the event to my stream</span>
+}</code></pre>
+<p><code>close</code></p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+<span class="co"> * &quot;close&quot; closure is called to end writing to the stream.</span>
+<span class="co"> *</span>
+<span class="co"> * In this example we don&#39;t declare any arguments, but an implicit </span>
+<span class="co"> * &#39;context&#39; variable is available with the stream context data.</span>
+<span class="co"> * </span>
+<span class="co"> */</span>
+close { Map context -&gt;
+    <span class="co">// close my stream</span>
+}</code></pre>
+<p>The plugin is used in this manner:</p>
+<ol style="list-style-type: decimal">
+<li>When an execution starts, the <code>open</code> closure is called with both the <a href="#execution-context-data">contextual data</a> about the execution, and any configuration property values. The returned context map is kept to pass to later calls</li>
+<li>For every log event that is emitted by the execution, each plugin's <code>addEvent</code> is called with the event and the context map created by <code>open</code></li>
+<li>After execution finishes, <code>close</code> is called with the context map.</li>
+</ol>
+<h2 id="streaminglogreader"><a href="#streaminglogreader">StreamingLogReader</a></h2>
+<p>The <code>StreamingLogReader</code> system reads log events from somewhere for a specific execution and returns them in an iterator-like fashion. Readers must also support an &quot;offset&quot;, allowing the event stream to resume from some index within the stream. These offset indices can be opaque to Rundeck (they could correspond to bytes, or event number, it is up to the plugin). The plugin is expected to report an offset value when reading events, and be able to resume from a previously reported offset value.</p>
+<p>Additionally, these plugins should be able to report a <code>totalSize</code> (in an opaque manner), and a <code>lastModified</code> timestamp, indicating the last log event timestamp that was received.</p>
+<h3 id="java-streaminglogreader"><a href="#java-streaminglogreader">Java StreamingLogReader</a></h3>
+<p>Create a Java class that implements the interface <a href="../javadoc/com/dtolabs/rundeck/plugins/logging/StreamingLogReaderPlugin.html">StreamingLogReaderPlugin</a>:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+<span class="co"> * Plugin interface for streaming log readers</span>
+<span class="co"> */</span>
+<span class="kw">public</span> <span class="kw">interface</span> StreamingLogReaderPlugin <span class="kw">extends</span> StreamingLogReader {
+    <span class="co">/**</span>
+<span class="co">     * Sets the execution context information for the log information </span>
+<span class="co">     * being requested, will be called</span>
+<span class="co">     * prior to other methods </span><span class="kw">{@link #openStream(Long)}</span><span class="co">, and must return </span>
+<span class="co">     * true to indicate the stream is ready to be open, false otherwise.</span>
+<span class="co">     * </span><span class="kw">@param context </span><span class="co">execution context data</span>
+<span class="co">     * </span><span class="kw">@return </span><span class="co">true if the stream is ready to open</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">initialize</span>(Map&lt;String, ? <span class="kw">extends</span> Object&gt; context);
+ 
+}</code></pre>
+<p>This extends the interface <a href="../javadoc/com/dtolabs/rundeck/core/logging/StreamingLogReader.html">StreamingLogReader</a>:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+<span class="co"> *  Reads log events in a streaming manner, and supports resuming from a specified offset.</span>
+<span class="co"> *</span>
+<span class="co"> *  </span><span class="kw">@see LogEventIterator</span>
+<span class="co"> *  </span><span class="kw">@see OffsetIterator</span>
+<span class="co"> *  </span><span class="kw">@see Closeable</span>
+<span class="co"> *  </span><span class="kw">@see CompletableIterator</span>
+<span class="co"> */</span>
+<span class="kw">public</span> <span class="kw">interface</span> StreamingLogReader <span class="kw">extends</span> LogEventIterator, Closeable {
+    <span class="co">/**</span>
+<span class="co">     * Read log entries starting at the specified offset</span>
+<span class="co">     *</span>
+<span class="co">     * </span><span class="kw">@param offset</span>
+<span class="co">     *</span>
+<span class="co">     * @return</span>
+<span class="co">     */</span>
+    <span class="dt">void</span> <span class="fu">openStream</span>(Long offset) <span class="kw">throws</span> IOException;
+ 
+    <span class="co">/**</span>
+<span class="co">     * Return the total size</span>
+<span class="co">     *</span>
+<span class="co">     * @return</span>
+<span class="co">     */</span>
+    <span class="dt">long</span> <span class="fu">getTotalSize</span>();
+ 
+    <span class="co">/**</span>
+<span class="co">     * Return the last modification time of the log </span>
+<span class="co">     * (e.g. last log entry time, or null if not modified)</span>
+<span class="co">     *</span>
+<span class="co">     * @return</span>
+<span class="co">     */</span>
+    Date <span class="fu">getLastModified</span>();
+}</code></pre>
+<p>Additional methods that must be implemented from super-interfaces:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">//from LogEventIterator</span>
+LogEvent <span class="fu">next</span>();
+<span class="dt">boolean</span> <span class="fu">hasNext</span>();
+<span class="dt">void</span> <span class="fu">remove</span>(); <span class="co">//unused</span>
+ 
+<span class="co">/**</span>
+<span class="co"> * Returns the current opaque offset within the underlying data stream</span>
+<span class="co"> *</span>
+<span class="co"> * @return</span>
+<span class="co"> */</span>
+<span class="dt">long</span> <span class="fu">getOffset</span>(); <span class="co">//from OffsetIterator</span>
+ 
+<span class="co">/**</span>
+<span class="co"> * Return true if the underlying source is completely exhausted, whether</span>
+<span class="co"> * or not there are any items to produce (may return false even if </span><span class="kw">{@link Iterator#hasNext()}</span><span class="co"> returns false).</span>
+<span class="co"> * </span><span class="kw">@return </span><span class="co">true if underlying iteration source is exhasuted</span>
+<span class="co"> */</span>
+<span class="dt">boolean</span> <span class="fu">isComplete</span>(); <span class="co">//from CompletableIterator</span></code></pre>
+<p>The plugin is used in this manner:</p>
+<ol style="list-style-type: decimal">
+<li>When the plugin is instantiated, any configuration properties defined that have values to be resolved are set on the plugin instance</li>
+<li>the <code>initialize</code> method is called with a map of <a href="#execution-context-data">contextual data</a> about the execution, if the method returns false, then clients are told that the log stream is pending.</li>
+<li>the <code>getLastModified</code> method may be called, to determine if there are new events since a read sequence</li>
+<li>The <code>openStream</code> method is called, possibly with an offset larger than 0, which indicates the event stream should begin at the specified offset</li>
+<li>The <code>java.util.Iterator</code> methods will be called to iterate all available LogEvents</li>
+<li>The <code>isComplete</code> method will be called to determine if the log output is complete, or may contain more entries later.</li>
+<li>The <code>getOffset</code> method will be called to record the last offset read.</li>
+<li>Finally, <code>close</code> is called.</li>
+</ol>
+<p>Rundeck uses this interface to read the log events to display in the GUI, or send out via its API. It uses the <code>offset</code>, as well as <code>lastModified</code>, to resume reading the log from a certain point, and to check whether there is more data since the last time it was read.</p>
+<p>The implementation of the <code>isComplete</code> method is important, because it signals to Rundeck that all log events for the stream have been read and no more are expected to be available. To be clear, this differs from the <code>java.util.Iterator#hasNext()</code> method, which returns true if any events are actually available. <code>isComplete</code> should return false until no more events will ever be available.</p>
+<p>If you are developing a <code>StreamingLogWriter</code> in conjuction with a <code>StreamingLogReader</code>, keep in mind that the writer's <code>close</code> method will be called to indicate the end of the stream, which would be reflected on the reader side by <code>isComplete</code> returning true.</p>
+<h3 id="groovy-streaminglogreader"><a href="#groovy-streaminglogreader">Groovy StreamingLogReader</a></h3>
+<p>Create a groovy script that calls the <code>rundeckPlugin</code> method and passes the <code>StreamingLogReaderPlugin</code> as the type of plugin:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="kw">import</span> com.dtolabs.rundeck.plugins.logging.StreamingLogReaderPlugin
+<span class="fu">rundeckPlugin</span>(StreamingLogReaderPlugin){
+    <span class="co">//plugin definition</span>
+}</code></pre>
+<p>To define metadata about your plugin, and configuration properties, see the <a href="notification-plugin.html#definition">Notification Plugin - Groovy Notification Plugins - DSL - Definition</a> chapter.</p>
+<p>Define these closures inside your definition:</p>
+<p><code>info</code></p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+<span class="co"> * The &#39;info&#39; closure is called to retrieve some metadata about the stream, </span>
+<span class="co"> * such as whether it is available to read, totalSize of the content, and last</span>
+<span class="co"> *  modification time</span>
+<span class="co"> * </span>
+<span class="co"> * It should return a Map containing these two entries:</span>
+<span class="co"> *  `ready` : a boolean indicating whether &#39;open&#39; will work</span>
+<span class="co"> * `lastModified`: Long (unix epoch) or Date indicating last modification of the log</span>
+<span class="co"> * `totalSize`: Long indicating total size of the log, it doesn&#39;t have to indicate bytes,</span>
+<span class="co"> *     merely a measurement of total data size</span>
+<span class="co"> */</span>
+info {Map execution, Map configuration-&gt;
+  
+    <span class="co">//return map containing metadata about the stream</span>
+    <span class="co">// it SHOULD contain these two elements:</span>
+    [
+        lastModified: <span class="fu">determineLastModified</span>(),
+        totalSize: <span class="fu">determineDataSize</span>(),
+        ready: <span class="fu">isReady</span>()
+    ]
+}</code></pre>
+<p><code>open</code></p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+<span class="co"> * The `open` closure is called to begin reading events from the stream.</span>
+<span class="co"> * It is passed the execution data, the plugin configuration, and an offset.</span>
+<span class="co"> * It should return a Map containing any context to store between calls.</span>
+<span class="co"> */</span>
+open { Map execution, Map configuration, <span class="dt">long</span> offset -&gt;
+    
+    <span class="co">//return map of context data for your plugin to reuse later,</span>
+    [
+        myfile: ...,
+        mycounter:...
+    ]
+}</code></pre>
+<p><code>next</code></p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+<span class="co"> * Next is called to produce the next event, it should return a Map</span>
+<span class="co"> * containing: [event: (event data), offset: (next offset), complete: (true/false)].  </span>
+<span class="co"> * The event data can be a LogEvent, or a Map containing:</span>
+<span class="co"> * [</span>
+<span class="co"> * message: (String),</span>
+<span class="co"> * loglevel: (String or LogLevel),</span>
+<span class="co"> * datetime: (long or Date),</span>
+<span class="co"> * eventType: (String),</span>
+<span class="co"> * metadata: (Map),</span>
+<span class="co"> * ]</span>
+<span class="co"> * `complete` should be true if no more events will ever be available.</span>
+<span class="co"> */</span>
+next { Map context-&gt;
+    Map value=<span class="kw">null</span>
+    <span class="dt">boolean</span> complete=<span class="kw">false</span>
+    <span class="dt">long</span> offset=...
+    <span class="kw">try</span>{
+        value = <span class="fu">readNextValue</span>(...)
+        complete = <span class="fu">isComplete</span>(..)
+    }<span class="kw">catch</span> (SomeException e){
+    }
+    <span class="co">//event can be a Map, or a LogEvent</span>
+    <span class="kw">return</span> [event:event, offset:offset, complete:complete]
+}</code></pre>
+<p><code>close</code></p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+<span class="co"> * Close is called to finish the read stream</span>
+<span class="co"> */</span>
+close{ Map context-&gt;
+    <span class="co">//perform any close action</span>
+}</code></pre>
+<p>The plugin is used in this manner:</p>
+<ol style="list-style-type: decimal">
+<li>The <code>info</code> closure is called to determine the <code>lastModified</code> and <code>totalSize</code>.</li>
+<li>The <code>open</code> closure is called with both the <a href="#execution-context-data">contextual data</a> about the execution, and any configuration property values, and the expected read offset</li>
+<li>The <code>next</code> closure is called repeatedly, until the result <code>event</code> entry is null, or <code>complete</code> is true. The <code>offset</code> value is reported to the client.</li>
+<li>The <code>close</code> closure is called with the context map.</li>
+</ol>
+<h2 id="executionfilestorage"><a href="#executionfilestorage">ExecutionFileStorage</a></h2>
+<p>The <code>ExecutionFileStorage</code> system is asked to store and retrieve entire log files and state files for a specific execution.</p>
+<p>The Java interface for these plugins is <a href="../javadoc/com/dtolabs/rundeck/plugins/logging/ExecutionFileStoragePlugin.html">ExecutionFileStoragePlugin</a>.</p>
+<p>Exection file storage allows Rundeck to store the files elsewhere, in case local file storage is not suitable for long-term retention.</p>
+<p>The ExecutionFileStorage service is used by two aspects of the Rundeck server currently.</p>
+<ol style="list-style-type: decimal">
+<li>Execution Log file - a data file containing all of the output for an execution</li>
+<li>Execution state files - a data file containing all of the workflow step and node state information for an execution</li>
+</ol>
+<h3 id="storage-behavior"><a href="#storage-behavior">Storage behavior</a></h3>
+<p>If an ExecutionFileStoragePlugin is installed and configured to be enabled, Rundeck will use it in this way after an Execution completes:</p>
+<p>Rundeck will place two <em>Storage Requests</em> in an asynchronous queue for that Execution to store the Log file and the State file.</p>
+<p>When triggered, the <em>Storage Request</em> will use the configured ExecutionFileStorage plugin and invoke <code>store</code>:</p>
+<ul>
+<li>If it is unsuccessful, Rundeck may re-queue the request to retry it after a delay (configurable)</li>
+</ul>
+<h3 id="retrieval-behavior"><a href="#retrieval-behavior">Retrieval behavior</a></h3>
+<p>When a client requests a log stream to read via the <strong>Local File Log</strong>, or requests to read the <strong>Execution Workflow State</strong>, Rundeck determines if the file(s) are available locally. If they are not available, it will start a <em>Retrieval Request</em> asynchronously for each missing file, and tell the client that the file is in a &quot;pending&quot; state.</p>
+<p>The <em>Retrieval Request</em> will use the configured ExecutionFileStorage plugin, and invoke <code>retrieve</code>.</p>
+<p>If successful, the client requests to read the <strong>Local File Log</strong> or <strong>Execution Workflow State</strong> should find the file available locally. If unsuccessful, the result may be cached for a period of time to report to the client. After that time, a new <em>Retrieval Request</em> may be started if requested by a client. After a certain number of attempts fail, further attempts will be disabled and return the cached status. The retry delay and number of attempts can be configured.</p>
+<h3 id="execution-file-availability"><a href="#execution-file-availability">Execution File Availability</a></h3>
+<p>Your plugin will be asked if a file of a specific type is 'available', and should report back one of:</p>
+<ul>
+<li><code>true</code> - the plugin can retrieve the file of the specified type</li>
+<li><code>false</code> - the plugin cannot retrieve the file of the specified type</li>
+</ul>
+<p>Only if <code>true</code> is reported will a <em>Retrieval Request</em> be created.</p>
+<p>If there is an error discovering availability, your plugin should throw an Exception with the error message to report.</p>
+<h3 id="java-executionfilestorage"><a href="#java-executionfilestorage">Java ExecutionFileStorage</a></h3>
+<p>Create a Java class that implements the interface <a href="../javadoc/com/dtolabs/rundeck/plugins/logging/ExecutionFileStoragePlugin.html">ExecutionFileStoragePlugin</a>:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+<span class="co"> * Plugin to implement </span><span class="kw">{@link com.dtolabs.rundeck.core.logging.ExecutionFileStorage}</span>
+<span class="co"> */</span>
+<span class="kw">public</span> <span class="kw">interface</span> ExecutionFileStoragePlugin <span class="kw">extends</span> ExecutionFileStorage {
+    <span class="co">/**</span>
+<span class="co">     * Initializes the plugin with contextual data</span>
+<span class="co">     *</span>
+<span class="co">     * </span><span class="kw">@param context</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">initialize</span>(Map&lt;String, ? <span class="kw">extends</span> Object&gt; context);
+ 
+    <span class="co">/**</span>
+<span class="co">     * Returns true if the file for the context and the given filetype </span>
+<span class="co">     * is available, false otherwise</span>
+<span class="co">     *</span>
+<span class="co">     * </span><span class="kw">@param filetype </span><span class="co">file type or extension of the file to check</span>
+<span class="co">     *</span>
+<span class="co">     * </span><span class="kw">@return </span><span class="co">true if a file with the given filetype is available </span>
+<span class="co">     * for the context</span>
+<span class="co">     *</span>
+<span class="co">     * </span><span class="kw">@throws com.dtolabs.rundeck.core.logging.ExecutionFileStorageException</span>
+<span class="co">     *          if there is an error determining the availability</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">isAvailable</span>(String filetype) <span class="kw">throws</span> ExecutionFileStorageException;
+}</code></pre>
+<p>This extends the interface <a href="../javadoc/com/dtolabs/rundeck/core/logging/ExecutionFileStorage.html">ExecutionFileStorage</a>:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+<span class="co"> * Handles storage and retrieval of typed files for an execution, the filetype is specified in the </span><span class="kw">{@link #store(String,</span>
+<span class="kw"> * java.io.InputStream, long, java.util.Date)}</span><span class="co"> and </span><span class="kw">{@link #retrieve(String, java.io.OutputStream)}</span><span class="co"> methods, and more</span>
+<span class="co"> * than one filetype may be stored or retrieved for the same execution.</span>
+<span class="co"> */</span>
+<span class="kw">public</span> <span class="kw">interface</span> ExecutionFileStorage {
+    <span class="co">/**</span>
+<span class="co">     * Stores a file of the given file type, read from the given stream</span>
+<span class="co">     *</span>
+<span class="co">     * </span><span class="kw">@param filetype </span><span class="co">    filetype or extension of the file to store</span>
+<span class="co">     * </span><span class="kw">@param stream </span><span class="co">      the input stream</span>
+<span class="co">     * </span><span class="kw">@param length </span><span class="co">      the file length</span>
+<span class="co">     * </span><span class="kw">@param lastModified </span><span class="co">the file modification time</span>
+<span class="co">     *</span>
+<span class="co">     * </span><span class="kw">@return </span><span class="co">true if successful</span>
+<span class="co">     *</span>
+<span class="co">     * </span><span class="kw">@throws java.io.IOException</span>
+<span class="co">     */</span>
+    <span class="dt">boolean</span> <span class="fu">store</span>(String filetype, InputStream stream, 
+                  <span class="dt">long</span> length, Date lastModified) 
+          <span class="kw">throws</span> IOException, ExecutionFileStorageException;
+ 
+    <span class="co">/**</span>
+<span class="co">     * Write a file of the given file type to the given stream</span>
+<span class="co">     *</span>
+<span class="co">     * </span><span class="kw">@param filetype </span><span class="co">key to identify stored file</span>
+<span class="co">     * </span><span class="kw">@param stream </span><span class="co">  the output stream</span>
+<span class="co">     *</span>
+<span class="co">     * </span><span class="kw">@return </span><span class="co">true if successful</span>
+<span class="co">     *</span>
+<span class="co">     * </span><span class="kw">@throws IOException</span>
+<span class="co">     */</span>
+    <span class="dt">boolean</span> <span class="fu">retrieve</span>(String filetype, OutputStream stream) 
+       <span class="kw">throws</span> IOException, ExecutionFileStorageException;
+}</code></pre>
+<p>The plugin is used in these two conditions:</p>
+<ul>
+<li>A log or state file needs to be stored via the plugin</li>
+<li>A log or state file needs to be retrieved via the plugin</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>When the plugin is instantiated, any configuration properties defined that have values to be resolved are set on the plugin instance</li>
+<li>The <code>initialize</code> method is called with a map of <a href="#execution-context-data">contextual data</a> about the execution.</li>
+</ol>
+<p>When <code>retrieval</code> is needed:</p>
+<ol style="list-style-type: decimal">
+<li>The <code>isAvailable</code> method is called to determine if the plugin can retrieve the file, and the filetype is specified</li>
+<li>If the method returns true, then <code>retrieve</code> method is called with the same filetype.</li>
+</ol>
+<p>When <code>storage</code> is needed:</p>
+<ol style="list-style-type: decimal">
+<li>The <code>store</code> method is called with the filetype to store.</li>
+</ol>
+<h3 id="groovy-executionfilestorage"><a href="#groovy-executionfilestorage">Groovy ExecutionFileStorage</a></h3>
+<p>Create a groovy script that calls the <code>rundeckPlugin</code> method and passes the <code>ExecutionFileStoragePlugin</code> as the type of plugin:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="kw">import</span> com.dtolabs.rundeck.plugins.logging.ExecutionFileStoragePlugin
+<span class="fu">rundeckPlugin</span>(ExecutionFileStoragePlugin){
+    <span class="co">//plugin definition</span>
+}</code></pre>
+<p>To define metadata about your plugin, and configuration properties, see the <a href="notification-plugin.html#definition">Notification Plugin - Groovy Notification Plugins - DSL - Definition</a> chapter.</p>
+<p>Define these closures inside your definition:</p>
+<p><code>available</code></p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+<span class="co"> * Called to determine the file availability, return true to indicate it is available, </span>
+<span class="co"> * false to indicate it is not available. An exception indicates an error.</span>
+<span class="co"> */</span>
+available { String filetype, Map execution, Map configuration-&gt;
+    <span class="co">//determine state</span>
+    <span class="kw">return</span> <span class="fu">isAvailable</span>()
+}</code></pre>
+<p><code>store</code></p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+<span class="co"> * Called to store a log file, called with the execution data, configuration properties, and an InputStream.  Additionally `length` and `lastModified` properties are in the closure binding, providing the file length, and last modification Date.</span>
+<span class="co"> * Return true to indicate success.</span>
+<span class="co"> */</span>
+store { String filetype, Map execution, Map configuration, InputStream source-&gt;
+    <span class="co">//store output</span>
+    source.<span class="fu">withReader</span> { reader -&gt;
+        <span class="co">//...write somewhere</span>
+    }
+    source.<span class="fu">close</span>()
+    <span class="co">//return true if successful</span>
+    <span class="kw">true</span>
+}</code></pre>
+<p><code>retrieve</code></p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+<span class="co"> * Called to retrieve a log file, called with the execution data, configuration properties, and an OutputStream.</span>
+<span class="co"> * Return true to indicate success.</span>
+<span class="co"> */</span>
+retrieve {  String filetype, Map execution, Map configuration, OutputStream out-&gt;
+    <span class="co">//get log file contents and write to output stream</span>
+    out &lt;&lt; <span class="fu">retrieveIt</span>()
+    <span class="co">//return true to indicate success</span>
+    <span class="kw">true</span>
+}</code></pre>
+<p>The plugin is used in this manner:</p>
+<ol style="list-style-type: decimal">
+<li>The <code>available</code> closure is called before retrieving the file, to determine if it is available, passing the filetype</li>
+<li>The <code>store</code> closure is called when a file needs to be stored, with the filetype, the <a href="#execution-context-data">contextual data</a>, configuration Map, and InputStream which will produce the log data. Additionally <code>length</code> and <code>lastModified</code> properties are in the closure binding, providing the file length, and last modification Date.</li>
+<li>The <code>retrieve</code> closure is called when a file needs to be retrieved, with the <a href="#execution-context-data">contextual data</a>, configuration Map, and OutputStream to write the log file content</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.5.0)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="logging-plugin.html">Logging Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="file-copier-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> File Copier Plugin</a></li>
+      <li class="next"><a href="notification-plugin.html">Notification Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2014 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<span class="generated-date" title="2015-04-16T17:40:52UTC">2015-04-16T17:40:52UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>

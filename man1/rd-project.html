@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>rd-project</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="August 17, 2011" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.5.0</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.5.0)</a></li>
+    
+    
+    <li ><a href="index.html">Command Line Tools</a></li>
+    <li class="active"><a href="rd-project.html">rd-project</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="rd-jobs.html"><i class="glyphicon glyphicon-arrow-left"></i> rd-jobs</a></li>
+      <li class="next"><a href="rd-queue.html">rd-queue <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#name">NAME</a></li>
+<li><a href="#synopsis">SYNOPSIS</a></li>
+<li><a href="#description">DESCRIPTION</a></li>
+<li><a href="#options">OPTIONS</a></li>
+<li><a href="#environment-variables">ENVIRONMENT VARIABLES</a></li>
+<li><a href="#execution">EXECUTION</a></li>
+<li><a href="#see-also">SEE ALSO</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">rd-project</h1>
+</div>
+<h1 id="name"><a href="#name">NAME</a></h1>
+<p>rd-project - Create projects.</p>
+<h1 id="synopsis"><a href="#synopsis">SYNOPSIS</a></h1>
+<p><code>rd-project [-vh] -a create -p projectname [ --property=value ]...</code></p>
+<h1 id="description"><a href="#description">DESCRIPTION</a></h1>
+<p>The rd-project command is used to create projects.</p>
+<p>The command will create the necessary directory structure and configuration files, and can be used to configure the project's properties.</p>
+<h1 id="options"><a href="#options">OPTIONS</a></h1>
+<dl>
+<dt><code>-h</code></dt>
+<dd><p>displays the usage information presented above.</p>
+</dd>
+<dt><code>-v</code></dt>
+<dd><p>run verbose.</p>
+</dd>
+<dt><code>-a</code></dt>
+<dd><p>The action name. Only &quot;create&quot; is supported.</p>
+</dd>
+<dt><code>-p</code></dt>
+<dd><p>The project name</p>
+</dd>
+<dt><code>--property=value</code></dt>
+<dd><p>Specify property values for the project's configuration file. Include one or more --property=value combinations.</p>
+</dd>
+</dl>
+<h1 id="environment-variables"><a href="#environment-variables">ENVIRONMENT VARIABLES</a></h1>
+<p>The following environment variables are assumed during the execution of rd-setup:</p>
+<ul>
+<li><p>JAVA_HOME :Java installation directory</p></li>
+<li><p>RDECK_BASE : Rundeck install directory</p></li>
+</ul>
+<h1 id="execution"><a href="#execution">EXECUTION</a></h1>
+<p><em>Examples</em></p>
+<p>Create a new project named &quot;production&quot;:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash">    <span class="kw">rd-project</span> -a create -p production</code></pre>
+<p>Create a new project and specify the &quot;project.ssh-keypath&quot; value as well as a path for the nodes data.</p>
+<pre class="sourceCode bash"><code class="sourceCode bash">    <span class="kw">rd-project</span> -a create -p production \
+       <span class="kw">--project.ssh-keypath</span>=/path/to/keyfile \
+       <span class="kw">--resources.source.1.config.file</span>=/path/to/resources</code></pre>
+<h1 id="see-also"><a href="#see-also">SEE ALSO</a></h1>
+<p><a href="rd-setup.html"><code>rd-setup</code></a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.5.0)</a></li>
+    
+    
+    <li ><a href="index.html">Command Line Tools</a></li>
+    <li class="active"><a href="rd-project.html">rd-project</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="rd-jobs.html"><i class="glyphicon glyphicon-arrow-left"></i> rd-jobs</a></li>
+      <li class="next"><a href="rd-queue.html">rd-queue <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2014 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<span class="generated-date" title="2015-04-16T17:40:52UTC">2015-04-16T17:40:52UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
