@@ -1,0 +1,2436 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>API Reference | Version 13</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Alex Honor" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="November 20, 2010" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.5.1</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.5.1)</a></li>
+    
+    
+    
+    <li class="active"><a href="index.html">API Reference | Version 13</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#api-version-number">API Version Number</a><ul>
+<li><a href="#changes">Changes</a></li>
+</ul></li>
+<li><a href="#urls">URLs</a></li>
+<li><a href="#xml-and-json">XML and JSON</a></li>
+<li><a href="#authentication">Authentication</a><ul>
+<li><a href="#token-authentication">Token Authentication</a></li>
+<li><a href="#password-authentication">Password Authentication</a></li>
+</ul></li>
+<li><a href="#response-format">Response Format</a><ul>
+<li><a href="#error-codes">Error codes</a></li>
+<li><a href="#item-lists">Item Lists</a></li>
+</ul></li>
+<li><a href="#api-contents">API Contents</a><ul>
+<li><a href="#authentication-tokens">Authentication Tokens</a></li>
+<li><a href="#system-info">System Info</a></li>
+<li><a href="#listing-jobs">Listing Jobs</a></li>
+<li><a href="#listing-jobs-for-a-project">Listing Jobs for a Project</a></li>
+<li><a href="#running-a-job">Running a Job</a></li>
+<li><a href="#exporting-jobs">Exporting Jobs</a></li>
+<li><a href="#importing-jobs">Importing Jobs</a></li>
+<li><a href="#getting-a-job-definition">Getting a Job Definition</a></li>
+<li><a href="#deleting-a-job-definition">Deleting a Job Definition</a></li>
+<li><a href="#bulk-job-delete">Bulk Job Delete</a></li>
+<li><a href="#getting-executions-for-a-job">Getting Executions for a Job</a></li>
+<li><a href="#delete-all-executions-for-a-job">Delete all Executions for a Job</a></li>
+<li><a href="#listing-running-executions">Listing Running Executions</a></li>
+<li><a href="#execution-info">Execution Info</a></li>
+<li><a href="#delete-an-execution">Delete an Execution</a></li>
+<li><a href="#bulk-delete-executions">Bulk Delete Executions</a></li>
+<li><a href="#execution-query">Execution Query</a></li>
+<li><a href="#execution-state">Execution State</a></li>
+<li><a href="#execution-output">Execution Output</a></li>
+<li><a href="#execution-output-with-state">Execution Output with State</a></li>
+<li><a href="#aborting-executions">Aborting Executions</a></li>
+<li><a href="#running-adhoc-commands">Running Adhoc Commands</a></li>
+<li><a href="#running-adhoc-scripts">Running Adhoc Scripts</a></li>
+<li><a href="#running-adhoc-script-urls">Running Adhoc Script URLs</a></li>
+<li><a href="#key-storage">Key Storage</a></li>
+<li><a href="#listing-projects">Listing Projects</a></li>
+<li><a href="#project-creation">Project Creation</a></li>
+<li><a href="#getting-project-info">Getting Project Info</a></li>
+<li><a href="#project-deletion">Project Deletion</a></li>
+<li><a href="#project-configuration">Project Configuration</a></li>
+<li><a href="#project-configuration-keys">Project Configuration Keys</a></li>
+<li><a href="#project-archive-export">Project Archive Export</a></li>
+<li><a href="#project-archive-import">Project Archive Import</a></li>
+<li><a href="#updating-and-listing-resources-for-a-project">Updating and Listing Resources for a Project</a></li>
+<li><a href="#refreshing-resources-for-a-project">Refreshing Resources for a Project</a></li>
+<li><a href="#project-readme-file">Project Readme File</a></li>
+<li><a href="#listing-history">Listing History</a></li>
+<li><a href="#listing-resources">Listing Resources</a></li>
+<li><a href="#getting-resource-info">Getting Resource Info</a></li>
+<li><a href="#takeover-schedule-in-cluster-mode">Takeover Schedule in Cluster Mode</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">API Reference | Version 13</h1>
+</div>
+<p>Rundeck provides a Web API for use with your application.</p>
+<h2 id="api-version-number"><a href="#api-version-number">API Version Number</a></h2>
+<p>The current API version is <code>13</code>.</p>
+<p>For API endpoints described in this document, the <em>minimum</em> API version required for their use is indicated by the URL used, e.g.:</p>
+<pre><code>/api/2/system/info
+/api/1/projects</code></pre>
+<p>This means you must use at least the API version indicated to access the endpoint, unless otherwise noted. Some features or functionality for the endpoint may only be supported in later versions.</p>
+<p>The API Version Number is required to be included in all API calls within the URL.</p>
+<p>If the version number is not included or if the requested version number is unsupported, then the API call will fail. The error response will include the code &quot;api-version-unsupported&quot; and have HTTP status code of <code>400 Bad Request</code>:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;result</span><span class="ot"> error=</span><span class="st">&quot;true&quot;</span><span class="ot"> apiversion=</span><span class="st">&quot;2&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;error</span><span class="ot"> code=</span><span class="st">&quot;api-version-unsupported&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;message&gt;</span>
+        Unsupported API Version &quot;1&quot;. API Request: /rundeck/api/1/project/test/jobs. Reason: Minimum supported version: 2
+        <span class="kw">&lt;/message&gt;</span>
+    <span class="kw">&lt;/error&gt;</span>
+<span class="kw">&lt;/result&gt;</span></code></pre>
+<h3 id="changes"><a href="#changes">Changes</a></h3>
+<p>Changes introduced by API Version number:</p>
+<p><strong>Version 13</strong>:</p>
+<ul>
+<li>New endpoints
+<ul>
+<li><code>/api/13/project/[NAME]/readme.md</code> and <code>/api/13/project/[NAME]/motd.md</code>
+<ul>
+<li><a href="#project-readme-file">Project Readme File</a> (<code>GET</code>, <code>PUT</code>, <code>DELETE</code>)</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>Version 12</strong>:</p>
+<ul>
+<li>New endpoints
+<ul>
+<li><code>POST /api/12/executions/delete</code>
+<ul>
+<li><a href="#bulk-delete-executions">Bulk delete executions</a></li>
+</ul></li>
+</ul></li>
+<li>Updated endpoints
+<ul>
+<li><code>DELETE /api/12/execution/[ID]</code>
+<ul>
+<li><a href="#delete-an-execution">Delete an execution</a></li>
+</ul></li>
+<li><code>DELETE /api/12/job/[ID]/executions</code>
+<ul>
+<li><a href="#delete-all-executions-for-a-job">Delete all executions for a job</a></li>
+</ul></li>
+<li><code>POST /api/12/job/[ID]/executions</code>
+<ul>
+<li><a href="#running-a-job">Run a Job</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>Version 11</strong>:</p>
+<p><strong>Update</strong>: The URL path for Token access was corrected.</p>
+<p>In this version, all new and updated endpoints support XML or JSON request and response content where appropriate.</p>
+<p><strong>Modified XML Response format</strong>:</p>
+<ul>
+<li>For endpoints requiring API version 11 <em>only</em>, the default for XML responses is to <em>no longer</em> include a <code>&lt;result&gt;</code> element around the data.</li>
+<li>For API clients that expect to see the <code>&lt;result&gt;</code> element, a request header of <code>X-Rundeck-API-XML-Response-Wrapper: true</code> will restore it.</li>
+<li>For endpoint requests for API version 10 and earlier, the <code>&lt;result&gt;</code> element will be sent as it has been (described in <a href="#response-format">Response Format</a>)</li>
+</ul>
+<p><strong>Version 11</strong>:</p>
+<ul>
+<li>New endpoints
+<ul>
+<li><code>/api/11/project/[NAME]/config</code>
+<ul>
+<li>PUT and GET for <a href="#project-configuration">Project Configuration</a></li>
+</ul></li>
+<li><code>/api/11/project/[NAME]/config/[KEY]</code>
+<ul>
+<li>PUT, GET, DELETE for <a href="#project-configuration-keys">Project Configuration Keys</a></li>
+</ul></li>
+<li><code>/api/11/project/[NAME]/export</code>
+<ul>
+<li>GET to retrieve archive of a project - <a href="#project-archive-export">Project Archive Export</a></li>
+</ul></li>
+<li><code>/api/11/project/[NAME]/import</code>
+<ul>
+<li>PUT to import an archive to a project - <a href="#project-archive-import">Project Archive Import</a></li>
+</ul></li>
+<li><code>/api/11/storage/keys/[PATH]</code>
+<ul>
+<li>GET, POST, PUT, DELETE: manage stored keys - <a href="#key-storage">Key Storage</a></li>
+</ul></li>
+<li><code>/api/11/tokens</code>
+<ul>
+<li>GET: List all auth tokens - <a href="#list-tokens">List Tokens</a></li>
+<li>POST: Generate a token for a user - <a href="#create-a-token">Create a Token</a></li>
+</ul></li>
+<li><code>/api/11/tokens/[user]</code>
+<ul>
+<li>GET: List auth tokens defined for a user - <a href="#list-tokens">List Tokens</a></li>
+<li>POST: Generate a token for a user - <a href="#create-a-token">Create a Token</a></li>
+</ul></li>
+<li><code>/api/11/token/[tokenID]</code>
+<ul>
+<li>GET: get a token - <a href="#get-a-tokens">Get a token</a></li>
+<li>DELETE: delete a token - <a href="#delete-a-token">Delete a Token</a></li>
+</ul></li>
+</ul></li>
+<li>Updated endpoints
+<ul>
+<li><code>/api/11/project/[NAME]</code>
+<ul>
+<li>DELETE method can delete a project - <a href="#project-deletion">Project Deletion</a></li>
+<li>GET method response updated - <a href="#getting-project-info">Getting Project Info</a></li>
+</ul></li>
+<li><code>/api/11/projects</code>
+<ul>
+<li>POST method can be used to create a new project - <a href="#project-creation">Project creation</a></li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>Version 10</strong>:</p>
+<ul>
+<li>New endpoints
+<ul>
+<li><code>/api/10/execution/[ID]/state</code> - <a href="#execution-state">Execution State</a>
+<ul>
+<li>Retrieve workflow step and node state information</li>
+</ul></li>
+<li><code>/api/10/execution/[ID]/output/state</code> - <a href="#execution-output-with-state">Execution Output with State</a>
+<ul>
+<li>Retrieve log output with state change information</li>
+</ul></li>
+<li><code>/api/10/execution/[ID]/output/node/[NODENAME]</code> and <code>/api/10/execution/[ID]/output/step/[STEPCTX]</code> - <a href="#execution-output">Execution Output</a>
+<ul>
+<li>Retrieve log output for a particular node or step</li>
+<li>Can combine both node and step context</li>
+</ul></li>
+</ul></li>
+<li>Updated endpoints
+<ul>
+<li><code>/api/10/execution/[ID]</code> - <a href="#execution-info">Execution Info</a>
+<ul>
+<li>added <code>successfulNodes</code> and <code>failedNodes</code> detail.</li>
+<li>added <code>job/options</code> data</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>Version 9</strong>:</p>
+<ul>
+<li>Updated endpoints
+<ul>
+<li><code>/api/9/executions/running</code> - <a href="#listing-running-executions">Listing Running Executions</a>
+<ul>
+<li>Allow <code>project=*</code> to list running executions across all projects</li>
+<li>Result data now includes <code>project</code> attribute for each <code>&lt;execution&gt;</code>.</li>
+</ul></li>
+<li><code>/api/9/jobs/import</code> - <a href="#importing-jobs">Importing Jobs</a>
+<ul>
+<li>Add <code>uuidOption</code> parameter to allow removing imported UUIDs to avoid creation conflicts.</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>Version 8</strong>:</p>
+<ul>
+<li>Updated endpoints
+<ul>
+<li><code>/api/8/run/script</code> and <code>/api/8/run/url</code> - <a href="#running-adhoc-scripts">Running Adhoc Scripts</a> and <a href="#running-adhoc-script-urls">Running Adhoc Script URLs</a>
+<ul>
+<li>Added two optional parameters for <code>scriptInterpreter</code> and <code>interpreterArgsQuoted</code></li>
+</ul></li>
+<li><code>/api/8/jobs/import</code> - <a href="#importing-jobs">Importing Jobs</a>
+<ul>
+<li>Added an optional parameter <code>project</code> which will override any project defined in the Job definition contexts. If used, the job definitions do not need a <code>project</code> value in them.</li>
+</ul></li>
+</ul></li>
+<li>Removed endpoints
+<ul>
+<li><code>/api/1/report/create</code></li>
+<li>Removed due to History no longer supporting arbitrary event reports.</li>
+</ul></li>
+</ul>
+<p><strong>Version 7</strong>:</p>
+<ul>
+<li>Add <strong>Incubator</strong> endpoint
+<ul>
+<li>PUT <code>/api/7/incubator/jobs/takeoverSchedule</code> - <a href="#takeover-schedule-in-cluster-mode">Takeover Schedule in Cluster Mode</a>
+<ul>
+<li>incubating feature for cluster mode schedule takeover</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>Version 6</strong>:</p>
+<ul>
+<li>Updated endpoints
+<ul>
+<li><code>/api/6/execution/[ID]/output</code> - <a href="#execution-output">Execution Output</a>
+<ul>
+<li>XML format has changed for API v6: entry log content is now specified as a <code>log</code> attribute value</li>
+<li>The old XML format will still be used for queries using <code>/api/5</code></li>
+<li>Fixed invalid XML when no format was specified and XML was used by default</li>
+<li><strong>documentation typo fixed</strong>: the JSON format incorrectly specified the log text key as 'mesg', corrected to 'log'</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>Version 5</strong>:</p>
+<p>Added in Rundeck 1.4.6, 1.5.1:</p>
+<ul>
+<li>New feature for some endpoints:
+<ul>
+<li>new <code>asUser</code> parameter can record an action (run or abort) as having been performed by another user</li>
+<li>Affected endpoints
+<ul>
+<li><a href="#running-a-job">Running a Job</a></li>
+<li><a href="#running-adhoc-commands">Running Adhoc Commands</a></li>
+<li><a href="#running-adhoc-scripts">Running Adhoc Scripts</a></li>
+<li><a href="#running-adhoc-script-urls">Running Adhoc Script URLs</a></li>
+<li><a href="#aborting-executions">Aborting Executions</a></li>
+</ul></li>
+</ul></li>
+<li>New endpoint
+<ul>
+<li><code>/api/5/jobs/delete</code> - <a href="#bulk-job-delete">Bulk Job Delete</a></li>
+</ul></li>
+<li>New endpoint
+<ul>
+<li><code>/api/5/execution/[ID]/output</code> - <a href="#execution-output">Execution Output</a></li>
+</ul></li>
+<li>New endpoint
+<ul>
+<li><code>/api/5/executions</code> - <a href="#execution-query">Execution Query</a></li>
+</ul></li>
+<li>Updated endpoints
+<ul>
+<li><code>/api/1/history</code> - <a href="#listing-history">Listing History</a>
+<ul>
+<li>new filter parameters added for including or excluding reports for exact job group/name values: <code>jobListFilter</code> and <code>excludeJobListFilter</code></li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>Version 4</strong>:</p>
+<ul>
+<li>New endpoint
+<ul>
+<li><code>/api/4/run/url</code> - <a href="#running-adhoc-script-urls">Running Adhoc Script URLs</a></li>
+</ul></li>
+</ul>
+<p><strong>Version 3</strong>:</p>
+<ul>
+<li>Updated endpoints
+<ul>
+<li><code>/api/1/resources</code> - <a href="#listing-resources">Listing Resources</a>
+<ul>
+<li><code>format</code> parameter can now use any supported Resource Format Parser format name.</li>
+</ul></li>
+<li><code>/api/2/project/[NAME]/resources</code> - <a href="#updating-and-listing-resources-for-a-project">Updating and Listing Resources for a Project</a>
+<ul>
+<li><code>POST</code> request Content-Type can be any MIME type supported by a Resource Format Parser plugin.</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><strong>Version 2</strong>:</p>
+<ul>
+<li>New endpoints
+<ul>
+<li><code>/api/2/project/[NAME]/jobs</code> - <a href="#listing-jobs-for-a-project">Listing Jobs for a Project</a></li>
+<li><code>/api/2/project/[NAME]/resources</code> - <a href="#updating-and-listing-resources-for-a-project">Updating and Listing Resources for a Project</a></li>
+<li><code>/api/2/project/[NAME]/resources/refresh</code> - <a href="#refreshing-resources-for-a-project">Refreshing Resources for a Project</a></li>
+</ul></li>
+<li>Updated endpoints
+<ul>
+<li><code>/api/1/jobs</code> - <a href="#listing-jobs">Listing Jobs</a>
+<ul>
+<li>Additional parameters added</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="urls"><a href="#urls">URLs</a></h2>
+<p>The Rundeck server has a &quot;Base URL&quot;, where you access the server. Your Rundeck Server URL may look like: <code>http://myserver:4440</code>.</p>
+<p>The root URL path for all calls to the API in this version is:</p>
+<pre><code>$RUNDECK_SERVER_URL/api/2</code></pre>
+<h2 id="xml-and-json"><a href="#xml-and-json">XML and JSON</a></h2>
+<p>The majority of API calls use XML for input and output. Some import/export features support YAML formatted documents, but XML is used for most API-level information.</p>
+<p>As of API version 11, new and updated endpoints will support JSON format, with content type <code>application/json</code>.</p>
+<p>JSON results can be retrieved by sending the HTTP &quot;Accept&quot; header with a <code>application/json</code> value. JSON request content is supported when the HTTP &quot;Content-Type&quot; header specifies <code>application/json</code>.</p>
+<p>If an &quot;Accept&quot; header is not specified, then the response will be either the same format as the request content (for POST, or PUT requests), or XML by default.</p>
+<h2 id="authentication"><a href="#authentication">Authentication</a></h2>
+<p>Authentication can be done in two different ways, either with Token based authentication, or with a username and password.</p>
+<p>Note that in either case, <strong>it is recommended that you enable SSL Support for the Rundeck server</strong> so that communication is encrypted at all times. For more information about using SSL, see <a href="../administration/configuring-ssl.html">Administration - Configuring Rundeck for SSL</a>.</p>
+<h3 id="token-authentication"><a href="#token-authentication">Token Authentication</a></h3>
+<p>Token Authentication consists of including a string known as an &quot;API Token&quot; with every request to the Rundeck API.</p>
+<p>To obtain an API Token, you must first log in to the Rundeck GUI using a user account that has &quot;admin&quot; credentials. Click on your username in the header of the page, and you will be shown your User Profile page. From this page you can manage your API Tokens. Click &quot;Generate API Token&quot; to create a new one. The unique string that is shown is the API Token.</p>
+<p>Alternately you can define tokens in static file, by setting the <code>rundeck.tokens.file</code> in <a href="../administration/configuration-file-reference.html#framework.properties">framework.properties</a>.</p>
+<p>You must include one of the following with every HTTP request to the API:</p>
+<ul>
+<li>HTTP Header <code>X-Rundeck-Auth-Token</code> set to the API Token string</li>
+</ul>
+<p>OR</p>
+<ul>
+<li>HTTP URL Parameter <code>authtoken</code> set to the API Token string</li>
+</ul>
+<p>With that in place, you can make calls to the API as described in the rest of this document, and you don't need to maintain any cookies between requests.</p>
+<p>Examples:</p>
+<p>Using the URL parameter to request the project list:</p>
+<pre><code>GET /api/1/projects?authtoken=E4rNvVRV378knO9dp3d73O0cs1kd0kCd HTTP/1.1
+...</code></pre>
+<p>Using the HTTP Header:</p>
+<pre><code>GET /api/1/projects HTTP/1.1
+X-Rundeck-Auth-Token: E4rNvVRV378knO9dp3d73O0cs1kd0kCd
+...</code></pre>
+<h3 id="password-authentication"><a href="#password-authentication">Password Authentication</a></h3>
+<p>If using Password Authentication, you must perform the authentication steps prior to accessing the API.</p>
+<p>This means that you must submit authentication parameters (username, password) to the &quot;Authentication URL&quot; and retain a Session Cookie.</p>
+<p>The Session Cookie must be sent with all calls to the API to maintain the authenticated connection.</p>
+<p>To submit authentication, submit a <code>POST</code> request to the URL:</p>
+<pre><code>$RUNDECK_SERVER_URL/j_security_check</code></pre>
+<p>With these parameters:</p>
+<ul>
+<li><code>j_username</code>: rundeck username</li>
+<li><code>j_password</code>: password</li>
+</ul>
+<p>If the response includes a redirect chain which includes or results in <code>$RUNDECK_SERVER_URL/user/login</code> or <code>$RUNDECK_SERVER_URL/user/error</code>, then the authentication request failed.</p>
+<p>Otherwise, if the response is a redirect chain which results in <code>200 successful</code> response, then the authentication was successful.</p>
+<p>The response should set a cookie named <code>JSESSIONID</code>.</p>
+<h2 id="response-format"><a href="#response-format">Response Format</a></h2>
+<p>For version 11 and later API requests, XML responses will have only the content indicated in the appropriate endpoint documentation.</p>
+<p>For version 10 and earlier API requests, XML responses will have this document structure:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;result</span><span class="ot"> success</span><span class="er">/error</span><span class="ot">=</span><span class="st">&quot;true&quot;</span><span class="ot"> apiversion=</span><span class="st">&quot;X&quot;</span><span class="kw">&gt;</span>
+    <span class="co">&lt;!-- error included if error=&quot;true&quot; --&gt;</span>
+    <span class="kw">&lt;error&gt;</span>
+        <span class="kw">&lt;message&gt;</span><span class="co">&lt;!-- error message text --&gt;</span><span class="kw">&lt;/message&gt;</span>
+        <span class="co">&lt;!-- ... multiple message elements --&gt;</span>
+    <span class="kw">&lt;/error&gt;</span>
+
+    <span class="co">&lt;!-- optional success element if declared for the endpoint --&gt;</span>
+    <span class="kw">&lt;success&gt;</span>
+        <span class="kw">&lt;message&gt;</span><span class="co">&lt;!-- success message --&gt;</span><span class="kw">&lt;/message&gt;</span>
+    <span class="kw">&lt;/success&gt;</span>
+
+    <span class="co">&lt;!--</span>
+<span class="co">        Specific API results..</span>
+<span class="co">    --&gt;</span>
+<span class="kw">&lt;/result&gt;</span></code></pre>
+<p>If an error occurred, then the <code>error</code> attribute of the <code>&lt;result&gt;</code> element will be &quot;true&quot;. Otherwise a <code>success</code> attribute will have the value &quot;true&quot;.</p>
+<p>Some <code>&lt;error&gt;</code> responses will include a <code>code</code> attribute giving a specific type of error code, in addition to the message.</p>
+<p>The <code>apiversion</code> attribute will be set to the latest version of the API supported by the server.</p>
+<h3 id="error-codes"><a href="#error-codes">Error codes</a></h3>
+<p>Defined error codes that may be returned as <code>&lt;error code=&quot;...&quot;&gt;</code></p>
+<dl>
+<dt><code>api-version-unsupported</code></dt>
+<dd><p>The specified API version is not supported for the requested resource</p>
+</dd>
+<dt><code>unauthorized</code></dt>
+<dd><p>The requested action is not authorized and/or the connection is not authenticated.</p>
+</dd>
+</dl>
+<h3 id="item-lists"><a href="#item-lists">Item Lists</a></h3>
+<p>Many API requests will return an item list as a result. These are typically in the form:</p>
+<pre><code>&lt;[items] count=&quot;x&quot;&gt;
+    &lt;[item] ...&gt;
+    &lt;[item] ...&gt;
+&lt;/[items]&gt;</code></pre>
+<p>Where the list of specific items are wrapped in a pluralized element name which contains a <code>count</code> attribute.</p>
+<p>When an API path declares its results as an &quot;Item List&quot; this is the format that will be returned.</p>
+<h2 id="api-contents"><a href="#api-contents">API Contents</a></h2>
+<h3 id="authentication-tokens"><a href="#authentication-tokens">Authentication Tokens</a></h3>
+<p>Authentication tokens can be managed via the API itself.</p>
+<h4 id="list-tokens"><a href="#list-tokens">List Tokens</a></h4>
+<p>List all tokens or all tokens for a specific user.</p>
+<p>Request:</p>
+<pre><code>GET /api/11/tokens
+GET /api/11/tokens/[USER]</code></pre>
+<p>Result:</p>
+<p><code>application/xml</code>:</p>
+<p>All users:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;tokens</span><span class="ot"> count=</span><span class="st">&#39;3&#39;</span><span class="ot"> allusers=</span><span class="st">&#39;true&#39;</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;token</span><span class="ot"> id=</span><span class="st">&#39;DRUVEuCdENoPkUpDkcDcdd6PeKkPdurc&#39;</span><span class="ot"> user=</span><span class="st">&#39;alice&#39;</span> <span class="kw">/&gt;</span>
+  <span class="kw">&lt;token</span><span class="ot"> id=</span><span class="st">&#39;VprOpDeDP3KcK2dp37p5DoD6o53cc82D&#39;</span><span class="ot"> user=</span><span class="st">&#39;bob&#39;</span> <span class="kw">/&gt;</span>
+  <span class="kw">&lt;token</span><span class="ot"> id=</span><span class="st">&#39;EveKe1KSRORnUN28D09eERDN3OvO4S6N&#39;</span><span class="ot"> user=</span><span class="st">&#39;frank&#39;</span> <span class="kw">/&gt;</span>
+<span class="kw">&lt;/tokens&gt;</span></code></pre>
+<p>For a specific user:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;tokens</span><span class="ot"> count=</span><span class="st">&#39;1&#39;</span><span class="ot"> user=</span><span class="st">&#39;alice&#39;</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;token</span><span class="ot"> id=</span><span class="st">&#39;DRUVEuCdENoPkUpDkcDcdd6PeKkPdurc&#39;</span><span class="ot"> user=</span><span class="st">&#39;alice&#39;</span> <span class="kw">/&gt;</span>
+<span class="kw">&lt;/tokens&gt;</span></code></pre>
+<p><code>application/json</code>:</p>
+<pre class="sourceCode json"><code class="sourceCode json">[
+  {
+    <span class="dt">&quot;user&quot;</span>: <span class="st">&quot;alice&quot;</span>,
+    <span class="dt">&quot;id&quot;</span>: <span class="st">&quot;DRUVEuCdENoPkUpDkcDcdd6PeKkPdurc&quot;</span>
+  },
+  {
+    <span class="dt">&quot;user&quot;</span>: <span class="st">&quot;bob&quot;</span>,
+    <span class="dt">&quot;id&quot;</span>: <span class="st">&quot;VprOpDeDP3KcK2dp37p5DoD6o53cc82D&quot;</span>
+  },
+  {
+    <span class="dt">&quot;user&quot;</span>: <span class="st">&quot;frank&quot;</span>,
+    <span class="dt">&quot;id&quot;</span>: <span class="st">&quot;EveKe1KSRORnUN28D09eERDN3OvO4S6N&quot;</span>
+  }
+]</code></pre>
+<h4 id="get-a-token"><a href="#get-a-token">Get a token</a></h4>
+<p>Get a specified auth token.</p>
+<p>Request:</p>
+<pre><code>GET /api/11/token/[ID]</code></pre>
+<p>Response:</p>
+<p><code>application/xml</code></p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;token</span><span class="ot"> id=</span><span class="st">&#39;DuV0UoDUDkoR38Evd786cdRsed6uSNdP&#39;</span><span class="ot"> user=</span><span class="st">&#39;alice&#39;</span> <span class="kw">/&gt;</span></code></pre>
+<p><code>application/json</code></p>
+<pre class="sourceCode json"><code class="sourceCode json">{
+  <span class="dt">&quot;user&quot;</span>: <span class="st">&quot;alice&quot;</span>,
+  <span class="dt">&quot;id&quot;</span>: <span class="st">&quot;DuV0UoDUDkoR38Evd786cdRsed6uSNdP&quot;</span>
+}</code></pre>
+<h4 id="create-a-token"><a href="#create-a-token">Create a Token</a></h4>
+<p>Create a new token for a specific user.</p>
+<p>Request:</p>
+<pre><code>POST /api/11/tokens
+POST /api/11/tokens/[USER]</code></pre>
+<p>The user specified must either be part of the URL, or be part of the request content. If used in the URL, then the request content is ignored and can be empty.</p>
+<p><code>Content-type: application/xml</code></p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;user</span><span class="ot"> user=</span><span class="st">&quot;alice&quot;</span><span class="kw">/&gt;</span></code></pre>
+<p><code>Content-type: application/json</code></p>
+<pre class="sourceCode json"><code class="sourceCode json">{ <span class="dt">&quot;user&quot;</span> : <span class="st">&quot;alice&quot;</span> }</code></pre>
+<p>Response:</p>
+<p><code>application/xml</code></p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;token</span><span class="ot"> id=</span><span class="st">&#39;DuV0UoDUDkoR38Evd786cdRsed6uSNdP&#39;</span><span class="ot"> user=</span><span class="st">&#39;alice&#39;</span> <span class="kw">/&gt;</span></code></pre>
+<p><code>application/json</code></p>
+<pre class="sourceCode json"><code class="sourceCode json">{
+  <span class="dt">&quot;user&quot;</span>: <span class="st">&quot;alice&quot;</span>,
+  <span class="dt">&quot;id&quot;</span>: <span class="st">&quot;DuV0UoDUDkoR38Evd786cdRsed6uSNdP&quot;</span>
+}</code></pre>
+<h4 id="delete-a-token"><a href="#delete-a-token">Delete a token</a></h4>
+<p>Delete a specified auth token.</p>
+<p>Request:</p>
+<pre><code>DELETE /api/11/token/[ID]</code></pre>
+<p>Response:</p>
+<pre><code>204 No Content</code></pre>
+<h3 id="system-info"><a href="#system-info">System Info</a></h3>
+<p>Get Rundeck server information and stats.</p>
+<p>URL:</p>
+<pre><code>/api/1/system/info</code></pre>
+<p>Parameters: none</p>
+<p>Result: Success response, with included system info and stats in this format:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;system&gt;</span>
+    <span class="kw">&lt;timestamp</span><span class="ot"> epoch=</span><span class="st">&quot;1305909785806&quot;</span><span class="ot"> unit=</span><span class="st">&quot;ms&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;datetime&gt;</span>2011-05-20T16:43:05Z<span class="kw">&lt;/datetime&gt;</span>
+    <span class="kw">&lt;/timestamp&gt;</span>
+    <span class="kw">&lt;rundeck&gt;</span>
+        <span class="kw">&lt;version&gt;</span>1.2.1<span class="kw">&lt;/version&gt;</span>
+        <span class="kw">&lt;apiversion&gt;</span>2<span class="kw">&lt;/apiversion&gt;</span>
+        <span class="kw">&lt;build&gt;</span>1.2.1-0-beta<span class="kw">&lt;/build&gt;</span>
+        <span class="kw">&lt;node&gt;</span>Venkman.local<span class="kw">&lt;/node&gt;</span>
+        <span class="kw">&lt;base&gt;</span>/Users/greg/rundeck121<span class="kw">&lt;/base&gt;</span>
+        <span class="kw">&lt;serverUUID&gt;</span>3E43E30D-F3D7-45AA-942A-04D5BAFED8CA<span class="kw">&lt;/serverUUID&gt;</span>
+    <span class="kw">&lt;/rundeck&gt;</span>
+    <span class="kw">&lt;os&gt;</span>
+        <span class="kw">&lt;arch&gt;</span>x86_64<span class="kw">&lt;/arch&gt;</span>
+        <span class="kw">&lt;name&gt;</span>Mac OS X<span class="kw">&lt;/name&gt;</span>
+        <span class="kw">&lt;version&gt;</span>10.6.7<span class="kw">&lt;/version&gt;</span>
+    <span class="kw">&lt;/os&gt;</span>
+    <span class="kw">&lt;jvm&gt;</span>
+        <span class="kw">&lt;name&gt;</span>Java HotSpot(TM) 64-Bit Server VM<span class="kw">&lt;/name&gt;</span>
+        <span class="kw">&lt;vendor&gt;</span>Apple Inc.<span class="kw">&lt;/vendor&gt;</span>
+        <span class="kw">&lt;version&gt;</span>19.1-b02-334<span class="kw">&lt;/version&gt;</span>
+    <span class="kw">&lt;/jvm&gt;</span>
+    <span class="kw">&lt;stats&gt;</span>
+        <span class="kw">&lt;uptime</span><span class="ot"> duration=</span><span class="st">&quot;300584&quot;</span><span class="ot"> unit=</span><span class="st">&quot;ms&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;since</span><span class="ot"> epoch=</span><span class="st">&quot;1305909485222&quot;</span><span class="ot"> unit=</span><span class="st">&quot;ms&quot;</span><span class="kw">&gt;</span>
+                <span class="kw">&lt;datetime&gt;</span>2011-05-20T16:38:05Z<span class="kw">&lt;/datetime&gt;</span>
+            <span class="kw">&lt;/since&gt;</span>
+        <span class="kw">&lt;/uptime&gt;</span>
+        <span class="kw">&lt;cpu&gt;</span>
+            <span class="kw">&lt;loadAverage</span><span class="ot"> unit=</span><span class="st">&quot;percent&quot;</span><span class="kw">&gt;</span>0.40234375<span class="kw">&lt;/loadAverage&gt;</span>
+            <span class="kw">&lt;processors&gt;</span>4<span class="kw">&lt;/processors&gt;</span>
+        <span class="kw">&lt;/cpu&gt;</span>
+        <span class="kw">&lt;memory</span><span class="ot"> unit=</span><span class="st">&quot;byte&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;max&gt;</span>477233152<span class="kw">&lt;/max&gt;</span>
+            <span class="kw">&lt;free&gt;</span>76626216<span class="kw">&lt;/free&gt;</span>
+            <span class="kw">&lt;total&gt;</span>257163264<span class="kw">&lt;/total&gt;</span>
+        <span class="kw">&lt;/memory&gt;</span>
+        <span class="kw">&lt;scheduler&gt;</span>
+            <span class="kw">&lt;running&gt;</span>0<span class="kw">&lt;/running&gt;</span>
+        <span class="kw">&lt;/scheduler&gt;</span>
+        <span class="kw">&lt;threads&gt;</span>
+            <span class="kw">&lt;active&gt;</span>24<span class="kw">&lt;/active&gt;</span>
+        <span class="kw">&lt;/threads&gt;</span>
+    <span class="kw">&lt;/stats&gt;</span>
+    <span class="kw">&lt;metrics</span><span class="ot"> href=</span><span class="st">&#39;http://dignan:4440/metrics/metrics?pretty=true&#39;</span><span class="ot"> contentType=</span><span class="st">&#39;text/json&#39;</span> <span class="kw">/&gt;</span>
+    <span class="kw">&lt;threadDump</span><span class="ot"> href=</span><span class="st">&#39;http://dignan:4440/metrics/threads&#39;</span><span class="ot"> contentType=</span><span class="st">&#39;text/plain&#39;</span> <span class="kw">/&gt;</span>
+<span class="kw">&lt;/system&gt;</span></code></pre>
+<p>Description of included elements:</p>
+<p><code>timestamp</code> describes the current system time known to the server. The <code>@epoch</code> attribute includes the milliseconds since the unix epoch.</p>
+<dl>
+<dt><code>datetime</code></dt>
+<dd>The W3C date and time
+</dd>
+</dl>
+<p><code>rundeck</code> includes information about the Rundeck application.</p>
+<dl>
+<dt><code>rundeck/version</code></dt>
+<dd><p>Rundeck version</p>
+</dd>
+<dt><code>rundeck/apiversion</code></dt>
+<dd><p>Rundeck API version</p>
+</dd>
+<dt><code>rundeck/build</code></dt>
+<dd><p>Rundeck build stamp</p>
+</dd>
+<dt><code>rundeck/node</code></dt>
+<dd><p>Server node name</p>
+</dd>
+<dt><code>rundeck/base</code></dt>
+<dd><p>Server base directory</p>
+</dd>
+<dt><code>rundeck/serverUUID</code></dt>
+<dd><p>Server UUID (present if cluster mode is enabled)</p>
+</dd>
+<dt><code>os/arch</code></dt>
+<dd><p>Operating System architecture</p>
+</dd>
+<dt><code>os/name</code></dt>
+<dd><p>Operating System Name</p>
+</dd>
+<dt><code>os/version</code></dt>
+<dd><p>Operating System Version</p>
+</dd>
+<dt><code>jvm/name</code></dt>
+<dd><p>JVM name</p>
+</dd>
+<dt><code>jvm/vendor</code></dt>
+<dd><p>JVM vendor</p>
+</dd>
+<dt><code>jvm/version</code></dt>
+<dd><p>JVM version</p>
+</dd>
+</dl>
+<p><code>stats</code> section includes some system statistics:</p>
+<p><code>uptime</code> describes the JVM uptime as duration in ms, and includes absolute startup time:</p>
+<dl>
+<dt><code>uptime/since</code></dt>
+<dd><p>JVM startup time as time since the unix epoch</p>
+</dd>
+<dt><code>uptime/since/datetime</code></dt>
+<dd><p>JVM startup time as W3C date time.</p>
+</dd>
+<dt><code>cpu/loadAverage</code></dt>
+<dd><p>JVM load average percentage for the system for the previous minute (see <a href="http://download.oracle.com/javase/6/docs/api/java/lang/management/OperatingSystemMXBean.html#getSystemLoadAverage()">getSystemLoadAverage</a>)</p>
+</dd>
+<dt><code>cpu/processors</code></dt>
+<dd><p>Number of available system processors. note that loadAverage might be calculated based on the total number of available processors</p>
+</dd>
+</dl>
+<p>The <code>memory</code> section describes memory usage in bytes:</p>
+<dl>
+<dt><code>max</code></dt>
+<dd><p>Maximum JVM memory that can be allocated</p>
+</dd>
+<dt><code>free</code></dt>
+<dd><p>Free memory of the allocated memory</p>
+</dd>
+<dt><code>total</code></dt>
+<dd><p>Total allocated memory for the JVM</p>
+</dd>
+<dt><code>scheduler/running</code></dt>
+<dd><p>Number of running jobs in the scheduler</p>
+</dd>
+<dt><code>threads/active</code></dt>
+<dd><p>Number of active Threads in the JVM</p>
+</dd>
+</dl>
+<h3 id="listing-jobs"><a href="#listing-jobs">Listing Jobs</a></h3>
+<p>List the jobs that exist for a project.</p>
+<p>URL:</p>
+<pre><code>/api/1/jobs</code></pre>
+<p>Required parameters:</p>
+<ul>
+<li><code>project</code>: the project name</li>
+</ul>
+<p>The following parameters can also be used to narrow down the result set.</p>
+<ul>
+<li><code>idlist</code>: specify a comma-separated list of Job IDs to include</li>
+<li><code>groupPath</code>: specify a group or partial group path to include all jobs within that group path. (Default value: &quot;*&quot;, all groups). Set to the special value &quot;-&quot; to match the top level jobs only.</li>
+<li><code>jobFilter</code>: specify a filter for the job Name. Matches any job name that contains this value.</li>
+<li><code>jobExactFilter</code>: specify an exact job name to match. (<strong>API version 2</strong> required.)</li>
+<li><code>groupPathExact</code>: specify an exact group path to match. Set to the special value &quot;-&quot; to match the top level jobs only. (<strong>API version 2</strong> required.)</li>
+</ul>
+<p>Result: An Item List of <code>jobs</code>. Each <code>job</code> is of the form:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml">    <span class="kw">&lt;job</span><span class="ot"> id=</span><span class="st">&quot;ID&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;name&gt;</span>Job Name<span class="kw">&lt;/name&gt;</span>
+        <span class="kw">&lt;group&gt;</span>Job Name<span class="kw">&lt;/group&gt;</span>
+        <span class="kw">&lt;project&gt;</span>Project Name<span class="kw">&lt;/project&gt;</span>
+        <span class="kw">&lt;description&gt;</span>...<span class="kw">&lt;/description&gt;</span>
+    <span class="kw">&lt;/job&gt;</span></code></pre>
+<p>Note: If neither <code>groupPath</code> nor <code>groupPathExact</code> are specified, then the default <code>groupPath</code> value of &quot;*&quot; will be used (matching jobs in all groups). <code>groupPathExact</code> cannot be combined with <code>groupPath</code>. You can set either one to &quot;-&quot; to match only the top-level jobs which are not within a group.</p>
+<h3 id="listing-jobs-for-a-project"><a href="#listing-jobs-for-a-project">Listing Jobs for a Project</a></h3>
+<p>List the jobs that exist for a project. (<strong>API version 2</strong> required.)</p>
+<p>URL:</p>
+<pre><code>/api/2/project/[NAME]/jobs</code></pre>
+<p>The following parameters can also be used to narrow down the result set.</p>
+<ul>
+<li><code>idlist</code>: specify a comma-separated list of Job IDs to include</li>
+<li><code>groupPath</code>: specify a group or partial group path to include all jobs within that group path. (Default value: &quot;*&quot;, all groups). Set to the special value &quot;-&quot; to match the top level jobs only</li>
+<li><code>jobFilter</code>: specify a filter for the job Name. Matches any job name that contains this value.</li>
+<li><code>jobExactFilter</code>: specify an exact job name to match.</li>
+<li><code>groupPathExact</code>: specify an exact group path to match. Set to the special value &quot;-&quot; to match the top level jobs only</li>
+</ul>
+<p>Result: An Item List of <code>jobs</code>. Each <code>job</code> is of the form:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;job</span><span class="ot"> id=</span><span class="st">&quot;ID&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;name&gt;</span>Job Name<span class="kw">&lt;/name&gt;</span>
+    <span class="kw">&lt;group&gt;</span>Job Name<span class="kw">&lt;/group&gt;</span>
+    <span class="kw">&lt;project&gt;</span>Project Name<span class="kw">&lt;/project&gt;</span>
+    <span class="kw">&lt;description&gt;</span>...<span class="kw">&lt;/description&gt;</span>
+<span class="kw">&lt;/job&gt;</span></code></pre>
+<p>Note: If neither <code>groupPath</code> nor <code>groupPathExact</code> are specified, then the default <code>groupPath</code> value of &quot;*&quot; will be used (matching jobs in all groups). <code>groupPathExact</code> cannot be combined with <code>groupPath</code>. You can set either one to &quot;-&quot; to match only the top-level jobs which are not within a group.</p>
+<h3 id="running-a-job"><a href="#running-a-job">Running a Job</a></h3>
+<p>Run a job specified by ID.</p>
+<p>URL:</p>
+<pre><code>GET /api/1/job/[ID]/run
+POST /api/12/job/[ID]/executions</code></pre>
+<p>Optional parameters:</p>
+<ul>
+<li><code>argString</code>: argument string to pass to the job, of the form: <code>-opt value -opt2 value ...</code>.</li>
+<li><code>loglevel</code>: argument specifying the loglevel to use, one of: 'DEBUG','VERBOSE','INFO','WARN','ERROR'</li>
+<li><code>asUser</code> : specifies a username identifying the user who ran the job. Requires <code>runAs</code> permission.</li>
+<li>Node filter parameters as described under <a href="#using-node-filters">Using Node Filters</a></li>
+</ul>
+<p>Result: An Item List of <code>executions</code> containing a single entry for the execution that was created. See <a href="#listing-running-executions">Listing Running Executions</a>.</p>
+<h3 id="exporting-jobs"><a href="#exporting-jobs">Exporting Jobs</a></h3>
+<p>Export the job definitions for in XML or YAML formats.</p>
+<p>URL:</p>
+<pre><code>/api/1/jobs/export</code></pre>
+<p>Required parameters:</p>
+<ul>
+<li><code>project</code></li>
+</ul>
+<p>Optional parameters:</p>
+<ul>
+<li><code>format</code> : can be &quot;xml&quot; or &quot;yaml&quot; to specify the output format. Default is &quot;xml&quot;</li>
+</ul>
+<p>The following parameters can also be used to narrow down the result set.</p>
+<ul>
+<li><code>idlist</code>: specify a comma-separated list of Job IDs to export</li>
+<li><code>groupPath</code>: specify a group or partial group path to include all jobs within that group path.</li>
+<li><code>jobFilter</code>: specify a filter for the job Name</li>
+</ul>
+<p>Result:</p>
+<p>If you specify <code>format=xml</code>, then the output will be in <a href="../man5/job-xml.html">job-xml</a> format.</p>
+<p>If you specify <code>format=yaml</code>, then the output will be in <a href="../man5/job-yaml.html">job-yaml</a> format.</p>
+<p>If an error occurs, then the output will be in XML format, using the common <code>result</code> element described in the <a href="#response-format">Response Format</a> section.</p>
+<h3 id="importing-jobs"><a href="#importing-jobs">Importing Jobs</a></h3>
+<p>Import job definitions in XML or YAML formats.</p>
+<p>URL:</p>
+<pre><code>/api/1/jobs/import</code></pre>
+<p>Method: <code>POST</code></p>
+<p>Expected Content-Type: <code>application/x-www-form-urlencoded</code> (<strong>since 1.3</strong>) or <code>multipart/form-data</code></p>
+<p>Required Content:</p>
+<ul>
+<li><code>xmlBatch</code>: Either a <code>x-www-form-urlencoded</code> request parameter containing the input content (<strong>since 1.3</strong>), or a <code>multipart/form-data</code> multipart MIME request part containing the content.</li>
+</ul>
+<p>Optional parameters:</p>
+<ul>
+<li><code>format</code> : can be &quot;xml&quot; or &quot;yaml&quot; to specify the output format. Default is &quot;xml&quot;</li>
+<li><code>dupeOption</code>: A value to indicate the behavior when importing jobs which already exist. Value can be &quot;skip&quot;, &quot;create&quot;, or &quot;update&quot;. Default is &quot;create&quot;.</li>
+<li><code>project</code> : (<strong>since v8</strong>) Specify the project that all job definitions should be imported to. If not specified, each job definition must define the project to import to.</li>
+<li><code>uuidOption</code>: Whether to preserve or remove UUIDs from the imported jobs. Allowed values (<strong>since V9</strong>):
+<ul>
+<li><code>preserve</code>: Preserve the UUIDs in imported jobs. This may cause the import to fail if the UUID is already used. (Default value).</li>
+<li><code>remove</code>: Remove the UUIDs from imported jobs. Allows update/create to succeed without conflict on UUID.</li>
+</ul></li>
+</ul>
+<p>Result:</p>
+<p>A set of status results. Each imported job definition will be either &quot;succeeded&quot;, &quot;failed&quot; or &quot;skipped&quot;. These status sections contain a <code>count</code> attribute declaring how many jobs they contain. Within each one there will be 0 or more <code>job</code> elements.</p>
+<pre class="sourceCode xml"><code class="sourceCode xml">    <span class="kw">&lt;succeeded</span><span class="ot"> count=</span><span class="st">&quot;x&quot;</span><span class="kw">&gt;</span>
+        <span class="co">&lt;!-- job elements --&gt;</span>
+    <span class="kw">&lt;/succeeded&gt;</span>
+    <span class="kw">&lt;failed</span><span class="ot"> count=</span><span class="st">&quot;x&quot;</span><span class="kw">&gt;</span>
+        <span class="co">&lt;!-- job elements --&gt;</span>
+    <span class="kw">&lt;/failed&gt;</span>
+    <span class="kw">&lt;skipped</span><span class="ot"> count=</span><span class="st">&quot;x&quot;</span><span class="kw">&gt;</span>
+        <span class="co">&lt;!-- job elements --&gt;</span>
+    <span class="kw">&lt;/skipped&gt;</span></code></pre>
+<p>Each Job element will be of the form:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;job&gt;</span>
+    <span class="co">&lt;!-- ID may not exist if the job was not created yet --&gt;</span>
+    <span class="kw">&lt;id&gt;</span>ID<span class="kw">&lt;/id&gt;</span>
+    <span class="kw">&lt;name&gt;</span>job name<span class="kw">&lt;/name&gt;</span>
+    <span class="kw">&lt;group&gt;</span>job group<span class="kw">&lt;/group&gt;</span>
+    <span class="kw">&lt;project&gt;</span>job project<span class="kw">&lt;/project&gt;</span>
+    <span class="co">&lt;!--if within the failed section, then an error section will be included --&gt;</span>
+    <span class="kw">&lt;error&gt;</span>Error message<span class="kw">&lt;/error&gt;</span>
+<span class="kw">&lt;/job&gt;</span></code></pre>
+<h3 id="getting-a-job-definition"><a href="#getting-a-job-definition">Getting a Job Definition</a></h3>
+<p>Export a single job definition in XML or YAML formats.</p>
+<p>URL:</p>
+<pre><code>/api/1/job/[ID]</code></pre>
+<p>Optional parameters:</p>
+<ul>
+<li><code>format</code> : can be &quot;xml&quot; or &quot;yaml&quot; to specify the output format. Default is &quot;xml&quot;</li>
+</ul>
+<p>Result:</p>
+<p>If you specify <code>format=xml</code>, then the output will be in <a href="../man5/job-xml.html">job-xml</a> format.</p>
+<p>If you specify <code>format=yaml</code>, then the output will be in <a href="../man5/job-yaml.html">job-yaml</a> format.</p>
+<p>If an error occurs, then the output will be in XML format, using the common <code>result</code> element described in the <a href="#response-format">Response Format</a> section.</p>
+<h3 id="deleting-a-job-definition"><a href="#deleting-a-job-definition">Deleting a Job Definition</a></h3>
+<p>Delete a single job definition.</p>
+<p>URL:</p>
+<pre><code>/api/1/job/[ID]</code></pre>
+<p>Method: <code>DELETE</code></p>
+<p>Result:</p>
+<p>The common <code>result</code> element described in the <a href="#response-format">Response Format</a> section, indicating success or failure and any messages.</p>
+<p>If successful, then the <code>result</code> will contain a <code>success/message</code> element with the result message:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;success&gt;</span>
+   <span class="kw">&lt;message&gt;</span>Job was successfully deleted: ... <span class="kw">&lt;/message&gt;</span>
+<span class="kw">&lt;/success&gt;</span></code></pre>
+<h3 id="bulk-job-delete"><a href="#bulk-job-delete">Bulk Job Delete</a></h3>
+<p>Delete multiple job definitions at once.</p>
+<p>URL:</p>
+<pre><code>/api/5/jobs/delete</code></pre>
+<p>Method: <code>DELETE</code>, or <code>POST</code></p>
+<p>Query parameters:</p>
+<ul>
+<li><code>ids</code>: The Job IDs to delete, can be specified multiple times</li>
+<li><code>idlist</code>: The Job IDs to delete as a single comma-separated string.</li>
+</ul>
+<p>Note: you can combine <code>ids</code> with <code>idlist</code></p>
+<p>Result:</p>
+<p>The common <code>result</code> element described in the <a href="#response-format">Response Format</a> section, indicating success or failure and any messages.</p>
+<p>If successful, then the <code>result</code> will contain a <code>deleteJobs</code> element with two sections of results, <code>succeeded</code> and <code>failed</code>:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;deleteJobs</span><span class="ot"> requestCount=</span><span class="st">&quot;#&quot;</span><span class="ot"> allsuccessful=</span><span class="st">&quot;true/false&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;succeeded</span><span class="ot"> count=</span><span class="st">&quot;1&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;deleteJobRequest</span><span class="ot"> id=</span><span class="st">&quot;[job ID]&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;message&gt;</span>[message]<span class="kw">&lt;/message&gt;</span>
+        <span class="kw">&lt;/deleteJobRequest&gt;</span>
+    <span class="kw">&lt;/succeeded&gt;</span>
+    <span class="kw">&lt;failed</span><span class="ot"> count=</span><span class="st">&quot;1&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;deleteJobRequest</span><span class="ot"> id=</span><span class="st">&quot;[job ID]&quot;</span><span class="ot"> errorCode=</span><span class="st">&quot;[code]&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;error&gt;</span>[message]<span class="kw">&lt;/error&gt;</span>
+        <span class="kw">&lt;/deleteJobRequest&gt;</span>
+    <span class="kw">&lt;/failed&gt;</span>
+<span class="kw">&lt;/deleteJobs&gt;</span></code></pre>
+<p><code>deleteJobs</code> will have two attributes:</p>
+<ul>
+<li><code>requestCount</code>: the number of job IDs that were in the delete request</li>
+<li><code>allsuccessful</code>: true/false: true if all job deletes were successful, false otherwise.</li>
+</ul>
+<p>The response may contain only one of <code>succeeded</code> or <code>failed</code>, depending on the result.</p>
+<p>The <code>succeeded</code> and <code>failed</code> sections contain multiple <code>deleteJobRequest</code> elements.</p>
+<p>Each <code>deleteJobRequest</code> under the <code>succeeded</code> section will contain:</p>
+<ul>
+<li><code>id</code> attribute - the Job ID</li>
+<li><code>message</code> sub-element - result message for the delete request</li>
+</ul>
+<p>Each <code>deleteJobRequest</code> under the <code>failed</code> section will contain:</p>
+<ul>
+<li><code>id</code> attribute - the Job ID</li>
+<li><code>error</code> sub-element - result error message for the delete request</li>
+<li><code>errorCode</code> attribute - a code indicating the type of failure, currently one of <code>failed</code>, <code>unauthorized</code> or <code>notfound</code>.</li>
+</ul>
+<h3 id="getting-executions-for-a-job"><a href="#getting-executions-for-a-job">Getting Executions for a Job</a></h3>
+<p>Get the list of executions for a Job.</p>
+<p>URL:</p>
+<pre><code>/api/1/job/[ID]/executions</code></pre>
+<p>Optional Query Parameters:</p>
+<ul>
+<li><code>status</code>: the status of executions you want to be returned. Must be one of &quot;succeeded&quot;, &quot;failed&quot;, &quot;aborted&quot;, or &quot;running&quot;. If this parameter is blank or unset, include all executions.</li>
+<li>Paging parameters:
+<ul>
+<li><code>max</code>: indicate the maximum number of results to return. If unspecified, all results will be returned.</li>
+<li><code>offset</code>: indicate the 0-indexed offset for the first result to return.</li>
+</ul></li>
+</ul>
+<p>Result: an Item List of <code>executions</code>. See <a href="#listing-running-executions">Listing Running Executions</a>.</p>
+<h3 id="delete-all-executions-for-a-job"><a href="#delete-all-executions-for-a-job">Delete all Executions for a Job</a></h3>
+<p>Delete all executions for a Job.</p>
+<p>Request:</p>
+<pre><code>DELETE /api/12/job/[ID]/executions</code></pre>
+<p>Result: The same format as <a href="#bulk-delete-executions">Bulk Delete Executions</a>.</p>
+<h3 id="listing-running-executions"><a href="#listing-running-executions">Listing Running Executions</a></h3>
+<p>List the currently running executions for a project</p>
+<p>URL:</p>
+<pre><code>/api/1/executions/running</code></pre>
+<p>Required Parameters:</p>
+<ul>
+<li><code>project</code>: the project name, or '*' for all projects (<strong>Since API v9</strong>)</li>
+</ul>
+<p>Result: An Item List of <code>executions</code>. Each <code>execution</code> of the form:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;execution</span><span class="ot"> id=</span><span class="st">&quot;[ID]&quot;</span><span class="ot"> href=</span><span class="st">&quot;[url]&quot;</span><span class="ot"> status=</span><span class="st">&quot;[status]&quot;</span><span class="ot"> project=</span><span class="st">&quot;[project]&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;user&gt;</span>[user]<span class="kw">&lt;/user&gt;</span>
+    <span class="kw">&lt;date-started</span><span class="ot"> unixtime=</span><span class="st">&quot;[unixtime]&quot;</span><span class="kw">&gt;</span>[datetime]<span class="kw">&lt;/date-started&gt;</span>
+
+    <span class="co">&lt;!-- optional job context if the execution is associated with a job --&gt;</span>
+    <span class="kw">&lt;job</span><span class="ot"> id=</span><span class="st">&quot;jobID&quot;</span><span class="ot"> averageDuration=</span><span class="st">&quot;[milliseconds]&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;name&gt;</span>..<span class="kw">&lt;/name&gt;</span>
+        <span class="kw">&lt;group&gt;</span>..<span class="kw">&lt;/group&gt;</span>
+        <span class="kw">&lt;description&gt;</span>..<span class="kw">&lt;/description&gt;</span>
+        <span class="co">&lt;!-- optional if arguments are passed to the job since v10 --&gt;</span>
+        <span class="kw">&lt;options&gt;</span>
+            <span class="kw">&lt;option</span><span class="ot"> name=</span><span class="st">&quot;optname&quot;</span><span class="ot"> value=</span><span class="st">&quot;optvalue&quot;</span><span class="kw">/&gt;</span>...
+        <span class="kw">&lt;/options&gt;</span>
+    <span class="kw">&lt;/job&gt;</span>
+
+    <span class="co">&lt;!-- description of the execution --&gt;</span>
+    <span class="kw">&lt;description&gt;</span>...<span class="kw">&lt;/description&gt;</span>
+
+    <span class="co">&lt;!-- argString (arguments) of the execution --&gt;</span>
+    <span class="kw">&lt;argstring&gt;</span>...<span class="kw">&lt;/argstring&gt;</span>
+
+    <span class="co">&lt;!-- if Rundeck is in cluster mode --&gt;</span>
+    <span class="kw">&lt;serverUUID&gt;</span>...<span class="kw">&lt;/serverUUID&gt;</span>
+
+    <span class="co">&lt;!-- The following elements included only if the execution has ended --&gt;</span>
+
+    <span class="co">&lt;!-- the completion time of the execution --&gt;</span>
+    <span class="kw">&lt;date-ended</span><span class="ot"> unixtime=</span><span class="st">&quot;[unixtime]&quot;</span><span class="kw">&gt;</span>[datetime]<span class="kw">&lt;/date-ended&gt;</span>
+
+    <span class="co">&lt;!-- if the execution was aborted, the username who aborted it: --&gt;</span>
+    <span class="kw">&lt;abortedby&gt;</span>[username]<span class="kw">&lt;/abortedby&gt;</span>
+
+    <span class="co">&lt;!-- if the execution was is finished, a list of node names that succeeded --&gt;</span>
+    <span class="kw">&lt;successfulNodes&gt;</span>
+        <span class="kw">&lt;node</span><span class="ot"> name=</span><span class="st">&quot;node1&quot;</span><span class="kw">/&gt;</span>
+        <span class="kw">&lt;node</span><span class="ot"> name=</span><span class="st">&quot;node2&quot;</span><span class="kw">/&gt;</span>
+    <span class="kw">&lt;/successfulNodes&gt;</span>
+
+    <span class="co">&lt;!-- if the execution was is finished, a list of node names that failed --&gt;</span>
+    <span class="kw">&lt;failedNodes&gt;</span>
+        <span class="kw">&lt;node</span><span class="ot"> name=</span><span class="st">&quot;node3&quot;</span><span class="kw">/&gt;</span>
+        <span class="kw">&lt;node</span><span class="ot"> name=</span><span class="st">&quot;node4&quot;</span><span class="kw">/&gt;</span>
+    <span class="kw">&lt;/failedNodes&gt;</span>
+
+<span class="kw">&lt;/execution&gt;</span></code></pre>
+<p>The <code>[status]</code> value indicates the execution status. It is one of:</p>
+<ul>
+<li><code>running</code>: execution is running</li>
+<li><code>succeeded</code>: execution completed successfully</li>
+<li><code>failed</code>: execution completed with failure</li>
+<li><code>aborted</code>: execution was aborted</li>
+</ul>
+<p>The <code>[url]</code> value is a URL to the Rundeck server page to view the execution output.</p>
+<p><code>[user]</code> is the username of the user who started the execution.</p>
+<p><code>[unixtime]</code> is the millisecond unix timestamp, and <code>[datetime]</code> is a W3C dateTime string in the format &quot;yyyy-MM-ddTHH:mm:ssZ&quot;.</p>
+<p>If known, the average duration of the associated Job will be indicated (in milliseconds) as <code>averageDuration</code>. (Since API v5)</p>
+<p><strong>API v9 and above</strong>: <code>project=&quot;[project]&quot;</code> is the project name of the execution.</p>
+<p><code>successfulNodes</code> and <code>failedNodes</code> list the names of nodes which succeeded or failed. <strong>API v10 and above</strong>.</p>
+<p>The <code>job</code> section contains <code>options</code> if an <code>argstring</code> value is set (<strong>API v10 and above</strong>). Inside <code>options</code> is a sequence of <code>&lt;option&gt;</code> elements with two attributes:</p>
+<ul>
+<li><code>name</code> the parsed option name</li>
+<li><code>value</code> the parsed option value</li>
+</ul>
+<p><strong>Since API v13</strong>: The <code>serverUUID</code> will indicate the server UUID if executed in cluster mode.</p>
+<h3 id="execution-info"><a href="#execution-info">Execution Info</a></h3>
+<p>Get the status for an execution by ID.</p>
+<p>Request:</p>
+<pre><code>GET /api/1/execution/[ID]</code></pre>
+<p>Result: an Item List of <code>executions</code> with a single item. See <a href="#listing-running-executions">Listing Running Executions</a>.</p>
+<h3 id="delete-an-execution"><a href="#delete-an-execution">Delete an Execution</a></h3>
+<p>Delete an execution by ID.</p>
+<p>Request:</p>
+<pre><code>DELETE /api/12/execution/[ID]</code></pre>
+<p>Result: <code>204 No Content</code></p>
+<p><em>Authorization requirement</em>:</p>
+<ul>
+<li>Requires the <code>delete_execution</code> action allowed for a <code>project</code> in the <code>application</code> context. See: <a href="../administration/access-control-policy.html#application-scope-resources-and-actions">Administration - Access Control Policy - Application Scope Resources and Actions</a></li>
+</ul>
+<h3 id="bulk-delete-executions"><a href="#bulk-delete-executions">Bulk Delete Executions</a></h3>
+<p>Delete a set of Executions by their IDs.</p>
+<p>Request:</p>
+<pre><code>POST /api/12/executions/delete</code></pre>
+<p>The IDs can be specified in two ways:</p>
+<ol style="list-style-type: decimal">
+<li><p>Using a URL parameter <code>ids</code>, as a comma separated list, with no body content</p>
+<pre><code>POST /api/12/executions/delete?ids=1,2,17
+Content-Length: 0</code></pre></li>
+<li><p>Using a request body of either XML or JSON data.</p></li>
+</ol>
+<p>If using a request body, the formats are specified below:</p>
+<p><strong>Content-Type: application/json</strong></p>
+<pre><code>{&quot;ids&quot;: [ 1, 2, 17 ] }</code></pre>
+<p><em>OR</em> more simply:</p>
+<pre><code>[ 1, 2, 17 ]</code></pre>
+<p><strong>Content-Type: application/xml</strong></p>
+<pre><code>&lt;executions&gt;
+    &lt;execution id=&quot;1&quot;/&gt;
+    &lt;execution id=&quot;2&quot;/&gt;
+    &lt;execution id=&quot;17&quot;/&gt;
+&lt;/executions&gt;</code></pre>
+<p>Response:</p>
+<p>The response format will be either <code>xml</code> or <code>json</code>, depending on the <code>Accept</code> header.</p>
+<p><strong>Content-Type: application/json</strong></p>
+<pre><code>{
+  &quot;failures&quot;: [
+    {
+      &quot;id&quot;: &quot;82&quot;,
+      &quot;message&quot;: &quot;Not found: 82&quot;
+    },
+    {
+      &quot;id&quot;: &quot;83&quot;,
+      &quot;message&quot;: &quot;Not found: 83&quot;
+    },
+    {
+      &quot;id&quot;: &quot;84&quot;,
+      &quot;message&quot;: &quot;Not found: 84&quot;
+    }
+  ],
+  &quot;failedCount&quot;: 3,
+  &quot;successCount&quot;: 2,
+  &quot;allsuccessful&quot;: false,
+  &quot;requestCount&quot;: 5
+}</code></pre>
+<p>The JSON fields will be:</p>
+<ul>
+<li><code>failures</code>: a list of objects indicating the <code>id</code> and <code>message</code> for the failed deletion attempt</li>
+<li><code>failedCount</code>: number of deletion attempts that failed</li>
+<li><code>successCount</code>: number of deletion attempts that succeeded</li>
+<li><code>allsuccessful</code>: true if all deletions were successful</li>
+<li><code>requestCount</code>: number of requested execution deletions</li>
+</ul>
+<p><strong>Content-Type: application/xml</strong></p>
+<pre><code>&lt;deleteExecutions requestCount=&#39;4&#39; allsuccessful=&#39;false&#39;&gt;
+  &lt;successful count=&#39;0&#39; /&gt;
+  &lt;failed count=&#39;4&#39;&gt;
+    &lt;execution id=&#39;131&#39; message=&#39;Unauthorized: Delete execution 131&#39; /&gt;
+    &lt;execution id=&#39;109&#39; message=&#39;Not found: 109&#39; /&gt;
+    &lt;execution id=&#39;81&#39; message=&#39;Not found: 81&#39; /&gt;
+    &lt;execution id=&#39;74&#39; message=&#39;Not found: 74&#39; /&gt;
+  &lt;/failed&gt;
+&lt;/deleteExecutions&gt;</code></pre>
+<h3 id="execution-query"><a href="#execution-query">Execution Query</a></h3>
+<p>Query for Executions based on Job or Execution details.</p>
+<p>URL:</p>
+<pre><code>/api/5/executions</code></pre>
+<p>Result: an Item List of <code>executions</code>. See <a href="#listing-running-executions">Listing Running Executions</a>.</p>
+<p>The <code>executions</code> element will have paging attributes:</p>
+<ul>
+<li><code>max</code>: maximum number of results per page</li>
+<li><code>offset</code>: offset from first of all results</li>
+<li><code>total</code>: total number of results</li>
+<li><code>count</code>: number of results in the response</li>
+</ul>
+<p>Required Parameters:</p>
+<ul>
+<li><code>project</code>: the project name</li>
+</ul>
+<p>The following parameters can also be used to narrow down the result set.</p>
+<p>Parameters for Execution details:</p>
+<ul>
+<li><code>statusFilter</code>: execution status, one of &quot;running&quot;, succeeded&quot;, &quot;failed&quot; or &quot;aborted&quot;</li>
+<li><code>abortedbyFilter</code>: Username who aborted an execution</li>
+<li><code>userFilter</code>: Username who started the execution</li>
+<li>Date query parameters:
+<ul>
+<li><code>recentFilter</code>: Use a simple text format to filter executions that completed within a period of time. The format is &quot;XY&quot; where X is an integer, and &quot;Y&quot; is one of:
+<ul>
+<li><code>h</code>: hour</li>
+<li><code>d</code>: day</li>
+<li><code>w</code>: week</li>
+<li><code>m</code>: month</li>
+<li><code>y</code>: year So a value of &quot;2w&quot; would return executions that completed within the last two weeks.</li>
+</ul></li>
+<li><code>begin</code>: Specify exact date for earliest execution completion time</li>
+<li><code>end</code>: Specify exact date for latest xecution completion time</li>
+</ul></li>
+<li><code>adhoc</code>: &quot;true/false&quot;, if true, include only Adhoc executions, if false return only Job executions. By default any matching executions are returned, however if you use any of the Job filters below, then only Job executions will be returned.</li>
+</ul>
+<p>The format for the <code>end</code>, and <code>begin</code> filters is either: a unix millisecond timestamp, or a W3C dateTime string in the format &quot;yyyy-MM-ddTHH:mm:ssZ&quot;.</p>
+<p>Parameters for querying for Executions for particular jobs:</p>
+<ul>
+<li><code>jobIdListFilter</code>: specify a Job ID to include, can be specified multiple times</li>
+<li><code>excludeJobIdListFilter</code>: specify a Job ID to exclude, can be specified multiple times</li>
+<li><code>jobListFilter</code>: specify a full Job group/name to include, can be specified multiple times</li>
+<li><code>excludeJobListFilter</code>: specify a full Job group/name to exclude, can be specified multiple times</li>
+<li><code>groupPath</code>: specify a group or partial group path to include all jobs within that group path. Set to the special value &quot;-&quot; to match the top level jobs only.</li>
+<li><code>groupPathExact</code>: specify an exact group path to match. Set to the special value &quot;-&quot; to match the top level jobs only.</li>
+<li><code>excludeGroupPath</code>: specify a group or partial group path to exclude all jobs within that group path. Set to the special value &quot;-&quot; to match the top level jobs only.</li>
+<li><code>excludeGroupPathExact</code>: specify an exact group path to exclude. Set to the special value &quot;-&quot; to match the top level jobs only.</li>
+<li><code>jobFilter</code>: specify a filter for the job Name. Include any job name that matches this value.</li>
+<li><code>excludeJobFilter</code>: specify a filter for the job Name. Exclude any job name that matches this value.</li>
+<li><code>jobExactFilter</code>: specify an exact job name to match.</li>
+<li><code>excludeJobExactFilter</code>: specify an exact job name to exclude.</li>
+</ul>
+<p>The format for the <code>jobListFilter</code> and <code>excludeJobListFilter</code> is the job's group and name separated by a '/' character, such as: &quot;group1/job name&quot;, or &quot;my job&quot; if there is no group.</p>
+<p>Paging parameters:</p>
+<ul>
+<li><code>max</code>: maximum number of results to include in response. (default: 20)</li>
+<li><code>offset</code>: offset for first result to include. (default: 0)</li>
+</ul>
+<h3 id="execution-state"><a href="#execution-state">Execution State</a></h3>
+<p>Get detail about the node and step state of an execution by ID. The execution can be currently running or completed.</p>
+<p>URL:</p>
+<pre><code>/api/10/execution/[ID]/state</code></pre>
+<p>Specify expected output format with the <code>Accept:</code> HTTP header. Supported formats:</p>
+<ul>
+<li><code>text/xml</code></li>
+<li><code>application/json</code></li>
+</ul>
+<p>The content of the response contains state information for different parts of the workflow:</p>
+<ul>
+<li>overall state</li>
+<li>per-node overall state</li>
+<li>per-step node state</li>
+</ul>
+<p>A workflow can have a step which consists of a sub-workflow, so each particular step has a &quot;Step Context Identifier&quot; which defines its location in the workflow(s), and looks something like &quot;1/5/2&quot;. Each number identifies the step number (starting at 1) at a workflow level. If there is a &quot;/&quot; in the context identifier, it means there are sub-workflow step numbers, and each preceding number corresponds to a step which has a sub-workflow.</p>
+<p>To identify the state of a particular node at a particular step, both a Node name, and a Step Context Identifier are necessary.</p>
+<p>In the result set returned by this API call, state information is organized primarily by Step and is structured in the same way as the workflow. This means that sub-workflows will have nested state structures for their steps.</p>
+<p>The state information for a Node will not contain the full set of details for the Step and Node, since this information is present in the workflow structure which contains the step state.</p>
+<h4 id="state-result-content"><a href="#state-result-content">State Result Content</a></h4>
+<p>The result set contains this top-level structure:</p>
+<ul>
+<li>general overal state information
+<ul>
+<li><code>startTime</code> execution start time (see <em>Timestamp format</em> below)</li>
+<li><code>endTime</code> execution end time if complete</li>
+<li><code>updateTime</code> last update time</li>
+<li><code>executionState</code> overall execution state</li>
+</ul></li>
+<li><code>allNodes</code> contains a <em>Node Name List</em> (see below) of nodes known to be targetted in some workflow</li>
+<li><code>nodes</code> contains an <em>Overall Node State List</em> of per-node step states</li>
+<li><code>serverNode</code> name of the server node</li>
+<li><code>executionId</code> current execution ID</li>
+<li><code>completed</code> true/false whether the execution is completed</li>
+<li>A <em>Workflow Section</em> (see below)</li>
+</ul>
+<p><strong>Workflow Section</strong></p>
+<p>Each Workflow Section within the result set will contain these structures</p>
+<ul>
+<li><code>stepCount</code> Number of steps in the workflow</li>
+<li><code>targetNodes</code> contains a Node Name List identifying the target nodes of the current workflow</li>
+<li><code>steps</code> contains a <em>Step State List</em> (see below) of information and state for each step</li>
+</ul>
+<p><strong>Node Name List</strong></p>
+<p>Consists of a sequence of node name entries, identifying each entry by a name.</p>
+<p>In XML, a sequence of <code>node</code> elements:</p>
+<pre><code>  &lt;node name=&quot;abc&quot; /&gt;
+  &lt;node name=&quot;xyz&quot; /&gt;
+  &lt;!-- ... more node elements --&gt;</code></pre>
+<p>In JSON, an array of node names.</p>
+<p><strong>Overall Node State List</strong></p>
+<p>Consists of a sequence of entries for each Node. Each entry contains</p>
+<ul>
+<li><code>name</code> node name</li>
+<li><code>steps</code> list of simple state indicator for steps executed by this node</li>
+</ul>
+<p>State Indicators:</p>
+<ul>
+<li><code>stepctx</code> Step Context Identifier</li>
+<li><code>executionState</code> execution state for this step and node</li>
+</ul>
+<p>In XML:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;node</span><span class="ot"> name=</span><span class="st">&quot;abc&quot;</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;steps&gt;</span>
+    <span class="kw">&lt;step&gt;</span>
+      <span class="kw">&lt;stepctx&gt;</span>1<span class="kw">&lt;/stepctx&gt;</span>
+      <span class="kw">&lt;executionState&gt;</span>SUCCEEDED<span class="kw">&lt;/executionState&gt;</span>
+    <span class="kw">&lt;/step&gt;</span>
+    <span class="kw">&lt;step&gt;</span>
+      <span class="kw">&lt;stepctx&gt;</span>2/1<span class="kw">&lt;/stepctx&gt;</span>
+      <span class="kw">&lt;executionState&gt;</span>SUCCEEDED<span class="kw">&lt;/executionState&gt;</span>
+    <span class="kw">&lt;/step&gt;</span>
+  <span class="kw">&lt;/steps&gt;</span>
+<span class="kw">&lt;/node&gt;</span>
+<span class="co">&lt;!-- more node elements --&gt;</span></code></pre>
+<p>In JSON: an object where each key is a node name, and the value is an array of State indicators. A state indicator is an object with two keys, <code>stepctx</code> and <code>executionState</code></p>
+<pre class="sourceCode json"><code class="sourceCode json">{
+    <span class="dt">&quot;abc&quot;</span>: [
+      {
+        <span class="dt">&quot;executionState&quot;</span>: <span class="st">&quot;SUCCEEDED&quot;</span>,
+        <span class="dt">&quot;stepctx&quot;</span>: <span class="st">&quot;1&quot;</span>
+      },
+      {
+        <span class="dt">&quot;executionState&quot;</span>: <span class="st">&quot;SUCCEEDED&quot;</span>,
+        <span class="dt">&quot;stepctx&quot;</span>: <span class="st">&quot;2/1&quot;</span>
+      }
+    ]
+}</code></pre>
+<p><strong>Step State List</strong></p>
+<p>A list of Step State information. Each step is identified by its number in the workflow (starting at 1) and its step context</p>
+<ul>
+<li><code>num</code> the step number (XML)</li>
+<li><code>id</code> the step number (JSON)</li>
+<li><code>stepctx</code> the step context identifier in the workflow</li>
+<li>general overall state information for the step
+<ul>
+<li><code>startTime</code> execution start time</li>
+<li><code>endTime</code> execution end time if complete</li>
+<li><code>updateTime</code> last update time</li>
+<li><code>executionState</code> overall execution state</li>
+</ul></li>
+<li><code>nodeStep</code> true/false. true if this step directly targets each node from the targetNodes list. If true, this means the step will contain a <code>nodeStates</code> section</li>
+<li><code>nodeStates</code> a <em>Node Step State Detail List</em> (see below) for the target nodes if this is a node step.</li>
+<li><code>hasSubworkflow</code> true/false. true if this step has a sub-workflow and a <code>workflow</code> entry</li>
+<li><code>workflow</code> this section contains a Workflow Section</li>
+</ul>
+<p><strong>Node Step State Detail List</strong></p>
+<p>A sequence of state details for a set of Nodes for the containing step. Each entry will contain:</p>
+<ul>
+<li><code>name</code> the node name</li>
+<li>state information for the Node
+<ul>
+<li><code>startTime</code> execution start time</li>
+<li><code>endTime</code> execution end time if complete</li>
+<li><code>updateTime</code> last update time</li>
+<li><code>executionState</code> overall execution state</li>
+</ul></li>
+</ul>
+<p>In XML:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml">    <span class="kw">&lt;nodeState</span><span class="ot"> name=</span><span class="st">&quot;abc&quot;</span><span class="kw">&gt;</span>
+      <span class="kw">&lt;startTime&gt;</span>2014-01-13T20:58:59Z<span class="kw">&lt;/startTime&gt;</span>
+      <span class="kw">&lt;updateTime&gt;</span>2014-01-13T20:59:04Z<span class="kw">&lt;/updateTime&gt;</span>
+      <span class="kw">&lt;endTime&gt;</span>2014-01-13T20:59:04Z<span class="kw">&lt;/endTime&gt;</span>
+      <span class="kw">&lt;executionState&gt;</span>SUCCEEDED<span class="kw">&lt;/executionState&gt;</span>
+    <span class="kw">&lt;/nodeState&gt;</span>
+    <span class="co">&lt;!-- more nodeState elements --&gt;</span></code></pre>
+<p>In JSON: an object with node names as keys. Values are objects containing the state information entries.</p>
+<pre class="sourceCode json"><code class="sourceCode json">          {
+            <span class="dt">&quot;abc&quot;</span>: {
+              <span class="dt">&quot;executionState&quot;</span>: <span class="st">&quot;SUCCEEDED&quot;</span>,
+              <span class="dt">&quot;endTime&quot;</span>: <span class="st">&quot;2014-01-13T20:38:31Z&quot;</span>,
+              <span class="dt">&quot;updateTime&quot;</span>: <span class="st">&quot;2014-01-13T20:38:31Z&quot;</span>,
+              <span class="dt">&quot;startTime&quot;</span>: <span class="st">&quot;2014-01-13T20:38:25Z&quot;</span>
+            }
+          }</code></pre>
+<p><strong>Full XML Example</strong></p>
+<p>Within the <code>&lt;result&gt;</code> element:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;executionState</span><span class="ot"> id=</span><span class="st">&quot;135&quot;</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;startTime&gt;</span>2014-01-13T20:58:59Z<span class="kw">&lt;/startTime&gt;</span>
+  <span class="kw">&lt;updateTime&gt;</span>2014-01-13T20:59:10Z<span class="kw">&lt;/updateTime&gt;</span>
+  <span class="kw">&lt;stepCount&gt;</span>2<span class="kw">&lt;/stepCount&gt;</span>
+  <span class="kw">&lt;allNodes&gt;</span>
+    <span class="kw">&lt;nodes&gt;</span>
+      <span class="kw">&lt;node</span><span class="ot"> name=</span><span class="st">&quot;dignan&quot;</span> <span class="kw">/&gt;</span>
+    <span class="kw">&lt;/nodes&gt;</span>
+  <span class="kw">&lt;/allNodes&gt;</span>
+  <span class="kw">&lt;targetNodes&gt;</span>
+    <span class="kw">&lt;nodes&gt;</span>
+      <span class="kw">&lt;node</span><span class="ot"> name=</span><span class="st">&quot;dignan&quot;</span> <span class="kw">/&gt;</span>
+    <span class="kw">&lt;/nodes&gt;</span>
+  <span class="kw">&lt;/targetNodes&gt;</span>
+  <span class="kw">&lt;executionId&gt;</span>135<span class="kw">&lt;/executionId&gt;</span>
+  <span class="kw">&lt;serverNode&gt;</span>dignan<span class="kw">&lt;/serverNode&gt;</span>
+  <span class="kw">&lt;endTime&gt;</span>2014-01-13T20:59:10Z<span class="kw">&lt;/endTime&gt;</span>
+  <span class="kw">&lt;executionState&gt;</span>SUCCEEDED<span class="kw">&lt;/executionState&gt;</span>
+  <span class="kw">&lt;completed&gt;</span>true<span class="kw">&lt;/completed&gt;</span>
+  <span class="kw">&lt;steps&gt;</span>
+    <span class="kw">&lt;step</span><span class="ot"> stepctx=</span><span class="st">&quot;1&quot;</span><span class="ot"> id=</span><span class="st">&quot;1&quot;</span><span class="kw">&gt;</span>
+      <span class="kw">&lt;startTime&gt;</span>2014-01-13T20:58:59Z<span class="kw">&lt;/startTime&gt;</span>
+      <span class="kw">&lt;nodeStep&gt;</span>true<span class="kw">&lt;/nodeStep&gt;</span>
+      <span class="kw">&lt;updateTime&gt;</span>2014-01-13T20:58:59Z<span class="kw">&lt;/updateTime&gt;</span>
+      <span class="kw">&lt;endTime&gt;</span>2014-01-13T20:59:04Z<span class="kw">&lt;/endTime&gt;</span>
+      <span class="kw">&lt;executionState&gt;</span>SUCCEEDED<span class="kw">&lt;/executionState&gt;</span>
+      <span class="kw">&lt;nodeStates&gt;</span>
+        <span class="kw">&lt;nodeState</span><span class="ot"> name=</span><span class="st">&quot;dignan&quot;</span><span class="kw">&gt;</span>
+          <span class="kw">&lt;startTime&gt;</span>2014-01-13T20:58:59Z<span class="kw">&lt;/startTime&gt;</span>
+          <span class="kw">&lt;updateTime&gt;</span>2014-01-13T20:59:04Z<span class="kw">&lt;/updateTime&gt;</span>
+          <span class="kw">&lt;endTime&gt;</span>2014-01-13T20:59:04Z<span class="kw">&lt;/endTime&gt;</span>
+          <span class="kw">&lt;executionState&gt;</span>SUCCEEDED<span class="kw">&lt;/executionState&gt;</span>
+        <span class="kw">&lt;/nodeState&gt;</span>
+      <span class="kw">&lt;/nodeStates&gt;</span>
+    <span class="kw">&lt;/step&gt;</span>
+    <span class="kw">&lt;step</span><span class="ot"> stepctx=</span><span class="st">&quot;2&quot;</span><span class="ot"> id=</span><span class="st">&quot;2&quot;</span><span class="kw">&gt;</span>
+      <span class="kw">&lt;startTime&gt;</span>2014-01-13T20:59:04Z<span class="kw">&lt;/startTime&gt;</span>
+      <span class="kw">&lt;nodeStep&gt;</span>false<span class="kw">&lt;/nodeStep&gt;</span>
+      <span class="kw">&lt;updateTime&gt;</span>2014-01-13T20:59:10Z<span class="kw">&lt;/updateTime&gt;</span>
+      <span class="kw">&lt;hasSubworkflow&gt;</span>true<span class="kw">&lt;/hasSubworkflow&gt;</span>
+      <span class="kw">&lt;endTime&gt;</span>2014-01-13T20:59:10Z<span class="kw">&lt;/endTime&gt;</span>
+      <span class="kw">&lt;executionState&gt;</span>SUCCEEDED<span class="kw">&lt;/executionState&gt;</span>
+      <span class="kw">&lt;workflow&gt;</span>
+        <span class="kw">&lt;startTime&gt;</span>2014-01-13T20:59:04Z<span class="kw">&lt;/startTime&gt;</span>
+        <span class="kw">&lt;updateTime&gt;</span>2014-01-13T20:59:10Z<span class="kw">&lt;/updateTime&gt;</span>
+        <span class="kw">&lt;stepCount&gt;</span>1<span class="kw">&lt;/stepCount&gt;</span>
+        <span class="kw">&lt;allNodes&gt;</span>
+          <span class="kw">&lt;nodes&gt;</span>
+            <span class="kw">&lt;node</span><span class="ot"> name=</span><span class="st">&quot;dignan&quot;</span> <span class="kw">/&gt;</span>
+          <span class="kw">&lt;/nodes&gt;</span>
+        <span class="kw">&lt;/allNodes&gt;</span>
+        <span class="kw">&lt;targetNodes&gt;</span>
+          <span class="kw">&lt;nodes&gt;</span>
+            <span class="kw">&lt;node</span><span class="ot"> name=</span><span class="st">&quot;dignan&quot;</span> <span class="kw">/&gt;</span>
+          <span class="kw">&lt;/nodes&gt;</span>
+        <span class="kw">&lt;/targetNodes&gt;</span>
+        <span class="kw">&lt;endTime&gt;</span>2014-01-13T20:59:10Z<span class="kw">&lt;/endTime&gt;</span>
+        <span class="kw">&lt;executionState&gt;</span>SUCCEEDED<span class="kw">&lt;/executionState&gt;</span>
+        <span class="kw">&lt;completed&gt;</span>true<span class="kw">&lt;/completed&gt;</span>
+        <span class="kw">&lt;steps&gt;</span>
+          <span class="kw">&lt;step</span><span class="ot"> stepctx=</span><span class="st">&quot;2/1&quot;</span><span class="ot"> id=</span><span class="st">&quot;1&quot;</span><span class="kw">&gt;</span>
+            <span class="kw">&lt;startTime&gt;</span>2014-01-13T20:59:04Z<span class="kw">&lt;/startTime&gt;</span>
+            <span class="kw">&lt;nodeStep&gt;</span>true<span class="kw">&lt;/nodeStep&gt;</span>
+            <span class="kw">&lt;updateTime&gt;</span>2014-01-13T20:59:04Z<span class="kw">&lt;/updateTime&gt;</span>
+            <span class="kw">&lt;endTime&gt;</span>2014-01-13T20:59:10Z<span class="kw">&lt;/endTime&gt;</span>
+            <span class="kw">&lt;executionState&gt;</span>SUCCEEDED<span class="kw">&lt;/executionState&gt;</span>
+            <span class="kw">&lt;nodeStates&gt;</span>
+              <span class="kw">&lt;nodeState</span><span class="ot"> name=</span><span class="st">&quot;dignan&quot;</span><span class="kw">&gt;</span>
+                <span class="kw">&lt;startTime&gt;</span>2014-01-13T20:59:04Z<span class="kw">&lt;/startTime&gt;</span>
+                <span class="kw">&lt;updateTime&gt;</span>2014-01-13T20:59:10Z<span class="kw">&lt;/updateTime&gt;</span>
+                <span class="kw">&lt;endTime&gt;</span>2014-01-13T20:59:10Z<span class="kw">&lt;/endTime&gt;</span>
+                <span class="kw">&lt;executionState&gt;</span>SUCCEEDED<span class="kw">&lt;/executionState&gt;</span>
+              <span class="kw">&lt;/nodeState&gt;</span>
+            <span class="kw">&lt;/nodeStates&gt;</span>
+          <span class="kw">&lt;/step&gt;</span>
+        <span class="kw">&lt;/steps&gt;</span>
+      <span class="kw">&lt;/workflow&gt;</span>
+    <span class="kw">&lt;/step&gt;</span>
+  <span class="kw">&lt;/steps&gt;</span>
+  <span class="kw">&lt;nodes&gt;</span>
+    <span class="kw">&lt;node</span><span class="ot"> name=</span><span class="st">&quot;dignan&quot;</span><span class="kw">&gt;</span>
+      <span class="kw">&lt;steps&gt;</span>
+        <span class="kw">&lt;step&gt;</span>
+          <span class="kw">&lt;stepctx&gt;</span>1<span class="kw">&lt;/stepctx&gt;</span>
+          <span class="kw">&lt;executionState&gt;</span>SUCCEEDED<span class="kw">&lt;/executionState&gt;</span>
+        <span class="kw">&lt;/step&gt;</span>
+        <span class="kw">&lt;step&gt;</span>
+          <span class="kw">&lt;stepctx&gt;</span>2/1<span class="kw">&lt;/stepctx&gt;</span>
+          <span class="kw">&lt;executionState&gt;</span>SUCCEEDED<span class="kw">&lt;/executionState&gt;</span>
+        <span class="kw">&lt;/step&gt;</span>
+      <span class="kw">&lt;/steps&gt;</span>
+    <span class="kw">&lt;/node&gt;</span>
+  <span class="kw">&lt;/nodes&gt;</span>
+<span class="kw">&lt;/executionState&gt;</span></code></pre>
+<p><strong>Full JSON example</strong></p>
+<pre class="sourceCode json"><code class="sourceCode json">    {
+      <span class="dt">&quot;completed&quot;</span>: <span class="dv">true</span>,
+      <span class="dt">&quot;executionState&quot;</span>: <span class="st">&quot;SUCCEEDED&quot;</span>,
+      <span class="dt">&quot;endTime&quot;</span>: <span class="st">&quot;2014-01-13T20:38:36Z&quot;</span>,
+      <span class="dt">&quot;serverNode&quot;</span>: <span class="st">&quot;dignan&quot;</span>,
+      <span class="dt">&quot;startTime&quot;</span>: <span class="st">&quot;2014-01-13T20:38:25Z&quot;</span>,
+      <span class="dt">&quot;updateTime&quot;</span>: <span class="st">&quot;2014-01-13T20:38:36Z&quot;</span>,
+      <span class="dt">&quot;stepCount&quot;</span>: <span class="dv">2</span>,
+      <span class="dt">&quot;allNodes&quot;</span>: [
+        <span class="st">&quot;dignan&quot;</span>
+      ],
+      <span class="dt">&quot;targetNodes&quot;</span>: [
+        <span class="st">&quot;dignan&quot;</span>
+      ],
+      <span class="dt">&quot;nodes&quot;</span>: {
+        <span class="dt">&quot;dignan&quot;</span>: [
+          {
+            <span class="dt">&quot;executionState&quot;</span>: <span class="st">&quot;SUCCEEDED&quot;</span>,
+            <span class="dt">&quot;stepctx&quot;</span>: <span class="st">&quot;1&quot;</span>
+          },
+          {
+            <span class="dt">&quot;executionState&quot;</span>: <span class="st">&quot;SUCCEEDED&quot;</span>,
+            <span class="dt">&quot;stepctx&quot;</span>: <span class="st">&quot;2/1&quot;</span>
+          }
+        ]
+      },
+      <span class="dt">&quot;executionId&quot;</span>: <span class="dv">134</span>,
+      <span class="dt">&quot;steps&quot;</span>: [
+        {
+          <span class="dt">&quot;executionState&quot;</span>: <span class="st">&quot;SUCCEEDED&quot;</span>,
+          <span class="dt">&quot;endTime&quot;</span>: <span class="st">&quot;2014-01-13T20:38:31Z&quot;</span>,
+          <span class="dt">&quot;nodeStates&quot;</span>: {
+            <span class="dt">&quot;dignan&quot;</span>: {
+              <span class="dt">&quot;executionState&quot;</span>: <span class="st">&quot;SUCCEEDED&quot;</span>,
+              <span class="dt">&quot;endTime&quot;</span>: <span class="st">&quot;2014-01-13T20:38:31Z&quot;</span>,
+              <span class="dt">&quot;updateTime&quot;</span>: <span class="st">&quot;2014-01-13T20:38:31Z&quot;</span>,
+              <span class="dt">&quot;startTime&quot;</span>: <span class="st">&quot;2014-01-13T20:38:25Z&quot;</span>
+            }
+          },
+          <span class="dt">&quot;updateTime&quot;</span>: <span class="st">&quot;2014-01-13T20:38:25Z&quot;</span>,
+          <span class="dt">&quot;nodeStep&quot;</span>: <span class="dv">true</span>,
+          <span class="dt">&quot;id&quot;</span>: <span class="st">&quot;1&quot;</span>,
+          <span class="dt">&quot;startTime&quot;</span>: <span class="st">&quot;2014-01-13T20:38:25Z&quot;</span>
+        },
+        {
+          <span class="dt">&quot;workflow&quot;</span>: {
+            <span class="dt">&quot;completed&quot;</span>: <span class="dv">true</span>,
+            <span class="dt">&quot;startTime&quot;</span>: <span class="st">&quot;2014-01-13T20:38:31Z&quot;</span>,
+            <span class="dt">&quot;updateTime&quot;</span>: <span class="st">&quot;2014-01-13T20:38:36Z&quot;</span>,
+            <span class="dt">&quot;stepCount&quot;</span>: <span class="dv">1</span>,
+            <span class="dt">&quot;allNodes&quot;</span>: [
+              <span class="st">&quot;dignan&quot;</span>
+            ],
+            <span class="dt">&quot;targetNodes&quot;</span>: [
+              <span class="st">&quot;dignan&quot;</span>
+            ],
+            <span class="dt">&quot;steps&quot;</span>: [
+              {
+                <span class="dt">&quot;executionState&quot;</span>: <span class="st">&quot;SUCCEEDED&quot;</span>,
+                <span class="dt">&quot;endTime&quot;</span>: <span class="st">&quot;2014-01-13T20:38:36Z&quot;</span>,
+                <span class="dt">&quot;nodeStates&quot;</span>: {
+                  <span class="dt">&quot;dignan&quot;</span>: {
+                    <span class="dt">&quot;executionState&quot;</span>: <span class="st">&quot;SUCCEEDED&quot;</span>,
+                    <span class="dt">&quot;endTime&quot;</span>: <span class="st">&quot;2014-01-13T20:38:36Z&quot;</span>,
+                    <span class="dt">&quot;updateTime&quot;</span>: <span class="st">&quot;2014-01-13T20:38:36Z&quot;</span>,
+                    <span class="dt">&quot;startTime&quot;</span>: <span class="st">&quot;2014-01-13T20:38:31Z&quot;</span>
+                  }
+                },
+                <span class="dt">&quot;updateTime&quot;</span>: <span class="st">&quot;2014-01-13T20:38:31Z&quot;</span>,
+                <span class="dt">&quot;nodeStep&quot;</span>: <span class="dv">true</span>,
+                <span class="dt">&quot;id&quot;</span>: <span class="st">&quot;1&quot;</span>,
+                <span class="dt">&quot;startTime&quot;</span>: <span class="st">&quot;2014-01-13T20:38:31Z&quot;</span>
+              }
+            ],
+            <span class="dt">&quot;endTime&quot;</span>: <span class="st">&quot;2014-01-13T20:38:36Z&quot;</span>,
+            <span class="dt">&quot;executionState&quot;</span>: <span class="st">&quot;SUCCEEDED&quot;</span>
+          },
+          <span class="dt">&quot;executionState&quot;</span>: <span class="st">&quot;SUCCEEDED&quot;</span>,
+          <span class="dt">&quot;endTime&quot;</span>: <span class="st">&quot;2014-01-13T20:38:36Z&quot;</span>,
+          <span class="dt">&quot;hasSubworkflow&quot;</span>: <span class="dv">true</span>,
+          <span class="dt">&quot;updateTime&quot;</span>: <span class="st">&quot;2014-01-13T20:38:36Z&quot;</span>,
+          <span class="dt">&quot;nodeStep&quot;</span>: <span class="dv">false</span>,
+          <span class="dt">&quot;id&quot;</span>: <span class="st">&quot;2&quot;</span>,
+          <span class="dt">&quot;startTime&quot;</span>: <span class="st">&quot;2014-01-13T20:38:31Z&quot;</span>
+        }
+      ]
+    }</code></pre>
+<p><strong>Timestamp format:</strong></p>
+<p>The timestamp format is ISO8601: <code>yyyy-MM-dd'T'HH:mm:ss'Z'</code></p>
+<p><strong>Execution states:</strong></p>
+<ul>
+<li><code>WAITING</code> - Waiting to start running</li>
+<li><code>RUNNING</code> - Currently running</li>
+<li><code>RUNNING_HANDLER</code> - Running error handler*</li>
+<li><code>SUCCEEDED</code> - Finished running successfully</li>
+<li><code>FAILED</code> - Finished with a failure</li>
+<li><code>ABORTED</code> - Execution was aborted</li>
+<li><code>NODE_PARTIAL_SUCCEEDED</code> - Partial success for some nodes*</li>
+<li><code>NODE_MIXED</code> - Mixed states among nodes*</li>
+<li><code>NOT_STARTED</code> - After waiting the execution did not start*</li>
+</ul>
+<p>* these states only apply to steps/nodes and do not apply to the overall execution or workflow.</p>
+<h3 id="execution-output"><a href="#execution-output">Execution Output</a></h3>
+<p>Get the output for an execution by ID. The execution can be currently running or may have already completed. Output can be filtered down to a specific node or workflow step.</p>
+<p>URL:</p>
+<pre><code>/api/5/execution/[ID]/output
+/api/10/execution/[ID]/output/node/[NODE]
+/api/10/execution/[ID]/output/node/[NODE]/step/[STEPCTX]
+/api/10/execution/[ID]/output/step/[STEPCTX]</code></pre>
+<p>The log output for each execution is stored in a file on the Rundeck server, and this API endpoint allows you to retrieve some or all of the output, in several possible formats: json, XML, and plain text. When retrieving the plain text output, some metadata about the log is included in HTTP Headers. JSON and XML output formats include metadata about each output log line, as well as metadata about the state of the execution and log file, and your current index location in the file.</p>
+<p>Output can be selected by Node or Step Context or both as of API v10.</p>
+<p>Several parameters can be used to retrieve only part of the output log data. You can use these parameters to more efficiently retrieve the log content over time while an execution is running.</p>
+<p>The log file used to store the execution output is a formatted text file which also contains metadata about each line of log output emitted during an execution. Several data values in this API endpoint refer to &quot;bytes&quot;, but these do not reflect the size of the final log data; they are only relative to the formatted log file itself. You can treat these byte values as opaque locations in the log file, but you should not try to correlate them to the actual textual log lines.</p>
+<p>Optional Parameters:</p>
+<ul>
+<li><code>offset</code>: byte offset to read from in the file. 0 indicates the beginning.</li>
+<li><code>lastlines</code>: number of lines to retrieve from the end of the available output. If specified it will override the <code>offset</code> value and return only the specified number of lines at the end of the log.</li>
+<li><code>lastmod</code>: epoch datestamp in milliseconds, return results only if modification changed since the specified date OR if more data is available at the given <code>offset</code></li>
+<li><code>maxlines</code>: maximum number of lines to retrieve forward from the specified offset.</li>
+</ul>
+<p>Result: The output content in the requested format.</p>
+<h4 id="tailing-output"><a href="#tailing-output">Tailing Output</a></h4>
+<p>To &quot;tail&quot; the output from a running execution, you will need to make a series of requests to this API endpoint, and update the <code>offset</code> value that you send to reflect the returned <code>dataoffset</code> value that you receive. This gives you a consistent pointer into the output log file.</p>
+<p>When starting these requests, there are two mechanisms you can use:</p>
+<ol style="list-style-type: decimal">
+<li>Start at the beginning, specifying either a <code>lastmod</code> or a <code>offset</code> of 0</li>
+<li>Start at the end, by using <code>lastlines</code> to receive the last available set of log lines.</li>
+</ol>
+<p>After your first request you will have the <code>dataoffset</code> and <code>lastmod</code> response values you can use to continue making requests for subsequent log output. You can choose several ways to do this:</p>
+<ol style="list-style-type: decimal">
+<li>Use the <code>offset</code> and <code>lastmod</code> parameters to indicate modification time and receive as much output as is available</li>
+<li>Use the <code>offset</code> and <code>maxlines</code> parameter to specify a maximum number of log entries</li>
+<li>Use only the <code>offset</code> parameter and receive as much output as is available.</li>
+</ol>
+<p>After each request, you will update your <code>offset</code> value to reflect the <code>dataoffset</code> in the response.</p>
+<p>All log output has been read when the <code>iscompleted</code> value is &quot;true&quot;.</p>
+<p>Below is some example pseudo-code for using this API endpoint to follow the output of a running execution &quot;live&quot;:</p>
+<ul>
+<li>set offset to 0</li>
+<li>set lastmod to 0</li>
+<li>Repeat until <code>iscompleted</code> response value is &quot;true&quot;:
+<ul>
+<li>perform request sending <code>offset</code> and <code>lastmod</code> parameters</li>
+<li>print any log entries, update progress bar, etc.</li>
+<li>Record the resulting <code>dataoffset</code> and <code>lastmod</code> response values for the next request</li>
+<li>if <code>unmodified</code> is &quot;true&quot;, sleep for 5 seconds</li>
+<li>otherwise sleep for 2 seconds</li>
+</ul></li>
+</ul>
+<p><strong>Authorization:</strong></p>
+<p>This endpoint requires that the user have 'read' access to the Job or to Adhoc executions to retrieve the output content.</p>
+<h4 id="output-format-using-the-url"><a href="#output-format-using-the-url">Output Format Using the URL</a></h4>
+<p>Specifying an output format can occur in several ways. The simplest ways are to include the format in the URL, either by including a <code>format</code> URL parameter, or an extension on the request URL.</p>
+<p>When using a URL format, use one of these values for the format:</p>
+<ul>
+<li><code>json</code></li>
+<li><code>xml</code></li>
+<li><code>text</code></li>
+</ul>
+<p>To use a URL parameter, add a <code>?format=</code> parameter to your request.</p>
+<p>E.g.:</p>
+<pre><code>GET /api/5/execution/3/output?format=json</code></pre>
+<p>To use a URL extension, add a &quot;.[format]&quot; to the end of the URL, but prior to any URL parameters.</p>
+<p>E.g.:</p>
+<pre><code>GET /api/5/execution/3/output.xml?offset=120</code></pre>
+<h4 id="output-format-using-accept-header"><a href="#output-format-using-accept-header">Output Format using Accept Header</a></h4>
+<p>You can also specify the format using Content Negotiation techniques by including an <code>Accept</code> header in your request, and specifying a valid MIME-type to represent one of the formats:</p>
+<ul>
+<li>For XML, <code>text/xml</code> or <code>application/xml</code></li>
+<li>For JSON, <code>application/json</code> or <code>text/json</code></li>
+<li>For plain text, <code>text/plain</code></li>
+</ul>
+<p>E.g.:</p>
+<pre><code>GET /api/5/execution/3/output
+Accept: */xml</code></pre>
+<h4 id="output-content"><a href="#output-content">Output Content</a></h4>
+<p>The result will contain a set of data values reflecting the execution's status, as well as the status and read location in the output file.</p>
+<ul>
+<li>In JSON, there will be an object containing these entries.</li>
+<li>In XML, within the standard <a href="#response-format">Response Format</a> <code>result</code> there will be an <code>output</code> element, containing these sub-elements, each with a text value.</li>
+</ul>
+<p>Entries:</p>
+<ul>
+<li><code>id</code>: ID of the execution</li>
+<li><code>message</code>: optional text message indicating why no entries were returned</li>
+<li><code>error</code>: optional text message indicating an error case</li>
+<li><code>unmodified</code>: true/false, (optional) &quot;true&quot; will be returned if the <code>lastmod</code> parameter was used and the file had not changed</li>
+<li><code>empty</code>: true/false, (optional) &quot;true&quot; will be returned if the log file does not exist or is empty, which may occur if the log data is requested before any output has been stored.</li>
+<li><code>offset</code>: Byte offset to read for the next set of data</li>
+<li><code>completed</code>: true/false, &quot;true&quot; if the current log entries or request parameters include all of the available data</li>
+<li><code>execCompleted</code>: true/false, &quot;true&quot; if the execution has completed.</li>
+<li><code>hasFailedNodes</code>: true/false, &quot;true&quot; if the execution has recorded a list of failed nodes</li>
+<li><code>execState</code>: execution state, one of &quot;running&quot;,&quot;succeeded&quot;,&quot;failed&quot;,&quot;aborted&quot;</li>
+<li><code>lastModified</code>: (long integer), millisecond timestamp of the last modification of the log file</li>
+<li><code>execDuration</code>: (long integer), millisecond duration of the execution</li>
+<li><code>percentLoaded</code>: (float), percentage of the output which has been loaded by the parameters to this request</li>
+<li><code>totalSize</code>: (integer), total bytes available in the output file</li>
+<li><code>filter</code> - if a <code>node</code> or <code>step</code> filter was used
+<ul>
+<li><code>nodename</code> - value of the node name filter</li>
+<li><code>stepctx</code> - value of the step context filter</li>
+</ul></li>
+</ul>
+<p>Each log entry will be included in a section called <code>entries</code>.</p>
+<ul>
+<li>In JSON, <code>entries</code> will contain an array of Objects, each containing the following format</li>
+<li>In XML, the <code>entries</code> element will contain a sequence of <code>entry</code> elements</li>
+</ul>
+<p>Content of each Log Entry:</p>
+<ul>
+<li><code>time</code>: Timestamp in format: &quot;HH:MM:SS&quot;</li>
+<li><code>level</code>: Log level, one of: SEVERE,WARNING,INFO,CONFIG,FINEST</li>
+<li><code>log</code>: The log message</li>
+<li><code>user</code>: User name</li>
+<li><code>command</code>: Workflow command context string</li>
+<li><code>node</code>: Node name</li>
+</ul>
+<p><strong>Note for API version 5:</strong></p>
+<p>For API requests using version <code>5</code> only, the XML <code>entry</code> will have the log message as the text value. Otherwise the log entry value will be within the <code>log</code> attribute.</p>
+<h4 id="text-format-content"><a href="#text-format-content">Text Format Content</a></h4>
+<p>For the plain text format, the content of the response will simply be the log output lines at the chosen offset location.</p>
+<p>Included in the response will be some HTTP headers that provide the metadata about the output location. Some headers may not be present, depending on the state of the response. See the <a href="#output-content">Output Content</a> section for descriptions of the content and availability of the values:</p>
+<ul>
+<li><code>X-Rundeck-ExecOutput-Error</code>: The <code>error</code> field</li>
+<li><code>X-Rundeck-ExecOutput-Message</code>: The <code>message</code> field</li>
+<li><code>X-Rundeck-ExecOutput-Empty</code>: The <code>empty</code> field</li>
+<li><code>X-Rundeck-ExecOutput-Unmodified</code>: The <code>unmodified</code> field</li>
+<li><code>X-Rundeck-ExecOutput-Offset</code>: The <code>offset</code> field</li>
+<li><code>X-Rundeck-ExecOutput-Completed</code>: The <code>completed</code> field</li>
+<li><code>X-Rundeck-Exec-Completed</code>: The <code>execCompleted</code> field</li>
+<li><code>X-Rundeck-Exec-State</code>: The <code>execState</code> field</li>
+<li><code>X-Rundeck-Exec-Duration</code>: the <code>execDuration</code> field</li>
+<li><code>X-Rundeck-ExecOutput-LastModifed</code>: The <code>lastModified</code> field</li>
+<li><code>X-Rundeck-ExecOutput-TotalSize</code>: The <code>totalSize</code> field</li>
+</ul>
+<h3 id="execution-output-with-state"><a href="#execution-output-with-state">Execution Output with State</a></h3>
+<p>Get the metadata associated with workflow step state changes along with the log output, optionally excluding log output.</p>
+<p>URL:</p>
+<pre><code>/api/10/execution/[ID]/output/state
+/api/10/execution/[ID]/output/state?stateOnly=true</code></pre>
+<p>This API endpoint provides the sequential log of state changes for steps and nodes, optionally interleaved with the actual log output.</p>
+<p>The output format is the same as <a href="#execution-output">Execution Output</a>, with this change:</p>
+<ul>
+<li>in the <code>entries</code> section, each entry will have a <code>type</code> value indicating the entry type
+<ul>
+<li><code>log</code> a normal log entry</li>
+<li><code>stepbegin</code> beginning of the step indicated by the <code>stepctx</code></li>
+<li><code>stepend</code> finishing of the step</li>
+<li><code>nodebegin</code> beginning of execution of a node for the given step</li>
+<li><code>nodeend</code> finishing of execution of a node for the given step</li>
+</ul></li>
+<li>metadata about the entry may be included in the entry</li>
+</ul>
+<h3 id="aborting-executions"><a href="#aborting-executions">Aborting Executions</a></h3>
+<p>Abort a running execution by ID.</p>
+<p>URL:</p>
+<pre><code>/api/1/execution/[ID]/abort</code></pre>
+<p>Optional Parameters:</p>
+<ul>
+<li><code>asUser</code> : specifies a username identifying the user who aborted the execution. Requires <code>runAs</code> permission.</li>
+</ul>
+<p>Result: The result will contain a <code>success/message</code> element will contain a descriptive message. The status of the abort action will be included as an element:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml">    <span class="kw">&lt;abort</span><span class="ot"> status=</span><span class="st">&quot;[abort-state]&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;execution</span><span class="ot"> id=</span><span class="st">&quot;[id]&quot;</span><span class="ot"> status=</span><span class="st">&quot;[status]&quot;</span><span class="kw">/&gt;</span>
+    <span class="kw">&lt;/abort&gt;</span></code></pre>
+<p>The <code>[abort-state]</code> will be one of: &quot;pending&quot;, &quot;failed&quot;, or &quot;aborted&quot;.</p>
+<h3 id="running-adhoc-commands"><a href="#running-adhoc-commands">Running Adhoc Commands</a></h3>
+<p>Run a command string.</p>
+<p>URL:</p>
+<pre><code>/api/1/run/command</code></pre>
+<p>Required Parameters:</p>
+<ul>
+<li><code>project</code>: the project name</li>
+<li><code>exec</code>: the shell command string to run, e.g. &quot;echo hello&quot;.</li>
+</ul>
+<p>Optional Parameters:</p>
+<ul>
+<li><code>nodeThreadcount</code>: threadcount to use</li>
+<li><code>nodeKeepgoing</code>: if &quot;true&quot;, continue executing on other nodes even if some fail.</li>
+<li><code>asUser</code> : specifies a username identifying the user who ran the command. Requires <code>runAs</code> permission.</li>
+</ul>
+<p>Node filter parameters as described under <a href="#using-node-filters">Using Node Filters</a></p>
+<p>Result: A success message, and a single <code>&lt;execution&gt;</code> item identifying the new execution by ID:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml">    <span class="kw">&lt;execution</span><span class="ot"> id=</span><span class="st">&quot;X&quot;</span><span class="kw">/&gt;</span></code></pre>
+<h3 id="running-adhoc-scripts"><a href="#running-adhoc-scripts">Running Adhoc Scripts</a></h3>
+<p>Run a script.</p>
+<p>URL:</p>
+<pre><code>/api/1/run/script</code></pre>
+<p>Method: <code>POST</code></p>
+<p>Required Parameters:</p>
+<ul>
+<li><code>project</code>: the project name</li>
+</ul>
+<p>Required Content:</p>
+<p>The script file content can be submitted either as a form request or multipart attachment.</p>
+<p>For Content-Type: <code>application/x-www-form-urlencoded</code></p>
+<ul>
+<li><code>scriptFile</code>: A <code>x-www-form-urlencoded</code> request parameter containing the script file content.</li>
+</ul>
+<p>For Content-Type: <code>multipart/form-data</code></p>
+<ul>
+<li><code>scriptFile</code>: the script file contents (<code>scriptFile</code> being the <code>name</code> attribute of the <code>Content-Disposition</code> header)</li>
+</ul>
+<p>Optional Parameters:</p>
+<ul>
+<li><code>argString</code>: Arguments to pass to the script when executed.</li>
+<li><code>nodeThreadcount</code>: threadcount to use</li>
+<li><code>nodeKeepgoing</code>: if &quot;true&quot;, continue executing on other nodes even if some fail.</li>
+<li><code>asUser</code> : specifies a username identifying the user who ran the script. Requires <code>runAs</code> permission.</li>
+<li><code>scriptInterpreter</code>: a command to use to run the script (<em>since version 8</em>)</li>
+<li><code>interpreterArgsQuoted</code>: <code>true</code>/<code>false</code>: if true, the script file and arguments will be quoted as the last argument to the <code>scriptInterpreter</code> (<em>since version 8</em>)</li>
+</ul>
+<p>Node filter parameters as described under <a href="#using-node-filters">Using Node Filters</a></p>
+<p>Result: A success message, and a single <code>&lt;execution&gt;</code> item identifying the new execution by ID:</p>
+<pre><code>&lt;execution id=&quot;X&quot;/&gt;</code></pre>
+<p><strong>Since API version 8</strong>: The script interpreter and whether the arguments to the interpreter are quoted can be specified.</p>
+<h3 id="running-adhoc-script-urls"><a href="#running-adhoc-script-urls">Running Adhoc Script URLs</a></h3>
+<p>Run a script downloaded from a URL. (<strong>API version 4</strong> required.)</p>
+<p>URL:</p>
+<pre><code>/api/4/run/url</code></pre>
+<p>Method: <code>POST</code></p>
+<p>Expected Content-Type: <code>application/x-www-form-urlencoded</code></p>
+<p>Required Parameters:</p>
+<ul>
+<li><code>project</code>: the project name</li>
+</ul>
+<p>Required Content:</p>
+<ul>
+<li><code>scriptURL</code>: A URL pointing to a script file</li>
+</ul>
+<p>Optional Parameters:</p>
+<ul>
+<li><code>argString</code>: Arguments to pass to the script when executed.</li>
+<li><code>nodeThreadcount</code>: threadcount to use</li>
+<li><code>nodeKeepgoing</code>: if &quot;true&quot;, continue executing on other nodes even if some fail.</li>
+<li><code>asUser</code> : specifies a username identifying the user who ran the script. Requires <code>runAs</code> permission.</li>
+<li><code>scriptInterpreter</code>: a command to use to run the script (<em>since version 8</em>)</li>
+<li><code>interpreterArgsQuoted</code>: <code>true</code>/<code>false</code>: if true, the script file and arguments will be quoted as the last argument to the <code>scriptInterpreter</code> (<em>since version 8</em>)</li>
+</ul>
+<p>Node filter parameters as described under <a href="#using-node-filters">Using Node Filters</a></p>
+<p>Result: A success message, and a single <code>&lt;execution&gt;</code> item identifying the new execution by ID:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml">    <span class="kw">&lt;execution</span><span class="ot"> id=</span><span class="st">&quot;X&quot;</span><span class="kw">/&gt;</span></code></pre>
+<p><strong>Since API version 8</strong>: The script interpreter and whether the arguments to the interpreter are quoted can be specified.</p>
+<h3 id="key-storage"><a href="#key-storage">Key Storage</a></h3>
+<p>Upload and manage public and private key files. For more information see the <a href="../administration/key-storage.html">Administration - Key Storage</a> document.</p>
+<p>Keys are stored via Rundeck's <em>Storage</em> facility. This is a path-based interface to manage files. The underlying storage may be on disk or in a database.</p>
+<p>The Storage facility manages &quot;resources&quot;, which may be files or directories. File resources can have metadata associated with them (such as MIME content type).</p>
+<p>Note: Private Keys can be uploaded but not retrieved directly with this API. They can only be used internally by Rundeck.</p>
+<p>URL:</p>
+<pre><code>/api/11/storage/keys/[PATH]/[FILE]</code></pre>
+<h4 id="upload-keys"><a href="#upload-keys">Upload Keys</a></h4>
+<p>Specify the type of key via the <code>Content-type</code> header:</p>
+<ul>
+<li><code>application/octet-stream</code> specifies a <strong>private key</strong></li>
+<li><code>application/pgp-keys</code> specifies a <strong>public key</strong></li>
+</ul>
+<p>Use <code>POST</code> to create a new file, or <code>PUT</code> to modify an existing file.</p>
+<pre><code>POST /api/11/storage/keys/[PATH]/[FILE]
+Content-Type: [...]</code></pre>
+<pre><code>PUT /api/11/storage/keys/[PATH]/[FILE]
+Content-Type: [...]</code></pre>
+<h4 id="list-keys"><a href="#list-keys">List keys</a></h4>
+<p>Lists resources at the specified PATH, provides a JSON or XML response based on the <code>Accept</code> request header.</p>
+<p>Each resource has a type of <code>file</code> or <code>directory</code>.</p>
+<p><code>GET /api/11/storage/keys/[PATH]/</code></p>
+<p>Response:</p>
+<p><code>application/xml</code></p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;resource</span><span class="ot"> path=</span><span class="st">&#39;keys&#39;</span><span class="ot"> type=</span><span class="st">&#39;directory&#39;</span>
+<span class="ot">url=</span><span class="st">&#39;http://dignan.local:4440/api/11/storage/keys&#39;</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;contents</span><span class="ot"> count=</span><span class="st">&#39;3&#39;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;resource</span><span class="ot"> path=</span><span class="st">&#39;keys/test1.pem&#39;</span><span class="ot"> type=</span><span class="st">&#39;file&#39;</span>
+<span class="ot">    url=</span><span class="st">&#39;http://dignan.local:4440/api/11/storage/keys/test1.pem&#39;</span>
+<span class="ot">    name=</span><span class="st">&#39;test1.pem&#39;</span><span class="kw">&gt;</span>
+      <span class="kw">&lt;resource-meta&gt;</span>
+        <span class="kw">&lt;Rundeck-content-type&gt;</span>
+        application/octet-stream<span class="kw">&lt;/Rundeck-content-type&gt;</span>
+        <span class="kw">&lt;Rundeck-content-size&gt;</span>1679<span class="kw">&lt;/Rundeck-content-size&gt;</span>
+        <span class="kw">&lt;Rundeck-content-mask&gt;</span>content<span class="kw">&lt;/Rundeck-content-mask&gt;</span>
+        <span class="kw">&lt;Rundeck-key-type&gt;</span>private<span class="kw">&lt;/Rundeck-key-type&gt;</span>
+      <span class="kw">&lt;/resource-meta&gt;</span>
+    <span class="kw">&lt;/resource&gt;</span>
+    <span class="kw">&lt;resource</span><span class="ot"> path=</span><span class="st">&#39;keys/test1.pub&#39;</span><span class="ot"> type=</span><span class="st">&#39;file&#39;</span>
+<span class="ot">    url=</span><span class="st">&#39;http://dignan.local:4440/api/11/storage/keys/test1.pub&#39;</span>
+<span class="ot">    name=</span><span class="st">&#39;test1.pub&#39;</span><span class="kw">&gt;</span>
+      <span class="kw">&lt;resource-meta&gt;</span>
+        <span class="kw">&lt;Rundeck-content-type&gt;</span>
+        application/pgp-keys<span class="kw">&lt;/Rundeck-content-type&gt;</span>
+        <span class="kw">&lt;Rundeck-content-size&gt;</span>393<span class="kw">&lt;/Rundeck-content-size&gt;</span>
+        <span class="kw">&lt;Rundeck-key-type&gt;</span>public<span class="kw">&lt;/Rundeck-key-type&gt;</span>
+      <span class="kw">&lt;/resource-meta&gt;</span>
+    <span class="kw">&lt;/resource&gt;</span>
+    <span class="kw">&lt;resource</span><span class="ot"> path=</span><span class="st">&#39;keys/monkey1.pub&#39;</span><span class="ot"> type=</span><span class="st">&#39;file&#39;</span>
+<span class="ot">    url=</span><span class="st">&#39;http://dignan.local:4440/api/11/storage/keys/monkey1.pub&#39;</span>
+<span class="ot">    name=</span><span class="st">&#39;monkey1.pub&#39;</span><span class="kw">&gt;</span>
+      <span class="kw">&lt;resource-meta&gt;</span>
+        <span class="kw">&lt;Rundeck-content-type&gt;</span>
+        application/pgp-keys<span class="kw">&lt;/Rundeck-content-type&gt;</span>
+        <span class="kw">&lt;Rundeck-content-size&gt;</span>640198<span class="kw">&lt;/Rundeck-content-size&gt;</span>
+        <span class="kw">&lt;Rundeck-key-type&gt;</span>public<span class="kw">&lt;/Rundeck-key-type&gt;</span>
+      <span class="kw">&lt;/resource-meta&gt;</span>
+    <span class="kw">&lt;/resource&gt;</span>
+    <span class="kw">&lt;resource</span><span class="ot"> path=</span><span class="st">&#39;keys/subdir&#39;</span><span class="ot"> type=</span><span class="st">&#39;directory&#39;</span>
+<span class="ot">    url=</span><span class="st">&#39;http://dignan.local:4440/api/11/storage/keys/subdir&#39;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;/resource&gt;</span>
+  <span class="kw">&lt;/contents&gt;</span>
+<span class="kw">&lt;/resource&gt;</span></code></pre>
+<p><code>application/json</code></p>
+<pre class="sourceCode json"><code class="sourceCode json">{
+  <span class="dt">&quot;resources&quot;</span>: [
+    {
+      <span class="dt">&quot;meta&quot;</span>: {
+        <span class="dt">&quot;Rundeck-key-type&quot;</span>: <span class="st">&quot;private&quot;</span>,
+        <span class="dt">&quot;Rundeck-content-mask&quot;</span>: <span class="st">&quot;content&quot;</span>,
+        <span class="dt">&quot;Rundeck-content-size&quot;</span>: <span class="st">&quot;1679&quot;</span>,
+        <span class="dt">&quot;Rundeck-content-type&quot;</span>: <span class="st">&quot;application/octet-stream&quot;</span>
+      },
+      <span class="dt">&quot;url&quot;</span>: <span class="st">&quot;http://dignan.local:4440/api/11/storage/keys/test1.pem&quot;</span>,
+      <span class="dt">&quot;name&quot;</span>: <span class="st">&quot;test1.pem&quot;</span>,
+      <span class="dt">&quot;type&quot;</span>: <span class="st">&quot;file&quot;</span>,
+      <span class="dt">&quot;path&quot;</span>: <span class="st">&quot;keys/test1.pem&quot;</span>
+    },
+    {
+      <span class="dt">&quot;url&quot;</span>: <span class="st">&quot;http://dignan.local:4440/api/11/storage/keys/subdir&quot;</span>,
+      <span class="dt">&quot;type&quot;</span>: <span class="st">&quot;directory&quot;</span>,
+      <span class="dt">&quot;path&quot;</span>: <span class="st">&quot;keys/subdir&quot;</span>
+    },
+    {
+      <span class="dt">&quot;meta&quot;</span>: {
+        <span class="dt">&quot;Rundeck-key-type&quot;</span>: <span class="st">&quot;public&quot;</span>,
+        <span class="dt">&quot;Rundeck-content-size&quot;</span>: <span class="st">&quot;640198&quot;</span>,
+        <span class="dt">&quot;Rundeck-content-type&quot;</span>: <span class="st">&quot;application/pgp-keys&quot;</span>
+      },
+      <span class="dt">&quot;url&quot;</span>: <span class="st">&quot;http://dignan.local:4440/api/11/storage/keys/monkey1.pub&quot;</span>,
+      <span class="dt">&quot;name&quot;</span>: <span class="st">&quot;monkey1.pub&quot;</span>,
+      <span class="dt">&quot;type&quot;</span>: <span class="st">&quot;file&quot;</span>,
+      <span class="dt">&quot;path&quot;</span>: <span class="st">&quot;keys/monkey1.pub&quot;</span>
+    },
+    {
+      <span class="dt">&quot;meta&quot;</span>: {
+        <span class="dt">&quot;Rundeck-key-type&quot;</span>: <span class="st">&quot;public&quot;</span>,
+        <span class="dt">&quot;Rundeck-content-size&quot;</span>: <span class="st">&quot;393&quot;</span>,
+        <span class="dt">&quot;Rundeck-content-type&quot;</span>: <span class="st">&quot;application/pgp-keys&quot;</span>
+      },
+      <span class="dt">&quot;url&quot;</span>: <span class="st">&quot;http://dignan.local:4440/api/11/storage/keys/test1.pub&quot;</span>,
+      <span class="dt">&quot;name&quot;</span>: <span class="st">&quot;test1.pub&quot;</span>,
+      <span class="dt">&quot;type&quot;</span>: <span class="st">&quot;file&quot;</span>,
+      <span class="dt">&quot;path&quot;</span>: <span class="st">&quot;keys/test1.pub&quot;</span>
+    }
+  ],
+  <span class="dt">&quot;url&quot;</span>: <span class="st">&quot;http://dignan.local:4440/api/11/storage/keys&quot;</span>,
+  <span class="dt">&quot;type&quot;</span>: <span class="st">&quot;directory&quot;</span>,
+  <span class="dt">&quot;path&quot;</span>: <span class="st">&quot;keys&quot;</span>
+}</code></pre>
+<h4 id="get-key-metadata"><a href="#get-key-metadata">Get Key Metadata</a></h4>
+<p>Returns the metadata about the stored key file.</p>
+<p>Provides a JSON or XML response based on the <code>Accept</code> request header:</p>
+<pre><code>GET /api/11/storage/keys/[PATH]/[FILE]</code></pre>
+<p>Response:</p>
+<p><code>application/xml</code></p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;resource</span><span class="ot"> path=</span><span class="st">&#39;keys/test1.pub&#39;</span><span class="ot"> type=</span><span class="st">&#39;file&#39;</span>
+<span class="ot">url=</span><span class="st">&#39;http://dignan.local:4440/api/11/storage/keys/test1.pub&#39;</span>
+<span class="ot">name=</span><span class="st">&#39;test1.pub&#39;</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;resource-meta&gt;</span>
+    <span class="kw">&lt;Rundeck-content-type&gt;</span>
+    application/pgp-keys<span class="kw">&lt;/Rundeck-content-type&gt;</span>
+    <span class="kw">&lt;Rundeck-content-size&gt;</span>393<span class="kw">&lt;/Rundeck-content-size&gt;</span>
+    <span class="kw">&lt;Rundeck-key-type&gt;</span>public<span class="kw">&lt;/Rundeck-key-type&gt;</span>
+  <span class="kw">&lt;/resource-meta&gt;</span>
+<span class="kw">&lt;/resource&gt;</span></code></pre>
+<p><code>application/json</code></p>
+<pre class="sourceCode json"><code class="sourceCode json">{
+  <span class="dt">&quot;meta&quot;</span>: {
+    <span class="dt">&quot;Rundeck-key-type&quot;</span>: <span class="st">&quot;public&quot;</span>,
+    <span class="dt">&quot;Rundeck-content-size&quot;</span>: <span class="st">&quot;393&quot;</span>,
+    <span class="dt">&quot;Rundeck-content-type&quot;</span>: <span class="st">&quot;application/pgp-keys&quot;</span>
+  },
+  <span class="dt">&quot;url&quot;</span>: <span class="st">&quot;http://dignan.local:4440/api/11/storage/keys/test1.pub&quot;</span>,
+  <span class="dt">&quot;name&quot;</span>: <span class="st">&quot;test1.pub&quot;</span>,
+  <span class="dt">&quot;type&quot;</span>: <span class="st">&quot;file&quot;</span>,
+  <span class="dt">&quot;path&quot;</span>: <span class="st">&quot;keys/test1.pub&quot;</span>
+}</code></pre>
+<h4 id="get-key-contents"><a href="#get-key-contents">GET Key Contents</a></h4>
+<p>Provides the <strong>public key</strong> content if the <code>Accept</code> request header matches <code>*/*</code> or <code>application/pgp-keys</code>:</p>
+<p><code>GET /api/11/storage/keys/[PATH]/[FILE]</code></p>
+<p><strong>Retrieving private key file contents is not allowed.</strong></p>
+<p>A GET request for a private key file if the <code>Accept</code> request header matches <code>*/*</code> or <code>application/octet-stream</code> will result in a <code>403 Unauthorized</code> response.</p>
+<pre><code>GET /api/11/storage/keys/[PATH]/[FILE]
+Accept: application/octet-stream
+...</code></pre>
+<p>Response:</p>
+<pre><code>403 Unauthorized
+...</code></pre>
+<h4 id="delete-keys"><a href="#delete-keys">Delete Keys</a></h4>
+<p>Deletes the file if it exists and returns <code>204</code> response.</p>
+<p><code>DELETE /api/11/storage/keys/[PATH]/[FILE]</code></p>
+<h3 id="listing-projects"><a href="#listing-projects">Listing Projects</a></h3>
+<p>List the existing projects on the server.</p>
+<p>URL:</p>
+<pre><code>/api/1/projects</code></pre>
+<p>Result: An Item List of <code>projects</code>, each <code>project</code> of the form specified in the <a href="#getting-project-info">Getting Project Info</a> section.</p>
+<p><em>Since API version 11</em>: JSON content can be retrieved with <code>Accept: application/json</code></p>
+<pre class="sourceCode json"><code class="sourceCode json">[
+    {
+        <span class="dt">&quot;name&quot;</span>:<span class="st">&quot;...&quot;</span>,
+        <span class="dt">&quot;description&quot;</span>:<span class="st">&quot;...&quot;</span>,
+        <span class="dt">&quot;url&quot;</span>:<span class="st">&quot;...&quot;</span>,
+    }
+]</code></pre>
+<h3 id="project-creation"><a href="#project-creation">Project Creation</a></h3>
+<p>Create a new project.</p>
+<pre><code>POST /api/11/projects</code></pre>
+<p>XML content:</p>
+<p><code>Content-Type: application/xml</code></p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;project&gt;</span>
+    <span class="kw">&lt;name&gt;</span>name<span class="kw">&lt;/name&gt;</span>
+    <span class="kw">&lt;config&gt;</span>
+        <span class="kw">&lt;property</span><span class="ot"> key=</span><span class="st">&quot;propname&quot;</span><span class="ot"> value=</span><span class="st">&quot;propvalue&quot;</span><span class="kw">/&gt;</span>
+        <span class="co">&lt;!-- ... --&gt;</span>
+    <span class="kw">&lt;/config&gt;</span>
+<span class="kw">&lt;/project&gt;</span></code></pre>
+<p>JSON content:</p>
+<p><code>Content-Type: application/json</code></p>
+<pre class="sourceCode json"><code class="sourceCode json">{ <span class="dt">&quot;name&quot;</span>: <span class="st">&quot;myproject&quot;</span>, <span class="dt">&quot;config&quot;</span>: { <span class="dt">&quot;propname&quot;</span>:<span class="st">&quot;propvalue&quot;</span> } }</code></pre>
+<p>Response: XML or JSON project definition of the form indicated in the <a href="#getting-project-info">Getting Project Info</a> section.</p>
+<h3 id="getting-project-info"><a href="#getting-project-info">Getting Project Info</a></h3>
+<p>Get information about a project.</p>
+<pre><code>GET /api/1/project/[NAME]</code></pre>
+<p>Result: An Item List of <code>projects</code> with one <code>project</code>. XML or JSON is determined by the <code>Accept</code> request header. The <code>project</code> is of the form:</p>
+<p><code>Content-Type: application/xml</code></p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;project&gt;</span>
+    <span class="kw">&lt;name&gt;</span>Project Name<span class="kw">&lt;/name&gt;</span>
+    <span class="kw">&lt;description&gt;</span>...<span class="kw">&lt;/description&gt;</span>
+    <span class="co">&lt;!-- additional items --&gt;</span>
+<span class="kw">&lt;/project&gt;</span></code></pre>
+<p>If the project defines a Resource Model Provider URL, then the additional items are:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;resources&gt;</span>
+    <span class="kw">&lt;providerURL&gt;</span>URL<span class="kw">&lt;/providerURL&gt;</span>
+<span class="kw">&lt;/resources&gt;</span></code></pre>
+<p>Updated in version 11:</p>
+<pre><code>GET /api/11/project/[NAME]</code></pre>
+<p><code>Content-Type: application/xml</code></p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;project</span><span class="ot"> url=</span><span class="st">&quot;http://server:4440/api/11/project/NAME&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;name&gt;</span>Project Name<span class="kw">&lt;/name&gt;</span>
+    <span class="kw">&lt;description&gt;</span>...<span class="kw">&lt;/description&gt;</span>
+    <span class="co">&lt;!-- additional items --&gt;</span>
+<span class="kw">&lt;/project&gt;</span></code></pre>
+<p><code>Content-Type: application/json</code> <em>since version 11</em></p>
+<pre class="sourceCode json"><code class="sourceCode json">{
+  <span class="dt">&quot;description&quot;</span>: <span class="st">&quot;&quot;</span>,
+  <span class="dt">&quot;name&quot;</span>: <span class="st">&quot;NAME&quot;</span>,
+  <span class="dt">&quot;url&quot;</span>: <span class="st">&quot;http://server:4440/api/11/project/NAME&quot;</span>,
+  <span class="dt">&quot;config&quot;</span>: {  }
+}</code></pre>
+<p><strong>API version 11 and later</strong>: If the user has <code>configure</code> authorization for the project, then the project configuration properties are included in the response.</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;config&gt;</span>
+    <span class="kw">&lt;property</span><span class="ot"> key=</span><span class="st">&quot;[name]&quot;</span><span class="ot"> value=</span><span class="st">&quot;[value]&quot;</span><span class="kw">/&gt;</span>
+    <span class="co">&lt;!-- ... --&gt;</span>
+<span class="kw">&lt;/config&gt;</span></code></pre>
+<h3 id="project-deletion"><a href="#project-deletion">Project Deletion</a></h3>
+<p>Delete an existing projects on the server. Requires 'delete' authorization.</p>
+<pre><code>DELETE /api/11/project/[NAME]</code></pre>
+<p>Response:</p>
+<pre><code>204 No Content</code></pre>
+<h3 id="project-configuration"><a href="#project-configuration">Project Configuration</a></h3>
+<p>Retrieve or modify the project configuration data. Requires <code>configure</code> authorization for the project.</p>
+<h4 id="get-project-configuration"><a href="#get-project-configuration">GET Project Configuration</a></h4>
+<p><code>GET /api/11/project/[NAME]/config</code></p>
+<p>Response, based on <code>Accept</code> header:</p>
+<p><code>Content-Type: application/xml</code></p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;config&gt;</span>
+    <span class="kw">&lt;property</span><span class="ot"> key=</span><span class="st">&quot;name&quot;</span><span class="ot"> value=</span><span class="st">&quot;value&quot;</span><span class="kw">/&gt;</span>
+    <span class="co">&lt;!-- ... --&gt;</span>
+<span class="kw">&lt;/config&gt;</span></code></pre>
+<p><code>Content-Type: application/json</code></p>
+<pre class="sourceCode json"><code class="sourceCode json">{
+    <span class="dt">&quot;key&quot;</span>:<span class="st">&quot;value&quot;</span>,
+    <span class="dt">&quot;key2&quot;</span>:<span class="st">&quot;value2...&quot;</span>
+}</code></pre>
+<p><code>Content-Type: text/plain</code> (<a href="http://en.wikipedia.org/wiki/.properties">Java Properties</a>-formatted text.)</p>
+<pre class="text"><code>key=value
+key2=value</code></pre>
+<h4 id="put-project-configuration"><a href="#put-project-configuration">PUT Project Configuration</a></h4>
+<p>Replaces all configuration data with the submitted values.</p>
+<p><code>PUT /api/11/project/[NAME]/config</code></p>
+<p>Request:</p>
+<p><code>Content-Type: application/xml</code></p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;config&gt;</span>
+    <span class="kw">&lt;property</span><span class="ot"> key=</span><span class="st">&quot;key&quot;</span><span class="ot"> value=</span><span class="st">&quot;value&quot;</span><span class="kw">/&gt;</span>
+    <span class="co">&lt;!-- ... --&gt;</span>
+<span class="kw">&lt;/config&gt;</span></code></pre>
+<p><code>Content-Type: application/json</code></p>
+<pre class="sourceCode json"><code class="sourceCode json">{
+    <span class="dt">&quot;key&quot;</span>:<span class="st">&quot;value&quot;</span>,
+    <span class="dt">&quot;key2&quot;</span>:<span class="st">&quot;value2...&quot;</span>
+}</code></pre>
+<p><code>Content-Type: text/plain</code> (<a href="http://en.wikipedia.org/wiki/.properties">Java Properties</a>-formatted text.)</p>
+<pre class="text"><code>key=value
+key2=value</code></pre>
+<p>Response: same as <a href="#get-project-configuration">GET Project Configuration</a>.</p>
+<h3 id="project-configuration-keys"><a href="#project-configuration-keys">Project Configuration Keys</a></h3>
+<p>Retrieve, change or delete individual configuration properties by their key. Requires <code>configure</code> authorization for the project.</p>
+<p>URL:</p>
+<pre><code>/api/11/project/[NAME]/config/[KEY]</code></pre>
+<p>Request and response formats:</p>
+<p><code>application/xml</code>:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;property</span><span class="ot"> key=</span><span class="st">&quot;[KEY]&quot;</span><span class="ot"> value=</span><span class="st">&quot;key value&quot;</span><span class="kw">/&gt;</span></code></pre>
+<p><code>application/json</code>:</p>
+<pre class="sourceCode json"><code class="sourceCode json">{ <span class="dt">&quot;[KEY]&quot;</span> : <span class="st">&quot;key value&quot;</span> }</code></pre>
+<p><code>text/plain</code>: the plain text key value</p>
+<pre class="text"><code>key value</code></pre>
+<h4 id="get-project-configuration-key"><a href="#get-project-configuration-key">GET Project Configuration Key</a></h4>
+<p>Retrieve the value.</p>
+<p><code>GET /api/11/project/[NAME]/config/[KEY]</code></p>
+<h4 id="put-project-configuration-key"><a href="#put-project-configuration-key">PUT Project Configuration Key</a></h4>
+<p>Set the value.</p>
+<p><code>PUT /api/11/project/[NAME]/config/[KEY]</code></p>
+<h4 id="delete-project-configuration-key"><a href="#delete-project-configuration-key">DELETE Project Configuration Key</a></h4>
+<p>Delete the key.</p>
+<p><code>DELETE /api/11/project/[NAME]/config/[KEY]</code></p>
+<p>Response will be</p>
+<pre><code>204 No Content</code></pre>
+<h3 id="project-archive-export"><a href="#project-archive-export">Project Archive Export</a></h3>
+<p>Export a zip archive of the project. Requires <code>export</code> authorization for the project.</p>
+<pre><code>GET /api/11/project/[NAME]/export</code></pre>
+<p>Response content type is <code>application/zip</code></p>
+<h3 id="project-archive-import"><a href="#project-archive-import">Project Archive Import</a></h3>
+<p>Import a zip archive to the project. Requires <code>import</code> authorization for the project.</p>
+<pre><code>PUT /api/11/project/[NAME]/import{?jobUuidOption,importExecutions}</code></pre>
+<p>Parameters:</p>
+<ul>
+<li><code>jobUuidOption</code> (optional, string, <code>preserve/remove</code>) ... Option declaring how duplicate Job UUIDs should be handled. If <code>preserve</code> (default) then imported job UUIDs will not be modified, and may conflict with jobs in other projects. If <code>remove</code> then all job UUIDs will be removed before importing.</li>
+<li><code>importExecutions</code> (optional, string, <code>true/false</code>) ... If true, import all executions and logs from the archive (default). If false, do not import executions or logs.</li>
+</ul>
+<p>Expected Request Content:</p>
+<p><code>Content-Type: application/zip</code></p>
+<p>Response will indicate whether the imported contents had any errors:</p>
+<p><strong>All imported jobs successful:</strong></p>
+<p><code>application/xml</code></p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;import</span><span class="ot"> status=</span><span class="st">&quot;successful&quot;</span><span class="kw">&gt;</span>
+<span class="kw">&lt;/import&gt;</span></code></pre>
+<p><code>application/json</code></p>
+<pre class="sourceCode json"><code class="sourceCode json">{<span class="dt">&quot;import_status&quot;</span>:<span class="st">&quot;successful&quot;</span>}</code></pre>
+<p><strong>Some imported jobs failed:</strong></p>
+<p><code>application/xml</code></p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;import</span><span class="ot"> status=</span><span class="st">&quot;failed&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;errors</span><span class="ot"> count=</span><span class="st">&quot;[#]&quot;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;error&gt;</span>Job ABC could not be validated: ...<span class="kw">&lt;/error&gt;</span>
+        <span class="kw">&lt;error&gt;</span>Job XYZ could not be validated: ...<span class="kw">&lt;/error&gt;</span>
+    <span class="kw">&lt;/errors&gt;</span>
+<span class="kw">&lt;/import&gt;</span></code></pre>
+<p><code>application/json</code></p>
+<pre class="sourceCode json"><code class="sourceCode json">{
+    <span class="dt">&quot;import_status&quot;</span>:<span class="st">&quot;failed&quot;</span>,
+    <span class="dt">&quot;errors&quot;</span>: [
+        <span class="st">&quot;Job ABC could not be validated: ...&quot;</span>,
+        <span class="st">&quot;Job XYZ could not be validated: ...&quot;</span>
+    ]
+}</code></pre>
+<h3 id="updating-and-listing-resources-for-a-project"><a href="#updating-and-listing-resources-for-a-project">Updating and Listing Resources for a Project</a></h3>
+<p>Update or retrieve the Resources for a project. A GET request returns the resources for the project, and a POST request will update the resources. (<strong>API version 2</strong> required.)</p>
+<p>URL:</p>
+<pre><code>/api/2/project/[NAME]/resources</code></pre>
+<p>Method: POST, GET</p>
+<h4 id="post-request"><a href="#post-request">POST request</a></h4>
+<p>POSTing to this URL will set the resources for the project to the content of the request.</p>
+<p>Expected POST Content: For API version 2: either <code>text/xml</code> or <code>text/yaml</code> Content-Type containing the Resource Model definition in <a href="../man5/resource-xml.html">resource-xml</a> or <a href="../man5/resource-yaml.html">resource-yaml</a> formats as the request body. (Note: any MIME type ending with '/yaml' or '/x-yaml' or '/xml' will be accepted).</p>
+<p><strong>Since API version 3</strong>: You can also POST data using a content type supported by a Resource Format Parser plugin. This requires using API version <code>3</code>.</p>
+<p>POST Result: A success or failure API response. (See <a href="#response-format">Response Format</a>).</p>
+<p>Example POST request:</p>
+<pre><code>POST /api/2/project/test/resources
+Content-Type: text/yaml
+
+node1:
+  hostname: node1
+  username: bob
+
+node2:
+  hostname: node2
+  username: bob</code></pre>
+<p>Result:</p>
+<pre><code>200 OK
+
+&lt;result success=&quot;true&quot;&gt;
+    &lt;success&gt;
+        &lt;message&gt;Resources were successfully updated for project test&lt;/message&gt;
+    &lt;/success&gt;
+&lt;/result&gt;</code></pre>
+<h4 id="get-request"><a href="#get-request">GET request</a></h4>
+<p>Optional GET Parameters:</p>
+<ul>
+<li><code>format</code> : Result format. One of &quot;xml&quot; or &quot;yaml&quot;. Default is &quot;xml&quot;.</li>
+<li>Query parameters can also be used. This is an alternate interface to <a href="#listing-resources">Listing Resources</a>.</li>
+</ul>
+<p>GET Result: Depending on the <code>format</code> parameter, a value of &quot;xml&quot; will return <a href="../man5/resource-xml.html">resource-xml</a> and &quot;yaml&quot; will return <a href="../man5/resource-yaml.html">resource-yaml</a> formatted results.</p>
+<p>Example GET request:</p>
+<pre><code>GET /api/2/project/test/resources</code></pre>
+<p>Response:</p>
+<pre><code>200 OK
+Content-Type: text/xml
+
+&lt;project&gt;
+    &lt;node name=&quot;node1&quot; hostname=&quot;node1&quot; username=&quot;bob&quot; /&gt;
+    &lt;node name=&quot;node2&quot; hostname=&quot;node2&quot; username=&quot;bob&quot; /&gt;
+&lt;/project&gt;</code></pre>
+<h3 id="refreshing-resources-for-a-project"><a href="#refreshing-resources-for-a-project">Refreshing Resources for a Project</a></h3>
+<p>Refresh the resources for a project via its Resource Model Provider URL. The URL can be specified as a request parameter, or the pre-configured URL for the project can be used. (<strong>API version 2</strong> required.)</p>
+<p>URL:</p>
+<pre><code>/api/2/project/[NAME]/resources/refresh</code></pre>
+<p>Method: POST</p>
+<p>Optional Parameters:</p>
+<dl>
+<dt><code>providerURL</code></dt>
+<dd>Specify the Resource Model Provider URL to refresh the resources from. If not specified then the configured provider URL in the <code>project.properties</code> file will be used.
+</dd>
+</dl>
+<p>Result: A success or failure result with a message.</p>
+<p>The URL requested as the <code>providerURL</code> must be allowed by the <code>project.properties</code> and <code>framework.properties</code> configuration settings according to these rules:</p>
+<ul>
+<li>If the <code>providerURL</code> matches the value of <code>project.resources.url</code>, it is allowed.</li>
+<li>Otherwise, these properties are checked as regular expressions to match the URL:
+<ul>
+<li><code>project.resources.allowedURL.X</code> in project.properties (X starts at 0).</li>
+<li><code>framework.resources.allowedURL.X</code> in framework.properties</li>
+</ul></li>
+<li>If both files define allowedURL regexes, the URL must match a regex in both of them.</li>
+<li>Otherwise, if only one file defines regexes, the URL must match one of them.</li>
+<li>Otherwise if no regexes are defined in either file, the URL is rejected.</li>
+</ul>
+<p>Multiple regexes can be specified in those config files by adding multiple properties:</p>
+<pre><code>project.resources.allowedURL.0=^http://myserver:9090/resources/.*$
+project.resources.allowedURL.1=^http://server2:9090/resources/.*$</code></pre>
+<h3 id="project-readme-file"><a href="#project-readme-file">Project Readme File</a></h3>
+<p>The <code>readme.md</code> and <code>motd.md</code> files, which are Markdown formatted and displayed in the Project listing page, can be managed via the API. (See <a href="http://rundeck.org/docs/administration/project-setup.html#project-readme.md">Project Readme.md</a>.)</p>
+<p>URL:</p>
+<pre><code>/api/13/project/[NAME]/readme.md
+/api/13/project/[NAME]/motd.md</code></pre>
+<p>Method: <code>GET</code>, <code>PUT</code> and <code>DELETE</code>.</p>
+<p>Format: XML, JSON and plain text formats.</p>
+<h4 id="get-request-1"><a href="#get-request-1">GET Request</a></h4>
+<p>Response format depends on the <code>Accept:</code> HTTP header.</p>
+<p><code>text/plain</code>:</p>
+<pre><code>The readme contents</code></pre>
+<p><code>application/xml</code>:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;contents&gt;</span>The readme contents<span class="kw">&lt;/contents&gt;</span></code></pre>
+<p><em>Note</em>: XML output will use CDATA to preserve formatting of the contents</p>
+<p><code>application/json</code>:</p>
+<pre class="sourceCode json"><code class="sourceCode json">{<span class="dt">&quot;contents&quot;</span>:<span class="st">&quot;The readme contents&quot;</span>}</code></pre>
+<p>If the file does not exist, then the response will be : <code>404 Not Found</code></p>
+<h4 id="put-request"><a href="#put-request">PUT Request</a></h4>
+<p>To create or modify the contents, use a <code>PUT</code> request, and <code>Content-Type</code> header to specify the same format. Use the same format as returned by the GET responses.</p>
+<h4 id="delete-request"><a href="#delete-request">DELETE Request</a></h4>
+<p>Deletes the resource if it exists.</p>
+<p>Response: <code>204 No Content</code></p>
+<h3 id="listing-history"><a href="#listing-history">Listing History</a></h3>
+<p>List the event history for a project.</p>
+<p>URL:</p>
+<pre><code>/api/1/history</code></pre>
+<p>Required Parameters:</p>
+<ul>
+<li><code>project</code> : project name</li>
+</ul>
+<p>Optional Parameters:</p>
+<ul>
+<li>History query parameters:
+<ul>
+<li><code>jobIdFilter</code>: include events for a job ID.</li>
+<li><code>reportIdFilter</code>: include events for an event Name.</li>
+<li><code>userFilter</code>: include events created by a user</li>
+<li><code>statFilter</code>: include events based on result status. this can be 'succeed','fail', or 'cancel'.</li>
+<li><code>jobListFilter</code>: include events for the job by name, format: 'group/name'. To use multiple values, include this parameter multiple times. (Since <em>API v5</em>)</li>
+<li><code>excludeJobListFilter</code>: exclude events for the job by name, format: 'group/name'. To use multiple values, include this parameter multiple times. (Since <em>API v5</em>)</li>
+</ul></li>
+<li>Date query parameters:
+<ul>
+<li><code>recentFilter</code>: Use a simple text format to filter events that occurred within a period of time. The format is &quot;XY&quot; where X is an integer, and &quot;Y&quot; is one of:
+<ul>
+<li><code>h</code>: hour</li>
+<li><code>d</code>: day</li>
+<li><code>w</code>: week</li>
+<li><code>m</code>: month</li>
+<li><code>y</code>: year So a value of &quot;2w&quot; would return events within the last two weeks.</li>
+</ul></li>
+<li><code>begin</code>: Specify exact date for earliest result.</li>
+<li><code>end</code>: Specify exact date for latest result.</li>
+</ul></li>
+<li>Paging parameters:
+<ul>
+<li><code>max</code>: indicate the maximum number of events to return. The default maximum to return is 20.</li>
+<li><code>offset</code>: indicate the 0-indexed offset for the first event to return.</li>
+</ul></li>
+</ul>
+<p>The format for the <code>end</code>, and <code>begin</code> filters is either: a unix millisecond timestamp, or a W3C dateTime string in the format &quot;yyyy-MM-ddTHH:mm:ssZ&quot;.</p>
+<p>The format for the <code>jobListFilter</code> and <code>excludeJobListFilter</code> is the job's group and name separated by a '/' character, such as: &quot;group1/job name&quot;, or &quot;my job&quot; if there is no group.</p>
+<p>Result: an Item List of <code>events</code>. Each <code>event</code> has this form:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;event</span><span class="ot"> starttime=</span><span class="st">&quot;[unixtime]&quot;</span><span class="ot"> endtime=</span><span class="st">&quot;[unixtime]&quot;</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;title&gt;</span>[job title, or &quot;adhoc&quot;]<span class="kw">&lt;/title&gt;</span>
+  <span class="kw">&lt;status&gt;</span>[status]<span class="kw">&lt;/status&gt;</span>
+  <span class="kw">&lt;summary&gt;</span>[summary text]<span class="kw">&lt;/summary&gt;</span>
+  <span class="kw">&lt;node-summary</span><span class="ot"> succeeded=</span><span class="st">&quot;[X]&quot;</span><span class="ot"> failed=</span><span class="st">&quot;[Y]&quot;</span><span class="ot"> total=</span><span class="st">&quot;[Z]&quot;</span><span class="kw">/&gt;</span>
+  <span class="kw">&lt;user&gt;</span>[user]<span class="kw">&lt;/user&gt;</span>
+  <span class="kw">&lt;project&gt;</span>[project]<span class="kw">&lt;/project&gt;</span>
+  <span class="kw">&lt;date-started&gt;</span>[start date]<span class="kw">&lt;/date-started&gt;</span>
+  <span class="kw">&lt;date-ended&gt;</span>[end date]<span class="kw">&lt;/date-ended&gt;</span>
+  <span class="co">&lt;!-- if the execution was aborted, the username who aborted it: --&gt;</span>
+  <span class="kw">&lt;abortedby&gt;</span>[username]<span class="kw">&lt;/abortedby&gt;</span>
+  <span class="co">&lt;!-- if associated with an Execution, include the execution id: --&gt;</span>
+  <span class="kw">&lt;execution</span><span class="ot"> id=</span><span class="st">&quot;[execid]&quot;</span><span class="kw">/&gt;</span>
+  <span class="co">&lt;!-- if associated with a Job, include the Job ID: --&gt;</span>
+  <span class="kw">&lt;job</span><span class="ot"> id=</span><span class="st">&quot;[jobid]&quot;</span><span class="kw">/&gt;</span>
+<span class="kw">&lt;/event&gt;</span></code></pre>
+<p>The <code>events</code> element will also have <code>max</code>, <code>offset</code>, and <code>total</code> attributes, to indicate the state of paged results. E.G:</p>
+<pre><code>&lt;events count=&quot;8&quot; total=&quot;268&quot; max=&quot;20&quot; offset=&quot;260&quot;&gt;
+...
+&lt;/events&gt;</code></pre>
+<p><code>total</code> is the total number of events matching the query parameters. <code>count</code> is the number of events included in the results. <code>max</code> is the paging size as specified in the request, or with the default value of 20. <code>offset</code> is the offset specified, or default value of 0.</p>
+<h3 id="listing-resources"><a href="#listing-resources">Listing Resources</a></h3>
+<p>List or query the resources for a project.</p>
+<p>URL:</p>
+<pre><code>/api/1/resources</code></pre>
+<p>Required Parameters:</p>
+<ul>
+<li><code>project</code> : project name</li>
+</ul>
+<p>Optional Parameters:</p>
+<ul>
+<li><code>format</code> : Result format.
+<ul>
+<li>for <strong>API Version 2 or earlier</strong>: One of &quot;xml&quot; or &quot;yaml&quot;.</li>
+<li>for <strong>API Version 3</strong>: any supported Resource Format Parser format name.</li>
+<li>Default is &quot;xml&quot;.</li>
+</ul></li>
+<li>Node Filter parameters: You can select resources to include and exclude in the result set, see <a href="#using-node-filters">Using Node Filters</a> below.</li>
+</ul>
+<p><strong>Note:</strong> If no query parameters are included, the result set will include all Node resources for the project.</p>
+<p>Result: Depending on the <code>format</code> parameter, a value of &quot;xml&quot; will return <a href="../man5/resource-xml.html">resource-xml</a> and &quot;yaml&quot; will return <a href="../man5/resource-yaml.html">resource-yaml</a> formatted results. Any other supported format value will return content in the specified format.</p>
+<h4 id="using-node-filters"><a href="#using-node-filters">Using Node Filters</a></h4>
+<p>To include certain resources, specify the inclusion filters:</p>
+<ul>
+<li><code>hostname</code>, <code>tags</code>, <code>os-[name,family,arch,version]</code>, <code>name</code></li>
+</ul>
+<p>To exclude certain resources, specify the exclusion filters as above but with <code>exclude-</code> prepended:</p>
+<ul>
+<li><code>exclude-hostname</code>, <code>exclude-tags</code>, etc..</li>
+</ul>
+<p>To specify which type of filter (inclusion or exclusion) takes precedence, specify:</p>
+<ul>
+<li><code>exclude-precedence</code> : Whether exclusion filters take precedence. &quot;true&quot;/&quot;false&quot; (default is &quot;true&quot;).</li>
+</ul>
+<p>If using only inclusion filters, the result set will be only those resources which <em>do</em> match the filters.</p>
+<p>If using only exclusion filters, the result set will be only those resources which <em>do not</em> match the filters.</p>
+<p>When using both types of filters, the result will depend on the <code>exclude-precedence</code> value (default true).</p>
+<ul>
+<li>When <code>exclude-precedence</code> is true:
+<ol style="list-style-type: decimal">
+<li>First select the resources which <em>do not</em> match the <strong>exclusion</strong> filters.</li>
+<li>Then select from those the resources which <em>do</em> match the <strong>inclusion</strong> filters.</li>
+</ol></li>
+<li>When <code>exclude-precedence</code> is false:
+<ol style="list-style-type: decimal">
+<li>First select all resources.</li>
+<li>Then remove the resources which <em>do not</em> match the <strong>exclusion</strong> filters.</li>
+<li>Then add the resources which <em>do</em> match the <strong>inclusion</strong> filters.</li>
+</ol></li>
+</ul>
+<p>The difference between these results is apparent when you have resources which are matched by both the exclusion and the inclusion filters. The precedence determines whether those resources are included or not.</p>
+<p>Using set logic, if &quot;A&quot; is the set of all resources, &quot;X&quot; is the set of all resources matching the exclusion filters, and &quot;I&quot; is the set of all resources matching the inclusion filters, then:</p>
+<ul>
+<li>when <code>exclude-precedence=true</code> then the result is:
+<ul>
+<li><span class="math">(<em>A</em> − <em>X</em>) ∩ <em>I</em></span></li>
+<li>which is also <span class="math"><em>I</em> − <em>X</em></span></li>
+</ul></li>
+<li>when <code>exclude-precedence=false</code> then the result is:
+<ul>
+<li><span class="math">(<em>A</em> − <em>X</em>) ∪ <em>I</em></span></li>
+</ul></li>
+</ul>
+<h3 id="getting-resource-info"><a href="#getting-resource-info">Getting Resource Info</a></h3>
+<p>Get a specific resource within a project.</p>
+<p>URL:</p>
+<pre><code>/api/1/resource/[NAME]</code></pre>
+<p>Required Parameters:</p>
+<ul>
+<li><code>project</code> : project name</li>
+</ul>
+<p>Optional Parameters:</p>
+<ul>
+<li><code>format</code> : Result format. One of &quot;xml&quot; or &quot;yaml&quot;. Default is &quot;xml&quot;.</li>
+</ul>
+<p>Result: Depending on the <code>format</code> parameter, a value of &quot;xml&quot; will return <a href="../man5/resource-xml.html">resource-xml</a> and &quot;yaml&quot; will return <a href="../man5/resource-yaml.html">resource-yaml</a> formatted results.</p>
+<p>The result will contain a single item for the specified resource.</p>
+<h3 id="takeover-schedule-in-cluster-mode"><a href="#takeover-schedule-in-cluster-mode">Takeover Schedule in Cluster Mode</a></h3>
+<p><strong>INCUBATOR</strong>: this endpoint is available under the <code>/incubator</code> top-level path to indicate it is under development, and the specific behavior may change before it is finalized, or even completely removed.</p>
+<p>Tell a Rundeck server in cluster mode to claim all scheduled jobs from another cluster server.</p>
+<p>URL:</p>
+<pre><code>/api/7/incubator/jobs/takeoverSchedule</code></pre>
+<p>HTTP Method:</p>
+<pre><code>PUT</code></pre>
+<p>Required Content:</p>
+<p>One of the following:</p>
+<ul>
+<li><p>XML content:</p>
+<pre><code>&lt;server uuid=&quot;[UUID]&quot;/&gt;</code></pre></li>
+<li><p>JSON content:</p>
+<pre><code>{ server: { uuid: &quot;[UUID]&quot; } }</code></pre></li>
+</ul>
+<p>Result:</p>
+<p>If request was XML, then Standard API response containing the following additional elements:</p>
+<ul>
+<li><code>self</code>
+<ul>
+<li><code>server</code>
+<ul>
+<li><code>@uuid</code> - this cluster server's uuid</li>
+</ul></li>
+</ul></li>
+<li><code>takeoverSchedule</code>
+<ul>
+<li><code>server</code>
+<ul>
+<li><code>@uuid</code> - requested server uuid to take over</li>
+</ul></li>
+<li><code>jobs</code> - set of successful and failed jobs taken over
+<ul>
+<li><code>successful</code>/<code>failed</code> - job set
+<ul>
+<li><code>@count</code> number of jobs in the set</li>
+<li><code>job</code> - one element for each job
+<ul>
+<li><code>@id</code> Job ID</li>
+<li><code>@href</code> Job HREF</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
+<p>Example XML Response:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;result</span><span class="ot"> success=</span><span class="st">&#39;true&#39;</span><span class="ot"> apiversion=</span><span class="st">&#39;7&#39;</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;message&gt;</span>Schedule Takeover successful for 2/2 Jobs.<span class="kw">&lt;/message&gt;</span>
+  <span class="kw">&lt;self&gt;</span>
+    <span class="kw">&lt;server</span><span class="ot"> uuid=</span><span class="st">&#39;C677C663-F902-4B97-B8AC-4AA57B58DDD6&#39;</span> <span class="kw">/&gt;</span>
+  <span class="kw">&lt;/self&gt;</span>
+  <span class="kw">&lt;takeoverSchedule&gt;</span>
+    <span class="kw">&lt;server</span><span class="ot"> uuid=</span><span class="st">&#39;8F3D5976-2232-4529-847B-8E45764608E3&#39;</span> <span class="kw">/&gt;</span>
+    <span class="kw">&lt;jobs</span><span class="ot"> total=</span><span class="st">&#39;2&#39;</span><span class="kw">&gt;</span>
+      <span class="kw">&lt;successful</span><span class="ot"> count=</span><span class="st">&#39;2&#39;</span><span class="kw">&gt;</span>
+        <span class="kw">&lt;job</span><span class="ot"> id=</span><span class="st">&#39;a1aa53ac-73a6-4ead-bbe4-34afbff8e057&#39;</span>
+<span class="ot">        href=</span><span class="st">&#39;http://localhost:9090/rundeck/job/show/a1aa53ac-73a6-4ead-bbe4-34afbff8e057&#39;</span> <span class="kw">/&gt;</span>
+        <span class="kw">&lt;job</span><span class="ot"> id=</span><span class="st">&#39;116e2025-7895-444a-88f7-d96b4f19fdb3&#39;</span>
+<span class="ot">        href=</span><span class="st">&#39;http://localhost:9090/rundeck/job/show/116e2025-7895-444a-88f7-d96b4f19fdb3&#39;</span> <span class="kw">/&gt;</span>
+      <span class="kw">&lt;/successful&gt;</span>
+      <span class="kw">&lt;failed</span><span class="ot"> count=</span><span class="st">&#39;0&#39;</span><span class="kw">&gt;&lt;/failed&gt;</span>
+    <span class="kw">&lt;/jobs&gt;</span>
+  <span class="kw">&lt;/takeoverSchedule&gt;</span>
+<span class="kw">&lt;/result&gt;</span></code></pre>
+<p>If request was JSON, then the following JSON:</p>
+<pre class="sourceCode json"><code class="sourceCode json">    {
+      <span class="dt">&quot;takeoverSchedule&quot;</span>: {
+        <span class="dt">&quot;jobs&quot;</span>: {
+          <span class="dt">&quot;failed&quot;</span>: [],
+          <span class="dt">&quot;successful&quot;</span>: [
+            {
+              <span class="dt">&quot;href&quot;</span>: <span class="st">&quot;http://dignan:4440/job/show/a1aa53ac-73a6-4ead-bbe4-34afbff8e057&quot;</span>,
+              <span class="dt">&quot;id&quot;</span>: <span class="st">&quot;a1aa53ac-73a6-4ead-bbe4-34afbff8e057&quot;</span>
+            },
+            {
+              <span class="dt">&quot;href&quot;</span>: <span class="st">&quot;http://dignan:4440/job/show/116e2025-7895-444a-88f7-d96b4f19fdb3&quot;</span>,
+              <span class="dt">&quot;id&quot;</span>: <span class="st">&quot;116e2025-7895-444a-88f7-d96b4f19fdb3&quot;</span>
+            }
+          ],
+          <span class="dt">&quot;total&quot;</span>: <span class="dv">2</span>
+        },
+        <span class="dt">&quot;server&quot;</span>: {
+          <span class="dt">&quot;uuid&quot;</span>: <span class="st">&quot;8F3D5976-2232-4529-847B-8E45764608E3&quot;</span>
+        }
+      },
+      <span class="dt">&quot;self&quot;</span>: {
+        <span class="dt">&quot;server&quot;</span>: {
+          <span class="dt">&quot;uuid&quot;</span>: <span class="st">&quot;C677C663-F902-4B97-B8AC-4AA57B58DDD6&quot;</span>
+        }
+      },
+      <span class="dt">&quot;message&quot;</span>: <span class="st">&quot;Schedule Takeover successful for 2/2 Jobs.&quot;</span>,
+      <span class="dt">&quot;apiversion&quot;</span>: <span class="dv">7</span>,
+      <span class="dt">&quot;success&quot;</span>: <span class="dv">true</span>
+    }</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.5.1)</a></li>
+    
+    
+    
+    <li class="active"><a href="index.html">API Reference | Version 13</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2014 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<span class="generated-date" title="2015-05-15T21:04:13UTC">2015-05-15T21:04:13UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
