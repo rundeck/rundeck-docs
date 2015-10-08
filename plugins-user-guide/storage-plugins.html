@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Storage Plugins</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.6.0</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.6.0)</a></li>
+    
+    
+    <li ><a href="index.html">Plugins User Guide</a></li>
+    <li class="active"><a href="storage-plugins.html">Storage Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="ssh-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> SSH Plugins</a></li>
+      <li class="next"><a href="orchestrator-plugins.html">Orchestrator Plugins <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#storage-backend">Storage Backend</a></li>
+<li><a href="#storage-converter">Storage Converter</a><ul>
+<li><a href="#jasypt-encryption-converter-plugin">Jasypt Encryption Converter Plugin</a></li>
+</ul></li>
+<li><a href="#develop-your-own">Develop your own</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Storage Plugins</h1>
+</div>
+<p>Storage plugins define ways to store and dynamically modify file contents such as store <a href="../administration/key-storage.html">Private Key Files</a> and <a href="../administration/project-setup.html">Project Configuration</a>.</p>
+<p>For configuration see <a href="configuring.html#storage-plugins">Configuring - Storage Plugins</a>.</p>
+<h2 id="storage-backend"><a href="#storage-backend">Storage Backend</a></h2>
+<p>A storage backend is a &quot;Storage&quot; plugin, which defines how to list, create, update, delete and retrieve file contents and metadata.</p>
+<p>Rundeck bundles two storage plugin types:</p>
+<ul>
+<li><code>file</code> - stores file contents on disk</li>
+<li><code>db</code> - stores file contents in the database</li>
+</ul>
+<h2 id="storage-converter"><a href="#storage-converter">Storage Converter</a></h2>
+<p>A storage converter is a &quot;StorageConverter&quot; plugin, which can modify the contents or metadata of a stored file as it is being created, updated, or read.</p>
+<h3 id="jasypt-encryption-converter-plugin"><a href="#jasypt-encryption-converter-plugin">Jasypt Encryption Converter Plugin</a></h3>
+<p>Rundeck includes an Encryption plugin called <code>jasypt-encryption</code>.<br />This plugin provides password based encryption for storage contents.<br />It uses the <a href="" title="http://jasypt.org">Jasypt</a> encryption library. The built in Java JCE is used unless another provider is specified, <a href="http://www.bouncycastle.org/">Bouncycastle</a> can be used by specifying the 'BC' provider name.</p>
+<p>Password, algorithm, provider, etc can be specified directly, or via environment variables (the <code>*EnvVarName</code> properties), or Java System properties (the <code>*SysPropName</code> properties).</p>
+<p>To enable it, see <a href="configuring.html#storage-converter-plugins">Configuring - Storage Converter Plugins</a>.</p>
+<p>Provider type: <code>jasypt-encryption</code></p>
+<p>The following encryption properties marked with <code>*</code> can be set directly, using the property name shown, but they can all also be set dynamically using either an Environment variable, or a Java System Property.<br />Append either <code>EnvVarName</code> for the environment variable, or <code>SysPropName</code> to use the Java System Property.<br />If a System Property is specified: it is read in once and used by the initialization of the converter plugin, then the Java System Property is set to null so it cannot be read again.</p>
+<p>Configuration properties:</p>
+<dl>
+<dt><code>encryptorType</code></dt>
+<dd><p>Jasypt Encryptor to use. Either <code>basic</code>, <code>strong</code>, or <code>custom</code>. Default: 'basic'.</p>
+<ul>
+<li><code>basic</code> uses algorithm <code>PBEWithMD5AndDES</code></li>
+<li><code>strong</code> requires use of the JCE Unlimited Strength policy files. (Algorithm: <code>PBEWithMD5AndTripleDES</code>)</li>
+<li><code>custom</code> is required to specify the algorithm.</li>
+</ul>
+</dd>
+<dt><code>password*</code></dt>
+<dd><p>the password.</p>
+</dd>
+<dt><code>algorithm*</code></dt>
+<dd><p>the encryption algorithm.</p>
+</dd>
+<dt><code>provider*</code></dt>
+<dd><p>the provider name. 'BC' indicates Bouncycastle.</p>
+</dd>
+<dt><code>providerClassName*</code></dt>
+<dd><p>Java class name of the provider.</p>
+</dd>
+<dt><code>keyObtentionIterations*</code></dt>
+<dd><p>Number of hashes to use for the password when generating the key, default is 1000.</p>
+</dd>
+</dl>
+<p>Example configuration for the Key Storage facility:</p>
+<pre><code>rundeck.storage.converter.1.type=jasypt-encryption
+rundeck.storage.converter.1.path=keys
+rundeck.storage.converter.1.config.passwordEnvVarName=ENC_PASSWORD
+rundeck.storage.converter.1.config.algorithm=PBEWITHSHA256AND128BITAES-CBC-BC
+rundeck.storage.converter.1.config.provider=BC</code></pre>
+<p>Example configuration for the Project Configuration storage facility:</p>
+<pre><code>rundeck.config.storage.converter.1.type=jasypt-encryption
+rundeck.config.storage.converter.1.path=/
+rundeck.config.storage.converter.1.config.password=sekrit
+rundeck.config.storage.converter.1.config.algorithm=PBEWITHSHA256AND128BITAES-CBC-BC
+rundeck.config.storage.converter.1.config.provider=BC</code></pre>
+<h2 id="develop-your-own"><a href="#develop-your-own">Develop your own</a></h2>
+<p>See:</p>
+<ul>
+<li><a href="../developer/storage-plugin.html">Storage Plugin Development</a>.</li>
+<li><a href="../developer/storage-converter-plugin.html">Storage Converter Plugin Development</a>.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.6.0)</a></li>
+    
+    
+    <li ><a href="index.html">Plugins User Guide</a></li>
+    <li class="active"><a href="storage-plugins.html">Storage Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="ssh-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> SSH Plugins</a></li>
+      <li class="next"><a href="orchestrator-plugins.html">Orchestrator Plugins <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://dtosolutions.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2014 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<span class="generated-date" title="2015-10-08T18:47:20UTC">2015-10-08T18:47:20UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
