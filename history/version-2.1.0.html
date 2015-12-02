@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Version 2.1.0</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="greg" />
+  <meta name="date" content="04/23/2014" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.6.2</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.6.2)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-2.1.0.html">Version 2.1.0 (2014-04-23)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.0.4.html">Version 2.0.4 (2014-04-18) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#release-2.1.0">Release 2.1.0</a><ul>
+<li><a href="#contributors">Contributors</a></li>
+<li><a href="#issues">Issues</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Version 2.1.0</h1>
+</div>
+<h1 id="release-2.1.0"><a href="#release-2.1.0">Release 2.1.0</a></h1>
+<p>Date: 2014-04-23</p>
+<p>This release enhances the Rundeck API and provides a facility for storing Key files that can be used for SSH.</p>
+<ul>
+<li>Project management improvements:
+<ul>
+<li>Project Delete action in the Configuration page</li>
+<li><a href="../api/index.html#changes">Project create/config/delete APIs</a></li>
+</ul></li>
+<li><a href="../administration/key-storage.html">Key storage facility</a>:
+<ul>
+<li><a href="../api/index.html#changes">Upload public or private keys via API</a></li>
+<li>store the key file data on disk or in the DB</li>
+<li>Use private keys for SSH</li>
+<li>Note: no encryption is performed by default, but you can use plugins to encrypt the data</li>
+</ul></li>
+</ul>
+<p><em>Upgrade notes:</em></p>
+<ol style="list-style-type: decimal">
+<li>If you are upgrading from 2.0.1 or earlier, see the notes about schema changes in the previous release notes: <a href="../history/version-2.0.2.html">2.0.2 Release Notes</a>.</li>
+<li>See the <a href="../upgrading/index.html">Upgrading Guide</a></li>
+</ol>
+<h2 id="contributors"><a href="#contributors">Contributors</a></h2>
+<ul>
+<li>Diomidis Spinellis (dspinellis)</li>
+<li>Greg Schueler (gschueler)</li>
+</ul>
+<h2 id="issues"><a href="#issues">Issues</a></h2>
+<ul>
+<li><a href="https://github.com/rundeck/rundeck/issues/745">add link about project.properties in project setup guide</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/743">After update to 2.0.4-1.15.GA ssh login fails with &quot;bad ownership or modes for directory&quot;</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/726">Key storage and management</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/722">deb requires java 6</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/693">Feature/project api</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/556">Allow script based plugins (-plugin.zip) to have just .zip extension instead</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/551">Allow user configuration of authentication methods available to built-in SSH provider</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/492">Update API to better manage rundeck administration</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/491">API to get a project configuration</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/488">API for api-key administration (list,create,remove)</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/487">API for project remove</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/486">API for project create</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/485">API for project export and import</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.6.2)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-2.1.0.html">Version 2.1.0 (2014-04-23)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.0.4.html">Version 2.0.4 (2014-04-18) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2015 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2015-12-02T20:32:49UTC">2015-12-02T20:32:49UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
