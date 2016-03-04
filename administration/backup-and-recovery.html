@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Backup and Recovery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.6.4</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.6.4)</a></li>
+    
+    
+    <li ><a href="index.html">Administrator Guide</a></li>
+    <li class="active"><a href="backup-and-recovery.html">Backup and Recovery</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="configuration-file-reference.html"><i class="glyphicon glyphicon-arrow-left"></i> Configuration File Reference</a></li>
+      <li class="next"><a href="tuning-rundeck.html">Tuning Rundeck <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#backup">Backup</a></li>
+<li><a href="#recovery">Recovery</a></li>
+<li><a href="#project-import-and-export">Project Import and Export</a><ul>
+<li><a href="#export-an-archive">Export an archive</a></li>
+<li><a href="#import-an-archive">Import an archive</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Backup and Recovery</h1>
+</div>
+<h2 id="backup"><a href="#backup">Backup</a></h2>
+<p>While running, export the Job definitions if you do not have these in source control:</p>
+<ol style="list-style-type: decimal">
+<li><p>Export the jobs. You will have to do this for each project</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rd-jobs</span> list -f /path/to/backup/dir/project1/jobs.xml -p project1
+<span class="kw">rd-jobs</span> list -f /path/to/backup/dir/project2/jobs.xml -p project2
+<span class="kw">...</span></code></pre></li>
+<li><p>Stop the server. See: <a href="#startup-and-shtudown">startup and shutdown</a>. (Rundeck data file backup should only be done with the server down.)</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rundeckd</span> stop</code></pre></li>
+<li><p>Copy the data files. (Assumes file datastore configuration). The location of the data directory depends on the installation method:</p></li>
+</ol>
+<ul>
+<li>RPM install: <code>/var/lib/rundeck/data</code></li>
+<li><p>Launcher install: <code>$RDECK_BASE/server/data</code></p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cp</span> -r data /path/to/backup/dir</code></pre></li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li>Copy the log (execution output) files.</li>
+</ol>
+<ul>
+<li>RPM install: <code>/var/lib/rundeck/logs</code></li>
+<li><p>Launcher install: <code>$RDECK_BASE/var/logs</code></p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cp</span> -r logs /path/to/backup/dir</code></pre></li>
+</ul>
+<ol start="5" style="list-style-type: decimal">
+<li><p>Start the server</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rundeckd</span> start</code></pre></li>
+</ol>
+<h2 id="recovery"><a href="#recovery">Recovery</a></h2>
+<ol style="list-style-type: decimal">
+<li><p>Stop the server. See: <a href="startup-and-shtudown.html">startup and shutdown</a>. (Rundeck recovery should only be done with the server down.)</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rundeckd</span> stop</code></pre></li>
+<li><p>Restore data/logs dir from backup (Refer to above for appropriate log/data path):</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cp</span> -r /path/to/backup/logs logspath
+<span class="kw">cp</span> -r /path/to/backup/data datapath</code></pre></li>
+<li><p>Start the server:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rundeckd</span> start</code></pre></li>
+<li><p>Reload the Job definitions. You will have to do this for each project:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rd-jobs</span> load -f /path/to/backup/dir/project1/jobs.xml -p project1
+<span class="kw">rd-jobs</span> load -f /path/to/backup/dir/project2/jobs.xml -p project2</code></pre></li>
+</ol>
+<h2 id="project-import-and-export"><a href="#project-import-and-export">Project Import and Export</a></h2>
+<p>As of Rundeck 1.4.4, you can export a Project's database contents into an archive file, and later import it into another project.</p>
+<p>You can use this mechanism for:</p>
+<ul>
+<li>backup</li>
+<li>migration from one database backend to another</li>
+<li>upgrading from one rundeck version to another</li>
+</ul>
+<h3 id="export-an-archive"><a href="#export-an-archive">Export an archive</a></h3>
+<p>To export, visit the &quot;Admin&quot; link in the Rundeck page header.</p>
+<p>Click on the link under &quot;Export Archive&quot; to download an archive containing the project Jobs, Executions and History.</p>
+<p>This archive can be imported into any other Rundeck project.</p>
+<p>The archive will contain:</p>
+<ul>
+<li>All Job definitions from the project</li>
+<li>All Executions from the project (both Job and Adhoc executions)</li>
+<li>All Execution log files (output logs)</li>
+<li>All History reports from the project</li>
+</ul>
+<p>Note that the archive <strong>will not contain</strong>:</p>
+<ul>
+<li>The Project config file <code>project.properties</code> located under your <code>$RDECK_BASE/projects/[name]/etc</code></li>
+<li>Resource definitions (such as <code>resources.xml</code> or resources received from external providers.)</li>
+</ul>
+<p>You should back up those contents separately if necessary.</p>
+<h3 id="import-an-archive"><a href="#import-an-archive">Import an archive</a></h3>
+<p>To import the contents of an exported archive, visit the &quot;Admin&quot; link in the Rundeck page header.</p>
+<p>Click on &quot;Import Archive&quot; to display the import form.</p>
+<p>Choose the rundeck archive file to import (should end with &quot;.rdproject.jar&quot;).</p>
+<p>Click &quot;Import&quot;.</p>
+<p>The import process:</p>
+<ul>
+<li>Creates any Jobs in the archive not found in this project with a new unique UUID</li>
+<li>Updates any Jobs in the archive that match Jobs found in the project (group and name match)</li>
+<li>Creates new Executions for the imported Jobs, and creates the output log files on disk</li>
+<li>Creates new History reports for imported Executions and Jobs</li>
+</ul>
+<p>Note that because the archive does not contain the project configuration or resource definitions, you will have to configure those separately for the new or updated project.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.6.4)</a></li>
+    
+    
+    <li ><a href="index.html">Administrator Guide</a></li>
+    <li class="active"><a href="backup-and-recovery.html">Backup and Recovery</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="configuration-file-reference.html"><i class="glyphicon glyphicon-arrow-left"></i> Configuration File Reference</a></li>
+      <li class="next"><a href="tuning-rundeck.html">Tuning Rundeck <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2016 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2016-03-04T22:23:36UTC">2016-03-04T22:23:36UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
