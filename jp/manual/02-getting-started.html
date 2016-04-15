@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>はじめに</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Alex Honor" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="November 20, 2010" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.6.6</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck ドキュメント (2.6.6)</a></li>
+    
+    
+    <li ><a href="index.html">ユーザーマニュアル</a></li>
+    <li class="active"><a href="02-getting-started.html">始めに</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="01-introduction.html"><i class="glyphicon glyphicon-arrow-left"></i> イントロダクション</a></li>
+      <li class="next"><a href="03-basics.html">Rundeck の基本 <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#rundeck-の基本">Rundeck の基本</a><ul>
+<li><a href="#コマンドディスパッチャ">コマンドディスパッチャ</a></li>
+<li><a href="#リソースモデル">リソースモデル</a></li>
+<li><a href="#権限の付与">権限の付与</a></li>
+<li><a href="#プロジェクト">プロジェクト</a></li>
+</ul></li>
+<li><a href="#rundeck-のインストール">Rundeck のインストール</a></li>
+<li><a href="#rundeck-のアップグレード">Rundeck のアップグレード</a></li>
+<li><a href="#はじめてのセットアップ">はじめてのセットアップ</a><ul>
+<li><a href="#ログイン">ログイン</a></li>
+<li><a href="#グループメンバー">グループメンバー</a></li>
+</ul></li>
+<li><a href="#まとめ">まとめ</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">はじめに</h1>
+</div>
+<p>この章は、Rundeck を新しく始めるユーザに向けたものです。基本的な項目の説明から始め、Rundeck の本質的な概念と用語を抑え、インストール方法、セットアップと進んでいきます。本章を読み終える頃には、Rundeck とは何か、どのように使うのか、どのようにセットアップするのかについて理解しているはずです。</p>
+<h2 id="rundeck-の基本"><a href="#rundeck-の基本">Rundeck の基本</a></h2>
+<p>Rundeck を開発する動機やコアとなったコンセプトがあります。あなたがこれから Rundeck を使い始めるところならば、それらのコンセプトについて知っておくと Rundeck を使う際やあなたの環境へ Rundeck を導入する際に役立つでしょう。</p>
+<h3 id="コマンドディスパッチャ"><a href="#コマンドディスパッチャ">コマンドディスパッチャ</a></h3>
+<p>Rundeck は <em>コマンドディスパッチング</em> という概念をサポートしています。これはあるひとまとまりのアクション（コマンドと呼ばれる）を指定して、それを分散実行する際に用いられます。</p>
+<p><em>コマンドディスパッチャ</em> は、指定したフィルタリング基準を満たすノードリソースを探してコマンドを分散実行する、Rundeck 内部のメカニズムです。コマンドはノードリソースの情報を含む、あるデータコンテキスト内で実行されます。コマンドディスパッチャはノードのフィルタリングに加え、並列実行・実行順序のコントロール・エラーハンドリングのためパラメータをオプションとして利用できます。</p>
+<p>コマンドディスパッチャは2種類のコマンド実行方法をサポートしています。</p>
+<ul>
+<li><em>アドホックコマンド</em>：あるホスト群に対して任意のシェルコマンドまたはシェルスクリプトを実行します。</li>
+<li><em>ジョブ</em>：コマンド群を名前を付けたジョブの中に入れてカプセル化し、複数ステップからなるワークフローとしてまとめます。</li>
+</ul>
+<p>コマンドディスパッチャは GUI と CUI の両方から扱えます。</p>
+<p>また、コマンドディスパッチャの全機能へアクセスできる Web API を使う事も出来ます。（ <a href="../api/index.html">Rundeck API</a> を参照）</p>
+<h3 id="リソースモデル"><a href="#リソースモデル">リソースモデル</a></h3>
+<p>コマンドディスパッチャはリソースモデルと合わせて使うことで動作します。Rundeck ではあなたのネットワークに置かれたホストを <em>リソースモデル</em> として表現します。<em>ノード</em> は、あるリソース（ネットワークアクセスが可能なホストの物理マシンまたは仮想インスタンス）を指します。</p>
+<p>ノードは多くの基本的なプロパティを持っています。さらに、任意の名前を付けたキーバリューペアを追加することでプロパティを拡張することも可能です。</p>
+<p>複数のソースからリソースモデルのデータを取得して格納するよう Rundeck を設定することができます。また、複数のソースから簡単に取り込めるよう、それぞれにリソースモデルドキュメントフォーマットを定義できます。</p>
+<p>リソースモデルのデータソースは、ローカルファイルでも、リモートでアクセス可能なサービスから取ってくるものでも大丈夫です。 <em>URL リソースモデルソース</em> とは、HTTP の GET メソッドでアクセスすると Rundeck がサポートするリソースモデルのドキュメントフォーマットでデータを返してくれる外部サービスを意味しています。</p>
+<p>Rundeck では現在ドキュメントフォーマットとして XML と YAML が使えます。<a href="rundeck-basics.html#リソースモデルドキュメントフォーマット">リソースモデルドキュメントフォーマット</a>を参照してください。</p>
+<p>どのプロジェクトも複数のリソースモデルソースを持つように設定することが可能です。<a href="http://rundeck.org/docs/manual/plugins.html#リソースモデルソース">リソースモデルソース</a>を参照してください。</p>
+<h3 id="権限の付与"><a href="#権限の付与">権限の付与</a></h3>
+<p>Rundeck は「users」グループに対してある決まった権限を付与する <em>アクセスコントロールポリシー</em> を適用します。コマンドディスパッチャによって実行される全てのアクションは、アクセスコントロールポリシーの条件を満たしている必要があります。</p>
+<p>Rundeck は、ポリシー定義を配慮してくれるため、あるユーザー達には一部のアクションのみ使用させるよう制限する等、ロールに基づく権限を定義できます。これによりセルフサービス型のインターフェイス（何人かのユーザーは、実行が許されたアクションのセットのみにアクセスできる）を可能にします。</p>
+<p>参照：<a href="../administration/authorization.html">権限の付与</a></p>
+<h3 id="プロジェクト"><a href="#プロジェクト">プロジェクト</a></h3>
+<p><em>プロジェクト</em> はプロジェクト管理業務を遂行するためのスペースを提供します。（プロジェクトごとに権限やジョブを管理できるということです）Rundeck で起きる全てのアクティビティは何れかのプロジェクトに関連しています。各プロジェクトは、それぞれリソースモデルと保存されたジョブを持っています。</p>
+<p>同じサーバーで複数のプロジェクトを扱うことができます。プロジェクトはそれぞれ独立しているので、一つの Rundeck で互いに無関係なシステムを管理することができます。これは異なるインフラを管理するのに役立ちます。</p>
+<h2 id="rundeck-のインストール"><a href="#rundeck-のインストール">Rundeck のインストール</a></h2>
+<p>より詳細なインストール方法については、<a href="../administration/installation.html">管理者向けマニュアルのインストール方法の章</a>を参照してください。</p>
+<p>最も簡単なインストール方法は、jar ファイルを起動することです。jar ファイルをダウンロードしてきて、<code>RD_BASE</code> ベースディレクトリにする予定のところに置いてください。</p>
+<p>java を使用して jar ファイルを実行することにより Rundeck サーバーを起動します：</p>
+<pre><code>java -jar rundeck-launcher-1.4.1.jar</code></pre>
+<h2 id="rundeck-のアップグレード"><a href="#rundeck-のアップグレード">Rundeck のアップグレード</a></h2>
+<p>旧バージョンからのアップグレードを行う場合は、<a href="../upgrading/index.html">Rundeck アップグレードガイド</a>を参照してください。</p>
+<h2 id="はじめてのセットアップ"><a href="#はじめてのセットアップ">はじめてのセットアップ</a></h2>
+<h3 id="ログイン"><a href="#ログイン">ログイン</a></h3>
+<p>Rundeck は様々なユーザー管理形式をサポートしています。デフォルトではファイルベースのユーザーリストを使用しますが、LDAP と連携させることも可能です。<a href="../administration/authentication.html">管理者向けマニュアル - 認証</a> を参照してください。</p>
+<p>Rundeck をインストールすると、使い始めるのに役立つテンポラリのログインユーザーが定義されます。</p>
+<ul>
+<li><code>user</code> ： コマンドやジョブの実行はできますが、ジョブ定義は編集できません。パスワードは &quot;user&quot; です。</li>
+<li><code>admin</code> : &quot;admin&quot; グループに属しており、自動的に &quot;admin&quot; および &quot;user&quot; というロール権限が付与されています。パスワードは &quot;admin&quot; です。</li>
+</ul>
+<h3 id="グループメンバー"><a href="#グループメンバー">グループメンバー</a></h3>
+<p>RPM パッケージを使って Rundeck をインストールした場合は、&quot;rundeck&quot; という UNIX グループが作られているでしょう。</p>
+<pre><code>$ groups rundeck
+rundeck : rundeck</code></pre>
+<p>また、いくつかのログファイルが &quot;rundeck&quot; のグループメンバーに対して書き込み可能にされています。</p>
+<pre><code>$ ls -l /var/log/rundeck/command.log
+-rw-rw-r-- 1 rundeck rundeck 588 Dec  2 11:24 /var/log/rundeck/command.log</code></pre>
+<p>Rundeck シェルツールを使用したい場合は、それが必要なユーザーアカウントに &quot;rundeck&quot; グループを必ず追加してください。</p>
+<p>&quot;rundeck&quot; グループに属さないユーザが Rundeck シェルツールを使用すると、このようなエラーメッセージが出ます：</p>
+<pre><code>$ rd-jobs
+log4j:ERROR setFile(null,true) call failed. java.io.FileNotFoundException: /var/log/rundeck/command.log (Permission denied)</code></pre>
+<p><a href="http://linux.die.net/man/8/usermod">usermod</a> コマンドを参考にして、ユーザーアカウントを編集してください。</p>
+<h2 id="まとめ"><a href="#まとめ">まとめ</a></h2>
+<p>あなたはもう Rundeck の必要最低限な事柄については理解しているはずです。きちんと動作するバージョンの Rundeck があり、ログインが出来るようになっているでしょう。次は Rundeck の基本を学んでいきます。</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck ドキュメント (2.6.6)</a></li>
+    
+    
+    <li ><a href="index.html">ユーザーマニュアル</a></li>
+    <li class="active"><a href="02-getting-started.html">始めに</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="01-introduction.html"><i class="glyphicon glyphicon-arrow-left"></i> イントロダクション</a></li>
+      <li class="next"><a href="03-basics.html">Rundeck の基本 <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;${DATE_YEAR} <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2016-04-15T23:37:44UTC">2016-04-15T23:37:44UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>

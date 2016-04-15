@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">${VERSION}</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#what-is-this-guide-about">What Is This Guide About</a></li>
+<li><a href="#what-is-rundeck">What Is Rundeck</a></li>
+<li><a href="#who-makes-the-rundeck-software">Who Makes The Rundeck Software</a></li>
+<li><a href="#getting-help">Getting Help</a></li>
+<li><a href="#rundeck-from-30000-feet">Rundeck From 30000 Feet</a></li>
+<li><a href="#rundeck-features">Rundeck Features</a></li>
+<li><a href="#rundeck-in-context">Rundeck In Context</a></li>
+<li><a href="#rundeck-architecture">Rundeck Architecture</a></li>
+<li><a href="#feedback">Feedback</a></li>
+<li><a href="#whats-next">Whats Next</a></li>
+<li><a href="#getting-started">Getting Started</a></li>
+<li><a href="#rundeck-basics">Rundeck Basics</a></li>
+<li><a href="#command-dispatching">Command Dispatching</a></li>
+<li><a href="#resource-model">Resource Model</a></li>
+<li><a href="#authorization">Authorization</a></li>
+<li><a href="#project">Project</a></li>
+<li><a href="#installing-rundeck">Installing Rundeck</a></li>
+<li><a href="#system-requirements">System Requirements</a></li>
+<li><a href="#java">Java</a></li>
+<li><a href="#network-access">Network Access</a></li>
+<li><a href="#installing-from-source">Installing From Source</a></li>
+<li><a href="#installing-with-rpm">Installing With Rpm</a></li>
+<li><a href="#installing-with-launcher">Installing With Launcher</a></li>
+<li><a href="#launcher-options">Launcher Options</a></li>
+<li><a href="#system-properties">System Properties</a></li>
+<li><a href="#upgrading-rundeck">Upgrading Rundeck</a></li>
+<li><a href="#first-time-setup">First Time Setup</a></li>
+<li><a href="#logins">Logins</a></li>
+<li><a href="#group-membership">Group Membership</a></li>
+<li><a href="#summary">Summary</a></li>
+<li><a href="#rundeck-basics-1">Rundeck Basics</a></li>
+<li><a href="#rundeck-interfaces">Rundeck Interfaces</a></li>
+<li><a href="#graphical-console">Graphical Console</a></li>
+<li><a href="#navigation">Navigation</a></li>
+<li><a href="#now-running">Now Running</a></li>
+<li><a href="#shell-tools">Shell Tools</a></li>
+<li><a href="#project-setup">Project Setup</a></li>
+<li><a href="#resource-model-1">Resource Model</a></li>
+<li><a href="#resource-model-document-formats">Resource Model Document Formats</a></li>
+<li><a href="#pluggable-resource-model-sources">Pluggable Resource Model Sources</a></li>
+<li><a href="#command-execution">Command Execution</a></li>
+<li><a href="#dispatcher-options">Dispatcher Options</a></li>
+<li><a href="#filtering-nodes-graphically">Filtering Nodes Graphically</a></li>
+<li><a href="#filtering-nodes-in-the-shell">Filtering Nodes In The Shell</a></li>
+<li><a href="#ad-hoc-commands">Ad Hoc Commands</a></li>
+<li><a href="#shell-tool-command-execution">Shell Tool Command Execution</a></li>
+<li><a href="#graphical-command-shell-execution">Graphical Command Shell Execution</a></li>
+<li><a href="#following-execution-output">Following Execution Output</a></li>
+<li><a href="#separate-execution-follow-page">Separate Execution Follow Page</a></li>
+<li><a href="#controlling-command-execution">Controlling Command Execution</a></li>
+<li><a href="#queuing-commands-to-rundeck">Queuing Commands To Rundeck</a></li>
+<li><a href="#tracking-execution">Tracking Execution</a></li>
+<li><a href="#plugins">Plugins</a></li>
+<li><a href="#ssh-plugin">Ssh Plugin</a></li>
+<li><a href="#included-plugins">Included Plugins</a></li>
+<li><a href="#history">History</a></li>
+<li><a href="#filtering-event-history">Filtering Event History</a></li>
+<li><a href="#event-view">Event View</a></li>
+<li><a href="#rss-link">Rss Link</a></li>
+<li><a href="#tips-and-tricks">Tips And Tricks</a></li>
+<li><a href="#saving-filters">Saving Filters</a></li>
+<li><a href="#auto-completion">Auto Completion</a></li>
+<li><a href="#summary-1">Summary</a></li>
+<li><a href="#jobs">Jobs</a></li>
+<li><a href="#job-groups">Job Groups</a></li>
+<li><a href="#job-uuids">Job Uuids</a></li>
+<li><a href="#listing-and-filtering-jobs">Listing And Filtering Jobs</a></li>
+<li><a href="#filtering-jobs">Filtering Jobs</a></li>
+<li><a href="#viewing-job-detail">Viewing Job Detail</a></li>
+<li><a href="#running-a-job">Running A Job</a></li>
+<li><a href="#choose-execution-options">Choose Execution Options</a></li>
+<li><a href="#following-running-jobs">Following Running Jobs</a></li>
+<li><a href="#creating-jobs">Creating Jobs</a></li>
+<li><a href="#temporary-jobs">Temporary Jobs</a></li>
+<li><a href="#saved-jobs">Saved Jobs</a></li>
+<li><a href="#simple-saved-job">Simple Saved Job</a></li>
+<li><a href="#node-dispatching-and-filtering">Node Dispatching And Filtering</a></li>
+<li><a href="#dynamic-node-filters">Dynamic Node Filters</a></li>
+<li><a href="#scheduled-jobs">Scheduled Jobs</a></li>
+<li><a href="#job-notifications">Job Notifications</a></li>
+<li><a href="#job-history">Job History</a></li>
+<li><a href="#killing-jobs">Killing Jobs</a></li>
+<li><a href="#deleting-jobs">Deleting Jobs</a></li>
+<li><a href="#updating-and-copying-jobs">Updating And Copying Jobs</a></li>
+<li><a href="#exporting-job-definitions">Exporting Job Definitions</a></li>
+<li><a href="#importing-job-definitions">Importing Job Definitions</a></li>
+<li><a href="#summary-2">Summary</a></li>
+<li><a href="#job-workflows">Job Workflows</a></li>
+<li><a href="#workflow-definition">Workflow Definition</a></li>
+<li><a href="#workflow-control-settings">Workflow Control Settings</a></li>
+<li><a href="#workflow-steps">Workflow Steps</a></li>
+<li><a href="#command-step">Command Step</a></li>
+<li><a href="#script-step">Script Step</a></li>
+<li><a href="#script-file-step">Script File Step</a></li>
+<li><a href="#job-reference-step">Job Reference Step</a></li>
+<li><a href="#reordering-steps">Reordering Steps</a></li>
+<li><a href="#save-the-changes">Save The Changes</a></li>
+<li><a href="#summary-3">Summary</a></li>
+<li><a href="#job-options">Job Options</a></li>
+<li><a href="#prompting-the-user">Prompting The User</a></li>
+<li><a href="#secure-options">Secure Options</a></li>
+<li><a href="#options-editor">Options Editor</a></li>
+<li><a href="#defining-an-option">Defining An Option</a></li>
+<li><a href="#remote-option-values">Remote Option Values</a></li>
+<li><a href="#script-usage">Script Usage</a></li>
+<li><a href="#calling-a-job-with-options">Calling A Job With Options</a></li>
+<li><a href="#summary-4">Summary</a></li>
+<li><a href="#rundeck-by-example">Rundeck By Example</a></li>
+<li><a href="#acme-anvils">Acme Anvils</a></li>
+<li><a href="#rundeck-set-up">Rundeck Set Up</a></li>
+<li><a href="#tag-classification-and-command-dispatching">Tag Classification And Command Dispatching</a></li>
+<li><a href="#jobs-1">Jobs</a></li>
+<li><a href="#job-structure">Job Structure</a></li>
+<li><a href="#job-grouping">Job Grouping</a></li>
+<li><a href="#job-option">Job Option</a></li>
+<li><a href="#allowed-values">Allowed Values</a></li>
+<li><a href="#script-access-to-option-data">Script Access To Option Data</a></li>
+<li><a href="#job-workflow-composition">Job Workflow Composition</a></li>
+<li><a href="#running-the-job">Running The Job</a></li>
+<li><a href="#job-access-control">Job Access Control</a></li>
+<li><a href="#resource-model-source-examples">Resource Model Source Examples</a></li>
+<li><a href="#resource-editor-examples">Resource Editor Examples</a></li>
+<li><a href="#option-model-provider-examples">Option Model Provider Examples</a></li>
+<li><a href="#administration">Administration</a></li>
+<li><a href="#startup-and-shutdown">Startup And Shutdown</a></li>
+<li><a href="#rpm">Rpm</a></li>
+<li><a href="#setting-java_home">Setting Java_home</a></li>
+<li><a href="#launcher">Launcher</a></li>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#configuration-layout">Configuration Layout</a></li>
+<li><a href="#rpm-layout">Rpm Layout</a></li>
+<li><a href="#launcher-layout">Launcher Layout</a></li>
+<li><a href="#configuration-files">Configuration Files</a></li>
+<li><a href="#admin.aclpolicy">Admin.Aclpolicy</a></li>
+<li><a href="#framework.properties">Framework.Properties</a></li>
+<li><a href="#log4j.properties">Log4j.Properties</a></li>
+<li><a href="#profile">Profile</a></li>
+<li><a href="#project.properties">Project.Properties</a></li>
+<li><a href="#jaas-loginmodule.conf">Jaas Loginmodule.Conf</a></li>
+<li><a href="#realm.properties">Realm.Properties</a></li>
+<li><a href="#rundeck-config.properties">Rundeck Config.Properties</a></li>
+<li><a href="#notification-email-settings">Notification Email Settings</a></li>
+<li><a href="#gui-admin-page">Gui Admin Page</a></li>
+<li><a href="#system-information-page">System Information Page</a></li>
+<li><a href="#user-profiles-page">User Profiles Page</a></li>
+<li><a href="#project-configuration">Project Configuration</a></li>
+<li><a href="#resource-model-sources-configuration">Resource Model Sources Configuration</a></li>
+<li><a href="#file-resource-model-source">File Resource Model Source</a></li>
+<li><a href="#directory-resource-model-source">Directory Resource Model Source</a></li>
+<li><a href="#script-resource-model-source">Script Resource Model Source</a></li>
+<li><a href="#url-resource-model-source">Url Resource Model Source</a></li>
+<li><a href="#default-node-executor-configuration">Default Node Executor Configuration</a></li>
+<li><a href="#default-file-copier-configuration">Default File Copier Configuration</a></li>
+<li><a href="#logs">Logs</a></li>
+<li><a href="#backup-and-recovery">Backup And Recovery</a></li>
+<li><a href="#recovery">Recovery</a></li>
+<li><a href="#relational-database">Relational Database</a></li>
+<li><a href="#enable-rdbsupport">Enable Rdbsupport</a></li>
+<li><a href="#customize-the-datasource">Customize The Datasource</a></li>
+<li><a href="#add-the-jdbc-driver">Add The Jdbc Driver</a></li>
+<li><a href="#ssh">Ssh</a></li>
+<li><a href="#ssh-configuration-requirements">Ssh Configuration Requirements</a></li>
+<li><a href="#ssh-key-generation">Ssh Key Generation</a></li>
+<li><a href="#configuring-remote-machine-for-ssh">Configuring Remote Machine For Ssh</a></li>
+<li><a href="#passing-environment-variables-through-remote-command">Passing Environment Variables Through Remote Command</a></li>
+<li><a href="#managing-logins">Managing Logins</a></li>
+<li><a href="#realm.properties-1">Realm.Properties</a></li>
+<li><a href="#active-directory">Active Directory</a></li>
+<li><a href="#communicating-over-secure-ldap-ldaps">Communicating Over Secure Ldap Ldaps:</a></li>
+<li><a href="#redundant-connection-options">Redundant Connection Options</a></li>
+<li><a href="#authorization-1">Authorization</a></li>
+<li><a href="#access-control-policy">Access Control Policy</a></li>
+<li><a href="#specific-resources-and-resource-types">Specific Resources And Resource Types</a></li>
+<li><a href="#special-api-token-authentication-group">Special Api Token Authentication Group</a></li>
+<li><a href="#rundeck-resource-authorizations">Rundeck Resource Authorizations</a></li>
+<li><a href="#application-scope-resources-and-actions">Application Scope Resources And Actions</a></li>
+<li><a href="#project-scope-resources-and-actions">Project Scope Resources And Actions</a></li>
+<li><a href="#node-resource-properties">Node Resource Properties</a></li>
+<li><a href="#access-control-policy-actions-example">Access Control Policy Actions Example</a></li>
+<li><a href="#troubleshooting-access-control-policy">Troubleshooting Access Control Policy</a></li>
+<li><a href="#authorization-caveats">Authorization Caveats</a></li>
+<li><a href="#configuring-rundeck-for-ssl">Configuring Rundeck For Ssl</a></li>
+<li><a href="#securing-passwords">Securing Passwords</a></li>
+<li><a href="#troubleshooting-keystore">Troubleshooting Keystore</a></li>
+<li><a href="#optional-pem-export">Optional Pem Export</a></li>
+<li><a href="#customizing-rundeck-gui">Customizing Rundeck Gui</a></li>
+<li><a href="#customizing-configuration-for-scale">Customizing Configuration For Scale</a></li>
+<li><a href="#file-descriptors">File Descriptors</a></li>
+<li><a href="#java-heap-size">Java Heap Size</a></li>
+<li><a href="#quartz-job-threadcount">Quartz Job Threadcount</a></li>
+<li><a href="#jmx-instrumentation">Jmx Instrumentation</a></li>
+<li><a href="#resource-model-source">Resource Model Source</a></li>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#configuration-1">Configuration</a></li>
+<li><a href="#implementations-and-examples">Implementations And Examples</a></li>
+<li><a href="#simple-vcs-url-resource-model-source">Simple Vcs Url Resource Model Source</a></li>
+<li><a href="#amazon-ec2-nodes">Amazon Ec2 Nodes</a></li>
+<li><a href="#third-party-url-resource-model-sources">Third Party Url Resource Model Sources</a></li>
+<li><a href="#option-model-provider">Option Model Provider</a></li>
+<li><a href="#requirements-1">Requirements</a></li>
+<li><a href="#configuration-2">Configuration</a></li>
+<li><a href="#json-format">Json Format</a></li>
+<li><a href="#variable-expansion-in-remote-urls">Variable Expansion In Remote Urls</a></li>
+<li><a href="#remote-request-failures">Remote Request Failures</a></li>
+<li><a href="#implementations-and-examples-1">Implementations And Examples</a></li>
+<li><a href="#hudson-artifacts-option-provider">Hudson Artifacts Option Provider</a></li>
+<li><a href="#yum-repoquery-option-model-provider">Yum Repoquery Option Model Provider</a></li>
+<li><a href="#resource-editor">Resource Editor</a></li>
+<li><a href="#definition">Definition</a></li>
+<li><a href="#using-properties">Using Properties</a></li>
+<li><a href="#using-remoteurl">Using Remoteurl</a></li>
+<li><a href="#streamlining-the-interface">Streamlining The Interface</a></li>
+<li><a href="#examples">Examples</a></li>
+<li><a href="#simple-site-integration">Simple Site Integration</a></li>
+<li><a href="#webhooks">Webhooks</a></li>
+<li><a href="#execution-notification-content">Execution Notification Content</a></li>
+<li><a href="#execution-notification-headers">Execution Notification Headers</a></li>
+<li><a href="#execution-notification-url-token-expansion">Execution Notification Url Token Expansion</a></li>
+<li><a href="#rundeck-api">Rundeck Api</a></li>
+<li><a href="#rundeck-plugins">Rundeck Plugins</a></li>
+<li><a href="#installing-plugins">Installing Plugins</a></li>
+<li><a href="#uninstalling-or-updating-plugins">Uninstalling Or Updating Plugins</a></li>
+<li><a href="#about-plugins">About Plugins</a></li>
+<li><a href="#types-of-plugins">Types Of Plugins</a></li>
+<li><a href="#node-execution-plugins">Node Execution Plugins</a></li>
+<li><a href="#resource-model-source-plugins">Resource Model Source Plugins</a></li>
+<li><a href="#resource-format-plugins">Resource Format Plugins</a></li>
+<li><a href="#about-services-and-providers">About Services And Providers</a></li>
+<li><a href="#using-providers">Using Providers</a></li>
+<li><a href="#node-execution-services">Node Execution Services</a></li>
+<li><a href="#node-specific">Node Specific</a></li>
+<li><a href="#project-or-framework-scope">Project Or Framework Scope</a></li>
+<li><a href="#resource-model-sources">Resource Model Sources</a></li>
+<li><a href="#resource-model-source-configuration">Resource Model Source Configuration</a></li>
+<li><a href="#resource-format-generators-and-parsers">Resource Format Generators And Parsers</a></li>
+<li><a href="#when-node-execution-service-providers-are-invoked">When Node Execution Service Providers Are Invoked</a></li>
+<li><a href="#built-in-providers">Built In Providers</a></li>
+<li><a href="#node-execution-services-1">Node Execution Services</a></li>
+<li><a href="#ssh-provider">Ssh Provider</a></li>
+<li><a href="#configuring-scp-file-copier">Configuring Scp File Copier</a></li>
+<li><a href="#configuring-ssh-authentication-type">Configuring Ssh Authentication Type</a></li>
+<li><a href="#configuring-ssh-username">Configuring Ssh Username</a></li>
+<li><a href="#configuring-ssh-private-keys">Configuring Ssh Private Keys</a></li>
+<li><a href="#configuring-ssh-password-authentication">Configuring Ssh Password Authentication</a></li>
+<li><a href="#configuring-secondary-sudo-password-authentication">Configuring Secondary Sudo Password Authentication</a></li>
+<li><a href="#resource-model-sources-1">Resource Model Sources</a></li>
+<li><a href="#file-resource-model-source-configuration">File Resource Model Source Configuration</a></li>
+<li><a href="#url-resource-model-source-configuration">Url Resource Model Source Configuration</a></li>
+<li><a href="#directory-resource-model-source-configuration">Directory Resource Model Source Configuration</a></li>
+<li><a href="#script-resource-model-source-configuration">Script Resource Model Source Configuration</a></li>
+<li><a href="#resource-format-services">Resource Format Services</a></li>
+<li><a href="#pre-installed-plugins">Pre Installed Plugins</a></li>
+<li><a href="#script-plugin">Script Plugin</a></li>
+<li><a href="#configuring-script-exec">Configuring Script Exec</a></li>
+<li><a href="#configuring-the-command-for-script-exec">Configuring The Command For Script Exec</a></li>
+<li><a href="#configuring-the-working-directory">Configuring The Working Directory</a></li>
+<li><a href="#configuring-the-shell">Configuring The Shell</a></li>
+<li><a href="#defining-the-script-exec-command">Defining The Script Exec Command</a></li>
+<li><a href="#requirements-for-the-script-exec-command">Requirements For The Script Exec Command</a></li>
+<li><a href="#configuring-script-copy">Configuring Script Copy</a></li>
+<li><a href="#configuring-the-command-for-script-copy">Configuring The Command For Script Copy</a></li>
+<li><a href="#configuring-the-working-directory-1">Configuring The Working Directory</a></li>
+<li><a href="#configuring-the-shell-1">Configuring The Shell</a></li>
+<li><a href="#configuring-the-remote-filepath">Configuring The Remote Filepath</a></li>
+<li><a href="#defining-the-script-copy-command">Defining The Script Copy Command</a></li>
+<li><a href="#defining-the-script-copy-filepath">Defining The Script Copy Filepath</a></li>
+<li><a href="#requirements-of-script-copy-command">Requirements Of Script Copy Command</a></li>
+<li><a href="#example-scripts">Example Scripts</a></li>
+<li><a href="#stub-plugin">Stub Plugin</a></li>
+<li><a href="#plugin-development">Plugin Development</a></li>
+<li><a href="#java-plugin-development">Java Plugin Development</a></li>
+<li><a href="#provider-classes">Provider Classes</a></li>
+<li><a href="#jar-dependencies">Jar Dependencies</a></li>
+<li><a href="#available-services">Available Services:</a></li>
+<li><a href="#provider-lifecycle">Provider Lifecycle</a></li>
+<li><a href="#node-executor-providers">Node Executor Providers</a></li>
+<li><a href="#file-copier-providers">File Copier Providers</a></li>
+<li><a href="#resource-model-source-providers">Resource Model Source Providers</a></li>
+<li><a href="#resource-format-parser-and-generator-providers">Resource Format Parser And Generator Providers</a></li>
+<li><a href="#script-plugin-development">Script Plugin Development</a></li>
+<li><a href="#provider-metadata">Provider Metadata</a></li>
+<li><a href="#configurable-resource-model-source-script-plugin">Configurable Resource Model Source Script Plugin</a></li>
+<li><a href="#how-script-plugin-providers-are-invoked">How Script Plugin Providers Are Invoked</a></li>
+<li><a href="#script-provider-requirements">Script Provider Requirements</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<p><strong>Links Moved</strong></p>
+<p>This document provides the new location of moved links.</p>
+<h2 id="introduction"><a href="#introduction">Introduction</a></h2>
+<ul>
+<li>Location moved: <a href="manual/introduction.html#">manual/introduction.html#</a></li>
+</ul>
+<h2 id="what-is-this-guide-about"><a href="#what-is-this-guide-about">What Is This Guide About</a></h2>
+<ul>
+<li><strong>Not found</strong></li>
+</ul>
+<h2 id="what-is-rundeck"><a href="#what-is-rundeck">What Is Rundeck</a></h2>
+<ul>
+<li>Location moved: <a href="manual/introduction.html#what-is-rundeck">manual/introduction.html#what-is-rundeck</a></li>
+</ul>
+<h2 id="who-makes-the-rundeck-software"><a href="#who-makes-the-rundeck-software">Who Makes The Rundeck Software</a></h2>
+<ul>
+<li>Location moved: <a href="manual/introduction.html#who-makes-the-rundeck-software">manual/introduction.html#who-makes-the-rundeck-software</a></li>
+</ul>
+<h2 id="getting-help"><a href="#getting-help">Getting Help</a></h2>
+<ul>
+<li>Location moved: <a href="manual/introduction.html#getting-help">manual/introduction.html#getting-help</a></li>
+</ul>
+<h2 id="rundeck-from-30000-feet"><a href="#rundeck-from-30000-feet">Rundeck From 30000 Feet</a></h2>
+<ul>
+<li>Location moved: <a href="manual/introduction.html#rundeck-from-30000-feet">manual/introduction.html#rundeck-from-30000-feet</a></li>
+</ul>
+<h2 id="rundeck-features"><a href="#rundeck-features">Rundeck Features</a></h2>
+<ul>
+<li>Location moved: <a href="manual/introduction.html#rundeck-features">manual/introduction.html#rundeck-features</a></li>
+</ul>
+<h2 id="rundeck-in-context"><a href="#rundeck-in-context">Rundeck In Context</a></h2>
+<ul>
+<li>Location moved: <a href="manual/introduction.html#rundeck-in-context">manual/introduction.html#rundeck-in-context</a></li>
+</ul>
+<h2 id="rundeck-architecture"><a href="#rundeck-architecture">Rundeck Architecture</a></h2>
+<ul>
+<li>Location moved: <a href="manual/introduction.html#rundeck-architecture">manual/introduction.html#rundeck-architecture</a></li>
+</ul>
+<h2 id="feedback"><a href="#feedback">Feedback</a></h2>
+<ul>
+<li>Location moved: <a href="manual/introduction.html#feedback">manual/introduction.html#feedback</a></li>
+</ul>
+<h2 id="whats-next"><a href="#whats-next">Whats Next</a></h2>
+<ul>
+<li>Location moved: <a href="manual/introduction.html#whats-next">manual/introduction.html#whats-next</a></li>
+</ul>
+<h2 id="getting-started"><a href="#getting-started">Getting Started</a></h2>
+<ul>
+<li>Location moved: <a href="manual/getting-started.html#">manual/getting-started.html#</a></li>
+</ul>
+<h2 id="rundeck-basics"><a href="#rundeck-basics">Rundeck Basics</a></h2>
+<ul>
+<li>Location moved: <a href="manual/getting-started.html#rundeck-basics">manual/getting-started.html#rundeck-basics</a></li>
+</ul>
+<h2 id="command-dispatching"><a href="#command-dispatching">Command Dispatching</a></h2>
+<ul>
+<li>Location moved: <a href="manual/getting-started.html#command-dispatching">manual/getting-started.html#command-dispatching</a></li>
+</ul>
+<h2 id="resource-model"><a href="#resource-model">Resource Model</a></h2>
+<ul>
+<li>Location moved: <a href="manual/getting-started.html#resource-model">manual/getting-started.html#resource-model</a></li>
+</ul>
+<h2 id="authorization"><a href="#authorization">Authorization</a></h2>
+<ul>
+<li>Location moved: <a href="administration/authorization.html#">administration/authorization.html#</a></li>
+</ul>
+<h2 id="project"><a href="#project">Project</a></h2>
+<ul>
+<li>Location moved: <a href="manpages/man5/job-v20.html#project">manpages/man5/job-v20.html#project</a></li>
+</ul>
+<h2 id="installing-rundeck"><a href="#installing-rundeck">Installing Rundeck</a></h2>
+<ul>
+<li>Location moved: <a href="manual/getting-started.html#installing-rundeck">manual/getting-started.html#installing-rundeck</a></li>
+</ul>
+<h2 id="system-requirements"><a href="#system-requirements">System Requirements</a></h2>
+<ul>
+<li>Location moved: <a href="administration/installation.html#system-requirements">administration/installation.html#system-requirements</a></li>
+</ul>
+<h2 id="java"><a href="#java">Java</a></h2>
+<ul>
+<li>Location moved: <a href="administration/installation.html#java">administration/installation.html#java</a></li>
+</ul>
+<h2 id="network-access"><a href="#network-access">Network Access</a></h2>
+<ul>
+<li>Location moved: <a href="administration/installation.html#network-access">administration/installation.html#network-access</a></li>
+</ul>
+<h2 id="installing-from-source"><a href="#installing-from-source">Installing From Source</a></h2>
+<ul>
+<li>Location moved: <a href="administration/installation.html#installing-from-source">administration/installation.html#installing-from-source</a></li>
+</ul>
+<h2 id="installing-with-rpm"><a href="#installing-with-rpm">Installing With Rpm</a></h2>
+<ul>
+<li>Location moved: <a href="administration/installation.html#installing-with-rpm">administration/installation.html#installing-with-rpm</a></li>
+</ul>
+<h2 id="installing-with-launcher"><a href="#installing-with-launcher">Installing With Launcher</a></h2>
+<ul>
+<li>Location moved: <a href="administration/installation.html#installing-with-launcher">administration/installation.html#installing-with-launcher</a></li>
+</ul>
+<h2 id="launcher-options"><a href="#launcher-options">Launcher Options</a></h2>
+<ul>
+<li>Location moved: <a href="administration/installation.html#launcher-options">administration/installation.html#launcher-options</a></li>
+</ul>
+<h2 id="system-properties"><a href="#system-properties">System Properties</a></h2>
+<ul>
+<li>Location moved: <a href="administration/installation.html#system-properties">administration/installation.html#system-properties</a></li>
+</ul>
+<h2 id="upgrading-rundeck"><a href="#upgrading-rundeck">Upgrading Rundeck</a></h2>
+<ul>
+<li>Location moved: <a href="manual/getting-started.html#upgrading-rundeck">manual/getting-started.html#upgrading-rundeck</a></li>
+</ul>
+<h2 id="first-time-setup"><a href="#first-time-setup">First Time Setup</a></h2>
+<ul>
+<li>Location moved: <a href="manual/getting-started.html#first-time-setup">manual/getting-started.html#first-time-setup</a></li>
+</ul>
+<h2 id="logins"><a href="#logins">Logins</a></h2>
+<ul>
+<li>Location moved: <a href="manual/getting-started.html#logins">manual/getting-started.html#logins</a></li>
+</ul>
+<h2 id="group-membership"><a href="#group-membership">Group Membership</a></h2>
+<ul>
+<li>Location moved: <a href="manual/getting-started.html#group-membership">manual/getting-started.html#group-membership</a></li>
+</ul>
+<h2 id="summary"><a href="#summary">Summary</a></h2>
+<ul>
+<li>Location moved: <a href="manual/getting-started.html#summary">manual/getting-started.html#summary</a></li>
+</ul>
+<h2 id="rundeck-basics-1"><a href="#rundeck-basics-1">Rundeck Basics</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#">manual/rundeck-basics.html#</a></li>
+</ul>
+<h2 id="rundeck-interfaces"><a href="#rundeck-interfaces">Rundeck Interfaces</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#rundeck-interfaces">manual/rundeck-basics.html#rundeck-interfaces</a></li>
+</ul>
+<h2 id="graphical-console"><a href="#graphical-console">Graphical Console</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#graphical-console">manual/rundeck-basics.html#graphical-console</a></li>
+</ul>
+<h2 id="navigation"><a href="#navigation">Navigation</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#navigation">manual/rundeck-basics.html#navigation</a></li>
+</ul>
+<h2 id="now-running"><a href="#now-running">Now Running</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#now-running">manual/rundeck-basics.html#now-running</a></li>
+</ul>
+<h2 id="shell-tools"><a href="#shell-tools">Shell Tools</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#shell-tools">manual/rundeck-basics.html#shell-tools</a></li>
+</ul>
+<h2 id="project-setup"><a href="#project-setup">Project Setup</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#project-setup">manual/rundeck-basics.html#project-setup</a></li>
+</ul>
+<h2 id="resource-model-1"><a href="#resource-model-1">Resource Model</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#resource-model">manual/rundeck-basics.html#resource-model</a></li>
+</ul>
+<h2 id="resource-model-document-formats"><a href="#resource-model-document-formats">Resource Model Document Formats</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#resource-model-document-formats">manual/rundeck-basics.html#resource-model-document-formats</a></li>
+</ul>
+<h2 id="pluggable-resource-model-sources"><a href="#pluggable-resource-model-sources">Pluggable Resource Model Sources</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#pluggable-resource-model-sources">manual/rundeck-basics.html#pluggable-resource-model-sources</a></li>
+</ul>
+<h2 id="command-execution"><a href="#command-execution">Command Execution</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#command-execution">manual/rundeck-basics.html#command-execution</a></li>
+</ul>
+<h2 id="dispatcher-options"><a href="#dispatcher-options">Dispatcher Options</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#dispatcher-options">manual/rundeck-basics.html#dispatcher-options</a></li>
+</ul>
+<h2 id="filtering-nodes-graphically"><a href="#filtering-nodes-graphically">Filtering Nodes Graphically</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#filtering-nodes-graphically">manual/rundeck-basics.html#filtering-nodes-graphically</a></li>
+</ul>
+<h2 id="filtering-nodes-in-the-shell"><a href="#filtering-nodes-in-the-shell">Filtering Nodes In The Shell</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#filtering-nodes-in-the-shell">manual/rundeck-basics.html#filtering-nodes-in-the-shell</a></li>
+</ul>
+<h2 id="ad-hoc-commands"><a href="#ad-hoc-commands">Ad Hoc Commands</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#ad-hoc-commands">manual/rundeck-basics.html#ad-hoc-commands</a></li>
+</ul>
+<h2 id="shell-tool-command-execution"><a href="#shell-tool-command-execution">Shell Tool Command Execution</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#shell-tool-command-execution">manual/rundeck-basics.html#shell-tool-command-execution</a></li>
+</ul>
+<h2 id="graphical-command-shell-execution"><a href="#graphical-command-shell-execution">Graphical Command Shell Execution</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#graphical-command-shell-execution">manual/rundeck-basics.html#graphical-command-shell-execution</a></li>
+</ul>
+<h2 id="following-execution-output"><a href="#following-execution-output">Following Execution Output</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#following-execution-output">manual/rundeck-basics.html#following-execution-output</a></li>
+</ul>
+<h2 id="separate-execution-follow-page"><a href="#separate-execution-follow-page">Separate Execution Follow Page</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#separate-execution-follow-page">manual/rundeck-basics.html#separate-execution-follow-page</a></li>
+</ul>
+<h2 id="controlling-command-execution"><a href="#controlling-command-execution">Controlling Command Execution</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#controlling-command-execution">manual/rundeck-basics.html#controlling-command-execution</a></li>
+</ul>
+<h2 id="queuing-commands-to-rundeck"><a href="#queuing-commands-to-rundeck">Queuing Commands To Rundeck</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#queuing-commands-to-rundeck">manual/rundeck-basics.html#queuing-commands-to-rundeck</a></li>
+</ul>
+<h2 id="tracking-execution"><a href="#tracking-execution">Tracking Execution</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#tracking-execution">manual/rundeck-basics.html#tracking-execution</a></li>
+</ul>
+<h2 id="plugins"><a href="#plugins">Plugins</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#">manual/plugins.html#</a></li>
+</ul>
+<h2 id="ssh-plugin"><a href="#ssh-plugin">Ssh Plugin</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#ssh-plugin">manual/rundeck-basics.html#ssh-plugin</a></li>
+</ul>
+<h2 id="included-plugins"><a href="#included-plugins">Included Plugins</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#included-plugins">manual/rundeck-basics.html#included-plugins</a></li>
+</ul>
+<h2 id="history"><a href="#history">History</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#history">manual/rundeck-basics.html#history</a></li>
+</ul>
+<h2 id="filtering-event-history"><a href="#filtering-event-history">Filtering Event History</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#filtering-event-history">manual/rundeck-basics.html#filtering-event-history</a></li>
+</ul>
+<h2 id="event-view"><a href="#event-view">Event View</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#event-view">manual/rundeck-basics.html#event-view</a></li>
+</ul>
+<h2 id="rss-link"><a href="#rss-link">Rss Link</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#rss-link">manual/rundeck-basics.html#rss-link</a></li>
+</ul>
+<h2 id="tips-and-tricks"><a href="#tips-and-tricks">Tips And Tricks</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#tips-and-tricks">manual/rundeck-basics.html#tips-and-tricks</a></li>
+</ul>
+<h2 id="saving-filters"><a href="#saving-filters">Saving Filters</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#saving-filters">manual/rundeck-basics.html#saving-filters</a></li>
+</ul>
+<h2 id="auto-completion"><a href="#auto-completion">Auto Completion</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#auto-completion">manual/rundeck-basics.html#auto-completion</a></li>
+</ul>
+<h2 id="summary-1"><a href="#summary-1">Summary</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-options.html#summary">manual/job-options.html#summary</a></li>
+</ul>
+<h2 id="jobs"><a href="#jobs">Jobs</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#">manual/jobs.html#</a></li>
+</ul>
+<h2 id="job-groups"><a href="#job-groups">Job Groups</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#job-groups">manual/jobs.html#job-groups</a></li>
+</ul>
+<h2 id="job-uuids"><a href="#job-uuids">Job Uuids</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#job-uuids">manual/jobs.html#job-uuids</a></li>
+</ul>
+<h2 id="listing-and-filtering-jobs"><a href="#listing-and-filtering-jobs">Listing And Filtering Jobs</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#listing-and-filtering-jobs">manual/jobs.html#listing-and-filtering-jobs</a></li>
+</ul>
+<h2 id="filtering-jobs"><a href="#filtering-jobs">Filtering Jobs</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#filtering-jobs">manual/jobs.html#filtering-jobs</a></li>
+</ul>
+<h2 id="viewing-job-detail"><a href="#viewing-job-detail">Viewing Job Detail</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#viewing-job-detail">manual/jobs.html#viewing-job-detail</a></li>
+</ul>
+<h2 id="running-a-job"><a href="#running-a-job">Running A Job</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#running-a-job">manual/jobs.html#running-a-job</a></li>
+</ul>
+<h2 id="choose-execution-options"><a href="#choose-execution-options">Choose Execution Options</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#choose-execution-options">manual/jobs.html#choose-execution-options</a></li>
+</ul>
+<h2 id="following-running-jobs"><a href="#following-running-jobs">Following Running Jobs</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#following-running-jobs">manual/jobs.html#following-running-jobs</a></li>
+</ul>
+<h2 id="creating-jobs"><a href="#creating-jobs">Creating Jobs</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#creating-jobs">manual/jobs.html#creating-jobs</a></li>
+</ul>
+<h2 id="temporary-jobs"><a href="#temporary-jobs">Temporary Jobs</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#temporary-jobs">manual/jobs.html#temporary-jobs</a></li>
+</ul>
+<h2 id="saved-jobs"><a href="#saved-jobs">Saved Jobs</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#saved-jobs">manual/jobs.html#saved-jobs</a></li>
+</ul>
+<h2 id="simple-saved-job"><a href="#simple-saved-job">Simple Saved Job</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#simple-saved-job">manual/jobs.html#simple-saved-job</a></li>
+</ul>
+<h2 id="node-dispatching-and-filtering"><a href="#node-dispatching-and-filtering">Node Dispatching And Filtering</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#node-dispatching-and-filtering">manual/jobs.html#node-dispatching-and-filtering</a></li>
+</ul>
+<h2 id="dynamic-node-filters"><a href="#dynamic-node-filters">Dynamic Node Filters</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#dynamic-node-filters">manual/jobs.html#dynamic-node-filters</a></li>
+</ul>
+<h2 id="scheduled-jobs"><a href="#scheduled-jobs">Scheduled Jobs</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#scheduled-jobs">manual/jobs.html#scheduled-jobs</a></li>
+</ul>
+<h2 id="job-notifications"><a href="#job-notifications">Job Notifications</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#job-notifications">manual/jobs.html#job-notifications</a></li>
+</ul>
+<h2 id="job-history"><a href="#job-history">Job History</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#job-history">manual/jobs.html#job-history</a></li>
+</ul>
+<h2 id="killing-jobs"><a href="#killing-jobs">Killing Jobs</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#killing-jobs">manual/jobs.html#killing-jobs</a></li>
+</ul>
+<h2 id="deleting-jobs"><a href="#deleting-jobs">Deleting Jobs</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#deleting-jobs">manual/jobs.html#deleting-jobs</a></li>
+</ul>
+<h2 id="updating-and-copying-jobs"><a href="#updating-and-copying-jobs">Updating And Copying Jobs</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#updating-and-copying-jobs">manual/jobs.html#updating-and-copying-jobs</a></li>
+</ul>
+<h2 id="exporting-job-definitions"><a href="#exporting-job-definitions">Exporting Job Definitions</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#exporting-job-definitions">manual/jobs.html#exporting-job-definitions</a></li>
+</ul>
+<h2 id="importing-job-definitions"><a href="#importing-job-definitions">Importing Job Definitions</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#importing-job-definitions">manual/jobs.html#importing-job-definitions</a></li>
+</ul>
+<h2 id="summary-2"><a href="#summary-2">Summary</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-workflows.html#summary">manual/job-workflows.html#summary</a></li>
+</ul>
+<h2 id="job-workflows"><a href="#job-workflows">Job Workflows</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-workflows.html#">manual/job-workflows.html#</a></li>
+</ul>
+<h2 id="workflow-definition"><a href="#workflow-definition">Workflow Definition</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-workflows.html#workflow-definition">manual/job-workflows.html#workflow-definition</a></li>
+</ul>
+<h2 id="workflow-control-settings"><a href="#workflow-control-settings">Workflow Control Settings</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-workflows.html#workflow-control-settings">manual/job-workflows.html#workflow-control-settings</a></li>
+</ul>
+<h2 id="workflow-steps"><a href="#workflow-steps">Workflow Steps</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-workflows.html#workflow-steps">manual/job-workflows.html#workflow-steps</a></li>
+</ul>
+<h2 id="command-step"><a href="#command-step">Command Step</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-workflows.html#command-step">manual/job-workflows.html#command-step</a></li>
+</ul>
+<h2 id="script-step"><a href="#script-step">Script Step</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-workflows.html#script-step">manual/job-workflows.html#script-step</a></li>
+</ul>
+<h2 id="script-file-step"><a href="#script-file-step">Script File Step</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-workflows.html#script-file-step">manual/job-workflows.html#script-file-step</a></li>
+</ul>
+<h2 id="job-reference-step"><a href="#job-reference-step">Job Reference Step</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-workflows.html#job-reference-step">manual/job-workflows.html#job-reference-step</a></li>
+</ul>
+<h2 id="reordering-steps"><a href="#reordering-steps">Reordering Steps</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-workflows.html#reordering-steps">manual/job-workflows.html#reordering-steps</a></li>
+</ul>
+<h2 id="save-the-changes"><a href="#save-the-changes">Save The Changes</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-workflows.html#save-the-changes">manual/job-workflows.html#save-the-changes</a></li>
+</ul>
+<h2 id="summary-3"><a href="#summary-3">Summary</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#summary">manual/jobs.html#summary</a></li>
+</ul>
+<h2 id="job-options"><a href="#job-options">Job Options</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-options.html#">manual/job-options.html#</a></li>
+</ul>
+<h2 id="prompting-the-user"><a href="#prompting-the-user">Prompting The User</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-options.html#prompting-the-user">manual/job-options.html#prompting-the-user</a></li>
+</ul>
+<h2 id="secure-options"><a href="#secure-options">Secure Options</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-options.html#secure-options">manual/job-options.html#secure-options</a></li>
+</ul>
+<h2 id="options-editor"><a href="#options-editor">Options Editor</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-options.html#options-editor">manual/job-options.html#options-editor</a></li>
+</ul>
+<h2 id="defining-an-option"><a href="#defining-an-option">Defining An Option</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-options.html#defining-an-option">manual/job-options.html#defining-an-option</a></li>
+</ul>
+<h2 id="remote-option-values"><a href="#remote-option-values">Remote Option Values</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-options.html#remote-option-values">manual/job-options.html#remote-option-values</a></li>
+</ul>
+<h2 id="script-usage"><a href="#script-usage">Script Usage</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-options.html#script-usage">manual/job-options.html#script-usage</a></li>
+</ul>
+<h2 id="calling-a-job-with-options"><a href="#calling-a-job-with-options">Calling A Job With Options</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-options.html#calling-a-job-with-options">manual/job-options.html#calling-a-job-with-options</a></li>
+</ul>
+<h2 id="summary-4"><a href="#summary-4">Summary</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-basics.html#summary">manual/rundeck-basics.html#summary</a></li>
+</ul>
+<h2 id="rundeck-by-example"><a href="#rundeck-by-example">Rundeck By Example</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-by-example.html#">manual/rundeck-by-example.html#</a></li>
+</ul>
+<h2 id="acme-anvils"><a href="#acme-anvils">Acme Anvils</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-by-example.html#acme-anvils">manual/rundeck-by-example.html#acme-anvils</a></li>
+</ul>
+<h2 id="rundeck-set-up"><a href="#rundeck-set-up">Rundeck Set Up</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-by-example.html#rundeck-set-up">manual/rundeck-by-example.html#rundeck-set-up</a></li>
+</ul>
+<h2 id="tag-classification-and-command-dispatching"><a href="#tag-classification-and-command-dispatching">Tag Classification And Command Dispatching</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-by-example.html#tag-classification-and-command-dispatching">manual/rundeck-by-example.html#tag-classification-and-command-dispatching</a></li>
+</ul>
+<h2 id="jobs-1"><a href="#jobs-1">Jobs</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-by-example.html#jobs">manual/rundeck-by-example.html#jobs</a></li>
+</ul>
+<h2 id="job-structure"><a href="#job-structure">Job Structure</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-by-example.html#job-structure">manual/rundeck-by-example.html#job-structure</a></li>
+</ul>
+<h2 id="job-grouping"><a href="#job-grouping">Job Grouping</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-by-example.html#job-grouping">manual/rundeck-by-example.html#job-grouping</a></li>
+</ul>
+<h2 id="job-option"><a href="#job-option">Job Option</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-by-example.html#job-option">manual/rundeck-by-example.html#job-option</a></li>
+</ul>
+<h2 id="allowed-values"><a href="#allowed-values">Allowed Values</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-by-example.html#allowed-values">manual/rundeck-by-example.html#allowed-values</a></li>
+</ul>
+<h2 id="script-access-to-option-data"><a href="#script-access-to-option-data">Script Access To Option Data</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-by-example.html#script-access-to-option-data">manual/rundeck-by-example.html#script-access-to-option-data</a></li>
+</ul>
+<h2 id="job-workflow-composition"><a href="#job-workflow-composition">Job Workflow Composition</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-by-example.html#job-workflow-composition">manual/rundeck-by-example.html#job-workflow-composition</a></li>
+</ul>
+<h2 id="running-the-job"><a href="#running-the-job">Running The Job</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-by-example.html#running-the-job">manual/rundeck-by-example.html#running-the-job</a></li>
+</ul>
+<h2 id="job-access-control"><a href="#job-access-control">Job Access Control</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-by-example.html#job-access-control">manual/rundeck-by-example.html#job-access-control</a></li>
+</ul>
+<h2 id="resource-model-source-examples"><a href="#resource-model-source-examples">Resource Model Source Examples</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-by-example.html#resource-model-source-examples">manual/rundeck-by-example.html#resource-model-source-examples</a></li>
+</ul>
+<h2 id="resource-editor-examples"><a href="#resource-editor-examples">Resource Editor Examples</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-by-example.html#resource-editor-examples">manual/rundeck-by-example.html#resource-editor-examples</a></li>
+</ul>
+<h2 id="option-model-provider-examples"><a href="#option-model-provider-examples">Option Model Provider Examples</a></h2>
+<ul>
+<li>Location moved: <a href="manual/rundeck-by-example.html#option-model-provider-examples">manual/rundeck-by-example.html#option-model-provider-examples</a></li>
+</ul>
+<h2 id="administration"><a href="#administration">Administration</a></h2>
+<ul>
+<li>Location moved: <a href="administration/index.html#administration">administration/index.html#administration</a></li>
+</ul>
+<h2 id="startup-and-shutdown"><a href="#startup-and-shutdown">Startup And Shutdown</a></h2>
+<ul>
+<li>Location moved: <a href="administration/startup-and-shutdown.html#">administration/startup-and-shutdown.html#</a></li>
+</ul>
+<h2 id="rpm"><a href="#rpm">Rpm</a></h2>
+<ul>
+<li>Location moved: <a href="administration/startup-and-shutdown.html#rpm">administration/startup-and-shutdown.html#rpm</a></li>
+</ul>
+<h2 id="setting-java_home"><a href="#setting-java_home">Setting Java_home</a></h2>
+<ul>
+<li>Location moved: <a href="administration/startup-and-shutdown.html#setting-java_home">administration/startup-and-shutdown.html#setting-java_home</a></li>
+</ul>
+<h2 id="launcher"><a href="#launcher">Launcher</a></h2>
+<ul>
+<li>Location moved: <a href="administration/startup-and-shutdown.html#launcher">administration/startup-and-shutdown.html#launcher</a></li>
+</ul>
+<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+<ul>
+<li>Location moved: <a href="administration/configuration.html#">administration/configuration.html#</a></li>
+</ul>
+<h2 id="configuration-layout"><a href="#configuration-layout">Configuration Layout</a></h2>
+<ul>
+<li>Location moved: <a href="administration/configuration.html#configuration-layout">administration/configuration.html#configuration-layout</a></li>
+</ul>
+<h2 id="rpm-layout"><a href="#rpm-layout">Rpm Layout</a></h2>
+<ul>
+<li>Location moved: <a href="administration/configuration.html#rpm-layout">administration/configuration.html#rpm-layout</a></li>
+</ul>
+<h2 id="launcher-layout"><a href="#launcher-layout">Launcher Layout</a></h2>
+<ul>
+<li>Location moved: <a href="administration/configuration.html#launcher-layout">administration/configuration.html#launcher-layout</a></li>
+</ul>
+<h2 id="configuration-files"><a href="#configuration-files">Configuration Files</a></h2>
+<ul>
+<li>Location moved: <a href="administration/configuration.html#configuration-files">administration/configuration.html#configuration-files</a></li>
+</ul>
+<h2 id="admin.aclpolicy"><a href="#admin.aclpolicy">Admin.Aclpolicy</a></h2>
+<ul>
+<li>Location moved: <a href="administration/configuration.html#admin.aclpolicy">administration/configuration.html#admin.aclpolicy</a></li>
+</ul>
+<h2 id="framework.properties"><a href="#framework.properties">Framework.Properties</a></h2>
+<ul>
+<li>Location moved: <a href="administration/configuration.html#framework.properties">administration/configuration.html#framework.properties</a></li>
+</ul>
+<h2 id="log4j.properties"><a href="#log4j.properties">Log4j.Properties</a></h2>
+<ul>
+<li>Location moved: <a href="administration/configuration.html#log4j.properties">administration/configuration.html#log4j.properties</a></li>
+</ul>
+<h2 id="profile"><a href="#profile">Profile</a></h2>
+<ul>
+<li>Location moved: <a href="administration/configuration.html#profile">administration/configuration.html#profile</a></li>
+</ul>
+<h2 id="project.properties"><a href="#project.properties">Project.Properties</a></h2>
+<ul>
+<li>Location moved: <a href="administration/configuration.html#project.properties">administration/configuration.html#project.properties</a></li>
+</ul>
+<h2 id="jaas-loginmodule.conf"><a href="#jaas-loginmodule.conf">Jaas Loginmodule.Conf</a></h2>
+<ul>
+<li>Location moved: <a href="administration/configuration.html#jaas-loginmodule.conf">administration/configuration.html#jaas-loginmodule.conf</a></li>
+</ul>
+<h2 id="realm.properties"><a href="#realm.properties">Realm.Properties</a></h2>
+<ul>
+<li>Location moved: <a href="administration/authentication.html#realm.properties">administration/authentication.html#realm.properties</a></li>
+</ul>
+<h2 id="rundeck-config.properties"><a href="#rundeck-config.properties">Rundeck Config.Properties</a></h2>
+<ul>
+<li>Location moved: <a href="administration/configuration.html#rundeck-config.properties">administration/configuration.html#rundeck-config.properties</a></li>
+</ul>
+<h2 id="notification-email-settings"><a href="#notification-email-settings">Notification Email Settings</a></h2>
+<ul>
+<li>Location moved: <a href="administration/configuration.html#notification-email-settings">administration/configuration.html#notification-email-settings</a></li>
+</ul>
+<h2 id="gui-admin-page"><a href="#gui-admin-page">Gui Admin Page</a></h2>
+<ul>
+<li>Location moved: <a href="administration/configuration.html#gui-admin-page">administration/configuration.html#gui-admin-page</a></li>
+</ul>
+<h2 id="system-information-page"><a href="#system-information-page">System Information Page</a></h2>
+<ul>
+<li>Location moved: <a href="administration/configuration.html#system-information-page">administration/configuration.html#system-information-page</a></li>
+</ul>
+<h2 id="user-profiles-page"><a href="#user-profiles-page">User Profiles Page</a></h2>
+<ul>
+<li>Location moved: <a href="administration/configuration.html#user-profiles-page">administration/configuration.html#user-profiles-page</a></li>
+</ul>
+<h2 id="project-configuration"><a href="#project-configuration">Project Configuration</a></h2>
+<ul>
+<li>Location moved: <a href="administration/configuration.html#project-configuration">administration/configuration.html#project-configuration</a></li>
+</ul>
+<h2 id="resource-model-sources-configuration"><a href="#resource-model-sources-configuration">Resource Model Sources Configuration</a></h2>
+<ul>
+<li>Location moved: <a href="administration/configuration.html#resource-model-sources-configuration">administration/configuration.html#resource-model-sources-configuration</a></li>
+</ul>
+<h2 id="file-resource-model-source"><a href="#file-resource-model-source">File Resource Model Source</a></h2>
+<ul>
+<li>Location moved: <a href="administration/configuration.html#file-resource-model-source">administration/configuration.html#file-resource-model-source</a></li>
+</ul>
+<h2 id="directory-resource-model-source"><a href="#directory-resource-model-source">Directory Resource Model Source</a></h2>
+<ul>
+<li>Location moved: <a href="administration/configuration.html#directory-resource-model-source">administration/configuration.html#directory-resource-model-source</a></li>
+</ul>
+<h2 id="script-resource-model-source"><a href="#script-resource-model-source">Script Resource Model Source</a></h2>
+<ul>
+<li>Location moved: <a href="administration/configuration.html#script-resource-model-source">administration/configuration.html#script-resource-model-source</a></li>
+</ul>
+<h2 id="url-resource-model-source"><a href="#url-resource-model-source">Url Resource Model Source</a></h2>
+<ul>
+<li>Location moved: <a href="administration/configuration.html#url-resource-model-source">administration/configuration.html#url-resource-model-source</a></li>
+</ul>
+<h2 id="default-node-executor-configuration"><a href="#default-node-executor-configuration">Default Node Executor Configuration</a></h2>
+<ul>
+<li>Location moved: <a href="administration/configuration.html#default-node-executor-configuration">administration/configuration.html#default-node-executor-configuration</a></li>
+</ul>
+<h2 id="default-file-copier-configuration"><a href="#default-file-copier-configuration">Default File Copier Configuration</a></h2>
+<ul>
+<li>Location moved: <a href="administration/configuration.html#default-file-copier-configuration">administration/configuration.html#default-file-copier-configuration</a></li>
+</ul>
+<h2 id="logs"><a href="#logs">Logs</a></h2>
+<ul>
+<li>Location moved: <a href="administration/logs.html#">administration/logs.html#</a></li>
+</ul>
+<h2 id="backup-and-recovery"><a href="#backup-and-recovery">Backup And Recovery</a></h2>
+<ul>
+<li>Location moved: <a href="administration/backup-and-recovery.html#">administration/backup-and-recovery.html#</a></li>
+</ul>
+<h2 id="recovery"><a href="#recovery">Recovery</a></h2>
+<ul>
+<li>Location moved: <a href="administration/backup-and-recovery.html#recovery">administration/backup-and-recovery.html#recovery</a></li>
+</ul>
+<h2 id="relational-database"><a href="#relational-database">Relational Database</a></h2>
+<ul>
+<li>Location moved: <a href="administration/relational-database.html#">administration/relational-database.html#</a></li>
+</ul>
+<h2 id="enable-rdbsupport"><a href="#enable-rdbsupport">Enable Rdbsupport</a></h2>
+<ul>
+<li>Location moved: <a href="administration/relational-database.html#enable-rdbsupport">administration/relational-database.html#enable-rdbsupport</a></li>
+</ul>
+<h2 id="customize-the-datasource"><a href="#customize-the-datasource">Customize The Datasource</a></h2>
+<ul>
+<li>Location moved: <a href="administration/relational-database.html#customize-the-datasource">administration/relational-database.html#customize-the-datasource</a></li>
+</ul>
+<h2 id="add-the-jdbc-driver"><a href="#add-the-jdbc-driver">Add The Jdbc Driver</a></h2>
+<ul>
+<li>Location moved: <a href="administration/relational-database.html#add-the-jdbc-driver">administration/relational-database.html#add-the-jdbc-driver</a></li>
+</ul>
+<h2 id="ssh"><a href="#ssh">Ssh</a></h2>
+<ul>
+<li>Location moved: <a href="administration/ssh.html#">administration/ssh.html#</a></li>
+</ul>
+<h2 id="ssh-configuration-requirements"><a href="#ssh-configuration-requirements">Ssh Configuration Requirements</a></h2>
+<ul>
+<li>Location moved: <a href="administration/ssh.html#ssh-configuration-requirements">administration/ssh.html#ssh-configuration-requirements</a></li>
+</ul>
+<h2 id="ssh-key-generation"><a href="#ssh-key-generation">Ssh Key Generation</a></h2>
+<ul>
+<li>Location moved: <a href="administration/ssh.html#ssh-key-generation">administration/ssh.html#ssh-key-generation</a></li>
+</ul>
+<h2 id="configuring-remote-machine-for-ssh"><a href="#configuring-remote-machine-for-ssh">Configuring Remote Machine For Ssh</a></h2>
+<ul>
+<li>Location moved: <a href="administration/ssh.html#configuring-remote-machine-for-ssh">administration/ssh.html#configuring-remote-machine-for-ssh</a></li>
+</ul>
+<h2 id="passing-environment-variables-through-remote-command"><a href="#passing-environment-variables-through-remote-command">Passing Environment Variables Through Remote Command</a></h2>
+<ul>
+<li>Location moved: <a href="administration/ssh.html#passing-environment-variables-through-remote-command">administration/ssh.html#passing-environment-variables-through-remote-command</a></li>
+</ul>
+<h2 id="managing-logins"><a href="#managing-logins">Managing Logins</a></h2>
+<ul>
+<li>Location moved: <a href="administration/authentication.html#managing-logins">administration/authentication.html#managing-logins</a></li>
+</ul>
+<h2 id="realm.properties-1"><a href="#realm.properties-1">Realm.Properties</a></h2>
+<ul>
+<li>Location moved: <a href="administration/configuration.html#realm.properties">administration/configuration.html#realm.properties</a></li>
+</ul>
+<h2 id="active-directory"><a href="#active-directory">Active Directory</a></h2>
+<ul>
+<li>Location moved: <a href="administration/authentication.html#active-directory">administration/authentication.html#active-directory</a></li>
+</ul>
+<h2 id="communicating-over-secure-ldap-ldaps"><a href="#communicating-over-secure-ldap-ldaps">Communicating Over Secure Ldap Ldaps:</a></h2>
+<ul>
+<li>Location moved: <a href="administration/authentication.html#communicating-over-secure-ldap-ldaps:">administration/authentication.html#communicating-over-secure-ldap-ldaps:</a></li>
+</ul>
+<h2 id="redundant-connection-options"><a href="#redundant-connection-options">Redundant Connection Options</a></h2>
+<ul>
+<li>Location moved: <a href="administration/authentication.html#redundant-connection-options">administration/authentication.html#redundant-connection-options</a></li>
+</ul>
+<h2 id="authorization-1"><a href="#authorization-1">Authorization</a></h2>
+<ul>
+<li>Location moved: <a href="manual/getting-started.html#authorization">manual/getting-started.html#authorization</a></li>
+</ul>
+<h2 id="access-control-policy"><a href="#access-control-policy">Access Control Policy</a></h2>
+<ul>
+<li>Location moved: <a href="administration/authorization.html#access-control-policy">administration/authorization.html#access-control-policy</a></li>
+</ul>
+<h2 id="specific-resources-and-resource-types"><a href="#specific-resources-and-resource-types">Specific Resources And Resource Types</a></h2>
+<ul>
+<li>Location moved: <a href="administration/authorization.html#specific-resources-and-resource-types">administration/authorization.html#specific-resources-and-resource-types</a></li>
+</ul>
+<h2 id="special-api-token-authentication-group"><a href="#special-api-token-authentication-group">Special Api Token Authentication Group</a></h2>
+<ul>
+<li>Location moved: <a href="administration/authorization.html#special-api-token-authentication-group">administration/authorization.html#special-api-token-authentication-group</a></li>
+</ul>
+<h2 id="rundeck-resource-authorizations"><a href="#rundeck-resource-authorizations">Rundeck Resource Authorizations</a></h2>
+<ul>
+<li>Location moved: <a href="administration/authorization.html#rundeck-resource-authorizations">administration/authorization.html#rundeck-resource-authorizations</a></li>
+</ul>
+<h2 id="application-scope-resources-and-actions"><a href="#application-scope-resources-and-actions">Application Scope Resources And Actions</a></h2>
+<ul>
+<li>Location moved: <a href="administration/authorization.html#application-scope-resources-and-actions">administration/authorization.html#application-scope-resources-and-actions</a></li>
+</ul>
+<h2 id="project-scope-resources-and-actions"><a href="#project-scope-resources-and-actions">Project Scope Resources And Actions</a></h2>
+<ul>
+<li>Location moved: <a href="administration/authorization.html#project-scope-resources-and-actions">administration/authorization.html#project-scope-resources-and-actions</a></li>
+</ul>
+<h2 id="node-resource-properties"><a href="#node-resource-properties">Node Resource Properties</a></h2>
+<ul>
+<li>Location moved: <a href="administration/authorization.html#node-resource-properties">administration/authorization.html#node-resource-properties</a></li>
+</ul>
+<h2 id="access-control-policy-actions-example"><a href="#access-control-policy-actions-example">Access Control Policy Actions Example</a></h2>
+<ul>
+<li>Location moved: <a href="administration/authorization.html#access-control-policy-actions-example">administration/authorization.html#access-control-policy-actions-example</a></li>
+</ul>
+<h2 id="troubleshooting-access-control-policy"><a href="#troubleshooting-access-control-policy">Troubleshooting Access Control Policy</a></h2>
+<ul>
+<li>Location moved: <a href="administration/authorization.html#troubleshooting-access-control-policy">administration/authorization.html#troubleshooting-access-control-policy</a></li>
+</ul>
+<h2 id="authorization-caveats"><a href="#authorization-caveats">Authorization Caveats</a></h2>
+<ul>
+<li>Location moved: <a href="administration/authorization.html#authorization-caveats">administration/authorization.html#authorization-caveats</a></li>
+</ul>
+<h2 id="configuring-rundeck-for-ssl"><a href="#configuring-rundeck-for-ssl">Configuring Rundeck For Ssl</a></h2>
+<ul>
+<li>Location moved: <a href="administration/ssl.html#configuring-rundeck-for-ssl">administration/ssl.html#configuring-rundeck-for-ssl</a></li>
+</ul>
+<h2 id="securing-passwords"><a href="#securing-passwords">Securing Passwords</a></h2>
+<ul>
+<li>Location moved: <a href="administration/ssl.html#securing-passwords">administration/ssl.html#securing-passwords</a></li>
+</ul>
+<h2 id="troubleshooting-keystore"><a href="#troubleshooting-keystore">Troubleshooting Keystore</a></h2>
+<ul>
+<li>Location moved: <a href="administration/ssl.html#troubleshooting-keystore">administration/ssl.html#troubleshooting-keystore</a></li>
+</ul>
+<h2 id="optional-pem-export"><a href="#optional-pem-export">Optional Pem Export</a></h2>
+<ul>
+<li>Location moved: <a href="administration/ssl.html#optional-pem-export">administration/ssl.html#optional-pem-export</a></li>
+</ul>
+<h2 id="customizing-rundeck-gui"><a href="#customizing-rundeck-gui">Customizing Rundeck Gui</a></h2>
+<ul>
+<li>Location moved: <a href="administration/gui-customization.html#customizing-rundeck-gui">administration/gui-customization.html#customizing-rundeck-gui</a></li>
+</ul>
+<h2 id="customizing-configuration-for-scale"><a href="#customizing-configuration-for-scale">Customizing Configuration For Scale</a></h2>
+<ul>
+<li>Location moved: <a href="administration/scaling-rundeck.html#customizing-configuration-for-scale">administration/scaling-rundeck.html#customizing-configuration-for-scale</a></li>
+</ul>
+<h2 id="file-descriptors"><a href="#file-descriptors">File Descriptors</a></h2>
+<ul>
+<li>Location moved: <a href="administration/scaling-rundeck.html#file-descriptors">administration/scaling-rundeck.html#file-descriptors</a></li>
+</ul>
+<h2 id="java-heap-size"><a href="#java-heap-size">Java Heap Size</a></h2>
+<ul>
+<li>Location moved: <a href="administration/scaling-rundeck.html#java-heap-size">administration/scaling-rundeck.html#java-heap-size</a></li>
+</ul>
+<h2 id="quartz-job-threadcount"><a href="#quartz-job-threadcount">Quartz Job Threadcount</a></h2>
+<ul>
+<li>Location moved: <a href="administration/scaling-rundeck.html#quartz-job-threadcount">administration/scaling-rundeck.html#quartz-job-threadcount</a></li>
+</ul>
+<h2 id="jmx-instrumentation"><a href="#jmx-instrumentation">Jmx Instrumentation</a></h2>
+<ul>
+<li>Location moved: <a href="administration/scaling-rundeck.html#jmx-instrumentation">administration/scaling-rundeck.html#jmx-instrumentation</a></li>
+</ul>
+<h2 id="resource-model-source"><a href="#resource-model-source">Resource Model Source</a></h2>
+<ul>
+<li>Location moved: <a href="administration/node-resource-sources.html#resource-model-source">administration/node-resource-sources.html#resource-model-source</a></li>
+</ul>
+<h2 id="requirements"><a href="#requirements">Requirements</a></h2>
+<ul>
+<li>Location moved: <a href="administration/node-resource-sources.html#requirements">administration/node-resource-sources.html#requirements</a></li>
+</ul>
+<h2 id="configuration-1"><a href="#configuration-1">Configuration</a></h2>
+<ul>
+<li>Location moved: <a href="administration/node-resource-sources.html#configuration">administration/node-resource-sources.html#configuration</a></li>
+</ul>
+<h2 id="implementations-and-examples"><a href="#implementations-and-examples">Implementations And Examples</a></h2>
+<ul>
+<li>Location moved: <a href="administration/node-resource-sources.html#implementations-and-examples">administration/node-resource-sources.html#implementations-and-examples</a></li>
+</ul>
+<h2 id="simple-vcs-url-resource-model-source"><a href="#simple-vcs-url-resource-model-source">Simple Vcs Url Resource Model Source</a></h2>
+<ul>
+<li>Location moved: <a href="administration/node-resource-sources.html#simple-vcs-url-resource-model-source">administration/node-resource-sources.html#simple-vcs-url-resource-model-source</a></li>
+</ul>
+<h2 id="amazon-ec2-nodes"><a href="#amazon-ec2-nodes">Amazon Ec2 Nodes</a></h2>
+<ul>
+<li>Location moved: <a href="administration/node-resource-sources.html#amazon-ec2-nodes">administration/node-resource-sources.html#amazon-ec2-nodes</a></li>
+</ul>
+<h2 id="third-party-url-resource-model-sources"><a href="#third-party-url-resource-model-sources">Third Party Url Resource Model Sources</a></h2>
+<ul>
+<li>Location moved: <a href="administration/node-resource-sources.html#third-party-url-resource-model-sources">administration/node-resource-sources.html#third-party-url-resource-model-sources</a></li>
+</ul>
+<h2 id="option-model-provider"><a href="#option-model-provider">Option Model Provider</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-options.html#option-model-provider">manual/job-options.html#option-model-provider</a></li>
+</ul>
+<h2 id="requirements-1"><a href="#requirements-1">Requirements</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-options.html#requirements">manual/job-options.html#requirements</a></li>
+</ul>
+<h2 id="configuration-2"><a href="#configuration-2">Configuration</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-options.html#configuration">manual/job-options.html#configuration</a></li>
+</ul>
+<h2 id="json-format"><a href="#json-format">Json Format</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-options.html#json-format">manual/job-options.html#json-format</a></li>
+</ul>
+<h2 id="variable-expansion-in-remote-urls"><a href="#variable-expansion-in-remote-urls">Variable Expansion In Remote Urls</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-options.html#variable-expansion-in-remote-urls">manual/job-options.html#variable-expansion-in-remote-urls</a></li>
+</ul>
+<h2 id="remote-request-failures"><a href="#remote-request-failures">Remote Request Failures</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-options.html#remote-request-failures">manual/job-options.html#remote-request-failures</a></li>
+</ul>
+<h2 id="implementations-and-examples-1"><a href="#implementations-and-examples-1">Implementations And Examples</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-options.html#implementations-and-examples">manual/job-options.html#implementations-and-examples</a></li>
+</ul>
+<h2 id="hudson-artifacts-option-provider"><a href="#hudson-artifacts-option-provider">Hudson Artifacts Option Provider</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-options.html#hudson-artifacts-option-provider">manual/job-options.html#hudson-artifacts-option-provider</a></li>
+</ul>
+<h2 id="yum-repoquery-option-model-provider"><a href="#yum-repoquery-option-model-provider">Yum Repoquery Option Model Provider</a></h2>
+<ul>
+<li>Location moved: <a href="manual/job-options.html#yum-repoquery-option-model-provider">manual/job-options.html#yum-repoquery-option-model-provider</a></li>
+</ul>
+<h2 id="resource-editor"><a href="#resource-editor">Resource Editor</a></h2>
+<ul>
+<li>Location moved: <a href="administration/node-resource-sources.html#resource-editor">administration/node-resource-sources.html#resource-editor</a></li>
+</ul>
+<h2 id="definition"><a href="#definition">Definition</a></h2>
+<ul>
+<li>Location moved: <a href="administration/node-resource-sources.html#definition">administration/node-resource-sources.html#definition</a></li>
+</ul>
+<h2 id="using-properties"><a href="#using-properties">Using Properties</a></h2>
+<ul>
+<li>Location moved: <a href="administration/node-resource-sources.html#using-properties">administration/node-resource-sources.html#using-properties</a></li>
+</ul>
+<h2 id="using-remoteurl"><a href="#using-remoteurl">Using Remoteurl</a></h2>
+<ul>
+<li>Location moved: <a href="administration/node-resource-sources.html#using-remoteurl">administration/node-resource-sources.html#using-remoteurl</a></li>
+</ul>
+<h2 id="streamlining-the-interface"><a href="#streamlining-the-interface">Streamlining The Interface</a></h2>
+<ul>
+<li>Location moved: <a href="administration/node-resource-sources.html#streamlining-the-interface">administration/node-resource-sources.html#streamlining-the-interface</a></li>
+</ul>
+<h2 id="examples"><a href="#examples">Examples</a></h2>
+<ul>
+<li>Location moved: <a href="administration/node-resource-sources.html#examples">administration/node-resource-sources.html#examples</a></li>
+</ul>
+<h2 id="simple-site-integration"><a href="#simple-site-integration">Simple Site Integration</a></h2>
+<ul>
+<li>Location moved: <a href="administration/node-resource-sources.html#simple-site-integration">administration/node-resource-sources.html#simple-site-integration</a></li>
+</ul>
+<h2 id="webhooks"><a href="#webhooks">Webhooks</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#webhooks">manual/jobs.html#webhooks</a></li>
+</ul>
+<h2 id="execution-notification-content"><a href="#execution-notification-content">Execution Notification Content</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#execution-notification-content">manual/jobs.html#execution-notification-content</a></li>
+</ul>
+<h2 id="execution-notification-headers"><a href="#execution-notification-headers">Execution Notification Headers</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#execution-notification-headers">manual/jobs.html#execution-notification-headers</a></li>
+</ul>
+<h2 id="execution-notification-url-token-expansion"><a href="#execution-notification-url-token-expansion">Execution Notification Url Token Expansion</a></h2>
+<ul>
+<li>Location moved: <a href="manual/jobs.html#execution-notification-url-token-expansion">manual/jobs.html#execution-notification-url-token-expansion</a></li>
+</ul>
+<h2 id="rundeck-api"><a href="#rundeck-api">Rundeck Api</a></h2>
+<ul>
+<li>Location moved: <a href="api/index.html#rundeck-api">api/index.html#rundeck-api</a></li>
+</ul>
+<h2 id="rundeck-plugins"><a href="#rundeck-plugins">Rundeck Plugins</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#rundeck-plugins">manual/plugins.html#rundeck-plugins</a></li>
+</ul>
+<h2 id="installing-plugins"><a href="#installing-plugins">Installing Plugins</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#installing-plugins">manual/plugins.html#installing-plugins</a></li>
+</ul>
+<h2 id="uninstalling-or-updating-plugins"><a href="#uninstalling-or-updating-plugins">Uninstalling Or Updating Plugins</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#uninstalling-or-updating-plugins">manual/plugins.html#uninstalling-or-updating-plugins</a></li>
+</ul>
+<h2 id="about-plugins"><a href="#about-plugins">About Plugins</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#about-plugins">manual/plugins.html#about-plugins</a></li>
+</ul>
+<h2 id="types-of-plugins"><a href="#types-of-plugins">Types Of Plugins</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#types-of-plugins">manual/plugins.html#types-of-plugins</a></li>
+</ul>
+<h2 id="node-execution-plugins"><a href="#node-execution-plugins">Node Execution Plugins</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#node-execution-plugins">manual/plugins.html#node-execution-plugins</a></li>
+</ul>
+<h2 id="resource-model-source-plugins"><a href="#resource-model-source-plugins">Resource Model Source Plugins</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#resource-model-source-plugins">manual/plugins.html#resource-model-source-plugins</a></li>
+</ul>
+<h2 id="resource-format-plugins"><a href="#resource-format-plugins">Resource Format Plugins</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#resource-format-plugins">manual/plugins.html#resource-format-plugins</a></li>
+</ul>
+<h2 id="about-services-and-providers"><a href="#about-services-and-providers">About Services And Providers</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#about-services-and-providers">manual/plugins.html#about-services-and-providers</a></li>
+</ul>
+<h2 id="using-providers"><a href="#using-providers">Using Providers</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#using-providers">manual/plugins.html#using-providers</a></li>
+</ul>
+<h2 id="node-execution-services"><a href="#node-execution-services">Node Execution Services</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#node-execution-services">manual/plugins.html#node-execution-services</a></li>
+</ul>
+<h2 id="node-specific"><a href="#node-specific">Node Specific</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#node-specific">manual/plugins.html#node-specific</a></li>
+</ul>
+<h2 id="project-or-framework-scope"><a href="#project-or-framework-scope">Project Or Framework Scope</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#project-or-framework-scope">manual/plugins.html#project-or-framework-scope</a></li>
+</ul>
+<h2 id="resource-model-sources"><a href="#resource-model-sources">Resource Model Sources</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#resource-model-sources">manual/plugins.html#resource-model-sources</a></li>
+</ul>
+<h2 id="resource-model-source-configuration"><a href="#resource-model-source-configuration">Resource Model Source Configuration</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#resource-model-source-configuration">manual/plugins.html#resource-model-source-configuration</a></li>
+</ul>
+<h2 id="resource-format-generators-and-parsers"><a href="#resource-format-generators-and-parsers">Resource Format Generators And Parsers</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#resource-format-generators-and-parsers">manual/plugins.html#resource-format-generators-and-parsers</a></li>
+</ul>
+<h2 id="when-node-execution-service-providers-are-invoked"><a href="#when-node-execution-service-providers-are-invoked">When Node Execution Service Providers Are Invoked</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#when-node-execution-service-providers-are-invoked">manual/plugins.html#when-node-execution-service-providers-are-invoked</a></li>
+</ul>
+<h2 id="built-in-providers"><a href="#built-in-providers">Built In Providers</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#built-in-providers">manual/plugins.html#built-in-providers</a></li>
+</ul>
+<h2 id="node-execution-services-1"><a href="#node-execution-services-1">Node Execution Services</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#node-execution-services-1">manual/plugins.html#node-execution-services-1</a></li>
+</ul>
+<h2 id="ssh-provider"><a href="#ssh-provider">Ssh Provider</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#ssh-provider">manual/plugins.html#ssh-provider</a></li>
+</ul>
+<h2 id="configuring-scp-file-copier"><a href="#configuring-scp-file-copier">Configuring Scp File Copier</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#configuring-scp-file-copier">manual/plugins.html#configuring-scp-file-copier</a></li>
+</ul>
+<h2 id="configuring-ssh-authentication-type"><a href="#configuring-ssh-authentication-type">Configuring Ssh Authentication Type</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#configuring-ssh-authentication-type">manual/plugins.html#configuring-ssh-authentication-type</a></li>
+</ul>
+<h2 id="configuring-ssh-username"><a href="#configuring-ssh-username">Configuring Ssh Username</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#configuring-ssh-username">manual/plugins.html#configuring-ssh-username</a></li>
+</ul>
+<h2 id="configuring-ssh-private-keys"><a href="#configuring-ssh-private-keys">Configuring Ssh Private Keys</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#configuring-ssh-private-keys">manual/plugins.html#configuring-ssh-private-keys</a></li>
+</ul>
+<h2 id="configuring-ssh-password-authentication"><a href="#configuring-ssh-password-authentication">Configuring Ssh Password Authentication</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#configuring-ssh-password-authentication">manual/plugins.html#configuring-ssh-password-authentication</a></li>
+</ul>
+<h2 id="configuring-secondary-sudo-password-authentication"><a href="#configuring-secondary-sudo-password-authentication">Configuring Secondary Sudo Password Authentication</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#configuring-secondary-sudo-password-authentication">manual/plugins.html#configuring-secondary-sudo-password-authentication</a></li>
+</ul>
+<h2 id="resource-model-sources-1"><a href="#resource-model-sources-1">Resource Model Sources</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#resource-model-sources-1">manual/plugins.html#resource-model-sources-1</a></li>
+</ul>
+<h2 id="file-resource-model-source-configuration"><a href="#file-resource-model-source-configuration">File Resource Model Source Configuration</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#file-resource-model-source-configuration">manual/plugins.html#file-resource-model-source-configuration</a></li>
+</ul>
+<h2 id="url-resource-model-source-configuration"><a href="#url-resource-model-source-configuration">Url Resource Model Source Configuration</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#url-resource-model-source-configuration">manual/plugins.html#url-resource-model-source-configuration</a></li>
+</ul>
+<h2 id="directory-resource-model-source-configuration"><a href="#directory-resource-model-source-configuration">Directory Resource Model Source Configuration</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#directory-resource-model-source-configuration">manual/plugins.html#directory-resource-model-source-configuration</a></li>
+</ul>
+<h2 id="script-resource-model-source-configuration"><a href="#script-resource-model-source-configuration">Script Resource Model Source Configuration</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#script-resource-model-source-configuration">manual/plugins.html#script-resource-model-source-configuration</a></li>
+</ul>
+<h2 id="resource-format-services"><a href="#resource-format-services">Resource Format Services</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#resource-format-services">manual/plugins.html#resource-format-services</a></li>
+</ul>
+<h2 id="pre-installed-plugins"><a href="#pre-installed-plugins">Pre Installed Plugins</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#pre-installed-plugins">manual/plugins.html#pre-installed-plugins</a></li>
+</ul>
+<h2 id="script-plugin"><a href="#script-plugin">Script Plugin</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#script-plugin">manual/plugins.html#script-plugin</a></li>
+</ul>
+<h2 id="configuring-script-exec"><a href="#configuring-script-exec">Configuring Script Exec</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#configuring-script-exec">manual/plugins.html#configuring-script-exec</a></li>
+</ul>
+<h2 id="configuring-the-command-for-script-exec"><a href="#configuring-the-command-for-script-exec">Configuring The Command For Script Exec</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#configuring-the-command-for-script-exec">manual/plugins.html#configuring-the-command-for-script-exec</a></li>
+</ul>
+<h2 id="configuring-the-working-directory"><a href="#configuring-the-working-directory">Configuring The Working Directory</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#configuring-the-working-directory">manual/plugins.html#configuring-the-working-directory</a></li>
+</ul>
+<h2 id="configuring-the-shell"><a href="#configuring-the-shell">Configuring The Shell</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#configuring-the-shell">manual/plugins.html#configuring-the-shell</a></li>
+</ul>
+<h2 id="defining-the-script-exec-command"><a href="#defining-the-script-exec-command">Defining The Script Exec Command</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#defining-the-script-exec-command">manual/plugins.html#defining-the-script-exec-command</a></li>
+</ul>
+<h2 id="requirements-for-the-script-exec-command"><a href="#requirements-for-the-script-exec-command">Requirements For The Script Exec Command</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#requirements-for-the-script-exec-command">manual/plugins.html#requirements-for-the-script-exec-command</a></li>
+</ul>
+<h2 id="configuring-script-copy"><a href="#configuring-script-copy">Configuring Script Copy</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#configuring-script-copy">manual/plugins.html#configuring-script-copy</a></li>
+</ul>
+<h2 id="configuring-the-command-for-script-copy"><a href="#configuring-the-command-for-script-copy">Configuring The Command For Script Copy</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#configuring-the-command-for-script-copy">manual/plugins.html#configuring-the-command-for-script-copy</a></li>
+</ul>
+<h2 id="configuring-the-working-directory-1"><a href="#configuring-the-working-directory-1">Configuring The Working Directory</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#configuring-the-working-directory-1">manual/plugins.html#configuring-the-working-directory-1</a></li>
+</ul>
+<h2 id="configuring-the-shell-1"><a href="#configuring-the-shell-1">Configuring The Shell</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#configuring-the-shell-1">manual/plugins.html#configuring-the-shell-1</a></li>
+</ul>
+<h2 id="configuring-the-remote-filepath"><a href="#configuring-the-remote-filepath">Configuring The Remote Filepath</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#configuring-the-remote-filepath">manual/plugins.html#configuring-the-remote-filepath</a></li>
+</ul>
+<h2 id="defining-the-script-copy-command"><a href="#defining-the-script-copy-command">Defining The Script Copy Command</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#defining-the-script-copy-command">manual/plugins.html#defining-the-script-copy-command</a></li>
+</ul>
+<h2 id="defining-the-script-copy-filepath"><a href="#defining-the-script-copy-filepath">Defining The Script Copy Filepath</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#defining-the-script-copy-filepath">manual/plugins.html#defining-the-script-copy-filepath</a></li>
+</ul>
+<h2 id="requirements-of-script-copy-command"><a href="#requirements-of-script-copy-command">Requirements Of Script Copy Command</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#requirements-of-script-copy-command">manual/plugins.html#requirements-of-script-copy-command</a></li>
+</ul>
+<h2 id="example-scripts"><a href="#example-scripts">Example Scripts</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#example-scripts">manual/plugins.html#example-scripts</a></li>
+</ul>
+<h2 id="stub-plugin"><a href="#stub-plugin">Stub Plugin</a></h2>
+<ul>
+<li>Location moved: <a href="manual/plugins.html#stub-plugin">manual/plugins.html#stub-plugin</a></li>
+</ul>
+<h2 id="plugin-development"><a href="#plugin-development">Plugin Development</a></h2>
+<ul>
+<li>Location moved: <a href="developer/plugin-development.html#">developer/plugin-development.html#</a></li>
+</ul>
+<h2 id="java-plugin-development"><a href="#java-plugin-development">Java Plugin Development</a></h2>
+<ul>
+<li>Location moved: <a href="developer/plugin-development.html#java-plugin-development">developer/plugin-development.html#java-plugin-development</a></li>
+</ul>
+<h2 id="provider-classes"><a href="#provider-classes">Provider Classes</a></h2>
+<ul>
+<li>Location moved: <a href="developer/plugin-development.html#provider-classes">developer/plugin-development.html#provider-classes</a></li>
+</ul>
+<h2 id="jar-dependencies"><a href="#jar-dependencies">Jar Dependencies</a></h2>
+<ul>
+<li>Location moved: <a href="developer/plugin-development.html#jar-dependencies">developer/plugin-development.html#jar-dependencies</a></li>
+</ul>
+<h2 id="available-services"><a href="#available-services">Available Services:</a></h2>
+<ul>
+<li>Location moved: <a href="developer/plugin-development.html#available-services:">developer/plugin-development.html#available-services:</a></li>
+</ul>
+<h2 id="provider-lifecycle"><a href="#provider-lifecycle">Provider Lifecycle</a></h2>
+<ul>
+<li>Location moved: <a href="developer/plugin-development.html#provider-lifecycle">developer/plugin-development.html#provider-lifecycle</a></li>
+</ul>
+<h2 id="node-executor-providers"><a href="#node-executor-providers">Node Executor Providers</a></h2>
+<ul>
+<li>Location moved: <a href="developer/plugin-development.html#node-executor-providers">developer/plugin-development.html#node-executor-providers</a></li>
+</ul>
+<h2 id="file-copier-providers"><a href="#file-copier-providers">File Copier Providers</a></h2>
+<ul>
+<li>Location moved: <a href="developer/plugin-development.html#file-copier-providers">developer/plugin-development.html#file-copier-providers</a></li>
+</ul>
+<h2 id="resource-model-source-providers"><a href="#resource-model-source-providers">Resource Model Source Providers</a></h2>
+<ul>
+<li>Location moved: <a href="developer/plugin-development.html#resource-model-source-providers">developer/plugin-development.html#resource-model-source-providers</a></li>
+</ul>
+<h2 id="resource-format-parser-and-generator-providers"><a href="#resource-format-parser-and-generator-providers">Resource Format Parser And Generator Providers</a></h2>
+<ul>
+<li>Location moved: <a href="developer/plugin-development.html#resource-format-parser-and-generator-providers">developer/plugin-development.html#resource-format-parser-and-generator-providers</a></li>
+</ul>
+<h2 id="script-plugin-development"><a href="#script-plugin-development">Script Plugin Development</a></h2>
+<ul>
+<li>Location moved: <a href="developer/plugin-development.html#script-plugin-development">developer/plugin-development.html#script-plugin-development</a></li>
+</ul>
+<h2 id="provider-metadata"><a href="#provider-metadata">Provider Metadata</a></h2>
+<ul>
+<li>Location moved: <a href="developer/plugin-development.html#provider-metadata">developer/plugin-development.html#provider-metadata</a></li>
+</ul>
+<h2 id="configurable-resource-model-source-script-plugin"><a href="#configurable-resource-model-source-script-plugin">Configurable Resource Model Source Script Plugin</a></h2>
+<ul>
+<li>Location moved: <a href="developer/plugin-development.html#configurable-resource-model-source-script-plugin">developer/plugin-development.html#configurable-resource-model-source-script-plugin</a></li>
+</ul>
+<h2 id="how-script-plugin-providers-are-invoked"><a href="#how-script-plugin-providers-are-invoked">How Script Plugin Providers Are Invoked</a></h2>
+<ul>
+<li>Location moved: <a href="developer/plugin-development.html#how-script-plugin-providers-are-invoked">developer/plugin-development.html#how-script-plugin-providers-are-invoked</a></li>
+</ul>
+<h2 id="script-provider-requirements"><a href="#script-provider-requirements">Script Provider Requirements</a></h2>
+<ul>
+<li>Location moved: <a href="developer/plugin-development.html#script-provider-requirements">developer/plugin-development.html#script-provider-requirements</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;${DATE_YEAR} <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2016-04-15T23:37:42UTC">2016-04-15T23:37:42UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
