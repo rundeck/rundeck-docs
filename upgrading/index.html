@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Upgrade Guide</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="April 15, 2015" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.6.5</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.6.5)</a></li>
+    
+    
+    
+    <li class="active"><a href="index.html">Upgrade Guide</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#upgrading-to-rundeck-2.5">Upgrading to Rundeck 2.5</a><ul>
+<li><a href="#java-7-required">Java 7 required</a></li>
+<li><a href="#scheduled-jobs-with-required-option-default-values">Scheduled Jobs with required option default values</a></li>
+<li><a href="#rd-project-create-of-existing-project">rd-project create of existing project</a></li>
+<li><a href="#database-schema">Database schema</a></li>
+<li><a href="#project-definitions-stored-in-db">Project definitions stored in DB</a></li>
+<li><a href="#web.xml-changes">web.xml changes</a></li>
+</ul></li>
+<li><a href="#upgrading-to-rundeck-2.1">Upgrading to Rundeck 2.1</a><ul>
+<li><a href="#database-schema-1">Database schema</a></li>
+<li><a href="#acl-policy-additions">ACL policy additions</a></li>
+</ul></li>
+<li><a href="#upgrading-to-rundeck-2.0-from-1.6.x">Upgrading to Rundeck 2.0 from 1.6.x</a></li>
+<li><a href="#clean-install">Clean install</a></li>
+<li><a href="#upgrading-jaas-properties-file">Upgrading JAAS properties file</a></li>
+<li><a href="#upgrading-an-existing-h2-database">Upgrading an existing H2 Database</a></li>
+<li><a href="#upgrading-an-existing-mysql-or-other-database">Upgrading an existing Mysql or other Database</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Upgrade Guide</h1>
+</div>
+<h2 id="upgrading-to-rundeck-2.5"><a href="#upgrading-to-rundeck-2.5">Upgrading to Rundeck 2.5</a></h2>
+<h3 id="java-7-required"><a href="#java-7-required">Java 7 required</a></h3>
+<p>Java 7 is now required for Rundeck 2.5, and Java 8 can be used. Java 6 will not work.</p>
+<h3 id="scheduled-jobs-with-required-option-default-values"><a href="#scheduled-jobs-with-required-option-default-values">Scheduled Jobs with required option default values</a></h3>
+<p>A bug in Rundeck previously allowed Jobs to saved with a schedule even if an Option marked &quot;required&quot; did not have a default value. The result was that the scheduler would fail to execute the job silently.</p>
+<p>In Rundeck 2.5 this is now considered a validation error when creating or importing the job definition, so any scheduled jobs with required options need to have a default value set.</p>
+<h3 id="rd-project-create-of-existing-project"><a href="#rd-project-create-of-existing-project">rd-project create of existing project</a></h3>
+<p>If <code>rd-project -a create -p projectname</code> is executed for an existing project, this will now fail.</p>
+<h3 id="database-schema"><a href="#database-schema">Database schema</a></h3>
+<p>This release adds some new DB tables but does not alter the schema of other tables.</p>
+<h3 id="project-definitions-stored-in-db"><a href="#project-definitions-stored-in-db">Project definitions stored in DB</a></h3>
+<p>Rundeck 2.4 and earlier used the filesystem to store Projects and their configuration. Rundeck 2.5 can now use the DB to store project definition and configuration, but this is not enabled by default.</p>
+<p>If you have projects that exist on the filesystem, when you upgrade to Rundeck 2.5, these projects and their configuration files can be automatically imported into the DB. This means that the contents of <code>project.properties</code> will be copied to the DB, using Rundeck's <a href="../administration/storage-facility.html">Storage Facility</a>.</p>
+<p>In addition, there is <em>no encryption by default</em>, if you want the contents of your project.properties to be encrypted in the DB, you must configure <a href="../plugins-user-guide/configuring.html#storage-converter-plugins">Storage Converter Plugins</a> to use an encryption plugin. There is now a <a href="../plugins-user-guide/storage-plugins.html#jasypt-encryption-converter-plugin">Jasypt Encryption Plugin</a> included with Rundeck which can be used.</p>
+<p><strong>Enable project DB storage</strong>:</p>
+<p>You can configure Rundeck to use the Database by adding the following to <code>rundeck-config.properties</code> before starting it up:</p>
+<pre><code>rundeck.projectsStorageType=db</code></pre>
+<p>When importing previously created filesystem projects, the contents of these files are imported to the DB:</p>
+<ul>
+<li><code>etc/project.properties</code></li>
+<li><code>readme.md</code></li>
+<li><code>motd.md</code></li>
+</ul>
+<p>In addition, after importing, the <code>project.properties</code> file will be renamed to <code>project.properties.imported</code>.</p>
+<p>If desired, you can switch back to using filesystem projects by doing this:</p>
+<ol style="list-style-type: decimal">
+<li>set <code>rundeck.projectsStorageType=filesystem</code> in <code>rundeck-config.properties</code></li>
+<li>rename each <code>project.properties.imported</code> file back to <code>project.properties</code></li>
+</ol>
+<h3 id="web.xml-changes"><a href="#web.xml-changes">web.xml changes</a></h3>
+<p>The <code>web.xml</code> file has changed significantly from 2.4.x to Rundeck 2.5.x.</p>
+<p>For this reason, if you have modified your <code>web.xml</code> file, located at <code>/var/lib/rundeck/exp/webapp/WEB-INF/web.xml</code>, for example to change the <code>&lt;security-role&gt;&lt;role-name&gt;user&lt;/role-name&gt;&lt;security-role&gt;</code>, then you may need to back it up, and re-apply the changes you made after upgrading to 2.5.x.</p>
+<p>If you receive a &quot;Service Unavailable&quot; error on startup, and the service.log file contains this message:</p>
+<pre><code>java.lang.ClassNotFoundException: org.codehaus.groovy.grails.web.sitemesh.GrailsPageFilter</code></pre>
+<p>Then that means your web.xml file is out of date. Replace it with the one from 2.5 installation, then re-apply your changes to <code>&lt;role-name&gt;</code>.</p>
+<h2 id="upgrading-to-rundeck-2.1"><a href="#upgrading-to-rundeck-2.1">Upgrading to Rundeck 2.1</a></h2>
+<h3 id="database-schema-1"><a href="#database-schema-1">Database schema</a></h3>
+<p>If you are upgrading from 2.0.x, be sure to perform backups prior to upgrading. This release adds a new DB table but does not alter the schema of other tables.</p>
+<h3 id="acl-policy-additions"><a href="#acl-policy-additions">ACL policy additions</a></h3>
+<p>Project access via API has been improved, and new authorizations are now required for project access. See <a href="../administration/access-control-policy.html#application-scope-resources-and-actions">Adminstration - Access Control Policy</a>.</p>
+<ul>
+<li>project access adds <code>configure</code>,<code>delete</code>,<code>import</code>,<code>export</code> actions</li>
+<li><code>admin</code> access still allows all actions</li>
+</ul>
+<p>Example allowing explicit actions:</p>
+<pre><code>context:
+  application: &#39;rundeck&#39;
+for:
+  resource:
+    - equals:
+        kind: &#39;project&#39;
+      allow: [create] # allow creating new projects
+  project:
+    - equals:
+        name: &#39;myproject&#39;
+      allow: [read,configure,delete,import,export,admin] # access to &#39;myproject&#39;
+by:
+  group: admin</code></pre>
+<p>The storage facility for uploading public/private keys requires authorization to use. The default <code>admin.aclpolicy</code> and <code>apitoken.aclpolicy</code> provide this access, but if you have custom policies you may want to allow access to these actions.</p>
+<ul>
+<li><code>storage</code> can allow <code>create</code>,<code>update</code>,<code>read</code>, or <code>delete</code></li>
+<li>you can match on <code>path</code> or <code>name</code> to narrow the access</li>
+</ul>
+<p>The default apitoken aclpolicy file allows this access:</p>
+<pre><code>context:
+  application: &#39;rundeck&#39;
+for:
+  storage:
+    - match:
+        path: &#39;(keys|keys/.*)&#39;
+      allow: &#39;*&#39; # allow all access to manage stored keys
+by:
+  group: api_token_group</code></pre>
+<h2 id="upgrading-to-rundeck-2.0-from-1.6.x"><a href="#upgrading-to-rundeck-2.0-from-1.6.x">Upgrading to Rundeck 2.0 from 1.6.x</a></h2>
+<p>Rundeck 2.0 has some under-the-hood changes, so please follow this guide when upgrading from Rundeck 1.6.x.</p>
+<p>The first step is always to make a backup of all important data for your existing Rundeck installation. Refer to the <a href="../administration/backup-and-recovery.html">Administration - Backup and Recovery</a> section.</p>
+<h2 id="clean-install"><a href="#clean-install">Clean install</a></h2>
+<p>The most direct upgrade method is to use the project export/import method and a clean install of Rundeck 2.0.</p>
+<p>Before shutting down your 1.6.x installation, perform <strong>Project Export</strong> for each project you wish to migrate:</p>
+<ol style="list-style-type: decimal">
+<li>Select your project</li>
+<li>Click the <em>Configure</em> tab in the header.</li>
+<li>Click the link under <em>Export Project Archive</em> to save it to your local disk.</li>
+<li>Make a copy of all project files under the projects directory for the project, e.g. <code>$RDECK_BASE/projects/NAME</code> (launcher) or <code>/var/rundeck/projects/NAME</code> (RPM/Deb). This includes the project.properties configuration as well as resources files.</li>
+</ol>
+<p>Perform a <em>clean</em> install Rundeck 2.0 (no cheating!).</p>
+<p>Then Import the projects you exported:</p>
+<ol style="list-style-type: decimal">
+<li>Create a new project, or select an existing project.</li>
+<li>Click the <em>gear icon</em> for the Configure page in the header.</li>
+<li>Click the <em>Import Archive</em> Tab</li>
+<li>Under <em>Choose a Rundeck Archive</em> pick the archive file you downloaded earlier</li>
+<li>Click <em>Import</em></li>
+</ol>
+<p>Finally, restore the project files for the imported project.</p>
+<h2 id="upgrading-jaas-properties-file"><a href="#upgrading-jaas-properties-file">Upgrading JAAS properties file</a></h2>
+<p>If you are not doing a clean install, and you want to maintain your JAAS login module configuration, you may have to change your jaas.conf file.</p>
+<p>The default jaas-loginmodule.conf file included with Rundeck 1.6.x uses the <code>org.mortbay.jetty.plus.jaas.spi.PropertyFileLoginModule</code> class. You will have to change your file to specify <code>org.eclipse.jetty.plus.jaas.spi.PropertyFileLoginModule</code> (&quot;org.eclipse&quot;).</p>
+<p>Modify the <code>$RDECK_BASE/server/config/jaas-loginmodule.conf</code> (launcher install) or <code>/etc/rundeck/jaas-loginmodule.conf</code> (RPM/Deb install).</p>
+<h2 id="upgrading-an-existing-h2-database"><a href="#upgrading-an-existing-h2-database">Upgrading an existing H2 Database</a></h2>
+<p>If you want to migrate your existing H2 Database, you will have to download an additional jar file to enable upgrading to the newer H2 version used in Rundeck 2.0.</p>
+<p>Download the <code>h2mig_pagestore_addon.jar</code> file linked on this page:</p>
+<ul>
+<li><a href="http://www.h2database.com/html/advanced.html#database_upgrade">H2 Database Upgrade</a></li>
+<li>Direct link: <a href="http://h2database.com/h2mig_pagestore_addon.jar">http://h2database.com/h2mig_pagestore_addon.jar</a></li>
+</ul>
+<p>Copy the file to <code>$RDECK_BASE/server/lib</code> (launcher jar) or <code>/var/lib/rundeck/bootstrap</code> (RPM/Deb install).</p>
+<h2 id="upgrading-an-existing-mysql-or-other-database"><a href="#upgrading-an-existing-mysql-or-other-database">Upgrading an existing Mysql or other Database</a></h2>
+<p>Rundeck 2.0 will add some columns to the existing tables, but should allow in-place migration of the mysql database.</p>
+<p>However, make sure you take appropriate backups of your data prior to upgrading.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.6.5)</a></li>
+    
+    
+    
+    <li class="active"><a href="index.html">Upgrade Guide</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2016 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2016-04-15T21:47:08UTC">2016-04-15T21:47:08UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>

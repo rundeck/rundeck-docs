@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>rd-jobs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="author" content="Alex Honor" />
+  <meta name="date" content="November 20, 2010" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.6.5</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.6.5)</a></li>
+    
+    
+    <li ><a href="index.html">Command Line Tools</a></li>
+    <li class="active"><a href="rd-jobs.html">rd-jobs</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="rd-acl.html"><i class="glyphicon glyphicon-arrow-left"></i> rd-acl</a></li>
+      <li class="next"><a href="rd-project.html">rd-project <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#name">NAME</a></li>
+<li><a href="#synopsis">SYNOPSIS</a></li>
+<li><a href="#description">DESCRIPTION</a></li>
+<li><a href="#options">OPTIONS</a><ul>
+<li><a href="#list-action-options">LIST ACTION OPTIONS</a></li>
+<li><a href="#load-action-options">LOAD ACTION OPTIONS</a></li>
+<li><a href="#purge-action-options">PURGE ACTION OPTIONS</a></li>
+</ul></li>
+<li><a href="#list-action">LIST ACTION</a></li>
+<li><a href="#load-action">LOAD ACTION</a></li>
+<li><a href="#purge-action">PURGE ACTION</a></li>
+<li><a href="#see-also">SEE ALSO</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">rd-jobs</h1>
+</div>
+<h1 id="name"><a href="#name">NAME</a></h1>
+<p>rd-jobs - List, load or delete jobs from the Rundeck server</p>
+<h1 id="synopsis"><a href="#synopsis">SYNOPSIS</a></h1>
+<p><code>rd-jobs [*action*] [*action options*]...</code></p>
+<h1 id="description"><a href="#description">DESCRIPTION</a></h1>
+<p>The rd-jobs command lists Jobs stored on the server and optionally downloads them as XML or Yaml, or uploads Job XML/Yaml to the server from a file.</p>
+<p>The tool works in one of two <em>ACTION</em> modes:</p>
+<ul>
+<li><p><code>list</code> : list the stored Jobs on the server (default action)</p></li>
+<li><p><code>load</code> : upload job definitions up to the server</p></li>
+<li><p><code>purge</code> : delete job definitions on the server</p></li>
+</ul>
+<h1 id="options"><a href="#options">OPTIONS</a></h1>
+<p><code>-h, --help</code> : Print usage message.</p>
+<p><code>-v</code> : Run verbosely.</p>
+<p><code>-p, --project *PROJECT*</code> : Project name to Load, List or Purge jobs.</p>
+<h2 id="list-action-options"><a href="#list-action-options">LIST ACTION OPTIONS</a></h2>
+<p><code>-g, --group *GROUP*</code> : Group name. List jobs within this group or sub-group</p>
+<p><code>-i, --idlist   *ID*</code> : Job ID List. List Jobs with these IDs explicitly. Comma-separated, e.g.: 1,2,3.</p>
+<p><code>-n, --name *NAME*</code> : Job Name. List jobs matching this name.</p>
+<p><code>-f, --file *FILE*</code> : File path. For list action, path to store the job definitions found in XML/Yaml.</p>
+<p><code>-F, --format *FORMAT*</code> : File Format. For list action, format for the output document. Values: &quot;xml&quot; or &quot;yaml&quot;. Default: &quot;xml&quot;.</p>
+<h2 id="load-action-options"><a href="#load-action-options">LOAD ACTION OPTIONS</a></h2>
+<p><code>-d, --duplicate *update|skip|create*</code> : Duplicate job behavior option. When loading jobs, treat definitions that already exist on the server in the given manner: 'update' existing jobs,'skip' the uploaded definitions, or 'create' them anyway. (load action. default: update)</p>
+<p><code>-r, --remove-uuids</code> : When loading jobs, remove UUIDs to avoid conflicts. (load action. default: false)</p>
+<p><code>-f, --file *FILE*</code> : File path. For load action, path to a FILE to upload.</p>
+<p><code>-F, --format *FORMAT*</code> : File Format. For load action, format for the input document. Values: &quot;xml&quot; or &quot;yaml&quot;. Default: &quot;xml&quot;.</p>
+<h2 id="purge-action-options"><a href="#purge-action-options">PURGE ACTION OPTIONS</a></h2>
+<p>The purge action uses the same set of options as the <em>list</em> action.</p>
+<h1 id="list-action"><a href="#list-action">LIST ACTION</a></h1>
+<p>The List action queries the server for a list of matching jobs, and displays the result list. Optionally the definitions of the matching jobs can be stored in a file if <code>-f</code> is specified.</p>
+<p>The jobs can be specified explicitly by ID using the <code>-i/--idlist</code> option. Otherwise they are searched using the options as filter criteria, and all matching Jobs are returned.</p>
+<p>If no options to the list action are supplied, then all Jobs on the server are returned.</p>
+<p>If no <code>-p/--project</code> option is specified, and only one project exists, the single project is used. Otherwise the option is required.</p>
+<p><em>Examples</em></p>
+<p>List all jobs on the server for the only project:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rd-jobs</span></code></pre>
+<p>List all jobs in the project &quot;demo&quot;</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rd-jobs</span> -p demo</code></pre>
+<p>List only a single job by ID:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rd-jobs</span> -i 123 -p demo</code></pre>
+<p>List a set of jobs by ID and store them in a XML file:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rd-jobs</span> -i 1,23,4 --file out.xml -p demo</code></pre>
+<p>List a set of jobs by ID and store them in a Yaml file:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rd-jobs</span> -i 1,23,4 --file out.yaml --format yaml -p demo</code></pre>
+<p>Output from the command will list the job name, ID number in brackets, and the URL to view the Job in the server.</p>
+<pre><code>Found 5 jobs:
+   1: Build all [38] &lt;http://localhost:8080/rundeck/scheduledExecution/show/38&gt;
+   2: Build and Update Server0 [31] &lt;http://localhost:8080/rundeck/scheduledExecution/show/31&gt;
+   3: Build and Update Server1 [17] &lt;http://localhost:8080/rundeck/scheduledExecution/show/17&gt;
+   4: Build and Update Server2 [45] &lt;http://localhost:8080/rundeck/scheduledExecution/show/45&gt;
+   5: Deploy Server4 [46] &lt;http://localhost:8080/rundeck/scheduledExecution/show/46&gt;</code></pre>
+<h1 id="load-action"><a href="#load-action">LOAD ACTION</a></h1>
+<p>The Load action uploads the specified file to the server, and the list of loaded jobs are displayed. If any Jobs cannot be stored (e.g. the user is unauthorized to run a certain command), the list of unsuccessfully created jobs are also displayed.</p>
+<p>The <code>-d,--duplicate</code> option lets you specify what should happen if any of the Job definitions have the same Name and Group of an existing Job on the server. The default option is &quot;update&quot;, which means to overwrite the existing definitions with the new version. &quot;skip&quot; means to ignore the uploaded definition. &quot;create&quot; means to create a new Job with the uploaded definition (hence making the Group+Name non-unique).</p>
+<p>The <code>-p,--project</code> option specifies the Project to import jobs to. If unspecified, each Job definition in the imported file must define a valid project.</p>
+<p><em>Examples</em></p>
+<p>Load a file to the server in XML or Yaml format:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash">    <span class="kw">rd-jobs</span> load -f jobs.xml
+    <span class="kw">rd-jobs</span> load -f jobs.yaml -F yaml</code></pre>
+<p>Output:</p>
+<pre><code>Total Jobs Uploaded: 2 jobs
+Succeeded creating/updating 2  Jobs:
+   1: Build and Update Server2 [45] &lt;http://localhost:8080/rundeck/scheduledExecution/show/45&gt;
+   2: Deploy Server4 [46] &lt;http://localhost:8080/rundeck/scheduledExecution/show/46&gt;</code></pre>
+<p>If a Job was not successfully created, you will see it mentioned along with a message about why it failed. The number next to the Job name indicates the index of the definition in the uploaded XML:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rd-jobs</span> load -f jobs.xml</code></pre>
+<p>Output:</p>
+<pre><code>Total Jobs Uploaded: 3 jobs
+Failed to add 1 Jobs:
+   3: Build Server1 : Project was not found: north
+Project was not found: north
+Succeeded creating/updating 2  Jobs:
+   1: Build and Update Server2 [45] &lt;http://localhost:8080/rundeck/scheduledExecution/show/45&gt;
+   2: Deploy Server4 [46] &lt;http://localhost:8080/rundeck/scheduledExecution/show/46&gt;</code></pre>
+<p>If the -d skip is specified, then any jobs definitions that were skipped will be listed:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rd-jobs</span> load -f jobs.xml -d skip</code></pre>
+<p>Output:</p>
+<pre><code>Total Jobs Uploaded: 2 jobs
+Skipped 2 Jobs:
+   1: Build and Update Server2 [45] &lt;http://localhost:8080/rundeck/scheduledExecution/show/45&gt;
+   2: Deploy Server4 [46] &lt;http://localhost:8080/rundeck/scheduledExecution/show/46&gt;</code></pre>
+<h1 id="purge-action"><a href="#purge-action">PURGE ACTION</a></h1>
+<p>The Purge action queries the server for a list of matching jobs, and then requests that the server delete those jobs. Optionally the definitions of the matching jobs can be stored in a file if <code>-f</code> is specified.</p>
+<p>The jobs can be specified explicitly by ID using the <code>-i/--idlist</code> option. Otherwise they are searched using the options as filter criteria, and all matching Jobs are deleted.</p>
+<p>If no <code>-p/--project</code> option is specified, and only one project exists, the single project is used. Otherwise the option is required.</p>
+<h1 id="see-also"><a href="#see-also">SEE ALSO</a></h1>
+<p><a href="run.html"><code>run</code></a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.6.5)</a></li>
+    
+    
+    <li ><a href="index.html">Command Line Tools</a></li>
+    <li class="active"><a href="rd-jobs.html">rd-jobs</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="rd-acl.html"><i class="glyphicon glyphicon-arrow-left"></i> rd-acl</a></li>
+      <li class="next"><a href="rd-project.html">rd-project <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2016 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2016-04-15T21:47:08UTC">2016-04-15T21:47:08UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Configuring SSL</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.6.5</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.6.5)</a></li>
+    
+    
+    <li ><a href="index.html">Administrator Guide</a></li>
+    <li class="active"><a href="configuring-ssl.html">Configuring SSL</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="access-control-policy.html"><i class="glyphicon glyphicon-arrow-left"></i> Access Control Policy</a></li>
+      <li class="next"><a href="gui-customization.html">GUI Customization <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#securing-passwords">Securing passwords</a></li>
+<li><a href="#troubleshooting-keystore">Troubleshooting keystore</a></li>
+<li><a href="#optional-pem-export">Optional PEM export</a></li>
+<li><a href="#using-an-ssl-terminated-proxy">Using an SSL Terminated Proxy</a></li>
+<li><a href="#disabling-ssl-protocols">Disabling SSL Protocols</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Configuring SSL</h1>
+</div>
+<p>This document describes how to configure Rundeck for SSL/HTTPS support, and assumes you are using the rundeck-launcher standalone launcher. If you are using RPM/deb install, refer to the appropriate configuration file paths from <a href="configuration-file-reference.html#configuration-layout">Configuration -&gt; Configuration Layout</a>.</p>
+<ol style="list-style-type: decimal">
+<li><p>Before beginning, do a first-run of the launcher, as it will create the base directory for Rundeck and generate configuration files.</p>
+<pre><code>cd $RDECK_BASE;  java -jar rundeck-launcher-1.1.0.jar</code></pre>
+<p>This will start the server and generate necessary config files. Press control-c to shut down the server.</p></li>
+<li><p>Using the <a href="http://linux.die.net/man/1/keytool-java-1.6.0-openjdk">keytool</a> command, generate a keystore for use as the server cert and client truststore. Specify passwords for key and keystore:</p></li>
+</ol>
+<pre><code>    keytool -keystore etc/keystore -alias rundeck -genkey -keyalg RSA -keypass admin -storepass admin
+
+Be sure to specify the correct hostname of the server as the response
+to the question &quot;What is your first and last name?&quot;.  Answer &quot;yes&quot; to
+the final question.
+
+You can pass all the answers to the tool on the command-line by using
+a HERE document.
+
+Replace the first line &quot;Venkman.local&quot; with the hostname for your
+server, and use any other organizational values you like:
+    
+        keytool -keystore etc/keystore -alias rundeck -genkey -keyalg RSA -keypass adminadmin -storepass adminadmin  &lt;&lt;!
+        Venkman.local
+        devops
+        My org
+        my city
+        my state
+        US
+        yes
+        !</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li><p>CLI tools that communicate to the Rundeck server need to trust the SSL certificate provided by the server. They are preconfigured to look for a truststore at the location: <code>$RDECK_BASE/etc/truststore</code>. Copy the keystore as the truststore for CLI tools:</p>
+<pre><code>cp etc/keystore etc/truststore</code></pre></li>
+<li><p>Modify the ssl.properties file to specify the location of the keystore and the appropriate passwords:</p>
+<pre><code>vi server/config/ssl.properties</code></pre>
+<p>An example ssl.properties file (from the RPM package).</p>
+<pre><code>keystore=/etc/rundeck/ssl/keystore
+keystore.password=adminadmin
+key.password=adminadmin
+truststore=/etc/rundeck/ssl/truststore
+truststore.password=adminadmin</code></pre></li>
+<li><p>Configure client properties. Modify the file <code>$RDECK_BASE/etc/framework.properties</code> and change these properties:</p>
+<ul>
+<li><code>framework.server.url</code></li>
+<li><code>framework.rundeck.url</code></li>
+<li><code>framework.server.port</code></li>
+</ul>
+<p>Set them to the appropriate https protocol, and change the port to 4443, or to the value of your <code>-Dserver.https.port</code> runtime configuration property.</p></li>
+<li><p>Configure server URL so that Rundeck knows its external address. Modify the file <code>$RDECK_BASE/server/config/rundeck-config.properties</code> and change the <code>grails.serverURL</code>:</p>
+<ul>
+<li><code>grails.serverURL=https://myhostname:4443</code></li>
+</ul>
+<p>Set the URL to include the appropriate https protocol, and change the port to 4443, or to the value of your <code>-Dserver.https.port</code> runtime configuration property.</p></li>
+<li><p>For Debian/RPM installation, uncomment line 43 in <code>/etc/rundeck/profile</code>:</p>
+<pre><code>export RDECK_JVM=&quot;$RDECK_JVM -Drundeck.ssl.config=/etc/rundeck/ssl/ssl.properties -Dserver.https.port=${RDECK_HTTPS_PORT}&quot;</code></pre></li>
+<li><p>Start the server. For the rundeck launcher, tell it where to read the ssl.properties</p>
+<pre><code>java -Drundeck.ssl.config=$RDECK_BASE/server/config/ssl.properties -jar rundeck-launcher-1.1.0.jar</code></pre>
+<p>You can change port by adding <code>-Dserver.https.port</code>:</p>
+<pre><code>    java -Drundeck.ssl.config=$RDECK_BASE/server/config/ssl.properties -Dserver.https.port=1234 rundeck-launcher-1.1.0.jar</code></pre>
+<p>If successful, you will see a line indicating the SSl connector has started:</p>
+<pre><code>Started SslSocketConnector@0.0.0.0:4443</code></pre></li>
+</ol>
+<h3 id="securing-passwords"><a href="#securing-passwords">Securing passwords</a></h3>
+<p>Passwords do not have to be stored in the ssl.config. If they are not set, then the server will prompt on the console for a user to enter the passwords.</p>
+<p>If you want the server to start without prompting then you need to set the passwords in the config file.</p>
+<p>The passwords stored in ssl.properties can be obfuscated so they are not in plaintext:</p>
+<p>Run the jetty &quot;Password&quot; utility:</p>
+<pre><code>$ java -cp server/lib/jetty-all-7.6.0.v20120127.jar org.eclipse.jetty.util.security.Password [username] [password]</code></pre>
+<p>This will produce two lines, one starting with &quot;OBF:&quot;</p>
+<p>Use the entire OBF: output as the password in the ssl.properties file, eg:</p>
+<pre><code>key.password=OBF:1lk2j1lkj321lj13lj</code></pre>
+<h3 id="troubleshooting-keystore"><a href="#troubleshooting-keystore">Troubleshooting keystore</a></h3>
+<p>Some common error messages and causes:</p>
+<dl>
+<dt>java.io.IOException: Keystore was tampered with, or password was incorrect</dt>
+<dd><p>A password specified in the file was incorrect.</p>
+</dd>
+<dt>2010-12-02 10:07:29.958::WARN: failed SslSocketConnector@0.0.0.0:4443: java.io.FileNotFoundException: /Users/greg/rundeck/etc/keystore (No such file or directory)</dt>
+<dd><p>The keystore/truststore file specified in ssl.properties doesn't exist</p>
+</dd>
+</dl>
+<h3 id="optional-pem-export"><a href="#optional-pem-export">Optional PEM export</a></h3>
+<p>You can export the PEM formatted server certificate for use by HTTPS clients (web browsers or e.g. curl).</p>
+<p>Export pem cacert for use by e.g. curl:</p>
+<pre><code>keytool -export -keystore etc/keystore -rfc -alias rundeck &gt; rundeck.server.pem</code></pre>
+<h2 id="using-an-ssl-terminated-proxy"><a href="#using-an-ssl-terminated-proxy">Using an SSL Terminated Proxy</a></h2>
+<p>You can tell Jetty to honor <code>X-Forwarded-Proto</code>, <code>X-Forwarded-Host</code>, <code>X-Forwarded-Server</code> and <code>X-Forwarded-For</code> headers by adding the following JVM property:</p>
+<ul>
+<li><code>rundeck.jetty.connector.forwarded</code> set to &quot;true&quot; to enable proxy forwarded support.</li>
+</ul>
+<p>E.g. modify the <code>RDECK_JVM</code> variable in the file <code>/etc/rundeck/profile</code> and add:</p>
+<pre><code>-Drundeck.jetty.connector.forwarded=true</code></pre>
+<p>This will enable Jetty to respond correctly when a forwarded request is first received.</p>
+<p><strong>Note:</strong> You will still need to modify the <code>grails.serverURL</code> value in <a href="configuration-file-reference.html#rundeck-config.properties">rundeck-config.properties</a> to let Rundeck know how to properly generate absolute URLs.</p>
+<h2 id="disabling-ssl-protocols"><a href="#disabling-ssl-protocols">Disabling SSL Protocols</a></h2>
+<p>You can disable SSL protocols or cipher suites using these JVM variables:</p>
+<ul>
+<li><code>rundeck.jetty.connector.ssl.includedProtocols</code> set to a comma-separated list of SSL protocols to enable. Default will be based on the available protocols.</li>
+<li><code>rundeck.jetty.connector.ssl.excludedProtocols</code> set to a comma-separated list of SSL protocols to disable. Default value: 'SSLv3'</li>
+<li><code>rundeck.jetty.connector.ssl.includedCipherSuites</code> set to a comma-separated list of Cipher suites to enable. Default will be based on the available cipher suites.</li>
+<li><code>rundeck.jetty.connector.ssl.excludedCipherSuites</code> set to a comma-separated list of Cipher suites to disable. No default value.</li>
+</ul>
+<p>The <code>included</code> settings determine what protocols or cipher suites are enabled, and the <code>excluded</code> settings then remove values from that list.</p>
+<p>E.g. modify the <code>RDECK_JVM</code> variable in the file <code>/etc/rundeck/profile</code> and add:</p>
+<pre><code>-Drundeck.jetty.connector.ssl.excludedProtocols=SSLv3,SSLv2Hello</code></pre>
+<p>When starting up the Jetty container will log a list of the disabled protocols:</p>
+<pre><code>2014-10-27 11:08:41.225:INFO:oejus.SslContextFactory:Enabled Protocols [SSLv2Hello, TLSv1] of [SSLv2Hello, SSLv3, TLSv1]</code></pre>
+<p>To see the list of enabled Cipher Suites, turn on DEBUG level logging for Jetty SSL utils: <code>-Dorg.eclipse.jetty.util.ssl.LEVEL=DEBUG</code>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.6.5)</a></li>
+    
+    
+    <li ><a href="index.html">Administrator Guide</a></li>
+    <li class="active"><a href="configuring-ssl.html">Configuring SSL</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="access-control-policy.html"><i class="glyphicon glyphicon-arrow-left"></i> Access Control Policy</a></li>
+      <li class="next"><a href="gui-customization.html">GUI Customization <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2016 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2016-04-15T21:47:08UTC">2016-04-15T21:47:08UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Model Format Parser and Generator Plugin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler, Alex Honor" />
+  <meta name="date" content="November 20, 2010" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.6.5</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.6.5)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="model-format-parser-and-generator-plugin.html">Model Format Parser and Generator Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="resource-model-source-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> Resource Model Source Plugin</a></li>
+      <li class="next"><a href="plugin-development.html">Plugin Development <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#java-plugin-type">Java Plugin Type</a><ul>
+<li><a href="#resourceformatparser">ResourceFormatParser</a></li>
+<li><a href="#resourceformatgenerator">ResourceFormatGenerator</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Model Format Parser and Generator Plugin</h1>
+</div>
+<h2 id="about"><a href="#about">About</a></h2>
+<p>Resource format Parser and Generator providers are used to serialize a set of Node resources into a textual format for transport or storage.</p>
+<p>Each Parser and Generator must declare the set of filename extensions (such as &quot;xml&quot; or &quot;json&quot;) that it supports, as well as the set of MIME types that it supports (such as &quot;text/xml&quot; or &quot;application/json&quot;.)<br />This lets other services retrieve the appropriate parser or generator when all that is known about the source or destination of serialized data is a filename or a MIME type.</p>
+<h2 id="java-plugin-type"><a href="#java-plugin-type">Java Plugin Type</a></h2>
+<h3 id="resourceformatparser"><a href="#resourceformatparser">ResourceFormatParser</a></h3>
+<p>For Parsers, your provider class must implement the interface <a href="../javadoc/com/dtolabs/rundeck/core/resources/format/ResourceFormatParser.html">ResourceFormatParser</a>:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">interface</span> ResourceFormatParser {
+    <span class="co">/**</span>
+<span class="co">     * Return the list of file extensions that this format parser can parse.</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> Set&lt;String&gt; <span class="fu">getFileExtensions</span>();
+ 
+    <span class="co">/**</span>
+<span class="co">     * Return the list of MIME types that this format parser can parse. </span>
+<span class="co">     * This may include wildcards such as &quot;*&amp;#47;xml&quot;.</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> Set&lt;String&gt; <span class="fu">getMIMETypes</span>();
+ 
+    <span class="co">/**</span>
+<span class="co">     * Parse a file</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> INodeSet <span class="fu">parseDocument</span>(File file) <span class="kw">throws</span> ResourceFormatParserException;
+ 
+    <span class="co">/**</span>
+<span class="co">     * Parse an input stream</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> INodeSet <span class="fu">parseDocument</span>(InputStream input) <span class="kw">throws</span> ResourceFormatParserException;
+}</code></pre>
+<h3 id="resourceformatgenerator"><a href="#resourceformatgenerator">ResourceFormatGenerator</a></h3>
+<p>For Generators, your provider class must implement the interface <a href="../javadoc/com/dtolabs/rundeck/core/resources/format/ResourceFormatGenerator.html">ResourceFormatGenerator</a>:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">interface</span> ResourceFormatGenerator {
+ 
+    <span class="co">/**</span>
+<span class="co">     * Return the list of file extensions that this format generator can generate</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> Set&lt;String&gt; <span class="fu">getFileExtensions</span>();
+ 
+    <span class="co">/**</span>
+<span class="co">     * Return the list of MIME types that this format generator can generate. </span>
+<span class="co">     * If more than one are returned, then the first value will be used by </span>
+<span class="co">     * default if necessary.</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> List&lt;String&gt; <span class="fu">getMIMETypes</span>();
+ 
+    <span class="co">/**</span>
+<span class="co">     * generate formatted output</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">generateDocument</span>(INodeSet nodeset, OutputStream stream) 
+                   <span class="kw">throws</span> ResourceFormatGeneratorException,IOException;
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.6.5)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="model-format-parser-and-generator-plugin.html">Model Format Parser and Generator Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="resource-model-source-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> Resource Model Source Plugin</a></li>
+      <li class="next"><a href="plugin-development.html">Plugin Development <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2016 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2016-04-15T21:47:08UTC">2016-04-15T21:47:08UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
