@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RESOURCE-YAML</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="February 25, 2011" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.6.7</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.6.7)</a></li>
+    
+    
+    <li ><a href="index.html">Document Format Reference</a></li>
+    <li class="active"><a href="resource-yaml.html">RESOURCE-YAML</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="resource-xml.html"><i class="glyphicon glyphicon-arrow-left"></i> RESOURCE-XML</a></li>
+      <li class="next"><a href="resource-json.html">RESOURCE-JSON <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#name">NAME</a><ul>
+<li><a href="#structure">Structure</a></li>
+<li><a href="#node-definition">Node Definition</a></li>
+<li><a href="#examples">Examples</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">RESOURCE-YAML</h1>
+</div>
+<h1 id="name"><a href="#name">NAME</a></h1>
+<p>resource-yaml-v13 - describes the Rundeck resource model document Yaml format</p>
+<p>The <code>resource</code> YAML document declares a resource model used by a Rundeck Project to define the set of Nodes that are available.</p>
+<p>See <a href="http://yaml.org">http://yaml.org</a> for more information about YAML.</p>
+<h2 id="structure"><a href="#structure">Structure</a></h2>
+<p>The resource format supports two structures: either a Yaml Sequence of <a href="#node-definition">Node definitions</a>, or a Yaml Map of node names with <a href="#node-definition">Node definitions</a> as values.</p>
+<p>Example:</p>
+<pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="kw">-</span> <span class="fu">somenode:</span> ...
+  ...
+<span class="kw">-</span> <span class="fu">somenode2:</span> ...</code></pre>
+<p>OR</p>
+<pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">somenode:</span>
+   <span class="fu">hostname:</span> ...
+   ...
+<span class="fu">somenode2:</span>
+   <span class="fu">hostname:</span> ...</code></pre>
+<p>In the second case, the <code>nodename</code> entry is not required.</p>
+<h2 id="node-definition"><a href="#node-definition">Node Definition</a></h2>
+<p>A Node definition consists of a Map with some required and some optional entries.</p>
+<p>Required Entries:</p>
+<dl>
+<dt><code>nodename</code></dt>
+<dd><p>Name of the node, this must be a unique Identifier across nodes within a project</p>
+</dd>
+<dt><code>hostname</code></dt>
+<dd><p>Hostname of the node. This can be any IP Address or hostname to address the node. Since hostname is used to make SSH connections, it is possible to overload the value to include port number. (eg, hostname:port).</p>
+</dd>
+<dt><code>username</code></dt>
+<dd><p>User name to connect to the node via SSH.</p>
+</dd>
+</dl>
+<p>Optional Entries:</p>
+<dl>
+<dt><code>description</code></dt>
+<dd><p>A description of the Node</p>
+</dd>
+<dt><code>tags</code></dt>
+<dd><p>A literal with comma-separated tag strings, or a Sequence of literals. Tags are used for filtering nodes and often represent server role, environment, class, or group.</p>
+</dd>
+<dt><code>osFamily</code></dt>
+<dd><p>OS Family</p>
+</dd>
+<dt><code>osArch</code></dt>
+<dd><p>OS Architecture</p>
+</dd>
+<dt><code>osName</code></dt>
+<dd><p>OS Name</p>
+</dd>
+<dt><code>osVersion</code></dt>
+<dd><p>OS Version</p>
+</dd>
+<dt><code>editUrl</code></dt>
+<dd><p>URL to an external resource model service.</p>
+</dd>
+<dt><code>remoteUrl</code></dt>
+<dd><p>URL to an external resource model editor service.</p>
+</dd>
+<dt><em>Anything</em></dt>
+<dd><p>Specify any custom attributes about node using a string value.</p>
+</dd>
+</dl>
+<ul>
+<li>For more information about using the <code>editUrl</code>/<code>remoteUrl</code> see the <a href="../administration/managing-node-sources.html#resource-editor">Rundeck User Manual</a>.</li>
+</ul>
+<h2 id="examples"><a href="#examples">Examples</a></h2>
+<p>Here's a node, Venkman.local, described with several of the required and optional attributes discussed above.</p>
+<pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">Venkman.local:</span>
+  <span class="fu">description:</span> Rundeck server node
+  <span class="fu">hostname:</span> Venkman.local
+  <span class="fu">nodename:</span> Venkman.local
+  <span class="fu">osArch:</span> x86_64
+  <span class="fu">osFamily:</span> unix
+  <span class="fu">osName:</span> Mac OS X
+  <span class="fu">osVersion:</span> 10.6.6
+  <span class="fu">tags:</span> &#39;&#39;
+  <span class="fu">username:</span> greg</code></pre>
+<p>Tags are very useful for node filtering and can be used to describe the role, environment, group, or class to which a node belongs. The Homestar.local example below describes a node that plays the role of a redis server in the production environment.</p>
+<pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">Homestar.local:</span>
+  <span class="fu">description:</span> The production redis server.
+  <span class="fu">hostname:</span> Homestar.local
+  <span class="fu">nodename:</span> Homestar.local
+  <span class="fu">osArch:</span> x86_64
+  <span class="fu">osFamily:</span> unix
+  <span class="fu">osName:</span> Linux
+  <span class="fu">tags:</span> &#39;redis_server,production&#39;
+  <span class="fu">username:</span> greg</code></pre>
+<p>Here's a node, bartholemew, that specifies some custom attributes (app-port, https-port):</p>
+<pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">bartholemew:</span>
+  <span class="fu">description:</span> Webapp node
+  <span class="fu">hostname:</span> bartholemew
+  <span class="fu">nodename:</span> bartholemew
+  <span class="fu">tags:</span> &#39;web,app&#39;
+  <span class="fu">username:</span> greg
+  <span class="fu">app-port:</span> 8080
+  <span class="fu">https-port:</span> 8443</code></pre>
+<p>Here is the same two nodes but in the sequence style syntax:</p>
+<pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="kw">-</span> <span class="fu">Homestar.local:</span>
+  <span class="fu">description:</span> The production redis server.
+  <span class="fu">hostname:</span> Homestar.local
+  <span class="fu">nodename:</span> Homestar.local
+  <span class="fu">tags:</span> &#39;redis_server,production&#39;
+  <span class="fu">username:</span> greg
+<span class="kw">-</span> <span class="fu">bartholemew:</span>
+  <span class="fu">description:</span> Webapp node
+  <span class="fu">hostname:</span> bartholemew
+  <span class="fu">nodename:</span> bartholemew
+  <span class="fu">tags:</span> &#39;web,app&#39;
+  <span class="fu">username:</span> greg
+  <span class="fu">app-port:</span> 8080
+  <span class="fu">https-port:</span> 8443</code></pre>
+<p>The Rundeck source code and all documentation may be downloaded from <a href="https://github.com/rundeck/rundeck/">https://github.com/rundeck/rundeck/</a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.6.7)</a></li>
+    
+    
+    <li ><a href="index.html">Document Format Reference</a></li>
+    <li class="active"><a href="resource-yaml.html">RESOURCE-YAML</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="resource-xml.html"><i class="glyphicon glyphicon-arrow-left"></i> RESOURCE-XML</a></li>
+      <li class="next"><a href="resource-json.html">RESOURCE-JSON <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2016 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2016-04-29T22:43:44UTC">2016-04-29T22:43:44UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>

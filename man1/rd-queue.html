@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>rd-queue</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="author" content="Alex Honor" />
+  <meta name="date" content="July 7, 2011" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.6.7</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.6.7)</a></li>
+    
+    
+    <li ><a href="index.html">Command Line Tools</a></li>
+    <li class="active"><a href="rd-queue.html">rd-queue</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="rd-project.html"><i class="glyphicon glyphicon-arrow-left"></i> rd-project</a></li>
+      <li class="next"><a href="rd-setup.html">rd-setup <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#name">NAME</a></li>
+<li><a href="#synopsis">SYNOPSIS</a></li>
+<li><a href="#description">DESCRIPTION</a></li>
+<li><a href="#options">OPTIONS</a><ul>
+<li><a href="#follow-mode">follow mode</a></li>
+<li><a href="#list-mode">list mode</a></li>
+</ul></li>
+<li><a href="#list-action">LIST ACTION</a></li>
+<li><a href="#follow-action">FOLLOW ACTION</a></li>
+<li><a href="#kill-action">KILL ACTION</a></li>
+<li><a href="#see-also">SEE ALSO</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">rd-queue</h1>
+</div>
+<h1 id="name"><a href="#name">NAME</a></h1>
+<p>rd-queue - List, follow or kill currently running executions.</p>
+<h1 id="synopsis"><a href="#synopsis">SYNOPSIS</a></h1>
+<p><code>rd-queue [*action*] [-h] [-e id] [-p project]</code></p>
+<h1 id="description"><a href="#description">DESCRIPTION</a></h1>
+<p>The rd-queue command is used to query the Central Dispatcher for a list of currently running Executions, or to Kill a currently running execution.</p>
+<p>The tool provides the following actions:</p>
+<ul>
+<li><p><code>list</code> : list the currently running executions on the server (default action)</p></li>
+<li><p><code>follow</code> : Follow the output of the execution specified by ID</p></li>
+<li><p><code>kill</code> : kill the execution specified by ID</p></li>
+</ul>
+<h1 id="options"><a href="#options">OPTIONS</a></h1>
+<dl>
+<dt><code>-h, --help</code></dt>
+<dd><p>Print usage message.</p>
+</dd>
+<dt><code>-e, --eid</code></dt>
+<dd><p>ID of the execution (kill or follow action only)</p>
+</dd>
+<dt><code>-p</code></dt>
+<dd><p>Project name (list action only)</p>
+</dd>
+</dl>
+<h2 id="follow-mode"><a href="#follow-mode">follow mode</a></h2>
+<dl>
+<dt><code>-q, --quiet</code></dt>
+<dd><p>Do not show output from the execution, but wait until it completes.</p>
+</dd>
+<dt><code>-r, --progress</code></dt>
+<dd><p>Show execution progress. For Jobs with a known average duration, '#' will indicate percentage complete, otherwise '.' will indicate continued progress.</p>
+</dd>
+<dt><code>-t, --restart</code></dt>
+<dd><p>If specified, all output from the Execution is retrieved from the beginning, rather than resuming from the current point in time.</p>
+</dd>
+</dl>
+<h2 id="list-mode"><a href="#list-mode">list mode</a></h2>
+<dl>
+<dt><code>-m, --max</code></dt>
+<dd><p>Maximum number of results to show, default 20.</p>
+</dd>
+<dt><code>-o, --offset</code></dt>
+<dd><p>Offset of the first result to show, default 0.</p>
+</dd>
+</dl>
+<h1 id="list-action"><a href="#list-action">LIST ACTION</a></h1>
+<p>This is the default action of the tool, so to list all running Executions for a project, simply use:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rd-queue</span> -p project</code></pre>
+<p>The output will display the number of executions, and their IDs and identifying names or descriptions, as well as a link to the Rundeck page to follow the output.</p>
+<p>If there is only one project, the <code>-p</code> option can be left out.</p>
+<p><em>Example</em></p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rd-queue</span> -p test</code></pre>
+<pre><code>Queue: 1 items
+[160] adhoc script job &lt;http://localhost:8080/rundeck/execution/follow/160&gt;</code></pre>
+<h1 id="follow-action"><a href="#follow-action">FOLLOW ACTION</a></h1>
+<p>This action allows you to specify the Execution ID of a currently running execution that you want to follow the progress of. The output of the execution will be retrieved from the current point in time onward and echoed locally to the console.</p>
+<p>If <code>-t</code>,<code>--restart</code> is used, then all output of the execution is retrieved from the beginning.</p>
+<p>If <code>-r</code>,<code>--progress</code> is used, then the output is not echoed, and a progress indicator bar is printed.</p>
+<p>If <code>-q</code>,<code>--quiet</code> is used, then no output is echoed, and the tool will wait until the execution completes, and exit with a non-zero exit status if the execution was not successful.</p>
+<p><em>Example</em></p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rd-queue</span> follow -e 160</code></pre>
+<pre><code>    Output from the job
+    ...
+Final output
+[160] execution status: failed</code></pre>
+<p><em>Example using --progress </em></p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rd-queue</span> follow -e 160 --progress
+<span class="co">####################.....</span>
+[<span class="kw">160</span>] execution status: failed</code></pre>
+<h1 id="kill-action"><a href="#kill-action">KILL ACTION</a></h1>
+<p>This action allows you to specify the Execution ID of a currently running execution that you want to stop.</p>
+<p><em>Example</em></p>
+<pre class="sourceCode bash"><code class="sourceCode bash">    <span class="kw">rd-queue</span> kill -e 160
+    <span class="kw">rd-queue</span> kill: success. [160] Job status: killed</code></pre>
+<h1 id="see-also"><a href="#see-also">SEE ALSO</a></h1>
+<p><a href="dispatch.html"><code>dispatch</code></a>, <a href="run.html"><code>run</code></a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.6.7)</a></li>
+    
+    
+    <li ><a href="index.html">Command Line Tools</a></li>
+    <li class="active"><a href="rd-queue.html">rd-queue</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="rd-project.html"><i class="glyphicon glyphicon-arrow-left"></i> rd-project</a></li>
+      <li class="next"><a href="rd-setup.html">rd-setup <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2016 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2016-04-29T22:43:44UTC">2016-04-29T22:43:44UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
