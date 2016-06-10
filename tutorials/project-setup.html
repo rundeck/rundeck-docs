@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.6.8</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.6.8)</a></li>
+    
+    
+    <li ><a href="index.html">Tutorials</a></li>
+    <li class="active"><a href="project-setup.html">Project Setup</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="nodes.html">Nodes <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#planning-for-the-project">Planning for the project</a></li>
+<li><a href="#create-the-project">Create the project</a></li>
+<li><a href="#declare-node-definitions">Declare node definitions</a></li>
+<li><a href="#configure-the-model-source">Configure the model source</a></li>
+<li><a href="#managing-node-sources">Managing Node Sources</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<h2 id="planning-for-the-project"><a href="#planning-for-the-project">Planning for the project</a></h2>
+<p>The administrator decides to create a project called &quot;anvils.&quot; to manage the activities of the anvils restart. The anvils project will contain definitions about the nodes used by the anvils application, as well as, a set a jobs that reference these nodes. The administrator will use Rundeck access control policies to govern which teams have access to perform each of the procedures.</p>
+<p>The administrator decides to formalize the role of each node in the application stack by introducing tags. Tags will be used within the Jobs to target each kind of node rather than reference specific hosts names or IP addresses. This makes the jobs reusable across different environments.</p>
+<p>The administrator will also use the built in <a href="../plugins-user-guide/ssh-plugins.html">SSH node executor</a> for the project since SSH is already used to execute remote commands.</p>
+<h2 id="create-the-project"><a href="#create-the-project">Create the project</a></h2>
+<p>The administrator creates the project using the <a href="../man1/rd-project.html">rd-project</a> command line tool. Logged in on the rundeck server as the user &quot;rundeck&quot;, the administrator executes:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rd-project</span> -p anvils --action create</code></pre>
+<p>This initializes the &quot;anvils&quot; project in Rundeck.</p>
+<p>Of course, the administrator could also create the project from the projects menu in the Rundeck GUI.</p>
+<p>The project has been created but contains no jobs and only one node definition, one entry for the Rundeck server node.</p>
+<h2 id="declare-node-definitions"><a href="#declare-node-definitions">Declare node definitions</a></h2>
+<p>Modeling the anvils nodes deployed in the live environment is administrator's next step.</p>
+<p>The anvils application environment has several components spread across different servers. Anvils is a three tier application and has web, application and database components, each component installed on a separate host.</p>
+<p>Additionally, the administrator decides to incorporate a recent convention to use different unix logins to execute commands to control each functional application component. Each component will run using under a separate unix login to help isolate each component at the system level.</p>
+<p>With this information in hand, the administrator prepares the project resource model using the <a href="../man5/resource-xml.html">resource-XML</a> document format. The file listing below contains the node definitions for the five nodes -- www1, www2, app1, app2, db1:</p>
+<p>File listing: /var/rundeck/projects/anvils/nodes/resources.xml</p>
+<table class="sourceCode xml numberLines"><tr class="sourceCode"><td class="lineNumbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+</pre></td><td class="sourceCode"><pre><code class="sourceCode xml"><span class="kw">&lt;?xml</span> version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;<span class="kw">?&gt;</span>
+<span class="kw">&lt;project&gt;</span>
+  <span class="kw">&lt;node</span><span class="ot"> name=</span><span class="st">&quot;www1.anvils.com&quot;</span><span class="ot"> description=</span><span class="st">&quot;A www server node.&quot;</span><span class="ot"> tags=</span><span class="st">&quot;www&quot;</span> 
+<span class="ot">    hostname=</span><span class="st">&quot;192.168.50.2&quot;</span><span class="ot"> username=</span><span class="st">&quot;www1&quot;</span> 
+<span class="ot">    osFamily=</span><span class="st">&quot;unix&quot;</span><span class="ot"> osName=</span><span class="st">&quot;Linux&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;attribute</span><span class="ot"> name=</span><span class="st">&quot;anvils-location&quot;</span><span class="ot"> value=</span><span class="st">&quot;US-East&quot;</span><span class="kw">/&gt;</span>
+    <span class="kw">&lt;attribute</span><span class="ot"> name=</span><span class="st">&quot;anvils-customer&quot;</span><span class="ot"> value=</span><span class="st">&quot;acme.com&quot;</span><span class="kw">/&gt;</span>
+  <span class="kw">&lt;/node&gt;</span>
+  <span class="kw">&lt;node</span><span class="ot"> name=</span><span class="st">&quot;www2.anvils.com&quot;</span><span class="ot"> description=</span><span class="st">&quot;A www server node.&quot;</span><span class="ot"> tags=</span><span class="st">&quot;www&quot;</span> 
+<span class="ot">    hostname=</span><span class="st">&quot;192.168.50.2&quot;</span><span class="ot"> username=</span><span class="st">&quot;www2&quot;</span> 
+<span class="ot">    osFamily=</span><span class="st">&quot;unix&quot;</span><span class="ot"> osName=</span><span class="st">&quot;Linux&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;attribute</span><span class="ot"> name=</span><span class="st">&quot;anvils-location&quot;</span><span class="ot"> value=</span><span class="st">&quot;US-East&quot;</span><span class="kw">/&gt;</span>
+    <span class="kw">&lt;attribute</span><span class="ot"> name=</span><span class="st">&quot;anvils-customer&quot;</span><span class="ot"> value=</span><span class="st">&quot;acme.com&quot;</span><span class="kw">/&gt;</span>
+  <span class="kw">&lt;/node&gt;</span>
+  <span class="kw">&lt;node</span><span class="ot"> name=</span><span class="st">&quot;app1.anvils.com&quot;</span><span class="ot"> description=</span><span class="st">&quot;A app server node.&quot;</span><span class="ot"> tags=</span><span class="st">&quot;app&quot;</span> 
+<span class="ot">    hostname=</span><span class="st">&quot;192.168.50.2&quot;</span><span class="ot"> username=</span><span class="st">&quot;app1&quot;</span> 
+<span class="ot">    osFamily=</span><span class="st">&quot;unix&quot;</span><span class="ot"> osName=</span><span class="st">&quot;Linux&quot;</span><span class="kw">&gt;</span> 
+    <span class="kw">&lt;attribute</span><span class="ot"> name=</span><span class="st">&quot;anvils-location&quot;</span><span class="ot"> value=</span><span class="st">&quot;US-East&quot;</span><span class="kw">/&gt;</span>
+    <span class="kw">&lt;attribute</span><span class="ot"> name=</span><span class="st">&quot;anvils-customer&quot;</span><span class="ot"> value=</span><span class="st">&quot;acme.com&quot;</span><span class="kw">/&gt;</span>
+  <span class="kw">&lt;/node&gt;</span>
+  <span class="kw">&lt;node</span><span class="ot"> name=</span><span class="st">&quot;app2.anvils.com&quot;</span><span class="ot"> description=</span><span class="st">&quot;A app server node.&quot;</span><span class="ot"> tags=</span><span class="st">&quot;app&quot;</span> 
+<span class="ot">    hostname=</span><span class="st">&quot;192.168.50.2&quot;</span><span class="ot"> username=</span><span class="st">&quot;app2&quot;</span> 
+<span class="ot">    osFamily=</span><span class="st">&quot;unix&quot;</span><span class="ot"> osName=</span><span class="st">&quot;Linux&quot;</span><span class="kw">&gt;</span> 
+    <span class="kw">&lt;attribute</span><span class="ot"> name=</span><span class="st">&quot;anvils-location&quot;</span><span class="ot"> value=</span><span class="st">&quot;US-East&quot;</span><span class="kw">/&gt;</span>
+    <span class="kw">&lt;attribute</span><span class="ot"> name=</span><span class="st">&quot;anvils-customer&quot;</span><span class="ot"> value=</span><span class="st">&quot;acme.com&quot;</span><span class="kw">/&gt;</span>
+  <span class="kw">&lt;/node&gt;</span>
+  <span class="kw">&lt;node</span><span class="ot"> name=</span><span class="st">&quot;db1.anvils.com&quot;</span><span class="ot"> description=</span><span class="st">&quot;A db server node.&quot;</span><span class="ot"> tags=</span><span class="st">&quot;db&quot;</span> 
+<span class="ot">    hostname=</span><span class="st">&quot;192.168.50.2&quot;</span><span class="ot"> username=</span><span class="st">&quot;db&quot;</span> 
+<span class="ot">    osFamily=</span><span class="st">&quot;unix&quot;</span><span class="ot"> osName=</span><span class="st">&quot;Linux&quot;</span><span class="kw">&gt;</span> 
+    <span class="kw">&lt;attribute</span><span class="ot"> name=</span><span class="st">&quot;anvils-location&quot;</span><span class="ot"> value=</span><span class="st">&quot;US-East&quot;</span><span class="kw">/&gt;</span>
+    <span class="kw">&lt;attribute</span><span class="ot"> name=</span><span class="st">&quot;anvils-customer&quot;</span><span class="ot"> value=</span><span class="st">&quot;acme.com&quot;</span><span class="kw">/&gt;</span>
+  <span class="kw">&lt;/node&gt;</span>
+<span class="kw">&lt;/project&gt;</span></code></pre></td></tr></table>
+<p>Reviewing the XML content one sees the XML data define several nodes and tags describing the three kinds of application components.</p>
+<p>A logical name for each node is defined with the <code>name</code> attribute (eg name=&quot;www1.anvils.com&quot;). The address used by SSH is set with <code>hostname</code> while the login used to execute commands has been specified with the <code>username</code> attribute (username=&quot;www1&quot; vs username=&quot;db&quot;). The value for the <code>tags</code> attribute reflects the server role (tags=&quot;web&quot; vs tags=&quot;app&quot;).</p>
+<p>You will also notice there are two ways to define attributes using inline attribute names like <code>osName</code> or a separate xml element like <code>anvils-location</code>. It's purely up to your preference which format you use.</p>
+<blockquote>
+<p>Note, this tutorial is a trivial sized example so to conserve space (and VMs) the nodes are located on the same VM (each node uses the same hostname but a different username).</p>
+</blockquote>
+<p>A node in rundeck can model a single host on the network and represents a single management endpoint. In the end, the ssh node executor plugin formulates an ssh command string similar to: &quot;ssh username@hostname command&quot;. The ssh identity is resolved via configuration at run time. In this example, the project default is used as specified in the [project.properties] configuraiton file. (e.g., project.ssh-keypath=/var/lib/rundeck/.ssh/id_rsa).</p>
+<p>See <a href="../plugins-user-guide/ssh-plugins.html#configuring-remote-machine-for-ssh">ssh-plugins guide</a> to learn about configuring remote machines for ssh.</p>
+<p>This example uses the built in ssh plugin but you are not restricted to using ssh. There are other node executor plugins that invoke remote actions via other tools (eg, salt, mcollective, winrm, chef knife, etc).</p>
+<h2 id="configure-the-model-source"><a href="#configure-the-model-source">Configure the model source</a></h2>
+<p>To make Rundeck aware of the new resource file containing the anvils nodes, the administrator modifies the <a href="../administration/configuration-file-reference.html#project.properties">project.properties</a> configuration file to declare a new resource model source.</p>
+<p>Below a directory type source is configured:</p>
+<pre><code>resources.source.2.config.directory=/var/rundeck/projects/anvils/nodes
+resources.source.2.type=directory</code></pre>
+<p>This is the second source (hence: resource.source.2) as the first one defined was created by the rd-project create action.</p>
+<p>New project sources can also be added in the Configure page:</p>
+<div class="figure">
+<img src="../figures/fig0609.png" alt="Anvils model sources" /><p class="caption">Anvils model sources</p>
+</div>
+<h2 id="managing-node-sources"><a href="#managing-node-sources">Managing Node Sources</a></h2>
+<p>See <a href="../administration/managing-node-sources.html">Managing Node Sources</a> to learn more about configuring Rundeck to read node data from external providers.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.6.8)</a></li>
+    
+    
+    <li ><a href="index.html">Tutorials</a></li>
+    <li class="active"><a href="project-setup.html">Project Setup</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="nodes.html">Nodes <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2016 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2016-06-10T20:39:58UTC">2016-06-10T20:39:58UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
