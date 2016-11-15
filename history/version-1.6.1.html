@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Version 1.6.1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="greg" />
+  <meta name="date" content="08/24/2013" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.6.11</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.6.11)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-1.6.1.html">Version 1.6.1 (2013-08-24)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-1.6.0.html">Version 1.6.0 (2013-08-02) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#release-1.6.1">Release 1.6.1</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Version 1.6.1</h1>
+</div>
+<h1 id="release-1.6.1"><a href="#release-1.6.1">Release 1.6.1</a></h1>
+<p>Date: 2013-08-24</p>
+<p>Notable Changes:</p>
+<ul>
+<li>Bug fixes and updates to documentation to reflect changes in 1.6</li>
+<li>Added a unix PAM login module</li>
+<li>Added a feature to allow static definition of API auth tokens in a file</li>
+<li>Restored ability to use Job references as Node steps in a workflow (i.e. execute the job reference for each matched node in the parent job.)</li>
+<li>Fixed issue using the Jenkins rundeck-plugin when authenticating to Rundeck</li>
+</ul>
+<p>Contributors:</p>
+<ul>
+<li>Alex Honor</li>
+<li>Greg Schueler</li>
+<li>Martin Strigl</li>
+</ul>
+<p>Issues:</p>
+<ul>
+<li><a href="https://github.com/dtolabs/rundeck/issues/524">Static authentication tokens defined in configuration file</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/523">Jenkins rundeck-plugin fails to authenticate to rundeck</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/521">* add the possibility to use ${session.user} for variable expansion in r...</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/518">Add a unix PAM JAAS login module</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/517">Restore node-step functionality for Job References</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/515">API for now running executions over all projects</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/514">Potential hanging job after execution completes</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/513">Project archive import fails to copy log files</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/512">Project import fails if execution has blank threadcount in xml</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/504">Add a &quot;Scaling Rundeck&quot; chapter</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/503">IE Javascript issue: can't enter option name</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/501">GUI Java Script ReferenceError: ExecutionOptions is not defined</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/499">Log API and Web requests</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/494">feature request: add the variable ${job.user.name} to the Option model provider</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/493">copy icon missing in 1.6</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/479">Update docs with 1.6 screenshots and navigation changes</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/411">Job scheduling issue with rundeck 1.5</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/395">Working around Local Command automatic escaping</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/366">Invalid option name can be defined in xml</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/249">Add Option to strip UUID for imported jobs</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/168">scp: ambiguous target - for Job with script referencing a node with a space</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.6.11)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-1.6.1.html">Version 1.6.1 (2013-08-24)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-1.6.0.html">Version 1.6.0 (2013-08-02) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2016 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2016-11-15T22:01:37UTC">2016-11-15T22:01:37UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
