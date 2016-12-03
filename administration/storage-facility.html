@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rundeck Storage Facility</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.7.1</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.7.1)</a></li>
+    
+    
+    <li ><a href="index.html">Administrator Guide</a></li>
+    <li class="active"><a href="storage-facility.html">Storage Facility</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="scaling-rundeck.html"><i class="glyphicon glyphicon-arrow-left"></i> Scaling Rundeck</a></li>
+      <li class="next"><a href="key-storage.html">Key Storage <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#storage-facility">Storage Facility</a></li>
+<li><a href="#key-storage">Key Storage</a></li>
+<li><a href="#project-storage">Project Storage</a></li>
+<li><a href="#storage-backends">Storage backends</a><ul>
+<li><a href="#configuring-storage-plugins">Configuring Storage Plugins</a></li>
+</ul></li>
+<li><a href="#storage-converters">Storage Converters</a><ul>
+<li><a href="#configuring-storage-converter-plugins">Configuring Storage Converter Plugins</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Rundeck Storage Facility</h1>
+</div>
+<p>This document describes the Rundeck Storage Facility which is used both for Key Storage, and for Project Definition Storage.</p>
+<h2 id="storage-facility"><a href="#storage-facility">Storage Facility</a></h2>
+<p>The Storage facility provides a filesystem-like structure for storing files. Each file is located with a &quot;/&quot;-separated &quot;path&quot; and a name, similar to a file system path.</p>
+<p>Currently the Storage Facility is split into two separate containers:</p>
+<ul>
+<li><a href="#key-storage">Key Storage</a></li>
+<li><a href="#project-storage">Project Storage</a></li>
+</ul>
+<p>Both containers use the same storage mechanisms, but they can be configured independently of each other, and have different APIs for modification.</p>
+<h2 id="key-storage"><a href="#key-storage">Key Storage</a></h2>
+<p>The Key Storage container allows storing public keys, private keys, and passwords securely. The contents of these files can be accessed by Node Execution plugins for authenticating to remote nodes. The contents can be written via the Rundeck API, but only public keys can be read via the API.</p>
+<p>See the chapter: <a href="key-storage.html">Key Storage</a>.</p>
+<p>When configuring Key Storage providers, the configuration entries in <code>rundeck-config.properties</code> start with:</p>
+<pre><code>rundeck.storage.provider.[index]</code></pre>
+<p>And converter plugins start with:</p>
+<pre><code>rundeck.storage.converter.[index]</code></pre>
+<h2 id="project-storage"><a href="#project-storage">Project Storage</a></h2>
+<p>Similar to Key Storage, the Project Storage container keeps files related to Rundeck Projects:</p>
+<ul>
+<li>contents of <code>etc/project.properties</code> - the Project configuration</li>
+<li>contents of <code>readme.md</code> and <code>motd.md</code> - Readme and MOTD files</li>
+</ul>
+<p>Access to these contents can be made via the Rundeck API.</p>
+<p>See the chapter: <a href="project-setup.html">Project Setup</a></p>
+<p>When configuring Project Storage providers, the configuration entries in <code>rundeck-config.properties</code> start with:</p>
+<pre><code>rundeck.config.storage.provider.[index]</code></pre>
+<p>And converter plugins start with:</p>
+<pre><code>rundeck.config.storage.converter.[index]</code></pre>
+<h2 id="storage-backends"><a href="#storage-backends">Storage backends</a></h2>
+<p>The location of stored data can be either on the filesystem, the database, or some external system via usage of a <strong>Storage Plugin</strong>.</p>
+<p>Rundeck provides these built-in implementations:</p>
+<ul>
+<li><code>file</code> - stores files locally on the filesystem</li>
+<li><code>db</code> - stores file data as BLOBs in the database</li>
+</ul>
+<h3 id="configuring-storage-plugins"><a href="#configuring-storage-plugins">Configuring Storage Plugins</a></h3>
+<p>See <a href="../plugins-user-guide/configuring.html#storage-plugins">Plugins User Guide - Configuring Storage Plugins</a>.</p>
+<h2 id="storage-converters"><a href="#storage-converters">Storage Converters</a></h2>
+<p>Files can be encrypted in the storage backend by use of a <a href="../developer/storage-converter-plugin.html">Storage Converter plugin</a>. A typical plugin would encrypt data at write time, and decrypt it at read time.</p>
+<p>The Storage Converter Plugin handles reading and writing the content for any matching resources. The subsequent data is stored in the storage backend (on-disk or in a database) alongside the metadata for the file.</p>
+<p>Converter plugins do not have to manage storing the data, that will be handled by the Storage backend.</p>
+<h3 id="configuring-storage-converter-plugins"><a href="#configuring-storage-converter-plugins">Configuring Storage Converter Plugins</a></h3>
+<p>See <a href="../plugins-user-guide/configuring.html#storage-converter-plugins">Plugins User Guide - Configuring Storage Converter Plugins</a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.7.1)</a></li>
+    
+    
+    <li ><a href="index.html">Administrator Guide</a></li>
+    <li class="active"><a href="storage-facility.html">Storage Facility</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="scaling-rundeck.html"><i class="glyphicon glyphicon-arrow-left"></i> Scaling Rundeck</a></li>
+      <li class="next"><a href="key-storage.html">Key Storage <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2016 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2016-12-03T01:45:12UTC">2016-12-03T01:45:12UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
