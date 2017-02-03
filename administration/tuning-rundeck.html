@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tuning Rundeck</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.7.2</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.7.2)</a></li>
+    
+    
+    <li ><a href="index.html">Administrator Guide</a></li>
+    <li class="active"><a href="tuning-rundeck.html">Tuning Rundeck</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="backup-and-recovery.html"><i class="glyphicon glyphicon-arrow-left"></i> Backup and Recovery</a></li>
+      <li class="next"><a href="scaling-rundeck.html">Scaling Rundeck <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#file-descriptors">File descriptors</a></li>
+<li><a href="#java-heap-size">Java heap size</a></li>
+<li><a href="#quartz-job-threadcount">Quartz job threadCount</a></li>
+<li><a href="#jmx-instrumentation">JMX instrumentation</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Tuning Rundeck</h1>
+</div>
+<h3 id="file-descriptors"><a href="#file-descriptors">File descriptors</a></h3>
+<p>The Rundeck server process opens a number of files during normal operation. These include system and java libraries, logs, and sockets. Your system restricts the number of open file handles per process but these limitations can be adjusted.</p>
+<p>If your installation attempts to exceed the limit, you will see an error like the one shown below in your <a href="logging.html">service.log</a> file.</p>
+<pre><code>Too many open files </code></pre>
+<p><em>On Linux nodes</em></p>
+<p>List the current limit with the <a href="http://ss64.com/bash/ulimit.html">ulimit</a> command:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">ulimit</span> -n</code></pre>
+<p>If the limit is low (eg <code>1024</code>) it should be raised.</p>
+<p>You can get the current number of open file descriptors used by the Rundeck server process with <a href="http://linux.die.net/man/8/lsof">lsof</a>:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">losf</span> -p <span class="kw">&lt;</span>rundeck pid<span class="kw">&gt;</span> <span class="kw">|</span> <span class="kw">wc</span> -l</code></pre>
+<p>Increase the limit for a wide margin. Edit <a href="http://ss64.com/bash/limits.conf.html">/etc/security/limits.conf</a> file to raise the hard and soft limits. Here they are raised to <code>65535</code> for the &quot;rundeck&quot; system account:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rundeck</span> hard nofile 65535
+<span class="kw">rundeck</span> soft nofile 65535</code></pre>
+<p>The system file descriptor limit is set in /proc/sys/fs/file-max. The following command will increase the limit to 65535:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">echo</span> 65535 <span class="kw">&gt;</span> /proc/sys/fs/file-max</code></pre>
+<p>In a new shell, run the ulimit command to set the new level:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">ulimit</span> -n 65535</code></pre>
+<p>The ulimit setting can be set in the <a href="startup-and-shutdown.html#launcher">rundeckd</a> startup script, or <a href="configuration-file-reference.html#profile">profile</a>.</p>
+<p>Restart Rundeck.</p>
+<h3 id="java-heap-size"><a href="#java-heap-size">Java heap size</a></h3>
+<p>The <code>rundeckd</code> startup script sets initial and maximum heap sizes for the server process. For many installations it will be sufficient.</p>
+<p>If the Rundeck JVM runs out of memory, the following error occurs:</p>
+<pre><code>Exception in thread &quot;main&quot; java.lang.OutOfMemoryError: Java heap space</code></pre>
+<p>Heap size is governed by the following startup parameters: <code>-Xms&lt;initial heap size&gt;</code> and <code>-Xmx&lt;maximum heap size&gt;</code></p>
+<p>You can increase these by updating the Rundeck <a href="configuration-file-reference.html#profile">profile</a>. To see the current values, grep the <code>profile</code> for the Xmx and Xms patterns:</p>
+<p><strong>Launcher installs:</strong></p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">egrep</span> <span class="st">&#39;(Xmx|Xms)&#39;</span> <span class="ot">$RDECK_BASE</span>/etc/profile</code></pre>
+<p><strong>RPM installs:</strong></p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">egrep</span> <span class="st">&#39;(Xmx|Xms)&#39;</span> /etc/rundeck/profile</code></pre>
+<p>The default settings initialized by the installer sets these to 1024 megabytes maximum and 256 megabytes initial:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">export</span> <span class="ot">RDECK_JVM=</span><span class="st">&quot;</span><span class="ot">$RDECK_JVM</span><span class="st"> -Xmx1024m -Xms256m&quot;</span></code></pre>
+<p><em>Sizing advice</em></p>
+<p>Several factors drive memory usage in Rundeck:</p>
+<ul>
+<li>User sessions</li>
+<li>Concurrent threads</li>
+<li>Concurrent jobs</li>
+<li>Number of managed nodes</li>
+</ul>
+<p>For example, if your installation has dozens of active users that manage a large environment (1000+ nodes), and has sufficient system memory, the following sizings might be more suitable:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">export</span> <span class="ot">RDECK_JVM=</span><span class="st">&quot;</span><span class="ot">$RDECK_JVM</span><span class="st"> -Xmx4096m -Xms1024m&quot;</span></code></pre>
+<h3 id="quartz-job-threadcount"><a href="#quartz-job-threadcount">Quartz job threadCount</a></h3>
+<p>The maximum number of threads used by Rundeck for concurrent jobs by default is set to <code>10</code>.</p>
+<p>You can change this value, by updating either the <code>rundeck-config.properties</code> file, or a file called <code>quartz.properties</code>.</p>
+<p>Please refer to the Quartz site for detailed information: <a href="http://www.quartz-scheduler.org/generated/2.2.1/html/qs-all/#page/Quartz_Scheduler_Documentation_Set%2Fre-thr_threadpool_configuration.html%23">Quartz 2.2 - ThreadPool Configuration</a>.</p>
+<h4 id="update-rundeck-config"><a href="#update-rundeck-config">Update rundeck-config</a></h4>
+<p>Use the properties mentioned in the Quartz documentation, but <strong>replace</strong> the <code>org.quartz</code> prefix, with the prefix <code>quartz.props</code>.</p>
+<p>e.g. in <code>rundeck-config.properties</code> :</p>
+<pre class="properties"><code>quartz.props.threadPool.threadCount = 20</code></pre>
+<p>Set the threadCount value to the max number of threads you want to run concurrently.</p>
+<h4 id="update-quartz.properties"><a href="#update-quartz.properties">Update quartz.properties</a></h4>
+<p>If the file doesn't exist, create it.</p>
+<ul>
+<li>RPM install: <code>/var/lib/rundeck/server/exp/webapp/WEB-INF/classes/quartz.properties</code></li>
+<li>Launcher install: <code>$RDECK_BASE/server/exp/webapp/WEB-INF/classes/quartz.properties</code></li>
+</ul>
+<p>To change the maximum threadCount modify this file and add the line:</p>
+<pre><code>org.quartz.threadPool.threadCount = 20</code></pre>
+<p>Set the threadCount value to the max number of threads you want to run concurrently.</p>
+<h3 id="jmx-instrumentation"><a href="#jmx-instrumentation">JMX instrumentation</a></h3>
+<p>You may wish to monitor the internal operation of your Rundeck server via JMX.</p>
+<p>JMX provides introspection on the JVM, the application server, and classes all through a consistent interface. These various components are exposed to the management console via JMX managed beans - MBeans for short.</p>
+<p><em>Note</em>: For more background information on JMX, see &quot;<a href="http://www.ibm.com/developerworks/library/j-jtp09196/">Java theory and practice: Instrumenting applications with JMX.</a>&quot;.</p>
+<p>Enable local JMX monitoring by adding the <code>com.sun.management.jmxremote</code> flag to the startup parameters in the <a href="configuration-file-reference.html#profile">profile</a>.</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">export</span> <span class="ot">RDECK_JVM=</span><span class="st">&quot;</span><span class="ot">$RDECK_JVM</span><span class="st"> -Dcom.sun.management.jmxremote&quot;</span></code></pre>
+<p>You use a JMX client to monitor JMX agents. This can be a desktop GUI like JConsole run locally.</p>
+<pre><code>jconsole &lt;rundeck pid&gt;</code></pre>
+<p>For instructions on remote JMX monitoring for Grails, Spring and log4j see: <a href="http://public.dhe.ibm.com/software/dw/java/j-grails12168-pdf.pdf">Grails in the enterprise</a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.7.2)</a></li>
+    
+    
+    <li ><a href="index.html">Administrator Guide</a></li>
+    <li class="active"><a href="tuning-rundeck.html">Tuning Rundeck</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="backup-and-recovery.html"><i class="glyphicon glyphicon-arrow-left"></i> Backup and Recovery</a></li>
+      <li class="next"><a href="scaling-rundeck.html">Scaling Rundeck <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2017 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2017-02-03T16:59:04UTC">2017-02-03T16:59:04UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>

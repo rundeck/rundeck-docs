@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Executions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Alex Honor" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="January 30, 2014" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.7.2</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.7.2)</a></li>
+    
+    
+    <li ><a href="index.html">User Guide</a></li>
+    <li class="active"><a href="executions.html">Executions</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="commands.html"><i class="glyphicon glyphicon-arrow-left"></i> Commands</a></li>
+      <li class="next"><a href="activity.html">Activity <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#difference-between-jobs-and-commands">Difference between Jobs and Commands</a><ul>
+<li><a href="#job-execution-view">Job execution view</a></li>
+<li><a href="#command-execution-view">Command execution view</a></li>
+</ul></li>
+<li><a href="#summary-view">Summary View</a><ul>
+<li><a href="#live">Live</a></li>
+<li><a href="#completed">Completed</a></li>
+</ul></li>
+<li><a href="#monitor-and-report-views">Monitor And Report Views</a><ul>
+<li><a href="#monitor">Monitor</a></li>
+<li><a href="#report">Report</a></li>
+</ul></li>
+<li><a href="#log-output">Log Output</a><ul>
+<li><a href="#view-options">View options</a></li>
+<li><a href="#raw-output">Raw output</a></li>
+</ul></li>
+<li><a href="#definition">Definition</a></li>
+<li><a href="#actions">Actions</a><ul>
+<li><a href="#saving-a-command-execution-as-a-job">Saving a Command execution as a Job</a></li>
+<li><a href="#edit-the-job">Edit the job</a></li>
+<li><a href="#running-again">Running again</a></li>
+<li><a href="#deleting">Deleting</a></li>
+</ul></li>
+<li><a href="#related-command-line-tools">Related Command Line Tools</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Executions</h1>
+</div>
+<p>An <em>execution</em> is a representation of the activity of a running or completed command or job. The data about the execution is used in rundeck to monitor the progress of a job or command and later for reporting about what happened.</p>
+<p>Each execution contains any output generated by commands or job steps, a record of the nodes where they occurred and the start/end time and status for each step.</p>
+<h2 id="overview"><a href="#overview">Overview</a></h2>
+<p>An execution represents the state of a command or job execution. Users can view an execution while it is in one of two states, running or completed. Each execution is identified by an ID and is addressable by a unique URL. You can share this URL to other Rundeck users and all see a common view of the execution.</p>
+<p>The Rundeck graphical interface lets you watch the progress of an execution in a number of ways - summary, monitor, log view or status bar - depending on the level of detail you desire.</p>
+<p>Jobs can complete either successfully, with a failure, partial success or have been aborted. The execution state consists of metadata about the steps, nodes where steps are running, log output, and any inputs and options the job runner has provided. The state also contains information about start and end time, and who started it.</p>
+<p>Besides the graphical interface, it is also possible to view an execution via the API or command line tool.</p>
+<h2 id="difference-between-jobs-and-commands"><a href="#difference-between-jobs-and-commands">Difference between Jobs and Commands</a></h2>
+<p>Whether executing a job or a command, Rundeck provides a consistent interface to the execution.</p>
+<p>There are small differences between the two though and the Rundeck graphic interface indicates this through a few changes to the appearance in the web pages.</p>
+<h3 id="job-execution-view"><a href="#job-execution-view">Job execution view</a></h3>
+<p>Job executions show the Job name and group and display an icon that looks like a book. An Action menu provides actions to modify the job.</p>
+<div class="figure">
+<img src="../figures/fig0805.png" alt="Job execution" /><p class="caption">Job execution</p>
+</div>
+<h3 id="command-execution-view"><a href="#command-execution-view">Command execution view</a></h3>
+<ol style="list-style-type: decimal">
+<li>Command executions display the command string as the execution name and an icon that looks like a terminal command prompt (<code>&gt;_</code>).</li>
+<li>The &quot;Save as a Job...&quot; button offers a user to create a job from the command using the same node filter info and automatically defines the first step of the workflow using the command string.</li>
+</ol>
+<div class="figure">
+<img src="../figures/fig0804.png" alt="Command execution" /><p class="caption">Command execution</p>
+</div>
+<h2 id="summary-view"><a href="#summary-view">Summary View</a></h2>
+<p>The summary view is the left most tab in the execution page and provides a simplified view of the execution state. The summary view is useful if you have a long running job and it is not important to view detail about its progress nor the log messages.</p>
+<p>The summary page displays a box score style table containing counters about node step executions.</p>
+<h3 id="live"><a href="#live">Live</a></h3>
+<p>The screenshot below displays the elements of the summary view for a running execution.</p>
+<ol style="list-style-type: decimal">
+<li>Execution status icon is blue to indicate it is running.</li>
+<li><p>Elapsed Time progress bar. The average elapsed time is calculated from the previous executions of the job. If the elapsed time is within the average duration, the bar is colored blue. If the elapsed time exceeds the average the bar turns orange. <img src="../figures/fig0810.png" /></p></li>
+<li>Action buttons. Assuming the ACL policy grants it, the execution can be killed.</li>
+<li>Tabs to other execution views besides Summary.</li>
+<li>Box score node summary shows nodes that are waiting to run, currently running steps, or are done running their steps.</li>
+<li>Now Running displays the current node and step that is being executed. The step is a link that will take you to the Monitor view.</li>
+<li><p>Activity for this job provides historical views to this kind of execution.</p></li>
+</ol>
+<div class="figure">
+<img src="../figures/fig0800.png" alt="Summary: Running" /><p class="caption">Summary: Running</p>
+</div>
+<h3 id="completed"><a href="#completed">Completed</a></h3>
+<p>The screenshot below displays the elements of the summary view for a completed execution.</p>
+<ol style="list-style-type: decimal">
+<li>Execution status icon is green with a check mark to indicate it was successful. Unsuccessful executions are red.</li>
+<li>Action buttons. Press the &quot;Run Again...&quot; button to re-run the execution.</li>
+<li>Box score about executed node steps:
+<ul>
+<li>COMPLETE: number of nodes that ran all steps,</li>
+<li>FAILED: number of nodes with failed steps,</li>
+<li>INCOMPLETE: number of nodes with some steps that were not started,</li>
+<li>NOT STARTED: number of nodes with all steps that were not started.</li>
+</ul></li>
+</ol>
+<div class="figure">
+<img src="../figures/fig0801.png" alt="Summary: Completed" /><p class="caption">Summary: Completed</p>
+</div>
+<h2 id="monitor-and-report-views"><a href="#monitor-and-report-views">Monitor And Report Views</a></h2>
+<p>Depending on the execution state, you can view the execution by node and step.</p>
+<h3 id="monitor"><a href="#monitor">Monitor</a></h3>
+<p>While the execution is running you can monitor progess organized by node and step. All nodes part of the execution are displayed with their steps shown below. The following screenshot displays the notable aspects.</p>
+<ol style="list-style-type: decimal">
+<li>Node detail view contains an arrow that when pushed, displays the steps. Clicking on the step will show any output that step generates.</li>
+<li>Step status is shown in the second column. If all steps for that node complete, &quot;All Steps OK &quot; is shown, otherwise you will see &quot;Running&quot;.</li>
+<li>The current executing step is shown in the third column.</li>
+<li>Start time and duration are displayed in the right hand columns.</li>
+</ol>
+<div class="figure">
+<img src="../figures/fig0806.png" alt="Monitor view" /><p class="caption">Monitor view</p>
+</div>
+<h3 id="report"><a href="#report">Report</a></h3>
+<p>After the execution completes, the Monitor tab name changes to &quot;Report&quot;. The Report view is similar to the Monitor view, displaying node and step information.</p>
+<ol style="list-style-type: decimal">
+<li>Box score about executed node steps as discussed earlier in this document.</li>
+<li>Collated output detail showing information as described in the Monitor view.</li>
+</ol>
+<div class="figure">
+<img src="../figures/fig0807.png" alt="Report view" /><p class="caption">Report view</p>
+</div>
+<h2 id="log-output"><a href="#log-output">Log Output</a></h2>
+<p>Output generated by the steps are displayed in the &quot;Log Output&quot; tab. While the execution is running, new messages are appened to the end of the view simulating a log tail.</p>
+<div class="figure">
+<img src="../figures/fig0808.png" alt="Log output view" /><p class="caption">Log output view</p>
+</div>
+<h3 id="view-options"><a href="#view-options">View options</a></h3>
+<p>The output view is controlled by view options (1). Click the &quot;View Options&quot; link to reveal the controls. The screenshot above shows the default settings turned on.</p>
+<ul>
+<li>time stamp. This is the time the message was read (not the time of execution on the remote server)</li>
+<li>node name. This is the Node's name where the step occured.</li>
+<li>step name. This is the step executed on the node. The icon indicates the kind of step. The one shown inthe screen shot is a job step (indicated by the book icon).</li>
+<li>log message. This is the output generated by the step. Messages written to standard error are displayed in a brownish red color.</li>
+</ul>
+<p><em>Ansi Color Mode</em>, if enabled, shows any ANSI-escaped colors in the output text. If disabled, the colors are not shown.</p>
+<p>The example below shows a screenshot of just Time and Node information selected.</p>
+<div class="figure">
+<img src="../figures/fig0209.png" alt="View options" /><p class="caption">View options</p>
+</div>
+<p>This results in the following display.</p>
+<div class="figure">
+<img src="../figures/fig0809.png" alt="Selected view options" /><p class="caption">Selected view options</p>
+</div>
+<h3 id="raw-output"><a href="#raw-output">Raw output</a></h3>
+<p>Press the &quot;Raw&quot; link to display just the log messages without any execution metadata.</p>
+<pre><code>- Web stopped (pid=8685) using method: web:stop
+- Web stopped (pid=8928) using method: web:stop
+- Web started (pid=15088)
+- Web started (pid=15331)</code></pre>
+<p>The Raw link does not contain any execution state metadata and only the output written to standard out and standard error (displayed in brown).</p>
+<h2 id="definition"><a href="#definition">Definition</a></h2>
+<p>Part of the execution model consists of the definition. For jobs this includes any steps and for Commands this contains the command string. Besides steps, the definition includes the nodes filter expression and the matched nodes. You can also note, that workflow strategy, error handling and concurrency settings are also visible.</p>
+<div class="figure">
+<img src="../figures/fig0811.png" alt="Execution definition" /><p class="caption">Execution definition</p>
+</div>
+<ol style="list-style-type: decimal">
+<li>Job steps. Each step is numbered in the order of execution. Each step type is recognizable by a different icon.</li>
+<li>Extra detail for script step. Script steps have extra detail available. Cicking that link will reveal the script in a window.</li>
+<li>Node filtering expression. Click the expression to reveal the nodes that were part of the execution. <img src="../figures/fig0812.png" alt="Execution nodes expanded" /></li>
+</ol>
+<ul>
+<li>3.a. Clicking on any of the attributes will take you to the Nodes page and match any nodes with that attribute name or value.</li>
+</ul>
+<h2 id="actions"><a href="#actions">Actions</a></h2>
+<h3 id="saving-a-command-execution-as-a-job"><a href="#saving-a-command-execution-as-a-job">Saving a Command execution as a Job</a></h3>
+<p>If a command execution needs repeating you may wish to save it as a Job. Of course, this assumes you have the appropriate ACL privilege allowing job edit.</p>
+<p>Press the &quot;Save as a Job...&quot; button to open the job editor and place the command string as the first step.</p>
+<div class="figure">
+<img src="../figures/fig0813.png" />
+</div>
+<p>It will be entered in the workflow portion of the job edit form as shown below.</p>
+<div class="figure">
+<img src="../figures/fig0814.png" alt="Command step in the Job form" /><p class="caption">Command step in the Job form</p>
+</div>
+<h3 id="edit-the-job"><a href="#edit-the-job">Edit the job</a></h3>
+<p>Press the Action menu button and choose &quot;Edit this Job..&quot; to open the job definition in the Job editor.</p>
+<div class="figure">
+<img src="../figures/fig0815.png" alt="Edit job definition" /><p class="caption">Edit job definition</p>
+</div>
+<h3 id="running-again"><a href="#running-again">Running again</a></h3>
+<p>To execute the job again press the &quot;Run Again...&quot; button.</p>
+<div class="figure">
+<img src="../figures/fig0816.png" alt="Run again" /><p class="caption">Run again</p>
+</div>
+<p>Note, the current definition is executed not the one stored in the execution.</p>
+<h3 id="deleting"><a href="#deleting">Deleting</a></h3>
+<p>If you have access, you can delete the execution by clicking &quot;Delete this Execution&quot; and confirming.</p>
+<div class="figure">
+<img src="../figures/fig08-delete-execution.png" alt="Delete this execution" /><p class="caption">Delete this execution</p>
+</div>
+<h2 id="related-command-line-tools"><a href="#related-command-line-tools">Related Command Line Tools</a></h2>
+<dl>
+<dt><a href="../man1/rd-queue.html">rd-queue</a></dt>
+<dd>List, follow or kill currently running executions.
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.7.2)</a></li>
+    
+    
+    <li ><a href="index.html">User Guide</a></li>
+    <li class="active"><a href="executions.html">Executions</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="commands.html"><i class="glyphicon glyphicon-arrow-left"></i> Commands</a></li>
+      <li class="next"><a href="activity.html">Activity <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2017 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2017-02-03T16:59:04UTC">2017-02-03T16:59:04UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
