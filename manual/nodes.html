@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nodes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Alex Honor" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="January 30, 2014" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.8.1</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.8.1)</a></li>
+    
+    
+    <li ><a href="index.html">User Guide</a></li>
+    <li class="active"><a href="nodes.html">Nodes</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="jobs.html"><i class="glyphicon glyphicon-arrow-left"></i> Jobs</a></li>
+      <li class="next"><a href="commands.html">Commands <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#nodes-tab-overview">Nodes tab overview</a></li>
+<li><a href="#attribute-name-spaces">Attribute name spaces</a></li>
+<li><a href="#navigating-nodes-by-tag-or-attribute">Navigating Nodes by tag or attribute</a></li>
+<li><a href="#node-filtering">Node filtering</a><ul>
+<li><a href="#filter-expression-syntax">Filter expression syntax</a></li>
+<li><a href="#saving-filters">Saving filters</a></li>
+</ul></li>
+<li><a href="#node-actions">Node actions</a></li>
+<li><a href="#related-command-line-tools">Related Command line tools</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Nodes</h1>
+</div>
+<h2 id="overview"><a href="#overview">Overview</a></h2>
+<p>A <em>Node</em> is a resource that is either a physical or virtual instance of a network accessible host. Nodes have a few basic attributes but a Node's attributes can be extended to include arbitrary named key/value pairs. Attributes typically describe the properties of a node or reflect the state of the node. One of a Node's built in attributes is called &quot;tags&quot; which is a list of classifications or categories about that Node.</p>
+<h2 id="nodes-tab-overview"><a href="#nodes-tab-overview">Nodes tab overview</a></h2>
+<p>Navigate to this page by clicking on the &quot;Nodes&quot; tab in the navigation bar.</p>
+<div class="figure">
+<img src="../figures/fig0204-a.png" alt="Nodes page" /><p class="caption">Nodes page</p>
+</div>
+<p>The screenshot above shows the elements of the Nodes page user interface.</p>
+<ol style="list-style-type: decimal">
+<li>Filter - Search expression using tags and attribute patterns. The filter menu also contains an item to list all nodes in the project.</li>
+<li>Tags - Category or classification of Nodes. Each tag shows the number of nodes that reference that tag. You can click the tag name and list other nodes with that tag.</li>
+<li>Node detail - Clicking on the node name will show a diaglog that lets you view the attributes and values for that Node.</li>
+<li>Attributes - Node attributes describe the characteristics or state of a Node</li>
+<li>Node actions - Run a command or create a Job for the nodes matching the filter.</li>
+<li>Single node view - Click the arrow next to the node name to drill down to a single node.</li>
+</ol>
+<h2 id="attribute-name-spaces"><a href="#attribute-name-spaces">Attribute name spaces</a></h2>
+<p>Because nodes might have many attributes, it can be helpful to use a naming convention that groups them into namespaces. The naming convention is simple:</p>
+<pre><code>{namespace}:{name} = {value}</code></pre>
+<p>When Rundeck sees an attribute with a name containing a colon it automatically groups them in the UI. For example, the screenshot below shows a node with two attributes under the &quot;web&quot; prefix.</p>
+<div class="figure">
+<img src="../figures/fig0204-h.png" alt="Attribute namespace" /><p class="caption">Attribute namespace</p>
+</div>
+<p>The two attributes are:</p>
+<ul>
+<li>web:pid = 4872</li>
+<li>web:state = RUNNING</li>
+</ul>
+<p>This naming convention is really just a graphical treatment to reduce the amount of data being shown all at once. This convention also helps add structure to your resource model.</p>
+<h2 id="navigating-nodes-by-tag-or-attribute"><a href="#navigating-nodes-by-tag-or-attribute">Navigating Nodes by tag or attribute</a></h2>
+<p>The node detail view contains a set of hyperlinks that automatically filter the nodes in the project. By clicking on a Node's tags, attribute names or attribute values the list of nodes will be refined to match a more specific expression. You can delete parts of the expression from the filter form to expand the search again.</p>
+<p>As you click search links in the node detail view, that attribute is placed in the node filter form and the attribute becomes a new column in the list view. These filtered list views are useful to create custom views about the project nodes.</p>
+<p>The screenshot below shows a case where two nodes were found that were tagged &quot;www&quot; have an attribute named web:pid and with their web:state attribute value &quot;RUNNING&quot;.</p>
+<div class="figure">
+<img src="../figures/fig0204-b.png" alt="Nodes filtering links" /><p class="caption">Nodes filtering links</p>
+</div>
+<ol style="list-style-type: decimal">
+<li>Clicking the single node view icon filters the list down to just that node.</li>
+<li>Find nodes with this Tag (e,g just nodes with tagged &quot;www&quot;).</li>
+<li>Find nodes with this Attribute name (e.g., any node with the &quot;web:pid&quot; attribute).</li>
+<li>Find nodes with this Attribute value (e.g., any node with attribute &quot;web:state=RUNNING&quot; ).</li>
+</ol>
+<p>The next screenshot shows a single node view. Notice the nodes unique name is entered in the filter form.</p>
+<div class="figure">
+<img src="../figures/fig0204-c1.png" alt="Single node view" /><p class="caption">Single node view</p>
+</div>
+<h2 id="node-filtering"><a href="#node-filtering">Node filtering</a></h2>
+<p>A <em>node filter</em> is a search pattern that matches a set of nodes. Rundeck node filters let you match Nodes based on a pattern like &quot;tags&quot; or any node attribute. You can define node filters that include and exclude nodes based on sets of patterns. While a node filter can specifically reference nodes using their unique name, filter patterns are more resilient to changes in your environment and better handle dynamically provisioned servers.</p>
+<div class="figure">
+<img src="../figures/fig0204-c.png" alt="Filtered nodes" /><p class="caption">Filtered nodes</p>
+</div>
+<ol style="list-style-type: decimal">
+<li>Filter expression</li>
+<li>Columned labeled by attribute name</li>
+</ol>
+<h3 id="filter-expression-syntax"><a href="#filter-expression-syntax">Filter expression syntax</a></h3>
+<p>The filter expression syntax is very simple. You can find a list of nodes by entering their names, or by attribute name and value. Values can also be regular expressions.</p>
+<p>For full syntax information see the <a href="node-filters.html">Node Filters</a> chapter.</p>
+<p>If you forget the syntax, press the help button in the filter form and a dialog containing a cheet sheet will be displayed (see screenshot below).</p>
+<div class="figure">
+<img src="../figures/fig0204-c2.png" alt="Filter expressions help" /><p class="caption">Filter expressions help</p>
+</div>
+<p>To exclude nodes that match a pattern place a &quot;!&quot; (exclamation point) to negate that part of the match.</p>
+<ol style="list-style-type: decimal">
+<li>Filter expression help dialog</li>
+</ol>
+<h3 id="saving-filters"><a href="#saving-filters">Saving filters</a></h3>
+<p>Often times you will want to go back to a set of nodes that matched a filter. You can save the filter and give it a name by pressing the &quot;save filter&quot; button to the right of the filter form. The example below shows the dialog to confirm saving a new filter.</p>
+<div class="figure">
+<img src="../figures/fig0204-d.png" alt="Filtered nodes" /><p class="caption">Filtered nodes</p>
+</div>
+<ol style="list-style-type: decimal">
+<li>Filter name</li>
+</ol>
+<p>The saved filters become availale in the Filters menu in in othe parts rundeck, like in the Nodes page, when creating Jobs or running Commands.</p>
+<div class="figure">
+<img src="../figures/fig0204-e.png" alt="Saved Filters menu" /><p class="caption">Saved Filters menu</p>
+</div>
+<ol style="list-style-type: decimal">
+<li>Named filter in menu</li>
+</ol>
+<h2 id="node-actions"><a href="#node-actions">Node actions</a></h2>
+<p>Often times you are browsing and filtering nodes because you want do do something with the list. The Node Actions menu contains links to</p>
+<ul>
+<li>Run a command. Choosing this menu item will forward your browser to the Commands page.</li>
+<li>Create a job. Choosing this menu item will forward you to the Job create page and enter the filter expression in the edit form.</li>
+</ul>
+<div class="figure">
+<img src="../figures/fig0204-f.png" alt="Node actions menu" /><p class="caption">Node actions menu</p>
+</div>
+<p>Users that don't have sufficeint privileges granted by the ACL will show that menu item disabled.</p>
+<p>The example below shows that the user can't create Job for those nodes.</p>
+<div class="figure">
+<img src="../figures/fig0204-g.png" alt="Not authorized in menu" /><p class="caption">Not authorized in menu</p>
+</div>
+<h2 id="related-command-line-tools"><a href="#related-command-line-tools">Related Command line tools</a></h2>
+<dl>
+<dt><a href="../man1/dispatch.html">dispatch</a></dt>
+<dd>List nodes or execute commands and scripts.
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.8.1)</a></li>
+    
+    
+    <li ><a href="index.html">User Guide</a></li>
+    <li class="active"><a href="nodes.html">Nodes</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="jobs.html"><i class="glyphicon glyphicon-arrow-left"></i> Jobs</a></li>
+      <li class="next"><a href="commands.html">Commands <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2017 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2017-04-17T23:33:56UTC">2017-04-17T23:33:56UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
