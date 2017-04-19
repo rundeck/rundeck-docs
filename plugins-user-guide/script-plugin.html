@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.8.2</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.8.2)</a></li>
+    
+    
+    <li ><a href="index.html">Plugins User Guide</a></li>
+    <li class="active"><a href="script-plugin.html">Script Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="logging-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> Logging Plugins</a></li>
+      <li class="next"><a href="ssh-plugins.html">SSH Plugins <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#custom-command-and-script-execution-with-the-script-plugin">Custom command and script execution with the script-plugin</a><ul>
+<li><a href="#configuring-script-exec">Configuring script-exec</a></li>
+<li><a href="#configuring-script-copy">Configuring script-copy</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<h2 id="custom-command-and-script-execution-with-the-script-plugin"><a href="#custom-command-and-script-execution-with-the-script-plugin">Custom command and script execution with the script-plugin</a></h2>
+<p>Rundeck comes with a pre-installed plugin called <code>script-plugin</code> that includes two providers that may be useful to customize how to execute commands and script files on remote nodes.</p>
+<p>The <code>script-plugin</code> includes these providers:</p>
+<ul>
+<li><code>script-exec</code> for the NodeExecutor service</li>
+<li><code>script-copy</code> for the FileCopier service</li>
+</ul>
+<p>This plugin provides the ability to specify an external script or command to perform a remote or local execution of a Rundeck command, and remote or local file copies.</p>
+<p>It can be a replacement for the built-in SSH-based remote execution and SCP-based file-copy mechanism to allow you to user whatever external mechanism you wish.</p>
+<p>Note: this plugin offers similar functionality to the <a href="../developer/plugin-development.html#script-plugin-development">Script Plugin Development</a> model. You may want to use this plugin to test your scripts, and then later package them into a standalone plugin using that model.</p>
+<h3 id="configuring-script-exec"><a href="#configuring-script-exec">Configuring script-exec</a></h3>
+<p>To configure the plugin you must specify a commandline string to execute. Optionally you may specify a directory to be used as the working directory when executing the commandline string, and a shell to invoke the command.</p>
+<p>You can configure these across all projects (framework-wide), a single project (project-wide), or specifically for each node, with the most specific configuration value taking precedence.</p>
+<h4 id="configuring-the-command-for-script-exec"><a href="#configuring-the-command-for-script-exec">Configuring the command for script-exec</a></h4>
+<p>For Framework and Project-wide, configure a property in either the framework.properties or project.properties files:</p>
+<dl>
+<dt><code>plugin.script-exec.default.command</code></dt>
+<dd>Specifies the default system command to run
+</dd>
+</dl>
+<p>For node-specific add an attribute named <code>script-exec</code> to the node.</p>
+<dl>
+<dt><code>script-exec</code></dt>
+<dd>Specifies the system command to run
+</dd>
+</dl>
+<p>See <a href="#defining-the-script-exec-command">Defining the script-exec command</a> for what to specify for this property.</p>
+<h4 id="configuring-the-working-directory"><a href="#configuring-the-working-directory">Configuring the working directory</a></h4>
+<p>For Framework and Project-wide, configure a property in either the framework.properties or project.properties files:</p>
+<dl>
+<dt><code>plugin.script-exec.default.dir</code></dt>
+<dd>Specifies the default working directory for the execution
+</dd>
+</dl>
+<p>For node-specific add an attribute named <code>script-exec-dir</code> to the node.</p>
+<dl>
+<dt><code>script-exec-dir</code></dt>
+<dd>Specifies the default working directory for the execution (optional)
+</dd>
+</dl>
+<h4 id="configuring-the-shell"><a href="#configuring-the-shell">Configuring the shell</a></h4>
+<p>For Framework and Project-wide, configure a property in either the framework.properties or project.properties files:</p>
+<dl>
+<dt><code>plugin.script-exec.default.shell</code></dt>
+<dd>Specifies the shell to use to interpret the command, e.g. &quot;bash -c&quot; or &quot;cmd.exe /c&quot;
+</dd>
+</dl>
+<p>For node-specific add an attribute named <code>script-exec-shell</code> to the node.</p>
+<dl>
+<dt><code>script-exec-shell</code></dt>
+<dd>Specifies the shell to use to interpret the command, e.g. &quot;bash -c&quot; or &quot;cmd.exe /c&quot; (optional)
+</dd>
+</dl>
+<h4 id="defining-the-script-exec-command"><a href="#defining-the-script-exec-command">Defining the script-exec command</a></h4>
+<p>The value of this property or attribute should be the complete commandline string to execute in an external system process.</p>
+<p>You can use <em>Data context properties</em> as you can in normal Rundeck command execution, such as <code>${node.name}</code> or <code>${job.name}</code>.</p>
+<p>In addition, the plugin provides these new data context properties:</p>
+<dl>
+<dt><code>exec.command</code></dt>
+<dd><p>The command that the workflow/user has specified to run on the node</p>
+</dd>
+<dt><code>exec.dir</code></dt>
+<dd><p>The working directory path if it is configured for the node or in a properties file</p>
+</dd>
+</dl>
+<p>Example:</p>
+<p>If you wanted to run some external remote connection command (&quot;/bin/execremote&quot;) in lieu of the built-in ssh command, you could specify these attributes for node:</p>
+<pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">mynode:</span>
+    <span class="fu">node-executor:</span> script-exec
+    <span class="fu">script-exec:</span> /bin/execremote -host ${node.hostname} -user ${node.username} -- ${exec.command}</code></pre>
+<p>If the command you want to run requires special handling (such as quoting or other interpretation) you may want to have a shell execute it. In which case you could specify the shell to use:</p>
+<pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">mynode:</span>
+    <span class="fu">node-executor:</span> script-exec
+    <span class="fu">script-exec-shell:</span> bash -c
+    <span class="fu">script-exec:</span> ssh -o &quot;some quoted option&quot; ${node.username}@${node.hostname} ${exec.command}</code></pre>
+<p>At run time, the properties specified would be expanded to the values for the specific node and command string to execute.</p>
+<p>OR, you could specify a default to apply to all nodes within the project.properties file located at <code>$RDECK_BASE/projects/NAME/etc/project.properties</code>.</p>
+<pre><code>script-exec.default.command=/bin/execremote -host ${node.hostname} \
+    -user ${node.username} -- ${exec.command}</code></pre>
+<p>Similarly for the <code>$RDECK_BASE/etc/framework.properties</code> file to apply to all projects.</p>
+<h4 id="requirements-for-the-script-exec-command"><a href="#requirements-for-the-script-exec-command">Requirements for the script-exec command</a></h4>
+<p>The command run by by the script plugin is expected to behave in the following manner:</p>
+<ul>
+<li>Exit with a system exit code of &quot;0&quot; in case of success.</li>
+<li>Any other exit code indicates failure</li>
+</ul>
+<p>Note: all output from STDOUT and STDERR will be captured as part of the Rundeck job execution.</p>
+<h3 id="configuring-script-copy"><a href="#configuring-script-copy">Configuring script-copy</a></h3>
+<p>To configure script-copy you must specify a commandline string to execute. Optionally you may specify a directory to be used as the working directory when executing the commandline string, and a shell to use to interpret the command.</p>
+<p>You must also specify the filepath on the target node where the script files will be placed, which can be done in two different ways.</p>
+<p>You can configure these across all projects (framework-wide), a single project (project-wide), or specifically for each node, with the most specific configuration value taking precedence.</p>
+<h4 id="configuring-the-command-for-script-copy"><a href="#configuring-the-command-for-script-copy">Configuring the command for script-copy</a></h4>
+<p>For Framework and Project-wide, configure these properties in either the framework.properties or project.properties files:</p>
+<dl>
+<dt><code>plugin.script-copy.default.command</code></dt>
+<dd>Specifies the default system command to run
+</dd>
+</dl>
+<p>For node-specific add these attributes to the node.</p>
+<dl>
+<dt><code>script-copy</code></dt>
+<dd>Specifies the system command to run
+</dd>
+</dl>
+<p>See <a href="#defining-the-script-copy-command">Defining the script-copy command</a> for what to specify for this property.</p>
+<h4 id="configuring-the-working-directory-1"><a href="#configuring-the-working-directory-1">Configuring the working directory</a></h4>
+<p>For Framework and Project-wide, configure a property in either the framework.properties or project.properties files:</p>
+<dl>
+<dt><code>plugin.script-copy.default.dir</code></dt>
+<dd>Specifies the default working directory for the execution
+</dd>
+</dl>
+<p>For node-specific add an attribute named <code>script-copy-dir</code> to the node.</p>
+<dl>
+<dt><code>script-copy-dir</code></dt>
+<dd>Specifies the default working directory for the execution (optional)
+</dd>
+</dl>
+<h4 id="configuring-the-shell-1"><a href="#configuring-the-shell-1">Configuring the shell</a></h4>
+<p>For Framework and Project-wide, configure a property in either the framework.properties or project.properties files:</p>
+<dl>
+<dt><code>plugin.script-copy.default.shell</code></dt>
+<dd>Specifies the shell to run the command (optional)
+</dd>
+</dl>
+<p>For node-specific add an attribute named <code>script-copy-shell</code> to the node.</p>
+<dl>
+<dt><code>script-copy-shell</code></dt>
+<dd>Specifies the shell to run the command (optional)
+</dd>
+</dl>
+<h4 id="configuring-the-remote-filepath"><a href="#configuring-the-remote-filepath">Configuring the remote filepath</a></h4>
+<p>For Framework and Project-wide, configure a property in either the framework.properties or project.properties files:</p>
+<dl>
+<dt><code>plugin.script-copy.default.remote-filepath</code></dt>
+<dd>Specifies the full path of the copied file.
+</dd>
+</dl>
+<p>For node-specific add an attribute named <code>script-copy-remote-filepath</code> to the node.</p>
+<dl>
+<dt><code>script-copy-remote-filepath</code></dt>
+<dd>Specifies the full path of the copied file.
+</dd>
+</dl>
+<p>See <a href="#defining-the-script-copy-filepath">Defining the script-copy filepath</a> for what to specify for this property.</p>
+<h4 id="defining-the-script-copy-command"><a href="#defining-the-script-copy-command">Defining the script-copy command</a></h4>
+<p>The value of this property or attribute should be the complete commandline string to execute in an external system process.</p>
+<p>You can use <em>Data context properties</em> as you can in normal Rundeck command execution, such as <code>${node.name}</code> or <code>${job.name}</code>.</p>
+<p>In addition, the plugin provides these new data context properties:</p>
+<dl>
+<dt><code>file-copy.file</code></dt>
+<dd><p>The local filepath that should be copied to the remote node</p>
+</dd>
+<dt><code>file-copy.filename</code></dt>
+<dd><p>The name of the file without any path information.</p>
+</dd>
+<dt><code>file-copy.destination</code></dt>
+<dd><p>The full destination path to copy the file to.</p>
+</dd>
+</dl>
+<p>The plugin will be executed in two scenarios:</p>
+<ol style="list-style-type: decimal">
+<li>A script must be copied to the remote node into a temporary location in order to be executed
+<ul>
+<li>In this case, the <code>${file-copy.destination}</code> will be generated based on the <a href="#defining-the-script-copy-filepath">script-copy filepath</a> property.</li>
+<li>If the &quot;script-copy filepath&quot; is not set, then the <code>${file-copy.destination}</code> will be unknown, and be blank</li>
+</ul></li>
+<li>A file must be copied to a specific destination path
+<ul>
+<li>In this case the <code>${file-copy.destination}</code> will be specified</li>
+</ul></li>
+</ol>
+<p>Example:</p>
+<p>If you wanted to run some external remote connection command (&quot;/bin/copyremote&quot;) in lieu of the built-in SCP command, you could specify these attributes for node:</p>
+<pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">mynode:</span>
+    <span class="fu">file-copier:</span> script-copy
+    <span class="fu">script-copy:</span> /bin/copyremote -host ${node.hostname} -user ${node.username} -- ${file-copy.file} ${file-copy.destination}</code></pre>
+<p>At run time, the properties specified would be expanded to the values for the specific node and command string to execute.</p>
+<p>OR, you could specify a default to apply to all nodes within the project.properties file located at <code>$RDECK_BASE/projects/NAME/etc/project.properties</code>.</p>
+<pre><code>script-copy.default.command=/bin/copyremote -host ${node.hostname} -user ${node.username} -- ${file-copy.file} ${file-copy.destination}</code></pre>
+<p>Similarly for the <code>$RDECK_BASE/etc/framework.properties</code> file to apply to all projects.</p>
+<h4 id="defining-the-script-copy-filepath"><a href="#defining-the-script-copy-filepath">Defining the script-copy filepath</a></h4>
+<p>This property is used when copying a <em>script file</em> to the remote node, as the location that temporary script files should be placed. When copying any other type of file (such as using the Copy File Workflow Node Step Plugin), the destination will be provided and the script-copy filepath is not used.</p>
+<p>The value of this property or attribute should be the complete filepath on the target node where copied script files are to be placed.</p>
+<p>You can do this in <em>two</em> ways, either as a configuration property as described here, or via output from your script, as described under <a href="#requirements-of-script-copy-command">Requirements of script-copy command</a>.</p>
+<p>You can use <em>Data context properties</em> as you can in normal Rundeck command execution, such as <code>${node.name}</code> or <code>${job.name}</code>.</p>
+<p>In addition, the plugin provides these new data context properties:</p>
+<dl>
+<dt><code>file-copy.file</code></dt>
+<dd><p>The local filepath that should be copied to the remote node</p>
+</dd>
+<dt><code>file-copy.filename</code></dt>
+<dd><p>The name of the file without any path information.</p>
+</dd>
+</dl>
+<p>Example:</p>
+<p>Using the &quot;/bin/copyremote&quot; example from above, we need to set the <code>script-copy-remote-filepath</code> to the location on the remote node where the file is copied. Our example copies <code>${file-copy.file}</code> to the location <code>${node.destdir}</code>. This is an attribute on the Node that we assume to be configured with a directory path.</p>
+<p>We need to set the <code>script-copy-remote-filepath</code> to the location on the remote node where the file will exist after being copied. We know the filename of the file is available as <code>${file-copy.filename}</code>, so we set it to <code>${node.destdir}/${file-copy.filename}</code>:</p>
+<pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">mynode:</span>
+    <span class="fu">file-copier:</span> script-copy
+    <span class="fu">script-copy:</span> /bin/copyremote -host ${node.hostname} -user ${node.username} -- ${file-copy.file} ${file-copy.destination}
+    <span class="fu">script-copy-remote-filepath:</span> ${node.destdir}/${file-copy.filename}</code></pre>
+<p>At run time, the properties specified would be expanded to the values for the specific node and command string to execute.</p>
+<p>OR, you could specify a default to apply to all nodes within the project.properties file located at <code>$RDECK_BASE/projects/NAME/etc/project.properties</code>.</p>
+<pre><code>script-copy.default.remote-filepath=${node.destdir}/${file-copy.filename}</code></pre>
+<p>Similarly for the <code>$RDECK_BASE/etc/framework.properties</code> file to apply to all projects.</p>
+<h4 id="requirements-of-script-copy-command"><a href="#requirements-of-script-copy-command">Requirements of script-copy command</a></h4>
+<p>The command executed by script-copy is expected to behave in the following manner:</p>
+<ul>
+<li>Exit with an exit code of &quot;0&quot; to indicate success</li>
+<li>Exit with any other exit code indicates failure</li>
+<li><strong>Either</strong>
+<ul>
+<li>Output the filepath of the copied file on the target node as the first line of output on STDOUT OR</li>
+<li>Define the &quot;remote-filepath&quot; as described above</li>
+</ul></li>
+</ul>
+<h4 id="example-scripts"><a href="#example-scripts">Example Scripts</a></h4>
+<p>Here are some example scripts to show the some possible usage patterns.</p>
+<p><strong>Example script-exec</strong>:</p>
+<p>Node definition:</p>
+<pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">mynode:</span>
+    <span class="fu">node-executor:</span> script-exec</code></pre>
+<p>Project config <code>project.properties</code> file:</p>
+<pre><code>plugin.script-exec.default.command=/tmp/myexec.sh ${node.hostname} ${node.username} -- ${exec.command}</code></pre>
+<p>Contents of <code>/tmp/myexec.sh</code>:</p>
+<table class="sourceCode bash numberLines"><tr class="sourceCode"><td class="lineNumbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="sourceCode"><pre><code class="sourceCode bash"><span class="co">#!/bin/bash</span>
+
+<span class="co"># args are [hostname] [username] -- [command to exec...]</span>
+
+<span class="ot">host=$1</span>; <span class="kw">shift</span>
+<span class="ot">user=$1</span>; <span class="kw">shift</span>
+<span class="kw">printf</span> -v commands <span class="st">&#39;%q &#39;</span> <span class="st">&quot;</span><span class="ot">$@</span><span class="st">&quot;</span>
+
+<span class="ot">REMOTECMD=</span>ssh
+
+<span class="kw">exec</span> <span class="st">&quot;</span><span class="ot">$REMOTECMD</span><span class="st">&quot;</span> <span class="st">&quot;</span><span class="ot">$user</span><span class="st">@</span><span class="ot">$host</span><span class="st">&quot;</span> <span class="st">&quot;</span><span class="ot">$command</span><span class="st">&quot;</span></code></pre></td></tr></table>
+<p><strong>Example script-copy</strong>:</p>
+<p>Node definition:</p>
+<pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">mynode:</span>
+    <span class="fu">file-copier:</span> script-copy
+    <span class="fu">destdir:</span> /some/node/dir
+    <span class="fu">script-copy-remote-filepath:</span> ${node.destdir}/${file-copy.filename}</code></pre>
+<p>System-wide config in <code>framework.properties</code>:</p>
+<pre><code>plugin.script-copy.default.command=/tmp/mycopy.sh ${node.hostname} ${node.username} ${file-copy.destination} ${file-copy.file}</code></pre>
+<p>Contents of <code>/tmp/mycopy.sh</code>:</p>
+<table class="sourceCode bash numberLines"><tr class="sourceCode"><td class="lineNumbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+</pre></td><td class="sourceCode"><pre><code class="sourceCode bash"><span class="co">#!/bin/bash</span>
+
+<span class="co"># args are [hostname] [username] [destpath] [filepath]</span>
+
+<span class="ot">host=$1</span>; <span class="kw">shift</span>
+<span class="ot">user=$1</span>; <span class="kw">shift</span>
+<span class="ot">dest=$1</span>; <span class="kw">shift</span>
+<span class="ot">file=$1</span>
+
+<span class="ot">name=${file##</span>*/<span class="ot">}</span>
+
+<span class="co"># copy to node</span>
+<span class="ot">CPCMD=</span>scp
+
+<span class="st">&quot;</span><span class="ot">$CPCMD</span><span class="st">&quot;</span> <span class="st">&quot;</span><span class="ot">$file</span><span class="st">&quot;</span> <span class="st">&quot;</span><span class="ot">$user</span><span class="st">@</span><span class="ot">$host</span><span class="st">:</span><span class="ot">$dest</span><span class="st">&quot;</span> <span class="kw">&gt;/dev/null</span> <span class="kw">||</span> <span class="kw">exit</span> <span class="ot">$?</span>
+
+<span class="kw">echo</span> <span class="st">&quot;</span><span class="ot">$dest</span><span class="st">&quot;</span></code></pre></td></tr></table>
+<p><strong>Example system ssh replacement</strong>:</p>
+<p>This example uses the system's &quot;ssh&quot; and &quot;scp&quot; commands to perform node execution and file copying, and doesn't make use of an external script file:</p>
+<p>Node-only configuration:</p>
+<table class="sourceCode yaml numberLines"><tr class="sourceCode"><td class="lineNumbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="sourceCode"><pre><code class="sourceCode yaml"><span class="fu">mynode:</span>
+    <span class="fu">hostname:</span> mynode
+    <span class="fu">username:</span> user1
+    <span class="fu">node-executor:</span> script-exec
+    <span class="fu">script-exec:</span> ssh -o &quot;StrictHostKeyChecking no&quot; ${node.username}@${node.hostname} ${exec.command}
+    <span class="fu">script-exec-shell:</span> bash -c
+    <span class="fu">file-copier:</span> script-copy
+    <span class="fu">destdir:</span> /tmp
+    <span class="fu">script-copy-shell:</span> bash -c
+    <span class="fu">script-copy:</span> scp ${file-copy.file} ${node.username}@${node.hostname}:${file-copy.destination}
+    <span class="fu">script-copy-remote-filepath:</span> ${node.destdir}/${file-copy.filename}</code></pre></td></tr></table>
+<p>This could all be set as defaults in the project.properties file, such as:</p>
+<pre><code># set default node executor
+service.NodeExecutor.default.provider=script-exec
+
+# set script-exec defaults
+plugin.script-exec.default.command=ssh -o &quot;StrictHostKeyChecking no&quot; ${node.username}@${node.hostname} ${exec.command}
+plugin.script-exec.default.shell=bash -c
+
+#set default file copier
+service.FileCopier.default.provider=script-copy
+
+#set script-copy defaults
+plugin.script-copy.default.command=scp ${file-copy.file} ${node.username}@${node.hostname}:${file-copy.destination}
+plugin.script-copy.default.shell: bash -c
+plugin.script-copy.default.remote-filepath: ${node.destdir}/${file-copy.filename}</code></pre>
+<p>In which case your node definitions could be as simple as:</p>
+<pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">mynode:</span>
+    <span class="fu">hostname:</span> mynode
+    <span class="fu">username:</span> user1
+    <span class="fu">destdir:</span> /tmp</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.8.2)</a></li>
+    
+    
+    <li ><a href="index.html">Plugins User Guide</a></li>
+    <li class="active"><a href="script-plugin.html">Script Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="logging-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> Logging Plugins</a></li>
+      <li class="next"><a href="ssh-plugins.html">SSH Plugins <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2017 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2017-04-19T23:48:26UTC">2017-04-19T23:48:26UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>

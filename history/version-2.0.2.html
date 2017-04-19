@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Version 2.0.2-SNAPSHOT</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="greg" />
+  <meta name="date" content="03/13/2014" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.8.2</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.8.2)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-2.0.2.html">Version 2.0.2 (2014-03-13)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.0.1.html">Version 2.0.1 (2014-02-11) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#release-2.0.2">Release 2.0.2</a><ul>
+<li><a href="#contributors">Contributors</a></li>
+<li><a href="#issues">Issues</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Version 2.0.2-SNAPSHOT</h1>
+</div>
+<h1 id="release-2.0.2"><a href="#release-2.0.2">Release 2.0.2</a></h1>
+<p>Date: 2014-03-13</p>
+<p>This is a bugfix release.</p>
+<p><em>Important Upgrade Note</em>: This bug <a href="https://github.com/rundeck/rundeck/issues/661">Issue 661</a> is caused by the VARCHAR length being too small for a database column. Unfortunately grails won't automatically update the VARCHAR size when you upgrade.</p>
+<ul>
+<li>If you are using a different database (mysql, etc.), you will have to update your schema manually.</li>
+<li><p>If you are using H2, you can use this script to update your database:</p>
+<ol style="list-style-type: decimal">
+<li>Shutdown rundeck</li>
+<li>Run <a href="https://gist.github.com/gschueler/9534814#file-rundeck-2-0-2-h2-upgrade-sh">rundeck-2.0.2-h2-upgrade.sh</a></li>
+<li>Start rundeck</li>
+</ol></li>
+</ul>
+<h2 id="contributors"><a href="#contributors">Contributors</a></h2>
+<ul>
+<li>David Wittman</li>
+<li>Greg Schueler</li>
+<li>Alex Honor</li>
+</ul>
+<h2 id="issues"><a href="#issues">Issues</a></h2>
+<ul>
+<li><a href="https://github.com/rundeck/rundeck/pull/702">Grammar fix in Job editor view</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/698">Import of an Exported Rundeck Project Results in &quot;No such property: year for class: java.lang.String&quot;</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/695">Plugin development guide broken into per plugin pages</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/691">Custom Attributes unusable in dynamic filters</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/690">Required options are not visible when the job page is refreshed</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/684">[2.0.1] Option field is split when use Run Again... button</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/678">Rundeck 2.0.1 - cron settings reset in ui</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/675">Rundeck 2.0.1 - Improve look of unauthorized access pages</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/674">Activity page: can show activity for wrong project</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/673">Project import: failure if execution workflow has nodeStep jobref</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/672">Rundeck 2.0.1 - Can not hide 'Command' / adhoc section</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/670">Update upstart init script to allow service stop command</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/669">Rundeck can't be stopped/restarted on Ubuntu</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/668">Show all tags button doesn't work correctly on Job run page</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/661">rundeck 2.0.1 - change target nodes - sql error when run is activated</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/658">Rundeck 2.0.1 - remove UUID doesn't work when uploading job definition</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/657">Rundeck 2.0.1 - 2013 copyright in footer</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/656">Export archive failed with NullPointerException in Rundeck 2.0.0</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.8.2)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-2.0.2.html">Version 2.0.2 (2014-03-13)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.0.1.html">Version 2.0.1 (2014-02-11) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2017 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2017-04-19T23:48:26UTC">2017-04-19T23:48:26UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
