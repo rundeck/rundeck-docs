@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.8.3</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.8.3)</a></li>
+    
+    
+    <li ><a href="index.html">Administrator Guide</a></li>
+    <li class="active"><a href="project-setup.html">Project Setup</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="startup-and-shutdown.html"><i class="glyphicon glyphicon-arrow-left"></i> Startup and Shutdown</a></li>
+      <li class="next"><a href="managing-node-sources.html">Managing Node Sources <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#project-definitions">Project Definitions</a><ul>
+<li><a href="#configuration-file">Configuration file</a></li>
+</ul></li>
+<li><a href="#project-setup">Project Setup</a><ul>
+<li><a href="#project-readme.md">Project readme.md</a></li>
+<li><a href="#project-nodes">Project Nodes</a></li>
+<li><a href="#external-resource-model-sources">External Resource Model Sources</a></li>
+<li><a href="#resource-model-document-formats">Resource Model Document formats</a></li>
+<li><a href="#pluggable-resource-model-sources">Pluggable Resource Model Sources</a></li>
+</ul></li>
+<li><a href="#related-command-line-tools">Related Command Line Tools</a></li>
+<li><a href="#api-usage">API Usage</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<h2 id="overview"><a href="#overview">Overview</a></h2>
+<p>A <em>project</em> is a place to separate management activity. All Rundeck activities occur within the context of a project. Multiple projects can be maintained on the same Rundeck server. Projects are independent from one another, so you can use them to organize unrelated systems within a single Rundeck installation. This can be useful for managing different infrastructures, environments or applications. Projects can be archived and imported to other Rundeck servers to help promote changes between environments.</p>
+<p>A new installation will not contain any projects so Rundeck will present you with a dialog to create one.</p>
+<h2 id="project-definitions"><a href="#project-definitions">Project Definitions</a></h2>
+<p>In Rundeck 2.4 and earlier, all project definitions and configuration files were stored on the filesystem.</p>
+<p>Starting in Rundeck 2.5, you have the option to store project definitions and configuration files in the database.</p>
+<p>The storage type can be changed by a configuration flag in the <code>rundeck-config.properties</code> file:</p>
+<pre><code>rundeck.projectsStorageType=db/filesystem</code></pre>
+<p>If you wish to use db storage you must add this configuration entry.</p>
+<p>If you have existing filesystem-based projects, and you start Rundeck with the <code>db</code> storage type, those projects will be automatically imported to the Database.<br />The import process copies the contents of <code>etc/project.properties</code>, <code>readme.md</code> and <code>motd.md</code> (if they exist). Finally, the <code>etc/project.properties</code> file will be renamed on disk to <code>etc/project.properties.imported</code>.</p>
+<p>The DB storage type also uses the Rundeck <strong>Storage Facility</strong> to store the file contents, which can be configured to use an Encryption plugin. See <a href="storage-facility.html#using-encryption">Storage Facility - Using Encryption</a>.</p>
+<h3 id="configuration-file"><a href="#configuration-file">Configuration file</a></h3>
+<p>When using <em>filesystem</em> storage type, each Project has a configuration file called <a href="configuration-file-reference.html#project.properties">project.properties</a>, located at this path:</p>
+<ul>
+<li>rpm/deb: /var/rundeck/projects/<em>project</em>/etc/project.properties</li>
+<li>launcher: $RDECK_BASE/projects/<em>project</em>/etc/project.properties</li>
+</ul>
+<h2 id="project-setup"><a href="#project-setup">Project Setup</a></h2>
+<p>A project can be set up either from the graphical console or using the <a href="https://rundeck.github.io/rundeck-cli/">rd</a> shell tool.</p>
+<p>In the graphical console, you will notice a Project menu in the top navigation bar. If no projects exist, you will be prompted to create a new project.</p>
+<p>Press the &quot;New Project&quot; button to create a project. Project names can contain letters and numbers but do not use spaces or special characters.</p>
+<div class="figure">
+<img src="../figures/fig0203-a.png" alt="Create project prompt" /><p class="caption">Create project prompt</p>
+</div>
+<p>After entering your project name, Rundeck initializes it and returns you to the &quot;Jobs&quot; page.</p>
+<p>Projects can be created at any time by going back to the Project menu and selecting the &quot;Create a new project...&quot; item.</p>
+<p>The project setup process generates Project configuration in the server, and a bootstrap resource model containing information about the rundeck server node.</p>
+<h3 id="project-readme.md"><a href="#project-readme.md">Project readme.md</a></h3>
+<p>You can create a readme file that welcomes your users and provides an overview about the project. This readme file can contain markdown text letting you format or embed images.</p>
+<div class="figure">
+<img src="../figures/fig0203.png" alt="Project readme" /><p class="caption">Project readme</p>
+</div>
+<h4 id="filesystem-based-readme"><a href="#filesystem-based-readme">Filesystem based readme</a></h4>
+<p>If using the <em>filesystem</em> storage type only, you can create the file in the project base directory:</p>
+<ul>
+<li>launcher: $RDECK_BASE/projects/{project}/readme.md</li>
+<li>rpm/deb: /var/rundeck/projects/{project}/readme.md</li>
+</ul>
+<p>If using the <em>db</em> storage type, you must use the <a href="#api-usage">API</a>.</p>
+<h3 id="project-nodes"><a href="#project-nodes">Project Nodes</a></h3>
+<p>The Resource Model is the set of available Nodes that Rundeck can dispatch commands to, and their associated metadata. Each Rundeck Project has its own Resource Model.</p>
+<p>After project creation, an initial resource model will contain information just about the Rundeck server host and is useful just for running local commands on the Rundeck server. You can browse the project resource model by going to the &quot;Nodes&quot; page.</p>
+<p>Node resources have common attributes, such as &quot;hostname&quot;. One of the more useful attributes is &quot;tags&quot;. A <em>tag</em> is a text label that you give to the Node, perhaps denoting a classification, a role the node plays in the environment, or group membership. A list of tags can be defined for a given node. You can also invent your own attributes as a way to know other details about your nodes.</p>
+<p>It is important to start thinking about node tagging for the nodes you manage because you will use them later when specifying node filtering options.</p>
+<h4 id="default-resources"><a href="#default-resources">Default resources</a></h4>
+<p>After initial project setup, the project will have a file resource model source. The project.properties file will contain a setting specifying this file:</p>
+<ul>
+<li><code>project.resources.file</code>: A local file path to read a resource model document</li>
+</ul>
+<p>Typically the path to this default resources file is:</p>
+<ul>
+<li>launcher: $RDECK_BASE/projects/{project}/etc/resources.xml</li>
+<li>deb/rpm: /var/rundeck/projects/{project}/etc/resources.xml</li>
+</ul>
+<p>It's possible to configure multiple &quot;Resource Model Sources&quot; for a project to retrieve additional Resource Model content from other sources.</p>
+<p>You can configure Rundeck to retrieve and store resource model data from any source, so long as it can produce one of the Rundeck resource model document formats. (See <a href="../plugins-user-guide/resource-model-source-plugins.html#resource-model-document-formats">Resource Model Document formats</a>.)</p>
+<p>See <a href="managing-node-sources.html#resource-model-source">Resource Model Sources</a>.</p>
+<h5 id="defining-a-node"><a href="#defining-a-node">Defining a node</a></h5>
+<p>Here's a sample XML document that defines a node called &quot;orion&quot;:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;project&gt;</span>
+  <span class="kw">&lt;node</span><span class="ot"> name=</span><span class="st">&quot;orion&quot;</span> 
+<span class="ot">    description=</span><span class="st">&quot;a foodazzler service host&quot;</span><span class="ot"> tags=</span><span class="st">&quot;staging,us-east&quot;</span> 
+<span class="ot">    osFamily=</span><span class="st">&quot;unix&quot;</span><span class="ot"> osName=</span><span class="st">&quot;Linux&quot;</span>
+<span class="ot">    hostname=</span><span class="st">&quot;orion&quot;</span><span class="ot">  username=</span><span class="st">&quot;alexh&quot;</span> 
+    <span class="kw">/&gt;</span>
+<span class="kw">&lt;/project&gt;</span></code></pre>
+<p>The <code>node</code> element has a few required such as <code>name</code>, <code>osFamily</code> and <code>tags</code>.</p>
+<p>You can add any number of nodes in this document. Here's a second node called homestar:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;project&gt;</span>
+  <span class="kw">&lt;node</span><span class="ot"> name=</span><span class="st">&quot;orion&quot;</span> 
+<span class="ot">    description=</span><span class="st">&quot;a foodazzler service host&quot;</span><span class="ot"> tags=</span><span class="st">&quot;staging,us-east&quot;</span> 
+<span class="ot">    osFamily=</span><span class="st">&quot;unix&quot;</span><span class="ot"> osName=</span><span class="st">&quot;Linux&quot;</span>
+<span class="ot">    hostname=</span><span class="st">&quot;orion&quot;</span><span class="ot">  username=</span><span class="st">&quot;alexh&quot;</span> 
+    <span class="kw">/&gt;</span>
+  <span class="kw">&lt;node</span><span class="ot"> name=</span><span class="st">&quot;homestar&quot;</span> 
+<span class="ot">    description=</span><span class="st">&quot;a humdinger&quot;</span><span class="ot"> tags=</span><span class="st">&quot;integration,us-west&quot;</span>
+<span class="ot">    osFamily=</span><span class="st">&quot;unix&quot;</span><span class="ot"> hostname=</span><span class="st">&quot;192.168.1.02&quot;</span><span class="ot">  username=</span><span class="st">&quot;alexh&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;attribute</span><span class="ot"> name=</span><span class="st">&quot;flavor&quot;</span><span class="ot"> value=</span><span class="st">&quot;medium&quot;</span><span class="kw">/&gt;</span>
+    <span class="kw">&lt;attribute</span><span class="ot"> name=</span><span class="st">&quot;package:version&quot;</span><span class="ot"> value=</span><span class="st">&quot;2.0&quot;</span><span class="kw">/&gt;</span>
+  <span class="kw">&lt;/node&gt;</span>
+<span class="kw">&lt;/project&gt;</span></code></pre>
+<p>The <code>hostname</code> and <code>username</code> values are used for the SSH connection while the <code>name</code> and <code>type</code> are used to define Node identity in the resource model. It is possible to overload the hostname value to include port information (eg, hostname=&quot;somehost:2022&quot;). This is useful if your run SSH on a different port.</p>
+<p>You can also tell there are two different ways to declare an attribute using the XML format. The &quot;flavor&quot; attribute is defined as a separate XML element:</p>
+<pre><code>&lt;attribute name=&quot;flavor&quot; value=&quot;medium&quot;/&gt;</code></pre>
+<h3 id="external-resource-model-sources"><a href="#external-resource-model-sources">External Resource Model Sources</a></h3>
+<p>Chances are you maintain information about your hosts within another tool, perhaps Chef, Puppet, Nagios, Amazon EC2, RightScale or even an in-house database. One of these tools might be considered the authority of knowledge about the nodes deployed in your network. Therefore, it is best to create an interface to the authoritative tool and expose it as Rundeck a resource model source. This can be done as a simple CGI script that does a transformation from the tool's format to the one Rundeck understands. You can also develop a plugin to interface with the external source.</p>
+<p>Of course, a rudimentary alternative is to maintain this information as an XML document, storing it in a source repository that is periodically exported to Rundeck. This method would be practical if your host infrastructure infrequently changes.</p>
+<p>Check the Rundeck web site for URL resource model sources. If you are interested in creating your own, see the <a href="managing-node-sources.html#resource-model-source">Resource model source</a> chapter.</p>
+<h3 id="resource-model-document-formats"><a href="#resource-model-document-formats">Resource Model Document formats</a></h3>
+<p>Rundeck currently has two resource model document formats built in:</p>
+<ul>
+<li>XML: <a href="../man5/resource-xml.html">resource-XML</a>. Format name: <code>resourcexml</code>.</li>
+<li>Yaml: <a href="../man5/resource-yaml.html">resource-YAML</a>. Format name: <code>resourceyaml</code>.</li>
+</ul>
+<p>You can enable more formats using <a href="../plugins-user-guide/resource-model-source-plugins.html">Resource Format Plugins</a>.</p>
+<h3 id="pluggable-resource-model-sources"><a href="#pluggable-resource-model-sources">Pluggable Resource Model Sources</a></h3>
+<p>Each project can have multiple sources for Resource model information, and you can use or write plugins to enable new sources for entries in the Resource model.</p>
+<p>You can configure the sources via the GUI from the Admin page, see <a href="../manual/configure.html">Configure Page</a>, or by modifying the project.properties file.</p>
+<h2 id="related-command-line-tools"><a href="#related-command-line-tools">Related Command Line Tools</a></h2>
+<p>Note: As of Rundeck 2.7.0, the Rundeck CLI tools are replaced with a single tool called <code>rd</code>, which can be installed separately.</p>
+<p>See the <a href="https://rundeck.github.io/rundeck-cli/">rd</a> website to install.</p>
+<p>The <a href="https://rundeck.github.io/rundeck-cli/">rd projects</a> command can be used to create a project.</p>
+<p>Execute the <code>rd projects create</code> command and specify a project name, here we use &quot;examples&quot;:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rd</span> projects create -p examples</code></pre>
+<p>You can also add configuration properties when you create the project. Here the default SSH key setting is declared via the <code>project.ssh-keypath</code>:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rd</span> projects create -p examples -- -project.ssh-keypath=/home/rundeck/.ssh/id_rsa</code></pre>
+<p>You can specify a resource model source using command options, too. Here a &quot;directory&quot; model source is declared.</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rd</span> projects create -p examples -- \
+  <span class="kw">-resources.source.2.type</span>=directory \
+  <span class="kw">-resources.source.2.config.directory</span>=/path/to/my/resources.d</code></pre>
+<p>Administrators can place multiple resource model files in this directory.</p>
+<h2 id="api-usage"><a href="#api-usage">API Usage</a></h2>
+<p>All Project creation, configuration, deletion, etc can be achieved via the <a href="../api/index.html">API</a>.</p>
+<p><a href="../api/index.html#project-creation">Create projects</a>:</p>
+<pre><code>POST /api/13/projects
+Content-Type: application/json
+
+{ &quot;name&quot;: &quot;myproject&quot;, &quot;config&quot;: { &quot;propname&quot;:&quot;propvalue&quot; } }</code></pre>
+<p><a href="../api/index.html#project-deletion">Delete projects</a>:</p>
+<pre><code>DELETE /api/13/project/myproject</code></pre>
+<p><a href="../api/index.html#project-configuration">Project configuration</a></p>
+<pre><code>PUT /api/13/project/myproject/config
+Content-Type: application/json
+
+{
+    &quot;key&quot;:&quot;value&quot;,
+    &quot;key2&quot;:&quot;value2...&quot;
+}</code></pre>
+<p><a href="../api/index.html#project-readme-file">Project readme/motd modification</a></p>
+<pre><code>PUT /api/13/project/myproject/readme.md
+Content-Type: text/plain
+
+This project manages [acme-guitars.com](http://acme-guitars.com).</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.8.3)</a></li>
+    
+    
+    <li ><a href="index.html">Administrator Guide</a></li>
+    <li class="active"><a href="project-setup.html">Project Setup</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="startup-and-shutdown.html"><i class="glyphicon glyphicon-arrow-left"></i> Startup and Shutdown</a></li>
+      <li class="next"><a href="managing-node-sources.html">Managing Node Sources <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2017 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2017-06-30T21:22:11UTC">2017-06-30T21:22:11UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
