@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Version 2.6.1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="greg" />
+  <meta name="date" content="10/23/2015" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.9.0</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.9.0)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-2.6.1.html">Version 2.6.1 (2015-10-23)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.6.0.html">Version 2.6.0 (2015-10-08) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#release-2.6.1">Release 2.6.1</a><ul>
+<li><a href="#fixes">Fixes</a></li>
+<li><a href="#contributors">Contributors</a></li>
+<li><a href="#bug-reporters">Bug Reporters</a></li>
+<li><a href="#issues">Issues</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Version 2.6.1</h1>
+</div>
+<h1 id="release-2.6.1"><a href="#release-2.6.1">Release 2.6.1</a></h1>
+<p>Date: 2015-10-23</p>
+<p>Name: <span style="color: cornflowerblue"><span class="glyphicon glyphicon-globe"></span> &quot;cafe bonbon cornflowerblue globe&quot;</span></p>
+<h2 id="fixes"><a href="#fixes">Fixes</a></h2>
+<p>Bugfixes for SCM plugins, and the Job execution/schedule toggle feature.</p>
+<h2 id="contributors"><a href="#contributors">Contributors</a></h2>
+<ul>
+<li>Greg Schueler (gschueler)</li>
+<li>Miguel A. Fuentes Buchholtz (miguelantonio)</li>
+<li>robertopaez</li>
+</ul>
+<h2 id="bug-reporters"><a href="#bug-reporters">Bug Reporters</a></h2>
+<ul>
+<li>LordMike</li>
+<li>albertmfb</li>
+<li>dustinak</li>
+<li>fseiftsmlb</li>
+<li>gschueler</li>
+<li>jyaworski</li>
+<li>katanafleet</li>
+<li>miguelantonio</li>
+<li>mprasil</li>
+<li>oovoo</li>
+<li>paulpet</li>
+<li>rophy</li>
+<li>tomkregenbild</li>
+</ul>
+<h2 id="issues"><a href="#issues">Issues</a></h2>
+<ul>
+<li><a href="https://github.com/rundeck/rundeck/issues/1510">SCM plugin does not interpret variables in paths</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1509">CLI: Running rd-jobs list gives an error when user profile is incomplete and SCM is enabled</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1502">Upgrade to 2.6.0: schedule/execution enabled defaults to No</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1501">changes implementation of flipScheduleEnabled and flipExecutionEnable…</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1499">SCM: import while export plugin enabled can cause stacktrace/empty file</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1497">SCM synch rebase: if result is conflicted, it should be aborted</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1496">SCM: yaml whitespace error on re-import</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1494">SCM &quot;Import remote changes&quot;-cancel button leads to SCM configuration</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1493">SCM rebase gives a non-descriptive message</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1492">SCM imports reads as XML even though YAML has been chosen</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1489">SCM: File Path Template Parameter issue</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1488">SCM: enabling git export and import, then exporting job changes, causes &quot;import needed&quot; status for the job</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1487">SCM: Job description with multiple lines can cause whitespace issues for git-diff</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1486">SCM: Merge result message is verbose</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1484">SCM Plugins: deleting a project should cleanup/remove loaded SCM plugins</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1483">Upgrading from 2.4.x to 2.6.x, all jobs have been set to &quot;Enable Execution: no&quot;</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1479">SCM export plugins: job change events leak to multiple projects</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1478">SCM: setup two projects with same git base dir causes issues</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1477">Upgrade to 2.6.0: Node selection defaults to &quot;user has to explicitly select target nodes&quot;</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1475">When disabling a crontab style schedule and restarting the rundeck service, the schedule is enabled again after service restart.</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1471">scm export commits yaml format in .xml extension</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1469">SCM HTTPS, unknown CA</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1468">Disable/Enable Schedule in Job Actions menu (Rundeck 2.6.0-1)</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1440">problem closing file descriptors unloading plugins in rundeck</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1380">Deleting execution from api is not always working (random errors)</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1110">documentation needed: using the sudo password and ssh private key passphrase via storage facility for ssh</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.9.0)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-2.6.1.html">Version 2.6.1 (2015-10-23)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.6.0.html">Version 2.6.0 (2015-10-08) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2017 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2017-08-03T19:33:23UTC">2017-08-03T19:33:23UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
