@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Version 1.6.0</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="greg" />
+  <meta name="date" content="08/02/2013" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.9.1</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.9.1)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-1.6.0.html">Version 1.6.0 (2013-08-02)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-1.5.3.html">Version 1.5.3 (2013-05-30) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#release-1.6.0">Release 1.6.0</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Version 1.6.0</h1>
+</div>
+<h1 id="release-1.6.0"><a href="#release-1.6.0">Release 1.6.0</a></h1>
+<p>Date: 2013-08-02</p>
+<p>Rundeck 1.6.0 introduces two major changes and a number of bug fixes and enhancements:</p>
+<ul>
+<li>Logging system plugins.
+<ul>
+<li>New facility allows integration with other systems, like Logstash, and improves Rundeck's behavior in a clustered cloud environment by allowing you to have log files synched to a shared storage more easily.</li>
+</ul></li>
+<li>Refreshed GUI
+<ul>
+<li>Did you know it hasn't really been changed since Rundeck 1.0?! We fixed some of the usability complaints about the old GUI, and our goal was to address usability without having to change functionality, but some of our future GUI enhancement ideas snuck in.</li>
+</ul></li>
+</ul>
+<p>Notable issues:</p>
+<ul>
+<li><a href="https://github.com/dtolabs/rundeck/issues/343">Allow scripts to be run as sudo</a> - popular request!</li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/352">Use defaults for optional parameter values, and expand to blank value when missing</a> - More intuitive and less annoying!</li>
+</ul>
+<p>Many thanks for the helpful contributions from the community!</p>
+<p>Contributors:</p>
+<ul>
+<li>Alex Honor</li>
+<li>Greg Schueler</li>
+<li>Jonathan Li</li>
+<li>Kim Ho</li>
+<li>UnsignedLong</li>
+</ul>
+<p>Issues:</p>
+<ul>
+<li><a href="https://github.com/dtolabs/rundeck/issues/477">Email subject line for aborted job says &quot;KILLING&quot; should say &quot;KILLED&quot;</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/476">onstart email notification doesn't get saved</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/474">Optional project element for job definitions</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/472">Unprivileged users can access execution api actions</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/471">Improve IE8/9 support</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/470">Rename Admin link to Configure</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/469">Re-running an adhoc command should return to Nodes/Command page</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/468">Save job by default</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/467">Cascading option does not display useful text if no choices available</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/466">RSS feed content for job execution contains inline script</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/465">Job &quot;Created by&quot; information is not accurate</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/464">Cascading options can fail to load remote options, if an option has only a single allowed value</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/463">RSS title should include options &amp; date/time</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/462">RSS feed for jobs does not reflect history view</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/461">Import Job definition: existing UUID will move a job to the current project</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/460">Potential division by zero in email notification</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/457">Remove /api/1/reports/create endpoint</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/456">Remove --noqueue flag from dispatch tool</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/455">LDAP login module does not perform CN validation on certificate when ldaps is specified</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/454">GUI updates for Rundeck 1.6</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/452">project archive/import should allow preserving job UUIDs</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/451">Cluster mode servers should not kill currently running jobs on other server UUIDs</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/450">No Project Access: should display user groups</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/449">aclpolicy example doesn't include application scope in example</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/448">RSS feed should default to not be enabled</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/443">Update Notification plugins: support other property scopes</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/441">Timeout trying to lock table: remove h2 pessimistic locks</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/434">Remove Project dropdown in Job form</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/430">Project archive with incomplete execution causes error on import</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/428">Job execution context should include the server URL, execution URL, and server UUID</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/426">Feature/log storage - adds plugin system for streaming logs and storing log files</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/425">Some log lines are truncated in GUI</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/424">rpm install: new project doesn't automatically create resources.xml (regression)</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/422">Remove cruft libs</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/419">Jar plugins: add ability to resolve classes from embedded libs first</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/418">asUser feature stops working after scheduling a job</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/416">&quot;num parameter is required&quot; error when adding a workflow step to a job</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/414">Feature/log storage - adds plugin system for streaming logs and storing log files</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/413">example ssh-script plugin: disable hostkey verification</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/410">update footers with simplifyops links</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/406">Missing osFamily attribute in Node definition causes command to fail</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/352">Use defaults for optional parameter values, and expand to blank value when missing</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/347">Rundeck execution follow UI splits single steps into multiple sections</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/343">Allow scripts to be run as sudo</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/306">changing project via dropdown does not update job pane.</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.9.1)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-1.6.0.html">Version 1.6.0 (2013-08-02)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-1.5.3.html">Version 1.5.3 (2013-05-30) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2017 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2017-08-04T22:17:25UTC">2017-08-04T22:17:25UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
