@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Version 2.6.9</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="greg" />
+  <meta name="date" content="08/03/2016" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.9.3</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.9.3)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-2.6.9.html">Version 2.6.9 (2016-08-03)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.6.8.html">Version 2.6.8 (2016-06-10) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#release-2.6.9">Release 2.6.9</a><ul>
+<li><a href="#notes">Notes</a></li>
+<li><a href="#contributors">Contributors</a></li>
+<li><a href="#bug-reporters">Bug Reporters</a></li>
+<li><a href="#issues">Issues</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Version 2.6.9</h1>
+</div>
+<h1 id="release-2.6.9"><a href="#release-2.6.9">Release 2.6.9</a></h1>
+<p>Date: 2016-08-03</p>
+<p>Name: <span style="color: indigo"><span class="glyphicon glyphicon-tower"></span> &quot;cafe bonbon indigo tower&quot;</span></p>
+<h2 id="notes"><a href="#notes">Notes</a></h2>
+<p>Notable Enhancements:</p>
+<ul>
+<li>Job execution will show more info about the step context in the Monitor/Summary tab (see <a href="https://github.com/rundeck/rundeck/pull/1926">#1926</a>)</li>
+<li>User Profile page: can select Spanish language manually</li>
+<li>Job Option editor GUI: order options via drag and drop</li>
+<li>Extended job description can be rendered as a Runbook tab (see <a href="https://github.com/rundeck/rundeck/pull/1904">#1904</a>)</li>
+<li>Some support for Oauth/preauth roles via a proxy (see <a href="https://github.com/rundeck/rundeck/pull/1883">#1883</a>)</li>
+</ul>
+<p>Bug Fixes:</p>
+<ul>
+<li>dynamic refresh for cascading remote option values</li>
+<li>A number of SCM/git plugin fixes</li>
+<li>Plugin jar loading issues</li>
+</ul>
+<h2 id="contributors"><a href="#contributors">Contributors</a></h2>
+<ul>
+<li>Alex Honor (ahonor)</li>
+<li>Dave Brothers (eidolonic)</li>
+<li>GitHub (web-flow)</li>
+<li>Greg Schueler (gschueler)</li>
+<li>Jaime Tobar (jtobard)</li>
+<li>John Stoltenborg (tlots)</li>
+<li>Miguel A. Fuentes Buchholtz (miguelantonio)</li>
+<li>Parth Soni (parth-kloudscript)</li>
+<li>Seth Klein (kindlyseth)</li>
+<li>variacode95</li>
+</ul>
+<h2 id="bug-reporters"><a href="#bug-reporters">Bug Reporters</a></h2>
+<ul>
+<li>ARentz07</li>
+<li>ajrnz</li>
+<li>andysteady</li>
+<li>eblikstad</li>
+<li>eidolonic</li>
+<li>gschueler</li>
+<li>jtobard</li>
+<li>katanafleet</li>
+<li>kgeis</li>
+<li>kincl</li>
+<li>ltamaster</li>
+<li>miguelantonio</li>
+<li>niphlod</li>
+<li>papagr</li>
+<li>pdev77b</li>
+<li>philippevidal80</li>
+<li>richiereynolds</li>
+<li>rophy</li>
+<li>schast</li>
+<li>tlots</li>
+</ul>
+<h2 id="issues"><a href="#issues">Issues</a></h2>
+<ul>
+<li><a href="https://github.com/rundeck/rundeck/pull/1973">Bug fix: multiple DATE format option values do not work</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1972">Git Plugin: default import selection to use regex</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1969">Update Quartz scheduler reference page</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1966">Secure job option with a default value from keystore is overwritten on job run</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1954">Improve error message: &quot;Option &lt;name&gt; is required, but storage value could not be read.&quot;</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1953">IE 11 issue: Node summary on execution page fails to load</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1947">Script-based Remote script plugin: incorrect arguments passed</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1942">Globals Variables to sending Email notification (list of emails)</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1941">Weird behaviour during enable/disable jobs scheduling.</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1938">add a project/global configuration to specify default encoding</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1931">SCM Export: create/update job causes error: Failed to serialize job, no content was written</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1926">Enhance execution step summary display</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1914">new options form: JS error when job has no options</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1913">Run Job: wrong number of selected nodes shown</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1907">GUI support for reordering options</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1904">Extended job description rendered as a Runbook</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1903">Home page: show stats for failed execution counts</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1901">Compatiblity Mode in Internet Explorer</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1898">2.6.8 on windows fails on pluginJars dirs</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1895">GUI option dynamic refresh broken in 2.6.6 and 2.6.8</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1894">Error building plugin: Class XXPlugin was not a valid plugin class for service: WorkflowNodeStep</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1893">Running a job as a different user (asUser parameter)</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1885">SCM export: invalid tag and renamed job causes &quot;Entry not found by path&quot;</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1883">Preauthentication filter</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1823">Context Variable: allow node options containing slash</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1743">Remote git repositories are checked on every jobs-page load</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1727">Rundeck local execution is case sensitive on osFamily = &quot;windows&quot;</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1708">SCM commit JOB in Windows</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1699">Rundeck i18n - ability to select language in GUI</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1459">Job set as &quot;execute locally&quot; should not require privilege to rundeck server node</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1370">Job reference step does not log step descriptions</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1360">Improve workflow step up/down graphics for usability</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1002">As a rundeck user, i'd like to have the possibility to sort rundeck job executions option on user interface.</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/667">Very difficult to trace output to exact job step in rundeck v2.0</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/363">NTH: improve job option ordering to allow GUI drag and drop</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.9.3)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-2.6.9.html">Version 2.6.9 (2016-08-03)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.6.8.html">Version 2.6.8 (2016-06-10) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2017 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2017-08-25T22:15:10UTC">2017-08-25T22:15:10UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>

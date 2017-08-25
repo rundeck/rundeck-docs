@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SCM Plugins</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="October 28, 2016" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.9.3</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.9.3)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="scm-plugins.html">SCM Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="logging-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> Logging Plugin</a></li>
+      <li class="next"><a href="notification-plugin.html">Notification Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#configuring">Configuring</a></li>
+<li><a href="#java-plugin-type">Java Plugin Type</a></li>
+<li><a href="#localization">Localization</a><ul>
+<li><a href="#message-codes">Message Codes</a></li>
+</ul></li>
+<li><a href="#example">Example</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">SCM Plugins</h1>
+</div>
+<h2 id="about"><a href="#about">About</a></h2>
+<p>SCM Plugins come in two flavors: <code>ScmExport</code> and <code>ScmImport</code>.</p>
+<dl>
+<dt><code>ScmExport</code></dt>
+<dd><p>Allows exporting Job changes.</p>
+</dd>
+<dt><code>ScmImport</code></dt>
+<dd><p>Allows importing Job changes.</p>
+</dd>
+</dl>
+<p>The two types can be combined or used separately.</p>
+<h2 id="configuring"><a href="#configuring">Configuring</a></h2>
+<p>Each Project can enable a single <code>ScmImport</code> and/or <code>ScmExport</code> plugin.</p>
+<p>This is done in the SCM Configuration page in the Rundeck GUI.</p>
+<p>Alternately, you can use the <a href="../api/index.html#scm">Rundeck API - SCM</a>.</p>
+<p>SCM Configuration for a project is <em>not</em> stored in the <code>project.properties</code> configuration contents.</p>
+<h2 id="java-plugin-type"><a href="#java-plugin-type">Java Plugin Type</a></h2>
+<ul>
+<li><em>Note</em>: Refer to <a href="plugin-development.html#java-plugin-development">Java Development</a> for information about developing a Java plugin for Rundeck.</li>
+</ul>
+<p>The plugin interface is <a href="../javadoc/com/dtolabs/rundeck/plugins/scm/ScmExportPluginFactory.html">ScmExportPluginFactory</a>. This factory type should produce a <a href="../javadoc/com/dtolabs/rundeck/plugins/scm/ScmExportPlugin.html">ScmExportPlugin</a> object.</p>
+<p>The plugin interface is <a href="../javadoc/com/dtolabs/rundeck/plugins/scm/ScmImportPluginFactory.html">ScmImportPluginFactory</a>. This factory type should produce a <a href="../javadoc/com/dtolabs/rundeck/plugins/scm/ScmImportPlugin.html">ScmImportPlugin</a> object.</p>
+<h2 id="localization"><a href="#localization">Localization</a></h2>
+<p>For the basics of plugin localization see: <a href="plugin-development.html#plugin-localization">Plugin Development - Plugin Localization</a>.</p>
+<h3 id="message-codes"><a href="#message-codes">Message Codes</a></h3>
+<p>In addition to the <a href="plugin-development.html#defining-plugin-localization-messages">basic plugin message codes</a>, SCM Plugins can have multiple &quot;input views&quot; with a set of properties, as well as a set of &quot;setup&quot; properties. The codes for these properties can be defined in your &quot;messages.properties&quot; file using the following patterns:</p>
+<ul>
+<li><code>setup.property.NAME.title</code> Title for setup property named &quot;NAME&quot;</li>
+<li><code>setup.property.NAME.description</code> Description for setup property named &quot;NAME&quot;</li>
+<li><code>action.ID.title</code> Title for action view with ID &quot;ID&quot;</li>
+<li><code>action.ID.description</code> Description for action view with ID &quot;ID&quot;</li>
+<li><code>action.ID.buttonTitle</code> Button Title for action view with ID &quot;ID&quot;</li>
+<li><code>action.ID.property.NAME.title</code> Title for property named &quot;NAME&quot; for action view with ID &quot;ID&quot;</li>
+<li><code>action.ID.property.NAME.description</code> Description for property named &quot;NAME&quot; for action view with ID &quot;ID&quot;</li>
+</ul>
+<h2 id="example"><a href="#example">Example</a></h2>
+<p>The Git Plugin bundled with rundeck provides an example.</p>
+<p>View: <a href="https://github.com/rundeck/rundeck/tree/master/plugins/git-plugin">Git Plugin Source</a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.9.3)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="scm-plugins.html">SCM Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="logging-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> Logging Plugin</a></li>
+      <li class="next"><a href="notification-plugin.html">Notification Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2017 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2017-08-25T22:15:10UTC">2017-08-25T22:15:10UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
