@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Localization</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.10.0</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.10.0)</a></li>
+    
+    
+    <li ><a href="index.html">Administrator Guide</a></li>
+    <li class="active"><a href="localization.html">Localization</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="email-settings.html"><i class="glyphicon glyphicon-arrow-left"></i> Email Settings</a></li>
+      
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#messages-file">Messages file</a><ul>
+<li><a href="#testing-your-changes">Testing your changes</a></li>
+<li><a href="#missing-strings">Missing Strings</a></li>
+<li><a href="#submit-a-pull-request">Submit a Pull Request</a></li>
+</ul></li>
+<li><a href="#date-formats">Date formats</a></li>
+<li><a href="#gui-customization">GUI Customization</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Localization</h1>
+</div>
+<p>Rundeck customization and localization/internationalization.</p>
+<h2 id="messages-file"><a href="#messages-file">Messages file</a></h2>
+<p>Rundeck uses Grails, based on Spring, which provides localization/internationalization by means of a <code>messages</code> file.</p>
+<p>For reference, see <a href="https://grails.github.io/grails-doc/2.4.4/guide/i18n.html">Grails Internationalization</a>.</p>
+<p>This file is in Java Properties format, and defines message strings.</p>
+<pre><code>webapp/WEB-INF/grails-app/i18n/messages.properties
+webapp/WEB-INF/grails-app/i18n/messages_es_419.properties</code></pre>
+<p>The default <code>messages.properties</code> file contains English/US strings, and formats. The file <code>messages_es_419.properties</code> defines Spanish strings.</p>
+<p>You can create a custom messages file for your locale, by duplicating the <code>messages.properties</code> file and translating the text strings, or altering the format strings.</p>
+<p>The Locale code you use is based on language code and country code.</p>
+<h3 id="testing-your-changes"><a href="#testing-your-changes">Testing your changes</a></h3>
+<p>You can <a href="https://grails.github.io/grails-doc/2.4.4/guide/i18n.html#changingLocales">change the locale used in Rundeck</a> by appending a <code>?lang=XX</code> to the URL in your request.</p>
+<h3 id="missing-strings"><a href="#missing-strings">Missing Strings</a></h3>
+<p>Not all of the Rundeck GUI uses localized strings yet. If you find a page in Rundeck that doesn't seem to use appropriate localization of English text, please <a href="https://github.com/rundeck/rundeck/issues/new?title=Missing%20i18n%20Text%3A%20___&amp;body=i18n%20support%20is%20missing%20on%20page%3A%20___%0A%0AText%3A%20___&amp;labels[]=i18n">Submit an issue report</a>.</p>
+<h3 id="submit-a-pull-request"><a href="#submit-a-pull-request">Submit a Pull Request</a></h3>
+<p>If you would like to translate Rundeck to another language, please submit your new messages file as a Pull Request via Github, so that we can include it in the next Rundeck release.</p>
+<p>There is a page on the <a href="https://github.com/rundeck/rundeck/wiki/Internationalization">Rundeck wiki: Internationalization</a> that can help if you are new to git.</p>
+<h2 id="date-formats"><a href="#date-formats">Date formats</a></h2>
+<p>Changing the Date formats shown in the Activity page of Rundeck:</p>
+<p>These messages entries determine the formats shown:</p>
+<ul>
+<li><code>jobslist.date.format</code> default <code>M/d/yy h:mm a</code></li>
+<li><code>jobslist.date.format.ko</code> default <code>M/DD/YY h:mm a</code></li>
+<li><code>jobslist.running.format.ko</code> default <code>h:mm a</code></li>
+</ul>
+<p>The <code>jobslist.date.format</code> uses <a href="https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html?is-external=true">Java SimpleDateFormat</a>.</p>
+<p>The messages ending with <code>.ko</code> use the <a href="http://momentjs.com/docs/#/displaying/format/">moment.js format</a></p>
+<h2 id="gui-customization"><a href="#gui-customization">GUI Customization</a></h2>
+<p>See <a href="gui-customization.html">GUI Customization</a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.10.0)</a></li>
+    
+    
+    <li ><a href="index.html">Administrator Guide</a></li>
+    <li class="active"><a href="localization.html">Localization</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="email-settings.html"><i class="glyphicon glyphicon-arrow-left"></i> Email Settings</a></li>
+      
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2017 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2017-10-16T22:31:18UTC">2017-10-16T22:31:18UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>

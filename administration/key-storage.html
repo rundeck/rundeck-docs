@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rundeck Key Storage</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.10.0</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.10.0)</a></li>
+    
+    
+    <li ><a href="index.html">Administrator Guide</a></li>
+    <li class="active"><a href="key-storage.html">Key Storage</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="storage-facility.html"><i class="glyphicon glyphicon-arrow-left"></i> Storage Facility</a></li>
+      <li class="next"><a href="email-settings.html">Email Settings <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#acl-policies">ACL Policies</a><ul>
+<li><a href="#examples">Examples</a></li>
+</ul></li>
+<li><a href="#api-usage">API Usage</a></li>
+<li><a href="#storage-backends">Storage backends</a><ul>
+<li><a href="#configuring-storage-plugins">Configuring Storage Plugins</a></li>
+</ul></li>
+<li><a href="#key-data-storage-converter">Key Data Storage Converter</a><ul>
+<li><a href="#configuring-storage-converter-plugins">Configuring Storage Converter Plugins</a></li>
+</ul></li>
+<li><a href="#using-keys-via-rundeck-node-executors">Using Keys via Rundeck Node Executors</a><ul>
+<li><a href="#built-in-jschnodeexecutor">Built-in JschNodeExecutor</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Rundeck Key Storage</h1>
+</div>
+<p>This document describes the Rundeck Key Storage mechanism for a developer to implement a secure data flow of sensitive private key data that can be used for sessions via a Rundeck Node Executor.</p>
+<p>The structure or hierarchy used for organizing Keys is up to you.</p>
+<p>A typical way to store shared keys might be under a &quot;common&quot; or &quot;shared&quot; root. Specific user or project keys might be stored under &quot;user/[username]/&quot; or &quot;project/[name]&quot; paths:</p>
+<ul>
+<li><code>common/qa-dev.pem</code></li>
+<li><code>user/bob/dev1.pem</code></li>
+<li><code>user/bob/prod1.pem</code></li>
+<li><code>role/qa/web1.pem</code></li>
+<li><code>project/project1/default.pem</code></li>
+</ul>
+<h2 id="acl-policies"><a href="#acl-policies">ACL Policies</a></h2>
+<p>Access to the Keys in the Storage facility are restricted by use of <a href="access-control-policy.html#">ACL policies</a>.</p>
+<p>Access to the <code>keys</code> path requires an <a href="access-control-policy.html#application-scope-resources-and-actions">Application scope</a> authorization.</p>
+<p>Within the application scope definition, define access with a <code>for</code> entry of <code>storage</code>.</p>
+<p>Authorization can be granted for these actions:</p>
+<ul>
+<li><code>create</code> - create files</li>
+<li><code>update</code> - modify files</li>
+<li><code>read</code> - list directories and view and read files</li>
+<li><code>delete</code> - delete files</li>
+</ul>
+<h3 id="examples"><a href="#examples">Examples</a></h3>
+<pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">description:</span> authorize keys/ storage files
+<span class="fu">context:</span>
+  <span class="fu">application:</span> &#39;rundeck&#39;
+<span class="fu">for:</span>
+  <span class="fu">storage:</span>
+    <span class="kw">-</span> <span class="fu">match:</span>
+        <span class="fu">path:</span> &#39;keys/.*&#39;
+      <span class="fu">allow:</span> <span class="kw">[</span>read<span class="kw">]</span>
+    <span class="kw">-</span> <span class="fu">equals:</span>
+        <span class="fu">path:</span> &#39;keys/test1.pub&#39;
+      <span class="fu">allow:</span> <span class="kw">[</span>read<span class="kw">,</span>create<span class="kw">,</span>update<span class="kw">,</span>delete<span class="kw">]</span>
+    <span class="kw">-</span> <span class="fu">match:</span>
+        <span class="fu">path:</span> &#39;keys/scratch/.*&#39;
+      <span class="fu">allow:</span> <span class="kw">[</span>read<span class="kw">,</span>create<span class="kw">,</span>update<span class="kw">,</span>delete<span class="kw">]</span></code></pre>
+<h2 id="api-usage"><a href="#api-usage">API Usage</a></h2>
+<p>The <a href="../api/index.html#key-storage">Key Storage API</a> is provided through the standard Rundeck HTTP API. Rundeck should be configured to use HTTPS, and all API access requires either an authentication token, or username and password authentication.</p>
+<p>Creating an key entry:</p>
+<ul>
+<li><code>POST /api/11/storage/keys/{path}/{name}</code>
+<ul>
+<li>Stores a key file named &quot;{name}&quot; at a particular path</li>
+<li>Request content is stored as-is, and the <code>Content-Type</code> is stored with the data.</li>
+<li>using Content-Type &quot;application/pgp-keys&quot; creates a <strong>Public key</strong></li>
+<li>using Content-Type &quot;application/octet-stream&quot; creates a <strong>Private key</strong></li>
+</ul></li>
+</ul>
+<p>Listing entries:</p>
+<ul>
+<li><code>GET /api/11/storage/keys/{path}/</code>
+<ul>
+<li>Lists all entries in the directory, provides a JSON or XML response based on the <code>Accept</code> request header</li>
+</ul></li>
+</ul>
+<p>Retrieving keys:</p>
+<ul>
+<li><code>GET /api/11/storage/keys/{path}/{name}</code>
+<ul>
+<li>Retrieve the key file data.</li>
+<li>Provides a JSON or XML response based on the <code>Accept</code> request header</li>
+</ul></li>
+</ul>
+<p>If the <code>Accept</code> header specifies <code>*/*</code> or the content-type of the file, then the response will be:</p>
+<ul>
+<li>For a <strong>Public Key</strong>: the public key content</li>
+<li>For a <strong>Private Key</strong>: a <code>403 Unauthorized</code> response.</li>
+</ul>
+<p>Deleting an entry:</p>
+<ul>
+<li><code>DELETE /api/11/storage/keys/{path}/{name}</code>
+<ul>
+<li>deletes the entry if it exists and returns <code>204</code> response</li>
+</ul></li>
+</ul>
+<h2 id="storage-backends"><a href="#storage-backends">Storage backends</a></h2>
+<p>The location of stored Key data can be either on the filesystem, the database, or some external system via usage of a <strong>Storage Plugin</strong>.</p>
+<p>Rundeck provides these built-in implementations:</p>
+<ul>
+<li><code>file</code> - stores files locally on the filesystem (default)</li>
+<li><code>db</code> - stores file data as BLOBs in the database</li>
+</ul>
+<h3 id="configuring-storage-plugins"><a href="#configuring-storage-plugins">Configuring Storage Plugins</a></h3>
+<p>See <a href="../plugins-user-guide/configuring.html#storage-plugins">Plugins User Guide - Configuring Storage Plugins</a>.</p>
+<h2 id="key-data-storage-converter"><a href="#key-data-storage-converter">Key Data Storage Converter</a></h2>
+<p>Keys can be encrypted in the storage backend by use of a <a href="../developer/storage-converter-plugin.html">Storage Converter plugin</a>. A typical plugin would encrypt any private-key data at write time, and decrypt it at read time.</p>
+<p>The Storage Converter Plugin handles reading and writing the content for any matching resources. The subsequent data is stored in the storage backend (on-disk or in a database) alongside the metadata for the file. If necessary, the metadata content can also be encrypted by modifying the data map that is provided.</p>
+<p>Converter plugins do not have to manage storing the data, that will be handled by the Storage backend.</p>
+<h3 id="configuring-storage-converter-plugins"><a href="#configuring-storage-converter-plugins">Configuring Storage Converter Plugins</a></h3>
+<p>See <a href="../plugins-user-guide/configuring.html#storage-converter-plugins">Plugins User Guide - Configuring Storage Converter Plugins</a>.</p>
+<h2 id="using-keys-via-rundeck-node-executors"><a href="#using-keys-via-rundeck-node-executors">Using Keys via Rundeck Node Executors</a></h2>
+<h3 id="built-in-jschnodeexecutor"><a href="#built-in-jschnodeexecutor">Built-in JschNodeExecutor</a></h3>
+<p>The provided java-based JschNodeExecutor, which is the default used for Node execution, uses Node attributes to determine the type of authentication used when connecting to the Node via SSH. To select private-key based authentication the Node attribute <code>ssh-authentication</code> is used:</p>
+<ul>
+<li><code>ssh-authentication=&quot;privateKey&quot;</code> (default value)</li>
+</ul>
+<p>The default and typical usage is to use a private key stored on the local file system specified via the <code>ssh-keypath</code> attribute.</p>
+<p>Use the following attribute to select one of the stored Keys for authentication.</p>
+<dl>
+<dt>Attribute</dt>
+<dd><p><code>ssh-key-storage-path</code></p>
+</dd>
+<dt>Value</dt>
+<dd><p><code>/keys/{path}/{name}</code> - the storage path to the key. Currently all keys are stored under the <code>/keys</code> top-level path.</p>
+</dd>
+</dl>
+<p>The value of the <code>ssh-key-storage-path</code> attribute can embed values taken from the execution context of the Rundeck job or execution, for example the username of the user running the job. This would be embedded as <code>${job.username}</code>, so to specify use of a key named &quot;default.pem&quot; stored in a path with the username of the executing user, the attribute might be set as:</p>
+<pre><code>ssh-key-storage-path=&quot;/keys/users/${job.username}/default.pem&quot;</code></pre>
+<p>When resolved, this will evaluate to <code>/keys/users/bob/default.pem</code> (for example).</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.10.0)</a></li>
+    
+    
+    <li ><a href="index.html">Administrator Guide</a></li>
+    <li class="active"><a href="key-storage.html">Key Storage</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="storage-facility.html"><i class="glyphicon glyphicon-arrow-left"></i> Storage Facility</a></li>
+      <li class="next"><a href="email-settings.html">Email Settings <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2017 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2017-10-16T22:31:18UTC">2017-10-16T22:31:18UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
