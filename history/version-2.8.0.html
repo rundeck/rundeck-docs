@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Version 2.8.0</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="greg" />
+  <meta name="date" content="04/10/2017" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.10.2</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.10.2)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-2.8.0.html">Version 2.8.0 (2017-04-10)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.7.3.html">Version 2.7.3 (2017-03-10) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#release-2.8.0">Release 2.8.0</a><ul>
+<li><a href="#upgrading-from-earlier-versions">Upgrading from Earlier versions</a></li>
+<li><a href="#notes">Notes</a></li>
+<li><a href="#contributors">Contributors</a></li>
+<li><a href="#bug-reporters">Bug Reporters</a></li>
+<li><a href="#issues">Issues</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Version 2.8.0</h1>
+</div>
+<h1 id="release-2.8.0"><a href="#release-2.8.0">Release 2.8.0</a></h1>
+<p>Date: 2017-04-10</p>
+<p>Name: <span style="color: MidnightBlue"><span class="glyphicon glyphicon-camera"></span> &quot;cafe cubano midnightblue camera&quot;</span></p>
+<h2 id="upgrading-from-earlier-versions"><a href="#upgrading-from-earlier-versions">Upgrading from Earlier versions</a></h2>
+<ul>
+<li>See the <a href="../upgrading/index.html">Upgrading Guide</a></li>
+</ul>
+<h2 id="notes"><a href="#notes">Notes</a></h2>
+<p>Import Changes:</p>
+<ul>
+<li>Java 8 is required.</li>
+</ul>
+<p>New Features:</p>
+<ul>
+<li>Jobs Options now have a <a href="../manual/jobs.html#file-option-type">File input type</a>.
+<ul>
+<li>Uploaded files are stored temporarily on the server while the execution runs</li>
+<li><a href="../api/index.html#upload-a-file-for-a-job-option">API support</a></li>
+</ul></li>
+<li>API Token Roles
+<ul>
+<li>API Tokens now have associated Roles and Expiration date.</li>
+<li><a href="../administration/access-control-policy.html#api-token-authorization-roles">Access Control</a>:
+<ul>
+<li>Authorized users can generate a token with their own roles.</li>
+<li>Authorized users can specify other access roles.</li>
+</ul></li>
+<li><a href="../administration/configuration-file-reference.html#security">Admins can specify maximum token lifetime</a>.</li>
+<li><a href="../api/index.html#authentication-tokens">API support</a></li>
+</ul></li>
+<li>Job editor autocomplete supports global variables</li>
+<li>Project configuration for displaying Readme/Motd on Projects List or Project Home page</li>
+<li>Project configuration for collapsing/expanding Job groups by default</li>
+<li>Project Archive Export: User can select what to include in the archive
+<ul>
+<li><a href="../api/index.html#project-archive-export">API support</a></li>
+<li><a href="../api/index.html#project-archive-export-async">API supports async export</a></li>
+</ul></li>
+<li>New Step Plugin: Refresh nodes. Causes Rundeck to refresh the nodes list for the project, so that subsequent Job Reference steps can use any new nodes.</li>
+<li>File Copy Plugin: Recursive and wildcard file copy</li>
+<li>Job Options: Multivalue options can be selected by default</li>
+<li>Job Options: <a href="../manual/jobs.html#json-format">Remote Option values can specify default selections</a></li>
+</ul>
+<p>Other changes:</p>
+<ul>
+<li><a href="../administration/configuration-file-reference.html#security">Optional <code>Referer</code> Header verification for CSRF attack prevention</a></li>
+<li>Plugin properties support <a href="../developer/plugin-development.html#plugin-properties"><code>Options</code> multivalue type</a> and <a href="http://rundeck.org/docs/developer/plugin-annotations.html#plugin-properties">java annotations</a></li>
+</ul>
+<p>Bugfixes:</p>
+<ul>
+<li>Error calling Job Run API for a scheduled Job</li>
+</ul>
+<h2 id="contributors"><a href="#contributors">Contributors</a></h2>
+<ul>
+<li>Dan Dunckel (dandunckelman)</li>
+<li>GitHub (web-flow)</li>
+<li>Greg Schueler (gschueler)</li>
+<li>Philippe Muller (pmuller)</li>
+<li>gitpmside (mathieuchateau)</li>
+<li>jtobard</li>
+</ul>
+<h2 id="bug-reporters"><a href="#bug-reporters">Bug Reporters</a></h2>
+<ul>
+<li>bzlowrance</li>
+<li>dandunckelman</li>
+<li>djalai</li>
+<li>gschueler</li>
+<li>hlerebours</li>
+<li>jtobard</li>
+<li>mathieuchateau</li>
+<li>pkr1234</li>
+<li>pmuller</li>
+<li>rophy</li>
+</ul>
+<h2 id="issues"><a href="#issues">Issues</a></h2>
+<p><a href="https://github.com/rundeck/rundeck/milestone/52">Milestone 2.8.0</a></p>
+<ul>
+<li><a href="https://github.com/rundeck/rundeck/issues/2413">Project config page: resource model source with CODE rendering field with empty value causes NPE</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2408">Project specific ACLs stored on filesystem are not loaded</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2407">Support global vars in Job editor autocomplete</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2404">Option to hide readme/motd on projects list page</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2400">IllegalArgumentException at job start on storage dirs creation</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2398">Fix typo: s/losf/lsof/</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2395">Revert default startpage setting when clicking on a project</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2394">Enhancement: Flag to not include executions in project archive generation</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2392">fix #921 add project.jobs.gui.groupExpandLevel configuration</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2389">API: Calling the API to run a job when the schedule is enabled trigger an error message</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2380">Expose refresh node cache to plugin</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2377">Readme.md hidden on Main Menu Feature request.</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2370">Packaging: Deb: uninstall &quot;purge&quot; script is not correct</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2368">Add RDECK_CONFIG_FILE environment variable</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2365">Require Java 8</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2359">CopyFile Plugin enhancement</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2358">Api token enhancement</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2351">File input option type for Jobs</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2236">Prevent csrf attacks</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1550">Feature Request: web api should have same ACL as the api token user</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1367">OpenJDK 64-Bit Server VM warning: ignoring option MaxPermSize=256m; support was removed in 8.0</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1189">&quot;Default&quot; for multivalue option fetched from remote URL</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.10.2)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-2.8.0.html">Version 2.8.0 (2017-04-10)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.7.3.html">Version 2.7.3 (2017-03-10) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2017 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2017-12-19T01:03:22UTC">2017-12-19T01:03:22UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
