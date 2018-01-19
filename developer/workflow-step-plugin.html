@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Workflow Step Plugin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="December 10, 2012" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.10.4</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.10.4)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="workflow-step-plugin.html">Workflow Step Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="node-executor-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> Node Executor Plugin</a></li>
+      <li class="next"><a href="file-copier-plugin.html">File Copier Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#about">About</a><ul>
+<li><a href="#use-cases">Use cases</a></li>
+</ul></li>
+<li><a href="#java-plugin-type">Java Plugin Type</a></li>
+<li><a href="#define-a-plugin-provider-class">Define a plugin provider class</a></li>
+<li><a href="#workflow-step-types">Workflow Step Types</a><ul>
+<li><a href="#plugin-properties">Plugin properties</a></li>
+<li><a href="#workflowstep-plugin">WorkflowStep Plugin</a></li>
+<li><a href="#workflownodestep-plugin">WorkflowNodeStep Plugin</a></li>
+<li><a href="#remotescriptnodestep-plugin">RemoteScriptNodeStep Plugin</a></li>
+<li><a href="#step-context-information">Step context information</a></li>
+<li><a href="#example-code">Example code</a></li>
+</ul></li>
+<li><a href="#script-plugin-type">Script Plugin Type</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Workflow Step Plugin</h1>
+</div>
+<h2 id="about"><a href="#about">About</a></h2>
+<p>There are two types of steps in a workflow:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Node Steps</strong> - executed on multiple nodes
+<ul>
+<li>example: a command or script execution</li>
+</ul></li>
+<li><strong>Workflow Steps</strong> - only executes once in a workflow
+<ul>
+<li>example: a Job-Reference step</li>
+</ul></li>
+</ol>
+<p>When there are multiple Nodes to execute on, the Node Steps execute multiple times, although the Workflow Steps will execute only once. Workflow steps are always executed in order, so any sequence of steps will be completed before the next step is executed even if they run on multiple nodes or threads.</p>
+<p>You can create a plugin to execute either type of step.</p>
+<h3 id="use-cases"><a href="#use-cases">Use cases</a></h3>
+<p>There are several reasons to create a Step Plugin:</p>
+<ul>
+<li>You want to take the set of nodes defined for a Job, and use them with some other batch processing system, such as another kind of remote dispatcher or orchestration tool, rather than executing commands on them directly.
+<ul>
+<li>You would implement a <a href="#workflowstep-plugin">WorkflowStep Plugin</a> plugin which is provided with the set of Nodes</li>
+</ul></li>
+<li>You want to interact with another system on a per-node basis, such as for updating or reporting the state of a Node or process, rather than executing a command on the node
+<ul>
+<li>You would implement a <a href="#workflownodestep-plugin">WorkflowNodeStep Plugin</a></li>
+</ul></li>
+<li>You want to wrap a command or script in a simplified user interface and have it executed remotely on nodes
+<ul>
+<li>You would implement a <a href="#remotescriptnodestep-plugin">RemoteScriptNodeStep Plugin</a> which allows you to define a command or script and declare a custom set of input fields.</li>
+</ul></li>
+</ul>
+<h2 id="java-plugin-type"><a href="#java-plugin-type">Java Plugin Type</a></h2>
+<h2 id="define-a-plugin-provider-class"><a href="#define-a-plugin-provider-class">Define a plugin provider class</a></h2>
+<p>Refer to the <a href="plugin-development.html#java-plugin-development">Plugin Development - Java Plugins</a> section for information about correct definition of a <a href="../javadoc/com/dtolabs/rundeck/core/plugins/Plugin.html">Plugin</a> class, including packaging as a Jar and annotation.</p>
+<p>Be sure to use the <code>@Plugin</code> annotation on your provider implementation class to let it be recognized by Rundeck (See <a href="plugin-annotations.html">Plugin Annotations</a>).</p>
+<p>Your <code>service</code> name should be one of the three listed below. The class <a href="../javadoc/com/dtolabs/rundeck/plugins/ServiceNameConstants.html">ServiceNameConstants</a> contains static definitions of all Rundeck Service names.</p>
+<h2 id="workflow-step-types"><a href="#workflow-step-types">Workflow Step Types</a></h2>
+<p>Your plugins can be one of three types.</p>
+<ul>
+<li><a href="#workflowstep-plugin">WorkflowStep</a></li>
+<li><a href="#workflownodestep-plugin">WorkflowNodeStep</a></li>
+<li><a href="#remotescriptnodestep-plugin">RemoteScriptNodeStep</a></li>
+</ul>
+<p>Each plugin type has an associated Java interface.</p>
+<h3 id="plugin-properties"><a href="#plugin-properties">Plugin properties</a></h3>
+<p>See <a href="plugin-development.html#plugin-descriptions">Plugin Development - Java Plugins - Descriptions</a> to learn how to create configuration properties for your plugin using Java annotations.</p>
+<h3 id="workflowstep-plugin"><a href="#workflowstep-plugin">WorkflowStep Plugin</a></h3>
+<p>Annotate your class with <code>@Plugin</code> and use the service name <code>WorkflowStep</code>.</p>
+<p>Implement the interface <a href="../javadoc/com/dtolabs/rundeck/plugins/step/StepPlugin.html">StepPlugin</a>:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+<span class="co">  * Execute the step.</span>
+<span class="co">  *</span>
+<span class="co">  * </span><span class="kw">@param context </span><span class="co">      the plugin step context</span>
+<span class="co">  * </span><span class="kw">@param configuration </span><span class="co">Any configuration property values not otherwise applied to the plugin</span>
+<span class="co">  *</span>
+<span class="co">  * </span><span class="kw">@throws StepException </span><span class="co">if an error occurs, the failureReason should indicate the reason</span>
+<span class="co">  */</span>
+<span class="kw">public</span> <span class="dt">void</span> <span class="fu">executeStep</span>(<span class="dt">final</span> PluginStepContext context, <span class="dt">final</span> Map&lt;String, Object&gt; configuration)
+    <span class="kw">throws</span> StepException;</code></pre>
+<p>Your implementation should throw a <a href="../javadoc/com/dtolabs/rundeck/core/execution/workflow/steps/node/NodeStepException.html">StepException</a> if an error occurs.</p>
+<h3 id="workflownodestep-plugin"><a href="#workflownodestep-plugin">WorkflowNodeStep Plugin</a></h3>
+<p>Annotate your class with <code>@Plugin</code> and use the service name <code>WorkflowNodeStep</code>.</p>
+<p>Implement the interface <a href="../javadoc/com/dtolabs/rundeck/plugins/step/NodeStepPlugin.html">NodeStepPlugin</a>:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+<span class="co"> * Execute the plugin step logic for the given node.</span>
+<span class="co"> *</span>
+<span class="co"> * </span><span class="kw">@param context </span><span class="co">      the step context</span>
+<span class="co"> * </span><span class="kw">@param configuration </span><span class="co">Any configuration property values not otherwise applied to the plugin</span>
+<span class="co"> * </span><span class="kw">@param entry </span><span class="co">        the Node</span>
+<span class="co"> *</span>
+<span class="co"> * </span><span class="kw">@throws NodeStepException </span><span class="co">if an error occurs</span>
+<span class="co"> */</span>
+<span class="kw">public</span> <span class="dt">void</span> <span class="fu">executeNodeStep</span>(<span class="dt">final</span> PluginStepContext context,
+                               <span class="dt">final</span> Map&lt;String, Object&gt; configuration,
+                               <span class="dt">final</span> INodeEntry entry)
+    <span class="kw">throws</span> NodeStepException;</code></pre>
+<p>Your implementation should throw a <a href="../javadoc/com/dtolabs/rundeck/core/execution/workflow/steps/node/NodeStepException.html">StepException</a> if an error occurs.</p>
+<h3 id="remotescriptnodestep-plugin"><a href="#remotescriptnodestep-plugin">RemoteScriptNodeStep Plugin</a></h3>
+<p>These are a specialized use-case of the Node Step plugin. They allow you to simply define a command or a script that should be executed on the remote nodes, and Rundeck will handle the remote execution of the command/script via the appropriate services.</p>
+<p>Annotate your class with <code>@Plugin</code> and use the service name <code>RemoteScriptNodeStep</code></p>
+<p>Implement the interface <a href="../javadoc/com/dtolabs/rundeck/plugins/step/RemoteScriptNodeStepPlugin.html">RemoteScriptNodeStepPlugin</a>:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+<span class="co"> * Generate a full script or command string to execute on the remote node</span>
+<span class="co"> *</span>
+<span class="co"> * </span><span class="kw">@param context </span><span class="co">      the step context</span>
+<span class="co"> * </span><span class="kw">@param configuration </span><span class="co">Any configuration property values not otherwise applied to the plugin</span>
+<span class="co"> * </span><span class="kw">@param entry </span><span class="co">        the Node</span>
+<span class="co"> *</span>
+<span class="co"> * </span><span class="kw">@throws NodeStepException </span><span class="co">if an error occurs</span>
+<span class="co"> */</span>
+<span class="kw">public</span> GeneratedScript <span class="fu">generateScript</span>(<span class="dt">final</span> PluginStepContext context,
+                                      <span class="dt">final</span> Map&lt;String, Object&gt; configuration,
+                                      <span class="dt">final</span> INodeEntry entry)
+    <span class="kw">throws</span> NodeStepException;</code></pre>
+<p>Your implementation should return a <a href="../javadoc/com/dtolabs/rundeck/plugins/step/GeneratedScript.html">GeneratedScript</a> object. You can make use of the <a href="../javadoc/com/dtolabs/rundeck/plugins/step/GeneratedScriptBuilder.html">GeneratedScriptBuilder</a> class to generate the appropriate return type using these two factory methods:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+<span class="co"> * Create a script</span>
+<span class="co"> *</span>
+<span class="co"> * </span><span class="kw">@param script </span><span class="co">the script text</span>
+<span class="co"> * </span><span class="kw">@param args </span><span class="co">  the arguments for the script</span>
+<span class="co"> */</span>
+<span class="kw">public</span> <span class="dt">static</span> GeneratedScript <span class="fu">script</span>(<span class="dt">final</span> String script, <span class="dt">final</span> String[] args);
+ 
+<span class="co">/**</span>
+<span class="co"> * Create a command</span>
+<span class="co"> *</span>
+<span class="co"> * </span><span class="kw">@param command </span><span class="co">the command and arguments</span>
+<span class="co"> */</span>
+<span class="kw">public</span> <span class="dt">static</span> GeneratedScript <span class="fu">command</span>(<span class="dt">final</span> String<span class="kw">... </span>command);</code></pre>
+<h3 id="step-context-information"><a href="#step-context-information">Step context information</a></h3>
+<p>Each plugin is passed a <a href="../javadoc/com/dtolabs/rundeck/plugins/step/PluginStepContext.html">PluginStepContext</a> instance that provides access to details about the step and its configuration:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">interface</span> PluginStepContext {
+    <span class="co">/**</span>
+<span class="co">     * Return the logger</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> PluginLogger <span class="fu">getLogger</span>();
+    <span class="co">/**</span>
+<span class="co">     * Return the project name</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> String <span class="fu">getFrameworkProject</span>();
+    <span class="co">/**</span>
+<span class="co">     * Return the data context</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> Map&lt;String, Map&lt;String, String&gt;&gt; <span class="fu">getDataContext</span>();
+ 
+    <span class="co">/**</span>
+<span class="co">     * Return the nodes used for this execution</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> INodeSet <span class="fu">getNodes</span>();
+    <span class="co">/**</span>
+<span class="co">     * Return the step number within the current workflow</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">getStepNumber</span>();
+    <span class="co">/**</span>
+<span class="co">     * Return the context path of step numbers within the larger workflow context.</span>
+<span class="co">     */</span>
+    <span class="kw">public</span> List&lt;Integer&gt; <span class="fu">getStepContext</span>();
+}</code></pre>
+<h3 id="example-code"><a href="#example-code">Example code</a></h3>
+<p>See the source directory <code>examples/example-java-step-plugin</code> for examples of all three provider types.</p>
+<ul>
+<li>On github: <a href="https://github.com/rundeck/rundeck/tree/development/examples/example-java-step-plugin">example-java-step-plugin</a></li>
+</ul>
+<h2 id="script-plugin-type"><a href="#script-plugin-type">Script Plugin Type</a></h2>
+<p><em>Note:</em> Currently these type of plugins can be implemented as script-based plugins:</p>
+<ul>
+<li>Node Steps - the plugin will execute the script <em>locally</em> on the Rundeck server for each node</li>
+<li>Remote Script Node Steps - the plugin will execute the script <em>remotely</em> on each node</li>
+</ul>
+<p>See the <a href="plugin-development.html#script-plugin-development">Script Plugin Development</a> for the basics of developing script-based plugins for Rundeck.</p>
+<p>Use the service name for the plugin type:</p>
+<ul>
+<li><code>WorkflowNodeStep</code></li>
+<li><code>RemoteScriptNodeStep</code></li>
+</ul>
+<p>For configuration properties, see the <a href="model-format-parser-and-generator-plugin.html">Resource Model Source Plugin - Plugin Properties</a>.</p>
+<p>Two additional <a href="plugin-development.html#provider-metadata">provider metadata properties</a> are available for <code>RemoteScriptNodeStep</code> plugins:</p>
+<ul>
+<li><code>use-original-extension</code> - (<code>true/false</code>, default <code>true</code>), whether to force the remotely copied script to have the same file extension as the original specified by <code>script-file</code>.</li>
+<li><code>script-file-extension</code> - A file extension to use for the remotely copied script.</li>
+</ul>
+<p>To define <a href="plugin-annotations.html#property-scopes">property scopes</a>, add a <code>scope</code> entry in the map for a configuration property:</p>
+<pre class="sourceCode yaml"><code class="sourceCode yaml">  <span class="fu">config:</span>
+    <span class="kw">-</span> <span class="fu">type:</span> Integer
+      <span class="fu">name:</span> count
+      <span class="fu">title:</span> Count
+      <span class="fu">description:</span> Enter the number of nodes to generate
+      <span class="fu">scope:</span> Project</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.10.4)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="workflow-step-plugin.html">Workflow Step Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="node-executor-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> Node Executor Plugin</a></li>
+      <li class="next"><a href="file-copier-plugin.html">File Copier Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2018-01-19T01:11:30UTC">2018-01-19T01:11:30UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
