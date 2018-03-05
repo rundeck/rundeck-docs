@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Version 2.8.3</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="greg" />
+  <meta name="date" content="06/30/2017" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.10.7</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.10.7)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-2.8.3.html">Version 2.8.3 (2017-06-30)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.8.2.html">Version 2.8.2 (2017-04-19) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#release-2.8.3">Release 2.8.3</a><ul>
+<li><a href="#upgrading-from-2.8.0">Upgrading from 2.8.0</a></li>
+<li><a href="#upgrading-from-earlier-versions">Upgrading from Earlier versions</a></li>
+<li><a href="#notes">Notes</a></li>
+<li><a href="#contributors">Contributors</a></li>
+<li><a href="#bug-reporters">Bug Reporters</a></li>
+<li><a href="#issues">Issues</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Version 2.8.3</h1>
+</div>
+<h1 id="release-2.8.3"><a href="#release-2.8.3">Release 2.8.3</a></h1>
+<p>Date: 2017-06-30</p>
+<p>Name: <span style="color: OrangeRed"><span class="glyphicon glyphicon-flash"></span> &quot;cafe cubano orangered flash&quot;</span></p>
+<h2 id="upgrading-from-2.8.0"><a href="#upgrading-from-2.8.0">Upgrading from 2.8.0</a></h2>
+<p><strong>Important Note</strong>: please see the <a href="../upgrading/index.html">Upgrading Guide</a> if you are using Mysql or H2 database, and are upgrading from Rundeck 2.8.0.</p>
+<p>A DB schema change requires a manual fix before upgrading.</p>
+<h2 id="upgrading-from-earlier-versions"><a href="#upgrading-from-earlier-versions">Upgrading from Earlier versions</a></h2>
+<ul>
+<li>See the <a href="../upgrading/index.html">Upgrading Guide</a></li>
+</ul>
+<h2 id="notes"><a href="#notes">Notes</a></h2>
+<p>This release is primarily bug fixes.</p>
+<p>Some other changes:</p>
+<ul>
+<li>If a step has an Error Handler that is marked as &quot;keepgoing on success&quot;, then Error level log output from the step is changed to Normal level</li>
+<li>Executions that were running when the Rundeck server was shutdown will be set to &quot;Incomplete&quot; when the server restarts.</li>
+<li>Some internal library versions were upgraded</li>
+</ul>
+<h2 id="contributors"><a href="#contributors">Contributors</a></h2>
+<ul>
+<li>Alex Honor (ahonor)</li>
+<li>Greg Schueler (gschueler)</li>
+<li>Loïc Blot (nerzhul)</li>
+<li>Sean Reifschneider (linsomniac)</li>
+<li>jtobard</li>
+<li>ltamaster</li>
+</ul>
+<h2 id="bug-reporters"><a href="#bug-reporters">Bug Reporters</a></h2>
+<ul>
+<li>arthurlogilab</li>
+<li>cr42</li>
+<li>flapp</li>
+<li>gschueler</li>
+<li>jtobard</li>
+<li>kmusard</li>
+<li>linsomniac</li>
+<li>ltamaster</li>
+<li>matthewsrogers</li>
+<li>nerzhul</li>
+<li>ronave</li>
+<li>schast</li>
+<li>shoelzle</li>
+<li>soar</li>
+<li>tomdeblende</li>
+<li>uralk</li>
+<li>willemdh</li>
+<li>zionio</li>
+</ul>
+<h2 id="issues"><a href="#issues">Issues</a></h2>
+<p><a href="https://github.com/rundeck/rundeck/milestone/55">Milestone 2.8.3</a></p>
+<ul>
+<li><a href="https://github.com/rundeck/rundeck/pull/2599">Add documentation for unlimited max token expiration time if set to 0</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2585">single valued options with &quot;selected=true&quot; fetched from remote URL don't work</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2559">2.8: ACL policy causes exception for matching clause of a resource attribute that is not present</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2552">single valued options with &quot;selected=true&quot; fetched from remote URL should not used on run again</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2547">Framework ssh timeout value used for both connect and command max time</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2539">Potential fix to #2538</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2538">Exception: property not found: framework.var.dir</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2528">Exception when exporting archive without project_acl authorization</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2525">Problem adding the first api token</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2523">Strange code editor behavior: delete option doesn't work</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2512">Fix problem with S3 plugin</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2510">Documentation: Changing wording of project global variable override.</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2503">Issue exporting job with node intersection</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2502">Documentation fix: java 8 is required</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2494">js issue when running job from popup</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2492">Generated tokens always are created with same user roles</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2487">Job Editor completion helper breaks when editing a job with a file upload</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2486">LocalCommand: empty option variable is not expanded</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2483">SCM GIT job exports different on different servers</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2481">java.lang.NullPointerException on debian jessie install</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2480">Update postgresql connector to 42.0.0</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2479">API: Rundeck 2.8.0, Token creation response for api v18 request is incorrect</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2474">Reduce Error logs on steps with Error Handler</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2470">Ad hoc scheduled executions could not be rescheduled after a restart and will be killed</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2466">Cleaned up executions marked as &quot;incomplete&quot;</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2462">Add autocomplete to notification fields in job editor</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2457">Improve slow db queries related to activity page and home page</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2454">Update not-yet-commons-ssl dependency to 0.3.17</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2453">Update jackson-databind to 2.8.8.1</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2450">Upgrade jsch to 0.1.54</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2448">Simplify rdb queries for project home page statistics</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2271">Scheduled job executions broken after restart</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2167">Rescheduling ad hoc execution fails when restarting rundeckd</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1626">rd-acl test suggests incorrect policy for key storage</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.10.7)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-2.8.3.html">Version 2.8.3 (2017-06-30)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.8.2.html">Version 2.8.2 (2017-04-19) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2018-03-05T16:52:18UTC">2018-03-05T16:52:18UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>

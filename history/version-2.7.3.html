@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Version 2.7.3</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="greg" />
+  <meta name="date" content="03/10/2017" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.org/index.html">
+      Rundeck
+      <p class="small rd_version">Job Scheduler and Runbook Automation</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">2.10.7</p>
+      </a>
+    </li>
+    </ul>
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.10.7)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-2.7.3.html">Version 2.7.3 (2017-03-10)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.7.2.html">Version 2.7.2 (2017-02-02) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#release-2.7.3">Release 2.7.3</a><ul>
+<li><a href="#upgrading-from-2.6">Upgrading from 2.6</a></li>
+<li><a href="#notes">Notes</a></li>
+<li><a href="#contributors">Contributors</a></li>
+<li><a href="#bug-reporters">Bug Reporters</a></li>
+<li><a href="#issues">Issues</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Version 2.7.3</h1>
+</div>
+<h1 id="release-2.7.3"><a href="#release-2.7.3">Release 2.7.3</a></h1>
+<p>Date: 2017-03-10</p>
+<p>Name: <span style="color: Tomato"><span class="glyphicon glyphicon-paperclip"></span> &quot;cafecito tomato paperclip&quot;</span></p>
+<h2 id="upgrading-from-2.6"><a href="#upgrading-from-2.6">Upgrading from 2.6</a></h2>
+<ul>
+<li>See the <a href="../upgrading/index.html">Upgrading Guide</a></li>
+</ul>
+<h2 id="notes"><a href="#notes">Notes</a></h2>
+<p>This is primarily a bugfix release, with a bonus enhancement.</p>
+<ul>
+<li>Fixed some plugin loader problems which were causing bugs with the Jasypt encryption for key storage, and Git SCM plugins</li>
+<li>Added autocomplete support to the Job Workflow editor text fields and text areas.</li>
+</ul>
+<h2 id="contributors"><a href="#contributors">Contributors</a></h2>
+<ul>
+<li>Albert Casademont (acasademont)</li>
+<li>GitHub (web-flow)</li>
+<li>Greg Schueler (gschueler)</li>
+<li>jtobard</li>
+</ul>
+<h2 id="bug-reporters"><a href="#bug-reporters">Bug Reporters</a></h2>
+<ul>
+<li>ChiefAlexander</li>
+<li>acasademont</li>
+<li>daikirinet</li>
+<li>gschueler</li>
+<li>isuftin</li>
+<li>schans</li>
+<li>seunaw</li>
+<li>willemdh</li>
+</ul>
+<h2 id="issues"><a href="#issues">Issues</a></h2>
+<p><a href="https://github.com/rundeck/rundeck/milestone/51">Milestone 2.7.3</a></p>
+<ul>
+<li><a href="https://github.com/rundeck/rundeck/issues/2362">Error; Save Command as a Job</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2361">Fix plugin loader issues</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2355">GUI: Autocomplete job/context vars in step editors</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2327">Abort execution can fail in cluster mode without explanation (wrong cluster node)</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2320">Add apitoken.aclpolicy to Debian conffile</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2316">Missing dependency on uuid-runtime in debian package since 2.7.2</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2294">Error scm git commit job</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2207">User and result columns in Activity page are mixed into each other</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2031">SCM Export Fails - ClassNotFoundException</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1854">SCM import fails</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1785">Jasypt exception thrown, no further information provided</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.10.7)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-2.7.3.html">Version 2.7.3 (2017-03-10)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.7.2.html">Version 2.7.2 (2017-02-02) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">SimplifyOps</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://simplifyops.com">#SimplifyOps</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://simplifyops.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2018-03-05T16:52:18UTC">2018-03-05T16:52:18UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
