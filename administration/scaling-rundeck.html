@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Scaling Rundeck</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.0-RC1)</a></li>
+    
+    
+    <li ><a href="index.html">Administrator Guide</a></li>
+    <li class="active"><a href="scaling-rundeck.html">Scaling Rundeck</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="tuning-rundeck.html"><i class="glyphicon glyphicon-arrow-left"></i> Tuning Rundeck</a></li>
+      <li class="next"><a href="storage-facility.html">Storage Facility <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#known-shortcomings-and-caveats">Known shortcomings and caveats</a></li>
+<li><a href="#performance">Performance</a></li>
+<li><a href="#failover">Failover</a></li>
+<li><a href="#clustering-and-horizontal-scaling">Clustering and horizontal scaling</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Scaling Rundeck</h1>
+</div>
+<p>This guide explains approaches and implementation examples for making Rundeck highly available and scaling Rundeck for production use. Rundeck is a Java webapp so many of the HA and scaling approaches will be similar to beefing up those kinds of applications in general. At this time, there is not a standard HA/Cluster configuration. The approaches discussed here are based on practices shared to us through our community. Use the approaches as guidelines to create your own solution.</p>
+<h3 id="overview"><a href="#overview">Overview</a></h3>
+<p>When thinking about scaling Rundeck there are roughly two concerns:</p>
+<ol style="list-style-type: decimal">
+<li>Make an individual Rundeck perform better. To tune an individual Rundeck instance see the <a href="tuning-rundeck.html">Tuning Rundeck</a> page. Also see the Database section below. Use an external database service like Mysql.</li>
+<li>Make the service you are providing with Rundeck handle more users and bigger workloads by adding more machines for increased capacity. In this case, you either want to be sure Rundeck is highly available or you want to add more capacity to serve more users or processing.</li>
+</ol>
+<h4 id="installation-types"><a href="#installation-types">Installation types</a></h4>
+<p>There are two types of Rundeck installations:</p>
+<ul>
+<li>standalone: This installation includes the embedded Jetty container. If you installed the RPM/DEB or launcher.jar, this is a standalone.</li>
+<li>WAR deployment: This installation deploys the Rundeck application via a WAR into a container like Apache-Tomcat.</li>
+</ul>
+<p>Depending on your installation preference, either is viable but there are pros and cons, too.</p>
+<p>The advantage of the standalone installation is convenience and simplicity. The standalone install defines a set of conventions about install locations and environment. The downside of the standalone installation is it can be more opaque to manage and control the internal Jetty container.</p>
+<p>The advantage of a WAR deployment is greater manageability of the container, of course. If you have a standard container for your organization, chances are there is already tooling for managing an HA failover process, balancing load across multiple instances, monitoring the webapps, and controlling the container as a service. The downside to the WAR deployment is that it might be less convenient to install for new users. They will have to install the container, drop in the WAR and then configure the webapp.</p>
+<p>Using either install, the goal is to create a high performing and available production Rundeck.</p>
+<p>Finally, if you are reading this chapter you are no doubt putting Rundeck into an important production role. Therefore, it is important that you also have backup and restore, monitoring and ops support to manage your Rundeck installations. It's a key service.</p>
+<h3 id="known-shortcomings-and-caveats"><a href="#known-shortcomings-and-caveats">Known shortcomings and caveats</a></h3>
+<p>The Rundeck project is in its early stages for building a complete HA and clustering solution. We are identifying <a href="https://trello.com/c/n9Ke7NbX/32-rundeck-ha-and-clustering">HA and Clustering</a> requirements and adding them to our <a href="https://trello.com/b/sn3g9nOr/rundeck-development">roadmap</a>. If these features are important to you we encourage you to vote on them or comment!</p>
+<ul>
+<li>No checkpoint restart: Jobs that terminate during mid-execution due to the primary failure are not resumable from the last step. The plan is to implement an execution model that is stored in the database. The model will contain a complete graph of steps of execution and progress.</li>
+<li>No automated job resumption: When the primary takes over, it does not automatically re-run jobs that failed due to the server failure. The plan is to use the checkpoint restart capability to flag jobs that could be resumed and put them in a special job group.</li>
+<li>No &quot;passive mode&quot;: Disable job execution from a rundeck instance to make it act like a true passive server. The work around has been to have an ACL policy meant for passive mode which disallows all job execution.</li>
+<li>No API to manage configuration: Sometimes an HA primary or cluster members need their configuration modified to customize their role or environment. This must currently be done using an external tool.</li>
+</ul>
+<h3 id="performance"><a href="#performance">Performance</a></h3>
+<p>Increasing performance is generally done using a &quot;divide and conquer&quot; strategy wherein various non job related processing is offloaded from the Rundeck webapp.</p>
+<h4 id="database"><a href="#database">Database</a></h4>
+<p><em>Don't use the embedded database.</em> If you install the vanilla standalone rundeck configuration, it will use an embedded database. Rundeck versions prior to 1.5, use the Hypersonic database (HSQLDB). Versions 1.5 and beyond include the H2 database. Either HSQLDB or H2 has a low performance wall. Rundeck users will hit this limitation at a small-medium level of scale.</p>
+<p>For high performance and scale requirements, you should not use these embedded databases. Instead, use an external database service like Mysql or Oracle. See the <a href="setting-up-an-rdb-datasource.html">Setting up an RDB Datasource</a> page to learn how to configure the Rundeck datasource to your database of choice.</p>
+<p>Also, be sure to locate your external database on a host(s) with sufficient capacity and performance. Don't create a downstream bottleneck!</p>
+<h4 id="node-execution"><a href="#node-execution">Node execution</a></h4>
+<p>If you are executing commands across many hundreds or thousands of hosts, the bundled SSH node executor may not meet your performance requirements. Each SSH connection uses multiple threads and the encryption/decryption of messages uses CPU cycles and memory. Depending on your environment, you might choose another Node executor like MCollective, Salt or something similar. This essentially delegates remote execution to another tool designed for asynchronous fan out and thus relieving Rundeck of managing remote task execution.</p>
+<h5 id="built-in-ssh-plugins"><a href="#built-in-ssh-plugins">Built in SSH plugins</a></h5>
+<p>If you are interested in using the built in <a href="../manual/plugins-user-guide/ssh-plugins.html">SSH plugins</a>, here are some details about how it performs when executing commands across very large numbers of nodes. For these tests, Rundeck was running on an 8 core, 32GB RAM m2.4xlarge AWS EC2 instance.</p>
+<p>We chose the <code>rpm -q</code> command which checks against the rpm database to see if a particular package was installed. For 1000 nodes we saw an average execution of 52 seconds. A 4000 node cluster took roughly 3.5 minutes, and 8000 node cluster about 7 minutes.</p>
+<p>The main limitation appears to be memory of the JVM instance relative to the number of concurrent requests. We tuned the max memory to be 12GB with a 1000 Concurrent Dispatch Threads to 1GB of Memory. GC appears to behave well during the runs given the &quot;bursty&quot; nature of them.</p>
+<h4 id="ssl-and-https-performance"><a href="#ssl-and-https-performance">SSL and HTTPS performance</a></h4>
+<p>It is possible to offload SSL connection processing by using an SSL termination proxy. This can be accomplished by setting up Apache httpd or <a href="https://en.wikipedia.org/wiki/Nginx">Nginx</a> as a frontend to your Rundeck instances.</p>
+<h4 id="resource-provider"><a href="#resource-provider">Resource provider</a></h4>
+<p>Rundeck projects obtain information about nodes via a <a href="../administration/node-resource-sources.html">resource provider</a>. If your resource provider is a long blocking process (due to slow responses from a backend service), it can slow down or even hang up Rundeck. Be sure to make your resource provider work asynchronously. Also, consider using caching when possible.</p>
+<h3 id="failover"><a href="#failover">Failover</a></h3>
+<p>Rundeck failover can be achieved with an Active/Standby cluster configuration. The idea is to have two instances of Rundeck, a primary actively handling traffic while a standby Rundeck passively waits to take the primary's place when the primary becomes unavailable.</p>
+<p>The process of taking the active primary role is called failover or <em>takeover</em>. The takeover procedure is generally a multi-step one, involving taking over job schedules, notifying monitoring and administrators, updating naming services, and any custom steps needed for your environment.</p>
+<p>Depending on your service level availability requirements, the failover process might be done automatically within seconds or the process might go through an Ops escalation and be done in minutes.</p>
+<h4 id="database-1"><a href="#database-1">Database</a></h4>
+<p>To support failover, a shared external database service must be used. Each rundeck instance must be configured to connect to the common database instance. A Rundeck HA solution also depends on a database replication scheme.</p>
+<p>Database Replication is a software solution that enables the user to replicate the Rundeck database tables to another database. The term master is used to describe the instance of the database that is being updated. Replication can either be to a Standby database or to members of a database cluster solution.</p>
+<p>AWS users might consider using <a href="https://aws.amazon.com/rds/">RDS</a> as highly available Mysql database.</p>
+<p><strong>Standby database</strong></p>
+<p>The configuration consists of two database servers; one is the primary database server and the other is in a standby mode. The primary server distributes its log files to the standby machine that can apply the changes immediately or not, based on the configuration. The detection of a failure and the failover procedure is a series of steps that can be operated manually or contained in a script that can be run automatically by the system that monitors the database. After the failover, which causes some inevitable downtime, the standby database will function as the main database server. Returning to the original database server is not a one-step process.</p>
+<p><strong>Database Cluster solution</strong></p>
+<p>Oracle, Mysql, and MS-SQL offer solutions to enable activation of multiple SQL servers over the cluster nodes. These solutions (e.g., Oracle RAC Parallel Server) provide transparency to Rundeck during the failover process by taking over the database session of the failed node in a way that is transparent to the Rundeck servers.</p>
+<h4 id="log-store"><a href="#log-store">Log store</a></h4>
+<p>An HA Rundeck requires Rundeck instances share the same log store. Job execution output is stored locally to the Rundeck instance that ran the job but this output can be loaded into a common storage facility (eg, AWS S3, WebDAV, custom). See <a href="../developer/logging-plugin.html">Logging Plugin Development</a> to learn how to implement your own log storage. Of course, you can configure your Rundeck instances to share a file system using a NAS/SAN or NFS but those methods are typically less desirable or impossible in a cloud environment. Without a shared logstore, job output files would need to be synchronized across Rundecks via a tool like <code>rsync</code>.</p>
+<p>With a configured Log store, the executing Rundeck instance copies the local output file to the log store after job completion. If the standby rundeck instance is activated, any request for that output log will cause the standby to retrieve it from the log store and copy it locally for future access.</p>
+<p>Rundeck will make multiple attempts to store a log file if the logstore is unavailable.</p>
+<p>Note, like the database, logstores should also be replicated and available. For an AWS environment, <a href="https://aws.amazon.com/s3/">S3</a> serves as a highly available and scalable log store.</p>
+<h4 id="ha-monitor"><a href="#ha-monitor">HA monitor</a></h4>
+<p>An HA monitor is a mechanism used to check the availability of the primary Rundeck and initiate the takeover for the standby Rundeck. This generally assumes that clients connect to the primary Rundeck using a DNS name or virtual IP address. This avoids having to communicate the address of the active Rundeck instance to users in case of a failover.</p>
+<h5 id="health-check"><a href="#health-check">Health check</a></h5>
+<p>The HA monitor should be configured to run a health check to test the status of the primary. It's important not to cause a takeover unless you are certain it needs to be done! Here are several health tests to consider:</p>
+<ul>
+<li>Reachable: Ping the primary Rundeck to be sure it's reachable over the network.</li>
+<li>API connection: Connect to the rundeck instance and get its system info. See: <a href="../api/index.html#system-info">/api/1/system/info</a>.</li>
+<li>Custom: You might also script a check unique to your configuration and environment.</li>
+</ul>
+<p>A health check should be designed to take the following parameters:</p>
+<ul>
+<li>maxtries: Number of attempts to run the health check (eg 3).</li>
+<li>interval: Amount of time to check in between tries (eg 30sec).</li>
+<li>timeout: Amount of time to wait for a check before failing because it exceeded the timeout (eg, 30sec).</li>
+</ul>
+<p>Writing the health check to test various levels of access can also assist in narrowing down the cause of the unavailability.</p>
+<h5 id="takeover"><a href="#takeover">Takeover</a></h5>
+<p>The takeover procedure should include any steps to make the standby a fully functioning primary rundeck instance. Here are some steps to consider in your takeover procedure:</p>
+<ul>
+<li>Scheduled jobs that were managed by the primary must be taken over by the secondary. See the <a href="../api/index.html#takeover-schedule-in-cluster-mode">takeover schedule</a> API.</li>
+<li>Update the monitoring station to start checking the new primary (old secondary).</li>
+<li>Update other maintenance tools that need care for the primary (eg, backup, cleanup).</li>
+<li>Optionally, provision a new secondary instance.</li>
+</ul>
+<h5 id="solutions"><a href="#solutions">Solutions</a></h5>
+<p>The HA monitor can be implemented in a number of ways depending on the level of sophistication and automation required:</p>
+<dl>
+<dt>Proxy/Loadbalancer</dt>
+<dd><p>The primary and standby rundeck instances sit behind a proxy (eg, Apache mod_proxy, mod_jk, HA proxy) or a load balancer (eg, F5, AWS ELB). The proxy/loadbalancer perform the health check and direct traffic to the active primary rundeck instance using a virtual IP address. This method is the most seamless to end-users and typically the quickest and most automated.</p>
+</dd>
+<dt>Scripted</dt>
+<dd><p>This approach uses several scripts to perform the check and takeover procedures (monitor, check, takeover). The &quot;monitor&quot; script is the main driver which periodically runs the &quot;check&quot; script which performs the various levels of health tests. When the check script detects the primary is down, the monitor script invokes the &quot;takeover&quot; script. The scripts can be run from the standby Rundeck server or from an administrative station.</p>
+</dd>
+<dt>Monitoring station</dt>
+<dd><p>Similar to the scripted approach, a monitoring station such as Nagios or Zabbix acts as the HA monitor and runs the check and takeover scripts. It may also coordinate updating DNS or VIP entries.</p>
+</dd>
+</dl>
+<h3 id="clustering-and-horizontal-scaling"><a href="#clustering-and-horizontal-scaling">Clustering and horizontal scaling</a></h3>
+<p>To provide more capacity for growing numbers of users or job executions, Rundeck can be deployed using a horizontal scaling (or scale out) approach. Using this approach, independent Rundeck instances run in different machines. Requests can be served by any machine transparently. Clustering requirements build on some of the needs as HA solutions. This specifically includes: a load-balancing proxy front end and a shared database and logstore.</p>
+<p>Generally, the architecture is composed of the following units:</p>
+<div class="figure">
+<img src="../figures/fig14100.png" alt="Clustering architecture" /><p class="caption">Clustering architecture</p>
+</div>
+<h4 id="examples"><a href="#examples">Examples</a></h4>
+<p>Several examples of clustering and HA are included below. The Amazon example represents what can be done in a cloud environment. The Apache-Tomcat cluster example reflects what users have done in datacenter environments. Finally, some users have implemented their own solutions using basic methods and Rundeck itself.</p>
+<h5 id="amazon-cloud"><a href="#amazon-cloud">Amazon Cloud</a></h5>
+<p>A scalable and available Rundeck service can be created using the standalone Rundeck installation and common Amazon web services.</p>
+<p>A very large SaaS company uses Rundeck as a backend service within a suite of cloud operations tools. Users access Rundeck indirectly via a specialized graphic interface which more or less is a pass through, calling various Rundeck WebAPI methods. Because these cloud operations tools must support both developers, testers and ops teams around the world, the Rundeck service must be highly available.</p>
+<p>The following frontend and backend services are used in conjunction with Rundeck:</p>
+<ul>
+<li>Load balancer: Elastic load balancer (sticky session, SSL terminator)</li>
+<li>Database: RDS (Mysql instance)</li>
+<li>Log store: S3 using the <a href="https://github.com/rundeck-plugins/rundeck-s3-log-plugin">S3 log plugin</a></li>
+</ul>
+<div class="figure">
+<img src="../figures/fig14101.png" alt="Clustering architecture" /><p class="caption">Clustering architecture</p>
+</div>
+<p>Note, if all your deployments run in EC2, you might also consider using the <a href="https://github.com/rundeck-plugins/rundeck-ec2-nodes-plugin">EC2 nodes plugin</a> so Rundeck knows about your EC2 instances.</p>
+<h5 id="apache-tomcat-cluster"><a href="#apache-tomcat-cluster">Apache-Tomcat Cluster</a></h5>
+<p>One of Rundeck's largest deployments is based on Tomcat clusters, Oracle RAC and a SAN logstore. This configuration uses two pairs of 2 node clusters in two data centers. Each cluster is load balanced using an F5 with a GLB managing failover across data centers. Each Rundeck project supports a particular line of business, with each customer environment containing dozens to small hundreds of hosts. Each user has a login to the Rundeck GUI and conducts the work through the console. This Rundeck service supports 500 users in over 200 projects and 10,000 job executions a month.</p>
+<p>If Oracle RAC and SAN storage is not available to you, here's a similar architecture using Mysql and a WebDAV store:</p>
+<ul>
+<li>Apache httpd/mod_jk2: Apache module provides integration between Apache web server and Tomcat.</li>
+<li>Apache httpd/mod_dav: Apache module provides provides a WebDAV service. (see <a href="https://github.com/rundeck-plugins/webdav-logstore">webdav-logstore-plugin</a>)</li>
+<li>Coyote AJP: Provides communication channel between Apache and the Rundeck instances in Tomcat.</li>
+<li>Sticky sessions: Ensures incoming requests with same session are routed to the same Tomcat worker. This does not use session sharing/replication.</li>
+</ul>
+<div class="figure">
+<img src="../figures/fig14102.png" alt="Apache-tomcat cluster" /><p class="caption">Apache-tomcat cluster</p>
+</div>
+<h5 id="simple-ha-failover"><a href="#simple-ha-failover">Simple HA failover</a></h5>
+<p>This last example is basically a &quot;roll your own&quot; HA failover solution that uses the scripted methods described earlier. This example uses the monitor, check, takeover scripts to perform the health tests, synchronize configuration and take over the primary role, if the primary is detected as down. The example, assumes there is a load balancer and an associated VIP to manage the traffic redirection. A sync job is used to replicate rundeck configuration across instances.</p>
+<div class="figure">
+<img src="../figures/fig14103.png" alt="Simple HA failover" /><p class="caption">Simple HA failover</p>
+</div>
+<p>If you are curious to see an example of a simple HA failover setup, take a look at this multi-node Vagrant configuration: <a href="https://github.com/ahonor/rundeck-vagrant/tree/master/primary-secondary-failover">primary-secondary-failover</a>.</p>
+<p>Let us know if you develop your own HA failover solution.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.0-RC1)</a></li>
+    
+    
+    <li ><a href="index.html">Administrator Guide</a></li>
+    <li class="active"><a href="scaling-rundeck.html">Scaling Rundeck</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="tuning-rundeck.html"><i class="glyphicon glyphicon-arrow-left"></i> Tuning Rundeck</a></li>
+      <li class="next"><a href="storage-facility.html">Storage Facility <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-04-13T23:15:40UTC">2018-04-13T23:15:40UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
