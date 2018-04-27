@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RESOURCE-XML</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Alex Honor" />
+  <meta name="date" content="November 20, 2010" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.0)</a></li>
+    
+    
+    <li ><a href="index.html">Document Format Reference</a></li>
+    <li class="active"><a href="resource-xml.html">RESOURCE-XML</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="job-yaml.html"><i class="glyphicon glyphicon-arrow-left"></i> JOB-YAML</a></li>
+      <li class="next"><a href="resource-yaml.html">RESOURCE-YAML <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#name">NAME</a></li>
+<li><a href="#elements">Elements</a><ul>
+<li><a href="#project">project</a></li>
+<li><a href="#node">node</a></li>
+<li><a href="#attribute">attribute</a></li>
+<li><a href="#examples">Examples</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">RESOURCE-XML</h1>
+</div>
+<h1 id="name"><a href="#name">NAME</a></h1>
+<p>resource-v13 - describes the Rundeck resource model document</p>
+<p>The Resource Model XML document declares a resource model that can also be uploaded to a project hosted on the Rundeck server. This document describes the format and necessary elements.</p>
+<h1 id="elements"><a href="#elements">Elements</a></h1>
+<p>The root (aka &quot;top-level&quot;) element of the resource file is called <code>project</code>.</p>
+<h2 id="project"><a href="#project">project</a></h2>
+<p>Project defines all the resources.</p>
+<p>Can contain the following elements:</p>
+<dl>
+<dt><a href="#node">node</a></dt>
+<dd>A node resource element.
+</dd>
+</dl>
+<p><em>Example</em></p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;project&gt;</span>
+    <span class="kw">&lt;node</span> <span class="er">...</span><span class="kw">/&gt;</span>
+<span class="kw">&lt;/project&gt;</span></code></pre>
+<h2 id="node"><a href="#node">node</a></h2>
+<p>The node element defines a Node resource.</p>
+<p><em>Attributes</em></p>
+<dl>
+<dt>name</dt>
+<dd><p>The node name. This is a logical identifier from the node. (required)</p>
+</dd>
+<dt>description</dt>
+<dd><p>A brief description about the node. (optional)</p>
+</dd>
+<dt>hostname</dt>
+<dd><p>The hostname or IP address of the remote host. (required)</p>
+</dd>
+<dt>osArch</dt>
+<dd><p>The operating system architecture. (optional)</p>
+</dd>
+<dt>osFamily</dt>
+<dd><p>The operating system family, such as unix or windows. (optional)</p>
+</dd>
+<dt>osName</dt>
+<dd><p>The operating system name such as Linux or Mac OS X. (optional)</p>
+</dd>
+<dt>tags</dt>
+<dd><p>Comma separated list of filtering tags. (optional) Tags are used for filtering nodes and often represent server role, environment, class, or group.</p>
+</dd>
+<dt>username</dt>
+<dd><p>The username used for the remote connection. (required)</p>
+</dd>
+<dt>editUrl</dt>
+<dd><p>URL to an external resource model editor service (optional)</p>
+</dd>
+<dt>remoteUrl</dt>
+<dd><p>URL to an external resource model service. (optional)</p>
+</dd>
+<dt><em>anything</em></dt>
+<dd><p>Any user-supplied attributes can be specified to add additional metadata about a node.</p>
+</dd>
+</dl>
+<p><em>Nested Elements</em></p>
+<dl>
+<dt><a href="#attribute">attribute</a></dt>
+<dd>Further user defined attributes.
+</dd>
+</dl>
+<h2 id="attribute"><a href="#attribute">attribute</a></h2>
+<p>Defines a single metadata attribute for the node, as an alternative to specifying it as a XML attribute on the <code>&lt;node&gt;</code> element itself.</p>
+<p><em>Attributes</em></p>
+<dl>
+<dt>name</dt>
+<dd><p>The name of the attribute</p>
+</dd>
+<dt>value</dt>
+<dd><p>The value of the attribute</p>
+</dd>
+</dl>
+<p>Alternatively, the value can be specified as nested text content.</p>
+<p>Examples:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;attribute</span><span class="ot"> name=</span><span class="st">&quot;server-path&quot;</span><span class="ot"> value=</span><span class="st">&quot;/var/myapp&quot;</span><span class="kw">/&gt;</span>
+<span class="kw">&lt;attribute</span><span class="ot"> name=</span><span class="st">&quot;server-port&quot;</span><span class="kw">&gt;</span>9010<span class="kw">&lt;/attribute&gt;</span></code></pre>
+<h2 id="examples"><a href="#examples">Examples</a></h2>
+<p>Define a node named &quot;strongbad&quot;:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;node</span><span class="ot"> name=</span><span class="st">&quot;strongbad&quot;</span><span class="ot"> type=</span><span class="st">&quot;Node&quot;</span>
+<span class="ot">    description=</span><span class="st">&quot;a development host&quot;</span>
+<span class="ot">    hostname=</span><span class="st">&quot;strongbad.local&quot;</span>
+<span class="ot">    osArch=</span><span class="st">&quot;i386&quot;</span><span class="ot"> osFamily=</span><span class="st">&quot;unix&quot;</span><span class="ot"> osName=</span><span class="st">&quot;Darwin&quot;</span><span class="ot"> osVersion=</span><span class="st">&quot;9.2.2&quot;</span>
+<span class="ot">    username=</span><span class="st">&quot;alexh&quot;</span><span class="kw">/&gt;</span></code></pre>
+<p>Define a node of the type LinuxNode that has a <code>https-port</code> attribute:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;node</span><span class="ot"> type=</span><span class="st">&quot;LinuxNode&quot;</span><span class="ot"> name=</span><span class="st">&quot;centos54&quot;</span><span class="ot"> hostname=</span><span class="st">&quot;centos54.local&quot;</span>
+<span class="ot">      description=</span><span class="st">&quot;Sample Linux node&quot;</span><span class="ot"> tags=</span><span class="st">&quot;sample,linux&quot;</span>
+      <span class="kw">&gt;</span>
+    <span class="kw">&lt;attribute</span><span class="ot"> name=</span><span class="st">&quot;https-port&quot;</span><span class="ot"> value=</span><span class="st">&quot;435&quot;</span><span class="kw">/&gt;</span>
+<span class="kw">&lt;/node&gt;</span></code></pre>
+<p>Define a node named that uses a non standard SSH port. The &quot;hostname&quot; value is overloaded to include the port (192.168.1.106:4022):</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;node</span><span class="ot"> name=</span><span class="st">&quot;centos54&quot;</span><span class="ot"> type=</span><span class="st">&quot;Node&quot;</span>
+<span class="ot">    description=</span><span class="st">&quot;a centos host&quot;</span>
+<span class="ot">    hostname=</span><span class="st">&quot;192.168.1.106:4022&quot;</span>
+<span class="ot">    username=</span><span class="st">&quot;deploy&quot;</span>
+    <span class="kw">/&gt;</span></code></pre>
+<p>An example using just the required attributes:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;node</span><span class="ot"> name=</span><span class="st">&quot;centos54&quot;</span><span class="ot"> type=</span><span class="st">&quot;Node&quot;</span>
+<span class="ot">    hostname=</span><span class="st">&quot;192.168.1.106:4022&quot;</span>
+<span class="ot">    username=</span><span class="st">&quot;deploy&quot;</span><span class="kw">/&gt;</span></code></pre>
+<p>An example with a custom attribute &quot;appname&quot; specified in the <code>&lt;node&gt;</code> element:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;node</span><span class="ot"> name=</span><span class="st">&quot;centos54&quot;</span><span class="ot"> type=</span><span class="st">&quot;Node&quot;</span>
+<span class="ot">    hostname=</span><span class="st">&quot;192.168.1.106:4022&quot;</span>
+<span class="ot">    username=</span><span class="st">&quot;deploy&quot;</span>
+<span class="ot">    appname=</span><span class="st">&quot;CoolApp&quot;</span>
+    <span class="kw">/&gt;</span></code></pre>
+<p>An example with tags and custom attributes that describe the server role and environment for this node:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;node</span><span class="ot"> name=</span><span class="st">&quot;centos54&quot;</span>
+<span class="ot">    hostname=</span><span class="st">&quot;192.168.1.106&quot;</span>
+<span class="ot">    username=</span><span class="st">&quot;deploy&quot;</span>
+<span class="ot">    role=</span><span class="st">&quot;redis_server&quot;</span>
+<span class="ot">    environment=</span><span class="st">&quot;production&quot;</span>
+<span class="ot">    tags=</span><span class="st">&quot;redis_server, production&quot;</span>
+    <span class="kw">/&gt;</span></code></pre>
+<p>The Rundeck source code and all documentation may be downloaded from <a href="https://github.com/rundeck/rundeck/">https://github.com/rundeck/rundeck/</a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.0)</a></li>
+    
+    
+    <li ><a href="index.html">Document Format Reference</a></li>
+    <li class="active"><a href="resource-xml.html">RESOURCE-XML</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="job-yaml.html"><i class="glyphicon glyphicon-arrow-left"></i> JOB-YAML</a></li>
+      <li class="next"><a href="resource-yaml.html">RESOURCE-YAML <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-04-27T20:16:36UTC">2018-04-27T20:16:36UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>

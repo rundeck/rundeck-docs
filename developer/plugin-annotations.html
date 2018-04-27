@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Plugin Annotations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler, Alex Honor" />
+  <meta name="date" content="November 20, 2010" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.0)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="plugin-annotations.html">Plugin Annotations</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="plugin-development.html"><i class="glyphicon glyphicon-arrow-left"></i> Plugin Development</a></li>
+      <li class="next"><a href="model-format-parser-and-generator-plugin.html">Model Format Parser and Generator Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#plugin-description">Plugin Description</a></li>
+<li><a href="#plugin-properties">Plugin Properties</a></li>
+<li><a href="#property-scopes">Property Scopes</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Plugin Annotations</h1>
+</div>
+<h2 id="about"><a href="#about">About</a></h2>
+<p>Some Rundeck Plugins allow you to use annotations to add <a href="plugin-development.html#plugin-descriptions">description metadata</a> about your plugin to the class definition itself, and Rundeck will extract that metadata for use in displaying the plugin information and configuration properties in the GUI, as well as for applying the runtime configuration values to your plugin class instance when it is being executed.</p>
+<blockquote>
+<p>Note, ResourceModelSource, NodeExecutor and FileCopier plugins currently do not support description annotations.</p>
+</blockquote>
+<h2 id="plugin-description"><a href="#plugin-description">Plugin Description</a></h2>
+<p>You can define the display name, and descriptive text about your plugin by adding a <a href="../javadoc/com/dtolabs/rundeck/plugins/descriptions/PluginDescription.html">PluginDescription</a> annotation to your plugin class.</p>
+<p>Attributes of <code>@PluginDescription</code>:</p>
+<ul>
+<li><code>title</code> - the display name for your plugin</li>
+<li><code>description</code> - descriptive text shown next to the display name</li>
+</ul>
+<p>Example:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="fu">@Plugin</span>(name=<span class="st">&quot;myplugin&quot;</span>, service=ServiceNameConstants.<span class="fu">WorkflowStep</span>)
+<span class="fu">@PluginDescription</span>(title=<span class="st">&quot;My Plugin&quot;</span>, description=<span class="st">&quot;Performs a custom step&quot;</span>)
+<span class="kw">public</span> <span class="kw">class</span> MyPlugin <span class="kw">implements</span> StepPlugin{
+    ...
+}</code></pre>
+<p><em>Note:</em> If you do not add this annotation, the plugin display name will be the same as the provider name, and will have no descriptive text when displayed.</p>
+<h2 id="plugin-properties"><a href="#plugin-properties">Plugin Properties</a></h2>
+<p>You can annotate individual fields in your class to define the configuration properties of your class. These are the supported Java types for annotated fields:</p>
+<ul>
+<li>String</li>
+<li>Boolean/boolean</li>
+<li>Integer/integer, Long/long</li>
+<li><code>Set</code>, <code>List</code>, <code>String[]</code> (if used with <code>@SelectValues(multiOption = true)</code>)</li>
+</ul>
+<p>When your plugin is executed, the fields will be set to the appropriate values based on their default value, scope, and any value set by the user in the workflow configuration.</p>
+<p>These annotation classes are used:</p>
+<ul>
+<li><a href="../javadoc/com/dtolabs/rundeck/plugins/descriptions/PluginProperty.html">PluginProperty</a> - Declares a class field as a plugin configuration property</li>
+<li><a href="../javadoc/com/dtolabs/rundeck/plugins/descriptions/SelectValues.html">SelectValues</a> - Declares a String property to be a &quot;Select&quot; property, which defines a set of input values that can be chosen from a list. Can be used with <code>multiOption</code> attribute to declare a <code>Set</code>, <code>List</code> or <code>String[]</code> and allow multiple values to be chosen. If <code>multiOption</code> is used with a String, the value will be the values joined with a <code>,</code> (comma).</li>
+<li><a href="../javadoc/com/dtolabs/rundeck/plugins/descriptions/TextArea.html">TextArea</a> - Declares a String property to be rendered as a multi-line text area in the Rundeck GUI.</li>
+</ul>
+<p>Attributes:</p>
+<ul>
+<li><code>@PluginProperty</code>
+<ul>
+<li><code>name</code> - the property identifier name</li>
+<li><code>title</code> - the property display name</li>
+<li><code>description</code> - descriptive text</li>
+<li><code>defaultValue</code> - default value</li>
+<li><code>required</code> - (boolean) whether the property is required to have an input value. Default: false.</li>
+<li><code>scope</code> (PropertyScope) the resolution scope for the property value</li>
+</ul></li>
+<li><code>@SelectValues</code>
+<ul>
+<li><code>values</code> (String[]) the set of values that can be chosen</li>
+<li><code>freeSelect</code> (boolean) whether the user can enter values not in the list. Default: false.</li>
+<li><code>multiOption</code> (boolean) whether multiple values can be selected as checkboxes, cannot be used with freeSelect. Default: false.</li>
+</ul></li>
+</ul>
+<p>Examples:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="fu">@PluginProperty</span>(title = <span class="st">&quot;Name&quot;</span>, description = <span class="st">&quot;What is your name?&quot;</span>, required = <span class="kw">true</span>)
+<span class="kw">private</span> String name;
+
+<span class="fu">@PluginProperty</span>(title = <span class="st">&quot;Age&quot;</span>, description = <span class="st">&quot;How old are you?&quot;</span>)
+<span class="kw">private</span> <span class="dt">int</span> amount;
+
+<span class="fu">@PluginProperty</span>(title = <span class="st">&quot;Favorite Fruit&quot;</span>,
+                description = <span class="st">&quot;What is your favorite fruit?&quot;</span>,
+                defaultValue = <span class="st">&quot;banana&quot;</span>)
+<span class="fu">@SelectValues</span>(values = {<span class="st">&quot;banana&quot;</span>, <span class="st">&quot;lemon&quot;</span>, <span class="st">&quot;orange&quot;</span>}, freeSelect = <span class="kw">true</span>)
+<span class="kw">private</span> String fruit;</code></pre>
+<h2 id="property-scopes"><a href="#property-scopes">Property Scopes</a></h2>
+<p>You can define the scope for a property by adding <code>scope</code> to the PluginProperty annotation. Refer to the class <a href="../javadoc/com/dtolabs/rundeck/core/plugins/configuration/PropertyScope.html">PropertyScope</a>.</p>
+<p>The default effective scope if you do not specify it in the annotation is <code>InstanceOnly</code>.</p>
+<p>For more information see <a href="plugin-development.html#property-scopes">Property Scopes</a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.0)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="plugin-annotations.html">Plugin Annotations</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="plugin-development.html"><i class="glyphicon glyphicon-arrow-left"></i> Plugin Development</a></li>
+      <li class="next"><a href="model-format-parser-and-generator-plugin.html">Model Format Parser and Generator Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-04-27T20:16:36UTC">2018-04-27T20:16:36UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
