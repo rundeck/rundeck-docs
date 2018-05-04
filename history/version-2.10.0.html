@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Version 2.10.0</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="greg" />
+  <meta name="date" content="10/16/2017" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.1)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-2.10.0.html">Version 2.10.0 (2017-10-16)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.9.4.html">Version 2.9.4 (2017-10-13) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#release-2.10.0">Release 2.10.0</a><ul>
+<li><a href="#upgrading-from-earlier-versions">Upgrading from Earlier versions</a></li>
+<li><a href="#notes">Notes</a></li>
+<li><a href="#contributors">Contributors</a></li>
+<li><a href="#bug-reporters">Bug Reporters</a></li>
+<li><a href="#issues">Issues</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Version 2.10.0</h1>
+</div>
+<h1 id="release-2.10.0"><a href="#release-2.10.0">Release 2.10.0</a></h1>
+<p>Date: 2017-10-16</p>
+<p>Name: <span style="color: Teal"><span class="glyphicon glyphicon-glass"></span> &quot;cafe mocha teal glass&quot;</span></p>
+<h2 id="upgrading-from-earlier-versions"><a href="#upgrading-from-earlier-versions">Upgrading from Earlier versions</a></h2>
+<ul>
+<li>See the <a href="../upgrading/index.html">Upgrading Guide</a></li>
+</ul>
+<h2 id="notes"><a href="#notes">Notes</a></h2>
+<p>New features:</p>
+<ul>
+<li>GUI editable Resource Model source plugins. Allows the xml/yaml/json resource data to be edited in the GUI.
+<ul>
+<li>The built-in File model source can be marked as &quot;writeable&quot;, allowing admins to edit the resources file in the GUI</li>
+</ul></li>
+<li>GUI editable ACLs. Modify the aclpolicy yaml files in the GUI and see validation info.</li>
+<li>Jobs can define Notifications in the event of Average Duration Exceeded</li>
+<li>API updated to allow user profile modifications</li>
+<li>Job Filters can specify whether a job is scheduled</li>
+<li>Key Value Data capture Log Filter can capture a value and specify a hardcoded name for the variable</li>
+</ul>
+<p>Plus: bug fixes, documentation typo fixes</p>
+<h2 id="contributors"><a href="#contributors">Contributors</a></h2>
+<ul>
+<li>Greg Schueler (gschueler)</li>
+<li>Michihito Shigemura (shigemk2)</li>
+<li>damageboy</li>
+<li>jtobard</li>
+</ul>
+<h2 id="bug-reporters"><a href="#bug-reporters">Bug Reporters</a></h2>
+<ul>
+<li>gschueler</li>
+<li>jtobard</li>
+<li>ltamaster</li>
+<li>ronave</li>
+<li>shigemk2</li>
+</ul>
+<h2 id="issues"><a href="#issues">Issues</a></h2>
+<p><a href="https://github.com/rundeck/rundeck/milestone/62">Milestone 2.10.0</a></p>
+<ul>
+<li><a href="https://github.com/rundeck/rundeck/pull/2847">Fix typo in tutorials/project-setup</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2790">Execution log storage partial checkpointing</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2785">Key Storage Selector doesn't work on Config Page</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2778">List Future Schedule on jobsAjax</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2772">ACL File editor</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2753">Feature: GUI editable File resource model sources</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2741">Api endpoint to modify user profile.</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2733">Jobs filter enhancement</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2720">Named pattern log filter</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2665">Job Notification for jobs exceeding average duration</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2569">API acl system level bug</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.1)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-2.10.0.html">Version 2.10.0 (2017-10-16)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.9.4.html">Version 2.9.4 (2017-10-13) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-05-04T21:54:04UTC">2018-05-04T21:54:04UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
