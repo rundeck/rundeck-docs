@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Content Converter Plugins</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="April 26, 2018" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.2)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="content-converter-plugins.html">Content Converter Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="log-filter-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> Log Filter Plugins</a></li>
+      
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#behavior">Behavior</a></li>
+<li><a href="#log-metadata">Log Metadata</a></li>
+<li><a href="#java-plugin-type">Java Plugin Type</a><ul>
+<li><a href="#groovy-contentconverter">Groovy ContentConverter</a></li>
+</ul></li>
+<li><a href="#localization">Localization</a></li>
+<li><a href="#example">Example</a></li>
+<li><a href="#example-groovy-plugins">Example Groovy plugins</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Content Converter Plugins</h1>
+</div>
+<h2 id="about"><a href="#about">About</a></h2>
+<p>Content Converter Plugins can convert log data into HTML or other data formats, to enable richer logs to be presented in the Rundeck GUI when viewing the Execution Output Logs.</p>
+<p>In addition, Content Converters can be chained together in a limited way, allowing one plugin to do the work of (say) converting a List of Java Strings into an HTML <code>&lt;ol&gt;</code>, while another plugin does the work of converting CSV formatted data into a List of Strings. You could add another plugin which can convert log data into a List of Strings, and it would also be rendered into a <code>&lt;ol&gt;</code> in the final output due to the first plugin.</p>
+<p>Each Content Converter Plugin can be asked for &quot;Data Types&quot; that it can accept, and also describes the Output &quot;Data Types&quot; that it can produce.</p>
+<p>A &quot;Data Type&quot; consist of a Java type (class), and a String such as <code>text/html</code>.</p>
+<h2 id="behavior"><a href="#behavior">Behavior</a></h2>
+<p>Content Converter plugins are applied automatically to Log Output when viewing it in the Rundeck GUI.</p>
+<p>However, the Log output must have certain metadata entries set for the Log Events. Plain log output will not be rendered in any special way (aside from ANSI Color rendering.)</p>
+<p>For this reason, usually a <a href="log-filter-plugins.html">Log Filter Plugin</a> is used to annotate the log output with the correct data type when used with Rundeck's Command or Script steps, however custom Step plugins can add this metadata in the logs they emit.</p>
+<h2 id="log-metadata"><a href="#log-metadata">Log Metadata</a></h2>
+<p>Log events have Metadata (key/value strings) associated with them.</p>
+<p>If a Log event has a <code>content-data-type</code> metadata value, Rundeck will attempt to chain together up to two Content Converter Plugins to convert the specified data type into <code>text/html</code> for rendering in the GUI.</p>
+<p>Using a Log Filter plugin such as the &quot;Render Formatted Data&quot; built-in Log Filter Plugin allows adding adding the <code>content-data-type</code> to the output of Commands or Script steps.</p>
+<p>Additional metadata can be passed to the Content Converter plugins. All log metadata entries with keys starting with <code>content-meta:</code> will be extracted from the Log Event metadata, and the <code>content-meta:</code> prefix removed.</p>
+<h2 id="java-plugin-type"><a href="#java-plugin-type">Java Plugin Type</a></h2>
+<p>Plugins must implement the <a href="../javadoc/com/dtolabs/rundeck/plugins/logs/ContentConverterPlugin.html">ContentConverterPlugin</a> interface, and declare as a provider of server <code>ContentConverter</code>.</p>
+<p>Methods:</p>
+<ul>
+<li><code>boolean isSupportsDataType(Class&lt;?&gt; clazz, String dataType)</code>: called to detect if the plugin supports the input Data Type.</li>
+<li><code>Class&lt;?&gt; getOutputClassForDataType(Class&lt;?&gt; clazz, String dataType)</code>: gets the Java Class for the input data type</li>
+<li><code>String getOutputDataTypeForContentDataType(Class&lt;?&gt; clazz, String dataType)</code>: gets the data type string for the input data type.</li>
+<li><code>Object convert(Object data, String dataType, Map&lt;String,String&gt; metadata)</code>: Convert the input data type to the output object, includes metadata about the log event as described in <a href="#log-metadata">Log Metadata</a>.</li>
+</ul>
+<h3 id="groovy-contentconverter"><a href="#groovy-contentconverter">Groovy ContentConverter</a></h3>
+<p>Create a groovy script that calls the <code>rundeckPlugin</code> method and passes the <code>ContentConverterPlugin</code> as the type of plugin:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="kw">import</span> com.dtolabs.rundeck.plugins.logs.ContentConverterPlugin
+<span class="fu">rundeckPlugin</span>(ContentConverterPlugin){
+    <span class="co">//plugin definition</span>
+}</code></pre>
+<p>To define metadata about your plugin, see the <a href="plugin-plugin.html#groovy-plugin-development">Plugin Development - Groovy Plugin Development</a> chapter.</p>
+<p>The <code>ContentConverterPlugin</code> Groovy DSL supports defining conversions between data types.</p>
+<p>Data types are represented with the <code>DataType</code> class (internal to the groovy plugin builder), and can be created by calling the <code>dataType(Class,String)</code> method with a Java Class, and a data type string.</p>
+<p>The built-in <code>convert(DataType input, Datatype output, Closure closure)</code> method allows you to define conversions from one Data Type to another. Your closure will be called with the input data, and is expected to return the output data. Returning <code>null</code> will simply skip the conversion.</p>
+<h4 id="convert-declaration"><a href="#convert-declaration">convert declaration</a></h4>
+<p>Call <code>convert</code> using explicit data types and a closure to define the conversion:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+<span class="co"> * Converts two data types</span>
+<span class="co"> */</span>
+<span class="fu">convert</span>(<span class="fu">dataType</span>(String,&#39;application/x-my-data&#39;), <span class="fu">dataType</span>(String,&#39;text/html&#39;)) { 
+    <span class="co">//properties available via delegation:</span>
+    <span class="co">// data: the input data</span>
+    <span class="co">// metadata: input metadata map</span>
+    <span class="co">// dataType: input DataType</span>
+    
+    <span class="co">//return type must match the output Java class in the DataType:</span>
+    <span class="kw">return</span> <span class="st">&quot;hello ${data}, it seems you are ${metadata.mood?:&#39;happy&#39;}.&quot;</span>
+}</code></pre>
+<p>When the DataType uses a Java String as its class, you can omit calling <code>dataType</code>, and simply pass the dataType string:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+<span class="co"> * Called to convert two data types</span>
+<span class="co"> */</span>
+<span class="fu">convert</span>(&#39;application/x-my-data&#39;, &#39;text/html&#39;) { 
+    <span class="co">//data is a String, and we should return a String</span>
+    <span class="kw">return</span> &#39;&lt;b&gt;&#39;+data+&#39; more data&lt;/b&gt;&#39;
+}</code></pre>
+<p>And if you are going to return <code>text/html</code> the output declaration can be skipped:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+<span class="co"> * Called to convert two data types</span>
+<span class="co"> */</span>
+<span class="fu">convert</span>(&#39;application/x-my-data&#39;) { 
+    <span class="co">//return type defaults to String and datatype &#39;text/html&#39;</span>
+    <span class="kw">return</span> &#39;&lt;b&gt;&#39;+data+&#39; more data&lt;/b&gt;&#39;
+}</code></pre>
+<p>Since Rundeck will chain together up to two ContentConverters to render <code>text/html</code> for a given input data type, you can define multiple conversion, if you want to use an intermediate type.</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+<span class="co"> * Convert a string into an intermediate java type</span>
+<span class="co"> */</span>
+<span class="fu">convert</span>(&#39;application/x-my-data-type&#39;, <span class="fu">dataType</span>(SomeClass,&#39;application/x-another-type&#39;)) { 
+    <span class="co">//use an intermediate object</span>
+    <span class="kw">return</span> <span class="kw">new</span> <span class="fu">SomeClass</span>(data)
+}
+<span class="co">/**</span>
+<span class="co"> * Expect the intermediate type as input, and default to HTML output</span>
+<span class="co"> */</span>
+<span class="fu">convert</span>(<span class="fu">dataType</span>(SomeClass,&#39;application/x-another-type&#39;)) { 
+    <span class="co">//now `data` will be a SomeClass object</span>
+    <span class="kw">return</span> data.<span class="fu">generateHtml</span>()
+}</code></pre>
+<h2 id="localization"><a href="#localization">Localization</a></h2>
+<p>For the basics of plugin localization see: <a href="plugin-development.html#plugin-localization">Plugin Development - Plugin Localization</a>.</p>
+<h2 id="example"><a href="#example">Example</a></h2>
+<p>Several built-in plugins are listed here:</p>
+<ul>
+<li><a href="https://github.com/rundeck/rundeck/tree/master/rundeckapp/src/groovy/com/dtolabs/rundeck/server/plugins/logs"><code>rundeckapp/src/groovy/com/dtolabs/rundeck/server/plugins/logs</code></a></li>
+</ul>
+<p>Several of the built-in rundeck plugins convert their input into a &quot;Data Type&quot; of: A Java List or Map object and type name of <code>application/x-java-map-or-list</code>. This &quot;Data Type&quot; can be rendered to HTML via the <a href="https://github.com/rundeck/rundeck/tree/master/rundeckapp/src/groovy/com/dtolabs/rundeck/server/plugins/logs/HTMLTableViewConverterPlugin.groovy">HTMLTableViewConverterPlugin</a>.</p>
+<p>Your plugins can make use of this built-in plugin and therefore do not have to convert directly to HTML. See the <a href="https://github.com/rundeck/rundeck/blob/master/rundeckapp/src/groovy/com/dtolabs/rundeck/server/plugins/logs/JsonConverterPlugin.groovy">JsonConverterPlugin</a> for an example.</p>
+<h2 id="example-groovy-plugins"><a href="#example-groovy-plugins">Example Groovy plugins</a></h2>
+<p>See <a href="https://github.com/rundeck/rundeck/tree/master/examples/example-groovy-content-converter-plugins">https://github.com/rundeck/rundeck/tree/master/examples/example-groovy-content-converter-plugins</a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.2)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="content-converter-plugins.html">Content Converter Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="log-filter-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> Log Filter Plugins</a></li>
+      
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-05-10T21:25:04UTC">2018-05-10T21:25:04UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
