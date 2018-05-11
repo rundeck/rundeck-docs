@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.3)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-1.4.4.html">Version 1.4.4 (2012-10-26)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-1.4.3.html">Version 1.4.3 (2012-6-21) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#release-1.4.4">Release 1.4.4</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<h1 id="release-1.4.4"><a href="#release-1.4.4">Release 1.4.4</a></h1>
+<p>Date: 10/26/2012</p>
+<p>This release marks the end of the 1.4 development cycle, and includes bug fixes and a few new features.</p>
+<p>We are planning to make some changes in the DB schema for the next release (1.5.x) that may not be backwards compatible so have included a feature to export a Rundeck project into an archive file. This will allow us to change the schema yet still allow users to migrate their projects.</p>
+<p>Notable Changes:</p>
+<ul>
+<li>bug fixes (scheduled jobs, mail notifications, rd-jobs yaml output, jenkins plugin + parallel jobs)</li>
+<li>Project archive/import - download an archive of Jobs, Executions and History that can be imported into a different project</li>
+<li>Added a second level of sudo password support</li>
+<li>Add a 'purge' action to rd-jobs tool to delete jobs</li>
+<li>Better support for Tomcat war deployment</li>
+<li>View all nodes button in Run page</li>
+<li>Cascading option values from remote URLs</li>
+<li>CLI tools can follow execution output from the server (rd-queue, run, dispatch)</li>
+<li>API enhancements:
+<ul>
+<li>query for executions and history reports</li>
+<li>retrieve execution output</li>
+</ul></li>
+</ul>
+<p>Issues:</p>
+<ul>
+<li><a href="https://github.com/dtolabs/rundeck/issues/215">remote options URL failure allows text field input even if option is restricted</a> (bug)</li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/212">project archive/import</a> (enhancement)</li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/211">multiple sudo authentication support</a> (enhancement)</li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/208">Document syntax of arguments passed to the run command</a> (enhancement, documentation)</li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/207">add purge option to rd-jobs tool</a> (enhancement, cli)</li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/205">Add query API for executions</a> (enhancement, api)</li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/204">CLI tools can't authenticate to a tomcat war deployment of rundeck</a> (bug)</li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/203">Allow history API to query for list of job names</a> (enhancement, api)</li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/194">javascript problem: Can't change nodes when trying to run a saved job</a> (bug, ux)</li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/193">Rundeck jobs fail to execute sometimes</a> (bug)</li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/192">Rundeck war should not contain servlet api libraries</a> (enhancement)</li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/191">deb dependency requires GUI libraries</a> (enhancement, packaging)</li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/189">Enable property expansion in framework level default ssh user</a> (enhancement, configuration, ssh)</li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/186">Mail notifications are broken in 1.4.3</a> (bug)</li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/184">resource model source URL basic auth support is broken</a> (bug)</li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/182">Update wiki/documentation for remote option provider</a> (documentation)</li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/180">Parallel/Concurrent jobs fail</a> (bug)</li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/179">cli tool rd-jobs format yaml does not generate any content in file for 1.4.3</a> (bug, cli)</li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/178">Scheduled RunDeck jobs no longer work with RunDeck 1.4.3</a> (bug, scheduler, jobs)</li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/174">Allow disabling of hover popups</a> (enhancement)</li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/172">Add a button to view all nodes in nodes filter view</a> (enhancement, ux, filters)</li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/145">need REST interface to retrieve execution ouput</a> (enhancement, api)</li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/142">dispatcher needs option to queue job but also observe log</a> (enhancement)</li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/109">Ability to change the default number of lines to display for the TAIL output in the rundeck job execution history</a> (enhancement)</li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/80">feature for cascading select list from options provider</a> (enhancement)</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.3)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-1.4.4.html">Version 1.4.4 (2012-10-26)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-1.4.3.html">Version 1.4.3 (2012-6-21) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-05-11T19:15:50UTC">2018-05-11T19:15:50UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>

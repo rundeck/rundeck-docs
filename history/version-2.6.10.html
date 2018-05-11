@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Version 2.6.10</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="greg" />
+  <meta name="date" content="11/10/2016" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.3)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-2.6.10.html">Version 2.6.10 (2016-11-10)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.6.9.html">Version 2.6.9 (2016-08-03) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#release-2.6.10">Release 2.6.10</a><ul>
+<li><a href="#notes">Notes</a></li>
+<li><a href="#contributors">Contributors</a></li>
+<li><a href="#bug-reporters">Bug Reporters</a></li>
+<li><a href="#issues">Issues</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Version 2.6.10</h1>
+</div>
+<h1 id="release-2.6.10"><a href="#release-2.6.10">Release 2.6.10</a></h1>
+<p>Date: 2016-11-10</p>
+<p>Name: <span style="color: LimeGreen"><span class="glyphicon glyphicon-glass"></span> &quot;cafe bonbon limegreen glass&quot;</span></p>
+<h2 id="notes"><a href="#notes">Notes</a></h2>
+<p>Notable Enhancements:</p>
+<ul>
+<li>Run Job Later feature: schedule a one-time Job execution</li>
+<li>Git SCM Plugins: ability to import jobs from a repo and &quot;archive&quot; the original UUID. Allows sharing a repo among multiple &quot;non-production&quot; projects within the same Rundeck server, and still maintain static UUIDs for the production project.</li>
+<li>Plugin localization and custom icons</li>
+<li>New Project home page</li>
+<li>Project ACLs shown in Access Control page in configuration section</li>
+<li>Custom navbar color configuration</li>
+</ul>
+<p>Bug Fixes:</p>
+<ul>
+<li>Potential XSS fixed in Activity page</li>
+<li>Pagination fixed on Activity page</li>
+<li>Git plugin: importing from a git repo, and later changing to a different repo would cause an error</li>
+</ul>
+<p>Other Changes:</p>
+<ul>
+<li>Job options are now always shown in the defined order</li>
+<li>Globals can be used in remote option value URLs</li>
+</ul>
+<p>And more...</p>
+<h2 id="contributors"><a href="#contributors">Contributors</a></h2>
+<ul>
+<li>Andres Montalban (amontalban)</li>
+<li>Fabrice Bacchella</li>
+<li>GitHub (web-flow)</li>
+<li>Greg Schueler (gschueler)</li>
+<li>Jamie L. Penman-Smithson (jamieps)</li>
+<li>Jeff Runningen</li>
+<li>Stian Mathiassen</li>
+<li>Sumesh P (sumeshpremraj)</li>
+</ul>
+<h2 id="bug-reporters"><a href="#bug-reporters">Bug Reporters</a></h2>
+<ul>
+<li>Mapel88</li>
+<li>ahonor</li>
+<li>ajxb</li>
+<li>amontalban</li>
+<li>cstewart87</li>
+<li>dabest1</li>
+<li>egeland</li>
+<li>fbacchella</li>
+<li>gschueler</li>
+<li>jamieps</li>
+<li>jrunningen</li>
+<li>katanafleet</li>
+<li>kureus</li>
+<li>ltamaster</li>
+<li>penekk</li>
+<li>pfweberp</li>
+<li>puremourning</li>
+<li>rophy</li>
+<li>s-tokutake</li>
+<li>scaissie</li>
+<li>sebw</li>
+<li>smat</li>
+<li>ssbarnea</li>
+<li>sumeshpremraj</li>
+<li>willemdh</li>
+</ul>
+<h2 id="issues"><a href="#issues">Issues</a></h2>
+<ul>
+<li><a href="https://github.com/rundeck/rundeck/issues/2151">API errors are always returned in XML format, not in JSON format</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2150">RSS feed not accessable by public anymore</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2144">Project config file editor: node executor/file copier validation failures show no message</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2136">Adhoc job run display error</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2134">java.lang.NullPointerException: Cannot get property 'workflow' on null object</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2131">Options with one value and 'enforced allowed values' are not loaded anymore</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2130">Custom color on top navbar</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2125">Global options (from project.properties) not available in valuesUrl</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2123">XSS vulnerability in Activity page</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2121">API: Job run allows separate option params</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2111">Plugin i18n</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2097">Problems viewing the oldest executions on the Activity page</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2093">add project home landing page</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2090">Add documentation to configure Rundeck with PostgreSQL DB</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2089">the /etc/rundeck/profile in RPM packaging has syntax error</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2079">List of Project ACLs added to security page. rename to Access Control</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2068">Escape HTML characters in ExecutionController.renderOutput</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2042">&quot;Send Notification?&quot; is hardcoded.</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2040">attributes with dot in prefix do not render in gui</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2039">using Job References, 2018-05-11T19:15:50UTC only gets expanded as option value in the top job.</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2036">Feature Request: Enable linking to job with runbook tab opened</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2030">More redhatcompliance init file, more easier to use profile file</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2025">Feature/api job info</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2024">Remote URL job options do not update when the refresh button is selected</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2021">Inline scripts token expansion broken in 2.6.9. How to escape the @ character?</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2015">Firefox: Secure job option with a default value from keystore is overwritten on job run</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2004">2.6.9-1: Drag workflow steps does not work unless you edit a step first</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2002">Default values not showing for multi-valued job options in 2.6.9-1</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1998">[Options Providers] 2.6.9 - display of sorted options does not respect &quot;preserveOrder&quot; or definition settings</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1995">Fixes #1994</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1992">replace &quot;dtolabs.com&quot; uri in acl internals</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1987">Support for ad hoc scheduling of jobs</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1983">colors disappeared in inline script</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1982">SCM Import/Export with high job count</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1970">SCM Import Fails with Cannot get property '[UUID]' on null object</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1503">SCM import should have a &quot;Remove UUIDs&quot; option</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1405">postgresql support is not documented</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1326">Launcher jar on windows: stack trace on startup</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.3)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-2.6.10.html">Version 2.6.10 (2016-11-10)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.6.9.html">Version 2.6.9 (2016-08-03) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-05-11T19:15:50UTC">2018-05-11T19:15:50UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
