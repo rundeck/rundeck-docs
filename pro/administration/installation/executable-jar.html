@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Installing as an executable .jar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.com/">
+      Rundeck Pro
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  <!--
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">3.0.x-SNAPSHOT</p>
+      </a>
+    </li>
+    </ul>
+
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+    -->    
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../../index.html">Rundeck Pro Documentation (3.0.x-SNAPSHOT)</a></li>
+    
+        <li><a href="../index.html">Administrator Guide</a></li>
+    
+    
+    <li ><a href="index.html">Installation</a></li>
+    <li class="active"><a href="executable-jar.html">Executable jar</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="tomcat.html"><i class="glyphicon glyphicon-arrow-left"></i> Tomcat</a></li>
+      <li class="next"><a href="windows.html">Windows <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Installing as an executable .jar</h1>
+</div>
+<p>Use the launcher as an alternative to a system package:</p>
+<ol style="list-style-type: decimal">
+<li>Download the launcher jar file.</li>
+<li><p>Define RDECK_BASE environment variable to the location of the install</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">export</span> <span class="ot">RDECK_BASE=$HOME</span>/rundeck; <span class="co"># or where you like it</span></code></pre></li>
+<li><p>Create the directory for the installation.</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">mkdir</span> -p <span class="ot">$RDECK_BASE</span> </code></pre></li>
+<li><p>Copy the launcher jar to the installation directory.</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cp</span> rundeck-launcher-2.0.0.jar <span class="ot">$RDECK_BASE</span></code></pre></li>
+<li><p>Change directory and run the jar.</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cd</span> <span class="ot">$RDECK_BASE</span>    
+<span class="kw">java</span> -XX:MaxPermSize=256m -Xmx1024m -jar rundeck-launcher-2.0.0.jar</code></pre></li>
+<li><p>Wait for the Started message.</p>
+<pre><code>2010-11-19 13:35:51.127::INFO:  Started SocketConnector@0.0.0.0:4440</code></pre></li>
+<li><p>Update your shell environment</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ot">PATH=$PATH</span>:<span class="ot">$RDECK_BASE</span>/tools/bin
+<span class="ot">MANPATH=$MANPATH</span>:<span class="ot">$RDECK_BASE</span>/docs/man</code></pre></li>
+</ol>
+<p>If you get an error message that resembles the one below, you probably are using an unsupported Java version.</p>
+<pre><code>Exception in thread &quot;main&quot; java.lang.UnsupportedClassVersionError: Bad version number in .class file</code></pre>
+<p>See the <a href="startup-and-shutdown.html">startup and shutdown</a> section for instructions on using the <code>rundeckd</code> shell tool to manage the rundeck launcher process.</p>
+<h4 id="launcher-options"><a href="#launcher-options">Launcher Options</a></h4>
+<p>The launcher jar can take a number of options to specify how the server should start. If you execute with a &quot;-h&quot; you will see the usage information:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">java</span> -XX:MaxPermSize=256m -Xmx1024m -jar rundeck-launcher-2.1.0.jar -h</code></pre>
+<pre><code>usage: java [JAVA_OPTIONS] -jar rundeck-launcher.jar  [-c PATH] [-d]
+       [--installonly] [-s PATH] [-b PATH] [-p PATH] [-h] [-x PATH]
+       [--skipinstall] [--serverdir PATH] [--datadir PATH]
+
+Run the rundeck server, installing the necessary components if they do not
+exist.
+    --skipinstall         Skip the extraction of the utilities from the
+                          launcher.
+    --installonly         Perform installation only and do not start the
+                          server.
+ -b,--basedir &lt;PATH&gt;      The basedir
+ -c,--configdir &lt;PATH&gt;    The location of the configuration.
+ -d                       Show debug information
+ -h,--help                Display this message.
+ -p,--projectdir &lt;PATH&gt;   The location of Rundeck&#39;s project data.
+ -s,--sbindir &lt;PATH&gt;      The install directory for the tools used by
+                          administrators.
+ -x,--bindir &lt;PATH&gt;       The install directory for the tools used by
+                          users.</code></pre>
+<p>These options can be used to customize the directories used by the launcher. By default all the directories are organized by convention within the current working directory where the launcher jar is located.</p>
+<h4 id="system-properties"><a href="#system-properties">System Properties</a></h4>
+<p>You can also customize the launcher behavior by using some java system properties.</p>
+<p>Specify these properties using the normal <code>-Dproperty=value</code> commandline options to the <code>java</code> command:</p>
+<ul>
+<li><code>server.http.port</code> The HTTP port to use for the server, default &quot;4440&quot;</li>
+<li><code>server.https.port</code> The HTTPS port to use or the server, default &quot;4443&quot;</li>
+<li><code>server.http.host</code> Address/hostname to listen on, default is all addresses &quot;0.0.0.0&quot;</li>
+<li><code>server.hostname</code> Hostname to use for the server, default is the system hostname</li>
+<li><code>server.web.context</code> Web context path to use, such as &quot;/rundeck&quot;. Default is &quot;/&quot;.</li>
+<li><code>rdeck.base</code> Rundeck Basedir to use, default is the directory containing the launcher jar</li>
+<li><code>server.datastore.path</code> Path to server datastore dir</li>
+<li><code>default.user.name</code> Username for default user account to create</li>
+<li><code>default.user.password</code> Password for default user account to create</li>
+<li><code>rundeck.jaaslogin</code> &quot;true/false&quot; - if true, enable JAAS login. If false, use the realm.properties file for login information.</li>
+<li><code>loginmodule.name</code> Custom JAAS loginmodule name to use</li>
+<li><code>loginmodule.conf.name</code> Name of a custom JAAS config file, located in the server's config dir.</li>
+<li><code>rundeck.config.name</code> Name of a custom rundeck config file, located in the server's config dir.</li>
+<li><code>rundeck.ssl.config</code> Path to the SSL config properties file to enable SSL. If not set, SSL is not enabled.</li>
+<li><code>rundeck.jetty.connector.forwarded</code> true/false. Set to true to enable support for &quot;X-forwarded-*&quot; headers which may be sent by a front-end proxy to the rundeck server. See <a href="configuring-ssl.html#using-an-ssl-terminated-proxy">Using an SSL Terminated Proxy</a>.</li>
+<li><code>rundeck.jetty.connector.ssl.excludedProtocols</code> Comma-separated list of SSL protocols to disable. Default: 'SSLv3'. See <a href="configuring-ssl.html#disabling-ssl-protocols">Disabling SSL Protocols</a>.</li>
+<li><code>rundeck.jetty.connector.ssl.includedProtocols</code> Comma-separated list of SSL protocols to include. Default is based on available protocols. See <a href="configuring-ssl.html#disabling-ssl-protocols">Disabling SSL Protocols</a>.</li>
+<li><code>rundeck.jetty.connector.ssl.excludedCipherSuites</code> Comma-separated list of Cipher suites to disable. No default. See <a href="configuring-ssl.html#disabling-ssl-protocols">Disabling SSL Protocols</a>.</li>
+<li><code>rundeck.jetty.connector.ssl.includedCipherSuites</code> Comma-separated list of Cipher suites to enable. Default is based on available cipher suites. See <a href="configuring-ssl.html#disabling-ssl-protocols">Disabling SSL Protocols</a>.</li>
+</ul>
+<p>For more information about using SSL, see <a href="configuring-ssl.html">Configuring Rundeck for SSL</a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../../index.html">Rundeck Pro Documentation (3.0.x-SNAPSHOT)</a></li>
+    
+        <li><a href="../index.html">Administrator Guide</a></li>
+    
+    
+    <li ><a href="index.html">Installation</a></li>
+    <li class="active"><a href="executable-jar.html">Executable jar</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="tomcat.html"><i class="glyphicon glyphicon-arrow-left"></i> Tomcat</a></li>
+      <li class="next"><a href="windows.html">Windows <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Pro Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://rundeck.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://rundeck.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2018-05-16T19:29:29UTC">2018-05-16T19:29:29UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>

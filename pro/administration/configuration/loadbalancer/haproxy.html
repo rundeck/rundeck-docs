@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Using HAProxy as a loadbalancer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){ jQuery('table').addClass('table table-condensed table-responsive'); });
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="http://rundeck.com/">
+      Rundeck Pro
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  <!--
+    <ul class="nav navbar-nav">
+    
+    <li class="item about selected">
+      <a href="http://rundeck.org/about.html">
+        About
+        <p class="small">News, Videos, Docs</p>
+      </a>
+    </li>
+    <li class="item help">
+      <a href="http://rundeck.org/help.html">
+        Get Help
+        <p class="small">IRC List Tracker</p>
+      </a>
+    </li>
+    <li class="item plugins ">
+      <a href="http://rundeck.org/plugins/index.html">
+        Plugins
+        <p class="small">Integrate Rundeck</p>
+      </a>
+    </li>
+    <li class="item downloads  omega">
+    <a href="http://rundeck.org/downloads.html">
+      Download
+      <p class="small rd_version">3.0.x-SNAPSHOT</p>
+      </a>
+    </li>
+    </ul>
+
+    <form class="navbar-form navbar-left" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+    -->    
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../../../index.html">Rundeck Pro Documentation (3.0.x-SNAPSHOT)</a></li>
+    
+        <li><a href="../../index.html">Administrator Guide</a></li>
+    
+        <li><a href="../index.html">Configuration</a></li>
+    
+    
+    <li ><a href="index.html">Loadbalancer</a></li>
+    <li class="active"><a href="haproxy.html">HAProxy</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="aws-elb.html"><i class="glyphicon glyphicon-arrow-left"></i> AWS ELB</a></li>
+      <li class="next"><a href="iis.html">IIS <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#enable-cgi-scripts-for-rundeck">Enable CGI Scripts for Rundeck</a></li>
+<li><a href="#create-the-health-check-script-on-each-instance">Create the health check script on each instance</a></li>
+<li><a href="#on-haproxy-add-the-following-settings">On HAProxy, add the following settings</a></li>
+<li><a href="#check-if-haproxy-redirect-to-the-active-instance">Check if HAProxy redirect to the active instance</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Using HAProxy as a loadbalancer</h1>
+</div>
+<!---
+Original:
+http://support.rundeck.com/customer/en/portal/articles/2894842-health-check-based-on-execution-mode-for-haproxy-lb
+http://support.rundeck.com/customer/en/portal/articles/2894840-enable-cgi-script-on-jetty
+--->
+
+<p>To avoid sending traffic to unavailable nodes, HAProxy can check the health of their downstream services via http or tcp. This document explains how to create a custom health check for Rundeck.</p>
+<h3 id="enable-cgi-scripts-for-rundeck"><a href="#enable-cgi-scripts-for-rundeck">Enable CGI Scripts for Rundeck</a></h3>
+<p>The first step is to enable the CGI Script access on the embedded Jetty container.</p>
+<p>Note: These settings are valid for the rpm/deb or launcher install.</p>
+<h4 id="edit-the-web.xml"><a href="#edit-the-web.xml">Edit the web.xml</a></h4>
+<p>In the launcher, the file <code>web.xml</code> is located on <code>$RDECK_BASE/server/exp/webapp/WEB-INF</code></p>
+<p>For deb/rpm installers, the <code>web.xml</code> is located in <code>/var/lib/rundeck/server/exp/webapp/WEB-INF</code></p>
+<p>Add the following attributes before the last &quot;security-constraint&quot; label (the one that contains the auth-constraint attribute). This will avoid the redirect to the login page if you are not logged in Rundeck.</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;security-constraint&gt;</span>
+    <span class="kw">&lt;web-resource-collection&gt;</span>
+        <span class="kw">&lt;web-resource-name&gt;</span>cgi<span class="kw">&lt;/web-resource-name&gt;</span>
+        <span class="kw">&lt;url-pattern&gt;</span>/cgi-bin/*<span class="kw">&lt;/url-pattern&gt;</span>
+    <span class="kw">&lt;/web-resource-collection&gt;</span>
+<span class="kw">&lt;/security-constraint&gt;</span></code></pre>
+<p>After the last servlet attribute, add the following settings. A folder called <code>WEB-INF/cgi-bin</code> must be created (the name of the folder can be defined by the user)</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;servlet&gt;</span>
+    <span class="kw">&lt;servlet-name&gt;</span>CGI<span class="kw">&lt;/servlet-name&gt;</span>
+    <span class="kw">&lt;servlet-class&gt;</span>org.eclipse.jetty.servlets.CGI<span class="kw">&lt;/servlet-class&gt;</span>
+    <span class="kw">&lt;init-param&gt;</span>
+        <span class="kw">&lt;param-name&gt;</span>Path<span class="kw">&lt;/param-name&gt;</span>
+        <span class="kw">&lt;param-value&gt;</span>/bin:/usr/bin:/usr/local/bin<span class="kw">&lt;/param-value&gt;</span>
+    <span class="kw">&lt;/init-param&gt;</span>
+    <span class="kw">&lt;init-param&gt;</span>
+        <span class="kw">&lt;param-name&gt;</span>cgibinResourceBaseIsRelative<span class="kw">&lt;/param-name&gt;</span>
+        <span class="kw">&lt;param-value&gt;</span>true<span class="kw">&lt;/param-value&gt;</span>
+    <span class="kw">&lt;/init-param&gt;</span>      
+    <span class="kw">&lt;init-param&gt;</span> 
+        <span class="kw">&lt;param-name&gt;</span>commandPrefix<span class="kw">&lt;/param-name&gt;</span> 
+        <span class="kw">&lt;param-value&gt;</span>/usr/bin/python<span class="kw">&lt;/param-value&gt;</span> 
+    <span class="kw">&lt;/init-param&gt;</span>         
+    <span class="kw">&lt;init-param&gt;</span>
+        <span class="kw">&lt;param-name&gt;</span>cgibinResourceBase<span class="kw">&lt;/param-name&gt;</span>
+        <span class="kw">&lt;param-value&gt;</span>WEB-INF/cgi-bin<span class="kw">&lt;/param-value&gt;</span>
+    <span class="kw">&lt;/init-param&gt;</span>
+    <span class="kw">&lt;async-supported&gt;</span>true<span class="kw">&lt;/async-supported&gt;</span>
+    <span class="kw">&lt;load-on-startup&gt;</span>1<span class="kw">&lt;/load-on-startup&gt;</span>
+<span class="kw">&lt;/servlet&gt;</span>
+```</code></pre>
+<p>Add the following settings after the last &quot;servlet-mapping&quot; attribute. The &quot;cgi-bin&quot; name must match with the settings defined on the servlet.</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;servlet-mapping&gt;</span>
+    <span class="kw">&lt;servlet-name&gt;</span>CGI<span class="kw">&lt;/servlet-name&gt;</span>
+    <span class="kw">&lt;url-pattern&gt;</span>/cgi-bin/*<span class="kw">&lt;/url-pattern&gt;</span>
+<span class="kw">&lt;/servlet-mapping&gt;</span></code></pre>
+<h4 id="run-the-script"><a href="#run-the-script">Run the Script</a></h4>
+<p>With this settings, any script added to <code>$RDECK_BASE/server/exp/webapp/WEB-INF/cgi-bin</code>, can be called as an endpoint. For example, the URL: <code>http://localhost:4440/cgi-bin/somescript</code> will call the script <code>$RDECK_BASE/server/exp/webapp/WEB-INF/cgi-bin/somescript</code></p>
+<h3 id="create-the-health-check-script-on-each-instance"><a href="#create-the-health-check-script-on-each-instance">Create the health check script on each instance</a></h3>
+<p>The health check uses a Rundeck API to get system information. A health check could factor in other information like scheduler thread ratio, CPU load or memory utilization. For an active/standby configuration, the health check should check the execution mode. When the execution mode is set to &quot;passive&quot; the load balancer should route around it.</p>
+<p>The example below uses a python script to demonstrate this.</p>
+<p>Create the following script on <code>$RDECK_BASE/server/exp/webapp/WEB-INF/cgi-bin/status</code></p>
+<pre class="sourceCode python"><code class="sourceCode python"><span class="co">#!/usr/bin/python</span>
+
+<span class="ch">import</span> sys
+<span class="ch">import</span> os
+<span class="ch">import</span> cgi
+
+<span class="ch">from</span> cgi <span class="ch">import</span> escape
+<span class="ch">import</span> requests
+<span class="ch">import</span> json
+
+form = cgi.FieldStorage()
+token = form.getvalue(<span class="st">&quot;token&quot;</span>)
+executionMode= form.getvalue(<span class="st">&quot;executionMode&quot;</span>)
+
+url = <span class="st">&#39;http://localhost:4440/api/20/system/info?format=json&amp;authtoken=&#39;</span> + token
+
+response = requests.post(url)
+info = json.loads(response.text)
+currentExecutionMode = info[<span class="st">&quot;system&quot;</span>][<span class="st">&quot;executions&quot;</span>][<span class="st">&quot;executionMode&quot;</span>]
+
+<span class="kw">if</span> currentExecutionMode == executionMode:
+    status = <span class="st">&quot;200&quot;</span>
+<span class="kw">else</span>:
+    status = <span class="st">&quot;403&quot;</span>
+
+
+<span class="dt">print</span> <span class="st">&quot;Content-type: text/html&quot;</span>
+<span class="dt">print</span> <span class="st">&#39;Status:&#39;</span> + status + <span class="st">&#39; &#39;</span>
+
+<span class="dt">print</span>
+<span class="dt">print</span> <span class="st">&quot;&lt;!doctype html&gt;&quot;</span>
+<span class="dt">print</span> <span class="st">&quot;&lt;html&gt;&quot;</span>
+<span class="dt">print</span> <span class="st">&quot;&lt;body&gt;&quot;</span>
+
+<span class="dt">print</span> <span class="st">&#39;Current Execution Mode:&#39;</span> + currentExecutionMode
+<span class="dt">print</span> <span class="st">&quot;&lt;br&gt;&quot;</span>
+<span class="dt">print</span> <span class="st">&#39;Expected Execution Mode:&#39;</span> + executionMode
+<span class="dt">print</span> <span class="st">&quot;&lt;/body&gt;&quot;</span>
+<span class="dt">print</span> <span class="st">&quot;&lt;/html&gt;&quot;</span></code></pre>
+<p>After the script has been deployed use your browser to visit the new health check page.</p>
+<p>The URL accepts a parameter called &quot;executionMode&quot; which takes one of two values: active or passive. If specified mode matches the actual mode the page will return HTTP response code 200 otherwise it will return 403.</p>
+<p>For example: <code>http://localhost:4440/cgi-bin/status?token=&lt;token&gt;&amp;executionMode=active</code></p>
+<div class="figure">
+<img src="../../../figures/haproxy-health-check.png" alt="Example health check" /><p class="caption">Example health check</p>
+</div>
+<h3 id="on-haproxy-add-the-following-settings"><a href="#on-haproxy-add-the-following-settings">On HAProxy, add the following settings</a></h3>
+<p>The web load balancer serving traffic to the Rundeck instance should be configured with the health check.</p>
+<ul>
+<li>Add the &quot;httpchk&quot; with the URI of the health check. The token value and the execution mode that you want to use are needed.</li>
+<li>Add the &quot;http-check&quot; with the expected status (in this case 200)</li>
+</ul>
+<pre><code>backend default_service
+cookie JSESSIONID prefix nocache
+option httpchk get /cgi-bin/status?token=&lt;TOKEN_VALUE&gt;&amp;executionMode=active
+http-check expect status 200
+server rundeck1 192.168.0.1:4440 cookie rundeck1 check inter 2000 rise 2 fall 3
+server rundeck2 192.168.0.2:4440 cookie rundeck2 check inter 2000 rise 2 fall 3
+server rundeck3 192.168.0.3:4440 cookie rundeck3 check inter 2000 rise 2 fall 3</code></pre>
+<h3 id="check-if-haproxy-redirect-to-the-active-instance"><a href="#check-if-haproxy-redirect-to-the-active-instance">Check if HAProxy redirect to the active instance</a></h3>
+<p>Once the web load balancer has been configured with the health check, any instance that is not in &quot;active&quot; mode will not be passed traffic.</p>
+<div class="figure">
+<img src="../../../figures/haproxy-status.png" alt="HAProxy status" /><p class="caption">HAProxy status</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../../../index.html">Rundeck Pro Documentation (3.0.x-SNAPSHOT)</a></li>
+    
+        <li><a href="../../index.html">Administrator Guide</a></li>
+    
+        <li><a href="../index.html">Configuration</a></li>
+    
+    
+    <li ><a href="index.html">Loadbalancer</a></li>
+    <li class="active"><a href="haproxy.html">HAProxy</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="aws-elb.html"><i class="glyphicon glyphicon-arrow-left"></i> AWS ELB</a></li>
+      <li class="next"><a href="iis.html">IIS <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+<footer class="copy col-sm-12 text-muted">
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Pro Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://rundeck.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<a class="btn btn-success" href="http://rundeck.com/development.html">
+<i class="glyphicon glyphicon-plus"></i>
+Add a New Feature to Rundeck
+</a>
+</p>
+<p>
+<span class="generated-date" title="2018-05-16T19:29:29UTC">2018-05-16T19:29:29UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+</body>
+</html>
