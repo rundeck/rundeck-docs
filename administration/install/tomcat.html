@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rundeck Pro as a Tomcat servlet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.x-SNAPSHOT)</a></li>
+    
+        <li><a href="../index.html">Administrator Guide</a></li>
+    
+    
+    <li ><a href="index.html">Installation</a></li>
+    <li class="active"><a href="tomcat.html">Tomcat</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="centosredhat.html"><i class="glyphicon glyphicon-arrow-left"></i> CentOS/Redhat</a></li>
+      <li class="next"><a href="windows.html">Windows <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#upgrading">Upgrading</a></li>
+<li><a href="#custom-jndi">Custom JNDI</a><ul>
+<li><a href="#using-jndi-resource-database-connection">Using JNDI Resource Database Connection</a></li>
+<li><a href="#using-jndi-database-to-manage-the-authentication">Using JNDI Database to manage the authentication</a></li>
+</ul></li>
+<li><a href="#configure-active-directory-ad-or-ldap-authentication">Configure Active Directory (AD) or LDAP Authentication</a><ul>
+<li><a href="#enable-logging-debug-for-tomcat-authentication">Enable logging debug for tomcat authentication</a></li>
+</ul></li>
+<li><a href="#connect-to-active-directory-with-ldaps-windows">Connect to Active Directory with LDAPS (Windows)</a><ul>
+<li><a href="#configure-ldaps">Configure LDAPS</a></li>
+<li><a href="#export-the-certificate-from-active-directory">Export the certificate from Active Directory</a></li>
+<li><a href="#import-the-certificate-into-java-keystore">Import the certificate into java keystore</a></li>
+<li><a href="#add-the-keystore-to-tomcat">Add the keystore to tomcat</a></li>
+<li><a href="#configure-tomcat-jndi-realm">Configure Tomcat JNDI Realm</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Rundeck Pro as a Tomcat servlet</h1>
+</div>
+<h2 id="installation"><a href="#installation">Installation</a></h2>
+<!---
+Originals:
+
+http://support.rundeck.com/customer/en/portal/articles/2798971-install-rundeck-pro-with-tomcat-on-linux
+http://support.rundeck.com/customer/en/portal/articles/1817834-install-rundeck-pro-as-a-war-tomcat-on-windows
+http://support.rundeck.com/customer/en/portal/articles/2471602-upgrade-rundeck-pro-as-a-war-tomcat-
+http://support.rundeck.com/customer/en/portal/articles/2799547-enable-ssl-tomcat
+http://support.rundeck.com/customer/en/portal/articles/2539313-jndi-custom-settings-on-tomcat)
+
+
+Should these be part of the OSS docs?
+
+http://support.rundeck.com/customer/en/portal/articles/2433205-configuring-tomcat-for-ldaps
+http://support.rundeck.com/customer/en/portal/articles/2859551-authentication-with-ad-or-ldap-on-tomcat
+
+--->
+
+<p>Note: Replace <code>$RDECK_BASE</code> with your rundeck base path and <code>$CATALINA_BASE</code> with your tomcat base path.</p>
+<ul>
+<li><a href="http://download.rundeck.com/versions.html">Download</a> the latest version of Rundeck Pro (war file)</li>
+<li>Install tomcat on linux environment, this could be done using a rpm/deb package (depending on your OS) or just using the binaries.</li>
+<li>Check your tomcat home folder (or Catalina home), eg: <code>/app/tomcat</code>.</li>
+<li>Create the following folders on $RDECK_BASE (eg: <code>/app/rundeckpro</code>)</li>
+</ul>
+<pre><code>$RDECK_BASE/etc
+$RDECK_BASE/libext
+$RDECK_BASE/projects
+$RDECK_BASE/var
+$RDECK_BASE/var/logs
+$RDECK_BASE/var/data
+$RDECK_BASE/var/tmp</code></pre>
+<ul>
+<li>Edit or create the <code>$CATALINA_BASE/bin/setenv.sh</code>:</li>
+</ul>
+<pre><code>JAVA_OPTS=&quot;$JAVA_OPTS -XX:MaxPermSize=256m -Xmx2048m -Xms512m -server  -Drdeck.base=$RDECK_BASE -Drundeck.config.location=$RDECK_BASE/etc/rundeck-config.properties&quot;</code></pre>
+<p>If you installed rundeck with RPM, the settings should be on <code>/etc/tomcat/tomcat.conf</code> The memory settings depends on your environment.</p>
+<ul>
+<li>Add users to <code>$CATALINA_BASE/conf/tomcat_users.xml</code></li>
+</ul>
+<pre><code>&lt;tomcat-users&gt;
+    &lt;role rolename=&quot;user&quot;/&gt;
+    &lt;role rolename=&quot;admin&quot;/&gt;
+    &lt;user username=&quot;user&quot; password=&quot;user&quot; roles=&quot;user&quot;/&gt;
+    &lt;user username=&quot;admin&quot; password=&quot;admin&quot; roles=&quot;user,admin&quot;/&gt;
+&lt;/tomcat-users&gt;</code></pre>
+<ul>
+<li>Copy the war file to <code>$CATALINA_BASE/webapps/rundeckpro.war</code></li>
+<li>Extract the war file on <code>$CATALINA_BASE/webapps/rundeckpro</code>. This can be done manually (using unzip or tar), or starting tomcat.</li>
+<li>Copy the content of this <a href="http://support.rundeck.com/customer/portal/articles/2419019-log4j-properties-template">log4j.properties</a> file to: <code>$CATALINA_BASE/webapps/rundeckpro/WEB-INF/classes/log4j.properties</code></li>
+</ul>
+<p>Replacing the paths with <code>$RDECK_BASE</code> as necessary.</p>
+<ul>
+<li>Create the following config files on $RDECK_BASE/etc with the content:</li>
+</ul>
+<p>rundeck-config.properties</p>
+<pre><code>#loglevel.default is the default log level for jobs: ERROR,WARN,INFO,VERBOSE,DEBUG
+loglevel.default=INFO
+rdeck.base=$RDECK_BASE #replace with the real path
+
+#rss.enabled if set to true enables RSS feeds that are public (non-authenticated)
+rss.enabled=true
+grails.serverURL=http://localhost:8080/rundeckpro  #replace with the real URL
+
+dataSource.dbCreate = update
+#it is recommended to use an external DB
+dataSource.url = jdbc:h2:file:$RDECK_BASE/var/data/grailsdb;MVCC=true
+
+# Pre Auth mode settings
+rundeck.security.authorization.preauthenticated.enabled=false
+rundeck.security.authorization.preauthenticated.attributeName=REMOTE_USER_GROUPS
+rundeck.security.authorization.preauthenticated.delimiter=,
+# Header from which to obtain user name
+rundeck.security.authorization.preauthenticated.userNameHeader=X-Forwarded-Uuid
+# Header from which to obtain list of roles
+rundeck.security.authorization.preauthenticated.userRolesHeader=X-Forwarded-Roles
+# Redirect to upstream logout url
+rundeck.security.authorization.preauthenticated.redirectLogout=false
+rundeck.security.authorization.preauthenticated.redirectUrl=/oauth2/sign_in</code></pre>
+<p>framework.properties</p>
+<pre><code># ----------------------------------------------------------------
+# Server connection information
+# ----------------------------------------------------------------
+
+framework.server.name = servername
+framework.server.hostname = serverhostname
+framework.server.port = 8080
+framework.server.url = http://localhost:8080/rundeckpro  #replace with the real URL
+
+# ----------------------------------------------------------------
+# Installation locations
+# ----------------------------------------------------------------
+
+rdeck.base=$RDECK_BASE  #replace with the real path
+
+framework.projects.dir=$RDECK_BASE/projects
+framework.etc.dir=$RDECK_BASE/etc
+framework.var.dir=$RDECK_BASE/var
+framework.tmp.dir=$RDECK_BASE/var/tmp
+framework.logs.dir=$RDECK_BASE/var/logs
+framework.libext.dir=$RDECK_BASE/libext
+
+# ----------------------------------------------------------------
+# SSH defaults for node executor and file copier
+# ----------------------------------------------------------------
+
+framework.ssh.keypath = /home/someuser/.ssh/id_rsa
+framework.ssh.user = someuser
+
+# ssh connection timeout after a specified number of milliseconds.
+# &quot;0&quot; value means wait forever.
+framework.ssh.timeout = 0
+
+# ----------------------------------------------------------------
+rundeck.server.uuid = XXXXXX #generate with uuidgen
+
+# ----------------------------------------------------------------
+# System-wide global variables.
+# ----------------------------------------------------------------
+
+# Expands to ${globals.var1}
+#framework.globals.var1 = value1
+
+# Expands to ${globals.var2}
+#framework.globals.var2 = value2</code></pre>
+<p>apitoken.aclpolicy</p>
+<pre><code>description: API project level access control
+context:
+ project: &#39;.*&#39; # all projects
+for:
+ resource:
+   - equals:
+       kind: job
+     allow: [create,delete,run] # allow create and delete jobs
+   - equals:
+       kind: node
+     allow: [read,create,update,refresh] # allow refresh node sources
+   - equals:
+       kind: event
+     allow: [read,create] # allow read/create events
+ adhoc:
+   - allow: [read,run,kill] # allow running/killing adhoc jobs and read output
+ job:
+   - allow: [create,read,update,delete,run,kill] # allow create/read/write/delete/run/kill of all jobs
+ node:
+   - allow: [read,run] # allow read/run for all nodes
+by:
+ group: api_token_group
+
+---
+
+description: API Application level access control
+context:
+ application: &#39;rundeck&#39;
+for:
+ resource:
+   - equals:
+       kind: system
+     allow: [read] # allow read of system info
+ project:
+   - match:
+       name: &#39;.*&#39;
+     allow: [read] # allow view of all projects
+ storage:
+   - match:
+       path: &#39;(keys|keys/.*)&#39;
+     allow: &#39;*&#39; # allow all access to manage stored keys
+by:
+ group: api_token_group</code></pre>
+<p>admin.aclpolicy</p>
+<pre><code>description: Admin, all access.
+context:
+ project: &#39;.*&#39; # all projects
+for:
+ resource:
+   - allow: &#39;*&#39; # allow read/create all kinds
+ adhoc:
+   - allow: &#39;*&#39; # allow read/running/killing adhoc jobs
+ job:
+   - allow: &#39;*&#39; # allow read/write/delete/run/kill of all jobs
+ node:
+   - allow: &#39;*&#39; # allow read/run for all nodes
+by:
+ group: admin
+
+---
+
+description: Admin, all access.
+context:
+ application: &#39;rundeck&#39;
+for:
+ resource:
+   - allow: &#39;*&#39; # allow create of projects
+ project:
+   - allow: &#39;*&#39; # allow view/admin of all projects
+ project_acl:
+   - allow: &#39;*&#39; # allow admin of all project-level ACL policies
+ storage:
+   - allow: &#39;*&#39; # allow read/create/update/delete for all /keys/* storage content
+by:
+ group: admin</code></pre>
+<ul>
+<li>Add extra settings to <code>$RDECK_BASE/etc/rundeck-config.properties</code>. It is recommended to use an external database, and save the project settings and key storage on this database. Please check: http://rundeck.org/docs/administration/setting-up-an-rdb-datasource.html</li>
+<li>Add a server UUID on <code>$RDECK_BASE/etc/framework.properties</code>. Eg:</li>
+</ul>
+<pre><code>rundeck.server.uuid=XXXXXX.</code></pre>
+<p>You can generate the server UUID with the <code>uuidgen</code> command</p>
+<ul>
+<li>Start or restart tomcat</li>
+<li>Upload a license key</li>
+</ul>
+<h2 id="upgrading"><a href="#upgrading">Upgrading</a></h2>
+<p>First, Download the rundeckpro-edition-X.X.X.war file from the download page: http://download.rundeck.com/versions.html</p>
+<p>The upgrade procedure should be:</p>
+<ul>
+<li>Back up your <code>log4j.properties</code> and <code>web.xml</code>, if you have changed anything there: ($CATALINA_BASE/webapps/rundeckpro/WEB-INF/classes/log4j.properties)</li>
+<li>Remove your <code>rundeckpro</code> and <code>rundeckpro.war</code> webapps directory.</li>
+<li>Back up the <code>libext</code> folder located in <code>$RDECK_BASE</code> if you have your own plugins, because the new version will load new plugin versions. If you don't have your own plugins, remove <code>libext</code></li>
+<li>Remove the contents of <code>$RDECK_BASE/var/tmp/pluginJars/</code></li>
+<li>If you have your own plugins on the previous <code>libext</code> folder, copy them back to the new libext folder.</li>
+<li>If you have setting related with plugins in <code>$RDECK_BASE/etc/rundeck-config.properties</code>, comment them in the first deploy. For example something like this: http://rundeck.org/docs/plugins-user-guide/bundled-plugins.html#jasypt-encryption-plugin</li>
+<li>Copy the new war file to <code>$CATALINA_BASE/webapps/</code></li>
+<li>unzip the .war file if the autodeploy is not enabled.</li>
+<li>Update your <code>web.xml</code> and <code>log4j.properties</code> if you changed the default settings.</li>
+<li>Restart Tomcat</li>
+<li>Uncomment the setting in <code>$RDECK_BASE/etc/rundeck-config.properties</code> if you commented them out previous, and restart tomcat again.</li>
+</ul>
+<h2 id="custom-jndi"><a href="#custom-jndi">Custom JNDI</a></h2>
+<h3 id="using-jndi-resource-database-connection"><a href="#using-jndi-resource-database-connection">Using JNDI Resource Database Connection</a></h3>
+<p>This setting allow Rundeck to use JNDI database connections instead of the default grails settings.</p>
+<ul>
+<li>Add the following entry on <code>$CATALINA_HOME/server.xml</code> under the <code>&lt;GlobalNamingResources&gt;</code> tag:</li>
+</ul>
+<pre><code>&lt;!-- Global JNDI resources
+      Documentation at /docs/jndi-resources-howto.html
+ --&gt;
+ &lt;GlobalNamingResources&gt;
+   &lt;!-- Editable user database that can also be used by
+        UserDatabaseRealm to authenticate users
+   --&gt;
+   &lt;Resource name=&quot;UserDatabase&quot; auth=&quot;Container&quot;
+             type=&quot;org.apache.catalina.UserDatabase&quot;
+             description=&quot;User database that can be updated and saved&quot;
+             factory=&quot;org.apache.catalina.users.MemoryUserDatabaseFactory&quot;
+             pathname=&quot;conf/tomcat-users.xml&quot; /&gt;
+
+&lt;Resource name=&quot;jdbc/rundeckdb&quot;
+                 global=&quot;jdbc/rundeckdb&quot;
+                 auth=&quot;Container&quot;
+                 type=&quot;javax.sql.DataSource&quot;
+   maxActive=&quot;100&quot;
+                maxIdle=&quot;30&quot;
+                maxWait=&quot;10000&quot;
+                username=&quot;rundeckuser&quot;
+                password=&quot;password&quot;
+                driverClassName=&quot;com.mysql.jdbc.Driver&quot;
+                url=&quot;jdbc:mysql://localhost:3306/rundeckdb&quot;/&gt;
+
+&lt;/GlobalNamingResources&gt;</code></pre>
+<ul>
+<li>Add the Resource link on <code>$CATALINA_HOME/context.xml</code></li>
+</ul>
+<pre><code>&lt;ResourceLink name=&quot;jdbc/rundeckdb&quot;
+                        global=&quot;jdbc/rundeckdb&quot;
+                        type=&quot;javax.sql.DataSource&quot;/&gt;</code></pre>
+<ul>
+<li>on <code>$RDECK_HOME/etc/rundeck-config.properties</code> add the <code>dataSource.jndiName</code> entry:</li>
+</ul>
+<pre><code>dataSource.jndiName=java:/comp/env/jdbc/rundeckdb</code></pre>
+<p>This will replace the dataSource.* entries</p>
+<h3 id="using-jndi-database-to-manage-the-authentication"><a href="#using-jndi-database-to-manage-the-authentication">Using JNDI Database to manage the authentication</a></h3>
+<p>To use a custom authentication method using database tables:</p>
+<ul>
+<li>It is necessary to have tables like this:</li>
+</ul>
+<pre><code>create table users (
+user_name varchar(15) not null primary key,
+user_pass varchar(15) not null
+);
+
+create table user_roles (
+user_name varchar(15) not null,
+role_name varchar(15) not null,
+primary key (user_name, role_name)
+);
+
+insert into users(&#39;samuel&#39;,&#39;samuel&#39;);
+insert into user_roles values(&#39;samuel&#39;,&#39;user&#39;);
+insert into user_roles values(&#39;samuel&#39;,&#39;admin&#39;);</code></pre>
+<ul>
+<li>All users needs a default role called &quot;user&quot; by default, if you want to change that you need to edit <code>$CATALINA_HOME/webapps/rundeckpro/WEB-INF/web.xml</code></li>
+</ul>
+<pre><code>&lt;security-role&gt;&lt;role-name&gt;user&lt;/role-name&gt;&lt;/security-role&gt;</code></pre>
+<p>*change the default role name</p>
+<ul>
+<li>Define the Resource connection in <code>$CATALINA_HOME/server.xml</code>:</li>
+</ul>
+<pre><code>&lt;!-- Global JNDI resources
+      Documentation at /docs/jndi-resources-howto.html
+ --&gt;
+ &lt;GlobalNamingResources&gt;
+   &lt;!-- Editable user database that can also be used by
+        UserDatabaseRealm to authenticate users
+   --&gt;
+   &lt;Resource name=&quot;UserDatabase&quot; auth=&quot;Container&quot;
+             type=&quot;org.apache.catalina.UserDatabase&quot;
+             description=&quot;User database that can be updated and saved&quot;
+             factory=&quot;org.apache.catalina.users.MemoryUserDatabaseFactory&quot;
+             pathname=&quot;conf/tomcat-users.xml&quot; /&gt;
+
+    &lt;Resource name=&quot;jdbc/testDB&quot;
+                       auth=&quot;Container&quot;
+                       type=&quot;javax.sql.DataSource&quot;
+                       maxActive=&quot;100&quot;
+                       maxIdle=&quot;30&quot;
+                       maxWait=&quot;10000&quot;
+                       username=&quot;rundeckauth&quot;
+                       password=&quot;password&quot;
+                       driverClassName=&quot;com.mysql.jdbc.Driver&quot;                   
+                       url=&quot;jdbc:mysql://localhost:3306/userauthdb?autoReconnect=true&quot;/&gt;
+
+  &lt;/GlobalNamingResources&gt;</code></pre>
+<ul>
+<li>Define the JNDI entry in <code>$CATALINA_HOME/server.xml</code>:</li>
+</ul>
+<pre><code>     &lt;!-- Use the LockOutRealm to prevent attempts to guess user passwords
+          via a brute-force attack --&gt;
+     &lt;Realm className=&quot;org.apache.catalina.realm.LockOutRealm&quot;&gt;
+       &lt;!-- This Realm uses the UserDatabase configured in the global JNDI
+            resources under the key &quot;UserDatabase&quot;.  Any edits
+            that are performed against this UserDatabase are immediately
+            available for use by the Realm.  --&gt;
+       &lt;Realm className=&quot;org.apache.catalina.realm.UserDatabaseRealm&quot;
+              resourceName=&quot;UserDatabase&quot;/&gt;
+     &lt;/Realm&gt;
+
+     &lt;Realm className=&quot;org.apache.catalina.realm.DataSourceRealm&quot;
+                  dataSourceName=&quot;jdbc/testDB&quot;
+     userTable=&quot;users&quot;
+     userNameCol=&quot;user_name&quot;
+     userCredCol=&quot;user_pass&quot; 
+     userRoleTable=&quot;user_roles&quot; 
+     roleNameCol=&quot;role_name&quot;/&gt;</code></pre>
+<p>Further information:</p>
+<ul>
+<li><a href="https://tomcat.apache.org/tomcat-7.0-doc/realm-howto.html#DataSourceRealm">https://tomcat.apache.org/tomcat-7.0-doc/realm-howto.html#DataSourceRealm</a></li>
+<li><a href="https://tomcat.apache.org/tomcat-7.0-doc/jndi-datasource-examples-howto.html#MySQL_DBCP_Example">https://tomcat.apache.org/tomcat-7.0-doc/jndi-datasource-examples-howto.html#MySQL_DBCP_Example</a></li>
+</ul>
+<h2 id="configure-active-directory-ad-or-ldap-authentication"><a href="#configure-active-directory-ad-or-ldap-authentication">Configure Active Directory (AD) or LDAP Authentication</a></h2>
+<p>Edit <code>$CATALINA_BASE/conf/server.xml</code> and add the following realm definition.</p>
+<p>Replace the &quot;<span class="citation">@token</span>@&quot; strings with values corresponding to your Active Directory/LDAP structure.</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;Realm</span><span class="ot"> className=</span><span class="st">&quot;org.apache.catalina.realm.JNDIRealm&quot;</span>
+<span class="ot">       connectionName=</span><span class="st">&quot;@jndi_connectionName@&quot;</span>
+<span class="ot">       connectionPassword=</span><span class="st">&quot;@jndi_connectionPassword@&quot;</span>
+<span class="ot">       connectionURL=</span><span class="st">&quot;@jndi_connectionURL@&quot;</span>
+<span class="ot">       referrals=</span><span class="st">&quot;follow&quot;</span>
+<span class="ot">       userBase=</span><span class="st">&quot;@jndi_userBase@&quot;</span>
+<span class="ot">       userSearch=</span><span class="st">&quot;(sAMAccountName={0})&quot;</span>
+<span class="ot">       userSubtree=</span><span class="st">&quot;true&quot;</span>
+<span class="ot">       roleBase=</span><span class="st">&quot;@jndi_roleBase@&quot;</span>
+<span class="ot">       roleName=</span><span class="st">&quot;cn&quot;</span>
+<span class="ot">       roleSearch=</span><span class="st">&quot;(member={0})&quot;</span>
+<span class="ot">       roleSubtree=</span><span class="st">&quot;true&quot;</span>
+<span class="ot">       roleNested=</span><span class="st">&quot;true&quot;</span>
+<span class="ot">       commonRole=</span><span class="st">&quot;user&quot;</span>
+  <span class="kw">/&gt;</span></code></pre>
+<p>Here are the descriptions for each attribute:</p>
+<ul>
+<li>connectionName: The account bind name (eg, cn=user,ou=blah,dc=example,dc=com or eg, * Administrator@sops.local)</li>
+<li>connectionPassword: the connection user's password (eg 'password')</li>
+<li>connectionURL: the URL to the ldap server (eg, 'ldap://192.168.50.11:389' )</li>
+<li>userBase: Base for finding users. (eg, 'dc=example,dc=com'), or</li>
+<li>userPattern: Pattern for finding users. (eg, 'cn={0},dc=example,dc=com')</li>
+<li>userSearch: Filter use to find the user. (eg: (sAMAccountName={0}) or (name={0})</li>
+<li>roleBase: Base for finding roles (eg 'OU=Rundeck,dc=example,dc=com' )</li>
+</ul>
+<p>To use both authentication methods, AD/LDAP plus the default users file (conf/tomcat-users.xml), use CombinedRealm:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;Realm</span><span class="ot"> className=</span><span class="st">&quot;org.apache.catalina.realm.CombinedRealm&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;Realm</span><span class="ot"> className=</span><span class="st">&quot;org.apache.catalina.realm.UserDatabaseRealm&quot;</span>
+<span class="ot">           resourceName=</span><span class="st">&quot;UserDatabase&quot;</span><span class="kw">/&gt;</span>
+    <span class="kw">&lt;Realm</span><span class="ot"> className=</span><span class="st">&quot;org.apache.catalina.realm.JNDIRealm&quot;</span>
+<span class="ot">           connectionName=</span><span class="st">&quot;CN=Administrator,CN=Users,DC=Example,DC=local&quot;</span>
+<span class="ot">           connectionPassword=</span><span class="st">&quot;password&quot;</span>
+<span class="ot">           connectionURL=</span><span class="st">&quot;ldap://server:389&quot;</span>
+<span class="ot">           referrals=</span><span class="st">&quot;follow&quot;</span>
+<span class="ot">           userBase=</span><span class="st">&quot;CN=Users,DC=Domain,DC=local&quot;</span>
+<span class="ot">           userSearch=</span><span class="st">&quot;(sAMAccountName={0})&quot;</span>
+<span class="ot">           userSubtree=</span><span class="st">&quot;true&quot;</span>
+<span class="ot">           roleBase=</span><span class="st">&quot;CN=Roles,DC=Example,DC=local&quot;</span>
+<span class="ot">           roleName=</span><span class="st">&quot;cn&quot;</span>
+<span class="ot">           roleSearch=</span><span class="st">&quot;(member={0})&quot;</span>
+<span class="ot">           roleSubtree=</span><span class="st">&quot;true&quot;</span>
+<span class="ot">           roleNested=</span><span class="st">&quot;true&quot;</span>
+<span class="ot">           commonRole=</span><span class="st">&quot;user&quot;</span>
+    <span class="kw">/&gt;</span>
+<span class="kw">&lt;/Realm&gt;</span></code></pre>
+<p>Further information about Realm authentication:</p>
+<ul>
+<li>https://tomcat.apache.org/tomcat-8.0-doc/realm-howto.html#JNDIRealm</li>
+<li>https://tomcat.apache.org/tomcat-8.0-doc/realm-howto.html#CombinedRealm</li>
+</ul>
+<h3 id="enable-logging-debug-for-tomcat-authentication"><a href="#enable-logging-debug-for-tomcat-authentication">Enable logging debug for tomcat authentication</a></h3>
+<p>Edit the file <code>$CATALINA_BASE/conf/logging.properties</code> and add the following entries:</p>
+<ul>
+<li>Modify the FileHandler.level from FINE to ALL</li>
+</ul>
+<pre><code>2localhost.org.apache.juli.FileHandler.level = ALL
+2localhost.org.apache.juli.FileHandler.directory = ${catalina.base}/logs
+2localhost.org.apache.juli.FileHandler.prefix = localhost.</code></pre>
+<ul>
+<li>Add the following lines at the end of the file</li>
+</ul>
+<pre><code>org.apache.catalina.core.ContainerBase.[Catalina].level = ALL
+org.apache.catalina.core.ContainerBase.[Catalina].handlers = 2localhost.org.apache.juli.FileHandler</code></pre>
+<p>The log will be enable on <code>localhost.YYYY-MM-DD.log</code> file on <code>$CATALINA_BASE/logs</code> folder</p>
+<h2 id="connect-to-active-directory-with-ldaps-windows"><a href="#connect-to-active-directory-with-ldaps-windows">Connect to Active Directory with LDAPS (Windows)</a></h2>
+<p>If you need to configure Tomcat to connect to your Active Directory server using LDAPS, this is how to do it.</p>
+<h3 id="configure-ldaps"><a href="#configure-ldaps">Configure LDAPS</a></h3>
+<p>Check the follow document to enable LDAPS and create a certificate: <a href="http://social.technet.microsoft.com/wiki/contents/articles/2980.ldap-over-ssl-ldaps-certificate.aspx">http://social.technet.microsoft.com/wiki/contents/articles/2980.ldap-over-ssl-ldaps-certificate.aspx</a></p>
+<h3 id="export-the-certificate-from-active-directory"><a href="#export-the-certificate-from-active-directory">Export the certificate from Active Directory</a></h3>
+<ul>
+<li>Click <strong>Start</strong>, type <strong>mmc</strong> and then click <strong>OK</strong>.</li>
+<li>Click <strong>File</strong> and then click <strong>Add/Remove Snap-in.</strong></li>
+<li>Click <strong>Certificates</strong> and then click <strong>Add</strong>.</li>
+<li>Select <strong>Service account</strong> and then click <strong>Next</strong>.</li>
+</ul>
+<div class="figure">
+<img src="../../figures/tomcat-ldaps-service-account.png" />
+</div>
+<ul>
+<li>In the <strong>Select Computer</strong> dialog box, select <strong>Local computer</strong> if you are working on the local computer, or select <strong>Another computer</strong> to find the remote computer.</li>
+</ul>
+<div class="figure">
+<img src="../../figures/tomcat-ldaps-select-computer.png" />
+</div>
+<ul>
+<li>Select <strong>Active Directory Domain Services</strong> and then click <strong>Finish</strong>.</li>
+</ul>
+<div class="figure">
+<img src="../../figures/tomcat-ldaps-ad-domain-services.png" />
+</div>
+<ul>
+<li>Expand <strong>Certificates - Services (Active Directory Domain Services)</strong> and then click **NTDS*. Right-click **NTDS*, click <strong>All Tasks</strong>, and then click <strong>Export</strong></li>
+</ul>
+<div class="figure">
+<img src="../../figures/tomcat-ldaps-cert-export.png" />
+</div>
+<p>On the Certificate Export Wizard welcome screen, click Next.</p>
+<div class="figure">
+<img src="../../figures/tomcat-ldaps-cert-export-wizard.png" />
+</div>
+<p>Export the certificate in .cer format</p>
+<div class="figure">
+<img src="../../figures/tomcat-ldaps-cert-export-wizard-format.png" />
+</div>
+<p>Save the certificate</p>
+<div class="figure">
+<img src="../../figures/tomcat-ldaps-cert-export-wizard-save.png" />
+</div>
+<h3 id="import-the-certificate-into-java-keystore"><a href="#import-the-certificate-into-java-keystore">Import the certificate into java keystore</a></h3>
+<p>Generate the truststore key in order to use it in the tomcat context. Run the follow command:</p>
+<pre><code>keytool  -import -trustcacerts -alias @ALIAS_NAME@  -file @CERTIFICATE_NAME.cer@ -keystore @CERT_PATH@/@KEYSTORE_NAME@</code></pre>
+<p>Where <code>@CERTIFICATE_NAME.cer@</code> is the certificate exported in the previous step</p>
+<h3 id="add-the-keystore-to-tomcat"><a href="#add-the-keystore-to-tomcat">Add the keystore to tomcat</a></h3>
+<p>Add to <code>tomcat.conf</code> or <code>setenv.sh</code>, depending on the installation type.</p>
+<p><code>$CATALINA_BASE/conf/tomcat.conf</code> (.rpm install)</p>
+<pre><code>#Use JAVA_OPTS to set java.library.path for libtcnative.so
+#JAVA_OPTS=&quot;-Djava.library.path=/usr/lib&quot;
+JAVA_OPTS=&quot; -XX:MaxPermSize=256m -Xmx1024m -Xms256m -server -Djavax.net.ssl.trustStore=@CERT_PATH@/@KEYSTORE_NAME@  -Drdeck.base=$RDECK_HOME -Drundeck.config.location=$RDECK_HOME/etc/rundeck-config.properties &quot;</code></pre>
+<p><code>$CATALINA_BASE/bin/setenv.sh</code> (.deb install)</p>
+<pre><code>CATALINA_PID=&quot;$CATALINA_BASE/logs/catalina.pid&quot;
+CATALINA_OPTS=&quot;-Drdeck.base=$RDECK_HOME -Drundeck.config.location=$RDECK_HOME/etc/rundeck-config.properties&quot;
+JAVA_OPTS=&quot;-server -Xmx1024m -Djavax.net.ssl.trustStore=@CERT_PATH@/@KEYSTORE_NAME@&quot;</code></pre>
+<h3 id="configure-tomcat-jndi-realm"><a href="#configure-tomcat-jndi-realm">Configure Tomcat JNDI Realm</a></h3>
+<p>In the <code>$CATALINA_BASE/server/conf/server.xml</code> specify the <code>connectionURL</code> using the ldaps address:</p>
+<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;Realm</span><span class="ot"> className=</span><span class="st">&quot;org.apache.catalina.realm.CombinedRealm&quot;</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;Realm</span><span class="ot"> className=</span><span class="st">&quot;org.apache.catalina.realm.UserDatabaseRealm&quot;</span>
+<span class="ot">           resourceName=</span><span class="st">&quot;UserDatabase&quot;</span><span class="kw">/&gt;</span>
+    <span class="kw">&lt;Realm</span><span class="ot"> className=</span><span class="st">&quot;org.apache.catalina.realm.JNDIRealm&quot;</span>
+<span class="ot">           connectionName=</span><span class="st">&quot;CN=@USERNAME@,CN=Users,DC=WindowsVirtual,DC=local&quot;</span>
+<span class="ot">           connectionPassword=</span><span class="st">&quot;@PASSWORD@&quot;</span>
+<span class="ot">           connectionURL=</span><span class="st">&quot;ldaps://@LDAPSERVER@:636&quot;</span>
+<span class="ot">           referrals=</span><span class="st">&quot;follow&quot;</span>
+<span class="ot">           userBase=</span><span class="st">&quot;CN=Users,DC=WindowsVirtual,DC=local&quot;</span>
+<span class="ot">           userSearch=</span><span class="st">&quot;(sAMAccountName={0})&quot;</span>
+<span class="ot">           userSubtree=</span><span class="st">&quot;true&quot;</span>
+<span class="ot">           roleBase=</span><span class="st">&quot;CN=Roles,DC=WindowsVirtual,DC=local&quot;</span>
+<span class="ot">           roleName=</span><span class="st">&quot;cn&quot;</span>
+<span class="ot">           roleSearch=</span><span class="st">&quot;(member={0})&quot;</span>
+<span class="ot">           roleSubtree=</span><span class="st">&quot;true&quot;</span>
+<span class="ot">           roleNested=</span><span class="st">&quot;true&quot;</span>
+<span class="ot">           commonRole=</span><span class="st">&quot;user&quot;</span>
+    <span class="kw">/&gt;</span>
+<span class="kw">&lt;/Realm&gt;</span></code></pre>
+<p>This example allow to use both authentication methods, LDAPS and tomcat-users.xml</p>
+<h3 id="troubleshooting"><a href="#troubleshooting">Troubleshooting</a></h3>
+<p>In order to test the connection with LDAPS server, you can use the SSLPoke utiliy:</p>
+<ul>
+<li><p>Download SSLPoke: <a href="https://confluence.atlassian.com/kb/unable-to-connect-to-ssl-services-due-to-pkix-path-building-failed-779355358.html">https://confluence.atlassian.com/kb/unable-to-connect-to-ssl-services-due-to-pkix-path-building-failed-779355358.html</a></p></li>
+<li><p>Test the connection using the certificate:</p></li>
+</ul>
+<pre><code>java -Djavax.net.ssl.trustStore=cacerts_ldapcertificate  SSLPoke 192.168.0.5 636 </code></pre>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.x-SNAPSHOT)</a></li>
+    
+        <li><a href="../index.html">Administrator Guide</a></li>
+    
+    
+    <li ><a href="index.html">Installation</a></li>
+    <li class="active"><a href="tomcat.html">Tomcat</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="centosredhat.html"><i class="glyphicon glyphicon-arrow-left"></i> CentOS/Redhat</a></li>
+      <li class="next"><a href="windows.html">Windows <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-05-24T01:50:16UTC">2018-05-24T01:50:16UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>

@@ -196,7 +196,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>If you want to skip ahead, you can go straight to <a href="#creating-jobs">Creating Jobs</a>.</p>
 <h2 id="job-groups"><a href="#job-groups">Job groups</a></h2>
 <p>As many jobs will accumulate over time, it is useful to organize Jobs into groups. A group is a logical set of jobs, and one job group can exist inside another. Rundeck displays job lists as a set of folders corresponding to the group structure your jobs define.</p>
-<p>Beyond organizing jobs, groups assist in defining access control policy, covered in the <a href="../administration/access-control-policy.html">Administrator guide - Access Control Policy</a>.</p>
+<p>Beyond organizing jobs, groups assist in defining access control policy, covered in the <a href="../administration/security/access-control-policy.html">Administrator guide - Access Control Policy</a>.</p>
 <h2 id="job-uuids"><a href="#job-uuids">Job UUIDs</a></h2>
 <p>When created, each new job will be assigned a unique universal identifier (UUID). If you are writing the Job definition using one of the supported formats you can assign the UUID yourself.</p>
 <p>You can use the UUID to make sure that when you rename or change the group for your job in your job definition, it will modify the correct job in the server.</p>
@@ -425,7 +425,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </ul>
 <p>When the Job starts, all &quot;start&quot; notifications will be triggered.</p>
 <p>When the Job finishes executing, all &quot;success&quot; notifications will be triggered if the Job is successful. Otherwise, all &quot;failure&quot; notifications will be triggered if the Job fails or is cancelled.</p>
-<p>To configure a custom email template, see the <a href="../administration/configuration-file-reference.html#custom-email-templates">Administration - Configuration File Reference - Custom Email Templates</a> chapter.</p>
+<p>To configure a custom email template, see the <a href="../administration/configuration/configuration-file-reference.html#custom-email-templates">Administration - Configuration File Reference - Custom Email Templates</a> chapter.</p>
 <h3 id="webhooks"><a href="#webhooks">Webhooks</a></h3>
 <p>Rundeck Jobs can be configured to POST data to a webhook URL when they succeed or fail.</p>
 <ul>
@@ -784,7 +784,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>Note, When passed as arguments to Job References, they can only be passed as the value of another Secure option. See <a href="#using-secure-options-with-job-references">Using Secure Options with Job References</a>.</p>
 </blockquote>
 <h3 id="secure-remote-authentication-options"><a href="#secure-remote-authentication-options">Secure Remote Authentication Options</a></h3>
-<p>The built-in <a href="plugins.html#ssh-provider">SSH Provider</a> for node execution allows using passwords for SSH and/or Sudo authentication mechanisms, and the passwords are supplied by Secure Remote Authentication Options defined in a Job.</p>
+<p>The built-in <a href="../plugins-user-guide/ssh-plugins.html">SSH Provider</a> for node execution allows using passwords for SSH and/or Sudo authentication mechanisms, and the passwords are supplied by Secure Remote Authentication Options defined in a Job.</p>
 <p>Secure Remote Authentication Options have some limitations compared to Plain and Secure options:</p>
 <ul>
 <li>The values entered by the user are not available for normal script and command option value expansion. This means that they can only be used for the purposes of the Remote Authentication.</li>
@@ -823,7 +823,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>Note, If you define arguments in the wrong manner, then the Secure and Secure Remote Authentication options will not be set when the Job reference is called. Plain options will behave the way they do in Command or Script arguments, and be left as-is as uninterpreted property references.</p>
 </blockquote>
 <h3 id="secure-options-using-key-storage"><a href="#secure-options-using-key-storage">Secure Options using Key Storage</a></h3>
-<p>Secure options can specify a Storage Path in lieu of a default value. This path to the <a href="../administration/key-storage.html">Key Storage Facility</a> will be loaded as the option value when one is not supplied.</p>
+<p>Secure options can specify a Storage Path in lieu of a default value. This path to the <a href="../administration/security/key-storage.html">Key Storage Facility</a> will be loaded as the option value when one is not supplied.</p>
 <p>The path must indicate a stored <code>password</code> entry in the storage facility.</p>
 <div class="figure">
 <img src="../figures/jobs-options-secure-storage-path.png" alt="Storage Path for Secure Option" /><p class="caption">Storage Path for Secure Option</p>
@@ -885,7 +885,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
   {<span class="dt">&quot;name&quot;</span>:<span class="st">&quot;A Label&quot;</span>, <span class="dt">&quot;value&quot;</span>:<span class="st">&quot;a value&quot;</span>, <span class="dt">&quot;selected&quot;</span>: <span class="dv">true</span>}
 ] </code></pre>
 <h3 id="url-connection-parameters"><a href="#url-connection-parameters">URL connection parameters</a></h3>
-<p>You can configure timeouts globally as described in <a href="../administration/configuration-file-reference.html#rundeck-config.properties">Configuration - Job Remote Option URL connection parameters</a>.</p>
+<p>You can configure timeouts globally as described in <a href="../administration/configuration/configuration-file-reference.html#rundeck-config.properties">Configuration - Job Remote Option URL connection parameters</a>.</p>
 <p>You can also specify these connection parameters on a per-URL basis:</p>
 <dl>
 <dt><code>timeout</code></dt>
@@ -1049,7 +1049,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </div>
 <p>Enter a command that will be used as the <em>invocation</em> to run the script, by including <code>${scriptfile}</code> to define where the resulting file will appear in the invocation command. For example, you can execute the script using <code>sudo</code> by entering:</p>
 <pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> -u username <span class="ot">${scriptfile}</span></code></pre>
-<p>This will then allow your script to make use of <a href="plugins.html#configuring-secondary-sudo-password-authentication">Sudo authentication</a>.</p>
+<p>This will then allow your script to make use of <a href="../plugins-user-guide/ssh-plugins.html#secondary-sudo-password-authentication">Sudo authentication</a>.</p>
 <p>The effective commandline for your script will become:</p>
 <pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> -u username [scriptfile] arguments ...</code></pre>
 <p>If necessary, you can check the &quot;Quote arguments to script invocation string?&quot; checkbox, which will then quote both the scriptfile and arguments before passing to the invocation command:</p>
@@ -1254,7 +1254,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>Note, The &quot;Inline Script Content&quot; variable expansion is <strong>not</strong> available for &quot;Script File&quot; steps. The Script File is not rewritten at all when used for execution.</p>
 </blockquote>
 <blockquote>
-<p>Note: This can be disabled, see <a href="../administration/configuration-file-reference.html#framework.properties">Administrator Guide &gt; Configuration File Reference &gt; framework.properties</a>.</p>
+<p>Note: This can be disabled, see <a href="../administration/configuration/configuration-file-reference.html#framework.properties">Administrator Guide &gt; Configuration File Reference &gt; framework.properties</a>.</p>
 </blockquote></li>
 <li><dl>
 <dt>Environment Variables (<em>see note</em>)</dt>
@@ -1328,7 +1328,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-05-16T21:46:29UTC">2018-05-16T21:46:29UTC</span>
+<span class="generated-date" title="2018-05-24T01:50:16UTC">2018-05-24T01:50:16UTC</span>
 </p>
 </footer>
 </div>

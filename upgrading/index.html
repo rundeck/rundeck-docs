@@ -228,7 +228,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <h3 id="inline-script-token-expansion-changes"><a href="#inline-script-token-expansion-changes">Inline script token expansion changes</a></h3>
 <p>(This is another change tha had some hiccups in the 2.6.10 release.)</p>
 <p>You must now use <code>@@</code> (two at-signs) to produce a literal <code>@</code> in an inline script when it might be interpreted as a token, i.e. <code>@word@</code> looks like a token, but <code>@word space@</code> is ok.</p>
-<p>You can globally disable inline script token expansion, see <a href="../administration/configuration-file-reference.html#framework.properties">framework.properties</a>.</p>
+<p>You can globally disable inline script token expansion, see <a href="../administration/configuration/configuration-file-reference.html#framework.properties">framework.properties</a>.</p>
 <h3 id="jetty-embedded-server-was-upgraded-to-9.0.x"><a href="#jetty-embedded-server-was-upgraded-to-9.0.x">Jetty embedded server was upgraded to 9.0.x</a></h3>
 <p>If you are using the default &quot;realm.properties&quot; login mechanism, the default JAAS configuration for file-based authentication will need to be modified to use correct class name in your <code>jaas-loginmodule.conf</code>:</p>
 <ul>
@@ -247,7 +247,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>This release adds some new DB tables but does not alter the schema of other tables.</p>
 <h3 id="project-definitions-stored-in-db"><a href="#project-definitions-stored-in-db">Project definitions stored in DB</a></h3>
 <p>Rundeck 2.4 and earlier used the filesystem to store Projects and their configuration. Rundeck 2.5 can now use the DB to store project definition and configuration, but this is not enabled by default.</p>
-<p>If you have projects that exist on the filesystem, when you upgrade to Rundeck 2.5, these projects and their configuration files can be automatically imported into the DB. This means that the contents of <code>project.properties</code> will be copied to the DB, using Rundeck's <a href="../administration/storage-facility.html">Storage Facility</a>.</p>
+<p>If you have projects that exist on the filesystem, when you upgrade to Rundeck 2.5, these projects and their configuration files can be automatically imported into the DB. This means that the contents of <code>project.properties</code> will be copied to the DB, using Rundeck's <a href="../administration/configuration/storage.html">Storage Facility</a>.</p>
 <p>In addition, there is <em>no encryption by default</em>, if you want the contents of your project.properties to be encrypted in the DB, you must configure <a href="../plugins-user-guide/configuring.html#storage-converter-plugins">Storage Converter Plugins</a> to use an encryption plugin. There is now a <a href="../plugins-user-guide/storage-plugins.html#jasypt-encryption-converter-plugin">Jasypt Encryption Plugin</a> included with Rundeck which can be used.</p>
 <p><strong>Enable project DB storage</strong>:</p>
 <p>You can configure Rundeck to use the Database by adding the following to <code>rundeck-config.properties</code> before starting it up:</p>
@@ -274,7 +274,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <h3 id="database-schema-1"><a href="#database-schema-1">Database schema</a></h3>
 <p>If you are upgrading from 2.0.x, be sure to perform backups prior to upgrading. This release adds a new DB table but does not alter the schema of other tables.</p>
 <h3 id="acl-policy-additions"><a href="#acl-policy-additions">ACL policy additions</a></h3>
-<p>Project access via API has been improved, and new authorizations are now required for project access. See <a href="../administration/access-control-policy.html#application-scope-resources-and-actions">Adminstration - Access Control Policy</a>.</p>
+<p>Project access via API has been improved, and new authorizations are now required for project access. See <a href="../administration/security/access-control-policy.html#application-scope-resources-and-actions">Adminstration - Access Control Policy</a>.</p>
 <ul>
 <li>project access adds <code>configure</code>,<code>delete</code>,<code>import</code>,<code>export</code> actions</li>
 <li><code>admin</code> access still allows all actions</li>
@@ -310,7 +310,7 @@ by:
   group: api_token_group</code></pre>
 <h2 id="upgrading-to-rundeck-2.0-from-1.6.x"><a href="#upgrading-to-rundeck-2.0-from-1.6.x">Upgrading to Rundeck 2.0 from 1.6.x</a></h2>
 <p>Rundeck 2.0 has some under-the-hood changes, so please follow this guide when upgrading from Rundeck 1.6.x.</p>
-<p>The first step is always to make a backup of all important data for your existing Rundeck installation. Refer to the <a href="../administration/backup-and-recovery.html">Administration - Backup and Recovery</a> section.</p>
+<p>The first step is always to make a backup of all important data for your existing Rundeck installation. Refer to the <a href="../administration/maintenance/backup-and-recovery.html">Administration - Backup and Recovery</a> section.</p>
 <h2 id="clean-install"><a href="#clean-install">Clean install</a></h2>
 <p>The most direct upgrade method is to use the project export/import method and a clean install of Rundeck 2.0.</p>
 <p>Before shutting down your 1.6.x installation, perform <strong>Project Export</strong> for each project you wish to migrate:</p>
@@ -395,7 +395,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-05-16T21:46:29UTC">2018-05-16T21:46:29UTC</span>
+<span class="generated-date" title="2018-05-24T01:50:16UTC">2018-05-24T01:50:16UTC</span>
 </p>
 </footer>
 </div>
