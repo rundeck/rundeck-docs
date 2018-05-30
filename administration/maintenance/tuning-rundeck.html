@@ -101,6 +101,10 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="#java-heap-size">Java heap size</a></li>
 <li><a href="#quartz-job-threadcount">Quartz job threadCount</a></li>
 <li><a href="#jmx-instrumentation">JMX instrumentation</a></li>
+<li><a href="#node-execution">Node execution</a></li>
+<li><a href="#built-in-ssh-plugins">Built in SSH plugins</a></li>
+<li><a href="#ssl-and-https-performance">SSL and HTTPS performance</a></li>
+<li><a href="#resource-provider">Resource provider</a></li>
 </ul>
 </div>
 </div>
@@ -176,6 +180,16 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>You use a JMX client to monitor JMX agents. This can be a desktop GUI like JConsole run locally.</p>
 <pre><code>jconsole &lt;rundeck pid&gt;</code></pre>
 <p>For instructions on remote JMX monitoring for Grails, Spring and log4j see: <a href="https://public.dhe.ibm.com/software/dw/java/j-grails12168-pdf.pdf">Grails in the enterprise</a>.</p>
+<h3 id="node-execution"><a href="#node-execution">Node execution</a></h3>
+<p>If you are executing commands across many hundreds or thousands of hosts, the bundled SSH node executor may not meet your performance requirements. Each SSH connection uses multiple threads and the encryption/decryption of messages uses CPU cycles and memory. Depending on your environment, you might choose another Node executor like MCollective, Salt or something similar. This essentially delegates remote execution to another tool designed for asynchronous fan out and thus relieving Rundeck of managing remote task execution.</p>
+<h3 id="built-in-ssh-plugins"><a href="#built-in-ssh-plugins">Built in SSH plugins</a></h3>
+<p>If you are interested in using the built in <a href="../../plugins-user-guide/ssh-plugins.html">SSH plugins</a>, here are some details about how it performs when executing commands across very large numbers of nodes. For these tests, Rundeck was running on an 8 core, 32GB RAM m2.4xlarge AWS EC2 instance.</p>
+<p>We chose the <code>rpm -q</code> command which checks against the rpm database to see if a particular package was installed. For 1000 nodes we saw an average execution of 52 seconds. A 4000 node cluster took roughly 3.5 minutes, and 8000 node cluster about 7 minutes.</p>
+<p>The main limitation appears to be memory of the JVM instance relative to the number of concurrent requests. We tuned the max memory to be 12GB with a 1000 Concurrent Dispatch Threads to 1GB of Memory. GC appears to behave well during the runs given the &quot;bursty&quot; nature of them.</p>
+<h3 id="ssl-and-https-performance"><a href="#ssl-and-https-performance">SSL and HTTPS performance</a></h3>
+<p>It is possible to offload SSL connection processing by using an SSL termination proxy. This can be accomplished by setting up Apache httpd or <a href="https://en.wikipedia.org/wiki/Nginx">Nginx</a> as a frontend to your Rundeck instances.</p>
+<h3 id="resource-provider"><a href="#resource-provider">Resource provider</a></h3>
+<p>Rundeck projects obtain information about nodes via a <a href="../configuration/managing-node-sources.html">resource provider</a>. If your resource provider is a long blocking process (due to slow responses from a backend service), it can slow down or even hang up Rundeck. Be sure to make your resource provider work asynchronously. Also, consider using caching when possible.</p>
 </div>
 </div>
 </div>
@@ -228,7 +242,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-05-24T01:50:16UTC">2018-05-24T01:50:16UTC</span>
+<span class="generated-date" title="2018-05-30T18:43:27UTC">2018-05-30T18:43:27UTC</span>
 </p>
 </footer>
 </div>
