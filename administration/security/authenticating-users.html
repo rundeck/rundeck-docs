@@ -604,6 +604,8 @@ SSL-Session:
 <p>Finally, in your <code>ldap-activedirectory.conf</code> be sure to change the <em>providerUrl</em> to be <code>ldaps://ad-server</code>. Including the port is optional as the default is 686.</p>
 <h2 id="pam"><a href="#pam">PAM</a></h2>
 <p>Rundeck includes a <a href="https://en.wikipedia.org/wiki/Pluggable_authentication_module">PAM</a> JAAS login module, which uses <a href="https://github.com/kohsuke/libpam4j">libpam4j</a> to authenticate.</p>
+<p>On debian based systems you need to install libpam4j :</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">apt</span> install libpam4j-java</code></pre>
 <p>This module can work with existing properties-file based authorization roles by enabling shared credentials between the modules, and introducing a Property file module that can be used only for authorization.</p>
 <p>Modules:</p>
 <ul>
@@ -847,7 +849,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-05-30T19:03:11UTC">2018-05-30T19:03:11UTC</span>
+<span class="generated-date" title="2018-05-31T15:46:42UTC">2018-05-31T15:46:42UTC</span>
 </p>
 </footer>
 </div>
