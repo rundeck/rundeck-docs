@@ -748,7 +748,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </tr>
 <tr class="even">
 <td align="left"><code>job</code></td>
-<td align="left">&quot;name&quot;,&quot;group&quot;</td>
+<td align="left">&quot;name&quot;,&quot;group&quot;,&quot;uuid&quot;</td>
 <td align="left"><code>read</code></td>
 <td align="left">View a Job, its executions, and read its definition</td>
 </tr>
@@ -827,6 +827,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </tbody>
 </table>
 <p><em>Note</em>: see <a href="#node-resource-properties">Node resource properties</a> for more node resource properties for authorization.</p>
+<p><em>Note</em>: Jobs can be referenced using &quot;name&quot; and &quot;group&quot; or using &quot;uuid&quot;.</p>
 <p><em>Note</em>: <code>runAs</code> and <code>killAs</code> actions only apply to certain API endpoints, and allow running jobs or adhoc executions or killing executions to be performed with a different username attached as the author of the action. See <a href="../../api/index.html#running-a-job">Rundeck API - Running a Job</a>.</p>
 <p><em>Note</em>: Job deletion requires allowing the 'delete' action both at the generic type and specific resource levels.</p>
 <p>Recall that defining rules for a generic resource type is done in this way:</p>
@@ -840,6 +841,12 @@ code > span.er { color: #ff0000; font-weight: bold; }
   <span class="fu">job:</span>
     <span class="kw">-</span> <span class="fu">equals:</span>
         <span class="fu">name:</span> bob
+      <span class="fu">allow:</span> <span class="kw">[</span>run<span class="kw">]</span></code></pre>
+<p>Or</p>
+<pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">for:</span>
+  <span class="fu">job:</span>
+    <span class="kw">-</span> <span class="fu">equals:</span>
+        <span class="fu">uuid:</span> baad57ad-1e0b-4452-b1e3-0cbcd10a7bec
       <span class="fu">allow:</span> <span class="kw">[</span>run<span class="kw">]</span></code></pre>
 <h3 id="node-resource-properties"><a href="#node-resource-properties">Node resource properties</a></h3>
 <p>The properties available are the attributes that are defined on the node, so you can apply authorizations based on tag, osName, hostname, etc. The special <code>rundeck_server</code> property will be set to &quot;true&quot; for the Rundeck server node only, and &quot;false&quot; for all other nodes.</p>
@@ -1067,7 +1074,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-05-31T15:46:42UTC">2018-05-31T15:46:42UTC</span>
+<span class="generated-date" title="2018-06-01T17:20:46UTC">2018-06-01T17:20:46UTC</span>
 </p>
 </footer>
 </div>
