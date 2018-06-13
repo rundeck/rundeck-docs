@@ -180,7 +180,9 @@ total 56
 -rw-r----- 1 rundeck rundeck  673 Jun  4 16:02 rundeck-config.properties
 -rw-r----- 1 rundeck rundeck 1505 Jun  4 16:02 framework.properties
 drwxr-x--- 1 rundeck rundeck 4096 Jun  4 16:08 ssl</code></pre>
-<p>A restart is necessary after the merge of <code>rundeck-config.properties</code></p>
+<p>If the <code>profile</code> file was modified on 2.11.x, the new profile file (for 3.x) will be created with the name <code>profile.rpmnew</code>. If that is the case, merge the changes on the old file and move them to the new one, eg:</p>
+<pre><code>mv /etc/rundeck/profile.rpmnew /etc/rundeck/profile</code></pre>
+<p>A restart is necessary after the merge of <code>rundeck-config.properties</code> or/and <code>profile</code> file.</p>
 </div>
 </div>
 </div>
@@ -231,7 +233,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-06T00:44:42UTC">2018-06-06T00:44:42UTC</span>
+<span class="generated-date" title="2018-06-13T20:26:32UTC">2018-06-13T20:26:32UTC</span>
 </p>
 </footer>
 </div>
