@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Version 2.11.3</title>
+  <title>Rundeck SSO Security (Pro Only)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
-  <meta name="author" content="greg" />
-  <meta name="date" content="05/11/2018" />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
@@ -22,7 +20,7 @@ jQuery(function(){
   jQuery('[data-toggle="popover"]').popover();
 });
 </script>
-  <link rel="stylesheet" href="../style.css" type="text/css" />
+  <link rel="stylesheet" href="../../style.css" type="text/css" />
 </head>
 <body data-spy="scroll" data-target=".toc-nav">
 <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -57,17 +55,19 @@ jQuery(function(){
 <ol class="breadcrumb top">
 
     
-        <li><a href="../index.html">Rundeck Documentation (3.0.x-SNAPSHOT)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (3.0.x-SNAPSHOT)</a></li>
+    
+        <li><a href="../index.html">Administrator Guide</a></li>
     
     
-    <li ><a href="index.html">Version History</a></li>
-    <li class="active"><a href="version-2.11.3.html">Version 2.11.3 (2018-05-11)</a></li>
+    <li ><a href="index.html">Security</a></li>
+    <li class="active"><a href="single-sign-on.html">Single Sign On</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
+      <li class="previous"><a href="key-storage.html"><i class="glyphicon glyphicon-arrow-left"></i> Key Storage</a></li>
       
-      <li class="next"><a href="version-2.11.2.html">Version 2.11.2 (2018-05-10) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -78,51 +78,62 @@ jQuery(function(){
 <div class="col-sm-3 toc-nav">
 <div class="nav">
 <ul>
-<li><a href="#release-2.11.3">Release 2.11.3</a><ul>
-<li><a href="#upgrading-from-earlier-versions">Upgrading from Earlier versions</a></li>
-<li><a href="#notes">Notes</a></li>
-<li><a href="#contributors">Contributors</a></li>
-<li><a href="#bug-reporters">Bug Reporters</a></li>
-<li><a href="#issues">Issues</a></li>
-</ul></li>
+<li><a href="#okta-application-configuration">Okta Application Configuration</a></li>
+<li><a href="#rundeck-configuration">Rundeck configuration</a></li>
+<li><a href="#sso-login">SSO Login</a></li>
 </ul>
 </div>
 </div>
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">Version 2.11.3</h1>
+<h1 class="title">Rundeck SSO Security (Pro Only)</h1>
 </div>
-<h1 id="release-2.11.3"><a href="#release-2.11.3">Release 2.11.3</a></h1>
-<p>Date: 2018-05-11</p>
-<p>Name: <span style="color: RoyalBlue"><span class="glyphicon glyphicon-plane"></span> &quot;cappuccino royalblue plane&quot;</span></p>
-<h2 id="upgrading-from-earlier-versions"><a href="#upgrading-from-earlier-versions">Upgrading from Earlier versions</a></h2>
+<p>Rundeck PRO can be configured to work with the Okta security platfom.</p>
+<p>To configure the Okta SSO plugin for your Rundeck installation you will need to add a new application to your Okta Applications, and then add some properties to your rundeck-config.properties file.</p>
+<h3 id="okta-application-configuration"><a href="#okta-application-configuration">Okta Application Configuration</a></h3>
+<p>Log into your Okta web portal and configure a new application.</p>
 <ul>
-<li>See the <a href="../upgrading/index.html">Upgrading Guide</a></li>
-</ul>
-<h2 id="notes"><a href="#notes">Notes</a></h2>
-<p>Bug fixes</p>
-<h2 id="contributors"><a href="#contributors">Contributors</a></h2>
+<li>Create a new web application.
 <ul>
-<li>Greg Schueler (gschueler)</li>
-<li>Martin (martinbydefault)</li>
-<li>Jaime Tobar (jtobard)</li>
-<li>Romain LEON (PeekLeon)</li>
-<li>Luis Toledo (ltamaster)</li>
-</ul>
-<h2 id="bug-reporters"><a href="#bug-reporters">Bug Reporters</a></h2>
+<li>Configure the application with &quot;Authorization Code&quot; Grant type allowed.</li>
+<li>Add the following URL to <code>Login Redirect URIs</code> (you can add more than one): <code>&lt;rundeck base url&gt;/user/oauth/okta</code>. Example: <code>http://localhost:4440/user/oauth/okta</code></li>
+<li>Copy the Client ID and Client Secret provided by Okta so that you can use them for the rundeck configuration.</li>
+</ul></li>
+<li>Create groups with the same name as the roles configured on Rundeck. Map users to those groups.</li>
+<li>Under the API menu, open the Authorization Servers configuration and add a new claim with the following information:
 <ul>
-<li>martinbydefault</li>
-<li>jtobard</li>
-<li>PeekLeon</li>
-<li>ltamaster</li>
+<li>Name: groups</li>
+<li>Include in Token Type: <code>ID Token</code> with <code>Userinfo/id_token_request</code></li>
+<li>Value Types: <code>Groups</code></li>
+<li>Filter: Regex: .*</li>
+</ul></li>
 </ul>
-<h2 id="issues"><a href="#issues">Issues</a></h2>
-<p><a href="https://github.com/rundeck/rundeck/milestone/77">Milestone 2.11.3</a></p>
-<ul>
-<li><a href="https://github.com/rundeck/rundeck/pull/3386">Documentation: fixed list not being correctly rendered</a></li>
-<li><a href="https://github.com/rundeck/rundeck/pull/3385">i18n Fix: default messages and 'by.you'</a></li>
-<li><a href="https://github.com/rundeck/rundeck/pull/3383">i18n Update: node filter help</a></li>
-</ul>
+<h3 id="rundeck-configuration"><a href="#rundeck-configuration">Rundeck configuration</a></h3>
+<p>Once you've set up the application in Okta you can configure Rundeck to use that application.</p>
+<p>Add the following properties to your rundeck-config.properties file:</p>
+<pre class="properties"><code>#The first two come from the Client Credentials section on your Application configuration page in Okta
+rundeck.security.oauth.okta.clientId = (Okta Client ID)
+rundeck.security.oauth.okta.clientSecret = (Okta Secret Key)
+
+#This group of properties requires you to replace the &lt;okta service url&gt; with the url provided by Okta for making api authorization calls
+#&lt;okta service url&gt; might look something like: https://dev-877856.oktapreview.com/oauth2/default
+#In your Okta web portal check API/Authorization Servers/Settings/Issuer to get this value  
+rundeck.security.oauth.okta.accessTokenUri = &lt;okta service url&gt;/v1/token
+rundeck.security.oauth.okta.userAuthorizationUri = &lt;okta service url&gt;/v1/authorize
+rundeck.security.oauth.okta.userInfoUri = &lt;okta service url&gt;/v1/userinfo
+
+#Copy These verbatim
+rundeck.security.oauth.okta.clientAuthenticationScheme = form
+rundeck.security.oauth.okta.scope = openid profile email
+
+#These properties control the appearance and url of the button on the login page
+rundeck.sso.loginButton.enabled=true
+rundeck.sso.loginButton.title=Login with Okta
+rundeck.sso.loginButton.url=oauth/okta</code></pre>
+<p>After completing the configuration of your rundeck-config.properties file, restart Rundeck.</p>
+<h3 id="sso-login"><a href="#sso-login">SSO Login</a></h3>
+<p>If you have successfully configured Okta and Rundeck you will see a new button on the rundeck login page that says <em>Login with Okta</em>. By clicking this button you will be redirected to an Okta Login form that will be used to collect the user credentials. Once you have logged in with your Okta credentials you will be redirected back to the home menu page in Rundeck.</p>
+<p>Congratulations, you now have a working Okta/Rundeck SSO setup.</p>
 </div>
 </div>
 </div>
@@ -134,17 +145,19 @@ jQuery(function(){
 <ol class="breadcrumb bottom">
 
     
-        <li><a href="../index.html">Rundeck Documentation (3.0.x-SNAPSHOT)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (3.0.x-SNAPSHOT)</a></li>
+    
+        <li><a href="../index.html">Administrator Guide</a></li>
     
     
-    <li ><a href="index.html">Version History</a></li>
-    <li class="active"><a href="version-2.11.3.html">Version 2.11.3 (2018-05-11)</a></li>
+    <li ><a href="index.html">Security</a></li>
+    <li class="active"><a href="single-sign-on.html">Single Sign On</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
+      <li class="previous"><a href="key-storage.html"><i class="glyphicon glyphicon-arrow-left"></i> Key Storage</a></li>
       
-      <li class="next"><a href="version-2.11.2.html">Version 2.11.2 (2018-05-10) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
