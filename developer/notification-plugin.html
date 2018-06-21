@@ -143,7 +143,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <h3 id="configuration-data"><a href="#configuration-data">Configuration data</a></h3>
 <p>The Configuration data is fully custom depending on your plugin, and is described in the <a href="#plugin-configuration-properties">Plugin configuration properties</a> section.</p>
 <h4 id="property-references"><a href="#property-references">Property References</a></h4>
-<p>The specific data values of the Configuration section are allowed to have embedded Property References as described in the <a href="../manual/jobs.html#context-variables">Jobs - Context Variables</a> section.</p>
+<p>The specific data values of the Configuration section are allowed to have embedded Property References as described in the <a href="../manual/creating-job-workflows.html#context-variables">Jobs - Context Variables</a> section.</p>
 <p>For example, when a user configures your plugin, they could embed an option value using: <code>${option.myoption}</code>. This value will be replaced with the runtime option value before being passed to your plugin.</p>
 <p>When defining Configuration properties that use custom Validation, keep in mind that the value set by a user may have such an embedded property reference and therefore may not pass the validation rules you have defined. If you want to allow these property references for a Configuration property, it must be a String type property, and any custom validation code should allow the embedded property references, for example by looking for a '${' sequence and allowing the value.</p>
 <h3 id="execution-data"><a href="#execution-data">Execution data</a></h3>
@@ -177,7 +177,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p><code>job.project</code>: Project name</p>
 <p><code>job.description</code>: Job Description</p>
 <p><code>job.averageDuration</code>: Average job duration in Milliseconds, if available</p>
-<p><code>execution.context</code> - this is a map containing all of the context variables available to the execution when it ran or will run, such as <a href="../manual/jobs.html#context-variables">Jobs - Context Variables</a>. The contents of this Map are the specific context namespaces and variables.</p>
+<p><code>execution.context</code> - this is a map containing all of the context variables available to the execution when it ran or will run, such as <a href="../manual/creating-job-workflows.html#context-variables">Jobs - Context Variables</a>. The contents of this Map are the specific context namespaces and variables.</p>
 <p><code>execution.context.option</code>: a Map containing the Job Option keys/values.</p>
 <p><code>job</code>: a Map containing the Job context data, as provided to executions. This map will contain some duplicate information as the <code>execution.job</code> map previously described.</p>
 <p>In Groovy, you can simply reference any values in the Execution data maps using <a href="http://groovy-lang.org/processing-xml.html#_gpath">Groovy Gpath</a>, e.g.:</p>
@@ -417,7 +417,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-20T16:48:18UTC">2018-06-20T16:48:18UTC</span>
+<span class="generated-date" title="2018-06-21T22:29:59UTC">2018-06-21T22:29:59UTC</span>
 </p>
 </footer>
 </div>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Builtin Node Steps</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.x-SNAPSHOT)</a></li>
+    
+        <li><a href="../index.html">User Guide</a></li>
+    
+    
+    
+    <li class="active"><a href="builtin-node-steps.html">Builtin Node Steps</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="sqlrunner-plugin-pro.html">SQLRunner Plugin (Pro) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#command-step">Command step</a></li>
+<li><a href="#script-step">Script step</a></li>
+<li><a href="#script-file-step">Script file step</a></li>
+<li><a href="#script-url-step">Script URL step</a></li>
+<li><a href="#job-reference-step">Job reference step</a></li>
+<li><a href="#copy-file-step">Copy File step</a></li>
+<li><a href="#local-command-step">Local Command step</a></li>
+<li><a href="#data-node-step">Data Node step</a></li>
+<li><a href="#notes">Notes</a><ul>
+<li><a href="#advanced-script-options">Advanced Script options</a></li>
+<li><a href="#changing-the-file-extension">Changing the File extension</a></li>
+<li><a href="#quoting-arguments-to-steps">Quoting arguments to steps</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Builtin Node Steps</h1>
+</div>
+<h3 id="command-step"><a href="#command-step">Command step</a></h3>
+<p>Use the command step to call system commands. Enter any command string you would type at the terminal on the remote hosts.</p>
+<div class="figure">
+<img src="../../figures/fig0404.png" alt="Command step type" /><p class="caption">Command step type</p>
+</div>
+<h3 id="script-step"><a href="#script-step">Script step</a></h3>
+<p>Execute the supplied shell script content. Optionally, can pass an argument to the script specified in the lower text field.</p>
+<div class="figure">
+<img src="../../figures/fig0405.png" alt="Script step type" /><p class="caption">Script step type</p>
+</div>
+<h3 id="script-file-step"><a href="#script-file-step">Script file step</a></h3>
+<p>Executes the script file local to the sever to the filtered Node set. Arguments can be passed to the script by specifying them in the lower text field.</p>
+<div class="figure">
+<img src="../../figures/fig0406.png" alt="Script file step type" /><p class="caption">Script file step type</p>
+</div>
+<h3 id="script-url-step"><a href="#script-url-step">Script URL step</a></h3>
+<p>Downloads a script from a URL, and executes it to the filtered Node set. Arguments can be passed to the script by specifying them in the lower text field.</p>
+<div class="figure">
+<img src="../../figures/fig0406.png" alt="Script URL step type" /><p class="caption">Script URL step type</p>
+</div>
+<p>The URL can contain <a href="#context-variables">Context Variables</a> that will be expanded at runtime.</p>
+<h3 id="job-reference-step"><a href="#job-reference-step">Job reference step</a></h3>
+<p>To call another saved Job, create a Job Reference step. Enter the name of the Job and its group.</p>
+<div class="figure">
+<img src="../../figures/fig0407.png" alt="Job reference step type" /><p class="caption">Job reference step type</p>
+</div>
+<p>The Job Reference form provides a Job browser to make it easier to select from the existing set of saved Jobs. Click the &quot;Choose A Job...&quot; link and navigate to the desired Job.</p>
+<p>Finally, if the Job defines Options, you can specify them in the commandline arguments text field and can include variable expansion to pass any input options for the current job. Format:</p>
+<pre><code>-optname &lt;value&gt; -optname &lt;value&gt; ...</code></pre>
+<p>The format for specifying options is exactly the same as you would pass to the <code>run</code> commandline tool, and you can substitute values of input options to the current job. For example:</p>
+<pre><code>-opt1 something -opt2 ${option.opt2}</code></pre>
+<p>This would set the value &quot;something&quot; for the Job's &quot;opt1&quot; option, and then pass the &quot;opt2&quot; option directly from the top-level job to the Job reference.</p>
+<p>This is similar to calling the other Job with [run]:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">run</span> [filter-options] -j group/jobname -- -opt1 something -opt2 somethingelse</code></pre>
+<p>If the Job has required Options that are not specified on the arguments line, then a &quot;defaultValue&quot; of that option will be used if it is defined. If a required option does not have a default value, then the execution will fail because the option is not specified.</p>
+<p>Job References can be run as either <em>Node Steps</em> or <em>Workflow Steps</em> (see <a href="#workflow-steps">Workflow Steps : Types of Steps</a>). When you choose to use a Job Reference as a <em>Node Step</em>, you can use the Node context variables within the arguments string to the Job.</p>
+<h4 id="overriding-node-filters"><a href="#overriding-node-filters">Overriding Node Filters</a></h4>
+<p>You can override the Node Filters used in the referenced Job. Click the &quot;Override Node Filters?&quot; button to expand the Node Filter area.</p>
+<div class="figure">
+<img src="../../figures/job-ref-node-filter-override.png" alt="Job Reference Node Filter Override" /><p class="caption">Job Reference Node Filter Override</p>
+</div>
+<p>Enter a new filter in the &quot;Node Filter&quot; input field to preview the matched nodes.</p>
+<p>Once you enter a new filter, you can modify the other aspects for the Node Dispatching used by the Job Reference:</p>
+<ul>
+<li>Thread Count</li>
+<li>Node failure behavior</li>
+<li>Node Rank attribute</li>
+<li>Node Rank order</li>
+</ul>
+<h3 id="copy-file-step"><a href="#copy-file-step">Copy File step</a></h3>
+<h3 id="local-command-step"><a href="#local-command-step">Local Command step</a></h3>
+<h3 id="data-node-step"><a href="#data-node-step">Data Node step</a></h3>
+<h2 id="notes"><a href="#notes">Notes</a></h2>
+<h3 id="advanced-script-options"><a href="#advanced-script-options">Advanced Script options</a></h3>
+<p>For <a href="#script-step">Script steps</a>, <a href="#script-file-step">Script file steps</a>, and <a href="#script-url-step">Script URL steps</a>, you can specify an optional <em>Invocation</em> string to declare how the script should be executed.</p>
+<p>Click on the &quot;Advanced&quot; link to reveal the input.</p>
+<div class="figure">
+<img src="../../figures/job_workflow_script_interpreter.png" alt="Advanced Script Settings" /><p class="caption">Advanced Script Settings</p>
+</div>
+<p>Enter a command that will be used as the <em>invocation</em> to run the script, by including <code>${scriptfile}</code> to define where the resulting file will appear in the invocation command. For example, you can execute the script using <code>sudo</code> by entering:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> -u username <span class="ot">${scriptfile}</span></code></pre>
+<p>This will then allow your script to make use of <a href="../../plugins-user-guide/ssh-plugins.html#secondary-sudo-password-authentication">Sudo authentication</a>.</p>
+<p>The effective commandline for your script will become:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">sudo</span> -u username [scriptfile] arguments ...</code></pre>
+<p>If necessary, you can check the &quot;Quote arguments to script invocation string?&quot; checkbox, which will then quote both the scriptfile and arguments before passing to the invocation command:</p>
+<pre><code>[invocation string] &quot;[scriptfile] arguments ...&quot;</code></pre>
+<h3 id="changing-the-file-extension"><a href="#changing-the-file-extension">Changing the File extension</a></h3>
+<p>You can also change the file extension set on the temporary file when it is invoked. This might be necessary if your command expects a file with a certain extension.</p>
+<p>Set the &quot;File Extension&quot; field to the desired extension. The <code>.</code> is optional, e.g. <code>.ps</code> or <code>sh</code>. The default is determined by the type of target node. Unix uses <code>.sh</code> and Windows uses <code>.bat</code>.</p>
+<h3 id="quoting-arguments-to-steps"><a href="#quoting-arguments-to-steps">Quoting arguments to steps</a></h3>
+<p>When you define a <a href="#command-step">Command</a> or arguments to any Script or Job reference step, your arguments are interpreted as a space-separated sequence of strings. If you need to use spaces or quotes within the argument, here are some rules for quoting arguments:</p>
+<ul>
+<li>If you have an argument with a space character, you can use either double or single quotes:
+<ul>
+<li><code>&quot;my argument&quot;</code>: interpreted as <code>my argument</code></li>
+<li><code>'my argument'</code>: interpreted as <code>my argument</code></li>
+</ul></li>
+<li>If you need to embed quotes within a quoted argument, you can wrap it in the opposite kind of quote (double or single):
+<ul>
+<li><code>'&quot;double quotes&quot;'</code>: interpreted as <code>&quot;double quotes&quot;</code></li>
+<li><code>&quot;'single quotes'&quot;</code>: interpreted as <code>'single quotes'</code></li>
+</ul></li>
+<li>Or use doubled-up quote characters
+<ul>
+<li><code>&quot;&quot;&quot;double quotes&quot;&quot;&quot;</code>: interpreted as <code>&quot;double quotes&quot;</code></li>
+<li><code>'''single quotes'''</code>: interpreted as <code>'single quotes'</code></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.x-SNAPSHOT)</a></li>
+    
+        <li><a href="../index.html">User Guide</a></li>
+    
+    
+    
+    <li class="active"><a href="builtin-node-steps.html">Builtin Node Steps</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="sqlrunner-plugin-pro.html">SQLRunner Plugin (Pro) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-06-21T22:29:59UTC">2018-06-21T22:29:59UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
