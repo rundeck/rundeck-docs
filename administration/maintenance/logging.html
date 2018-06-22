@@ -75,6 +75,13 @@ jQuery(function(){
 <div id="docbody">
 <div class="container">
 <div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#streaming-log-plugins">Streaming log plugins</a></li>
+</ul>
+</div>
+</div>
 <div class="col-sm-9">
 <div class="page-header">
 <h1 class="title">Logs</h1>
@@ -102,6 +109,17 @@ jQuery(function(){
 <li><code>service.log</code>: Standard input and output generated during runtime</li>
 </ul>
 <p>See the <a href="../configuration/configuration-file-reference.html#log4j.properties">#log4j.properties</a> section for information about customizing log message formats and location.</p>
+<h2 id="streaming-log-plugins"><a href="#streaming-log-plugins">Streaming log plugins</a></h2>
+<p>Streaming log plugins have two forms:</p>
+<dl>
+<dt>Streaming Log Writers</dt>
+<dd><p>can write log data to another system (e.g. a search or log storage system) as the log data is received. Multiple Log Writers can be configured for a server, and Rundeck's filesystem-based log writer is used by default.</p>
+</dd>
+<dt>Streaming Log Readers</dt>
+<dd><p>can load the log data from another system, rather than from the local file system. Only a single Log Reader can be configured for the a server, and Rundeck's filesystem-based log reader is used by default.</p>
+</dd>
+</dl>
+<p>To learn how to develop your own Logging plugin see <a href="../../developer/logging-plugin.html">Plugin Developer Guide - Logging Plugin</a>.</p>
 </div>
 </div>
 </div>
@@ -154,7 +172,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-21T22:29:59UTC">2018-06-21T22:29:59UTC</span>
+<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
 </p>
 </footer>
 </div>

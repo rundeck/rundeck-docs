@@ -130,38 +130,38 @@ jQuery(function(){
 </div>
 <p>To edit an item in the list click the &quot;Edit&quot; button. To delete an item in the list click the &quot;Delete&quot; button.</p>
 <p>Each type of Resource Model Source will have different configuration settings of its own. The built-in Resource Model Source providers are shown below.</p>
-<p>You can install more sources as plugins, see <a href="../plugins-user-guide/resource-model-source-plugins.html#resource-model-source-plugins">Resource Model Source Plugins</a>.</p>
+<p>You can install more sources as plugins, see <a href="../administration/configuration/resource-model-sources/built-in-resource-model-source-plugins.html#resource-model-source-plugins">Resource Model Source Plugins</a>.</p>
 <h4 id="file-resource-model-source"><a href="#file-resource-model-source">File Resource Model Source</a></h4>
 <p>This is the File Resource Model Source configuration form:</p>
 <div class="figure">
 <img src="../figures/fig0707.png" alt="File Resource Model Source" /><p class="caption">File Resource Model Source</p>
 </div>
-<p>See <a href="../plugins-user-guide/resource-model-source-plugins.html#file-resource-model-source-configuration">File Resource Model Source Configuration</a> for more configuration information.</p>
+<p>See <a href="../administration/configuration/resource-model-sources/built-in-resource-model-source-plugins.html#file-resource-model-source-configuration">File Resource Model Source Configuration</a> for more configuration information.</p>
 <h4 id="directory-resource-model-source"><a href="#directory-resource-model-source">Directory Resource Model Source</a></h4>
-<p>Allows a directory to be scanned for resource document files. All files with an extension supported by one of the <a href="../plugins-user-guide/resource-model-source-plugins.html#resource-model-document-formats">Resource Model Document Formats</a> are included.</p>
+<p>Allows a directory to be scanned for resource document files. All files with an extension supported by one of the <a href="../administration/configuration/resource-model-sources/built-in-resource-model-source-plugins.html#resource-model-document-formats">Resource Model Document Formats</a> are included.</p>
 <div class="figure">
 <img src="../figures/fig0709.png" alt="Directory Resource Model Source" /><p class="caption">Directory Resource Model Source</p>
 </div>
-<p>See <a href="../plugins-user-guide/resource-model-source-plugins.html#directory-resource-model-source-configuration">Directory Resource Model Source Configuration</a> for more configuration information.</p>
+<p>See <a href="../administration/configuration/resource-model-sources/built-in-resource-model-source-plugins.html#directory-resource-model-source-configuration">Directory Resource Model Source Configuration</a> for more configuration information.</p>
 <h4 id="script-resource-model-source"><a href="#script-resource-model-source">Script Resource Model Source</a></h4>
 <p>This source can run an external script to produce the resource model definitions.</p>
 <div class="figure">
 <img src="../figures/fig0710.png" alt="Script Resource Model Source" /><p class="caption">Script Resource Model Source</p>
 </div>
-<p>See <a href="../plugins-user-guide/resource-model-source-plugins.html#script-resource-model-source-configuration">Script Resource Model Source Configuration</a> for more configuration information.</p>
+<p>See <a href="../administration/configuration/resource-model-sources/built-in-resource-model-source-plugins.html#script-resource-model-source-configuration">Script Resource Model Source Configuration</a> for more configuration information.</p>
 <h4 id="url-resource-model-source"><a href="#url-resource-model-source">URL Resource Model Source</a></h4>
 <p>This source performs a HTTP GET request on a URL to return the resource definitions.</p>
 <div class="figure">
 <img src="../figures/fig0711.png" alt="URL Resource Model Source" /><p class="caption">URL Resource Model Source</p>
 </div>
-<p>See <a href="../plugins-user-guide/resource-model-source-plugins.html#url-resource-model-source-configuration">URL Resource Model Source Configuration</a> for more configuration information.</p>
+<p>See <a href="../administration/configuration/resource-model-sources/built-in-resource-model-source-plugins.html#url-resource-model-source-configuration">URL Resource Model Source Configuration</a> for more configuration information.</p>
 <h3 id="default-node-executor-configuration"><a href="#default-node-executor-configuration">Default Node Executor Configuration</a></h3>
 <p>When Rundeck executes a command on a node, it does so via a &quot;Node Executor&quot;. The most common built-in Node Executor is the &quot;SSH&quot; implementation, which uses SSH to connect to the remote node, however other implementations can be used.</p>
 <p>Select the Default Node Executor you wish to use for all remote Nodes for the project:</p>
 <div class="figure">
 <img src="../figures/fig0712.png" alt="Default Node Executor Choice" /><p class="caption">Default Node Executor Choice</p>
 </div>
-<p>You can install more types of Node Executors as plugins, see <a href="../plugins-user-guide/node-execution-plugins.html">Node Execution Plugins</a>.</p>
+<p>You can install more types of Node Executors as plugins, see <a href="job-plugins.html#node-execution">Node Execution Plugins</a>.</p>
 <h3 id="default-file-copier-configuration"><a href="#default-file-copier-configuration">Default File Copier Configuration</a></h3>
 <p>When Rundeck executes a script on a node, it does so by first copying the script as a file to the node, via a &quot;File Copier&quot;. (It then uses a &quot;Node Executor&quot; to execute the script like a command.)</p>
 <p>The most common built-in File Copier is the &quot;SCP&quot; implementation, which uses SCP to copy the file to the remote node, however other implementations can be used.</p>
@@ -169,7 +169,7 @@ jQuery(function(){
 <div class="figure">
 <img src="../figures/fig0713.png" alt="Default File Copier Choice" /><p class="caption">Default File Copier Choice</p>
 </div>
-<p>You can install more types of File Copiers as plugins, see <a href="../plugins-user-guide/node-execution-plugins.html">Node Execution Plugins</a>.</p>
+<p>You can install more types of File Copiers as plugins, see <a href="job-plugins.html#node-execution">Node Execution Plugins</a>.</p>
 <h2 id="key-storage"><a href="#key-storage">Key Storage</a></h2>
 <p>The Key Storage facility provides an <a href="../api/index.html#key-storage">API</a> and GUI to manage public, private keys and passwords. These stored keys are used by both Node Executor and File Copier plugins. Project configuration settings allow you to reference a key path for both the default Node Executor and File Copier (<a href="configure.html#default-node-executor-configuration">see above</a>).</p>
 <p>Keys can be stored either using an uploaded file or as text input. Public key data can be retrieved once stored. Private key and password data is only available to the node execution plugins.</p>
@@ -292,7 +292,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-21T22:29:59UTC">2018-06-21T22:29:59UTC</span>
+<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
 </p>
 </footer>
 </div>

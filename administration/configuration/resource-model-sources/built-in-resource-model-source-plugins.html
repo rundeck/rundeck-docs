@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Built-in Resource Model Source Plugins</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <link rel="stylesheet" href="../../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../../../index.html">Rundeck Documentation (3.0.x-SNAPSHOT)</a></li>
+    
+        <li><a href="../../index.html">Administrator Guide</a></li>
+    
+        <li><a href="../index.html">Rundeck Configuration</a></li>
+    
+    
+    <li ><a href="index.html">Node Sources</a></li>
+    <li class="active"><a href="built-in-resource-model-source-plugins.html">Built-in Resource Model Source Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="azure-resource-model-source.html"><i class="glyphicon glyphicon-arrow-left"></i> Azure Resource Model Source</a></li>
+      <li class="next"><a href="servicenow-resource-model-source.html">ServiceNow Resource Model Source <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#file-resource-model-source-configuration">File Resource Model Source Configuration</a></li>
+<li><a href="#url-resource-model-source-configuration">URL Resource Model Source Configuration</a></li>
+<li><a href="#directory-resource-model-source-configuration">Directory Resource Model Source Configuration</a></li>
+<li><a href="#script-resource-model-source-configuration">Script Resource Model Source Configuration</a></li>
+<li><a href="#resource-model-document-formats">Resource Model Document Formats</a><ul>
+<li><a href="#resource-format-plugins">Resource Format Plugins</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Built-in Resource Model Source Plugins</h1>
+</div>
+<p>Rundeck includes these Built-in plugins in the core installation:</p>
+<dl>
+<dt><code>file</code></dt>
+<dd><p>Uses a file on the file system, in any of the supported Resources formats.</p>
+</dd>
+<dt><code>url</code></dt>
+<dd><p>GETs a URL, and expects one of the supported Resources formats.</p>
+</dd>
+<dt><code>directory</code></dt>
+<dd><p>looks at all files in a directory for supported file extensions, and internally uses the <code>file</code> provider for each file that matches.</p>
+</dd>
+<dt><code>script</code></dt>
+<dd><p>Executes a script and parses the output as one of the supported formats</p>
+</dd>
+</dl>
+<p>To configure these providers use the following configuration properties.</p>
+<h3 id="file-resource-model-source-configuration"><a href="#file-resource-model-source-configuration">File Resource Model Source Configuration</a></h3>
+<p>The <code>file</code> Resource Model Source provider reads a file in one of the supported Resource Model Document Formats.</p>
+<table>
+<caption>Configuration properties for <code>file</code> Resource Model Source provider</caption>
+<thead>
+<tr class="header">
+<th align="left">Name</th>
+<th align="left">Value</th>
+<th align="left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>file</code></td>
+<td align="left">file path</td>
+<td align="left">Path to a file on disk.</td>
+</tr>
+<tr class="even">
+<td align="left"><code>format</code></td>
+<td align="left">format name</td>
+<td align="left">Can be used to declare the format explicitly. Otherwise the format is determined from the <code>file</code>'s extension.</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>requireFileExists</code></td>
+<td align="left">true/false</td>
+<td align="left">If true and the file is missing, causes a failure to load the nodes. (Default: false)</td>
+</tr>
+<tr class="even">
+<td align="left"><code>includeServerNode</code></td>
+<td align="left">true/false</td>
+<td align="left">If true, include the Project's server node automatically. (Default: false)</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>generateFileAutomatically</code></td>
+<td align="left">true/false</td>
+<td align="left">If true, create the file automatically if it is missing. (Default: false)</td>
+</tr>
+</tbody>
+</table>
+<p>The value of <code>format</code> must be one of the supported Resource Model Document Formats. The built-in formats are: <code>resourcexml</code> or <code>resourceyaml</code>, but any format provided by a <a href="#resource-model-document-formats">Resource Format Plugin</a> can be specified as well.</p>
+<p><em>Example:</em></p>
+<pre><code>resources.source.1.type=file
+resources.source.1.file=/home/rundeck/projects/example/etc/resources2.xml
+resources.source.1.format=resourcexml
+resources.source.1.requireFileExists=true
+resources.source.1.includeServerNode=true
+resources.source.1.generateFileAutomatically=true</code></pre>
+<h3 id="url-resource-model-source-configuration"><a href="#url-resource-model-source-configuration">URL Resource Model Source Configuration</a></h3>
+<p>The <code>url</code> Resource Model Source provider performs a HTTP GET request to retrieve the Nodes definition.</p>
+<p>Configuration properties:</p>
+<table>
+<caption>Configuration properties for <code>url</code> Resource Model Source provider</caption>
+<thead>
+<tr class="header">
+<th align="left">Name</th>
+<th align="left">Value</th>
+<th align="left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>url</code></td>
+<td align="left">URL</td>
+<td align="left">A valid URL, either <code>http:</code>, <code>https:</code> or <code>file:</code> protocol.</td>
+</tr>
+<tr class="even">
+<td align="left"><code>cache</code></td>
+<td align="left">true/false</td>
+<td align="left">If true, use ETag/Last-Modified information from the server to only download new content if it has changed. If false, always download the content. (Default: true)</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>timeout</code></td>
+<td align="left">seconds</td>
+<td align="left">Number of seconds before request fails due to timeout. <code>0</code> means no timeout. (Default: 30)</td>
+</tr>
+</tbody>
+</table>
+<p>The Resource Model Document Format that is used is determined by the MIME type sent by the remote server. The built-in formats accept &quot;*/xml&quot; and &quot;*/yaml&quot; and &quot;*/x-yaml&quot;.</p>
+<p><em>Example:</em></p>
+<pre><code>resources.source.1.type=url
+resources.source.1.url=file:/home/rundeck/projects/example/etc/resources2.xml
+resources.source.1.cache=true
+resources.source.1.timeout=0</code></pre>
+<h3 id="directory-resource-model-source-configuration"><a href="#directory-resource-model-source-configuration">Directory Resource Model Source Configuration</a></h3>
+<p>The <code>directory</code> Resource Model Source provider lists all files in a directory, and loads each one that has a supported file extension as File Resource Model Source with all default configuration options.</p>
+<table>
+<caption>Configuration properties for <code>directory</code> Resource Model Source provider</caption>
+<thead>
+<tr class="header">
+<th align="left">Name</th>
+<th align="left">Value</th>
+<th align="left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>directory</code></td>
+<td align="left">directory path</td>
+<td align="left">All files in the directory that have a supported file extension will be loaded</td>
+</tr>
+</tbody>
+</table>
+<p><em>Example:</em></p>
+<pre><code>resources.source.2.type=directory
+resources.source.2.directory=/home/rundeck/projects/example/resources</code></pre>
+<h3 id="script-resource-model-source-configuration"><a href="#script-resource-model-source-configuration">Script Resource Model Source Configuration</a></h3>
+<p>The <code>script</code> Resource Model Source provider executes a script file and reads the output of the script as one of the supported <a href="#resource-model-document-formats">Resource Model Document Formats</a>.</p>
+<table>
+<caption>Configuration properties for <code>script</code> Resource Model Source provider</caption>
+<thead>
+<tr class="header">
+<th align="left">Name</th>
+<th align="left">Value</th>
+<th align="left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>file</code></td>
+<td align="left">Script file path</td>
+<td align="left">If required by the <code>interpreter</code>, the file should be executable</td>
+</tr>
+<tr class="even">
+<td align="left"><code>interpreter</code></td>
+<td align="left">Command or interpreter to use</td>
+<td align="left">e.g. &quot;bash -c&quot;</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>args</code></td>
+<td align="left">Additional arguments to pass</td>
+<td align="left">The arguments will be added after the script file name to the executed commandline</td>
+</tr>
+<tr class="even">
+<td align="left"><code>format</code></td>
+<td align="left">Format name</td>
+<td align="left">Must be used to declare the format explicitly.</td>
+</tr>
+</tbody>
+</table>
+<p>The script will be executed in this way:</p>
+<pre><code>[interpreter] file [args]</code></pre>
+<p>All output on STDOUT will be passed to a Resource Format Parser to parse. The format specified must be available.</p>
+<p><em>Example:</em></p>
+<pre><code>resources.source.2.type=script
+resources.source.2.file=/home/rundeck/projects/example/etc/generate.sh
+resources.source.2.interpreter=bash -c
+resources.source.2.args=-project example
+resources.source.2.format=resourceyaml</code></pre>
+<h2 id="resource-model-document-formats"><a href="#resource-model-document-formats">Resource Model Document Formats</a></h2>
+<p>Resource Model Document Formats are defined by plugins that provide Generators and Parsers, typically in matched pairs, with both a parser and generator for the same format name.</p>
+<h3 id="resource-format-plugins"><a href="#resource-format-plugins">Resource Format Plugins</a></h3>
+<p>Rundeck includes three built-in plugins in the core installation:</p>
+<dl>
+<dt><code>resourcexml</code></dt>
+<dd><p>Supports the Resource XML document format: <a href="../../../man5/resource-xml.html">resource-XML</a>.</p>
+<p>Supported MIME types:</p>
+<ul>
+<li>Generator: <code>text/xml</code></li>
+<li>Parser: <code>*/xml</code></li>
+</ul>
+<p>Supported File extensions:</p>
+<ul>
+<li><code>.xml</code></li>
+</ul>
+</dd>
+<dt><code>resourceyaml</code></dt>
+<dd><p>Supports the Resource YAML document format: <a href="../../../man5/resource-yaml.html">resource-YAML</a>.</p>
+<p>Supported MIME types:</p>
+<ul>
+<li>Generator: <code>text/yaml</code>, <code>text/x-yaml</code>, <code>application/yaml</code>, <code>application/x-yaml</code></li>
+<li>Parser: <code>*/yaml</code>, <code>*/x-yaml</code></li>
+</ul>
+<p>Supported File extensions:</p>
+<ul>
+<li><code>.yml</code>, <code>.yaml</code></li>
+</ul>
+</dd>
+<dt><code>resourcejson</code></dt>
+<dd><p>Supports the Resource JSON document format: <a href="../../../man5/resource-json.html">resource-JSON</a>.</p>
+<p>Supported MIME types:</p>
+<ul>
+<li>Generator: <code>application/json</code>, <code>text/json</code></li>
+<li>Parser: <code>application/json</code>, <code>text/json</code></li>
+</ul>
+<p>Supported File extensions:</p>
+<ul>
+<li><code>.json</code></li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../../../index.html">Rundeck Documentation (3.0.x-SNAPSHOT)</a></li>
+    
+        <li><a href="../../index.html">Administrator Guide</a></li>
+    
+        <li><a href="../index.html">Rundeck Configuration</a></li>
+    
+    
+    <li ><a href="index.html">Node Sources</a></li>
+    <li class="active"><a href="built-in-resource-model-source-plugins.html">Built-in Resource Model Source Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="azure-resource-model-source.html"><i class="glyphicon glyphicon-arrow-left"></i> Azure Resource Model Source</a></li>
+      <li class="next"><a href="servicenow-resource-model-source.html">ServiceNow Resource Model Source <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>

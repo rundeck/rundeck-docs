@@ -79,14 +79,14 @@ code > span.er { color: #ff0000; font-weight: bold; }
         <li><a href="../index.html">Administrator Guide</a></li>
     
     
-    <li ><a href="index.html">Configuration</a></li>
+    <li ><a href="index.html">Rundeck Configuration</a></li>
     <li class="active"><a href="project-setup.html">Project Setup</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
       <li class="previous"><a href="license-pro.html"><i class="glyphicon glyphicon-arrow-left"></i> License (Pro)</a></li>
-      <li class="next"><a href="managing-node-sources.html">Managing Node Sources <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="next"><a href="remote-job-execution-pro.html">Remote Job Execution (Pro) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -127,7 +127,7 @@ or
 rundeck.projectsStorageType=filesystem</code></pre>
 <p>If you wish to use <em>filesystem</em> storage you must add this configuration entry.</p>
 <p>If you have existing filesystem-based projects, and you start Rundeck with the <code>db</code> storage type, those projects will be automatically imported to the Database. The import process copies the contents of <code>etc/project.properties</code>, <code>readme.md</code> and <code>motd.md</code> (if they exist). Finally, the <code>etc/project.properties</code> file will be renamed on disk to <code>etc/project.properties.imported</code>.</p>
-<p>The DB storage type also uses the Rundeck <strong>Storage Facility</strong> to store the file contents, which can be configured to use an Encryption plugin. See <a href="storage.html#using-encryption">Storage Facility - Using Encryption</a>.</p>
+<p>The DB storage type also uses the Rundeck <strong>Storage Facility</strong> to store the file contents, which can be configured to use an Encryption plugin. See <a href="storage/index.html#using-encryption">Storage Facility - Using Encryption</a>.</p>
 <h3 id="configuration-file"><a href="#configuration-file">Configuration file</a></h3>
 <p>When using <em>filesystem</em> storage type, each Project has a configuration file called <a href="configuration-file-reference.html#project.properties">project.properties</a>, located at this path:</p>
 <ul>
@@ -173,8 +173,8 @@ rundeck.projectsStorageType=filesystem</code></pre>
 <li>deb/rpm: /var/rundeck/projects/{project}/etc/resources.xml</li>
 </ul>
 <p>It's possible to configure multiple &quot;Resource Model Sources&quot; for a project to retrieve additional Resource Model content from other sources.</p>
-<p>You can configure Rundeck to retrieve and store resource model data from any source, so long as it can produce one of the Rundeck resource model document formats. (See <a href="../../plugins-user-guide/resource-model-source-plugins.html#resource-model-document-formats">Resource Model Document formats</a>.)</p>
-<p>See <a href="managing-node-sources.html#resource-model-source">Resource Model Sources</a>.</p>
+<p>You can configure Rundeck to retrieve and store resource model data from any source, so long as it can produce one of the Rundeck resource model document formats. (See <a href="resource-model-sources/built-in-resource-model-source-plugins.html#resource-model-document-formats">Resource Model Document formats</a>.)</p>
+<p>See <a href="resource-model-sources/built-in-resource-model-source-plugins.html#resource-model-source">Resource Model Sources</a>.</p>
 <h5 id="defining-a-node"><a href="#defining-a-node">Defining a node</a></h5>
 <p>Here's a sample XML document that defines a node called &quot;orion&quot;:</p>
 <pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;project&gt;</span>
@@ -205,14 +205,14 @@ rundeck.projectsStorageType=filesystem</code></pre>
 <h3 id="external-resource-model-sources"><a href="#external-resource-model-sources">External Resource Model Sources</a></h3>
 <p>Chances are you maintain information about your hosts within another tool, perhaps Chef, Puppet, Nagios, Amazon EC2, RightScale or even an in-house database. One of these tools might be considered the authority of knowledge about the nodes deployed in your network. Therefore, it is best to create an interface to the authoritative tool and expose it as Rundeck a resource model source. This can be done as a simple CGI script that does a transformation from the tool's format to the one Rundeck understands. You can also develop a plugin to interface with the external source.</p>
 <p>Of course, a rudimentary alternative is to maintain this information as an XML document, storing it in a source repository that is periodically exported to Rundeck. This method would be practical if your host infrastructure infrequently changes.</p>
-<p>Check the Rundeck web site for URL resource model sources. If you are interested in creating your own, see the <a href="managing-node-sources.html#resource-model-source">Resource model source</a> chapter.</p>
+<p>Check the Rundeck web site for URL resource model sources. If you are interested in creating your own, see the <a href="resource-model-sources/built-in-resource-model-source-plugins.html#resource-model-source">Resource model source</a> chapter.</p>
 <h3 id="resource-model-document-formats"><a href="#resource-model-document-formats">Resource Model Document formats</a></h3>
 <p>Rundeck currently has two resource model document formats built in:</p>
 <ul>
 <li>XML: <a href="../../man5/resource-xml.html">resource-XML</a>. Format name: <code>resourcexml</code>.</li>
 <li>Yaml: <a href="../../man5/resource-yaml.html">resource-YAML</a>. Format name: <code>resourceyaml</code>.</li>
 </ul>
-<p>You can enable more formats using <a href="../../plugins-user-guide/resource-model-source-plugins.html">Resource Format Plugins</a>.</p>
+<p>You can enable more formats using <a href="resource-model-sources/built-in-resource-model-source-plugins.html#resource-model-document-formats">Resource Format Plugins</a>.</p>
 <h3 id="pluggable-resource-model-sources"><a href="#pluggable-resource-model-sources">Pluggable Resource Model Sources</a></h3>
 <p>Each project can have multiple sources for Resource model information, and you can use or write plugins to enable new sources for entries in the Resource model.</p>
 <p>You can configure the sources via the GUI from the Admin page, see <a href="../../manual/configure.html">Configure Page</a>, or by modifying the project.properties file.</p>
@@ -267,14 +267,14 @@ This project manages [acme-guitars.com](http://acme-guitars.com).</code></pre>
         <li><a href="../index.html">Administrator Guide</a></li>
     
     
-    <li ><a href="index.html">Configuration</a></li>
+    <li ><a href="index.html">Rundeck Configuration</a></li>
     <li class="active"><a href="project-setup.html">Project Setup</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
       <li class="previous"><a href="license-pro.html"><i class="glyphicon glyphicon-arrow-left"></i> License (Pro)</a></li>
-      <li class="next"><a href="managing-node-sources.html">Managing Node Sources <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="next"><a href="remote-job-execution-pro.html">Remote Job Execution (Pro) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -303,7 +303,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-21T22:29:59UTC">2018-06-21T22:29:59UTC</span>
+<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
 </p>
 </footer>
 </div>

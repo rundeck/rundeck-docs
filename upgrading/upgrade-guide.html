@@ -247,8 +247,8 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>This release adds some new DB tables but does not alter the schema of other tables.</p>
 <h3 id="project-definitions-stored-in-db"><a href="#project-definitions-stored-in-db">Project definitions stored in DB</a></h3>
 <p>Rundeck 2.4 and earlier used the filesystem to store Projects and their configuration. Rundeck 2.5 can now use the DB to store project definition and configuration, but this is not enabled by default.</p>
-<p>If you have projects that exist on the filesystem, when you upgrade to Rundeck 2.5, these projects and their configuration files can be automatically imported into the DB. This means that the contents of <code>project.properties</code> will be copied to the DB, using Rundeck's <a href="../administration/configuration/storage.html">Storage Facility</a>.</p>
-<p>In addition, there is <em>no encryption by default</em>, if you want the contents of your project.properties to be encrypted in the DB, you must configure <a href="../plugins-user-guide/configuring.html#storage-converter-plugins">Storage Converter Plugins</a> to use an encryption plugin. There is now a <a href="../plugins-user-guide/storage-plugins.html#jasypt-encryption-converter-plugin">Jasypt Encryption Plugin</a> included with Rundeck which can be used.</p>
+<p>If you have projects that exist on the filesystem, when you upgrade to Rundeck 2.5, these projects and their configuration files can be automatically imported into the DB. This means that the contents of <code>project.properties</code> will be copied to the DB, using Rundeck's <a href="../administration/configuration/storage/index.html">Storage Facility</a>.</p>
+<p>In addition, there is <em>no encryption by default</em>, if you want the contents of your project.properties to be encrypted in the DB, you must configure <a href="../administration/configuration/plugins/configuring.html#storage-converter-plugins">Storage Converter Plugins</a> to use an encryption plugin. There is now a <a href="../administration/configuration/plugins/bundled-plugins.html#jasypt-encryption-plugin">Jasypt Encryption Plugin</a> included with Rundeck which can be used.</p>
 <p><strong>Enable project DB storage</strong>:</p>
 <p>You can configure Rundeck to use the Database by adding the following to <code>rundeck-config.properties</code> before starting it up:</p>
 <pre><code>rundeck.projectsStorageType=db</code></pre>
@@ -395,7 +395,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-21T22:29:59UTC">2018-06-21T22:29:59UTC</span>
+<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
 </p>
 </footer>
 </div>

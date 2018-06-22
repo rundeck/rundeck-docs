@@ -69,7 +69,7 @@ jQuery(function(){
 <div class="col-sm-6">
     <ul class="pager">
       
-      
+      <li class="next"><a href="azure-log-storage-plugin.html">Azure Log Storage Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -88,13 +88,18 @@ jQuery(function(){
 <h2 id="log-storage-plugin">Log storage plugin</h2>
 <p>So far we have the following plugins for execution log storage:</p>
 <ul>
-<li><a href="https://github.com/rundeck-plugins/rundeck-s3-log-plugin">AWS S3</a>: This plugin works with any storage compatible with AWS S3 API, eg: S3, Minio, etc.</li>
-<li><a href="https://github.com/rundeck-plugins/rundeck-azure-plugin">Azure Blob Storage</a></li>
+<li><a href="s3-log-storage-plugin.html">AWS S3</a>: This plugin works with any storage compatible with AWS S3 API, eg: S3, Minio, etc.</li>
+<li><a href="azure-log-storage-plugin.html">Azure Blob Storage</a></li>
 </ul>
 <p>See <a href="../../../developer/logging-plugin.html">Logging Plugin Development</a> to learn how to implement your own log storage.</p>
 <h2 id="shared-file-system">Shared file system</h2>
 <p>You can configure your Rundeck instances to share a file system using a NAS/SAN or NFS but those methods are typically less desirable or impossible in a cloud environment. Without a shared logstore, job output files would need to be synchronized across Rundecks via a tool like <code>rsync</code>.</p>
 <p>You can set the shared file system path with <code>framework.logs.dir</code> in the <code>framework.properties</code> file. This changes must be done in all the cluster members.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol style="list-style-type: decimal">
+<li><a href="azure-log-storage-plugin.html">Azure Log Storage Plugin</a></li>
+<li><a href="s3-log-storage-plugin.html">S3 Log Storage Plugin</a></li>
+</ol>
 </div>
 </div>
 </div>
@@ -120,7 +125,7 @@ jQuery(function(){
 <div class="col-sm-6">
     <ul class="pager">
       
-      
+      <li class="next"><a href="azure-log-storage-plugin.html">Azure Log Storage Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -149,7 +154,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-21T22:29:59UTC">2018-06-21T22:29:59UTC</span>
+<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
 </p>
 </footer>
 </div>

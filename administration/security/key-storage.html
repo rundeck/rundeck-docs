@@ -200,13 +200,13 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><code>db</code> - stores file data as BLOBs in the database</li>
 </ul>
 <h3 id="configuring-storage-plugins"><a href="#configuring-storage-plugins">Configuring Storage Plugins</a></h3>
-<p>See <a href="../../plugins-user-guide/configuring.html#storage-plugins">Plugins User Guide - Configuring Storage Plugins</a>.</p>
+<p>See <a href="../configuration/plugins/configuring.html#storage-plugins">Plugins User Guide - Configuring Storage Plugins</a>.</p>
 <h2 id="key-data-storage-converter"><a href="#key-data-storage-converter">Key Data Storage Converter</a></h2>
 <p>Keys can be encrypted in the storage backend by use of a <a href="../../developer/storage-converter-plugin.html">Storage Converter plugin</a>. A typical plugin would encrypt any private-key data at write time, and decrypt it at read time.</p>
 <p>The Storage Converter Plugin handles reading and writing the content for any matching resources. The subsequent data is stored in the storage backend (on-disk or in a database) alongside the metadata for the file. If necessary, the metadata content can also be encrypted by modifying the data map that is provided.</p>
 <p>Converter plugins do not have to manage storing the data, that will be handled by the Storage backend.</p>
 <h3 id="configuring-storage-converter-plugins"><a href="#configuring-storage-converter-plugins">Configuring Storage Converter Plugins</a></h3>
-<p>See <a href="../../plugins-user-guide/configuring.html#storage-converter-plugins">Plugins User Guide - Configuring Storage Converter Plugins</a>.</p>
+<p>See <a href="../configuration/plugins/configuring.html#storage-converter-plugins">Plugins User Guide - Configuring Storage Converter Plugins</a>.</p>
 <h2 id="using-keys-via-rundeck-node-executors"><a href="#using-keys-via-rundeck-node-executors">Using Keys via Rundeck Node Executors</a></h2>
 <h3 id="built-in-jschnodeexecutor"><a href="#built-in-jschnodeexecutor">Built-in JschNodeExecutor</a></h3>
 <p>The provided java-based JschNodeExecutor, which is the default used for Node execution, uses Node attributes to determine the type of authentication used when connecting to the Node via SSH. To select private-key based authentication the Node attribute <code>ssh-authentication</code> is used:</p>
@@ -278,7 +278,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-21T22:29:59UTC">2018-06-21T22:29:59UTC</span>
+<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
 </p>
 </footer>
 </div>

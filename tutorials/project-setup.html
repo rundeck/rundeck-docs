@@ -107,7 +107,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <h2 id="planning-for-the-project"><a href="#planning-for-the-project">Planning for the project</a></h2>
 <p>The administrator decides to create a project called &quot;anvils.&quot; to manage the activities of the anvils restart. The anvils project will contain definitions about the nodes used by the anvils application, as well as, a set a jobs that reference these nodes. The administrator will use Rundeck access control policies to govern which teams have access to perform each of the procedures.</p>
 <p>The administrator decides to formalize the role of each node in the application stack by introducing tags. Tags will be used within the Jobs to target each kind of node rather than reference specific hosts names or IP addresses. This makes the jobs reusable across different environments.</p>
-<p>The administrator will also use the built in <a href="../plugins-user-guide/ssh-plugins.html">SSH node executor</a> for the project since SSH is already used to execute remote commands.</p>
+<p>The administrator will also use the built in <a href="../manual/node-execution/ssh-node-execution.html">SSH node executor</a> for the project since SSH is already used to execute remote commands.</p>
 <h2 id="create-the-project"><a href="#create-the-project">Create the project</a></h2>
 <p>The administrator can create the project using the <a href="https://rundeck.github.io/rundeck-cli/">rd</a> command line tool. Logged in on the rundeck server as the user &quot;rundeck&quot;, the administrator executes:</p>
 <pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rd</span> projects create -p anvils</code></pre>
@@ -193,7 +193,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>Note, this tutorial is a trivial sized example so to conserve space (and VMs) the nodes are located on the same VM (each node uses the same hostname but a different username).</p>
 </blockquote>
 <p>A node in rundeck can model a single host on the network and represents a single management endpoint. In the end, the ssh node executor plugin formulates an ssh command string similar to: &quot;ssh username@hostname command&quot;. The ssh identity is resolved via configuration at run time. In this example, the project default is used as specified in the [project.properties] configuration file. (e.g., project.ssh-keypath=/var/lib/rundeck/.ssh/id_rsa).</p>
-<p>See <a href="../plugins-user-guide/ssh-plugins.html#configuring-remote-machine-for-ssh">ssh-plugins guide</a> to learn about configuring remote machines for ssh.</p>
+<p>See <a href="../manual/node-execution/ssh-node-execution.html#configuring-remote-machine-for-ssh">ssh-plugins guide</a> to learn about configuring remote machines for ssh.</p>
 <p>This example uses the built in ssh plugin but you are not restricted to using ssh. There are other node executor plugins that invoke remote actions via other tools (eg, salt, mcollective, winrm, chef knife, etc).</p>
 <h2 id="configure-the-model-source"><a href="#configure-the-model-source">Configure the model source</a></h2>
 <p>To make Rundeck aware of the new resource file containing the anvils nodes, the administrator modifies the <a href="../administration/configuration/configuration-file-reference.html#project.properties">project.properties</a> configuration file to declare a new resource model source.</p>
@@ -206,7 +206,7 @@ resources.source.2.type=directory</code></pre>
 <img src="../figures/fig0609.png" alt="Anvils model sources" /><p class="caption">Anvils model sources</p>
 </div>
 <h2 id="managing-node-sources"><a href="#managing-node-sources">Managing Node Sources</a></h2>
-<p>See <a href="../administration/configuration/managing-node-sources.html">Managing Node Sources</a> to learn more about configuring Rundeck to read node data from external providers.</p>
+<p>See <a href="../administration/configuration/resource-model-sources/index.html">Managing Node Sources</a> to learn more about configuring Rundeck to read node data from external providers.</p>
 </div>
 </div>
 </div>
@@ -257,7 +257,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-21T22:29:59UTC">2018-06-21T22:29:59UTC</span>
+<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
 </p>
 </footer>
 </div>

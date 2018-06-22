@@ -78,7 +78,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
     
         <li><a href="../../index.html">Administrator Guide</a></li>
     
-        <li><a href="../index.html">Configuration</a></li>
+        <li><a href="../index.html">Rundeck Configuration</a></li>
     
     
     
@@ -144,6 +144,11 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><a href="using-oracle-as-a-database-backend.html">Oracle</a></li>
 <li><a href="using-microsoft-sql-server-as-a-database-backend.html">SQL Server</a></li>
 </ul>
+<p>To develop your own storage plugin, see:</p>
+<ul>
+<li><a href="../../../developer/storage-plugin.html">Storage Plugin Development</a>.</li>
+<li><a href="../../../developer/storage-converter-plugin.html">Storage Converter Plugin Development</a>.</li>
+</ul>
 <h3 id="customize-the-datasource">Customize the Datasource</h3>
 <p>The default dataSource is configured for filesystem storage using HSQLDB:</p>
 <pre class="sourceCode java"><code class="sourceCode java">dataSource.<span class="fu">url</span> = jdbc:hsqldb:file:/var/lib/rundeck/data/grailsdb;shutdown=<span class="kw">true</span></code></pre>
@@ -172,20 +177,13 @@ dataSource.<span class="fu">password</span> = dbpass</code></pre></td></tr></tab
 <p>Rundeck includes a JDBC driver for Mysql and H2. If you are using another database copy the appropriate JDBC driver, such as &quot;ojdbc14.jar&quot; for Oracle into the server <code>lib</code> dir:</p>
 <pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">cp</span> ojdbc14.jar <span class="ot">$RDECK_BASE</span>/server/lib</code></pre>
 <h3 id="configuring-storage-plugins">Configuring Storage Plugins</h3>
-<p>See <a href="../../../plugins-user-guide/configuring.html#storage-plugins">Plugins User Guide - Configuring Storage Plugins</a>.</p>
+<p>See <a href="../plugins/configuring.html#storage-plugins">Plugins User Guide - Configuring Storage Plugins</a>.</p>
 <h2 id="storage-converters">Storage Converters</h2>
 <p>Files can be encrypted in the storage backend by use of a <a href="../../../developer/storage-converter-plugin.html">Storage Converter plugin</a>. A typical plugin would encrypt data at write time, and decrypt it at read time.</p>
 <p>The Storage Converter Plugin handles reading and writing the content for any matching resources. The subsequent data is stored in the storage backend (on-disk or in a database) alongside the metadata for the file.</p>
 <p>Converter plugins do not have to manage storing the data, that will be handled by the Storage backend.</p>
 <h3 id="configuring-storage-converter-plugins">Configuring Storage Converter Plugins</h3>
-<p>See <a href="../../../plugins-user-guide/configuring.html#storage-converter-plugins">Plugins User Guide - Configuring Storage Converter Plugins</a>.</p>
-<h2 id="table-of-contents">Table of Contents</h2>
-<ol style="list-style-type: decimal">
-<li><a href="using-microsoft-sql-server-as-a-database-backend.html">Using Microsoft SQL Server as a database backend</a></li>
-<li><a href="using-mysql-as-a-database-backend.html">Using MySQL as a database backend</a></li>
-<li><a href="using-oracle-as-a-database-backend.html">Using Oracle as a database backend</a></li>
-<li><a href="using-postgres-as-a-database-backend.html">Using Postgres as a database backend</a></li>
-</ol>
+<p>See <a href="../plugins/configuring.html#storage-converter-plugins">Plugins User Guide - Configuring Storage Converter Plugins</a>.</p>
 </div>
 </div>
 </div>
@@ -201,7 +199,7 @@ dataSource.<span class="fu">password</span> = dbpass</code></pre></td></tr></tab
     
         <li><a href="../../index.html">Administrator Guide</a></li>
     
-        <li><a href="../index.html">Configuration</a></li>
+        <li><a href="../index.html">Rundeck Configuration</a></li>
     
     
     
@@ -240,7 +238,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-21T22:29:59UTC">2018-06-21T22:29:59UTC</span>
+<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
 </p>
 </footer>
 </div>

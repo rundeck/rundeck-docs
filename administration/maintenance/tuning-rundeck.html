@@ -183,13 +183,13 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <h3 id="node-execution"><a href="#node-execution">Node execution</a></h3>
 <p>If you are executing commands across many hundreds or thousands of hosts, the bundled SSH node executor may not meet your performance requirements. Each SSH connection uses multiple threads and the encryption/decryption of messages uses CPU cycles and memory. Depending on your environment, you might choose another Node executor like MCollective, Salt or something similar. This essentially delegates remote execution to another tool designed for asynchronous fan out and thus relieving Rundeck of managing remote task execution.</p>
 <h3 id="built-in-ssh-plugins"><a href="#built-in-ssh-plugins">Built in SSH plugins</a></h3>
-<p>If you are interested in using the built in <a href="../../plugins-user-guide/ssh-plugins.html">SSH plugins</a>, here are some details about how it performs when executing commands across very large numbers of nodes. For these tests, Rundeck was running on an 8 core, 32GB RAM m2.4xlarge AWS EC2 instance.</p>
+<p>If you are interested in using the built in <a href="../../manual/node-execution/ssh-node-execution.html">SSH plugins</a>, here are some details about how it performs when executing commands across very large numbers of nodes. For these tests, Rundeck was running on an 8 core, 32GB RAM m2.4xlarge AWS EC2 instance.</p>
 <p>We chose the <code>rpm -q</code> command which checks against the rpm database to see if a particular package was installed. For 1000 nodes we saw an average execution of 52 seconds. A 4000 node cluster took roughly 3.5 minutes, and 8000 node cluster about 7 minutes.</p>
 <p>The main limitation appears to be memory of the JVM instance relative to the number of concurrent requests. We tuned the max memory to be 12GB with a 1000 Concurrent Dispatch Threads to 1GB of Memory. GC appears to behave well during the runs given the &quot;bursty&quot; nature of them.</p>
 <h3 id="ssl-and-https-performance"><a href="#ssl-and-https-performance">SSL and HTTPS performance</a></h3>
 <p>It is possible to offload SSL connection processing by using an SSL termination proxy. This can be accomplished by setting up Apache httpd or <a href="https://en.wikipedia.org/wiki/Nginx">Nginx</a> as a frontend to your Rundeck instances.</p>
 <h3 id="resource-provider"><a href="#resource-provider">Resource provider</a></h3>
-<p>Rundeck projects obtain information about nodes via a <a href="../configuration/managing-node-sources.html">resource provider</a>. If your resource provider is a long blocking process (due to slow responses from a backend service), it can slow down or even hang up Rundeck. Be sure to make your resource provider work asynchronously. Also, consider using caching when possible.</p>
+<p>Rundeck projects obtain information about nodes via a <a href="../configuration/resource-model-sources/index.html">resource provider</a>. If your resource provider is a long blocking process (due to slow responses from a backend service), it can slow down or even hang up Rundeck. Be sure to make your resource provider work asynchronously. Also, consider using caching when possible.</p>
 </div>
 </div>
 </div>
@@ -242,7 +242,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-21T22:29:59UTC">2018-06-21T22:29:59UTC</span>
+<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
 </p>
 </footer>
 </div>
