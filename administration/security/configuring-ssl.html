@@ -91,7 +91,7 @@ jQuery(function(){
 <h1 class="title">Configuring SSL</h1>
 </div>
 <p>This document describes how to configure Rundeck for SSL/HTTPS support, and assumes you are using the rundeck-launcher standalone launcher. If you are using RPM/deb install, refer to the appropriate configuration file paths from <a href="../configuration/configuration-file-reference.html#configuration-layout">Configuration -&gt; Configuration Layout</a>.</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><p>Before beginning, do a first-run of the launcher, as it will create the base directory for Rundeck and generate configuration files.</p>
 <pre><code>cd $RDECK_BASE;  java -jar rundeck-launcher-1.1.0.jar</code></pre>
 <p>This will start the server and generate necessary config files. Press control-c to shut down the server.</p></li>
@@ -118,7 +118,7 @@ server, and use any other organizational values you like:
         US
         yes
         !</code></pre>
-<ol start="3" style="list-style-type: decimal">
+<ol start="3" type="1">
 <li><p>CLI tools that communicate to the Rundeck server need to trust the SSL certificate provided by the server. They are preconfigured to look for a truststore at the location: <code>$RDECK_BASE/etc/truststore</code>. Copy the keystore as the truststore for CLI tools:</p>
 <pre><code>cp etc/keystore etc/truststore</code></pre></li>
 <li><p>Modify the ssl.properties file to specify the location of the keystore and the appropriate passwords:</p>
@@ -150,43 +150,43 @@ truststore.password=adminadmin</code></pre></li>
 <p>If successful, you will see a line indicating the SSl connector has started:</p>
 <pre><code>Started SslSocketConnector@0.0.0.0:4443</code></pre></li>
 </ol>
-<h3 id="securing-passwords"><a href="#securing-passwords">Securing passwords</a></h3>
+<h3 id="securing-passwords">Securing passwords</h3>
 <p>Passwords do not have to be stored in the ssl.config. If they are not set, then the server will prompt on the console for a user to enter the passwords.</p>
 <p>If you want the server to start without prompting then you need to set the passwords in the config file.</p>
 <p>The passwords stored in ssl.properties can be obfuscated so they are not in plaintext:</p>
-<p>Run the jetty &quot;Password&quot; utility:</p>
+<p>Run the jetty “Password” utility:</p>
 <pre><code>$ java -cp server/lib/jetty-all-7.6.0.v20120127.jar org.eclipse.jetty.util.security.Password [username] [password]</code></pre>
-<p>This will produce two lines, one starting with &quot;OBF:&quot;</p>
+<p>This will produce two lines, one starting with “OBF:”</p>
 <p>Use the entire OBF: output as the password in the ssl.properties file, eg:</p>
 <pre><code>key.password=OBF:1lk2j1lkj321lj13lj</code></pre>
-<h3 id="troubleshooting-keystore"><a href="#troubleshooting-keystore">Troubleshooting keystore</a></h3>
+<h3 id="troubleshooting-keystore">Troubleshooting keystore</h3>
 <p>Some common error messages and causes:</p>
 <dl>
 <dt>java.io.IOException: Keystore was tampered with, or password was incorrect</dt>
 <dd><p>A password specified in the file was incorrect.</p>
 </dd>
 <dt>2010-12-02 10:07:29.958::WARN: failed SslSocketConnector@0.0.0.0:4443: java.io.FileNotFoundException: /Users/greg/rundeck/etc/keystore (No such file or directory)</dt>
-<dd><p>The keystore/truststore file specified in ssl.properties doesn't exist</p>
+<dd><p>The keystore/truststore file specified in ssl.properties doesn’t exist</p>
 </dd>
 </dl>
-<h3 id="optional-pem-export"><a href="#optional-pem-export">Optional PEM export</a></h3>
-<p>You can export the PEM formatted server certificate for use by HTTPS clients (web browsers or e.g. curl).</p>
-<p>Export pem cacert for use by e.g. curl:</p>
+<h3 id="optional-pem-export">Optional PEM export</h3>
+<p>You can export the PEM formatted server certificate for use by HTTPS clients (web browsers or e.g. curl).</p>
+<p>Export pem cacert for use by e.g. curl:</p>
 <pre><code>keytool -export -keystore etc/keystore -rfc -alias rundeck &gt; rundeck.server.pem</code></pre>
-<h2 id="using-an-ssl-terminated-proxy"><a href="#using-an-ssl-terminated-proxy">Using an SSL Terminated Proxy</a></h2>
+<h2 id="using-an-ssl-terminated-proxy">Using an SSL Terminated Proxy</h2>
 <p>You can tell Jetty to honor <code>X-Forwarded-Proto</code>, <code>X-Forwarded-Host</code>, <code>X-Forwarded-Server</code> and <code>X-Forwarded-For</code> headers by adding the following JVM property:</p>
 <ul>
-<li><code>rundeck.jetty.connector.forwarded</code> set to &quot;true&quot; to enable proxy forwarded support.</li>
+<li><code>rundeck.jetty.connector.forwarded</code> set to “true” to enable proxy forwarded support.</li>
 </ul>
 <p>E.g. modify the <code>RDECK_JVM</code> variable in the file <code>/etc/rundeck/profile</code> and add:</p>
 <pre><code>-Drundeck.jetty.connector.forwarded=true</code></pre>
 <p>This will enable Jetty to respond correctly when a forwarded request is first received.</p>
 <p><strong>Note:</strong> You will still need to modify the <code>grails.serverURL</code> value in <a href="configuration-file-reference.html#rundeck-config.properties">rundeck-config.properties</a> to let Rundeck know how to properly generate absolute URLs.</p>
-<h2 id="disabling-ssl-protocols"><a href="#disabling-ssl-protocols">Disabling SSL Protocols</a></h2>
+<h2 id="disabling-ssl-protocols">Disabling SSL Protocols</h2>
 <p>You can disable SSL protocols or cipher suites using these JVM variables:</p>
 <ul>
 <li><code>rundeck.jetty.connector.ssl.includedProtocols</code> set to a comma-separated list of SSL protocols to enable. Default will be based on the available protocols.</li>
-<li><code>rundeck.jetty.connector.ssl.excludedProtocols</code> set to a comma-separated list of SSL protocols to disable. Default value: 'SSLv3'</li>
+<li><code>rundeck.jetty.connector.ssl.excludedProtocols</code> set to a comma-separated list of SSL protocols to disable. Default value: ‘SSLv3’</li>
 <li><code>rundeck.jetty.connector.ssl.includedCipherSuites</code> set to a comma-separated list of Cipher suites to enable. Default will be based on the available cipher suites.</li>
 <li><code>rundeck.jetty.connector.ssl.excludedCipherSuites</code> set to a comma-separated list of Cipher suites to disable. No default value.</li>
 </ul>
@@ -248,7 +248,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

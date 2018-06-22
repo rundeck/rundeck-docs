@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
+  <title>edam3088230078063988177temp</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -81,20 +81,18 @@ jQuery(function(){
 <div class="nav">
 <ul>
 <li><a href="#types-of-plugins">Types of Plugins</a></li>
-<li><a href="#about-services-and-providers">About Services and Providers</a><ul>
-<li><a href="#service-categories">Service Categories</a></li>
-</ul></li>
+<li><a href="#about-services-and-providers">About Services and Providers</a></li>
 </ul>
 </div>
 </div>
 <div class="col-sm-9">
-<h2 id="types-of-plugins"><a href="#types-of-plugins">Types of Plugins</a></h2>
+<h2 id="types-of-plugins">Types of Plugins</h2>
 <p>Plugins are files that contain one or more Service Provider implementations. Each plugin file could contain multiple Providers for different types of services, however typically each plugin file would contain only providers related in some fashion.</p>
-<p>Rundeck includes a number of &quot;built-in&quot; providers, as well as a few &quot;included&quot; plugin files.</p>
-<p>In this document &quot;plugin&quot; and &quot;provider&quot; are used somewhat interchangeably. When referring to an actual file containing the provider implementations we will say &quot;plugin file&quot;.</p>
-<div class="figure">
-<img src="../../../figures/fig1102.png" alt="Rundeck Providers and Plugin Files" /><p class="caption">Rundeck Providers and Plugin Files</p>
-</div>
+<p>Rundeck includes a number of “built-in” providers, as well as a few “included” plugin files.</p>
+<p>In this document “plugin” and “provider” are used somewhat interchangeably. When referring to an actual file containing the provider implementations we will say “plugin file”.</p>
+<figure>
+<img src="../../../figures/fig1102.png" alt="Rundeck Providers and Plugin Files" /><figcaption>Rundeck Providers and Plugin Files</figcaption>
+</figure>
 <p>Rundeck supports several different types of plugins to perform different kinds of services:</p>
 <ul>
 <li><a href="workflow-step-plugins.html">Workflow Step</a> - defines an action that can be a distinct step within a workflow, either for an individual Node or a set of Nodes</li>
@@ -108,39 +106,39 @@ jQuery(function(){
 <li><a href="storage-plugins.html">Storage Facility</a> - defines storage backends and content conversion</li>
 <li><a href="orchestrator-plugins.html">Orchestrator</a> - defines a mechanism for orchestrating nodes when performing dispatched commands</li>
 </ul>
-<h2 id="about-services-and-providers"><a href="#about-services-and-providers">About Services and Providers</a></h2>
-<p>The Rundeck core makes use of several different &quot;Services&quot; that provide functionality for the different steps necessary to execute workflows, jobs, and commands across multiple nodes.</p>
-<p>Each Service makes use of &quot;Providers&quot;. Each Provider has a unique &quot;Provider Name&quot; that is used to identify it, and most Services have default Providers unless you specify different ones to use.</p>
+<h2 id="about-services-and-providers">About Services and Providers</h2>
+<p>The Rundeck core makes use of several different “Services” that provide functionality for the different steps necessary to execute workflows, jobs, and commands across multiple nodes.</p>
+<p>Each Service makes use of “Providers”. Each Provider has a unique “Provider Name” that is used to identify it, and most Services have default Providers unless you specify different ones to use.</p>
 <p><img src="../../../figures/fig1101.png" alt="Rundeck Services and Providers" /> <img src="../../../figures/fig1101_2.png" alt="Rundeck Services and Providers" /> <img src="../../../figures/fig1101_3.png" alt="Rundeck Services and Providers" /></p>
 <p>Rundeck Plugin Files can contain more than one Provider.</p>
-<h3 id="service-categories"><a href="#service-categories">Service Categories</a></h3>
+<p>###Service Categories</p>
 <p>Services fall into different categories, which determine how and where they are used.</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li><p><strong>Node Execution services</strong> - providers of these services operate in the context of a single Node definition, and can be configured at Node scope or higher:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Node Executor - these providers define ways of executing a command on a Node (local or remote)</li>
 <li>File Copier - these providers define ways of copying files to a Node.</li>
 </ol></li>
 <li><p><strong>Project services</strong></p>
-<ol style="list-style-type: decimal">
-<li>Resource Model Source - (aka &quot;Resource Providers&quot;) these define ways of retrieving Node resources for a Project</li>
+<ol type="1">
+<li>Resource Model Source - (aka “Resource Providers”) these define ways of retrieving Node resources for a Project</li>
 </ol></li>
 <li><p><strong>Global services</strong> (framework level)</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Resource Format Parser - these define document format parsers</li>
 <li>Resource Format Generators - these define document format generators</li>
 <li>Storage Facility - these define storage backends and converters</li>
 <li>Logging - these define log file storage and log streaming input and output</li>
 </ol></li>
 <li><p><strong>Workflow services</strong></p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Workflow Step - providers define behavior for all nodes</li>
 <li>Workflow Node Step - providers define behavior for a single node</li>
 <li>Remote Script Node Step - a specific use-case for Node Step providers</li>
 <li>Orchestrator - providers define how nodes are iterated over during node dispatch steps</li>
 </ol></li>
 <li><p><strong>Notification services</strong></p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Notifications - external actions that are triggered when a Job starts or finishes.</li>
 </ol></li>
 </ol>
@@ -198,7 +196,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

@@ -66,8 +66,8 @@ jQuery(function(){
 </div>
 <div class="col-sm-6">
     <ul class="pager">
+      <li class="previous"><a href="upgrade-guide.html"><i class="glyphicon glyphicon-arrow-left"></i> Upgrade Guide</a></li>
       
-      <li class="next"><a href="upgrade-guide.html">Upgrade Guide <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -88,8 +88,8 @@ jQuery(function(){
 <div class="page-header">
 <h1 class="title">Upgrade Rundeck 2.11.X to Rundeck 3.X</h1>
 </div>
-<h3 id="rundeck-launcher"><a href="#rundeck-launcher">Rundeck Launcher</a></h3>
-<p>The &quot;launcher jar&quot; for Rundeck 2 is gone. However, the .war file now operates the same way. Just use the .war in the same way as the previous launcher jar, or deploy it as a webapp.</p>
+<h3 id="rundeck-launcher">Rundeck Launcher</h3>
+<p>The “launcher jar” for Rundeck 2 is gone. However, the .war file now operates the same way. Just use the .war in the same way as the previous launcher jar, or deploy it as a webapp.</p>
 <p>To upgrade to Rundeck 3 using launcher use the following steps:</p>
 <ul>
 <li><p>Stop Rundeck Service, eg: <code>.$RDECK_BASE/server/sbin/rundeckd stop</code></p></li>
@@ -97,7 +97,7 @@ jQuery(function(){
 </ul>
 <pre><code>mv $RDECK_BASE/libext $RDECK_BASE/libext.2-11</code></pre>
 <ul>
-<li>Remove previous &quot;source&quot; folders:</li>
+<li>Remove previous “source” folders:</li>
 </ul>
 <pre><code>rm -rf server/exp/ server/lib/ server/sbin</code></pre>
 <ul>
@@ -110,10 +110,10 @@ jQuery(function(){
 <pre><code>rundeck.log4j.config.file=$RDECK_BASE/server/config/log4j.properties</code></pre>
 <p>*replace <code>$RDECK_BASE</code> with the real path.</p>
 <ul>
-<li><p>Copy the &quot;custom&quot; plugins back to <code>.$RDECK_BASE/libext</code> folder</p></li>
+<li><p>Copy the “custom” plugins back to <code>.$RDECK_BASE/libext</code> folder</p></li>
 <li><p>Start rundeck 3: <code>.$RDECK_BASE/server/sbin/rundeckd start</code></p></li>
 </ul>
-<h3 id="rundeck-deb-package"><a href="#rundeck-deb-package">Rundeck DEB Package</a></h3>
+<h3 id="rundeck-deb-package">Rundeck DEB Package</h3>
 <p>The upgrade process can be done using the <code>.deb</code> file or using the command <code>apt-get</code>:</p>
 <ul>
 <li>using deb package</li>
@@ -135,7 +135,7 @@ jQuery(function(){
       Z     : start a shell to examine the situation
  The default action is to keep your current version.
 *** rundeck-config.properties (Y/I/N/O/D/Z) [default=N] ?</code></pre>
-<p>For example, if you select &quot;YES&quot; the older file will be moved to <code>rundeck-config.properties.dpkg-old</code>, and <code>rundeck-config.properties</code> will be loaded with the default values (so a merge will be needed)</p>
+<p>For example, if you select “YES” the older file will be moved to <code>rundeck-config.properties.dpkg-old</code>, and <code>rundeck-config.properties</code> will be loaded with the default values (so a merge will be needed)</p>
 <pre><code>-rw-r----- 1 rundeck rundeck  986 May 11 19:13 realm.properties
 -rw-r----- 1 rundeck rundeck  730 May 11 19:13 project.properties
 -rw-r----- 1 rundeck rundeck 7529 May 11 19:13 log4j.properties
@@ -149,7 +149,7 @@ jQuery(function(){
 -rw-r----- 1 rundeck rundeck  673 Jun  4 14:22 rundeck-config.properties.dpkg-old
 drwxr-x--- 1 rundeck rundeck 4096 Jun  4 14:25 ssl</code></pre>
 <p>A restart is necessary after the merge of <code>rundeck-config.properties</code></p>
-<h3 id="rundeck-rpm-package"><a href="#rundeck-rpm-package">Rundeck RPM Package</a></h3>
+<h3 id="rundeck-rpm-package">Rundeck RPM Package</h3>
 <p>The upgrade process can be done using the <code>.rmp</code> file or using the command <code>yum</code>:</p>
 <ul>
 <li>using rpm package</li>
@@ -203,8 +203,8 @@ drwxr-x--- 1 rundeck rundeck 4096 Jun  4 16:08 ssl</code></pre>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
+      <li class="previous"><a href="upgrade-guide.html"><i class="glyphicon glyphicon-arrow-left"></i> Upgrade Guide</a></li>
       
-      <li class="next"><a href="upgrade-guide.html">Upgrade Guide <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -233,7 +233,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

@@ -21,23 +21,69 @@ jQuery(function(){
 });
 </script>
   <style type="text/css">
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; }
-code > span.dt { color: #902000; }
-code > span.dv { color: #40a070; }
-code > span.bn { color: #40a070; }
-code > span.fl { color: #40a070; }
-code > span.ch { color: #4070a0; }
-code > span.st { color: #4070a0; }
-code > span.co { color: #60a0b0; font-style: italic; }
-code > span.ot { color: #007020; }
-code > span.al { color: #ff0000; font-weight: bold; }
-code > span.fu { color: #06287e; }
-code > span.er { color: #ff0000; font-weight: bold; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../style.css" type="text/css" />
 </head>
@@ -128,8 +174,8 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>Rundeck Jobs can be configured to prompt a user for input by defining one or more named <em>options</em>. An <em>option</em> models a named parameter that can be required or optional and include a range of choices that will be presented to the user when the Job is run.</p>
 <p>Users supply options by typing in a value or selecting from a menu of choices. A validation pattern ensures input complies to the option requirement. Once chosen, the value chosen for the option is accessible to the commands called by the Job.</p>
 <p>Option choices can be modeled as a static set or from a dynamic source. Static choices can be modeled as a comma separated list in the job definition. When option values must be dynamic, the Job can be defined to use a URL to retrieve option data from an external source. Enabling Jobs to access external sources via URL opens the door to integrating Rundeck with other tools and incorporating their data into Job workflows.</p>
-<h2 id="prompting-the-user"><a href="#prompting-the-user">Prompting the user</a></h2>
-<p>The obvious effect from defining Job options is their appearance to the user running the Job. Users will be presented a page called &quot;Choose Execution Options...&quot; where input and menu choices must be configured.</p>
+<h2 id="prompting-the-user">Prompting the user</h2>
+<p>The obvious effect from defining Job options is their appearance to the user running the Job. Users will be presented a page called “Choose Execution Options…” where input and menu choices must be configured.</p>
 <p>Command line users executing Jobs via the <code>run</code> shell tool also will specify options as an argument string.</p>
 <blockquote>
 <p>Note, the <code>run</code> command does not prompt the user for required options so you must specify them directly.</p>
@@ -140,69 +186,66 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li>Required options: Making an option required means the Job will fail if a user does not specify a non-blank value. In other words, a blank or missing value is not allowed for the option.</li>
 <li>Input restrictions and validation: If you need to make the option value be somewhat open ended consider how you can create safeguards to control their choice.</li>
 </ul>
-<h2 id="input-types"><a href="#input-types">Input Types</a></h2>
+<h2 id="input-types">Input Types</h2>
 <p>Option Input Types define how the option is presented in the GUI, and how it is used when the Job executes.</p>
 <p>Input types:</p>
 <ul>
-<li>&quot;Plain&quot; - a normal option which is shown in clear text</li>
-<li>&quot;Secure&quot; - a secure option which is obscured at user input time, and the value of which is not stored in the database. See <a href="#secure-options">secure-options</a>.</li>
-<li>&quot;Secure Remote Authentication&quot; - a secure option which is used only for remote authentication and is not exposed in scripts or commands. See <a href="#secure-remote-authentication-options">secure-remote-authentication-options</a>.</li>
+<li>“Plain” - a normal option which is shown in clear text</li>
+<li>“Secure” - a secure option which is obscured at user input time, and the value of which is not stored in the database. See <a href="#secure-options">secure-options</a>.</li>
+<li>“Secure Remote Authentication” - a secure option which is used only for remote authentication and is not exposed in scripts or commands. See <a href="#secure-remote-authentication-options">secure-remote-authentication-options</a>.</li>
 </ul>
-<h2 id="options-editor"><a href="#options-editor">Options editor</a></h2>
+<h2 id="options-editor">Options editor</h2>
 <p>Options can be created for any stored Job. The Job edit page contains an area displaying a summary to existing options and a link to add new ones or edit existing ones.</p>
-<div class="figure">
-<img src="../figures/fig0501.png" alt="Add option link" /><p class="caption">Add option link</p>
-</div>
+<figure>
+<img src="../figures/fig0501.png" alt="Add option link" /><figcaption>Add option link</figcaption>
+</figure>
 <p>The option summary shows each option and its default value if it defines them.</p>
-<p>Clicking the &quot;edit&quot; link opens the options editor.</p>
-<div class="figure">
-<img src="../figures/fig0503.png" alt="Option editor" /><p class="caption">Option editor</p>
-</div>
-<p>The options editor displays an expanded summary for each defined option. Each option is listed with its usage summary, description, values list and any restrictions. Pressing the &quot;Add an option&quot; link will open a form to define a new parameter. Pressing the &quot;Close&quot; link will collapse the options editor and return back to the summary view.</p>
-<p>Moving the mouse over any row in the options editor reveals links to delete or edit the highlighted option. Pressing the remove icon will display a prompt confirming you want to delete that option from the Job. Clicking the &quot;edit&quot; link opens a new form that lets you modify all aspects of that option.</p>
+<p>Clicking the “edit” link opens the options editor.</p>
+<figure>
+<img src="../figures/fig0503.png" alt="Option editor" /><figcaption>Option editor</figcaption>
+</figure>
+<p>The options editor displays an expanded summary for each defined option. Each option is listed with its usage summary, description, values list and any restrictions. Pressing the “Add an option” link will open a form to define a new parameter. Pressing the “Close” link will collapse the options editor and return back to the summary view.</p>
+<p>Moving the mouse over any row in the options editor reveals links to delete or edit the highlighted option. Pressing the remove icon will display a prompt confirming you want to delete that option from the Job. Clicking the “edit” link opens a new form that lets you modify all aspects of that option.</p>
 <p>Options can also be defined as part of a job definition and later loaded to the Rundeck server. See [job-xml] and [job-yaml] and [rd-jobs] pages if you prefer using an textual Job definition.</p>
-<h2 id="defining-an-option"><a href="#defining-an-option">Defining an option</a></h2>
+<h2 id="defining-an-option">Defining an option</h2>
 <p><strong>Text Options</strong></p>
-<p>New options can be defined by pressing the &quot;Add an option&quot; link while existing ones can be changed by pressing their &quot;edit&quot; link.</p>
-<p>Choose &quot;Text&quot; from the Option Type:</p>
-<div class="figure">
-<img src="../figures/fig0502.png" alt="Option edit form" /><p class="caption">Option edit form</p>
-</div>
+<p>New options can be defined by pressing the “Add an option” link while existing ones can be changed by pressing their “edit” link.</p>
+<p>Choose “Text” from the Option Type:</p>
+<figure>
+<img src="../figures/fig0502.png" alt="Option edit form" /><figcaption>Option edit form</figcaption>
+</figure>
 <p>The option definition form is organized into several areas:</p>
 <dl>
 <dt>Identification</dt>
-<dd><p>Here you provide the option's name and description. The name becomes part of acceptable arguments to the Job while the description will be provided as help text to users running the Job.</p>
+<dd><p>Here you provide the option’s name and description. The name becomes part of acceptable arguments to the Job while the description will be provided as help text to users running the Job.</p>
 <p>The Default Value will be pre-selected in the GUI when the option is presented.</p>
 </dd>
 <dt>Input Type</dt>
-<dd><p>Choose between &quot;Plain&quot;, &quot;Date&quot;, &quot;Secure&quot; and &quot;Secure Remote Authentication&quot;. For input types other than &quot;Plain&quot;, the multi-valued option will be disabled.</p>
+<dd><p>Choose between “Plain”, “Date”, “Secure” and “Secure Remote Authentication”. For input types other than “Plain”, the multi-valued option will be disabled.</p>
 </dd>
 <dt>Date Format</dt>
-<dd>If &quot;Date&quot; Input Type is chosen, you can enter a date format to use when selecting the date
+<dd><p>If “Date” Input Type is chosen, you can enter a date format to use when selecting the date in the user interface. Using the <a href="https://momentjs.com/docs/#/displaying/format/">momentjs format</a>.</p>
 </dd>
-</dl>
-<p>in the user interface. Using the <a href="https://momentjs.com/docs/#/displaying/format/">momentjs format</a>.</p>
-<dl>
 <dt>Default Value</dt>
 <dd><p>A Default Value will automatically be set for the option if it is not otherwise specified by the user, even if not specified among the arguments when executing a job via the command-line or API. Note that a blank value can be specified via the command-line or API, which will override the use of the Default Value.</p>
 </dd>
 <dt>Allowed values</dt>
-<dd><p>Allowed values provide a model of possible choices. This can contain a static list of values or a URL to a server providing option data. Values can be specified as a comma separated list as seen above but can also be requested from an external source using a &quot;remote URL&quot;.</p>
+<dd><p>Allowed values provide a model of possible choices. This can contain a static list of values or a URL to a server providing option data. Values can be specified as a comma separated list as seen above but can also be requested from an external source using a “remote URL”.</p>
 </dd>
 <dt>Restrictions</dt>
-<dd><p>Defines criteria on which input to accept or present. Option choices can be controlled using the &quot;Enforced from values&quot; restriction. When set &quot;true&quot;, Rundeck will only present a popup menu. If set &quot;false&quot;, a text field will also be presented. Enter a regular expression in the &quot;Match Regular Expression&quot; field the Job will evaluate when run.</p>
+<dd><p>Defines criteria on which input to accept or present. Option choices can be controlled using the “Enforced from values” restriction. When set “true”, Rundeck will only present a popup menu. If set “false”, a text field will also be presented. Enter a regular expression in the “Match Regular Expression” field the Job will evaluate when run.</p>
 </dd>
 <dt>Requirement</dt>
-<dd><p>Indicates if the Job can only run if a non-blank value is provided for that Option. Choose &quot;No&quot; to indicate that a blank value is allowed, and choose &quot;Yes&quot; to indicate that a blank value is not allowed.</p>
+<dd><p>Indicates if the Job can only run if a non-blank value is provided for that Option. Choose “No” to indicate that a blank value is allowed, and choose “Yes” to indicate that a blank value is not allowed.</p>
 <p>If a Default Value is set, then it will be used when no value is provided, unless a blank value is allowed and is explicitly specified.</p>
 </dd>
 </dl>
-<div class="figure">
-<img src="../figures/fig-option-multival.png" alt="Option Multivalued Form" /><p class="caption">Option Multivalued Form</p>
-</div>
+<figure>
+<img src="../figures/fig-option-multival.png" alt="Option Multivalued Form" /><figcaption>Option Multivalued Form</figcaption>
+</figure>
 <dl>
 <dt>Multi-valued</dt>
-<dd><p>Defines if the user input can consist of multiple values. Choosing &quot;No&quot; states that only a single value can chosen as input. Choosing &quot;Yes&quot; states that the user may select multiple input values from the Allowed values and/or enter multiple values of their own.</p>
+<dd><p>Defines if the user input can consist of multiple values. Choosing “No” states that only a single value can chosen as input. Choosing “Yes” states that the user may select multiple input values from the Allowed values and/or enter multiple values of their own.</p>
 </dd>
 <dt>Delimiter</dt>
 <dd><p>The delimiter string will be used to separate the multiple values when the Job is run.</p>
@@ -211,20 +254,20 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <dd><p>If checked, and no default value(s) are specified, all of the remote or local values will be selected by default.</p>
 </dd>
 </dl>
-<p>Once satisfied with the option definition, press the &quot;Save&quot; button to add it to the Job definition. Pressing the &quot;Cancel&quot; button will dismiss the changes and close the form.</p>
+<p>Once satisfied with the option definition, press the “Save” button to add it to the Job definition. Pressing the “Cancel” button will dismiss the changes and close the form.</p>
 <p>Usage (see below)</p>
-<div class="figure">
-<img src="../figures/fig-option-usage.png" alt="Option Usage" /><p class="caption">Option Usage</p>
-</div>
-<h3 id="file-option-type"><a href="#file-option-type">File Option Type</a></h3>
-<p>Choose &quot;File&quot; from the Option Type:</p>
-<div class="figure">
-<img src="../figures/fig-newoption-file.png" alt="File Option Edit Form" /><p class="caption">File Option Edit Form</p>
-</div>
+<figure>
+<img src="../figures/fig-option-usage.png" alt="Option Usage" /><figcaption>Option Usage</figcaption>
+</figure>
+<h3 id="file-option-type">File Option Type</h3>
+<p>Choose “File” from the Option Type:</p>
+<figure>
+<img src="../figures/fig-newoption-file.png" alt="File Option Edit Form" /><figcaption>File Option Edit Form</figcaption>
+</figure>
 <p>The Option Name and Description can be entered.</p>
 <dl>
 <dt>Required</dt>
-<dd>Choose whether to require the option have a value.
+<dd><p>Choose whether to require the option have a value.</p>
 </dd>
 </dl>
 <p>File option usage:</p>
@@ -232,82 +275,78 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p><code>file.NAME</code> will be the local file path.</p>
 <p><code>file.NAME.filename</code> will be the original file name (if available).</p>
 <p><code>file.NAME.sha</code> will be the SHA256 hash of the file.</p>
-<h2 id="script-usage"><a href="#script-usage">Script usage</a></h2>
+<h2 id="script-usage">Script usage</h2>
 <p>Option values can be passed to scripts as an argument or referenced inside the script via a named token. Each option value is defined in the Options context variables as <code>option.NAME</code>.</p>
 <p>See the <a href="#context-variables">Context Variables</a> Section.</p>
 <p><strong>Example:</strong></p>
-<p>A Job named &quot;hello&quot; and has an option named &quot;message&quot;.</p>
-<p>The &quot;hello&quot; Job option signature would be: <code>-message &lt;&gt;</code>.</p>
-<div class="figure">
-<img src="../figures/fig0504.png" alt="Option usage" /><p class="caption">Option usage</p>
-</div>
+<p>A Job named “hello” and has an option named “message”.</p>
+<p>The “hello” Job option signature would be: <code>-message &lt;&gt;</code>.</p>
+<figure>
+<img src="../figures/fig0504.png" alt="Option usage" /><figcaption>Option usage</figcaption>
+</figure>
 <p>The arguments passed to the script are defined as <code>${option.message}</code>.</p>
-<p>Here's the content of this simple script that shows the various forms to access the value of the &quot;message&quot; option.</p>
-<table class="sourceCode bash numberLines"><tr class="sourceCode"><td class="lineNumbers"><pre>1
-2
-3
-4
-</pre></td><td class="sourceCode"><pre><code class="sourceCode bash"><span class="co">#!/bin/sh    </span>
-<span class="kw">echo</span> envvar=<span class="ot">$RD_OPTION_MESSAGE</span> ;<span class="co"># access message as environment variable.</span>
-<span class="kw">echo</span> args=<span class="ot">$1</span>                   ;<span class="co"># read value passed into argument vector</span>
-<span class="kw">echo</span> message=@option.message@  ;<span class="co"># access message via replacement token syntax</span></code></pre></td></tr></table>
-<p>When the user runs the &quot;hello&quot; job they will be prompted for the &quot;message&quot; value.</p>
-<div class="figure">
-<img src="../figures/fig0505.png" alt="Option entered" /><p class="caption">Option entered</p>
-</div>
-<p>Let's assume they chose the word &quot;howdy&quot; in response. The output of the Job will be:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ot">envar=</span>howdy
-<span class="ot">args=</span>howdy    
-<span class="ot">message=</span>howdy    </code></pre>
+<p>Here’s the content of this simple script that shows the various forms to access the value of the “message” option.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">#!/bin/sh    </span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="bu">echo</span> envvar=<span class="va">$RD_OPTION_MESSAGE</span> ;<span class="co"># access message as environment variable.</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="bu">echo</span> args=<span class="va">$1</span>                   ;<span class="co"># read value passed into argument vector</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="bu">echo</span> message=@option.message@  ;<span class="co"># access message via replacement token syntax</span></a></code></pre></div>
+<p>When the user runs the “hello” job they will be prompted for the “message” value.</p>
+<figure>
+<img src="../figures/fig0505.png" alt="Option entered" /><figcaption>Option entered</figcaption>
+</figure>
+<p>Let’s assume they chose the word “howdy” in response. The output of the Job will be:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="va">envar=</span>howdy</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="va">args=</span>howdy    </a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="va">message=</span>howdy    </a></code></pre></div>
 <p>If you define the option to be <em>Required</em>, then the Job will fail to run unless the user supplies a value that is not blank.</p>
 <p>If you define the option to not be <em>Required</em>, then the option value is allowed to be blank, and specifying a blank value would result in:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ot">envar=</span>
-<span class="ot">args=</span>
-<span class="ot">message=</span></code></pre>
-<p>You can use the <em>Default Value</em> of an option to provide a value in the case where the user doesn't specify it. In the GUI, the <em>Default Value</em> will automatically be presented in the Job Execution page. From the CLI or API, leaving off a <code>-option</code> argument to a job will use the default value.</p>
-<p>You can also handle default values within a script, if your option doesn't specify one, or the user specifies a blank value for the option:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="va">envar=</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="va">args=</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="va">message=</span></a></code></pre></div>
+<p>You can use the <em>Default Value</em> of an option to provide a value in the case where the user doesn’t specify it. In the GUI, the <em>Default Value</em> will automatically be presented in the Job Execution page. From the CLI or API, leaving off a <code>-option</code> argument to a job will use the default value.</p>
+<p>You can also handle default values within a script, if your option doesn’t specify one, or the user specifies a blank value for the option:</p>
 <p><strong>Environment variable:</strong></p>
 <p>As a precaution you might test existence for the variable and perhaps set a default value. To test its existence you might use:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">test</span> -s <span class="st">&quot;</span><span class="ot">$RD_OPTION_NAME</span><span class="st">&quot;</span></code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="bu">test</span> -s <span class="st">&quot;</span><span class="va">$RD_OPTION_NAME</span><span class="st">&quot;</span></a></code></pre></div>
 <p>You might also use a Bash feature that tests and defaults it to a value:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ot">${RD_OPTION_NAME:=</span>mydefault<span class="ot">}</span> </code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="va">${RD_OPTION_NAME:=</span>mydefault<span class="va">}</span> </a></code></pre></div>
 <p><strong>Replacement token:</strong></p>
 <p>If the option is blank or unset the token will be replaced with a blank string. You might write your script a bit more defensively and change the implementation like so:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="ot">message=</span><span class="st">&quot;@option.message@&quot;</span>
-<span class="kw">if [</span> <span class="ot">-z</span> <span class="st">&quot;</span><span class="ot">$message</span><span class="st">&quot;</span><span class="kw"> ]</span>
-<span class="kw">then</span>
-   <span class="ot">message=</span>mydefault
-<span class="kw">fi</span></code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="va">message=</span><span class="st">&quot;@option.message@&quot;</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">if</span><span class="bu"> [</span> <span class="ot">-z</span> <span class="st">&quot;</span><span class="va">$message</span><span class="st">&quot;</span><span class="bu"> ]</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw">then</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">   <span class="va">message=</span>mydefault</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="kw">fi</span></a></code></pre></div>
 <blockquote>
 <p>Note, The replacement token syntax is only supported in inline script steps (ie, not script file or command steps).</p>
 </blockquote>
 <p><strong>Escaping Replacement Token:</strong></p>
-<p>If you want to use the <code>@</code> char in a way that looks like a replacement token you can escape it using <code>@@</code>, i.e. doubling it.</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># escaping of @ sign to avoid expansion before the @option.domain@</span>
-<span class="ot">email=</span><span class="st">&quot;user@@mail.@option.domain@&quot;</span>
-
-<span class="co"># If the first @ sign comes right before the token, use three @</span>
-<span class="ot">email=</span><span class="st">&quot;user@@@option.domain@&quot;</span></code></pre>
+<p>If you want to use the <code>@</code> char in a way that looks like a replacement token you can escape it using <code>@@</code>, i.e. doubling it.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># escaping of @ sign to avoid expansion before the @option.domain@</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="va">email=</span><span class="st">&quot;user@@mail.@option.domain@&quot;</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co"># If the first @ sign comes right before the token, use three @</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="va">email=</span><span class="st">&quot;user@@@option.domain@&quot;</span></a></code></pre></div>
 <p>In this example, the <code>@@@option.domain@</code> will result in <code>@mydomain</code>, and <code>@@mail.@option.domain2@</code> will result in <code>@mail.mydomain</code>.</p>
 <p>If you do not escape the <code>@</code> in the second example, then <code>@mail.@</code> will be expanded to a missing value, resulting in a blank string.</p>
 <p>You do not need to escape the <code>@</code> sign in all cases, only when it might look like an expansion token. If there are any whitespace characters before the next <code>@</code> sign, it does not need to be escaped:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># first @ sign does not need to be escaped</span>
-<span class="ot">text=</span><span class="st">&quot;Hi user@somewhere, @option.greeting@!&quot;</span></code></pre>
-<h2 id="escaped-values"><a href="#escaped-values">Escaped values</a></h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># first @ sign does not need to be escaped</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="va">text=</span><span class="st">&quot;Hi user@somewhere, @option.greeting@!&quot;</span></a></code></pre></div>
+<h2 id="escaped-values">Escaped values</h2>
 <p>When the arguments to script or the contents of a Command execution string are evaluated, embedded property references like <code>${option.name}</code> are replaced by the values entered by a user.</p>
 <p>To prevent any user input from including shell-special characters (accidentally or maliciously), any argument which has embedded references will be quoted for the shell.</p>
 <p>You should also be careful in how arguments to scripts are used within a script.</p>
 <p>For example, if you have a Shell script step with argument string <code>${option.message}</code>, and script:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/bin/bash</span>
-
-<span class="kw">echo</span> <span class="ot">$1</span></code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co">#!/bin/bash</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="bu">echo</span> <span class="va">$1</span></a></code></pre></div>
 <p>Then this script will partially expand the <code>${option.message}</code> value a second time, even though it was correctly quoted to pass to your script.</p>
 <p>You should do something like this instead:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="co">#!/bin/bash</span>
-
-<span class="kw">echo</span> <span class="st">&quot;</span><span class="ot">$1</span><span class="st">&quot;</span></code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co">#!/bin/bash</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span></a></code></pre></div>
 <p>Which allows the shell will correctly handle the input value by quoting it.</p>
-<h2 id="secure-options"><a href="#secure-options">Secure Options</a></h2>
+<h2 id="secure-options">Secure Options</h2>
 <p>Options can be marked as Secure, to show a password prompt in the GUI, instead of a normal text field or drop down menu. Secure option values are not stored with the Execution as are the other option values.</p>
 <p>There are two types of Secure options:</p>
 <ul>
@@ -317,7 +356,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>Secure Options do not support Multi-valued input.</p>
 <p>Secure Options cannot be used as authentication input to Node Executors, you must use a Secure Remote Authentication option described below.</p>
 <p><strong>Important Note</strong></p>
-<p>&quot;Secure&quot; option values are not stored in the Rundeck database when the Job is executed, but the value that is entered is exposed to use in scripts and commands. Make sure you acknowledge these security implications before using them. Secure options are available for use in scripts and command like any other option value:</p>
+<p>“Secure” option values are not stored in the Rundeck database when the Job is executed, but the value that is entered is exposed to use in scripts and commands. Make sure you acknowledge these security implications before using them. Secure options are available for use in scripts and command like any other option value:</p>
 <ul>
 <li>as plaintext arguments using <code>${option.name}</code>
 <ul>
@@ -335,16 +374,16 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <blockquote>
 <p>Note, When passed as arguments to Job References, they can only be passed as the value of another Secure option. See <a href="#using-secure-options-with-job-references">Using Secure Options with Job References</a>.</p>
 </blockquote>
-<h3 id="secure-remote-authentication-options"><a href="#secure-remote-authentication-options">Secure Remote Authentication Options</a></h3>
+<h3 id="secure-remote-authentication-options">Secure Remote Authentication Options</h3>
 <p>The built-in <a href="node-execution/ssh-node-execution.html">SSH Provider</a> for node execution allows using passwords for SSH and/or Sudo authentication mechanisms, and the passwords are supplied by Secure Remote Authentication Options defined in a Job.</p>
 <p>Secure Remote Authentication Options have some limitations compared to Plain and Secure options:</p>
 <ul>
 <li>The values entered by the user are not available for normal script and command option value expansion. This means that they can only be used for the purposes of the Remote Authentication.</li>
 </ul>
-<h3 id="using-secure-options-with-job-references"><a href="#using-secure-options-with-job-references">Using Secure Options with Job References</a></h3>
+<h3 id="using-secure-options-with-job-references">Using Secure Options with Job References</h3>
 <p>When you <a href="#job-reference-step">define a Job Reference step in a workflow</a>, you can specify the arguments that are passed to it. You can pass Secure Option values and Secure Remote Authentication Option values from a top-level job to a Job Reference, but option values <em>cannot be passed into another option of a different type</em>. So a parent job can only pass option values to the Job reference if the option type is the same between the jobs.</p>
 <p>This constraint is to maintain the security design of these options:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Secure options should not to be stored in the Rundeck execution database, so must not be used as plain option values.</li>
 <li>Secure Remote Authentication options should not be used in scripts/commands, so must not be used as Secure or Plain option values.</li>
 </ol>
@@ -352,15 +391,15 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <ul>
 <li>Job A
 <ul>
-<li>Option &quot;plain1&quot; - Plain</li>
-<li>Option &quot;secure1&quot; - Secure</li>
-<li>Option &quot;auth1&quot; - Secure remote authentication</li>
+<li>Option “plain1” - Plain</li>
+<li>Option “secure1” - Secure</li>
+<li>Option “auth1” - Secure remote authentication</li>
 </ul></li>
 <li>Job B
 <ul>
-<li>Option &quot;plain2&quot; - Plain</li>
-<li>Option &quot;secure2&quot; - Secure</li>
-<li>Option &quot;auth2&quot; - Secure remote authentication</li>
+<li>Option “plain2” - Plain</li>
+<li>Option “secure2” - Secure</li>
+<li>Option “auth2” - Secure remote authentication</li>
 </ul></li>
 </ul>
 <p>If Job A defines a Job reference to call Job B, then the only valid mapping is shown below:</p>
@@ -374,28 +413,28 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <blockquote>
 <p>Note, If you define arguments in the wrong manner, then the Secure and Secure Remote Authentication options will not be set when the Job reference is called. Plain options will behave the way they do in Command or Script arguments, and be left as-is as uninterpreted property references.</p>
 </blockquote>
-<h3 id="secure-options-using-key-storage"><a href="#secure-options-using-key-storage">Secure Options using Key Storage</a></h3>
+<h3 id="secure-options-using-key-storage">Secure Options using Key Storage</h3>
 <p>Secure options can specify a Storage Path in lieu of a default value. This path to the <a href="../administration/security/key-storage.html">Key Storage Facility</a> will be loaded as the option value when one is not supplied.</p>
 <p>The path must indicate a stored <code>password</code> entry in the storage facility.</p>
-<div class="figure">
-<img src="../figures/jobs-options-secure-storage-path.png" alt="Storage Path for Secure Option" /><p class="caption">Storage Path for Secure Option</p>
-</div>
-<h2 id="remote-option-values"><a href="#remote-option-values">Remote option values</a></h2>
+<figure>
+<img src="../figures/jobs-options-secure-storage-path.png" alt="Storage Path for Secure Option" /><figcaption>Storage Path for Secure Option</figcaption>
+</figure>
+<h2 id="remote-option-values">Remote option values</h2>
 <p>A model of option values can be retrieved from an external source called an <em>option model provider</em>. When the <code>valuesUrl</code> is specified for an Option, then the model of allowed values is retrieved from the specified URL.</p>
 <p>This is useful in a couple of scenarios when Rundeck is used to coordinate process that depend on other systems:</p>
 <ul>
-<li>Deploying packages or artifacts produced by a build or CI server, e.g. Jenkins.
+<li>Deploying packages or artifacts produced by a build or CI server, e.g. Jenkins.
 <ul>
 <li>A list of recent Jenkins build artifacts can be imported as Options data, so that a User can pick an appropriate package name to deploy from a list.</li>
 </ul></li>
 <li>Selecting from a set of available environments, defined in a CMDB</li>
 <li>Any situation in which input variables for your Jobs must be selected from some set of values produced by a different system.</li>
 </ul>
-<h2 id="option-model-provider"><a href="#option-model-provider">Option model provider</a></h2>
+<h2 id="option-model-provider">Option model provider</h2>
 <p>The Option model provider is a mechanism to allow the Options defined for a Job to have some of the possible input values provided by a remote service or database.</p>
 <p>Option model providers are configured on a per-Option basis (where a Job may have zero or more Options).</p>
-<h3 id="requirements"><a href="#requirements">Requirements</a></h3>
-<ol style="list-style-type: decimal">
+<h3 id="requirements">Requirements</h3>
+<ol type="1">
 <li>Options model data must be <a href="http://www.json.org">JSON formatted</a>.</li>
 <li>It must be accessible via HTTP(S) or on the local disk for the Rundeck server.</li>
 <li>It must be in one of two JSON structures, <em>either</em>:
@@ -405,59 +444,59 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </ul></li>
 <li>By default, the HTTP(S) response must include the <code>application/json</code> content type in the header. In case this cannot be controlled, the attribute <code>project.jobs.disableRemoteOptionJsonCheck</code> can be set to <code>true</code> in the project settings.</li>
 </ol>
-<h3 id="configuration"><a href="#configuration">Configuration</a></h3>
-<p>Each Option entry for a Job can be configured to get the set of possible values from a remote URL. If you are authoring the Jobs via <a href="../man5/job-xml.html#option">job.xml file format</a>, simply add a <code>valuesUrl</code> attribute for the <code>&lt;option&gt;</code>. If you are modifying the Job in the Rundeck web GUI, you can entry a URL in the &quot;Remote URL&quot; field for the Option.</p>
+<h3 id="configuration">Configuration</h3>
+<p>Each Option entry for a Job can be configured to get the set of possible values from a remote URL. If you are authoring the Jobs via <a href="../man5/job-xml.html#option">job.xml file format</a>, simply add a <code>valuesUrl</code> attribute for the <code>&lt;option&gt;</code>. If you are modifying the Job in the Rundeck web GUI, you can entry a URL in the “Remote URL” field for the Option.</p>
 <p>e.g.:</p>
 <pre><code>&lt;option valuesUrl=&quot;http://site.example.com/values.json&quot; ... /&gt;</code></pre>
 <blockquote>
 <p>Note, File URL scheme is also acceptable (e.g, <code>file:/path/to/job/options/optA.json</code>).</p>
 </blockquote>
 <p>The value data must be returned in JSON data format described below.</p>
-<h3 id="json-format"><a href="#json-format">JSON format</a></h3>
+<h3 id="json-format">JSON format</h3>
 <p>Three styles of return data are supported: simple list, simple object, and a name/value list. For a simple list, the list values will be displayed in a pop-up list when running the Job. If a simple object or name/value pairs are returned, then the <code>name</code> will be displayed in the list, but the <code>value</code> will be used as the input.</p>
 <p><em>Examples</em></p>
 <p>Simple List:</p>
-<pre class="sourceCode json"><code class="sourceCode json">[<span class="st">&quot;x value for test&quot;</span>,<span class="st">&quot;y value for test&quot;</span>]</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="ot">[</span><span class="st">&quot;x value for test&quot;</span><span class="ot">,</span><span class="st">&quot;y value for test&quot;</span><span class="ot">]</span></a></code></pre></div>
 <p>This will populate the select menu with the given values.</p>
 <p>Simple Object:</p>
-<pre class="sourceCode json"><code class="sourceCode json">{ <span class="dt">&quot;Name&quot;</span>: <span class="st">&quot;value1&quot;</span>, <span class="dt">&quot;Name2&quot;</span>:<span class="st">&quot;value2&quot;</span> }</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="fu">{</span> <span class="dt">&quot;Name&quot;</span><span class="fu">:</span> <span class="st">&quot;value1&quot;</span><span class="fu">,</span> <span class="dt">&quot;Name2&quot;</span><span class="fu">:</span><span class="st">&quot;value2&quot;</span> <span class="fu">}</span></a></code></pre></div>
 <p>This will populate the select menu to show the names and use the values.</p>
 <p>Name Value List:</p>
-<pre class="sourceCode json"><code class="sourceCode json">[
-  {<span class="dt">&quot;name&quot;</span>:<span class="st">&quot;X Label&quot;</span>, <span class="dt">&quot;value&quot;</span>:<span class="st">&quot;x value&quot;</span>},
-  {<span class="dt">&quot;name&quot;</span>:<span class="st">&quot;Y Label&quot;</span>, <span class="dt">&quot;value&quot;</span>:<span class="st">&quot;y value&quot;</span>},
-  {<span class="dt">&quot;name&quot;</span>:<span class="st">&quot;A Label&quot;</span>, <span class="dt">&quot;value&quot;</span>:<span class="st">&quot;a value&quot;</span>}
-] </code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="ot">[</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">  <span class="fu">{</span><span class="dt">&quot;name&quot;</span><span class="fu">:</span><span class="st">&quot;X Label&quot;</span><span class="fu">,</span> <span class="dt">&quot;value&quot;</span><span class="fu">:</span><span class="st">&quot;x value&quot;</span><span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">  <span class="fu">{</span><span class="dt">&quot;name&quot;</span><span class="fu">:</span><span class="st">&quot;Y Label&quot;</span><span class="fu">,</span> <span class="dt">&quot;value&quot;</span><span class="fu">:</span><span class="st">&quot;y value&quot;</span><span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4">  <span class="fu">{</span><span class="dt">&quot;name&quot;</span><span class="fu">:</span><span class="st">&quot;A Label&quot;</span><span class="fu">,</span> <span class="dt">&quot;value&quot;</span><span class="fu">:</span><span class="st">&quot;a value&quot;</span><span class="fu">}</span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="ot">]</span> </a></code></pre></div>
 <p>For multivalued options, if the result is a list of objects and some have a <code>selected</code> property of <code>true</code>, those values will be selected by default.</p>
 <p>For a single valued option, the first result with <code>selected=true</code> will be selected (if any).</p>
 <p>Name Value List with default selections:</p>
-<pre class="sourceCode json"><code class="sourceCode json">[
-  {<span class="dt">&quot;name&quot;</span>:<span class="st">&quot;X Label&quot;</span>, <span class="dt">&quot;value&quot;</span>:<span class="st">&quot;x value&quot;</span>, <span class="dt">&quot;selected&quot;</span>: <span class="dv">true</span>},
-  {<span class="dt">&quot;name&quot;</span>:<span class="st">&quot;Y Label&quot;</span>, <span class="dt">&quot;value&quot;</span>:<span class="st">&quot;y value&quot;</span>},
-  {<span class="dt">&quot;name&quot;</span>:<span class="st">&quot;A Label&quot;</span>, <span class="dt">&quot;value&quot;</span>:<span class="st">&quot;a value&quot;</span>, <span class="dt">&quot;selected&quot;</span>: <span class="dv">true</span>}
-] </code></pre>
-<h3 id="url-connection-parameters"><a href="#url-connection-parameters">URL connection parameters</a></h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="ot">[</span></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">  <span class="fu">{</span><span class="dt">&quot;name&quot;</span><span class="fu">:</span><span class="st">&quot;X Label&quot;</span><span class="fu">,</span> <span class="dt">&quot;value&quot;</span><span class="fu">:</span><span class="st">&quot;x value&quot;</span><span class="fu">,</span> <span class="dt">&quot;selected&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">  <span class="fu">{</span><span class="dt">&quot;name&quot;</span><span class="fu">:</span><span class="st">&quot;Y Label&quot;</span><span class="fu">,</span> <span class="dt">&quot;value&quot;</span><span class="fu">:</span><span class="st">&quot;y value&quot;</span><span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4">  <span class="fu">{</span><span class="dt">&quot;name&quot;</span><span class="fu">:</span><span class="st">&quot;A Label&quot;</span><span class="fu">,</span> <span class="dt">&quot;value&quot;</span><span class="fu">:</span><span class="st">&quot;a value&quot;</span><span class="fu">,</span> <span class="dt">&quot;selected&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">}</span></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="ot">]</span> </a></code></pre></div>
+<h3 id="url-connection-parameters">URL connection parameters</h3>
 <p>You can configure timeouts globally as described in <a href="../administration/configuration/configuration-file-reference.html#rundeck-config.properties">Configuration - Job Remote Option URL connection parameters</a>.</p>
 <p>You can also specify these connection parameters on a per-URL basis:</p>
 <dl>
 <dt><code>timeout</code></dt>
-<dd><p>socket timeout in seconds</p>
+<dd>socket timeout in seconds
 </dd>
 <dt><code>contimeout</code></dt>
-<dd><p>connection timeout in seconds</p>
+<dd>connection timeout in seconds
 </dd>
 <dt><code>retry</code></dt>
-<dd><p>retry count if no response from server</p>
+<dd>retry count if no response from server
 </dd>
 </dl>
-<p>To set this in an Option's remote URL, add them as the &quot;fragment&quot; portion of the URL, after the <code>#</code> character like so:</p>
+<p>To set this in an Option’s remote URL, add them as the “fragment” portion of the URL, after the <code>#</code> character like so:</p>
 <pre><code>http://host/mypath#timeout=60;contimeout=5;retry=1</code></pre>
 <p>Use <code>key=value</code> for a parameter, and separate multiple parameters with the <code>;</code> character.</p>
-<h3 id="cascading-remote-options"><a href="#cascading-remote-options">Cascading Remote Options</a></h3>
-<p>Cascading options allow an option's Remote values URL to embed the values entered by the user for other options when executing a Job. When the user enters or selects a value for one of the other options, then the remote JSON is refreshed for the current option.</p>
+<h3 id="cascading-remote-options">Cascading Remote Options</h3>
+<p>Cascading options allow an option’s Remote values URL to embed the values entered by the user for other options when executing a Job. When the user enters or selects a value for one of the other options, then the remote JSON is refreshed for the current option.</p>
 <p>This provides a mechanism for declaring hierarchical or dependent sets of option values.</p>
-<p>E.g. if you wanted one option to choose a &quot;repository&quot;, and another option to select a specific &quot;branch&quot; within that repository. Define your option provider to respond correctly based on the selected &quot;repository&quot; value, and define your Remote option URL to include a reference to the &quot;repository&quot; option value. The Rundeck GUI will then reload the JSON values from the remote URL and insert the correct value of the &quot;repository&quot; option when loading the &quot;branch&quot; option values. If the user changes the selected repository, then the branch values will be automatically refreshed.</p>
-<p>You can declare a dependency of one option to another by embedding property references within the remote values URL. The property reference is of the form <code>${option.[name].value}</code>. If you declare an option with a remote values URL like &quot;http://server/options?option2=${option.option2.value}&quot;, then that option will depend on the value of the &quot;option2&quot; option.</p>
+<p>E.g. if you wanted one option to choose a “repository”, and another option to select a specific “branch” within that repository. Define your option provider to respond correctly based on the selected “repository” value, and define your Remote option URL to include a reference to the “repository” option value. The Rundeck GUI will then reload the JSON values from the remote URL and insert the correct value of the “repository” option when loading the “branch” option values. If the user changes the selected repository, then the branch values will be automatically refreshed.</p>
+<p>You can declare a dependency of one option to another by embedding property references within the remote values URL. The property reference is of the form <code>${option.[name].value}</code>. If you declare an option with a remote values URL like “http://server/options?option2=${option.option2.value}”, then that option will depend on the value of the “option2” option.</p>
 <p>In the GUI, when the options are loaded, option2 will be shown first, and the remote values for option1 will only be loaded once a value has been selected for option2, and the value will be placed in the URL when it is loaded.</p>
 <p>If an option has dependencies on other options that do not have a value set, then the embedded references will evaluate to &quot;&quot; (empty string) when loading the URL.</p>
 <p>If an option has dependencies on other options and the remote values <a href="#json-format">JSON data</a> is empty (empty list or empty object), then the option shown in the GUI will indicate that the user should select values for the necessary options. This allows Option model providers to indicate that some or all of the dependent option values are necessary for the current option before showing the input for the option.</p>
@@ -465,8 +504,8 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <blockquote>
 <p>Note, It is also possible to declare a cycle of dependencies between option values, which will cause the automatic reloading to be disabled. In this case the user must manually click the reload button to reload the option values if a dependency has changed.</p>
 </blockquote>
-<h3 id="variable-expansion-in-remote-urls"><a href="#variable-expansion-in-remote-urls">Variable expansion in remote URLs</a></h3>
-<p>The URL declared for the &quot;valuesUrl&quot; can embed variables which will be filled with certain job context items when making the remote request. This helps make the URLs more generic and contextual to the Job.</p>
+<h3 id="variable-expansion-in-remote-urls">Variable expansion in remote URLs</h3>
+<p>The URL declared for the “valuesUrl” can embed variables which will be filled with certain job context items when making the remote request. This helps make the URLs more generic and contextual to the Job.</p>
 <p>Two types of expansions are available, Job context, and Option context.</p>
 <p>To include job information in the URL, specify a variable of the form <code>${job._property_}</code>.</p>
 <p>Properties available for Job context:</p>
@@ -481,27 +520,25 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li><code>rundeck.basedir</code>: File path of the Rundeck base dir (<code>file://</code> URLs only)</li>
 </ul>
 <p>Additionally the <code>rundeck.*</code> properties can be specified without the <code>job.</code> prefix, e.g. <code>${rundeck.basedir}</code>.</p>
-<p>To include Option information in the URL, specify a variable of the form ${option.<em>property</em>}:</p>
+<p>To include Option information in the URL, specify a variable of the form ${option._property_}:</p>
 <p>Properties available for Option context:</p>
 <ul>
 <li><code>name</code>: Name of the current option</li>
 </ul>
-<p>To include <a href="#cascading-remote-options">Cascading remote option</a> values information in the URL, specify a variable of the form ${option.<em>name</em>.value}:</p>
+<p>To include <a href="#cascading-remote-options">Cascading remote option</a> values information in the URL, specify a variable of the form ${option._name_.value}:</p>
 <ul>
 <li><code>option.[name].value</code>: substitutes the selected value of another option by name. If the option is not set, then a blank string (&quot;&quot;) will be substituted.</li>
 </ul>
 <p><em>Examples</em></p>
 <pre><code>http://server.com/test?name=${option.name}</code></pre>
-<p>Passes the option name as the &quot;name&quot; query parameter to the URL.</p>
+<p>Passes the option name as the “name” query parameter to the URL.</p>
 <pre><code>http://server.com/test?jobname=${job.name}&amp;jobgroup=${job.group}</code></pre>
 <p>Passes the job name and group as query parameters.</p>
 <pre><code>http://server.com/branches?repository=${option.repository.value}</code></pre>
-<p>Passes the value of the selected &quot;repository&quot; option, or &quot;&quot; (blank) if it is not set. This option becomes a dependent of the &quot;repository&quot; option, and if the &quot;repository&quot; value changes, the remote option values for this option will be reloaded.</p>
-<h3 id="remote-request-failures"><a href="#remote-request-failures">Remote request failures</a></h3>
+<p>Passes the value of the selected “repository” option, or &quot;&quot; (blank) if it is not set. This option becomes a dependent of the “repository” option, and if the “repository” value changes, the remote option values for this option will be reloaded.</p>
+<h3 id="remote-request-failures">Remote request failures</h3>
 <p>If the request for the remote option values fails, then the GUI form will display a warning message:</p>
-<div class="figure">
-<img src="../figures/fig0901.png" />
-</div>
+<p><img src="../figures/fig0901.png" /></p>
 <p>In this case, the option will be allowed to use a textfield to set the value.</p>
 </div>
 </div>
@@ -553,7 +590,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

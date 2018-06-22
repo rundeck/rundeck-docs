@@ -87,9 +87,9 @@ jQuery(function(){
 <div class="page-header">
 <h1 class="title">Orchestrator Plugin</h1>
 </div>
-<h2 id="configuring"><a href="#configuring">Configuring</a></h2>
+<h2 id="configuring">Configuring</h2>
 <p>Orchestrators are configured in a Job definition, see: <a href="../manual/creating-jobs.html#orchestrator">Jobs - Orchestrator</a>.</p>
-<h2 id="java-plugin-type"><a href="#java-plugin-type">Java Plugin Type</a></h2>
+<h2 id="java-plugin-type">Java Plugin Type</h2>
 <ul>
 <li><em>Note</em>: Refer to <a href="plugin-development.html#java-plugin-development">Java Development</a> for information about developing a Java plugin for Rundeck.</li>
 </ul>
@@ -102,7 +102,7 @@ jQuery(function(){
 <p>Nodes may be executed on in the same or on multiple threads, the Orchestrator processor will manage the threads based on the configured Threadcount for the job.</p>
 <p>In this manner, the Orchestrator allows some number of nodes to be executed on simultaneously, and manages when new nodes are available.</p>
 <p>Note: The Orchestrator must abide by these limitations:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>A node may not be processed more than once, so getNode should always return a new node, or null.</li>
 <li>The Orchestrator must return nodes from the original set given to the OrchestratorPlugin, it cannot introduce new nodes</li>
 </ol>
@@ -156,7 +156,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

@@ -66,8 +66,8 @@ jQuery(function(){
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="built-in-node-execution-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> Built-in Node Execution Plugins</a></li>
-      <li class="next"><a href="script-node-execution.html">Script Node Execution <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      
+      <li class="next"><a href="ssh-node-execution.html">SSH Node Execution <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -97,7 +97,6 @@ jQuery(function(){
 Original: 
 http://support.rundeck.com/customer/en/portal/articles/1939728-powershell-plugins)
 --->
-
 <p>These plugins are only applicable to Rundeck Pro deployments on Windows Servers.</p>
 <p>There are two plugins:</p>
 <ul>
@@ -105,61 +104,61 @@ http://support.rundeck.com/customer/en/portal/articles/1939728-powershell-plugin
 <li><strong>Node Executor</strong>: Executes the command and script steps.</li>
 </ul>
 <p>The plugins can be enabled in the Project Configuration page by selecting the PowerShell Node Executor and PowerShell File Copier as the default Node Executor and File Copiers.</p>
-<h3 id="authentication-types"><a href="#authentication-types">Authentication Types</a></h3>
+<h3 id="authentication-types">Authentication Types</h3>
 <p>Authentication can happen in two ways, via trusted domain account or by username and password.</p>
-<h4 id="hosts-in-trusted-domain"><a href="#hosts-in-trusted-domain">Hosts in Trusted Domain</a></h4>
+<h4 id="hosts-in-trusted-domain">Hosts in Trusted Domain</h4>
 <p>When all hosts are in a trusted domain, remote execution requires just the username to access the remote hosts. Authentication will be made to the remote nodes as the domain user account that is executing the Rundeck server process.</p>
-<h4 id="username-and-password"><a href="#username-and-password">Username and Password</a></h4>
+<h4 id="username-and-password">Username and Password</h4>
 <p>If all hosts are not in a trusted domain, both username and password are required to access the remote hosts.</p>
-<h3 id="plugin-configuration"><a href="#plugin-configuration">Plugin Configuration</a></h3>
+<h3 id="plugin-configuration">Plugin Configuration</h3>
 <p>Trusted Domain authentication will be used by default, unless a username and password are configured to be used.</p>
 <p>You can configure the plugins to use a password via the Key Storage facility when accessing remote hosts.</p>
 <ul>
 <li>password storage - using a password that is stored in the Key Storage facility.</li>
 </ul>
 <p>You can either configure the password or password storage path at a project-wide level, or on a per-node basis.</p>
-<h3 id="password-storage"><a href="#password-storage">Password Storage</a></h3>
-<p>Passwords can be stored securely in the Rundeck Pro Keystore facility. These passwords can be stored in a tree like structure to help you organize them any way you wish. The passwords can be referenced using an attribute named &quot;password-storage-path&quot;. When Rundeck needs the password, it looks up the file as referenced by the storage path, reads, decrypts, and passes the value to the plugins.</p>
-<h3 id="node-configuration"><a href="#node-configuration">Node Configuration</a></h3>
-<p>Each host is configurable via &quot;nodes&quot; in the project resource model. Nodes are defined in terms of attributes.</p>
+<h3 id="password-storage">Password Storage</h3>
+<p>Passwords can be stored securely in the Rundeck Pro Keystore facility. These passwords can be stored in a tree like structure to help you organize them any way you wish. The passwords can be referenced using an attribute named “password-storage-path”. When Rundeck needs the password, it looks up the file as referenced by the storage path, reads, decrypts, and passes the value to the plugins.</p>
+<h3 id="node-configuration">Node Configuration</h3>
+<p>Each host is configurable via “nodes” in the project resource model. Nodes are defined in terms of attributes.</p>
 <p>Attributes</p>
 <ul>
 <li>hostname: The hostname of the remote node accessible to the Rundeck server host.</li>
 <li>username: The login account name to the remote host.</li>
-<li>password-storage-path: The path to the file containing the password in the keystore. This path will start with &quot;keys/&quot;.</li>
-<li>connectionUri: Alternate connection parameters as a URI. e.g. &quot;https://hostname:port&quot;</li>
+<li>password-storage-path: The path to the file containing the password in the keystore. This path will start with “keys/”.</li>
+<li>connectionUri: Alternate connection parameters as a URI. e.g. “https://hostname:port”</li>
 </ul>
-<h4 id="example-resource-model-definitions"><a href="#example-resource-model-definitions">Example resource model definitions</a></h4>
+<h4 id="example-resource-model-definitions">Example resource model definitions</h4>
 <p>The following example show a node defined using the XML format.</p>
 <p><strong>Note the password-storage-path attribute referencing the key path.</strong></p>
 <pre><code> &lt;node name=&quot;winhost123&quot; 
        hostname=&quot;xxx.xxx.xxx.xxx&quot; 
        username=&quot;myaccount&quot; 
        password-storage-path=&quot;keys/winhost123.passwd&quot; .../&gt;</code></pre>
-<h3 id="project-configuration"><a href="#project-configuration">Project Configuration</a></h3>
+<h3 id="project-configuration">Project Configuration</h3>
 <p>The Password storage path can be configured at the project level. In the Project Configuration page, set the Password Storage Path to a key path. The path can contain references to information from the node or user who is executing the command, for example:</p>
 <pre><code>keys/nodes/${node.name}.password</code></pre>
 <p>or</p>
 <pre><code>keys/users/${job.username}.password</code></pre>
-<h3 id="winrm-setting-to-use-powershell-plugin"><a href="#winrm-setting-to-use-powershell-plugin">WinRM Setting to use PowerShell Plugin</a></h3>
+<h3 id="winrm-setting-to-use-powershell-plugin">WinRM Setting to use PowerShell Plugin</h3>
 <p>In order to connect Rundeck with remote Windows nodes, it is necessary to set WinRM in both, the server and the remote nodes.</p>
-<h4 id="on-the-rundeck-server"><a href="#on-the-rundeck-server">On the rundeck server</a></h4>
+<h4 id="on-the-rundeck-server">On the rundeck server</h4>
 <pre><code>winrm quickconfig
 winrm set winrm/config/client @{TrustedHosts=&quot;*&quot;}</code></pre>
-<h4 id="on-the-remote-nodes"><a href="#on-the-remote-nodes">On the remote nodes</a></h4>
+<h4 id="on-the-remote-nodes">On the remote nodes</h4>
 <pre><code>winrm quickconfig
 ​winrm set winrm/config/service/Auth @{Basic=&quot;true&quot;}
 winrm set winrm/config/service @{AllowUnencrypted=&quot;true&quot;}
 winrm set winrm/config/winrs @{MaxMemoryPerShellMB=&quot;1024&quot;}</code></pre>
-<h3 id="other-setting"><a href="#other-setting">Other setting</a></h3>
+<h3 id="other-setting">Other setting</h3>
 <p>To enable the execution of remote command:</p>
 <pre><code>Set-ExecutionPolicy RemoteSigned</code></pre>
 <p>To enable permission to a user to execute remote command:</p>
 <pre><code>Set-PSSessionConfiguration -ShowSecurityDescriptorUI -Name Microsoft.PowerShell</code></pre>
 <p>Increase the concurrent shell issue:</p>
 <pre><code>set-item wsman:\localhost\shell\maxshellsperuser 50 </code></pre>
-<h3 id="troubleshooting"><a href="#troubleshooting">Troubleshooting</a></h3>
-<p>If you get &quot;Access is denied&quot; error when you try to access to a shared folder on the remote node, it is possible that you must use the <a href="http://support.rundeck.com/customer/portal/articles/2522223-enable-credssp-authentication-windows">CredSSP autentication</a>.</p>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<p>If you get “Access is denied” error when you try to access to a shared folder on the remote node, it is possible that you must use the <a href="http://support.rundeck.com/customer/portal/articles/2522223-enable-credssp-authentication-windows">CredSSP autentication</a>.</p>
 <p>Then, you can define the authentication type like:</p>
 <pre><code>&lt;node name=&quot;XXXXX&quot; 
       description=&quot;Windows Server 2012&quot; 
@@ -188,13 +187,13 @@ Get-NetConnectionProfile
 
 Set-NetConnectionProfile -InterfaceIndex [INTERFAZ_INDEX] -NetworkCategory Private</code></pre>
 <p>It could be necessary to change the user’s log-on in tomcat service when the remote connection does not work:</p>
-<div class="figure">
-<img src="../../figures/powershell-troubleshooting.png" alt="Tomcat settings" /><p class="caption">Tomcat settings</p>
-</div>
+<figure>
+<img src="../../figures/powershell-troubleshooting.png" alt="Tomcat settings" /><figcaption>Tomcat settings</figcaption>
+</figure>
 <p>For further information about winrm and PowerShell plug-in see:</p>
 <ul>
-<li><a href="http://support.rundeck.com/customer/en/portal/articles/1939728-powershell-plugins">http://support.rundeck.com/customer/en/portal/articles/1939728-powershell-plugins</a></li>
-<li><a href="https://github.com/rundeck-plugins/rundeck-winrm-plugin">https://github.com/rundeck-plugins/rundeck-winrm-plugin</a></li>
+<li><a href="http://support.rundeck.com/customer/en/portal/articles/1939728-powershell-plugins" class="uri">http://support.rundeck.com/customer/en/portal/articles/1939728-powershell-plugins</a></li>
+<li><a href="https://github.com/rundeck-plugins/rundeck-winrm-plugin" class="uri">https://github.com/rundeck-plugins/rundeck-winrm-plugin</a></li>
 </ul>
 </div>
 </div>
@@ -218,8 +217,8 @@ Set-NetConnectionProfile -InterfaceIndex [INTERFAZ_INDEX] -NetworkCategory Priva
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="built-in-node-execution-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> Built-in Node Execution Plugins</a></li>
-      <li class="next"><a href="script-node-execution.html">Script Node Execution <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      
+      <li class="next"><a href="ssh-node-execution.html">SSH Node Execution <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -248,7 +247,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
+  <title>edam6897999357154730906temp</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -69,7 +69,7 @@ jQuery(function(){
 <div class="col-sm-6">
     <ul class="pager">
       <li class="previous"><a href="using-oracle-as-a-database-backend.html"><i class="glyphicon glyphicon-arrow-left"></i> Using Oracle as a database backend</a></li>
-      
+      <li class="next"><a href="using-mysql-as-a-database-backend.html">Using MySQL as a database backend <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -89,24 +89,24 @@ jQuery(function(){
 </div>
 </div>
 <div class="col-sm-9">
-<h1 id="using-postgres-as-a-database-backend"><a href="#using-postgres-as-a-database-backend">Using Postgres as a database backend</a></h1>
+<h1 id="using-postgres-as-a-database-backend">Using Postgres as a database backend</h1>
 <p>This is a simple guide for setting up PostgreSQL for use with Rundeck.</p>
-<h2 id="install-postgresql"><a href="#install-postgresql">Install PostgreSQL</a></h2>
-<p>You can &quot;yum install&quot; or &quot;apt-get install&quot; the server, or you can download rpms manually if you like. See <a href="https://wiki.postgresql.org/wiki/Detailed_installation_guides">PostgreSQL installation</a></p>
-<h2 id="setup-rundeck-database"><a href="#setup-rundeck-database">Setup Rundeck Database</a></h2>
+<h2 id="install-postgresql">Install PostgreSQL</h2>
+<p>You can “yum install” or “apt-get install” the server, or you can download rpms manually if you like. See <a href="https://wiki.postgresql.org/wiki/Detailed_installation_guides">PostgreSQL installation</a></p>
+<h2 id="setup-rundeck-database">Setup Rundeck Database</h2>
 <p>We have to create the database and user for Rundeck.</p>
-<p>If it is not running, start Postgres (with &quot;service postgresql-<version> start&quot; or similar).</p>
-<p>Switch to 'postgres' user and use the 'psql' commandline tool to access the db:</p>
+<p>If it is not running, start Postgres (with “service postgresql-<version> start” or similar).</p>
+<p>Switch to ‘postgres’ user and use the ‘psql’ commandline tool to access the db:</p>
 <pre><code>$ su postgres
 $ psql</code></pre>
-<p>Once you have the 'postgres=#'' prompt, enter the following commands to create the rundeck database:</p>
+<p>Once you have the ‘postgres=#’’ prompt, enter the following commands to create the rundeck database:</p>
 <pre><code>postgres=# create database rundeck;</code></pre>
 <p>Now, create a user and grant privileges to connect to this DB.</p>
 <pre><code>postgres=# create user rundeckuser with password &#39;rundeckpassword&#39;;
 postgres=# grant ALL privileges on database rundeck to rundeckuser;</code></pre>
 <p>You can then exit the psql prompt.</p>
 <p>You may also have to add a pg_hba.conf entry for this user. See <a href="https://www.postgresql.org/docs/9.5/static/auth-pg-hba-conf.html">pg_hba.conf documentation</a></p>
-<h2 id="configure-rundeck"><a href="#configure-rundeck">Configure Rundeck</a></h2>
+<h2 id="configure-rundeck">Configure Rundeck</h2>
 <p>Now you need to configure Rundeck to connect to this DB as described earlier in this document: <a href="#customize-the-datasource">Customize the Datasource</a>.</p>
 <p>Update your <code>rundeck-config.properties</code> and configure the datasource:</p>
 <pre><code>dataSource.driverClassName = org.postgresql.Driver
@@ -140,7 +140,7 @@ dataSource.password=rundeckpassword</code></pre>
 <div class="col-sm-6">
     <ul class="pager">
       <li class="previous"><a href="using-oracle-as-a-database-backend.html"><i class="glyphicon glyphicon-arrow-left"></i> Using Oracle as a database backend</a></li>
-      
+      <li class="next"><a href="using-mysql-as-a-database-backend.html">Using MySQL as a database backend <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -169,7 +169,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

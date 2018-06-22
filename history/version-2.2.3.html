@@ -90,17 +90,17 @@ jQuery(function(){
 <div class="page-header">
 <h1 class="title">Version 2.2.3</h1>
 </div>
-<h1 id="release-2.2.3"><a href="#release-2.2.3">Release 2.2.3</a></h1>
+<h1 id="release-2.2.3">Release 2.2.3</h1>
 <p>Date: 2014-09-24</p>
 <p>Fix several issues found in 2.2.2:</p>
 <ul>
-<li><a href="https://github.com/rundeck/rundeck/issues/943">2.2.2: Workflow editor drag/drop or step delete doesn't work</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/943">2.2.2: Workflow editor drag/drop or step delete doesn’t work</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/940">Documentation: Sudo password option type incorrect: should specify Secure Remote Authentication option</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/939">plugin development: plugin properties using rendering options should allow String values</a></li>
 </ul>
 <p>Release notes from 2.2.2 follow:</p>
 <p>This release fixes a number of bugs and addresses several potential security issues:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Require a unique token for each form request from the GUI, which prevents replay and CSRF attacks</li>
 <li>Updated all pages to prevent unencoded data from being written to the response, preventing XSS style attacks.</li>
 <li>Prevent access to the /api URLs via the web GUI.</li>
@@ -109,17 +109,17 @@ jQuery(function(){
 <p>Please see the Notes below for some configuration information related to these changes.</p>
 <p><strong>A big Thank You to one of our clients for sponsoring the work for these enhancements.</strong></p>
 <p><em>Security Notes:</em></p>
-<p>The new form tokens used in all form requests by default will expire in 30 minutes. This means that if your session timeout is larger than 30 minutes and you attempt to e.g. run a job after your web page has been sitting open for longer than that, you will see an &quot;Invalid token&quot; error. If this becomes a problem for you you can either change the expiration time for these tokens, or switch to using non-expiring tokens. See <a href="http://rundeck.org/2.2.2/administration/configuration-file-reference.html#security">Administration - Configuration File Reference - Security</a>.</p>
+<p>The new form tokens used in all form requests by default will expire in 30 minutes. This means that if your session timeout is larger than 30 minutes and you attempt to e.g. run a job after your web page has been sitting open for longer than that, you will see an “Invalid token” error. If this becomes a problem for you you can either change the expiration time for these tokens, or switch to using non-expiring tokens. See <a href="http://rundeck.org/2.2.2/administration/configuration-file-reference.html#security">Administration - Configuration File Reference - Security</a>.</p>
 <p>To add a Password field definition to your plugin, see <a href="http://rundeck.org/2.2.2/developer/plugin-development.html#description-properties">Plugin Development - Description Properties</a>. (Note that currently using property annotations is not supported for the three plugin types that can use Password properties.)</p>
 <p><em>Upgrade notes:</em></p>
 <p>See the <a href="http://rundeck.org/2.2.2/upgrading/index.html">Upgrading Guide</a>.</p>
-<h2 id="contributors"><a href="#contributors">Contributors</a></h2>
+<h2 id="contributors">Contributors</h2>
 <ul>
 <li>Andreas Knifh (knifhen)</li>
 <li>Daniel Serodio (dserodio)</li>
 <li>Greg Schueler (gschueler)</li>
 </ul>
-<h2 id="bug-reporters"><a href="#bug-reporters">Bug Reporters</a></h2>
+<h2 id="bug-reporters">Bug Reporters</h2>
 <ul>
 <li>adolfocorreia</li>
 <li>ahonor</li>
@@ -135,11 +135,11 @@ jQuery(function(){
 <li>rfletcher</li>
 <li>schicky</li>
 </ul>
-<h2 id="issues"><a href="#issues">Issues</a></h2>
+<h2 id="issues">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/934">dynamic node filter string incorrectly includes name: prefix</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/931">aclpolicy files are listed in random order in Configure page</a></li>
-<li><a href="https://github.com/rundeck/rundeck/pull/925">Improve &quot;Authenticating Users&quot; docs re. logging</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/925">Improve “Authenticating Users” docs re. logging</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/919">Security: allow plugins to specify password properties that are obscured in project config page</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/915">Job Variable Length is too low</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/910">Config toggle: Hide error page stacktrace</a></li>
@@ -149,13 +149,13 @@ jQuery(function(){
 <li><a href="https://github.com/rundeck/rundeck/issues/905">Rundeck 2.1.1 scheduling bug</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/904">Selectively Disable metrics servlets features</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/903">Broken Link in Documentation</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/901">Machine tag style attributes don't get replaced</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/901">Machine tag style attributes don’t get replaced</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/900">Scheduled job with retry never completes 2.2.1</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/898">API docs state latest version is 11, but it is 12</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/896">NPE: Cannot get property 'nodeSet' on null object since upgrade to 2.2.1-1</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/896">NPE: Cannot get property ‘nodeSet’ on null object since upgrade to 2.2.1-1</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/894">Powershell and script-exec - extension problem</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/892">Ldap nestedGroup examples</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/883">&quot;Retry failed nodes&quot; does not seem to work, when using dynamic nodes filters</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/883">“Retry failed nodes” does not seem to work, when using dynamic nodes filters</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/861">UI job status incorrect</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/844">Odd page when not allowing node info access</a></li>
 </ul>
@@ -209,7 +209,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

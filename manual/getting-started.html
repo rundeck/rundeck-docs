@@ -97,7 +97,7 @@ jQuery(function(){
 <h1 class="title">Getting Started</h1>
 </div>
 <p>This chapter helps new users get started with Rundeck. We will begin by explaining a few essential Rundeck concepts and terminology and then discuss installation, project setup and introduce you to the top level navigation of the interface.</p>
-<h2 id="essential-concepts"><a href="#essential-concepts">Essential Concepts</a></h2>
+<h2 id="essential-concepts">Essential Concepts</h2>
 <p>Several fundamental concepts underlie and drive the Rundeck system. If you are a new user, knowing about them will help you use or integrate Rundeck into your environment.</p>
 <ul>
 <li><strong>Role-based Access Control Policies</strong>: A Rundeck <em><a href="../administration/access-control-policy.html">access control policy</a></em> grants users and user groups certain privileges to perform actions against rundeck resources like projects, jobs, nodes, commands and API.</li>
@@ -108,27 +108,27 @@ jQuery(function(){
 <li><strong>Executions</strong>: An <em><a href="executions.html">execution</a></em> is a representation of the activity of a running or completed command or job. The data about the execution is used in rundeck to monitor the progress of a job or command and later for reporting about what happened.</li>
 <li><strong>Plugins</strong>: Most of what Rundeck does is via one of its <em><a href="../plugins-user-guide/index.html">plugins</a></em>. Plugins exist to execute commands on nodes, perform steps in a job, send a notification about job status, gather information about the hosts in your network, copy a file to a remote server, store and stream logs, or talk to a user directory.</li>
 </ul>
-<h2 id="download-and-installation"><a href="#download-and-installation">Download and Installation</a></h2>
-<p>If a running Rundeck instance isn't already available to you, there are a couple ways you can try it.</p>
+<h2 id="download-and-installation">Download and Installation</h2>
+<p>If a running Rundeck instance isn’t already available to you, there are a couple ways you can try it.</p>
 <ul>
 <li>You can <a href="http://rundeck.org/downloads.html">download</a> and install the Rundeck software. There are several package formats. Choose the one that best suits your infrastructure. After installation, be sure Rundeck has been started. See <a href="../administration/maintenance/startup-and-shutdown.html">Startup</a> to learn how to startup and shutdown rundeck.</li>
 <li>You can run the <a href="https://github.com/rundeck/anvils-demo">vagrant</a> demo. The demo contains a project with tagged nodes, example job workflows with dynamic options, and a set of users, each with varying degrees of privilege.</li>
 </ul>
-<p>The default port for the web interface is <code>4440</code>. If you installed Rundeck on your local machine, go to this URL: <a href="http://localhost:4440">http://localhost:4440</a></p>
-<h2 id="login"><a href="#login">Login</a></h2>
-<p>Rundeck requires every user to login. The default installation defines an &quot;admin&quot; user with access to perform all actions. Use &quot;admin&quot; for username and password.</p>
-<div class="figure">
-<img src="../figures/fig0202.png" alt="Login form" /><p class="caption">Login form</p>
-</div>
-<h2 id="project-setup"><a href="#project-setup">Project setup</a></h2>
-<p>A new installation will not contain any projects so Rundeck will present you with a dialog to create one. Press the &quot;New Project&quot; button to create a project. Fill the project creation form with a desired name. Project names can contain letters and numbers but do not use spaces or special characters. The <a href="../administration/configuration/project-setup.html">Project setup</a> chapter in the Administrator guide will show you how to learn to add Nodes, automate the creation and maintenance of Rundeck projects.</p>
+<p>The default port for the web interface is <code>4440</code>. If you installed Rundeck on your local machine, go to this URL: <a href="http://localhost:4440" class="uri">http://localhost:4440</a></p>
+<h2 id="login">Login</h2>
+<p>Rundeck requires every user to login. The default installation defines an “admin” user with access to perform all actions. Use “admin” for username and password.</p>
+<figure>
+<img src="../figures/fig0202.png" alt="Login form" /><figcaption>Login form</figcaption>
+</figure>
+<h2 id="project-setup">Project setup</h2>
+<p>A new installation will not contain any projects so Rundeck will present you with a dialog to create one. Press the “New Project” button to create a project. Fill the project creation form with a desired name. Project names can contain letters and numbers but do not use spaces or special characters. The <a href="../administration/configuration/project-setup.html">Project setup</a> chapter in the Administrator guide will show you how to learn to add Nodes, automate the creation and maintenance of Rundeck projects.</p>
 <p>Once the project has been created you are ready to use your Rundeck instance.</p>
-<h2 id="rundeck-graphical-console"><a href="#rundeck-graphical-console">Rundeck Graphical Console</a></h2>
-<h3 id="navigation"><a href="#navigation">Navigation</a></h3>
+<h2 id="rundeck-graphical-console">Rundeck Graphical Console</h2>
+<h3 id="navigation">Navigation</h3>
 <p>The Rundeck page header contains global navigation control to move between tabbed pages: Jobs, Nodes, Commands and Activity. It also has links to Configure the project, logout, view your user profile and a link to this online help.</p>
-<div class="figure">
-<img src="../figures/fig0201.png" alt="Top navigation bar" /><p class="caption">Top navigation bar</p>
-</div>
+<figure>
+<img src="../figures/fig0201.png" alt="Top navigation bar" /><figcaption>Top navigation bar</figcaption>
+</figure>
 <dl>
 <dt>Project menu</dt>
 <dd><p>The top navigation bar contains a menu to select the desired project. If only one project exists, the menu will automatically be selected. You can create new projects from this menu, too.</p>
@@ -150,7 +150,7 @@ jQuery(function(){
 <p>See <a href="activity.html">Activity</a>.</p>
 </dd>
 <dt>Configure</dt>
-<dd><p>If your login belongs to the &quot;admin&quot; group and therefore granted &quot;admin&quot; privileges, a &quot;Configure&quot; icon will be displayed in the top navigation bar. From the Configure page you can edit project configuration, export and import project archives, view system information, and see what plugins are installed.</p>
+<dd><p>If your login belongs to the “admin” group and therefore granted “admin” privileges, a “Configure” icon will be displayed in the top navigation bar. From the Configure page you can edit project configuration, export and import project archives, view system information, and see what plugins are installed.</p>
 <p>See <a href="configure.html">Configure</a></p>
 </dd>
 <dt>User</dt>
@@ -161,13 +161,13 @@ jQuery(function(){
 <dd><p>Opens a page to this user manual.</p>
 </dd>
 </dl>
-<h2 id="command-line-tools"><a href="#command-line-tools">Command Line Tools</a></h2>
+<h2 id="command-line-tools">Command Line Tools</h2>
 <p>Rundeck includes a number of shell tools to dispatch commands, load and run Job definitions and interact with the dispatcher queue. These command tools are an alternative to functions accessible in the graphical console.</p>
 <p>See the <a href="../man1/index.html">Command line tools</a>.</p>
-<h2 id="api"><a href="#api">API</a></h2>
+<h2 id="api">API</h2>
 <p>You can also use the Web API to interface with all aspects of node and Job execution.</p>
 <p>See the <a href="../api/index.html">Rundeck API</a> page for a reference on the endpoints and examples.</p>
-<h2 id="document-formats"><a href="#document-formats">Document Formats</a></h2>
+<h2 id="document-formats">Document Formats</h2>
 <p>If you prefer to manage job and resource definitions using text files you can do so using XML or YAML formats.</p>
 <p>See the <a href="../man5/index.html">Document Format Reference</a>.</p>
 </div>
@@ -220,7 +220,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

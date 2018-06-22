@@ -93,16 +93,16 @@ jQuery(function(){
 <div class="page-header">
 <h1 class="title">Version 3.0.0-alpha1</h1>
 </div>
-<h1 id="release-3.0.0-alpha1"><a href="#release-3.0.0-alpha1">Release 3.0.0-alpha1</a></h1>
+<h1 id="release-3.0.0-alpha1">Release 3.0.0-alpha1</h1>
 <p>Date: 2018-06-01</p>
-<p>Name: <span style="color: aquamarine"><span class="glyphicon glyphicon-apple"></span> &quot;jalapeño popper aquamarine apple&quot;</span></p>
-<h2 id="prerelease-notes"><a href="#prerelease-notes">Prerelease Notes</a></h2>
-<p><strong>This is a prerelease</strong> of Rundeck 3.0. There have been a number of changes and we are asking for community feedback on this version. If you find a bug or regression, please file an issue at <a href="https://github.com/rundeck/rundeck/issues">https://github.com/rundeck/rundeck/issues</a>.</p>
-<p>We are publishing the snapshot documentation for Rundeck 3.0 at this URL: <a href="http://rundeck.org/3.0.x-SNAPSHOT/">http://rundeck.org/3.0.x-SNAPSHOT/</a>. Currently the Upgrading Guide is <em>not</em> updated with specific Rundeck 3.0 information, so please read the notes below.</p>
-<p>The largest change is that we've upgraded the underlying web-app framework to Grails 3. This affects some aspects of install and configuration:</p>
+<p>Name: <span style="color: aquamarine"><span class="glyphicon glyphicon-apple"></span> “jalapeño popper aquamarine apple”</span></p>
+<h2 id="prerelease-notes">Prerelease Notes</h2>
+<p><strong>This is a prerelease</strong> of Rundeck 3.0. There have been a number of changes and we are asking for community feedback on this version. If you find a bug or regression, please file an issue at <a href="https://github.com/rundeck/rundeck/issues" class="uri">https://github.com/rundeck/rundeck/issues</a>.</p>
+<p>We are publishing the snapshot documentation for Rundeck 3.0 at this URL: <a href="http://rundeck.org/3.0.x-SNAPSHOT/" class="uri">http://rundeck.org/3.0.x-SNAPSHOT/</a>. Currently the Upgrading Guide is <em>not</em> updated with specific Rundeck 3.0 information, so please read the notes below.</p>
+<p>The largest change is that we’ve upgraded the underlying web-app framework to Grails 3. This affects some aspects of install and configuration:</p>
 <p>Install:</p>
 <ul>
-<li>The &quot;launcher jar&quot; for Rundeck 2 is gone (long live the launcher jar). However the .war file now operates the same way. Just use the .war in the same way as the previous launcher jar, or deploy it as a webapp.</li>
+<li>The “launcher jar” for Rundeck 2 is gone (long live the launcher jar). However the .war file now operates the same way. Just use the .war in the same way as the previous launcher jar, or deploy it as a webapp.</li>
 </ul>
 <p>Configuration:</p>
 <ul>
@@ -112,7 +112,7 @@ jQuery(function(){
 </ul>
 <p>Authentication Changes:</p>
 <ul>
-<li>We no longer rely on &quot;container-based&quot; security/authentication (i.e. web.xml auth constraints, coupled with Jetty/Tomcat authentication setup.) We now use &quot;Spring Security&quot; for Grails, which moves the authentication checks into Rundeck itself. This enables SSO, Oauth, and other types of authentication which was difficult/impossible to implement before.</li>
+<li>We no longer rely on “container-based” security/authentication (i.e. web.xml auth constraints, coupled with Jetty/Tomcat authentication setup.) We now use “Spring Security” for Grails, which moves the authentication checks into Rundeck itself. This enables SSO, Oauth, and other types of authentication which was difficult/impossible to implement before.</li>
 <li>The default JAAS authentication method still works, so existing JAAS based configuration should operate as expected.</li>
 <li>Pre-authentication modes should work as they did before.</li>
 <li>SSO integration: <em>documentation TBD</em></li>
@@ -124,18 +124,18 @@ jQuery(function(){
 <li>Stephen Joyner</li>
 </ul>
 <p>👏👏👏</p>
-<h2 id="upgrading"><a href="#upgrading">Upgrading</a></h2>
+<h2 id="upgrading">Upgrading</h2>
 <p>For the most part, Rundeck 3.0 is drop-in compatible with existing Rundeck 2.11 installations.</p>
 <p>We recommend doing a fresh install of 3.0.0-alpha1 and copying your Jobs/projects into it for testing.</p>
 <p>If you are upgrading in-place, <em>Be sure to backup import data/configs before upgrading.</em></p>
 <p>If you are using the rundeck Launcher jar, replace it with the <code>.war</code> artifact, which can be renamed with a <code>.jar</code> extension if needed.</p>
 <p>See the <em>Configuration</em> notes above.</p>
-<h2 id="additional-enhancements-since-rundeck-2.11"><a href="#additional-enhancements-since-rundeck-2.11">Additional Enhancements since Rundeck 2.11:</a></h2>
+<h2 id="additional-enhancements-since-rundeck-2.11">Additional Enhancements since Rundeck 2.11:</h2>
 <ul>
 <li>Limit multiple executions of a job</li>
 <li>Encrypt passwords stored in configuration files</li>
 </ul>
-<h2 id="contributors"><a href="#contributors">Contributors</a></h2>
+<h2 id="contributors">Contributors</h2>
 <ul>
 <li>Alberto Hormazabal (ahormazabal)</li>
 <li>Davy Gabard</li>
@@ -149,7 +149,7 @@ jQuery(function(){
 <li>carlos (carlosrfranco)</li>
 <li>scollector65</li>
 </ul>
-<h2 id="bug-reporters"><a href="#bug-reporters">Bug Reporters</a></h2>
+<h2 id="bug-reporters">Bug Reporters</h2>
 <ul>
 <li>Kaldor37</li>
 <li>Nomekrax</li>
@@ -162,7 +162,7 @@ jQuery(function(){
 <li>turlubullu</li>
 <li>wcliff</li>
 </ul>
-<h2 id="issues"><a href="#issues">Issues</a></h2>
+<h2 id="issues">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/76">Milestone 3.0.0</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/pull/3430">Fixed various french translations</a></li>
@@ -170,7 +170,7 @@ jQuery(function(){
 <li><a href="https://github.com/rundeck/rundeck/issues/3423">Create project via API with invalid project name does not return error</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/3421">BUG: Job Options not appearing in Duplicated Jobs</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/3420">Using variable in Storage path job options</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/3384">duplicate jobs page doesn't show options</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3384">duplicate jobs page doesn’t show options</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/3379">rundeck access log contains &quot;_Ljava.lang.String;&quot; instead of project</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/3290">Grails 3 Update</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/2092">Using variable in Storage path job options</a></li>
@@ -228,7 +228,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

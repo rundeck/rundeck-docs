@@ -68,8 +68,8 @@ jQuery(function(){
 </div>
 <div class="col-sm-6">
     <ul class="pager">
+      <li class="previous"><a href="s3-log-storage-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> S3 Log Storage Plugin</a></li>
       
-      <li class="next"><a href="s3-log-storage-plugin.html">S3 Log Storage Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -90,11 +90,11 @@ jQuery(function(){
 <h1 class="title">Azure Log Storage Plugin</h1>
 </div>
 <p>The Azure Storage plugin uses Azure Storage to store execution log files, for backup or for a cluster environment behavior.</p>
-<p>The source code lives at <a href="https://github.com/rundeck-plugins/rundeck-azure-plugin">https://github.com/rundeck-plugins/rundeck-azure-plugin</a>.</p>
-<h3 id="enable-the-plugin"><a href="#enable-the-plugin">Enable the plugin</a></h3>
+<p>The source code lives at <a href="https://github.com/rundeck-plugins/rundeck-azure-plugin" class="uri">https://github.com/rundeck-plugins/rundeck-azure-plugin</a>.</p>
+<h3 id="enable-the-plugin">Enable the plugin</h3>
 <p>Enable the ExecutionFileStorage provider named azure-storage in your <code>rundeck-config.properties</code> file:</p>
 <p><code>rundeck.execution.logs.fileStoragePlugin=azure-storage</code></p>
-<h3 id="configuration"><a href="#configuration">Configuration</a></h3>
+<h3 id="configuration">Configuration</h3>
 <p>To configure the Azure Storage Account credentials you can set these property values:</p>
 <ul>
 <li><strong>storageAccount</strong>: Azure Storage Account</li>
@@ -109,7 +109,7 @@ jQuery(function(){
 <li><code>${job.name}</code> = job name (or blank)</li>
 </ul></li>
 </ul>
-<p>You can define the configuration values in <code>framework.properties</code> by prefixing the property name with the stem: <code>framework.plugin.ExecutionFileStorage.azure-storage</code>. Or in a project's <code>project.properties</code> file with the stem <code>project.plugin.ExecutionFileStorage.azure-storage</code>.</p>
+<p>You can define the configuration values in <code>framework.properties</code> by prefixing the property name with the stem: <code>framework.plugin.ExecutionFileStorage.azure-storage</code>. Or in a project’s <code>project.properties</code> file with the stem <code>project.plugin.ExecutionFileStorage.azure-storage</code>.</p>
 <p>For example:</p>
 <pre><code>#storage.storageAccount and storage.accessKey
 framework.plugin.ExecutionFileStorage.azure-storage.storageAccount=&lt;ACCOUNT-NAME&gt;
@@ -142,8 +142,8 @@ framework.plugin.ExecutionFileStorage.azure-storage.path=logs/${job.project}/${j
 </div>
 <div class="col-sm-6">
     <ul class="pager">
+      <li class="previous"><a href="s3-log-storage-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> S3 Log Storage Plugin</a></li>
       
-      <li class="next"><a href="s3-log-storage-plugin.html">S3 Log Storage Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -172,7 +172,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

@@ -96,15 +96,15 @@ jQuery(function(){
 <div class="page-header">
 <h1 class="title">Nodes</h1>
 </div>
-<h2 id="overview"><a href="#overview">Overview</a></h2>
-<p>A <em>Node</em> is a resource that is either a physical or virtual instance of a network accessible host. Nodes have a few basic attributes but a Node's attributes can be extended to include arbitrary named key/value pairs. Attributes typically describe the properties of a node or reflect the state of the node. One of a Node's built in attributes is called &quot;tags&quot; which is a list of classifications or categories about that Node.</p>
-<h2 id="nodes-tab-overview"><a href="#nodes-tab-overview">Nodes tab overview</a></h2>
-<p>Navigate to this page by clicking on the &quot;Nodes&quot; tab in the navigation bar.</p>
-<div class="figure">
-<img src="../figures/fig0204-a.png" alt="Nodes page" /><p class="caption">Nodes page</p>
-</div>
+<h2 id="overview">Overview</h2>
+<p>A <em>Node</em> is a resource that is either a physical or virtual instance of a network accessible host. Nodes have a few basic attributes but a Node’s attributes can be extended to include arbitrary named key/value pairs. Attributes typically describe the properties of a node or reflect the state of the node. One of a Node’s built in attributes is called “tags” which is a list of classifications or categories about that Node.</p>
+<h2 id="nodes-tab-overview">Nodes tab overview</h2>
+<p>Navigate to this page by clicking on the “Nodes” tab in the navigation bar.</p>
+<figure>
+<img src="../figures/fig0204-a.png" alt="Nodes page" /><figcaption>Nodes page</figcaption>
+</figure>
 <p>The screenshot above shows the elements of the Nodes page user interface.</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Filter - Search expression using tags and attribute patterns. The filter menu also contains an item to list all nodes in the project.</li>
 <li>Tags - Category or classification of Nodes. Each tag shows the number of nodes that reference that tag. You can click the tag name and list other nodes with that tag.</li>
 <li>Node detail - Clicking on the node name will show a dialogue that lets you view the attributes and values for that Node.</li>
@@ -112,86 +112,86 @@ jQuery(function(){
 <li>Node actions - Run a command or create a Job for the nodes matching the filter.</li>
 <li>Single node view - Click the arrow next to the node name to drill down to a single node.</li>
 </ol>
-<h2 id="attribute-name-spaces"><a href="#attribute-name-spaces">Attribute name spaces</a></h2>
+<h2 id="attribute-name-spaces">Attribute name spaces</h2>
 <p>Because nodes might have many attributes, it can be helpful to use a naming convention that groups them into namespaces. The naming convention is simple:</p>
 <pre><code>{namespace}:{name} = {value}</code></pre>
-<p>When Rundeck sees an attribute with a name containing a colon it automatically groups them in the UI. For example, the screenshot below shows a node with two attributes under the &quot;web&quot; prefix.</p>
-<div class="figure">
-<img src="../figures/fig0204-h.png" alt="Attribute namespace" /><p class="caption">Attribute namespace</p>
-</div>
+<p>When Rundeck sees an attribute with a name containing a colon it automatically groups them in the UI. For example, the screenshot below shows a node with two attributes under the “web” prefix.</p>
+<figure>
+<img src="../figures/fig0204-h.png" alt="Attribute namespace" /><figcaption>Attribute namespace</figcaption>
+</figure>
 <p>The two attributes are:</p>
 <ul>
 <li>web:pid = 4872</li>
 <li>web:state = RUNNING</li>
 </ul>
 <p>This naming convention is really just a graphical treatment to reduce the amount of data being shown all at once. This convention also helps add structure to your resource model.</p>
-<h2 id="navigating-nodes-by-tag-or-attribute"><a href="#navigating-nodes-by-tag-or-attribute">Navigating Nodes by tag or attribute</a></h2>
-<p>The node detail view contains a set of hyperlinks that automatically filter the nodes in the project. By clicking on a Node's tags, attribute names or attribute values the list of nodes will be refined to match a more specific expression. You can delete parts of the expression from the filter form to expand the search again.</p>
+<h2 id="navigating-nodes-by-tag-or-attribute">Navigating Nodes by tag or attribute</h2>
+<p>The node detail view contains a set of hyperlinks that automatically filter the nodes in the project. By clicking on a Node’s tags, attribute names or attribute values the list of nodes will be refined to match a more specific expression. You can delete parts of the expression from the filter form to expand the search again.</p>
 <p>As you click search links in the node detail view, that attribute is placed in the node filter form and the attribute becomes a new column in the list view. These filtered list views are useful to create custom views about the project nodes.</p>
-<p>The screenshot below shows a case where two nodes were found that were tagged &quot;www&quot; have an attribute named web:pid and with their web:state attribute value &quot;RUNNING&quot;.</p>
-<div class="figure">
-<img src="../figures/fig0204-b.png" alt="Nodes filtering links" /><p class="caption">Nodes filtering links</p>
-</div>
-<ol style="list-style-type: decimal">
+<p>The screenshot below shows a case where two nodes were found that were tagged “www” have an attribute named web:pid and with their web:state attribute value “RUNNING”.</p>
+<figure>
+<img src="../figures/fig0204-b.png" alt="Nodes filtering links" /><figcaption>Nodes filtering links</figcaption>
+</figure>
+<ol type="1">
 <li>Clicking the single node view icon filters the list down to just that node.</li>
-<li>Find nodes with this Tag (e,g just nodes with tagged &quot;www&quot;).</li>
-<li>Find nodes with this Attribute name (e.g., any node with the &quot;web:pid&quot; attribute).</li>
-<li>Find nodes with this Attribute value (e.g., any node with attribute &quot;web:state=RUNNING&quot; ).</li>
+<li>Find nodes with this Tag (e,g just nodes with tagged “www”).</li>
+<li>Find nodes with this Attribute name (e.g., any node with the “web:pid” attribute).</li>
+<li>Find nodes with this Attribute value (e.g., any node with attribute “web:state=RUNNING” ).</li>
 </ol>
 <p>The next screenshot shows a single node view. Notice the nodes unique name is entered in the filter form.</p>
-<div class="figure">
-<img src="../figures/fig0204-c1.png" alt="Single node view" /><p class="caption">Single node view</p>
-</div>
-<h2 id="node-filtering"><a href="#node-filtering">Node filtering</a></h2>
-<p>A <em>node filter</em> is a search pattern that matches a set of nodes. Rundeck node filters let you match Nodes based on a pattern like &quot;tags&quot; or any node attribute. You can define node filters that include and exclude nodes based on sets of patterns. While a node filter can specifically reference nodes using their unique name, filter patterns are more resilient to changes in your environment and better handle dynamically provisioned servers.</p>
-<div class="figure">
-<img src="../figures/fig0204-c.png" alt="Filtered nodes" /><p class="caption">Filtered nodes</p>
-</div>
-<ol style="list-style-type: decimal">
+<figure>
+<img src="../figures/fig0204-c1.png" alt="Single node view" /><figcaption>Single node view</figcaption>
+</figure>
+<h2 id="node-filtering">Node filtering</h2>
+<p>A <em>node filter</em> is a search pattern that matches a set of nodes. Rundeck node filters let you match Nodes based on a pattern like “tags” or any node attribute. You can define node filters that include and exclude nodes based on sets of patterns. While a node filter can specifically reference nodes using their unique name, filter patterns are more resilient to changes in your environment and better handle dynamically provisioned servers.</p>
+<figure>
+<img src="../figures/fig0204-c.png" alt="Filtered nodes" /><figcaption>Filtered nodes</figcaption>
+</figure>
+<ol type="1">
 <li>Filter expression</li>
 <li>Column labeled by attribute name</li>
 </ol>
-<h3 id="filter-expression-syntax"><a href="#filter-expression-syntax">Filter expression syntax</a></h3>
+<h3 id="filter-expression-syntax">Filter expression syntax</h3>
 <p>The filter expression syntax is very simple. You can find a list of nodes by entering their names, or by attribute name and value. Values can also be regular expressions.</p>
 <p>For full syntax information see the <a href="node-filters.html">Node Filters</a> chapter.</p>
 <p>If you forget the syntax, press the help button in the filter form and a dialog containing a cheat sheet will be displayed (see screenshot below).</p>
-<div class="figure">
-<img src="../figures/fig0204-c2.png" alt="Filter expressions help" /><p class="caption">Filter expressions help</p>
-</div>
-<p>To exclude nodes that match a pattern place a &quot;!&quot; (exclamation point) to negate that part of the match.</p>
-<ol style="list-style-type: decimal">
+<figure>
+<img src="../figures/fig0204-c2.png" alt="Filter expressions help" /><figcaption>Filter expressions help</figcaption>
+</figure>
+<p>To exclude nodes that match a pattern place a “!” (exclamation point) to negate that part of the match.</p>
+<ol type="1">
 <li>Filter expression help dialog</li>
 </ol>
-<h3 id="saving-filters"><a href="#saving-filters">Saving filters</a></h3>
-<p>Often times you will want to go back to a set of nodes that matched a filter. You can save the filter and give it a name by pressing the &quot;save filter&quot; button to the right of the filter form. The example below shows the dialog to confirm saving a new filter.</p>
-<div class="figure">
-<img src="../figures/fig0204-d.png" alt="Filtered nodes" /><p class="caption">Filtered nodes</p>
-</div>
-<ol style="list-style-type: decimal">
+<h3 id="saving-filters">Saving filters</h3>
+<p>Often times you will want to go back to a set of nodes that matched a filter. You can save the filter and give it a name by pressing the “save filter” button to the right of the filter form. The example below shows the dialog to confirm saving a new filter.</p>
+<figure>
+<img src="../figures/fig0204-d.png" alt="Filtered nodes" /><figcaption>Filtered nodes</figcaption>
+</figure>
+<ol type="1">
 <li>Filter name</li>
 </ol>
 <p>The saved filters become available in the Filters menu in other parts of rundeck, like in the Nodes page, when creating Jobs or running Commands.</p>
-<div class="figure">
-<img src="../figures/fig0204-e.png" alt="Saved Filters menu" /><p class="caption">Saved Filters menu</p>
-</div>
-<ol style="list-style-type: decimal">
+<figure>
+<img src="../figures/fig0204-e.png" alt="Saved Filters menu" /><figcaption>Saved Filters menu</figcaption>
+</figure>
+<ol type="1">
 <li>Named filter in menu</li>
 </ol>
-<h2 id="node-actions"><a href="#node-actions">Node actions</a></h2>
+<h2 id="node-actions">Node actions</h2>
 <p>Often times you are browsing and filtering nodes because you want to do something with the list. The Node Actions menu contains links to</p>
 <ul>
 <li>Run a command. Choosing this menu item will forward your browser to the Commands page.</li>
 <li>Create a job. Choosing this menu item will forward you to the Job create page and enter the filter expression in the edit form.</li>
 </ul>
-<div class="figure">
-<img src="../figures/fig0204-f.png" alt="Node actions menu" /><p class="caption">Node actions menu</p>
-</div>
-<p>Users that don't have sufficient privileges granted by the ACL will show that menu item disabled.</p>
-<p>The example below shows that the user can't create Job for those nodes.</p>
-<div class="figure">
-<img src="../figures/fig0204-g.png" alt="Not authorized in menu" /><p class="caption">Not authorized in menu</p>
-</div>
-<h2 id="related-command-line-tools"><a href="#related-command-line-tools">Related Command line tools</a></h2>
+<figure>
+<img src="../figures/fig0204-f.png" alt="Node actions menu" /><figcaption>Node actions menu</figcaption>
+</figure>
+<p>Users that don’t have sufficient privileges granted by the ACL will show that menu item disabled.</p>
+<p>The example below shows that the user can’t create Job for those nodes.</p>
+<figure>
+<img src="../figures/fig0204-g.png" alt="Not authorized in menu" /><figcaption>Not authorized in menu</figcaption>
+</figure>
+<h2 id="related-command-line-tools">Related Command line tools</h2>
 <dl>
 <dt><a href="../man1/dispatch.html">dispatch</a></dt>
 <dd>List nodes or execute commands and scripts.
@@ -247,7 +247,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

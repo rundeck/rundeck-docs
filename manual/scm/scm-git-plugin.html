@@ -104,14 +104,14 @@ jQuery(function(){
 </div>
 <p>Rundeck provides SCM Export and SCM Import providers for Git.</p>
 <p>This plugin allows Source Code Management of the jobs, versioning, exporting or importing their definitions using a remote Git repository.</p>
-<h2 id="configuring-git-export"><a href="#configuring-git-export">Configuring Git Export</a></h2>
-<h3 id="commiter-configuration"><a href="#commiter-configuration">Commiter Configuration</a></h3>
+<h2 id="configuring-git-export">Configuring Git Export</h2>
+<h3 id="commiter-configuration">Commiter Configuration</h3>
 <p><strong>Committer Name</strong> and <strong>Committer Email</strong> are mandatory fields, the recommended configuration is to use the default <code>${user.fullName}</code> and <code>${user.email}</code>. The email and name of the current user can be set on the Profile page.</p>
-<h3 id="git-repository-configuration"><a href="#git-repository-configuration">Git Repository Configuration</a></h3>
+<h3 id="git-repository-configuration">Git Repository Configuration</h3>
 <p><strong>The Base Directory</strong> is a local folder on the server node used to clone the git repository.</p>
 <p><strong>Git url</strong> and <strong>Branch</strong> are the common repository settings.</p>
 <p><strong>Fetch automatically</strong> automatize the fetch command to be called in background.</p>
-<h3 id="job-source-files-configuration"><a href="#job-source-files-configuration">Job Source Files Configuration</a></h3>
+<h3 id="job-source-files-configuration">Job Source Files Configuration</h3>
 <p><strong>Export UUID Behavior</strong> can be one of these values: <code>preserve</code>, <code>original</code> or <code>remove</code>.</p>
 <ul>
 <li><code>preserve</code> - Write the Job UUID into exported Jobs, and as <code>${job.id}</code> in the <strong>File Path Template</strong></li>
@@ -129,17 +129,17 @@ jQuery(function(){
 <li><code>${config.format}</code> - Serialization format <code>xml</code> or <code>yaml</code>.</li>
 </ul>
 <p><strong>Format</strong> store files using <code>xml</code> or <code>yaml</code> format.</p>
-<h3 id="authentication-configuration"><a href="#authentication-configuration">Authentication Configuration</a></h3>
+<h3 id="authentication-configuration">Authentication Configuration</h3>
 <p><strong>SSH: Strict Host Key Checking</strong>: If yes, require remote host SSH key is defined in the <code>~/.ssh/known_hosts</code> file, otherwise do not verify.</p>
 <p><strong>SSH Key Storage Path</strong> (Optional): A Storage Key path containing the private key to be used with git authentication.</p>
 <p><strong>Password Storage Path</strong> (Optional): A password stored in the Key Storage to be used on the ssh or https git authentication.</p>
-<h2 id="git-import-configuration"><a href="#git-import-configuration">Git Import Configuration</a></h2>
-<h3 id="git-repository-configuration-1"><a href="#git-repository-configuration-1">Git Repository Configuration</a></h3>
+<h2 id="git-import-configuration">Git Import Configuration</h2>
+<h3 id="git-repository-configuration-1">Git Repository Configuration</h3>
 <p><strong>The Base Directory</strong> is a local folder on the server node used to clone the git repository.</p>
 <p><strong>Git url</strong> and <strong>Branch</strong> are the common repository settings.</p>
 <p><strong>Fetch automatically</strong> automatize the fetch command to be called in background.</p>
 <p><strong>Pull automatically</strong> automatically pull remote changes on automatic fetch. If false, you can always perform it manually.</p>
-<h3 id="job-source-files-configuration-1"><a href="#job-source-files-configuration-1">Job Source Files Configuration</a></h3>
+<h3 id="job-source-files-configuration-1">Job Source Files Configuration</h3>
 <p><strong>Import UUID Behavior</strong> how to handle UUIDs from imported Job source files</p>
 <ul>
 <li><code>preserve</code> - Preserve the Source UUID as the Job UUID</li>
@@ -155,21 +155,21 @@ jQuery(function(){
 <li><code>${job.sourceId}</code> - Original Job UUID, this is a random UUID different from <code>${job.id}</code> (See above <code>archive</code> UUID Behavior)</li>
 <li><code>${config.format}</code> - Serialization format <code>xml</code> or <code>yaml</code>.</li>
 </ul>
-<h3 id="authentication-configuration-1"><a href="#authentication-configuration-1">Authentication Configuration</a></h3>
+<h3 id="authentication-configuration-1">Authentication Configuration</h3>
 <p><strong>SSH: Strict Host Key Checking</strong>: If yes, require remote host SSH key is defined in the <code>~/.ssh/known_hosts</code> file, otherwise do not verify.</p>
 <p><strong>SSH Key Storage Path</strong> (Optional): A Storage Key path containing the private key to be used with git authentication.</p>
 <p><strong>Password Storage Path</strong> (Optional): A password stored in the Key Storage to be used on the ssh or https git authentication.</p>
-<h3 id="setup-configuration"><a href="#setup-configuration">Setup Configuration</a></h3>
+<h3 id="setup-configuration">Setup Configuration</h3>
 <p>You can set <strong>Match a Regular Expression?</strong> to <code>yes</code> to enter a regular expression that is going to be checked to match all paths that match the regular expression to be imported. If you set it to <code>no</code> on the next step you are going to be asked to select one by one the files to be imported.</p>
-<h2 id="advanced-configurations"><a href="#advanced-configurations">Advanced configurations</a></h2>
-<h3 id="use-the-same-repo-for-multiple-projects."><a href="#use-the-same-repo-for-multiple-projects.">Use the same repo for multiple projects.</a></h3>
+<h2 id="advanced-configurations">Advanced configurations</h2>
+<h3 id="use-the-same-repo-for-multiple-projects.">Use the same repo for multiple projects.</h3>
 <p>There is more than one way to use a single repository for multiple projects.</p>
 <p>You can use different branches of the same repository for each project or you can use the same branch but using folders in the repository.</p>
 <p>This is an example of use folders inside the same repository and branch.</p>
-<h3 id="export-configuration"><a href="#export-configuration">Export Configuration</a></h3>
+<h3 id="export-configuration">Export Configuration</h3>
 <p>On the first project, called <em>project-a</em> in this example: Set <strong>Export UUID Behavior</strong> to <code>original</code>. Set <strong>File Path Template</strong> to <code>project-a/${job.group}${job.name}-${job.sourceId}.${config.format}</code>.</p>
 <p>In another project, called <em>project-b</em> on this example, use the same configuration, just change the <strong>File Path Template</strong> to <code>project-b/${job.group}${job.name}-${job.sourceId}.${config.format}</code>.</p>
-<h3 id="import-configuration"><a href="#import-configuration">Import Configuration</a></h3>
+<h3 id="import-configuration">Import Configuration</h3>
 <p>On the first project, to import jobs from <em>project-a</em> in the last example: Set <strong>Import UUID Behavior</strong> to <code>archive</code>. Set <strong>File Path Template</strong> to <code>project-a/${job.group}${job.name}-${job.sourceId}.${config.format}</code>. Set <strong>Match a Regular Expression?</strong> to <code>yes</code> and <strong>Regular Expression</strong> to <code>project-a/.*\.xml</code> or <code>project-a/.*\.yaml</code>.</p>
 <p>On the other project, to import <em>project-b</em>: Set <strong>Import UUID Behavior</strong> to <code>archive</code>. Set <strong>File Path Template</strong> to <code>project-b/${job.group}${job.name}-${job.sourceId}.${config.format}</code>. Set <strong>Match a Regular Expression?</strong> to <code>yes</code> and <strong>Regular Expression</strong> to <code>project-b/.*\.xml</code> or <code>project-b/.*\.yaml</code>.</p>
 </div>
@@ -224,7 +224,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

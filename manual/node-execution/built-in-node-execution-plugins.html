@@ -66,8 +66,8 @@ jQuery(function(){
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      
-      <li class="next"><a href="powershell-node-execution.html">PowerShell Node Execution <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="previous"><a href="ssh-node-execution.html"><i class="glyphicon glyphicon-arrow-left"></i> SSH Node Execution</a></li>
+      <li class="next"><a href="script-node-execution.html">Script Node Execution <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -88,35 +88,35 @@ jQuery(function(){
 <div class="page-header">
 <h1 class="title">Built-in Node Execution Plugins</h1>
 </div>
-<h2 id="when-node-executors-are-invoked"><a href="#when-node-executors-are-invoked">When Node Executors are invoked</a></h2>
+<h2 id="when-node-executors-are-invoked">When Node Executors are invoked</h2>
 <p>Rundeck executes Command items on Nodes. The command may be part of a Workflow as defined in a Job, and it may be executed multiple times on different nodes.</p>
-<p>Several &quot;kinds&quot; of Command items can be specified in Workflows:</p>
-<ol style="list-style-type: decimal">
-<li>&quot;exec&quot; commands - simple system command strings.</li>
-<li>&quot;script&quot; commands - either embedded script content, or server-local script. files can be sent to the specified node and then executed with a set of input arguments.</li>
-<li>&quot;jobref&quot; commands - references to other Jobs by name that will be executed with a set of input arguments.</li>
+<p>Several “kinds” of Command items can be specified in Workflows:</p>
+<ol type="1">
+<li>“exec” commands - simple system command strings.</li>
+<li>“script” commands - either embedded script content, or server-local script. files can be sent to the specified node and then executed with a set of input arguments.</li>
+<li>“jobref” commands - references to other Jobs by name that will be executed with a set of input arguments.</li>
 <li>custom - Users can use or create their own workflow step plugins.</li>
 </ol>
 <p>Rundeck uses the NodeExecutor and FileCopier services as part of the process of executing these command types.</p>
-<p>The procedure for executing an &quot;exec&quot; command is:</p>
-<ol style="list-style-type: decimal">
+<p>The procedure for executing an “exec” command is:</p>
+<ol type="1">
 <li>load the NodeExecutor provider for the node and context.</li>
 <li>call the NodeExecutor#executeCommand method.</li>
 </ol>
-<p>The procedure for executing a &quot;script&quot; command is:</p>
-<ol style="list-style-type: decimal">
+<p>The procedure for executing a “script” command is:</p>
+<ol type="1">
 <li>load the FileCopier provider for the node and context.</li>
 <li>call the FileCopier#copy* method.</li>
 <li>load the NodeExecutor provider for the node and context.</li>
-<li>Possibly execute an intermediate command (such as &quot;chmod +x&quot; on the copied file).</li>
+<li>Possibly execute an intermediate command (such as “chmod +x” on the copied file).</li>
 <li>execute the NodeExecutor#executeCommand method, passing the filepath of the copied file, and any arguments to the script command.</li>
 </ol>
-<h2 id="file-copier-destination-directory"><a href="#file-copier-destination-directory">File Copier destination directory</a></h2>
+<h2 id="file-copier-destination-directory">File Copier destination directory</h2>
 <p>When executing a Script step, the destination file path to be used when copying the script can be set using Node, Project, or Framework configuration values.</p>
 <p>Node Attributes:</p>
 <ul>
 <li><code>file-copy-destination-dir</code>: The directory on the remote node to copy the script file to before executing it. The default value is <code>C:/WINDOWS/TEMP/</code> on Windows nodes, and <code>/tmp</code> for other nodes.</li>
-<li><code>osFamily</code>: specify &quot;windows&quot; for windows nodes.</li>
+<li><code>osFamily</code>: specify “windows” for windows nodes.</li>
 </ul>
 <p>The <code>file-copy-destination-dir</code> can be set at the project and framework level, and can have a default be specified depending on the osfamily as well:</p>
 <p>In <code>project.properties</code> file:</p>
@@ -130,21 +130,21 @@ jQuery(function(){
 <li><code>framework.file-copy-destination-dir.[osfamily]</code> - default for nodes in the framework with specified osfamily</li>
 </ul>
 <p>The order to determine the value is:</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>node-specific</li>
 <li>project-os-specific</li>
 <li>project-specific</li>
 <li>framework-os-specific</li>
 <li>framework-specific</li>
 </ol>
-<h2 id="built-in-node-execution-plugins"><a href="#built-in-node-execution-plugins">Built-in Node Execution plugins</a></h2>
+<h2 id="built-in-node-execution-plugins">Built-in Node Execution plugins</h2>
 <p>Rundeck includes the following node execution plugins.</p>
 <dl>
 <dt><code>local</code></dt>
 <dd><p>local execution of a command.</p>
 </dd>
 <dt><code>jsch-ssh</code></dt>
-<dd><p>remote execution of a command via SSH, requiring the &quot;hostname&quot;, and &quot;username&quot; attributes on a node.</p>
+<dd><p>remote execution of a command via SSH, requiring the “hostname”, and “username” attributes on a node.</p>
 </dd>
 </dl>
 <p>For FileCopier, these plugins:</p>
@@ -153,7 +153,7 @@ jQuery(function(){
 <dd><p>creates a local temp file for a script.</p>
 </dd>
 <dt><code>jsch-scp</code></dt>
-<dd><p>remote copy of a command via SCP, requiring the &quot;hostname&quot; and &quot;username&quot; attributes on a node.</p>
+<dd><p>remote copy of a command via SCP, requiring the “hostname” and “username” attributes on a node.</p>
 </dd>
 </dl>
 </div>
@@ -178,8 +178,8 @@ jQuery(function(){
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      
-      <li class="next"><a href="powershell-node-execution.html">PowerShell Node Execution <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="previous"><a href="ssh-node-execution.html"><i class="glyphicon glyphicon-arrow-left"></i> SSH Node Execution</a></li>
+      <li class="next"><a href="script-node-execution.html">Script Node Execution <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -208,7 +208,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

@@ -68,8 +68,8 @@ jQuery(function(){
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="azure-log-storage-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> Azure Log Storage Plugin</a></li>
       
+      <li class="next"><a href="azure-log-storage-plugin.html">Azure Log Storage Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -93,22 +93,22 @@ jQuery(function(){
 <h1 class="title">S3 Log Storage Plugin</h1>
 </div>
 <p>This is a plugin for <a href="http://rundeck.org">Rundeck</a> that uses <a href="http://aws.amazon.com/s3">Amazon S3</a> to store execution log files, for backup or for cloud-friendly behavior.</p>
-<p>The source code lives at <a href="https://github.com/rundeck-plugins/rundeck-s3-log-plugin">https://github.com/rundeck-plugins/rundeck-s3-log-plugin</a>.</p>
-<h2 id="build"><a href="#build">Build</a></h2>
+<p>The source code lives at <a href="https://github.com/rundeck-plugins/rundeck-s3-log-plugin" class="uri">https://github.com/rundeck-plugins/rundeck-s3-log-plugin</a>.</p>
+<h2 id="build">Build</h2>
 <pre><code>./gradlew clean build</code></pre>
-<h2 id="install"><a href="#install">Install</a></h2>
+<h2 id="install">Install</h2>
 <p>Copy the <code>rundeck-s3-log-plugin-x.y.jar</code> file to the <code>libext/</code> directory inside your Rundeck installation.</p>
 <p>Enable the ExecutionFileStorage provider named <code>org.rundeck.amazon-s3</code> in your <code>rundeck-config</code> file:</p>
 <pre><code>rundeck.execution.logs.fileStoragePlugin=org.rundeck.amazon-s3</code></pre>
-<h2 id="aws-credentials"><a href="#aws-credentials">AWS Credentials</a></h2>
-<p>The plugin will by default use the &quot;credentials provider chain&quot; for AWS access credentials, which allows you to externally configure the credentials in any of three ways:</p>
-<ol style="list-style-type: decimal">
+<h2 id="aws-credentials">AWS Credentials</h2>
+<p>The plugin will by default use the “credentials provider chain” for AWS access credentials, which allows you to externally configure the credentials in any of three ways:</p>
+<ol type="1">
 <li>Environment variables <code>AWS_ACCESS_KEY_ID</code> and <code>AWS_SECRET_KEY</code></li>
 <li>Java system properties <code>aws.accessKeyId</code> and <code>aws.secretKey</code></li>
 <li>Instance Profile credentials, if you are running on EC2. (See <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/role-usecase-ec2app.html">the IAM user guide</a>).</li>
 </ol>
 <p>If you want to specify access key and secret key, you can do so in the configuration:</p>
-<h2 id="configuration"><a href="#configuration">Configuration</a></h2>
+<h2 id="configuration">Configuration</h2>
 <p>To configure the AWS access credentials you can set these property values:</p>
 <p><code>AWSAccessKeyId</code> : access key, required if using <code>AWSSecretKey</code></p>
 <p><code>AWSSecretKey</code> : secret key, required if using <code>AWSAccessKeyId</code></p>
@@ -127,7 +127,7 @@ jQuery(function(){
 <p><code>region</code> : AWS region name to use. Default: <code>us-east-1</code></p>
 <p><code>endpoint</code>: Optional, a custom S3 compatible endpoint to use, such as <code>https://my-host.com/s3</code></p>
 <p><code>pathStyle</code>: Optional, boolean, default=False, set to True if you need to define the bucket in your S3 like endpoint URL. e.g https://&lt;s3_like_end_point_url&gt;/&lt;your_bucket_name&gt; A custom way of defining buckets in your endpoint. Useful for non-AWS S3 like object storage technology e.g swift stack, Optums, etc. Background information http://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html. May be useful if you have an https endpoint URL.</p>
-<p>You can define the configuration values in <code>framework.properties</code> by prefixing the property name with the stem: <code>framework.plugin.ExecutionFileStorage.org.rundeck.amazon-s3.</code>. Or in a project's project.properties file with the stem <code>project.plugin.ExecutionFileStorage.org.rundeck.amazon-s3.</code>.</p>
+<p>You can define the configuration values in <code>framework.properties</code> by prefixing the property name with the stem: <code>framework.plugin.ExecutionFileStorage.org.rundeck.amazon-s3.</code>. Or in a project’s project.properties file with the stem <code>project.plugin.ExecutionFileStorage.org.rundeck.amazon-s3.</code>.</p>
 <p>For example:</p>
 <pre><code>#AWSAccessKeyId and AWSSecretKey can be specified in the file
 framework.plugin.ExecutionFileStorage.org.rundeck.amazon-s3.AWSAccessKeyId=ABC123...
@@ -141,7 +141,7 @@ framework.plugin.ExecutionFileStorage.org.rundeck.amazon-s3.bucket=test-rundeck-
 
 #path to store the logs
 framework.plugin.ExecutionFileStorage.org.rundeck.amazon-s3.path=logs/${job.project}/${job.execid}.log</code></pre>
-<h2 id="using-with-rundeck-ssl-configuration"><a href="#using-with-rundeck-ssl-configuration">Using with Rundeck SSL Configuration</a></h2>
+<h2 id="using-with-rundeck-ssl-configuration">Using with Rundeck SSL Configuration</h2>
 <p>If you want to use this plugin when you have Rundeck configured with a custom SSL truststore, you will need to import the Amazon S3 SSL certificates to your truststore.</p>
 <pre><code>echo -n | openssl s_client -connect my-bucket.s3.amazonaws.com:443 &gt; certs.out
 keytool -importcert -trustcacerts -file certs.out -alias s3-amazonaws -keystore $RDECK_BASE/etc/truststore</code></pre>
@@ -169,8 +169,8 @@ keytool -importcert -trustcacerts -file certs.out -alias s3-amazonaws -keystore 
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="azure-log-storage-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> Azure Log Storage Plugin</a></li>
       
+      <li class="next"><a href="azure-log-storage-plugin.html">Azure Log Storage Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -199,7 +199,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

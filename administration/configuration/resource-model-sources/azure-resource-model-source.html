@@ -69,7 +69,7 @@ jQuery(function(){
 <div class="col-sm-6">
     <ul class="pager">
       <li class="previous"><a href="amazon-ec2-resource-model-source.html"><i class="glyphicon glyphicon-arrow-left"></i> Amazon EC2 Resource Model Source</a></li>
-      <li class="next"><a href="built-in-resource-model-source-plugins.html">Built-in Resource Model Source Plugins <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      
     </ul>
 </div>
 </div>
@@ -94,8 +94,8 @@ jQuery(function(){
 <h1 class="title">Azure Resource Model Source</h1>
 </div>
 <p>The Azure Resource Model Source Plugin provides the Azure VMs as nodes on a Rundeck Server.</p>
-<p>The source code lives at <a href="https://github.com/rundeck-plugins/rundeck-azure-plugin">https://github.com/rundeck-plugins/rundeck-azure-plugin</a>.</p>
-<h3 id="credentials-settings"><a href="#credentials-settings">Credentials Settings</a></h3>
+<p>The source code lives at <a href="https://github.com/rundeck-plugins/rundeck-azure-plugin" class="uri">https://github.com/rundeck-plugins/rundeck-azure-plugin</a>.</p>
+<h3 id="credentials-settings">Credentials Settings</h3>
 <p>Settings related to the Azure connection</p>
 <ul>
 <li><strong>Client ID</strong>: Azure Client ID.</li>
@@ -105,16 +105,16 @@ jQuery(function(){
 <li><strong>Certificate Path</strong>: (Optional) Azure certificate file path (if the access key is not defined).</li>
 <li><strong>Certificate Password</strong>: (Optional) Azure certificate Password (if the access key is not defined).</li>
 </ul>
-<h3 id="other-settings"><a href="#other-settings">Other Settings:</a></h3>
+<h3 id="other-settings">Other Settings:</h3>
 <p>Mapping and filter settings</p>
 <ul>
-<li><strong>Mapping Params</strong>: Custom mapping settings. Property mapping definitions. Specify multiple mappings in the form &quot;attributeName.selector=selector&quot; or &quot;attributeName.default=value&quot;, separated by &quot;;&quot;</li>
+<li><strong>Mapping Params</strong>: Custom mapping settings. Property mapping definitions. Specify multiple mappings in the form “attributeName.selector=selector” or “attributeName.default=value”, separated by “;”</li>
 <li><strong>Resource Group</strong>: Filter using resource group</li>
-<li><strong>Only Running Instances</strong>: Filter for the &quot;Running&quot; instances. If false, all instances will be returned.</li>
+<li><strong>Only Running Instances</strong>: Filter for the “Running” instances. If false, all instances will be returned.</li>
 </ul>
-<h3 id="mapping"><a href="#mapping">Mapping</a></h3>
+<h3 id="mapping">Mapping</h3>
 <p>Map the Azure VM properties to Rundeck Node definition</p>
-<h4 id="default-mapping"><a href="#default-mapping">Default Mapping</a></h4>
+<h4 id="default-mapping">Default Mapping</h4>
 <pre><code>nodename.selector                   =    name
 hostname.selector                   =    hostname
 description.selector                =    short_description
@@ -155,18 +155,18 @@ provisioningState:displayStatus.selector        =    azure_provisioningState_dis
 provisioningState:message.selector              =    azure_provisioningState_message
 provisioningState:time.selector                 =    azure_provisioningState_time
 </code></pre>
-<h3 id="adding-tags-from-azure-vm-tags"><a href="#adding-tags-from-azure-vm-tags">Adding Tags from Azure VM Tags</a></h3>
-<p>You can add Rundeck's node tags using Azure VM tags.</p>
+<h3 id="adding-tags-from-azure-vm-tags">Adding Tags from Azure VM Tags</h3>
+<p>You can add Rundeck’s node tags using Azure VM tags.</p>
 <p>For example, create an Azure VM tags like:</p>
 <ul>
 <li>Rundeck-Tags=sometag1,sometag2</li>
 </ul>
 <p><code>sometag1</code> and <code>sometag2</code> will be added as tags on Rundeck nodes</p>
-<h3 id="adding-custom-tags-from-azure-vm-files"><a href="#adding-custom-tags-from-azure-vm-files">Adding custom tags from Azure VM files</a></h3>
+<h3 id="adding-custom-tags-from-azure-vm-files">Adding custom tags from Azure VM files</h3>
 <p>You can add extra tags using the azure fields available (right column on the default mapping).</p>
 <p>For example, adding extra tags based on the VM resource group and status:</p>
 <pre><code>tags.selector=azure_resourceGroup,azure_status;</code></pre>
-<h3 id="adding-custom-attribute-based-on-azure-vm-tags"><a href="#adding-custom-attribute-based-on-azure-vm-tags">Adding custom attribute based on Azure VM Tags</a></h3>
+<h3 id="adding-custom-attribute-based-on-azure-vm-tags">Adding custom attribute based on Azure VM Tags</h3>
 <p>Also, you can add extra nodes attributes using Azure VM tags.</p>
 <p>For example, creating the following tags on the Azure VM, you can map those tags to a rundeck node attribute:</p>
 <ul>
@@ -204,7 +204,7 @@ winrm-password-storage-path.selector=winrm-password-storage-path</code></pre>
 <div class="col-sm-6">
     <ul class="pager">
       <li class="previous"><a href="amazon-ec2-resource-model-source.html"><i class="glyphicon glyphicon-arrow-left"></i> Amazon EC2 Resource Model Source</a></li>
-      <li class="next"><a href="built-in-resource-model-source-plugins.html">Built-in Resource Model Source Plugins <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      
     </ul>
 </div>
 </div>
@@ -233,7 +233,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

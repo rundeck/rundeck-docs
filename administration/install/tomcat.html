@@ -21,23 +21,69 @@ jQuery(function(){
 });
 </script>
   <style type="text/css">
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; }
-code > span.dt { color: #902000; }
-code > span.dv { color: #40a070; }
-code > span.bn { color: #40a070; }
-code > span.fl { color: #40a070; }
-code > span.ch { color: #4070a0; }
-code > span.st { color: #4070a0; }
-code > span.co { color: #60a0b0; font-style: italic; }
-code > span.ot { color: #007020; }
-code > span.al { color: #ff0000; font-weight: bold; }
-code > span.fu { color: #06287e; }
-code > span.er { color: #ff0000; font-weight: bold; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../../style.css" type="text/css" />
 </head>
@@ -121,7 +167,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div class="page-header">
 <h1 class="title">Rundeck Pro as a Tomcat servlet</h1>
 </div>
-<h2 id="installation"><a href="#installation">Installation</a></h2>
+<h2 id="installation">Installation</h2>
 <!---
 Originals:
 
@@ -138,7 +184,6 @@ http://support.rundeck.com/customer/en/portal/articles/2433205-configuring-tomca
 http://support.rundeck.com/customer/en/portal/articles/2859551-authentication-with-ad-or-ldap-on-tomcat
 
 --->
-
 <p>Note: Replace <code>$RDECK_BASE</code> with your rundeck base path and <code>$CATALINA_BASE</code> with your tomcat base path.</p>
 <ul>
 <li><a href="http://download.rundeck.com/versions.html">Download</a> the latest version of Rundeck Pro (war file)</li>
@@ -332,13 +377,13 @@ by:
 <li>Start or restart tomcat</li>
 <li>Upload a license key</li>
 </ul>
-<h2 id="upgrading"><a href="#upgrading">Upgrading</a></h2>
+<h2 id="upgrading">Upgrading</h2>
 <p>First, Download the rundeckpro-edition-X.X.X.war file from the download page: http://download.rundeck.com/versions.html</p>
 <p>The upgrade procedure should be:</p>
 <ul>
 <li>Back up your <code>log4j.properties</code> and <code>web.xml</code>, if you have changed anything there: ($CATALINA_BASE/webapps/rundeckpro/WEB-INF/classes/log4j.properties)</li>
 <li>Remove your <code>rundeckpro</code> and <code>rundeckpro.war</code> webapps directory.</li>
-<li>Back up the <code>libext</code> folder located in <code>$RDECK_BASE</code> if you have your own plugins, because the new version will load new plugin versions. If you don't have your own plugins, remove <code>libext</code></li>
+<li>Back up the <code>libext</code> folder located in <code>$RDECK_BASE</code> if you have your own plugins, because the new version will load new plugin versions. If you don’t have your own plugins, remove <code>libext</code></li>
 <li>Remove the contents of <code>$RDECK_BASE/var/tmp/pluginJars/</code></li>
 <li>If you have your own plugins on the previous <code>libext</code> folder, copy them back to the new libext folder.</li>
 <li>If you have setting related with plugins in <code>$RDECK_BASE/etc/rundeck-config.properties</code>, comment them in the first deploy. For example something like this: http://rundeck.org/docs/plugins-user-guide/bundled-plugins.html#jasypt-encryption-plugin</li>
@@ -348,8 +393,8 @@ by:
 <li>Restart Tomcat</li>
 <li>Uncomment the setting in <code>$RDECK_BASE/etc/rundeck-config.properties</code> if you commented them out previous, and restart tomcat again.</li>
 </ul>
-<h2 id="custom-jndi"><a href="#custom-jndi">Custom JNDI</a></h2>
-<h3 id="using-jndi-resource-database-connection"><a href="#using-jndi-resource-database-connection">Using JNDI Resource Database Connection</a></h3>
+<h2 id="custom-jndi">Custom JNDI</h2>
+<h3 id="using-jndi-resource-database-connection">Using JNDI Resource Database Connection</h3>
 <p>This setting allow Rundeck to use JNDI database connections instead of the default grails settings.</p>
 <ul>
 <li>Add the following entry on <code>$CATALINA_HOME/server.xml</code> under the <code>&lt;GlobalNamingResources&gt;</code> tag:</li>
@@ -391,7 +436,7 @@ by:
 </ul>
 <pre><code>dataSource.jndiName=java:/comp/env/jdbc/rundeckdb</code></pre>
 <p>This will replace the dataSource.* entries</p>
-<h3 id="using-jndi-database-to-manage-the-authentication"><a href="#using-jndi-database-to-manage-the-authentication">Using JNDI Database to manage the authentication</a></h3>
+<h3 id="using-jndi-database-to-manage-the-authentication">Using JNDI Database to manage the authentication</h3>
 <p>To use a custom authentication method using database tables:</p>
 <ul>
 <li>It is necessary to have tables like this:</li>
@@ -411,7 +456,7 @@ insert into users(&#39;samuel&#39;,&#39;samuel&#39;);
 insert into user_roles values(&#39;samuel&#39;,&#39;user&#39;);
 insert into user_roles values(&#39;samuel&#39;,&#39;admin&#39;);</code></pre>
 <ul>
-<li>All users needs a default role called &quot;user&quot; by default, if you want to change that you need to edit <code>$CATALINA_HOME/webapps/rundeckpro/WEB-INF/web.xml</code></li>
+<li>All users needs a default role called “user” by default, if you want to change that you need to edit <code>$CATALINA_HOME/webapps/rundeckpro/WEB-INF/web.xml</code></li>
 </ul>
 <pre><code>&lt;security-role&gt;&lt;role-name&gt;user&lt;/role-name&gt;&lt;/security-role&gt;</code></pre>
 <p>*change the default role name</p>
@@ -466,63 +511,63 @@ insert into user_roles values(&#39;samuel&#39;,&#39;admin&#39;);</code></pre>
      roleNameCol=&quot;role_name&quot;/&gt;</code></pre>
 <p>Further information:</p>
 <ul>
-<li><a href="https://tomcat.apache.org/tomcat-7.0-doc/realm-howto.html#DataSourceRealm">https://tomcat.apache.org/tomcat-7.0-doc/realm-howto.html#DataSourceRealm</a></li>
-<li><a href="https://tomcat.apache.org/tomcat-7.0-doc/jndi-datasource-examples-howto.html#MySQL_DBCP_Example">https://tomcat.apache.org/tomcat-7.0-doc/jndi-datasource-examples-howto.html#MySQL_DBCP_Example</a></li>
+<li><a href="https://tomcat.apache.org/tomcat-7.0-doc/realm-howto.html#DataSourceRealm" class="uri">https://tomcat.apache.org/tomcat-7.0-doc/realm-howto.html#DataSourceRealm</a></li>
+<li><a href="https://tomcat.apache.org/tomcat-7.0-doc/jndi-datasource-examples-howto.html#MySQL_DBCP_Example" class="uri">https://tomcat.apache.org/tomcat-7.0-doc/jndi-datasource-examples-howto.html#MySQL_DBCP_Example</a></li>
 </ul>
-<h2 id="configure-active-directory-ad-or-ldap-authentication"><a href="#configure-active-directory-ad-or-ldap-authentication">Configure Active Directory (AD) or LDAP Authentication</a></h2>
+<h2 id="configure-active-directory-ad-or-ldap-authentication">Configure Active Directory (AD) or LDAP Authentication</h2>
 <p>Edit <code>$CATALINA_BASE/conf/server.xml</code> and add the following realm definition.</p>
-<p>Replace the &quot;<span class="citation">@token</span>@&quot; strings with values corresponding to your Active Directory/LDAP structure.</p>
-<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;Realm</span><span class="ot"> className=</span><span class="st">&quot;org.apache.catalina.realm.JNDIRealm&quot;</span>
-<span class="ot">       connectionName=</span><span class="st">&quot;@jndi_connectionName@&quot;</span>
-<span class="ot">       connectionPassword=</span><span class="st">&quot;@jndi_connectionPassword@&quot;</span>
-<span class="ot">       connectionURL=</span><span class="st">&quot;@jndi_connectionURL@&quot;</span>
-<span class="ot">       referrals=</span><span class="st">&quot;follow&quot;</span>
-<span class="ot">       userBase=</span><span class="st">&quot;@jndi_userBase@&quot;</span>
-<span class="ot">       userSearch=</span><span class="st">&quot;(sAMAccountName={0})&quot;</span>
-<span class="ot">       userSubtree=</span><span class="st">&quot;true&quot;</span>
-<span class="ot">       roleBase=</span><span class="st">&quot;@jndi_roleBase@&quot;</span>
-<span class="ot">       roleName=</span><span class="st">&quot;cn&quot;</span>
-<span class="ot">       roleSearch=</span><span class="st">&quot;(member={0})&quot;</span>
-<span class="ot">       roleSubtree=</span><span class="st">&quot;true&quot;</span>
-<span class="ot">       roleNested=</span><span class="st">&quot;true&quot;</span>
-<span class="ot">       commonRole=</span><span class="st">&quot;user&quot;</span>
-  <span class="kw">/&gt;</span></code></pre>
+<p>Replace the “<span class="citation" data-cites="token">@token</span>@” strings with values corresponding to your Active Directory/LDAP structure.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">&lt;Realm</span><span class="ot"> className=</span><span class="st">&quot;org.apache.catalina.realm.JNDIRealm&quot;</span></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="ot">       connectionName=</span><span class="st">&quot;@jndi_connectionName@&quot;</span></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="ot">       connectionPassword=</span><span class="st">&quot;@jndi_connectionPassword@&quot;</span></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="ot">       connectionURL=</span><span class="st">&quot;@jndi_connectionURL@&quot;</span></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="ot">       referrals=</span><span class="st">&quot;follow&quot;</span></a>
+<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="ot">       userBase=</span><span class="st">&quot;@jndi_userBase@&quot;</span></a>
+<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="ot">       userSearch=</span><span class="st">&quot;(sAMAccountName={0})&quot;</span></a>
+<a class="sourceLine" id="cb16-8" data-line-number="8"><span class="ot">       userSubtree=</span><span class="st">&quot;true&quot;</span></a>
+<a class="sourceLine" id="cb16-9" data-line-number="9"><span class="ot">       roleBase=</span><span class="st">&quot;@jndi_roleBase@&quot;</span></a>
+<a class="sourceLine" id="cb16-10" data-line-number="10"><span class="ot">       roleName=</span><span class="st">&quot;cn&quot;</span></a>
+<a class="sourceLine" id="cb16-11" data-line-number="11"><span class="ot">       roleSearch=</span><span class="st">&quot;(member={0})&quot;</span></a>
+<a class="sourceLine" id="cb16-12" data-line-number="12"><span class="ot">       roleSubtree=</span><span class="st">&quot;true&quot;</span></a>
+<a class="sourceLine" id="cb16-13" data-line-number="13"><span class="ot">       roleNested=</span><span class="st">&quot;true&quot;</span></a>
+<a class="sourceLine" id="cb16-14" data-line-number="14"><span class="ot">       commonRole=</span><span class="st">&quot;user&quot;</span></a>
+<a class="sourceLine" id="cb16-15" data-line-number="15">  <span class="kw">/&gt;</span></a></code></pre></div>
 <p>Here are the descriptions for each attribute:</p>
 <ul>
 <li>connectionName: The account bind name (eg, cn=user,ou=blah,dc=example,dc=com or eg, * Administrator@sops.local)</li>
-<li>connectionPassword: the connection user's password (eg 'password')</li>
-<li>connectionURL: the URL to the ldap server (eg, 'ldap://192.168.50.11:389' )</li>
-<li>userBase: Base for finding users. (eg, 'dc=example,dc=com'), or</li>
-<li>userPattern: Pattern for finding users. (eg, 'cn={0},dc=example,dc=com')</li>
+<li>connectionPassword: the connection user’s password (eg ‘password’)</li>
+<li>connectionURL: the URL to the ldap server (eg, ‘ldap://192.168.50.11:389’ )</li>
+<li>userBase: Base for finding users. (eg, ‘dc=example,dc=com’), or</li>
+<li>userPattern: Pattern for finding users. (eg, ‘cn={0},dc=example,dc=com’)</li>
 <li>userSearch: Filter use to find the user. (eg: (sAMAccountName={0}) or (name={0})</li>
-<li>roleBase: Base for finding roles (eg 'OU=Rundeck,dc=example,dc=com' )</li>
+<li>roleBase: Base for finding roles (eg ‘OU=Rundeck,dc=example,dc=com’ )</li>
 </ul>
 <p>To use both authentication methods, AD/LDAP plus the default users file (conf/tomcat-users.xml), use CombinedRealm:</p>
-<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;Realm</span><span class="ot"> className=</span><span class="st">&quot;org.apache.catalina.realm.CombinedRealm&quot;</span><span class="kw">&gt;</span>
-    <span class="kw">&lt;Realm</span><span class="ot"> className=</span><span class="st">&quot;org.apache.catalina.realm.UserDatabaseRealm&quot;</span>
-<span class="ot">           resourceName=</span><span class="st">&quot;UserDatabase&quot;</span><span class="kw">/&gt;</span>
-    <span class="kw">&lt;Realm</span><span class="ot"> className=</span><span class="st">&quot;org.apache.catalina.realm.JNDIRealm&quot;</span>
-<span class="ot">           connectionName=</span><span class="st">&quot;CN=Administrator,CN=Users,DC=Example,DC=local&quot;</span>
-<span class="ot">           connectionPassword=</span><span class="st">&quot;password&quot;</span>
-<span class="ot">           connectionURL=</span><span class="st">&quot;ldap://server:389&quot;</span>
-<span class="ot">           referrals=</span><span class="st">&quot;follow&quot;</span>
-<span class="ot">           userBase=</span><span class="st">&quot;CN=Users,DC=Domain,DC=local&quot;</span>
-<span class="ot">           userSearch=</span><span class="st">&quot;(sAMAccountName={0})&quot;</span>
-<span class="ot">           userSubtree=</span><span class="st">&quot;true&quot;</span>
-<span class="ot">           roleBase=</span><span class="st">&quot;CN=Roles,DC=Example,DC=local&quot;</span>
-<span class="ot">           roleName=</span><span class="st">&quot;cn&quot;</span>
-<span class="ot">           roleSearch=</span><span class="st">&quot;(member={0})&quot;</span>
-<span class="ot">           roleSubtree=</span><span class="st">&quot;true&quot;</span>
-<span class="ot">           roleNested=</span><span class="st">&quot;true&quot;</span>
-<span class="ot">           commonRole=</span><span class="st">&quot;user&quot;</span>
-    <span class="kw">/&gt;</span>
-<span class="kw">&lt;/Realm&gt;</span></code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">&lt;Realm</span><span class="ot"> className=</span><span class="st">&quot;org.apache.catalina.realm.CombinedRealm&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">    <span class="kw">&lt;Realm</span><span class="ot"> className=</span><span class="st">&quot;org.apache.catalina.realm.UserDatabaseRealm&quot;</span></a>
+<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="ot">           resourceName=</span><span class="st">&quot;UserDatabase&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb17-4" data-line-number="4">    <span class="kw">&lt;Realm</span><span class="ot"> className=</span><span class="st">&quot;org.apache.catalina.realm.JNDIRealm&quot;</span></a>
+<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="ot">           connectionName=</span><span class="st">&quot;CN=Administrator,CN=Users,DC=Example,DC=local&quot;</span></a>
+<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="ot">           connectionPassword=</span><span class="st">&quot;password&quot;</span></a>
+<a class="sourceLine" id="cb17-7" data-line-number="7"><span class="ot">           connectionURL=</span><span class="st">&quot;ldap://server:389&quot;</span></a>
+<a class="sourceLine" id="cb17-8" data-line-number="8"><span class="ot">           referrals=</span><span class="st">&quot;follow&quot;</span></a>
+<a class="sourceLine" id="cb17-9" data-line-number="9"><span class="ot">           userBase=</span><span class="st">&quot;CN=Users,DC=Domain,DC=local&quot;</span></a>
+<a class="sourceLine" id="cb17-10" data-line-number="10"><span class="ot">           userSearch=</span><span class="st">&quot;(sAMAccountName={0})&quot;</span></a>
+<a class="sourceLine" id="cb17-11" data-line-number="11"><span class="ot">           userSubtree=</span><span class="st">&quot;true&quot;</span></a>
+<a class="sourceLine" id="cb17-12" data-line-number="12"><span class="ot">           roleBase=</span><span class="st">&quot;CN=Roles,DC=Example,DC=local&quot;</span></a>
+<a class="sourceLine" id="cb17-13" data-line-number="13"><span class="ot">           roleName=</span><span class="st">&quot;cn&quot;</span></a>
+<a class="sourceLine" id="cb17-14" data-line-number="14"><span class="ot">           roleSearch=</span><span class="st">&quot;(member={0})&quot;</span></a>
+<a class="sourceLine" id="cb17-15" data-line-number="15"><span class="ot">           roleSubtree=</span><span class="st">&quot;true&quot;</span></a>
+<a class="sourceLine" id="cb17-16" data-line-number="16"><span class="ot">           roleNested=</span><span class="st">&quot;true&quot;</span></a>
+<a class="sourceLine" id="cb17-17" data-line-number="17"><span class="ot">           commonRole=</span><span class="st">&quot;user&quot;</span></a>
+<a class="sourceLine" id="cb17-18" data-line-number="18">    <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb17-19" data-line-number="19"><span class="kw">&lt;/Realm&gt;</span></a></code></pre></div>
 <p>Further information about Realm authentication:</p>
 <ul>
 <li>https://tomcat.apache.org/tomcat-8.0-doc/realm-howto.html#JNDIRealm</li>
 <li>https://tomcat.apache.org/tomcat-8.0-doc/realm-howto.html#CombinedRealm</li>
 </ul>
-<h3 id="enable-logging-debug-for-tomcat-authentication"><a href="#enable-logging-debug-for-tomcat-authentication">Enable logging debug for tomcat authentication</a></h3>
+<h3 id="enable-logging-debug-for-tomcat-authentication">Enable logging debug for tomcat authentication</h3>
 <p>Edit the file <code>$CATALINA_BASE/conf/logging.properties</code> and add the following entries:</p>
 <ul>
 <li>Modify the FileHandler.level from FINE to ALL</li>
@@ -536,55 +581,41 @@ insert into user_roles values(&#39;samuel&#39;,&#39;admin&#39;);</code></pre>
 <pre><code>org.apache.catalina.core.ContainerBase.[Catalina].level = ALL
 org.apache.catalina.core.ContainerBase.[Catalina].handlers = 2localhost.org.apache.juli.FileHandler</code></pre>
 <p>The log will be enable on <code>localhost.YYYY-MM-DD.log</code> file on <code>$CATALINA_BASE/logs</code> folder</p>
-<h2 id="connect-to-active-directory-with-ldaps-windows"><a href="#connect-to-active-directory-with-ldaps-windows">Connect to Active Directory with LDAPS (Windows)</a></h2>
+<h2 id="connect-to-active-directory-with-ldaps-windows">Connect to Active Directory with LDAPS (Windows)</h2>
 <p>If you need to configure Tomcat to connect to your Active Directory server using LDAPS, this is how to do it.</p>
-<h3 id="configure-ldaps"><a href="#configure-ldaps">Configure LDAPS</a></h3>
-<p>Check the follow document to enable LDAPS and create a certificate: <a href="http://social.technet.microsoft.com/wiki/contents/articles/2980.ldap-over-ssl-ldaps-certificate.aspx">http://social.technet.microsoft.com/wiki/contents/articles/2980.ldap-over-ssl-ldaps-certificate.aspx</a></p>
-<h3 id="export-the-certificate-from-active-directory"><a href="#export-the-certificate-from-active-directory">Export the certificate from Active Directory</a></h3>
+<h3 id="configure-ldaps">Configure LDAPS</h3>
+<p>Check the follow document to enable LDAPS and create a certificate: <a href="http://social.technet.microsoft.com/wiki/contents/articles/2980.ldap-over-ssl-ldaps-certificate.aspx" class="uri">http://social.technet.microsoft.com/wiki/contents/articles/2980.ldap-over-ssl-ldaps-certificate.aspx</a></p>
+<h3 id="export-the-certificate-from-active-directory">Export the certificate from Active Directory</h3>
 <ul>
 <li>Click <strong>Start</strong>, type <strong>mmc</strong> and then click <strong>OK</strong>.</li>
 <li>Click <strong>File</strong> and then click <strong>Add/Remove Snap-in.</strong></li>
 <li>Click <strong>Certificates</strong> and then click <strong>Add</strong>.</li>
 <li>Select <strong>Service account</strong> and then click <strong>Next</strong>.</li>
 </ul>
-<div class="figure">
-<img src="../../figures/tomcat-ldaps-service-account.png" />
-</div>
+<p><img src="../../figures/tomcat-ldaps-service-account.png" /></p>
 <ul>
 <li>In the <strong>Select Computer</strong> dialog box, select <strong>Local computer</strong> if you are working on the local computer, or select <strong>Another computer</strong> to find the remote computer.</li>
 </ul>
-<div class="figure">
-<img src="../../figures/tomcat-ldaps-select-computer.png" />
-</div>
+<p><img src="../../figures/tomcat-ldaps-select-computer.png" /></p>
 <ul>
 <li>Select <strong>Active Directory Domain Services</strong> and then click <strong>Finish</strong>.</li>
 </ul>
-<div class="figure">
-<img src="../../figures/tomcat-ldaps-ad-domain-services.png" />
-</div>
+<p><img src="../../figures/tomcat-ldaps-ad-domain-services.png" /></p>
 <ul>
 <li>Expand <strong>Certificates - Services (Active Directory Domain Services)</strong> and then click **NTDS*. Right-click **NTDS*, click <strong>All Tasks</strong>, and then click <strong>Export</strong></li>
 </ul>
-<div class="figure">
-<img src="../../figures/tomcat-ldaps-cert-export.png" />
-</div>
+<p><img src="../../figures/tomcat-ldaps-cert-export.png" /></p>
 <p>On the Certificate Export Wizard welcome screen, click Next.</p>
-<div class="figure">
-<img src="../../figures/tomcat-ldaps-cert-export-wizard.png" />
-</div>
+<p><img src="../../figures/tomcat-ldaps-cert-export-wizard.png" /></p>
 <p>Export the certificate in .cer format</p>
-<div class="figure">
-<img src="../../figures/tomcat-ldaps-cert-export-wizard-format.png" />
-</div>
+<p><img src="../../figures/tomcat-ldaps-cert-export-wizard-format.png" /></p>
 <p>Save the certificate</p>
-<div class="figure">
-<img src="../../figures/tomcat-ldaps-cert-export-wizard-save.png" />
-</div>
-<h3 id="import-the-certificate-into-java-keystore"><a href="#import-the-certificate-into-java-keystore">Import the certificate into java keystore</a></h3>
+<p><img src="../../figures/tomcat-ldaps-cert-export-wizard-save.png" /></p>
+<h3 id="import-the-certificate-into-java-keystore">Import the certificate into java keystore</h3>
 <p>Generate the truststore key in order to use it in the tomcat context. Run the follow command:</p>
 <pre><code>keytool  -import -trustcacerts -alias @ALIAS_NAME@  -file @CERTIFICATE_NAME.cer@ -keystore @CERT_PATH@/@KEYSTORE_NAME@</code></pre>
 <p>Where <code>@CERTIFICATE_NAME.cer@</code> is the certificate exported in the previous step</p>
-<h3 id="add-the-keystore-to-tomcat"><a href="#add-the-keystore-to-tomcat">Add the keystore to tomcat</a></h3>
+<h3 id="add-the-keystore-to-tomcat">Add the keystore to tomcat</h3>
 <p>Add to <code>tomcat.conf</code> or <code>setenv.sh</code>, depending on the installation type.</p>
 <p><code>$CATALINA_BASE/conf/tomcat.conf</code> (.rpm install)</p>
 <pre><code>#Use JAVA_OPTS to set java.library.path for libtcnative.so
@@ -594,32 +625,32 @@ JAVA_OPTS=&quot; -XX:MaxPermSize=256m -Xmx1024m -Xms256m -server -Djavax.net.ssl
 <pre><code>CATALINA_PID=&quot;$CATALINA_BASE/logs/catalina.pid&quot;
 CATALINA_OPTS=&quot;-Drdeck.base=$RDECK_HOME -Drundeck.config.location=$RDECK_HOME/etc/rundeck-config.properties&quot;
 JAVA_OPTS=&quot;-server -Xmx1024m -Djavax.net.ssl.trustStore=@CERT_PATH@/@KEYSTORE_NAME@&quot;</code></pre>
-<h3 id="configure-tomcat-jndi-realm"><a href="#configure-tomcat-jndi-realm">Configure Tomcat JNDI Realm</a></h3>
+<h3 id="configure-tomcat-jndi-realm">Configure Tomcat JNDI Realm</h3>
 <p>In the <code>$CATALINA_BASE/server/conf/server.xml</code> specify the <code>connectionURL</code> using the ldaps address:</p>
-<pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;Realm</span><span class="ot"> className=</span><span class="st">&quot;org.apache.catalina.realm.CombinedRealm&quot;</span><span class="kw">&gt;</span>
-    <span class="kw">&lt;Realm</span><span class="ot"> className=</span><span class="st">&quot;org.apache.catalina.realm.UserDatabaseRealm&quot;</span>
-<span class="ot">           resourceName=</span><span class="st">&quot;UserDatabase&quot;</span><span class="kw">/&gt;</span>
-    <span class="kw">&lt;Realm</span><span class="ot"> className=</span><span class="st">&quot;org.apache.catalina.realm.JNDIRealm&quot;</span>
-<span class="ot">           connectionName=</span><span class="st">&quot;CN=@USERNAME@,CN=Users,DC=WindowsVirtual,DC=local&quot;</span>
-<span class="ot">           connectionPassword=</span><span class="st">&quot;@PASSWORD@&quot;</span>
-<span class="ot">           connectionURL=</span><span class="st">&quot;ldaps://@LDAPSERVER@:636&quot;</span>
-<span class="ot">           referrals=</span><span class="st">&quot;follow&quot;</span>
-<span class="ot">           userBase=</span><span class="st">&quot;CN=Users,DC=WindowsVirtual,DC=local&quot;</span>
-<span class="ot">           userSearch=</span><span class="st">&quot;(sAMAccountName={0})&quot;</span>
-<span class="ot">           userSubtree=</span><span class="st">&quot;true&quot;</span>
-<span class="ot">           roleBase=</span><span class="st">&quot;CN=Roles,DC=WindowsVirtual,DC=local&quot;</span>
-<span class="ot">           roleName=</span><span class="st">&quot;cn&quot;</span>
-<span class="ot">           roleSearch=</span><span class="st">&quot;(member={0})&quot;</span>
-<span class="ot">           roleSubtree=</span><span class="st">&quot;true&quot;</span>
-<span class="ot">           roleNested=</span><span class="st">&quot;true&quot;</span>
-<span class="ot">           commonRole=</span><span class="st">&quot;user&quot;</span>
-    <span class="kw">/&gt;</span>
-<span class="kw">&lt;/Realm&gt;</span></code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">&lt;Realm</span><span class="ot"> className=</span><span class="st">&quot;org.apache.catalina.realm.CombinedRealm&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb23-2" data-line-number="2">    <span class="kw">&lt;Realm</span><span class="ot"> className=</span><span class="st">&quot;org.apache.catalina.realm.UserDatabaseRealm&quot;</span></a>
+<a class="sourceLine" id="cb23-3" data-line-number="3"><span class="ot">           resourceName=</span><span class="st">&quot;UserDatabase&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb23-4" data-line-number="4">    <span class="kw">&lt;Realm</span><span class="ot"> className=</span><span class="st">&quot;org.apache.catalina.realm.JNDIRealm&quot;</span></a>
+<a class="sourceLine" id="cb23-5" data-line-number="5"><span class="ot">           connectionName=</span><span class="st">&quot;CN=@USERNAME@,CN=Users,DC=WindowsVirtual,DC=local&quot;</span></a>
+<a class="sourceLine" id="cb23-6" data-line-number="6"><span class="ot">           connectionPassword=</span><span class="st">&quot;@PASSWORD@&quot;</span></a>
+<a class="sourceLine" id="cb23-7" data-line-number="7"><span class="ot">           connectionURL=</span><span class="st">&quot;ldaps://@LDAPSERVER@:636&quot;</span></a>
+<a class="sourceLine" id="cb23-8" data-line-number="8"><span class="ot">           referrals=</span><span class="st">&quot;follow&quot;</span></a>
+<a class="sourceLine" id="cb23-9" data-line-number="9"><span class="ot">           userBase=</span><span class="st">&quot;CN=Users,DC=WindowsVirtual,DC=local&quot;</span></a>
+<a class="sourceLine" id="cb23-10" data-line-number="10"><span class="ot">           userSearch=</span><span class="st">&quot;(sAMAccountName={0})&quot;</span></a>
+<a class="sourceLine" id="cb23-11" data-line-number="11"><span class="ot">           userSubtree=</span><span class="st">&quot;true&quot;</span></a>
+<a class="sourceLine" id="cb23-12" data-line-number="12"><span class="ot">           roleBase=</span><span class="st">&quot;CN=Roles,DC=WindowsVirtual,DC=local&quot;</span></a>
+<a class="sourceLine" id="cb23-13" data-line-number="13"><span class="ot">           roleName=</span><span class="st">&quot;cn&quot;</span></a>
+<a class="sourceLine" id="cb23-14" data-line-number="14"><span class="ot">           roleSearch=</span><span class="st">&quot;(member={0})&quot;</span></a>
+<a class="sourceLine" id="cb23-15" data-line-number="15"><span class="ot">           roleSubtree=</span><span class="st">&quot;true&quot;</span></a>
+<a class="sourceLine" id="cb23-16" data-line-number="16"><span class="ot">           roleNested=</span><span class="st">&quot;true&quot;</span></a>
+<a class="sourceLine" id="cb23-17" data-line-number="17"><span class="ot">           commonRole=</span><span class="st">&quot;user&quot;</span></a>
+<a class="sourceLine" id="cb23-18" data-line-number="18">    <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb23-19" data-line-number="19"><span class="kw">&lt;/Realm&gt;</span></a></code></pre></div>
 <p>This example allow to use both authentication methods, LDAPS and tomcat-users.xml</p>
-<h3 id="troubleshooting"><a href="#troubleshooting">Troubleshooting</a></h3>
+<h3 id="troubleshooting">Troubleshooting</h3>
 <p>In order to test the connection with LDAPS server, you can use the SSLPoke utiliy:</p>
 <ul>
-<li><p>Download SSLPoke: <a href="https://confluence.atlassian.com/kb/unable-to-connect-to-ssl-services-due-to-pkix-path-building-failed-779355358.html">https://confluence.atlassian.com/kb/unable-to-connect-to-ssl-services-due-to-pkix-path-building-failed-779355358.html</a></p></li>
+<li><p>Download SSLPoke: <a href="https://confluence.atlassian.com/kb/unable-to-connect-to-ssl-services-due-to-pkix-path-building-failed-779355358.html" class="uri">https://confluence.atlassian.com/kb/unable-to-connect-to-ssl-services-due-to-pkix-path-building-failed-779355358.html</a></p></li>
 <li><p>Test the connection using the certificate:</p></li>
 </ul>
 <pre><code>java -Djavax.net.ssl.trustStore=cacerts_ldapcertificate  SSLPoke 192.168.0.5 636 </code></pre>
@@ -675,7 +706,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

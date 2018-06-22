@@ -88,121 +88,36 @@ jQuery(function(){
 </div>
 <p>You can modify some display features of the Rundeck GUI by setting these properties in the <a href="configuration-file-reference.html#rundeck-config.properties">rundeck-config.properties</a> file:</p>
 <table>
-<col width="45%" />
-<col width="38%" />
-<col width="16%" />
-<thead>
-<tr class="header">
-<th align="left"><strong>Property</strong></th>
-<th align="left"><strong>Description</strong></th>
-<th align="left"><strong>Example</strong></th>
-</tr>
-</thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>rundeck.gui.title</code></td>
-<td align="left">Title shown in app header</td>
-<td align="left">Test App</td>
-</tr>
-<tr class="even">
-<td align="left"><code>rundeck.gui.brand.html</code></td>
-<td align="left">HTML used in place of title</td>
-<td align="left"><code>Test &lt;b&gt;App&lt;/b&gt;</code></td>
-</tr>
-<tr class="odd">
-<td align="left"><code>rundeck.gui.logo</code></td>
-<td align="left">Logo icon path relative to webapps/rundeck/images dir</td>
-<td align="left">test-logo.png</td>
-</tr>
-<tr class="even">
-<td align="left"><code>rundeck.gui.logoHires</code></td>
-<td align="left">(High Res/retina) Logo icon path relative to webapps/rundeck/images dir. Should be 2x the specified logo-height and logo-width</td>
-<td align="left">test-logo@2x.png</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>rundeck.gui.logo-width</code></td>
-<td align="left">Icon width for proper display (32px is best)</td>
-<td align="left">32px</td>
-</tr>
-<tr class="even">
-<td align="left"><code>rundeck.gui.logo-height</code></td>
-<td align="left">Icon height for proper display (32px is best)</td>
-<td align="left">32px</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>rundeck.gui.titleLink</code></td>
-<td align="left">URL for the link used by the app header icon.</td>
-<td align="left">http://rundeck.org</td>
-</tr>
-<tr class="even">
-<td align="left"><code>rundeck.gui.helpLink</code></td>
-<td align="left">URL for the &quot;help&quot; link in the app header.</td>
-<td align="left">http://rundeck.org/ docs</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>rundeck.gui.navbar.background</code></td>
-<td align="left">Color of the background of the top navigation bar.</td>
-<td align="left"><code>#3C3C3C</code></td>
-</tr>
-<tr class="even">
-<td align="left"><code>rundeck.gui.realJobTree</code></td>
-<td align="left">Displaying a real tree in the Jobs overview instead of collapsing empty groups. <strong>Default: true</strong></td>
-<td align="left">false</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>rundeck.gui.startpage</code></td>
-<td align="left">Change the default page shown after choosing a project. Values: 'adhoc', 'configure', 'createJob', 'events', 'home', 'jobs', 'nodes', 'projectHome Default: 'projectHome'.</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left"><code>rundeck.gui.execution.tail.lines.default</code></td>
-<td align="left">Change the default number of lines shown in the execution page in tail mode view. (Default: 20)</td>
-<td align="left">50</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>rundeck.gui.execution.tail.lines.max</code></td>
-<td align="left">Change the maximum number of lines shown in the execution page in tail mode view. (Default: 100)</td>
-<td align="left">200</td>
-</tr>
-<tr class="even">
-<td align="left"><code>rundeck.gui.enableJobHoverInfo</code></td>
-<td align="left">Shows job information when the user hovers over a job name in various pages. (Default: true)</td>
-<td align="left">false</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>rundeck.gui.login.welcome</code></td>
-<td align="left">Text displayed in the login form pages. (Default: blank)</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left"><code>rundeck.gui.login.welcomeHtml</code></td>
-<td align="left">HTML displayed in the login form pages. The HTML will be sanitized before display. (Default: blank) HTML displayed in the login form pages (below the login form). The HTM before display. (Default: blank)</td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left"><code>rundeck.gui.errorpage.hidestacktrace</code></td>
-<td align="left">Hide Java stacktraces from the end user when an error occurs. Default: false.</td>
-<td align="left">true/false</td>
-</tr>
-<tr class="even">
-<td align="left"><code>rundeck.gui.job.description.disableHTML</code></td>
-<td align="left">Disable extended Job description and Option description rendering as HTML. (Default: false)</td>
-<td align="left">true/false</td>
-</tr>
-<tr class="odd">
-<td align="left"><code>rundeck.gui.clusterIdentityInHeader</code></td>
-<td align="left">When cluster mode is enabled, display server name/ID in header. (Default: false)</td>
-<td align="left">true/false</td>
-</tr>
-<tr class="even">
-<td align="left"><code>rundeck.gui.clusterIdentityInFooter</code></td>
-<td align="left">When cluster mode is enabled, display server name/ID in footer. (Default: true)</td>
-<td align="left">true/false</td>
+<td><strong>Property</strong> <strong>Description</strong> <strong>Example</strong></td>
 </tr>
 </tbody>
 </table>
+<p><code>rundeck.gui.title</code> Title shown in app header Test App</p>
+<p><code>rundeck.gui.brand.html</code> HTML used in place of title <code>Test &lt;b&gt;App&lt;/b&gt;</code></p>
+<p><code>rundeck.gui.logo</code> Logo icon path relative to test-logo.png webapps/rundeck/images dir</p>
+<p><code>rundeck.gui.logoHires</code> (High Res/retina) Logo icon path test-logo@2x.png relative to webapps/rundeck/images dir. Should be 2x the specified logo-height and logo-width</p>
+<p><code>rundeck.gui.logo-width</code> Icon width for proper display (32px 32px is best)</p>
+<p><code>rundeck.gui.logo-height</code> Icon height for proper display (32px 32px is best)</p>
+<p><code>rundeck.gui.titleLink</code> URL for the link used by the app http://rundeck.org header icon.</p>
+<p><code>rundeck.gui.helpLink</code> URL for the “help” link in the app http://rundeck.org/ header. docs</p>
+<p><code>rundeck.gui.navbar.background</code> Color of the background of the top <code>#3C3C3C</code> navigation bar.</p>
+<p><code>rundeck.gui.realJobTree</code> Displaying a real tree in the Jobs false overview instead of collapsing<br />
+empty groups. <strong>Default: true</strong></p>
+<p><code>rundeck.gui.startpage</code> Change the default page shown after choosing a project. Values: ‘adhoc’, ‘configure’, ‘createJob’, ‘events’, ‘home’, ‘jobs’, ‘nodes’, ‘projectHome’ or ‘uploadJob’. Default: ‘projectHome’.</p>
+<p><code>rundeck.gui.execution.tail.lines.default</code> Change the default number of lines 50 shown in the execution page in tail mode view. (Default: 20)</p>
+<p><code>rundeck.gui.execution.tail.lines.max</code> Change the maximum number of lines 200 shown in the execution page in tail mode view. (Default: 100)</p>
+<p><code>rundeck.gui.enableJobHoverInfo</code> Shows job information when the user false hovers over a job name in various<br />
+pages. (Default: true)</p>
+<p><code>rundeck.gui.login.welcome</code> Text displayed in the login form pages. (Default: blank)</p>
+<p><code>rundeck.gui.login.welcomeHtml</code> HTML displayed in the login form pages. The HTML will be sanitized before display. (Default: blank) <code>rundeck.gui.login.footerMessageHtml</code> HTML displayed in the login form pages (below the login form). The HTML will be sanitized before display. (Default: blank)</p>
+<p><code>rundeck.gui.errorpage.hidestacktrace</code> Hide Java stacktraces from the end true/false user when an error occurs. Default: false.</p>
+<p><code>rundeck.gui.job.description.disableHTML</code> Disable extended Job description true/false and Option description rendering as HTML. (Default: false)</p>
+<p><code>rundeck.gui.clusterIdentityInHeader</code> When cluster mode is enabled, true/false display server name/ID in header. (Default: false)</p>
+<p><code>rundeck.gui.clusterIdentityInFooter</code> When cluster mode is enabled, true/false display server name/ID in footer. (Default: true) ——————————————————————————-</p>
 <p>The <code>rundeck.gui.errorpage.hidestacktrace</code> can also be set to true via a Java system property defined at system startup: <code>-Dorg.rundeck.gui.errorpage.hidestacktrace=true</code>.</p>
-<h2 id="localization"><a href="#localization">Localization</a></h2>
+<h2 id="localization">Localization</h2>
 <p>See <a href="localization.html">Localization</a>.</p>
 </div>
 </div>
@@ -256,7 +171,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

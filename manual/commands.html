@@ -103,13 +103,11 @@ jQuery(function(){
 <p>A <em>command</em> is a single executable string executed on a Node. Rundeck invokes commands on nodes via a <em>node executor</em> which evaluates the command string and executes it. Node executors evaluate the command string in a data context containing information about the Node resource. Command strings can reference this data and thus avoid hard coding node or environment specific values.</p>
 <p>The Rundeck graphical console provides the ability to execute commands to a set of filtered Node resources. The Command page can accept any command string you might run via an SSH command or via the <a href="../man1/dispatch.html">dispatch</a> shell tool.</p>
 <p>Note, your ability to view Nodes and execute commands on them depends on your ACL policy.</p>
-<h2 id="commands-tab-overview"><a href="#commands-tab-overview">Commands tab overview</a></h2>
-<p>Navigate to this page by clicking on the &quot;Commands&quot; tab in the navigation bar. Alternatively, go to the Nodes tab and choose the &quot;Node Actions&quot; menu and select the &quot;Run a command ...&quot; menu item.</p>
-<div class="figure">
-<img src="../figures/fig0207.png" />
-</div>
+<h2 id="commands-tab-overview">Commands tab overview</h2>
+<p>Navigate to this page by clicking on the “Commands” tab in the navigation bar. Alternatively, go to the Nodes tab and choose the “Node Actions” menu and select the “Run a command …” menu item.</p>
+<p><img src="../figures/fig0207.png" /></p>
 <p>The screenshot above shows the elements of the Commands page user interface.</p>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>Command prompt - Enter the command string.</li>
 <li>Command dispatch settings - Optional settings to control concurrency and errors.</li>
 <li>Filter expression - Search expression to match nodes.</li>
@@ -117,58 +115,58 @@ jQuery(function(){
 <li>Run command button - Execute command for command string and matched nodes.</li>
 <li>Activity views - Historical views of command executions.</li>
 </ol>
-<h2 id="enter-a-command"><a href="#enter-a-command">Enter a command</a></h2>
-<div class="figure">
-<img src="../figures/fig0207-a.png" alt="Input command string" /><p class="caption">Input command string</p>
-</div>
+<h2 id="enter-a-command">Enter a command</h2>
+<figure>
+<img src="../figures/fig0207-a.png" alt="Input command string" /><figcaption>Input command string</figcaption>
+</figure>
 <p>Enter the command string you wish to execute on the Nodes. This command string must be a valid command statement that can be executed on the nodes.</p>
-<h3 id="dispatch-settings"><a href="#dispatch-settings">Dispatch settings</a></h3>
-<div class="figure">
-<img src="../figures/fig0208-b.png" alt="Choose dispatch settings" /><p class="caption">Choose dispatch settings</p>
-</div>
+<h3 id="dispatch-settings">Dispatch settings</h3>
+<figure>
+<img src="../figures/fig0208-b.png" alt="Choose dispatch settings" /><figcaption>Choose dispatch settings</figcaption>
+</figure>
 <p>The dispatch settings let you control the amount of concurrency and error handling for the command execution.</p>
 <ul>
 <li>Thread count: Number of concurrent command executions. By default the value is 1 which causes a sequential execution.</li>
 <li>On node failure: If a command execution fails on the node, you can choose to continue (default) or stop immediately at the failed node.</li>
 </ul>
-<h2 id="select-the-nodes"><a href="#select-the-nodes">Select the nodes</a></h2>
-<div class="figure">
-<img src="../figures/fig0207-b.png" alt="Filter the nodes" /><p class="caption">Filter the nodes</p>
-</div>
-<p>You can choose the nodes by either choosing a saved filter or typing in your own filter expression. Press the &quot;Set Filter&quot; button to find the matched nodes. You can get help on filter expression syntax by pressing the help button.</p>
-<h3 id="node-detail"><a href="#node-detail">Node detail</a></h3>
-<p>Each of the matched nodes is linked to a detail view where you can inspect the Node's attribute values (1).</p>
+<h2 id="select-the-nodes">Select the nodes</h2>
+<figure>
+<img src="../figures/fig0207-b.png" alt="Filter the nodes" /><figcaption>Filter the nodes</figcaption>
+</figure>
+<p>You can choose the nodes by either choosing a saved filter or typing in your own filter expression. Press the “Set Filter” button to find the matched nodes. You can get help on filter expression syntax by pressing the help button.</p>
+<h3 id="node-detail">Node detail</h3>
+<p>Each of the matched nodes is linked to a detail view where you can inspect the Node’s attribute values (1).</p>
 <p>You can click the filter links inside the detail view to continue building your filter expression (2).</p>
-<div class="figure">
-<img src="../figures/fig0208-a.png" alt="Node detail" /><p class="caption">Node detail</p>
-</div>
-<h2 id="execute-command"><a href="#execute-command">Execute command</a></h2>
-<p>With the command string and filter entered you are ready to run the command. Press the &quot;Run on x Nodes&quot; button to begin the execution.</p>
+<figure>
+<img src="../figures/fig0208-a.png" alt="Node detail" /><figcaption>Node detail</figcaption>
+</figure>
+<h2 id="execute-command">Execute command</h2>
+<p>With the command string and filter entered you are ready to run the command. Press the “Run on x Nodes” button to begin the execution.</p>
 <p>The command will be dispatched to all the Nodes matched by the filter. The command prompt and run button become disabled until the execution completes. Output from the command execution is shown below.</p>
-<div class="figure">
-<img src="../figures/fig0208.png" alt="Command execution output" /><p class="caption">Command execution output</p>
-</div>
-<ol style="list-style-type: decimal">
+<figure>
+<img src="../figures/fig0208.png" alt="Command execution output" /><figcaption>Command execution output</figcaption>
+</figure>
+<ol type="1">
 <li>Link to execution page: Every execution has an ID an a separate page to follow it and view a report after it completes.</li>
 <li>View options: Output is automatically collated by node and contains time information. You can toggle these as desired.</li>
 <li>Collated output: All output is grouped by the node.</li>
 <li>Output log links: You can view the raw output in the browser or download it to your desktop.</li>
 </ol>
-<p>You can dismiss the output by pressing the &quot;X&quot; button above the Download link.</p>
-<h2 id="monitor-the-execution"><a href="#monitor-the-execution">Monitor the execution</a></h2>
+<p>You can dismiss the output by pressing the “X” button above the Download link.</p>
+<h2 id="monitor-the-execution">Monitor the execution</h2>
 <p>Once the command execution begins you can monitor its progress on the Commands page or a separate execution follow page discussed later.</p>
-<div class="figure">
-<img src="../figures/fig0207-c.png" alt="Now running a command" /><p class="caption">Now running a command</p>
-</div>
-<ol style="list-style-type: decimal">
+<figure>
+<img src="../figures/fig0207-c.png" alt="Now running a command" /><figcaption>Now running a command</figcaption>
+</figure>
+<ol type="1">
 <li>Kill job button: You can kill the execution by pressing this button.</li>
-<li>Execution status bar: If you dismissed the output view, you can continue monitoring progress in the &quot;running&quot; tab in the Activity section.</li>
+<li>Execution status bar: If you dismissed the output view, you can continue monitoring progress in the “running” tab in the Activity section.</li>
 </ol>
-<h3 id="output-view-options"><a href="#output-view-options">Output view options</a></h3>
+<h3 id="output-view-options">Output view options</h3>
 <p>This page section provides several views to read the output using different formats.</p>
-<div class="figure">
-<img src="../figures/fig0209.png" alt="View options" /><p class="caption">View options</p>
-</div>
+<figure>
+<img src="../figures/fig0209.png" alt="View options" /><figcaption>View options</figcaption>
+</figure>
 <dl>
 <dt>Log view</dt>
 <dd><p>Displays output messages from the command execution as if you were running the Unix <code>tail -f</code> command on the output log file. <img src="../figures/fig0208.png" alt="Execution output" /></p>
@@ -177,19 +175,19 @@ jQuery(function(){
 <dd><p>Output messages are sorted into Node specific sections and are not interlaced. By default, the messages are collapsed but can be revealed by pressing the disclosure icon to the right. <img src="../figures/fig0210.png" alt="Collapsed output" /></p>
 </dd>
 </dl>
-<h3 id="execution-follow-page"><a href="#execution-follow-page">Execution follow page</a></h3>
-<p>Sometimes it is useful to have a page where just the execution output is displayed separately. One purpose is to share a link to others interested in following the output messages. Click the progress bar in the &quot;Activity&quot; section to go to the execution follow page.</p>
-<div class="figure">
-<img src="../figures/fig0207-d.png" alt="Execution follow view" /><p class="caption">Execution follow view</p>
-</div>
+<h3 id="execution-follow-page">Execution follow page</h3>
+<p>Sometimes it is useful to have a page where just the execution output is displayed separately. One purpose is to share a link to others interested in following the output messages. Click the progress bar in the “Activity” section to go to the execution follow page.</p>
+<figure>
+<img src="../figures/fig0207-d.png" alt="Execution follow view" /><figcaption>Execution follow view</figcaption>
+</figure>
 <p>Notice the URL in the location bar of your browser. This URL can be shared to others interested in the progress of execution. The URL contains the execution ID (EID) and has a form like:</p>
 <pre><code> http://rundeckserver/project/prod/execution/show/{EID}</code></pre>
 <p>After execution completes, the command will have a status:</p>
 <ul>
 <li>Successful: No errors occurred during execution of the command across the filtered Node set</li>
-<li>Failed: One or more errors occurred. A list of Nodes that incurred an error is displayed. The page will also contain a link &quot;Retry Failed Nodes...&quot; in case you would like to retry the command.</li>
+<li>Failed: One or more errors occurred. A list of Nodes that incurred an error is displayed. The page will also contain a link “Retry Failed Nodes…” in case you would like to retry the command.</li>
 </ul>
-<h2 id="execution-history"><a href="#execution-history">Execution history</a></h2>
+<h2 id="execution-history">Execution history</h2>
 <p>The Commands page provides several views about execution history.</p>
 <ul>
 <li>running: Shows any currently running command executions.</li>
@@ -197,16 +195,15 @@ jQuery(function(){
 <li>failed: Shows failed executions from last 24 hours.</li>
 <li>by you: Shows executions started by you.</li>
 </ul>
-<div class="figure">
-<img src="../figures/fig0207-e.png" alt="Recent history" /><p class="caption">Recent history</p>
-</div>
-<p>You can further search activity history by clicking the &quot;Filter activity...&quot; link.</p>
-<h2 id="related-command-line-tools"><a href="#related-command-line-tools">Related Command line tools</a></h2>
+<figure>
+<img src="../figures/fig0207-e.png" alt="Recent history" /><figcaption>Recent history</figcaption>
+</figure>
+<p>You can further search activity history by clicking the “Filter activity…” link.</p>
+<h2 id="related-command-line-tools">Related Command line tools</h2>
 <dl>
 <dt><a href="../man1/dispatch.html">dispatch</a></dt>
-<dd>Execute ad hoc commands and scripts.
+<dd>Execute ad hoc commands and scripts. <a href="../man1/rd-queue.html">rd-queue</a>
 </dd>
-<dt><a href="../man1/rd-queue.html">rd-queue</a></dt>
 <dd>Query Rundeck for currently running Jobs and possibly kill them.
 </dd>
 </dl>
@@ -260,7 +257,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

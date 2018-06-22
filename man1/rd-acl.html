@@ -101,11 +101,11 @@ jQuery(function(){
 <div class="page-header">
 <h1 class="title">rd-acl</h1>
 </div>
-<h2 id="name"><a href="#name">Name</a></h2>
+<h2 id="name">Name</h2>
 <p>rd-acl - Test and generate Rundeck ACL policy files.</p>
-<h2 id="synopsis"><a href="#synopsis">Synopsis</a></h2>
+<h2 id="synopsis">Synopsis</h2>
 <p><code>rd-acl [*command*] [*command options*]...</code></p>
-<h2 id="description"><a href="#description">Description</a></h2>
+<h2 id="description">Description</h2>
 <p>The rd-acl command can test aclpolicy files to check whether they will allow a certain action request or not.</p>
 <p>It can also list the results for all defined access tests for a user or group.</p>
 <p>It can also generate the correct policy for a certain action. This can be done in a semi-interactive mode by specifying each <a href="#common-options">Common Option</a> in turn, allowing it to prompt you with a set of next possible options.</p>
@@ -114,130 +114,130 @@ jQuery(function(){
 <p>The tool works in these <em>COMMAND</em> modes:</p>
 <dl>
 <dt><code>test</code></dt>
-<dd><p>test one or more aclpolicy files to determine if an action would be allowed.</p>
+<dd>test one or more aclpolicy files to determine if an action would be allowed.
 </dd>
 <dt><code>list</code></dt>
-<dd><p>list all access tests for a user or group for one or more aclpolicy files.</p>
+<dd>list all access tests for a user or group for one or more aclpolicy files.
 </dd>
 <dt><code>create</code></dt>
-<dd><p>generate the correct ACL policy YAML definition for a specific action, or to allow a previously rejected action as logged in the Rundeck AUDIT log.</p>
+<dd>generate the correct ACL policy YAML definition for a specific action, or to allow a previously rejected action as logged in the Rundeck AUDIT log.
 </dd>
 <dt><code>validate</code></dt>
-<dd><p>Validate a file or directory of files, and print messages about problems with the files.</p>
+<dd>Validate a file or directory of files, and print messages about problems with the files.
 </dd>
 </dl>
-<h2 id="related"><a href="#related">Related</a></h2>
+<h2 id="related">Related</h2>
 <p>See:</p>
 <ul>
 <li><a href="../man5/aclpolicy.html">ACL Policy syntax</a></li>
 <li><a href="../administration/access-control-policy.html">Access Control Policy</a></li>
 </ul>
-<h2 id="options"><a href="#options">Options</a></h2>
+<h2 id="options">Options</h2>
 <dl>
 <dt><code>-h, --help</code></dt>
-<dd><p>Print usage message.</p>
+<dd>Print usage message.
 </dd>
 <dt><code>-v, --verbose</code></dt>
-<dd><p>Run verbosely.</p>
+<dd>Run verbosely.
 </dd>
 </dl>
-<h3 id="test-and-validate-command-options"><a href="#test-and-validate-command-options">Test and Validate Command Options</a></h3>
+<h3 id="test-and-validate-command-options">Test and Validate Command Options</h3>
 <p>The <code>test</code> and <code>validate</code> commands take these input options.</p>
 <dl>
 <dt><code>-d, --dir &lt;dir&gt;</code></dt>
-<dd><p>Directory. Load all policy files in the specified directory.</p>
+<dd>Directory. Load all policy files in the specified directory.
 </dd>
 <dt><code>-f, --file &lt;file&gt;</code></dt>
-<dd><p>File path. Load the specified aclpolicy file.</p>
+<dd>File path. Load the specified aclpolicy file.
 </dd>
 <dt><code>-v</code></dt>
-<dd><p>If the tested action is not allowed, print the necessary ACL policy to allow it (as per the <code>create</code> action.)</p>
+<dd>If the tested action is not allowed, print the necessary ACL policy to allow it (as per the <code>create</code> action.)
 </dd>
 </dl>
-<p>One of <code>--dir</code> or <code>--file</code> is required for the <code>test</code> command. If the rdeck.base system property is defined, then the Rundeck &quot;etc&quot; dir will be used as for the <code>--dir</code> option by default.</p>
+<p>One of <code>--dir</code> or <code>--file</code> is required for the <code>test</code> command. If the rdeck.base system property is defined, then the Rundeck “etc” dir will be used as for the <code>--dir</code> option by default.</p>
 <p>In addition, the <code>test</code> command also takes the <a href="#common-options">Common Options</a> and these options:</p>
 <dl>
 <dt><code>-V, --validate</code></dt>
 <dd>Validate all input files, and exit with non-zero exit code if validation fails. (<code>test</code> and <code>list</code> actions.)
 </dd>
 </dl>
-<h3 id="create-command-options"><a href="#create-command-options">Create Command Options</a></h3>
+<h3 id="create-command-options">Create Command Options</h3>
 <p>In addition to the <a href="#common-options">Common Options</a>, the <code>create</code> command takes these input options.</p>
 <dl>
 <dt><code>-i, --input &lt;file | -&gt;</code></dt>
-<dd><p>Parse the Rundeck AUDIT log input, and for any REJECTED decisions, generate the appropriate aclpolicy to allow the action. If the value of the <code>--input</code> option is <code>-</code> (dash character), then the STDIN is read. If <code>--input</code> is used, then the Common Options are ignored.</p>
+<dd>Parse the Rundeck AUDIT log input, and for any REJECTED decisions, generate the appropriate aclpolicy to allow the action. If the value of the <code>--input</code> option is <code>-</code> (dash character), then the STDIN is read. If <code>--input</code> is used, then the Common Options are ignored.
 </dd>
 <dt><code>-r, --regex</code></dt>
-<dd><p>Match the resource using regular expressions. (create command).</p>
+<dd>Match the resource using regular expressions. (create command).
 </dd>
 </dl>
-<h3 id="common-options"><a href="#common-options">Common Options</a></h3>
+<h3 id="common-options">Common Options</h3>
 <p>These options define the Context, Subject, Action, and Resource, which are used both to define an Access Request (for the <code>test</code> command), and to define a rule in the ACL Policy (for the <code>create</code> command).</p>
 <p><strong>Context options:</strong></p>
 <dl>
 <dt><code>-c,--context &lt;application | project&gt;</code></dt>
-<dd>Context: either 'project' or 'application'. For project context, the <code>-p,--project</code> option is required.
+<dd>Context: either ‘project’ or ‘application’. For project context, the <code>-p,--project</code> option is required.
 </dd>
 </dl>
 <p><strong>Subject options:</strong></p>
 <dl>
 <dt><code>-g,--groups &lt;group,...&gt;</code></dt>
-<dd><p>Subject Groups names. Comma-separated list of user groups to validate (test command) or for by: clause (create command).</p>
+<dd>Subject Groups names. Comma-separated list of user groups to validate (test command) or for by: clause (create command).
 </dd>
 <dt><code>-u,--user &lt;user,...&gt;</code></dt>
-<dd><p>Subject User name. Comma-separated list of user names to validate (test command) or for by: clause (create command).</p>
+<dd>Subject User name. Comma-separated list of user names to validate (test command) or for by: clause (create command).
 </dd>
 </dl>
 <p><strong>Action options:</strong></p>
 <dl>
 <dt><code>-a,--allow &lt;action,...&gt;</code></dt>
-<dd><p>Actions to test are allowed (test command) or to allow (create command).</p>
+<dd>Actions to test are allowed (test command) or to allow (create command).
 </dd>
 <dt><code>-D,--deny &lt;action,...&gt;</code></dt>
-<dd><p>Actions to test are denied (test command) or to deny (create command).</p>
+<dd>Actions to test are denied (test command) or to deny (create command).
 </dd>
 </dl>
 <p><strong>Resource Options:</strong></p>
-<p>Resources are characterized as either &quot;specific resources&quot;, or &quot;resource types&quot; (see <a href="../administration/access-control-policy.html#specific-resources-and-resource-types">Specific Resources and Resource Types</a>). You can specify &quot;resource types&quot; using the <code>-G, --generic &lt;kind&gt;</code> option. All specific resources can be specified directly using one of the options, or by type using <code>-R, --resource &lt;type&gt;</code> in combination with <code>-b, --attributes &lt;attr=val ...&gt;</code>.</p>
+<p>Resources are characterized as either “specific resources”, or “resource types” (see <a href="../administration/access-control-policy.html#specific-resources-and-resource-types">Specific Resources and Resource Types</a>). You can specify “resource types” using the <code>-G, --generic &lt;kind&gt;</code> option. All specific resources can be specified directly using one of the options, or by type using <code>-R, --resource &lt;type&gt;</code> in combination with <code>-b, --attributes &lt;attr=val ...&gt;</code>.</p>
 <dl>
 <dt><code>-G,--generic &lt;kind&gt;</code></dt>
-<dd><p>Generic resource kind.</p>
+<dd>Generic resource kind.
 </dd>
 <dt><code>-R,--resource &lt;type&gt;</code></dt>
-<dd><p>Resource type name.</p>
+<dd>Resource type name.
 </dd>
 <dt><code>-b,--attributes &lt;key=value ...&gt;</code></dt>
-<dd><p>Attributes for the resource. A sequence of key=value pairs, multiple pairs can follow with a space. Use a value of '?' to see suggestions.</p>
+<dd>Attributes for the resource. A sequence of key=value pairs, multiple pairs can follow with a space. Use a value of ‘?’ to see suggestions.
 </dd>
 </dl>
 <p>The following define <a href="../administration/access-control-policy.html#project-scope-resources-and-actions">Project scope resources</a>:</p>
 <dl>
 <dt><code>-A,--adhoc</code></dt>
-<dd><p>Adhoc execution (project context)</p>
+<dd>Adhoc execution (project context)
 </dd>
 <dt><code>-j,--job &lt;group/name&gt;</code></dt>
-<dd><p>Job group/name. (project context)</p>
+<dd>Job group/name. (project context)
 </dd>
 <dt><code>-I,--jobUuid &lt;uuid&gt;</code></dt>
-<dd><p>Job uuid. (project context)</p>
+<dd>Job uuid. (project context)
 </dd>
 <dt><code>-n,--node &lt;nodename&gt;</code></dt>
-<dd><p>Node name. (project context)</p>
+<dd>Node name. (project context)
 </dd>
 <dt><code>-t,--tags &lt;tag,..&gt;</code></dt>
-<dd><p>Node tags. If specified, the resource match will be defined using 'contains'. (project context)</p>
+<dd>Node tags. If specified, the resource match will be defined using ‘contains’. (project context)
 </dd>
 </dl>
 <p>The following define <a href="../administration/access-control-policy.html#application-scope-resources-and-actions">Application scope resources</a>:</p>
 <dl>
 <dt><code>-s,--storage &lt;path/file&gt;</code></dt>
-<dd><p>Storage path/name. (application context)</p>
+<dd>Storage path/name. (application context)
 </dd>
 <dt><code>-p,--project &lt;project&gt;</code></dt>
-<dd><p>Name of project, used in project context or for application resource.</p>
+<dd>Name of project, used in project context or for application resource.
 </dd>
 </dl>
-<h3 id="list-command-options"><a href="#list-command-options">List Command Options</a></h3>
+<h3 id="list-command-options">List Command Options</h3>
 <p>The <code>list</code> command uses these <a href="#test-command-options">Test Command Options</a> to set the aclpolicy files to be evaluated: <code>-f,--file</code> and <code>-d,--dir</code>.</p>
 <p>It also allows these options from the <a href="#common-options">Common Options</a>:</p>
 <p>The Subject options: <code>-g,--groups</code> and <code>-u,--user</code></p>
@@ -249,16 +249,16 @@ jQuery(function(){
 <li><code>-j,--job</code> Job group/name.</li>
 <li><code>-I,--jobUuid</code> Job uuid.</li>
 </ul>
-<h2 id="test-command"><a href="#test-command">Test Command</a></h2>
+<h2 id="test-command">Test Command</h2>
 <p>The Test command loads the specified aclpolicy file or directory of files, and evaluates the Access Request defined by the <a href="#common-options">Common Options</a>, and emits the decision of whether the request is allowed, disallowed, or denied. If it is allowed, then <code>rd-acl</code> will exit with a 0 exit code, otherwise it will exit with 2 exit code.</p>
-<p>If the <code>-v, --verbose</code> flag is enabled, and the decision was not &quot;allowed&quot;, then it will additionally automatically invoke the <a href="#create-command">Create Command</a> to generate an aclpolicy definition to allow the requested action.</p>
-<p><strong>Note:</strong> If the decision was &quot;denied&quot;, then that indicates a specific DENY rule matches the Access Request. A DENY rule that matches will override all ALLOW rules that match.</p>
+<p>If the <code>-v, --verbose</code> flag is enabled, and the decision was not “allowed”, then it will additionally automatically invoke the <a href="#create-command">Create Command</a> to generate an aclpolicy definition to allow the requested action.</p>
+<p><strong>Note:</strong> If the decision was “denied”, then that indicates a specific DENY rule matches the Access Request. A DENY rule that matches will override all ALLOW rules that match.</p>
 <p><em>Examples</em></p>
-<p>Test all aclpolicy files in the Rundeck &quot;etc&quot; directory by default, with an allowed result for <code>read</code> action:</p>
+<p>Test all aclpolicy files in the Rundeck “etc” directory by default, with an allowed result for <code>read</code> action:</p>
 <pre><code>rd-acl test --context application --groups test --storage keys/test1.pem --allow read
 Using configured Rundeck etc dir: /etc/rundeck
 The result was: allowed</code></pre>
-<p>Test all aclpolicy files in the Rundeck &quot;etc&quot; directory by default, with a rejected result for <code>create</code> action:</p>
+<p>Test all aclpolicy files in the Rundeck “etc” directory by default, with a rejected result for <code>create</code> action:</p>
 <pre><code>rd-acl test --context application --groups test --storage keys/key1.pem --allow create
 Using configured Rundeck etc dir: /etc/rundeck
 Result: REJECTED
@@ -283,10 +283,10 @@ context:
   application: rundeck
 by:
   group: test</code></pre>
-<h2 id="list-command"><a href="#list-command">List Command</a></h2>
+<h2 id="list-command">List Command</h2>
 <p>The List command loads the specified aclpolicy file or directory of files, and evaluates all access requests possible for the specified Group or User. It lists the decision of whether each request is allowed, disallowed, or denied.</p>
 <p>Further evaluations can be done by supplying some concrete values to identify a Project, Nodes, Jobs, and a Storage path.</p>
-<p>If the <code>-v, --verbose</code> flag is enabled, and the decision was &quot;denied&quot;, then it will print the decision details including the file name of the policy rule that denies the request.</p>
+<p>If the <code>-v, --verbose</code> flag is enabled, and the decision was “denied”, then it will print the decision details including the file name of the policy rule that denies the request.</p>
 <p>In the output, a line starting with <code>-</code> indicates the action was rejected, <code>+</code> indicates the action was allowed, and <code>!</code> indicates the action was denied.</p>
 <p>The evaluation lines are in the form:</p>
 <pre><code>&lt;result&gt; &lt;action&gt;: &lt;resource&gt; [&lt;reason&gt;]</code></pre>
@@ -405,9 +405,9 @@ Using configured Rundeck etc dir: /etc/rundeck
   REJECTED, reason: REJECTED_DENIED, evaluations:   /etc/rundeck/apitoken.aclpolicy[2][rule: 1: {match={path=(keys|keys/.*)}, allow=*, deny=delete}] for actions: [delete] =&gt; REJECTED_DENIED
 ...snip
 </code></pre>
-<h2 id="create-command"><a href="#create-command">Create Command</a></h2>
+<h2 id="create-command">Create Command</h2>
 <p>The Create Command can generate ACL Policy YAML definitions based on the <a href="#common-options">Common Options</a>. It can also parse the output from an authorization evaluation, as logged in the Rundeck AUDIT log, and generate the policy necessary to allow any REJECTED evaluations. In the case of DENIED evaluations, it will still generate a policy to allow the access request, but note that the DENY rule would need to be removed to actually allow the specified action.</p>
-<p>Create has a &quot;semi-interactive&quot; behavior. If you enter only some components of the Subject, Context, Action and Resource necessary to define a rule, then it will prompt with some possible values for the next component.</p>
+<p>Create has a “semi-interactive” behavior. If you enter only some components of the Subject, Context, Action and Resource necessary to define a rule, then it will prompt with some possible values for the next component.</p>
 <p><em>Examples</em></p>
 <p>Begin by typing the <code>create</code> command with no options</p>
 <pre><code>rd-acl create 
@@ -456,7 +456,8 @@ Possible options:
     node
     event
     job</code></pre>
-<p>Here we see several options to specify the resource. the <code>Job</code>, <code>Adhoc</code> and <code>Node</code> options define both the resource type, and some resource attributes. The <code>-R</code> option can set the resource type directly, and then the <code>-b</code> attributes option can be used to define the attributes.<br />Otherwise the <code>-G</code> option can be used to match a resource kind.</p>
+<p>Here we see several options to specify the resource. the <code>Job</code>, <code>Adhoc</code> and <code>Node</code> options define both the resource type, and some resource attributes. The <code>-R</code> option can set the resource type directly, and then the <code>-b</code> attributes option can be used to define the attributes.<br />
+Otherwise the <code>-G</code> option can be used to match a resource kind.</p>
 <p>We will specify node tags using <code>-t</code>:</p>
 <pre><code>rd-acl create -c project -p &#39;.*&#39; -g test -t prod,www
 -a/--allow or -D/--deny is required.
@@ -483,10 +484,10 @@ context:
   project: .*
 by:
   group: test</code></pre>
-<h2 id="validate-command"><a href="#validate-command">Validate Command</a></h2>
+<h2 id="validate-command">Validate Command</h2>
 <p>The Validate command loads the specified aclpolicy file or directory of files, and validates the aclpolicy definitions. It prints any errors found and it will exit with a 0 exit code if no errors are found, otherwise it will exit with 2 exit code.</p>
 <p><em>Examples</em></p>
-<p>Validate all aclpolicy files in the Rundeck &quot;etc&quot; directory by default:</p>
+<p>Validate all aclpolicy files in the Rundeck “etc” directory by default:</p>
 <pre><code>$ rd-acl validate
 Using configured Rundeck etc dir: /etc/rundeck
 The validation passed</code></pre>
@@ -495,7 +496,7 @@ The validation passed</code></pre>
 /Users/greg/rundeck25/bad5.aclpolicy[1]:
   Context section is not valid: {xproject=asdf}, it should contain only &#39;application:&#39; or &#39;project:&#39;
 The validation failed</code></pre>
-<h2 id="see-also"><a href="#see-also">See Also</a></h2>
+<h2 id="see-also">See Also</h2>
 <p><a href="../man5/aclpolicy.html"><code>aclpolicy</code></a></p>
 <p><a href="../administration/access-control-policy.html">Access Control Policy</a></p>
 </div>
@@ -548,7 +549,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

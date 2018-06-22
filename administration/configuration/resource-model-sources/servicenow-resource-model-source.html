@@ -68,8 +68,8 @@ jQuery(function(){
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="built-in-resource-model-source-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> Built-in Resource Model Source Plugins</a></li>
       
+      <li class="next"><a href="built-in-resource-model-source-plugins.html">Built-in Resource Model Source Plugins <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -90,7 +90,7 @@ jQuery(function(){
 <div class="page-header">
 <h1 class="title">ServiceNow Resource Model Source</h1>
 </div>
-<p>This is a Resource Model Source plugin that provides server information from ServiceNow's CMDB.</p>
+<p>This is a Resource Model Source plugin that provides server information from ServiceNow’s CMDB.</p>
 <p>To obtain the data, the Service Now connection parameters must be passed as parameters to the plugin (username, password and url), and a list of server types, this can be:</p>
 <ul>
 <li>all : Retrieve al types of servers</li>
@@ -103,14 +103,14 @@ jQuery(function(){
 <li>hpux: Retrieve only HPUX machines</li>
 <li>osx: Retrieve only OS X machines</li>
 <li>netware: Retrieve only Netware machines</li>
-<li>comma separated list : as example 'linux,win'</li>
+<li>comma separated list : as example ‘linux,win’</li>
 </ul>
-<h3 id="mapping-and-default-values"><a href="#mapping-and-default-values">Mapping and default values</a></h3>
+<h3 id="mapping-and-default-values">Mapping and default values</h3>
 <ul>
-<li><code>mappingParams</code>: A set of &quot;;&quot; separated mapping entries. This values are going to override the default mapping one by one. The minimal maping needed is the `username, because Service Now servers lacks a username field to map:</li>
+<li><code>mappingParams</code>: A set of “;” separated mapping entries. This values are going to override the default mapping one by one. The minimal maping needed is the `username, because Service Now servers lacks a username field to map:</li>
 </ul>
 <pre><code>username.default=root</code></pre>
-<h3 id="default-mapping"><a href="#default-mapping">Default Mapping</a></h3>
+<h3 id="default-mapping">Default Mapping</h3>
 <pre><code>nodename.selector=name
 hostname.selector=host_name,ip_address,dns_domain
 sshport.default=22
@@ -128,7 +128,7 @@ cpuType.selector=cpu_type
 osDomain.selector=os_domain
 tags.selector=asset_tag
 tags.default=servicenow</code></pre>
-<h3 id="configuration-of-the-mapping"><a href="#configuration-of-the-mapping">Configuration of the Mapping</a></h3>
+<h3 id="configuration-of-the-mapping">Configuration of the Mapping</h3>
 <p>The node requieres at least the nodename, hostname and user. A selector with a list like this:</p>
 <pre><code>hostname.selector=host_name,ip_address,dns_domain</code></pre>
 <p>Are going to search on the result of the query the value of <code>host_name</code>, if is not set, the <code>ip_address</code> or the <code>dns_domain</code>.</p>
@@ -166,8 +166,8 @@ tags.default=servicenow</code></pre>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="built-in-resource-model-source-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> Built-in Resource Model Source Plugins</a></li>
       
+      <li class="next"><a href="built-in-resource-model-source-plugins.html">Built-in Resource Model Source Plugins <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -196,7 +196,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

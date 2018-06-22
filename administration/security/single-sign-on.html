@@ -90,12 +90,12 @@ jQuery(function(){
 </div>
 <p>Rundeck PRO can be configured to work with the Okta security platfom.</p>
 <p>To configure the Okta SSO plugin for your Rundeck installation you will need to add a new application to your Okta Applications, and then add some properties to your rundeck-config.properties file.</p>
-<h3 id="okta-application-configuration"><a href="#okta-application-configuration">Okta Application Configuration</a></h3>
+<h3 id="okta-application-configuration">Okta Application Configuration</h3>
 <p>Log into your Okta web portal and configure a new application.</p>
 <ul>
 <li>Create a new web application.
 <ul>
-<li>Configure the application with &quot;Authorization Code&quot; Grant type allowed.</li>
+<li>Configure the application with “Authorization Code” Grant type allowed.</li>
 <li>Add the following URL to <code>Login Redirect URIs</code> (you can add more than one): <code>&lt;rundeck base url&gt;/user/oauth/okta</code>. Example: <code>http://localhost:4440/user/oauth/okta</code></li>
 <li>Copy the Client ID and Client Secret provided by Okta so that you can use them for the rundeck configuration.</li>
 </ul></li>
@@ -108,8 +108,8 @@ jQuery(function(){
 <li>Filter: Regex: .*</li>
 </ul></li>
 </ul>
-<h3 id="rundeck-configuration"><a href="#rundeck-configuration">Rundeck configuration</a></h3>
-<p>Once you've set up the application in Okta you can configure Rundeck to use that application.</p>
+<h3 id="rundeck-configuration">Rundeck configuration</h3>
+<p>Once you’ve set up the application in Okta you can configure Rundeck to use that application.</p>
 <p>Add the following properties to your rundeck-config.properties file:</p>
 <pre class="properties"><code>#The first two come from the Client Credentials section on your Application configuration page in Okta
 rundeck.security.oauth.okta.clientId = (Okta Client ID)
@@ -131,7 +131,7 @@ rundeck.sso.loginButton.enabled=true
 rundeck.sso.loginButton.title=Login with Okta
 rundeck.sso.loginButton.url=oauth/okta</code></pre>
 <p>After completing the configuration of your rundeck-config.properties file, restart Rundeck.</p>
-<h3 id="sso-login"><a href="#sso-login">SSO Login</a></h3>
+<h3 id="sso-login">SSO Login</h3>
 <p>If you have successfully configured Okta and Rundeck you will see a new button on the rundeck login page that says <em>Login with Okta</em>. By clicking this button you will be redirected to an Okta Login form that will be used to collect the user credentials. Once you have logged in with your Okta credentials you will be redirected back to the home menu page in Rundeck.</p>
 <p>Congratulations, you now have a working Okta/Rundeck SSO setup.</p>
 </div>
@@ -186,7 +186,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

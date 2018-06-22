@@ -94,29 +94,28 @@ jQuery(function(){
 <!---
 Original: http://support.rundeck.com/customer/en/portal/articles/2745900-ruleset-workflow-strategy-plugin-advanced-workflow-
 --->
-
 <p>The Ruleset Workflow Strategy Plugin (exclusive to Rundeck Pro) allows you to define a set of rules to describe when and if steps in the workflow should run.</p>
 <p>The plugin can be selected in the Workflow Strategy list in the the Edit Job page.</p>
 <p>The rules configuration value is a multiline block of text in the following format.</p>
-<h2 id="rules-syntax"><a href="#rules-syntax">Rules syntax</a></h2>
+<h2 id="rules-syntax">Rules syntax</h2>
 <p>Rules define how each step should run. You can add one rule per-line. Rules are additive, and you can define multiple rules for each step. Rules are in the form:</p>
 <pre><code>STEP [directive] [conditions...]</code></pre>
 <p>This indicates which step or steps the rule applies to, and any directives or conditions for the step. The rule must have a directive or condition, or both.</p>
-<h3 id="step"><a href="#step">Step</a></h3>
+<h3 id="step">Step</h3>
 <p>Specifies the step or steps that the rule applies to. You must include the [ and ] characters:</p>
 <ul>
 <li><code>[X]</code>: Applies to a single step, the named or numbered step X. You can use the step number, e.g. <code>[1]</code> or the label, e.g. <code>[Deploy QA]</code> (case sensitive).</li>
 <li><code>[X,Y,Z...]</code>: Applies to multiple steps. Separate multiple steps with a comma, e.g. <code>[1,Deploy,3]</code></li>
 <li><code>1[*]1</code>: Applies to all steps</li>
 </ul>
-<h3 id="directive"><a href="#directive">Directive</a></h3>
+<h3 id="directive">Directive</h3>
 <p>Directives optionally define when a step should start. You can define a directive rule for all steps <code>[*]</code> using run-at-start or run-in-sequence.</p>
 <ul>
 <li><code>run-at-start</code>: Run at workflow start time. The indicated steps will start immediately when the workflow starts.</li>
 <li><code>run-in-sequence</code>: Run after the previous step in sequence is run or is skipped.</li>
 <li><code>run-after:X[,Y[,Z..]]</code>: Run after one or more steps run or are skipped.</li>
 </ul>
-<h3 id="conditions"><a href="#conditions">Conditions</a></h3>
+<h3 id="conditions">Conditions</h3>
 <p>Conditions can define additional checks that must pass before a step can run, or determine when a step can be skipped. For example:</p>
 <ul>
 <li><code>if:expression</code></li>
@@ -130,7 +129,7 @@ Original: http://support.rundeck.com/customer/en/portal/articles/2745900-ruleset
 <li><code>key.name!~pattern</code>: negative regular expression match</li>
 <li><code>!key.name context</code>: variable is unset</li>
 </ul>
-<h2 id="examples"><a href="#examples">Examples</a></h2>
+<h2 id="examples">Examples</h2>
 <p>Run steps 2 and 5 only after step 1 is done:</p>
 <pre><code>[2,5] run-after:1</code></pre>
 <p>Choose between 5 and 6 based on an option value:</p>
@@ -193,7 +192,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

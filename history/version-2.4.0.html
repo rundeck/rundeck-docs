@@ -82,7 +82,7 @@ jQuery(function(){
 <li><a href="#new-features">New Features</a></li>
 <li><a href="#incubator-features">Incubator features</a></li>
 <li><a href="#compatibility-notes">Compatibility notes</a></li>
-<li><a href="#what-is-americano-indigo-briefcase">What is &quot;americano indigo briefcase&quot;?</a></li>
+<li><a href="#what-is-americano-indigo-briefcase">What is “americano indigo briefcase”?</a></li>
 <li><a href="#contributors">Contributors</a></li>
 <li><a href="#bug-reporters">Bug Reporters</a></li>
 <li><a href="#issues">Issues</a></li>
@@ -94,11 +94,11 @@ jQuery(function(){
 <div class="page-header">
 <h1 class="title">Version 2.4.0</h1>
 </div>
-<h1 id="release-2.4.0"><a href="#release-2.4.0">Release 2.4.0</a></h1>
+<h1 id="release-2.4.0">Release 2.4.0</h1>
 <p>Date: 2014-12-16</p>
-<p>Name: <span style="color: indigo"><span class="glyphicon glyphicon-briefcase"></span> &quot;americano indigo briefcase&quot;</span></p>
+<p>Name: <span style="color: indigo"><span class="glyphicon glyphicon-briefcase"></span> “americano indigo briefcase”</span></p>
 <p>This release has bug fixes and new features, including some GUI improvements.</p>
-<h2 id="new-features"><a href="#new-features">New Features</a></h2>
+<h2 id="new-features">New Features</h2>
 <ul>
 <li>Job references can override Node Filters. See updates to <a href="../man5/job-xml.html#jobref">XML</a> and <a href="../man5/job-yaml.html#job-reference-entry">YAML</a> job definition formats as well.</li>
 <li>Job and Option descriptions can contain markdown and HTML. For Jobs, the first line is the short description, and following lines are interpreted as markdown.</li>
@@ -114,34 +114,34 @@ jQuery(function(){
 <li>Job Edit/Create page: you are now asked to confirm navigation away from the page if you have made changes to the Job</li>
 </ul></li>
 </ul>
-<h2 id="incubator-features"><a href="#incubator-features">Incubator features</a></h2>
+<h2 id="incubator-features">Incubator features</h2>
 <ul>
 <li>Parallel step execution
 <ul>
 <li><p>this can be enabled with <code>rundeck-config.properties</code> entry:</p>
-<pre><code>feature.incubator.parallelWorkflowStrategy=true</code></pre></li>
+<pre><code>  feature.incubator.parallelWorkflowStrategy=true</code></pre></li>
 </ul></li>
 <li>ssh-agent forwarding for ssh connections
 <ul>
 <li><p>this can be enabled per node, project, or server framework.properties:</p>
-<pre><code>framework.local-ssh-agent=&lt;true|false&gt;
-framework.local-ttl-ssh-agent=&lt;time in sec&gt;</code></pre>
+<pre><code>  framework.local-ssh-agent=&lt;true|false&gt;
+  framework.local-ttl-ssh-agent=&lt;time in sec&gt;</code></pre>
 <p>project.properties:</p>
-<pre><code>project.local-ssh-agent=&lt;true|false&gt;
-project.local-ttl-ssh-agent=&lt;time in sec&gt;</code></pre>
+<pre><code>  project.local-ssh-agent=&lt;true|false&gt;
+  project.local-ttl-ssh-agent=&lt;time in sec&gt;</code></pre>
 <p>Node properties:</p>
-<pre><code>local-ssh-agent=&lt;true|false&gt;
-local-ttl-ssh-agent=&lt;time in sec&gt;</code></pre></li>
+<pre><code>  local-ssh-agent=&lt;true|false&gt;
+  local-ttl-ssh-agent=&lt;time in sec&gt;</code></pre></li>
 </ul></li>
 </ul>
-<h2 id="compatibility-notes"><a href="#compatibility-notes">Compatibility notes</a></h2>
+<h2 id="compatibility-notes">Compatibility notes</h2>
 <p>A bug in API v11 XML responses caused them to sometimes be incorrectly wrapped in a <code>&lt;result&gt;</code> element, this has now been corrected. See the <a href="../api/index.html">API Docs</a> for information. The Rundeck API Java Client library has been updated to workaround this issue (for previous versions of Rundeck).</p>
-<h2 id="what-is-americano-indigo-briefcase"><a href="#what-is-americano-indigo-briefcase">What is &quot;americano indigo briefcase&quot;?</a></h2>
-<p>New versions of Rundeck will have a name based on the version number. The 2.x theme is Coffee, and 2.4.x is &quot;americano&quot;. The point release defines a combination of color and icon we can display in the GUI for easier visual differentiation. 2.4.0 is &quot;indigo briefcase&quot;.</p>
+<h2 id="what-is-americano-indigo-briefcase">What is “americano indigo briefcase”?</h2>
+<p>New versions of Rundeck will have a name based on the version number. The 2.x theme is Coffee, and 2.4.x is “americano”. The point release defines a combination of color and icon we can display in the GUI for easier visual differentiation. 2.4.0 is “indigo briefcase”.</p>
 <blockquote>
-<p>Why yes, I'd like an americano, thank you.</p>
+<p>Why yes, I’d like an americano, thank you.</p>
 </blockquote>
-<h2 id="contributors"><a href="#contributors">Contributors</a></h2>
+<h2 id="contributors">Contributors</h2>
 <ul>
 <li>Alex Honor (ahonor)</li>
 <li>Greg Schueler (gschueler)</li>
@@ -151,7 +151,7 @@ local-ttl-ssh-agent=&lt;time in sec&gt;</code></pre></li>
 <li>Ruslan Lutsenko (lruslan)</li>
 <li>mezbiderli</li>
 </ul>
-<h2 id="bug-reporters"><a href="#bug-reporters">Bug Reporters</a></h2>
+<h2 id="bug-reporters">Bug Reporters</h2>
 <ul>
 <li>Whitepatrick</li>
 <li>adamhamner</li>
@@ -172,10 +172,10 @@ local-ttl-ssh-agent=&lt;time in sec&gt;</code></pre></li>
 <li>ujfjhz</li>
 <li>zarry</li>
 </ul>
-<h2 id="issues"><a href="#issues">Issues</a></h2>
+<h2 id="issues">Issues</h2>
 <ul>
-<li><a href="https://github.com/rundeck/rundeck/issues/1051">Cancel editing resource model source doesn't work</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1044">Job run form triggered from Jobs list page incorrectly shows next scheduled time as &quot;never&quot;</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1051">Cancel editing resource model source doesn’t work</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1044">Job run form triggered from Jobs list page incorrectly shows next scheduled time as “never”</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1039">Nodes yaml format: if attribute values are not strings, throws exception</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1036">Rundeck under Tomcat7 dump a lot a of serialization Warning</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1031">Project Config permission needs Project Create ACL</a></li>
@@ -187,22 +187,22 @@ local-ttl-ssh-agent=&lt;time in sec&gt;</code></pre></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1018">script-based file copier plugin fails to load project/framework configuration</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1017">Add server uuid element to the /system/info endpoint</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1016">Project config: plugins with same property names will render same values</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1015">&quot;Copy file&quot; step moves file rather than copy</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1015">“Copy file” step moves file rather than copy</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/1013">Do not look further if nodefilter.dispatch is not set</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1012">rundeck.gui.login.welcome no longer allows html tags like <b></b> to make all or part of the welcome message bold.</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/1010">Fix API v11 xml wrapper responses</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1009">Improve validation messages during job import</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1008">APIv11 responses should not include <result> element</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/999">ux: clicking &quot;Top&quot; link when browsing jobs in a group takes you to the rundeck home page</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/999">ux: clicking “Top” link when browsing jobs in a group takes you to the rundeck home page</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/972">Add MSSQL Support</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/965">job.serverUrl not available in reference job.</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/960">HMAC request tokens expiring prematurely: &quot;request did not include a valid token&quot;</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/960">HMAC request tokens expiring prematurely: “request did not include a valid token”</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/929">Issues/927 parallel execution</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/891">Delete execution link should not be shown while execution is running</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/849">Editing two workflow steps is unsupported</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/848">Rundeck using MSSQL datasource</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/811">URL encode ${option.[name].value} in Cascading Remote Options</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/254">Job editor: don't allow user to lose changes</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/254">Job editor: don’t allow user to lose changes</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/222">Cannot use UTF8 in rundeck</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/131">Jobref calls should support overriding node filter params</a></li>
 </ul>
@@ -256,7 +256,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

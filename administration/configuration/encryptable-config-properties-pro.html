@@ -89,15 +89,15 @@ jQuery(function(){
 <h1 class="title">Rundeck PRO Config Property Encryption</h1>
 </div>
 <p>All Rundeck PRO bundles come with a feature that allows you to encrypt the values in the rundeck-config.properties file.</p>
-<h3 id="approach"><a href="#approach">Approach</a></h3>
+<h3 id="approach">Approach</h3>
 <p>To use encrypted properties in Rundeck you will have a master password that will be used to encrypt and decrypt the other passwords you wish to use in the rundeck-config.properties file.</p>
-<p>For instance you might want to encrypt the bind password to your LDAP server. Let's say your LDAP bind password is <code>binder123</code>. You will need a master password to encrypt this value. We will use <code>1PwdToBindThem$</code> for the master password.</p>
-<h3 id="encrypting-property-values"><a href="#encrypting-property-values">Encrypting Property values</a></h3>
+<p>For instance you might want to encrypt the bind password to your LDAP server. Let’s say your LDAP bind password is <code>binder123</code>. You will need a master password to encrypt this value. We will use <code>1PwdToBindThem$</code> for the master password.</p>
+<h3 id="encrypting-property-values">Encrypting Property values</h3>
 <p>To encrypt your passwords you will need to download the Jasypt encryption tools that can be found at http://www.jasypt.org/</p>
 <p>After downloading the zip distribution of the latest verison, you will unzip the archive to your desired location. The unzipped Jasypt folder has a bin folder inside it. Navigate to that location, and use the encrypt.sh or encrypt.bat script to run the following command: <code>./encrypt.sh input=&quot;binder123&quot; password=&quot;1PwdToBindThem$&quot;</code></p>
 <p>The script will print various information. You are interested in the OUTPUT section which will have a value that looks like: <code>axxXQWvbRT3pBNqhpsM4wxNBzJc6gSPw</code> (note that it will not be this value)</p>
 <p>You will take the encrypted string: <code>axxXQWvbRT3pBNqhpsM4wxNBzJc6gSPw</code> and use it in your rundeck-config.properties file like this: <code>rundeck.security.ldap.bindPassword=ENC(axxXQWvbRT3pBNqhpsM4wxNBzJc6gSPw)</code></p>
-<h3 id="decrypting-rundeck-config.properties"><a href="#decrypting-rundeck-config.properties">Decrypting rundeck-config.properties</a></h3>
+<h3 id="decrypting-rundeck-config.properties">Decrypting rundeck-config.properties</h3>
 <p>To decrypt the encrypted properties in your rundeck-config.properties file you will need to set the environment variable <code>RUNDECK_PROP_DECRYPTER_PWD</code> with the value of your master password before starting Rundeck.</p>
 <p>In our example we would do: <code>export RUNDECK_PROP_DECRYPTER_PWD=1PwdToBindThem$</code> then we would start our Rundeck PRO installation. After the application has completed the bootstrap process and is responding to requests, the environment variable can be unset for security purposes.</p>
 </div>
@@ -152,7 +152,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

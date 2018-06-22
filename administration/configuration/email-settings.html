@@ -98,28 +98,28 @@ jQuery(function(){
 <li>Launcher: $RDECK_BASE/server/config/rundeck-config.properties</li>
 </ul>
 <p>Refer to the appropriate configuration file paths from <a href="configuration-file-reference.html#configuration-layout">Configuration -&gt; Configuration Layout</a> to locate the Rundeck configuration paths depending on your install.</p>
-<h2 id="smtp-server-settings"><a href="#smtp-server-settings">SMTP server settings</a></h2>
+<h2 id="smtp-server-settings">SMTP server settings</h2>
 <p>By default the plugin assumes an unsecured mail server configured at localhost on port 25. You can specify your own with these settings:</p>
 <pre><code>grails.mail.host=localhost
 grails.mail.port=25</code></pre>
 <p>To add authentication:</p>
 <pre><code>grails.mail.username=user
 grails.mail.password=pass</code></pre>
-<h3 id="advanced-smtp-settings"><a href="#advanced-smtp-settings">Advanced SMTP settings</a></h3>
+<h3 id="advanced-smtp-settings">Advanced SMTP settings</h3>
 <p>If you need more advanced configuration (e.g., authenticated and secured over SSL), see the grails Mail plugin configuration: <a href="https://plugins.grails.org/plugin/grails/mail#Configuration">Grails Mail Configuration</a></p>
 <p>The caveat for using this is that in our experience it requires using a .groovy formatted configuration file to support the extended configuration properties.</p>
 <p>See <a href="configuration-file-reference.html#groovy-config-format">Groovy config format</a>.</p>
-<h2 id="notification-email-settings"><a href="#notification-email-settings">Notification email settings</a></h2>
+<h2 id="notification-email-settings">Notification email settings</h2>
 <p>The URL and From: address used in <a href="../../manual/creating-jobs.html#job-notifications">Job email notifications</a> are managed via the settings located in the rundeck-config.properties file.</p>
 <p>The two properties are:</p>
 <ul>
 <li>grails.serverURL</li>
 <li>grails.mail.default.from</li>
 </ul>
-<p>Here's an example:</p>
+<p>Here’s an example:</p>
 <pre><code>grails.serverURL=https://node.fully.qualified.domain.name:4443
 grails.mail.default.from=deployer@domain.com</code></pre>
-<h3 id="custom-email-templates"><a href="#custom-email-templates">Custom Email Templates</a></h3>
+<h3 id="custom-email-templates">Custom Email Templates</h3>
 <p>You can define these properties to customize the email notifications. Each property can be defined for a specific Trigger, or for the general case. Available triggers are: <code>success</code>,<code>failure</code>, and <code>start</code>. In addition, you can have custom settings for a project and job name combination as well:</p>
 <pre><code># trigger-specific templating
 rundeck.mail.[trigger].template.subject=[custom subject line]
@@ -137,15 +137,15 @@ rundeck.mail.template.file=[path to template file]
 rundeck.mail.template.log.formatted=true/false (if true, prefix log lines with context information)</code></pre>
 <p>If a template filepath ends with <code>.md</code> or <code>.markdown</code>, then it will be interpreted as a Markdown formatted template. Otherwise it is expected that the template file contains HTML.</p>
 <p>The Subject line, filepath, and file contents can all contain embedded property references of the form <code>${group.key}</code>. The available properties are mostly the same as those available for Notification Plugins, including the <code>execution.*</code> and <code>job.*</code> values. See <a href="../developer/notification-plugin.html#execution-data">Plugin Development - Notification Plugin - Execution Data</a>.</p>
-<p>The &quot;Context Variables&quot; values used within the execution are available just as they are in the execution, so options would be available as <code>${option.name}</code>.</p>
+<p>The “Context Variables” values used within the execution are available just as they are in the execution, so options would be available as <code>${option.name}</code>.</p>
 <p>In addition these properties are defined:</p>
 <ul>
 <li><code>rundeck.href</code>: URL to the Rundeck server</li>
 <li><code>notification.trigger</code>: Trigger name</li>
-<li><code>notification.eventStatus</code>: A string indicating the combination of execution status, and notification trigger, suitable for an email subject line, such as &quot;KILLED&quot;, &quot;FAILURE&quot;, &quot;STARTING&quot;, &quot;SUCCESS&quot;.</li>
+<li><code>notification.eventStatus</code>: A string indicating the combination of execution status, and notification trigger, suitable for an email subject line, such as “KILLED”, “FAILURE”, “STARTING”, “SUCCESS”.</li>
 <li><code>execution.projectHref</code>: URL to the Project within Rundeck.</li>
 </ul>
-<h2 id="troubleshooting"><a href="#troubleshooting">Troubleshooting</a></h2>
+<h2 id="troubleshooting">Troubleshooting</h2>
 <p>See the <a href="../maintenance/logging.html#service.log">service.log</a> for mail error messages.</p>
 </div>
 </div>
@@ -199,7 +199,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

@@ -92,14 +92,14 @@ jQuery(function(){
 <div class="page-header">
 <h1 class="title">Version 2.11.0</h1>
 </div>
-<h1 id="release-2.11.0"><a href="#release-2.11.0">Release 2.11.0</a></h1>
+<h1 id="release-2.11.0">Release 2.11.0</h1>
 <p>Date: 2018-04-27</p>
-<p>Name: <span style="color: Olive"><span class="glyphicon glyphicon-music"></span> &quot;cappuccino olive music&quot;</span></p>
-<h2 id="upgrading-from-earlier-versions"><a href="#upgrading-from-earlier-versions">Upgrading from Earlier versions</a></h2>
+<p>Name: <span style="color: Olive"><span class="glyphicon glyphicon-music"></span> “cappuccino olive music”</span></p>
+<h2 id="upgrading-from-earlier-versions">Upgrading from Earlier versions</h2>
 <ul>
 <li>See the <a href="../upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes"><a href="#notes">Notes</a></h2>
+<h2 id="notes">Notes</h2>
 <p>New Features:</p>
 <ul>
 <li>SCM/Git plugin:
@@ -133,12 +133,12 @@ jQuery(function(){
 <li>Job Node Threadcount: can use an option value</li>
 <li>Job Notification:
 <ul>
-<li>Can send a notification if the job duration exceeds an absolute time, or relative to the job's average <a href="https://github.com/rundeck/rundeck/pull/3087">#3087</a></li>
-<li>Separate notifications for failure vs. retryable failure (i.e.) <a href="https://github.com/rundeck/rundeck/pull/2864">#2864</a></li>
+<li>Can send a notification if the job duration exceeds an absolute time, or relative to the job’s average <a href="https://github.com/rundeck/rundeck/pull/3087">#3087</a></li>
+<li>Separate notifications for failure vs. retryable failure (i.e.) <a href="https://github.com/rundeck/rundeck/pull/2864">#2864</a></li>
 </ul></li>
 <li>Job Definition visibility ACL:
 <ul>
-<li>A new ACL access level <code>view</code> is a subset of the <code>read</code> access level for jobs, and does not allow users to view the &quot;Definition&quot; tab of a Job, or download the XML/YAML definitions.</li>
+<li>A new ACL access level <code>view</code> is a subset of the <code>read</code> access level for jobs, and does not allow users to view the “Definition” tab of a Job, or download the XML/YAML definitions.</li>
 </ul></li>
 <li>Plugin development:
 <ul>
@@ -169,7 +169,7 @@ jQuery(function(){
 <p><strong>RPM spec:</strong></p>
 <p>The <code>rundeck</code> user/group is now created within system UID ranges <a href="https://github.com/rundeck/rundeck/pull/3195">#3195</a>.</p>
 <p><strong>ACLs: Edit Project Configuration/Nodes GUI access level requirements changed:</strong></p>
-<p>Previously: GUI actions &quot;Project &gt; Edit Configuration&quot; and &quot;Project &gt; Edit Nodes&quot; required <code>admin</code> project access. Now: only <code>configure</code> level access is required.</p>
+<p>Previously: GUI actions “Project &gt; Edit Configuration” and “Project &gt; Edit Nodes” required <code>admin</code> project access. Now: only <code>configure</code> level access is required.</p>
 <p>NOTE: API behavior was always this way, so this change simply aligns the access requirements.</p>
 <p>Potential security implications:</p>
 <ul>
@@ -178,14 +178,14 @@ jQuery(function(){
 </ul>
 <p>See: <a href="https://github.com/rundeck/rundeck/pull/3084">#3084</a></p>
 <p><strong>ACLs: Job Definition visibility</strong></p>
-<p>A new ACL access level <code>view</code> is a subset of the <code>read</code> access level for jobs, and does not allow users to view the &quot;Definition&quot; tab of a Job, or download the XML/YAML definitions.</p>
+<p>A new ACL access level <code>view</code> is a subset of the <code>read</code> access level for jobs, and does not allow users to view the “Definition” tab of a Job, or download the XML/YAML definitions.</p>
 <p>ACLs which allow <code>read</code> to Jobs, will work as before. To disallow Job Definition viewing/downloading, you should change your ACLs to only allow <code>view</code> access.</p>
 <p><strong>Project Storage Type is now <code>db</code> by default:</strong></p>
 <p>If you want to continue using filesystem storage for project config/readme/motd files, you will need to set this in your <code>rundeck-config.properties</code> before upgrading:</p>
 <pre><code>rundeck.projectsStorageType=filesystem</code></pre>
 <p>Upgrading an existing <code>filesystem</code> configuration to <code>db</code> is automatic, and project configs/readme/motd will be loaded into DB storage at system startup.</p>
-<p>To encrypt the DB storage, you will need to <a href="../plugins-user-guide/bundled-plugins.html#jasypt-encryption-plugin">enable encryption for the &quot;Project Configuration&quot; storage layer</a>.</p>
-<h2 id="contributors"><a href="#contributors">Contributors</a></h2>
+<p>To encrypt the DB storage, you will need to <a href="../plugins-user-guide/bundled-plugins.html#jasypt-encryption-plugin">enable encryption for the “Project Configuration” storage layer</a>.</p>
+<h2 id="contributors">Contributors</h2>
 <ul>
 <li>Antoine-Auffret</li>
 <li>Greg Schueler (gschueler)</li>
@@ -199,7 +199,7 @@ jQuery(function(){
 <li>jtobard</li>
 <li>mickymiek</li>
 </ul>
-<h2 id="bug-reporters"><a href="#bug-reporters">Bug Reporters</a></h2>
+<h2 id="bug-reporters">Bug Reporters</h2>
 <ul>
 <li>MustaphaB1</li>
 <li>PeekLeon</li>
@@ -226,7 +226,7 @@ jQuery(function(){
 <li>ronave</li>
 <li>sebastianbello</li>
 </ul>
-<h2 id="issues"><a href="#issues">Issues</a></h2>
+<h2 id="issues">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/65">Milestone 2.11.0</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/pull/3319">Support groovy plugin DSL for LogFilter/ContentConverter plugins</a></li>
@@ -238,7 +238,7 @@ jQuery(function(){
 <li><a href="https://github.com/rundeck/rundeck/pull/3295">Internationalization of views/user/login</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/3281">French language selection menu</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/3278">Fix #3048 hide add log filter button for job refs</a></li>
-<li><a href="https://github.com/rundeck/rundeck/pull/3276">Add &quot;Initial Execution ID&quot; as a context variable for Job Retries jobs:</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3276">Add “Initial Execution ID” as a context variable for Job Retries jobs:</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/3275">Make rundeck.projectsStorageType=db default</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/3274">Fix git-import plugin error</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/3273">SCM import plugin error when fetching remote changes</a></li>
@@ -249,21 +249,21 @@ jQuery(function(){
 <li><a href="https://github.com/rundeck/rundeck/pull/3265">Fix Bug 3256</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/3260">Disable JSON check for remote options</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/3259">Fix #3258 add user.login info to setup input</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/3256">BUG: &quot;Description&quot; field is blanked when &quot;Project Name&quot; is an invalid string</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3256">BUG: “Description” field is blanked when “Project Name” is an invalid string</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/3255">adding passphrase storage in simple configuration GUI</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/3253">Project free form label</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/3251">GRPC ready</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/3246">Cannot create an empty resources.xml file</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/3242">Scheduled jobs fail when using roleNameAttribute=&quot;distinguishedName&quot; in the AD configuration</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3242">Scheduled jobs fail when using roleNameAttribute=“distinguishedName” in the AD configuration</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/3236">Fix issues with test ordering</a></li>
-<li><a href="https://github.com/rundeck/rundeck/pull/3230">Correct storage type from &quot;filesystem&quot; to &quot;file&quot; (Documentation only)</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3230">Correct storage type from “filesystem” to “file” (Documentation only)</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/3228">Fix 500 error api response for running executions with invalid project name</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/3223">Malformed Request Breaks API</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/3221">Job Filter just show 20 jobs</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/3207">Add &quot;Initial Execution ID&quot; as a context variable for Job Retries jobs</a></li>
-<li><a href="https://github.com/rundeck/rundeck/pull/3204">Edit job doesn't always change the schedule owner</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3207">Add “Initial Execution ID” as a context variable for Job Retries jobs</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3204">Edit job doesn’t always change the schedule owner</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/3195">Changing RPM Spec file to add rundeck user and group within system UI…</a></li>
-<li><a href="https://github.com/rundeck/rundeck/pull/3135">Option &quot;label&quot; field for display name</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3135">Option “label” field for display name</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/3122">Plugins control</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/3115">Job Reference by UUID</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/3102">Scm cluster config</a></li>
@@ -271,11 +271,11 @@ jQuery(function(){
 <li><a href="https://github.com/rundeck/rundeck/issues/3086">On Retryable Failure notification is erroneously selected by default</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/3084">Fix #3012 admin access required to modify project config/nodes in gui</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/3068">Allow option value for thread count</a></li>
-<li><a href="https://github.com/rundeck/rundeck/pull/3066">Checking for dynamic properties unless the step is a &quot;plugin&quot; type</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3066">Checking for dynamic properties unless the step is a “plugin” type</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/3064">Customize average duration condition for the notification plugin.</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/3056">JobRef import options</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/3054">Project description</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/3051">Enhancement Request / project.ssh-key-passphrase-storage-path not shown in &quot;simple configuration&quot; GUI</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3051">Enhancement Request / project.ssh-key-passphrase-storage-path not shown in “simple configuration” GUI</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/3050">Exposing the delimiter on a environment variable for multi-valued opt…</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/3048">GUI should not allow Log Filter to be added to a Job Reference workflow step</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/3046">Scm speed enhancement</a></li>
@@ -286,21 +286,21 @@ jQuery(function(){
 <li><a href="https://github.com/rundeck/rundeck/issues/3027">Add project description to the project table.</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/3022">Import options defined for Job when it is added as a workflow step</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/3012">ACLs for project admin and delete_execution are mutually exclusive</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/2922">Enhancement request: Not able to load JSON remote options - Rundeck requires the content-type header to be set to 'application/json'</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2922">Enhancement request: Not able to load JSON remote options - Rundeck requires the content-type header to be set to ‘application/json’</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/2911">Job Timeout &amp; Kill Job Does Not Halt Job Steps</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/2864">Separate notifications for retryable failures</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/2791">Add unicode icons to HTML page title for execution results</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/2701">Rundeck don't update job name's reference after to change job's name</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2701">Rundeck don’t update job name’s reference after to change job’s name</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/2554">Exposing the delimiter on a environment variable for multi-valued options</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/2440">Allow option value for thread count</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/2222">job status &quot;killed&quot; when running a job with the job refrence error handler on multiple nodes</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2222">job status “killed” when running a job with the job refrence error handler on multiple nodes</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1841">How to trigger child jobs using email notifications</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1622">SCM: not compatible with clustering/HA</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1574">Child job notifications don't trigger</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1574">Child job notifications don’t trigger</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1384">After deleting a project, Log file storage resume might cause exception in logs</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1167">Feature request prevent job download as XML/YAML</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1155">Workflow broken after job rename</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1144">Feature Request: redirect to 'Log Output' tab after submitting a job instead of summary tab</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1144">Feature Request: redirect to ‘Log Output’ tab after submitting a job instead of summary tab</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1107">Feature Request: job execution links with #output should take you to the actual tab</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1067">Feature Request: When using the retry option, allow option to suppress notifications until the last execution</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/257">Job delete/rename: should check whether any job references would break</a></li>
@@ -355,7 +355,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

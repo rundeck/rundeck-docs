@@ -89,22 +89,22 @@ jQuery(function(){
 <div class="page-header">
 <h1 class="title">Version 2.2.0</h1>
 </div>
-<h1 id="release-2.2.0"><a href="#release-2.2.0">Release 2.2.0</a></h1>
+<h1 id="release-2.2.0">Release 2.2.0</h1>
 <p>Date: 2014-07-11</p>
 <p>New features:</p>
 <ul>
-<li>Job timeout: specify a maximum duration for a job. If the job execution exceeds this duration, it will be halted (as if killed manually). You can use a simple format like &quot;120m&quot; (120 minutes) or &quot;2h&quot; (2 hours). You can specify the timeout via a job option by setting it to <code>${option.name}</code>. This only affects the job when executed directly, not when run as a job reference.</li>
+<li>Job timeout: specify a maximum duration for a job. If the job execution exceeds this duration, it will be halted (as if killed manually). You can use a simple format like “120m” (120 minutes) or “2h” (2 hours). You can specify the timeout via a job option by setting it to <code>${option.name}</code>. This only affects the job when executed directly, not when run as a job reference.</li>
 <li>Job retry: specify a maximum retry attempt for a job. If the job fails or is timed out, it will be retried. The maximum value can be specified via a job option if set to <code>${option.name}</code>.</li>
-<li>Delete executions: delete executions individually or in bulk. Requires a 'delete_execution' action allowed via aclpolicy.</li>
+<li>Delete executions: delete executions individually or in bulk. Requires a ‘delete_execution’ action allowed via aclpolicy.</li>
 </ul>
 <p>Some bug fixes are included, as well as some pull requests to enhance the LDAP login module:</p>
 <ul>
 <li>Support nested LDAP group membership (see <a href="https://github.com/rundeck/rundeck/pull/829">Added support for nested groups in JettyCachingLdapLoginModule.</a>)</li>
-<li>Support a &quot;supplementalRoles&quot; setting, which can help avoid the <code>!role</code> issue. See <a href="../administration/authenticating-users.html#login-module-configuration">Login Module Configuration</a>.</li>
+<li>Support a “supplementalRoles” setting, which can help avoid the <code>!role</code> issue. See <a href="../administration/authenticating-users.html#login-module-configuration">Login Module Configuration</a>.</li>
 </ul>
 <p><em>Upgrade notes:</em></p>
 <p>Several domain fields were added. Mysql and H2 should upgrade in place without issue.</p>
-<h2 id="contributors"><a href="#contributors">Contributors</a></h2>
+<h2 id="contributors">Contributors</h2>
 <ul>
 <li>jdmulloy</li>
 <li>Greg Schueler (gschueler)</li>
@@ -113,18 +113,18 @@ jQuery(function(){
 <li>Bart van der Schans (schans)</li>
 <li>Andreas Knifh (knifhen)</li>
 </ul>
-<h2 id="issues"><a href="#issues">Issues</a></h2>
+<h2 id="issues">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/pull/845">Server listening port number defined in profile instead of service start script</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/842">Install fails when /etc/rundeck is a symlink</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/834">Multiple Recepient E-mail Notification</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/829">Added support for nested groups in JettyCachingLdapLoginModule.</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/825">Add Job retry behavior</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/821">Job's references are reported as Killed</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/821">Job’s references are reported as Killed</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/820">Ace editor cursor position bug on mac retina display</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/815">add a Job Timeout behavior</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/803">Added support for the supplementalRoles option to the LDAP Module</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/797">Ansi 256 color support doesn't work</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/797">Ansi 256 color support doesn’t work</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/767">Delete executions</a></li>
 </ul>
 </div>
@@ -177,7 +177,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

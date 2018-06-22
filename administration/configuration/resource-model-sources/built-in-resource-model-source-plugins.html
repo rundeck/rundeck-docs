@@ -68,8 +68,8 @@ jQuery(function(){
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="azure-resource-model-source.html"><i class="glyphicon glyphicon-arrow-left"></i> Azure Resource Model Source</a></li>
-      <li class="next"><a href="servicenow-resource-model-source.html">ServiceNow Resource Model Source <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="previous"><a href="servicenow-resource-model-source.html"><i class="glyphicon glyphicon-arrow-left"></i> ServiceNow Resource Model Source</a></li>
+      <li class="next"><a href="amazon-ec2-resource-model-source.html">Amazon EC2 Resource Model Source <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -110,42 +110,42 @@ jQuery(function(){
 </dd>
 </dl>
 <p>To configure these providers use the following configuration properties.</p>
-<h3 id="file-resource-model-source-configuration"><a href="#file-resource-model-source-configuration">File Resource Model Source Configuration</a></h3>
+<h3 id="file-resource-model-source-configuration">File Resource Model Source Configuration</h3>
 <p>The <code>file</code> Resource Model Source provider reads a file in one of the supported Resource Model Document Formats.</p>
 <table>
 <caption>Configuration properties for <code>file</code> Resource Model Source provider</caption>
 <thead>
 <tr class="header">
-<th align="left">Name</th>
-<th align="left">Value</th>
-<th align="left">Notes</th>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Value</th>
+<th style="text-align: left;">Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>file</code></td>
-<td align="left">file path</td>
-<td align="left">Path to a file on disk.</td>
+<td style="text-align: left;"><code>file</code></td>
+<td style="text-align: left;">file path</td>
+<td style="text-align: left;">Path to a file on disk.</td>
 </tr>
 <tr class="even">
-<td align="left"><code>format</code></td>
-<td align="left">format name</td>
-<td align="left">Can be used to declare the format explicitly. Otherwise the format is determined from the <code>file</code>'s extension.</td>
+<td style="text-align: left;"><code>format</code></td>
+<td style="text-align: left;">format name</td>
+<td style="text-align: left;">Can be used to declare the format explicitly. Otherwise the format is determined from the <code>file</code>’s extension.</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>requireFileExists</code></td>
-<td align="left">true/false</td>
-<td align="left">If true and the file is missing, causes a failure to load the nodes. (Default: false)</td>
+<td style="text-align: left;"><code>requireFileExists</code></td>
+<td style="text-align: left;">true/false</td>
+<td style="text-align: left;">If true and the file is missing, causes a failure to load the nodes. (Default: false)</td>
 </tr>
 <tr class="even">
-<td align="left"><code>includeServerNode</code></td>
-<td align="left">true/false</td>
-<td align="left">If true, include the Project's server node automatically. (Default: false)</td>
+<td style="text-align: left;"><code>includeServerNode</code></td>
+<td style="text-align: left;">true/false</td>
+<td style="text-align: left;">If true, include the Project’s server node automatically. (Default: false)</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>generateFileAutomatically</code></td>
-<td align="left">true/false</td>
-<td align="left">If true, create the file automatically if it is missing. (Default: false)</td>
+<td style="text-align: left;"><code>generateFileAutomatically</code></td>
+<td style="text-align: left;">true/false</td>
+<td style="text-align: left;">If true, create the file automatically if it is missing. (Default: false)</td>
 </tr>
 </tbody>
 </table>
@@ -157,95 +157,95 @@ resources.source.1.format=resourcexml
 resources.source.1.requireFileExists=true
 resources.source.1.includeServerNode=true
 resources.source.1.generateFileAutomatically=true</code></pre>
-<h3 id="url-resource-model-source-configuration"><a href="#url-resource-model-source-configuration">URL Resource Model Source Configuration</a></h3>
+<h3 id="url-resource-model-source-configuration">URL Resource Model Source Configuration</h3>
 <p>The <code>url</code> Resource Model Source provider performs a HTTP GET request to retrieve the Nodes definition.</p>
 <p>Configuration properties:</p>
 <table>
 <caption>Configuration properties for <code>url</code> Resource Model Source provider</caption>
 <thead>
 <tr class="header">
-<th align="left">Name</th>
-<th align="left">Value</th>
-<th align="left">Notes</th>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Value</th>
+<th style="text-align: left;">Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>url</code></td>
-<td align="left">URL</td>
-<td align="left">A valid URL, either <code>http:</code>, <code>https:</code> or <code>file:</code> protocol.</td>
+<td style="text-align: left;"><code>url</code></td>
+<td style="text-align: left;">URL</td>
+<td style="text-align: left;">A valid URL, either <code>http:</code>, <code>https:</code> or <code>file:</code> protocol.</td>
 </tr>
 <tr class="even">
-<td align="left"><code>cache</code></td>
-<td align="left">true/false</td>
-<td align="left">If true, use ETag/Last-Modified information from the server to only download new content if it has changed. If false, always download the content. (Default: true)</td>
+<td style="text-align: left;"><code>cache</code></td>
+<td style="text-align: left;">true/false</td>
+<td style="text-align: left;">If true, use ETag/Last-Modified information from the server to only download new content if it has changed. If false, always download the content. (Default: true)</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>timeout</code></td>
-<td align="left">seconds</td>
-<td align="left">Number of seconds before request fails due to timeout. <code>0</code> means no timeout. (Default: 30)</td>
+<td style="text-align: left;"><code>timeout</code></td>
+<td style="text-align: left;">seconds</td>
+<td style="text-align: left;">Number of seconds before request fails due to timeout. <code>0</code> means no timeout. (Default: 30)</td>
 </tr>
 </tbody>
 </table>
-<p>The Resource Model Document Format that is used is determined by the MIME type sent by the remote server. The built-in formats accept &quot;*/xml&quot; and &quot;*/yaml&quot; and &quot;*/x-yaml&quot;.</p>
+<p>The Resource Model Document Format that is used is determined by the MIME type sent by the remote server. The built-in formats accept “*/xml” and “*/yaml” and &quot;*/x-yaml&quot;.</p>
 <p><em>Example:</em></p>
 <pre><code>resources.source.1.type=url
 resources.source.1.url=file:/home/rundeck/projects/example/etc/resources2.xml
 resources.source.1.cache=true
 resources.source.1.timeout=0</code></pre>
-<h3 id="directory-resource-model-source-configuration"><a href="#directory-resource-model-source-configuration">Directory Resource Model Source Configuration</a></h3>
+<h3 id="directory-resource-model-source-configuration">Directory Resource Model Source Configuration</h3>
 <p>The <code>directory</code> Resource Model Source provider lists all files in a directory, and loads each one that has a supported file extension as File Resource Model Source with all default configuration options.</p>
 <table>
 <caption>Configuration properties for <code>directory</code> Resource Model Source provider</caption>
 <thead>
 <tr class="header">
-<th align="left">Name</th>
-<th align="left">Value</th>
-<th align="left">Notes</th>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Value</th>
+<th style="text-align: left;">Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>directory</code></td>
-<td align="left">directory path</td>
-<td align="left">All files in the directory that have a supported file extension will be loaded</td>
+<td style="text-align: left;"><code>directory</code></td>
+<td style="text-align: left;">directory path</td>
+<td style="text-align: left;">All files in the directory that have a supported file extension will be loaded</td>
 </tr>
 </tbody>
 </table>
 <p><em>Example:</em></p>
 <pre><code>resources.source.2.type=directory
 resources.source.2.directory=/home/rundeck/projects/example/resources</code></pre>
-<h3 id="script-resource-model-source-configuration"><a href="#script-resource-model-source-configuration">Script Resource Model Source Configuration</a></h3>
+<h3 id="script-resource-model-source-configuration">Script Resource Model Source Configuration</h3>
 <p>The <code>script</code> Resource Model Source provider executes a script file and reads the output of the script as one of the supported <a href="#resource-model-document-formats">Resource Model Document Formats</a>.</p>
 <table>
 <caption>Configuration properties for <code>script</code> Resource Model Source provider</caption>
 <thead>
 <tr class="header">
-<th align="left">Name</th>
-<th align="left">Value</th>
-<th align="left">Notes</th>
+<th style="text-align: left;">Name</th>
+<th style="text-align: left;">Value</th>
+<th style="text-align: left;">Notes</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><code>file</code></td>
-<td align="left">Script file path</td>
-<td align="left">If required by the <code>interpreter</code>, the file should be executable</td>
+<td style="text-align: left;"><code>file</code></td>
+<td style="text-align: left;">Script file path</td>
+<td style="text-align: left;">If required by the <code>interpreter</code>, the file should be executable</td>
 </tr>
 <tr class="even">
-<td align="left"><code>interpreter</code></td>
-<td align="left">Command or interpreter to use</td>
-<td align="left">e.g. &quot;bash -c&quot;</td>
+<td style="text-align: left;"><code>interpreter</code></td>
+<td style="text-align: left;">Command or interpreter to use</td>
+<td style="text-align: left;">e.g. “bash -c”</td>
 </tr>
 <tr class="odd">
-<td align="left"><code>args</code></td>
-<td align="left">Additional arguments to pass</td>
-<td align="left">The arguments will be added after the script file name to the executed commandline</td>
+<td style="text-align: left;"><code>args</code></td>
+<td style="text-align: left;">Additional arguments to pass</td>
+<td style="text-align: left;">The arguments will be added after the script file name to the executed commandline</td>
 </tr>
 <tr class="even">
-<td align="left"><code>format</code></td>
-<td align="left">Format name</td>
-<td align="left">Must be used to declare the format explicitly.</td>
+<td style="text-align: left;"><code>format</code></td>
+<td style="text-align: left;">Format name</td>
+<td style="text-align: left;">Must be used to declare the format explicitly.</td>
 </tr>
 </tbody>
 </table>
@@ -258,9 +258,9 @@ resources.source.2.file=/home/rundeck/projects/example/etc/generate.sh
 resources.source.2.interpreter=bash -c
 resources.source.2.args=-project example
 resources.source.2.format=resourceyaml</code></pre>
-<h2 id="resource-model-document-formats"><a href="#resource-model-document-formats">Resource Model Document Formats</a></h2>
+<h2 id="resource-model-document-formats">Resource Model Document Formats</h2>
 <p>Resource Model Document Formats are defined by plugins that provide Generators and Parsers, typically in matched pairs, with both a parser and generator for the same format name.</p>
-<h3 id="resource-format-plugins"><a href="#resource-format-plugins">Resource Format Plugins</a></h3>
+<h3 id="resource-format-plugins">Resource Format Plugins</h3>
 <p>Rundeck includes three built-in plugins in the core installation:</p>
 <dl>
 <dt><code>resourcexml</code></dt>
@@ -324,8 +324,8 @@ resources.source.2.format=resourceyaml</code></pre>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="azure-resource-model-source.html"><i class="glyphicon glyphicon-arrow-left"></i> Azure Resource Model Source</a></li>
-      <li class="next"><a href="servicenow-resource-model-source.html">ServiceNow Resource Model Source <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="previous"><a href="servicenow-resource-model-source.html"><i class="glyphicon glyphicon-arrow-left"></i> ServiceNow Resource Model Source</a></li>
+      <li class="next"><a href="amazon-ec2-resource-model-source.html">Amazon EC2 Resource Model Source <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -354,7 +354,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

@@ -95,9 +95,9 @@ jQuery(function(){
 <div class="page-header">
 <h1 class="title">Job Workflows</h1>
 </div>
-<p>The Job's most basic feature is its ability to execute one or more steps. This sequence of steps is called a <em>workflow</em>.</p>
-<p>The steps of the Job workflow are displayed when viewing a Job's detail from a Job listing or within the Job editor form.</p>
-<h2 id="workflow-definition"><a href="#workflow-definition">Workflow definition</a></h2>
+<p>The Job’s most basic feature is its ability to execute one or more steps. This sequence of steps is called a <em>workflow</em>.</p>
+<p>The steps of the Job workflow are displayed when viewing a Job’s detail from a Job listing or within the Job editor form.</p>
+<h2 id="workflow-definition">Workflow definition</h2>
 <p>Workflows can be defined within the Rundeck graphical console or as an XML or YAML document that is loaded to the server.</p>
 <p>The graphical console provides an authoring environment where steps can be added, edited, removed or reordered.</p>
 <p>Users preferring to define Jobs in a text format should refer to the two format definitions:</p>
@@ -107,11 +107,11 @@ jQuery(function(){
 </ul>
 <p>It is also possible to author Jobs inside the graphical console and then export the definition as a file using the <code>rd-jobs</code> shell tool (<a href="../man1/rd-jobs.html">rd-jobs</a>).</p>
 <p>See <a href="#exporting-job-definitions">Exporting Job definitions</a> and <a href="#importing-job-definitions">Importing Job definitions</a>.</p>
-<h2 id="workflow-control-settings"><a href="#workflow-control-settings">Workflow control settings</a></h2>
+<h2 id="workflow-control-settings">Workflow control settings</h2>
 <p>Workflow execution is controlled by two important settings: <em>Keepgoing</em> and <em>Strategy</em>.</p>
-<div class="figure">
-<img src="../figures/fig0401.png" alt="Workflow controls" /><p class="caption">Workflow controls</p>
-</div>
+<figure>
+<img src="../figures/fig0401.png" alt="Workflow controls" /><figcaption>Workflow controls</figcaption>
+</figure>
 <p><em>Keepgoing</em>: This manages what to do if a step incurs an error:</p>
 <ul>
 <li>Stop at the failed step: Fail immediately (default).</li>
@@ -119,7 +119,6 @@ jQuery(function(){
 </ul>
 <p>The default is to fail immediately but depending on the procedure at hand you can choose to have the execution continue.</p>
 <!--- Out of date? Node First, Parallel, Sequential, Ruleset Workflow Strategy --->
-
 <p><em>Strategy</em>: Controls the order of execution of steps and command dispatch to nodes: <em>Node-oriented</em> and <em>Step-oriented</em>.</p>
 <ul>
 <li><em>Node-oriented</em>: Executes the full workflow on each node before the next node. (default)</li>
@@ -142,18 +141,18 @@ jQuery(function(){
 6.   NodeB      &quot;</code></pre>
 <p>The process you are automating will determine which strategy is correct, though the node-oriented flow is more commonplace.</p>
 <p>For more complex workflow strategy rules, see <a href="workflow-strategies/ruleset-workflow-strategy-plugin.html">Ruleset Workflow Strategy Plugin</a></p>
-<h2 id="workflow-steps"><a href="#workflow-steps">Workflow steps</a></h2>
+<h2 id="workflow-steps">Workflow steps</h2>
 <p>The following sections describe how to construct a workflow as a set of steps of different types.</p>
 <p>When creating a new Job definition, the Workflow form will be set with defaults and have no workflow steps defined. The workflow editor will have a form open asking to choose a step type to add.</p>
-<div class="figure">
-<img src="../figures/fig0402.png" alt="Add a step" /><p class="caption">Add a step</p>
-</div>
-<p>To add new steps simply press the &quot;Add a step&quot; link inside the workflow editor form. This will prompt you with a dialog asking which kind of step you would like to add. Each kind of step has its own form. When you are done filling out the form, press &quot;Save&quot; to add it to the sequence. Pressing &quot;Cancel&quot; will close the form and leave the sequence unchanged.</p>
-<div class="figure">
-<img src="../figures/fig0403.png" alt="Add a step form" /><p class="caption">Add a step form</p>
-</div>
+<figure>
+<img src="../figures/fig0402.png" alt="Add a step" /><figcaption>Add a step</figcaption>
+</figure>
+<p>To add new steps simply press the “Add a step” link inside the workflow editor form. This will prompt you with a dialog asking which kind of step you would like to add. Each kind of step has its own form. When you are done filling out the form, press “Save” to add it to the sequence. Pressing “Cancel” will close the form and leave the sequence unchanged.</p>
+<figure>
+<img src="../figures/fig0403.png" alt="Add a step form" /><figcaption>Add a step form</figcaption>
+</figure>
 <p>New steps are always added to the end of the sequence. See <a href="#reordering-steps">Reordering steps</a> for directions on moving steps into a new order.</p>
-<p>Each step can have a &quot;Description&quot; to give it a more logical name or description to be displayed in the Rundeck GUI.</p>
+<p>Each step can have a “Description” to give it a more logical name or description to be displayed in the Rundeck GUI.</p>
 <p>The next several sections describe the specification of each kind of workflow step.</p>
 <p><strong>Types of Steps</strong></p>
 <p>Steps in a workflow can be either <em>Node Steps</em> or <em>Workflow Steps</em>.</p>
@@ -161,54 +160,54 @@ jQuery(function(){
 <li>Node Steps operate once on each Node, which could be multiple times within a workflow. For a full list of Node Steps, see <a href="job-plugins.html#node-steps">Job Plugins - Node Steps</a></li>
 <li>Workflow Steps operate only once in the workflow. For a full list of Workflow Steps, see <a href="job-plugins.html#workflow-steps">Workflow Steps</a></li>
 </ul>
-<h2 id="reordering-steps"><a href="#reordering-steps">Reordering steps</a></h2>
+<h2 id="reordering-steps">Reordering steps</h2>
 <p>The order of the Workflow steps can be modified by hovering over any step and then clicking and dragging the double arrow icon to the desired position. A blue horizontal bar helps highlight the position where the Job will land.</p>
-<div class="figure">
-<img src="../figures/fig0408.png" alt="Job step reorder" /><p class="caption">Job step reorder</p>
-</div>
+<figure>
+<img src="../figures/fig0408.png" alt="Job step reorder" /><figcaption>Job step reorder</figcaption>
+</figure>
 <p>After releasing the select Job, it will land in the desired position and the step order will be updated.</p>
-<p>If you wish to Undo the step reordering, press the &quot;Undo&quot; link above the steps.</p>
-<p>The &quot;Redo&quot; button can be pressed to reapply the last undone change.</p>
-<p>Press the &quot;Revert All Changes&quot; button to go back to the original step order.</p>
-<h2 id="error-handlers"><a href="#error-handlers">Error Handlers</a></h2>
-<p>Each step in a Workflow can have an associated &quot;Error Handler&quot; action. This handler is a secondary step of any of the available types that will execute if the Workflow step fails. Error Handler steps can be used to recover the workflow from failure, or simply to execute a secondary action.</p>
-<p>This provides a few different ways to deal with a step's failure:</p>
+<p>If you wish to Undo the step reordering, press the “Undo” link above the steps.</p>
+<p>The “Redo” button can be pressed to reapply the last undone change.</p>
+<p>Press the “Revert All Changes” button to go back to the original step order.</p>
+<h2 id="error-handlers">Error Handlers</h2>
+<p>Each step in a Workflow can have an associated “Error Handler” action. This handler is a secondary step of any of the available types that will execute if the Workflow step fails. Error Handler steps can be used to recover the workflow from failure, or simply to execute a secondary action.</p>
+<p>This provides a few different ways to deal with a step’s failure:</p>
 <ul>
 <li>Print additional information about a failure</li>
 <li>Roll back a change</li>
 <li>Recover the workflow from failure, and continue normally</li>
 </ul>
-<p>When a Workflow step has a failure, the behavior depends on whether it has an Error Handler or not, and the value of the &quot;keepgoing&quot; setting for the Workflow, and the value of the &quot;keepgoingOnSuccess&quot; for the Error Handler.</p>
+<p>When a Workflow step has a failure, the behavior depends on whether it has an Error Handler or not, and the value of the “keepgoing” setting for the Workflow, and the value of the “keepgoingOnSuccess” for the Error Handler.</p>
 <ul>
 <li>When a step fails <strong>without an Error Handler</strong>
-<ol style="list-style-type: decimal">
-<li>the Workflow is marked as &quot;failed&quot;</li>
+<ol type="1">
+<li>the Workflow is marked as “failed”</li>
 <li>If <code>keepgoing=&quot;false&quot;</code>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>then the entire Workflow stops</li>
 </ol></li>
 <li>Otherwise, the remaining Workflow steps are executed in order</li>
-<li>the Workflow ends with a &quot;failed&quot; result status</li>
+<li>the Workflow ends with a “failed” result status</li>
 </ol></li>
 </ul>
-<p>If you define an Error Handler for a step, then the behavior changes. The handler can recover the step's failure by executing successfully, and a secondary option &quot;keepgoingOnSuccess&quot; will let you override the Workflow's &quot;keepgoing&quot; value if it is false.</p>
+<p>If you define an Error Handler for a step, then the behavior changes. The handler can recover the step’s failure by executing successfully, and a secondary option “keepgoingOnSuccess” will let you override the Workflow’s “keepgoing” value if it is false.</p>
 <ul>
 <li>When a step fails <strong>with an Error Handler</strong>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>The Error Handler is executed</li>
 <li>If the Error Handler was successful and has <code>keepgoingOnSuccess=&quot;true&quot;</code>
-<ol style="list-style-type: decimal">
+<ol type="1">
 <li>The workflow <code>keepgoing</code> is ignored,</li>
 <li>The Workflow failure status is <em>not</em> marked, and it will continue to the next step</li>
 </ol></li>
 <li>Else if <code>keepgoing=&quot;false&quot;</code>
-<ol style="list-style-type: decimal">
-<li>The Workflow is marked as &quot;failed&quot;</li>
+<ol type="1">
+<li>The Workflow is marked as “failed”</li>
 <li>Then the entire Workflow stops</li>
 </ol></li>
 <li>Else if <code>keepgoing=&quot;true&quot;</code>
-<ol style="list-style-type: decimal">
-<li>If the Error Handler failed then the Workflow is marked as &quot;failed&quot;</li>
+<ol type="1">
+<li>If the Error Handler failed then the Workflow is marked as “failed”</li>
 <li>Otherwise, the Workflow is <em>not</em> additionally marked</li>
 </ol></li>
 <li>the remaining Workflow steps are executed in order (including other triggered Error Handlers)</li>
@@ -216,26 +215,26 @@ jQuery(function(){
 </ol></li>
 </ul>
 <p>Essentially, the result status of the Error Handler becomes the result status of its Step, if the Workflow has <code>keepgoing=&quot;true&quot;</code> or if the Error Handler overrides it with <code>keepgoingOnSuccess=&quot;true&quot;</code>. If the Error Handler succeeds, then the step is not considered to have failed. This includes scripts, commands, job references, etc. (Scripts and commands must have an exit status of <code>0</code> to return success.)</p>
-<p>It is a good practice, when you are defining Error Handlers, to <strong>always</strong> have them fail (e.g. scripts/commands return a non-zero exit-code), unless you specifically want them to be used for Recovery.</p>
+<p>It is a good practice, when you are defining Error Handlers, to <strong>always</strong> have them fail (e.g. scripts/commands return a non-zero exit-code), unless you specifically want them to be used for Recovery.</p>
 <blockquote>
-<p>Note, Error-handlers can be attached to either Node Steps or Workflow Steps, and the type of step and the Strategy of the Workflow determines what type of Error-handler steps can be attached to a step. The only restriction is in the case that the Workflow is &quot;Node-oriented&quot;, which means that the workflow is executed independently for each node. In this case, Node Steps can only have other Node steps as Error Handlers. In other cases, the Error Handler can be other Workflow steps.</p>
+<p>Note, Error-handlers can be attached to either Node Steps or Workflow Steps, and the type of step and the Strategy of the Workflow determines what type of Error-handler steps can be attached to a step. The only restriction is in the case that the Workflow is “Node-oriented”, which means that the workflow is executed independently for each node. In this case, Node Steps can only have other Node steps as Error Handlers. In other cases, the Error Handler can be other Workflow steps.</p>
 </blockquote>
-<p>To add an error handler press the &quot;+ error handler&quot; button on the step you want to handle. The form presented includes the normal set of steps you can add to a workflow.</p>
-<div class="figure">
-<img src="../figures/fig0410.png" alt="Adding an error handler" /><p class="caption">Adding an error handler</p>
-</div>
+<p>To add an error handler press the “+ error handler” button on the step you want to handle. The form presented includes the normal set of steps you can add to a workflow.</p>
+<figure>
+<img src="../figures/fig0410.png" alt="Adding an error handler" /><figcaption>Adding an error handler</figcaption>
+</figure>
 <p>The example below shows an error handler that calls a script by URL.</p>
-<div class="figure">
-<img src="../figures/fig0411.png" alt="Example error handler" /><p class="caption">Example error handler</p>
-</div>
-<h3 id="context-information"><a href="#context-information">Context information</a></h3>
+<figure>
+<img src="../figures/fig0411.png" alt="Example error handler" /><figcaption>Example error handler</figcaption>
+</figure>
+<h3 id="context-information">Context information</h3>
 <p>When the Error-handler step is executed, its execution context will contain some information about the nature of the failure that occurred for the original step.</p>
 <p>In the case where a Node Step has a Workflow Step as an Error Handler, then the failure data for multiple nodes is rolled up into a single failure reason to be used by the Workflow Step.</p>
 <p>See the section on <a href="#context-variables">Context Variables</a> for more information.</p>
-<h2 id="save-the-changes"><a href="#save-the-changes">Save the changes</a></h2>
-<p>Once the Workflow steps have been defined and order, changes are permanently saved after pressing the &quot;Create&quot; button if new or the &quot;Update&quot; button if the Job is being modified.</p>
-<h2 id="context-variables"><a href="#context-variables">Context Variables</a></h2>
-<p>When a Job step is executed, it has a set of &quot;context&quot; variables that you can access in the Job step. There are several sets of context variables, including: the Job context <code>job</code>, the Node context <code>node</code>, and the Option context <code>option</code>.</p>
+<h2 id="save-the-changes">Save the changes</h2>
+<p>Once the Workflow steps have been defined and order, changes are permanently saved after pressing the “Create” button if new or the “Update” button if the Job is being modified.</p>
+<h2 id="context-variables">Context Variables</h2>
+<p>When a Job step is executed, it has a set of “context” variables that you can access in the Job step. There are several sets of context variables, including: the Job context <code>job</code>, the Node context <code>node</code>, and the Option context <code>option</code>.</p>
 <p>Job context variables:</p>
 <ul>
 <li><code>job.name</code>: Name of the Job</li>
@@ -245,8 +244,8 @@ jQuery(function(){
 <li><code>job.executionType</code> : Execution type, can be <code>user</code>, <code>scheduled</code> or <code>user-scheduled</code> for <code>Run Job Later</code> executions</li>
 <li><code>job.username</code>: Username of the user executing the Job</li>
 <li><code>job.project</code>: Project name</li>
-<li><code>job.loglevel</code>: Logging level, one of: 'ERROR','WARN','INFO','VERBOSE','DEBUG'</li>
-<li><code>job.user.email</code>: Executing user's email address set in <a href="user.html">User profile</a>.</li>
+<li><code>job.loglevel</code>: Logging level, one of: ‘ERROR’,‘WARN’,‘INFO’,‘VERBOSE’,‘DEBUG’</li>
+<li><code>job.user.email</code>: Executing user’s email address set in <a href="user.html">User profile</a>.</li>
 <li><code>job.retryAttempt</code>: A number indicating the attempt, if this execution is a <a href="#retry">retry</a>.</li>
 <li><code>job.wasRetry</code>: <code>true</code> if this execution is a retry, otherwise <code>false</code>. See: <a href="#retry">retry</a>.</li>
 <li><code>job.threadcount</code>: Threadcount (number of nodes run at once) of the Job</li>
@@ -272,7 +271,7 @@ jQuery(function(){
 <li><code>SSHProtocolFailure</code> - SSH protocol failure</li>
 <li><code>HostNotFound</code> - host not found</li>
 <li><code>ConnectionTimeout</code> - connection timeout</li>
-<li><code>ConnectionFailure</code> - connection failure (e.g. refused)</li>
+<li><code>ConnectionFailure</code> - connection failure (e.g. refused)</li>
 <li><code>IOFailure</code> - IO error</li>
 <li><code>AuthenticationFailure</code> - authentication was refused or incorrect</li>
 </ul></li>
@@ -294,28 +293,28 @@ jQuery(function(){
 <li><code>result.failedNodes</code>: Comma-separated list of node names that failed for a <code>NodeDispatchFailure</code></li>
 </ul>
 <p>Option context variables are referred to as <code>option.NAME</code> (more about <a href="defining-job-options.html">Job Options</a>.)</p>
-<h3 id="context-variable-usage"><a href="#context-variable-usage">Context Variable Usage</a></h3>
+<h3 id="context-variable-usage">Context Variable Usage</h3>
 <p>Context variables can be used in a few ways in a Job step, with slightly different syntaxes:</p>
 <ul>
 <li><dl>
 <dt>Commands, Script Arguments and Job Reference Arguments</dt>
-<dd><code>${ctx.name}</code>
+<dd><pre><code>`${ctx.name}`</code></pre>
 </dd>
 </dl></li>
 <li><dl>
 <dt>Inline Script Content (<em>see note</em>)</dt>
-<dd><code>@ctx.name@</code>
+<dd><pre><code>`@ctx.name@`</code></pre>
 </dd>
 </dl>
 <blockquote>
-<p>Note, The &quot;Inline Script Content&quot; variable expansion is <strong>not</strong> available for &quot;Script File&quot; steps. The Script File is not rewritten at all when used for execution.</p>
+<p>Note, The “Inline Script Content” variable expansion is <strong>not</strong> available for “Script File” steps. The Script File is not rewritten at all when used for execution.</p>
 </blockquote>
 <blockquote>
 <p>Note: This can be disabled, see <a href="../administration/configuration/configuration-file-reference.html#framework.properties">Administrator Guide &gt; Configuration File Reference &gt; framework.properties</a>.</p>
 </blockquote></li>
 <li><dl>
 <dt>Environment Variables (<em>see note</em>)</dt>
-<dd><code>$RD_CTX_NAME</code>
+<dd><pre><code>`$RD_CTX_NAME`</code></pre>
 </dd>
 </dl>
 <p>The syntax for Environment variables is that all letters become uppercase, punctuation is replaced with underscore, and the name is prefixed with <code>RD_</code>.</p>
@@ -323,16 +322,16 @@ jQuery(function(){
 <p>Note, See the chapter <a href="node-execution/ssh-node-execution.html#passing-environment-variables-through-remote-command">Plugins - SSH - Passing Environment Variables Through Remote Commands</a> for information about requirements of the SSH server.</p>
 </blockquote></li>
 </ul>
-<h2 id="related-command-line-tools"><a href="#related-command-line-tools">Related Command Line Tools</a></h2>
+<h2 id="related-command-line-tools">Related Command Line Tools</h2>
 <dl>
 <dt><a href="../man1/rd-jobs.html">rd-jobs</a></dt>
-<dd><p>List, load and delete job definitions.</p>
+<dd>List, load and delete job definitions.
 </dd>
 <dt><a href="../man1/rd-queue.html">rd-queue</a></dt>
-<dd><p>List, follow or kill currently running executions.</p>
+<dd>List, follow or kill currently running executions.
 </dd>
 <dt><a href="../man1/run.html">run</a></dt>
-<dd><p>Run a job.</p>
+<dd>Run a job.
 </dd>
 </dl>
 </div>
@@ -385,7 +384,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

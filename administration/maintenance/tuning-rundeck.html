@@ -21,23 +21,69 @@ jQuery(function(){
 });
 </script>
   <style type="text/css">
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; }
-code > span.dt { color: #902000; }
-code > span.dv { color: #40a070; }
-code > span.bn { color: #40a070; }
-code > span.fl { color: #40a070; }
-code > span.ch { color: #4070a0; }
-code > span.st { color: #4070a0; }
-code > span.co { color: #60a0b0; font-style: italic; }
-code > span.ot { color: #007020; }
-code > span.al { color: #ff0000; font-weight: bold; }
-code > span.fu { color: #06287e; }
-code > span.er { color: #ff0000; font-weight: bold; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../../style.css" type="text/css" />
 </head>
@@ -112,37 +158,37 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div class="page-header">
 <h1 class="title">Tuning Rundeck</h1>
 </div>
-<h3 id="file-descriptors"><a href="#file-descriptors">File descriptors</a></h3>
+<h3 id="file-descriptors">File descriptors</h3>
 <p>The Rundeck server process opens a number of files during normal operation. These include system and java libraries, logs, and sockets. Your system restricts the number of open file handles per process but these limitations can be adjusted.</p>
 <p>If your installation attempts to exceed the limit, you will see an error like the one shown below in your <a href="logging.html">service.log</a> file.</p>
 <pre><code>Too many open files</code></pre>
 <p><em>On Linux nodes</em></p>
 <p>List the current limit with the <a href="https://ss64.com/bash/ulimit.html">ulimit</a> command:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">ulimit</span> -n</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="bu">ulimit</span> -n</a></code></pre></div>
 <p>If the limit is low (eg <code>1024</code>) it should be raised.</p>
 <p>You can get the current number of open file descriptors used by the Rundeck server process with <a href="https://linux.die.net/man/8/lsof">lsof</a>:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">lsof</span> -p <span class="kw">&lt;</span>rundeck pid<span class="kw">&gt;</span> <span class="kw">|</span> <span class="kw">wc</span> -l</code></pre>
-<p>Increase the limit for a wide margin. Edit <a href="https://ss64.com/bash/limits.conf.html">/etc/security/limits.conf</a> file to raise the hard and soft limits. Here they are raised to <code>65535</code> for the &quot;rundeck&quot; system account:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rundeck</span> hard nofile 65535
-<span class="kw">rundeck</span> soft nofile 65535</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="ex">lsof</span> -p <span class="op">&lt;</span>rundeck pid<span class="op">&gt;</span> <span class="kw">|</span> <span class="fu">wc</span> -l</a></code></pre></div>
+<p>Increase the limit for a wide margin. Edit <a href="https://ss64.com/bash/limits.conf.html">/etc/security/limits.conf</a> file to raise the hard and soft limits. Here they are raised to <code>65535</code> for the “rundeck” system account:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="ex">rundeck</span> hard nofile 65535</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="ex">rundeck</span> soft nofile 65535</a></code></pre></div>
 <p>The system file descriptor limit is set in /proc/sys/fs/file-max. The following command will increase the limit to 65535:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">echo</span> 65535 <span class="kw">&gt;</span> /proc/sys/fs/file-max</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="bu">echo</span> 65535 <span class="op">&gt;</span> /proc/sys/fs/file-max</a></code></pre></div>
 <p>In a new shell, run the ulimit command to set the new level:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">ulimit</span> -n 65535</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="bu">ulimit</span> -n 65535</a></code></pre></div>
 <p>The ulimit setting can be set in the <a href="startup-and-shutdown.html#launcher">rundeckd</a> startup script, or <a href="../configuration/configuration-file-reference.html#profile">profile</a>.</p>
 <p>Restart Rundeck.</p>
-<h3 id="java-heap-size"><a href="#java-heap-size">Java heap size</a></h3>
+<h3 id="java-heap-size">Java heap size</h3>
 <p>The <code>rundeckd</code> startup script sets initial and maximum heap sizes for the server process. For many installations it will be sufficient.</p>
 <p>If the Rundeck JVM runs out of memory, the following error occurs:</p>
 <pre><code>Exception in thread &quot;main&quot; java.lang.OutOfMemoryError: Java heap space</code></pre>
 <p>Heap size is governed by the following startup parameters: <code>-Xms&lt;initial heap size&gt;</code> and <code>-Xmx&lt;maximum heap size&gt;</code></p>
 <p>You can increase these by updating the Rundeck <a href="../configuration/configuration-file-reference.html#profile">profile</a>. To see the current values, grep the <code>profile</code> for the Xmx and Xms patterns:</p>
 <p><strong>Launcher installs:</strong></p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">egrep</span> <span class="st">&#39;(Xmx|Xms)&#39;</span> <span class="ot">$RDECK_BASE</span>/etc/profile</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="fu">egrep</span> <span class="st">&#39;(Xmx|Xms)&#39;</span> <span class="va">$RDECK_BASE</span>/etc/profile</a></code></pre></div>
 <p><strong>RPM installs:</strong></p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">egrep</span> <span class="st">&#39;(Xmx|Xms)&#39;</span> /etc/rundeck/profile</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="fu">egrep</span> <span class="st">&#39;(Xmx|Xms)&#39;</span> /etc/rundeck/profile</a></code></pre></div>
 <p>The default settings initialized by the installer sets these to 1024 megabytes maximum and 256 megabytes initial:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">export</span> <span class="ot">RDECK_JVM=</span><span class="st">&quot;</span><span class="ot">$RDECK_JVM</span><span class="st"> -Xmx1024m -Xms256m&quot;</span></code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="bu">export</span> <span class="va">RDECK_JVM=</span><span class="st">&quot;</span><span class="va">$RDECK_JVM</span><span class="st"> -Xmx1024m -Xms256m&quot;</span></a></code></pre></div>
 <p><em>Sizing advice</em></p>
 <p>Several factors drive memory usage in Rundeck:</p>
 <ul>
@@ -152,18 +198,18 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <li>Number of managed nodes</li>
 </ul>
 <p>For example, if your installation has dozens of active users that manage a large environment (1000+ nodes), and has sufficient system memory, the following sizings might be more suitable:</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">export</span> <span class="ot">RDECK_JVM=</span><span class="st">&quot;</span><span class="ot">$RDECK_JVM</span><span class="st"> -Xmx4096m -Xms1024m&quot;</span></code></pre>
-<h3 id="quartz-job-threadcount"><a href="#quartz-job-threadcount">Quartz job threadCount</a></h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="bu">export</span> <span class="va">RDECK_JVM=</span><span class="st">&quot;</span><span class="va">$RDECK_JVM</span><span class="st"> -Xmx4096m -Xms1024m&quot;</span></a></code></pre></div>
+<h3 id="quartz-job-threadcount">Quartz job threadCount</h3>
 <p>The maximum number of threads used by Rundeck for concurrent jobs by default is set to <code>10</code>.</p>
 <p>You can change this value, by updating either the <code>rundeck-config.properties</code> file, or a file called <code>quartz.properties</code>.</p>
 <p>Please refer to the Quartz site for detailed information: <a href="http://www.quartz-scheduler.org/documentation/quartz-2.x/configuration/ConfigThreadPool.html#configure-threadpool-settings">Quartz - Configure ThreadPool Settings</a>.</p>
-<h4 id="update-rundeck-config"><a href="#update-rundeck-config">Update rundeck-config</a></h4>
+<h4 id="update-rundeck-config">Update rundeck-config</h4>
 <p>Use the properties mentioned in the Quartz documentation, but <strong>replace</strong> the <code>org.quartz</code> prefix, with the prefix <code>quartz.props</code>.</p>
-<p>e.g. in <code>rundeck-config.properties</code> :</p>
+<p>e.g. in <code>rundeck-config.properties</code> :</p>
 <pre class="properties"><code>quartz.props.threadPool.threadCount = 20</code></pre>
 <p>Set the threadCount value to the max number of threads you want to run concurrently.</p>
-<h4 id="update-quartz.properties"><a href="#update-quartz.properties">Update quartz.properties</a></h4>
-<p>If the file doesn't exist, create it.</p>
+<h4 id="update-quartz.properties">Update quartz.properties</h4>
+<p>If the file doesn’t exist, create it.</p>
 <ul>
 <li>RPM install: <code>/var/lib/rundeck/server/exp/webapp/WEB-INF/classes/quartz.properties</code></li>
 <li>Launcher install: <code>$RDECK_BASE/server/exp/webapp/WEB-INF/classes/quartz.properties</code></li>
@@ -171,24 +217,24 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <p>To change the maximum threadCount modify this file and add the line:</p>
 <pre><code>org.quartz.threadPool.threadCount = 20</code></pre>
 <p>Set the threadCount value to the max number of threads you want to run concurrently.</p>
-<h3 id="jmx-instrumentation"><a href="#jmx-instrumentation">JMX instrumentation</a></h3>
+<h3 id="jmx-instrumentation">JMX instrumentation</h3>
 <p>You may wish to monitor the internal operation of your Rundeck server via JMX.</p>
 <p>JMX provides introspection on the JVM, the application server, and classes all through a consistent interface. These various components are exposed to the management console via JMX managed beans - MBeans for short.</p>
-<p><em>Note</em>: For more background information on JMX, see &quot;<a href="https://www.ibm.com/developerworks/library/j-jtp09196/">Java theory and practice: Instrumenting applications with JMX.</a>&quot;.</p>
+<p><em>Note</em>: For more background information on JMX, see “<a href="https://www.ibm.com/developerworks/library/j-jtp09196/">Java theory and practice: Instrumenting applications with JMX.</a>”.</p>
 <p>Enable local JMX monitoring by adding the <code>com.sun.management.jmxremote</code> flag to the startup parameters in the <a href="../configuration/configuration-file-reference.html#profile">profile</a>.</p>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">export</span> <span class="ot">RDECK_JVM=</span><span class="st">&quot;</span><span class="ot">$RDECK_JVM</span><span class="st"> -Dcom.sun.management.jmxremote&quot;</span></code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="bu">export</span> <span class="va">RDECK_JVM=</span><span class="st">&quot;</span><span class="va">$RDECK_JVM</span><span class="st"> -Dcom.sun.management.jmxremote&quot;</span></a></code></pre></div>
 <p>You use a JMX client to monitor JMX agents. This can be a desktop GUI like JConsole run locally.</p>
 <pre><code>jconsole &lt;rundeck pid&gt;</code></pre>
 <p>For instructions on remote JMX monitoring for Grails, Spring and log4j see: <a href="https://public.dhe.ibm.com/software/dw/java/j-grails12168-pdf.pdf">Grails in the enterprise</a>.</p>
-<h3 id="node-execution"><a href="#node-execution">Node execution</a></h3>
+<h3 id="node-execution">Node execution</h3>
 <p>If you are executing commands across many hundreds or thousands of hosts, the bundled SSH node executor may not meet your performance requirements. Each SSH connection uses multiple threads and the encryption/decryption of messages uses CPU cycles and memory. Depending on your environment, you might choose another Node executor like MCollective, Salt or something similar. This essentially delegates remote execution to another tool designed for asynchronous fan out and thus relieving Rundeck of managing remote task execution.</p>
-<h3 id="built-in-ssh-plugins"><a href="#built-in-ssh-plugins">Built in SSH plugins</a></h3>
+<h3 id="built-in-ssh-plugins">Built in SSH plugins</h3>
 <p>If you are interested in using the built in <a href="../../manual/node-execution/ssh-node-execution.html">SSH plugins</a>, here are some details about how it performs when executing commands across very large numbers of nodes. For these tests, Rundeck was running on an 8 core, 32GB RAM m2.4xlarge AWS EC2 instance.</p>
 <p>We chose the <code>rpm -q</code> command which checks against the rpm database to see if a particular package was installed. For 1000 nodes we saw an average execution of 52 seconds. A 4000 node cluster took roughly 3.5 minutes, and 8000 node cluster about 7 minutes.</p>
-<p>The main limitation appears to be memory of the JVM instance relative to the number of concurrent requests. We tuned the max memory to be 12GB with a 1000 Concurrent Dispatch Threads to 1GB of Memory. GC appears to behave well during the runs given the &quot;bursty&quot; nature of them.</p>
-<h3 id="ssl-and-https-performance"><a href="#ssl-and-https-performance">SSL and HTTPS performance</a></h3>
+<p>The main limitation appears to be memory of the JVM instance relative to the number of concurrent requests. We tuned the max memory to be 12GB with a 1000 Concurrent Dispatch Threads to 1GB of Memory. GC appears to behave well during the runs given the “bursty” nature of them.</p>
+<h3 id="ssl-and-https-performance">SSL and HTTPS performance</h3>
 <p>It is possible to offload SSL connection processing by using an SSL termination proxy. This can be accomplished by setting up Apache httpd or <a href="https://en.wikipedia.org/wiki/Nginx">Nginx</a> as a frontend to your Rundeck instances.</p>
-<h3 id="resource-provider"><a href="#resource-provider">Resource provider</a></h3>
+<h3 id="resource-provider">Resource provider</h3>
 <p>Rundeck projects obtain information about nodes via a <a href="../configuration/resource-model-sources/index.html">resource provider</a>. If your resource provider is a long blocking process (due to slow responses from a backend service), it can slow down or even hang up Rundeck. Be sure to make your resource provider work asynchronously. Also, consider using caching when possible.</p>
 </div>
 </div>
@@ -242,7 +288,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>

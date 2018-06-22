@@ -68,7 +68,7 @@ jQuery(function(){
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      
+      <li class="previous"><a href="built-in-resource-model-source-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> Built-in Resource Model Source Plugins</a></li>
       <li class="next"><a href="azure-resource-model-source.html">Azure Resource Model Source <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
@@ -81,7 +81,7 @@ jQuery(function(){
 <div class="page-header">
 <h1 class="title">Amazon EC2 Resource Model Source</h1>
 </div>
-<p><a href="https://aws.amazon.com/ec2/">Amazon's EC2</a> (Elastic Cloud Compute) is a cloud service in wide use for dynamic infrastructure; it is easy to start up and shut down Node &quot;Instances&quot; in the cloud.</p>
+<p><a href="https://aws.amazon.com/ec2/">Amazon’s EC2</a> (Elastic Cloud Compute) is a cloud service in wide use for dynamic infrastructure; it is easy to start up and shut down Node “Instances” in the cloud.</p>
 <p>For Rundeck, we would like to have a way of querying the EC2 service to see what EC2 Instances are available for use as Rundeck Nodes.</p>
 <p>Amazon has a well-defined API for communication with their services, which would allow us to pull out the EC2 data, and generate XML if we wanted to. We could write a script that produces that data and use that script on a server to produce data via a URL, or we could use that script with the <a href="built-in-resource-model-source-plugins.html#script-resource-model-source-configuration">script resource model source plugin</a> to generate it. This would give us complete control of the output, but does require extra work.</p>
 <p>However, there is already a plugin to do this for you: the <a href="https://github.com/rundeck-plugins/rundeck-ec2-nodes-plugin">Rundeck EC2 Nodes Plugin</a>.</p>
@@ -90,28 +90,28 @@ jQuery(function(){
 <li><a href="https://github.com/rundeck-plugins/rundeck-ec2-nodes-plugin/downloads">download the binary distribution</a>.</li>
 </ul>
 <p>Use is fairly simple:</p>
-<ol style="list-style-type: decimal">
-<li>Copy the plugin file &quot;rundeck-ec2-nodes-plugin-1.2.jar&quot; into your <code>$RDECK_BASE/libext</code> directory. The plugin contains all of the required dependencies.</li>
-<li>Login to Rundeck with an administrator account, and click the &quot;Admin&quot; link in the page header for your project then click the &quot;Configure Project&quot; link, <em>or</em> create a new project.</li>
-<li>In the project configuration page, under <strong>Resource Model Sources</strong> click the &quot;Add Source&quot; button.</li>
-<li>Click &quot;Add&quot; for the &quot;AWS EC2 Resources&quot; type.</li>
-<li>Enter the configuration details (see below) for the plugin and click &quot;Save&quot;.</li>
-<li>Click &quot;Save&quot; for the Project Configuration.</li>
+<ol type="1">
+<li>Copy the plugin file “rundeck-ec2-nodes-plugin-1.2.jar” into your <code>$RDECK_BASE/libext</code> directory. The plugin contains all of the required dependencies.</li>
+<li>Login to Rundeck with an administrator account, and click the “Admin” link in the page header for your project then click the “Configure Project” link, <em>or</em> create a new project.</li>
+<li>In the project configuration page, under <strong>Resource Model Sources</strong> click the “Add Source” button.</li>
+<li>Click “Add” for the “AWS EC2 Resources” type.</li>
+<li>Enter the configuration details (see below) for the plugin and click “Save”.</li>
+<li>Click “Save” for the Project Configuration.</li>
 </ol>
-<p>Minimal configuration details for the plugin includes your AWS access credentials you can find here <a href="https://console.aws.amazon.com/iam/home">https://console.aws.amazon.com/iam/home</a></p>
+<p>Minimal configuration details for the plugin includes your AWS access credentials you can find here <a href="https://console.aws.amazon.com/iam/home" class="uri">https://console.aws.amazon.com/iam/home</a></p>
 <dl>
 <dt><em>Access Key</em></dt>
-<dd><p>Specify your AWS Access key.</p>
+<dd>Specify your AWS Access key.
 </dd>
 <dt><em>Secret Key</em></dt>
-<dd><p>Specify your AWS Secret Key</p>
+<dd>Specify your AWS Secret Key
 </dd>
 </dl>
 <p>Read about the other configuration details in the <a href="https://github.com/rundeck-plugins/rundeck-ec2-nodes-plugin/blob/master/Readme.md">readme</a> for the rundeck-ec2-nodes-plugin.</p>
 <p>Finally, within Rundeck, you can Refresh the Nodes from within the Run tab. You should see a Node entry for each EC2 Instance that is available.</p>
 <p>You can manage the set of Nodes that gets returned from the plugin by organizing your EC2 instances using EC2 Tags, as well as adding EC2 Filters to the plugin configuration.</p>
-<p>The EC2 plugin will automatically add tags for the nodes based on an EC2 Instance Tag named &quot;Rundeck-Tags&quot;, as well as the Instance's state. You can also add &quot;Mapping parameters&quot; to the EC2 Plugin configuration to add additional tags.</p>
-<p>You can add filters to the EC2 Plugin configuration under the &quot;Filter Params&quot; configuration area, with the syntax of: <code>filter=value;filter2=value2</code>. The available filter names are listed in <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html">AWS API - DescribeInstances</a>.</p>
+<p>The EC2 plugin will automatically add tags for the nodes based on an EC2 Instance Tag named “Rundeck-Tags”, as well as the Instance’s state. You can also add “Mapping parameters” to the EC2 Plugin configuration to add additional tags.</p>
+<p>You can add filters to the EC2 Plugin configuration under the “Filter Params” configuration area, with the syntax of: <code>filter=value;filter2=value2</code>. The available filter names are listed in <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html">AWS API - DescribeInstances</a>.</p>
 <p>You can also configure your EC2 Plugin manually or automatically by creating or modifying the [project.properties] file, and defining a [Resource Model Source] provider, like this:</p>
 <pre><code>resources.source.1.type=aws-ec2
 resources.source.1.config.accessKey=...
@@ -142,7 +142,7 @@ resources.source.1.config.filter=...</code></pre>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      
+      <li class="previous"><a href="built-in-resource-model-source-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> Built-in Resource Model Source Plugins</a></li>
       <li class="next"><a href="azure-resource-model-source.html">Azure Resource Model Source <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
@@ -172,7 +172,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-22T18:04:53UTC">2018-06-22T18:04:53UTC</span>
+<span class="generated-date" title="2018-06-22T18:43:07UTC">2018-06-22T18:43:07UTC</span>
 </p>
 </footer>
 </div>
