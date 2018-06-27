@@ -230,21 +230,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb3-12" data-line-number="12"><span class="ex">user</span>:user,user</a></code></pre></div>
 <p><em>Adding additional users</em></p>
 <p>You may wish to have additional users with various privileges rather than giving out role accounts to groups. You may also want to avoid having the passwords in plaintext within the configuration file.</p>
-<p>To accomplish this, you’ll need a properly hashed or encrypted password to use in the config. Pass the username and password to the <code>Password</code> utility which is part of the <code>jetty-all-9.0.7.v20131107.jar</code> file.</p>
-<p>Location:</p>
-<ul>
-<li>Launcher install: <code>$RDECK_BASE/server/lib/jetty-all-9.0.7.v20131107.jar</code></li>
-<li>RPM/Deb install: <code>/var/lib/rundeck/bootstrap/jetty-all-9.0.7.v20131107.jar</code></li>
-</ul>
-<p>Use the correct path below.</p>
+<p>To accomplish this, you’ll need a properly hashed or encrypted password to use in the config. Rundeck has a built in command line utility to encrypt passwords. The default encryption service is the Jetty password utility.</p>
 <p>In this example, we’ll setup a new user named “jsmith”, with a password of “mypass”:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1">$ <span class="ex">java</span> -cp jetty-all-9.0.7.v20131107.jar org.eclipse.jetty.util.security.Password jsmith mypass</a></code></pre></div>
-<pre><code>OBF:1xfd1zt11uha1ugg1zsp1xfp
-MD5:a029d0df84eb5549c641e04a9ef389e5
-CRYPT:jsnDAc2Xk4W4o</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1">$ <span class="ex">java</span> -jar rundeck-3.0.0.war --encryptpwd Jetty</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="ex">Required</span> values are marked with: *</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="ex">Username</span> (Optional, but necessary for Crypt encoding)<span class="bu">:</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="ex">jsmith</span>    <span class="op">&lt;</span>-----Type this value</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="ex">*Value</span> To Encrypt (The text you want to encrypt)<span class="bu">:</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="ex">mypass</span>    <span class="op">&lt;</span>-----Type this value</a></code></pre></div>
+<pre><code>obfuscate: OBF:1xfd1zt11uha1ugg1zsp1xfp
+md5: MD5:a029d0df84eb5549c641e04a9ef389e5
+crypt: CRYPT:jsnDAc2Xk4W4o</code></pre>
 <p>Then add this to the <code>realm.properties</code> file with a line like so:</p>
 <pre><code>jsmith: MD5:a029d0df84eb5549c641e04a9ef389e5,user,admin</code></pre>
 <p>Then restart Rundeck to ensure it picks up the change and you’re done.</p>
+<p>There is also a password encrypter utility user interface in the Rundeck application that can be used to generate encrypted passwords. Click the gear icon and then “Password Utility” to use that interface.</p>
 <h2 id="ldap">LDAP</h2>
 <p>LDAP and Active Directory configurations are created in the same way, but your LDAP structure may be different than Active Directory’s structure.</p>
 <p>Rundeck includes two JAAS login modules you can use for LDAP directory authentication:</p>
@@ -774,7 +774,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-06-27T18:00:35UTC">2018-06-27T18:00:35UTC</span>
+<span class="generated-date" title="2018-06-27T18:03:51UTC">2018-06-27T18:03:51UTC</span>
 </p>
 </footer>
 </div>
