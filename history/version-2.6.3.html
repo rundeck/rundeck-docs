@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Version 2.6.3</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="greg" />
+  <meta name="date" content="02/25/2016" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.5)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-2.6.3.html">Version 2.6.3 (2016-02-25)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.6.2.html">Version 2.6.2 (2015-12-02) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#release-2.6.3">Release 2.6.3</a><ul>
+<li><a href="#notes">Notes</a></li>
+<li><a href="#contributors">Contributors</a></li>
+<li><a href="#bug-reporters">Bug Reporters</a></li>
+<li><a href="#issues">Issues</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Version 2.6.3</h1>
+</div>
+<h1 id="release-2.6.3"><a href="#release-2.6.3">Release 2.6.3</a></h1>
+<p>Date: 2016-02-25</p>
+<p>Name: <span style="color: dodgerblue"><span class="glyphicon glyphicon-leaf"></span> &quot;cafe bonbon dodgerblue leaf&quot;</span></p>
+<h2 id="notes"><a href="#notes">Notes</a></h2>
+<p>Primarily bug fixes, and some enhancements:</p>
+<ul>
+<li>Asynchronous nodes cache. Per-project and global toggle and configurable retention delay. By default, projects now use an asynchronous method for retrieving Node data from Resource Model Sources. You should see an improvement in page load when using slow model sources (such as a URL for a slow endpoint).</li>
+<li>Performance improvements with many thousands of Nodes. The Nodes and Commands page, as well as other places where Nodes are loaded (e.g. Job editor) now should be much more responsive when you have e.g. 20K nodes. The Nodes page now uses result paging, and some parts of the UI now truncate the result set as well if you have many nodes.</li>
+</ul>
+<h2 id="contributors"><a href="#contributors">Contributors</a></h2>
+<ul>
+<li>Alex Honor (ahonor)</li>
+<li>Bryon Williams</li>
+<li>Greg Schueler (gschueler)</li>
+<li>Luis Toledo</li>
+<li>Miguel A. Fuentes Buchholtz (miguelantonio)</li>
+<li>Rophy Tsai (rophy)</li>
+<li>mathieuchateau</li>
+</ul>
+<h2 id="bug-reporters"><a href="#bug-reporters">Bug Reporters</a></h2>
+<ul>
+<li>Alicia-Solinea</li>
+<li>SydOps</li>
+<li>ahonor</li>
+<li>ajxb</li>
+<li>arminioa</li>
+<li>bryonwilliams</li>
+<li>gschueler</li>
+<li>kamaradclimber</li>
+<li>kmusard</li>
+<li>ltamaster</li>
+<li>makered</li>
+<li>mathieuchateau</li>
+<li>obrienmorgan</li>
+<li>rasebo</li>
+<li>richiereynolds</li>
+<li>robizz</li>
+<li>rophy</li>
+<li>schast</li>
+<li>snebel29</li>
+<li>ssbarnea</li>
+</ul>
+<h2 id="issues"><a href="#issues">Issues</a></h2>
+<ul>
+<li><a href="https://github.com/rundeck/rundeck/issues/1709">toggle job execution/schedule can be triggered with GET without synchronizer token</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1703">Add bulk job edit: enable/disable schedule and execution</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1701">ExecutionJob: Failed to update job statistics</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1688">some links are dead</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1686">Workflow step editor: after deleting a script and hitting save, it disappears</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1678">Code example in documentation incorrect</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1677">Documentation Proposed Change log4j</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1673">Missing step plugin causes execution to show no output</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1672">Orchestrator plugin input cannot use job options</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1670">missing API documentation for job execution and schedule enable/disable</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1668">SCM plugins not shown in Plugins listing page</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1667">Add documentation for changing date formats, and general localization</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1666">Script-based plugin setting for merging parent environment variables</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1662">Feature: Asynchronous nodes cache</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1658">Nodes UI page updates issues</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1657">Secure options with defaults in key storage</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1651">Node page UI updated for large node sets</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1650">rd-acl doesn't support project_acl resource type</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1647">lack of quoting tags links in Nodes browse page</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1644">SCM: GitExportPlugin - Could not serialize job: java.lang.IllegalArgumentException: Format not supported: yaml</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1642">SCM: NoSuchFileException</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1635">Passive mode - more explicit for already running job</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1621">Enhance project archive API: select only a set of executions for output</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1620">Added CODE renderingType to allow plugins to render textareas with th…</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1617">execution query api for older than relative date</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1615">fix #1525 project storage file read should not close stream</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1614">fix #1611</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1611">500 http response when execution does not exist</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1610">Invalid username and password message displayed on a successful login which was preceeded by a failed login</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1597">Querying 5k nodes leads to very long queries on the webui</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1596">fix long line wrapping for log output #1558</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1593">Multiple Authentication Modules documentation error</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1579">The size (8192) given to the column 'json_data' exceeds the maximum allowed for any data type (8000)</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1578">Document how to grant via ACL for Per-Job schedule and execution toggling</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1558">Console output is not wrapped making impossible to see long lines</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1525">Export project is not working when using the GUI - 2.6.0-1</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1448">Cancel/Save options on workflow step become unresponsive after error</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1415">Prevents remote option spam in issue 1391 by using onChange event</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1368">Log Output gone mad in 2.5.2</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1310">Simultaneously triggered jobs sometimes hang</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1302">Job timeouts before actual timeout value</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.5)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-2.6.3.html">Version 2.6.3 (2016-02-25)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.6.2.html">Version 2.6.2 (2015-12-02) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-07-06T20:05:59UTC">2018-07-06T20:05:59UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Log Filter Plugins</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="April 26, 2018" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.5)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="log-filter-plugins.html">Log Filter Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="ui-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> UI Plugins</a></li>
+      <li class="next"><a href="content-converter-plugins.html">Content Converter Plugins <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#behavior">Behavior</a></li>
+<li><a href="#java-plugin-type">Java Plugin Type</a><ul>
+<li><a href="#groovy-logfilter">Groovy LogFilter</a></li>
+</ul></li>
+<li><a href="#localization">Localization</a></li>
+<li><a href="#example">Example</a></li>
+<li><a href="#example-groovy-plugins">Example Groovy plugins</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Log Filter Plugins</h1>
+</div>
+<h2 id="about"><a href="#about">About</a></h2>
+<p>Log Filter plugins provide a way to process logging output from commands, scripts and other workflow step types. They can filter the output (remove, add, modify), or they can be used to capture or convert the output. They can also add metadata to the logs, or emit new log data.</p>
+<p>Log Filter plugins implement the <a href="../javadoc/com/dtolabs/rundeck/plugins/logging/LogFilterPlugin.html">LogFilterPlugin</a> interface, and provider the <code>LogFilter</code> service.</p>
+<h2 id="behavior"><a href="#behavior">Behavior</a></h2>
+<p>Users creating Workflows can configure Log Filter plugins within their workflow in two ways:</p>
+<ol style="list-style-type: decimal">
+<li>At the top level, applying to all steps in the workflow</li>
+<li>At a step level, applying only to specific step(s).</li>
+</ol>
+<h2 id="java-plugin-type"><a href="#java-plugin-type">Java Plugin Type</a></h2>
+<ul>
+<li><em>Note</em>: Refer to <a href="plugin-development.html#java-plugin-development">Java Development</a> for information about developing a Java plugin for Rundeck.</li>
+</ul>
+<p>The plugin interface is <a href="../javadoc/com/dtolabs/rundeck/plugins/logging/LogFilterPlugin.html">LogFilterPlugin</a>. You can use the <a href="../javadoc/com/dtolabs/rundeck/core/logging/PluginLoggingContext.html">PluginLoggingContext</a> to get the data context and add data to it via the Output context.</p>
+<p>When the top level, or step level is ready, all configured Log Filter plugins will be initialized using the optional <code>init</code> method.</p>
+<p>For each log event emitted within the configured level, each configured Log Filter plugin will have its <code>handleEvent</code> method called, in order, with a <a href="../javadoc/com/dtolabs/rundeck/core/logging/LogEventControl.html">LogEventControl</a> instance. The LogEventControl can be used to get or modify the content of the <a href="../javadoc/com/dtolabs/rundeck/core/logging/LogEvent.html">LogEvent</a> (message, type, level, metadata). It can also control how the log event is handled:</p>
+<ul>
+<li><code>emit</code>: the log should be emitted</li>
+<li><code>quell</code>: the log should be futher processed, but not emitted in the final log</li>
+<li><code>quiet</code>: the final loglevel should be set to VERBOSE</li>
+<li><code>remove</code>: the log event should not be processed further</li>
+</ul>
+<h3 id="groovy-logfilter"><a href="#groovy-logfilter">Groovy LogFilter</a></h3>
+<p>Create a groovy script that calls the <code>rundeckPlugin</code> method and passes the <code>LogFilterPlugin</code> as the type of plugin:</p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="kw">import</span> com.dtolabs.rundeck.plugins.logging.LogFilterPlugin
+<span class="fu">rundeckPlugin</span>(LogFilterPlugin){
+    <span class="co">//plugin definition</span>
+}</code></pre>
+<p>To define metadata about your plugin, and configuration properties, see the <a href="plugin-plugin.html#groovy-plugin-development">Plugin Development - Groovy Plugin Development</a> chapter.</p>
+<p>The <code>LogFilterPlugin</code> Groovy DLS supports these closure definitions:</p>
+<ul>
+<li><code>init</code> initialization for the plugin (optional)</li>
+<li><code>handleEvent</code> handle a log event (required)</li>
+<li><code>complete</code> complete the log filter processing after all events have been handled (optional)</li>
+</ul>
+<p>Closure descriptions:</p>
+<p><code>init</code></p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+<span class="co"> * Called to initialization the plugin with the context</span>
+<span class="co"> */</span>
+init { PluginLoggingContext context, Map configuration -&gt;
+    <span class="co">//perform initialization</span>
+}</code></pre>
+<p><code>handleEvent</code></p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+<span class="co"> * Called to initialization the plugin with the context</span>
+<span class="co"> */</span>
+handleEvent { PluginLoggingContext context, LogEventControl event, Map configuration -&gt;
+    <span class="co">//handle the event</span>
+}</code></pre>
+<p><code>complete</code></p>
+<pre class="sourceCode java"><code class="sourceCode java"><span class="co">/**</span>
+<span class="co"> * Called to complete the plugin processing</span>
+<span class="co"> */</span>
+complete { PluginLoggingContext context, Map configuration -&gt;
+    <span class="co">//finish</span>
+}</code></pre>
+<h2 id="localization"><a href="#localization">Localization</a></h2>
+<p>For the basics of plugin localization see: <a href="plugin-development.html#plugin-localization">Plugin Development - Plugin Localization</a>.</p>
+<h2 id="example"><a href="#example">Example</a></h2>
+<p>Several built-in plugins are listed here:</p>
+<ul>
+<li><a href="https://github.com/rundeck/rundeck/tree/master/rundeckapp/src/groovy/com/dtolabs/rundeck/server/plugins/logging"><code>rundeckapp/src/groovy/com/dtolabs/rundeck/server/plugins/logging</code></a></li>
+</ul>
+<h2 id="example-groovy-plugins"><a href="#example-groovy-plugins">Example Groovy plugins</a></h2>
+<p>See <a href="https://github.com/rundeck/rundeck/tree/master/examples/example-groovy-log-filter-plugins">https://github.com/rundeck/rundeck/tree/master/examples/example-groovy-log-filter-plugins</a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.5)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="log-filter-plugins.html">Log Filter Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="ui-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> UI Plugins</a></li>
+      <li class="next"><a href="content-converter-plugins.html">Content Converter Plugins <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-07-06T20:05:59UTC">2018-07-06T20:05:59UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
