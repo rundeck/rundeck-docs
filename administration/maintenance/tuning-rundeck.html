@@ -201,28 +201,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="bu">export</span> <span class="va">RDECK_JVM=</span><span class="st">&quot;</span><span class="va">$RDECK_JVM</span><span class="st"> -Xmx4096m -Xms1024m&quot;</span></a></code></pre></div>
 <h3 id="quartz-job-threadcount">Quartz job threadCount</h3>
 <p>The maximum number of threads used by Rundeck for concurrent jobs by default is set to <code>10</code>.</p>
-<p>You can change this value, by updating either the <code>rundeck-config.properties</code> file, or a file called <code>quartz.properties</code>.</p>
+<p>You can change this value, by updating the <code>rundeck-config.properties</code> file.</p>
 <p>Please refer to the Quartz site for detailed information: <a href="http://www.quartz-scheduler.org/documentation/quartz-2.x/configuration/ConfigThreadPool.html#configure-threadpool-settings">Quartz - Configure ThreadPool Settings</a>.</p>
 <h4 id="update-rundeck-config">Update rundeck-config</h4>
 <p>Use the properties mentioned in the Quartz documentation, but <strong>replace</strong> the <code>org.quartz</code> prefix, with the prefix <code>quartz.props</code>.</p>
 <p>e.g. in <code>rundeck-config.properties</code> :</p>
 <pre class="properties"><code>quartz.props.threadPool.threadCount = 20</code></pre>
 <p>Set the threadCount value to the max number of threads you want to run concurrently.</p>
-<h4 id="update-quartz.properties">Update quartz.properties</h4>
-<p>If the file doesn’t exist, create it.</p>
-<ul>
-<li>RPM install: <code>/var/lib/rundeck/server/exp/webapp/WEB-INF/classes/quartz.properties</code></li>
-<li>Launcher install: <code>$RDECK_BASE/server/exp/webapp/WEB-INF/classes/quartz.properties</code></li>
-</ul>
-<p>To change the maximum threadCount modify this file and add the line:</p>
-<pre><code>org.quartz.threadPool.threadCount = 20</code></pre>
-<p>Set the threadCount value to the max number of threads you want to run concurrently.</p>
 <h3 id="jmx-instrumentation">JMX instrumentation</h3>
 <p>You may wish to monitor the internal operation of your Rundeck server via JMX.</p>
 <p>JMX provides introspection on the JVM, the application server, and classes all through a consistent interface. These various components are exposed to the management console via JMX managed beans - MBeans for short.</p>
 <p><em>Note</em>: For more background information on JMX, see “<a href="https://www.ibm.com/developerworks/library/j-jtp09196/">Java theory and practice: Instrumenting applications with JMX.</a>”.</p>
 <p>Enable local JMX monitoring by adding the <code>com.sun.management.jmxremote</code> flag to the startup parameters in the <a href="../configuration/configuration-file-reference.html#profile">profile</a>.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="bu">export</span> <span class="va">RDECK_JVM=</span><span class="st">&quot;</span><span class="va">$RDECK_JVM</span><span class="st"> -Dcom.sun.management.jmxremote&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="bu">export</span> <span class="va">RDECK_JVM=</span><span class="st">&quot;</span><span class="va">$RDECK_JVM</span><span class="st"> -Dcom.sun.management.jmxremote&quot;</span></a></code></pre></div>
 <p>You use a JMX client to monitor JMX agents. This can be a desktop GUI like JConsole run locally.</p>
 <pre><code>jconsole &lt;rundeck pid&gt;</code></pre>
 <p>For instructions on remote JMX monitoring for Grails, Spring and log4j see: <a href="https://public.dhe.ibm.com/software/dw/java/j-grails12168-pdf.pdf">Grails in the enterprise</a>.</p>
@@ -288,7 +279,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-07-09T21:57:17UTC">2018-07-09T21:57:17UTC</span>
+<span class="generated-date" title="2018-07-10T17:19:25UTC">2018-07-10T17:19:25UTC</span>
 </p>
 </footer>
 </div>
