@@ -378,7 +378,7 @@ by:
 <p>Finally, restore the project files for the imported project.</p>
 <h2 id="upgrading-jaas-properties-file">Upgrading JAAS properties file</h2>
 <p>If you are not doing a clean install, and you want to maintain your JAAS login module configuration, you may have to change your jaas.conf file.</p>
-<p>The default jaas-loginmodule.conf file included with Rundeck 1.6.x uses the <code>org.mortbay.jetty.plus.jaas.spi.PropertyFileLoginModule</code> class. You will have to change your file to specify <code>org.eclipse.jetty.plus.jaas.spi.PropertyFileLoginModule</code> (“org.eclipse”).</p>
+<p>The default jaas-loginmodule.conf file included with Rundeck 1.6.x uses the <code>org.mortbay.jetty.plus.jaas.spi.PropertyFileLoginModule</code> class. You will have to change your file to specify <code>org.eclipse.jetty.jaas.spi.PropertyFileLoginModule</code> (“org.eclipse”).</p>
 <p>Modify the <code>$RDECK_BASE/server/config/jaas-loginmodule.conf</code> (launcher install) or <code>/etc/rundeck/jaas-loginmodule.conf</code> (RPM/Deb install).</p>
 <h2 id="upgrading-an-existing-h2-database">Upgrading an existing H2 Database</h2>
 <p>If you want to migrate your existing H2 Database, you will have to download an additional jar file to enable upgrading to the newer H2 version used in Rundeck 2.0.</p>
@@ -441,7 +441,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-07-10T17:19:25UTC">2018-07-10T17:19:25UTC</span>
+<span class="generated-date" title="2018-07-10T17:32:43UTC">2018-07-10T17:32:43UTC</span>
 </p>
 </footer>
 </div>
