@@ -108,6 +108,7 @@ jQuery(function(){
 <li><a href="#pagination-defaults">Pagination defaults</a></li>
 <li><a href="#job-remote-option-url-connection-parameters">Job Remote Option URL connection parameters</a></li>
 <li><a href="#job-file-option-uploads">Job File Option Uploads</a></li>
+<li><a href="#node-cache">Node Cache</a></li>
 <li><a href="#groovy-config-format">Groovy config format</a></li>
 <li><a href="#specify-config-file-location">Specify config file location</a></li>
 </ul></li>
@@ -367,6 +368,16 @@ rundeck.execution.stats.retryDelay=5000</code></pre>
 <p>Max temp file expiration (duration in milliseconds). The uploaded file will be removed if not used as a job option within ths time period. (This primarily affects Job executions performed via API because the File Upload and Job Run are performed as separate steps.)</p>
 <pre><code># default is 10 minutes
 rundeck.fileUploadService.tempfile.expiration=600000</code></pre>
+<h3 id="node-cache">Node Cache</h3>
+<p>Defaults for the Node caches</p>
+<dl>
+<dt>Enabled: true/false (default true).</dt>
+<dd><p><code>rundeck.nodeService.nodeCache.enabled=true</code> If set to false, no caching is performed.</p>
+</dd>
+<dt>First Load Asynch: true/false</dt>
+<dd><code>rundeck.nodeService.nodeCache.firstLoadAsynch=false</code> The default for whether the first load of a project’s nodes should be performed synchronously or not. If set to <code>true</code>, and the <a href="project-setup.html#project-nodes">Project Nodes &gt; Synchronous First Load</a> value is unset, then the initial load of a Project’s nodes when the cache is empty will be done in the background asynchronously. Otherwise the initial load is done synchronously, possibly causing a delay at Rundeck startup or Job execution startup. A Project level configuration value will override this default.
+</dd>
+</dl>
 <h3 id="groovy-config-format">Groovy config format</h3>
 <p>You can change you rundeck-config.properties to a rundeck-config.groovy.</p>
 <p>The groovy format is a java-like language, and it is not the same as properties.</p>
@@ -444,7 +455,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-07-10T17:32:43UTC">2018-07-10T17:32:43UTC</span>
+<span class="generated-date" title="2018-07-12T21:41:43UTC">2018-07-12T21:41:43UTC</span>
 </p>
 </footer>
 </div>

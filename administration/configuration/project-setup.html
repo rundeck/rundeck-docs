@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>edam7115915590054173537temp</title>
+  <title>edam2671417762989886994temp</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -208,6 +208,19 @@ rundeck.projectsStorageType=filesystem</code></pre>
 <p>After project creation, an initial resource model will contain information just about the Rundeck server host and is useful just for running local commands on the Rundeck server. You can browse the project resource model by going to the “Nodes” page.</p>
 <p>Node resources have common attributes, such as “hostname”. One of the more useful attributes is “tags”. A <em>tag</em> is a text label that you give to the Node, perhaps denoting a classification, a role the node plays in the environment, or group membership. A list of tags can be defined for a given node. You can also invent your own attributes as a way to know other details about your nodes.</p>
 <p>It is important to start thinking about node tagging for the nodes you manage because you will use them later when specifying node filtering options.</p>
+<h4 id="configuration">Configuration</h4>
+<p>These project level configuration settings can be set in the config file, or in the GUI:</p>
+<dl>
+<dt>Use Asynchronous Cache (default: true)</dt>
+<dd><code>project.nodeCache.enabled</code> Use asynchronous cache for all Resource Model Source results in this project
+</dd>
+<dt>Cache Delay</dt>
+<dd><code>project.nodeCache.delay</code> Delay in seconds, at least 30
+</dd>
+<dt>Synchronous First Load</dt>
+<dd><code>project.nodeCache.firstLoadSynch</code> When the cache is empty, forces the first load to happen synchronously to prevent empty node results.
+</dd>
+</dl>
 <h4 id="default-resources">Default resources</h4>
 <p>After initial project setup, the project will have a file resource model source. The project.properties file will contain a setting specifying this file:</p>
 <ul>
@@ -349,7 +362,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-07-10T17:32:43UTC">2018-07-10T17:32:43UTC</span>
+<span class="generated-date" title="2018-07-12T21:41:43UTC">2018-07-12T21:41:43UTC</span>
 </p>
 </footer>
 </div>
