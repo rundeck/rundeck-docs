@@ -104,7 +104,7 @@ jQuery(function(){
 <li><a href="#notification-email-settings">Notification email settings</a></li>
 <li><a href="#custom-email-templates">Custom Email Templates</a></li>
 <li><a href="#execution-finalize-retry-settings">Execution finalize retry settings</a></li>
-<li><a href="#metrics-servlets">Metrics servlets</a></li>
+<li><a href="#metrics-capturing">Metrics Capturing</a></li>
 <li><a href="#pagination-defaults">Pagination defaults</a></li>
 <li><a href="#job-remote-option-url-connection-parameters">Job Remote Option URL connection parameters</a></li>
 <li><a href="#job-file-option-uploads">Job File Option Uploads</a></li>
@@ -330,17 +330,30 @@ rundeck.execution.finalize.retryDelay=5000
 rundeck.execution.stats.retryMax=3
 rundeck.execution.stats.retryDelay=5000</code></pre>
 <p>Delay is in milliseconds. If a max is set to <code>-1</code>, then retries will happen indefinitely.</p>
-<h3 id="metrics-servlets">Metrics servlets</h3>
-<p>Rundeck includes the <a href="http://metrics.dropwizard.io/3.0.2/">Metrics</a> servlets. You can selectively disable these by setting these config values:</p>
-<p><code>rundeck.web.metrics.servlets.[name].enabled=true/false</code></p>
-<p>Servlet names are:</p>
+<h3 id="metrics-capturing">Metrics Capturing</h3>
+<p>Rundeck captures metrics using the <a href="http://metrics.dropwizard.io/3.0.2/">Metrics</a> library.</p>
+<p>You can disable all metrics capturing with:</p>
+<pre><code>rundeck.metrics.enabled=true/false</code></pre>
+<p>Additional configuration for metrics:</p>
+<pre><code># capture metrics for requests via a filter
+rundeck.metrics.requestFilterEnabled=true/false
+
+# use JMX 
+rundeck.metrics.jmxEnabled=true/false</code></pre>
+<h4 id="metrics-api-endpoints">Metrics API Endpoints</h4>
+<p>Rundeck exposes Metrics data via API endpoints, which are enabled by default.</p>
+<p>You can disable all metrics API endpoints with:</p>
+<pre><code>rundeck.metrics.api.enabled=true/false</code></pre>
+<p>You can also selectively disable each endpoing by setting these config values:</p>
+<pre><code>rundeck.metrics.api.[name].enabled=true/false</code></pre>
+<p>Metrics names are:</p>
 <ul>
 <li><code>metrics</code></li>
 <li><code>threads</code></li>
 <li><code>ping</code></li>
 <li><code>healthcheck</code></li>
 </ul>
-<p>All of the servlets are enabled by default.</p>
+<p>See: <a href="../api/index.html#list-metrics">API &gt; List Metrics</a>.</p>
 <h3 id="pagination-defaults">Pagination defaults</h3>
 <p>Default paging size for the Activity page and results from execution API queries can be changed.</p>
 <pre><code>rundeck.pagination.default.max=20</code></pre>
@@ -455,7 +468,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-07-12T21:41:43UTC">2018-07-12T21:41:43UTC</span>
+<span class="generated-date" title="2018-07-18T19:37:44UTC">2018-07-18T19:37:44UTC</span>
 </p>
 </footer>
 </div>
