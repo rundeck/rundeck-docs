@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Backup and Recovery</title>
+  <title>Plugin Control</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -125,14 +125,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <li><a href="../index.html">Administrator Guide</a></li>
     
     
-    <li ><a href="index.html">Maintenance</a></li>
-    <li class="active"><a href="backup-and-recovery.html">Backup and Recovery</a></li>
+    <li ><a href="index.html">Projects</a></li>
+    <li class="active"><a href="plugin-control.html">Plugin Control</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="logging.html"><i class="glyphicon glyphicon-arrow-left"></i> Logging</a></li>
-      <li class="next"><a href="tuning-rundeck.html">Tuning Rundeck <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="previous"><a href="project-motd.html"><i class="glyphicon glyphicon-arrow-left"></i> Project MOTD</a></li>
+      <li class="next"><a href="project-archives.html">Project Archives <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -143,104 +143,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="col-sm-3 toc-nav">
 <div class="nav">
 <ul>
-<li><a href="#backup">Backup</a></li>
-<li><a href="#recovery">Recovery</a></li>
-<li><a href="#project-import-and-export">Project Import and Export</a><ul>
-<li><a href="#export-an-archive">Export an archive</a></li>
-<li><a href="#import-an-archive">Import an archive</a></li>
-</ul></li>
+<li><a href="#graphical-interface-pro">Graphical Interface (Pro)</a></li>
+<li><a href="#cli-usage">CLI Usage</a></li>
+<li><a href="#api-usage">API Usage</a></li>
 </ul>
 </div>
 </div>
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">Backup and Recovery</h1>
+<h1 class="title">Plugin Control</h1>
 </div>
-<h2 id="backup">Backup</h2>
-<p>While running, export the Job definitions if you do not have these in source control:</p>
-<p>You can use the <a href="https://rundeck.github.io/rundeck-cli/">rd</a> tool.</p>
-<ol type="1">
-<li><p>Export the jobs. You will have to do this for each project</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ex">rd</span> jobs list -f /path/to/backup/dir/project1/jobs.xml -p project1</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="ex">rd</span> jobs list -f /path/to/backup/dir/project2/jobs.xml -p project2</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="ex">...</span></a></code></pre></div></li>
-<li><p>Stop the server. See: <a href="startup-and-shutdown.html">startup and shutdown</a>. (Rundeck data file backup should only be done with the server down.)</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ex">rundeckd</span> stop</a></code></pre></div></li>
-<li><p>Copy the data files. (Assumes file datastore configuration). The location of the data directory depends on the installation method:</p></li>
-</ol>
-<ul>
-<li>RPM install: <code>/var/lib/rundeck/data</code></li>
-<li>Launcher install: <code>$RDECK_BASE/server/data</code></li>
-</ul>
-<pre><code>~~~~~~ {.bash}
-cp -r data /path/to/backup/dir
-~~~~~~ 
-         </code></pre>
-<ol start="4" type="1">
-<li>Copy the log (execution output) files.</li>
-</ol>
-<ul>
-<li>RPM install: <code>/var/lib/rundeck/logs</code></li>
-<li>Launcher install: <code>$RDECK_BASE/var/logs</code></li>
-</ul>
-<pre><code>~~~~~~ {.bash}
-cp -r logs /path/to/backup/dir
-~~~~~~</code></pre>
-<ol start="5" type="1">
-<li><p>Start the server</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="ex">rundeckd</span> start</a></code></pre></div></li>
-</ol>
-<h2 id="recovery">Recovery</h2>
-<ol type="1">
-<li><p>Stop the server. See: <a href="startup-and-shutdown.html">startup and shutdown</a>. (Rundeck recovery should only be done with the server down.)</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="ex">rundeckd</span> stop</a></code></pre></div></li>
-<li><p>Restore data/logs dir from backup (Refer to above for appropriate log/data path):</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="fu">cp</span> -r /path/to/backup/logs logspath</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="fu">cp</span> -r /path/to/backup/data datapath</a></code></pre></div></li>
-<li><p>Start the server:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="ex">rundeckd</span> start</a></code></pre></div></li>
-<li><p>Reload the Job definitions. You will have to do this for each project:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="ex">rd</span> jobs load -f /path/to/backup/dir/project1/jobs.xml -p project1</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="ex">rd</span> jobs load -f /path/to/backup/dir/project2/jobs.xml -p project2</a></code></pre></div></li>
-</ol>
-<h2 id="project-import-and-export">Project Import and Export</h2>
-<p>As of Rundeck 1.4.4, you can export a Project’s database contents into an archive file, and later import it into another project.</p>
-<p>You can use this mechanism for:</p>
-<ul>
-<li>backup</li>
-<li>migration from one database backend to another</li>
-<li>upgrading from one rundeck version to another</li>
-</ul>
-<h3 id="export-an-archive">Export an archive</h3>
-<p>To export, visit the “Admin” link in the Rundeck page header.</p>
-<p>Click on the link under “Export Archive” to download an archive containing the project Jobs, Executions and History.</p>
-<p>This archive can be imported into any other Rundeck project.</p>
-<p>The archive will contain:</p>
-<ul>
-<li>All Job definitions from the project</li>
-<li>All Executions from the project (both Job and Adhoc executions)</li>
-<li>All Execution log files (output logs)</li>
-<li>All History reports from the project</li>
-</ul>
-<p>Note that the archive <strong>will not contain</strong>:</p>
-<ul>
-<li>The Project config file <code>project.properties</code> located under your <code>$RDECK_BASE/projects/[name]/etc</code></li>
-<li>Resource definitions (such as <code>resources.xml</code> or resources received from external providers.)</li>
-</ul>
-<p>You should back up those contents separately if necessary.</p>
-<h3 id="import-an-archive">Import an archive</h3>
-<p>To import the contents of an exported archive, visit the “Admin” link in the Rundeck page header.</p>
-<p>Click on “Import Archive” to display the import form.</p>
-<p>Choose the rundeck archive file to import (should end with “.rdproject.jar”).</p>
-<p>Click “Import”.</p>
-<p>The import process:</p>
-<ul>
-<li>Creates any Jobs in the archive not found in this project with a new unique UUID</li>
-<li>Updates any Jobs in the archive that match Jobs found in the project (group and name match)</li>
-<li>Creates new Executions for the imported Jobs, and creates the output log files on disk</li>
-<li>Creates new History reports for imported Executions and Jobs</li>
-</ul>
-<p>Note that because the archive does not contain the project configuration or resource definitions, you will have to configure those separately for the new or updated project.</p>
+<p>By default all plugins are enabled for each project. You may need to restrict access to plugins for certain projects.</p>
+<p>Only enabled plugins are visible to job writers in the Job Edit page.</p>
+<h2 id="graphical-interface-pro">Graphical Interface (Pro)</h2>
+<p>The Plugin Control page lets you enable and disable specific plugins.</p>
+<p>Go to the “Project Settings” and then choose “Plugins Control” menu item.</p>
+<p>Uncheck any plugin you wish to disable.</p>
+<h2 id="cli-usage">CLI Usage</h2>
+<p>Use the <code>rd projects configure set</code> command to define the <code>disabled.plugins</code> property.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ex">rd</span> projects configure set -p MyProject -- \</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">   --disabled.plugins=pluginA,pluginB</a></code></pre></div>
+<h2 id="api-usage">API Usage</h2>
+<p>Project configuration can be achieved via the <a href="../../api/index.html">API</a>.</p>
+<p><a href="../../api/index.html#project-configuration">Project configuration</a></p>
+<pre><code>PUT /api/13/project/MyProject/config
+Content-Type: application/json
+
+{
+    &quot;disabled.plugins&quot;:&quot;pluginA,pluginB&quot;
+}</code></pre>
 </div>
 </div>
 </div>
@@ -257,14 +188,14 @@ cp -r logs /path/to/backup/dir
         <li><a href="../index.html">Administrator Guide</a></li>
     
     
-    <li ><a href="index.html">Maintenance</a></li>
-    <li class="active"><a href="backup-and-recovery.html">Backup and Recovery</a></li>
+    <li ><a href="index.html">Projects</a></li>
+    <li class="active"><a href="plugin-control.html">Plugin Control</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="logging.html"><i class="glyphicon glyphicon-arrow-left"></i> Logging</a></li>
-      <li class="next"><a href="tuning-rundeck.html">Tuning Rundeck <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="previous"><a href="project-motd.html"><i class="glyphicon glyphicon-arrow-left"></i> Project MOTD</a></li>
+      <li class="next"><a href="project-archives.html">Project Archives <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
