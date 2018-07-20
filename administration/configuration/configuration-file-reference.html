@@ -293,6 +293,9 @@ Determines whether access to the API is allowed if the API client authenticates 
 <li><p><code>rundeck.security.csrf.referer.filterMethod</code>:<code>NONE|POST|*</code>. Set HTTP Method to filter based on Referer header. Can be POST, or &quot;*&quot; for all methods. Default: NONE (disabled)</p></li>
 <li><p><code>rundeck.security.csrf.referer.allowApi</code>: <code>true|false</code>. Allow /api/* requests without requiring matching Referer header. Default: true.</p></li>
 <li><p><code>rundeck.security.csrf.referer.requireHttps</code>: <code>true|false</code>. If server URL is HTTPS, Require referer header to be from HTTPS version of server URL, if false allow HTTP as well. Default: true.</p></li>
+<li><p><code>rundeck.security.enforceMaxSessions</code>: <code>true|false</code>. Only allow users to log in a configured number of times. Oldest sessions are automatically logged out. <code>Default: false</code>.</p>
+<p>Note: If you use the rd tool with the RD_USERNAME/RD_PASSWORD authentication this will use an active session each time your run the command. If you log into the user interface then execute rd commands you could be logged out of your web session. If you have multiple long running rd commands and you exceed the maxSessions limit, you may experience unexpected behavior. If you use api tokens with the rd tool it will not log out your interactive session. If you enable this setting and also use the rd tool, it is recommended that you use api tokens with the rd tool.</p></li>
+<li><p><code>rundeck.security.maxSessions</code>: If enforceMaxSessions is true, this setting controls the number of active sessions a user is allowed to have. <code>Default: 1</code></p></li>
 </ul>
 <h3 id="execution-mode">Execution Mode</h3>
 <ul>
@@ -396,12 +399,12 @@ rundeck.fileUploadService.tempfile.expiration=600000</code></pre>
 <p>The groovy format is a java-like language, and it is not the same as properties.</p>
 <p>Make sure you put quotes around all string values, but it is not necessary for true/false or numbers.</p>
 <p>java properties format:</p>
-<pre class="properties"><code>some.property=value </code></pre>
+<pre class="properties"><code>some.property=value</code></pre>
 <p>groovy format:</p>
 <pre class="groovy"><code>some.property=&quot;value&quot;</code></pre>
 <p>You can also use nested values using curly brackets, or use dot-notation “a.b.c”, but since it is not simple text properties, strings have to be quoted.</p>
 <p>E.g. : a.b.c=“blah” is the same as:</p>
-<pre class="groovy"><code>a{ 
+<pre class="groovy"><code>a{
     b{
         c=&quot;blah&quot;
     }
@@ -468,7 +471,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-07-19T22:22:58UTC">2018-07-19T22:22:58UTC</span>
+<span class="generated-date" title="2018-07-20T17:10:11UTC">2018-07-20T17:10:11UTC</span>
 </p>
 </footer>
 </div>
