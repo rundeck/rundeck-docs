@@ -163,26 +163,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 id="open-source-rundeck">Open Source Rundeck</h2>
 <h3 id="install-with-apt-get">Install with apt-get</h3>
 <p>You can use this script to add the Rundeck apt repo and install Rundeck:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="bu">echo</span> <span class="st">&quot;deb http://dl.bintray.com/rundeck/rundeck-deb /&quot;</span> <span class="kw">|</span> <span class="fu">sudo</span> tee -a /etc/apt/sources.list.d/rundeck.list </a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="bu">echo</span> <span class="st">&quot;deb-src http://dl.bintray.com/rundeck/rundeck-deb /&quot;</span> <span class="kw">|</span> <span class="fu">sudo</span> tee -a /etc/apt/sources.list.d/rundeck.list</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="ex">curl</span> <span class="st">&#39;https://bintray.com/user/downloadSubjectPublicKey?username=bintray&#39;</span> <span class="kw">|</span> <span class="fu">sudo</span> apt-key add -</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="fu">sudo</span> apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="fu">sudo</span> apt-get update</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="fu">sudo</span> apt-get install rundeck</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="bu">echo</span> <span class="st">&quot;deb https://rundeck.bintray.com/rundeck-deb /&quot;</span> <span class="kw">|</span> <span class="fu">sudo</span> tee -a /etc/apt/sources.list.d/rundeck.list </a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="ex">curl</span> <span class="st">&#39;https://bintray.com/user/downloadSubjectPublicKey?username=bintray&#39;</span> <span class="kw">|</span> <span class="fu">sudo</span> apt-key add -</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="fu">sudo</span> apt-get update</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="fu">sudo</span> apt-get install rundeck</a></code></pre></div>
 <p>When new versions of Rundeck are released, you can upgrade to them using the command:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="fu">sudo</span> apt-get update</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="fu">sudo</span> apt-get install rundeck</a></code></pre></div>
 <h3 id="install-deb-package-directly">Install deb package directly</h3>
-<p>Download deb package: http://rundeck.org/downloads.html and run:</p>
+<p>Download deb package: http://rundeck.org/download/deb/ and run:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">sudo</span> dpkg -i rundeck_x.xx.x-x-GA_all.deb</a></code></pre></div>
 <h2 id="rundeck-pro">Rundeck Pro</h2>
 <h3 id="install-with-apt-get-1">Install with apt-get</h3>
 <p>You can use this script to add the Rundeck Pro apt repo and install Rundeck Pro cluster:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="bu">echo</span> <span class="st">&quot;deb https://rundeckpro.bintray.com/deb stable main&quot;</span> <span class="kw">|</span> <span class="fu">sudo</span> tee /etc/apt/sources.list.d/rundeck.list</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="fu">sudo</span> apt-get install apt-transport-https</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="fu">sudo</span> apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 379CE192D401AB61</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="fu">sudo</span> apt-get update</a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="fu">sudo</span> apt-get install rundeckpro-cluster</a></code></pre></div>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="fu">sudo</span> apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 379CE192D401AB61</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="fu">sudo</span> apt-get update</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="fu">sudo</span> apt-get install rundeckpro-cluster</a></code></pre></div>
 <p>When new versions of Rundeck Pro are released, you can upgrade to them using the command:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="fu">sudo</span> apt-get update</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="fu">sudo</span> apt-get install rundeckpro-cluster</a></code></pre></div>
@@ -255,7 +252,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-07-20T17:10:11UTC">2018-07-20T17:10:11UTC</span>
+<span class="generated-date" title="2018-07-20T18:53:46UTC">2018-07-20T18:53:46UTC</span>
 </p>
 </footer>
 </div>
