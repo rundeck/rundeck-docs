@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Installing as an executable .jar</title>
+  <title>Installing as an executable war</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -153,22 +153,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">Installing as an executable .jar</h1>
+<h1 class="title">Installing as an executable war</h1>
 </div>
-<p>Use the launcher as an alternative to a system package:</p>
+<p>Use the executable war as an alternative to a system package:</p>
 <ol type="1">
-<li>Download the launcher jar file.</li>
+<li>Download the executable war file.</li>
 <li><p>Define RDECK_BASE environment variable to the location of the install</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="bu">export</span> <span class="va">RDECK_BASE=$HOME</span>/rundeck; <span class="co"># or where you like it</span></a></code></pre></div></li>
 <li><p>Create the directory for the installation.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="fu">mkdir</span> -p <span class="va">$RDECK_BASE</span> </a></code></pre></div></li>
-<li><p>Copy the launcher jar to the installation directory.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">cp</span> rundeck-launcher-2.0.0.jar <span class="va">$RDECK_BASE</span></a></code></pre></div></li>
+<li><p>Copy the executable war to the installation directory.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">cp</span> rundeck-3.0.0.war <span class="va">$RDECK_BASE</span></a></code></pre></div></li>
 <li><p>Change directory and run the jar.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="bu">cd</span> <span class="va">$RDECK_BASE</span>    </a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="ex">java</span> -XX:MaxPermSize=256m -Xmx1024m -jar rundeck-launcher-2.0.0.jar</a></code></pre></div></li>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="ex">java</span> -Xmx4g -jar rundeck-3.0.0.war</a></code></pre></div></li>
 <li><p>Wait for the Started message.</p>
-<pre><code>2010-11-19 13:35:51.127::INFO:  Started SocketConnector@0.0.0.0:4440</code></pre></li>
+<pre><code>Grails application running at http://ecto1.local:4440 in environment: production</code></pre></li>
 <li><p>Update your shell environment</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="va">PATH=$PATH</span>:<span class="va">$RDECK_BASE</span>/tools/bin</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="va">MANPATH=$MANPATH</span>:<span class="va">$RDECK_BASE</span>/docs/man</a></code></pre></div></li>
@@ -184,20 +184,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Rundeck is now up and running!</p>
 <p>Next, learn how to <a href="../../manual/getting-started.html#project-setup">create your first Rundeck Pro project</a></p>
 <h3 id="updating">Updating</h3>
-<p>When you need to update rundeck and you can not find the relevant section on the docs you are probably on a quite recent version. This worked successfully in all the steps from 2.6.5 to 2.6.10.</p>
+<p>When you need to update rundeck and you can not find the relevant section on the docs you are probably on a quite recent version.</p>
 <ul>
 <li>Stop rundeck</li>
-<li>Remove <code>%RDECK_BASE%\server\exp</code> and <code>%RDECK_BASE%\server\lib</code>, making a backup of any file you modified under those directories (e.g. <code>%RDECK_BASE%\server\exp\webapp\WEB-INF\classes\log4j.properties</code>, <code>%RDECK_BASE%\server\exp\webapp\WEB-INF\web.xml</code>, etc)</li>
-<li>download the launcher</li>
+<li>download the new war</li>
 <li><p>open a prompt, optionally setting RDECK_BASE and launch –installonly</p>
-<p>java -jar rundeck-launcher-2.6.10.jar –installonly</p></li>
+<pre><code>  java -jar rundeck-3.0.x.war --installonly</code></pre></li>
 <li>copy over your customizations</li>
 <li>don’t forget, e.g., sqljdbc41.jar in <code>%RDECK_BASE%\server\lib</code></li>
 <li><p>start rundeck</p></li>
 </ul>
 <h3 id="launcher-options">Launcher Options</h3>
-<p>The launcher jar can take a number of options to specify how the server should start. If you execute with a “-h” you will see the usage information:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="ex">java</span> -XX:MaxPermSize=256m -Xmx1024m -jar rundeck-launcher-2.1.0.jar -h</a></code></pre></div>
+<p>The executable war can take a number of options to specify how the server should start. If you execute with a “-h” you will see the usage information:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="ex">java</span> -Xmx4g -jar rundeck-3.0.0.jar -h</a></code></pre></div>
 <pre><code>usage: java [JAVA_OPTIONS] -jar rundeck-launcher.jar  [-c PATH] [-d]
        [--installonly] [-s PATH] [-b PATH] [-p PATH] [-h] [-x PATH]
        [--skipinstall] [--serverdir PATH] [--datadir PATH]
@@ -217,7 +216,7 @@ exist.
                           administrators.
  -x,--bindir &lt;PATH&gt;       The install directory for the tools used by
                           users.</code></pre>
-<p>These options can be used to customize the directories used by the launcher. By default all the directories are organized by convention within the current working directory where the launcher jar is located.</p>
+<p>These options can be used to customize the directories used by the launcher. By default all the directories are organized by convention within the current working directory where the executable war is located.</p>
 <h3 id="system-properties">System Properties</h3>
 <p>You can also customize the launcher behavior by using some java system properties.</p>
 <p>Specify these properties using the normal <code>-Dproperty=value</code> commandline options to the <code>java</code> command:</p>
@@ -227,7 +226,7 @@ exist.
 <li><code>server.http.host</code> Address/hostname to listen on, default is all addresses “0.0.0.0”</li>
 <li><code>server.hostname</code> Hostname to use for the server, default is the system hostname</li>
 <li><code>server.web.context</code> Web context path to use, such as “/rundeck”. Default is “/”.</li>
-<li><code>rdeck.base</code> Rundeck Basedir to use, default is the directory containing the launcher jar</li>
+<li><code>rdeck.base</code> Rundeck Basedir to use, default is the directory containing the executable war</li>
 <li><code>server.datastore.path</code> Path to server datastore dir</li>
 <li><code>default.user.name</code> Username for default user account to create</li>
 <li><code>default.user.password</code> Password for default user account to create</li>
@@ -295,7 +294,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-07-27T17:04:53UTC">2018-07-27T17:04:53UTC</span>
+<span class="generated-date" title="2018-07-27T22:28:45UTC">2018-07-27T22:28:45UTC</span>
 </p>
 </footer>
 </div>
