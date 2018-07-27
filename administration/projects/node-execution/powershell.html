@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PowerShell Node Execution</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <link rel="stylesheet" href="../../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../../../index.html">Rundeck Documentation (3.0.0)</a></li>
+    
+        <li><a href="../../index.html">Administrator Guide</a></li>
+    
+        <li><a href="../index.html">Projects</a></li>
+    
+    
+    <li ><a href="index.html">Node Execution</a></li>
+    <li class="active"><a href="powershell.html">Powershell</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="ssh.html"><i class="glyphicon glyphicon-arrow-left"></i> SSH</a></li>
+      
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#authentication-types">Authentication Types</a></li>
+<li><a href="#plugin-configuration">Plugin Configuration</a></li>
+<li><a href="#password-storage">Password Storage</a></li>
+<li><a href="#node-configuration">Node Configuration</a></li>
+<li><a href="#project-configuration">Project Configuration</a></li>
+<li><a href="#winrm-setting-to-use-powershell-plugin">WinRM Setting to use PowerShell Plugin</a></li>
+<li><a href="#other-setting">Other setting</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">PowerShell Node Execution</h1>
+</div>
+<!---
+Original: 
+http://support.rundeck.com/customer/en/portal/articles/1939728-powershell-plugins)
+--->
+<p>These plugins are only applicable to Rundeck Pro deployments on Windows Servers.</p>
+<p>There are two plugins:</p>
+<ul>
+<li><strong>File Copier</strong>: Copies files to the remote node for execution by the Node Executor. This plugin would be used to execute any Script steps in your workflows, or to copy your own files stored on the Rundeck Pro host.</li>
+<li><strong>Node Executor</strong>: Executes the command and script steps.</li>
+</ul>
+<p>The plugins can be enabled in the Project Configuration page by selecting the PowerShell Node Executor and PowerShell File Copier as the default Node Executor and File Copiers.</p>
+<h3 id="authentication-types">Authentication Types</h3>
+<p>Authentication can happen in two ways, via trusted domain account or by username and password.</p>
+<h4 id="hosts-in-trusted-domain">Hosts in Trusted Domain</h4>
+<p>When all hosts are in a trusted domain, remote execution requires just the username to access the remote hosts. Authentication will be made to the remote nodes as the domain user account that is executing the Rundeck server process.</p>
+<h4 id="username-and-password">Username and Password</h4>
+<p>If all hosts are not in a trusted domain, both username and password are required to access the remote hosts.</p>
+<h3 id="plugin-configuration">Plugin Configuration</h3>
+<p>Trusted Domain authentication will be used by default, unless a username and password are configured to be used.</p>
+<p>You can configure the plugins to use a password via the Key Storage facility when accessing remote hosts.</p>
+<ul>
+<li>password storage - using a password that is stored in the Key Storage facility.</li>
+</ul>
+<p>You can either configure the password or password storage path at a project-wide level, or on a per-node basis.</p>
+<h3 id="password-storage">Password Storage</h3>
+<p>Passwords can be stored securely in the Rundeck Pro Keystore facility. These passwords can be stored in a tree like structure to help you organize them any way you wish. The passwords can be referenced using an attribute named “password-storage-path”. When Rundeck needs the password, it looks up the file as referenced by the storage path, reads, decrypts, and passes the value to the plugins.</p>
+<h3 id="node-configuration">Node Configuration</h3>
+<p>Each host is configurable via “nodes” in the project resource model. Nodes are defined in terms of attributes.</p>
+<p>Attributes</p>
+<ul>
+<li>hostname: The hostname of the remote node accessible to the Rundeck server host.</li>
+<li>username: The login account name to the remote host.</li>
+<li>password-storage-path: The path to the file containing the password in the keystore. This path will start with “keys/”.</li>
+<li>connectionUri: Alternate connection parameters as a URI. e.g. “https://hostname:port”</li>
+</ul>
+<h4 id="example-resource-model-definitions">Example resource model definitions</h4>
+<p>The following example show a node defined using the XML format.</p>
+<p><strong>Note the password-storage-path attribute referencing the key path.</strong></p>
+<pre><code> &lt;node name=&quot;winhost123&quot; 
+       hostname=&quot;xxx.xxx.xxx.xxx&quot; 
+       username=&quot;myaccount&quot; 
+       password-storage-path=&quot;keys/winhost123.passwd&quot; .../&gt;</code></pre>
+<h3 id="project-configuration">Project Configuration</h3>
+<p>The Password storage path can be configured at the project level. In the Project Configuration page, set the Password Storage Path to a key path. The path can contain references to information from the node or user who is executing the command, for example:</p>
+<pre><code>keys/nodes/${node.name}.password</code></pre>
+<p>or</p>
+<pre><code>keys/users/${job.username}.password</code></pre>
+<h3 id="winrm-setting-to-use-powershell-plugin">WinRM Setting to use PowerShell Plugin</h3>
+<p>In order to connect Rundeck with remote Windows nodes, it is necessary to set WinRM in both, the server and the remote nodes.</p>
+<h4 id="on-the-rundeck-server">On the rundeck server</h4>
+<pre><code>winrm quickconfig
+winrm set winrm/config/client @{TrustedHosts=&quot;*&quot;}</code></pre>
+<h4 id="on-the-remote-nodes">On the remote nodes</h4>
+<pre><code>winrm quickconfig
+​winrm set winrm/config/service/Auth @{Basic=&quot;true&quot;}
+winrm set winrm/config/service @{AllowUnencrypted=&quot;true&quot;}
+winrm set winrm/config/winrs @{MaxMemoryPerShellMB=&quot;1024&quot;}</code></pre>
+<h3 id="other-setting">Other setting</h3>
+<p>To enable the execution of remote command:</p>
+<pre><code>Set-ExecutionPolicy RemoteSigned</code></pre>
+<p>To enable permission to a user to execute remote command:</p>
+<pre><code>Set-PSSessionConfiguration -ShowSecurityDescriptorUI -Name Microsoft.PowerShell</code></pre>
+<p>Increase the concurrent shell issue:</p>
+<pre><code>set-item wsman:\localhost\shell\maxshellsperuser 50 </code></pre>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<p>If you get “Access is denied” error when you try to access to a shared folder on the remote node, it is possible that you must use the <a href="http://support.rundeck.com/customer/portal/articles/2522223-enable-credssp-authentication-windows">CredSSP autentication</a>.</p>
+<p>Then, you can define the authentication type like:</p>
+<pre><code>&lt;node name=&quot;XXXXX&quot; 
+      description=&quot;Windows Server 2012&quot; 
+      tags=&quot;Win2012&quot; 
+      hostname=&quot;XXXXX&quot; 
+      osArch=&quot;amd64&quot; 
+      osFamily=&quot;windows&quot; 
+      osName=&quot;Windows Server 2012&quot; 
+      osVersion=&quot;6.3&quot; 
+      username=&quot;rundeckuser@Domain.Local&quot; password-storage-path=&quot;keys/xxxxx&quot; 
+      ps-authentication-type=&quot;CredSSP&quot; /&gt;</code></pre>
+<p>If you get this error, you have to change the network category:</p>
+<pre><code>WinRM service is already running on this machine.
+
+WSManFault
+   Message
+       ProviderFault
+           WSManFault
+               Message = WinRM firewall exception will not work since one of the network connection types on this machine is set to Public. Change the network connection type to either Domain or Private and try again.
+Error number:  -2144108183 0x80338169
+
+WinRM firewall exception will not work since one of the network connection types on this machine is set to Public. Change the network connection type to either Domain or Private and try again.</code></pre>
+<p>Workaround using PowerShell as Administrator User:</p>
+<pre><code># (to get the InterfaceIndex)
+Get-NetConnectionProfile
+
+Set-NetConnectionProfile -InterfaceIndex [INTERFAZ_INDEX] -NetworkCategory Private</code></pre>
+<p>It could be necessary to change the user’s log-on in tomcat service when the remote connection does not work:</p>
+<figure>
+<img src="../../figures/powershell-troubleshooting.png" alt="Tomcat settings" /><figcaption>Tomcat settings</figcaption>
+</figure>
+<p>For further information about winrm and PowerShell plug-in see:</p>
+<ul>
+<li><a href="http://support.rundeck.com/customer/en/portal/articles/1939728-powershell-plugins" class="uri">http://support.rundeck.com/customer/en/portal/articles/1939728-powershell-plugins</a></li>
+<li><a href="https://github.com/rundeck-plugins/rundeck-winrm-plugin" class="uri">https://github.com/rundeck-plugins/rundeck-winrm-plugin</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../../../index.html">Rundeck Documentation (3.0.0)</a></li>
+    
+        <li><a href="../../index.html">Administrator Guide</a></li>
+    
+        <li><a href="../index.html">Projects</a></li>
+    
+    
+    <li ><a href="index.html">Node Execution</a></li>
+    <li class="active"><a href="powershell.html">Powershell</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="ssh.html"><i class="glyphicon glyphicon-arrow-left"></i> SSH</a></li>
+      
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-07-27T23:37:20UTC">2018-07-27T23:37:20UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
