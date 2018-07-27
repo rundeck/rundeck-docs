@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Quickstart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.0-rc1)</a></li>
+    
+    
+    <li ><a href="index.html">Rundeck Pro</a></li>
+    <li class="active"><a href="quickstart.html">Quickstart</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#what-is-rundeck">What is Rundeck?</a></li>
+<li><a href="#what-is-rundeck-pro">What is Rundeck Pro?</a></li>
+<li><a href="#how-can-i-try-out-rundeck-pro">How can I try out Rundeck Pro?</a></li>
+<li><a href="#encrypted-keyconfig-storage">Encrypted key/config storage</a></li>
+<li><a href="#what-is-next">What is next?</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Quickstart</h1>
+</div>
+<h3 id="what-is-rundeck">What is Rundeck?</h3>
+<p>Rundeck is an open source web app that lets system operators repeatably and securely execute operations procedures in production and other environment contexts.</p>
+<h3 id="what-is-rundeck-pro">What is Rundeck Pro?</h3>
+<p>What differentiates Rundeck Pro from the OSS Rundeck version is . . . .</p>
+<h3 id="how-can-i-try-out-rundeck-pro">How can I try out Rundeck Pro?</h3>
+<p><strong>Note:</strong> this setup is meant for evaluating Rundeck on your local workstation. For a guide to setting up Rundeck Pro in production see <a href="../administration/install/index.html">Installation</a>.</p>
+<ol type="1">
+<li>Fill out the <a href="https://www.rundeck.com/download-now">download form</a> to access the download page.</li>
+<li>Click on <code>➤ Cluster</code> and click on the the file ending in <code>.jar</code> to start the download.</li>
+<li><p>Once the download is finished verify that the file’s checksum matches the expected checksum:</p>
+<pre><code>shasum -a 1 ~/Downloads/rundeckpro-launcher-cluster-3.0.0-rc1.jar</code></pre></li>
+<li><p>Run the <code>.jar</code> file:</p>
+<pre><code>java -XX:MaxPermSize=256m -Xmx1024m -jar ~/Downloads/rundeckpro-launcher-cluster-3.0.0-rc1.jar</code></pre></li>
+<li><p>Once you see something similar to following log output, you know the server is ready:</p>
+<pre><code>2018-04-23 16:18:58.889:INFO:oejs.ServerConnector:main: Started ServerConnector@2dcf960d{HTTP/1.1}{0.0.0.0:4440}</code></pre></li>
+<li>Navigate to <a href="http://localhost:4440/user/login">http://localhost:4440/</a> in a browser</li>
+<li><p>Log in with the username <strong>admin</strong> and password <strong>admin</strong></p></li>
+</ol>
+<p>Rundeck Pro is now running on your workstation for you to evaluate!</p>
+<h3 id="encrypted-keyconfig-storage">Encrypted key/config storage</h3>
+<p>Encrypted key/config storage enabled by default. The default encryption algorithm is stronger than the “Default JCE Policy” used in earlier versions of Java 1.8</p>
+<p>Note: If you receive an error message about encryption policy strength with creating projects or keys you will need to upgrade your Java 1.8 version, or set the encryption algorithm in <code>rundeck-config.properties</code> to a lower strength algorithm such as <code>PBEWithMD5AndDES</code></p>
+<p>Further information about encrypted key/config storage on <a href="http://rundeck.org/docs/plugins-user-guide/bundled-plugins.html#jasypt-encryption-plugin">this</a> link.</p>
+<h3 id="what-is-next">What is next?</h3>
+<p>Next, learn how to <a href="http://rundeck.org/docs/manual/getting-started.html#project-setup">create your first Rundeck Pro project</a></p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.0-rc1)</a></li>
+    
+    
+    <li ><a href="index.html">Rundeck Pro</a></li>
+    <li class="active"><a href="quickstart.html">Quickstart</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-07-27T22:44:22UTC">2018-07-27T22:44:22UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>

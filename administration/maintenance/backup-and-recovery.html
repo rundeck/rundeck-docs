@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Backup and Recovery</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.0-rc1)</a></li>
+    
+        <li><a href="../index.html">Administrator Guide</a></li>
+    
+    
+    <li ><a href="index.html">Maintenance</a></li>
+    <li class="active"><a href="backup-and-recovery.html">Backup and Recovery</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="logging.html"><i class="glyphicon glyphicon-arrow-left"></i> Logging</a></li>
+      <li class="next"><a href="tuning-rundeck.html">Tuning Rundeck <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#backup">Backup</a></li>
+<li><a href="#recovery">Recovery</a></li>
+<li><a href="#project-import-and-export">Project Import and Export</a><ul>
+<li><a href="#export-an-archive">Export an archive</a></li>
+<li><a href="#import-an-archive">Import an archive</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Backup and Recovery</h1>
+</div>
+<h2 id="backup">Backup</h2>
+<p>While running, export the Job definitions if you do not have these in source control:</p>
+<p>You can use the <a href="https://rundeck.github.io/rundeck-cli/">rd</a> tool.</p>
+<ol type="1">
+<li><p>Export the jobs. You will have to do this for each project</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ex">rd</span> jobs list -f /path/to/backup/dir/project1/jobs.xml -p project1</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="ex">rd</span> jobs list -f /path/to/backup/dir/project2/jobs.xml -p project2</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="ex">...</span></a></code></pre></div></li>
+<li><p>Stop the server. See: <a href="startup-and-shutdown.html">startup and shutdown</a>. (Rundeck data file backup should only be done with the server down.)</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ex">rundeckd</span> stop</a></code></pre></div></li>
+<li><p>Copy the data files. (Assumes file datastore configuration). The location of the data directory depends on the installation method:</p></li>
+</ol>
+<ul>
+<li>RPM install: <code>/var/lib/rundeck/data</code></li>
+<li>Launcher install: <code>$RDECK_BASE/server/data</code></li>
+</ul>
+<pre><code>~~~~~~ {.bash}
+cp -r data /path/to/backup/dir
+~~~~~~ 
+         </code></pre>
+<ol start="4" type="1">
+<li>Copy the log (execution output) files.</li>
+</ol>
+<ul>
+<li>RPM install: <code>/var/lib/rundeck/logs</code></li>
+<li>Launcher install: <code>$RDECK_BASE/var/logs</code></li>
+</ul>
+<pre><code>~~~~~~ {.bash}
+cp -r logs /path/to/backup/dir
+~~~~~~</code></pre>
+<ol start="5" type="1">
+<li><p>Start the server</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="ex">rundeckd</span> start</a></code></pre></div></li>
+</ol>
+<h2 id="recovery">Recovery</h2>
+<ol type="1">
+<li><p>Stop the server. See: <a href="startup-and-shutdown.html">startup and shutdown</a>. (Rundeck recovery should only be done with the server down.)</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="ex">rundeckd</span> stop</a></code></pre></div></li>
+<li><p>Restore data/logs dir from backup (Refer to above for appropriate log/data path):</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="fu">cp</span> -r /path/to/backup/logs logspath</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="fu">cp</span> -r /path/to/backup/data datapath</a></code></pre></div></li>
+<li><p>Start the server:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="ex">rundeckd</span> start</a></code></pre></div></li>
+<li><p>Reload the Job definitions. You will have to do this for each project:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="ex">rd</span> jobs load -f /path/to/backup/dir/project1/jobs.xml -p project1</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="ex">rd</span> jobs load -f /path/to/backup/dir/project2/jobs.xml -p project2</a></code></pre></div></li>
+</ol>
+<h2 id="project-import-and-export">Project Import and Export</h2>
+<p>As of Rundeck 1.4.4, you can export a Project’s database contents into an archive file, and later import it into another project.</p>
+<p>You can use this mechanism for:</p>
+<ul>
+<li>backup</li>
+<li>migration from one database backend to another</li>
+<li>upgrading from one rundeck version to another</li>
+</ul>
+<h3 id="export-an-archive">Export an archive</h3>
+<p>To export, visit the “Admin” link in the Rundeck page header.</p>
+<p>Click on the link under “Export Archive” to download an archive containing the project Jobs, Executions and History.</p>
+<p>This archive can be imported into any other Rundeck project.</p>
+<p>The archive will contain:</p>
+<ul>
+<li>All Job definitions from the project</li>
+<li>All Executions from the project (both Job and Adhoc executions)</li>
+<li>All Execution log files (output logs)</li>
+<li>All History reports from the project</li>
+</ul>
+<p>Note that the archive <strong>will not contain</strong>:</p>
+<ul>
+<li>The Project config file <code>project.properties</code> located under your <code>$RDECK_BASE/projects/[name]/etc</code></li>
+<li>Resource definitions (such as <code>resources.xml</code> or resources received from external providers.)</li>
+</ul>
+<p>You should back up those contents separately if necessary.</p>
+<h3 id="import-an-archive">Import an archive</h3>
+<p>To import the contents of an exported archive, visit the “Admin” link in the Rundeck page header.</p>
+<p>Click on “Import Archive” to display the import form.</p>
+<p>Choose the rundeck archive file to import (should end with “.rdproject.jar”).</p>
+<p>Click “Import”.</p>
+<p>The import process:</p>
+<ul>
+<li>Creates any Jobs in the archive not found in this project with a new unique UUID</li>
+<li>Updates any Jobs in the archive that match Jobs found in the project (group and name match)</li>
+<li>Creates new Executions for the imported Jobs, and creates the output log files on disk</li>
+<li>Creates new History reports for imported Executions and Jobs</li>
+</ul>
+<p>Note that because the archive does not contain the project configuration or resource definitions, you will have to configure those separately for the new or updated project.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.0-rc1)</a></li>
+    
+        <li><a href="../index.html">Administrator Guide</a></li>
+    
+    
+    <li ><a href="index.html">Maintenance</a></li>
+    <li class="active"><a href="backup-and-recovery.html">Backup and Recovery</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="logging.html"><i class="glyphicon glyphicon-arrow-left"></i> Logging</a></li>
+      <li class="next"><a href="tuning-rundeck.html">Tuning Rundeck <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-07-27T22:44:22UTC">2018-07-27T22:44:22UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>

@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Plugin Development</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler, Alex Honor" />
+  <meta name="date" content="November 20, 2010" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.0-rc1)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="plugin-development.html">Plugin Development</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="plugin-annotations.html">Plugin Annotations <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#java-plugin-development">Java Plugin Development</a><ul>
+<li><a href="#plugin-version">Plugin Version</a></li>
+<li><a href="#build-dependencies">Build dependencies</a></li>
+<li><a href="#available-services">Available Services</a></li>
+<li><a href="#provider-classes">Provider Classes</a></li>
+<li><a href="#provider-lifecycle">Provider Lifecycle</a></li>
+<li><a href="#plugin-failure-results">Plugin failure results</a></li>
+<li><a href="#plugin-descriptions">Plugin Descriptions</a></li>
+<li><a href="#internationalizationlocalization-for-jar-files">Internationalization/Localization for Jar files</a></li>
+</ul></li>
+<li><a href="#groovy-plugin-development">Groovy Plugin Development</a><ul>
+<li><a href="#groovy-dsl">Groovy DSL</a></li>
+<li><a href="#supported-groovy-plugin-types">Supported Groovy Plugin Types</a></li>
+</ul></li>
+<li><a href="#script-plugin-development">Script Plugin Development</a><ul>
+<li><a href="#ui-plugin-development">UI Plugin Development</a></li>
+<li><a href="#script-plugin-zip-structure">Script plugin zip structure</a></li>
+<li><a href="#plugin-version-changes">Plugin version changes</a></li>
+<li><a href="#provider-metadata">Provider metadata</a></li>
+<li><a href="#plugin-properties">Plugin properties</a></li>
+<li><a href="#how-script-plugin-providers-are-invoked">How script plugin providers are invoked</a></li>
+<li><a href="#script-provider-requirements">Script provider requirements</a></li>
+<li><a href="#internationalizationlocalization-for-zip-files">Internationalization/Localization for Zip files</a></li>
+</ul></li>
+<li><a href="#property-scopes">Property scopes</a><ul>
+<li><a href="#node-services-instance-scope">Node services instance scope</a></li>
+</ul></li>
+<li><a href="#property-rendering-options">Property Rendering Options</a></li>
+<li><a href="#plugin-localization">Plugin Localization</a><ul>
+<li><a href="#resolving-localization-message-files">Resolving Localization Message Files</a></li>
+<li><a href="#defining-plugin-localization-messages">Defining Plugin Localization Messages</a></li>
+</ul></li>
+<li><a href="#plugin-icons">Plugin Icons</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Plugin Development</h1>
+</div>
+<p>There are currently two ways to develop plugins:</p>
+<ol type="1">
+<li><a href="#java-plugin-development">Java plugin development</a>: Develop Java code that is distributed within a Jar file.</li>
+<li><a href="#script-plugin-development">Script Plugin Development</a>: Write shell/system scripts that implement your desired behavior and put them in a zip file with some metadata.</li>
+<li>Groovy Plugin Development: Write groovy scripts to implement Notification and Logging plugins.</li>
+</ol>
+<p>Either way, the resultant plugin archive file, either a .jar java archive, or a .zip file archive, will be placed in the plugin directory (Launcher: <code>$RDECK_BASE/libext</code>, RPM,DEB: <code>/var/lib/rundeck/libext</code>).</p>
+<h2 id="java-plugin-development">Java Plugin Development</h2>
+<p>Java plugins are distributed as .jar files containing the necessary classes for one or more service provider, as well as any other java jar dependency files.</p>
+<p>Each classname listed must be a valid “<a href="#provider-classes">Provider Class</a>” as defined below, and must have a <code>@Plugin</code> annotation to define its service type and provider name.</p>
+<p>The <code>.jar</code> file you distribute must have this metadata within the main Manifest for the jar file to be correctly loaded by the system:</p>
+<ul>
+<li><code>Rundeck-Plugin-Version: 1.2</code></li>
+<li><code>Rundeck-Plugin-Archive: true</code></li>
+<li><code>Rundeck-Plugin-Classnames: classname,..</code></li>
+<li><code>Rundeck-Plugin-Libs: lib/something.jar ...</code> <em>(optional)</em></li>
+<li><code>Rundeck-Plugin-Author: Author name</code> <em>(optional)</em></li>
+<li><code>Rundeck-Plugin-URL: Website URL</code> <em>(optional)</em></li>
+<li><code>Rundeck-Plugin-Date: Publication date</code> <em>(optional)</em> in ISO8601 format</li>
+</ul>
+<p>Additionally, you should include a manifest entry to indicate the plugin file’s version:</p>
+<ul>
+<li><code>Rundeck-Plugin-File-Version: 1.x</code></li>
+</ul>
+<p>This version number will be used to load only the newest plugin file, if more than one provider of the same name and type is defined.</p>
+<h3 id="plugin-version">Plugin Version</h3>
+<p><code>Rundeck-Plugin-Version</code> indicates the plugin mechanism version</p>
+<h3 id="build-dependencies">Build dependencies</h3>
+<p>Rundeck’s core jar is published to the central Maven repository, so you can simply specify a dependency in your build file.</p>
+<p>For gradle, use:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="fu">compile</span>(group:&#39;org.<span class="fu">rundeck</span>&#39;, name: &#39;rundeck-core&#39;, version: &#39;<span class="dv">3</span>.<span class="fl">0.0</span>-rc1&#39;)</a></code></pre></div>
+<p>For maven use:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">&lt;dependencies&gt;</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">   <span class="kw">&lt;dependency&gt;</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">      <span class="kw">&lt;groupId&gt;</span>org.rundeck<span class="kw">&lt;/groupId&gt;</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">      <span class="kw">&lt;artifactId&gt;</span>rundeck-core<span class="kw">&lt;/artifactId&gt;</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">      <span class="kw">&lt;version&gt;</span>3.0.0-rc1<span class="kw">&lt;/version&gt;</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">      <span class="kw">&lt;scope&gt;</span>compile<span class="kw">&lt;/scope&gt;</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">   <span class="kw">&lt;/dependency&gt;</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="kw">&lt;/dependencies&gt;</span></a></code></pre></div>
+<ul>
+<li>Rundeck’s core jar is published to the central Maven repository, so you can now declare a build dependency more easily.</li>
+</ul>
+<p>If your Java classes require external libraries that are not included with the Rundeck runtime, you can include them in your .jar archive. (Look in <code>$RDECK_BASE/tools/lib</code> to see the set of third-party jars that are available for your classes by default at runtime).</p>
+<p>Specify the <code>Rundeck-Plugin-Libs</code> attribute in the Main attributes of the Manifest for the jar, set the value to a space-separated list of jar file names as you have included them in the jar.</p>
+<p>E.g.:</p>
+<pre><code>Rundeck-Plugin-Libs: lib/somejar-1.2.jar lib/anotherjar-1.3.jar</code></pre>
+<p>Then include the jar files in the Plugin’s jar contents:</p>
+<pre><code>META-INF/
+META-INF/MANIFEST.MF
+com/
+com/mycompany/
+com/mycompany/rundeck/
+com/mycompany/rundeck/plugin/
+com/mycompany/rundeck/plugin/test/
+com/mycompany/rundeck/plugin/test/TestNodeExecutor.class
+lib/
+lib/somejar-1.2.jar
+lib/anotherjar-1.3.jar</code></pre>
+<h3 id="available-services">Available Services</h3>
+<p>The Rundeck core makes use of several different “Services” that provide functionality for executing steps, getting information about Nodes or sending notifications.</p>
+<p>Plugins can contain one or more Service Provider implementations. Each plugin file could contain multiple Providers for different types of services, however typically each plugin file would contain only providers related in some fashion.</p>
+<p>Node Execution services:</p>
+<ul>
+<li><code>NodeExecutor</code> - executes a command on a node <a href="../javadoc/com/dtolabs/rundeck/core/execution/service/NodeExecutor.html">javadoc</a>.</li>
+<li><code>FileCopier</code> - copies a file to a node <a href="../javadoc/com/dtolabs/rundeck/core/execution/service/FileCopier.html">javadoc</a>.</li>
+</ul>
+<p>Resource model services:</p>
+<ul>
+<li><code>ResourceModelSource</code> - produces a set of Node definitions for a project <a href="../javadoc/com/dtolabs/rundeck/core/resources/ResourceModelSource.html">javadoc</a>.</li>
+<li><code>ResourceFormatParser</code> - parses a document into a set of Node resources <a href="../javadoc/com/dtolabs/rundeck/core/resources/format/ResourceFormatParser.html">javadoc</a>.</li>
+<li><code>ResourceFormatGenerator</code> - generates a document from a set of Node resources <a href="../javadoc/com/dtolabs/rundeck/core/resources/format/ResourceFormatGenerator.html">javadoc</a>.</li>
+</ul>
+<p>Workflow Step services (described in <a href="workflow-step-plugin.html">Workflow Step Plugin</a>):</p>
+<ul>
+<li><code>WorkflowStep</code> - runs a single step in a workflow.</li>
+<li><code>WorkflowNodeStep</code> - runs a single step for each node in a workflow.</li>
+<li><code>RemoteScriptNodeStep</code> - generates a script or command to execute remotely for each node in a workflow.</li>
+</ul>
+<p>Notification services (described in <a href="notification-plugin.html">Notification Plugin</a>):</p>
+<ul>
+<li><code>Notification</code> - performs an action after a Job state trigger.</li>
+</ul>
+<p>Storage services:</p>
+<ul>
+<li><code>Storage</code> - backend for storing data: <a href="storage-plugin.html">Storage Plugin</a></li>
+<li><code>StorageConverter</code> - modifies stored content or metadata: <a href="storage-converter-plugin.html">Storage Converter Plugin</a></li>
+</ul>
+<p>Logging services:</p>
+<ul>
+<li><code>ExecutionFileStorage</code> - stores and retrieves execution files to another location: <a href="logging-plugin.html">Execution File Storage Plugin</a></li>
+<li><code>StreamingLogWriter</code> - writes execution log events to a destination: <a href="logging-plugin.html">Streaming Log Writer Plugin</a></li>
+<li><code>StreamingLogReader</code> - reads execution log events from a destination: <a href="logging-plugin.html">Streaming Log Reader Plugin</a></li>
+</ul>
+<p>Orchestrator:</p>
+<ul>
+<li><code>Orchestrator</code> - orchestrates node dispatching: <a href="orchestrator-plugin.html">Orchestrator Plugin</a></li>
+</ul>
+<h3 id="provider-classes">Provider Classes</h3>
+<p>A “Provider Class” is a java class that implements a particular interface and declares itself as a provider for a particular Rundeck “Service”.</p>
+<p>Each plugin also defines a “Name” that identifies it for use in Rundeck. The Name of a plugin is also referred to as a “Provider Name”, as the plugin class is a provider of a particular service.</p>
+<p>You should choose a unique but simple name for your provider.</p>
+<p>Each plugin class must have the <a href="../javadoc/com/dtolabs/rundeck/core/plugins/Plugin.html">Plugin</a> annotation applied to it.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="at">@Plugin</span>(name=<span class="st">&quot;myprovider&quot;</span>, service=<span class="st">&quot;NodeExecutor&quot;</span>)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">public</span> <span class="kw">class</span> MyProvider <span class="kw">implements</span> NodeExecutor {</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">...</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">}</a></code></pre></div>
+<p>Your provider class must have at least a zero-argument constructor, and optionally can have a single-argument constructor with a <code>com.dtolabs.rundeck.core.common.Framework</code> parameter, in which case your class will be constructed with this constructor and passed the Framework instance.</p>
+<p>You may log messages to the ExecutionListener available via <a href="../javadoc/com/dtolabs/rundeck/core/execution/ExecutionContext.html">ExecutionContext#getExecutionListener()</a> method.</p>
+<p>You can also send output to <code>System.err</code> and <code>System.out</code> and it will be captured as output of the execution.</p>
+<h3 id="provider-lifecycle">Provider Lifecycle</h3>
+<p>Provider classes are instantiated when needed by the Framework object, and the instance is retained within the Service for future reuse. The Framework object may exist across multiple executions, and the provider instance may be reused.</p>
+<p>Provider instances may also be used by multiple threads.</p>
+<p>Your provider class should not use any instance fields and should be careful not to use un-threadsafe operations.</p>
+<h3 id="plugin-failure-results">Plugin failure results</h3>
+<p>Some plugin methods return a “Result” interface which indicates the result status of the call to the plugin class. If there is an error, some plugins allow an Exception to be thrown or for the error to be included in the Result class. In both cases, there is a “FailureReason” that must be specified. See the javadoc: <a href="../javadoc/com/dtolabs/rundeck/core/execution/workflow/steps/FailureReason.html">FailureReason</a>.</p>
+<p>This can be any implementation of the FailureReason interface, and this object’s <code>toString()</code> method will be used to return the reason value (for example, it is passed to Error Handler steps in a Workflow as the “result.reason” string). The mechanism used internally is to provide an Enum implementation of the FailureReason interface, and to enumerate the possible reasons for failure within the enum.</p>
+<p>You are encouraged to re-use existing FailureReasons as much as possible as they provide some basic failure causes. Existing classes:</p>
+<ul>
+<li><a href="../javadoc/com/dtolabs/rundeck/core/execution/workflow/steps/node/NodeStepFailureReason.html">NodeStepFailureReason</a></li>
+<li><a href="../javadoc/com/dtolabs/rundeck/core/execution/workflow/steps/StepFailureReason.html">StepFailureReason</a></li>
+</ul>
+<h3 id="plugin-descriptions">Plugin Descriptions</h3>
+<p>To define a plugin that presents custom GUI configuration properties and/or uses Project/Framework level configuration, you need to provide a Description of your plugin. The Description defines metadata about the plugin, such as the display name and descriptive text, as well as the list of all configuration Properties that it supports.</p>
+<p>There are several ways to declare your plugin’s Description:</p>
+<p><strong>Collaborator interface</strong></p>
+<p>Implement the <a href="../javadoc/com/dtolabs/rundeck/plugins/util/DescriptionBuilder.Collaborator.html">DescriptionBuilder.Collaborator</a> interface in your plugin class, and it will be given an opportunity to perform actions on the Builder object before it finally constructs a Description.</p>
+<p><strong>Describable interface</strong></p>
+<p>If you want to build the Description object yourself, you can do so by implementing the <a href="../javadoc/com/dtolabs/rundeck/core/plugins/configuration/Describable.html">Describable</a> interface. Return a <a href="../javadoc/com/dtolabs/rundeck/core/plugins/configuration/Description.html">Description</a> instance. You can construct one by using the <a href="../javadoc/com/dtolabs/rundeck/plugins/util/DescriptionBuilder.html">DescriptionBuilder</a> builder class.</p>
+<p><strong>Description Annotations</strong></p>
+<p>Newer plugin types support using java annotations to create a Description object. See <a href="plugin-annotations.html">Plugin Annotations</a>.</p>
+<h4 id="description-properties">Description Properties</h4>
+<p>Within a Description object you can define a set of Property objects, which represent the input properties for the plugin.</p>
+<p>Some plugin types support using Java Annotations to define properties, see <a href="plugin-annotations.html">Plugin Annotations</a>.</p>
+<p>For the remaining plugin types, the Properties must be defined using the other interfaces described above, typically with the use of a <a href="../javadoc/com/dtolabs/rundeck/plugins/util/PropertyBuilder.html">PropertyBuilder</a>.</p>
+<p><strong>Rendering Options</strong></p>
+<p>You can specify “rendering options” to affect the property being rendered in the Rundeck GUI. These affect Property type <em>String</em> only:</p>
+<ul>
+<li>Textarea: renders the input as a multi-line text area.</li>
+<li>Password: renders the input as a password input.</li>
+</ul>
+<p>For more information see the options under <a href="#property-rendering-options">Property Rendering options</a>.</p>
+<p>A set of constants for the supported rendering option keys and some values are provided in the <a href="../javadoc/com/dtolabs/rundeck/core/plugins/configuration/StringRenderingConstants.html">StringRenderingConstants</a>.</p>
+<h3 id="internationalizationlocalization-for-jar-files">Internationalization/Localization for Jar files</h3>
+<p>Since Rundeck 2.6.10, Plugins support Internationalization (“i18n”) using Java properties files.</p>
+<p>Include a <code>resources/i18n</code> directory in your jar file, with localized versions of your Plugin messages.</p>
+<p>See <a href="#plugin-localization">Plugin Localization</a>.</p>
+<h2 id="groovy-plugin-development">Groovy Plugin Development</h2>
+<p>Some types of plugins can be created with a simple Groovy-based DSL. This gives you a simpler way to develop plugins, but still provides the power of Java. Of course, you can build a Java plugin using Groovy, however this DSL allows you to create a plugin within a single file for simple use cases.</p>
+<p>To create a Groovy based plugin, create a file named <code>MyXYZPlugin.groovy</code> in the plugins directory for Rundeck.</p>
+<p>You must restart rundeck to make the plugin available the first time, but you can subsequently update the .groovy script without restarting Rundeck.</p>
+<h3 id="groovy-dsl">Groovy DSL</h3>
+<p>Within the Groovy script, you define your plugin by calling the <code>rundeckPlugin</code> method, and pass it both the Class of the type of plugin, and a Closure used to build the plugin object.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">import</span>  com.dtolabs.rundeck.plugins.notification.NotificationPlugin</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="fu">rundeckPlugin</span>(NotificationPlugin){</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">    <span class="co">//plugin definition goes here...</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">}</a></code></pre></div>
+<p>In this case we use the same <code>NotificationPlugin</code> interface used for Java [Notfiication Plugins].</p>
+<p>However, for other plugin types you would specify the correct Java interface for the specific plugin type.</p>
+<p>Note: Be sure to <code>import</code> all necessary types used in the Groovy script.</p>
+<h4 id="definition">Definition</h4>
+<p>Within the definition section you can define your plugin’s Description to be shown in the Rundeck GUI, as well as configuration properties to present to the user.</p>
+<p><em>Properties</em></p>
+<p>Set these properties to change the GUI display of your plugin:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb7-1" data-line-number="1">title=&#39;My Plugin&#39;</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">description=&#39;Does some action&#39;</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">version = <span class="st">&quot;0.0.1&quot;</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">url = <span class="st">&quot;http://example&quot;</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">author = <span class="st">&quot;© 2018, me&quot;</span></a></code></pre></div>
+<p><em>Configuration</em></p>
+<p>Use a <code>configuration</code> closure to define configuration properties:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb8-1" data-line-number="1">configuration{</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">    <span class="co">//property definitions go here...</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">}</a></code></pre></div>
+<p>Note: not all plugin types support <code>configuration</code>.</p>
+<p><em>Property Definitions</em></p>
+<p>User configuration properties can be defined in a few ways. To define a property within the <code>configuration</code> section, you can use either of these forms:</p>
+<ol type="1">
+<li>method call form, specifying the attributes of the property:</li>
+</ol>
+<div class="sourceCode" id="cb9"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="fu">myproperty</span> (title: <span class="st">&quot;My Property&quot;</span>, description: <span class="st">&quot;Something&quot;</span>, type: &#39;Integer&#39;)</a></code></pre></div>
+<ol start="2" type="1">
+<li>assignment form. This form guesses the data type and sets the defaultValue, but does not add any other attributes.</li>
+</ol>
+<div class="sourceCode" id="cb10"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb10-1" data-line-number="1">myproperty2=<span class="st">&quot;default value&quot;</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">//the above is equivalent to:</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="fu">myproperty2</span>(defaultValue:<span class="st">&quot;default value&quot;</span>, type: &#39;String&#39;)</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">myproperty3=[<span class="st">&quot;value&quot;</span>,<span class="st">&quot;another&quot;</span>,<span class="st">&quot;text&quot;</span>]</a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">//the above is equivalent to:</span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="fu">myproperty3</span>(type:&#39;FreeSelect&#39;,values:[<span class="st">&quot;value&quot;</span>,<span class="st">&quot;another&quot;</span>,<span class="st">&quot;text&quot;</span>])</a></code></pre></div>
+<p>Each property has several attributes you can define, but only <code>name</code> and <code>type</code> are required:</p>
+<ul>
+<li><code>name</code> - the unique identifier for this property</li>
+<li><code>type</code> - the data type to use for the property, defaults to String. Available types:
+<ul>
+<li><code>String</code> - user can enter text</li>
+<li><code>Integer</code>, <code>Long</code> - user can enter a number</li>
+<li><code>Boolean</code> - user is shown a checkbox</li>
+<li><code>Select</code> or <code>FreeSelect</code> - user can choose from a list. With <code>FreeSelect</code>, the user can also type in any value</li>
+</ul></li>
+<li><code>title</code> - a user-readable string to describe the property</li>
+<li><code>description</code> - a string describing the property</li>
+<li><code>required</code> - whether the property is required to have a value</li>
+<li><code>defaultValue</code> - any default value for the property</li>
+<li><code>scope</code> - defines the scope for the property. Allowed values are described under the chapter <a href="plugin-annotations.html#property-scopes">Plugin Annotations - Property Scopes</a>. You may also simply use a String matching the name of the scope, e.g. “Instance”. The default scope if unspecified is “Instance”.</li>
+</ul>
+<p>In addition to these properties, for <code>Select</code> or <code>FreeSelect</code> type, you can define:</p>
+<ul>
+<li><code>values</code> - list of string values the user can select from</li>
+</ul>
+<p>To define a validation check for a property, use the first form and supply a closure. The implicit <code>it</code> variable will be the value of the property to check, and your closure should return <code>true</code> if the value is valid.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="fu">phone_number</span>(title: <span class="st">&quot;Phone number&quot;</span>){</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">   it.<span class="fu">replaceAll</span>(/[^\d]/,&#39;&#39;)==~/^\d{<span class="dv">10</span>}$/</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">}</a></code></pre></div>
+<p><strong>A Note about Scopes and Validation</strong>:</p>
+<p>The user is presented with any <code>Instance</code> scoped properties in the Rundeck GUI when defining a Job, and any invalid configuration values will present an error when saving the Job. This includes failing to set a value for a “required” property. However, if you have properties that are scoped for <code>Project</code> or lower, those properties will not be shown in the GUI. In that case, the validation will not be checked for the properties when saving the Job definition, and will only be performed when the plugin is invoked.</p>
+<h3 id="supported-groovy-plugin-types">Supported Groovy Plugin Types</h3>
+<ul>
+<li>[Notification Plugins]</li>
+<li><a href="logging-plugins.html#groovy-streaminglogreader">Streaming Log Writer Plugin</a></li>
+<li><a href="logging-plugins.html#groovy-streaminglogwriter">Streaming Log Reader Plugin</a></li>
+<li><a href="logging-plugins.html#groovy-executionfilestorage">Execution File Storage Plugin</a></li>
+<li><a href="log-filter-plugins.html#groovy-logfilter">Log Filter Plugin</a></li>
+<li><a href="content-converter-plugins.html#groovy-contentconverter">Content Converter Plugin</a></li>
+</ul>
+<h2 id="script-plugin-development">Script Plugin Development</h2>
+<p>Script plugins can provide the same services as Java plugins, but they do so with a script that is invoked in an external system processes by the JVM.</p>
+<p>These Services support Script Plugins:</p>
+<ul>
+<li><a href="node-executor-plugin.html#script-plugin-type">NodeExecutor</a></li>
+<li><a href="file-copier-plugin.html#script-plugin-type">FileCopier</a></li>
+<li><a href="resource-model-source-plugin.html#script-plugin-type">ResourceModelSource</a></li>
+<li><a href="workflow-step-plugin.html#script-plugin-type">WorkflowNodeStep</a> and RemoteScriptNodeStep</li>
+</ul>
+<blockquote>
+<p>Note, the ResourceFormatParser and ResourceFormatGenerator services <em>do not</em> support the Script Plugin type.</p>
+</blockquote>
+<h3 id="ui-plugin-development">UI Plugin Development</h3>
+<p>UI Plugins are supported with a <code>ui</code> plugin type, which is similar to a Script Plugin.</p>
+<p>See: <a href="ui-plugins.html">UI Plugins</a>.</p>
+<h3 id="script-plugin-zip-structure">Script plugin zip structure</h3>
+<p>You must create a zip file with the following structure:</p>
+<pre><code>[name]-plugin.zip
+\- [name]-plugin/ -- root directory of zip contents, same name as zip file
+   |- plugin.yaml -- plugin metadata file
+   |- contents/
+   |  |- ...      -- script or resource files
+   |  \- ...
+   \- resources/  -- i18n resources, icons, (and for UI plugins: scripts/css)
+      |- i18n/
+      |- ...</code></pre>
+<p>Here is an example:</p>
+<pre><code>$ unzip -l example-1.0-plugin.zip
+Archive:  example-1.0-plugin.zip
+  Length     Date   Time    Name
+ --------    ----   ----    ----
+        0  04-12-11 11:31   example-1.0-plugin/
+        0  04-11-11 15:31   example-1.0-plugin/contents/
+     2142  04-11-11 15:31   example-1.0-plugin/contents/script1.sh
+     1591  04-11-11 13:10   example-1.0-plugin/contents/script2.sh
+      576  04-12-11 10:58   example-1.0-plugin/plugin.yaml
+ --------                   -------
+     4309                   5 files</code></pre>
+<p>The filename of the plugin zip must end with “-plugin.zip” to be recognized as a plugin archive. The zip must contain a top-level directory with the same base name as the zip file (sans “.zip”).</p>
+<p>The file <code>plugin.yaml</code> must have this structure:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="co"># yaml plugin metadata</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="fu">name:</span><span class="at"> plugin name</span></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="fu">version:</span><span class="at"> plugin version</span></a>
+<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="fu">rundeckPluginVersion:</span><span class="at"> 1.2</span></a>
+<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="fu">author:</span><span class="at"> author name</span></a>
+<a class="sourceLine" id="cb14-7" data-line-number="7"><span class="fu">date:</span><span class="at"> release date (ISO8601)</span></a>
+<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="fu">url:</span><span class="at"> website URL</span></a>
+<a class="sourceLine" id="cb14-9" data-line-number="9"><span class="fu">providers:</span></a>
+<a class="sourceLine" id="cb14-10" data-line-number="10">    <span class="kw">-</span> <span class="fu">name:</span><span class="at"> provider</span></a>
+<a class="sourceLine" id="cb14-11" data-line-number="11">      <span class="fu">service:</span><span class="at"> service name</span></a>
+<a class="sourceLine" id="cb14-12" data-line-number="12">      <span class="fu">plugin-type:</span><span class="at"> script</span></a>
+<a class="sourceLine" id="cb14-13" data-line-number="13">      <span class="fu">script-interpreter:</span><span class="at"> </span><span class="kw">[</span>interpreter<span class="kw">]</span></a>
+<a class="sourceLine" id="cb14-14" data-line-number="14">      <span class="fu">script-file:</span><span class="at"> </span><span class="kw">[</span>script file name<span class="kw">]</span></a>
+<a class="sourceLine" id="cb14-15" data-line-number="15">      <span class="fu">script-args:</span><span class="at"> </span><span class="kw">[</span>script file args<span class="kw">]</span></a></code></pre></div>
+<p>The main metadata that is required:</p>
+<ul>
+<li><code>name</code> - name for the plugin</li>
+<li><code>version</code> - version number of the plugin</li>
+<li><code>rundeckPluginVersion</code> - Rundeck Plugin type version, currently “1.2”</li>
+<li><code>providers</code> - list of provider metadata maps</li>
+</ul>
+<p>These are optional:</p>
+<ul>
+<li><code>author</code> - optional author info</li>
+<li><code>date</code> - optional release date info in ISO8601 format</li>
+<li><code>url</code> - optional website URL</li>
+</ul>
+<p>This provides the necessary metadata about the plugin, including one or more entries in the <code>providers</code> list to declare those providers defined in the plugin.</p>
+<h3 id="plugin-version-changes">Plugin version changes</h3>
+<p>The value of <code>rundeckPluginVersion</code> defines some features of the loaded plugin.</p>
+<ul>
+<li><code>1.2</code>
+<ul>
+<li>allows use of <a href="#plugin-localization">Plugin Localization</a> with message resources and <a href="#plugin-icons">Plugin Icons</a>.</li>
+</ul></li>
+<li><code>1.1</code>
+<ul>
+<li>uses a default of <code>true</code> for <code>mergeEnvironment</code> (see below)</li>
+</ul></li>
+<li><code>1.0</code> first release
+<ul>
+<li>uses a default of <code>false</code> for <code>mergeEnvironment</code> (see below)</li>
+</ul></li>
+</ul>
+<h3 id="provider-metadata">Provider metadata</h3>
+<p>Required provider entries:</p>
+<ul>
+<li><code>name</code> - provider name</li>
+<li><code>service</code> - service name, one of these valid services:
+<ul>
+<li><code>NodeExecutor</code></li>
+<li><code>FileCopier</code></li>
+<li><code>ResourceModelSource</code></li>
+<li><code>WorkflowNodeStep</code></li>
+<li><code>RemoteScriptNodeStep</code></li>
+</ul></li>
+<li><code>plugin-type</code> - must be <code>script</code> for these types (or <code>ui</code> for <a href="ui-plugins.html">UI Plugins</a>)</li>
+<li><code>script-file</code> - must be the name of a file relative to the <code>contents</code> directory</li>
+</ul>
+<p>For <code>ResourceModelSource</code> service, this additional entry is required:</p>
+<ul>
+<li><code>resource-format</code> - Must be the name of one of the supported <a href="../administration/configuration/resource-model-sources/built-in-resource-model-source-plugins.html#resource-model-document-formats">Resource Model Document Formats</a>.</li>
+</ul>
+<p>Optional entries:</p>
+<ul>
+<li><code>script-interpreter</code> - A system command that should be used to execute the script. This can be a single binary path, e.g. <code>/bin/bash</code>, or include any args to the command, such as <code>/bin/bash -c</code>.</li>
+<li><code>script-args</code> - the arguments to use when executing the script file.</li>
+<li><p><code>interpreter-args-quoted</code> - true/false - (default false). If true, the execution will be done by passing the file and args as a single argument to the interpreter: <code>${interpreter} &quot;${file} ${arg1} ${arg2}...&quot;</code>. If false, the execution will be done by passing the file and args as separate arguments: <code>${interpreter} ${file} ${arg1} ${arg2}...</code></p></li>
+<li><code>use-original-extension</code>: (<code>true/false</code>, default <code>true</code>), whether to force the remotely copied script to have the same file extension as the original specified by <code>script-file</code>. (Available for <code>RemoteScriptNodeStep</code> only.)</li>
+<li><code>script-file-extension</code>: A file extension to use for the remotely copied script. (Available for <code>RemoteScriptNodeStep</code> only.)</li>
+<li><code>mergeEnvironment</code> - boolean, if true (default for <code>rundeckPluginVersion: 1.1+</code>), when the script is executed the Environment variables from the Rundeck server will be merged with the context environment variables provided to the script. If false (default for <code>rundeckPluginVersion: 1.0</code>), then only the context environment variables will be provided.</li>
+<li><p><code>config</code> - a Map defining custom plugin properties (see below.)</p></li>
+</ul>
+<h3 id="plugin-properties">Plugin properties</h3>
+<p>Custom plugin properties are supported in script-based plugins for these plugin types:</p>
+<ul>
+<li><code>ResourceModelSource</code></li>
+<li><code>NodeExecutor</code></li>
+<li><code>FileCopier</code></li>
+<li><code>WorkflowNodeStep</code></li>
+<li><code>RemoteScriptNodeStep</code></li>
+</ul>
+<p>You can use the metadata entries to declare properties about your plugin.</p>
+<p>Create a <code>config</code> entry in each provider definition, containing a sequence of map entries for each configuration property you want to define. In the map entry include:</p>
+<ul>
+<li><code>type</code> - The type of property. Must be one of:
+<ul>
+<li><code>String</code></li>
+<li><code>Boolean</code> value must be “true” or “false”</li>
+<li><code>Integer</code></li>
+<li><code>Long</code></li>
+<li><code>Select</code> must be on of a set of values</li>
+<li><code>FreeSelect</code> may be one of a set of values</li>
+<li><code>Options</code> may be more than one of a set of values, the result will be the values joined with a <code>,</code> (comma)</li>
+</ul></li>
+<li><code>name</code> - Name to identify the property</li>
+<li><code>title</code> - Title to display in the GUI (optional)</li>
+<li><code>description</code> - Description to display in the GUI (optional)</li>
+<li><code>required</code> - (true/false) if true, require a non-empty value (optional)</li>
+<li><code>default</code> - A default value to use (optional)</li>
+<li><code>values</code> - A comma-separated list of values to use for Select or FreeSelect. Required for Select/FreeSelect.</li>
+<li><code>scope</code> - Resolution scope for the property. Default: “Instance”.</li>
+<li><code>renderingOptions</code> - A Map containing a definition of rendering option keys/values. (See <a href="#property-rendering-options">Property Rendering Options</a> below.)</li>
+</ul>
+<p>When your script is invoked, each configuration property defined for the plugin will be set as <code>RD_CONFIG_[PROPERTY]</code> variables passed to your script (see below). “<em>PROPERTY</em>” refers to your plugin property name in uppercase. A plugin property named “foo” will translate to the shell variable <code>RD_CONFIG_FOO</code>.</p>
+<p>See <a href="#property-scopes">Property Scopes</a> below.</p>
+<h4 id="example-script-plugin-property">Example script plugin property</h4>
+<p>Here is an example:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="co"># yaml plugin metadata</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="fu">name:</span><span class="at"> plugin name</span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="fu">version:</span><span class="at"> plugin version</span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="fu">rundeckPluginVersion:</span><span class="at"> 1.0</span></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="fu">author:</span><span class="at"> author name</span></a>
+<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="fu">date:</span><span class="at"> release date</span></a>
+<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="fu">providers:</span></a>
+<a class="sourceLine" id="cb15-9" data-line-number="9">    <span class="kw">-</span> <span class="fu">name:</span><span class="at"> provider</span></a>
+<a class="sourceLine" id="cb15-10" data-line-number="10">      <span class="fu">service:</span><span class="at"> service name</span></a>
+<a class="sourceLine" id="cb15-11" data-line-number="11">      <span class="fu">plugin-type:</span><span class="at"> script</span></a>
+<a class="sourceLine" id="cb15-12" data-line-number="12">      <span class="fu">script-interpreter:</span><span class="at"> </span><span class="kw">[</span>interpreter<span class="kw">]</span></a>
+<a class="sourceLine" id="cb15-13" data-line-number="13">      <span class="fu">script-file:</span><span class="at"> </span><span class="kw">[</span>script file name<span class="kw">]</span></a>
+<a class="sourceLine" id="cb15-14" data-line-number="14">      <span class="fu">script-args:</span><span class="at"> </span><span class="kw">[</span>script file args<span class="kw">]</span></a>
+<a class="sourceLine" id="cb15-15" data-line-number="15">      <span class="fu">config:</span></a>
+<a class="sourceLine" id="cb15-16" data-line-number="16">        <span class="kw">-</span> <span class="fu">name:</span><span class="at"> myprop</span></a>
+<a class="sourceLine" id="cb15-17" data-line-number="17">          <span class="fu">title:</span><span class="at"> My Property</span></a>
+<a class="sourceLine" id="cb15-18" data-line-number="18">          <span class="fu">type:</span><span class="at"> String</span></a>
+<a class="sourceLine" id="cb15-19" data-line-number="19">          <span class="fu">required:</span><span class="at"> false</span></a>
+<a class="sourceLine" id="cb15-20" data-line-number="20">          <span class="fu">description:</span><span class="at"> </span><span class="st">&quot;A custom property&quot;</span></a>
+<a class="sourceLine" id="cb15-21" data-line-number="21">          <span class="fu">scope:</span><span class="at"> Instance</span></a>
+<a class="sourceLine" id="cb15-22" data-line-number="22">          <span class="fu">renderingOptions:</span></a>
+<a class="sourceLine" id="cb15-23" data-line-number="23">            <span class="fu">instance-scope-node-attribute:</span><span class="at"> </span><span class="st">&quot;my-prop&quot;</span></a>
+<a class="sourceLine" id="cb15-24" data-line-number="24">        <span class="kw">-</span> <span class="fu">name:</span><span class="at"> myprop2</span></a>
+<a class="sourceLine" id="cb15-25" data-line-number="25">          <span class="fu">title:</span><span class="at"> Another Property</span></a>
+<a class="sourceLine" id="cb15-26" data-line-number="26">          <span class="fu">type:</span><span class="at"> Integer</span></a>
+<a class="sourceLine" id="cb15-27" data-line-number="27">          <span class="fu">required:</span><span class="at"> true</span></a>
+<a class="sourceLine" id="cb15-28" data-line-number="28">          <span class="fu">description:</span><span class="at"> </span><span class="st">&quot;Must be present&quot;</span></a>
+<a class="sourceLine" id="cb15-29" data-line-number="29">          <span class="fu">default:</span><span class="at"> </span><span class="st">&#39;123&#39;</span></a>
+<a class="sourceLine" id="cb15-30" data-line-number="30">          <span class="fu">scope:</span><span class="at"> Framework</span></a></code></pre></div>
+<h3 id="how-script-plugin-providers-are-invoked">How script plugin providers are invoked</h3>
+<p>When the provider is used for node execution or file copying, the script file, interpreter, and args are combined into a commandline executed by the system in this pattern:</p>
+<pre><code>[interpreter] [filename] [args...]</code></pre>
+<p>If the interpreter is not specified, then the script file is executed directly, and that means it must be acceptable by the system to be executed directly (include any necessary <code>#!</code> line, etc).</p>
+<p><code>script-args</code> can contain data-context properties such as <code>${node.name}</code>. Additionally, the specific Service will provide some additional context properties that can be used:</p>
+<ul>
+<li>NodeExecutor will define <code>${exec.command}</code> containing the command to be executed</li>
+<li>FileCopier will define <code>${file-copy.file}</code> containing the local path to the file that needs to be copied, and <code>${file-copy.destination}</code> containing the remote destination path that is requested, if available.</li>
+<li>ResourceModelSource will define <code>${config.KEY}</code> for each configuration property KEY that is defined.</li>
+</ul>
+<p>All script-plugins will also be provided with these context entries:</p>
+<ul>
+<li><code>rundeck.base</code> - base directory of the Rundeck installation</li>
+<li><code>rundeck.project</code> - project name</li>
+<li><code>plugin.base</code> - base directory of the expanded ‘contents’ dir of the plugin</li>
+<li><code>plugin.file</code> - the plugin file itself</li>
+<li><code>plugin.scriptfile</code> - the path to the script file being executed for the plugin</li>
+<li><code>plugin.vardir</code> - var dir the plugin can use for caching data, local to the project</li>
+<li><code>plugin.tmpdir</code> - temp dir the plugin can use</li>
+</ul>
+<p>In addition, all of the data-context properties that are available in the <code>script-args</code> are provided as environment variables to the script or interpreter when it is executed.</p>
+<p>Environment variables are generated in all-caps with this format:</p>
+<pre><code>RD_[KEY]_[NAME]</code></pre>
+<p>The <code>KEY</code> and <code>NAME</code> are the same as <code>${key.name}</code>. Any characters in the key or name that are not valid Bash shell variable characters are replaced with underscore ’_’.</p>
+<p>Examples:</p>
+<ul>
+<li><code>${node.name}</code> becomes <code>$RD_NODE_NAME</code></li>
+<li><code>${node.some-attribute}</code> becomes <code>$RD_NODE_SOME_ATTRIBUTE</code></li>
+<li><code>${exec.command}</code> becomes <code>$RD_EXEC_COMMAND</code></li>
+<li><code>${file-copy.file}</code> becomes <code>$RD_FILE_COPY_FILE</code></li>
+</ul>
+<h3 id="script-provider-requirements">Script provider requirements</h3>
+<p>The specific service has expectations about the way your provider script behaves.</p>
+<h4 id="exit-code">Exit code</h4>
+<ul>
+<li>Exit code of 0 indicates success</li>
+<li>Any other exit code indicates failure</li>
+</ul>
+<h4 id="output">Output</h4>
+<dl>
+<dt>For <code>NodeExecutor</code></dt>
+<dd><p>All output to <code>STDOUT</code>/<code>STDERR</code> will be captured for the job’s output.</p>
+</dd>
+<dt>For <code>FileCopier</code></dt>
+<dd><p>The first line of output of <code>STDOUT</code> MUST be the filepath of the file copied to the target node. Other output is ignored. All output to <code>STDERR</code> will be captured for the job’s output.</p>
+</dd>
+<dt>For <code>ResourceModelSource</code></dt>
+<dd><p>All output on <code>STDOUT</code> will be captured and passed to a <code>ResourceFormatParser</code> for the specified <code>resource-format</code> to create the Node definitions.</p>
+</dd>
+</dl>
+<h3 id="internationalizationlocalization-for-zip-files">Internationalization/Localization for Zip files</h3>
+<p>Since Rundeck 2.6.10, Plugins support Internationalization (“i18n”) using Java properties files.</p>
+<p>Include a <code>resources/i18n</code> directory in your zip file, with localized versions of your Plugin messages.</p>
+<p>See <a href="#plugin-localization">Plugin Localization</a>.</p>
+<h2 id="property-scopes">Property scopes</h2>
+<p>The <code>scope</code> determines how the value of the property is resolved.</p>
+<p>These are the available scopes and how the property values can be resolved:</p>
+<ul>
+<li><code>Framework</code> - Only framework properties</li>
+<li><code>ProjectOnly</code> - Only Project properties</li>
+<li><code>Project</code> - Project and Framework properties</li>
+<li><code>InstanceOnly</code> - Only instance properties</li>
+<li><code>Instance</code> - Instance and all earlier levels</li>
+</ul>
+<p>When resolving a property in a Project or Framework scope, the following properties will be searched:</p>
+<ul>
+<li>Framework scope
+<ul>
+<li>file: <code>$RDECK_BASE/etc/framework.properties</code></li>
+<li>property: <code>framework.plugin.[ServiceName].[providerName].[propertyname]</code></li>
+</ul></li>
+<li>Project scope
+<ul>
+<li>file: <code>$RDECK_BASE/projects/[ProjectName]/etc/project.properties</code></li>
+<li>property: <code>project.plugin.[ServiceName].[providerName].[propertyname]</code></li>
+</ul></li>
+</ul>
+<p>Instance scope refers to the configuration for a plugin “instance”. For different plugin types, due to the differences between how they are configured, this scope is resolved in different ways.</p>
+<dl>
+<dt>For <code>ResourceModelSource</code>:</dt>
+<dd><p>Resolved for each indexed source via the configuration in the <code>project.properties</code> file.</p>
+</dd>
+<dt>For <code>NodeExecutor</code>, and <code>FileCopier</code>:</dt>
+<dd><p>Custom properties are <em>only</em> supported in Script-based plugins. The instance scoped-property values are only loaded via Node attributes at execution time, based on the mapping provided in the <code>renderingOptions</code>. See <a href="#node-services-instance-scope">Node services instance scope</a>.</p>
+</dd>
+<dt>For Workflow Step services:</dt>
+<dd><p>Resolved from the step configuration defined in the workflow.</p>
+</dd>
+<dt>For <code>Notification</code>:</dt>
+<dd><p>Resolved from the notification trigger configuration defined in the workflow.</p>
+</dd>
+</dl>
+<h3 id="node-services-instance-scope">Node services instance scope</h3>
+<p>For script-based <code>NodeExecutor</code> and <code>FileCopier</code> plugins, Instance-scope properties can be defined to retrieve values from the Node’s attributes at execution time.</p>
+<p>Define the <code>renderingOptions</code> property entry, and add a <code>instance-scope-node-attribute</code> key:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb18-1" data-line-number="1">      <span class="fu">config:</span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">        <span class="kw">-</span> <span class="fu">name:</span><span class="at"> myprop</span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3">          <span class="fu">title:</span><span class="at"> My Property</span></a>
+<a class="sourceLine" id="cb18-4" data-line-number="4">          <span class="fu">type:</span><span class="at"> String</span></a>
+<a class="sourceLine" id="cb18-5" data-line-number="5">          <span class="fu">required:</span><span class="at"> false</span></a>
+<a class="sourceLine" id="cb18-6" data-line-number="6">          <span class="fu">description:</span><span class="at"> </span><span class="st">&quot;A custom property&quot;</span></a>
+<a class="sourceLine" id="cb18-7" data-line-number="7">          <span class="fu">scope:</span><span class="at"> Instance</span></a>
+<a class="sourceLine" id="cb18-8" data-line-number="8">          <span class="fu">renderingOptions:</span></a>
+<a class="sourceLine" id="cb18-9" data-line-number="9">            <span class="fu">instance-scope-node-attribute:</span><span class="at"> </span><span class="st">&quot;my-prop&quot;</span></a></code></pre></div>
+<p>When resolving the property value at execution time the node attribute “my-prop” will be used for the value (if present), before resolving other allowed scopes.</p>
+<h2 id="property-rendering-options">Property Rendering Options</h2>
+<p>Rendering options define special attributes of a property, which can be used to declare how it is shown in the GUI, or how the value is loaded at resolution time.</p>
+<p>Available rendering option keys:</p>
+<ul>
+<li><code>displayType</code>, values:
+<ul>
+<li><code>SINGLE_LINE</code> - display input as a single text field.</li>
+<li><code>MULTI_LINE</code> - display input as a multi-line text area.</li>
+<li><code>CODE</code> - display input as a multi-line text area with syntax highlighting</li>
+<li><code>PASSWORD</code> - display input as a password field</li>
+<li><code>STATIC_TEXT</code> - display static text without an input field, using the default value as the text</li>
+</ul></li>
+<li><code>instance-scope-node-attribute</code>
+<ul>
+<li>Value is the name of a Node attribute to use for instance-scoped properties for <em>Node Services</em> plugins <code>NodeExecutor</code> and <code>FileCopier</code> only.</li>
+</ul></li>
+<li><code>selectionAccessor</code>, values:
+<ul>
+<li><code>STORAGE_PATH</code> - display an additional input to select a Storage Path string from Rundeck’s <a href="../administration/security/key-storage.html">Key Storage Facility</a>.</li>
+</ul></li>
+<li><code>storage-path-root</code>
+<ul>
+<li>Value is a Storage Path indicating the root to use if the selectionAccessor is <code>STORAGE_PATH</code>.</li>
+</ul></li>
+<li><code>storage-file-meta-filter</code>
+<ul>
+<li>Value is a Storage metadata filter string, indicating the types of Storage Files to select from if selectionAccessor is <code>STORAGE_PATH</code>. Filt string format: <code>metadatakey=value</code>, e.g. <code>Rundeck-key-type=private</code>.</li>
+</ul></li>
+<li><code>valueConversion</code> defines a way to convert a the value of the resolved property. Allowed values:
+<ul>
+<li><code>STORAGE_PATH_AUTOMATIC_READ</code> - automatically loads the storage contents from the given Storage Path, replacing the path with the loaded file contents as a String. E.g. can be used to load a Password file contents.</li>
+<li><code>PRIVATE_DATA_CONTEXT</code> - automatically read a value from the Private data context, which contains Secure Authentication Job Option values. E.g. With this conversion enabled, a config value of “option.mypassword” would be replaced with the value of a secure authentication job option named “mypassword”.</li>
+<li><code>valueConversionFailure</code> can be used to indicate that if the Private data context, or Storage path data is not present, then the config data key should be removed. Allowed values:
+<ul>
+<li><code>remove</code> - remove the original config property value if the conversion is not successful</li>
+</ul></li>
+<li><code>staticTextContentType</code> if displayType is <code>STATIC_TEXT</code>, the content type for the defaultValue text. values:
+<ul>
+<li><code>text/html</code> render as sanitized HTML</li>
+<li><code>text/x-markdown</code> convert markdown text to sanitized HTML</li>
+<li>any other value or if not specified: render text directly</li>
+</ul></li>
+<li><code>groupName</code> specifies a group that the input field belongs to. If not specified the field will be in the primary, unnamed group. If specified, all fields with the same <code>groupName</code> value will be displayed in a common area under the group name.</li>
+<li><code>grouping</code> allowed value: <code>secondary</code>, indicates that the specified <code>groupName</code> should be shown in a collapsed state if no input values in that group have been set. If no <code>groupName</code> is set, then the field will be displayed under a group with a heading of “More”.</li>
+<li><code>codeSyntaxMode</code> - if displayType is <code>CODE</code>, name of a <a href="https://ace.c9.io">ACE editor mode</a> supported by Rundeck. One of: <code>batchfile</code>, <code>diff</code>, <code>dockerfile</code>, <code>golang</code>, <code>groovy</code>, <code>html</code>, <code>java</code>, <code>javscript</code>, <code>json</code>, <code>markdown</code>, <code>perl</code>, <code>php</code>, <code>powershell</code>, <code>properties</code>, <code>python</code>, <code>ruby</code>, <code>sh</code>, <code>sql</code>, <code>xml</code>, <code>yaml</code>.</li>
+<li><code>codeSyntaxSelectable</code> - if displayType is <code>CODE</code>, <code>true/false</code>: if true, show a select box for choosing from the available syntax highlighting modes.</li>
+</ul></li>
+</ul>
+<h2 id="plugin-localization">Plugin Localization</h2>
+<p>Since Rundeck Plugin Version 1.2 (Rundeck 2.6.10), Plugins support Internationalization (“i18n”) using Java properties files.</p>
+<p>Specify <code>rundeckPluginVersion: 1.2</code> in your plugin.yaml (script plugins) or <code>Rundeck-Plugin-Version: 1.2</code> in your jar Manifest (jar plugins) to enable Localization support.</p>
+<p>Include a <code>resources/i18n</code> directory in your jar/zip file, with localized versions of your Plugin messages.</p>
+<h3 id="resolving-localization-message-files">Resolving Localization Message Files</h3>
+<p>The mechanism for looking up the appropriate localization messages file is similar to the Spring Java library mechanism.</p>
+<ul>
+<li><code>resources/i18n/messages.properties</code> The default messages for the plugin provider(s). This file will be loaded if no other more specific messages file is found.</li>
+</ul>
+<p>When loading messages for a locale/language, this search order will be used,:</p>
+<ol type="1">
+<li><code>resources/i18n/messages_LANG_COUNTRY.properties</code> for requested Locale</li>
+<li><code>resources/i18n/messages_LANG.properties</code> for requested Locale</li>
+<li><code>resources/i18n/messages_LANG_COUNTRY.properties</code> for Default Locale for the JVM</li>
+<li><code>resources/i18n/messages_LANG.properties</code> for Default Locale for the JVM</li>
+<li><code>resources/i18n/messages.properties</code> as fallback</li>
+</ol>
+<p>In addition, specific messages files can be created for each Provider defined in your plugin file.</p>
+<ol type="1">
+<li><code>resources/i18n/SERVICE.PROVIDER.messages.properties</code> for requested Plugin Service and Provider names.</li>
+<li><code>resources/i18n/PROVIDER.messages.properties</code> for requested Provider name.</li>
+<li><code>resources/i18n/SERVICE.messages.properties</code> for requested Service name.</li>
+<li><code>resources/i18n/messages.properties</code> as fallback</li>
+</ol>
+<p>If you have multiple Providers in your plugin file, can use separate messages files for each provider.</p>
+<p>You can combine the Locale and Service/Provider:</p>
+<ul>
+<li><code>resources/i18n/SERVICE.PROVIDER.messages_LANG_COUNTRY.properties</code></li>
+</ul>
+<p>Here is an example:</p>
+<p><code>resources/i18n/WorkflowNodeStep.flow-control.messages_es_419.properties</code></p>
+<h3 id="defining-plugin-localization-messages">Defining Plugin Localization Messages</h3>
+<p>When displaying a plugin in the GUI, Rundeck will look for localized versions of text for the plugin, using the localization messages if they are found. If they are not found, it will use the text versions defined in the Plugin Description (Java annotations or plugin.yaml file).</p>
+<p>The <code>messages.properties</code> file is a <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Properties.html#load(java.io.Reader)">Java Properties Format</a> in <code>UTF-8</code> encoding.</p>
+<p>The following message Codes will be used:</p>
+<ul>
+<li><code>plugin.title</code> Plugin Title</li>
+<li><code>plugin.description</code> Plugin Description</li>
+<li><code>property.NAME.title</code> Title for configuration property named “NAME”</li>
+<li><code>property.NAME.description</code> Description for configuration property named “NAME”</li>
+</ul>
+<p>(<em>Note</em>: SCM Plugins have additional message codes. See: <a href="scm-plugins.html#localization">SCM Plugins - Localization</a>).</p>
+<p>Additionally, if a property has a <a href="#property-rendering-options">Property Rendering Option</a> marking it as <code>STATIC_TEXT</code> normally the <code>defaultValue</code> of the property is used to render it as text or HTML. This value can be localized as well:</p>
+<ul>
+<li><code>plugin.NAME.defaultValue</code> Static text/html for a STATIC_TEXT property named “NAME”</li>
+</ul>
+<p>The message code will be resolved using the following search pattern using the Service and Provider names:</p>
+<ol type="1">
+<li><code>SERVICE.PROVIDER.CODE</code></li>
+<li><code>PROVIDER.CODE</code></li>
+<li><code>SERVICE.CODE</code></li>
+<li><code>CODE</code></li>
+</ol>
+<p>Where <code>CODE</code> is one of the messages codes mentioned above.</p>
+<p>So for example you could define the titles of two different providers using this file:</p>
+<p><code>messages.properties</code></p>
+<pre class="properties"><code>provider1.plugin.title=My Provider 1
+provider2.plugin.title=My Provider 2</code></pre>
+<h2 id="plugin-icons">Plugin Icons</h2>
+<p>Since Rundeck Plugin Version 1.2 (Rundeck 2.6.10), Custom Icons can now be defined for your plugin.</p>
+<p>Specify <code>rundeckPluginVersion: 1.2</code> in your plugin.yaml (script plugins) or <code>Rundeck-Plugin-Version: 1.2</code> in your jar Manifest (jar plugins) to enable custom icon support.</p>
+<p>Include a <code>resources/</code> directory in your jar/zip file with your icon file. The icon is resolved by looking for a file in the resources directory using the following search pattern:</p>
+<ol type="1">
+<li><code>resources/SERVICE.PROVIDER.icon.png</code></li>
+<li><code>resources/PROVIDER.icon.png</code></li>
+<li><code>resources/SERVICE.icon.png</code></li>
+<li><code>resources/icon.png</code></li>
+</ol>
+<p>You can define a custom icon for each Provider in your plugin file, or a single icon for all providers.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.0-rc1)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="plugin-development.html">Plugin Development</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="plugin-annotations.html">Plugin Annotations <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-07-27T22:44:22UTC">2018-07-27T22:44:22UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
