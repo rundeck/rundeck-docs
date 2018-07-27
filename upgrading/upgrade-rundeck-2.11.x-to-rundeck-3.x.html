@@ -91,37 +91,25 @@ jQuery(function(){
 <h3 id="rundeck-launcher">Rundeck Launcher</h3>
 <p>The “launcher jar” for Rundeck 2 is gone. However, the .war file now operates the same way. Just use the .war in the same way as the previous launcher jar, or deploy it as a webapp.</p>
 <p>To upgrade to Rundeck 3 using launcher use the following steps:</p>
+<p><strong>NOTE: replace <code>$RDECK_BASE</code> below with the real path.</strong></p>
 <ul>
-<li><p>Stop Rundeck Service, eg: <code>.$RDECK_BASE/server/sbin/rundeckd stop</code></p></li>
-<li><p>In case you have customs plugins on <code>libext</code> folder, backup them. For example, you can move the full <code>libext</code>:</p></li>
-</ul>
-<pre><code>mv $RDECK_BASE/libext $RDECK_BASE/libext.2-11</code></pre>
-<ul>
-<li>Remove previous “source” folders:</li>
-</ul>
-<pre><code>rm -rf server/exp/ server/lib/ server/sbin</code></pre>
-<ul>
-<li>Copy the new war file to <code>$RDECK_BASE</code> and install it:</li>
-</ul>
-<pre><code>java -jar rundeck-3.X.war --installonly</code></pre>
-<ul>
-<li>Add the following attribute to <code>$RDECK_BASE/server/config/rundeck-config.properties</code></li>
-</ul>
-<pre><code>rundeck.log4j.config.file=$RDECK_BASE/server/config/log4j.properties</code></pre>
-<p>*replace <code>$RDECK_BASE</code> with the real path.</p>
-<ul>
-<li><p>Copy the “custom” plugins back to <code>.$RDECK_BASE/libext</code> folder</p></li>
-<li><p>Start rundeck 3: <code>.$RDECK_BASE/server/sbin/rundeckd start</code></p></li>
+<li><p>Stop Rundeck Service, eg: <code>$RDECK_BASE/server/sbin/rundeckd stop</code></p></li>
+<li><p>In case you have customs plugins on <code>libext</code> folder, backup them. For example, you can move the full <code>libext</code>:</p>
+<pre><code>mv $RDECK_BASE/libext $RDECK_BASE/libext.2-11</code></pre></li>
+<li><p>Remove previous “source” folders:</p>
+<pre><code>rm -rf server/exp/ server/lib/ server/sbin</code></pre></li>
+<li><p>Copy the new war file to <code>$RDECK_BASE</code> and install it:</p>
+<pre><code>java -jar rundeck-3.X.war --installonly</code></pre></li>
+<li><p>Add the following attribute to <code>$RDECK_BASE/server/config/rundeck-config.properties</code></p>
+<pre><code>rundeck.log4j.config.file=$RDECK_BASE/server/config/log4j.properties</code></pre></li>
+<li><p>Copy the “custom” plugins back to <code>$RDECK_BASE/libext</code> folder</p></li>
+<li><p>Start rundeck 3: <code>$RDECK_BASE/server/sbin/rundeckd start</code></p></li>
 </ul>
 <h3 id="rundeck-deb-package">Rundeck DEB Package</h3>
 <p>The upgrade process can be done using the <code>.deb</code> file or using the command <code>apt-get</code>:</p>
-<ul>
-<li>using deb package</li>
-</ul>
+<p><strong>If using deb package</strong></p>
 <pre><code>sudo dpkg -i rundeck-3.0.X.deb</code></pre>
-<ul>
-<li>from apt-get</li>
-</ul>
+<p><strong>If using apt-get</strong></p>
 <pre><code>sudo apt-get upgrade rundeck</code></pre>
 <p><strong>Configuration Files:</strong></p>
 <p>When the upgrade command is run, the upgrade process will prompt about what to do with the new version of config files. In the case of <code>rundeck-config.properties</code>, a merge needs to be done between the old and new version, because the attribute <code>rundeck.log4j.config.file</code> is needed on Rundeck 3 (this attribute is part of the default <code>rundeck-config.properties</code> template):</p>
@@ -150,19 +138,15 @@ jQuery(function(){
 drwxr-x--- 1 rundeck rundeck 4096 Jun  4 14:25 ssl</code></pre>
 <p>A restart is necessary after the merge of <code>rundeck-config.properties</code></p>
 <h3 id="rundeck-rpm-package">Rundeck RPM Package</h3>
-<p>The upgrade process can be done using the <code>.rmp</code> file or using the command <code>yum</code>:</p>
-<ul>
-<li>using rpm package</li>
-</ul>
+<p>The upgrade process can be done using the <code>.rpm</code> file or using the command <code>yum</code>:</p>
+<h4 id="using-rpm-files">using rpm files</h4>
 <pre><code>sh-4.2# rpm -U rundeck-3.x.rpm rundeck-config-3.X.rpm
 
 warning: /etc/rundeck/framework.properties created as /etc/rundeck/framework.properties.rpmnew
 warning: /etc/rundeck/rundeck-config.properties created as /etc/rundeck/rundeck-config.properties.rpmnew
 rundeck.server.uuid = XXXXXXXXXXXXXXX
 </code></pre>
-<ul>
-<li>Using yum</li>
-</ul>
+<h4 id="using-yum">Using yum</h4>
 <pre><code>sh-4.2#  yum upgrade rundeck rundeck-config</code></pre>
 <p>In the case of the RPM upgrade, the old properties files are not modified, and the new files are saved with the extension <code>.rpmnew</code>. For the configuration file <code>rundeck-config.properties</code> a merge is needed to include new default attribute (<code>rundeck.log4j.config.file</code>).</p>
 <pre><code>sh-4.2# ls -lrt
@@ -233,7 +217,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-07-27T16:46:24UTC">2018-07-27T16:46:24UTC</span>
+<span class="generated-date" title="2018-07-27T17:04:53UTC">2018-07-27T17:04:53UTC</span>
 </p>
 </footer>
 </div>
