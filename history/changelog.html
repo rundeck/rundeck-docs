@@ -545,6 +545,8 @@ jQuery(function(){
 <p>If using Mysql/other DBs which require a JDBC driver, be sure to specify it explicitly in the rundeck-config file, e.g. <code>dataSource.driverClassName=com.mysql.jdbc.Driver</code></p>
 <p><em>Oracle and other relational DB Support</em></p>
 <p>Support for Oracle is still considered experimental. We have confirmed that it works with oracle 12c and 11g, however we would like your feedback.</p>
+<p><em>Tomcat War deployment</em></p>
+<p>Due to changes in authentication, <code>tomcat-users.xml</code> and other Tomcat authentication modules no longer work. More information about upgrading with Tomcat will be posted on <a href="https://github.com/rundeck/rundeck/issues/3754">this github issue</a>.</p>
 <h2 id="upgrading">Upgrading</h2>
 <p>For the most part, Rundeck 3.0 is drop-in compatible with existing Rundeck 2.11 installations.</p>
 <p>We recommend doing a fresh install of 3.0.0 and copying your Jobs/projects into it for testing.</p>
@@ -2294,7 +2296,7 @@ jQuery(function(){
 <li><a href="https://github.com/rundeck/rundeck/pull/2068">Escape HTML characters in ExecutionController.renderOutput</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/2042">“Send Notification?” is hardcoded.</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/2040">attributes with dot in prefix do not render in gui</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/2039">using Job References, 2018-07-27T22:57:02UTC only gets expanded as option value in the top job.</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2039">using Job References, 2018-07-27T23:22:26UTC only gets expanded as option value in the top job.</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/2036">Feature Request: Enable linking to job with runbook tab opened</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/2030">More redhatcompliance init file, more easier to use profile file</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/2025">Feature/api job info</a></li>
@@ -4587,7 +4589,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-07-27T22:57:02UTC">2018-07-27T22:57:02UTC</span>
+<span class="generated-date" title="2018-07-27T23:22:26UTC">2018-07-27T23:22:26UTC</span>
 </p>
 </footer>
 </div>

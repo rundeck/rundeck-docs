@@ -81,6 +81,7 @@ jQuery(function(){
 <li><a href="#rundeck-launcher">Rundeck Launcher</a></li>
 <li><a href="#rundeck-deb-package">Rundeck DEB Package</a></li>
 <li><a href="#rundeck-rpm-package">Rundeck RPM Package</a></li>
+<li><a href="#tomcat-war-deployment">Tomcat War deployment</a></li>
 </ul>
 </div>
 </div>
@@ -167,6 +168,8 @@ drwxr-x--- 1 rundeck rundeck 4096 Jun  4 16:08 ssl</code></pre>
 <p>If the <code>profile</code> file was modified on 2.11.x, the new profile file (for 3.x) will be created with the name <code>profile.rpmnew</code>. If that is the case, merge the changes on the old file and move them to the new one, eg:</p>
 <pre><code>mv /etc/rundeck/profile.rpmnew /etc/rundeck/profile</code></pre>
 <p>A restart is necessary after the merge of <code>rundeck-config.properties</code> or/and <code>profile</code> file.</p>
+<h3 id="tomcat-war-deployment">Tomcat War deployment</h3>
+<p>Due to changes in authentication, <code>tomcat-users.xml</code> and other Tomcat authentication modules no longer work. More information about upgrading with Tomcat will be posted on <a href="https://github.com/rundeck/rundeck/issues/3754">this github issue</a>.</p>
 </div>
 </div>
 </div>
@@ -217,7 +220,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-07-27T22:57:02UTC">2018-07-27T22:57:02UTC</span>
+<span class="generated-date" title="2018-07-27T23:22:26UTC">2018-07-27T23:22:26UTC</span>
 </p>
 </footer>
 </div>
