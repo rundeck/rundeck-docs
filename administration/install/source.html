@@ -85,6 +85,7 @@ jQuery(function(){
 <div class="nav">
 <ul>
 <li><a href="#installing-from-source">Installing from Source</a></li>
+<li><a href="#documentation">Documentation</a></li>
 </ul>
 </div>
 </div>
@@ -94,18 +95,22 @@ jQuery(function(){
 </div>
 <h2 id="installing-from-source">Installing from Source</h2>
 <p>Checkout the sources from <a href="https://github.com/rundeck/rundeck">GitHub</a></p>
-<p>You can build either the launcher jar (self-running archive), or a RPM.</p>
+<p>You can build either the executable war (self-running archive), or a RPM/Deb.</p>
 <pre><code>./gradlew build</code></pre>
 <p>Creates artifacts:</p>
 <ul>
-<li><code>rundeckapp/target/rundeck-X.Y.war</code></li>
-<li><code>rundeck-launcher/launcher/build/libs/rundeck-launcher-X.Y.jar</code></li>
+<li><code>rundeckapp/build/libs/rundeck-X.Y.war</code></li>
 </ul>
-<p>Build the RPM:</p>
+<p>Build the RPM (requires <code>rpm</code> command):</p>
 <pre><code>make rpm</code></pre>
+<p>Build the DEB (requires <code>dpkg</code> command):</p>
+<pre><code>make deb</code></pre>
 <p>To build clean:</p>
 <pre><code>make clean</code></pre>
-<p>Documentation can be built using: <code>make clean docs</code>. Documentation build requires <a href="https://pandoc.org/">pandoc</a>. The RPM build depends on the documentation as well.</p>
+<h2 id="documentation">Documentation</h2>
+<p>The documentation is in a separate repo: <a href="https://github.com/rundeck/docs" class="uri">https://github.com/rundeck/docs</a>.</p>
+<p>Once you check out the documentation source, documentation can be built using: <code>make</code>.</p>
+<p>Documentation build requires <a href="https://pandoc.org/">pandoc</a> and <a href="http://groovy-lang.org/">groovy</a>.</p>
 </div>
 </div>
 </div>
@@ -164,7 +169,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-01T16:58:37UTC">2018-08-01T16:58:37UTC</span>
+<span class="generated-date" title="2018-08-01T21:40:24UTC">2018-08-01T21:40:24UTC</span>
 </p>
 </footer>
 </div>
