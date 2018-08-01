@@ -210,9 +210,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>You can change this value, by updating the <code>rundeck-config.properties</code> file.</p>
 <p>Please refer to the Quartz site for detailed information: <a href="http://www.quartz-scheduler.org/documentation/quartz-2.x/configuration/ConfigThreadPool.html#configure-threadpool-settings">Quartz - Configure ThreadPool Settings</a>.</p>
 <h4 id="update-rundeck-config">Update rundeck-config</h4>
-<p>Use the properties mentioned in the Quartz documentation, but <strong>replace</strong> the <code>org.quartz</code> prefix, with the prefix <code>quartz.props</code>.</p>
+<p>Use the properties mentioned in the Quartz documentation, but <strong>replace</strong> the <code>org.quartz</code> prefix, with the prefix <code>quartz</code>.</p>
 <p>e.g. in <code>rundeck-config.properties</code> :</p>
-<pre class="properties"><code>quartz.props.threadPool.threadCount = 20</code></pre>
+<pre class="properties"><code>quartz.threadPool.threadCount = 20</code></pre>
 <p>Set the threadCount value to the max number of threads you want to run concurrently.</p>
 <h3 id="jmx-instrumentation">JMX instrumentation</h3>
 <p>You may wish to monitor the internal operation of your Rundeck server via JMX.</p>
@@ -291,7 +291,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-07-31T18:35:02UTC">2018-07-31T18:35:02UTC</span>
+<span class="generated-date" title="2018-08-01T16:59:22UTC">2018-08-01T16:59:22UTC</span>
 </p>
 </footer>
 </div>
