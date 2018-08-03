@@ -101,15 +101,12 @@ jQuery(function(){
 <p>Rundeck customization and localization/internationalization.</p>
 <h2 id="messages-file">Messages file</h2>
 <p>Rundeck uses Grails, based on Spring, which provides localization/internationalization by means of a <code>messages</code> file.</p>
-<p>For reference, see <a href="https://docs.grails.org/2.5.6/guide/i18n.html">Grails Internationalization</a>.</p>
-<p>This file is in Java Properties format, and defines message strings.</p>
-<pre><code>webapp/WEB-INF/grails-app/i18n/messages.properties
-webapp/WEB-INF/grails-app/i18n/messages_es_419.properties</code></pre>
-<p>The default <code>messages.properties</code> file contains English/US strings, and formats. The file <code>messages_es_419.properties</code> defines Spanish strings.</p>
-<p>You can create a custom messages file for your locale, by duplicating the <code>messages.properties</code> file and translating the text strings, or altering the format strings.</p>
+<p>For reference, see <a href="https://docs.grails.org/latest/guide/i18n.html">Grails Internationalization</a>.</p>
+<p>In order to add or override default localized messages you can create a new file: <code>RDECK_BASE/i18n/messages.properties</code> and place your overrides in that file, according to the normal <code>messages.properties</code> format.</p>
+<p>To override messages for a language other than English, follow the normal process for supplying these messages by adding the appropriate locale qualifier to your <code>messages.properties</code> file. For example, the file name for Spanish strings would be: <code>messages_es_419.properties</code></p>
 <p>The Locale code you use is based on language code and country code.</p>
 <h3 id="testing-your-changes">Testing your changes</h3>
-<p>You can <a href="https://docs.grails.org/2.5.6/guide/i18n.html#changingLocales">change the locale used in Rundeck</a> by appending a <code>?lang=XX</code> to the URL in your request.</p>
+<p>You can <a href="https://docs.grails.org/latest/guide/i18n.html#changingLocales">change the locale used in Rundeck</a> by appending a <code>?lang=XX</code> to the URL in your request.</p>
 <h3 id="missing-strings">Missing Strings</h3>
 <p>Not all of the Rundeck GUI uses localized strings yet. If you find a page in Rundeck that doesn’t seem to use appropriate localization of English text, please <a href="https://github.com/rundeck/rundeck/issues/new?title=Missing%20i18n%20Text%3A%20___&amp;body=i18n%20support%20is%20missing%20on%20page%3A%20___%0A%0AText%3A%20___&amp;labels%5B%5D=i18n">Submit an issue report</a>.</p>
 <h3 id="submit-a-pull-request">Submit a Pull Request</h3>
@@ -185,7 +182,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-02T18:45:41UTC">2018-08-02T18:45:41UTC</span>
+<span class="generated-date" title="2018-08-03T17:21:09UTC">2018-08-03T17:21:09UTC</span>
 </p>
 </footer>
 </div>

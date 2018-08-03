@@ -105,8 +105,6 @@ http://support.rundeck.com/customer/en/portal/articles/2415681-oracle-setup)
 <p><a href="http://www.oracle.com/technetwork/database/features/jdbc/default-2280470.html" class="uri">http://www.oracle.com/technetwork/database/features/jdbc/default-2280470.html</a></p>
 <ul>
 <li>Copy the downloaded file <code>ojdbc7.jar</code> to the <code>$RDECK_BASE/server/lib</code></li>
-<li>Download the “rundeck-oracle-dialect” jar file, located at <a href="https://github.com/gschueler/rundeck_oracle_dialect/releases">gschueler/rundeck_oracle_dialect</a>.</li>
-<li>Copy the <code>rundeck-oracle-dialect-0.1.1.jar</code> file to <code>$RDECK_BASE/server/lib</code></li>
 <li>Update <code>$RDECK_BASE/etc/rundeck-config.properties</code>:</li>
 </ul>
 <pre><code>
@@ -114,7 +112,7 @@ dataSource.url = jdbc:oracle:thin:@127.0.0.1:1521:orcl # (change server name and
 dataSource.driverClassName = oracle.jdbc.driver.OracleDriver
 dataSource.username = XXXXXX
 dataSource.password = XXXXXXX
-dataSource.dialect = com.rundeck.hibernate.RundeckOracleDialect
+dataSource.dialect = org.rundeck.hibernate.RundeckOracleDialect
 dataSource.properties.validationQuery = SELECT 1 FROM DUAL</code></pre>
 </div>
 </div>
@@ -176,7 +174,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-02T18:45:41UTC">2018-08-02T18:45:41UTC</span>
+<span class="generated-date" title="2018-08-03T17:21:09UTC">2018-08-03T17:21:09UTC</span>
 </p>
 </footer>
 </div>
