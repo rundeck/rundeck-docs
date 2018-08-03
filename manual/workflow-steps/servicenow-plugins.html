@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ServiceNow Plugins</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <link rel="stylesheet" href="../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.1)</a></li>
+    
+        <li><a href="../index.html">User Guide</a></li>
+    
+    
+    
+    <li class="active"><a href="servicenow-plugins.html">ServiceNow Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="progress-badge-plugin-pro.html">Progress Badge Plugin (Pro) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/workflow-steps/servicenow.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#change-case-state-workflowstep">Change case state Workflowstep</a><ul>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#usage">Usage</a></li>
+</ul></li>
+<li><a href="#check-assigned-cases-workflowstep">Check assigned cases Workflowstep</a><ul>
+<li><a href="#configuration-1">Configuration</a></li>
+<li><a href="#usage-1">Usage</a></li>
+</ul></li>
+<li><a href="#check-case-state-workflowstep">Check case state Workflowstep</a><ul>
+<li><a href="#configuration-2">Configuration</a></li>
+<li><a href="#usage-2">Usage</a></li>
+</ul></li>
+<li><a href="#comment-case-workflowstep">Comment case Workflowstep</a><ul>
+<li><a href="#configuration-3">Configuration</a></li>
+</ul></li>
+<li><a href="#create-case-workflowstep">Create case Workflowstep</a><ul>
+<li><a href="#configuration-4">Configuration</a></li>
+<li><a href="#usage-3">Usage</a></li>
+</ul></li>
+<li><a href="#comment-case-notification">Comment case Notification</a><ul>
+<li><a href="#configuration-5">Configuration</a></li>
+</ul></li>
+<li><a href="#create-case-notification">Create case Notification</a><ul>
+<li><a href="#configuration-6">Configuration</a></li>
+<li><a href="#usage-4">Usage</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">ServiceNow Plugins</h1>
+</div>
+<!---
+Original: 
+http://support.rundeck.com/customer/en/portal/articles/2915300-servicenow-plugins)
+--->
+<h2 id="change-case-state-workflowstep">Change case state Workflowstep</h2>
+<p>Rundeck workflow step that changes an incident state</p>
+<h3 id="configuration">Configuration</h3>
+<p>The Service Now connection credentials are set in the project.properties file for your project. Password it’s a keystorage path to the password.</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Incident-Change-State.url=https://server.service-now.com
+project.plugin.WorkflowStep.Service-Now-Incident-Change-State.login=user
+project.plugin.WorkflowStep.Service-Now-Incident-Change-State.password-key-storage-path=keys/servicenow/pass</code></pre>
+<p>or in <code>framework.properties</code></p>
+<pre><code>servicenow.url=https://server.service-now.com
+servicenow.login=user
+servicenow.password-key-storage-path=keys/servicenow/pass</code></pre>
+<h3 id="usage">Usage</h3>
+<p>To use the plugin, configure the follow mandatory inputs.</p>
+<ul>
+<li>number: The Incident number to be updated.</li>
+<li>newState: The new state of the Incident. It can be the number of the state or the description.</li>
+</ul>
+<h2 id="check-assigned-cases-workflowstep">Check assigned cases Workflowstep</h2>
+<p>Rundeck workflow step that checks assigned incidents</p>
+<h3 id="configuration-1">Configuration</h3>
+<p>The Service Now connection credentials are set in the project.properties file for your project. Password it’s a keystorage path to the password.</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Incident-Check-Assigned.login=user
+project.plugin.WorkflowStep.Service-Now-Incident-Check-Assigned.password-key-storage-path=keys/servicenow/pass
+project.plugin.WorkflowStep.Service-Now-Incident-Check-Assigned.url=https://server.service-now.com</code></pre>
+<p>or in <code>framework.properties</code></p>
+<pre><code>servicenow.url=https://server.service-now.com
+servicenow.login=user
+servicenow.password-key-storage-path=keys/servicenow/pass</code></pre>
+<h3 id="usage-1">Usage</h3>
+<p>To use the plugin, configure the follow mandatory inputs.</p>
+<ul>
+<li>caller: the username of the Caller field on the Incident.</li>
+</ul>
+<p>This inputs is optional</p>
+<ul>
+<li>state: If you want you can enter a state number or description to add to the search, this way the incidents assigned to the caller only on this state are going to be considered.</li>
+</ul>
+<h2 id="check-case-state-workflowstep">Check case state Workflowstep</h2>
+<p>Rundeck workflow step that checks an incident state</p>
+<h3 id="configuration-2">Configuration</h3>
+<p>The Service Now connection credentials are set in the project.properties file for your project. Password it’s a keystorage path to the password.</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Incident-Check-State.login=user
+project.plugin.WorkflowStep.Service-Now-Incident-Check-State.password-key-storage-path=keys/servicenow/pass
+project.plugin.WorkflowStep.Service-Now-Incident-Check-State.url=https://server.service-now.com</code></pre>
+<p>or in <code>framework.properties</code></p>
+<pre><code>servicenow.url=https://server.service-now.com
+servicenow.login=user
+servicenow.password-key-storage-path=keys/servicenow/pass</code></pre>
+<h3 id="usage-2">Usage</h3>
+<p>To use the plugin, configure the follow mandatory inputs.</p>
+<ul>
+<li>number: The Incident number to be checked.</li>
+<li>state: The state to be checked. It can be the number of the state or the description.</li>
+</ul>
+<h2 id="comment-case-workflowstep">Comment case Workflowstep</h2>
+<p>Rundeck workflow step that comments an incident</p>
+<h3 id="configuration-3">Configuration</h3>
+<p>The Service Now connection credentials are set in the project.properties file for your project. Password it’s a keystorage path to the password.</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Comment.login=user
+project.plugin.WorkflowStep.Service-Now-Comment.password-key-storage-path=keys/servicenow/pass
+project.plugin.WorkflowStep.Service-Now-Comment.url=https://server.service-now.com</code></pre>
+<p>or in <code>framework.properties</code></p>
+<pre><code>servicenow.url=https://server.service-now.com
+servicenow.login=user
+servicenow.password-key-storage-path=keys/servicenow/pass</code></pre>
+<h2 id="create-case-workflowstep">Create case Workflowstep</h2>
+<p>Rundeck workflow step that creates an incident</p>
+<h3 id="configuration-4">Configuration</h3>
+<p>The Service Now connection credentials are set in the project.properties file for your project. Password it’s a keystorage path to the password.</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Incident-Create.login=user
+project.plugin.WorkflowStep.Service-Now-Incident-Create.password-key-storage-path=keys/servicenow/pass
+project.plugin.WorkflowStep.Service-Now-Incident-Create.url=https://server.service-now.com</code></pre>
+<p>or in <code>framework.properties</code></p>
+<pre><code>servicenow.url=https://server.service-now.com
+servicenow.login=user
+servicenow.password-key-storage-path=keys/servicenow/pass</code></pre>
+<h3 id="usage-3">Usage</h3>
+<p>To use the plugin, configure the follow mandatory inputs.</p>
+<ul>
+<li>caller: the username of the assigned Caller field of the Incident.</li>
+<li>description: Short Description of the Incident</li>
+</ul>
+<p>These inputs are optional and if leave empty the default value of Service now it’s going to be used</p>
+<ul>
+<li>urgency: A number representing the urgency of the incident (usually being 1 the most urgent)</li>
+<li>impact: A number representing the impact of the incident (usually being 1 the higher urgent)</li>
+<li>priority: A number representing the priority of the incident (calculated from urgency and impact)</li>
+</ul>
+<h2 id="comment-case-notification">Comment case Notification</h2>
+<p>Rundeck workflow step that coments an incident</p>
+<h3 id="configuration-5">Configuration</h3>
+<p>The Service Now connection credentials are set in the project.properties file for your project.</p>
+<pre><code>project.plugin.Notification.Service-Now-Notification.login=user
+project.plugin.Notification.Service-Now-Notification.password=s3cret
+project.plugin.Notification.Service-Now-Notification.url=https://server.service-now.com</code></pre>
+<h2 id="create-case-notification">Create case Notification</h2>
+<p>Rundeck workflow step that creates an incident</p>
+<h3 id="configuration-6">Configuration</h3>
+<p>The Service Now connection credentials are set in the project.properties file for your project.</p>
+<pre><code>project.plugin.Notification.Service-Now-Notification.login=user
+project.plugin.Notification.Service-Now-Notification.password=s3cret
+project.plugin.Notification.Service-Now-Notification.url=https://server.service-now.com</code></pre>
+<h3 id="usage-4">Usage</h3>
+<p>To use the plugin, configure this mandatory input:</p>
+<ul>
+<li>caller: the username of the assigned Caller field of the Incident.</li>
+</ul>
+<p>These inputs are optional and if leave empty the default value of Service now it’s going to be used</p>
+<ul>
+<li>urgency: A number representing the urgency of the incident (usually being 1 the most urgent)</li>
+<li>impact: A number representing the impact of the incident (usually being 1 the higher urgent)</li>
+<li>priority: A number representing the priority of the incident (calculated from urgency and impact)</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.1)</a></li>
+    
+        <li><a href="../index.html">User Guide</a></li>
+    
+    
+    
+    <li class="active"><a href="servicenow-plugins.html">ServiceNow Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="progress-badge-plugin-pro.html">Progress Badge Plugin (Pro) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/workflow-steps/servicenow.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-08-03T23:28:58UTC">2018-08-03T23:28:58UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>

@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>rd-acl</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="author" content="Alex Honor" />
+  <meta name="date" content="April 6, 2015" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.1)</a></li>
+    
+    
+    <li ><a href="index.html">Command Line Tools</a></li>
+    <li class="active"><a href="rd-acl.html">rd-acl</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="dispatch.html"><i class="glyphicon glyphicon-arrow-left"></i> dispatch</a></li>
+      <li class="next"><a href="rd-jobs.html">rd-jobs <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manpages/man1/rd-acl.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#name">Name</a></li>
+<li><a href="#synopsis">Synopsis</a></li>
+<li><a href="#description">Description</a></li>
+<li><a href="#related">Related</a></li>
+<li><a href="#options">Options</a><ul>
+<li><a href="#test-and-validate-command-options">Test and Validate Command Options</a></li>
+<li><a href="#create-command-options">Create Command Options</a></li>
+<li><a href="#common-options">Common Options</a></li>
+<li><a href="#list-command-options">List Command Options</a></li>
+</ul></li>
+<li><a href="#test-command">Test Command</a></li>
+<li><a href="#list-command">List Command</a></li>
+<li><a href="#create-command">Create Command</a></li>
+<li><a href="#validate-command">Validate Command</a></li>
+<li><a href="#see-also">See Also</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">rd-acl</h1>
+</div>
+<h2 id="name">Name</h2>
+<p>rd-acl - Test and generate Rundeck ACL policy files.</p>
+<h2 id="synopsis">Synopsis</h2>
+<p><code>rd-acl [*command*] [*command options*]...</code></p>
+<h2 id="description">Description</h2>
+<p>The rd-acl command can test aclpolicy files to check whether they will allow a certain action request or not.</p>
+<p>It can also list the results for all defined access tests for a user or group.</p>
+<p>It can also generate the correct policy for a certain action. This can be done in a semi-interactive mode by specifying each <a href="#common-options">Common Option</a> in turn, allowing it to prompt you with a set of next possible options.</p>
+<p>It can also take as input the output from the Rundeck AUDIT log, and generate ACL policy definitions to allow any disallowed actions.</p>
+<p>It can also validate one or more files.</p>
+<p>The tool works in these <em>COMMAND</em> modes:</p>
+<dl>
+<dt><code>test</code></dt>
+<dd>test one or more aclpolicy files to determine if an action would be allowed.
+</dd>
+<dt><code>list</code></dt>
+<dd>list all access tests for a user or group for one or more aclpolicy files.
+</dd>
+<dt><code>create</code></dt>
+<dd>generate the correct ACL policy YAML definition for a specific action, or to allow a previously rejected action as logged in the Rundeck AUDIT log.
+</dd>
+<dt><code>validate</code></dt>
+<dd>Validate a file or directory of files, and print messages about problems with the files.
+</dd>
+</dl>
+<h2 id="related">Related</h2>
+<p>See:</p>
+<ul>
+<li><a href="../man5/aclpolicy.html">ACL Policy syntax</a></li>
+<li><a href="../administration/access-control-policy.html">Access Control Policy</a></li>
+</ul>
+<h2 id="options">Options</h2>
+<dl>
+<dt><code>-h, --help</code></dt>
+<dd>Print usage message.
+</dd>
+<dt><code>-v, --verbose</code></dt>
+<dd>Run verbosely.
+</dd>
+</dl>
+<h3 id="test-and-validate-command-options">Test and Validate Command Options</h3>
+<p>The <code>test</code> and <code>validate</code> commands take these input options.</p>
+<dl>
+<dt><code>-d, --dir &lt;dir&gt;</code></dt>
+<dd>Directory. Load all policy files in the specified directory.
+</dd>
+<dt><code>-f, --file &lt;file&gt;</code></dt>
+<dd>File path. Load the specified aclpolicy file.
+</dd>
+<dt><code>-v</code></dt>
+<dd>If the tested action is not allowed, print the necessary ACL policy to allow it (as per the <code>create</code> action.)
+</dd>
+</dl>
+<p>One of <code>--dir</code> or <code>--file</code> is required for the <code>test</code> command. If the rdeck.base system property is defined, then the Rundeck “etc” dir will be used as for the <code>--dir</code> option by default.</p>
+<p>In addition, the <code>test</code> command also takes the <a href="#common-options">Common Options</a> and these options:</p>
+<dl>
+<dt><code>-V, --validate</code></dt>
+<dd>Validate all input files, and exit with non-zero exit code if validation fails. (<code>test</code> and <code>list</code> actions.)
+</dd>
+</dl>
+<h3 id="create-command-options">Create Command Options</h3>
+<p>In addition to the <a href="#common-options">Common Options</a>, the <code>create</code> command takes these input options.</p>
+<dl>
+<dt><code>-i, --input &lt;file | -&gt;</code></dt>
+<dd>Parse the Rundeck AUDIT log input, and for any REJECTED decisions, generate the appropriate aclpolicy to allow the action. If the value of the <code>--input</code> option is <code>-</code> (dash character), then the STDIN is read. If <code>--input</code> is used, then the Common Options are ignored.
+</dd>
+<dt><code>-r, --regex</code></dt>
+<dd>Match the resource using regular expressions. (create command).
+</dd>
+</dl>
+<h3 id="common-options">Common Options</h3>
+<p>These options define the Context, Subject, Action, and Resource, which are used both to define an Access Request (for the <code>test</code> command), and to define a rule in the ACL Policy (for the <code>create</code> command).</p>
+<p><strong>Context options:</strong></p>
+<dl>
+<dt><code>-c,--context &lt;application | project&gt;</code></dt>
+<dd>Context: either ‘project’ or ‘application’. For project context, the <code>-p,--project</code> option is required.
+</dd>
+</dl>
+<p><strong>Subject options:</strong></p>
+<dl>
+<dt><code>-g,--groups &lt;group,...&gt;</code></dt>
+<dd>Subject Groups names. Comma-separated list of user groups to validate (test command) or for by: clause (create command).
+</dd>
+<dt><code>-u,--user &lt;user,...&gt;</code></dt>
+<dd>Subject User name. Comma-separated list of user names to validate (test command) or for by: clause (create command).
+</dd>
+</dl>
+<p><strong>Action options:</strong></p>
+<dl>
+<dt><code>-a,--allow &lt;action,...&gt;</code></dt>
+<dd>Actions to test are allowed (test command) or to allow (create command).
+</dd>
+<dt><code>-D,--deny &lt;action,...&gt;</code></dt>
+<dd>Actions to test are denied (test command) or to deny (create command).
+</dd>
+</dl>
+<p><strong>Resource Options:</strong></p>
+<p>Resources are characterized as either “specific resources”, or “resource types” (see <a href="../administration/access-control-policy.html#specific-resources-and-resource-types">Specific Resources and Resource Types</a>). You can specify “resource types” using the <code>-G, --generic &lt;kind&gt;</code> option. All specific resources can be specified directly using one of the options, or by type using <code>-R, --resource &lt;type&gt;</code> in combination with <code>-b, --attributes &lt;attr=val ...&gt;</code>.</p>
+<dl>
+<dt><code>-G,--generic &lt;kind&gt;</code></dt>
+<dd>Generic resource kind.
+</dd>
+<dt><code>-R,--resource &lt;type&gt;</code></dt>
+<dd>Resource type name.
+</dd>
+<dt><code>-b,--attributes &lt;key=value ...&gt;</code></dt>
+<dd>Attributes for the resource. A sequence of key=value pairs, multiple pairs can follow with a space. Use a value of ‘?’ to see suggestions.
+</dd>
+</dl>
+<p>The following define <a href="../administration/access-control-policy.html#project-scope-resources-and-actions">Project scope resources</a>:</p>
+<dl>
+<dt><code>-A,--adhoc</code></dt>
+<dd>Adhoc execution (project context)
+</dd>
+<dt><code>-j,--job &lt;group/name&gt;</code></dt>
+<dd>Job group/name. (project context)
+</dd>
+<dt><code>-I,--jobUuid &lt;uuid&gt;</code></dt>
+<dd>Job uuid. (project context)
+</dd>
+<dt><code>-n,--node &lt;nodename&gt;</code></dt>
+<dd>Node name. (project context)
+</dd>
+<dt><code>-t,--tags &lt;tag,..&gt;</code></dt>
+<dd>Node tags. If specified, the resource match will be defined using ‘contains’. (project context)
+</dd>
+</dl>
+<p>The following define <a href="../administration/access-control-policy.html#application-scope-resources-and-actions">Application scope resources</a>:</p>
+<dl>
+<dt><code>-s,--storage &lt;path/file&gt;</code></dt>
+<dd>Storage path/name. (application context)
+</dd>
+<dt><code>-p,--project &lt;project&gt;</code></dt>
+<dd>Name of project, used in project context or for application resource.
+</dd>
+</dl>
+<h3 id="list-command-options">List Command Options</h3>
+<p>The <code>list</code> command uses these <a href="#test-command-options">Test Command Options</a> to set the aclpolicy files to be evaluated: <code>-f,--file</code> and <code>-d,--dir</code>.</p>
+<p>It also allows these options from the <a href="#common-options">Common Options</a>:</p>
+<p>The Subject options: <code>-g,--groups</code> and <code>-u,--user</code></p>
+<p>These Resource options:</p>
+<ul>
+<li><code>-p,--project</code> name of a project to test</li>
+<li><code>-s,--storage</code> Storage path/name</li>
+<li><code>-n,--node</code> or <code>-t,--tags</code> name or tags of a node to tests</li>
+<li><code>-j,--job</code> Job group/name.</li>
+<li><code>-I,--jobUuid</code> Job uuid.</li>
+</ul>
+<h2 id="test-command">Test Command</h2>
+<p>The Test command loads the specified aclpolicy file or directory of files, and evaluates the Access Request defined by the <a href="#common-options">Common Options</a>, and emits the decision of whether the request is allowed, disallowed, or denied. If it is allowed, then <code>rd-acl</code> will exit with a 0 exit code, otherwise it will exit with 2 exit code.</p>
+<p>If the <code>-v, --verbose</code> flag is enabled, and the decision was not “allowed”, then it will additionally automatically invoke the <a href="#create-command">Create Command</a> to generate an aclpolicy definition to allow the requested action.</p>
+<p><strong>Note:</strong> If the decision was “denied”, then that indicates a specific DENY rule matches the Access Request. A DENY rule that matches will override all ALLOW rules that match.</p>
+<p><em>Examples</em></p>
+<p>Test all aclpolicy files in the Rundeck “etc” directory by default, with an allowed result for <code>read</code> action:</p>
+<pre><code>rd-acl test --context application --groups test --storage keys/test1.pem --allow read
+Using configured Rundeck etc dir: /etc/rundeck
+The result was: allowed</code></pre>
+<p>Test all aclpolicy files in the Rundeck “etc” directory by default, with a rejected result for <code>create</code> action:</p>
+<pre><code>rd-acl test --context application --groups test --storage keys/key1.pem --allow create
+Using configured Rundeck etc dir: /etc/rundeck
+Result: REJECTED
+The result was: not allowed</code></pre>
+<p>The same as above, using the <code>--verbose</code> flag</p>
+<pre><code>rd-acl test --context application --groups test --storage keys/key1.pem --allow create -v
+Using configured Rundeck etc dir: /etc/rundeck
+Result: REJECTED
+Decision for: res&lt;name:key1.pem, path:keys, type:storage&gt; subject&lt;Username:user Group:test&gt; action&lt;create&gt; env&lt;http://dtolabs.com/rundeck/env/application:rundeck&gt;: authorized: false: REJECTED, reason: REJECTED, evaluations: None
+The result was: not allowed
+Policies to allow the requested actions:
+## create or append this to a .aclpolicy file
+---
+for:
+  storage:
+  - allow: create
+    equals:
+      name: key1.pem
+      path: keys
+description: generated
+context:
+  application: rundeck
+by:
+  group: test</code></pre>
+<h2 id="list-command">List Command</h2>
+<p>The List command loads the specified aclpolicy file or directory of files, and evaluates all access requests possible for the specified Group or User. It lists the decision of whether each request is allowed, disallowed, or denied.</p>
+<p>Further evaluations can be done by supplying some concrete values to identify a Project, Nodes, Jobs, and a Storage path.</p>
+<p>If the <code>-v, --verbose</code> flag is enabled, and the decision was “denied”, then it will print the decision details including the file name of the policy rule that denies the request.</p>
+<p>In the output, a line starting with <code>-</code> indicates the action was rejected, <code>+</code> indicates the action was allowed, and <code>!</code> indicates the action was denied.</p>
+<p>The evaluation lines are in the form:</p>
+<pre><code>&lt;result&gt; &lt;action&gt;: &lt;resource&gt; [&lt;reason&gt;]</code></pre>
+<p><em>Examples</em></p>
+<p>List results for just a group name:</p>
+<pre><code>rd-acl list -g api_token_group
+Using configured Rundeck etc dir: /etc/rundeck
+# Application Context access for group api_token_group
+
+
+(No project (-p) specified, skipping Application context actions for a specific project.)
+
+
+(No storage path (-s) specified, skipping Application context actions for a specific storage path.)
+
+- create: project [REJECTED]
++ read: system
+- admin: job [REJECTED]
+- admin: user [REJECTED]
+
+(No project (-p) specified, skipping Project context listing.)</code></pre>
+<p>Add a <code>-p</code> to specify a project:</p>
+<pre><code>rd-acl list  -g api_token_group -p test
+Using configured Rundeck etc dir: /etc/rundeck
+# Application Context access for group api_token_group
+
+- admin: project named &quot;test&quot; [REJECTED]
+- delete_execution: project named &quot;test&quot; [REJECTED]
+- import: project named &quot;test&quot; [REJECTED]
++ read: project named &quot;test&quot;
+- export: project named &quot;test&quot; [REJECTED]
+- configure: project named &quot;test&quot; [REJECTED]
+- delete: project named &quot;test&quot; [REJECTED]
+
+(No storage path (-s) specified, skipping Application context actions for a specific storage path.)
+
+- create: project [REJECTED]
++ read: system
+- admin: job [REJECTED]
+- admin: user [REJECTED]
+
+# Project &quot;test&quot; access for group api_token_group
+
+- runAs: Adhoc executions [REJECTED]
++ kill: Adhoc executions
++ run: Adhoc executions
++ read: Adhoc executions
+- killAs: Adhoc executions [REJECTED]
+
+(No job (-j) specified, skipping Project context actions for a specific job.)
+
+
+(No node (-n) or tags (-t) specified, skipping Project context actions for a specific node or node tags.)
+
++ read: node
++ refresh: node
++ create: node
++ update: node
++ create: event
++ read: event
++ create: job
++ delete: job</code></pre>
+<p>Include <code>-j</code>, <code>-n</code> and <code>-s</code>:</p>
+<pre><code>rd-acl list  -g api_token_group -p test -s keys/boingo.pem -j test/job -n mynode
+Using configured Rundeck etc dir: /etc/rundeck
+# Application Context access for group api_token_group
+
+- configure: project named &quot;test&quot; [REJECTED]
+- import: project named &quot;test&quot; [REJECTED]
+- export: project named &quot;test&quot; [REJECTED]
+- delete: project named &quot;test&quot; [REJECTED]
+- delete_execution: project named &quot;test&quot; [REJECTED]
++ read: project named &quot;test&quot;
+- admin: project named &quot;test&quot; [REJECTED]
++ read: storage path &quot;keys/boingo.pem&quot;
++ update: storage path &quot;keys/boingo.pem&quot;
+! delete: storage path &quot;keys/boingo.pem&quot; [REJECTED_DENIED]
++ create: storage path &quot;keys/boingo.pem&quot;
+- create: project [REJECTED]
++ read: system
+- admin: job [REJECTED]
+- admin: user [REJECTED]
+
+# Project &quot;test&quot; access for group api_token_group
+
+- runAs: Adhoc executions [REJECTED]
+- killAs: Adhoc executions [REJECTED]
++ kill: Adhoc executions
++ run: Adhoc executions
++ read: Adhoc executions
++ run: Job &quot;test/job&quot;
+- runAs: Job &quot;test/job&quot; [REJECTED]
++ create: Job &quot;test/job&quot;
++ read: Job &quot;test/job&quot;
++ delete: Job &quot;test/job&quot;
++ update: Job &quot;test/job&quot;
+- killAs: Job &quot;test/job&quot; [REJECTED]
++ kill: Job &quot;test/job&quot;
++ read: Node &quot;mynode&quot;
++ run: Node &quot;mynode&quot;
++ update: node
++ refresh: node
++ read: node
++ create: node
++ create: event
++ read: event
++ delete: job
++ create: job</code></pre>
+<p>Using the <code>-v</code> verbose flag shows more detail about the REJECTED_DENIED result:</p>
+<pre><code>rd-acl list  -g api_token_group -p test -s keys/boingo.pem -v
+Using configured Rundeck etc dir: /etc/rundeck
+# Application Context access for group api_token_group
+
+...snip
+! delete: storage path &quot;keys/boingo.pem&quot; [REJECTED_DENIED]
+  REJECTED, reason: REJECTED_DENIED, evaluations:   /etc/rundeck/apitoken.aclpolicy[2][rule: 1: {match={path=(keys|keys/.*)}, allow=*, deny=delete}] for actions: [delete] =&gt; REJECTED_DENIED
+...snip
+</code></pre>
+<h2 id="create-command">Create Command</h2>
+<p>The Create Command can generate ACL Policy YAML definitions based on the <a href="#common-options">Common Options</a>. It can also parse the output from an authorization evaluation, as logged in the Rundeck AUDIT log, and generate the policy necessary to allow any REJECTED evaluations. In the case of DENIED evaluations, it will still generate a policy to allow the access request, but note that the DENY rule would need to be removed to actually allow the specified action.</p>
+<p>Create has a “semi-interactive” behavior. If you enter only some components of the Subject, Context, Action and Resource necessary to define a rule, then it will prompt with some possible values for the next component.</p>
+<p><em>Examples</em></p>
+<p>Begin by typing the <code>create</code> command with no options</p>
+<pre><code>rd-acl create 
+-c/--context is required.
+Choose one of: 
+  -c application
+    Access to projects, users, storage, system info.
+  -c project
+    Access to jobs, nodes, events, within a project.</code></pre>
+<p>Add a <code>-c project</code> option:</p>
+<pre><code>rd-acl create -c project
+-p/--project is required.
+Choose the name of a project, or .*: 
+  -p myproject
+  -p &#39;.*&#39;</code></pre>
+<p>Add a <code>-p</code> option:</p>
+<pre><code>rd-acl create -c project -p &#39;.*&#39;
+-g/--groups &lt;group,...&gt; or -u/--user &lt;user,...&gt; are required
+  -u user1,user2... 
+  -g group1,group2... 
+    Groups control access for a set of users, and correspond
+    to authorization roles.</code></pre>
+<p>Add a <code>-g</code> option:</p>
+<pre><code>rd-acl create -c project -p &#39;.*&#39; -g test
+Project-context resource option is required.
+Possible options:
+  Job: -j/--job &lt;group/name&gt;
+    View, modify, create*, delete*, run, and kill specific jobs.
+    * Create and delete also require additional -G/--generic &lt;kind&gt; level access.
+  Adhoc: -A/--adhoc
+    View, run, and kill adhoc commands.
+  Node: -n/--node &lt;nodename&gt;
+      : -t/--tags &lt;tag,..&gt;
+    View and run on specific nodes by name or tag.
+  Resource: -R/--resource &lt;type&gt;
+    Specify the resource type directly. -b/--attributes &lt;key=value ...&gt; should also be used.
+    resource types in this context: 
+    node
+    job
+    adhoc
+  Generic: -G/--generic &lt;kind&gt;
+    Create and delete jobs.
+    View and manage nodes.
+    View events.
+    generic kinds in this context: 
+    node
+    event
+    job</code></pre>
+<p>Here we see several options to specify the resource. the <code>Job</code>, <code>Adhoc</code> and <code>Node</code> options define both the resource type, and some resource attributes. The <code>-R</code> option can set the resource type directly, and then the <code>-b</code> attributes option can be used to define the attributes.<br />
+Otherwise the <code>-G</code> option can be used to match a resource kind.</p>
+<p>We will specify node tags using <code>-t</code>:</p>
+<pre><code>rd-acl create -c project -p &#39;.*&#39; -g test -t prod,www
+-a/--allow or -D/--deny is required.
+  -a action1,action2,...
+  -D action1,action2,...
+Possible actions in this context: 
+  *
+  read
+  run</code></pre>
+<p>Now we are prompted to choose actions to allow or deny for the rule, and the ACL policy definition is printed.</p>
+<pre><code>rd-acl create -c project -p &#39;.*&#39; -g test -t prod,www -a read -D run
+## create or append this to a .aclpolicy file
+---
+for:
+  node:
+  - allow: read
+    deny: run
+    contains:
+      tags:
+      - prod
+      - www
+description: generated
+context:
+  project: .*
+by:
+  group: test</code></pre>
+<h2 id="validate-command">Validate Command</h2>
+<p>The Validate command loads the specified aclpolicy file or directory of files, and validates the aclpolicy definitions. It prints any errors found and it will exit with a 0 exit code if no errors are found, otherwise it will exit with 2 exit code.</p>
+<p><em>Examples</em></p>
+<p>Validate all aclpolicy files in the Rundeck “etc” directory by default:</p>
+<pre><code>$ rd-acl validate
+Using configured Rundeck etc dir: /etc/rundeck
+The validation passed</code></pre>
+<p>Validate a specific file:</p>
+<pre><code>$ rd-acl validate -f bad5.aclpolicy
+/Users/greg/rundeck25/bad5.aclpolicy[1]:
+  Context section is not valid: {xproject=asdf}, it should contain only &#39;application:&#39; or &#39;project:&#39;
+The validation failed</code></pre>
+<h2 id="see-also">See Also</h2>
+<p><a href="../man5/aclpolicy.html"><code>aclpolicy</code></a></p>
+<p><a href="../administration/access-control-policy.html">Access Control Policy</a></p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.1)</a></li>
+    
+    
+    <li ><a href="index.html">Command Line Tools</a></li>
+    <li class="active"><a href="rd-acl.html">rd-acl</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="dispatch.html"><i class="glyphicon glyphicon-arrow-left"></i> dispatch</a></li>
+      <li class="next"><a href="rd-jobs.html">rd-jobs <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manpages/man1/rd-acl.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-08-03T23:28:58UTC">2018-08-03T23:28:58UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
