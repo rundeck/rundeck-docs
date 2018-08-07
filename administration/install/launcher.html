@@ -167,7 +167,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Define RDECK_BASE environment variable to the location of the install</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="bu">export</span> <span class="va">RDECK_BASE=$HOME</span>/rundeck; <span class="co"># or where you like it</span></a></code></pre></div></li>
 <li><p>Create the directory for the installation.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="fu">mkdir</span> -p <span class="va">$RDECK_BASE</span> </a></code></pre></div></li>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="fu">mkdir</span> -p <span class="va">$RDECK_BASE</span></a></code></pre></div></li>
 <li><p>Copy the executable war to the installation directory.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">cp</span> rundeck-3.0.0.war <span class="va">$RDECK_BASE</span></a></code></pre></div></li>
 <li><p>Change directory and run the jar.</p>
@@ -227,11 +227,10 @@ exist.
 <p>You can also customize the launcher behavior by using some java system properties.</p>
 <p>Specify these properties using the normal <code>-Dproperty=value</code> commandline options to the <code>java</code> command:</p>
 <ul>
-<li><code>server.http.port</code> The HTTP port to use for the server, default “4440”</li>
+<li><code>server.port</code> The HTTP port to use for the server, default “4440”</li>
 <li><code>server.https.port</code> The HTTPS port to use or the server, default “4443”</li>
-<li><code>server.http.host</code> Address/hostname to listen on, default is all addresses “0.0.0.0”</li>
-<li><code>server.hostname</code> Hostname to use for the server, default is the system hostname</li>
-<li><code>server.web.context</code> Web context path to use, such as “/rundeck”. Default is “/”.</li>
+<li><code>server.address</code> Address/hostname to listen on, default is “localhost”</li>
+<li><code>server.contextPath</code> Web context path to use, such as “/rundeck”. Default is “/”.</li>
 <li><code>rdeck.base</code> Rundeck Basedir to use, default is the directory containing the executable war</li>
 <li><code>server.datastore.path</code> Path to server datastore dir</li>
 <li><code>default.user.name</code> Username for default user account to create</li>
@@ -306,7 +305,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-03T23:40:08UTC">2018-08-03T23:40:08UTC</span>
+<span class="generated-date" title="2018-08-07T16:12:06UTC">2018-08-07T16:12:06UTC</span>
 </p>
 </footer>
 </div>
