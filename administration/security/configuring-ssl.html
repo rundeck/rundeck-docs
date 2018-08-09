@@ -96,14 +96,14 @@ jQuery(function(){
 <div class="page-header">
 <h1 class="title">Configuring SSL</h1>
 </div>
-<p>This document describes how to configure Rundeck for SSL/HTTPS support, and assumes you are using the rundeck-launcher standalone launcher. If you are using RPM/deb install, refer to the appropriate configuration file paths from <a href="../configuration/configuration-file-reference.html#configuration-layout">Configuration -&gt; Configuration Layout</a>.</p>
+<p>This document describes how to configure Rundeck for SSL/HTTPS support, and assumes you are using the rundeck-launcher standalone launcher. If you are using RPM/DEB install, refer to the appropriate configuration file paths from <a href="../configuration/configuration-file-reference.html#configuration-layout">Configuration -&gt; Configuration Layout</a>.</p>
 <ol type="1">
 <li><p>Before beginning, do a first-run of the launcher, as it will create the base directory for Rundeck and generate configuration files.</p>
-<pre><code>cd $RDECK_BASE;  java -jar rundeck-launcher-1.1.0.jar</code></pre>
-<p>This will start the server and generate necessary config files. Press control-c to shut down the server.</p></li>
+<pre><code>cd $RDECK_BASE;  java -jar rundeck-3.0.1.war</code></pre>
+<p>This will start the server and generate necessary config files. Press control-c to shut down the server after you get below message from therminal: Grails application running at http://localhost:4440 in environment: production</p></li>
 <li><p>Using the <a href="https://linux.die.net/man/1/keytool-java-1.6.0-openjdk">keytool</a> command, generate a keystore for use as the server cert and client truststore. Specify passwords for key and keystore:</p></li>
 </ol>
-<pre><code>    keytool -keystore etc/keystore -alias rundeck -genkey -keyalg RSA -keypass admin -storepass admin
+<pre><code>    keytool -keystore etc/keystore -alias rundeck -genkey -keyalg RSA -keypass adminadmin -storepass adminadmin
 
 Be sure to specify the correct hostname of the server as the response
 to the question &quot;What is your first and last name?&quot;.  Answer &quot;yes&quot; to
@@ -129,12 +129,13 @@ server, and use any other organizational values you like:
 <pre><code>cp etc/keystore etc/truststore</code></pre></li>
 <li><p>Modify the ssl.properties file to specify the location of the keystore and the appropriate passwords:</p>
 <pre><code>vi server/config/ssl.properties</code></pre>
-<p>An example ssl.properties file (from the RPM package).</p>
+<p>An example ssl.properties file (from the RPM and DEB packages).</p>
 <pre><code>keystore=/etc/rundeck/ssl/keystore
 keystore.password=adminadmin
 key.password=adminadmin
 truststore=/etc/rundeck/ssl/truststore
-truststore.password=adminadmin</code></pre></li>
+truststore.password=adminadmin</code></pre>
+<p>The ssl.properties default keystore and truststore location path for war installation is $RDECK_BASE/etc/</p></li>
 <li><p>Configure client properties. Modify the file <code>$RDECK_BASE/etc/framework.properties</code> and change these properties:</p>
 <ul>
 <li><code>framework.server.url</code></li>
@@ -147,14 +148,15 @@ truststore.password=adminadmin</code></pre></li>
 <li><code>grails.serverURL=https://myhostname:4443</code></li>
 </ul>
 <p>Set the URL to include the appropriate https protocol, and change the port to 4443, or to the value of your <code>-Dserver.https.port</code> runtime configuration property.</p></li>
-<li><p>For Debian/RPM installation, uncomment line 43 in <code>/etc/rundeck/profile</code>:</p>
-<pre><code>export RDECK_JVM=&quot;$RDECK_JVM -Drundeck.ssl.config=/etc/rundeck/ssl/ssl.properties -Dserver.https.port=${RDECK_HTTPS_PORT}&quot;</code></pre></li>
+<li><p>For Debian installation, create/edit <code>/etc/default/rundeckd</code>, for RPM installation, create/edit <code>/etc/sysconfig/rundeckd</code>:</p>
+<pre><code>export RUNDECK_WITH_SSL=true
+export RDECK_HTTPS_PORT=1234</code></pre></li>
 <li><p>Start the server. For the rundeck launcher, tell it where to read the ssl.properties</p>
-<pre><code>java -Drundeck.ssl.config=$RDECK_BASE/server/config/ssl.properties -jar rundeck-launcher-1.1.0.jar</code></pre>
+<pre><code>java -Drundeck.ssl.config=$RDECK_BASE/server/config/ssl.properties -jar rundeck-3.0.1.war</code></pre>
 <p>You can change port by adding <code>-Dserver.https.port</code>:</p>
-<pre><code>    java -Drundeck.ssl.config=$RDECK_BASE/server/config/ssl.properties -Dserver.https.port=1234 rundeck-launcher-1.1.0.jar</code></pre>
+<pre><code>    java -Drundeck.ssl.config=$RDECK_BASE/server/config/ssl.properties -Dserver.https.port=1234 -jar rundeck-3.0.1.war</code></pre>
 <p>If successful, you will see a line indicating the SSl connector has started:</p>
-<pre><code>Started SslSocketConnector@0.0.0.0:4443</code></pre></li>
+<pre><code>Grails application running at https://localhost:1234 in environment: production</code></pre></li>
 </ol>
 <h3 id="securing-passwords">Securing passwords</h3>
 <p>Passwords do not have to be stored in the ssl.config. If they are not set, then the server will prompt on the console for a user to enter the passwords.</p>
@@ -260,7 +262,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-07T16:12:06UTC">2018-08-07T16:12:06UTC</span>
+<span class="generated-date" title="2018-08-09T18:21:39UTC">2018-08-09T18:21:39UTC</span>
 </p>
 </footer>
 </div>
