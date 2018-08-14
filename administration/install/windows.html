@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Installing on Window</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <link rel="stylesheet" href="../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.x)</a></li>
+    
+        <li><a href="../index.html">Administrator Guide</a></li>
+    
+    
+    <li ><a href="index.html">Installation</a></li>
+    <li class="active"><a href="windows.html">Windows</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="tomcat.html"><i class="glyphicon glyphicon-arrow-left"></i> Tomcat</a></li>
+      <li class="next"><a href="source.html">Source <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/install/windows.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#install-rundeck-pro">Install Rundeck Pro</a><ul>
+<li><a href="#login-to-the-gui">Login to the GUI</a></li>
+<li><a href="#start-stop-instances">Start-Stop instances</a></li>
+<li><a href="#install-license-file">Install License File</a></li>
+</ul></li>
+<li><a href="#folder-structure">Folder Structure</a></li>
+<li><a href="#enable-crepssp-authentication-on-windows-domain">Enable CREPSSP Authentication On Windows Domain</a><ul>
+<li><a href="#on-the-rundeck-server">On the Rundeck server</a></li>
+<li><a href="#on-the-remote-node">On the remote node</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Installing on Window</h1>
+</div>
+<!---
+Originals:
+http://support.rundeck.com/customer/en/portal/articles/2885088-installing-a-single-instance-of-rundeck-pro-cluster-on-windows
+http://support.rundeck.com/customer/en/portal/articles/2819414-install-rundeck-pro-team-launcher-on-windows
+http://support.rundeck.com/customer/en/portal/articles/2522223-enable-credssp-authentication-windows-
+--->
+<p>Note: these instructions are for installing a single instance “cluster” (one cluster member only) for evaluation or standalone usage.</p>
+<h2 id="install-rundeck-pro">Install Rundeck Pro</h2>
+<p>This guide will install Rundeck PRO as a Service on a Windows Server. It uses the Rundeck Pro launcher installer (Jar file).</p>
+<ul>
+<li>Download the latest version of Rundeck PRO Cluster launcher here: http://download.rundeck.com/versions.html</li>
+<li>Choose a root directory (e.g. C:).</li>
+<li>Place rundeckpro-launcher-cluster-X.X.X.jar in that directory</li>
+<li>Go to the RDECK_BASE (e.g. C:) folder and launch the installation of rundeck.</li>
+</ul>
+<pre><code>cd C:\rundeck
+java -jar rundeckpro-launcher-cluster-X.X.X.jar</code></pre>
+<figure>
+<img src="../../figures/windows-launcher.png" alt="Windows launcher" /><figcaption>Windows launcher</figcaption>
+</figure>
+<ul>
+<li>After Rundeck PRO started, stop the process.</li>
+<li>Create a bat file (e.g. start_rundeck.bat) and place it under %RDECK_BASE%</li>
+</ul>
+<pre><code>set CURDIR=%~dp0
+call %CURDIR%etc\profile.bat
+java %RDECK_CLI_OPTS% %RDECK_SSL_OPTS% -jar    
+rundeckpro-launcher-cluster-X.X.X.jar --skipinstall -d  &gt;&gt; %CURDIR%\var\logs\service.log  2&gt;&amp;1</code></pre>
+<ul>
+<li>Download nssm.exe from http://nssm.cc/</li>
+<li>Place the executable under %RDECK_BASE% (you can place it elsewhere, but for the sake of the example let’s use always the root dir)</li>
+<li>Open a prompt and issue these commands (Administrator mode required to install a service)</li>
+</ul>
+<pre><code>    cd C:\rundeck
+    nssm.exe install RUNDECK</code></pre>
+<ul>
+<li>the GUI pops up, set “path” as %RDECK_BASE%_rundeck.bat , startup directory as %RDECK_BASE% (optionally set “low” on the process tab, under priority, to avoid server cpu spike when starting rundeck)</li>
+</ul>
+<figure>
+<img src="../../figures/nssm-installer.png" alt="NSSM Installer" /><figcaption>NSSM Installer</figcaption>
+</figure>
+<ul>
+<li>Go to the service management console (services.msc) and you’ll find RUNDECK listed as a service. Starting it will start the rundeck process.</li>
+</ul>
+<figure>
+<img src="../../figures/service-management-console.png" alt="Service Management Console" /><figcaption>Service Management Console</figcaption>
+</figure>
+<h3 id="login-to-the-gui">Login to the GUI</h3>
+<p>By default, Rundeck will be installed in port 4440. To access Rundeck, go to the following URL: http://servername:4440.</p>
+<p>Normally, it is necessary to modify the <code>grails.serverURL</code> property in <code>%RDECK_BASE%\server\config\rundeck-config.properties</code> to access the GUI. Change <code>grails.serverURL</code> to the server name or IP. You will need to restart the Rundeck service for the change to take effect.</p>
+<p>After the restart, you can access the GUI at http://servername:4440/</p>
+<figure>
+<img src="../../figures/login-page.png" alt="Login page" /><figcaption>Login page</figcaption>
+</figure>
+<p>The default username and password is “admin”</p>
+<h3 id="start-stop-instances">Start-Stop instances</h3>
+<p>Use the Service Windows GUI to start/stop/restart the instance</p>
+<h3 id="install-license-file">Install License File</h3>
+<p>Go to the GUI and click on the “No License Key File is installed” button</p>
+<figure>
+<img src="../../figures/no-license-key.png" alt="No license key" /><figcaption>No license key</figcaption>
+</figure>
+<p>Then click on “Upload License File”</p>
+<figure>
+<img src="../../figures/upload-license.png" alt="Upload license" /><figcaption>Upload license</figcaption>
+</figure>
+<p>Then select the license file (.key file) and press “Update License File”</p>
+<figure>
+<img src="../../figures/license.png" alt="License" /><figcaption>License</figcaption>
+</figure>
+<p>Finally, it is necessary to change the “Passive Mode” to “Active”</p>
+<figure>
+<img src="../../figures/active-mode.png" alt="Active mode" /><figcaption>Active mode</figcaption>
+</figure>
+<h2 id="folder-structure">Folder Structure</h2>
+<pre><code>+---etc
+|       admin.aclpolicy =&gt; Administrator access control policy defined with a [aclpolicy] document
+|       apitoken.aclpolicy =&gt; Default API ACL policies
+|       cli-log4j.properties =&gt; This file defines the logging configuration for the Commandline tools.
+|       framework.properties =&gt; Configuration file used by shell tools and core Rundeck services
+|       preferences.properties
+|       profile
+|       profile.bat =&gt; Shell environment variables used by the shell tools
+|       project.properties =&gt;Rundeck project configuration file when using Filsystem based project defintions.
++---libext =&gt; Plugin folder
++---projects =&gt; Projects data (eg: resource files, project properties, etc)
++---server
+|   +---config
+|   |       jaas-loginmodule.conf
+|   |       realm.properties =&gt; Property file user directory when PropertyFileLoginModule is used
+|   |       rundeck-config.properties =&gt; This is the primary Rundeck webapp configuration file. Defines default loglevel, datasource configuration, and GUI customization.
+|   |       ssl.properties =&gt; To enable SSL access to rundeck
+|   |      
+|   +---data =&gt; H2 database
+|   |       grailsdb.mv.db
+|   +---exp
+|   +---lib
+|   +---logs =&gt; Rundeck logging 
+|   |       rundeck.access.log =&gt; access to rundeck
+|   |       rundeck.api.log =&gt; Api calls
+|   |       rundeck.audit.log =&gt; Authorization messages pertaining to aclpolicy
+|   |       rundeck.executions.log =&gt; Logs of all executions
+|   |       rundeck.jobs.log =&gt; Log of all job definition changes
+|   |       rundeck.log=&gt; General Rundeck application messages
+|   |       rundeck.options.log=&gt; Logs remote HTTP requests for Options JSON data
+|   |       rundeck.project.log
+|   |       rundeck.storage.log=&gt; Standard input and output generated during runtime
+|   +---sbin
+|   \---work
++---tools=&gt; rd-acl client (to manage ACL validation)
+\---var   =&gt; Executions Logs folder</code></pre>
+<h2 id="enable-crepssp-authentication-on-windows-domain">Enable CREPSSP Authentication On Windows Domain</h2>
+<h3 id="on-the-rundeck-server">On the Rundeck server</h3>
+<h4 id="enable-credssp">Enable CredSSP</h4>
+<p>Open a powershell windows and run:</p>
+<pre><code>Enable-WSManCredSSP -Role &quot;Client&quot; -DelegateComputer &quot;*.something.com&quot;</code></pre>
+<p>Where <code>something.com</code> is the DNS domain of the target computer</p>
+<p>or</p>
+<pre><code>Enable-WSManCredSSP -Role &quot;Client&quot; -DelegateComputer &quot;*&quot;</code></pre>
+<h4 id="allow-delegating-fresh-credentials">Allow Delegating Fresh Credentials</h4>
+<ul>
+<li>Click <strong>Start</strong>, type <strong>mmc</strong> and then click <strong>OK</strong>.</li>
+<li>Click <strong>File and then click </strong>Add/Remove Snap-in**.</li>
+<li>Click <strong>Group Policy Object</strong> and then click <strong>Add</strong>.</li>
+<li>Select <strong>Local Computer</strong> and then click <strong>Finish</strong>.</li>
+<li>Go to <strong>Computer PolicyTemplatesDelegationDelegating Fresh Credentials</strong> → Set to <strong>enabled</strong></li>
+</ul>
+<figure>
+<img src="../../figures/allow-delegating-fresh-credentials-1.png" alt="Enable delegating fresh credentials" /><figcaption>Enable delegating fresh credentials</figcaption>
+</figure>
+<ul>
+<li>Add <strong>WSMAN/</strong>* to list of computers and check the box for <strong>Concatenate OS defaults with input above</strong>.</li>
+</ul>
+<figure>
+<img src="../../figures/allow-delegating-fresh-credentials-2.png" alt="Add servers to list" /><figcaption>Add servers to list</figcaption>
+</figure>
+<h4 id="enable-credssp-authentication-on-winrm-client">Enable CredSSP authentication on Winrm Client</h4>
+<p>Open a CMD Prompt as an Administrator user and execute:</p>
+<pre><code>winrm set winrm/config/client/auth @{CredSSP=&quot;true&quot;}</code></pre>
+<p>You need to have winrm service configured and running.</p>
+<h3 id="on-the-remote-node">On the remote node</h3>
+<h4 id="enable-credssp-1">Enable CredSSP</h4>
+<p>Open a powershell windows and run:</p>
+<pre><code>Enable-WSManCredSSP -Role &quot;Server&quot;</code></pre>
+<h4 id="make-sure-that-you-enable-the-credssp-on-winrm-service-settings">Make sure that you enable the CredSSP on WinRM Service settings</h4>
+<p>To get the WinRm Service config:</p>
+<pre><code>winrm get winrm/config/service</code></pre>
+<p>To enable the CredSSP:</p>
+<pre><code>winrm set winrm/config/service/auth @{CredSSP=&quot;true&quot;}</code></pre>
+<h3 id="troubleshooting">Troubleshooting</h3>
+<p>If you are using a non-administrator user (or a not- domain-administrator user) to execute command to remote nodes, you need to set up the access on the remote machine ( to the user or some of its groups, eg: Domain User group).</p>
+<p>To add permissions to non-administrator user to execute remote commands:</p>
+<pre><code>Set-PSSessionConfiguration Microsoft.Powershell -ShowSecurityDescriptorUI</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.x)</a></li>
+    
+        <li><a href="../index.html">Administrator Guide</a></li>
+    
+    
+    <li ><a href="index.html">Installation</a></li>
+    <li class="active"><a href="windows.html">Windows</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="tomcat.html"><i class="glyphicon glyphicon-arrow-left"></i> Tomcat</a></li>
+      <li class="next"><a href="source.html">Source <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/install/windows.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-08-14T16:55:16UTC">2018-08-14T16:55:16UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
