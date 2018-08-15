@@ -117,7 +117,10 @@ jQuery(function(){
 <h3 id="rundeck-configuration">Rundeck configuration</h3>
 <p>Once you’ve set up the application in Okta you can configure Rundeck to use that application.</p>
 <p>Add the following properties to your rundeck-config.properties file:</p>
-<pre class="properties"><code>#The first two come from the Client Credentials section on your Application configuration page in Okta
+<pre class="properties"><code>#Enable the OAuth SSO feature
+rundeck.security.oauth.enabled=true
+
+#The first two come from the Client Credentials section on your Application configuration page in Okta
 rundeck.security.oauth.okta.clientId = (Okta Client ID)
 rundeck.security.oauth.okta.clientSecret = (Okta Secret Key)
 
@@ -198,7 +201,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-14T18:30:06UTC">2018-08-14T18:30:06UTC</span>
+<span class="generated-date" title="2018-08-15T20:45:58UTC">2018-08-15T20:45:58UTC</span>
 </p>
 </footer>
 </div>
