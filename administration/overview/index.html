@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Azure Log Storage Plugin</title>
+  <title>System Architecture</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -20,7 +20,7 @@ jQuery(function(){
   jQuery('[data-toggle="popover"]').popover();
 });
 </script>
-  <link rel="stylesheet" href="../../../style.css" type="text/css" />
+  <link rel="stylesheet" href="../../style.css" type="text/css" />
 </head>
 <body data-spy="scroll" data-target=".toc-nav">
 <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -55,20 +55,18 @@ jQuery(function(){
 <ol class="breadcrumb top">
 
     
-        <li><a href="../../../index.html">Rundeck Documentation (3.0.x)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (3.0.x)</a></li>
     
-        <li><a href="../../index.html">Administrator Guide</a></li>
-    
-        <li><a href="../index.html">Rundeck Pro Cluster</a></li>
+        <li><a href="../index.html">Administrator Guide</a></li>
     
     
-    <li ><a href="index.html">Logstore</a></li>
-    <li class="active"><a href="azure-log-storage-plugin.html">Azure Log Storage Plugin</a></li>
+    
+    <li class="active"><a href="index.html">System Architecture</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="s3-log-storage-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> S3 Log Storage Plugin</a></li>
+      
       
     </ul>
 </div>
@@ -76,54 +74,31 @@ jQuery(function(){
 <div class="row">
 <div class="col-sm-12 text-right">
     <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/cluster/logstore/azure.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/overview/system-architecture.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
 <div id="docbody">
 <div class="container">
 <div class="row">
-<div class="col-sm-3 toc-nav">
-<div class="nav">
-<ul>
-<li><a href="#enable-the-plugin">Enable the plugin</a></li>
-<li><a href="#configuration">Configuration</a></li>
-</ul>
-</div>
-</div>
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">Azure Log Storage Plugin</h1>
+<h1 class="title">System Architecture</h1>
 </div>
-<p>The Azure Storage plugin uses Azure Storage to store execution log files, for backup or for a cluster environment behavior.</p>
-<p>The source code lives at <a href="https://github.com/rundeck-plugins/rundeck-azure-plugin" class="uri">https://github.com/rundeck-plugins/rundeck-azure-plugin</a>.</p>
-<h3 id="enable-the-plugin">Enable the plugin</h3>
-<p>Enable the ExecutionFileStorage provider named azure-storage in your <code>rundeck-config.properties</code> file:</p>
-<p><code>rundeck.execution.logs.fileStoragePlugin=azure-storage</code></p>
-<h3 id="configuration">Configuration</h3>
-<p>To configure the Azure Storage Account credentials you can set these property values:</p>
+<p>Rundeck is a server application you host on a system you designate a central administrative control point. Internally, Rundeck stores job definitions and execution history in a relational database. Output from command and job executions is saved on disk but can be forwarded to remote stores like S3 or Logstash.</p>
+<p>Rundeck distributed command execution is performed using a pluggable node execution layer that defaults to SSH but plugins allow you to use other means like MCollective, Salt, WinRM, or your custom method. Rundeck server configuration includes settings to define the outbound user allowed by the remote hosts. Remote machines are not required to make connections back to the server.</p>
+<figure>
+<img src="../../figures/fig0001.png" alt="Rundeck architecture" /><figcaption>Rundeck architecture</figcaption>
+</figure>
+<p>The Rundeck application itself is a Java-based webapp. The application provides both graphical interface and network interfaces used by the Rundeck shell tools.</p>
+<p>Access to the Rundeck application requires a login and password. The default Rundeck installation uses a flat file user directory containing a set of default logins. Logins are defined in terms of a username and password as well as one or more user groups. An alternative configuration to the flat file user directory, is LDAP (e.g., ActiveDirectory) but Rundeck authentication and authorization is customizable via <a href="https://en.wikipedia.org/wiki/Java_Authentication_and_Authorization_Service">JAAS</a>. Users must also be authorized to perform actions like define a job or execute one. This is controlled by an access control facility that reads policy files defined by the Rundeck administrator. Privilege is granted if a user’s group membership meets the requirements of the policy.</p>
+<p>Two installation methods are supported:</p>
 <ul>
-<li><strong>storageAccount</strong>: Azure Storage Account</li>
-<li><strong>accessKey</strong>: Azure Storage Access Key</li>
-<li><p><strong>path</strong>: The path in the bucket to store a log file.</p>
-<p>You can use these expansion variables:</p>
-<ul>
-<li><code>${job.execid}</code> = execution ID</li>
-<li><code>${job.project}</code> = project name</li>
-<li><code>${job.id}</code> = job UUID (or blank).</li>
-<li><code>${job.group}</code> = job group (or blank).</li>
-<li><code>${job.name}</code> = job name (or blank)</li>
-</ul></li>
+<li><p>System package: RPM and Debian packaging is intended for managed installation and provides robust tools that integrate with your environment, man pages, shell tool set in your path, init.d startup and shutdown.</p></li>
+<li><p>Launcher: The launcher is intended for quick setup, to get you running right away. Perfect for bootstrapping a project or trying a new feature.</p></li>
 </ul>
-<p>You can define the configuration values in <code>framework.properties</code> by prefixing the property name with the stem: <code>framework.plugin.ExecutionFileStorage.azure-storage</code>. Or in a project’s <code>project.properties</code> file with the stem <code>project.plugin.ExecutionFileStorage.azure-storage</code>.</p>
-<p>For example:</p>
-<pre><code>#storage.storageAccount and storage.accessKey
-framework.plugin.ExecutionFileStorage.azure-storage.storageAccount=&lt;ACCOUNT-NAME&gt;
-framework.plugin.ExecutionFileStorage.azure-storage.accessKey=&lt;ACCESS-KEY&gt;
-
-#path to store the logs
-framework.plugin.ExecutionFileStorage.azure-storage.path=logs/${job.project}/${job.execid}.log
-</code></pre>
+<p>Rundeck can also install as a WAR file into an external container like Tomcat.</p>
+<p>Assuming the system requirements are met, Rundeck can be installed either from source, system package or via the launcher.</p>
 </div>
 </div>
 </div>
@@ -135,20 +110,18 @@ framework.plugin.ExecutionFileStorage.azure-storage.path=logs/${job.project}/${j
 <ol class="breadcrumb bottom">
 
     
-        <li><a href="../../../index.html">Rundeck Documentation (3.0.x)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (3.0.x)</a></li>
     
-        <li><a href="../../index.html">Administrator Guide</a></li>
-    
-        <li><a href="../index.html">Rundeck Pro Cluster</a></li>
+        <li><a href="../index.html">Administrator Guide</a></li>
     
     
-    <li ><a href="index.html">Logstore</a></li>
-    <li class="active"><a href="azure-log-storage-plugin.html">Azure Log Storage Plugin</a></li>
+    
+    <li class="active"><a href="index.html">System Architecture</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="s3-log-storage-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> S3 Log Storage Plugin</a></li>
+      
       
     </ul>
 </div>
@@ -156,7 +129,7 @@ framework.plugin.ExecutionFileStorage.azure-storage.path=logs/${job.project}/${j
 <div class="row">
 <div class="col-sm-12 text-right">
     <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/cluster/logstore/azure.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/overview/system-architecture.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>

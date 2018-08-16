@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Azure Log Storage Plugin</title>
+  <title>Running Docker Images</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -20,7 +20,7 @@ jQuery(function(){
   jQuery('[data-toggle="popover"]').popover();
 });
 </script>
-  <link rel="stylesheet" href="../../../style.css" type="text/css" />
+  <link rel="stylesheet" href="../../style.css" type="text/css" />
 </head>
 <body data-spy="scroll" data-target=".toc-nav">
 <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -55,20 +55,18 @@ jQuery(function(){
 <ol class="breadcrumb top">
 
     
-        <li><a href="../../../index.html">Rundeck Documentation (3.0.x)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (3.0.x)</a></li>
     
-        <li><a href="../../index.html">Administrator Guide</a></li>
-    
-        <li><a href="../index.html">Rundeck Pro Cluster</a></li>
+        <li><a href="../index.html">Administrator Guide</a></li>
     
     
-    <li ><a href="index.html">Logstore</a></li>
-    <li class="active"><a href="azure-log-storage-plugin.html">Azure Log Storage Plugin</a></li>
+    <li ><a href="index.html">Installation</a></li>
+    <li class="active"><a href="docker.html">Docker</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="s3-log-storage-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> S3 Log Storage Plugin</a></li>
+      <li class="previous"><a href="source.html"><i class="glyphicon glyphicon-arrow-left"></i> Source</a></li>
       
     </ul>
 </div>
@@ -76,7 +74,7 @@ jQuery(function(){
 <div class="row">
 <div class="col-sm-12 text-right">
     <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/cluster/logstore/azure.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/install/docker.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
@@ -86,44 +84,43 @@ jQuery(function(){
 <div class="col-sm-3 toc-nav">
 <div class="nav">
 <ul>
-<li><a href="#enable-the-plugin">Enable the plugin</a></li>
-<li><a href="#configuration">Configuration</a></li>
+<li><a href="#open-source-rundeck"><span>Open Source Rundeck</span></a><ul>
+<li><a href="#rundeckrundecksnapshot"><code>rundeck/rundeck:SNAPSHOT</code></a></li>
+</ul></li>
+<li><a href="#rundeck-pro"><span>Rundeck Pro</span></a><ul>
+<li><a href="#rundeckproclustersnapshot"><code>rundeckpro/cluster:SNAPSHOT</code></a></li>
+<li><a href="#rundeckproteamsnapshot"><code>rundeckpro/team:SNAPSHOT</code></a></li>
+<li><a href="#rundeckprodrsnapshot"><code>rundeckpro/dr:SNAPSHOT</code></a></li>
+</ul></li>
+<li><a href="#example-configurations"><span>Example Configurations</span></a></li>
 </ul>
 </div>
 </div>
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">Azure Log Storage Plugin</h1>
+<h1 class="title">Running Docker Images</h1>
 </div>
-<p>The Azure Storage plugin uses Azure Storage to store execution log files, for backup or for a cluster environment behavior.</p>
-<p>The source code lives at <a href="https://github.com/rundeck-plugins/rundeck-azure-plugin" class="uri">https://github.com/rundeck-plugins/rundeck-azure-plugin</a>.</p>
-<h3 id="enable-the-plugin">Enable the plugin</h3>
-<p>Enable the ExecutionFileStorage provider named azure-storage in your <code>rundeck-config.properties</code> file:</p>
-<p><code>rundeck.execution.logs.fileStoragePlugin=azure-storage</code></p>
-<h3 id="configuration">Configuration</h3>
-<p>To configure the Azure Storage Account credentials you can set these property values:</p>
+<blockquote>
+<p>!!NOTICE!!: The docker images are currently incubating; they are unstable and unsupported. Full usage information can be found on the Docker Hub image pages.</p>
+</blockquote>
+<h2 id="open-source-rundeck"><a href="https://hub.docker.com/r/rundeck/rundeck/">Open Source Rundeck</a></h2>
+<h3 id="rundeckrundecksnapshot"><code>rundeck/rundeck:SNAPSHOT</code></h3>
+<pre><code>docker run --name some-rundeck -v data:/home/rundeck/server/data rundeck/rundeck:SNAPSHOT</code></pre>
+<h2 id="rundeck-pro"><a href="https://hub.docker.com/r/rundeckpro">Rundeck Pro</a></h2>
+<h3 id="rundeckproclustersnapshot"><code>rundeckpro/cluster:SNAPSHOT</code></h3>
+<h3 id="rundeckproteamsnapshot"><code>rundeckpro/team:SNAPSHOT</code></h3>
+<h3 id="rundeckprodrsnapshot"><code>rundeckpro/dr:SNAPSHOT</code></h3>
+<pre><code>docker run --name some-rundeck -v data:/home/rundeck/server/data rundeckpro/cluster:SNAPSHOT</code></pre>
+<h2 id="example-configurations"><a href="https://github.com/rundeck/docker-zoo">Example Configurations</a></h2>
+<p>The <a href="https://github.com/rundeck/docker-zoo">Rundeck Docker Zoo</a> has many docker compose example projects:</p>
 <ul>
-<li><strong>storageAccount</strong>: Azure Storage Account</li>
-<li><strong>accessKey</strong>: Azure Storage Access Key</li>
-<li><p><strong>path</strong>: The path in the bucket to store a log file.</p>
-<p>You can use these expansion variables:</p>
-<ul>
-<li><code>${job.execid}</code> = execution ID</li>
-<li><code>${job.project}</code> = project name</li>
-<li><code>${job.id}</code> = job UUID (or blank).</li>
-<li><code>${job.group}</code> = job group (or blank).</li>
-<li><code>${job.name}</code> = job name (or blank)</li>
-</ul></li>
+<li>Basic quick-start with persistent storage</li>
+<li>External database setup with <code>mysql</code> and <code>oracle</code></li>
+<li>LDAP configuration</li>
+<li>Standard cloud config</li>
+<li>etc.</li>
 </ul>
-<p>You can define the configuration values in <code>framework.properties</code> by prefixing the property name with the stem: <code>framework.plugin.ExecutionFileStorage.azure-storage</code>. Or in a project’s <code>project.properties</code> file with the stem <code>project.plugin.ExecutionFileStorage.azure-storage</code>.</p>
-<p>For example:</p>
-<pre><code>#storage.storageAccount and storage.accessKey
-framework.plugin.ExecutionFileStorage.azure-storage.storageAccount=&lt;ACCOUNT-NAME&gt;
-framework.plugin.ExecutionFileStorage.azure-storage.accessKey=&lt;ACCESS-KEY&gt;
-
-#path to store the logs
-framework.plugin.ExecutionFileStorage.azure-storage.path=logs/${job.project}/${job.execid}.log
-</code></pre>
+<p>Check it out for use as a quick config reference and starting templates!</p>
 </div>
 </div>
 </div>
@@ -135,20 +132,18 @@ framework.plugin.ExecutionFileStorage.azure-storage.path=logs/${job.project}/${j
 <ol class="breadcrumb bottom">
 
     
-        <li><a href="../../../index.html">Rundeck Documentation (3.0.x)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (3.0.x)</a></li>
     
-        <li><a href="../../index.html">Administrator Guide</a></li>
-    
-        <li><a href="../index.html">Rundeck Pro Cluster</a></li>
+        <li><a href="../index.html">Administrator Guide</a></li>
     
     
-    <li ><a href="index.html">Logstore</a></li>
-    <li class="active"><a href="azure-log-storage-plugin.html">Azure Log Storage Plugin</a></li>
+    <li ><a href="index.html">Installation</a></li>
+    <li class="active"><a href="docker.html">Docker</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="s3-log-storage-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> S3 Log Storage Plugin</a></li>
+      <li class="previous"><a href="source.html"><i class="glyphicon glyphicon-arrow-left"></i> Source</a></li>
       
     </ul>
 </div>
@@ -156,7 +151,7 @@ framework.plugin.ExecutionFileStorage.azure-storage.path=logs/${job.project}/${j
 <div class="row">
 <div class="col-sm-12 text-right">
     <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/cluster/logstore/azure.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/install/docker.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
