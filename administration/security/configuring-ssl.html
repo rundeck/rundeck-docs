@@ -182,12 +182,16 @@ export RDECK_HTTPS_PORT=1234</code></pre></li>
 <p>Export pem cacert for use by e.g. curl:</p>
 <pre><code>keytool -export -keystore etc/keystore -rfc -alias rundeck &gt; rundeck.server.pem</code></pre>
 <h2 id="using-an-ssl-terminated-proxy">Using an SSL Terminated Proxy</h2>
-<p>You can tell Jetty to honor <code>X-Forwarded-Proto</code>, <code>X-Forwarded-Host</code>, <code>X-Forwarded-Server</code> and <code>X-Forwarded-For</code> headers by adding the following JVM property:</p>
+<p>You can tell Jetty to honor <code>X-Forwarded-Proto</code>, <code>X-Forwarded-Host</code>, <code>X-Forwarded-Server</code> and <code>X-Forwarded-For</code> headers in two ways:</p>
+<p>In <a href="configuration-file-reference.html#rundeck-config.properties">rundeck-config.properties</a> you can set:</p>
+<pre><code>server.useForwardHeaders=true</code></pre>
+<p>Or by declaring the following JVM property:</p>
 <ul>
 <li><code>rundeck.jetty.connector.forwarded</code> set to “true” to enable proxy forwarded support.</li>
 </ul>
-<p>E.g. modify the <code>RDECK_JVM</code> variable in the file <code>/etc/rundeck/profile</code> and add:</p>
-<pre><code>-Drundeck.jetty.connector.forwarded=true</code></pre>
+<p>For the executable war you can specify it on the commandline <code>-Drundeck.jetty.connector.forwarded=true</code>.</p>
+<p>For RPM/DEB install you can export the <code>RDECK_JVM_OPTS</code> variable in the file <code>/etc/sysconfig/rundeckd</code> (RPM) or <code>/etc/default/rundeckd</code> (DEB) and add:</p>
+<pre><code>RDECK_JVM_OPTS=-Drundeck.jetty.connector.forwarded=true</code></pre>
 <p>This will enable Jetty to respond correctly when a forwarded request is first received.</p>
 <p><strong>Note:</strong> You will still need to modify the <code>grails.serverURL</code> value in <a href="configuration-file-reference.html#rundeck-config.properties">rundeck-config.properties</a> to let Rundeck know how to properly generate absolute URLs.</p>
 <h2 id="disabling-ssl-protocols">Disabling SSL Protocols</h2>
@@ -262,7 +266,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-15T20:45:58UTC">2018-08-15T20:45:58UTC</span>
+<span class="generated-date" title="2018-08-16T20:50:01UTC">2018-08-16T20:50:01UTC</span>
 </p>
 </footer>
 </div>
