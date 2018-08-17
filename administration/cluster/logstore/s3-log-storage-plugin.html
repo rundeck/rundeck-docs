@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>S3 Log Storage Plugin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <link rel="stylesheet" href="../../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../../../index.html">Rundeck Documentation (3.0.2)</a></li>
+    
+        <li><a href="../../index.html">Administrator Guide</a></li>
+    
+        <li><a href="../index.html">Rundeck Pro Cluster</a></li>
+    
+    
+    <li ><a href="index.html">Logstore</a></li>
+    <li class="active"><a href="s3-log-storage-plugin.html">S3 Log Storage Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="azure-log-storage-plugin.html">Azure Log Storage Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/cluster/logstore/s3.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#build">Build</a></li>
+<li><a href="#install">Install</a></li>
+<li><a href="#aws-credentials">AWS Credentials</a></li>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#using-with-rundeck-ssl-configuration">Using with Rundeck SSL Configuration</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">S3 Log Storage Plugin</h1>
+</div>
+<p>This is a plugin for <a href="http://rundeck.org">Rundeck</a> that uses <a href="http://aws.amazon.com/s3">Amazon S3</a> to store execution log files, for backup or for cloud-friendly behavior.</p>
+<p>The source code lives at <a href="https://github.com/rundeck-plugins/rundeck-s3-log-plugin" class="uri">https://github.com/rundeck-plugins/rundeck-s3-log-plugin</a>.</p>
+<h2 id="build">Build</h2>
+<pre><code>./gradlew clean build</code></pre>
+<h2 id="install">Install</h2>
+<p>Copy the <code>rundeck-s3-log-plugin-x.y.jar</code> file to the <code>libext/</code> directory inside your Rundeck installation.</p>
+<p>Enable the ExecutionFileStorage provider named <code>org.rundeck.amazon-s3</code> in your <code>rundeck-config</code> file:</p>
+<pre><code>rundeck.execution.logs.fileStoragePlugin=org.rundeck.amazon-s3</code></pre>
+<h2 id="aws-credentials">AWS Credentials</h2>
+<p>The plugin will by default use the “credentials provider chain” for AWS access credentials, which allows you to externally configure the credentials in any of three ways:</p>
+<ol type="1">
+<li>Environment variables <code>AWS_ACCESS_KEY_ID</code> and <code>AWS_SECRET_KEY</code></li>
+<li>Java system properties <code>aws.accessKeyId</code> and <code>aws.secretKey</code></li>
+<li>Instance Profile credentials, if you are running on EC2. (See <a href="http://docs.aws.amazon.com/IAM/latest/UserGuide/role-usecase-ec2app.html">the IAM user guide</a>).</li>
+</ol>
+<p>If you want to specify access key and secret key, you can do so in the configuration:</p>
+<h2 id="configuration">Configuration</h2>
+<p>To configure the AWS access credentials you can set these property values:</p>
+<p><code>AWSAccessKeyId</code> : access key, required if using <code>AWSSecretKey</code></p>
+<p><code>AWSSecretKey</code> : secret key, required if using <code>AWSAccessKeyId</code></p>
+<p><code>AWSCredentialsFile</code> : properties file which contains <code>accessKey</code> and <code>secretKey</code> entries. Alternative to specifying the <code>AWSAccessKeyId and</code>AWSSecretKey`</p>
+<p>S3 configuration uses these plugin configuration property values:</p>
+<p><code>bucket</code> : name of the S3 bucket to use</p>
+<p><code>path</code> : a path-like string that defines where in the bucket to store the log for a particular execution. You can include variables to expand. Default value: <code>rundeck/project/$PROJECT/logs/$ID</code></p>
+<p>Variables in the <code>path</code> value include:</p>
+<ul>
+<li><code>${job.execid}</code> - the execution ID</li>
+<li><code>${job.project}</code> - the project name</li>
+<li><code>${job.id}</code> - the Job UUID if it exists</li>
+<li><code>${job.group}</code> - the Job Group if it exists</li>
+<li><code>${job.path}</code> - the Job Name if it exists</li>
+</ul>
+<p><code>region</code> : AWS region name to use. Default: <code>us-east-1</code></p>
+<p><code>endpoint</code>: Optional, a custom S3 compatible endpoint to use, such as <code>https://my-host.com/s3</code></p>
+<p><code>pathStyle</code>: Optional, boolean, default=False, set to True if you need to define the bucket in your S3 like endpoint URL. e.g https://&lt;s3_like_end_point_url&gt;/&lt;your_bucket_name&gt; A custom way of defining buckets in your endpoint. Useful for non-AWS S3 like object storage technology e.g swift stack, Optums, etc. Background information http://docs.aws.amazon.com/AmazonS3/latest/dev/VirtualHosting.html. May be useful if you have an https endpoint URL.</p>
+<p>You can define the configuration values in <code>framework.properties</code> by prefixing the property name with the stem: <code>framework.plugin.ExecutionFileStorage.org.rundeck.amazon-s3.</code>. Or in a project’s project.properties file with the stem <code>project.plugin.ExecutionFileStorage.org.rundeck.amazon-s3.</code>.</p>
+<p>For example:</p>
+<pre><code>#AWSAccessKeyId and AWSSecretKey can be specified in the file
+framework.plugin.ExecutionFileStorage.org.rundeck.amazon-s3.AWSAccessKeyId=ABC123...
+framework.plugin.ExecutionFileStorage.org.rundeck.amazon-s3.AWSSecretKey=ABC321...
+
+#alternately, AWSCredentialsFile can point to a file which contains `accessKey` and `secretKey`
+framework.plugin.ExecutionFileStorage.org.rundeck.amazon-s3.AWSCredentialsFile=/path/to/awscredentials.properties
+
+#name of the bucket
+framework.plugin.ExecutionFileStorage.org.rundeck.amazon-s3.bucket=test-rundeck-logs
+
+#path to store the logs
+framework.plugin.ExecutionFileStorage.org.rundeck.amazon-s3.path=logs/${job.project}/${job.execid}.log</code></pre>
+<h2 id="using-with-rundeck-ssl-configuration">Using with Rundeck SSL Configuration</h2>
+<p>If you want to use this plugin when you have Rundeck configured with a custom SSL truststore, you will need to import the Amazon S3 SSL certificates to your truststore.</p>
+<pre><code>echo -n | openssl s_client -connect my-bucket.s3.amazonaws.com:443 &gt; certs.out
+keytool -importcert -trustcacerts -file certs.out -alias s3-amazonaws -keystore $RDECK_BASE/etc/truststore</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../../../index.html">Rundeck Documentation (3.0.2)</a></li>
+    
+        <li><a href="../../index.html">Administrator Guide</a></li>
+    
+        <li><a href="../index.html">Rundeck Pro Cluster</a></li>
+    
+    
+    <li ><a href="index.html">Logstore</a></li>
+    <li class="active"><a href="s3-log-storage-plugin.html">S3 Log Storage Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="azure-log-storage-plugin.html">Azure Log Storage Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/cluster/logstore/s3.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-08-17T22:56:10UTC">2018-08-17T22:56:10UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>

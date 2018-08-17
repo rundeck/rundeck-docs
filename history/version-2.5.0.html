@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Version 2.5.0</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="greg" />
+  <meta name="date" content="04/15/2015" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.2)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-2.5.0.html">Version 2.5.0 (2015-04-15)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.4.2.html">Version 2.4.2 (2015-02-13) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-2.5.0.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#release-2.5.0">Release 2.5.0</a><ul>
+<li><a href="#new-features">New Features</a></li>
+<li><a href="#upgrading">Upgrading</a></li>
+<li><a href="#contributors">Contributors</a></li>
+<li><a href="#bug-reporters">Bug Reporters</a></li>
+<li><a href="#issues">Issues</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Version 2.5.0</h1>
+</div>
+<h1 id="release-2.5.0">Release 2.5.0</h1>
+<p>Date: 2015-04-15</p>
+<p>Name: <span style="color: saddlebrown"><span class="glyphicon glyphicon-grain"></span> “cafe au lait saddlebrown grain”</span></p>
+<p>This release has many new features and bugfixes, and contains some refactoring under the hood.</p>
+<h2 id="new-features">New Features</h2>
+<ul>
+<li>Upgraded grails framework, which adds support for Java 8 (and removes Java 6)</li>
+<li>Can now store Project definition and configuration in the database (optional), see <a href="../administration/project-setup.html#project-definitions">Project Definitions</a> and information in the <a href="http://rundeck.org/2.5.0/upgrading/index.html">Upgrade Guide</a>.</li>
+<li>Improved GUI for administering a project: modify Project configuration file contents, and readme.md/motd.md contents. Project archiving is also now performed asynchronously.</li>
+<li>New Jasypt encryption plugin can be used for Key Storage and Project Configuration, see <a href="../plugins-user-guide/storage-plugins.html#jasypt-encryption-converter-plugin">Jasypt Encryption Converter Plugin</a></li>
+<li>Support Key Storage password for SSH sudo and SSH private key passphrase</li>
+<li>New workflow step plugin: Assert state of another Job, optionally halt workflow with custom status string</li>
+<li>New <code>rd-acl</code> commandline tool can list test and generate .aclpolicy file contents, see <a href="../man1/rd-acl.html">rd-acl</a></li>
+<li>New Orchestrator plugin point. Orchestrators can be used to batch and sequence the matched nodes used in node dispatching, e.g.: only allow a certain % to run simultaneously.
+<ul>
+<li><a href="../plugins-user-guide/orchestrator-plugins.html">Plugins User Guide - Orchestrator Plugins</a></li>
+<li><a href="../developer/orchestrator-plugin.html">Plugin Developer Guide - Orchestrator Plugin</a></li>
+<li><a href="https://github.com/rundeck/rundeck/tree/development/examples/example-java-orchestrator-plugin">Example code</a></li>
+</ul></li>
+<li>Added hybrid LDAP + properties file group authentication for JAAS (<code>JettyCombinedLdapLoginModule</code>)
+<ul>
+<li><a href="http//rundeck.org/2.5.0/administration/authenticating-users.html#combining-ldap-with-other-modules">Administration - Authentication - Combining LDAP with other modules</a></li>
+</ul></li>
+</ul>
+<h2 id="upgrading">Upgrading</h2>
+<p><strong>Note:</strong> We’ve attempted to maintain compatibility with previous plugins, but due to changes in the core library, Rundeck may have issues loading or running some plugins.</p>
+<p>Please report issues found to <a href="https://github.com/rundeck/rundeck/issues">Github issues</a>.</p>
+<p>See the <a href="../upgrading/index.html">Upgrading Guide</a></p>
+<h2 id="contributors">Contributors</h2>
+<ul>
+<li>Andreas Knifh</li>
+<li>Greg Schueler (gschueler)</li>
+<li>Mark Bidewell (mbidewell)</li>
+<li>Mayank Asthana (mayankasthana)</li>
+<li>Puru Tuladhar (tuladhar)</li>
+<li>Thomas Mueller (vinzent)</li>
+<li>Yagi (yagince)</li>
+<li>ashley-taylor</li>
+<li>new23d</li>
+</ul>
+<h2 id="bug-reporters">Bug Reporters</h2>
+<ul>
+<li>MartinMulder</li>
+<li>MartyNeal</li>
+<li>Zophar78</li>
+<li>adamhamner</li>
+<li>ahonor</li>
+<li>ashley-taylor</li>
+<li>brismuth</li>
+<li>danifr</li>
+<li>dbeckham</li>
+<li>ffk23</li>
+<li>gschueler</li>
+<li>hirsts</li>
+<li>hjdr4</li>
+<li>knifhen</li>
+<li>mayankasthana</li>
+<li>mbidewell</li>
+<li>mgherman</li>
+<li>mikagika</li>
+<li>new23d</li>
+<li>reigner-yrastorza</li>
+<li>travisgroth</li>
+<li>tuladhar</li>
+<li>vinzent</li>
+<li>yagince</li>
+</ul>
+<h2 id="issues">Issues</h2>
+<ul>
+<li><a href="https://github.com/rundeck/rundeck/issues/1164">Project config page: plugin properties of wrong scope displayed</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1163">Security: Script plugins: password rendering option plugin property files not properly obscured</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1161">Display of active jobs maxes out at 20</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1158">dispatch command does not work when project config stored in RDB</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1150">Schedules don’t launch</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1149">Fix LDAP nested groups for Active Directory</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1148">Documentation: Database docs link to 404 Not Found</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1143">Fixed typo in command in docs and grammar</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1135">Project definitions and configuration stored in DB</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1134">Refactor authorization into components, add preauth attribute role</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1133">Support ServerAliveInterval and ServerAliveCountMax</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1131">Rundeck v2.4.0-1 rundeck not deleting dispatch files</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1129">Dispatched inline script has race condition with crontab</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1128">Storage provider/converter config info on Plugins page is wrong</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1127">Add default storage encryption plugin</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1124">JettyPamLoginModule: supplementalRoles split regex requires whitespace</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1122">Using SSH stored password for sudo</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1121">Jobs initiated from the crontab do not respect the timeout value given for that job</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1120">Script plugin non-instance configuration fails</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1119">Add “server uuid” element to the Execution info</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1118">API doc: Getting Project Info response xml has bad formatting</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1114">${result.resultCode} is not available in the error handler for a Local Command Plugin step.</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1105">job state conditional plugin</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1104">Add workflow step plugin: Assert state of another Job, optionally halt workflow with custom status string</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1095">GUI: 2.4.x: Custom property input fields for node-step plugins style issues</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1094">Export archive does not work</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1092">LDAP auth requests have no timeout</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1090">upload jobs page: after uploading, Delete action from action menu should be available</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1089">List Plugins admin page should show Resource Model Source providers</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1088">Scheduled jobs without a default value for required options fail to run</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1087">‘Algorithm negotiation fail’ JSCH</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1075">Upgrade grails to 2.4.4</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1074">Launcher: fix “nohup: redirecting stderr to stdout” warning</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1056">Inline scripts for jobs do not honor File Copy Settings</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1043">Add text/plain MIME type for YAML files</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1026">Support project-specific email template overrides</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/920">Add support for Java 8</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/859">aclpolicy validation/builder tool</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/826">adding orchestrator</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/808">The run shell tool can clobber plugin cache</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/608">Allow hybrid LDAP + properties file group authentication</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/232">add configurable timeout for remote option URLs</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.2)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-2.5.0.html">Version 2.5.0 (2015-04-15)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.4.2.html">Version 2.4.2 (2015-02-13) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-2.5.0.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-08-17T22:56:10UTC">2018-08-17T22:56:10UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
