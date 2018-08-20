@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>API Reference | Version 25</title>
+  <title>API Reference | Version 26</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -127,7 +127,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     
     
     
-    <li class="active"><a href="index.html">API Reference | Version 25</a></li>
+    <li class="active"><a href="index.html">API Reference | Version 26</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
@@ -297,11 +297,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">API Reference | Version 25</h1>
+<h1 class="title">API Reference | Version 26</h1>
 </div>
 <p>Rundeck provides a Web API for use with your application.</p>
 <h2 id="api-version-number">API Version Number</h2>
-<p>The current API version is <code>25</code>.</p>
+<p>The current API version is <code>26</code>.</p>
 <p>For API endpoints described in this document, the <em>minimum</em> API version required for their use is indicated by the URL used, e.g.:</p>
 <pre><code>/api/2/system/info
 /api/1/projects</code></pre>
@@ -327,6 +327,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>View the <a href="#index">Index</a> listing API paths.</p>
 <h2 id="changes">Changes</h2>
 <p>Changes introduced by API Version number:</p>
+<p><strong>Version 26</strong>:</p>
+<ul>
+<li>Udated Endpoints:
+<ul>
+<li><a href="#listing-projects"><code>GET /api/V/projects</code></a> - label to projects response.</li>
+</ul></li>
+</ul>
 <p><strong>Version 25</strong>:</p>
 <ul>
 <li>New Endpoints.
@@ -4358,6 +4365,7 @@ Accept: application/octet-stream
 <p><strong>Response:</strong></p>
 <p>An Item List of <code>projects</code>, each <code>project</code> of the form specified in the <a href="#getting-project-info">Getting Project Info</a> section.</p>
 <p><em>Since API version 11</em>: JSON content can be retrieved with <code>Accept: application/json</code></p>
+<p><em>Since API version 26</em>: add the project <code>label</code> to the response</p>
 <div class="sourceCode" id="cb235"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb235-1" data-line-number="1"><span class="ot">[</span></a>
 <a class="sourceLine" id="cb235-2" data-line-number="2">    <span class="fu">{</span></a>
 <a class="sourceLine" id="cb235-3" data-line-number="3">        <span class="dt">&quot;name&quot;</span><span class="fu">:</span><span class="st">&quot;...&quot;</span><span class="fu">,</span></a>
@@ -5868,7 +5876,7 @@ DELETE /api/13/project/[PROJECT]/motd.md</code></pre>
     
     
     
-    <li class="active"><a href="index.html">API Reference | Version 25</a></li>
+    <li class="active"><a href="index.html">API Reference | Version 26</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
@@ -5909,7 +5917,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-17T22:57:33UTC">2018-08-17T22:57:33UTC</span>
+<span class="generated-date" title="2018-08-20T17:59:55UTC">2018-08-20T17:59:55UTC</span>
 </p>
 </footer>
 </div>
