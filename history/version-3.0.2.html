@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>edam3118715992509361919temp</title>
+  <title>Version 3.0.2</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="author" content="greg" />
+  <meta name="date" content="08/17/2018" />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
@@ -58,21 +60,21 @@ jQuery(function(){
         <li><a href="../index.html">Rundeck Documentation (3.0.x)</a></li>
     
     
-    <li ><a href="index.html">Tutorials</a></li>
-    <li class="active"><a href="nodes.html">Nodes</a></li>
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-3.0.2.html">Version 3.0.2 (2018-08-17)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="project-setup.html"><i class="glyphicon glyphicon-arrow-left"></i> Project Setup</a></li>
-      <li class="next"><a href="jobs.html">Jobs <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      
+      <li class="next"><a href="version-3.0.1.html">Version 3.0.1 (2018-08-03) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
     <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/tutorials/nodes.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-3.0.2.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
@@ -82,23 +84,70 @@ jQuery(function(){
 <div class="col-sm-3 toc-nav">
 <div class="nav">
 <ul>
-<li><a href="#listing-and-filtering-nodes">Listing and filtering nodes</a></li>
+<li><a href="#release-3.0.2">Release 3.0.2</a><ul>
+<li><a href="#notes">Notes</a></li>
+<li><a href="#contributors">Contributors</a></li>
+<li><a href="#bug-reporters">Bug Reporters</a></li>
+<li><a href="#issues">Issues</a></li>
+</ul></li>
 </ul>
 </div>
 </div>
 <div class="col-sm-9">
-<h2 id="listing-and-filtering-nodes">Listing and filtering nodes</h2>
-<p>With the new model source in place and the project configuration updated, the administrator can begin listing the nodes in rundeck and dispatch commands.</p>
-<p>Clicking on the “Nodes” tab in the anvils project will list all the nodes by default. The screenshot below shows the listing with 6 nodes.</p>
-<figure>
-<img src="../figures/fig0601.png" alt="Anvils resources" /><figcaption>Anvils resources</figcaption>
-</figure>
-<p>The tags allow filtering nodes by their functional role. Below shows just the nodes tagged “www”:</p>
-<figure>
-<img src="../figures/fig0602.png" alt="Filtered nodes" /><figcaption>Filtered nodes</figcaption>
-</figure>
-<p>The screenshot shows the filter form with an expression: <code>tags: www</code>. Node filtering uses a simple syntax. You can match nodes by specifying the attribute name (eg, tags) and the value of the tag (eg, www).</p>
-<p>These tags will be used in the next chapters to run commands and define jobs.</p>
+<div class="page-header">
+<h1 class="title">Version 3.0.2</h1>
+</div>
+<h1 id="release-3.0.2">Release 3.0.2</h1>
+<p>Date: 2018-08-17</p>
+<p>Name: <span style="color: brown"><span class="glyphicon glyphicon-book"></span> “jalapeño popper brown book”</span></p>
+<h2 id="notes">Notes</h2>
+<p>Bug fixes</p>
+<h2 id="contributors">Contributors</h2>
+<ul>
+<li>Greg Schueler (gschueler)</li>
+<li>Jaime Tobar (jtobard)</li>
+<li>Stephen Joyner (sjrd218)</li>
+</ul>
+<h2 id="bug-reporters">Bug Reporters</h2>
+<ul>
+<li>Ehoudry</li>
+<li>PeekLeon</li>
+<li>camAtGitHub</li>
+<li>comtaler</li>
+<li>gaetanquentin</li>
+<li>gschueler</li>
+<li>gufertum</li>
+<li>jtobard</li>
+<li>ltamaster</li>
+<li>moreiramarti</li>
+<li>nixmomo</li>
+</ul>
+<h2 id="issues">Issues</h2>
+<p><a href="https://github.com/rundeck/rundeck/milestone/82">Milestone 3.0.2</a></p>
+<ul>
+<li><a href="https://github.com/rundeck/rundeck/issues/3851">System prop -Dserver.web.context doesn’t work. (nginx is broken after upgrade 3.0.1)</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3850">Fix #3828 node names with / break GUI output loading</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3848">Fix #3840 restore jetty forwarded headers support</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3847">Log Storage GUI and stats improvements</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3845">Log Storage page confusing labels: “Progress” is not a progress measure</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3840">setting rundeck.jetty.connector.forwarded=true still forwards https to http</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3837">Fix: projectHome js, anchor, needed for pro ui plugins</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3836">Project description on project list api call</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3828">Log Output is not shown on a workflow with nodes with <code>/</code> in the name</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3827">API 25 list of projects : desciption empty and label missing</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3822">Plugin Control remove disabled plugins</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3820">Plugin control disabled plugins</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3805">Fix NFS log file storage in cluster mode</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3804">Cluster mode prevents partial log load from shared file system</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3802">fix api error 500 on scm export</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3799">Calendar in ‘Run Job Later’ function</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3791">Job reference steps appear as “running” even after completed</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3789">Problem saving api token on postgres</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3787">Deploying 3.0.1-20180803 on wildfly 13: java.lang.IllegalArgumentException: URI scheme is not &quot;file&quot;</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3785">WARN GenerationTarget encountered exception accepting command</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3780">Rundeck 3 : api error 500</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3767">Generating API Token fails with: Couldn’t find user auth token: null</a></li>
+</ul>
 </div>
 </div>
 </div>
@@ -113,21 +162,21 @@ jQuery(function(){
         <li><a href="../index.html">Rundeck Documentation (3.0.x)</a></li>
     
     
-    <li ><a href="index.html">Tutorials</a></li>
-    <li class="active"><a href="nodes.html">Nodes</a></li>
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-3.0.2.html">Version 3.0.2 (2018-08-17)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="project-setup.html"><i class="glyphicon glyphicon-arrow-left"></i> Project Setup</a></li>
-      <li class="next"><a href="jobs.html">Jobs <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      
+      <li class="next"><a href="version-3.0.1.html">Version 3.0.1 (2018-08-03) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
     <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/tutorials/nodes.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-3.0.2.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
