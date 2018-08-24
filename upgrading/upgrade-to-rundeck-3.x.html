@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Upgrade Rundeck 2.11.X to Rundeck 3.X</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Luis Toledo" />
+  <meta name="date" content="June 1, 2018" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.3)</a></li>
+    
+    
+    <li ><a href="index.html">Upgrading</a></li>
+    <li class="active"><a href="upgrade-to-rundeck-3.x.html">Upgrade to Rundeck 3.X</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="upgrade-guide-2.x.html">Upgrade Guide (2.x) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/upgrading/upgrading-to-rundeck3.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#rundeck-launcher">Rundeck Launcher</a></li>
+<li><a href="#rundeck-deb-package">Rundeck DEB Package</a></li>
+<li><a href="#rundeck-rpm-package">Rundeck RPM Package</a></li>
+<li><a href="#tomcat-war-deployment">Tomcat War deployment</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Upgrade Rundeck 2.11.X to Rundeck 3.X</h1>
+</div>
+<h3 id="rundeck-launcher">Rundeck Launcher</h3>
+<p>The “launcher jar” for Rundeck 2 is gone. However, the .war file now operates the same way. Just use the .war in the same way as the previous launcher jar, or deploy it as a webapp.</p>
+<p>To upgrade to Rundeck 3 using launcher use the following steps:</p>
+<p><strong>NOTE: replace <code>$RDECK_BASE</code> below with the real path.</strong></p>
+<ul>
+<li><p>Stop Rundeck Service, eg: <code>$RDECK_BASE/server/sbin/rundeckd stop</code></p></li>
+<li><p>In case you have customs plugins on <code>libext</code> folder, backup them. For example, you can move the full <code>libext</code>:</p>
+<pre><code>mv $RDECK_BASE/libext $RDECK_BASE/libext.2-11</code></pre></li>
+<li><p>Remove previous “source” folders:</p>
+<pre><code>rm -rf server/exp/ server/lib/ server/sbin</code></pre></li>
+<li><p>Copy the new war file to <code>$RDECK_BASE</code> and install it:</p>
+<pre><code>java -jar rundeck-3.X.war --installonly</code></pre></li>
+<li><p>Add the following attribute to <code>$RDECK_BASE/server/config/rundeck-config.properties</code></p>
+<pre><code>rundeck.log4j.config.file=$RDECK_BASE/server/config/log4j.properties</code></pre></li>
+<li><p>Copy the “custom” plugins back to <code>$RDECK_BASE/libext</code> folder</p></li>
+<li><p>Start rundeck 3: <code>$RDECK_BASE/server/sbin/rundeckd start</code></p></li>
+</ul>
+<h3 id="rundeck-deb-package">Rundeck DEB Package</h3>
+<p>The upgrade process can be done using the <code>.deb</code> file or using the command <code>apt-get</code>:</p>
+<p><strong>If using deb package</strong></p>
+<pre><code>sudo dpkg -i rundeck-3.0.X.deb</code></pre>
+<p><strong>If using apt-get</strong></p>
+<pre><code>sudo apt-get upgrade rundeck</code></pre>
+<p><strong>Configuration Files:</strong></p>
+<p>When the upgrade command is run, the upgrade process will prompt about what to do with the new version of config files. In the case of <code>rundeck-config.properties</code>, a merge needs to be done between the old and new version, because the attribute <code>rundeck.log4j.config.file</code> is needed on Rundeck 3 (this attribute is part of the default <code>rundeck-config.properties</code> template):</p>
+<pre><code>Configuration file &#39;/etc/rundeck/rundeck-config.properties&#39;
+ ==&gt; Modified (by you or by a script) since installation.
+ ==&gt; Package distributor has shipped an updated version.
+   What would you like to do about it ?  Your options are:
+    Y or I  : install the package maintainer&#39;s version
+    N or O  : keep your currently-installed version
+      D     : show the differences between the versions
+      Z     : start a shell to examine the situation
+ The default action is to keep your current version.
+*** rundeck-config.properties (Y/I/N/O/D/Z) [default=N] ?</code></pre>
+<p>For example, if you select “YES” the older file will be moved to <code>rundeck-config.properties.dpkg-old</code>, and <code>rundeck-config.properties</code> will be loaded with the default values (so a merge will be needed)</p>
+<pre><code>-rw-r----- 1 rundeck rundeck  986 May 11 19:13 realm.properties
+-rw-r----- 1 rundeck rundeck  730 May 11 19:13 project.properties
+-rw-r----- 1 rundeck rundeck 7529 May 11 19:13 log4j.properties
+-rw-r----- 1 rundeck rundeck  136 May 11 19:13 jaas-loginmodule.conf
+-rw-r----- 1 rundeck rundeck 1104 May 11 19:13 apitoken.aclpolicy
+-rw-r----- 1 rundeck rundeck  738 May 11 19:13 admin.aclpolicy
+-rw-r----- 1 rundeck rundeck 1438 Jun  1 19:28 framework.properties
+-rw-r----- 1 rundeck rundeck  454 Jun  1 19:32 rundeck-config.properties
+-rw-r----- 1 rundeck rundeck 3419 Jun  1 19:32 profile
+-rw-r----- 1 rundeck rundeck  511 Jun  1 19:32 cli-log4j.properties
+-rw-r----- 1 rundeck rundeck  673 Jun  4 14:22 rundeck-config.properties.dpkg-old
+drwxr-x--- 1 rundeck rundeck 4096 Jun  4 14:25 ssl</code></pre>
+<p>A restart is necessary after the merge of <code>rundeck-config.properties</code></p>
+<h3 id="rundeck-rpm-package">Rundeck RPM Package</h3>
+<p>The upgrade process can be done using the <code>.rpm</code> file or using the command <code>yum</code>:</p>
+<h4 id="using-rpm-files">using rpm files</h4>
+<pre><code>sh-4.2# rpm -U rundeck-3.x.rpm rundeck-config-3.X.rpm
+
+warning: /etc/rundeck/framework.properties created as /etc/rundeck/framework.properties.rpmnew
+warning: /etc/rundeck/rundeck-config.properties created as /etc/rundeck/rundeck-config.properties.rpmnew
+rundeck.server.uuid = XXXXXXXXXXXXXXX
+</code></pre>
+<h4 id="using-yum">Using yum</h4>
+<pre><code>sh-4.2#  yum upgrade rundeck rundeck-config</code></pre>
+<p>In the case of the RPM upgrade, the old properties files are not modified, and the new files are saved with the extension <code>.rpmnew</code>. For the configuration file <code>rundeck-config.properties</code> a merge is needed to include new default attribute (<code>rundeck.log4j.config.file</code>).</p>
+<pre><code>sh-4.2# ls -lrt
+total 56
+-rw-r----- 1 rundeck rundeck  455 Jun  1 19:34 rundeck-config.properties.rpmnew
+-rw-r----- 1 rundeck rundeck  986 Jun  1 19:34 realm.properties
+-rw-r----- 1 rundeck rundeck  729 Jun  1 19:34 project.properties
+-rw-r----- 1 rundeck rundeck 3426 Jun  1 19:34 profile
+-rw-r----- 1 rundeck rundeck 7538 Jun  1 19:34 log4j.properties
+-rw-r----- 1 rundeck rundeck  136 Jun  1 19:34 jaas-loginmodule.conf
+-rw-r----- 1 rundeck rundeck 1177 Jun  1 19:34 framework.properties.rpmnew
+-rw-r----- 1 rundeck rundeck  511 Jun  1 19:34 cli-log4j.properties
+-rw-r----- 1 rundeck rundeck 1104 Jun  1 19:34 apitoken.aclpolicy
+-rw-r----- 1 rundeck rundeck  738 Jun  1 19:34 admin.aclpolicy
+-rw-r----- 1 rundeck rundeck  673 Jun  4 16:02 rundeck-config.properties
+-rw-r----- 1 rundeck rundeck 1505 Jun  4 16:02 framework.properties
+drwxr-x--- 1 rundeck rundeck 4096 Jun  4 16:08 ssl</code></pre>
+<p>If the <code>profile</code> file was modified on 2.11.x, the new profile file (for 3.x) will be created with the name <code>profile.rpmnew</code>. If that is the case, merge the changes on the old file and move them to the new one, eg:</p>
+<pre><code>mv /etc/rundeck/profile.rpmnew /etc/rundeck/profile</code></pre>
+<p>A restart is necessary after the merge of <code>rundeck-config.properties</code> or/and <code>profile</code> file.</p>
+<h3 id="tomcat-war-deployment">Tomcat War deployment</h3>
+<p>Due to changes in authentication, <code>tomcat-users.xml</code> and other Tomcat authentication modules no longer work. More information about upgrading with Tomcat will be posted on <a href="https://github.com/rundeck/rundeck/issues/3754">this github issue</a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.3)</a></li>
+    
+    
+    <li ><a href="index.html">Upgrading</a></li>
+    <li class="active"><a href="upgrade-to-rundeck-3.x.html">Upgrade to Rundeck 3.X</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="upgrade-guide-2.x.html">Upgrade Guide (2.x) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/upgrading/upgrading-to-rundeck3.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-08-24T20:01:27UTC">2018-08-24T20:01:27UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
