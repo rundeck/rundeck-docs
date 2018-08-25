@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>edam731632692368359202temp</title>
+  <title>edam8990776452943930474temp</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -197,27 +197,10 @@ dataSource.driverClassName=com.mysql.jdbc.Driver</code></pre>
 <p>Enable DB storage for Project configurations, and Key Storage. Optionally enable encryption.</p>
 <p>For more info refer to:</p>
 <ul>
-<li><a href="http://rundeck.org/docs/administration/key-storage.html">Administrator Guide - Key Storage</a></li>
-<li><a href="http://rundeck.org/docs/plugins-user-guide/storage-plugins.html#jasypt-encryption-converter-plugin">Plugins User Guide - Storage Plugins - Jasypt Encryption</a></li>
-<li><a href="http://rundeck.org/docs/plugins-user-guide/configuring.html#storage-plugins">Plugins User Guide - Configuring - Storage Plugins</a></li>
+<li><a href="../../security/key-storage.html" title="Administrator Guide - Security - Key Storage">Security - Key Storage</a></li>
+<li><a href="../plugins/bundled-plugins.html#jasypt-encryption-plugin" title="Administrator Guide - Rundeck Configuration - Configuring Plugins - Bundled Plugins - Jasypt Encryption Plugin">Configuring Plugins - Bundled Plugins - Jasypt Encryption Plugin</a></li>
+<li><a href="../storage-facility.html" title="Administrator Guide - Rundeck Configuration - Storage Facility">Storage Facility</a></li>
 </ul>
-<p>Modify <code>rundeck-config.properties</code></p>
-<pre><code># Enables DB for Project configuration storage
-rundeck.projectsStorageType=db
-
-# Encryption for project config storage
-rundeck.config.storage.converter.1.type=jasypt-encryption
-rundeck.config.storage.converter.1.path=projects
-rundeck.config.storage.converter.1.config.password=mysecret
-
-# Enable DB for Key Storage
-rundeck.storage.provider.1.type=db
-rundeck.storage.provider.1.path=keys
-
-# Encryption for Key Storage
-rundeck.storage.converter.1.type=jasypt-encryption
-rundeck.storage.converter.1.path=keys
-rundeck.storage.converter.1.config.password=mysecret</code></pre>
 <h2 id="start-up-rundeck">Start up Rundeck</h2>
 <p>Start the Rundeck server again.</p>
 <p>Unix:</p>
@@ -295,7 +278,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-20T22:30:59UTC">2018-08-20T22:30:59UTC</span>
+<span class="generated-date" title="2018-08-25T02:59:54UTC">2018-08-25T02:59:54UTC</span>
 </p>
 </footer>
 </div>

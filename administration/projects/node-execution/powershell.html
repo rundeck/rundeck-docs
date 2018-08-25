@@ -93,7 +93,12 @@ jQuery(function(){
 <li><a href="#project-configuration">Project Configuration</a></li>
 <li><a href="#winrm-setting-to-use-powershell-plugin">WinRM Setting to use PowerShell Plugin</a></li>
 <li><a href="#other-setting">Other setting</a></li>
+<li><a href="#enable-credssp-authentication-on-windows-domain">Enable CredSSP Authentication On Windows Domain</a><ul>
+<li><a href="#on-the-rundeck-server-1">On the Rundeck server</a></li>
+<li><a href="#on-the-remote-node">On the remote node</a></li>
 <li><a href="#troubleshooting">Troubleshooting</a></li>
+<li><a href="#troubleshooting-1">Troubleshooting</a></li>
+</ul></li>
 </ul>
 </div>
 </div>
@@ -165,7 +170,49 @@ winrm set winrm/config/winrs @{MaxMemoryPerShellMB=&quot;1024&quot;}</code></pre
 <pre><code>Set-PSSessionConfiguration -ShowSecurityDescriptorUI -Name Microsoft.PowerShell</code></pre>
 <p>Increase the concurrent shell issue:</p>
 <pre><code>set-item wsman:\localhost\shell\maxshellsperuser 50 </code></pre>
+<h2 id="enable-credssp-authentication-on-windows-domain">Enable CredSSP Authentication On Windows Domain</h2>
+<h3 id="on-the-rundeck-server-1">On the Rundeck server</h3>
+<h4 id="enable-credssp">Enable CredSSP</h4>
+<p>Open a powershell windows and run:</p>
+<pre><code>Enable-WSManCredSSP -Role &quot;Client&quot; -DelegateComputer &quot;*.something.com&quot;</code></pre>
+<p>Where <code>something.com</code> is the DNS domain of the target computer</p>
+<p>or</p>
+<pre><code>Enable-WSManCredSSP -Role &quot;Client&quot; -DelegateComputer &quot;*&quot;</code></pre>
+<h4 id="allow-delegating-fresh-credentials">Allow Delegating Fresh Credentials</h4>
+<ul>
+<li>Click <strong>Start</strong>, type <strong>mmc</strong> and then click <strong>OK</strong>.</li>
+<li>Click <strong>File and then click </strong>Add/Remove Snap-in**.</li>
+<li>Click <strong>Group Policy Object</strong> and then click <strong>Add</strong>.</li>
+<li>Select <strong>Local Computer</strong> and then click <strong>Finish</strong>.</li>
+<li>Go to <strong>Computer PolicyTemplatesDelegationDelegating Fresh Credentials</strong> → Set to <strong>enabled</strong></li>
+</ul>
+<figure>
+<img src="../../../figures/allow-delegating-fresh-credentials-1.png" alt="Enable delegating fresh credentials" /><figcaption>Enable delegating fresh credentials</figcaption>
+</figure>
+<ul>
+<li>Add <strong>WSMAN/</strong>* to list of computers and check the box for <strong>Concatenate OS defaults with input above</strong>.</li>
+</ul>
+<figure>
+<img src="../../../figures/allow-delegating-fresh-credentials-2.png" alt="Add servers to list" /><figcaption>Add servers to list</figcaption>
+</figure>
+<h4 id="enable-credssp-authentication-on-winrm-client">Enable CredSSP authentication on Winrm Client</h4>
+<p>Open a CMD Prompt as an Administrator user and execute:</p>
+<pre><code>winrm set winrm/config/client/auth @{CredSSP=&quot;true&quot;}</code></pre>
+<p>You need to have winrm service configured and running.</p>
+<h3 id="on-the-remote-node">On the remote node</h3>
+<h4 id="enable-credssp-1">Enable CredSSP</h4>
+<p>Open a powershell windows and run:</p>
+<pre><code>Enable-WSManCredSSP -Role &quot;Server&quot;</code></pre>
+<h4 id="make-sure-that-you-enable-the-credssp-on-winrm-service-settings">Make sure that you enable the CredSSP on WinRM Service settings</h4>
+<p>To get the WinRm Service config:</p>
+<pre><code>winrm get winrm/config/service</code></pre>
+<p>To enable the CredSSP:</p>
+<pre><code>winrm set winrm/config/service/auth @{CredSSP=&quot;true&quot;}</code></pre>
 <h3 id="troubleshooting">Troubleshooting</h3>
+<p>If you are using a non-administrator user (or a not- domain-administrator user) to execute command to remote nodes, you need to set up the access on the remote machine ( to the user or some of its groups, eg: Domain User group).</p>
+<p>To add permissions to non-administrator user to execute remote commands:</p>
+<pre><code>Set-PSSessionConfiguration Microsoft.Powershell -ShowSecurityDescriptorUI</code></pre>
+<h3 id="troubleshooting-1">Troubleshooting</h3>
 <p>If you get “Access is denied” error when you try to access to a shared folder on the remote node, it is possible that you must use the <a href="http://support.rundeck.com/customer/portal/articles/2522223-enable-credssp-authentication-windows">CredSSP autentication</a>.</p>
 <p>Then, you can define the authentication type like:</p>
 <pre><code>&lt;node name=&quot;XXXXX&quot; 
@@ -196,13 +243,8 @@ Get-NetConnectionProfile
 Set-NetConnectionProfile -InterfaceIndex [INTERFAZ_INDEX] -NetworkCategory Private</code></pre>
 <p>It could be necessary to change the user’s log-on in tomcat service when the remote connection does not work:</p>
 <figure>
-<img src="../../figures/powershell-troubleshooting.png" alt="Tomcat settings" /><figcaption>Tomcat settings</figcaption>
+<img src="../../../figures/powershell-troubleshooting.png" alt="Tomcat settings" /><figcaption>Tomcat settings</figcaption>
 </figure>
-<p>For further information about winrm and PowerShell plug-in see:</p>
-<ul>
-<li><a href="http://support.rundeck.com/customer/en/portal/articles/1939728-powershell-plugins" class="uri">http://support.rundeck.com/customer/en/portal/articles/1939728-powershell-plugins</a></li>
-<li><a href="https://github.com/rundeck-plugins/rundeck-winrm-plugin" class="uri">https://github.com/rundeck-plugins/rundeck-winrm-plugin</a></li>
-</ul>
 </div>
 </div>
 </div>
@@ -263,7 +305,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-20T22:30:59UTC">2018-08-20T22:30:59UTC</span>
+<span class="generated-date" title="2018-08-25T02:59:54UTC">2018-08-25T02:59:54UTC</span>
 </p>
 </footer>
 </div>

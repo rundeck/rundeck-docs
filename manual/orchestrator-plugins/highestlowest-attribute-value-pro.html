@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>rd-jobs</title>
+  <title>Highest/Lowest Attribute Value (Pro)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
-  <meta name="author" content="Greg Schueler" />
-  <meta name="author" content="Alex Honor" />
-  <meta name="date" content="November 30, 2016" />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
@@ -23,7 +20,7 @@ jQuery(function(){
   jQuery('[data-toggle="popover"]').popover();
 });
 </script>
-  <link rel="stylesheet" href="../style.css" type="text/css" />
+  <link rel="stylesheet" href="../../style.css" type="text/css" />
 </head>
 <body data-spy="scroll" data-target=".toc-nav">
 <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -58,35 +55,53 @@ jQuery(function(){
 <ol class="breadcrumb top">
 
     
-        <li><a href="../index.html">Rundeck Documentation (3.0.x)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (3.0.x)</a></li>
+    
+        <li><a href="../index.html">User Guide</a></li>
     
     
-    <li ><a href="index.html">Command Line Tools</a></li>
-    <li class="active"><a href="rd-jobs.html">rd-jobs</a></li>
+    
+    <li class="active"><a href="highestlowest-attribute-value-pro.html">Highest/Lowest Attribute Value (Pro)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="rd-acl.html"><i class="glyphicon glyphicon-arrow-left"></i> rd-acl</a></li>
-      <li class="next"><a href="rd-project.html">rd-project <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="previous"><a href="bundled-orchestrator-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> Bundled Orchestrator Plugins</a></li>
+      
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
     <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manpages/man1/rd-jobs.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/orchestrator-plugins/highest-lowest.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
 <div id="docbody">
 <div class="container">
 <div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#configuration">Configuration</a></li>
+</ul>
+</div>
+</div>
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">rd-jobs</h1>
+<h1 class="title">Highest/Lowest Attribute Value (Pro)</h1>
 </div>
-<p><code>rd-jobs</code> is no longer available, please see <a href="https://rundeck.github.io/rundeck-cli">rd</a>.</p>
+<p>This Orchestrator plugin picks one node with either the highest or lowest value of a certain attribute.</p>
+<h2 id="configuration">Configuration</h2>
+<dl>
+<dt>Attribute</dt>
+<dd><p>Node Attribute to sort by.</p>
+</dd>
+<dt>Sort</dt>
+<dd><p>Sort order, <code>highest</code> or <code>lowest</code></p>
+</dd>
+</dl>
 </div>
 </div>
 </div>
@@ -98,24 +113,26 @@ jQuery(function(){
 <ol class="breadcrumb bottom">
 
     
-        <li><a href="../index.html">Rundeck Documentation (3.0.x)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (3.0.x)</a></li>
+    
+        <li><a href="../index.html">User Guide</a></li>
     
     
-    <li ><a href="index.html">Command Line Tools</a></li>
-    <li class="active"><a href="rd-jobs.html">rd-jobs</a></li>
+    
+    <li class="active"><a href="highestlowest-attribute-value-pro.html">Highest/Lowest Attribute Value (Pro)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="rd-acl.html"><i class="glyphicon glyphicon-arrow-left"></i> rd-acl</a></li>
-      <li class="next"><a href="rd-project.html">rd-project <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="previous"><a href="bundled-orchestrator-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> Bundled Orchestrator Plugins</a></li>
+      
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
     <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manpages/man1/rd-jobs.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/orchestrator-plugins/highest-lowest.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
@@ -143,7 +160,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-20T22:30:59UTC">2018-08-20T22:30:59UTC</span>
+<span class="generated-date" title="2018-08-25T02:59:54UTC">2018-08-25T02:59:54UTC</span>
 </p>
 </footer>
 </div>

@@ -185,7 +185,7 @@ $RDECK_BASE/server/config
 <p>Other settings:</p>
 <ul>
 <li><code>framework.log.dispatch.console.format</code>: Default format for non-terse node execution logging run by the <code>dispatch</code> CLI tool.</li>
-<li><code>execution.script.tokenexpansion.enabled</code>: Whether inline script token expansion is enabled, default <code>true</code>. If <code>false</code>, the “Inline Script Content” syntax described in <a href="../../manual/creating-job-workflows.html#context-variables">User Guide &gt; Jobs &gt; Context Variable Usage</a> is disabled.</li>
+<li><code>execution.script.tokenexpansion.enabled</code>: Whether inline script token expansion is enabled, default <code>true</code>. If <code>false</code>, the “Inline Script Content” syntax described in <a href="../../manual/creating-job-workflows.html#context-variables" title="User Guide - Creating Job Workflows - Context Variables">User Guide - Creating Job Workflows - Context Variables</a> is disabled.</li>
 </ul>
 <p>Static authentication tokens for API access:</p>
 <p>You can define the location of a .properties file in framework.properties:</p>
@@ -302,6 +302,7 @@ Determines whether access to the API is allowed if the API client authenticates 
 <li><p><code>rundeck.security.enforceMaxSessions</code>: <code>true|false</code>. Only allow users to log in a configured number of times. Oldest sessions are automatically logged out. <code>Default: false</code>.</p>
 <p>Note: If you use the rd tool with the RD_USERNAME/RD_PASSWORD authentication this will use an active session each time your run the command. If you log into the user interface then execute rd commands you could be logged out of your web session. If you have multiple long running rd commands and you exceed the maxSessions limit, you may experience unexpected behavior. If you use api tokens with the rd tool it will not log out your interactive session. If you enable this setting and also use the rd tool, it is recommended that you use api tokens with the rd tool.</p></li>
 <li><p><code>rundeck.security.maxSessions</code>: If enforceMaxSessions is true, this setting controls the number of active sessions a user is allowed to have. <code>Default: 1</code></p></li>
+<li><p><code>rundeck.security.jaasRolePrefix</code>: Prefix string to add to each <em>role</em> determined via <a href="../security/authenticating-users.html#jetty-and-jaas-authentication" title="Administrator Guide - Security - Authenticating Users - Jetty And Jaas Authentication">JAAS Authentication</a>. Default: none.</p></li>
 </ul>
 <h3 id="execution-mode">Execution Mode</h3>
 <ul>
@@ -483,7 +484,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-20T22:30:59UTC">2018-08-20T22:30:59UTC</span>
+<span class="generated-date" title="2018-08-25T02:59:54UTC">2018-08-25T02:59:54UTC</span>
 </p>
 </footer>
 </div>

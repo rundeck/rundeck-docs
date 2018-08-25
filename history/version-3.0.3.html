@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Progress Badge Plugin (Pro)</title>
+  <title>Version 3.0.3</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="author" content="greg" />
+  <meta name="date" content="08/24/2018" />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
@@ -20,7 +22,7 @@ jQuery(function(){
   jQuery('[data-toggle="popover"]').popover();
 });
 </script>
-  <link rel="stylesheet" href="../../style.css" type="text/css" />
+  <link rel="stylesheet" href="../style.css" type="text/css" />
 </head>
 <body data-spy="scroll" data-target=".toc-nav">
 <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -55,26 +57,24 @@ jQuery(function(){
 <ol class="breadcrumb top">
 
     
-        <li><a href="../../index.html">Rundeck Documentation (3.0.x)</a></li>
-    
-        <li><a href="../index.html">User Guide</a></li>
+        <li><a href="../index.html">Rundeck Documentation (3.0.x)</a></li>
     
     
-    
-    <li class="active"><a href="progress-badge-plugin-pro.html">Progress Badge Plugin (Pro)</a></li>
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-3.0.3.html">Version 3.0.3 (2018-08-24)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="servicenow-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> ServiceNow Plugins</a></li>
-      <li class="next"><a href="builtin-workflow-steps.html">Builtin Workflow Steps <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      
+      <li class="next"><a href="version-3.0.2.html">Version 3.0.2 (2018-08-17) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
     <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/workflow-steps/progress-badge.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-3.0.3.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
@@ -84,43 +84,73 @@ jQuery(function(){
 <div class="col-sm-3 toc-nav">
 <div class="nav">
 <ul>
-<li><a href="#progress-badges-log-filter-plugin">Progress Badges Log Filter Plugin</a></li>
-<li><a href="#progress-badge-workflow-step-plugin">Progress Badge Workflow Step Plugin</a></li>
-<li><a href="#emoji-support">Emoji Support</a></li>
-<li><a href="#advanced-render-options">Advanced render options</a></li>
+<li><a href="#release-3.0.3">Release 3.0.3</a><ul>
+<li><a href="#notes">Notes</a></li>
+<li><a href="#contributors">Contributors</a></li>
+<li><a href="#bug-reporters">Bug Reporters</a></li>
+<li><a href="#issues">Issues</a></li>
+</ul></li>
 </ul>
 </div>
 </div>
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">Progress Badge Plugin (Pro)</h1>
+<h1 class="title">Version 3.0.3</h1>
 </div>
-<p>The Progress Badge Plugin included with Rundeck Pro can create graphic badges to be rendered on the Log Output tab.</p>
-<p>Includes a Log Filter Plugin and Workflow Step Plugin.</p>
-<h2 id="progress-badges-log-filter-plugin">Progress Badges Log Filter Plugin</h2>
-<p>Accepts the following input:</p>
+<h1 id="release-3.0.3">Release 3.0.3</h1>
+<p>Date: 2018-08-24</p>
+<p>Name: <span style="color: burlywood"><span class="glyphicon glyphicon-briefcase"></span> “jalapeño popper burlywood briefcase”</span></p>
+<h2 id="notes">Notes</h2>
+<p>This release contains:</p>
 <ul>
-<li>Title (optional) can include context variables</li>
-<li>Text to be displayed inside the badge. Supports emoticons (see below).</li>
-<li>String (optional) regular expression to search in the normal output of the step, if found, the badge is rendered as success (green) else is rendered as failed (red)</li>
-<li>Mute: Default <code>true</code>, suppress all the standard output, just diaplay the badge or errors.</li>
-<li>Boolean to do nothing if string pattern does not match.</li>
+<li>bug fixes</li>
+<li>some UI updates</li>
+<li>updated plugin: Ansible 2.5.0</li>
 </ul>
-<h2 id="progress-badge-workflow-step-plugin">Progress Badge Workflow Step Plugin</h2>
-<p>Render a single badge using input options:</p>
+<h2 id="contributors">Contributors</h2>
 <ul>
-<li>Title (optional) can include context variables</li>
-<li>Text to be displayed inside the badge. Supports emoticons (see below).</li>
-<li>Status of the Badge, ok (green badge), error (red badge) or neutral (grey badge). Can be a variable from option o key-value data.</li>
+<li>Greg Schueler (gschueler)</li>
+<li>Jaime Tobar (jtobard)</li>
+<li>Jesse Marple (jessemarple)</li>
+<li>Luis Toledo (ltamaster)</li>
+<li>Greg Zapp (ProTip)</li>
+<li>Romain LEON (PeekLeon)</li>
 </ul>
-<h2 id="emoji-support">Emoji Support</h2>
-<p>To use some emoji inside the text, must input the alias of the emoji between colon: <code>:smile: Successfull job! :100:</code> Display as:</p>
-<p><code>😄 Successfull job! 💯</code></p>
-<p>A full list of supported emoji are included on the plugin README.md and on the page of the library: <a href="https://github.com/vdurmont/emoji-java">vdurmont/emoji-java</a></p>
-<h2 id="advanced-render-options">Advanced render options</h2>
+<h2 id="bug-reporters">Bug Reporters</h2>
 <ul>
-<li>Specify typeface and font size</li>
-<li>Select for background color of the badge. O can enter a hexadecimal color value in the format #ffff00</li>
+<li>Ehoudry</li>
+<li>PeekLeon</li>
+<li>ProTip</li>
+<li>gschueler</li>
+<li>imad-almansi</li>
+<li>jessemarple</li>
+<li>ltamaster</li>
+<li>marcoc610</li>
+<li>timhughes</li>
+</ul>
+<h2 id="issues">Issues</h2>
+<p><a href="https://github.com/rundeck/rundeck/milestone/83">Milestone 3.0.3</a></p>
+<ul>
+<li><a href="https://github.com/rundeck/rundeck/pull/3904">rd ui : sidebar overlay</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3897">Update dom4j to 2.1.1, add required jaxen dep</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3896">Cleanup of Welcome page</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3895">#3894 cleans up the h1 and stylingof the welcome message on dashboard</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3894">firstRun h1 displays white text on a white background.</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3892">Fix #3888 activity links should be relative to app base url</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3890">Fix #3864 new project should be in projects list</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3888">project Home page: contextPath ignored for activity link</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3883">LDAP authentication fixing</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3879">UI: Job edit page: Editable filter label is not bold like the others.</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3873">Feature/3771/motd</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3864">Rundeck 3 : New project not visible</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3859">Updating Ansible Plugin to version 2.5.0.</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3856">Rundeck 3 : Text in progress bar</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3852">No such property: description for class: com.dtolabs.rundeck.core.execution.impl.local.LocalNodeExecutor</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3849">Project search box in home page doesn’t search labels</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3818">Having a job as an execution step failing running jobs at the same time</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3775">rd ui: Job progress bar half obscured</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3771">Message of the Day V2</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3752">Top bar shows the project name, not the project label. It should show label.</a></li>
 </ul>
 </div>
 </div>
@@ -133,26 +163,24 @@ jQuery(function(){
 <ol class="breadcrumb bottom">
 
     
-        <li><a href="../../index.html">Rundeck Documentation (3.0.x)</a></li>
-    
-        <li><a href="../index.html">User Guide</a></li>
+        <li><a href="../index.html">Rundeck Documentation (3.0.x)</a></li>
     
     
-    
-    <li class="active"><a href="progress-badge-plugin-pro.html">Progress Badge Plugin (Pro)</a></li>
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-3.0.3.html">Version 3.0.3 (2018-08-24)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="servicenow-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> ServiceNow Plugins</a></li>
-      <li class="next"><a href="builtin-workflow-steps.html">Builtin Workflow Steps <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      
+      <li class="next"><a href="version-3.0.2.html">Version 3.0.2 (2018-08-17) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
     <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/workflow-steps/progress-badge.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-3.0.3.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
@@ -180,7 +208,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-20T22:30:59UTC">2018-08-20T22:30:59UTC</span>
+<span class="generated-date" title="2018-08-25T02:59:54UTC">2018-08-25T02:59:54UTC</span>
 </p>
 </footer>
 </div>

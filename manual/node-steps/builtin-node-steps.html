@@ -131,8 +131,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="sqlrunner-plugin-pro.html"><i class="glyphicon glyphicon-arrow-left"></i> SQLRunner Plugin (Pro)</a></li>
-      
+      <li class="previous"><a href="vmware-operations-node-step-plugin-pro.html"><i class="glyphicon glyphicon-arrow-left"></i> VMWare Operations Node Step Plugin (Pro)</a></li>
+      <li class="next"><a href="jira-node-step-plugins-pro.html">Jira Node Step Plugins (Pro) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -189,7 +189,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <figure>
 <img src="../../figures/fig0406.png" alt="Script URL step type" /><figcaption>Script URL step type</figcaption>
 </figure>
-<p>The URL can contain <a href="#context-variables">Context Variables</a> that will be expanded at runtime.</p>
+<p>The URL can contain <a href="../creating-job-workflows.html#context-variables" title="User Guide - Creating Job Workflows - Context Variables">Context Variables</a> that will be expanded at runtime.</p>
 <h3 id="job-reference-step">Job reference step</h3>
 <p>To call another saved Job, create a Job Reference step. Enter the name of the Job and its group.</p>
 <figure>
@@ -219,8 +219,53 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Node Rank order</li>
 </ul>
 <h3 id="copy-file-step">Copy File step</h3>
+<p>Copy a file to a destination on a remote node.</p>
+<figure>
+<img src="../../figures/copy-file-step.png" alt="Copy File Step" /><figcaption>Copy File Step</figcaption>
+</figure>
+<h4 id="configuration">Configuration</h4>
+<dl>
+<dt>Source Path</dt>
+<dd>Path on the rundeck server for the file or base directory (recursive/wildcard search).
+</dd>
+<dt>Destination Path</dt>
+<dd>Path on the remote node for the file destination. If the path ends with a /, the same filename as the source will be used.
+</dd>
+<dt>Pattern</dt>
+<dd>Wildcard pattern (optional). E.g: <code>**/*.txt</code>
+</dd>
+<dt>Recursive copy</dt>
+<dd>Recursively copy source dir, or matched files and dirs to the destination path.
+</dd>
+<dt>Print transfer information</dt>
+<dd>Log information about the file copy
+</dd>
+</dl>
 <h3 id="local-command-step">Local Command step</h3>
+<p>Run a command locally on the server</p>
+<figure>
+<img src="../../figures/local-command-step.png" alt="Local Command Step" /><figcaption>Local Command Step</figcaption>
+</figure>
+<h4 id="configuration-1">Configuration</h4>
+<dl>
+<dt>Command</dt>
+<dd>The command (runs locally)
+</dd>
+</dl>
 <h3 id="data-node-step">Data Node step</h3>
+<p>Produce data values for a node.</p>
+<figure>
+<img src="../../figures/data-node-step.png" alt="Data Node Step" /><figcaption>Data Node Step</figcaption>
+</figure>
+<h4 id="configuration-2">Configuration</h4>
+<dl>
+<dt>Data</dt>
+<dd>Properties formatted data to set for the current node
+</dd>
+<dt>Format</dt>
+<dd>Format for the data. One of: <code>properties</code>, <code>json</code>, or <code>yaml</code>
+</dd>
+</dl>
 <h2 id="notes">Notes</h2>
 <h3 id="advanced-script-options">Advanced Script options</h3>
 <p>For <a href="#script-step">Script steps</a>, <a href="#script-file-step">Script file steps</a>, and <a href="#script-url-step">Script URL steps</a>, you can specify an optional <em>Invocation</em> string to declare how the script should be executed.</p>
@@ -279,8 +324,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="sqlrunner-plugin-pro.html"><i class="glyphicon glyphicon-arrow-left"></i> SQLRunner Plugin (Pro)</a></li>
-      
+      <li class="previous"><a href="vmware-operations-node-step-plugin-pro.html"><i class="glyphicon glyphicon-arrow-left"></i> VMWare Operations Node Step Plugin (Pro)</a></li>
+      <li class="next"><a href="jira-node-step-plugins-pro.html">Jira Node Step Plugins (Pro) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -315,7 +360,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-20T22:30:59UTC">2018-08-20T22:30:59UTC</span>
+<span class="generated-date" title="2018-08-25T02:59:54UTC">2018-08-25T02:59:54UTC</span>
 </p>
 </footer>
 </div>

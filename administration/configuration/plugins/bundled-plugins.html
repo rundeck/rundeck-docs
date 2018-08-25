@@ -91,7 +91,6 @@ jQuery(function(){
 <li><a href="#built-in-resource-model-formats">Built-in Resource Model Formats</a></li>
 <li><a href="#script-plugin">Script Plugin</a></li>
 <li><a href="#stub-plugin">Stub Plugin</a></li>
-<li><a href="#orchestrator-plugin">Orchestrator Plugin</a></li>
 <li><a href="#local-execution-plugin">Local Execution Plugin</a></li>
 <li><a href="#job-state-plugin">Job State Plugin</a></li>
 <li><a href="#flow-control-plugin">Flow Control Plugin</a></li>
@@ -155,14 +154,6 @@ jQuery(function(){
 </dl>
 <p>You could, for example, disable or test an entire project’s workflows or jobs by simply setting the <code>project.properties</code> node executor provider to <code>stub</code>.</p>
 <p>File: <code>rundeck-stub-plugin-3.0.x.jar</code></p>
-<h2 id="orchestrator-plugin">Orchestrator Plugin</h2>
-<p>Provides several Orchestrator plugin implementations:</p>
-<ul>
-<li>Random Subset: Selects a maximum number of the target nodes at random</li>
-<li>Rank Tiered: Processes nodes in a tiered manner, ordered by rank</li>
-<li>Max Percentage: Processes at maximum a percentage of the target nodes</li>
-</ul>
-<p>File: <code>rundeck-orchestrator-plugin-3.0.x.jar</code></p>
 <h2 id="local-execution-plugin">Local Execution Plugin</h2>
 <p>A Node Step plugin which executes a command locally instead of on a target node.</p>
 <p>File: <code>rundeck-localexec-plugin-3.0.x.jar</code></p>
@@ -181,7 +172,7 @@ jQuery(function(){
 <h2 id="jasypt-encryption-plugin">Jasypt Encryption Plugin</h2>
 <p>Provides an encryption <a href="../storage-facility.html#storage-converters">storage converter</a> for the Storage facility. Can be used to encrypt the contents of Key Storage, and Project Configuration stored in the DB or on disk.</p>
 <p>This plugin provides password based encryption for storage contents.<br />
-It uses the <a href="" title="http://jasypt.org">Jasypt</a> encryption library. The built in Java JCE is used unless another provider is specified, <a href="https://www.bouncycastle.org/">Bouncycastle</a> can be used by specifying the ‘BC’ provider name.</p>
+It uses the <a href="http://jasypt.org">Jasypt</a> encryption library. The built in Java JCE is used unless another provider is specified, <a href="https://www.bouncycastle.org/">Bouncycastle</a> can be used by specifying the ‘BC’ provider name.</p>
 <p>Password, algorithm, provider, etc can be specified directly, or via environment variables (the <code>*EnvVarName</code> properties), or Java System properties (the <code>*SysPropName</code> properties).</p>
 <p>To enable it, see <a href="configuring.html#storage-converter-plugins">Configuring - Storage Converter Plugins</a>.</p>
 <p>See also: <a href="../../security/key-storage.html">Key Storage</a></p>
@@ -299,7 +290,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-20T22:30:59UTC">2018-08-20T22:30:59UTC</span>
+<span class="generated-date" title="2018-08-25T02:59:54UTC">2018-08-25T02:59:54UTC</span>
 </p>
 </footer>
 </div>

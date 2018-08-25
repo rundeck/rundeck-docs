@@ -92,45 +92,52 @@ jQuery(function(){
 <p>The Rundeck application itself is a Java-based webapp. The application provides both graphical interface and network interfaces used by the Rundeck shell tools.</p>
 <p>Access to the Rundeck application requires a login and password. The default Rundeck installation uses a flat file user directory containing a set of default logins. Logins are defined in terms of a username and password as well as one or more user groups. An alternative configuration to the flat file user directory, is LDAP (e.g., ActiveDirectory) but Rundeck authentication and authorization is customizable via <a href="http://en.wikipedia.org/wiki/Java_Authentication_and_Authorization_Service">JAAS</a>. Users must also be authorized to perform actions like define a job or execute one. This is controlled by an access control facility that reads policy files defined by the Rundeck administrator. Privilege is granted if a user’s group membership meets the requirements of the policy.</p>
 <h2 id="license">License</h2>
-<p><a href="../administration/configuration/license-pro.html">License</a></p>
+<p>See: <a href="../administration/configuration/license-pro.html">Rundeck Pro Licensing and Support</a></p>
 <h2 id="general-configuration">General configuration</h2>
-<p>Rundeck Pro supports all properties described in the <a href="http://rundeck.org/docs/administration/configuration-file-reference.html">OSS version</a>.</p>
-<h2 id="node-sources">Node Sources</h2>
-<p>Node Sources allow you to import metadata about the nodes you want to run Rundeck jobs on. Node Sources are configured on Rundeck Pro in the same was as the OSS version, described in <a href="http://rundeck.org/docs/administration/managing-node-sources.html">Managing Node Sources</a>.</p>
+<p>Rundeck Pro supports all properties described in the <a href="../administration/configuration/configuration-file-reference.html">OSS version</a>.</p>
+<h2 id="node-model-sources">Node Model Sources</h2>
+<p>Node Sources allow you to import metadata about the nodes you want to run Rundeck jobs on. Node Sources are configured on Rundeck Pro in the same was as the OSS version, described in <a href="../administration/projects/resource-model-sources/index.html">Node Model Sources</a>.</p>
 <h2 id="authentication">Authentication</h2>
 <p>Similar to OSS Rundeck, Rundeck Pro uses Servlet Container Authentication to determine the logged in user name and the user’s authorized roles.</p>
 <p>For more details, see <a href="../administration/security/authenticating-users.html">Authenticating Users</a></p>
 <h2 id="key-storage">Key storage</h2>
 <p>Similar to OSS Rundeck, Rundeck Pro can securely store private keys that the Rundeck Node Executor and use for sessions.</p>
-<p>For momre details, see <a href="http://rundeck.org/docs/administration/key-storage.html">Key Storage</a></p>
-<h2 id="remote-job-execution-pro-only">Remote job execution (Pro-only)</h2>
+<p>For momre details, see <a href="../administration/security/key-storage.html">Key Storage</a></p>
+<h2 id="remote-job-execution">Remote job execution</h2>
 <p>This feature allows Rundeck Pro cluster members to forward job executions to other cluster members based on a policy configuration. By default, each member of the cluster executes jobs locally and does not forward them. You can define multiple profiles and assign different projects to different profiles. If a job is executed in a project which is not assigned to a specific profile, the default policy is used.</p>
 <p>For more details, see <a href="../administration/configuration/remote-job-execution-pro.html">Remote Job Execution</a></p>
 <h2 id="high-availability">High availability</h2>
 <h3 id="database">Database</h3>
-<ul>
-<li><a href="../administration/configuration/storage/using-mysql-as-a-database-backend.html">mysql</a></li>
-<li><a href="../administration/configuration/storage/using-postgres-as-a-database-backend.html">postgres</a></li>
-<li><a href="../administration/configuration/storage/using-oracle-as-a-database-backend.html">oracle</a></li>
-<li><a href="../administration/configuration/storage/using-microsoft-sql-server-as-a-database-backend.html">mssql</a></li>
-</ul>
-<h3 id="loadbalancer-pro-only">Loadbalancer (Pro-only)</h3>
+<p>See: <a href="../administration/configuration/database/index.html">Database Backends</a>.</p>
+<h3 id="loadbalancer">Loadbalancer</h3>
 <p>A loadbalancer allows you to achieve high availability in your Rundeck Pro installation by routing http traffic across several redundant Rundeck Pro instances.</p>
 <p>To learn how to set up a loadbalancer for Rundeck Pro, see <a href="../administration/cluster/loadbalancer/index.html">Loadbalancer</a></p>
-<h3 id="autotakeover-pro-only">Autotakeover (Pro-only)</h3>
+<h3 id="autotakeover">Autotakeover</h3>
 <p>If a cluster member goes down, all scheduled jobs on that cluster member must be moved to another cluster node. This process can be performed automatically using the heartbeat and Autotakeover features in Rundeck Pro version 2.1.0 and later releases.</p>
 <p>To learn how to set up Autotakeover, see <a href="../administration/cluster/autotakeover/index.html">Autotakeover</a></p>
-<h3 id="logstore-pro-only">Logstore (Pro-only)</h3>
+<h3 id="logstore">Logstore</h3>
 <p>All Cluster members must share the same log storage, this can be achieved in two ways:</p>
 <ul>
 <li>Shared file system: You can set the shared file system path with <code>framework.logs.dir</code> in the <code>framework.properties</code> file. This changes must be done in all the cluster members.</li>
 <li>Plugins: Using an Execution log storage plugin.</li>
 </ul>
-<p>So far we have the following plugins for execution log storage:</p>
+<p>Some plugins that can be used:</p>
+<h4 id="rundeck-pro-s3-log-storage-plugin">Rundeck Pro S3 Log Storage Plugin</h4>
+<p>This plugin provides Log Storage via Amazon AWS S3, or any storage compatible with AWS S3 API, eg: S3, <a href="https://minio.io/">Minio</a>, etc.</p>
+<p>It is based on the open source <a href="https://github.com/rundeck-plugins/rundeck-s3-log-plugin">Rundeck S3 Log Storage Plugin</a>.</p>
+<p>It adds the additional feature:</p>
 <ul>
-<li><a href="https://github.com/rundeck-plugins/rundeck-s3-log-plugin">AWS S3</a>: This plugin works with any storage compatible with AWS S3 API, eg: S3, Minio, etc.</li>
-<li><a href="https://github.com/rundeck-plugins/rundeck-azure-plugin">Azure Blob Storage</a></li>
+<li><em>Checkpoint log storage</em>: This enables viewing the execution logs while the execution is running.</li>
 </ul>
+<h5 id="configuration">Configuration</h5>
+<p>Enable the ExecutionFileStorage provider named <code>com.rundeck.rundeckpro.amazon-s3</code> in your rundeck-config file:</p>
+<pre><code>rundeck.execution.logs.fileStoragePlugin=com.rundeck.rundeckpro.amazon-s3</code></pre>
+<p>The “checkpoint log storage” feature is enabled by default.</p>
+<p>If you wish to disable it you can set this in your framework.properties:</p>
+<pre><code>framework.plugin.ExecutionFileStorage.com.rundeck.rundeckpro.amazon-s3.checkpoint=false</code></pre>
+<p>Please refer to the <a href="https://github.com/rundeck-plugins/rundeck-s3-log-plugin">open source plugin</a> for other configuration. <strong>Note</strong>: Be sure to use <code>com.rundeck.rundeckpro.amazon-s3</code> in place of <code>org.rundeck.amazon-s3</code>.</p>
+<h4 id="azure-blob-storage-plugin">Azure Blob Storage Plugin</h4>
+<p>See: <a href="https://github.com/rundeck-plugins/rundeck-azure-plugin">Azure Blob Storage</a></p>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ol type="1">
 <li><a href="quickstart.html">Quickstart</a></li>
@@ -191,7 +198,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-20T22:30:59UTC">2018-08-20T22:30:59UTC</span>
+<span class="generated-date" title="2018-08-25T02:59:54UTC">2018-08-25T02:59:54UTC</span>
 </p>
 </footer>
 </div>

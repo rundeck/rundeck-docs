@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>dispatch</title>
+  <title>Bundled Orchestrator Plugins</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
-  <meta name="author" content="Greg Schueler" />
-  <meta name="date" content="November 30, 2016" />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
@@ -22,7 +20,7 @@ jQuery(function(){
   jQuery('[data-toggle="popover"]').popover();
 });
 </script>
-  <link rel="stylesheet" href="../style.css" type="text/css" />
+  <link rel="stylesheet" href="../../style.css" type="text/css" />
 </head>
 <body data-spy="scroll" data-target=".toc-nav">
 <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -57,35 +55,71 @@ jQuery(function(){
 <ol class="breadcrumb top">
 
     
-        <li><a href="../index.html">Rundeck Documentation (3.0.x)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (3.0.x)</a></li>
+    
+        <li><a href="../index.html">User Guide</a></li>
     
     
-    <li ><a href="index.html">Command Line Tools</a></li>
-    <li class="active"><a href="dispatch.html">dispatch</a></li>
+    
+    <li class="active"><a href="bundled-orchestrator-plugins.html">Bundled Orchestrator Plugins</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
       
-      <li class="next"><a href="rd-acl.html">rd-acl <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="next"><a href="highestlowest-attribute-value-pro.html">Highest/Lowest Attribute Value (Pro) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
     <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manpages/man1/dispatch.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/orchestrator-plugins/bundled.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
 <div id="docbody">
 <div class="container">
 <div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#random-subset">Random Subset</a><ul>
+<li><a href="#configuration">Configuration</a></li>
+</ul></li>
+<li><a href="#rank-tiered">Rank Tiered</a></li>
+<li><a href="#max-percentage">Max Percentage</a><ul>
+<li><a href="#configuration-1">Configuration</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">dispatch</h1>
+<h1 class="title">Bundled Orchestrator Plugins</h1>
 </div>
-<p><code>dispatch</code> is no longer available, please see <a href="https://rundeck.github.io/rundeck-cli">rd</a>.</p>
+<p>Bundled Orchestrator plugins included in Rundeck.</p>
+<h2 id="random-subset">Random Subset</h2>
+<p>Selects a maximum number of the target nodes at random</p>
+<h3 id="configuration">Configuration</h3>
+<dl>
+<dt>Count</dt>
+<dd><p>Number of nodes to select from the pool</p>
+</dd>
+</dl>
+<h2 id="rank-tiered">Rank Tiered</h2>
+<p>Processes nodes in a tiered manner, ordered by rank.</p>
+<p>Will never process the next rank until all nodes in the previous rank are complete. Uses the configured Rank ordering for the Job.</p>
+<p>Note: if a Rank Attribute is not set, then the node names are used as the rank attribute, and the behavior of this orchestrator will essentially be single threaded.</p>
+<h2 id="max-percentage">Max Percentage</h2>
+<p>Processes at maximum a percentage of the target nodes.</p>
+<p>Will never process more than the given percentage of nodes per run at one time regardless of how high threads are configured.</p>
+<h3 id="configuration-1">Configuration</h3>
+<dl>
+<dt>Percent</dt>
+<dd><p>Max Percentage (e.g. <code>33</code> for 33%)</p>
+</dd>
+</dl>
 </div>
 </div>
 </div>
@@ -97,24 +131,26 @@ jQuery(function(){
 <ol class="breadcrumb bottom">
 
     
-        <li><a href="../index.html">Rundeck Documentation (3.0.x)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (3.0.x)</a></li>
+    
+        <li><a href="../index.html">User Guide</a></li>
     
     
-    <li ><a href="index.html">Command Line Tools</a></li>
-    <li class="active"><a href="dispatch.html">dispatch</a></li>
+    
+    <li class="active"><a href="bundled-orchestrator-plugins.html">Bundled Orchestrator Plugins</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
       
-      <li class="next"><a href="rd-acl.html">rd-acl <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="next"><a href="highestlowest-attribute-value-pro.html">Highest/Lowest Attribute Value (Pro) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
     <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manpages/man1/dispatch.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/orchestrator-plugins/bundled.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
@@ -142,7 +178,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-20T22:30:59UTC">2018-08-20T22:30:59UTC</span>
+<span class="generated-date" title="2018-08-25T02:59:54UTC">2018-08-25T02:59:54UTC</span>
 </p>
 </footer>
 </div>
