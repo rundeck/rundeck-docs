@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Jira Notification Plugins</title>
+  <title>Highest/Lowest Attribute Value (Pro)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -61,12 +61,12 @@ jQuery(function(){
     
     
     
-    <li class="active"><a href="jira-notification-plugins.html">Jira Notification Plugins</a></li>
+    <li class="active"><a href="highestlowest-attribute-value-pro.html">Highest/Lowest Attribute Value (Pro)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="webhooks.html"><i class="glyphicon glyphicon-arrow-left"></i> Webhooks</a></li>
+      <li class="previous"><a href="bundled-orchestrator-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> Bundled Orchestrator Plugins</a></li>
       
     </ul>
 </div>
@@ -74,7 +74,7 @@ jQuery(function(){
 <div class="row">
 <div class="col-sm-12 text-right">
     <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/notifications/jira-notification-plugins.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/orchestrator-plugins/highest-lowest.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
@@ -84,53 +84,24 @@ jQuery(function(){
 <div class="col-sm-3 toc-nav">
 <div class="nav">
 <ul>
-<li><a href="#jira-issue-notification-comment">Jira / Issue / Notification Comment</a><ul>
 <li><a href="#configuration">Configuration</a></li>
-<li><a href="#usage">Usage</a></li>
-</ul></li>
-<li><a href="#jira-issue-notification-create">Jira / Issue / Notification Create</a><ul>
-<li><a href="#configuration-1">Configuration</a></li>
-<li><a href="#usage-1">Usage</a></li>
-</ul></li>
 </ul>
 </div>
 </div>
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">Jira Notification Plugins</h1>
+<h1 class="title">Highest/Lowest Attribute Value (Pro)</h1>
 </div>
-<h2 id="jira-issue-notification-comment">Jira / Issue / Notification Comment</h2>
-<p>Append notification messages to a Jira issue.</p>
-<h3 id="configuration">Configuration</h3>
-<p>The Jira connection credentials are set in the <code>project.properties</code> file for your project. In Notification plugins, <code>password</code> is on clean text.</p>
-<pre><code>project.plugin.Notification.jira-comment-issue.login=admin@instance.com
-project.plugin.Notification.jira-comment-issue.password=cleanPass
-project.plugin.Notification.jira-comment-issue.url=https://instance.atlassian.net</code></pre>
-<h3 id="usage">Usage</h3>
-<p>To use the plugin, configure the mandatory input.</p>
-<ul>
-<li>issue key: The Jira issue ID.</li>
-</ul>
-<h2 id="jira-issue-notification-create">Jira / Issue / Notification Create</h2>
-<p>Creates a new Jira issue.</p>
-<h3 id="configuration-1">Configuration</h3>
-<p>The Jira connection credentials are set in the <code>project.properties</code> file for your project. In Notification plugins, <code>password</code> is on clean text.</p>
-<pre><code>project.plugin.Notification.jira-create-issue-notif.login=admin@instance.com
-project.plugin.Notification.jira-create-issue-notif.password=cleanPass
-project.plugin.Notification.jira-create-issue-notif.url=https://instance.atlassian.net</code></pre>
-<h3 id="usage-1">Usage</h3>
-<p>To use the plugin, configure the mandatory inputs.</p>
-<ul>
-<li>project: Jira Project ID.</li>
-<li>type: Type of the issue, default Incident</li>
-<li>summary: Issue summary</li>
-<li>description: Issue description</li>
-</ul>
-<p>Optional inputs:</p>
-<ul>
-<li>assignee: Issue assignee</li>
-<li>reporter: Issue reporter</li>
-</ul>
+<p>This Orchestrator plugin picks one node with either the highest or lowest value of a certain attribute.</p>
+<h2 id="configuration">Configuration</h2>
+<dl>
+<dt>Attribute</dt>
+<dd><p>Node Attribute to sort by.</p>
+</dd>
+<dt>Sort</dt>
+<dd><p>Sort order, <code>highest</code> or <code>lowest</code></p>
+</dd>
+</dl>
 </div>
 </div>
 </div>
@@ -148,12 +119,12 @@ project.plugin.Notification.jira-create-issue-notif.url=https://instance.atlassi
     
     
     
-    <li class="active"><a href="jira-notification-plugins.html">Jira Notification Plugins</a></li>
+    <li class="active"><a href="highestlowest-attribute-value-pro.html">Highest/Lowest Attribute Value (Pro)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="webhooks.html"><i class="glyphicon glyphicon-arrow-left"></i> Webhooks</a></li>
+      <li class="previous"><a href="bundled-orchestrator-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> Bundled Orchestrator Plugins</a></li>
       
     </ul>
 </div>
@@ -161,7 +132,7 @@ project.plugin.Notification.jira-create-issue-notif.url=https://instance.atlassi
 <div class="row">
 <div class="col-sm-12 text-right">
     <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/notifications/jira-notification-plugins.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/orchestrator-plugins/highest-lowest.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
@@ -189,7 +160,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-24T20:01:27UTC">2018-08-24T20:01:27UTC</span>
+<span class="generated-date" title="2018-08-25T03:04:09UTC">2018-08-25T03:04:09UTC</span>
 </p>
 </footer>
 </div>

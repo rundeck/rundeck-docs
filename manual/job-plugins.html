@@ -86,6 +86,8 @@ jQuery(function(){
 <li><a href="#workflow-steps">Workflow Steps</a></li>
 <li><a href="#notifications">Notifications</a></li>
 <li><a href="#workflow-strategy">Workflow Strategy</a></li>
+<li><a href="#node-orchestrator">Node Orchestrator</a></li>
+<li><a href="#log-filters">Log Filters</a></li>
 </ul>
 </div>
 </div>
@@ -95,6 +97,7 @@ jQuery(function(){
 </div>
 <h2 id="node-steps">Node Steps</h2>
 <ul>
+<li><a href="node-steps/jira-node-step-plugins-pro.html" title="User Guide - Jira Node Step Plugins (Pro)">Jira Node Step Plugins (Pro)</a></li>
 <li><a href="node-steps/builtin-node-steps.html#command-step">Command step</a></li>
 <li><a href="node-steps/builtin-node-steps.html#script-step">Script step</a></li>
 <li><a href="node-steps/builtin-node-steps.html#script-file-step">Scipt file</a></li>
@@ -104,7 +107,7 @@ jQuery(function(){
 <li><a href="node-steps/builtin-node-steps.html#local-command-step">Local command</a></li>
 <li><a href="node-steps/builtin-node-steps.html#data-node-step">Data node</a></li>
 <li><a href="node-steps/sqlrunner-plugin-pro.html">SQL Runner (Pro)</a></li>
-<li><a href="node-steps/vmware.html">VMWare (Pro)</a></li>
+<li><a href="node-steps/vmware-operations-node-step-plugin-pro.html" title="User Guide - VMWare Operations Node Step Plugin (Pro)">VMWare Operations Node Step Plugin (Pro)</a></li>
 </ul>
 <h2 id="workflow-steps">Workflow Steps</h2>
 <ul>
@@ -119,19 +122,39 @@ jQuery(function(){
 <li><a href="workflow-steps/builtin-workflow-steps.html#data-step">Data step</a></li>
 <li><a href="workflow-steps/file-transfer-plugins.html">File Transfer (Pro)</a></li>
 <li><a href="workflow-steps/github-script-plugin-pro.html">Github (Pro)</a></li>
+<li><a href="workflow-steps/jira-workflow-step-plugins-pro.html" title="User Guide - Jira Workflow Step Plugins (Pro)">Jira Workflow Step Plugins (Pro)</a></li>
 <li><a href="workflow-steps/progress-badge-plugin-pro.html#progress-badge-workflow-step-plugin">Progress Badge (Pro)</a></li>
 <li><a href="workflow-steps/servicenow-plugins.html">ServiceNow (Pro)</a></li>
-<li><a href="workflow-steps/vmware.html">VMWare (Pro)</a></li>
+<li><a href="workflow-steps/vmware-step-plugins-pro.html" title="User Guide - VMWare Step Plugins (Pro)">VMWare Step Plugins (Pro)</a></li>
 </ul>
 <h2 id="notifications">Notifications</h2>
 <p>Notification plugins determine what Rundeck does when a Job Execution starts or finishes, with either success or failure. For a general explanation on how job notifications work, see <a href="creating-jobs.html#job-notifications">Creating jobs#Job Notifications</a></p>
 <ul>
 <li><a href="notifications/email.html">Email</a></li>
+<li><a href="notifications/jira-notification-plugins-pro.html" title="User Guide - Jira Notification Plugins (Pro)">Jira Notification Plugins (Pro)</a></li>
 <li><a href="notifications/webhooks.html">Webhooks</a></li>
 </ul>
 <h2 id="workflow-strategy">Workflow Strategy</h2>
+<p>The Workflow Strategy determines how the steps are processed within a Job’s Workflow.</p>
 <ul>
 <li><a href="workflow-strategies/ruleset-workflow-strategy-plugin.html">Ruleset (Pro)</a></li>
+</ul>
+<h2 id="node-orchestrator">Node Orchestrator</h2>
+<p>An Orchestrator plugin can determine how to use the Nodes selected by your Job Filter. By default, all of the filtered nodes will be used, in the order specified in your Job definition.</p>
+<p>However an Orchestrator plugin can choose which of the nodes should be used, and when. For example, to limit concurrent execution to a subset of the nodes, or to skip certain nodes.</p>
+<ul>
+<li><a href="orchestrator-plugins/bundled-orchestrator-plugins.html" title="User Guide - Bundled Orchestrator Plugins">Bundled Orchestrator Plugins</a></li>
+<li><a href="orchestrator-plugins/highestlowest-attribute-value-pro.html" title="User Guide - Highest/Lowest Attribute Value (Pro)">Highest/Lowest Attribute Value (Pro)</a></li>
+</ul>
+<h2 id="log-filters">Log Filters</h2>
+<p>Log Filters can filter/process/read output from specific Workflow Steps, or all Workflow Steps of a Job.</p>
+<ul>
+<li><a href="log-filters/mask-passwords.html" title="User Guide - Mask Passwords">Mask Passwords</a></li>
+<li><a href="log-filters/render-formatted-data.html" title="User Guide - Render Formatted Data">Render Formatted Data</a></li>
+<li><a href="log-filters/key-value-data.html" title="User Guide - Key-Value Data">Key-Value Data</a></li>
+<li><a href="log-filters/quiet-output.html" title="User Guide - Quiet Output">Quiet Output</a></li>
+<li><a href="log-filters/highlight-output.html" title="User Guide - Highlight Output">Highlight Output</a></li>
+<li><a href="log-filters/progress-badge-log-filter-pro.html" title="User Guide - Progress Badge Log Filter (Pro)">Progress Badge Log Filter (Pro)</a></li>
 </ul>
 </div>
 </div>
@@ -189,7 +212,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-24T20:01:27UTC">2018-08-24T20:01:27UTC</span>
+<span class="generated-date" title="2018-08-25T03:04:09UTC">2018-08-25T03:04:09UTC</span>
 </p>
 </footer>
 </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Progress Badge Plugin (Pro)</title>
+  <title>Bundled Orchestrator Plugins</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -61,20 +61,20 @@ jQuery(function(){
     
     
     
-    <li class="active"><a href="progress-badge-plugin-pro.html">Progress Badge Plugin (Pro)</a></li>
+    <li class="active"><a href="bundled-orchestrator-plugins.html">Bundled Orchestrator Plugins</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="servicenow-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> ServiceNow Plugins</a></li>
-      <li class="next"><a href="jira-workflow-step-plugins.html">Jira Workflow Step Plugins <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      
+      <li class="next"><a href="highestlowest-attribute-value-pro.html">Highest/Lowest Attribute Value (Pro) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
     <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/workflow-steps/progress-badge.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/orchestrator-plugins/bundled.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
@@ -84,44 +84,42 @@ jQuery(function(){
 <div class="col-sm-3 toc-nav">
 <div class="nav">
 <ul>
-<li><a href="#progress-badges-log-filter-plugin">Progress Badges Log Filter Plugin</a></li>
-<li><a href="#progress-badge-workflow-step-plugin">Progress Badge Workflow Step Plugin</a></li>
-<li><a href="#emoji-support">Emoji Support</a></li>
-<li><a href="#advanced-render-options">Advanced render options</a></li>
+<li><a href="#random-subset">Random Subset</a><ul>
+<li><a href="#configuration">Configuration</a></li>
+</ul></li>
+<li><a href="#rank-tiered">Rank Tiered</a></li>
+<li><a href="#max-percentage">Max Percentage</a><ul>
+<li><a href="#configuration-1">Configuration</a></li>
+</ul></li>
 </ul>
 </div>
 </div>
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">Progress Badge Plugin (Pro)</h1>
+<h1 class="title">Bundled Orchestrator Plugins</h1>
 </div>
-<p>The Progress Badge Plugin included with Rundeck Pro can create graphic badges to be rendered on the Log Output tab.</p>
-<p>Includes a Log Filter Plugin and Workflow Step Plugin.</p>
-<h2 id="progress-badges-log-filter-plugin">Progress Badges Log Filter Plugin</h2>
-<p>Accepts the following input:</p>
-<ul>
-<li>Title (optional) can include context variables</li>
-<li>Text to be displayed inside the badge. Supports emoticons (see below).</li>
-<li>String (optional) regular expression to search in the normal output of the step, if found, the badge is rendered as success (green) else is rendered as failed (red)</li>
-<li>Mute: Default <code>true</code>, suppress all the standard output, just diaplay the badge or errors.</li>
-<li>Boolean to do nothing if string pattern does not match.</li>
-</ul>
-<h2 id="progress-badge-workflow-step-plugin">Progress Badge Workflow Step Plugin</h2>
-<p>Render a single badge using input options:</p>
-<ul>
-<li>Title (optional) can include context variables</li>
-<li>Text to be displayed inside the badge. Supports emoticons (see below).</li>
-<li>Status of the Badge, ok (green badge), error (red badge) or neutral (grey badge). Can be a variable from option o key-value data.</li>
-</ul>
-<h2 id="emoji-support">Emoji Support</h2>
-<p>To use some emoji inside the text, must input the alias of the emoji between colon: <code>:smile: Successfull job! :100:</code> Display as:</p>
-<p><code>😄 Successfull job! 💯</code></p>
-<p>A full list of supported emoji are included on the plugin README.md and on the page of the library: <a href="https://github.com/vdurmont/emoji-java">vdurmont/emoji-java</a></p>
-<h2 id="advanced-render-options">Advanced render options</h2>
-<ul>
-<li>Specify typeface and font size</li>
-<li>Select for background color of the badge. O can enter a hexadecimal color value in the format #ffff00</li>
-</ul>
+<p>Bundled Orchestrator plugins included in Rundeck.</p>
+<h2 id="random-subset">Random Subset</h2>
+<p>Selects a maximum number of the target nodes at random</p>
+<h3 id="configuration">Configuration</h3>
+<dl>
+<dt>Count</dt>
+<dd><p>Number of nodes to select from the pool</p>
+</dd>
+</dl>
+<h2 id="rank-tiered">Rank Tiered</h2>
+<p>Processes nodes in a tiered manner, ordered by rank.</p>
+<p>Will never process the next rank until all nodes in the previous rank are complete. Uses the configured Rank ordering for the Job.</p>
+<p>Note: if a Rank Attribute is not set, then the node names are used as the rank attribute, and the behavior of this orchestrator will essentially be single threaded.</p>
+<h2 id="max-percentage">Max Percentage</h2>
+<p>Processes at maximum a percentage of the target nodes.</p>
+<p>Will never process more than the given percentage of nodes per run at one time regardless of how high threads are configured.</p>
+<h3 id="configuration-1">Configuration</h3>
+<dl>
+<dt>Percent</dt>
+<dd><p>Max Percentage (e.g. <code>33</code> for 33%)</p>
+</dd>
+</dl>
 </div>
 </div>
 </div>
@@ -139,20 +137,20 @@ jQuery(function(){
     
     
     
-    <li class="active"><a href="progress-badge-plugin-pro.html">Progress Badge Plugin (Pro)</a></li>
+    <li class="active"><a href="bundled-orchestrator-plugins.html">Bundled Orchestrator Plugins</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="servicenow-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> ServiceNow Plugins</a></li>
-      <li class="next"><a href="jira-workflow-step-plugins.html">Jira Workflow Step Plugins <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      
+      <li class="next"><a href="highestlowest-attribute-value-pro.html">Highest/Lowest Attribute Value (Pro) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
     <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/workflow-steps/progress-badge.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/orchestrator-plugins/bundled.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
@@ -180,7 +178,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-24T20:01:27UTC">2018-08-24T20:01:27UTC</span>
+<span class="generated-date" title="2018-08-25T03:04:09UTC">2018-08-25T03:04:09UTC</span>
 </p>
 </footer>
 </div>

@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>rd-project</title>
+  <title>Key-Value Data</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
-  <meta name="author" content="Greg Schueler" />
-  <meta name="date" content="November 30, 2016" />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
@@ -22,7 +20,7 @@ jQuery(function(){
   jQuery('[data-toggle="popover"]').popover();
 });
 </script>
-  <link rel="stylesheet" href="../style.css" type="text/css" />
+  <link rel="stylesheet" href="../../style.css" type="text/css" />
 </head>
 <body data-spy="scroll" data-target=".toc-nav">
 <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -57,35 +55,63 @@ jQuery(function(){
 <ol class="breadcrumb top">
 
     
-        <li><a href="../index.html">Rundeck Documentation (3.0.3)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (3.0.3)</a></li>
+    
+        <li><a href="../index.html">User Guide</a></li>
     
     
-    <li ><a href="index.html">Command Line Tools</a></li>
-    <li class="active"><a href="rd-project.html">rd-project</a></li>
+    
+    <li class="active"><a href="key-value-data.html">Key-Value Data</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="rd-jobs.html"><i class="glyphicon glyphicon-arrow-left"></i> rd-jobs</a></li>
-      <li class="next"><a href="rd-queue.html">rd-queue <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="previous"><a href="mask-passwords.html"><i class="glyphicon glyphicon-arrow-left"></i> Mask Passwords</a></li>
+      
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
     <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manpages/man1/rd-project.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/log-filters/key-value-data.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
 <div id="docbody">
 <div class="container">
 <div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#configuration">Configuration</a></li>
+</ul>
+</div>
+</div>
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">rd-project</h1>
+<h1 class="title">Key-Value Data</h1>
 </div>
-<p><code>rd-project</code> is no longer available, please see <a href="https://rundeck.github.io/rundeck-cli">rd</a>.</p>
+<p>Captures simple Key/Value data using a simple text format from a regular expresssion.</p>
+<p>By default, to produce a key/value entry, echo a line similar to this:</p>
+<pre><code>RUNDECK:DATA:(key) = (value)</code></pre>
+<p>Where <code>(key)</code> is the key name, and <code>(value)</code> is the value.</p>
+<p>If you provide a regular expression with only one group, the <code>name</code> input is required.</p>
+<p>You can define the regular expression used.</p>
+<h2 id="configuration">Configuration</h2>
+<dl>
+<dt>Pattern</dt>
+<dd>Regular Expression for matching key/value data. Default: <code>^RUNDECK:DATA:(.+?)\s*=\s*(.+)$</code>
+</dd>
+<dt>Name Data</dt>
+<dd><p>Regular Expression for matching key/value data.</p>
+<p>The regular expression must define two Capturing Groups. The first group matched defines the data key, and the second group defines the data value.</p>
+<p>See the <a href="https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html">Java Pattern</a> documentation.</p>
+</dd>
+<dt>Log Data</dt>
+<dd>If true, log the captured data
+</dd>
+</dl>
 </div>
 </div>
 </div>
@@ -97,24 +123,26 @@ jQuery(function(){
 <ol class="breadcrumb bottom">
 
     
-        <li><a href="../index.html">Rundeck Documentation (3.0.3)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (3.0.3)</a></li>
+    
+        <li><a href="../index.html">User Guide</a></li>
     
     
-    <li ><a href="index.html">Command Line Tools</a></li>
-    <li class="active"><a href="rd-project.html">rd-project</a></li>
+    
+    <li class="active"><a href="key-value-data.html">Key-Value Data</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="rd-jobs.html"><i class="glyphicon glyphicon-arrow-left"></i> rd-jobs</a></li>
-      <li class="next"><a href="rd-queue.html">rd-queue <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="previous"><a href="mask-passwords.html"><i class="glyphicon glyphicon-arrow-left"></i> Mask Passwords</a></li>
+      
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
     <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manpages/man1/rd-project.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/log-filters/key-value-data.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
@@ -142,7 +170,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-24T20:01:27UTC">2018-08-24T20:01:27UTC</span>
+<span class="generated-date" title="2018-08-25T03:04:09UTC">2018-08-25T03:04:09UTC</span>
 </p>
 </footer>
 </div>
