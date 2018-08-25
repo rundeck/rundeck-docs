@@ -131,13 +131,18 @@ jQuery(function(){
 <p>Once the project has been created you are ready to use your Rundeck instance.</p>
 <h2 id="rundeck-graphical-console">Rundeck Graphical Console</h2>
 <h3 id="navigation">Navigation</h3>
-<p>The Rundeck page header contains global navigation control to move between tabbed pages: Jobs, Nodes, Commands and Activity. It also has links to Configure the project, logout, view your user profile and a link to this online help.</p>
+<p>Most Rundeck navigation is done using the navigation bar on the left side of the page. Using the left navigation bar you can choose between available projects, and once inside a project you can switch to the project’s Dashboard, Jobs, Nodes, Commands and Activity pages. Project adminstrators will also be able to access the Project Settings pages.</p>
+<p>For those with Rundeck administrator access the System settings can be accessed by presing the gear icon in the page header.</p>
+<p>Finally, your user profile and logout functions are found under the User icon.</p>
 <figure>
-<img src="../figures/fig0201.png" alt="Top navigation bar" /><figcaption>Top navigation bar</figcaption>
+<img src="../figures/fig0201.png" alt="Top level navigation" /><figcaption>Top level navigation</figcaption>
 </figure>
 <dl>
-<dt>Project menu</dt>
-<dd><p>The top navigation bar contains a menu to select the desired project. If only one project exists, the menu will automatically be selected. You can create new projects from this menu, too.</p>
+<dt>Projects menu</dt>
+<dd><p>Select the desired project. If only one project exists, the menu will automatically be selected. You can create new projects from this menu, too.</p>
+</dd>
+<dt>Dashboard</dt>
+<dd><p>View the project description, Readme and executions summary. Rundeck Pro users may see UI plugins that provide visualizations for schedules and execution history.</p>
 </dd>
 <dt>Jobs</dt>
 <dd><p>From the Jobs page, one can list, create and run Jobs. A configurable filter allows a user to limit the Job listing to those Jobs matching the filtering criteria. These filter settings can be saved to a Users profile. Only authorized jobs will be visible.</p>
@@ -155,16 +160,13 @@ jQuery(function(){
 <dd><p>From the Activity page, one can view currently executing commands and Jobs or browse execution history. The execution history can be filtered based on user selected parameters. Once the filter has been set, the matching history is displayed. The current filter settings also configure an RSS link, found in the top right of the page (see Rundeck Administration to enable RSS).</p>
 <p>See <a href="activity.html">Activity</a>.</p>
 </dd>
-<dt>Configure</dt>
-<dd><p>If your login belongs to the “admin” group and therefore granted “admin” privileges, a “Configure” icon will be displayed in the top navigation bar. From the Configure page you can edit project configuration, export and import project archives, view system information, and see what plugins are installed.</p>
+<dt>System</dt>
+<dd><p>If your login belongs to the “admin” group and therefore granted “admin” privileges, a “System” icon will be displayed in the top navigation bar. From the System menu you can access the Key Storage, System Configuration, Access Control, System Report, Log Storage, List Plugins, Password Utility and Execution model.</p>
 <p>See <a href="configure.html">Configure</a></p>
 </dd>
 <dt>User</dt>
 <dd><p>The User menu lets you logout and view your profile page. Your user profile lists your group memberships and a form to list and generate API tokens.</p>
 <p>See <a href="user.html">User</a></p>
-</dd>
-<dt>Help</dt>
-<dd><p>Opens a page to this user manual.</p>
 </dd>
 </dl>
 <h2 id="command-line-tools">Command Line Tools</h2>
@@ -232,7 +234,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-25T02:59:54UTC">2018-08-25T02:59:54UTC</span>
+<span class="generated-date" title="2018-08-25T21:37:06UTC">2018-08-25T21:37:06UTC</span>
 </p>
 </footer>
 </div>

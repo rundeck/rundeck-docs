@@ -91,11 +91,11 @@ jQuery(function(){
 <li><a href="#listing-and-filtering-jobs">Listing and filtering Jobs</a><ul>
 <li><a href="#filtering-jobs">Filtering Jobs</a></li>
 </ul></li>
-<li><a href="#viewing-job-detail">Viewing Job detail</a></li>
 <li><a href="#running-a-job">Running a Job</a><ul>
 <li><a href="#choose-execution-options">Choose execution options</a></li>
 <li><a href="#following-running-jobs">Following Running Jobs</a></li>
 </ul></li>
+<li><a href="#viewing-job-detail">Viewing Job detail</a></li>
 <li><a href="#job-history">Job history</a></li>
 <li><a href="#killing-jobs">Killing Jobs</a></li>
 </ul>
@@ -142,6 +142,7 @@ jQuery(function(){
 <li>Job Name: the name of the job</li>
 <li>Group: the name of the job group</li>
 <li>Description: Job description text</li>
+<li>Scheduled: Include jobs that have been scheduled.</li>
 </ul>
 <p>You can type a substring or a regular expression in any of these fields.</p>
 <p>After pressing the “Filter” button, the Job list will be filtered to include only the matching jobs.</p>
@@ -150,14 +151,32 @@ jQuery(function(){
 </figure>
 <p>To refine the filter, click on the blue-outlined Filter description, and change the filter fields.</p>
 <p>To reset the filter and go back to the full job page, click the “Clear” button in the Filter fields.</p>
-<h2 id="viewing-job-detail">Viewing Job detail</h2>
-<p>A Job’s detail can be previewed by hovering the mouse pointer over the Job’s name link. Click outside the popup to close it.</p>
+<h2 id="running-a-job">Running a Job</h2>
+<p>Navigate to the desired Job from the filtered listing and then press the “Run” icon to immediately run the Job. If you do not see the Run icon, it means your login does not have “run” privileges for that job.</p>
 <figure>
-<img src="../figures/fig0320.png" alt="Job detail popup" /><figcaption>Job detail popup</figcaption>
+<img src="../figures/fig0319.png" alt="Job run button" /><figcaption>Job run button</figcaption>
 </figure>
-<p>Pressing the link for the Job name will navigate to a separate page where you can run the job or view the job definition.</p>
+<p>If you navigated to the separate job page, press the “Run” button there.</p>
 <figure>
-<img src="../figures/fig0321.png" alt="Job detail page" /><figcaption>Job detail page</figcaption>
+<img src="../figures/fig0319-b.png" alt="Job run button" /><figcaption>Job run button</figcaption>
+</figure>
+<p>The Run job dialog allows you to input Job options if any, Log level, Nodes selection and how you want to follow the execution.</p>
+<h3 id="choose-execution-options">Choose execution options</h3>
+<p>Jobs can be defined to prompt the user for options. This page contains a form presenting any of these Job options.</p>
+<p>Some options will have default values while others may present you with a menu of choices. Some options are optional while others are required. Lastly, there might be a pattern governing what values are acceptable.</p>
+<p>If there are any such Job options, you can change them here before proceeding with the execution.</p>
+<p>When you are ready, press “Run Job Now”. The job will enter the execution queue and you can track its execution in the Activity section of the page, or by going to the <a href="activity.html">Activity</a> page.</p>
+<h3 id="following-running-jobs">Following Running Jobs</h3>
+<p>Once you have started running a Job, you can follow the Job’s output in the Execution page.</p>
+<figure>
+<img src="../figures/fig0319-c.png" alt="Job execution output" /><figcaption>Job execution output</figcaption>
+</figure>
+<p>On the Jobs list page, look in the “Running” tab in the Activity section of the page and click the execution ID’s progress bar.</p>
+<p>If you pressed the “run” button from the Job’s detail page, or you selected to “Follow execution” when you ran the job, your browser will already have been directed to the Execution Follow page.</p>
+<h2 id="viewing-job-detail">Viewing Job detail</h2>
+<p>A Job’s definition can be shown by clicking on the Definition tab in the Job Show page or in the Execution page.</p>
+<figure>
+<img src="../figures/fig0320.png" alt="Job definition" /><figcaption>Job definition</figcaption>
 </figure>
 <p>The information in the Job detail view includes:</p>
 <ul>
@@ -169,25 +188,6 @@ jQuery(function(){
 <li>Statistics about the job executions</li>
 </ul>
 <p>Pressing the “Show Matches” link will display the list of Nodes where the Job will run.</p>
-<h2 id="running-a-job">Running a Job</h2>
-<p>Any stored job can be started from the Jobs page. Navigate to the desired Job from the filtered listing and then press the “Run” icon to immediately queue and run the Job. If you do not see the Run icon, it means your login does not have “run” privileges.</p>
-<figure>
-<img src="../figures/fig0319.png" alt="Job run button" /><figcaption>Job run button</figcaption>
-</figure>
-<p>If you navigated to the separate job page, press the “Run” button there.</p>
-<figure>
-<img src="../figures/fig0319-b.png" alt="Job run button" /><figcaption>Job run button</figcaption>
-</figure>
-<p>After the Run button has been pressed, a dialog will open where you can choose execution options.</p>
-<h3 id="choose-execution-options">Choose execution options</h3>
-<p>Jobs can be defined to prompt the user for options. This page contains a form presenting any of these Job options.</p>
-<p>Some options will have default values while others may present you with a menu of choices. Some options are optional while others are required. Lastly, their might be a pattern governing what values are acceptable.</p>
-<p>If there are any such Job options, you can change them here before proceeding with the execution.</p>
-<p>When you are ready, press “Run Job Now”. The job will enter the execution queue and you can track its execution in the Activity section of the page, or by going to the <a href="activity.html">Activity</a> page.</p>
-<h3 id="following-running-jobs">Following Running Jobs</h3>
-<p>Once you have started running a Job, you can follow the Job’s output in the Execution Follow page.</p>
-<p>On the Jobs page, look in the “Running” tab in the Activity section of the page and click the progress bar.</p>
-<p>If you pressed the “run” button from the Job’s detail page, or you selected to “Follow execution” when you ran the job, your browser will already have been directed to the Execution Follow page.</p>
 <h2 id="job-history">Job history</h2>
 <p>In the Job page, you can see the outcome of previous executions of Jobs by looking at the Activity section.</p>
 <p>You can click on any past execution in the list to see the full execution for that job run.</p>
@@ -199,10 +199,12 @@ jQuery(function(){
 <h2 id="killing-jobs">Killing Jobs</h2>
 <p>Jobs that are currently running can be Killed immediately.</p>
 <p>WARNING: This feature should be used with caution, as it forcibly kills the Java Thread that the Job is running on.</p>
-<p>From the Activity view Now Running section, or in the Job execution follow page, click on the “Kill Job Now” button for the running Job.</p>
+<p>From the Activity view Now Running section, or in the Job execution follow page, click on the “Kill Job” button for the running Job.</p>
 <p>When prompted “Really kill this job?” Click the “Yes” button.</p>
 <p>The Job will terminate with a “Killed” completion status.</p>
-<p>See also: <a href="../man1/rd-queue.html">rd-queue</a>.</p>
+<figure>
+<img src="../figures/fig0319-d.png" alt="Job definition" /><figcaption>Job definition</figcaption>
+</figure>
 </div>
 </div>
 </div>
@@ -259,7 +261,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-25T02:59:54UTC">2018-08-25T02:59:54UTC</span>
+<span class="generated-date" title="2018-08-25T21:37:06UTC">2018-08-25T21:37:06UTC</span>
 </p>
 </footer>
 </div>
