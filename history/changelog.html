@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="greg" />
-  <meta name="date" content="08/24/2018" />
+  <meta name="date" content="08/27/2018" />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
@@ -61,13 +61,13 @@ jQuery(function(){
     
     
     <li ><a href="index.html">Version History</a></li>
-    <li class="active"><a href="changelog.html">Changelog (2018-08-24)</a></li>
+    <li class="active"><a href="changelog.html">Changelog (2018-08-27)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
       
-      <li class="next"><a href="version-3.0.3.html">Version 3.0.3 (2018-08-24) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="next"><a href="version-3.0.4.html">Version 3.0.4 (2018-08-27) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -84,415 +84,421 @@ jQuery(function(){
 <div class="col-sm-3 toc-nav">
 <div class="nav">
 <ul>
-<li><a href="#release-3.0.3">Release 3.0.3</a><ul>
+<li><a href="#release-3.0.4">Release 3.0.4</a><ul>
 <li><a href="#notes">Notes</a></li>
 <li><a href="#contributors">Contributors</a></li>
 <li><a href="#bug-reporters">Bug Reporters</a></li>
 <li><a href="#issues">Issues</a></li>
 </ul></li>
-<li><a href="#release-3.0.2">Release 3.0.2</a><ul>
+<li><a href="#release-3.0.3">Release 3.0.3</a><ul>
 <li><a href="#notes-1">Notes</a></li>
 <li><a href="#contributors-1">Contributors</a></li>
 <li><a href="#bug-reporters-1">Bug Reporters</a></li>
 <li><a href="#issues-1">Issues</a></li>
 </ul></li>
-<li><a href="#release-3.0.1">Release 3.0.1</a><ul>
+<li><a href="#release-3.0.2">Release 3.0.2</a><ul>
 <li><a href="#notes-2">Notes</a></li>
 <li><a href="#contributors-2">Contributors</a></li>
 <li><a href="#bug-reporters-2">Bug Reporters</a></li>
 <li><a href="#issues-2">Issues</a></li>
 </ul></li>
-<li><a href="#release-3.0.0">Release 3.0.0</a><ul>
+<li><a href="#release-3.0.1">Release 3.0.1</a><ul>
 <li><a href="#notes-3">Notes</a></li>
+<li><a href="#contributors-3">Contributors</a></li>
+<li><a href="#bug-reporters-3">Bug Reporters</a></li>
+<li><a href="#issues-3">Issues</a></li>
+</ul></li>
+<li><a href="#release-3.0.0">Release 3.0.0</a><ul>
+<li><a href="#notes-4">Notes</a></li>
 <li><a href="#documentation">Documentation</a></li>
 <li><a href="#changes">Changes</a></li>
 <li><a href="#thanks">Thanks</a></li>
 <li><a href="#known-issues-and-limitations">Known Issues and Limitations</a></li>
 <li><a href="#upgrading">Upgrading</a></li>
 <li><a href="#additional-enhancements-since-rundeck-2.11">Additional Enhancements since Rundeck 2.11:</a></li>
-<li><a href="#contributors-3">Contributors</a></li>
-<li><a href="#bug-reporters-3">Bug Reporters</a></li>
-<li><a href="#issues-3">Issues</a></li>
-</ul></li>
-<li><a href="#release-2.11.5">Release 2.11.5</a><ul>
-<li><a href="#upgrading-from-earlier-versions">Upgrading from Earlier versions</a></li>
-<li><a href="#notes-4">Notes</a></li>
 <li><a href="#contributors-4">Contributors</a></li>
 <li><a href="#bug-reporters-4">Bug Reporters</a></li>
 <li><a href="#issues-4">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.11.4">Release 2.11.4</a><ul>
-<li><a href="#upgrading-from-earlier-versions-1">Upgrading from Earlier versions</a></li>
+<li><a href="#release-2.11.5">Release 2.11.5</a><ul>
+<li><a href="#upgrading-from-earlier-versions">Upgrading from Earlier versions</a></li>
 <li><a href="#notes-5">Notes</a></li>
 <li><a href="#contributors-5">Contributors</a></li>
 <li><a href="#bug-reporters-5">Bug Reporters</a></li>
 <li><a href="#issues-5">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.11.3">Release 2.11.3</a><ul>
-<li><a href="#upgrading-from-earlier-versions-2">Upgrading from Earlier versions</a></li>
+<li><a href="#release-2.11.4">Release 2.11.4</a><ul>
+<li><a href="#upgrading-from-earlier-versions-1">Upgrading from Earlier versions</a></li>
 <li><a href="#notes-6">Notes</a></li>
 <li><a href="#contributors-6">Contributors</a></li>
 <li><a href="#bug-reporters-6">Bug Reporters</a></li>
 <li><a href="#issues-6">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.11.2">Release 2.11.2</a><ul>
-<li><a href="#upgrading-from-earlier-versions-3">Upgrading from Earlier versions</a></li>
+<li><a href="#release-2.11.3">Release 2.11.3</a><ul>
+<li><a href="#upgrading-from-earlier-versions-2">Upgrading from Earlier versions</a></li>
 <li><a href="#notes-7">Notes</a></li>
 <li><a href="#contributors-7">Contributors</a></li>
 <li><a href="#bug-reporters-7">Bug Reporters</a></li>
 <li><a href="#issues-7">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.11.1">Release 2.11.1</a><ul>
-<li><a href="#upgrading-from-earlier-versions-4">Upgrading from Earlier versions</a></li>
+<li><a href="#release-2.11.2">Release 2.11.2</a><ul>
+<li><a href="#upgrading-from-earlier-versions-3">Upgrading from Earlier versions</a></li>
 <li><a href="#notes-8">Notes</a></li>
 <li><a href="#contributors-8">Contributors</a></li>
 <li><a href="#bug-reporters-8">Bug Reporters</a></li>
 <li><a href="#issues-8">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.11.0">Release 2.11.0</a><ul>
-<li><a href="#upgrading-from-earlier-versions-5">Upgrading from Earlier versions</a></li>
+<li><a href="#release-2.11.1">Release 2.11.1</a><ul>
+<li><a href="#upgrading-from-earlier-versions-4">Upgrading from Earlier versions</a></li>
 <li><a href="#notes-9">Notes</a></li>
 <li><a href="#contributors-9">Contributors</a></li>
 <li><a href="#bug-reporters-9">Bug Reporters</a></li>
 <li><a href="#issues-9">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.10.8">Release 2.10.8</a><ul>
-<li><a href="#upgrading-from-earlier-versions-6">Upgrading from Earlier versions</a></li>
+<li><a href="#release-2.11.0">Release 2.11.0</a><ul>
+<li><a href="#upgrading-from-earlier-versions-5">Upgrading from Earlier versions</a></li>
 <li><a href="#notes-10">Notes</a></li>
 <li><a href="#contributors-10">Contributors</a></li>
 <li><a href="#bug-reporters-10">Bug Reporters</a></li>
 <li><a href="#issues-10">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.10.7">Release 2.10.7</a><ul>
-<li><a href="#upgrading-from-earlier-versions-7">Upgrading from Earlier versions</a></li>
+<li><a href="#release-2.10.8">Release 2.10.8</a><ul>
+<li><a href="#upgrading-from-earlier-versions-6">Upgrading from Earlier versions</a></li>
 <li><a href="#notes-11">Notes</a></li>
 <li><a href="#contributors-11">Contributors</a></li>
 <li><a href="#bug-reporters-11">Bug Reporters</a></li>
 <li><a href="#issues-11">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.10.6">Release 2.10.6</a><ul>
-<li><a href="#upgrading-from-earlier-versions-8">Upgrading from Earlier versions</a></li>
+<li><a href="#release-2.10.7">Release 2.10.7</a><ul>
+<li><a href="#upgrading-from-earlier-versions-7">Upgrading from Earlier versions</a></li>
 <li><a href="#notes-12">Notes</a></li>
 <li><a href="#contributors-12">Contributors</a></li>
 <li><a href="#bug-reporters-12">Bug Reporters</a></li>
 <li><a href="#issues-12">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.10.5">Release 2.10.5</a><ul>
-<li><a href="#upgrading-from-earlier-versions-9">Upgrading from Earlier versions</a></li>
+<li><a href="#release-2.10.6">Release 2.10.6</a><ul>
+<li><a href="#upgrading-from-earlier-versions-8">Upgrading from Earlier versions</a></li>
 <li><a href="#notes-13">Notes</a></li>
 <li><a href="#contributors-13">Contributors</a></li>
 <li><a href="#bug-reporters-13">Bug Reporters</a></li>
 <li><a href="#issues-13">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.10.4">Release 2.10.4</a><ul>
-<li><a href="#upgrading-from-earlier-versions-10">Upgrading from Earlier versions</a></li>
+<li><a href="#release-2.10.5">Release 2.10.5</a><ul>
+<li><a href="#upgrading-from-earlier-versions-9">Upgrading from Earlier versions</a></li>
 <li><a href="#notes-14">Notes</a></li>
 <li><a href="#contributors-14">Contributors</a></li>
 <li><a href="#bug-reporters-14">Bug Reporters</a></li>
 <li><a href="#issues-14">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.10.3">Release 2.10.3</a><ul>
-<li><a href="#upgrading-from-earlier-versions-11">Upgrading from Earlier versions</a></li>
+<li><a href="#release-2.10.4">Release 2.10.4</a><ul>
+<li><a href="#upgrading-from-earlier-versions-10">Upgrading from Earlier versions</a></li>
 <li><a href="#notes-15">Notes</a></li>
 <li><a href="#contributors-15">Contributors</a></li>
 <li><a href="#bug-reporters-15">Bug Reporters</a></li>
 <li><a href="#issues-15">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.10.2">Release 2.10.2</a><ul>
-<li><a href="#upgrading-from-earlier-versions-12">Upgrading from Earlier versions</a></li>
+<li><a href="#release-2.10.3">Release 2.10.3</a><ul>
+<li><a href="#upgrading-from-earlier-versions-11">Upgrading from Earlier versions</a></li>
 <li><a href="#notes-16">Notes</a></li>
 <li><a href="#contributors-16">Contributors</a></li>
 <li><a href="#bug-reporters-16">Bug Reporters</a></li>
 <li><a href="#issues-16">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.10.1">Release 2.10.1</a><ul>
-<li><a href="#upgrading-from-earlier-versions-13">Upgrading from Earlier versions</a></li>
+<li><a href="#release-2.10.2">Release 2.10.2</a><ul>
+<li><a href="#upgrading-from-earlier-versions-12">Upgrading from Earlier versions</a></li>
 <li><a href="#notes-17">Notes</a></li>
 <li><a href="#contributors-17">Contributors</a></li>
 <li><a href="#bug-reporters-17">Bug Reporters</a></li>
 <li><a href="#issues-17">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.10.0">Release 2.10.0</a><ul>
-<li><a href="#upgrading-from-earlier-versions-14">Upgrading from Earlier versions</a></li>
+<li><a href="#release-2.10.1">Release 2.10.1</a><ul>
+<li><a href="#upgrading-from-earlier-versions-13">Upgrading from Earlier versions</a></li>
 <li><a href="#notes-18">Notes</a></li>
 <li><a href="#contributors-18">Contributors</a></li>
 <li><a href="#bug-reporters-18">Bug Reporters</a></li>
 <li><a href="#issues-18">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.9.4">Release 2.9.4</a><ul>
-<li><a href="#upgrading-from-earlier-versions-15">Upgrading from Earlier versions</a></li>
+<li><a href="#release-2.10.0">Release 2.10.0</a><ul>
+<li><a href="#upgrading-from-earlier-versions-14">Upgrading from Earlier versions</a></li>
 <li><a href="#notes-19">Notes</a></li>
 <li><a href="#contributors-19">Contributors</a></li>
 <li><a href="#bug-reporters-19">Bug Reporters</a></li>
 <li><a href="#issues-19">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.9.3">Release 2.9.3</a><ul>
-<li><a href="#upgrading-from-earlier-versions-16">Upgrading from Earlier versions</a></li>
+<li><a href="#release-2.9.4">Release 2.9.4</a><ul>
+<li><a href="#upgrading-from-earlier-versions-15">Upgrading from Earlier versions</a></li>
 <li><a href="#notes-20">Notes</a></li>
 <li><a href="#contributors-20">Contributors</a></li>
 <li><a href="#bug-reporters-20">Bug Reporters</a></li>
 <li><a href="#issues-20">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.9.2">Release 2.9.2</a><ul>
-<li><a href="#upgrading-from-earlier-versions-17">Upgrading from Earlier versions</a></li>
+<li><a href="#release-2.9.3">Release 2.9.3</a><ul>
+<li><a href="#upgrading-from-earlier-versions-16">Upgrading from Earlier versions</a></li>
 <li><a href="#notes-21">Notes</a></li>
 <li><a href="#contributors-21">Contributors</a></li>
 <li><a href="#bug-reporters-21">Bug Reporters</a></li>
 <li><a href="#issues-21">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.9.1">Release 2.9.1</a><ul>
-<li><a href="#upgrading-from-earlier-versions-18">Upgrading from Earlier versions</a></li>
+<li><a href="#release-2.9.2">Release 2.9.2</a><ul>
+<li><a href="#upgrading-from-earlier-versions-17">Upgrading from Earlier versions</a></li>
 <li><a href="#notes-22">Notes</a></li>
 <li><a href="#contributors-22">Contributors</a></li>
 <li><a href="#bug-reporters-22">Bug Reporters</a></li>
 <li><a href="#issues-22">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.9.0">Release 2.9.0</a><ul>
-<li><a href="#upgrading-from-earlier-versions-19">Upgrading from Earlier versions</a></li>
+<li><a href="#release-2.9.1">Release 2.9.1</a><ul>
+<li><a href="#upgrading-from-earlier-versions-18">Upgrading from Earlier versions</a></li>
 <li><a href="#notes-23">Notes</a></li>
 <li><a href="#contributors-23">Contributors</a></li>
 <li><a href="#bug-reporters-23">Bug Reporters</a></li>
 <li><a href="#issues-23">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.8.4">Release 2.8.4</a><ul>
-<li><a href="#upgrading-from-2.8.0">Upgrading from 2.8.0</a></li>
-<li><a href="#upgrading-from-earlier-versions-20">Upgrading from Earlier versions</a></li>
+<li><a href="#release-2.9.0">Release 2.9.0</a><ul>
+<li><a href="#upgrading-from-earlier-versions-19">Upgrading from Earlier versions</a></li>
 <li><a href="#notes-24">Notes</a></li>
 <li><a href="#contributors-24">Contributors</a></li>
 <li><a href="#bug-reporters-24">Bug Reporters</a></li>
 <li><a href="#issues-24">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.8.3">Release 2.8.3</a><ul>
-<li><a href="#upgrading-from-2.8.0-1">Upgrading from 2.8.0</a></li>
-<li><a href="#upgrading-from-earlier-versions-21">Upgrading from Earlier versions</a></li>
+<li><a href="#release-2.8.4">Release 2.8.4</a><ul>
+<li><a href="#upgrading-from-2.8.0">Upgrading from 2.8.0</a></li>
+<li><a href="#upgrading-from-earlier-versions-20">Upgrading from Earlier versions</a></li>
 <li><a href="#notes-25">Notes</a></li>
 <li><a href="#contributors-25">Contributors</a></li>
 <li><a href="#bug-reporters-25">Bug Reporters</a></li>
 <li><a href="#issues-25">Issues</a></li>
 </ul></li>
+<li><a href="#release-2.8.3">Release 2.8.3</a><ul>
+<li><a href="#upgrading-from-2.8.0-1">Upgrading from 2.8.0</a></li>
+<li><a href="#upgrading-from-earlier-versions-21">Upgrading from Earlier versions</a></li>
+<li><a href="#notes-26">Notes</a></li>
+<li><a href="#contributors-26">Contributors</a></li>
+<li><a href="#bug-reporters-26">Bug Reporters</a></li>
+<li><a href="#issues-26">Issues</a></li>
+</ul></li>
 <li><a href="#release-2.8.2">Release 2.8.2</a><ul>
 <li><a href="#upgrading-from-2.8.0-2">Upgrading from 2.8.0</a></li>
 <li><a href="#upgrading-from-earlier-versions-22">Upgrading from Earlier versions</a></li>
-<li><a href="#notes-26">Notes</a></li>
-<li><a href="#contributors-26">Contributors</a></li>
+<li><a href="#notes-27">Notes</a></li>
+<li><a href="#contributors-27">Contributors</a></li>
 <li><a href="#reporters">Reporters</a></li>
-<li><a href="#issues-26">Issues</a></li>
+<li><a href="#issues-27">Issues</a></li>
 </ul></li>
 <li><a href="#release-2.8.1">Release 2.8.1</a><ul>
 <li><a href="#upgrading-from-2.8.0-3">Upgrading from 2.8.0</a></li>
 <li><a href="#upgrading-from-earlier-versions-23">Upgrading from Earlier versions</a></li>
-<li><a href="#contributors-27">Contributors</a></li>
-<li><a href="#bug-reporters-26">Bug Reporters</a></li>
-<li><a href="#issues-27">Issues</a></li>
-</ul></li>
-<li><a href="#release-2.8.0">Release 2.8.0</a><ul>
-<li><a href="#upgrading-from-earlier-versions-24">Upgrading from Earlier versions</a></li>
-<li><a href="#notes-27">Notes</a></li>
 <li><a href="#contributors-28">Contributors</a></li>
 <li><a href="#bug-reporters-27">Bug Reporters</a></li>
 <li><a href="#issues-28">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.7.3">Release 2.7.3</a><ul>
-<li><a href="#upgrading-from-2.6">Upgrading from 2.6</a></li>
+<li><a href="#release-2.8.0">Release 2.8.0</a><ul>
+<li><a href="#upgrading-from-earlier-versions-24">Upgrading from Earlier versions</a></li>
 <li><a href="#notes-28">Notes</a></li>
 <li><a href="#contributors-29">Contributors</a></li>
 <li><a href="#bug-reporters-28">Bug Reporters</a></li>
 <li><a href="#issues-29">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.7.2">Release 2.7.2</a><ul>
-<li><a href="#upgrading-from-2.6-1">Upgrading from 2.6</a></li>
+<li><a href="#release-2.7.3">Release 2.7.3</a><ul>
+<li><a href="#upgrading-from-2.6">Upgrading from 2.6</a></li>
 <li><a href="#notes-29">Notes</a></li>
 <li><a href="#contributors-30">Contributors</a></li>
 <li><a href="#bug-reporters-29">Bug Reporters</a></li>
 <li><a href="#issues-30">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.7.1">Release 2.7.1</a><ul>
-<li><a href="#upgrading-from-2.6-2">Upgrading from 2.6</a></li>
+<li><a href="#release-2.7.2">Release 2.7.2</a><ul>
+<li><a href="#upgrading-from-2.6-1">Upgrading from 2.6</a></li>
 <li><a href="#notes-30">Notes</a></li>
 <li><a href="#contributors-31">Contributors</a></li>
 <li><a href="#bug-reporters-30">Bug Reporters</a></li>
 <li><a href="#issues-31">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.7.0">Release 2.7.0</a><ul>
-<li><a href="#upgrading-from-2.6-3">Upgrading from 2.6</a></li>
-<li><a href="#new-features">New Features</a></li>
+<li><a href="#release-2.7.1">Release 2.7.1</a><ul>
+<li><a href="#upgrading-from-2.6-2">Upgrading from 2.6</a></li>
+<li><a href="#notes-31">Notes</a></li>
 <li><a href="#contributors-32">Contributors</a></li>
 <li><a href="#bug-reporters-31">Bug Reporters</a></li>
 <li><a href="#issues-32">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.6.11">Release 2.6.11</a><ul>
-<li><a href="#note">Note</a></li>
+<li><a href="#release-2.7.0">Release 2.7.0</a><ul>
+<li><a href="#upgrading-from-2.6-3">Upgrading from 2.6</a></li>
+<li><a href="#new-features">New Features</a></li>
 <li><a href="#contributors-33">Contributors</a></li>
 <li><a href="#bug-reporters-32">Bug Reporters</a></li>
 <li><a href="#issues-33">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.6.10">Release 2.6.10</a><ul>
-<li><a href="#notes-31">Notes</a></li>
+<li><a href="#release-2.6.11">Release 2.6.11</a><ul>
+<li><a href="#note">Note</a></li>
 <li><a href="#contributors-34">Contributors</a></li>
 <li><a href="#bug-reporters-33">Bug Reporters</a></li>
 <li><a href="#issues-34">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.6.9">Release 2.6.9</a><ul>
+<li><a href="#release-2.6.10">Release 2.6.10</a><ul>
 <li><a href="#notes-32">Notes</a></li>
 <li><a href="#contributors-35">Contributors</a></li>
 <li><a href="#bug-reporters-34">Bug Reporters</a></li>
 <li><a href="#issues-35">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.6.8">Release 2.6.8</a><ul>
+<li><a href="#release-2.6.9">Release 2.6.9</a><ul>
 <li><a href="#notes-33">Notes</a></li>
 <li><a href="#contributors-36">Contributors</a></li>
 <li><a href="#bug-reporters-35">Bug Reporters</a></li>
 <li><a href="#issues-36">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.6.7">Release 2.6.7</a><ul>
+<li><a href="#release-2.6.8">Release 2.6.8</a><ul>
 <li><a href="#notes-34">Notes</a></li>
 <li><a href="#contributors-37">Contributors</a></li>
 <li><a href="#bug-reporters-36">Bug Reporters</a></li>
 <li><a href="#issues-37">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.6.6">Release 2.6.6</a><ul>
+<li><a href="#release-2.6.7">Release 2.6.7</a><ul>
 <li><a href="#notes-35">Notes</a></li>
 <li><a href="#contributors-38">Contributors</a></li>
 <li><a href="#bug-reporters-37">Bug Reporters</a></li>
 <li><a href="#issues-38">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.6.5">Release 2.6.5</a><ul>
+<li><a href="#release-2.6.6">Release 2.6.6</a><ul>
 <li><a href="#notes-36">Notes</a></li>
 <li><a href="#contributors-39">Contributors</a></li>
 <li><a href="#bug-reporters-38">Bug Reporters</a></li>
 <li><a href="#issues-39">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.6.4">Release 2.6.4</a><ul>
+<li><a href="#release-2.6.5">Release 2.6.5</a><ul>
 <li><a href="#notes-37">Notes</a></li>
 <li><a href="#contributors-40">Contributors</a></li>
 <li><a href="#bug-reporters-39">Bug Reporters</a></li>
 <li><a href="#issues-40">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.6.3">Release 2.6.3</a><ul>
+<li><a href="#release-2.6.4">Release 2.6.4</a><ul>
 <li><a href="#notes-38">Notes</a></li>
 <li><a href="#contributors-41">Contributors</a></li>
 <li><a href="#bug-reporters-40">Bug Reporters</a></li>
 <li><a href="#issues-41">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.6.2">Release 2.6.2</a><ul>
+<li><a href="#release-2.6.3">Release 2.6.3</a><ul>
 <li><a href="#notes-39">Notes</a></li>
 <li><a href="#contributors-42">Contributors</a></li>
 <li><a href="#bug-reporters-41">Bug Reporters</a></li>
 <li><a href="#issues-42">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.6.1">Release 2.6.1</a><ul>
-<li><a href="#fixes">Fixes</a></li>
+<li><a href="#release-2.6.2">Release 2.6.2</a><ul>
+<li><a href="#notes-40">Notes</a></li>
 <li><a href="#contributors-43">Contributors</a></li>
 <li><a href="#bug-reporters-42">Bug Reporters</a></li>
 <li><a href="#issues-43">Issues</a></li>
+</ul></li>
+<li><a href="#release-2.6.1">Release 2.6.1</a><ul>
+<li><a href="#fixes">Fixes</a></li>
+<li><a href="#contributors-44">Contributors</a></li>
+<li><a href="#bug-reporters-43">Bug Reporters</a></li>
+<li><a href="#issues-44">Issues</a></li>
 </ul></li>
 <li><a href="#release-2.6.0">Release 2.6.0</a><ul>
 <li><a href="#new-features-1">New Features</a></li>
 <li><a href="#upgrading-1">Upgrading</a></li>
 <li><a href="#compatibility">Compatibility</a></li>
-<li><a href="#contributors-44">Contributors</a></li>
-<li><a href="#bug-reporters-43">Bug Reporters</a></li>
-<li><a href="#issues-44">Issues</a></li>
-</ul></li>
-<li><a href="#release-2.5.3">Release 2.5.3</a><ul>
 <li><a href="#contributors-45">Contributors</a></li>
 <li><a href="#bug-reporters-44">Bug Reporters</a></li>
 <li><a href="#issues-45">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.5.2">Release 2.5.2</a><ul>
+<li><a href="#release-2.5.3">Release 2.5.3</a><ul>
 <li><a href="#contributors-46">Contributors</a></li>
 <li><a href="#bug-reporters-45">Bug Reporters</a></li>
 <li><a href="#issues-46">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.5.1">Release 2.5.1</a><ul>
-<li><a href="#enhancements">Enhancements</a></li>
-<li><a href="#upgrading-to-2.5">Upgrading to 2.5</a></li>
+<li><a href="#release-2.5.2">Release 2.5.2</a><ul>
 <li><a href="#contributors-47">Contributors</a></li>
 <li><a href="#bug-reporters-46">Bug Reporters</a></li>
 <li><a href="#issues-47">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.5.0">Release 2.5.0</a><ul>
-<li><a href="#new-features-2">New Features</a></li>
-<li><a href="#upgrading-2">Upgrading</a></li>
+<li><a href="#release-2.5.1">Release 2.5.1</a><ul>
+<li><a href="#enhancements">Enhancements</a></li>
+<li><a href="#upgrading-to-2.5">Upgrading to 2.5</a></li>
 <li><a href="#contributors-48">Contributors</a></li>
 <li><a href="#bug-reporters-47">Bug Reporters</a></li>
 <li><a href="#issues-48">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.4.1">Release 2.4.1</a><ul>
-<li><a href="#compatibility-notes">Compatibility notes</a></li>
+<li><a href="#release-2.5.0">Release 2.5.0</a><ul>
+<li><a href="#new-features-2">New Features</a></li>
+<li><a href="#upgrading-2">Upgrading</a></li>
 <li><a href="#contributors-49">Contributors</a></li>
 <li><a href="#bug-reporters-48">Bug Reporters</a></li>
 <li><a href="#issues-49">Issues</a></li>
+</ul></li>
+<li><a href="#release-2.4.1">Release 2.4.1</a><ul>
+<li><a href="#compatibility-notes">Compatibility notes</a></li>
+<li><a href="#contributors-50">Contributors</a></li>
+<li><a href="#bug-reporters-49">Bug Reporters</a></li>
+<li><a href="#issues-50">Issues</a></li>
 </ul></li>
 <li><a href="#release-2.4.0">Release 2.4.0</a><ul>
 <li><a href="#new-features-3">New Features</a></li>
 <li><a href="#incubator-features">Incubator features</a></li>
 <li><a href="#compatibility-notes-1">Compatibility notes</a></li>
 <li><a href="#what-is-americano-indigo-briefcase">What is “americano indigo briefcase”?</a></li>
-<li><a href="#contributors-50">Contributors</a></li>
-<li><a href="#bug-reporters-49">Bug Reporters</a></li>
-<li><a href="#issues-50">Issues</a></li>
-</ul></li>
-<li><a href="#release-2.3.2">Release 2.3.2</a><ul>
 <li><a href="#contributors-51">Contributors</a></li>
 <li><a href="#bug-reporters-50">Bug Reporters</a></li>
 <li><a href="#issues-51">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.3.1">Release 2.3.1</a><ul>
+<li><a href="#release-2.3.2">Release 2.3.2</a><ul>
 <li><a href="#contributors-52">Contributors</a></li>
 <li><a href="#bug-reporters-51">Bug Reporters</a></li>
 <li><a href="#issues-52">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.3.0">Release 2.3.0</a><ul>
+<li><a href="#release-2.3.1">Release 2.3.1</a><ul>
 <li><a href="#contributors-53">Contributors</a></li>
 <li><a href="#bug-reporters-52">Bug Reporters</a></li>
 <li><a href="#issues-53">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.2.3">Release 2.2.3</a><ul>
+<li><a href="#release-2.3.0">Release 2.3.0</a><ul>
 <li><a href="#contributors-54">Contributors</a></li>
 <li><a href="#bug-reporters-53">Bug Reporters</a></li>
 <li><a href="#issues-54">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.2.2">Release 2.2.2</a><ul>
+<li><a href="#release-2.2.3">Release 2.2.3</a><ul>
 <li><a href="#contributors-55">Contributors</a></li>
 <li><a href="#bug-reporters-54">Bug Reporters</a></li>
 <li><a href="#issues-55">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.2.1">Release 2.2.1</a><ul>
+<li><a href="#release-2.2.2">Release 2.2.2</a><ul>
 <li><a href="#contributors-56">Contributors</a></li>
+<li><a href="#bug-reporters-55">Bug Reporters</a></li>
 <li><a href="#issues-56">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.2.0">Release 2.2.0</a><ul>
+<li><a href="#release-2.2.1">Release 2.2.1</a><ul>
 <li><a href="#contributors-57">Contributors</a></li>
 <li><a href="#issues-57">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.1.3">Release 2.1.3</a><ul>
+<li><a href="#release-2.2.0">Release 2.2.0</a><ul>
 <li><a href="#contributors-58">Contributors</a></li>
 <li><a href="#issues-58">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.1.2">Release 2.1.2</a><ul>
+<li><a href="#release-2.1.3">Release 2.1.3</a><ul>
 <li><a href="#contributors-59">Contributors</a></li>
 <li><a href="#issues-59">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.1.1">Release 2.1.1</a><ul>
+<li><a href="#release-2.1.2">Release 2.1.2</a><ul>
 <li><a href="#contributors-60">Contributors</a></li>
 <li><a href="#issues-60">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.1.0">Release 2.1.0</a><ul>
+<li><a href="#release-2.1.1">Release 2.1.1</a><ul>
 <li><a href="#contributors-61">Contributors</a></li>
 <li><a href="#issues-61">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.0.4">Release 2.0.4</a><ul>
+<li><a href="#release-2.1.0">Release 2.1.0</a><ul>
 <li><a href="#contributors-62">Contributors</a></li>
 <li><a href="#issues-62">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.0.3">Release 2.0.3</a><ul>
+<li><a href="#release-2.0.4">Release 2.0.4</a><ul>
 <li><a href="#contributors-63">Contributors</a></li>
 <li><a href="#issues-63">Issues</a></li>
 </ul></li>
-<li><a href="#release-2.0.2">Release 2.0.2</a><ul>
+<li><a href="#release-2.0.3">Release 2.0.3</a><ul>
 <li><a href="#contributors-64">Contributors</a></li>
 <li><a href="#issues-64">Issues</a></li>
+</ul></li>
+<li><a href="#release-2.0.2">Release 2.0.2</a><ul>
+<li><a href="#contributors-65">Contributors</a></li>
+<li><a href="#issues-65">Issues</a></li>
 </ul></li>
 <li><a href="#release-2.0.1">Release 2.0.1</a></li>
 <li><a href="#release-2.0.0">Release 2.0.0</a><ul>
@@ -501,7 +507,7 @@ jQuery(function(){
 <li><a href="#related-projects">Related projects</a></li>
 <li><a href="#get-in-touch">Get in touch</a></li>
 <li><a href="#acknowledgements">Acknowledgements</a></li>
-<li><a href="#issues-65">Issues</a></li>
+<li><a href="#issues-66">Issues</a></li>
 <li><a href="#fixed-in-beta1">Fixed in beta1</a></li>
 </ul></li>
 <li><a href="#release-1.6.2">Release 1.6.2</a></li>
@@ -521,17 +527,48 @@ jQuery(function(){
 <div class="page-header">
 <h1 class="title">Changelog</h1>
 </div>
+<h1 id="release-3.0.4">Release 3.0.4</h1>
+<p>Date: 2018-08-27</p>
+<p>Name: <span style="color: chartreuse"><span class="glyphicon glyphicon-bullhorn"></span> “jalapeño popper chartreuse bullhorn”</span></p>
+<h2 id="notes">Notes</h2>
+<p>Bug fixes</p>
+<h2 id="contributors">Contributors</h2>
+<ul>
+<li>Greg Schueler (gschueler)</li>
+<li>Jaime Tobar (jtobard)</li>
+<li>Romain Leon (PeekLeon)</li>
+</ul>
+<h2 id="bug-reporters">Bug Reporters</h2>
+<ul>
+<li>Antoine-Auffret</li>
+<li>Ehoudry</li>
+<li>PeekLeon</li>
+<li>gjvc</li>
+<li>gschueler</li>
+<li>jtobard</li>
+</ul>
+<h2 id="issues">Issues</h2>
+<p><a href="https://github.com/rundeck/rundeck/milestone/84">Milestone 3.0.4</a></p>
+<ul>
+<li><a href="https://github.com/rundeck/rundeck/pull/3928">Fix delete expired tokens button in GUI</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3926">fix #3921 project description back to project list on menu/home</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3923">rd ui : sidebar overlay - forgotten z-index</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3921">Rundeck 3 : Project description not displayed</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3919">Rundeck 3 bug : Can’t delete tokens and expired tokens with UI</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3917">Fix #3914 NodeFilter class was shadowed by glob import</a></li>
+<li><h2 id="grails-exception-in-3.0.3-20180824"><a href="https://github.com/rundeck/rundeck/issues/3914">grails exception in 3.0.3-20180824</a></h2></li>
+</ul>
 <h1 id="release-3.0.3">Release 3.0.3</h1>
 <p>Date: 2018-08-24</p>
 <p>Name: <span style="color: burlywood"><span class="glyphicon glyphicon-briefcase"></span> “jalapeño popper burlywood briefcase”</span></p>
-<h2 id="notes">Notes</h2>
+<h2 id="notes-1">Notes</h2>
 <p>This release contains:</p>
 <ul>
 <li>bug fixes</li>
 <li>some UI updates</li>
 <li>updated plugin: Ansible 2.5.0</li>
 </ul>
-<h2 id="contributors">Contributors</h2>
+<h2 id="contributors-1">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 <li>Jaime Tobar (jtobard)</li>
@@ -540,7 +577,7 @@ jQuery(function(){
 <li>Greg Zapp (ProTip)</li>
 <li>Romain LEON (PeekLeon)</li>
 </ul>
-<h2 id="bug-reporters">Bug Reporters</h2>
+<h2 id="bug-reporters-1">Bug Reporters</h2>
 <ul>
 <li>Ehoudry</li>
 <li>PeekLeon</li>
@@ -552,7 +589,7 @@ jQuery(function(){
 <li>marcoc610</li>
 <li>timhughes</li>
 </ul>
-<h2 id="issues">Issues</h2>
+<h2 id="issues-1">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/83">Milestone 3.0.3</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/pull/3904">rd ui : sidebar overlay</a></li>
@@ -580,15 +617,15 @@ jQuery(function(){
 <h1 id="release-3.0.2">Release 3.0.2</h1>
 <p>Date: 2018-08-17</p>
 <p>Name: <span style="color: brown"><span class="glyphicon glyphicon-book"></span> “jalapeño popper brown book”</span></p>
-<h2 id="notes-1">Notes</h2>
+<h2 id="notes-2">Notes</h2>
 <p>Bug fixes</p>
-<h2 id="contributors-1">Contributors</h2>
+<h2 id="contributors-2">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 <li>Jaime Tobar (jtobard)</li>
 <li>Stephen Joyner (sjrd218)</li>
 </ul>
-<h2 id="bug-reporters-1">Bug Reporters</h2>
+<h2 id="bug-reporters-2">Bug Reporters</h2>
 <ul>
 <li>Ehoudry</li>
 <li>PeekLeon</li>
@@ -602,7 +639,7 @@ jQuery(function(){
 <li>moreiramarti</li>
 <li>nixmomo</li>
 </ul>
-<h2 id="issues-1">Issues</h2>
+<h2 id="issues-2">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/82">Milestone 3.0.2</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/3851">System prop -Dserver.web.context doesn’t work. (nginx is broken after upgrade 3.0.1)</a></li>
@@ -632,22 +669,22 @@ jQuery(function(){
 <h1 id="release-3.0.1">Release 3.0.1</h1>
 <p>Date: 2018-08-03</p>
 <p>Name: <span style="color: blue"><span class="glyphicon glyphicon-bell"></span> “jalapeño popper blue bell”</span></p>
-<h2 id="notes-2">Notes</h2>
+<h2 id="notes-3">Notes</h2>
 <p>Bug fixes</p>
-<h2 id="contributors-2">Contributors</h2>
+<h2 id="contributors-3">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 <li>ProTip</li>
 <li>Stephen Joyner (sjrd218)</li>
 </ul>
-<h2 id="bug-reporters-2">Bug Reporters</h2>
+<h2 id="bug-reporters-3">Bug Reporters</h2>
 <ul>
 <li>ProTip</li>
 <li>harold-s</li>
 <li>pchevallereau</li>
 <li>sjrd218</li>
 </ul>
-<h2 id="issues-2">Issues</h2>
+<h2 id="issues-3">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/81">Milestone 3.0.1</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/pull/3779">Add jetty password encoding compatibility to spring security password validation</a></li>
@@ -660,7 +697,7 @@ jQuery(function(){
 <h1 id="release-3.0.0">Release 3.0.0</h1>
 <p>Date: 2018-07-27</p>
 <p>Name: <span style="color: aquamarine"><span class="glyphicon glyphicon-apple"></span> “jalapeño popper aquamarine apple”</span></p>
-<h2 id="notes-3">Notes</h2>
+<h2 id="notes-4">Notes</h2>
 <p>Welcome to Rundeck 3.0, which consists of both under-the-hood changes (upgrading the underlying application framework) and visual changes (a revamped UI).</p>
 <p>The application framework upgrade from Grails 2 to Grails 3 gets a lot of technical debt off of our plate, and enables some long-asked-for features, such as SSO.</p>
 <p>Our new UI is just the first step on a path towards improved usability and flexibility, and we have big plans for more in the future.</p>
@@ -717,7 +754,7 @@ jQuery(function(){
 <li>Encrypt passwords stored in configuration files</li>
 <li>API additions: Retry a job based on previous execution, access metrics information</li>
 </ul>
-<h2 id="contributors-3">Contributors</h2>
+<h2 id="contributors-4">Contributors</h2>
 <ul>
 <li>Alberto Hormazabal (ahormazabal)</li>
 <li>Davy Gabard (Kaldor37)</li>
@@ -732,7 +769,7 @@ jQuery(function(){
 <li>carlos (carlosrfranco)</li>
 <li>scollector65</li>
 </ul>
-<h2 id="bug-reporters-3">Bug Reporters</h2>
+<h2 id="bug-reporters-4">Bug Reporters</h2>
 <ul>
 <li>Kaldor37</li>
 <li>Nomekrax</li>
@@ -754,7 +791,7 @@ jQuery(function(){
 <li>turlubullu</li>
 <li>wcliff</li>
 </ul>
-<h2 id="issues-3">Issues</h2>
+<h2 id="issues-4">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/76">Milestone 3.0.0</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/3740">Can’t save node filter</a></li>
@@ -803,20 +840,20 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes-4">Notes</h2>
+<h2 id="notes-5">Notes</h2>
 <p>Bug fixes.</p>
 <p>This release addresses the error <strong>ORA-01795</strong> in <code>menu/home</code> when using Oracle Database with over 1000 projects.</p>
-<h2 id="contributors-4">Contributors</h2>
+<h2 id="contributors-5">Contributors</h2>
 <ul>
 <li>Jaime Tobar (jtobard)</li>
 </ul>
-<h2 id="bug-reporters-4">Bug Reporters</h2>
+<h2 id="bug-reporters-5">Bug Reporters</h2>
 <ul>
 <li>isuftin</li>
 <li>jtobard</li>
 <li>sebastianbello</li>
 </ul>
-<h2 id="issues-4">Issues</h2>
+<h2 id="issues-5">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/79">Milestone 2.11.5</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/3474">“Cannot get property ‘extid’ on null object” when viewing job definition</a></li>
@@ -832,22 +869,22 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes-5">Notes</h2>
+<h2 id="notes-6">Notes</h2>
 <p>Bug and security fixes.</p>
 <p>This release addresses a potential security issue in processing of zip files, please see the this issue: <a href="https://github.com/rundeck/rundeck/issues/3471">Security Advisory: Zip Slip directory traversal vulnerability #3471</a>.</p>
-<h2 id="contributors-5">Contributors</h2>
+<h2 id="contributors-6">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 <li>Jaime Tobar (jtobard)</li>
 <li>Stephen Joyner (sjrd218)</li>
 </ul>
-<h2 id="bug-reporters-5">Bug Reporters</h2>
+<h2 id="bug-reporters-6">Bug Reporters</h2>
 <ul>
 <li>gschueler</li>
 <li>jtobard</li>
 <li>kino71</li>
 </ul>
-<h2 id="issues-5">Issues</h2>
+<h2 id="issues-6">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/78">Milestone 2.11.4</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/3494">2.11: backport bug fixes</a>
@@ -866,9 +903,9 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes-6">Notes</h2>
+<h2 id="notes-7">Notes</h2>
 <p>Bug fixes</p>
-<h2 id="contributors-6">Contributors</h2>
+<h2 id="contributors-7">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 <li>Martin (martinbydefault)</li>
@@ -876,14 +913,14 @@ jQuery(function(){
 <li>Romain LEON (PeekLeon)</li>
 <li>Luis Toledo (ltamaster)</li>
 </ul>
-<h2 id="bug-reporters-6">Bug Reporters</h2>
+<h2 id="bug-reporters-7">Bug Reporters</h2>
 <ul>
 <li>martinbydefault</li>
 <li>jtobard</li>
 <li>PeekLeon</li>
 <li>ltamaster</li>
 </ul>
-<h2 id="issues-6">Issues</h2>
+<h2 id="issues-7">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/77">Milestone 2.11.3</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/pull/3386">Documentation: fixed list not being correctly rendered</a></li>
@@ -898,16 +935,16 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes-7">Notes</h2>
+<h2 id="notes-8">Notes</h2>
 <p>Bug fixes and one API addition (retry job from execution and failed nodes).</p>
-<h2 id="contributors-7">Contributors</h2>
+<h2 id="contributors-8">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 <li>Jaime Tobar (jtobard)</li>
 <li>Luis Toledo (ltamaster)</li>
 <li>Romain LEON (PeekLeon)</li>
 </ul>
-<h2 id="bug-reporters-7">Bug Reporters</h2>
+<h2 id="bug-reporters-8">Bug Reporters</h2>
 <ul>
 <li>PeekLeon</li>
 <li>gschueler</li>
@@ -916,7 +953,7 @@ jQuery(function(){
 <li>ouyangxudu</li>
 <li>vinillum</li>
 </ul>
-<h2 id="issues-7">Issues</h2>
+<h2 id="issues-8">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/75">Milestone 2.11.2</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/pull/3372">API: Run job based on execution (retryExecId)</a></li>
@@ -936,16 +973,16 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes-8">Notes</h2>
+<h2 id="notes-9">Notes</h2>
 <p>Bug fixes, improvements to Internationalization and French translation.</p>
-<h2 id="contributors-8">Contributors</h2>
+<h2 id="contributors-9">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 <li>Jaime Tobar (jtobard)</li>
 <li>Romain LEON (PeekLeon)</li>
 <li>Hristo Malinov (hmalinov)</li>
 </ul>
-<h2 id="bug-reporters-8">Bug Reporters</h2>
+<h2 id="bug-reporters-9">Bug Reporters</h2>
 <ul>
 <li>PeekLeon</li>
 <li>jtobard</li>
@@ -961,7 +998,7 @@ jQuery(function(){
 <li>hmalinov</li>
 <li>dandunckelman</li>
 </ul>
-<h2 id="issues-8">Issues</h2>
+<h2 id="issues-9">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/74">Milestone 2.11.1</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/pull/3350">i18n translation of you</a></li>
@@ -988,7 +1025,7 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes-9">Notes</h2>
+<h2 id="notes-10">Notes</h2>
 <p>New Features:</p>
 <ul>
 <li>SCM/Git plugin:
@@ -1074,7 +1111,7 @@ jQuery(function(){
 <pre><code>rundeck.projectsStorageType=filesystem</code></pre>
 <p>Upgrading an existing <code>filesystem</code> configuration to <code>db</code> is automatic, and project configs/readme/motd will be loaded into DB storage at system startup.</p>
 <p>To encrypt the DB storage, you will need to <a href="http://rundeck.org/docs/plugins-user-guide/bundled-plugins.html#jasypt-encryption-plugin">enable encryption for the “Project Configuration” storage layer</a>.</p>
-<h2 id="contributors-9">Contributors</h2>
+<h2 id="contributors-10">Contributors</h2>
 <ul>
 <li>Antoine-Auffret</li>
 <li>Greg Schueler (gschueler)</li>
@@ -1088,7 +1125,7 @@ jQuery(function(){
 <li>jtobard</li>
 <li>mickymiek</li>
 </ul>
-<h2 id="bug-reporters-9">Bug Reporters</h2>
+<h2 id="bug-reporters-10">Bug Reporters</h2>
 <ul>
 <li>MustaphaB1</li>
 <li>PeekLeon</li>
@@ -1115,7 +1152,7 @@ jQuery(function(){
 <li>ronave</li>
 <li>sebastianbello</li>
 </ul>
-<h2 id="issues-9">Issues</h2>
+<h2 id="issues-10">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/65">Milestone 2.11.0</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/pull/3319">Support groovy plugin DSL for LogFilter/ContentConverter plugins</a></li>
@@ -1202,7 +1239,7 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes-10">Notes</h2>
+<h2 id="notes-11">Notes</h2>
 <p>Bug Fixes:</p>
 <ul>
 <li>Fix an issue causing Vault key storage plugin to not work</li>
@@ -1222,14 +1259,14 @@ jQuery(function(){
 <li>Ansible plugin upgraded to version 2.3.0</li>
 <li>API version → 22</li>
 </ul>
-<h2 id="contributors-10">Contributors</h2>
+<h2 id="contributors-11">Contributors</h2>
 <ul>
 <li>Antoine-Auffret</li>
 <li>Greg Schueler (gschueler)</li>
 <li>Jaime Tobar (jtobard)</li>
 <li>Luis Toledo (ltamaster)</li>
 </ul>
-<h2 id="bug-reporters-10">Bug Reporters</h2>
+<h2 id="bug-reporters-11">Bug Reporters</h2>
 <ul>
 <li>Antoine-Auffret</li>
 <li>gschueler</li>
@@ -1239,7 +1276,7 @@ jQuery(function(){
 <li>ltamaster</li>
 <li>sebastianbello</li>
 </ul>
-<h2 id="issues-10">Issues</h2>
+<h2 id="issues-11">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/72">Milestone 2.10.8</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/pull/3216">Update/apiv22 scm import</a></li>
@@ -1266,7 +1303,7 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes-11">Notes</h2>
+<h2 id="notes-12">Notes</h2>
 <p>Some bugfixes, and some improvements to Git SCM plugin:</p>
 <ul>
 <li>Export: Option to Synchronize automatically during fetch (default: false)</li>
@@ -1279,20 +1316,20 @@ jQuery(function(){
 <li>Export: Push Remotely is checked by default when making commits</li>
 <li>(see full details <a href="https://github.com/rundeck/rundeck/pull/3152">#PR3152</a>)</li>
 </ul>
-<h2 id="contributors-11">Contributors</h2>
+<h2 id="contributors-12">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 <li>Jaime Tobar (jtobard)</li>
 <li>Rene Fragoso (ctrlrsf)</li>
 </ul>
-<h2 id="bug-reporters-11">Bug Reporters</h2>
+<h2 id="bug-reporters-12">Bug Reporters</h2>
 <ul>
 <li>SpencerMalone</li>
 <li>ctrlrsf</li>
 <li>gentunian</li>
 <li>jtobard</li>
 </ul>
-<h2 id="issues-11">Issues</h2>
+<h2 id="issues-12">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/71">Milestone 2.10.7</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/pull/3152">SCM usability enhancement</a></li>
@@ -1308,18 +1345,18 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes-12">Notes</h2>
+<h2 id="notes-13">Notes</h2>
 <p>Bugfix release with one enhancement.</p>
-<h2 id="contributors-12">Contributors</h2>
+<h2 id="contributors-13">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 </ul>
-<h2 id="bug-reporters-12">Bug Reporters</h2>
+<h2 id="bug-reporters-13">Bug Reporters</h2>
 <ul>
 <li>gschueler</li>
 <li>jplassnibatt</li>
 </ul>
-<h2 id="issues-12">Issues</h2>
+<h2 id="issues-13">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/70">Milestone 2.10.6</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/3112">${config.*} plugin variables not resolving after upgrade to 2.1.1</a></li>
@@ -1334,17 +1371,17 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes-13">Notes</h2>
+<h2 id="notes-14">Notes</h2>
 <p>This is a bugfix release.</p>
-<h2 id="contributors-13">Contributors</h2>
+<h2 id="contributors-14">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 </ul>
-<h2 id="bug-reporters-13">Bug Reporters</h2>
+<h2 id="bug-reporters-14">Bug Reporters</h2>
 <ul>
 <li>Hackeruncle</li>
 </ul>
-<h2 id="issues-13">Issues</h2>
+<h2 id="issues-14">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/69">Milestone 2.10.5</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/2942">com.dtolabs.rundeck.core.NodesetEmptyException: No matched nodes: NodeSet{includes={name=hadoop39, dominant=false, }}</a></li>
@@ -1357,21 +1394,21 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes-14">Notes</h2>
+<h2 id="notes-15">Notes</h2>
 <p>This is a bug fix release.</p>
 <p>Note: If you use MSSQL database, see the comments on this issue <a href="https://github.com/rundeck/rundeck/pull/3080">PR3080</a>.</p>
-<h2 id="contributors-14">Contributors</h2>
+<h2 id="contributors-15">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 <li>jtobard</li>
 </ul>
-<h2 id="bug-reporters-14">Bug Reporters</h2>
+<h2 id="bug-reporters-15">Bug Reporters</h2>
 <ul>
 <li>ikogan</li>
 <li>jtobard</li>
 <li>michaelm02</li>
 </ul>
-<h2 id="issues-14">Issues</h2>
+<h2 id="issues-15">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/68">Milestone 2.10.4</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/pull/3080">Low isolation level as property</a></li>
@@ -1387,16 +1424,16 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes-15">Notes</h2>
+<h2 id="notes-16">Notes</h2>
 <p>This is a bug fix release.</p>
-<h2 id="contributors-15">Contributors</h2>
+<h2 id="contributors-16">Contributors</h2>
 <ul>
 <li>Alberto Hormazabal Cespedes (ahormazabal)</li>
 <li>Greg Schueler (gschueler)</li>
 <li>Jocelyn Thode</li>
 <li>carlos (carlosrfranco)</li>
 </ul>
-<h2 id="bug-reporters-15">Bug Reporters</h2>
+<h2 id="bug-reporters-16">Bug Reporters</h2>
 <ul>
 <li>alonalmog82</li>
 <li>gschueler</li>
@@ -1405,7 +1442,7 @@ jQuery(function(){
 <li>lusis</li>
 <li>sebastianbello</li>
 </ul>
-<h2 id="issues-15">Issues</h2>
+<h2 id="issues-16">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/66">Milestone 2.10.3</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/3063">empty <code>adhoc:</code> section: Invalid ACL passes validation and causes NPE</a></li>
@@ -1425,9 +1462,9 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes-16">Notes</h2>
+<h2 id="notes-17">Notes</h2>
 <p>This is a bug fix release.</p>
-<h2 id="contributors-16">Contributors</h2>
+<h2 id="contributors-17">Contributors</h2>
 <ul>
 <li>Adam Brett (adambrett)</li>
 <li>Greg Schueler (gschueler)</li>
@@ -1435,7 +1472,7 @@ jQuery(function(){
 <li>jtobard</li>
 <li>scollector65</li>
 </ul>
-<h2 id="bug-reporters-16">Bug Reporters</h2>
+<h2 id="bug-reporters-17">Bug Reporters</h2>
 <ul>
 <li>OmriShiv</li>
 <li>adambrett</li>
@@ -1446,7 +1483,7 @@ jQuery(function(){
 <li>scollector65</li>
 <li>sebastianbello</li>
 </ul>
-<h2 id="issues-16">Issues</h2>
+<h2 id="issues-17">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/67">Milestone 2.10.2</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/pull/3006">Fix starting rundeck in /var/log/rundeck for debian</a></li>
@@ -1476,7 +1513,7 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes-17">Notes</h2>
+<h2 id="notes-18">Notes</h2>
 <p>Primarily Bug fixes.</p>
 <p>Enhancements:</p>
 <ul>
@@ -1485,7 +1522,7 @@ jQuery(function(){
 <li>Within a job, copy data to the <code>export.*</code> group, to have it available in later steps if the job is included as a Job Reference.</li>
 </ul></li>
 </ul>
-<h2 id="contributors-17">Contributors</h2>
+<h2 id="contributors-18">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 <li>Luis Toledo (ltamaster)</li>
@@ -1493,7 +1530,7 @@ jQuery(function(){
 <li>jtobard</li>
 <li>morihaya</li>
 </ul>
-<h2 id="bug-reporters-17">Bug Reporters</h2>
+<h2 id="bug-reporters-18">Bug Reporters</h2>
 <ul>
 <li>JustRiedy</li>
 <li>Morihaya</li>
@@ -1505,7 +1542,7 @@ jQuery(function(){
 <li>shigemk2</li>
 <li>vinillum</li>
 </ul>
-<h2 id="issues-17">Issues</h2>
+<h2 id="issues-18">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/64">Milestone 2.10.1</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/pull/2953">Improvement on load jobs page</a></li>
@@ -1539,7 +1576,7 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes-18">Notes</h2>
+<h2 id="notes-19">Notes</h2>
 <p>New features:</p>
 <ul>
 <li>GUI editable Resource Model source plugins. Allows the xml/yaml/json resource data to be edited in the GUI.
@@ -1553,14 +1590,14 @@ jQuery(function(){
 <li>Key Value Data capture Log Filter can capture a value and specify a hardcoded name for the variable</li>
 </ul>
 <p>Plus: bug fixes, documentation typo fixes</p>
-<h2 id="contributors-18">Contributors</h2>
+<h2 id="contributors-19">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 <li>Michihito Shigemura (shigemk2)</li>
 <li>damageboy</li>
 <li>jtobard</li>
 </ul>
-<h2 id="bug-reporters-18">Bug Reporters</h2>
+<h2 id="bug-reporters-19">Bug Reporters</h2>
 <ul>
 <li>gschueler</li>
 <li>jtobard</li>
@@ -1568,7 +1605,7 @@ jQuery(function(){
 <li>ronave</li>
 <li>shigemk2</li>
 </ul>
-<h2 id="issues-18">Issues</h2>
+<h2 id="issues-19">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/62">Milestone 2.10.0</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/pull/2847">Fix typo in tutorials/project-setup</a></li>
@@ -1591,12 +1628,12 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes-19">Notes</h2>
+<h2 id="notes-20">Notes</h2>
 <p>Bugfix release.</p>
 <p>Previous changes in 2.9.0: <a href="https://github.com/rundeck/rundeck/blob/v2.9.0/RELEASE.md">Relese 2.9.0</a></p>
 <p>For more detail see <a href="https://github.com/rundeck/rundeck/issues/2577">2.9.0 Changes</a></p>
 <p><strong>Many Thanks</strong> to Michihito Shigemura for increasing the signal-to-noise ratio of our documentation by diligently fixing numerous typos!</p>
-<h2 id="contributors-19">Contributors</h2>
+<h2 id="contributors-20">Contributors</h2>
 <ul>
 <li>Bob van Bokkem (BobVanB)</li>
 <li>Greg Schueler (gschueler)</li>
@@ -1606,7 +1643,7 @@ jQuery(function(){
 <li>jtobard</li>
 <li>tomcs (braintreeps)</li>
 </ul>
-<h2 id="bug-reporters-19">Bug Reporters</h2>
+<h2 id="bug-reporters-20">Bug Reporters</h2>
 <ul>
 <li>BobVanB</li>
 <li>crile</li>
@@ -1623,7 +1660,7 @@ jQuery(function(){
 <li>shigemk2</li>
 <li>tcsalameh</li>
 </ul>
-<h2 id="issues-19">Issues</h2>
+<h2 id="issues-20">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/63">Milestone 2.9.4</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/2835">Log filter plugins do not show GUI controls for input properties</a></li>
@@ -1653,19 +1690,19 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes-20">Notes</h2>
+<h2 id="notes-21">Notes</h2>
 <p>Bugfix release.</p>
 <p>Previous changes in 2.9.0: <a href="https://github.com/rundeck/rundeck/blob/v2.9.0/RELEASE.md">Relese 2.9.0</a></p>
 <p>For more detail see <a href="https://github.com/rundeck/rundeck/issues/2577">2.9.0 Changes</a></p>
 <p>Stay tuned! We are also adding many new features to <a href="http://rundeck.com">Rundeck Pro</a>.</p>
-<h2 id="contributors-20">Contributors</h2>
+<h2 id="contributors-21">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 <li>Luis Toledo (ltamaster)</li>
 <li>jtobard</li>
 <li>黑牛 (chenlingmin)</li>
 </ul>
-<h2 id="bug-reporters-20">Bug Reporters</h2>
+<h2 id="bug-reporters-21">Bug Reporters</h2>
 <ul>
 <li>ahonor</li>
 <li>chenlingmin</li>
@@ -1674,7 +1711,7 @@ jQuery(function(){
 <li>jtobard</li>
 <li>ltamaster</li>
 </ul>
-<h2 id="issues-20">Issues</h2>
+<h2 id="issues-21">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/61">Milestone 2.9.3</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/2715">When upload job’s definition them project always is filled with the current project</a></li>
@@ -1693,20 +1730,20 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes-21">Notes</h2>
+<h2 id="notes-22">Notes</h2>
 <p>Bugfix release.</p>
 <p>Previous changes in 2.9.0: <a href="https://github.com/rundeck/rundeck/blob/v2.9.0/RELEASE.md">Relese 2.9.0</a></p>
 <p>For more detail see <a href="https://github.com/rundeck/rundeck/issues/2577">2.9.0 Changes</a></p>
 <p>Stay tuned! We are also adding many new features to <a href="http://rundeck.com">Rundeck Pro</a>.</p>
-<h2 id="contributors-21">Contributors</h2>
+<h2 id="contributors-22">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 </ul>
-<h2 id="bug-reporters-21">Bug Reporters</h2>
+<h2 id="bug-reporters-22">Bug Reporters</h2>
 <ul>
 <li>FritsHoogland</li>
 </ul>
-<h2 id="issues-21">Issues</h2>
+<h2 id="issues-22">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/60">Milestone 2.9.2</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/2675">Running an ad-hoc command with ansible plugin results in java.lang.NoSuchMethodError: com.dtolabs.rundeck.core.execution.ExecutionContext.getDataContext()Ljava/util/Map;</a></li>
@@ -1719,23 +1756,23 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes-22">Notes</h2>
+<h2 id="notes-23">Notes</h2>
 <p>Bugfix release.</p>
 <p>Previous changes in 2.9.0: <a href="https://github.com/rundeck/rundeck/blob/v2.9.0/RELEASE.md">Relese 2.9.0</a></p>
 <p>For more detail see <a href="https://github.com/rundeck/rundeck/issues/2577">2.9.0 Changes</a></p>
 <p>Stay tuned! We are also adding many new features to <a href="http://rundeck.com">Rundeck Pro</a>.</p>
-<h2 id="contributors-22">Contributors</h2>
+<h2 id="contributors-23">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 </ul>
-<h2 id="bug-reporters-22">Bug Reporters</h2>
+<h2 id="bug-reporters-23">Bug Reporters</h2>
 <ul>
 <li>gschueler</li>
 <li>ltamaster</li>
 <li>qicaihuoyan</li>
 <li>uprooted</li>
 </ul>
-<h2 id="issues-22">Issues</h2>
+<h2 id="issues-23">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/59">Milestone 2.9.1</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/2673">Editing Project Configuration File</a></li>
@@ -1752,7 +1789,7 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes-23">Notes</h2>
+<h2 id="notes-24">Notes</h2>
 <p>This release contains a number of enhancements:</p>
 <p>For more detail see <a href="https://github.com/rundeck/rundeck/issues/2577">2.9.0 Changes</a></p>
 <ol type="1">
@@ -1786,14 +1823,14 @@ jQuery(function(){
 </ul></li>
 </ol>
 <p>Stay tuned! We are also adding many new features to <a href="http://rundeck.com">Rundeck Pro</a>.</p>
-<h2 id="contributors-23">Contributors</h2>
+<h2 id="contributors-24">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 <li>Luis Toledo (ltamaster)</li>
 <li>Marcel Dorenkamp (mdorenkamp)</li>
 <li>jtobard</li>
 </ul>
-<h2 id="bug-reporters-23">Bug Reporters</h2>
+<h2 id="bug-reporters-24">Bug Reporters</h2>
 <ul>
 <li>damageboy</li>
 <li>daveres</li>
@@ -1806,7 +1843,7 @@ jQuery(function(){
 <li>pgressa</li>
 <li>roller</li>
 </ul>
-<h2 id="issues-23">Issues</h2>
+<h2 id="issues-24">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/56">Milestone 2.9.0</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/2660">Project ACLS not applied to scheduled jobs, SCM context</a></li>
@@ -1852,21 +1889,21 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes-24">Notes</h2>
+<h2 id="notes-25">Notes</h2>
 <p>This release is primarily bug fixes.</p>
-<h2 id="contributors-24">Contributors</h2>
+<h2 id="contributors-25">Contributors</h2>
 <ul>
 <li>GitHub (web-flow)</li>
 <li>Greg Schueler (gschueler)</li>
 <li>René Kroon</li>
 </ul>
-<h2 id="bug-reporters-24">Bug Reporters</h2>
+<h2 id="bug-reporters-25">Bug Reporters</h2>
 <ul>
 <li>JustRiedy</li>
 <li>ReneKroon</li>
 <li>simple365</li>
 </ul>
-<h2 id="issues-24">Issues</h2>
+<h2 id="issues-25">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/57">Milestone 2.8.4</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/2609">Mysql syntax error after login</a></li>
@@ -1884,7 +1921,7 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes-25">Notes</h2>
+<h2 id="notes-26">Notes</h2>
 <p>This release is primarily bug fixes.</p>
 <p>Some other changes:</p>
 <ul>
@@ -1892,7 +1929,7 @@ jQuery(function(){
 <li>Executions that were running when the Rundeck server was shutdown will be set to “Incomplete” when the server restarts.</li>
 <li>Some internal library versions were upgraded</li>
 </ul>
-<h2 id="contributors-25">Contributors</h2>
+<h2 id="contributors-26">Contributors</h2>
 <ul>
 <li>Alex Honor (ahonor)</li>
 <li>Greg Schueler (gschueler)</li>
@@ -1901,7 +1938,7 @@ jQuery(function(){
 <li>jtobard</li>
 <li>ltamaster</li>
 </ul>
-<h2 id="bug-reporters-25">Bug Reporters</h2>
+<h2 id="bug-reporters-26">Bug Reporters</h2>
 <ul>
 <li>arthurlogilab</li>
 <li>cr42</li>
@@ -1922,7 +1959,7 @@ jQuery(function(){
 <li>willemdh</li>
 <li>zionio</li>
 </ul>
-<h2 id="issues-25">Issues</h2>
+<h2 id="issues-26">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/55">Milestone 2.8.3</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/pull/2599">Add documentation for unlimited max token expiration time if set to 0</a></li>
@@ -1971,9 +2008,9 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes-26">Notes</h2>
+<h2 id="notes-27">Notes</h2>
 <p>Bug fixes and a few slight enhancements.</p>
-<h2 id="contributors-26">Contributors</h2>
+<h2 id="contributors-27">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 <li>jtobard</li>
@@ -1985,7 +2022,7 @@ jQuery(function(){
 <li>jquick</li>
 <li>ahonor</li>
 </ul>
-<h2 id="issues-26">Issues</h2>
+<h2 id="issues-27">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/54">Milestone 2.8.2</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/pull/2443">Using option value in key storage path</a></li>
@@ -2004,13 +2041,13 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="contributors-27">Contributors</h2>
+<h2 id="contributors-28">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 <li>Jordan Jethwa (jjethwa)</li>
 <li>jtobard</li>
 </ul>
-<h2 id="bug-reporters-26">Bug Reporters</h2>
+<h2 id="bug-reporters-27">Bug Reporters</h2>
 <ul>
 <li>gschueler</li>
 <li>jjethwa</li>
@@ -2019,7 +2056,7 @@ jQuery(function(){
 <li>schast</li>
 <li>sebastianopilla</li>
 </ul>
-<h2 id="issues-27">Issues</h2>
+<h2 id="issues-28">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/53">Milestone 2.8.1</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/2435">Create Job from execution fails</a></li>
@@ -2039,7 +2076,7 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes-27">Notes</h2>
+<h2 id="notes-28">Notes</h2>
 <p>Import Changes:</p>
 <ul>
 <li>Java 8 is required.</li>
@@ -2084,7 +2121,7 @@ jQuery(function(){
 <ul>
 <li>Error calling Job Run API for a scheduled Job</li>
 </ul>
-<h2 id="contributors-28">Contributors</h2>
+<h2 id="contributors-29">Contributors</h2>
 <ul>
 <li>Dan Dunckel (dandunckelman)</li>
 <li>GitHub (web-flow)</li>
@@ -2093,7 +2130,7 @@ jQuery(function(){
 <li>gitpmside (mathieuchateau)</li>
 <li>jtobard</li>
 </ul>
-<h2 id="bug-reporters-27">Bug Reporters</h2>
+<h2 id="bug-reporters-28">Bug Reporters</h2>
 <ul>
 <li>bzlowrance</li>
 <li>dandunckelman</li>
@@ -2106,7 +2143,7 @@ jQuery(function(){
 <li>pmuller</li>
 <li>rophy</li>
 </ul>
-<h2 id="issues-28">Issues</h2>
+<h2 id="issues-29">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/52">Milestone 2.8.0</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/2413">Project config page: resource model source with CODE rendering field with empty value causes NPE</a></li>
@@ -2140,20 +2177,20 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes-28">Notes</h2>
+<h2 id="notes-29">Notes</h2>
 <p>This is primarily a bugfix release, with a bonus enhancement.</p>
 <ul>
 <li>Fixed some plugin loader problems which were causing bugs with the Jasypt encryption for key storage, and Git SCM plugins</li>
 <li>Added autocomplete support to the Job Workflow editor text fields and text areas.</li>
 </ul>
-<h2 id="contributors-29">Contributors</h2>
+<h2 id="contributors-30">Contributors</h2>
 <ul>
 <li>Albert Casademont (acasademont)</li>
 <li>GitHub (web-flow)</li>
 <li>Greg Schueler (gschueler)</li>
 <li>jtobard</li>
 </ul>
-<h2 id="bug-reporters-28">Bug Reporters</h2>
+<h2 id="bug-reporters-29">Bug Reporters</h2>
 <ul>
 <li>ChiefAlexander</li>
 <li>acasademont</li>
@@ -2164,7 +2201,7 @@ jQuery(function(){
 <li>seunaw</li>
 <li>willemdh</li>
 </ul>
-<h2 id="issues-29">Issues</h2>
+<h2 id="issues-30">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/51">Milestone 2.7.3</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/2362">Error; Save Command as a Job</a></li>
@@ -2187,9 +2224,9 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes-29">Notes</h2>
+<h2 id="notes-30">Notes</h2>
 <p>This is a bugfix release.</p>
-<h2 id="contributors-30">Contributors</h2>
+<h2 id="contributors-31">Contributors</h2>
 <ul>
 <li>Andrei Burd (burdandrei)</li>
 <li>Ben P (benwtr)</li>
@@ -2201,7 +2238,7 @@ jQuery(function(){
 <li>Philippe Muller</li>
 <li>jtobard</li>
 </ul>
-<h2 id="bug-reporters-29">Bug Reporters</h2>
+<h2 id="bug-reporters-30">Bug Reporters</h2>
 <ul>
 <li>BobVanB</li>
 <li>RockTheJib</li>
@@ -2221,7 +2258,7 @@ jQuery(function(){
 <li>rooty0</li>
 <li>rophy</li>
 </ul>
-<h2 id="issues-30">Issues</h2>
+<h2 id="issues-31">Issues</h2>
 <p><a href="https://api.github.com/repos/rundeck/rundeck/milestones/50">Milestone 2.7.2</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/2309">Tomcat: Project Archive export does not complete</a></li>
@@ -2252,17 +2289,17 @@ jQuery(function(){
 <ul>
 <li>See the <a href="http://rundeck.org/docs/upgrading/index.html">Upgrading Guide</a></li>
 </ul>
-<h2 id="notes-30">Notes</h2>
+<h2 id="notes-31">Notes</h2>
 <p>This is a bugfix release.</p>
-<h2 id="contributors-31">Contributors</h2>
+<h2 id="contributors-32">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 </ul>
-<h2 id="bug-reporters-30">Bug Reporters</h2>
+<h2 id="bug-reporters-31">Bug Reporters</h2>
 <ul>
 <li>charlescoupeau</li>
 </ul>
-<h2 id="issues-31">Issues</h2>
+<h2 id="issues-32">Issues</h2>
 <p><a href="https://api.github.com/repos/rundeck/rundeck/milestones/49">Milestone 2.7.1</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/2217">Error start Rundeck SSL since last update 2.7.0</a></li>
@@ -2284,7 +2321,7 @@ jQuery(function(){
 <li>Filter activity by Node</li>
 <li>Override node filter at job execution time</li>
 </ul>
-<h2 id="contributors-32">Contributors</h2>
+<h2 id="contributors-33">Contributors</h2>
 <ul>
 <li>Andres Montalban (amontalban)</li>
 <li>David Schile</li>
@@ -2297,7 +2334,7 @@ jQuery(function(){
 <li>Rene Fragoso (ctrlrsf)</li>
 <li>ltamaster</li>
 </ul>
-<h2 id="bug-reporters-31">Bug Reporters</h2>
+<h2 id="bug-reporters-32">Bug Reporters</h2>
 <ul>
 <li>adrianshum</li>
 <li>ahonor</li>
@@ -2314,7 +2351,7 @@ jQuery(function(){
 <li>pgressa</li>
 <li>williamh</li>
 </ul>
-<h2 id="issues-32">Issues</h2>
+<h2 id="issues-33">Issues</h2>
 <p><a href="https://github.com/rundeck/rundeck/milestone/38">Milestone 2.7.0</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/pull/2210">Add executionType</a></li>
@@ -2354,16 +2391,16 @@ jQuery(function(){
 <h2 id="note">Note</h2>
 <p>This release is primarily to fix an upgrade issue for 2.6.9 and earlier.</p>
 <p>Refer to the <a href="http://rundeck.org/docs/history/version-2.6.10.html">2.6.10 release notes for more changes since 2.6.9</a>.</p>
-<h2 id="contributors-33">Contributors</h2>
+<h2 id="contributors-34">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 </ul>
-<h2 id="bug-reporters-32">Bug Reporters</h2>
+<h2 id="bug-reporters-33">Bug Reporters</h2>
 <ul>
 <li>theduusK</li>
 <li>xyntrix</li>
 </ul>
-<h2 id="issues-33">Issues</h2>
+<h2 id="issues-34">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/2168">Project list links to project homepage and does not respect <code>rundeck.gui.startpage</code> setting</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/2164">Rundeck 2.6.10 upgrade breaks rundeck on CentOS</a></li>
@@ -2372,7 +2409,7 @@ jQuery(function(){
 <h1 id="release-2.6.10">Release 2.6.10</h1>
 <p>Date: 2016-11-10</p>
 <p>Name: <span style="color: LimeGreen"><span class="glyphicon glyphicon-glass"></span> “cafe bonbon limegreen glass”</span></p>
-<h2 id="notes-31">Notes</h2>
+<h2 id="notes-32">Notes</h2>
 <p>Notable Enhancements:</p>
 <ul>
 <li>Run Job Later feature: schedule a one-time Job execution</li>
@@ -2394,7 +2431,7 @@ jQuery(function(){
 <li>Globals can be used in remote option value URLs</li>
 </ul>
 <p>And more…</p>
-<h2 id="contributors-34">Contributors</h2>
+<h2 id="contributors-35">Contributors</h2>
 <ul>
 <li>Andres Montalban (amontalban)</li>
 <li>Fabrice Bacchella</li>
@@ -2405,7 +2442,7 @@ jQuery(function(){
 <li>Stian Mathiassen</li>
 <li>Sumesh P (sumeshpremraj)</li>
 </ul>
-<h2 id="bug-reporters-33">Bug Reporters</h2>
+<h2 id="bug-reporters-34">Bug Reporters</h2>
 <ul>
 <li>Mapel88</li>
 <li>ahonor</li>
@@ -2433,7 +2470,7 @@ jQuery(function(){
 <li>sumeshpremraj</li>
 <li>willemdh</li>
 </ul>
-<h2 id="issues-34">Issues</h2>
+<h2 id="issues-35">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/2151">API errors are always returned in XML format, not in JSON format</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/2150">RSS feed not accessable by public anymore</a></li>
@@ -2454,7 +2491,7 @@ jQuery(function(){
 <li><a href="https://github.com/rundeck/rundeck/pull/2068">Escape HTML characters in ExecutionController.renderOutput</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/2042">“Send Notification?” is hardcoded.</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/2040">attributes with dot in prefix do not render in gui</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/2039">using Job References, 2018-08-25T21:37:06UTC only gets expanded as option value in the top job.</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2039">using Job References, 2018-08-27T21:45:35UTC only gets expanded as option value in the top job.</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/2036">Feature Request: Enable linking to job with runbook tab opened</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/2030">More redhatcompliance init file, more easier to use profile file</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/2025">Feature/api job info</a></li>
@@ -2478,7 +2515,7 @@ jQuery(function(){
 <h1 id="release-2.6.9">Release 2.6.9</h1>
 <p>Date: 2016-08-03</p>
 <p>Name: <span style="color: indigo"><span class="glyphicon glyphicon-tower"></span> “cafe bonbon indigo tower”</span></p>
-<h2 id="notes-32">Notes</h2>
+<h2 id="notes-33">Notes</h2>
 <p>Notable Enhancements:</p>
 <ul>
 <li>Job execution will show more info about the step context in the Monitor/Summary tab (see <a href="https://github.com/rundeck/rundeck/pull/1926">#1926</a>)</li>
@@ -2493,7 +2530,7 @@ jQuery(function(){
 <li>A number of SCM/git plugin fixes</li>
 <li>Plugin jar loading issues</li>
 </ul>
-<h2 id="contributors-35">Contributors</h2>
+<h2 id="contributors-36">Contributors</h2>
 <ul>
 <li>Alex Honor (ahonor)</li>
 <li>Dave Brothers (eidolonic)</li>
@@ -2506,7 +2543,7 @@ jQuery(function(){
 <li>Seth Klein (kindlyseth)</li>
 <li>variacode95</li>
 </ul>
-<h2 id="bug-reporters-34">Bug Reporters</h2>
+<h2 id="bug-reporters-35">Bug Reporters</h2>
 <ul>
 <li>ARentz07</li>
 <li>ajrnz</li>
@@ -2529,7 +2566,7 @@ jQuery(function(){
 <li>schast</li>
 <li>tlots</li>
 </ul>
-<h2 id="issues-35">Issues</h2>
+<h2 id="issues-36">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/pull/1973">Bug fix: multiple DATE format option values do not work</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1972">Git Plugin: default import selection to use regex</a></li>
@@ -2571,19 +2608,19 @@ jQuery(function(){
 <h1 id="release-2.6.8">Release 2.6.8</h1>
 <p>Date: 2016-06-10</p>
 <p>Name: <span style="color: hotpink"><span class="glyphicon glyphicon-pushpin"></span> “cafe bonbon hotpink pushpin”</span></p>
-<h2 id="notes-33">Notes</h2>
+<h2 id="notes-34">Notes</h2>
 <p>Fixed bugs and an enhancement:</p>
 <ul>
 <li>Framework and project global variables. Use <code>framework.globals.X=Y</code> or <code>project.globals.X=Y</code> in you configuration to expose <code>${globals.X}</code> to jobs/executions.</li>
 </ul>
-<h2 id="contributors-36">Contributors</h2>
+<h2 id="contributors-37">Contributors</h2>
 <ul>
 <li>Alberto Hormazabal (ahormazabal)</li>
 <li>Diomidis Spinellis (dspinellis)</li>
 <li>Greg Schueler (gschueler)</li>
 <li>shigemk2</li>
 </ul>
-<h2 id="bug-reporters-35">Bug Reporters</h2>
+<h2 id="bug-reporters-36">Bug Reporters</h2>
 <ul>
 <li>ahonor</li>
 <li>ddzed15</li>
@@ -2596,7 +2633,7 @@ jQuery(function(){
 <li>royjenkins</li>
 <li>shigemk2</li>
 </ul>
-<h2 id="issues-36">Issues</h2>
+<h2 id="issues-37">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/pull/1890">Add framework and project global variables</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1869">Script plugins for Workflow/Node steps: allow script file extension to be specified</a></li>
@@ -2621,14 +2658,14 @@ jQuery(function(){
 <h1 id="release-2.6.7">Release 2.6.7</h1>
 <p>Date: 2016-04-29</p>
 <p>Name: <span style="color: goldenrod"><span class="glyphicon glyphicon-plane"></span> “cafe bonbon goldenrod plane”</span></p>
-<h2 id="notes-34">Notes</h2>
+<h2 id="notes-35">Notes</h2>
 <p>Bug fixes.</p>
-<h2 id="contributors-37">Contributors</h2>
+<h2 id="contributors-38">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 <li>sebastianopilla</li>
 </ul>
-<h2 id="bug-reporters-36">Bug Reporters</h2>
+<h2 id="bug-reporters-37">Bug Reporters</h2>
 <ul>
 <li>ahonor</li>
 <li>ajxb</li>
@@ -2641,7 +2678,7 @@ jQuery(function(){
 <li>ltamaster</li>
 <li>sebastianopilla</li>
 </ul>
-<h2 id="issues-37">Issues</h2>
+<h2 id="issues-38">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/1830">Resource Model source errors are not properly shown in config page (2.6.6)</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1828">Directory Resource Issue using JSON files</a></li>
@@ -2663,67 +2700,8 @@ jQuery(function(){
 <h1 id="release-2.6.6">Release 2.6.6</h1>
 <p>Date: 2016-04-15</p>
 <p>Name: <span style="color: fuchsia"><span class="glyphicon glyphicon-phone"></span> “cafe bonbon fuchsia phone”</span></p>
-<h2 id="notes-35">Notes</h2>
-<p>(Release 2.6.5 was missing some changes noted here, so 2.6.6 includes those changes. 2.6.5 release notes are repeated here.)</p>
-<p>Primarily bug fixes and performance improvements.</p>
-<p>Notably:</p>
-<ul>
-<li>Startup time improved for Rundeck installs with many (thousands) of projects</li>
-<li>Fixes for node sources and asynchronous node loading</li>
-<li>new healthcheck for database latency</li>
-</ul>
-<h2 id="contributors-38">Contributors</h2>
-<ul>
-<li>Bharadwaj P (t20)</li>
-<li>Greg Schueler (gschueler)</li>
-</ul>
-<h2 id="bug-reporters-37">Bug Reporters</h2>
-<ul>
-<li>ahonor</li>
-<li>david-gregory-inmar</li>
-<li>fiquett</li>
-<li>gschueler</li>
-<li>hyuan-esol</li>
-<li>jippi</li>
-<li>joshuaspence</li>
-<li>ltamaster</li>
-<li>nilroy</li>
-<li>t20</li>
-</ul>
-<h2 id="issues-38">Issues</h2>
-<ul>
-<li><a href="https://github.com/rundeck/rundeck/issues/1809">healthcheck: add database pingtime healthcheck</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1807">API enhancement: takeover schedule for a single job</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1797">Error connecting to OpenSSH 7.2p2. server</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1796">Throw SSHProtocolFailure error when SSH to a remote machine running OpenSSH 7.2p2</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1795">Job execution error in log after schedule takeover</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1794">Request to /scheduler/takeover for all jobs should skip already owned jobs</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1793">Response for /scheduler/takeover indicates prior owner’s server uuid</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1790">SSH: when node has blank hostname, it attempts to connect to localhost.</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1773">rd-jobs list export schedule.time.hour wrong</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1771">Slow startup due to incomplete log storage requests</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1770">(2.6.4) Create project fails after second submit</a></li>
-<li><a href="https://github.com/rundeck/rundeck/pull/1769">fix #1744 first node load is synchronous</a></li>
-<li><a href="https://github.com/rundeck/rundeck/pull/1765">fix #1764 slow home page with many projects</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1764">Slow main page with many projects</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1760">Nodes list error when the remoteUrl is defined</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1749">spurious “removeScriptPluginCache: /var/lib/rundeck/libext/cache/…” message</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1747">GUI enhancement: show owner server UUID for scheduled jobs</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1746">API enhancement: cluster mode ability to find server UUID for scheduled jobs</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1744">Initial resource model loading is not asynchronous</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1740">unable to save jobs when notification plugin used</a></li>
-<li><a href="https://github.com/rundeck/rundeck/pull/1736">Upgrade Apache Commons Collections to v3.2.2</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1725">After 2.6.3 upgrade, nodes are not updated</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1719">Incomplete log file storage request should be cancelled after final retry, or retriable via API</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1711">Listing Running Executions API, “Total” error value using wildcard (&quot;*&quot;) in the URL</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1411">In the summary page, a failed node reports failure on the wrong step (2.5.3-1)</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1361">MailNotificationPlugin.groovy does not work with rundeck 2.5.2</a></li>
-</ul>
-<hr />
-<h1 id="release-2.6.5">Release 2.6.5</h1>
-<p>Date: 2016-04-15</p>
-<p>Name: <span style="color: forestgreen"><span class="glyphicon glyphicon-paperclip"></span> “cafe bonbon forestgreen paperclip”</span></p>
 <h2 id="notes-36">Notes</h2>
+<p>(Release 2.6.5 was missing some changes noted here, so 2.6.6 includes those changes. 2.6.5 release notes are repeated here.)</p>
 <p>Primarily bug fixes and performance improvements.</p>
 <p>Notably:</p>
 <ul>
@@ -2779,16 +2757,75 @@ jQuery(function(){
 <li><a href="https://github.com/rundeck/rundeck/issues/1361">MailNotificationPlugin.groovy does not work with rundeck 2.5.2</a></li>
 </ul>
 <hr />
-<h1 id="release-2.6.4">Release 2.6.4</h1>
-<p>Date: 2016-03-04</p>
-<p>Name: <span style="color: firebrick"><span class="glyphicon glyphicon-music"></span> “cafe bonbon firebrick music”</span></p>
+<h1 id="release-2.6.5">Release 2.6.5</h1>
+<p>Date: 2016-04-15</p>
+<p>Name: <span style="color: forestgreen"><span class="glyphicon glyphicon-paperclip"></span> “cafe bonbon forestgreen paperclip”</span></p>
 <h2 id="notes-37">Notes</h2>
-<p>Bug fixes.</p>
+<p>Primarily bug fixes and performance improvements.</p>
+<p>Notably:</p>
+<ul>
+<li>Startup time improved for Rundeck installs with many (thousands) of projects</li>
+<li>Fixes for node sources and asynchronous node loading</li>
+<li>new healthcheck for database latency</li>
+</ul>
 <h2 id="contributors-40">Contributors</h2>
 <ul>
+<li>Bharadwaj P (t20)</li>
 <li>Greg Schueler (gschueler)</li>
 </ul>
 <h2 id="bug-reporters-39">Bug Reporters</h2>
+<ul>
+<li>ahonor</li>
+<li>david-gregory-inmar</li>
+<li>fiquett</li>
+<li>gschueler</li>
+<li>hyuan-esol</li>
+<li>jippi</li>
+<li>joshuaspence</li>
+<li>ltamaster</li>
+<li>nilroy</li>
+<li>t20</li>
+</ul>
+<h2 id="issues-40">Issues</h2>
+<ul>
+<li><a href="https://github.com/rundeck/rundeck/issues/1809">healthcheck: add database pingtime healthcheck</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1807">API enhancement: takeover schedule for a single job</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1797">Error connecting to OpenSSH 7.2p2. server</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1796">Throw SSHProtocolFailure error when SSH to a remote machine running OpenSSH 7.2p2</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1795">Job execution error in log after schedule takeover</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1794">Request to /scheduler/takeover for all jobs should skip already owned jobs</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1793">Response for /scheduler/takeover indicates prior owner’s server uuid</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1790">SSH: when node has blank hostname, it attempts to connect to localhost.</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1773">rd-jobs list export schedule.time.hour wrong</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1771">Slow startup due to incomplete log storage requests</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1770">(2.6.4) Create project fails after second submit</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1769">fix #1744 first node load is synchronous</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1765">fix #1764 slow home page with many projects</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1764">Slow main page with many projects</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1760">Nodes list error when the remoteUrl is defined</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1749">spurious “removeScriptPluginCache: /var/lib/rundeck/libext/cache/…” message</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1747">GUI enhancement: show owner server UUID for scheduled jobs</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1746">API enhancement: cluster mode ability to find server UUID for scheduled jobs</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1744">Initial resource model loading is not asynchronous</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1740">unable to save jobs when notification plugin used</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1736">Upgrade Apache Commons Collections to v3.2.2</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1725">After 2.6.3 upgrade, nodes are not updated</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1719">Incomplete log file storage request should be cancelled after final retry, or retriable via API</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1711">Listing Running Executions API, “Total” error value using wildcard (&quot;*&quot;) in the URL</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1411">In the summary page, a failed node reports failure on the wrong step (2.5.3-1)</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1361">MailNotificationPlugin.groovy does not work with rundeck 2.5.2</a></li>
+</ul>
+<hr />
+<h1 id="release-2.6.4">Release 2.6.4</h1>
+<p>Date: 2016-03-04</p>
+<p>Name: <span style="color: firebrick"><span class="glyphicon glyphicon-music"></span> “cafe bonbon firebrick music”</span></p>
+<h2 id="notes-38">Notes</h2>
+<p>Bug fixes.</p>
+<h2 id="contributors-41">Contributors</h2>
+<ul>
+<li>Greg Schueler (gschueler)</li>
+</ul>
+<h2 id="bug-reporters-40">Bug Reporters</h2>
 <ul>
 <li>gschueler</li>
 <li>richiereynolds</li>
@@ -2796,7 +2833,7 @@ jQuery(function(){
 <li>tkald</li>
 <li>wufpack00</li>
 </ul>
-<h2 id="issues-40">Issues</h2>
+<h2 id="issues-41">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/1721">SCM initialization can cause slow startup with many projects</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1717">java.lang.NullPointerException Rundeck 2.6.3</a></li>
@@ -2808,13 +2845,13 @@ jQuery(function(){
 <h1 id="release-2.6.3">Release 2.6.3</h1>
 <p>Date: 2016-02-25</p>
 <p>Name: <span style="color: dodgerblue"><span class="glyphicon glyphicon-leaf"></span> “cafe bonbon dodgerblue leaf”</span></p>
-<h2 id="notes-38">Notes</h2>
+<h2 id="notes-39">Notes</h2>
 <p>Primarily bug fixes, and some enhancements:</p>
 <ul>
 <li>Asynchronous nodes cache. Per-project and global toggle and configurable retention delay. By default, projects now use an asynchronous method for retrieving Node data from Resource Model Sources. You should see an improvement in page load when using slow model sources (such as a URL for a slow endpoint).</li>
 <li>Performance improvements with many thousands of Nodes. The Nodes and Commands page, as well as other places where Nodes are loaded (e.g. Job editor) now should be much more responsive when you have e.g. 20K nodes. The Nodes page now uses result paging, and some parts of the UI now truncate the result set as well if you have many nodes.</li>
 </ul>
-<h2 id="contributors-41">Contributors</h2>
+<h2 id="contributors-42">Contributors</h2>
 <ul>
 <li>Alex Honor (ahonor)</li>
 <li>Bryon Williams</li>
@@ -2824,7 +2861,7 @@ jQuery(function(){
 <li>Rophy Tsai (rophy)</li>
 <li>mathieuchateau</li>
 </ul>
-<h2 id="bug-reporters-40">Bug Reporters</h2>
+<h2 id="bug-reporters-41">Bug Reporters</h2>
 <ul>
 <li>Alicia-Solinea</li>
 <li>SydOps</li>
@@ -2847,7 +2884,7 @@ jQuery(function(){
 <li>snebel29</li>
 <li>ssbarnea</li>
 </ul>
-<h2 id="issues-41">Issues</h2>
+<h2 id="issues-42">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/1709">toggle job execution/schedule can be triggered with GET without synchronizer token</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1703">Add bulk job edit: enable/disable schedule and execution</a></li>
@@ -2895,7 +2932,7 @@ jQuery(function(){
 <h1 id="release-2.6.2">Release 2.6.2</h1>
 <p>Date: 2015-12-02</p>
 <p>Name: <span style="color: crimson"><span class="glyphicon glyphicon-headphones"></span> “cafe bonbon crimson headphones”</span></p>
-<h2 id="notes-39">Notes</h2>
+<h2 id="notes-40">Notes</h2>
 <p>This release includes bug fixes, and some enhancements.</p>
 <ul>
 <li>Secure Job Options can now use Key Storage for defaults, enabling use via scheduled jobs</li>
@@ -2903,18 +2940,18 @@ jQuery(function(){
 <li>API added for SCM plugins, API version updated to v15</li>
 <li>Plugins: input property definitions can now be placed in groups, which can be shown collapsed by default</li>
 </ul>
-<h2 id="contributors-42">Contributors</h2>
+<h2 id="contributors-43">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 </ul>
-<h2 id="bug-reporters-41">Bug Reporters</h2>
+<h2 id="bug-reporters-42">Bug Reporters</h2>
 <ul>
 <li>ahonor</li>
 <li>gschueler</li>
 <li>sea-lmarchal</li>
 <li>stack72</li>
 </ul>
-<h2 id="issues-42">Issues</h2>
+<h2 id="issues-43">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/pull/1560">Feature/multifile storage</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1553">SCM API: push via project-commit action not working</a></li>
@@ -2937,13 +2974,13 @@ jQuery(function(){
 <p>Name: <span style="color: cornflowerblue"><span class="glyphicon glyphicon-globe"></span> “cafe bonbon cornflowerblue globe”</span></p>
 <h2 id="fixes">Fixes</h2>
 <p>Bugfixes for SCM plugins, and the Job execution/schedule toggle feature.</p>
-<h2 id="contributors-43">Contributors</h2>
+<h2 id="contributors-44">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 <li>Miguel A. Fuentes Buchholtz (miguelantonio)</li>
 <li>robertopaez</li>
 </ul>
-<h2 id="bug-reporters-42">Bug Reporters</h2>
+<h2 id="bug-reporters-43">Bug Reporters</h2>
 <ul>
 <li>LordMike</li>
 <li>albertmfb</li>
@@ -2959,7 +2996,7 @@ jQuery(function(){
 <li>rophy</li>
 <li>tomkregenbild</li>
 </ul>
-<h2 id="issues-43">Issues</h2>
+<h2 id="issues-44">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/1510">SCM plugin does not interpret variables in paths</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1509">CLI: Running rd-jobs list gives an error when user profile is incomplete and SCM is enabled</a></li>
@@ -3025,7 +3062,7 @@ jQuery(function(){
 <li>The project name is no longer included in exported Job definitions.</li>
 <li>In YAML: options are now always serialized as a sequence, and will preserve the sequence order on input. The original Map format is still allowed on import.</li>
 </ul>
-<h2 id="contributors-44">Contributors</h2>
+<h2 id="contributors-45">Contributors</h2>
 <ul>
 <li>Alex Honor (ahonor)</li>
 <li>Francois Travais</li>
@@ -3036,7 +3073,7 @@ jQuery(function(){
 <li>William Jimenez (wjimenez5271)</li>
 <li>maciejs</li>
 </ul>
-<h2 id="bug-reporters-43">Bug Reporters</h2>
+<h2 id="bug-reporters-44">Bug Reporters</h2>
 <ul>
 <li>adamhamner</li>
 <li>ahonor</li>
@@ -3054,7 +3091,7 @@ jQuery(function(){
 <li>sylvainr</li>
 <li>wjimenez5271</li>
 </ul>
-<h2 id="issues-44">Issues</h2>
+<h2 id="issues-45">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/pull/1465">SCM Plugin with Git support</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/1453">Log limit</a></li>
@@ -3094,11 +3131,11 @@ jQuery(function(){
 <ul>
 <li>Bug fixes</li>
 </ul>
-<h2 id="contributors-45">Contributors</h2>
+<h2 id="contributors-46">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 </ul>
-<h2 id="bug-reporters-44">Bug Reporters</h2>
+<h2 id="bug-reporters-45">Bug Reporters</h2>
 <ul>
 <li>ahonor</li>
 <li>ddzed15</li>
@@ -3106,7 +3143,7 @@ jQuery(function(){
 <li>runnnt0</li>
 <li>tomkregenbild</li>
 </ul>
-<h2 id="issues-45">Issues</h2>
+<h2 id="issues-46">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/1363">${option.wimrmPassword} not passed between jobs in 2.5.2 version. ( was working in 2.5.1)</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1356">Jaas login module using LDAPS can cause exception “Unconnected sockets not implemented”</a></li>
@@ -3127,12 +3164,12 @@ jQuery(function(){
 <li>Improved performance on Execution follow page with many nodes (1000+).</li>
 <li>Bug fixes</li>
 </ul>
-<h2 id="contributors-46">Contributors</h2>
+<h2 id="contributors-47">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 <li>Noah Lorang (noahhl)</li>
 </ul>
-<h2 id="bug-reporters-45">Bug Reporters</h2>
+<h2 id="bug-reporters-46">Bug Reporters</h2>
 <ul>
 <li>andham</li>
 <li>blysik</li>
@@ -3149,7 +3186,7 @@ jQuery(function(){
 <li>stack72</li>
 <li>touzoku</li>
 </ul>
-<h2 id="issues-46">Issues</h2>
+<h2 id="issues-47">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/1321">Enable the configuration of excluded cipher suites for SSL</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1320">GUI: Plugins List in Configure page: plugin provider names should be shown</a></li>
@@ -3200,11 +3237,11 @@ jQuery(function(){
 <p><strong>Note:</strong> We’ve attempted to maintain compatibility with previous plugins, but due to changes in the core library, Rundeck may have issues loading or running some plugins.</p>
 <p>Please report issues found to <a href="https://github.com/rundeck/rundeck/issues">Github issues</a>.</p>
 <p>See the <a href="http://rundeck.org/2.5.1/upgrading/index.html">Upgrading Guide</a></p>
-<h2 id="contributors-47">Contributors</h2>
+<h2 id="contributors-48">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 </ul>
-<h2 id="bug-reporters-46">Bug Reporters</h2>
+<h2 id="bug-reporters-47">Bug Reporters</h2>
 <ul>
 <li>Zophar78</li>
 <li>andham</li>
@@ -3224,7 +3261,7 @@ jQuery(function(){
 <li>tiahino</li>
 <li>wcooley</li>
 </ul>
-<h2 id="issues-47">Issues</h2>
+<h2 id="issues-48">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/1239">Job with a negative threadcount causes exception when using Orchestrator</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1234">Failed job runs not shown in ‘failed’ tab</a></li>
@@ -3286,7 +3323,7 @@ jQuery(function(){
 <p><strong>Note:</strong> We’ve attempted to maintain compatibility with previous plugins, but due to changes in the core library, Rundeck may have issues loading or running some plugins.</p>
 <p>Please report issues found to <a href="https://github.com/rundeck/rundeck/issues">Github issues</a>.</p>
 <p>See the <a href="http://rundeck.org/2.5.0/upgrading/index.html">Upgrading Guide</a></p>
-<h2 id="contributors-48">Contributors</h2>
+<h2 id="contributors-49">Contributors</h2>
 <ul>
 <li>Andreas Knifh</li>
 <li>Greg Schueler (gschueler)</li>
@@ -3298,7 +3335,7 @@ jQuery(function(){
 <li>ashley-taylor</li>
 <li>new23d</li>
 </ul>
-<h2 id="bug-reporters-47">Bug Reporters</h2>
+<h2 id="bug-reporters-48">Bug Reporters</h2>
 <ul>
 <li>MartinMulder</li>
 <li>MartyNeal</li>
@@ -3325,7 +3362,7 @@ jQuery(function(){
 <li>vinzent</li>
 <li>yagince</li>
 </ul>
-<h2 id="issues-48">Issues</h2>
+<h2 id="issues-49">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/1164">Project config page: plugin properties of wrong scope displayed</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1163">Security: Script plugins: password rendering option plugin property files not properly obscured</a></li>
@@ -3376,13 +3413,13 @@ jQuery(function(){
 <p>This release has bug fixes.</p>
 <h2 id="compatibility-notes">Compatibility notes</h2>
 <p>See the <a href="http://rundeck.org/2.4.0/history/version-2.4.0.html">release notes for v2.4.0</a></p>
-<h2 id="contributors-49">Contributors</h2>
+<h2 id="contributors-50">Contributors</h2>
 <ul>
 <li>ETAI Opérations</li>
 <li>Greg Schueler (gschueler)</li>
 <li>Mark Bidewell (mbidewell)</li>
 </ul>
-<h2 id="bug-reporters-48">Bug Reporters</h2>
+<h2 id="bug-reporters-49">Bug Reporters</h2>
 <ul>
 <li>Farzy</li>
 <li>bdmorin</li>
@@ -3396,7 +3433,7 @@ jQuery(function(){
 <li>russellballestrini</li>
 <li>smithtimamy</li>
 </ul>
-<h2 id="issues-49">Issues</h2>
+<h2 id="issues-50">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/pull/1093">Fix ssh-agent variable names in documentation</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1091">Activity page/tabs: events for deleted jobs appear incorrectly, options for other jobs hidden</a></li>
@@ -3464,7 +3501,7 @@ jQuery(function(){
 <blockquote>
 <p>Why yes, I’d like an americano, thank you.</p>
 </blockquote>
-<h2 id="contributors-50">Contributors</h2>
+<h2 id="contributors-51">Contributors</h2>
 <ul>
 <li>Alex Honor (ahonor)</li>
 <li>Greg Schueler (gschueler)</li>
@@ -3474,7 +3511,7 @@ jQuery(function(){
 <li>Ruslan Lutsenko (lruslan)</li>
 <li>mezbiderli</li>
 </ul>
-<h2 id="bug-reporters-49">Bug Reporters</h2>
+<h2 id="bug-reporters-50">Bug Reporters</h2>
 <ul>
 <li>Whitepatrick</li>
 <li>adamhamner</li>
@@ -3495,7 +3532,7 @@ jQuery(function(){
 <li>ujfjhz</li>
 <li>zarry</li>
 </ul>
-<h2 id="issues-50">Issues</h2>
+<h2 id="issues-51">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/1051">Cancel editing resource model source doesn’t work</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1044">Job run form triggered from Jobs list page incorrectly shows next scheduled time as “never”</a></li>
@@ -3534,19 +3571,19 @@ jQuery(function(){
 <p>Date: 2014-11-06</p>
 <p>Fix more regressions in executing remote inline script steps.</p>
 <p>See <a href="http://rundeck.org/docs/history/version-2.3.0.html">2.3.0 release notes</a>.</p>
-<h2 id="contributors-51">Contributors</h2>
+<h2 id="contributors-52">Contributors</h2>
 <ul>
 <li>Alex Honor (ahonor)</li>
 <li>Greg Schueler (gschueler)</li>
 </ul>
-<h2 id="bug-reporters-50">Bug Reporters</h2>
+<h2 id="bug-reporters-51">Bug Reporters</h2>
 <ul>
 <li>ahonor</li>
 <li>gschueler</li>
 <li>ko-christ</li>
 <li>mumblez</li>
 </ul>
-<h2 id="issues-51">Issues</h2>
+<h2 id="issues-52">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/1006">dispatch -s scriptfile – args fails</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/1004">Create email settings page in admin guide</a></li>
@@ -3557,16 +3594,16 @@ jQuery(function(){
 <p>Date: 2014-10-31</p>
 <p>Fix a regression in executing local inline script steps.</p>
 <p>See <a href="http://rundeck.org/docs/history/version-2.3.0.html">2.3.0 release notes</a>.</p>
-<h2 id="contributors-52">Contributors</h2>
+<h2 id="contributors-53">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 </ul>
-<h2 id="bug-reporters-51">Bug Reporters</h2>
+<h2 id="bug-reporters-52">Bug Reporters</h2>
 <ul>
 <li>ko-christ</li>
 <li>richiereynolds</li>
 </ul>
-<h2 id="issues-52">Issues</h2>
+<h2 id="issues-53">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/994">Options not expanded in inline scripts in 2.3.0</a></li>
 <li><h2 id="bad-interpreter-error"><a href="https://github.com/rundeck/rundeck/issues/993">bad interpreter error</a></h2></li>
@@ -3586,12 +3623,12 @@ The built-in SSH execution and SCP file copy both now support using stored passw
 <li>Bug fixes</li>
 <li>Disable SSLv3 by default</li>
 </ul>
-<h2 id="contributors-53">Contributors</h2>
+<h2 id="contributors-54">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 <li>JayKim (c-jason-kim)</li>
 </ul>
-<h2 id="bug-reporters-52">Bug Reporters</h2>
+<h2 id="bug-reporters-53">Bug Reporters</h2>
 <ul>
 <li>aparsons</li>
 <li>c-jason-kim</li>
@@ -3606,7 +3643,7 @@ The built-in SSH execution and SCP file copy both now support using stored passw
 <li>pwhack</li>
 <li>stagrlee</li>
 </ul>
-<h2 id="issues-53">Issues</h2>
+<h2 id="issues-54">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/987">Disable SSL Undesired Versions</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/985">add MaxPermSize to default JVM args</a></li>
@@ -3641,68 +3678,6 @@ The built-in SSH execution and SCP file copy both now support using stored passw
 <li><a href="https://github.com/rundeck/rundeck/issues/939">plugin development: plugin properties using rendering options should allow String values</a></li>
 </ul>
 <p>Release notes from 2.2.2 follow:</p>
-<p>This release fixes a number of bugs and addresses several potential security issues:</p>
-<ol type="1">
-<li>Require a unique token for each form request from the GUI, which prevents replay and CSRF attacks</li>
-<li>Updated all pages to prevent unencoded data from being written to the response, preventing XSS style attacks.</li>
-<li>Prevent access to the /api URLs via the web GUI.</li>
-<li>Some plugins (Resource model, Node Executor and File Copier) now support using Password fields displayed in the Project config page. The field values once set are never revealed in clear text via the GUI.</li>
-</ol>
-<p>Please see the Notes below for some configuration information related to these changes.</p>
-<p><strong>A big Thank You to one of our clients for sponsoring the work for these enhancements.</strong></p>
-<p><em>Security Notes:</em></p>
-<p>The new form tokens used in all form requests by default will expire in 30 minutes. This means that if your session timeout is larger than 30 minutes and you attempt to e.g. run a job after your web page has been sitting open for longer than that, you will see an “Invalid token” error. If this becomes a problem for you you can either change the expiration time for these tokens, or switch to using non-expiring tokens. See <a href="http://rundeck.org/2.2.2/administration/configuration-file-reference.html#security">Administration - Configuration File Reference - Security</a>.</p>
-<p>To add a Password field definition to your plugin, see <a href="http://rundeck.org/2.2.2/developer/plugin-development.html#description-properties">Plugin Development - Description Properties</a>. (Note that currently using property annotations is not supported for the three plugin types that can use Password properties.)</p>
-<p><em>Upgrade notes:</em></p>
-<p>See the <a href="http://rundeck.org/2.2.2/upgrading/index.html">Upgrading Guide</a>.</p>
-<h2 id="contributors-54">Contributors</h2>
-<ul>
-<li>Andreas Knifh (knifhen)</li>
-<li>Daniel Serodio (dserodio)</li>
-<li>Greg Schueler (gschueler)</li>
-</ul>
-<h2 id="bug-reporters-53">Bug Reporters</h2>
-<ul>
-<li>adolfocorreia</li>
-<li>ahonor</li>
-<li>arjones85</li>
-<li>danpilch</li>
-<li>dennis-benzinger-hybris</li>
-<li>dserodio</li>
-<li>garyhodgson</li>
-<li>gschueler</li>
-<li>jerome83136</li>
-<li>knifhen</li>
-<li>majkinetor</li>
-<li>rfletcher</li>
-<li>schicky</li>
-</ul>
-<h2 id="issues-54">Issues</h2>
-<ul>
-<li><a href="https://github.com/rundeck/rundeck/issues/934">dynamic node filter string incorrectly includes name: prefix</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/931">aclpolicy files are listed in random order in Configure page</a></li>
-<li><a href="https://github.com/rundeck/rundeck/pull/925">Improve “Authenticating Users” docs re. logging</a></li>
-<li><a href="https://github.com/rundeck/rundeck/pull/919">Security: allow plugins to specify password properties that are obscured in project config page</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/915">Job Variable Length is too low</a></li>
-<li><a href="https://github.com/rundeck/rundeck/pull/910">Config toggle: Hide error page stacktrace</a></li>
-<li><a href="https://github.com/rundeck/rundeck/pull/909">Security: CSRF prevention</a></li>
-<li><a href="https://github.com/rundeck/rundeck/pull/908">Security: prevent XSS issues</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/907">Cannot pass multiple values to multivalued option with enforced values</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/905">Rundeck 2.1.1 scheduling bug</a></li>
-<li><a href="https://github.com/rundeck/rundeck/pull/904">Selectively Disable metrics servlets features</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/903">Broken Link in Documentation</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/901">Machine tag style attributes don’t get replaced</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/900">Scheduled job with retry never completes 2.2.1</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/898">API docs state latest version is 11, but it is 12</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/896">NPE: Cannot get property ‘nodeSet’ on null object since upgrade to 2.2.1-1</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/894">Powershell and script-exec - extension problem</a></li>
-<li><a href="https://github.com/rundeck/rundeck/pull/892">Ldap nestedGroup examples</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/883">“Retry failed nodes” does not seem to work, when using dynamic nodes filters</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/861">UI job status incorrect</a></li>
-<li><h2 id="odd-page-when-not-allowing-node-info-access"><a href="https://github.com/rundeck/rundeck/issues/844">Odd page when not allowing node info access</a></h2></li>
-</ul>
-<h1 id="release-2.2.2">Release 2.2.2</h1>
-<p>Date: 2014-09-19</p>
 <p>This release fixes a number of bugs and addresses several potential security issues:</p>
 <ol type="1">
 <li>Require a unique token for each form request from the GUI, which prevents replay and CSRF attacks</li>
@@ -3761,6 +3736,68 @@ The built-in SSH execution and SCP file copy both now support using stored passw
 <li><a href="https://github.com/rundeck/rundeck/pull/892">Ldap nestedGroup examples</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/883">“Retry failed nodes” does not seem to work, when using dynamic nodes filters</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/861">UI job status incorrect</a></li>
+<li><h2 id="odd-page-when-not-allowing-node-info-access"><a href="https://github.com/rundeck/rundeck/issues/844">Odd page when not allowing node info access</a></h2></li>
+</ul>
+<h1 id="release-2.2.2">Release 2.2.2</h1>
+<p>Date: 2014-09-19</p>
+<p>This release fixes a number of bugs and addresses several potential security issues:</p>
+<ol type="1">
+<li>Require a unique token for each form request from the GUI, which prevents replay and CSRF attacks</li>
+<li>Updated all pages to prevent unencoded data from being written to the response, preventing XSS style attacks.</li>
+<li>Prevent access to the /api URLs via the web GUI.</li>
+<li>Some plugins (Resource model, Node Executor and File Copier) now support using Password fields displayed in the Project config page. The field values once set are never revealed in clear text via the GUI.</li>
+</ol>
+<p>Please see the Notes below for some configuration information related to these changes.</p>
+<p><strong>A big Thank You to one of our clients for sponsoring the work for these enhancements.</strong></p>
+<p><em>Security Notes:</em></p>
+<p>The new form tokens used in all form requests by default will expire in 30 minutes. This means that if your session timeout is larger than 30 minutes and you attempt to e.g. run a job after your web page has been sitting open for longer than that, you will see an “Invalid token” error. If this becomes a problem for you you can either change the expiration time for these tokens, or switch to using non-expiring tokens. See <a href="http://rundeck.org/2.2.2/administration/configuration-file-reference.html#security">Administration - Configuration File Reference - Security</a>.</p>
+<p>To add a Password field definition to your plugin, see <a href="http://rundeck.org/2.2.2/developer/plugin-development.html#description-properties">Plugin Development - Description Properties</a>. (Note that currently using property annotations is not supported for the three plugin types that can use Password properties.)</p>
+<p><em>Upgrade notes:</em></p>
+<p>See the <a href="http://rundeck.org/2.2.2/upgrading/index.html">Upgrading Guide</a>.</p>
+<h2 id="contributors-56">Contributors</h2>
+<ul>
+<li>Andreas Knifh (knifhen)</li>
+<li>Daniel Serodio (dserodio)</li>
+<li>Greg Schueler (gschueler)</li>
+</ul>
+<h2 id="bug-reporters-55">Bug Reporters</h2>
+<ul>
+<li>adolfocorreia</li>
+<li>ahonor</li>
+<li>arjones85</li>
+<li>danpilch</li>
+<li>dennis-benzinger-hybris</li>
+<li>dserodio</li>
+<li>garyhodgson</li>
+<li>gschueler</li>
+<li>jerome83136</li>
+<li>knifhen</li>
+<li>majkinetor</li>
+<li>rfletcher</li>
+<li>schicky</li>
+</ul>
+<h2 id="issues-56">Issues</h2>
+<ul>
+<li><a href="https://github.com/rundeck/rundeck/issues/934">dynamic node filter string incorrectly includes name: prefix</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/931">aclpolicy files are listed in random order in Configure page</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/925">Improve “Authenticating Users” docs re. logging</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/919">Security: allow plugins to specify password properties that are obscured in project config page</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/915">Job Variable Length is too low</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/910">Config toggle: Hide error page stacktrace</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/909">Security: CSRF prevention</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/908">Security: prevent XSS issues</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/907">Cannot pass multiple values to multivalued option with enforced values</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/905">Rundeck 2.1.1 scheduling bug</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/904">Selectively Disable metrics servlets features</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/903">Broken Link in Documentation</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/901">Machine tag style attributes don’t get replaced</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/900">Scheduled job with retry never completes 2.2.1</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/898">API docs state latest version is 11, but it is 12</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/896">NPE: Cannot get property ‘nodeSet’ on null object since upgrade to 2.2.1-1</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/894">Powershell and script-exec - extension problem</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/892">Ldap nestedGroup examples</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/883">“Retry failed nodes” does not seem to work, when using dynamic nodes filters</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/861">UI job status incorrect</a></li>
 <li><h2 id="odd-page-when-not-allowing-node-info-access-1"><a href="https://github.com/rundeck/rundeck/issues/844">Odd page when not allowing node info access</a></h2></li>
 </ul>
 <h1 id="release-2.2.1">Release 2.2.1</h1>
@@ -3768,11 +3805,11 @@ The built-in SSH execution and SCP file copy both now support using stored passw
 <p>Bugfix release.</p>
 <p><em>Upgrade notes:</em></p>
 <p>See the <a href="http://rundeck.org/2.2.1/upgrading/index.html">Upgrading Guide</a>.</p>
-<h2 id="contributors-56">Contributors</h2>
+<h2 id="contributors-57">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 </ul>
-<h2 id="issues-56">Issues</h2>
+<h2 id="issues-57">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/875">example node filters in help popover when clicked go to error page</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/869">Job references listed in workflow definition are hard to read</a></li>
@@ -3801,7 +3838,7 @@ The built-in SSH execution and SCP file copy both now support using stored passw
 </ul>
 <p><em>Upgrade notes:</em></p>
 <p>Several domain fields were added. Mysql and H2 should upgrade in place without issue.</p>
-<h2 id="contributors-57">Contributors</h2>
+<h2 id="contributors-58">Contributors</h2>
 <ul>
 <li>jdmulloy</li>
 <li>Greg Schueler (gschueler)</li>
@@ -3810,7 +3847,7 @@ The built-in SSH execution and SCP file copy both now support using stored passw
 <li>Bart van der Schans (schans)</li>
 <li>Andreas Knifh (knifhen)</li>
 </ul>
-<h2 id="issues-57">Issues</h2>
+<h2 id="issues-58">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/pull/845">Server listening port number defined in profile instead of service start script</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/842">Install fails when /etc/rundeck is a symlink</a></li>
@@ -3832,11 +3869,11 @@ The built-in SSH execution and SCP file copy both now support using stored passw
 <li>If you are upgrading from 2.0.1 or earlier, see the notes about schema changes in the previous release notes: <a href="http://rundeck.org/docs/history/version-2.0.2.html">2.0.2 Release Notes</a>.</li>
 <li>See the <a href="http://rundeck.org/2.1.0/upgrading/index.html">Upgrading Guide</a></li>
 </ol>
-<h2 id="contributors-58">Contributors</h2>
+<h2 id="contributors-59">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 </ul>
-<h2 id="issues-58">Issues</h2>
+<h2 id="issues-59">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/841">option order not preserved when using cascading remote options</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/834">Multiple Recepient E-mail Notification</a></li>
@@ -3856,11 +3893,11 @@ The built-in SSH execution and SCP file copy both now support using stored passw
 <li>If you are upgrading from 2.0.1 or earlier, see the notes about schema changes in the previous release notes: <a href="http://rundeck.org/docs/history/version-2.0.2.html">2.0.2 Release Notes</a>.</li>
 <li>See the <a href="http://rundeck.org/2.1.0/upgrading/index.html">Upgrading Guide</a></li>
 </ol>
-<h2 id="contributors-59">Contributors</h2>
+<h2 id="contributors-60">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 </ul>
-<h2 id="issues-59">Issues</h2>
+<h2 id="issues-60">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/795">Create job with nodeset: breaks using tagsa+tagb</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/793">node filter exclusion of tags doesn’t seem to work</a></li>
@@ -3905,12 +3942,12 @@ The built-in SSH execution and SCP file copy both now support using stored passw
 <li>If you are upgrading from 2.0.1 or earlier, see the notes about schema changes in the previous release notes: <a href="http://rundeck.org/2.1.0/history/version-2.0.2.html">2.0.2 Release Notes</a>.</li>
 <li>See the <a href="http://rundeck.org/2.1.0/upgrading/index.html">Upgrading Guide</a></li>
 </ol>
-<h2 id="contributors-60">Contributors</h2>
+<h2 id="contributors-61">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 <li>Jason R. McNeil (jasonrm)</li>
 </ul>
-<h2 id="issues-60">Issues</h2>
+<h2 id="issues-61">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/753">Simple custom email notification templates</a></li>
 <li><a href="https://github.com/rundeck/rundeck/pull/752">notification plugins are not working</a></li>
@@ -3940,12 +3977,12 @@ The built-in SSH execution and SCP file copy both now support using stored passw
 <li>If you are upgrading from 2.0.1 or earlier, see the notes about schema changes in the previous release notes: <a href="http://rundeck.org/2.1.0/history/version-2.0.2.html">2.0.2 Release Notes</a>.</li>
 <li>See the <a href="http://rundeck.org/2.1.0/upgrading/index.html">Upgrading Guide</a></li>
 </ol>
-<h2 id="contributors-61">Contributors</h2>
+<h2 id="contributors-62">Contributors</h2>
 <ul>
 <li>Diomidis Spinellis (dspinellis)</li>
 <li>Greg Schueler (gschueler)</li>
 </ul>
-<h2 id="issues-61">Issues</h2>
+<h2 id="issues-62">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/745">add link about project.properties in project setup guide</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/743">After update to 2.0.4-1.15.GA ssh login fails with “bad ownership or modes for directory”</a></li>
@@ -3974,11 +4011,11 @@ The built-in SSH execution and SCP file copy both now support using stored passw
 <li>Start rundeck</li>
 </ol></li>
 </ul>
-<h2 id="contributors-62">Contributors</h2>
+<h2 id="contributors-63">Contributors</h2>
 <ul>
 <li>Greg Schueler (gschueler)</li>
 </ul>
-<h2 id="issues-62">Issues</h2>
+<h2 id="issues-63">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/740">Required option value icon shown even when value is set</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/738">[2.0.3] Documentation: job ‘create’ access not shown in admin example ACL policy</a></li>
@@ -4009,13 +4046,13 @@ The built-in SSH execution and SCP file copy both now support using stored passw
 <li>Start rundeck</li>
 </ol></li>
 </ul>
-<h2 id="contributors-63">Contributors</h2>
+<h2 id="contributors-64">Contributors</h2>
 <ul>
 <li>David Petzel</li>
 <li>Greg Schueler (gschueler)</li>
 <li>Alex Honor (ahonor)</li>
 </ul>
-<h2 id="issues-63">Issues</h2>
+<h2 id="issues-64">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/707">Create from execution is broken [2.0.2]</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/682">Service fails to start on RHEL5</a></li>
@@ -4034,13 +4071,13 @@ The built-in SSH execution and SCP file copy both now support using stored passw
 <li>Start rundeck</li>
 </ol></li>
 </ul>
-<h2 id="contributors-64">Contributors</h2>
+<h2 id="contributors-65">Contributors</h2>
 <ul>
 <li>David Wittman</li>
 <li>Greg Schueler</li>
 <li>Alex Honor</li>
 </ul>
-<h2 id="issues-64">Issues</h2>
+<h2 id="issues-65">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/pull/702">Grammar fix in Job editor view</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/698">Import of an Exported Rundeck Project Results in “No such property: year for class: java.lang.String”</a></li>
@@ -4194,7 +4231,7 @@ The built-in SSH execution and SCP file copy both now support using stored passw
 <li>Vincent Behar</li>
 <li>As well as <em>(anonymous) Sponsored Development Clients</em> - thank you!</li>
 </ul>
-<h2 id="issues-65">Issues</h2>
+<h2 id="issues-66">Issues</h2>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/issues/629">Update docs for Upgrading to 2.0</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/628">Multiple node sources should merge the attributes for a node</a></li>
@@ -4712,13 +4749,13 @@ The built-in SSH execution and SCP file copy both now support using stored passw
     
     
     <li ><a href="index.html">Version History</a></li>
-    <li class="active"><a href="changelog.html">Changelog (2018-08-24)</a></li>
+    <li class="active"><a href="changelog.html">Changelog (2018-08-27)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
       
-      <li class="next"><a href="version-3.0.3.html">Version 3.0.3 (2018-08-24) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="next"><a href="version-3.0.4.html">Version 3.0.4 (2018-08-27) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -4753,7 +4790,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-25T21:37:06UTC">2018-08-25T21:37:06UTC</span>
+<span class="generated-date" title="2018-08-27T21:45:35UTC">2018-08-27T21:45:35UTC</span>
 </p>
 </footer>
 </div>
