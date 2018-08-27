@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Installing as an executable war</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.4)</a></li>
+    
+        <li><a href="../index.html">Administrator Guide</a></li>
+    
+    
+    <li ><a href="index.html">Installation</a></li>
+    <li class="active"><a href="launcher.html">Launcher</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="system-requirements.html"><i class="glyphicon glyphicon-arrow-left"></i> System Requirements</a></li>
+      <li class="next"><a href="ubuntudebian.html">Ubuntu/Debian <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/install/jar.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#logging-in-for-the-first-time">Logging in for the first time</a><ul>
+<li><a href="#updating">Updating</a></li>
+<li><a href="#executable-war-options">Executable War Options</a></li>
+<li><a href="#system-properties">System Properties</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Installing as an executable war</h1>
+</div>
+<p>Use the executable war as an alternative to a system package:</p>
+<ol type="1">
+<li>Download the executable war file.</li>
+<li><p>Define RDECK_BASE environment variable to the location of the install</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="bu">export</span> <span class="va">RDECK_BASE=$HOME</span>/rundeck; <span class="co"># or where you like it</span></a></code></pre></div></li>
+<li><p>Create the directory for the installation.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="fu">mkdir</span> -p <span class="va">$RDECK_BASE</span></a></code></pre></div></li>
+<li><p>Copy the executable war to the installation directory.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">cp</span> rundeck-3.0.x.war <span class="va">$RDECK_BASE</span></a></code></pre></div></li>
+<li><p>Change directory and run the WAR.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="bu">cd</span> <span class="va">$RDECK_BASE</span>    </a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="ex">java</span> -Xmx4g -jar rundeck-3.0.x.war</a></code></pre></div></li>
+<li><p>Wait for the Started message.</p>
+<pre><code>Grails application running at http://ecto1.local:4440 in environment: production</code></pre></li>
+<li><p>Update your shell environment</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="va">PATH=$PATH</span>:<span class="va">$RDECK_BASE</span>/tools/bin</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="va">MANPATH=$MANPATH</span>:<span class="va">$RDECK_BASE</span>/docs/man</a></code></pre></div></li>
+</ol>
+<p>If you get an error message that resembles the one below, you probably are using an unsupported Java version.</p>
+<pre><code>Exception in thread &quot;main&quot; java.lang.UnsupportedClassVersionError: Bad version number in .class file</code></pre>
+<p>See the <a href="../maintenance/startup-and-shutdown.html">startup and shutdown</a> section for instructions on using the <code>rundeckd</code> shell tool to manage the rundeck server process.</p>
+<h2 id="logging-in-for-the-first-time">Logging in for the first time</h2>
+<ol type="1">
+<li>Navigate to <a href="http://localhost:4440/user/login">http://localhost:4440/</a> in a browser</li>
+<li>Log in with the username <strong>admin</strong> and password <strong>admin</strong></li>
+</ol>
+<p>Rundeck is now up and running!</p>
+<p>Next, learn how to <a href="../../manual/getting-started.html#project-setup">create your first Rundeck Pro project</a></p>
+<h3 id="updating">Updating</h3>
+<p>When you need to update rundeck and you can not find the relevant section on the docs you are probably on a quite recent version.</p>
+<ul>
+<li>Stop rundeck</li>
+<li>download the new war</li>
+<li><p>open a prompt, optionally setting RDECK_BASE and launch –installonly</p>
+<pre><code>  java -jar rundeck-3.0.x.war --installonly</code></pre></li>
+<li>copy over your customizations</li>
+<li>don’t forget, e.g., sqljdbc41.jar in <code>%RDECK_BASE%\server\lib</code></li>
+<li><p>start rundeck</p></li>
+</ul>
+<h3 id="executable-war-options">Executable War Options</h3>
+<p>The executable war can take a number of options to specify how the server should start. If you execute with a “-h” you will see the usage information:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="ex">java</span> -Xmx4g -jar rundeck-3.0.x.war -h</a></code></pre></div>
+<pre><code>usage: java [JAVA_OPTIONS] -jar rundeck.war  [-c PATH] [-d]
+       [--installonly] [-s PATH] [-b PATH] [-p PATH] [-h] [-x PATH]
+       [--skipinstall] [--serverdir PATH] [--datadir PATH]
+
+Run the rundeck server, installing the necessary components if they do not
+exist.
+    --skipinstall         Skip the extraction of the utilities from the
+                          launcher.
+    --installonly         Perform installation only and do not start the
+                          server.
+ -b,--basedir &lt;PATH&gt;      The basedir
+ -c,--configdir &lt;PATH&gt;    The location of the configuration.
+ -d                       Show debug information
+ -h,--help                Display this message.
+ -p,--projectdir &lt;PATH&gt;   The location of Rundeck&#39;s project data.
+ -s,--sbindir &lt;PATH&gt;      The install directory for the tools used by
+                          administrators.
+ -x,--bindir &lt;PATH&gt;       The install directory for the tools used by
+                          users.</code></pre>
+<p>These options can be used to customize the directories used by the executable war. By default all the directories are organized by convention within the current working directory where the executable war is located.</p>
+<h3 id="system-properties">System Properties</h3>
+<p>You can also customize the executable war behavior by using some java system properties.</p>
+<p>Specify these properties using the normal <code>-Dproperty=value</code> commandline options to the <code>java</code> command:</p>
+<ul>
+<li><code>server.port</code> The HTTP port to use for the server, default “4440”</li>
+<li><code>server.https.port</code> The HTTPS port to use or the server, default “4443”</li>
+<li><code>server.address</code> Address/hostname to listen on, default is “localhost”</li>
+<li><code>server.contextPath</code> Web context path to use, such as “/rundeck”. Default is “/”.</li>
+<li><code>rdeck.base</code> Rundeck Basedir to use, default is the directory containing the executable war</li>
+<li><code>server.datastore.path</code> Path to server datastore dir</li>
+<li><code>default.user.name</code> Username for default user account to create</li>
+<li><code>default.user.password</code> Password for default user account to create</li>
+<li><code>rundeck.jaaslogin</code> “true/false” - if true, enable JAAS login. If false, use the realm.properties file for login information.</li>
+<li><code>loginmodule.name</code> Custom JAAS loginmodule name to use</li>
+<li><code>loginmodule.conf.name</code> Name of a custom JAAS config file, located in the server’s config dir.</li>
+<li><code>rundeck.config.name</code> Name of a custom rundeck config file, located in the server’s config dir.</li>
+<li><code>rundeck.ssl.config</code> Path to the SSL config properties file to enable SSL. If not set, SSL is not enabled.</li>
+<li><code>rundeck.jetty.connector.forwarded</code> true/false. Set to true to enable support for “X-forwarded-*” headers which may be sent by a front-end proxy to the rundeck server. See <a href="../security/configuring-ssl.html#using-an-ssl-terminated-proxy">Using an SSL Terminated Proxy</a>.</li>
+<li><code>rundeck.jetty.connector.ssl.excludedProtocols</code> Comma-separated list of SSL protocols to disable. Default: ‘SSLv3’. See <a href="../security/configuring-ssl.html#disabling-ssl-protocols">Disabling SSL Protocols</a>.</li>
+<li><code>rundeck.jetty.connector.ssl.includedProtocols</code> Comma-separated list of SSL protocols to include. Default is based on available protocols. See <a href="../security/configuring-ssl.html#disabling-ssl-protocols">Disabling SSL Protocols</a>.</li>
+<li><code>rundeck.jetty.connector.ssl.excludedCipherSuites</code> Comma-separated list of Cipher suites to disable. No default. See <a href="../security/configuring-ssl.html#disabling-ssl-protocols">Disabling SSL Protocols</a>.</li>
+<li><code>rundeck.jetty.connector.ssl.includedCipherSuites</code> Comma-separated list of Cipher suites to enable. Default is based on available cipher suites. See <a href="../security/configuring-ssl.html#disabling-ssl-protocols">Disabling SSL Protocols</a>.</li>
+</ul>
+<p>For more information about using SSL, see <a href="../security/configuring-ssl.html">Configuring Rundeck for SSL</a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.4)</a></li>
+    
+        <li><a href="../index.html">Administrator Guide</a></li>
+    
+    
+    <li ><a href="index.html">Installation</a></li>
+    <li class="active"><a href="launcher.html">Launcher</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="system-requirements.html"><i class="glyphicon glyphicon-arrow-left"></i> System Requirements</a></li>
+      <li class="next"><a href="ubuntudebian.html">Ubuntu/Debian <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/install/jar.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-08-27T21:45:41UTC">2018-08-27T21:45:41UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Introduction</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Damon Edwards" />
+  <meta name="date" content="July 23, 2018" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.4)</a></li>
+    
+    
+    <li ><a href="index.html">User Guide</a></li>
+    <li class="active"><a href="introduction.html">Introduction</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="getting-help.html">Getting Help <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/01-introduction.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#what-is-this-guide-about">What is this guide about?</a></li>
+<li><a href="#what-is-rundeck">What is Rundeck?</a></li>
+<li><a href="#is-rundeck-free">Is Rundeck free?</a></li>
+<li><a href="#who-makes-rundeck">Who makes Rundeck?</a></li>
+<li><a href="#rundeck-feature-highlights">Rundeck feature highlights</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Introduction</h1>
+</div>
+<h2 id="what-is-this-guide-about">What is this guide about?</h2>
+<p>Welcome to the Rundeck user guide. This guide was written to help you quickly become productive with the Rundeck server and tools.</p>
+<h2 id="what-is-rundeck">What is Rundeck?</h2>
+<p>Rundeck is an operations management platform that helps you connect your people with the processes and tools they need to get their job done. Rundeck will help alleviate the time-consuming grunt work and toil that currently consumes too much of your team’s time. With Rundeck you will get more done, respond quicker to incidents, and spend less time in ticket queues.</p>
+<p>The most common usage of Rundeck is to create standard operating procedures from any of your existing tools or scripts. Trigger Rundeck jobs from the Web GUI, API, CLI, or by schedule. Rundeck’s access control features make it easy to safely delegate control of tasks to those traditionally outside of operations.</p>
+<p>Rundeck was designed to accept the reality that heterogeneous infrastructure and tooling are a fact of life in any sizable organization. That is why Rundeck doesn’t make you replace the scripts, commands, or tools you use today. You use Rundeck to execute workflows across your existing automation (e.g., Ansible, Puppet, Chef, Jenkins, Docker, Kubernetes, legacy tools, and all of your custom scripts/APIs) or quickly automate previously manual procedures. With Rundeck you can reuse the automation skills you already have and add new ones as needed.</p>
+<p>Out of the box, Rundeck gives you capabilities that would be expensive to develop and maintain in-house: workflow control, scheduling, error-handling, logging, access control, option passing, log filtering, web GUI, REST API (with CLI tools) and integration with external sources for authentication, resource model, and option data.</p>
+<h2 id="is-rundeck-free">Is Rundeck free?</h2>
+<h4 id="rundeck">Rundeck</h4>
+<p>At its core, Rundeck is free open source software licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache Software License</a> (v2.0), and you can participate in the project on <a href="https://github.com/rundeck/rundeck">GitHub</a>. For those who write and run Rundeck jobs at small-scale usage (e.g., limited use or within a team), the open-source Rundeck delivers you the features you need, for free, forever.</p>
+<h4 id="rundeck-pro">Rundeck Pro</h4>
+<p>The focus of <a href="https://www.rundeck.com/rundeck-pro">Rundeck Pro</a>, our commercial offering, is on making Rundeck production-ready and enterprise-scale. Rundeck Pro, built on the open source Rundeck, is the bundle of software and services you need to run Rundeck as an enterprise-class service.</p>
+<p>Built and tested for the enterprise, Rundeck Pro includes exclusive features (including clustering/HA, advanced workflow, enhanced ACL management, enhanced dashboards/visualization) and Rundeck Pro exclusive plugins. Professional support and on-boarding services are also part of the Rundeck Pro subscription bundle.</p>
+<h2 id="who-makes-rundeck">Who makes Rundeck?</h2>
+<p>Rundeck is developed by Rundeck, Inc. and the Rundeck community. All new users are welcomed to participate in the project and contribute. Please vote on feature ideas on the <a href="https://trello.com/b/sn3g9nOr/rundeck-development">Rundeck Trello Board</a>.</p>
+<h2 id="rundeck-feature-highlights">Rundeck feature highlights</h2>
+<ul>
+<li>Distributed command execution</li>
+<li>Workflow (including option passing, conditionals, error handling, and multiple workflow strategies)</li>
+<li>Pluggable execution system (SSH and WinRM by default; Powershell available)</li>
+<li>Pluggable resource model (get details of your infrastructure from external systems)</li>
+<li>On-demand (Web GUI, API or CLI) or scheduled job execution</li>
+<li>Secure Key store for passwords and keys</li>
+<li>Role-based access control policy with support for LDAP/ActiveDirectory/SSO</li>
+<li>Access control policy editing/management tools</li>
+<li>History and auditing logs</li>
+<li>Use any scripting language</li>
+</ul>
+<p>Already itching to install it? Jump ahead to <a href="getting-started.html#download-and-installation">Installing Rundeck</a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.4)</a></li>
+    
+    
+    <li ><a href="index.html">User Guide</a></li>
+    <li class="active"><a href="introduction.html">Introduction</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="getting-help.html">Getting Help <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/01-introduction.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-08-27T21:45:41UTC">2018-08-27T21:45:41UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
