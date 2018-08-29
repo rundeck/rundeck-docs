@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HTML Table View Converter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <link rel="stylesheet" href="../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.x)</a></li>
+    
+        <li><a href="../index.html">User Guide</a></li>
+    
+    
+    <li ><a href="index.html">Content Converter Plugins</a></li>
+    <li class="active"><a href="html-table-view-converter.html">HTML Table View Converter</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="html-view-converter.html">HTML View Converter <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/content-converters/html-table-view.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#input-data-types">Input Data Types</a></li>
+<li><a href="#output-data-types">Output Data Types</a></li>
+<li><a href="#options">Options</a></li>
+<li><a href="#related-plugins">Related Plugins</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">HTML Table View Converter</h1>
+</div>
+<p>Note: this plugin accepts Intermediate data types and produces <code>text/html</code></p>
+<p>Renders structured data as a Table in HTML. The input should be a List or Map. If the List contains Maps, the first item’s keys will be the table headers.</p>
+<p>See: <a href="index.html#sanitized-html-output" title="User Guide - Content Converter Plugins - Sanitized Html Output">- Sanitized Html Output</a>.</p>
+<h2 id="input-data-types">Input Data Types</h2>
+<p>These are Intermediate data types, such as Java Collection types. These types are produced by other plugins, see <a href="#related-plugins">Related Plugins</a>.</p>
+<ul>
+<li><code>application/x-java-map-list</code> + <code>List&lt;Map&gt;</code>
+<ul>
+<li>Renders a Table, using the keys of the first Map in the list as the Table headers.</li>
+</ul></li>
+<li><code>application/x-java-col-list</code> + <code>List</code>
+<ul>
+<li>Renders a Table, using the first item in the list as a list of Table headers. Each subsequent item is a row, as a Collection of objects, and each object will be rendered in a table cell, recursively if it is a List or Map.</li>
+</ul></li>
+<li><code>application/x-java-map</code> + <code>Map</code>
+<ul>
+<li>Renders a table with <code>Key</code> and <code>Value</code> headers, where each map entry is a row. Recursively renders values that are List or Map type.</li>
+</ul></li>
+<li><code>application/x-java-list</code> + <code>List</code>
+<ul>
+<li>Renders a table without headers, with a row for each item. The first column indicates the numeric index, and the second column renders the item, recursively for List or Map types.</li>
+</ul></li>
+<li><code>application/x-java-map-or-list</code> + <code>Map</code> or <code>List</code>
+<ul>
+<li>Used to accept an input type that could be either a List or Map.</li>
+</ul></li>
+</ul>
+<h2 id="output-data-types">Output Data Types</h2>
+<ul>
+<li><code>text/html</code> - <code>String</code></li>
+</ul>
+<h2 id="options">Options</h2>
+<p>These metadata values can be set in the Log metadata with a prefix of <code>content-meta:</code>:</p>
+<ul>
+<li><code>css-class</code> - CSS class to use for Table</li>
+<li><code>table-title</code> - Title to use for Table</li>
+</ul>
+<h2 id="related-plugins">Related Plugins</h2>
+<ul>
+<li><a href="json-data-converter.html" title="User Guide - Content Converter Plugins - JSON Data Converter">JSON Data Converter</a></li>
+<li><a href="properties-converter.html" title="User Guide - Content Converter Plugins - Properties Converter">Properties Converter</a></li>
+<li><a href="tabular-data-converter.html" title="User Guide - Content Converter Plugins - Tabular Data Converter">Tabular Data Converter</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.x)</a></li>
+    
+        <li><a href="../index.html">User Guide</a></li>
+    
+    
+    <li ><a href="index.html">Content Converter Plugins</a></li>
+    <li class="active"><a href="html-table-view-converter.html">HTML Table View Converter</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="html-view-converter.html">HTML View Converter <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/content-converters/html-table-view.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-08-29T19:59:40UTC">2018-08-29T19:59:40UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+</body>
+</html>
