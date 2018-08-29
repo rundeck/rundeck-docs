@@ -224,28 +224,7 @@ exist.
                           users.</code></pre>
 <p>These options can be used to customize the directories used by the executable war. By default all the directories are organized by convention within the current working directory where the executable war is located.</p>
 <h3 id="system-properties">System Properties</h3>
-<p>You can also customize the executable war behavior by using some java system properties.</p>
-<p>Specify these properties using the normal <code>-Dproperty=value</code> commandline options to the <code>java</code> command:</p>
-<ul>
-<li><code>server.port</code> The HTTP port to use for the server, default “4440”</li>
-<li><code>server.https.port</code> The HTTPS port to use or the server, default “4443”</li>
-<li><code>server.address</code> Address/hostname to listen on, default is “localhost”</li>
-<li><code>server.contextPath</code> Web context path to use, such as “/rundeck”. Default is “/”.</li>
-<li><code>rdeck.base</code> Rundeck Basedir to use, default is the directory containing the executable war</li>
-<li><code>server.datastore.path</code> Path to server datastore dir</li>
-<li><code>default.user.name</code> Username for default user account to create</li>
-<li><code>default.user.password</code> Password for default user account to create</li>
-<li><code>rundeck.jaaslogin</code> “true/false” - if true, enable JAAS login. If false, use the realm.properties file for login information.</li>
-<li><code>loginmodule.name</code> Custom JAAS loginmodule name to use</li>
-<li><code>loginmodule.conf.name</code> Name of a custom JAAS config file, located in the server’s config dir.</li>
-<li><code>rundeck.config.name</code> Name of a custom rundeck config file, located in the server’s config dir.</li>
-<li><code>rundeck.ssl.config</code> Path to the SSL config properties file to enable SSL. If not set, SSL is not enabled.</li>
-<li><code>rundeck.jetty.connector.forwarded</code> true/false. Set to true to enable support for “X-forwarded-*” headers which may be sent by a front-end proxy to the rundeck server. See <a href="../security/configuring-ssl.html#using-an-ssl-terminated-proxy">Using an SSL Terminated Proxy</a>.</li>
-<li><code>rundeck.jetty.connector.ssl.excludedProtocols</code> Comma-separated list of SSL protocols to disable. Default: ‘SSLv3’. See <a href="../security/configuring-ssl.html#disabling-ssl-protocols">Disabling SSL Protocols</a>.</li>
-<li><code>rundeck.jetty.connector.ssl.includedProtocols</code> Comma-separated list of SSL protocols to include. Default is based on available protocols. See <a href="../security/configuring-ssl.html#disabling-ssl-protocols">Disabling SSL Protocols</a>.</li>
-<li><code>rundeck.jetty.connector.ssl.excludedCipherSuites</code> Comma-separated list of Cipher suites to disable. No default. See <a href="../security/configuring-ssl.html#disabling-ssl-protocols">Disabling SSL Protocols</a>.</li>
-<li><code>rundeck.jetty.connector.ssl.includedCipherSuites</code> Comma-separated list of Cipher suites to enable. Default is based on available cipher suites. See <a href="../security/configuring-ssl.html#disabling-ssl-protocols">Disabling SSL Protocols</a>.</li>
-</ul>
+<p>See <a href="../configuration/system-properties-configuration.html" title="Administrator Guide - Rundeck Configuration - System Properties Configuration">Rundeck Configuration - System Properties Configuration</a></p>
 <p>For more information about using SSL, see <a href="../security/configuring-ssl.html">Configuring Rundeck for SSL</a>.</p>
 </div>
 </div>
@@ -305,7 +284,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-28T22:27:06UTC">2018-08-28T22:27:06UTC</span>
+<span class="generated-date" title="2018-08-29T17:42:39UTC">2018-08-29T17:42:39UTC</span>
 </p>
 </footer>
 </div>

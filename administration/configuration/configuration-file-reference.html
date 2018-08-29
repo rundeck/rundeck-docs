@@ -67,7 +67,7 @@ jQuery(function(){
 <div class="col-sm-6">
     <ul class="pager">
       <li class="previous"><a href="localization.html"><i class="glyphicon glyphicon-arrow-left"></i> Localization</a></li>
-      <li class="next"><a href="encryptable-config-properties-pro.html">Encryptable Config Properties (Pro) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="next"><a href="system-properties-configuration.html">System Properties Configuration <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -104,6 +104,7 @@ jQuery(function(){
 <li><a href="#session-timeout">Session timeout</a></li>
 <li><a href="#rundeck-config.properties">rundeck-config.properties</a><ul>
 <li><a href="#security">Security</a></li>
+<li><a href="#server-settings">Server Settings</a></li>
 <li><a href="#execution-mode">Execution Mode</a></li>
 <li><a href="#project-configuration-storage-settings">Project Configuration Storage settings</a></li>
 <li><a href="#key-storage-settings">Key Storage settings</a></li>
@@ -274,18 +275,8 @@ resources.source.3.type=directory</code></pre>
 <h2 id="realm.properties">realm.properties</h2>
 <p>Property file user directory when PropertyFileLoginModule is used. Specified from <a href="#jaas-loginmodule.conf">jaas-loginmodule.conf</a>.</p>
 <h2 id="session-timeout">Session timeout</h2>
-<p>Edit the web.xml to modify session-timeout from 30 to 90 minutes:</p>
-<p>RPM: /var/lib/rundeck/exp/webapp/WEB-INF/web.xml</p>
-<p>Example: Set the timeout to 60 minutes:</p>
-<pre><code>diff /var/lib/rundeck/exp/webapp/WEB-INF/web.xml web.xml
-
-214c214
-
-&lt; &lt;session-timeout&gt;30&lt;/session-timeout&gt;
-
----
-
-&gt; &lt;session-timeout&gt;90&lt;/session-timeout&gt;</code></pre>
+<p>See <a href="#server-settings">rundeck-config.properties &gt; Server Settings</a></p>
+<p>Or set <code>server.session.timeout</code> via <a href="system-properties-configuration.html" title="Administrator Guide - Rundeck Configuration - System Properties Configuration">System Properties Configuration</a>.</p>
 <h2 id="rundeck-config.properties">rundeck-config.properties</h2>
 <p>This is the primary Rundeck webapp configuration file. Defines default loglevel, datasource configuration, and <a href="gui-customization.html">GUI customization</a>.</p>
 <p>The following sections describe configuration values for this file.</p>
@@ -303,6 +294,10 @@ Determines whether access to the API is allowed if the API client authenticates 
 <p>Note: If you use the rd tool with the RD_USERNAME/RD_PASSWORD authentication this will use an active session each time your run the command. If you log into the user interface then execute rd commands you could be logged out of your web session. If you have multiple long running rd commands and you exceed the maxSessions limit, you may experience unexpected behavior. If you use api tokens with the rd tool it will not log out your interactive session. If you enable this setting and also use the rd tool, it is recommended that you use api tokens with the rd tool.</p></li>
 <li><p><code>rundeck.security.maxSessions</code>: If enforceMaxSessions is true, this setting controls the number of active sessions a user is allowed to have. <code>Default: 1</code></p></li>
 <li><p><code>rundeck.security.jaasRolePrefix</code>: Prefix string to add to each <em>role</em> determined via <a href="../security/authenticating-users.html#jetty-and-jaas-authentication" title="Administrator Guide - Security - Authenticating Users - Jetty And Jaas Authentication">JAAS Authentication</a>. Default: none.</p></li>
+</ul>
+<h3 id="server-settings">Server Settings</h3>
+<ul>
+<li><code>server.session.timeout</code>: timeout in seconds.</li>
 </ul>
 <h3 id="execution-mode">Execution Mode</h3>
 <ul>
@@ -449,7 +444,7 @@ rundeck.fileUploadService.tempfile.expiration=600000</code></pre>
 <div class="col-sm-6">
     <ul class="pager">
       <li class="previous"><a href="localization.html"><i class="glyphicon glyphicon-arrow-left"></i> Localization</a></li>
-      <li class="next"><a href="encryptable-config-properties-pro.html">Encryptable Config Properties (Pro) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="next"><a href="system-properties-configuration.html">System Properties Configuration <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
@@ -484,7 +479,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-28T22:27:06UTC">2018-08-28T22:27:06UTC</span>
+<span class="generated-date" title="2018-08-29T17:42:39UTC">2018-08-29T17:42:39UTC</span>
 </p>
 </footer>
 </div>

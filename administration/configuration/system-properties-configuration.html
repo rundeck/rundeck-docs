@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Storage Facility</title>
+  <title>System Properties Configuration</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -61,20 +61,20 @@ jQuery(function(){
     
     
     <li ><a href="index.html">Rundeck Configuration</a></li>
-    <li class="active"><a href="storage-facility.html">Storage Facility</a></li>
+    <li class="active"><a href="system-properties-configuration.html">System Properties Configuration</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="encryptable-config-properties-pro.html"><i class="glyphicon glyphicon-arrow-left"></i> Encryptable Config Properties (Pro)</a></li>
-      
+      <li class="previous"><a href="configuration-file-reference.html"><i class="glyphicon glyphicon-arrow-left"></i> Configuration File Reference</a></li>
+      <li class="next"><a href="encryptable-config-properties-pro.html">Encryptable Config Properties (Pro) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
     <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/configuration/storage-facility.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/configuration/system-properties.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
@@ -84,77 +84,52 @@ jQuery(function(){
 <div class="col-sm-3 toc-nav">
 <div class="nav">
 <ul>
-<li><a href="#storage-facility">Storage Facility</a></li>
-<li><a href="#key-storage">Key Storage</a></li>
-<li><a href="#project-storage">Project Storage</a></li>
-<li><a href="#storage-backends">Storage backends</a></li>
-<li><a href="#storage-converters">Storage Converters</a><ul>
-<li><a href="#using-encryption">Using Encryption</a></li>
-</ul></li>
+<li><a href="#executable-war">Executable War</a></li>
+<li><a href="#profile">Profile</a></li>
+<li><a href="#properties-reference">Properties Reference</a></li>
 </ul>
 </div>
 </div>
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">Storage Facility</h1>
+<h1 class="title">System Properties Configuration</h1>
 </div>
-<p>This document describes the Rundeck Storage Facility which is used both for Key Storage, and for Project Definition Storage.</p>
-<h2 id="storage-facility">Storage Facility</h2>
-<p>The Storage facility provides a filesystem-like structure for storing files. Each file is located with a “/”-separated “path” and a name, similar to a file system path.</p>
-<p>Currently the Storage Facility is split into two separate containers:</p>
+<p>This document explains how to declare Java System Properties used for configuring rundecRundeck.</p>
+<p>These properties must be declared on the Java commandline when starting Rundeck.</p>
+<h2 id="executable-war">Executable War</h2>
+<p>If you are using <a href="../install/launcher.html" title="Administrator Guide - Installation - Launcher">Executable War</a> to start Rundeck, you would set the properties directly on the commandline, using the <code>-Dpropertyname=value</code> syntax. Add a <code>-D</code> for each property:</p>
+<pre><code>java -server -Dserver.session.timeout=3600 -Dserver.port=8080 -jar rundeck-3.0.5-20180828.war</code></pre>
+<h2 id="profile">Profile</h2>
+<p>For RPM or DEB installations, you can use environment variables set in a “defaults” file to add additional Java Sytem Properties.</p>
 <ul>
-<li><a href="#key-storage">Key Storage</a></li>
-<li><a href="#project-storage">Project Storage</a></li>
+<li>RPM install: <code>/etc/sysconfig/rundeckd</code></li>
+<li>DEB install: <code>/etc/default/rundeckd</code></li>
 </ul>
-<p>Both containers use the same storage mechanisms, but they can be configured independently of each other, and have different APIs for modification.</p>
-<h2 id="key-storage">Key Storage</h2>
-<p>The Key Storage container allows storing public keys, private keys, and passwords securely. The contents of these files can be accessed by Node Execution plugins for authenticating to remote nodes. The contents can be written via the Rundeck API, but only public keys can be read via the API.</p>
-<p>See the chapter: <a href="../security/key-storage.html">Key Storage</a>.</p>
-<p>When configuring Key Storage providers, the configuration entries in <code>rundeck-config.properties</code> start with:</p>
-<pre><code>rundeck.storage.provider.[index]</code></pre>
-<p>And converter plugins start with:</p>
-<pre><code>rundeck.storage.converter.[index]</code></pre>
-<h2 id="project-storage">Project Storage</h2>
-<p>Similar to Key Storage, the Project Storage container keeps files related to Rundeck Projects:</p>
+<p>Within the <code>rundeckd</code> defaults file, declare a <code>RDECK_JVM_OPTS</code> variable:</p>
+<pre><code>RDECK_JVM_OPTS=&quot;-Dserver.session.timeout=3600 -Dserver.port=8080&quot;</code></pre>
+<h2 id="properties-reference">Properties Reference</h2>
 <ul>
-<li>contents of <code>etc/project.properties</code> - the Project configuration</li>
-<li>contents of <code>readme.md</code> and <code>motd.md</code> - Readme and MOTD files</li>
+<li><code>server.port</code> The HTTP port to use for the server, default “4440”</li>
+<li><code>server.https.port</code> The HTTPS port to use or the server, default “4443”</li>
+<li><code>server.address</code> Address/hostname to listen on, default is “localhost”</li>
+<li><code>server.contextPath</code> Web context path to use, such as “/rundeck”. Default is “/”.</li>
+<li><code>server.session.timeout</code> Session timeout in seconds.</li>
+<li><code>rdeck.base</code> Rundeck Basedir to use, default is the directory containing the executable war</li>
+<li><code>server.datastore.path</code> Path to server datastore dir</li>
+<li><code>default.user.name</code> Username for default user account to create</li>
+<li><code>default.user.password</code> Password for default user account to create</li>
+<li><code>rundeck.jaaslogin</code> “true/false” - if true, enable JAAS login. If false, use the realm.properties file for login information.</li>
+<li><code>loginmodule.name</code> Custom JAAS loginmodule name to use</li>
+<li><code>loginmodule.conf.name</code> Name of a custom JAAS config file, located in the server’s config dir.</li>
+<li><code>rundeck.config.name</code> Name of a custom rundeck config file, located in the server’s config dir.</li>
+<li><code>rundeck.ssl.config</code> Path to the SSL config properties file to enable SSL. If not set, SSL is not enabled.</li>
+<li><code>rundeck.jetty.connector.forwarded</code> true/false. Set to true to enable support for “X-forwarded-*” headers which may be sent by a front-end proxy to the rundeck server. See <a href="../security/configuring-ssl.html#using-an-ssl-terminated-proxy">Using an SSL Terminated Proxy</a>.</li>
+<li><code>rundeck.jetty.connector.ssl.excludedProtocols</code> Comma-separated list of SSL protocols to disable. Default: ‘SSLv3’. See <a href="../security/configuring-ssl.html#disabling-ssl-protocols">Disabling SSL Protocols</a>.</li>
+<li><code>rundeck.jetty.connector.ssl.includedProtocols</code> Comma-separated list of SSL protocols to include. Default is based on available protocols. See <a href="../security/configuring-ssl.html#disabling-ssl-protocols">Disabling SSL Protocols</a>.</li>
+<li><code>rundeck.jetty.connector.ssl.excludedCipherSuites</code> Comma-separated list of Cipher suites to disable. No default. See <a href="../security/configuring-ssl.html#disabling-ssl-protocols">Disabling SSL Protocols</a>.</li>
+<li><code>rundeck.jetty.connector.ssl.includedCipherSuites</code> Comma-separated list of Cipher suites to enable. Default is based on available cipher suites. See <a href="../security/configuring-ssl.html#disabling-ssl-protocols">Disabling SSL Protocols</a>.</li>
 </ul>
-<p>Access to these contents can be made via the Rundeck API.</p>
-<p>See the chapter: <a href="../project-setup.html">Project Setup</a></p>
-<p>When configuring Project Storage providers, the configuration entries in <code>rundeck-config.properties</code> start with:</p>
-<pre><code>rundeck.config.storage.provider.[index]</code></pre>
-<p>And converter plugins start with:</p>
-<pre><code>rundeck.config.storage.converter.[index]</code></pre>
-<h2 id="storage-backends">Storage backends</h2>
-<p>The location of stored data can be either on the filesystem, the database, or some external system via usage of a <strong>Storage Plugin</strong>.</p>
-<p>Rundeck provides these built-in implementations:</p>
-<ul>
-<li><code>filesystem</code> - stores files locally on the filesystem</li>
-<li><code>db</code> - stores file data as BLOBs in the database</li>
-</ul>
-<p>It is highly recommended that you configure Rundeck to use a relational database instead of the default file-based data storage.</p>
-<p>For information on configuring Rundeck to use specific Databases, see:</p>
-<ul>
-<li><a href="database/index.html">Administor Guide &gt; Rundeck Configuration &gt; Database</a></li>
-</ul>
-<p>To develop your own storage plugin, see:</p>
-<ul>
-<li><a href="../../developer/storage-plugin.html">Storage Plugin Development</a>.</li>
-</ul>
-<h2 id="storage-converters">Storage Converters</h2>
-<p>Files can be encrypted in the storage backend by use of a <a href="../../developer/storage-converter-plugin.html">Storage Converter plugin</a>. A typical plugin would encrypt data at write time, and decrypt it at read time.</p>
-<p>The Storage Converter Plugin handles reading and writing the content for any matching resources. The subsequent data is stored in the storage backend (on-disk or in a database) alongside the metadata for the file.</p>
-<p>Converter plugins do not have to manage storing the data, that will be handled by the Storage backend.</p>
-<p>To develop your own storage converter plugin, see:</p>
-<ul>
-<li><a href="../../developer/storage-converter-plugin.html">Storage Converter Plugin Development</a>.</li>
-</ul>
-<h3 id="using-encryption">Using Encryption</h3>
-<p>Rundeck provides a bundled Storage Converter plugin implementation:</p>
-<ul>
-<li><code>jasypt-encryption</code> - encrypts the storage contents: <a href="plugins/bundled-plugins.html#jasypt-encryption-plugin" title="Administrator Guide - Rundeck Configuration - Configuring Plugins - Bundled Plugins - Jasypt Encryption Plugin">Configuring Plugins - Bundled Plugins - Jasypt Encryption Plugin</a></li>
-</ul>
+<p>For more information about using SSL, see <a href="../security/configuring-ssl.html">Configuring Rundeck for SSL</a>.</p>
 </div>
 </div>
 </div>
@@ -172,20 +147,20 @@ jQuery(function(){
     
     
     <li ><a href="index.html">Rundeck Configuration</a></li>
-    <li class="active"><a href="storage-facility.html">Storage Facility</a></li>
+    <li class="active"><a href="system-properties-configuration.html">System Properties Configuration</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="encryptable-config-properties-pro.html"><i class="glyphicon glyphicon-arrow-left"></i> Encryptable Config Properties (Pro)</a></li>
-      
+      <li class="previous"><a href="configuration-file-reference.html"><i class="glyphicon glyphicon-arrow-left"></i> Configuration File Reference</a></li>
+      <li class="next"><a href="encryptable-config-properties-pro.html">Encryptable Config Properties (Pro) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
     <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/configuration/storage-facility.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/configuration/system-properties.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
