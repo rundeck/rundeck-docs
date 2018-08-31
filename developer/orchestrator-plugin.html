@@ -8,14 +8,14 @@
   <meta name="author" content="Greg Schueler" />
   <meta name="date" content="April 10, 2015" />
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 <!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 
 <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 jQuery(function(){
   jQuery('table').addClass('table table-condensed table-responsive'); 
@@ -99,8 +99,8 @@ jQuery(function(){
 <ul>
 <li><em>Note</em>: Refer to <a href="plugin-development.html#java-plugin-development">Java Development</a> for information about developing a Java plugin for Rundeck.</li>
 </ul>
-<p>The plugin interface is <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.1-20180803/com/dtolabs/rundeck/plugins/orchestrator/OrchestratorPlugin.html">OrchestratorPlugin</a>.</p>
-<p>This is actually a Factory pattern, which produces an <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.1-20180803/com/dtolabs/rundeck/plugins/orchestrator/Orchestrator.html">Orchestrator</a> instance.</p>
+<p>The plugin interface is <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.5-20180828/com/dtolabs/rundeck/plugins/orchestrator/OrchestratorPlugin.html">OrchestratorPlugin</a>.</p>
+<p>This is actually a Factory pattern, which produces an <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.5-20180828/com/dtolabs/rundeck/plugins/orchestrator/Orchestrator.html">Orchestrator</a> instance.</p>
 <p>The <code>Orchestrator</code> instance is responsible for determining what order and how many nodes are available to execute on.</p>
 <p>All of the methods on the orchestrator will be called on the same thread, so your Orchestrator implementation does not need to worry about synchronization.</p>
 <p>The <code>getNode()</code> method will be called multiple times to retrieve any available Nodes for processing. If it returns <code>null</code>, that indicates no nodes are currently available. <code>isComplete</code> method will be called to determine if any nodes will be available in the future if <code>null</code> has been returned. Note that <code>isComplete</code> does not need to wait for all nodes to be returned via <code>returnNode</code>, it merely has to indicate if any new nodes will be returned from <code>getNode()</code>.</p>
@@ -168,7 +168,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-29T19:56:04UTC">2018-08-29T19:56:04UTC</span>
+<span class="generated-date" title="2018-08-31T23:27:19UTC">2018-08-31T23:27:19UTC</span>
 </p>
 </footer>
 </div>
@@ -188,5 +188,9 @@ Try Rundeck Pro
 <!-- Start of HubSpot Embed Code -->
 <script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
 <!-- End of HubSpot Embed Code -->
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
 </body>
 </html>
