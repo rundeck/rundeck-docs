@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>API Reference | Version 26</title>
+  <title>API Reference | Version 27</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -127,7 +127,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     
     
     
-    <li class="active"><a href="index.html">API Reference | Version 26</a></li>
+    <li class="active"><a href="index.html">API Reference | Version 27</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
@@ -297,11 +297,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">API Reference | Version 26</h1>
+<h1 class="title">API Reference | Version 27</h1>
 </div>
 <p>Rundeck provides a Web API for use with your application.</p>
 <h2 id="api-version-number">API Version Number</h2>
-<p>The current API version is <code>26</code>.</p>
+<p>The current API version is <code>27</code>.</p>
 <p>For API endpoints described in this document, the <em>minimum</em> API version required for their use is indicated by the URL used, e.g.:</p>
 <pre><code>/api/2/system/info
 /api/1/projects</code></pre>
@@ -327,6 +327,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>View the <a href="#index">Index</a> listing API paths.</p>
 <h2 id="changes">Changes</h2>
 <p>Changes introduced by API Version number:</p>
+<p><strong>Version 27</strong>:</p>
+<ul>
+<li>Udated Endpoints:
+<ul>
+<li><a href="#list-users"><code>GET /api/V/user/list</code></a> - More info from the user.</li>
+</ul></li>
+</ul>
 <p><strong>Version 26</strong>:</p>
 <ul>
 <li>Udated Endpoints:
@@ -1788,7 +1795,7 @@ Signal Dispatcher id=4 state=RUNNABLE
 <h3 id="list-users">List users</h3>
 <p>Get a list of all the users.</p>
 <p><strong>Request:</strong></p>
-<pre><code>GET /api/21/user/list/</code></pre>
+<pre><code>GET /api/27/user/list/</code></pre>
 <p><strong>Response:</strong></p>
 <p>Success response, with a list of users:</p>
 <p><code>Content-Type: application/xml</code>:</p>
@@ -1797,26 +1804,49 @@ Signal Dispatcher id=4 state=RUNNABLE
 <a class="sourceLine" id="cb46-3" data-line-number="3">  <span class="kw">&lt;firstName&gt;</span>Name<span class="kw">&lt;/firstName&gt;</span></a>
 <a class="sourceLine" id="cb46-4" data-line-number="4">  <span class="kw">&lt;lastName&gt;</span>LastName<span class="kw">&lt;/lastName&gt;</span></a>
 <a class="sourceLine" id="cb46-5" data-line-number="5">  <span class="kw">&lt;email&gt;</span>user@server.com<span class="kw">&lt;/email&gt;</span></a>
-<a class="sourceLine" id="cb46-6" data-line-number="6"><span class="kw">&lt;/user&gt;</span></a>
-<a class="sourceLine" id="cb46-7" data-line-number="7"><span class="kw">&lt;user&gt;</span></a>
-<a class="sourceLine" id="cb46-8" data-line-number="8">  <span class="kw">&lt;login&gt;</span>admin<span class="kw">&lt;/login&gt;</span></a>
-<a class="sourceLine" id="cb46-9" data-line-number="9">  <span class="kw">&lt;firstName</span> <span class="kw">/&gt;</span></a>
-<a class="sourceLine" id="cb46-10" data-line-number="10">  <span class="kw">&lt;lastName</span> <span class="kw">/&gt;</span></a>
-<a class="sourceLine" id="cb46-11" data-line-number="11">  <span class="kw">&lt;email</span> <span class="kw">/&gt;</span></a>
-<a class="sourceLine" id="cb46-12" data-line-number="12"><span class="kw">&lt;/user&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb46-6" data-line-number="6">  <span class="kw">&lt;created&gt;</span>2017-10-01 09:00:20.44<span class="kw">&lt;/created&gt;</span></a>
+<a class="sourceLine" id="cb46-7" data-line-number="7">  <span class="kw">&lt;updated&gt;</span>2018-08-24 10:53:02.751<span class="kw">&lt;/updated&gt;</span></a>
+<a class="sourceLine" id="cb46-8" data-line-number="8">  <span class="kw">&lt;lastJob&gt;</span>2018-08-28 10:35:00.495<span class="kw">&lt;/lastJob&gt;</span></a>
+<a class="sourceLine" id="cb46-9" data-line-number="9">  <span class="kw">&lt;tokens&gt;</span>1<span class="kw">&lt;/tokens&gt;</span></a>
+<a class="sourceLine" id="cb46-10" data-line-number="10"><span class="kw">&lt;/user&gt;</span></a>
+<a class="sourceLine" id="cb46-11" data-line-number="11"><span class="kw">&lt;user&gt;</span></a>
+<a class="sourceLine" id="cb46-12" data-line-number="12">  <span class="kw">&lt;login&gt;</span>admin<span class="kw">&lt;/login&gt;</span></a>
+<a class="sourceLine" id="cb46-13" data-line-number="13">  <span class="kw">&lt;firstName</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb46-14" data-line-number="14">  <span class="kw">&lt;lastName</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb46-15" data-line-number="15">  <span class="kw">&lt;email&gt;</span>admin@server.com<span class="kw">&lt;/email&gt;</span></a>
+<a class="sourceLine" id="cb46-16" data-line-number="16">  <span class="kw">&lt;created&gt;</span>2016-07-17 14:42:20.44<span class="kw">&lt;/created&gt;</span></a>
+<a class="sourceLine" id="cb46-17" data-line-number="17">  <span class="kw">&lt;updated&gt;</span>2018-08-24 10:53:02.751<span class="kw">&lt;/updated&gt;</span></a>
+<a class="sourceLine" id="cb46-18" data-line-number="18">  <span class="kw">&lt;lastJob&gt;</span>2018-08-28 10:35:00.495<span class="kw">&lt;/lastJob&gt;</span></a>
+<a class="sourceLine" id="cb46-19" data-line-number="19">  <span class="kw">&lt;tokens&gt;</span>6<span class="kw">&lt;/tokens&gt;</span></a>
+<a class="sourceLine" id="cb46-20" data-line-number="20"><span class="kw">&lt;/user&gt;</span></a></code></pre></div>
 <p><code>Content-Type: application/json</code>:</p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="ot">[</span><span class="fu">{</span></a>
 <a class="sourceLine" id="cb47-2" data-line-number="2">    <span class="dt">&quot;login&quot;</span><span class="fu">:</span><span class="st">&quot;user&quot;</span><span class="fu">,</span></a>
 <a class="sourceLine" id="cb47-3" data-line-number="3">    <span class="dt">&quot;firstName&quot;</span><span class="fu">:</span><span class="st">&quot;Name&quot;</span><span class="fu">,</span></a>
 <a class="sourceLine" id="cb47-4" data-line-number="4">    <span class="dt">&quot;lastName&quot;</span><span class="fu">:</span><span class="st">&quot;LastName&quot;</span><span class="fu">,</span></a>
-<a class="sourceLine" id="cb47-5" data-line-number="5">    <span class="dt">&quot;email&quot;</span><span class="fu">:</span><span class="st">&quot;user@server.com&quot;</span></a>
-<a class="sourceLine" id="cb47-6" data-line-number="6"><span class="fu">}</span><span class="ot">,</span></a>
-<a class="sourceLine" id="cb47-7" data-line-number="7"><span class="fu">{</span></a>
-<a class="sourceLine" id="cb47-8" data-line-number="8">    <span class="dt">&quot;login&quot;</span><span class="fu">:</span><span class="st">&quot;admin&quot;</span><span class="fu">,</span></a>
-<a class="sourceLine" id="cb47-9" data-line-number="9">    <span class="dt">&quot;firstName&quot;</span><span class="fu">:</span><span class="st">&quot;Admin&quot;</span><span class="fu">,</span></a>
-<a class="sourceLine" id="cb47-10" data-line-number="10">    <span class="dt">&quot;lastName&quot;</span><span class="fu">:</span><span class="st">&quot;Admin&quot;</span><span class="fu">,</span></a>
-<a class="sourceLine" id="cb47-11" data-line-number="11">    <span class="dt">&quot;email&quot;</span><span class="fu">:</span><span class="st">&quot;admin@server.com&quot;</span></a>
-<a class="sourceLine" id="cb47-12" data-line-number="12"><span class="fu">}</span><span class="ot">]</span></a></code></pre></div>
+<a class="sourceLine" id="cb47-5" data-line-number="5">    <span class="dt">&quot;email&quot;</span><span class="fu">:</span><span class="st">&quot;user@server.com&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb47-6" data-line-number="6">    <span class="dt">&quot;created&quot;</span><span class="fu">:</span> <span class="st">&quot;2017-10-01T09:00:20Z&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb47-7" data-line-number="7">    <span class="dt">&quot;updated&quot;</span><span class="fu">:</span> <span class="st">&quot;2018-08-24T13:53:02Z&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb47-8" data-line-number="8">    <span class="dt">&quot;lastJob&quot;</span><span class="fu">:</span> <span class="st">&quot;2018-08-28T13:31:00Z&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb47-9" data-line-number="9">    <span class="dt">&quot;tokens&quot;</span><span class="fu">:</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb47-10" data-line-number="10"><span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb47-11" data-line-number="11"><span class="fu">{</span></a>
+<a class="sourceLine" id="cb47-12" data-line-number="12">    <span class="dt">&quot;login&quot;</span><span class="fu">:</span><span class="st">&quot;admin&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb47-13" data-line-number="13">    <span class="dt">&quot;firstName&quot;</span><span class="fu">:</span><span class="st">&quot;Admin&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb47-14" data-line-number="14">    <span class="dt">&quot;lastName&quot;</span><span class="fu">:</span><span class="st">&quot;Admin&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb47-15" data-line-number="15">    <span class="dt">&quot;email&quot;</span><span class="fu">:</span><span class="st">&quot;admin@server.com&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb47-16" data-line-number="16">    <span class="dt">&quot;created&quot;</span><span class="fu">:</span> <span class="st">&quot;2016-07-17T18:42:00Z&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb47-17" data-line-number="17">    <span class="dt">&quot;updated&quot;</span><span class="fu">:</span> <span class="st">&quot;2018-08-24T13:53:00Z&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb47-18" data-line-number="18">    <span class="dt">&quot;lastJob&quot;</span><span class="fu">:</span> <span class="st">&quot;2018-08-28T13:31:00Z&quot;</span><span class="fu">,</span></a>
+<a class="sourceLine" id="cb47-19" data-line-number="19">    <span class="dt">&quot;tokens&quot;</span><span class="fu">:</span> <span class="dv">6</span></a>
+<a class="sourceLine" id="cb47-20" data-line-number="20"><span class="fu">}</span><span class="ot">]</span></a></code></pre></div>
+<p><strong>Since v27</strong>:</p>
+<ul>
+<li><code>created</code> Creation date of the user.</li>
+<li><code>updated</code> Last time the user contact data was updated.</li>
+<li><code>lastJob</code> Last time the user runs a job.</li>
+<li><code>tokens</code> Number of API tokens associated to the user.</li>
+</ul>
 <h3 id="get-user-profile">Get user profile</h3>
 <p>Get same user profile data.</p>
 <p><strong>Request:</strong></p>
@@ -5876,7 +5906,7 @@ DELETE /api/13/project/[PROJECT]/motd.md</code></pre>
     
     
     
-    <li class="active"><a href="index.html">API Reference | Version 26</a></li>
+    <li class="active"><a href="index.html">API Reference | Version 27</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
@@ -5917,7 +5947,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-08-31T23:22:03UTC">2018-08-31T23:22:03UTC</span>
+<span class="generated-date" title="2018-09-05T17:57:14UTC">2018-09-05T17:57:14UTC</span>
 </p>
 </footer>
 </div>
