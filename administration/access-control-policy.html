@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Access Control Policy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.7)</a></li>
+    
+    
+    <li ><a href="index.html">Administrator Guide</a></li>
+    <li class="active"><a href="access-control-policy.html">Access Control Policy</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="authenticating-users.html"><i class="glyphicon glyphicon-arrow-left"></i> Authenticating Users</a></li>
+      <li class="next"><a href="configuring-ssl.html">Configuring SSL <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#access-control-policy">Access control policy</a><ul>
+<li><a href="#policy-file-locations">Policy File Locations</a></li>
+<li><a href="#lifecycle">Lifecycle</a></li>
+<li><a href="#rd-acl">rd-acl</a></li>
+<li><a href="#example">Example</a></li>
+</ul></li>
+<li><a href="#specific-resources-and-resource-types">Specific Resources and Resource Types</a></li>
+<li><a href="#api-token-authorization-roles">API Token Authorization Roles</a></li>
+<li><a href="#rundeck-resource-authorizations">Rundeck resource authorizations</a><ul>
+<li><a href="#application-scope-resources-and-actions">Application Scope Resources and Actions</a></li>
+<li><a href="#project-scope-resources-and-actions">Project Scope Resources and Actions</a></li>
+<li><a href="#node-resource-properties">Node resource properties</a></li>
+<li><a href="#access-control-policy-actions-example">Access control policy actions example</a></li>
+</ul></li>
+<li><a href="#prevent-local-execution-on-the-rundeck-server">Prevent Local Execution on the Rundeck Server</a></li>
+<li><a href="#troubleshooting-access-control-policy">Troubleshooting access control policy</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Access Control Policy</h1>
+</div>
+<p>Based on the <a href="authenticating-users.html">Authentication</a> mechanism, the Container provides Rundeck with a list of &quot;group&quot; or &quot;role&quot; names that the user belongs to. Rundeck uses this list to determine what access rights the user has. (For more about the role list, refer to <a href="authenticating-users.html#container-authentication-and-authorization">Authenticating Users - Container authentication and authorization</a>.)</p>
+<p>A Rundeck <em>access control policy</em> grants users and user groups certain privileges to perform actions against rundeck resources like projects, jobs, nodes, commands and API. Every action requested by a user is evaluated by the Rundeck authorization system and logged for reporting and auditing purposes.</p>
+<p>Since Rundeck respects the policy definition, you can define role-based authorization to restrict users to only a subset of actions. This enables a self-service type interface, where some users have access to a limited set of executable actions.</p>
+<p>Two dimensions of information dictate authorization inside Rundeck:</p>
+<ul>
+<li><em>group</em> memberships assigned to a <em>user</em> login.<br /></li>
+<li>access control policy that grants access to one or more <em>policy action</em>s to a <em>group</em> or <em>user</em>.</li>
+</ul>
+<p>The remainder of this section will describe how to use the access control policy.</p>
+<h2 id="access-control-policy"><a href="#access-control-policy">Access control policy</a></h2>
+<p>Access to running or modifying Jobs is managed in an access control policy defined using the aclpolicy YAML document. This file contains a number of policy elements that describe what user group is allowed to perform which actions.</p>
+<p>Please read over this document for information on how to define it, and how to grant access for certain actions to certain resources:</p>
+<ul>
+<li><a href="../man5/aclpolicy.html">aclpolicy</a></li>
+</ul>
+<p>Policies can be organized into more than one file to help organize access by group or pattern of use. The normal Rundeck install will have generated a policy for the &quot;admin&quot; group. Not all users will need to be given &quot;admin&quot; access level to control and modify all Jobs. More typically, a group of users will be given access to just a subset of Jobs.</p>
+<h3 id="policy-file-locations"><a href="#policy-file-locations">Policy File Locations</a></h3>
+<p>Rundeck loads ACL Policy definitions from these locations:</p>
+<ul>
+<li>All <code>*.aclpolicy</code> files found in the rundeck <code>etc</code> dir, which is either <code>/etc/rundeck</code> (rpm and debian install defaults), or <code>$RDECK_BASE/etc</code> (launcher/war configuration).</li>
+<li>System level policies created via the <a href="../api/index.html#acls">System ACLs API</a></li>
+<li>Project level policies created via the <a href="../api/index.html#project-acls">Project ACLs API</a>, limited only to project context policies for a specific project.</li>
+</ul>
+<h3 id="lifecycle"><a href="#lifecycle">Lifecycle</a></h3>
+<p>The Rundeck server does not need to be restarted for changes to aclpolicy files to take effect.</p>
+<p>The files are loaded at startup and are cached. When an authorization request occurs, the policies may be reloaded if the file was modified. A file's contents are cached for at least 60 seconds before checking if they need to be reloaded. Also, the etc directory is only re-scanned for new/removed files after a 60 second delay.</p>
+<p>If an authorization request occurs in the context of a specific Project (e.g. &quot;does a user have Run access for a specific Job in this project?&quot;) then the Project-level policies created via the API area also used to evaluate the authorization request.</p>
+<p>Otherwise, only the policies on the filesystem, and uploaded to the System ACLs API are evaluated for the request.</p>
+<h3 id="rd-acl"><a href="#rd-acl">rd-acl</a></h3>
+<p>Added in Rundeck 2.5, the <a href="../man1/rd-acl.html">rd-acl</a> tool can help to create, test, and validate your policy files.</p>
+<h3 id="example"><a href="#example">Example</a></h3>
+<p>File listing: admin.aclpolicy example</p>
+<table class="sourceCode yaml numberLines"><tr class="sourceCode"><td class="lineNumbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+</pre></td><td class="sourceCode"><pre><code class="sourceCode yaml"><span class="fu">description:</span> Admin project level access control. Applies to resources within a specific project.
+<span class="fu">context:</span>
+  <span class="fu">project:</span> &#39;.*&#39;<span class="er"> # all projects</span>
+<span class="fu">for:</span>
+  <span class="fu">resource:</span>
+    <span class="kw">-</span> <span class="fu">equals:</span>
+        <span class="fu">kind:</span> job
+      <span class="fu">allow:</span> <span class="kw">[</span>create<span class="kw">]</span> <span class="co"># allow create jobs</span>
+    <span class="kw">-</span> <span class="fu">equals:</span>
+        <span class="fu">kind:</span> node
+      <span class="fu">allow:</span> <span class="kw">[</span>read<span class="kw">,</span>create<span class="kw">,</span>update<span class="kw">,</span>refresh<span class="kw">]</span> <span class="co"># allow refresh node sources</span>
+    <span class="kw">-</span> <span class="fu">equals:</span>
+        <span class="fu">kind:</span> event
+      <span class="fu">allow:</span> <span class="kw">[</span>read<span class="kw">,</span>create<span class="kw">]</span> <span class="co"># allow read/create events</span>
+  <span class="fu">adhoc:</span>
+    <span class="kw">-</span> <span class="fu">allow:</span> <span class="kw">[</span>read<span class="kw">,</span>run<span class="kw">,</span>runAs<span class="kw">,</span>kill<span class="kw">,</span>killAs<span class="kw">]</span> <span class="co"># allow running/killing adhoc jobs</span>
+  <span class="fu">job:</span>
+    <span class="kw">-</span> <span class="fu">allow:</span> <span class="kw">[</span>create<span class="kw">,</span>read<span class="kw">,</span>update<span class="kw">,</span>delete<span class="kw">,</span>run<span class="kw">,</span>runAs<span class="kw">,</span>kill<span class="kw">,</span>killAs<span class="kw">]</span> <span class="co"># allow create/read/write/delete/run/kill of all jobs</span>
+  <span class="fu">node:</span>
+    <span class="kw">-</span> <span class="fu">allow:</span> <span class="kw">[</span>read<span class="kw">,</span>run<span class="kw">]</span> <span class="co"># allow read/run for nodes</span>
+<span class="fu">by:</span>
+  <span class="fu">group:</span> admin
+
+<span class="ot">---</span>
+
+<span class="fu">description:</span> Admin Application level access control, applies to creating/deleting projects, admin of user profiles, viewing projects and reading system information.
+<span class="fu">context:</span>
+  <span class="fu">application:</span> &#39;rundeck&#39;
+<span class="fu">for:</span>
+  <span class="fu">resource:</span>
+    <span class="kw">-</span> <span class="fu">equals:</span>
+        <span class="fu">kind:</span> project
+      <span class="fu">allow:</span> <span class="kw">[</span>create<span class="kw">]</span> <span class="co"># allow create of projects</span>
+    <span class="kw">-</span> <span class="fu">equals:</span>
+        <span class="fu">kind:</span> system
+      <span class="fu">allow:</span> <span class="kw">[</span>read<span class="kw">,</span>enable_executions<span class="kw">,</span>disable_executions<span class="kw">,</span>admin<span class="kw">]</span> <span class="co"># allow read of system info, enable/disable all executions</span>
+    <span class="kw">-</span> <span class="fu">equals:</span>
+        <span class="fu">kind:</span> system_acl
+      <span class="fu">allow:</span> <span class="kw">[</span>read<span class="kw">,</span>create<span class="kw">,</span>update<span class="kw">,</span>delete<span class="kw">,</span>admin<span class="kw">]</span> <span class="co"># allow modifying system ACL files</span>
+    <span class="kw">-</span> <span class="fu">equals:</span>
+        <span class="fu">kind:</span> user
+      <span class="fu">allow:</span> <span class="kw">[</span>admin<span class="kw">]</span> <span class="co"># allow modify user profiles</span>
+  <span class="fu">project:</span>
+    <span class="kw">-</span> <span class="fu">match:</span>
+        <span class="fu">name:</span> &#39;.*&#39;
+      <span class="fu">allow:</span> <span class="kw">[</span>read<span class="kw">,</span>import<span class="kw">,</span>export<span class="kw">,</span>configure<span class="kw">,</span>delete<span class="kw">,</span>promote<span class="kw">,</span>admin<span class="kw">]</span> <span class="co"># allow full access of all projects or use &#39;admin&#39;</span>
+  <span class="fu">project_acl:</span>
+    <span class="kw">-</span> <span class="fu">match:</span>
+        <span class="fu">name:</span> &#39;.*&#39;
+      <span class="fu">allow:</span> <span class="kw">[</span>read<span class="kw">,</span>create<span class="kw">,</span>update<span class="kw">,</span>delete<span class="kw">,</span>admin<span class="kw">]</span> <span class="co"># allow modifying project-specific ACL files</span>
+  <span class="fu">storage:</span>
+    <span class="kw">-</span> <span class="fu">allow:</span> <span class="kw">[</span>read<span class="kw">,</span>create<span class="kw">,</span>update<span class="kw">,</span>delete<span class="kw">]</span> <span class="co"># allow access for /ssh-key/* storage content</span>
+
+<span class="fu">by:</span>
+  <span class="fu">group:</span> admin</code></pre></td></tr></table>
+<p>The example policy document above demonstrates the access granted to the users in group &quot;admin&quot;.</p>
+<p>Both <code>username</code> and <code>group</code> can use regular expressions to match multiple users or groups.</p>
+<p>Two separate policies define two levels of access control. The first is the &quot;project&quot; context, which allows access to actions on resources within a specific project. The second is the &quot;application&quot; level context, which allows access to things like creating projects, access to projects, managing users, and access to system information.</p>
+<h2 id="specific-resources-and-resource-types"><a href="#specific-resources-and-resource-types">Specific Resources and Resource Types</a></h2>
+<p>As described in the <a href="../man5/aclpolicy.html">aclpolicy-v10(5)</a> definition, access is granted or denied to specific &quot;resources&quot;. Resources can take two forms:</p>
+<ul>
+<li>A specific resource, with a type and properties</li>
+<li>Resource types, which applies to all resources of a specific type or &quot;kind&quot;</li>
+</ul>
+<p>For example, you might want to restrict access to a job or jobs within a certain group. This corresponds to specific &quot;job&quot; resources with a &quot;group&quot; property matching a certain pattern.</p>
+<p>You might also want to restrict who can create <em>new</em> jobs. Since a new job does not exist yet, you cannot create a rule for this action to apply to an existing job. Which means this corresponds to a generic resource with a &quot;kind&quot; called &quot;job&quot;.</p>
+<h2 id="api-token-authorization-roles"><a href="#api-token-authorization-roles">API Token Authorization Roles</a></h2>
+<p>In Rundeck 2.8.x and later, Authentication Tokens are given a set of <em>Authorization Roles</em> at generation time, so the access levels for the Token depend on how it was generated.</p>
+<p>See: <a href="../api/index.html#token-authentication">API Token</a> usage instructions.</p>
+<p>See below: <a href="#api-token-authorization">API Token Authorization</a>.</p>
+<p>(<strong>Note:</strong> In Rundeck 2.7.x and earlier, clients of the <a href="../api/index.html">Web API</a> may use the <a href="../api/index.html#token-authentication">Token Authentication</a> method. These clients are placed in the special authorization group called <code>api_token_group</code>.)</p>
+<h2 id="rundeck-resource-authorizations"><a href="#rundeck-resource-authorizations">Rundeck resource authorizations</a></h2>
+<p>Rundeck declares a number of actions that can be referenced inside the access control policy document.</p>
+<p>The actions and resources are divided into project scope and application scope:</p>
+<h3 id="application-scope-resources-and-actions"><a href="#application-scope-resources-and-actions">Application Scope Resources and Actions</a></h3>
+<p>You define application scope rules in the aclpolicy, by declaring this context:</p>
+<pre><code>context:
+  application: &#39;rundeck&#39;</code></pre>
+<p>These are the Application scope actions that can be allowed or denied via the aclpolicy:</p>
+<ul>
+<li>Creating Projects (<code>create</code> action on a resource type with kind 'project')</li>
+<li>Reading system information (<code>read</code> action on a resource type with kind 'system')</li>
+<li>Managing System level ACL Policies (actions on a resource type with kind 'system_acl')
+<ul>
+<li>Reading <code>read</code></li>
+<li>Creating <code>create</code></li>
+<li>Updating <code>update</code></li>
+<li>Deleting <code>delete</code></li>
+<li>Full access <code>admin</code></li>
+</ul></li>
+<li>Disabling executions (<code>disable_executions</code> action on a resource type with kind 'system')</li>
+<li>Managing executions
+<ul>
+<li>Enabling executions (<code>enable_executions</code> action on a resource type with kind 'system')</li>
+<li>Disabling executions (<code>disable_executions</code> action on a resource type with kind 'system')</li>
+<li>Full control (<code>admin</code> action on a resource type with kind 'system')</li>
+</ul></li>
+<li>Administering user profiles (<code>admin</code> action on a resource type of kind 'user')</li>
+<li>Accessing SSH Keys (<code>create</code>,<code>update</code>,<code>read</code>, or <code>delete</code> action on a specific path within the storage 'storage' type)</li>
+<li>Actions on specific projects by name (actions on a <code>project</code> type)
+<ul>
+<li>Reading <code>read</code></li>
+<li>Deleting <code>delete</code></li>
+<li>Configuring <code>configure</code></li>
+<li>Importing archives <code>import</code></li>
+<li>Exporting archives <code>export</code></li>
+<li>Deleting executions <code>delete_execution</code></li>
+<li>Export project to another Rundeck instance <code>promote</code></li>
+<li>Full access <code>admin</code></li>
+</ul></li>
+<li>Managing Project level ACL Policies on specific projects by name (actions on a <code>project_acl</code> type)
+<ul>
+<li>Reading <code>read</code></li>
+<li>Creating <code>create</code></li>
+<li>Updating <code>update</code></li>
+<li>Deleting <code>delete</code></li>
+<li>Full access <code>admin</code></li>
+</ul></li>
+<li>Generating API Tokens (actions on a resource type of kind <code>apitoken</code>)
+<ul>
+<li>Creating User tokens <code>generate_user_token</code></li>
+<li>Creating Service tokens <code>generate_service_token</code></li>
+<li>Full access <code>admin</code></li>
+</ul></li>
+<li>Create Service Tokens with specified Roles (actions on a <code>apitoken</code> type)
+<ul>
+<li>Creating Service tokens <code>create</code></li>
+</ul></li>
+</ul>
+<p>The following table summarizes the generic and specific resources and the actions you can restrict in the application scope:</p>
+<table>
+<caption>Application scope generic type actions</caption>
+<thead>
+<tr class="header">
+<th align="left">Type</th>
+<th align="left">Resource Kind</th>
+<th align="left">Properties</th>
+<th align="left">Actions</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>resource</code></td>
+<td align="left"><code>project</code></td>
+<td align="left">none</td>
+<td align="left"><code>create</code></td>
+<td align="left">Create a new project</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;</td>
+<td align="left"><code>system</code></td>
+<td align="left">none</td>
+<td align="left"><code>read</code></td>
+<td align="left">Read system information</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;</td>
+<td align="left">&quot;</td>
+<td align="left">none</td>
+<td align="left"><code>enable_executions</code></td>
+<td align="left">Enable executions</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;</td>
+<td align="left">&quot;</td>
+<td align="left">none</td>
+<td align="left"><code>disable_executions</code></td>
+<td align="left">Disable executions</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;</td>
+<td align="left">&quot;</td>
+<td align="left">none</td>
+<td align="left"><code>admin</code></td>
+<td align="left">Enable or disable executions</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;</td>
+<td align="left"><code>system_acl</code></td>
+<td align="left">none</td>
+<td align="left"><code>read</code></td>
+<td align="left">Read system ACL policy files</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;</td>
+<td align="left">&quot;</td>
+<td align="left">none</td>
+<td align="left"><code>create</code></td>
+<td align="left">Create system ACL policy files</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;</td>
+<td align="left">&quot;</td>
+<td align="left">none</td>
+<td align="left"><code>update</code></td>
+<td align="left">Update system ACL policy files</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;</td>
+<td align="left">&quot;</td>
+<td align="left">none</td>
+<td align="left"><code>delete</code></td>
+<td align="left">Delete system ACL policy files</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;</td>
+<td align="left">&quot;</td>
+<td align="left">none</td>
+<td align="left"><code>admin</code></td>
+<td align="left">All access to system ACL policy files</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;</td>
+<td align="left"><code>user</code></td>
+<td align="left">none</td>
+<td align="left"><code>admin</code></td>
+<td align="left">Modify user profiles</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;</td>
+<td align="left"><code>job</code></td>
+<td align="left">none</td>
+<td align="left"><code>admin</code></td>
+<td align="left">Manage job schedules</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;</td>
+<td align="left"><code>apitoken</code></td>
+<td align="left">none</td>
+<td align="left"><code>generate_user_token</code></td>
+<td align="left">Create a &quot;user&quot; token</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;</td>
+<td align="left">&quot;</td>
+<td align="left">none</td>
+<td align="left"><code>generate_service_token</code></td>
+<td align="left">Create a &quot;service&quot; token</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;</td>
+<td align="left">&quot;</td>
+<td align="left">none</td>
+<td align="left"><code>admin</code></td>
+<td align="left">Full access</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Application scope specific resource actions</caption>
+<thead>
+<tr class="header">
+<th align="left">Type</th>
+<th align="left">Properties</th>
+<th align="left">Actions</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>project</code></td>
+<td align="left">&quot;name&quot;</td>
+<td align="left"><code>read</code></td>
+<td align="left">View a project in the project list</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;</td>
+<td align="left">&quot;</td>
+<td align="left"><code>configure</code></td>
+<td align="left">View and modify project configuration</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;</td>
+<td align="left">&quot;</td>
+<td align="left"><code>delete</code></td>
+<td align="left">Delete project</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;</td>
+<td align="left">&quot;</td>
+<td align="left"><code>import</code></td>
+<td align="left">Import archive contents to the project</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;</td>
+<td align="left">&quot;</td>
+<td align="left"><code>export</code></td>
+<td align="left">Export the project as an archive</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;</td>
+<td align="left">&quot;</td>
+<td align="left"><code>delete_execution</code></td>
+<td align="left">Delete executions</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;</td>
+<td align="left">&quot;</td>
+<td align="left"><code>admin</code></td>
+<td align="left">Full access to project</td>
+</tr>
+<tr class="even">
+<td align="left"><code>project_acl</code></td>
+<td align="left">&quot;name&quot;</td>
+<td align="left"><code>read</code></td>
+<td align="left">Read project ACL Policy files</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;</td>
+<td align="left">&quot;</td>
+<td align="left"><code>create</code></td>
+<td align="left">Create project ACL Policy files</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;</td>
+<td align="left">&quot;</td>
+<td align="left"><code>update</code></td>
+<td align="left">Update project ACL Policy files</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;</td>
+<td align="left">&quot;</td>
+<td align="left"><code>delete</code></td>
+<td align="left">Delete project ACL Policy files</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;</td>
+<td align="left">&quot;</td>
+<td align="left"><code>admin</code></td>
+<td align="left">All access to project ACL Policy files</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>storage</code></td>
+<td align="left">&quot;path&quot;,&quot;name&quot;</td>
+<td align="left"><code>create</code></td>
+<td align="left">Create files in the storage facility</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;</td>
+<td align="left">&quot;</td>
+<td align="left"><code>update</code></td>
+<td align="left">Modify files in the storage facility</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;</td>
+<td align="left">&quot;</td>
+<td align="left"><code>read</code></td>
+<td align="left">Read files and list directories in the storage facility</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;</td>
+<td align="left">&quot;</td>
+<td align="left"><code>delete</code></td>
+<td align="left">Delete files in the storage facility</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>apitoken</code></td>
+<td align="left">&quot;username&quot;,&quot;roles&quot;</td>
+<td align="left"><code>create</code></td>
+<td align="left">Create an API Token with specified roles or username</td>
+</tr>
+</tbody>
+</table>
+<h4 id="api-token-authorization"><a href="#api-token-authorization">API Token Authorization</a></h4>
+<p>API Tokens can be generated if the user has the appropriate authorization on the <code>apitoken</code> generic resource type.</p>
+<dl>
+<dt>&quot;User Token&quot;</dt>
+<dd><p>An API Token with the owner's username, and a subset of the owner's authorization roles.</p>
+</dd>
+<dt>&quot;Service Token&quot;</dt>
+<dd><p>An API Token which may have a different username than the owner, and may have a different set of authorization roles.</p>
+</dd>
+</dl>
+<p>This distinction allows administrators to let some users generate API Tokens which cannot increase their access levels (User Tokens), and other users to generate API Tokens with different access levels in a controlled way.</p>
+<p>The authorizations levels are:</p>
+<ul>
+<li><code>generate_user_token</code>: allows the user to generate a User Token.</li>
+<li><code>generate_service_token</code>: allows a user to generate a Service Token (see below).</li>
+<li><code>admin</code>: allows the user to generate a Token with any username and roles.</li>
+</ul>
+<p>Example to generate a User Token:</p>
+<pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">description:</span> Allow &quot;ops_team&quot; members to generate User Tokens
+<span class="fu">for:</span>
+  <span class="fu">resource:</span>
+  <span class="kw">-</span> <span class="fu">equals:</span>
+      <span class="fu">kind:</span> apitoken
+    <span class="fu">allow:</span> generate_user_token
+<span class="fu">context:</span>
+  <span class="fu">application:</span> rundeck
+<span class="fu">by:</span>
+  <span class="fu">group:</span> ops_team</code></pre>
+<p>To specify what roles and usernames are allowed for a Service Token, the user must <em>also</em> be authorized to <code>create</code> an <code>apitoken</code> resource type for a declared set of usernames and roles.</p>
+<p>Example to generate a Service Token:</p>
+<pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">description:</span> Allow &quot;sec_ops&quot; members to generate Service Tokens, for specific usernames and additional roles
+<span class="fu">for:</span>
+
+  <span class="fu">resource:</span>
+  <span class="kw">-</span> <span class="fu">equals:</span>
+      <span class="fu">kind:</span> apitoken
+    <span class="fu">allow:</span> generate_service_token
+
+  <span class="fu">apitoken:</span>
+  <span class="kw">-</span> <span class="fu">allow:</span> create
+    <span class="fu">match:</span>
+      <span class="fu">username:</span> &#39;(mysql|myservice)&#39;
+    <span class="fu">subset:</span>
+      <span class="fu">roles:</span>
+      <span class="kw">-</span> mysql_api_access
+      <span class="kw">-</span> myservice_api_access
+<span class="fu">context:</span>
+  <span class="fu">application:</span> rundeck
+<span class="fu">by:</span>
+  <span class="fu">group:</span> sec_ops</code></pre>
+<p>Service Tokens implicitly allow a subset of the user's own authorization roles and username (<code>generate_service_token</code> implies <code>generate_user_token</code>), so the usernames and roles authorized in the ACL Policy must specify any <em>extra</em> roles. When a Service Token is generated, any requested roles not already allowed by <code>generate_user_token</code> will be checked against the ACL Policy. However, it is best to be explicit in the list of roles you want to allow.</p>
+<p><strong>Important:</strong></p>
+<p>The <code>subset:</code> match for <code>roles:</code> declares that <em>extra</em> roles for the Service Token may only come from this list, but doesn't require the token to have all of the roles. (If you used <code>contains:</code> it would be the inverse, and grant access only if the extra Service Token roles contained all of those in the <code>roles:</code> list, i.e. a superset vs. a subset.)</p>
+<h3 id="project-scope-resources-and-actions"><a href="#project-scope-resources-and-actions">Project Scope Resources and Actions</a></h3>
+<p>You define project scope rules in the aclpolicy by declaring this context:</p>
+<pre><code>context:
+  project: &quot;(regex)&quot;</code></pre>
+<p>The regex can match all projects using &quot;.*&quot;, or you can simply put the project name.</p>
+<p>Note that for projects not matched by an aclpolicy, <em>no</em> actions will be granted to users.</p>
+<p>Also note that to hide projects completely from users, you would need to grant or deny the &quot;read&quot; access to the project in the <a href="#application-scope-resources-and-actions">Application Scope</a>.</p>
+<p>These are the Project scope actions that can be allowed or denied via the aclpolicy:</p>
+<ul>
+<li>Create Jobs ('create' action on a resource type with kind 'job')</li>
+<li>Delete Jobs ('delete' action on a resource type with kind 'job')</li>
+<li>Read Node data ('read' action on a resource type with kind 'node')</li>
+<li>Update/Refresh node data ('create','update','refresh' action on a resource type with kind 'node')</li>
+<li>Read history events ('read' action on a resource type with kind 'event')</li>
+<li>Create history events ('create' action on a resource type with kind 'event')</li>
+<li>Run adhoc jobs ('run' action on 'adhoc' resources)</li>
+<li>Kill adhoc jobs ('kill' action on 'adhoc' resources)</li>
+<li>Any Action on Jobs (actions on 'job' resources, see below)</li>
+</ul>
+<p>The following table summarizes the generic and specific resources and the actions you can restrict in the project scope:</p>
+<table>
+<caption>Project scope generic type actions</caption>
+<thead>
+<tr class="header">
+<th align="left">Type</th>
+<th align="left">Resource Kind</th>
+<th align="left">Actions</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>resource</code></td>
+<td align="left"><code>job</code></td>
+<td align="left"><code>create</code></td>
+<td align="left">Create a new Job</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;</td>
+<td align="left">&quot;</td>
+<td align="left"><code>delete</code></td>
+<td align="left">Delete jobs</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;</td>
+<td align="left"><code>node</code></td>
+<td align="left"><code>read</code></td>
+<td align="left">Read node information</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;</td>
+<td align="left">&quot;</td>
+<td align="left"><code>create</code></td>
+<td align="left">Create new node entries</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;</td>
+<td align="left">&quot;</td>
+<td align="left"><code>update</code></td>
+<td align="left">Modify node entries</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;</td>
+<td align="left">&quot;</td>
+<td align="left"><code>refresh</code></td>
+<td align="left">Refresh node entry from a URL</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;</td>
+<td align="left"><code>event</code></td>
+<td align="left"><code>read</code></td>
+<td align="left">Read history event information</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;</td>
+<td align="left">&quot;</td>
+<td align="left"><code>create</code></td>
+<td align="left">Create arbitrary history event entries</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Project scope specific resource actions</caption>
+<thead>
+<tr class="header">
+<th align="left">Type</th>
+<th align="left">Properties</th>
+<th align="left">Actions</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>adhoc</code></td>
+<td align="left"></td>
+<td align="left"><code>read</code></td>
+<td align="left">Read adhoc execution output</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;</td>
+<td align="left"></td>
+<td align="left"><code>run</code></td>
+<td align="left">Run an adhoc execution</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;</td>
+<td align="left"></td>
+<td align="left"><code>runAs</code></td>
+<td align="left">Run an adhoc execution as another user</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;</td>
+<td align="left"></td>
+<td align="left"><code>kill</code></td>
+<td align="left">Kill an adhoc execution</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;</td>
+<td align="left"></td>
+<td align="left"><code>killAs</code></td>
+<td align="left">Kill an adhoc execution as another user</td>
+</tr>
+<tr class="even">
+<td align="left"><code>job</code></td>
+<td align="left">&quot;name&quot;,&quot;group&quot;</td>
+<td align="left"><code>read</code></td>
+<td align="left">View a Job, its executions, and read its definition</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;</td>
+<td align="left"></td>
+<td align="left"><code>view</code></td>
+<td align="left">View a Job and its executions</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;</td>
+<td align="left"></td>
+<td align="left"><code>update</code></td>
+<td align="left">Modify a job</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;</td>
+<td align="left"></td>
+<td align="left"><code>delete</code></td>
+<td align="left">Delete a job</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;</td>
+<td align="left"></td>
+<td align="left"><code>run</code></td>
+<td align="left">Run a job</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;</td>
+<td align="left"></td>
+<td align="left"><code>runAs</code></td>
+<td align="left">Run a job as another user</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;</td>
+<td align="left"></td>
+<td align="left"><code>kill</code></td>
+<td align="left">Kill a running job</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;</td>
+<td align="left"></td>
+<td align="left"><code>killAs</code></td>
+<td align="left">Kill a running job as another user</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;</td>
+<td align="left"></td>
+<td align="left"><code>create</code></td>
+<td align="left">Create the matching job</td>
+</tr>
+<tr class="odd">
+<td align="left">&quot;</td>
+<td align="left"></td>
+<td align="left"><code>toggle_schedule</code></td>
+<td align="left">Enable/disable the job's schedule</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;</td>
+<td align="left"></td>
+<td align="left"><code>toggle_execution</code></td>
+<td align="left">Enable/disable the job for execution</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>node</code></td>
+<td align="left">&quot;rundeck_server&quot;, &quot;nodename&quot;, ...</td>
+<td align="left"><code>read</code></td>
+<td align="left">View the node in the UI (see <a href="#node-resource-properties">Node resource properties</a>)</td>
+</tr>
+<tr class="even">
+<td align="left">&quot;</td>
+<td align="left"></td>
+<td align="left"><code>run</code></td>
+<td align="left">Run jobs/adhoc on the node</td>
+</tr>
+</tbody>
+</table>
+<p><em>Note</em>: see <a href="#node-resource-properties">Node resource properties</a> for more node resource properties for authorization.</p>
+<p><em>Note</em>: <code>runAs</code> and <code>killAs</code> actions only apply to certain API endpoints, and allow running jobs or adhoc executions or killing executions to be performed with a different username attached as the author of the action. See <a href="../api/index.html#running-a-job">Rundeck API - Running a Job</a>.</p>
+<p><em>Note</em>: Job deletion requires allowing the 'delete' action both at the generic type and specific resource levels.</p>
+<p>Recall that defining rules for a generic resource type is done in this way:</p>
+<pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">for:</span>
+  <span class="fu">resource:</span>
+    <span class="kw">-</span> <span class="fu">equals:</span>
+        <span class="fu">kind:</span> &#39;project&#39;
+      <span class="fu">allow:</span> <span class="kw">[</span>create<span class="kw">]</span></code></pre>
+<p>Whereas defining rules for specific resources of a certain type is done in this way:</p>
+<pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">for:</span>
+  <span class="fu">job:</span>
+    <span class="kw">-</span> <span class="fu">equals:</span>
+        <span class="fu">name:</span> bob
+      <span class="fu">allow:</span> <span class="kw">[</span>run<span class="kw">]</span></code></pre>
+<h3 id="node-resource-properties"><a href="#node-resource-properties">Node resource properties</a></h3>
+<p>The properties available are the attributes that are defined on the node, so you can apply authorizations based on tag, osName, hostname, etc. The special <code>rundeck_server</code> property will be set to &quot;true&quot; for the Rundeck server node only, and &quot;false&quot; for all other nodes.</p>
+<p>Any custom attributes can be used as well.</p>
+<table>
+<caption>Pre-defined Node resource properties for authorization filters</caption>
+<thead>
+<tr class="header">
+<th align="left">Name</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>nodename</code></td>
+<td align="left">Name of the node</td>
+</tr>
+<tr class="even">
+<td align="left"><code>username</code></td>
+<td align="left">Authentication username</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>hostname</code></td>
+<td align="left">Hostname of the node</td>
+</tr>
+<tr class="even">
+<td align="left"><code>description</code></td>
+<td align="left">Description of the node</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>tags</code></td>
+<td align="left">Set of tags. Can use with the <code>contains:</code> filter.</td>
+</tr>
+<tr class="even">
+<td align="left"><code>osName</code></td>
+<td align="left">Operating System name</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>osFamily</code></td>
+<td align="left">Operating System family, e.g. &quot;unix&quot; or &quot;windows&quot;</td>
+</tr>
+<tr class="even">
+<td align="left"><code>osVersion</code></td>
+<td align="left">Operating System version</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>osArch</code></td>
+<td align="left">Operating System architecture</td>
+</tr>
+<tr class="even">
+<td align="left"><code>rundeck_server</code></td>
+<td align="left">A value set to &quot;true&quot; if the node is the Rundeck server node</td>
+</tr>
+</tbody>
+</table>
+<h3 id="access-control-policy-actions-example"><a href="#access-control-policy-actions-example">Access control policy actions example</a></h3>
+<p>Below is an example policy document demonstrating policy actions to create limited access for a group of users. Users in the group &quot;restart_user&quot;, are allowed to run three jobs in the &quot;adm&quot; group, Restart, stop and start. By allowing <code>run</code> but not <code>read</code>, the &quot;stop&quot; and &quot;start&quot; jobs will not be visible. Allowing <code>view</code> for the 'Restart' job, but not <code>read</code>, means that the users can view the job, but not its workflow definition, nor can they download the Job definition file.</p>
+<p>File listing: restart_user.aclpolicy example</p>
+<table class="sourceCode yaml numberLines"><tr class="sourceCode"><td class="lineNumbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+</pre></td><td class="sourceCode"><pre><code class="sourceCode yaml"><span class="fu">description:</span> Limited user access for adm restart action
+<span class="fu">context:</span>
+  <span class="fu">project:</span> &#39;.*&#39;
+<span class="fu">for:</span>
+  <span class="fu">job:</span>
+    <span class="kw">-</span> <span class="fu">equals:</span>
+        <span class="fu">group:</span> &#39;adm&#39;
+        <span class="fu">name:</span> &#39;Restart&#39;
+      <span class="fu">allow:</span> <span class="kw">[</span>run<span class="kw">,</span>view<span class="kw">]</span>
+    <span class="kw">-</span> <span class="fu">equals:</span>
+        <span class="fu">group:</span> &#39;adm&#39;
+        <span class="fu">name:</span> &#39;stop&#39;
+      <span class="fu">allow:</span> <span class="kw">[</span>run<span class="kw">]</span>
+    <span class="kw">-</span> <span class="fu">equals:</span>
+        <span class="fu">group:</span> &#39;adm&#39;
+        <span class="fu">name:</span> &#39;start&#39;
+      <span class="fu">allow:</span> <span class="kw">[</span>run<span class="kw">]</span>
+<span class="fu">by:</span>
+  <span class="fu">group:</span> <span class="kw">[</span>restart_user<span class="kw">]</span>
+
+<span class="ot">---</span>
+
+<span class="fu">description:</span> Limited user access for adm restart action.
+<span class="fu">context:</span>
+  <span class="fu">application:</span> &#39;rundeck&#39;
+<span class="fu">for:</span>
+  <span class="fu">resource:</span>
+    <span class="kw">-</span> <span class="fu">equals:</span>
+        <span class="fu">kind:</span> system
+      <span class="fu">allow:</span> <span class="kw">[</span>read<span class="kw">]</span> <span class="co"># allow read of system info</span>
+  <span class="fu">project:</span>
+    <span class="kw">-</span> <span class="fu">match:</span>
+        <span class="fu">name:</span> &#39;.*&#39;
+      <span class="fu">allow:</span> <span class="kw">[</span>read<span class="kw">]</span> <span class="co"># allow view of all projects</span>
+<span class="fu">by:</span>
+  <span class="fu">group:</span> <span class="kw">[</span>restart_user<span class="kw">]</span></code></pre></td></tr></table>
+<h2 id="prevent-local-execution-on-the-rundeck-server"><a href="#prevent-local-execution-on-the-rundeck-server">Prevent Local Execution on the Rundeck Server</a></h2>
+<p>Below is an example policy to prevent any user on the &quot;remote&quot; group to execute any command or job on the local rundeck server.</p>
+<p>If a job is tried to be executed locally, it will fail. Also, the local rundeck server will not appear on the node filter list.</p>
+<p>File listing: remote.aclpolicy</p>
+<table class="sourceCode yaml numberLines"><tr class="sourceCode"><td class="lineNumbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="sourceCode"><pre><code class="sourceCode yaml"><span class="fu">description:</span> Acess for users on remote group
+<span class="fu">context:</span>
+  <span class="fu">project:</span> &#39;.*&#39;
+<span class="fu">for:</span>
+  <span class="fu">resource:</span>
+    <span class="kw">-</span> <span class="fu">allow:</span> &#39;*&#39;
+  <span class="fu">job:</span>
+    <span class="kw">-</span> <span class="fu">allow:</span> &#39;*&#39;
+  <span class="fu">adhoc:</span>
+    <span class="kw">-</span> <span class="fu">allow:</span> &#39;*&#39;
+  <span class="fu">node:</span>
+    <span class="kw">-</span> <span class="fu">equals:</span>
+        <span class="fu">rundeck_server:</span> &#39;false&#39;
+      <span class="fu">allow:</span> <span class="kw">[</span>read<span class="kw">,</span> run<span class="kw">]</span>
+<span class="fu">by:</span>
+  <span class="fu">group:</span> remote</code></pre></td></tr></table>
+<h2 id="troubleshooting-access-control-policy"><a href="#troubleshooting-access-control-policy">Troubleshooting access control policy</a></h2>
+<p>After defining an aclpolicy file to grant access to a particular group of users, you may find them getting &quot;unauthorized&quot; messages or complaints that certain actions are not possible.</p>
+<p>To diagnose this, begin by checking two bits:</p>
+<ol style="list-style-type: decimal">
+<li>The user's group membership. This can be done by going to the user's profile page in Rundeck. That page will list the groups the user is a member.</li>
+<li>Read the messages inside the <code>rundeck.audit.log</code> log file. The authorization facility generates fairly low level messages describing how the policy is matched to the user context.</li>
+<li>Use the <a href="../man1/rd-acl.html">rd-acl</a> tool to test and validate your policy files</li>
+</ol>
+<p>For each entry in the audit log, you'll see all decisions leading up to either a AUTHORIZED or a REJECTED message. It's not uncommon to see REJECTED messages followed by AUTHORIZED. The important thing is to look at the last decision made.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.7)</a></li>
+    
+    
+    <li ><a href="index.html">Administrator Guide</a></li>
+    <li class="active"><a href="access-control-policy.html">Access Control Policy</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="authenticating-users.html"><i class="glyphicon glyphicon-arrow-left"></i> Authenticating Users</a></li>
+      <li class="next"><a href="configuring-ssl.html">Configuring SSL <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-09-13T19:17:37UTC">2018-09-13T19:17:37UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
