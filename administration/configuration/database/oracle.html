@@ -104,11 +104,10 @@ http://support.rundeck.com/customer/en/portal/articles/2415681-oracle-setup)
 </ul>
 <p><a href="http://www.oracle.com/technetwork/database/features/jdbc/default-2280470.html" class="uri">http://www.oracle.com/technetwork/database/features/jdbc/default-2280470.html</a></p>
 <ul>
-<li>Copy the downloaded file <code>ojdbc7.jar</code> to the <code>$RDECK_BASE/server/lib</code> for war launcher or in /var/lib/rundeck/lib (create it) for RPM and DEB installations</li>
-<li>Update <code>$RDECK_BASE/etc/rundeck-config.properties</code>:</li>
+<li>Copy the downloaded file <code>ojdbc7.jar</code> to the <code>$RDECK_BASE/server/lib</code> for war launcher or in <code>/var/lib/rundeck/lib</code> (create it) for RPM and DEB installations</li>
+<li>Update <code>rundeck-config.properties</code> file according to your installation <a href="https://rundeck.org/docs/administration/configuration/configuration-file-reference.html#configuration-layout">layout</a>:</li>
 </ul>
-<pre><code>
-dataSource.url = jdbc:oracle:thin:@127.0.0.1:1521:orcl # (change server name and instance name)
+<pre><code>dataSource.url = jdbc:oracle:thin:@127.0.0.1:1521:orcl # (change server name and instance name)
 dataSource.driverClassName = oracle.jdbc.driver.OracleDriver
 dataSource.username = XXXXXX
 dataSource.password = XXXXXXX
@@ -174,7 +173,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-09-19T17:21:19UTC">2018-09-19T17:21:19UTC</span>
+<span class="generated-date" title="2018-09-20T15:41:05UTC">2018-09-20T15:41:05UTC</span>
 </p>
 </footer>
 </div>
