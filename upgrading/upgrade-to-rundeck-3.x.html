@@ -146,7 +146,7 @@ drwxr-x--- 1 rundeck rundeck 4096 Jun  4 14:25 ssl</code></pre>
 <p>A restart is necessary after the merge of <code>rundeck-config.properties</code></p>
 <h3 id="rundeck-rpm-package">Rundeck RPM Package</h3>
 <p>The upgrade process can be done using the <code>.rpm</code> file or using the command <code>yum</code>:</p>
-<h4 id="using-rpm-files">using rpm files</h4>
+<h4 id="using-rpm-package">Using rpm package</h4>
 <pre><code>sh-4.2# rpm -U rundeck-3.x.rpm rundeck-config-3.X.rpm
 
 warning: /etc/rundeck/framework.properties created as /etc/rundeck/framework.properties.rpmnew
@@ -175,7 +175,19 @@ drwxr-x--- 1 rundeck rundeck 4096 Jun  4 16:08 ssl</code></pre>
 <pre><code>mv /etc/rundeck/profile.rpmnew /etc/rundeck/profile</code></pre>
 <p>A restart is necessary after the merge of <code>rundeck-config.properties</code> or/and <code>profile</code> file.</p>
 <h3 id="tomcat-war-deployment">Tomcat War deployment</h3>
-<p>Due to changes in authentication, <code>tomcat-users.xml</code> and other Tomcat authentication modules no longer work. More information about upgrading with Tomcat will be posted on <a href="https://github.com/rundeck/rundeck/issues/3754">this github issue</a>.</p>
+<ul>
+<li><p>Stop Tomcat</p></li>
+<li><p>Delete <code>$tomcat.base/webapps/rundeck</code></p></li>
+<li><p>Delete <code>$tomcat.base/webapps/rundeck.war</code></p></li>
+<li><p>Place Rundeck 3 as the old war file <code>$tomcat.base/webapps/rundeck.war</code></p></li>
+<li><p>Start Tomcat</p></li>
+</ul>
+<h4 id="notes">NOTES:</h4>
+<ul>
+<li><p>Due to changes in authentication, <code>tomcat-users.xml</code> and other Tomcat’s authentication modules no longer work, you should configure users as in a launcher installation.</p></li>
+<li><p>If you do not have “-Drundeck.config.location” defined or configured in <code>$tomcat.base/bin/setenv.sh</code> file (<code>tomcat.base\bin\setenv.bat</code> for Windows), it will take <code>$rdeck.base/server/config/rundeck-config.properties</code>.</p></li>
+<li><p>If Rundeck is not starting, please remove <code>$rdeck.base/var/.install_complete</code> and restart Tomcat.</p></li>
+</ul>
 </div>
 </div>
 </div>
@@ -232,7 +244,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-10-01T18:19:19UTC">2018-10-01T18:19:19UTC</span>
+<span class="generated-date" title="2018-10-01T18:30:59UTC">2018-10-01T18:30:59UTC</span>
 </p>
 </footer>
 </div>
