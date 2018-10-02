@@ -251,8 +251,8 @@ crypt: CRYPT:jsnDAc2Xk4W4o</code></pre>
 <h4 id="step-1-setup-the-ldap-login-module-configuration-file">Step 1: Setup the LDAP login module configuration file</h4>
 <p>Create a <code>jaas-ldap.conf</code> file in the same directory as the <code>jaas-loginmodule.conf</code> file.</p>
 <ul>
-<li>RPM/Deb install: /etc/rundeck/</li>
-<li>Executable War install: $RDECK_BASE/server/config</li>
+<li>RPM/Deb install: <code>/etc/rundeck/</code></li>
+<li>Executable War install: <code>$RDECK_BASE/server/config</code></li>
 </ul>
 <p>Make sure the name of your Login Module configuration is the same as you use in the next step. The Login Module configuration is defined like this:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb6-1" data-line-number="1">    myloginmodule {</a>
@@ -277,8 +277,8 @@ crypt: CRYPT:jsnDAc2Xk4W4o</code></pre>
 <p><strong>For the RPM/Deb installation</strong>: the absolute path to the JAAS config file must be specified with the <code>java.security.auth.login.config</code> property.</p>
 <p>Declare <code>RDECK_JVM_OPTS</code> in <code>/etc/sysconfig/rundeckd</code> (rpm) or <code>/etc/default/rundeckd</code> (deb):</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="va">RDECK_JVM_OPTS=</span><span class="st">&quot;-Drundeck.jaaslogin=true \ </span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">       -Djava.security.auth.login.config=/etc/rundeck/jaas-loginmodule.conf \</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="st">       -Dloginmodule.name=RDpropertyfilelogin&quot;</span></a></code></pre></div>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">       -Djava.security.auth.login.config=/etc/rundeck/jaas-ldap.conf \</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="st">       -Dloginmodule.name=ldap&quot;</span></a></code></pre></div>
 <h4 id="step-3-restart-rundeckd">Step 3: Restart rundeckd</h4>
 <div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="fu">sudo</span> /etc/init.d/rundeckd restart</a></code></pre></div>
 <h4 id="step-4-attempt-to-logon">Step 4: Attempt to logon</h4>
@@ -650,7 +650,7 @@ user1: -,user,readonly</code></pre>
 <a class="sourceLine" id="cb22-21" data-line-number="21">    cacheDurationMillis=<span class="st">&quot;300000&quot;</span></a>
 <a class="sourceLine" id="cb22-22" data-line-number="22">    reportStatistics=<span class="st">&quot;true&quot;</span>;</a>
 <a class="sourceLine" id="cb22-23" data-line-number="23"></a>
-<a class="sourceLine" id="cb22-24" data-line-number="24">  org.eclipse.jetty.plus.jaas.spi.PropertyFileLoginModule required</a>
+<a class="sourceLine" id="cb22-24" data-line-number="24">  org.eclipse.jetty.jaas.spi.PropertyFileLoginModule required</a>
 <a class="sourceLine" id="cb22-25" data-line-number="25">    debug=<span class="st">&quot;true&quot;</span></a>
 <a class="sourceLine" id="cb22-26" data-line-number="26">    file=<span class="st">&quot;/etc/rundeck/realm.properties&quot;</span>;</a>
 <a class="sourceLine" id="cb22-27" data-line-number="27">};</a></code></pre></div>
@@ -771,7 +771,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-10-01T18:30:59UTC">2018-10-01T18:30:59UTC</span>
+<span class="generated-date" title="2018-10-02T03:54:14UTC">2018-10-02T03:54:14UTC</span>
 </p>
 </footer>
 </div>
