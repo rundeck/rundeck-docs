@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Commands</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Alex Honor" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="January 30, 2014" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.7)</a></li>
+    
+    
+    <li ><a href="index.html">User Guide</a></li>
+    <li class="active"><a href="commands.html">Commands</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="executions.html">Executions <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/06-commands.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/06-commands.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#commands-tab-overview">Commands tab overview</a></li>
+<li><a href="#enter-a-command">Enter a command</a><ul>
+<li><a href="#dispatch-settings">Dispatch settings</a></li>
+</ul></li>
+<li><a href="#select-the-nodes">Select the nodes</a><ul>
+<li><a href="#node-detail">Node detail</a></li>
+</ul></li>
+<li><a href="#execute-command">Execute command</a></li>
+<li><a href="#monitor-the-execution">Monitor the execution</a><ul>
+<li><a href="#output-view-options">Output view options</a></li>
+<li><a href="#execution-follow-page">Execution follow page</a></li>
+</ul></li>
+<li><a href="#execution-history">Execution history</a></li>
+<li><a href="#related-command-line-tools">Related Command line tools</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Commands</h1>
+</div>
+<p>A <em>command</em> is a single executable string executed on a Node. Rundeck invokes commands on nodes via a <em>node executor</em> which evaluates the command string and executes it. Node executors evaluate the command string in a data context containing information about the Node resource. Command strings can reference this data and thus avoid hard coding node or environment specific values.</p>
+<p>The Rundeck graphical console provides the ability to execute commands to a set of filtered Node resources. The Command page can accept any command string you might run via an SSH command or via the <a href="../man1/dispatch.html">dispatch</a> shell tool.</p>
+<p>Note, your ability to view Nodes and execute commands on them depends on your ACL policy.</p>
+<h2 id="commands-tab-overview">Commands tab overview</h2>
+<p>Navigate to this page by clicking on the “Commands” tab in the navigation bar. Alternatively, go to the Nodes tab and choose the “Node Actions” menu and select the “Run a command …” menu item.</p>
+<p><img src="../figures/fig0207.png" /></p>
+<p>The screenshot above shows the elements of the Commands page user interface.</p>
+<ol type="1">
+<li>Command prompt - Enter the command string.</li>
+<li>Command dispatch settings - Optional settings to control concurrency and errors.</li>
+<li>Filter expression - Search expression to match nodes.</li>
+<li>Filter results list - Matching nodes presented as a list here.</li>
+<li>Run command button - Execute command for command string and matched nodes.</li>
+<li>Activity views - Historical views of command executions.</li>
+</ol>
+<h2 id="enter-a-command">Enter a command</h2>
+<figure>
+<img src="../figures/fig0207-a.png" alt="Input command string" /><figcaption>Input command string</figcaption>
+</figure>
+<p>Enter the command string you wish to execute on the Nodes. This command string must be a valid command statement that can be executed on the nodes.</p>
+<h3 id="dispatch-settings">Dispatch settings</h3>
+<figure>
+<img src="../figures/fig0208-b.png" alt="Choose dispatch settings" /><figcaption>Choose dispatch settings</figcaption>
+</figure>
+<p>The dispatch settings let you control the amount of concurrency and error handling for the command execution.</p>
+<ul>
+<li>Thread count: Number of concurrent command executions. By default the value is 1 which causes a sequential execution.</li>
+<li>On node failure: If a command execution fails on the node, you can choose to continue (default) or stop immediately at the failed node.</li>
+</ul>
+<h2 id="select-the-nodes">Select the nodes</h2>
+<figure>
+<img src="../figures/fig0207-b.png" alt="Filter the nodes" /><figcaption>Filter the nodes</figcaption>
+</figure>
+<p>You can choose the nodes by either choosing a saved filter or typing in your own filter expression. Press the “Set Filter” button to find the matched nodes. You can get help on filter expression syntax by pressing the help button.</p>
+<h3 id="node-detail">Node detail</h3>
+<p>Each of the matched nodes is linked to a detail view where you can inspect the Node’s attribute values (1).</p>
+<p>You can click the filter links inside the detail view to continue building your filter expression (2).</p>
+<figure>
+<img src="../figures/fig0208-a.png" alt="Node detail" /><figcaption>Node detail</figcaption>
+</figure>
+<h2 id="execute-command">Execute command</h2>
+<p>With the command string and filter entered you are ready to run the command. Press the “Run on x Nodes” button to begin the execution.</p>
+<p>The command will be dispatched to all the Nodes matched by the filter. The command prompt and run button become disabled until the execution completes. Output from the command execution is shown below.</p>
+<figure>
+<img src="../figures/fig0208.png" alt="Command execution output" /><figcaption>Command execution output</figcaption>
+</figure>
+<ol type="1">
+<li>Link to execution page: Every execution has an ID an a separate page to follow it and view a report after it completes.</li>
+<li>View options: Output is automatically collated by node and contains time information. You can toggle these as desired.</li>
+<li>Collated output: All output is grouped by the node.</li>
+<li>Output log links: You can view the raw output in the browser or download it to your desktop.</li>
+</ol>
+<p>You can dismiss the output by pressing the “X” button above the Download link.</p>
+<h2 id="monitor-the-execution">Monitor the execution</h2>
+<p>Once the command execution begins you can monitor its progress on the Commands page or a separate execution follow page discussed later.</p>
+<figure>
+<img src="../figures/fig0207-c.png" alt="Now running a command" /><figcaption>Now running a command</figcaption>
+</figure>
+<ol type="1">
+<li>Kill job button: You can kill the execution by pressing this button.</li>
+<li>Execution status bar: If you dismissed the output view, you can continue monitoring progress in the “running” tab in the Activity section.</li>
+</ol>
+<h3 id="output-view-options">Output view options</h3>
+<p>This page section provides several views to read the output using different formats.</p>
+<figure>
+<img src="../figures/fig0209.png" alt="View options" /><figcaption>View options</figcaption>
+</figure>
+<dl>
+<dt>Log view</dt>
+<dd><p>Displays output messages from the command execution as if you were running the Unix <code>tail -f</code> command on the output log file. <img src="../figures/fig0208.png" alt="Execution output" /></p>
+</dd>
+<dt>By Node</dt>
+<dd><p>Output messages are sorted into Node specific sections and are not interlaced. By default, the messages are collapsed but can be revealed by pressing the disclosure icon to the right. <img src="../figures/fig0210.png" alt="Collapsed output" /></p>
+</dd>
+</dl>
+<h3 id="execution-follow-page">Execution follow page</h3>
+<p>Sometimes it is useful to have a page where just the execution output is displayed separately. One purpose is to share a link to others interested in following the output messages. Click the progress bar in the “Activity” section to go to the execution follow page.</p>
+<figure>
+<img src="../figures/fig0207-d.png" alt="Execution follow view" /><figcaption>Execution follow view</figcaption>
+</figure>
+<p>Notice the URL in the location bar of your browser. This URL can be shared to others interested in the progress of execution. The URL contains the execution ID (EID) and has a form like:</p>
+<pre><code> http://rundeckserver/project/prod/execution/show/{EID}</code></pre>
+<p>After execution completes, the command will have a status:</p>
+<ul>
+<li>Successful: No errors occurred during execution of the command across the filtered Node set</li>
+<li>Failed: One or more errors occurred. A list of Nodes that incurred an error is displayed. The page will also contain a link “Retry Failed Nodes…” in case you would like to retry the command.</li>
+</ul>
+<h2 id="execution-history">Execution history</h2>
+<p>The Commands page provides several views about execution history.</p>
+<ul>
+<li>running: Shows any currently running command executions.</li>
+<li>recent: Shows any executions from the last 24 hours.</li>
+<li>failed: Shows failed executions from last 24 hours.</li>
+<li>by you: Shows executions started by you.</li>
+</ul>
+<figure>
+<img src="../figures/fig0207-e.png" alt="Recent history" /><figcaption>Recent history</figcaption>
+</figure>
+<p>You can further search activity history by clicking the “Filter activity…” link.</p>
+<h2 id="related-command-line-tools">Related Command line tools</h2>
+<dl>
+<dt><a href="../man1/dispatch.html">dispatch</a></dt>
+<dd>Execute ad hoc commands and scripts. <a href="../man1/rd-queue.html">rd-queue</a>
+</dd>
+<dd>Query Rundeck for currently running Jobs and possibly kill them.
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.7)</a></li>
+    
+    
+    <li ><a href="index.html">User Guide</a></li>
+    <li class="active"><a href="commands.html">Commands</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="executions.html">Executions <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/06-commands.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/06-commands.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-10-09T00:04:57UTC">2018-10-09T00:04:57UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+</body>
+</html>

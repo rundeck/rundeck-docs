@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Version 1.5.1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="greg" />
+  <meta name="date" content="04/30/2013" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.7)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-1.5.1.html">Version 1.5.1 (2013-04-30)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-1.5.html">Version 1.5 (2013-2-21) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+history/version-1.5.1.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-1.5.1.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#release-1.5.1">Release 1.5.1</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Version 1.5.1</h1>
+</div>
+<h1 id="release-1.5.1">Release 1.5.1</h1>
+<p>Date: 2013-04-30</p>
+<p>Notable Changes:</p>
+<ul>
+<li>Bug fixes</li>
+<li>Job Notification Plugins
+<ul>
+<li>Jobs can now trigger notification plugins in addition to the built-in email and webhook</li>
+<li>plugins can be developed in Java or with a new Groovy DSL</li>
+<li>See the <a href="../developer/notification-plugin-development.html">Notification Plugin Development</a> Chapter.</li>
+<li>Example code at <a href="https://github.com/dtolabs/rundeck/tree/development/examples">dtolabs/rundeck/examples</a></li>
+</ul></li>
+<li>Notification ‘onstart’ trigger
+<ul>
+<li>Jobs can now cause a notification trigger when started via the ‘onstart’ trigger</li>
+</ul></li>
+<li>Notifications can now use the email address of the user who executed a job, as <code>${job.user.email}</code>. (You can set an email for your account in the Profile page.)</li>
+</ul>
+<p>Contributors:</p>
+<ul>
+<li>Alex Honor</li>
+<li>Charles Duffy</li>
+<li>Greg Schueler</li>
+<li>John Burbridge</li>
+<li>Jonathan Li</li>
+<li>Kim Ho</li>
+</ul>
+<p>Issues:</p>
+<ul>
+<li><a href="https://github.com/dtolabs/rundeck/issues/361">Add static ordering to job options instead of always sorted by name</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/360">Add job notification plugins</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/356">Big number as option default causes exception on load job from xml</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/353">Job XML parse fails if “false” value in an command step</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/351">Local error handling command lost on export / import</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/350">error handler has exception when attempting to handle No Matched Nodes failure for a job reference</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/346">Multi-value options not pre-populated when doing a “run again”</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/341">API: add “asUser” feature for running/killing jobs and executions</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/338">init script doesn’t work on CentOS (one-line fix provided)</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/330">job group changes before authorization check in 1.5</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/328">Many ACL policy files can slow down the Project drop down menu</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/327">Unable to generate an api-token on rundeck 1.5</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/325">Cannot send notification email using 1.5</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/320">Long description for Option causes Job import failure in 1.5 for jobs exported from 1.4</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/316">1.5: GUI regression: Success rate % in job popup always shows 0%</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/315">1.5: GUI regression: Job execution follow page: progress meter stuck</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/313">Invalid XML char in log output breaks CLI output follow mode.</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/312">1.5: html and ajax errors about “Timeout trying to lock table”</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/311">sudo responder hangs</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/298">CLIUtils.generateArgline does not quote IFS characters other than space</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/280">documentation: upgrade guide “admin” aclpolicy doesn’t allow all permissions</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/250">Add Job Notification/webhook on job start</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/209">projects folder under version control - .svn folder treated as project</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/206">incorrect aclpolicy yaml structure can cause NPE</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/201">Options are not passed correctly to programs</a></li>
+<li><a href="https://github.com/dtolabs/rundeck/issues/165">Allow Email Address substitution in notification recipients list</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.7)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-1.5.1.html">Version 1.5.1 (2013-04-30)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-1.5.html">Version 1.5 (2013-2-21) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+history/version-1.5.1.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-1.5.1.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-10-09T00:04:57UTC">2018-10-09T00:04:57UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+</body>
+</html>

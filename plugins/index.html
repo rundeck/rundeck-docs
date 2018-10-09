@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rundeck Plugins</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.7)</a></li>
+    
+    
+    
+    <li class="active"><a href="index.html">Rundeck Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+plugins/index.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/plugins/index.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Rundeck Plugins</h1>
+</div>
+<p>This document lists the plugins <strong>distributed with Rundeck and Rundeck Pro</strong>.</p>
+<p>More plugins can be found via:</p>
+<ul>
+<li><a href="https://rundeck.org/plugins/">Rundeck.org plugins listing</a></li>
+<li><a href="https://github.com/rundeck-plugins/">The official rundeck-plugins</a> org on github</li>
+<li><a href="https://github.com/search?p=3&amp;q=rundeck&amp;type=Repositories">Github Search: rundeck</a></li>
+<li><a href="https://github.com/topics/rundeck">Github topic: <code>rundeck</code></a></li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 40%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Plugin</th>
+<th>Description</th>
+<th>Availability</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Node Step</td>
+<td><a href="../manual/node-steps/builtin-node-steps.html#command-step" title="User Guide - Builtin Node Steps - Command Step">Command</a></td>
+<td>Calls system commands on remote nodes</td>
+<td>Built-in</td>
+</tr>
+<tr class="even">
+<td>Node Step</td>
+<td><a href="../manual/node-steps/builtin-node-steps.html#script-step" title="User Guide - Builtin Node Steps - Script Step">Script</a></td>
+<td>Executes script contents</td>
+<td>Built-in</td>
+</tr>
+<tr class="odd">
+<td>Node Step</td>
+<td><a href="../manual/node-steps/builtin-node-steps.html#script-file-step" title="User Guide - Builtin Node Steps - Script File Step">Script File</a></td>
+<td>Executes script files</td>
+<td>Built-in</td>
+</tr>
+<tr class="even">
+<td>Node Step</td>
+<td><a href="../manual/node-steps/builtin-node-steps.html#script-url-step" title="User Guide - Builtin Node Steps - Script Url Step">Script URL</a></td>
+<td>Downloads and executes scripts from URLs</td>
+<td>Built-in</td>
+</tr>
+<tr class="odd">
+<td>Node Step</td>
+<td><a href="../manual/node-steps/builtin-node-steps.html#job-reference-step" title="User Guide - Builtin Node Steps - Job Reference Step">Job Reference</a></td>
+<td>Calls other jobs</td>
+<td>Built-in</td>
+</tr>
+<tr class="even">
+<td>Node Step</td>
+<td><a href="../manual/node-steps/builtin-node-steps.html#copy-file-step" title="User Guide - Builtin Node Steps - Copy File Step">Copy File</a></td>
+<td>Copies a file to a remote node</td>
+<td>Built-in</td>
+</tr>
+<tr class="odd">
+<td>Node Step</td>
+<td><a href="../manual/node-steps/builtin-node-steps.html#local-command-step" title="User Guide - Builtin Node Steps - Local Command Step">Local Command</a></td>
+<td>Execute system commands locally</td>
+<td>Built-in</td>
+</tr>
+<tr class="even">
+<td>Node Step</td>
+<td><a href="../manual/node-steps/builtin-node-steps.html#data-node-step" title="User Guide - Builtin Node Steps - Data Node Step">Data Node</a></td>
+<td>Produces data values for a node</td>
+<td>Built-in</td>
+</tr>
+<tr class="odd">
+<td>Node Step</td>
+<td><a href="../manual/node-steps/jira-node-step-plugins-pro.html" title="User Guide - Jira Node Step Plugins (Pro)">Jira</a></td>
+<td>Creates or updates Jira issues</td>
+<td>Pro</td>
+</tr>
+<tr class="even">
+<td>Node Step</td>
+<td><a href="../manual/node-steps/sqlrunner-plugin-pro.html" title="User Guide - SQLRunner Plugin (Pro)">SQL Runner</a></td>
+<td>Executes SQL scripts against JDBC URLs</td>
+<td>Pro</td>
+</tr>
+<tr class="odd">
+<td>Node Step</td>
+<td><a href="../manual/node-steps/vmware-operations-node-step-plugin-pro.html" title="User Guide - VMWare Operations Node Step Plugin (Pro)">VMwave</a></td>
+<td>Controls VMware VMs’ power state</td>
+<td>Pro</td>
+</tr>
+<tr class="even">
+<td>Workflow Step</td>
+<td><a href="../manual/workflow-steps/builtin-workflow-steps.html#ansible-module" title="User Guide - Builtin Workflow Steps - Ansible Module">Ansible module</a></td>
+<td>Runs Ansible modules</td>
+<td>Built-in</td>
+</tr>
+<tr class="odd">
+<td>Workflow Step</td>
+<td><a href="../manual/workflow-steps/builtin-workflow-steps.html#ansible-playbook-inline" title="User Guide - Builtin Workflow Steps - Ansible Playbook Inline">Ansible playbook inline</a></td>
+<td>Runs Ansible playbooks inline</td>
+<td>Built-in</td>
+</tr>
+<tr class="even">
+<td>Workflow Step</td>
+<td><a href="../manual/workflow-steps/builtin-workflow-steps.html#ansible-playbook" title="User Guide - Builtin Workflow Steps - Ansible Playbook">Ansible playbook</a></td>
+<td>Runs Ansible playbooks</td>
+<td>Built-in</td>
+</tr>
+<tr class="odd">
+<td>Workflow Step</td>
+<td><a href="../manual/workflow-steps/builtin-workflow-steps.html#global-variable" title="User Guide - Builtin Workflow Steps - Global Variable">Global variable</a></td>
+<td></td>
+<td>Built-in</td>
+</tr>
+<tr class="even">
+<td>Workflow Step</td>
+<td><a href="../manual/workflow-steps/builtin-workflow-steps.html#flow-control" title="User Guide - Builtin Workflow Steps - Flow Control">Flow control</a></td>
+<td></td>
+<td>Built-in</td>
+</tr>
+<tr class="odd">
+<td>Workflow Step</td>
+<td><a href="../manual/workflow-steps/builtin-workflow-steps.html#job-state-conditional" title="User Guide - Builtin Workflow Steps - Job State Conditional">Job state conditional</a></td>
+<td></td>
+<td>Built-in</td>
+</tr>
+<tr class="even">
+<td>Workflow Step</td>
+<td><a href="../manual/workflow-steps/builtin-workflow-steps.html#log-data-step" title="User Guide - Builtin Workflow Steps - Log Data Step">Log data step</a></td>
+<td></td>
+<td>Built-in</td>
+</tr>
+<tr class="odd">
+<td>Workflow Step</td>
+<td><a href="../manual/workflow-steps/builtin-workflow-steps.html#refresh-project-nodes" title="User Guide - Builtin Workflow Steps - Refresh Project Nodes">Refresh project nodes</a></td>
+<td></td>
+<td>Built-in</td>
+</tr>
+<tr class="even">
+<td>Workflow Step</td>
+<td><a href="../manual/workflow-steps/builtin-workflow-steps.html#data-step" title="User Guide - Builtin Workflow Steps - Data Step">Data step</a></td>
+<td></td>
+<td>Built-in</td>
+</tr>
+<tr class="odd">
+<td>Workflow Step</td>
+<td><a href="../manual/workflow-steps/jira-workflow-step-plugins-pro.html" title="User Guide - Jira Workflow Step Plugins (Pro)">Jira</a></td>
+<td>Creates or updates Jira issues</td>
+<td>Pro</td>
+</tr>
+<tr class="even">
+<td>Workflow Step</td>
+<td><a href="../manual/workflow-steps/file-transfer-plugins.html" title="User Guide - File Transfer Plugins">File Transfer</a></td>
+<td>Transfers files via FTP, SFTP or HTTP</td>
+<td>Pro</td>
+</tr>
+<tr class="odd">
+<td>Workflow Step</td>
+<td><a href="../manual/workflow-steps/github-script-plugin-pro.html" title="User Guide - Github Script Plugin (Pro)">Github</a></td>
+<td>Runs scripts from a GitHub repo</td>
+<td>Pro</td>
+</tr>
+<tr class="even">
+<td>Workflow Step</td>
+<td><a href="../manual/workflow-steps/progress-badge-workflow-step-pro.html#progress-badge-workflow-step-plugin" title="User Guide - Progress Badge Workflow Step (Pro) - Progress Badge Workflow Step Plugin">Progress Badge</a></td>
+<td>Create graphic badges in log output</td>
+<td>Pro</td>
+</tr>
+<tr class="odd">
+<td>Workflow Step</td>
+<td><a href="../manual/workflow-steps/servicenow-plugins.html" title="User Guide - ServiceNow Plugins">ServiceNow</a></td>
+<td>Creates or modifies ServiceNow cases</td>
+<td>Pro</td>
+</tr>
+<tr class="even">
+<td>Workflow Step</td>
+<td><a href="../manual/workflow-steps/vmware-step-plugins-pro.html" title="User Guide - VMWare Step Plugins (Pro)">VMware</a></td>
+<td>Creates or modifies VMware VMs</td>
+<td>Pro</td>
+</tr>
+<tr class="odd">
+<td>Notifications</td>
+<td><a href="../manual/notifications/email.html" title="User Guide - Email">Email</a></td>
+<td>Sends emails when a job finishes</td>
+<td>Built-in</td>
+</tr>
+<tr class="even">
+<td>Notifications</td>
+<td><a href="../manual/notifications/webhooks.html" title="User Guide - Webhooks">Webhooks</a></td>
+<td>Sends HTTP POST data to a URL when a job finishes</td>
+<td>Built-in</td>
+</tr>
+<tr class="odd">
+<td>Notifications</td>
+<td><a href="../manual/notifications/jira-notification-plugins-pro.html" title="User Guide - Jira Notification Plugins (Pro)">Jira</a></td>
+<td>Creates or modifies Jira issues when a job finishes</td>
+<td>Pro</td>
+</tr>
+<tr class="even">
+<td>Workflow Strategy</td>
+<td><a href="../manual/workflow-strategies/ruleset-workflow-strategy-plugin.html" title="User Guide - Workflow Strategies - Ruleset Workflow Strategy Plugin">Ruleset</a></td>
+<td>Defines rules for when steps in a workflow should run</td>
+<td>Pro</td>
+</tr>
+<tr class="odd">
+<td>Node Orchestrator</td>
+<td><a href="../manual/orchestrator-plugins/bundled-orchestrator-plugins.html#random-subset" title="User Guide - Bundled Orchestrator Plugins - Random Subset">Random Subset</a></td>
+<td>Selects a maximum number of the target nodes at random</td>
+<td>Built-in</td>
+</tr>
+<tr class="even">
+<td>Node Orchestrator</td>
+<td><a href="../manual/orchestrator-plugins/bundled-orchestrator-plugins.html#ranked-tired" title="User Guide - Bundled Orchestrator Plugins - Ranked Tired">Ranked Tiered</a></td>
+<td>Processes nodes in a tiered manner, ordered by rank</td>
+<td>Built-in</td>
+</tr>
+<tr class="odd">
+<td>Node Orchestrator</td>
+<td><a href="../manual/orchestrator-plugins/bundled-orchestrator-plugins.html#max-percentage" title="User Guide - Bundled Orchestrator Plugins - Max Percentage">Max Percentage</a></td>
+<td>Processes at maximum a percentage of the target nodes</td>
+<td>Built-in</td>
+</tr>
+<tr class="even">
+<td>Node Orchestrator</td>
+<td><a href="../manual/orchestrator-plugins/highestlowest-attribute-value-pro.html" title="User Guide - Highest/Lowest Attribute Value (Pro)">Highest/Lowest Attribute Value</a></td>
+<td>Picks one node with either the highest or lowest value of a certain attribute</td>
+<td>Pro</td>
+</tr>
+<tr class="odd">
+<td>Log Filter</td>
+<td><a href="../manual/log-filters/mask-passwords.html" title="User Guide - Mask Passwords">Mask Passwords</a></td>
+<td>Masks secure input option values from being emitted in the logs</td>
+<td>Built-in</td>
+</tr>
+<tr class="even">
+<td>Log Filter</td>
+<td><a href="../manual/log-filters/render-formatted-data.html" title="User Guide - Render Formatted Data">Render Formatted Data</a></td>
+<td>Allows marking formatted data as a certain data type</td>
+<td>Built-in</td>
+</tr>
+<tr class="odd">
+<td>Log Filter</td>
+<td><a href="../manual/log-filters/key-value-data.html" title="User Guide - Key-Value Data">Key-Value Data</a></td>
+<td>Captures key/value data</td>
+<td>Built-in</td>
+</tr>
+<tr class="even">
+<td>Log Filter</td>
+<td><a href="../manual/log-filters/quiet-output.html" title="User Guide - Quiet Output">Quiet Output</a></td>
+<td>Supresses patterns of output</td>
+<td>Built-in</td>
+</tr>
+<tr class="odd">
+<td>Log Filter</td>
+<td><a href="../manual/log-filters/highlight-output.html" title="User Guide - Highlight Output">Highlight Output</a></td>
+<td>Highlights patterns of output</td>
+<td>Built-in</td>
+</tr>
+<tr class="even">
+<td>Log Filter</td>
+<td><a href="../manual/log-filters/progress-badge-log-filter-pro.html" title="User Guide - Progress Badge Log Filter (Pro)">Progress Badge</a></td>
+<td>Create graphic badges in log output</td>
+<td>Pro</td>
+</tr>
+<tr class="odd">
+<td>Content Converter</td>
+<td><a href="../manual/content-converters/html-table-view-converter.html" title="User Guide - Content Converter Plugins - HTML Table View Converter">HTML Table View</a></td>
+<td>Renders structured data as a HTML tables</td>
+<td>Built-in</td>
+</tr>
+<tr class="even">
+<td>Content Converter</td>
+<td><a href="../manual/content-converters/html-view-converter.html" title="User Guide - Content Converter Plugins - HTML View Converter">HTML View</a></td>
+<td>Renders embedded HTML</td>
+<td>Built-in</td>
+</tr>
+<tr class="odd">
+<td>Content Converter</td>
+<td><a href="../manual/content-converters/json-data-converter.html" title="User Guide - Content Converter Plugins - JSON Data Converter">JSON Data</a></td>
+<td>Parses JSON into a Java object</td>
+<td>Built-in</td>
+</tr>
+<tr class="even">
+<td>Content Converter</td>
+<td><a href="../manual/content-converters/markdown-converter.html" title="User Guide - Content Converter Plugins - Markdown Converter">Markdown</a></td>
+<td>Renders Markdown as HTML</td>
+<td>Built-in</td>
+</tr>
+<tr class="odd">
+<td>Content Converter</td>
+<td><a href="../manual/content-converters/properties-converter.html" title="User Guide - Content Converter Plugins - Properties Converter">Properties</a></td>
+<td>Parses Java style Properties data into a Java object</td>
+<td>Built-in</td>
+</tr>
+<tr class="even">
+<td>Content Converter</td>
+<td><a href="../manual/content-converters/tabular-data-converter.html" title="User Guide - Content Converter Plugins - Tabular Data Converter">Tabular Data</a></td>
+<td>Parses Tabular text (csv) into a a Java object</td>
+<td>Built-in</td>
+</tr>
+<tr class="odd">
+<td>Log Storage</td>
+<td><a href="../administration/cluster/logstore/azure-log-storage-plugin.html" title="Administrator Guide - Rundeck Pro Cluster - Logstore - Azure Log Storage Plugin">Azure Storage</a></td>
+<td>Stores log files in Azure Storage</td>
+<td>Community</td>
+</tr>
+<tr class="even">
+<td>Log Storage</td>
+<td><a href="../administration/cluster/logstore/s3-log-storage-plugin.html" title="Administrator Guide - Rundeck Pro Cluster - Logstore - S3 Log Storage Plugin">Amazon S3</a></td>
+<td>Stores log files in Amazon S3</td>
+<td>Community</td>
+</tr>
+<tr class="odd">
+<td>Node Execution</td>
+<td><a href="../administration/projects/node-execution/built-in-plugins.html" title="Administrator Guide - Projects - Node Execution - Built in Plugins">Node Execution</a></td>
+<td></td>
+<td>Built-in</td>
+</tr>
+<tr class="even">
+<td>Node Execution</td>
+<td><a href="../administration/projects/node-execution/script.html" title="Administrator Guide - Projects - Node Execution - Script">Script</a></td>
+<td>Uses a script to execute commands on remote nodes</td>
+<td>Built-in</td>
+</tr>
+<tr class="odd">
+<td>Node Execution</td>
+<td><a href="../administration/projects/node-execution/ssh.html" title="Administrator Guide - Projects - Node Execution - SSH">SSH</a></td>
+<td>Uses SSH to execute commands on remote nodes</td>
+<td>Built-in</td>
+</tr>
+<tr class="even">
+<td>Node Execution</td>
+<td><a href="../administration/projects/node-execution/powershell.html" title="Administrator Guide - Projects - Node Execution - Powershell">Powershell</a></td>
+<td>Uses PowerShell to execute commands on remote nodes</td>
+<td>Pro</td>
+</tr>
+<tr class="odd">
+<td>Resource Model Source</td>
+<td><a href="../administration/projects/resource-model-sources/built-in-plugins-file-directory-url-script.html" title="Administrator Guide - Projects - Node Model Sources - Built in Plugins (File, Directory, URL, Script)">Resource Model Source</a></td>
+<td></td>
+<td>Built-in</td>
+</tr>
+<tr class="even">
+<td>Resource Model Source</td>
+<td><a href="../administration/projects/resource-model-sources/resource-editor.html" title="Administrator Guide - Projects - Node Model Sources - Resource Editor">Resource Editor</a></td>
+<td></td>
+<td>Built-in</td>
+</tr>
+<tr class="odd">
+<td>Resource Model Source</td>
+<td><a href="../administration/projects/resource-model-sources/aws-ec2-nodes.html" title="Administrator Guide - Projects - Node Model Sources - AWS EC2 Nodes">AWS</a></td>
+<td>Populates your nodes from EC2</td>
+<td>Community</td>
+</tr>
+<tr class="even">
+<td>Resource Model Source</td>
+<td><a href="../administration/projects/resource-model-sources/azure.html" title="Administrator Guide - Projects - Node Model Sources - Azure">Azure</a></td>
+<td>Populates your nodes from Azure</td>
+<td>Community</td>
+</tr>
+<tr class="odd">
+<td>Resource Model Source</td>
+<td><a href="../administration/projects/resource-model-sources/service-now-cmdb.html" title="Administrator Guide - Projects - Node Model Sources - Service Now CMDB">ServiceNow</a></td>
+<td>Populates your nodes from ServiceNow’s CMDB</td>
+<td>Pro</td>
+</tr>
+<tr class="even">
+<td>Resource Model Source</td>
+<td><a href="../administration/projects/resource-model-sources/vmware-plugin.html" title="Administrator Guide - Projects - Node Model Sources - VMWare Plugin">VMware</a></td>
+<td>Populates your nodes from a VSphere ESXi server or VCenter Server</td>
+<td>Pro</td>
+</tr>
+<tr class="odd">
+<td>SCM</td>
+<td><a href="../administration/projects/scm/git-plugin.html" title="Administrator Guide - Projects - SCM - Git Plugin">Git</a></td>
+<td>Imports or exports jobs from a Git repository</td>
+<td>Community</td>
+</tr>
+<tr class="even">
+<td>SCM</td>
+<td><a href="../administration/projects/scm/job-replication-pro.html" title="Administrator Guide - Projects - SCM - Job Replication (Pro)">Job Replication</a></td>
+<td>Replicates job state between Rundeck Cluster instances</td>
+<td>Pro</td>
+</tr>
+<tr class="odd">
+<td>SSO</td>
+<td><a href="../administration/security/single-sign-on.html" title="Administrator Guide - Security - Single Sign On">Okta</a></td>
+<td>Allows you to use Okta to log into Rundeck</td>
+<td>Pro</td>
+</tr>
+<tr class="even">
+<td>Storage Converter</td>
+<td><a href="../administration/configuration/plugins/bundled-plugins.html#jasypt-encryption-plugin" title="Administrator Guide - Rundeck Configuration - Configuring Plugins - Bundled Plugins - Jasypt Encryption Plugin">Encyption</a></td>
+<td>Encrypts Key Storage and Project configuration data</td>
+<td>Built-in</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.7)</a></li>
+    
+    
+    
+    <li class="active"><a href="index.html">Rundeck Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+plugins/index.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/plugins/index.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-10-09T00:04:57UTC">2018-10-09T00:04:57UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+</body>
+</html>

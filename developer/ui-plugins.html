@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>UI Plugins</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="December 4, 2017" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.7)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="ui-plugins.html">UI Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="scm-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> SCM Plugins</a></li>
+      <li class="next"><a href="log-filter-plugins.html">Log Filter Plugins <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+developer/11-ui-plugins.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/developer/11-ui-plugins.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#behavior">Behavior</a></li>
+<li><a href="#zip-plugin-type">Zip Plugin Type</a><ul>
+<li><a href="#ui-plugin-provider-declaration">UI Plugin Provider Declaration</a></li>
+<li><a href="#localization">Localization</a></li>
+<li><a href="#icon">Icon</a></li>
+</ul></li>
+<li><a href="#java-plugin-type">Java Plugin Type</a><ul>
+<li><a href="#localization-1">Localization</a></li>
+<li><a href="#icon-1">Icon</a></li>
+</ul></li>
+<li><a href="#javascript-api">Javascript API</a><ul>
+<li><a href="#loading-resources">Loading resources</a></li>
+<li><a href="#loading-i18n-resources">Loading i18n Resources</a></li>
+</ul></li>
+<li><a href="#example-plugin">Example Plugin</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">UI Plugins</h1>
+</div>
+<h2 id="about">About</h2>
+<p>UI Plugins provide a way to include Javascript and CSS files in various parts of the Rundeck GUI’s HTML pages. You can define which pages of the GUI should include your plugin files, and use the Javascript and CSS to modify or add new features to the GUI.</p>
+<p>UI Plugins that are installed are loaded on all applicable pages by default.</p>
+<p>UI Plugins can either be packaged as Zip files or Java Jar files. The simplest is to use a Zip plugin type.</p>
+<p>Your Javascript can make use if a simple <a href="#javascript-api">Javascript API</a> for additional features.</p>
+<h2 id="behavior">Behavior</h2>
+<p>When Rundeck renders a page, it evaluates whether any UI plugins are applicable, and what resources of those plugins to load for the page. If some plugins declare that they <code>require</code> other plugins, the ordering is arranged to load required plugins first, if possible. Note: any plugin that you put in the <code>requires</code> section must also be configured to load on the same pages, otherwise Rundeck will not load it.</p>
+<p>For Zip UI plugins Rundeck looks at the <code>plugin.yaml</code> data which declares the page configurations to determine applicability. For Java plugins, Rundeck calls the <code>doesApply</code> method.</p>
+<p>When loading a plugin for the page, Rundeck will link to the script and stylesheets for the page. For Zip UI Plugins, the Page configuration determines which scripts and stylesheets to load. For Java plugins, the <code>scriptResourcesForPath</code> and <code>styleResourcesForPath</code> methods will be called.</p>
+<p>This is the list of available pages which can load UI plugins:</p>
+<ul>
+<li><code>menu/jobs</code>,</li>
+<li><code>menu/home</code></li>
+<li><code>menu/projectHome</code></li>
+<li><code>menu/executionMode</code></li>
+<li><code>menu/projectExport</code></li>
+<li><code>menu/projectImport</code></li>
+<li><code>menu/projectDelete</code></li>
+<li><code>menu/projectAcls</code></li>
+<li><code>menu/editProjectAclFile</code></li>
+<li><code>menu/createProjectAclFile</code></li>
+<li><code>menu/saveProjectAclFile</code></li>
+<li><code>menu/logStorage</code></li>
+<li><code>menu/securityConfig</code></li>
+<li><code>menu/acls</code></li>
+<li><code>menu/editSystemAclFile</code></li>
+<li><code>menu/createSystemAclFile</code></li>
+<li><code>menu/saveSystemAclFile</code></li>
+<li><code>menu/systemInfo</code></li>
+<li><code>menu/systemConfig</code></li>
+<li><code>menu/metrics</code></li>
+<li><code>menu/plugins</code></li>
+<li><code>menu/welcome</code></li>
+<li><code>menu/storage</code></li>
+<li><code>scheduledExecution/show</code></li>
+<li><code>scheduledExecution/edit</code></li>
+<li><code>scheduledExecution/delete</code></li>
+<li><code>scheduledExecution/create</code></li>
+<li><code>execution/show</code></li>
+<li><code>framework/nodes</code></li>
+<li><code>framework/adhoc</code></li>
+<li><code>framework/createProject</code></li>
+<li><code>framework/editProject</code></li>
+<li><code>framework/editProjectConfig</code></li>
+<li><code>framework/editProjectFile</code></li>
+<li><code>scm/index</code></li>
+<li><code>reports/index</code></li>
+</ul>
+<h2 id="zip-plugin-type">Zip Plugin Type</h2>
+<p>See the <a href="plugin-development.html#script-plugin-zip-structure">Plugin Development - Script plugin zip structure</a> for the basics of Zip plugin structure.</p>
+<p>The structure of the zip file is:</p>
+<pre><code>[name]-plugin.zip
+\- [name]-plugin/ -- root directory of zip contents, same name as zip file
+   |- plugin.yaml -- plugin metadata file
+   \- resources/  -- i18n resources, icons, (and for UI plugins: scripts/css)
+      |- icon.png
+      |- i18n/
+      |  |- messages.properties
+      |  |- messages_es_419.properties
+      |  \- ...
+      |- js/
+      |  |- myfile.js
+      |  \- ...
+      \- css/
+         |- mystyles.css
+         \- ...</code></pre>
+<h3 id="ui-plugin-provider-declaration">UI Plugin Provider Declaration</h3>
+<p>The following is required in the <code>providers:</code> section of the <code>plugin.yaml</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># yaml plugin metadata</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="fu">name:</span><span class="at"> plugin name</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="fu">version:</span><span class="at"> plugin version</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="fu">rundeckPluginVersion:</span><span class="at"> 1.2</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="fu">author:</span><span class="at"> author name</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="fu">date:</span><span class="at"> release date (ISO8601)</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="fu">url:</span><span class="at"> website URL</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="fu">providers:</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">    <span class="kw">-</span> <span class="fu">service:</span><span class="at"> UI</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">      <span class="fu">name:</span><span class="at"> my-provider-id</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12">      <span class="fu">plugin-type:</span><span class="at"> ui</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13">      <span class="fu">title:</span><span class="at"> </span><span class="st">&quot;My Plugin Title&quot;</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14">      <span class="fu">description:</span><span class="at"> </span><span class="st">&quot;My Plugin Description&quot;</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15">      <span class="fu">ui:</span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16">        <span class="kw">-</span> <span class="fu">pages:</span><span class="at"> </span><span class="st">&#39;*&#39;</span></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17">          <span class="fu">scripts:</span></a>
+<a class="sourceLine" id="cb2-18" data-line-number="18">            <span class="kw">-</span> js/my-init.js</a>
+<a class="sourceLine" id="cb2-19" data-line-number="19">            <span class="kw">-</span> js/lib/some-dependency.js</a>
+<a class="sourceLine" id="cb2-20" data-line-number="20">            <span class="kw">-</span> js/lib/my-main.js</a>
+<a class="sourceLine" id="cb2-21" data-line-number="21">          <span class="fu">requires:</span><span class="at"> </span><span class="st">&#39;some-other-provider&#39;</span></a>
+<a class="sourceLine" id="cb2-22" data-line-number="22">        <span class="kw">-</span> <span class="fu">pages:</span><span class="at"> </span><span class="kw">[</span><span class="st">&#39;some/path&#39;</span><span class="kw">]</span></a>
+<a class="sourceLine" id="cb2-23" data-line-number="23">          <span class="fu">styles:</span><span class="at"> </span></a>
+<a class="sourceLine" id="cb2-24" data-line-number="24">            <span class="kw">-</span> css/mystyles.css</a></code></pre></div>
+<p>For a UI plugin, define a <code>service: UI</code> and a <code>plugin-type: ui</code>. (The <code>providers</code> section can also define other providers, of any type.)</p>
+<p>For <code>name:</code> use a unique provider ID for your plugin.</p>
+<p>Within the <code>ui:</code> section is a list of UI Plugin Page Configurations.</p>
+<p>UI Plugin Page Configurations consist of:</p>
+<ul>
+<li><code>pages:</code> A list of applicable Page paths. This can be a single path string, a list of paths, or a <code>*</code> which will match all paths.</li>
+<li><code>scripts:</code> A single file or list of files. These are relative to the <code>resources</code> directory in your zip file.</li>
+<li><code>styles:</code> A single file, or a list of files. Thes are relative to the <code>resources</code> directory in your zip file.</li>
+<li><code>requires:</code> A single or list of other UI plugin provider IDs.</li>
+</ul>
+<p>See <a href="#javascript-api">Javascript API</a> for additional Javascript information.</p>
+<h3 id="localization">Localization</h3>
+<p>For the basics of zip plugin localization see: <a href="plugin-development.html#internationalizationlocalization-for-zip-files">Plugin Development - Internationalization/Localization for Zip files</a>.</p>
+<h3 id="icon">Icon</h3>
+<p>See <a href="plugin-development.html#plugin-icons">Plugin Icons</a>.</p>
+<h2 id="java-plugin-type">Java Plugin Type</h2>
+<ul>
+<li><em>Note</em>: Refer to <a href="plugin-development.html#java-plugin-development">Java Development</a> for information about developing a Java plugin for Rundeck.</li>
+</ul>
+<p>The plugin interface is <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.7-20180828/com/dtolabs/rundeck/plugins/rundeck/UIPlugin.html">UIPlugin</a>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb3-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">public</span> <span class="kw">interface</span> UIPlugin {</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">    <span class="co">/**</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">     <span class="co">* </span><span class="kw">@param path</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">     <span class="co">*</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">     <span class="co">*</span> <span class="kw">@return </span>true if this plugin applies at the path</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">     <span class="co">*/</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">    <span class="dt">boolean</span> <span class="fu">doesApply</span>(<span class="bu">String</span> path);</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">    <span class="co">/**</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">     <span class="co">*</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">     <span class="co">* </span><span class="kw">@param path</span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">     <span class="co">*</span> <span class="kw">@return </span>list of resources available at the path</a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">     <span class="co">*/</span></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15">    <span class="bu">List</span>&lt;<span class="bu">String</span>&gt; <span class="fu">resourcesForPath</span>(<span class="bu">String</span> path);</a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb3-17" data-line-number="17">    <span class="co">/**</span></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18">     <span class="co">* </span><span class="kw">@param path</span></a>
+<a class="sourceLine" id="cb3-19" data-line-number="19">     <span class="co">*</span></a>
+<a class="sourceLine" id="cb3-20" data-line-number="20">     <span class="co">*</span> <span class="kw">@return </span>list of javascript resources to load at the path</a>
+<a class="sourceLine" id="cb3-21" data-line-number="21">     <span class="co">*/</span></a>
+<a class="sourceLine" id="cb3-22" data-line-number="22">    <span class="bu">List</span>&lt;<span class="bu">String</span>&gt; <span class="fu">scriptResourcesForPath</span>(<span class="bu">String</span> path);</a>
+<a class="sourceLine" id="cb3-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb3-24" data-line-number="24">    <span class="co">/**</span></a>
+<a class="sourceLine" id="cb3-25" data-line-number="25">     <span class="co">* </span><span class="kw">@param path</span></a>
+<a class="sourceLine" id="cb3-26" data-line-number="26">     <span class="co">*</span></a>
+<a class="sourceLine" id="cb3-27" data-line-number="27">     <span class="co">*</span> <span class="kw">@return </span>list of css stylesheets to load at the path</a>
+<a class="sourceLine" id="cb3-28" data-line-number="28">     <span class="co">*/</span></a>
+<a class="sourceLine" id="cb3-29" data-line-number="29">    <span class="bu">List</span>&lt;<span class="bu">String</span>&gt; <span class="fu">styleResourcesForPath</span>(<span class="bu">String</span> path);</a>
+<a class="sourceLine" id="cb3-30" data-line-number="30"></a>
+<a class="sourceLine" id="cb3-31" data-line-number="31">    <span class="co">/**</span></a>
+<a class="sourceLine" id="cb3-32" data-line-number="32">     <span class="co">* </span><span class="kw">@param path</span></a>
+<a class="sourceLine" id="cb3-33" data-line-number="33">     <span class="co">*</span></a>
+<a class="sourceLine" id="cb3-34" data-line-number="34">     <span class="co">*</span> <span class="kw">@return </span>list of plugin names this plugin depends on for the specified path</a>
+<a class="sourceLine" id="cb3-35" data-line-number="35">     <span class="co">*/</span></a>
+<a class="sourceLine" id="cb3-36" data-line-number="36">    <span class="bu">List</span>&lt;<span class="bu">String</span>&gt; <span class="fu">requires</span>(<span class="bu">String</span> path);</a>
+<a class="sourceLine" id="cb3-37" data-line-number="37">}</a></code></pre></div>
+<p>The methods of the plugin are used as follows:</p>
+<ul>
+<li><code>doesApply</code>: should return <code>true</code>, if the plugin applies to the given path</li>
+<li><code>resourcesForPath</code>: return the list of resources for the given path</li>
+<li><code>scriptResourcesForPath</code>: return the list of Javascript resources for the path</li>
+<li><code>styleResourcesForPath</code>: return the list of CSS resources for the path</li>
+<li><code>requires</code>: return a list of other UI plugin names which this plugin requires, used to order the loading of plugin resources.</li>
+</ul>
+<p>Resources should be included in your plugin Jar file under a <code>resources/</code> directory.</p>
+<h3 id="localization-1">Localization</h3>
+<p>For the basics of Java plugin localization see: <a href="plugin-development.html#plugin-localization">Plugin Development - Plugin Localization</a>.</p>
+<h3 id="icon-1">Icon</h3>
+<p>See <a href="plugin-development.html#plugin-icons">Plugin Icons</a>.</p>
+<h2 id="javascript-api">Javascript API</h2>
+<p>When loaded in a Rundeck GUI page, your Javascript code can use a simple Javascript API to get more information about the Rundeck application, and your plugin.</p>
+<p>Note: Rundeck makes use of <a href="http://knockoutjs.com/">Knockout</a> and [jQuery][] on all GUI pages, so they can be used by your plugins. Knockout is useful to understand when interacting with the JS already included on a Rundeck page.</p>
+<p>Rundeck creates a window object called <code>rundeckPage</code> with these methods:</p>
+<ul>
+<li><code>project()</code>: returns the name of the current project, if available</li>
+<li><code>path()</code>: the page path</li>
+<li><code>lang()</code>: current user locale and language code</li>
+<li><code>pluginBaseUrl(pluginId)</code>: returns the base URL for loading file resources for a plugin with provider ID “pluginId”. Append a resources path to retrieve any plugin resource files.</li>
+<li><code>pluginBasei18nUrl(pluginId)</code>: returns the base URL for loading i18n resources for a plugin with provider ID “pluginId”. Append a resources path to retrieve i18n resources.</li>
+</ul>
+<p>Note: the <code>rundeckPage</code> object may have other methods, but any methods not documented here are subject to change.</p>
+<h3 id="loading-resources">Loading resources</h3>
+<p>You can load other resources from your plugin by using the <code>pluginBaseUrl</code> for your plugin.</p>
+<p>Example using jQuery:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">function</span> <span class="at">loadHtmlTemplate</span>(file)<span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">    <span class="co">//assuming my zip plugin has a resources/html/myfile.html</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">    <span class="kw">var</span> myProvider<span class="op">=</span><span class="st">&#39;com.mycompany.rundeck.myplugin&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">    <span class="kw">var</span> pluginUrl <span class="op">=</span> <span class="va">rundeckPage</span>.<span class="at">pluginBaseUrl</span>(myProvider)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">    <span class="kw">var</span> fullUrl <span class="op">=</span> pluginUrl <span class="op">+</span> <span class="st">&#39;/html/&#39;</span> <span class="op">+</span> file <span class="op">+</span> <span class="st">&quot;.html&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">    <span class="va">jQuery</span>.<span class="at">get</span>(fullUrl<span class="op">,</span> <span class="kw">function</span> (text) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">        <span class="co">//do something with the HTML contents         </span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="op">}</span></a></code></pre></div>
+<h3 id="loading-i18n-resources">Loading i18n Resources</h3>
+<p>The <code>rundeckPage.pluginBasei18nUrl(..)</code> method will return the base URL for loading i18n resources.</p>
+<p>Rundeck Plugin Localization/Internationalization uses java <code>.properties</code> formatted files. (See <a href="plugin-development.html#plugin-localization">Plugin Localization</a>). However, your i18n resources don’t have to be <code>.properties</code> files.</p>
+<p>Requesting resources via this URL provides two features to help with i18n:</p>
+<ol type="1">
+<li>Locale resolution. Requesting a path such as <code>rundeckPage.pluginBasei18nUrl('myprovider')+'/myfile.txt'</code>, will attempt to resolve the file by looking for a file based on the current User’s locale/language settings. E.g. if their language is set to Spanish (code <code>es_419</code>), the request will resolve to a file <code>i18n/myfile_es_419.txt</code> if it exists. It will fall back to the language (e.g. <code>es</code>), then any default locale (e.g. <code>en_us</code>), default language (e.g. <code>en</code>) and finally the original file path.</li>
+<li>Conversion of Java .properties to JSON. If you request a <code>.properties</code> file, and append a <code>?format=json</code> to the URL, Rundeck will load the Java Properties formatted data, and return the JSON for the data.</li>
+</ol>
+<p>Examples:</p>
+<p>Loads plugin i18n messages into the <code>window.Messages</code> object. If my zip plugin has a file <code>resources/i18n/messages_es_419.properties</code> and user’s current lang is <code>es_419</code>, this would load the Spanish messages:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">function</span> <span class="at">loadi18nMessages</span>(file)<span class="op">{</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">    <span class="kw">var</span> myProvider<span class="op">=</span><span class="st">&#39;com.mycompany.rundeck.myplugin&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">    <span class="kw">var</span> plugini18nBase <span class="op">=</span> <span class="va">rundeckPage</span>.<span class="at">pluginBasei18nUrl</span>(myProvider)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">    <span class="va">jQuery</span>.<span class="at">ajax</span>(<span class="op">{</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">        <span class="dt">url</span><span class="op">:</span> plugini18nBase <span class="op">+</span> <span class="st">&#39;/messages.properties?format=json&#39;</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">        <span class="dt">success</span><span class="op">:</span> <span class="kw">function</span> (data) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">            <span class="cf">if</span> (<span class="kw">typeof</span>(<span class="va">window</span>.<span class="at">Messages</span>) <span class="op">!=</span> <span class="st">&#39;object&#39;</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">                <span class="va">window</span>.<span class="at">Messages</span> <span class="op">=</span> <span class="op">{};</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">            <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">            <span class="va">jQuery</span>.<span class="at">extend</span>(<span class="va">window</span>.<span class="at">Messages</span><span class="op">,</span> data)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="op">}</span></a></code></pre></div>
+<p>This example is similar to the first example, but loads a HTML file specific to the Language/Locale of the user. If the locale is <code>es_419</code> this would load the <code>resources/i18n/html/myfile_es_419.html</code> file:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">function</span> <span class="at">loadi18nHtmlTemplate</span>(file)<span class="op">{</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">    <span class="kw">var</span> myProvider<span class="op">=</span><span class="st">&#39;com.mycompany.rundeck.myplugin&#39;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">    <span class="kw">var</span> plugini18nBase <span class="op">=</span> <span class="va">rundeckPage</span>.<span class="at">pluginBasei18nUrl</span>(myProvider)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">    <span class="kw">var</span> fullUrl <span class="op">=</span> plugini18nBase <span class="op">+</span> <span class="st">&#39;/html/&#39;</span> <span class="op">+</span> file <span class="op">+</span> <span class="st">&quot;.html&quot;</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">    <span class="va">jQuery</span>.<span class="at">get</span>(fullUrl<span class="op">,</span> <span class="kw">function</span> (text) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">        <span class="co">//do something with the HTML contents         </span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8">    <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="op">}</span></a></code></pre></div>
+<h2 id="example-plugin">Example Plugin</h2>
+<p>Here are some <a href="https://github.com/rundeck-plugins/ui-plugin-examples/">UI Plugin Examples</a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.7)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="ui-plugins.html">UI Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="scm-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> SCM Plugins</a></li>
+      <li class="next"><a href="log-filter-plugins.html">Log Filter Plugins <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+developer/11-ui-plugins.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/developer/11-ui-plugins.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-10-09T00:04:57UTC">2018-10-09T00:04:57UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+</body>
+</html>

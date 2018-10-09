@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GUI Customization</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <link rel="stylesheet" href="../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.7)</a></li>
+    
+        <li><a href="../index.html">Administrator Guide</a></li>
+    
+    
+    <li ><a href="index.html">Rundeck Configuration</a></li>
+    <li class="active"><a href="gui-customization.html">GUI Customization</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="email-settings.html"><i class="glyphicon glyphicon-arrow-left"></i> Email Settings</a></li>
+      <li class="next"><a href="localization.html">Localization <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/configuration/gui-customization.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/configuration/gui-customization.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#localization">Localization</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">GUI Customization</h1>
+</div>
+<p>You can modify some display features of the Rundeck GUI by setting these properties in the <a href="configuration-file-reference.html#rundeck-config.properties">rundeck-config.properties</a> file:</p>
+<hr />
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Property</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>rundeck.gui.logo</code></td>
+<td>Requires staticUserResources to be enabled. Sets the user’s logo (e.g. company/org logo) on the login, logout pages and in the header of the application</td>
+<td>‘rundeck.png’</td>
+</tr>
+<tr class="even">
+<td><code>rundeck.gui.logoSmall</code></td>
+<td>Requires staticUserResources to be enabled. Sets a small user’s logo (e.g. company/org logo) to be used in place of the larger logo in the header of the application.</td>
+<td>‘rundeck.small.png’</td>
+</tr>
+<tr class="odd">
+<td><code>rundeck.gui.sidebarColor</code></td>
+<td>Sets the background color of the navigation sidebar.</td>
+<td>‘#2910f8’</td>
+</tr>
+<tr class="even">
+<td><code>rundeck.gui.sidebarTextColor</code></td>
+<td>Sets the text color of the navigation sidebar.</td>
+<td>‘#fffdfa’</td>
+</tr>
+<tr class="odd">
+<td><code>rundeck.gui.sidebarTextActiveColor</code></td>
+<td>Sets the active text/link color of the navigation sidebar.</td>
+<td>‘#000000’</td>
+</tr>
+<tr class="even">
+<td><code>rundeck.gui.instanceName</code></td>
+<td>Sets the instance name</td>
+<td>‘Ops Management Console&gt; Prod’, ‘Ops Staging’</td>
+</tr>
+<tr class="odd">
+<td><code>rundeck.gui.instanceNameLabelColor</code></td>
+<td>Sets the instance label color</td>
+<td>‘#2910f8’</td>
+</tr>
+<tr class="even">
+<td><code>rundeck.gui.instanceNameLabelTextColor</code></td>
+<td>Sets the instance label text color</td>
+<td>‘#64fe31’</td>
+</tr>
+<tr class="odd">
+<td><code>rundeck.gui.title</code></td>
+<td>Title shown in app header</td>
+<td>Test App</td>
+</tr>
+<tr class="even">
+<td><code>rundeck.gui.staticUserResources.enabled</code></td>
+<td>Enable serving static files from $RDECK_BASE/user-assets dir. This must be set to true if using a custom logo.</td>
+<td>true</td>
+</tr>
+<tr class="odd">
+<td><code>rundeck.gui.paginatejobs.enabled</code></td>
+<td>Paginate job list when listing project jobs</td>
+<td>true</td>
+</tr>
+<tr class="even">
+<td><code>rundeck.gui.paginatejobs.max.per.page</code></td>
+<td>Number of jobs per page to display when job pagination is enabled</td>
+<td>true</td>
+</tr>
+<tr class="odd">
+<td><code>rundeck.gui.titleLink</code></td>
+<td>URL for the link used by the app header icon.</td>
+<td>http://rundeck.org</td>
+</tr>
+<tr class="even">
+<td><code>rundeck.gui.helpLink</code></td>
+<td>URL for the “help” link in the app header.</td>
+<td>http://rundeck.org/docs</td>
+</tr>
+<tr class="odd">
+<td><code>rundeck.gui.realJobTree</code></td>
+<td>Displaying a real tree in the Jobs overview instead of collapsing empty groups.</td>
+<td>false <strong>Default: true</strong></td>
+</tr>
+<tr class="even">
+<td><code>rundeck.gui.startpage</code></td>
+<td>Change the default page shown after choosing a project. Values: ‘adhoc’, ‘configure’, ‘createJob’, ‘events’, ‘home’, ‘jobs’, ‘nodes’, ‘projectHome’ or ‘uploadJob’.</td>
+<td><strong>Default: ‘projectHome’</strong></td>
+</tr>
+<tr class="odd">
+<td><code>rundeck.gui.execution.tail.lines.default</code></td>
+<td>Change the default number of lines shown in the execution page in tail mode view.</td>
+<td><strong>Default: 20</strong></td>
+</tr>
+<tr class="even">
+<td><code>rundeck.gui.execution.tail.lines.max</code></td>
+<td>Change the maximum number of lines shown in the execution page in tail mode view.</td>
+<td><strong>Default: 100</strong></td>
+</tr>
+<tr class="odd">
+<td><code>rundeck.gui.enableJobHoverInfo</code></td>
+<td>Shows job information when the user hovers over a job name in various pages.</td>
+<td><strong>Default: true</strong></td>
+</tr>
+<tr class="even">
+<td><code>rundeck.gui.login.welcome</code></td>
+<td>Text displayed in the login form pages.</td>
+<td><strong>Default: blank</strong></td>
+</tr>
+<tr class="odd">
+<td><code>rundeck.gui.login.welcomeHtml</code></td>
+<td>HTML displayed in the login form pages. The HTML will be sanitized before display.</td>
+<td><strong>Default: blank</strong></td>
+</tr>
+<tr class="even">
+<td><code>rundeck.gui.login.footerMessageHtml</code></td>
+<td>HTML displayed in the login form</td>
+<td>pages (below the login form). The HTML will be sanitized before display.</td>
+</tr>
+<tr class="odd">
+<td><code>rundeck.gui.errorpage.hidestacktrace</code></td>
+<td>Hide Java stacktraces from the end true/false user when an error occurs.</td>
+<td><strong>Default: false</strong></td>
+</tr>
+<tr class="even">
+<td><code>rundeck.gui.job.description.disableHTML</code></td>
+<td>Disable extended Job description true/false and Option description rendering as HTML.</td>
+<td><strong>Default: false</strong></td>
+</tr>
+<tr class="odd">
+<td><code>rundeck.gui.clusterIdentityInHeader</code></td>
+<td>When cluster mode is enabled, true/false display server name/ID in header.</td>
+<td><strong>Default: false</strong></td>
+</tr>
+<tr class="even">
+<td><code>rundeck.gui.clusterIdentityInFooter</code></td>
+<td>When cluster mode is enabled, true/false display server name/ID in footer.</td>
+<td><strong>Default: true</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>The <code>rundeck.gui.errorpage.hidestacktrace</code> can also be set to true via a Java system property defined at system startup: <code>-Dorg.rundeck.gui.errorpage.hidestacktrace=true</code>.</p>
+<h2 id="localization">Localization</h2>
+<p>See <a href="localization.html">Localization</a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.7)</a></li>
+    
+        <li><a href="../index.html">Administrator Guide</a></li>
+    
+    
+    <li ><a href="index.html">Rundeck Configuration</a></li>
+    <li class="active"><a href="gui-customization.html">GUI Customization</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="email-settings.html"><i class="glyphicon glyphicon-arrow-left"></i> Email Settings</a></li>
+      <li class="next"><a href="localization.html">Localization <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/configuration/gui-customization.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/configuration/gui-customization.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-10-09T00:04:57UTC">2018-10-09T00:04:57UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+</body>
+</html>
