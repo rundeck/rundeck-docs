@@ -689,8 +689,7 @@ rundeck.security.authorization.preauthenticated.attributeName=REMOTE_USER_GROUPS
 rundeck.security.authorization.preauthenticated.delimiter=:</code></pre>
 <p>This configuration requires some additional setup to enable:</p>
 <ol type="1">
-<li><p>The file <code>WEB-INF/web.xml</code> inside the war contents <strong>must</strong> be modified to remove the <code>&lt;auth-constraint&gt;</code> element. This disables the behavior which causes the Container to trigger its authentication mechanism when a user browses to a Rundeck page requiring authorization.</p></li>
-<li><p>Apache HTTPD and Tomcat must be configured to communicate so that a list of User Roles is sent to Tomcat as a request Attribute with the given “attributeName”.</p></li>
+<li>Apache HTTPD and Tomcat must be configured to communicate so that a list of User Roles is sent to Tomcat as a request Attribute with the given “attributeName”.</li>
 </ol>
 <p>For Tomcat and Apache HTTPd with <code>mod_proxy_ajp</code>, here are some additional instructions:</p>
 <ol type="1">
@@ -771,7 +770,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-10-13T05:30:21UTC">2018-10-13T05:30:21UTC</span>
+<span class="generated-date" title="2018-10-22T20:40:31UTC">2018-10-22T20:40:31UTC</span>
 </p>
 </footer>
 </div>
