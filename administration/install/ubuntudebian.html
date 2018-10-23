@@ -178,7 +178,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="fu">sudo</span> apt-get install rundeck</a></code></pre></div>
 <h3 id="install-deb-package-directly">Install deb package directly</h3>
 <p>Download deb package: http://rundeck.org/download/deb/ and run:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">sudo</span> dpkg -i rundeck_x.xx.x-x-GA_all.deb</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">sudo</span> dpkg -i rundeckpro-cluster_3.0.x.deb</a></code></pre></div>
 <h2 id="rundeck-pro">Rundeck Pro</h2>
 <h3 id="install-with-apt-get-1">Install with apt-get</h3>
 <p>You can use this script to add the Rundeck Pro apt repo and install Rundeck Pro cluster:</p>
@@ -191,14 +191,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="fu">sudo</span> apt-get install rundeckpro-cluster</a></code></pre></div>
 <h3 id="install-deb-package-directly-1">Install deb package directly</h3>
 <p>Download deb package: http://download.rundeck.com/eval/ and run:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="fu">sudo</span> dpkg -i rundeckpro-EDITION_X.X.X-GA_all.deb</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="fu">sudo</span> dpkg -i rundeckpro-cluster_3.0.x.deb</a></code></pre></div>
 <h2 id="starting-rundeck">Starting Rundeck</h2>
-<p>To start Rundeck Pro:</p>
+<p>To start Rundeck:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="fu">sudo</span> service rundeckd start</a></code></pre></div>
 <p>To verify that the service started correctly, tail the logs:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="fu">tail</span> -f /var/log/rundeck/service.log</a></code></pre></div>
 <p>The service is ready once you see something similar to:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="ex">2018-04-25</span> 22:21:53.203:INFO:oejs.ServerConnector:main: Started ServerConnector@7d593bbc<span class="dt">{HTTP/1.1}{0.0.0.0:4440}</span></a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="ex">Grails</span> application running at http://localhost:4440 in environment: production</a></code></pre></div>
 <h2 id="logging-in-for-the-first-time">Logging in for the first time</h2>
 <ol type="1">
 <li>Navigate to <a href="http://localhost:4440/user/login">http://localhost:4440/</a> in a browser</li>
@@ -264,7 +264,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-10-23T17:42:36UTC">2018-10-23T17:42:36UTC</span>
+<span class="generated-date" title="2018-10-23T19:05:07UTC">2018-10-23T19:05:07UTC</span>
 </p>
 </footer>
 </div>
