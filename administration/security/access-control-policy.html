@@ -333,6 +333,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Creating Service tokens <code>create</code></li>
 </ul></li>
+<li>Managing plugins (actions on resource with kind ‘plugin’)
+<ul>
+<li>Listing installed and available plugins <code>read</code></li>
+<li>Installing plugins <code>install</code></li>
+<li>Uninstalling plugins <code>uninstall</code></li>
+<li>Full access <code>admin</code></li>
+</ul></li>
 </ul>
 <p>The following table summarizes the generic and specific resources and the actions you can restrict in the application scope:</p>
 <table>
@@ -444,6 +451,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td style="text-align: left;">none</td>
 <td style="text-align: left;"><code>generate_service_token</code></td>
 <td style="text-align: left;">Create a “service” token</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;"><code>admin</code></td>
+<td style="text-align: left;">Full access</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>plugin</code></td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;"><code>read</code></td>
+<td style="text-align: left;">List installed and available plugins</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;"><code>install</code></td>
+<td style="text-align: left;">Install plugins</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;"><code>uninstall</code></td>
+<td style="text-align: left;">Uninstall plugins</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">&quot;</td>
@@ -1026,7 +1061,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-10-23T19:05:07UTC">2018-10-23T19:05:07UTC</span>
+<span class="generated-date" title="2018-10-29T21:42:57UTC">2018-10-29T21:42:57UTC</span>
 </p>
 </footer>
 </div>
