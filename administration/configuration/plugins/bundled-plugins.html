@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bundled Plugins</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <link rel="stylesheet" href="../../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../../../index.html">Rundeck Documentation (3.0.8)</a></li>
+    
+        <li><a href="../../index.html">Administrator Guide</a></li>
+    
+        <li><a href="../index.html">Rundeck Configuration</a></li>
+    
+    
+    <li ><a href="index.html">Configuring Plugins</a></li>
+    <li class="active"><a href="bundled-plugins.html">Bundled Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="configuring.html"><i class="glyphicon glyphicon-arrow-left"></i> Configuring</a></li>
+      
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/configuration/plugins/bundled-plugins.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/configuration/plugins/bundled-plugins.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#ssh-plugins">SSH Plugins</a></li>
+<li><a href="#built-in-resource-model-sources">Built-in Resource Model Sources</a></li>
+<li><a href="#built-in-resource-model-formats">Built-in Resource Model Formats</a></li>
+<li><a href="#script-plugin">Script Plugin</a></li>
+<li><a href="#stub-plugin">Stub Plugin</a></li>
+<li><a href="#local-execution-plugin">Local Execution Plugin</a></li>
+<li><a href="#job-state-plugin">Job State Plugin</a></li>
+<li><a href="#flow-control-plugin">Flow Control Plugin</a></li>
+<li><a href="#jasypt-encryption-plugin">Jasypt Encryption Plugin</a></li>
+<li><a href="#git-plugin">Git Plugin</a></li>
+<li><a href="#copy-file-plugin">Copy File Plugin</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Bundled Plugins</h1>
+</div>
+<p>Rundeck comes with several plugins out of the box. <em>Built-in</em> plugins are part of the core installation, and do not have an associated plugin file. <em>Bundled</em> plugins come packaged in a plugin file, and are installed in the <code>libext</code> dir automatically at installation time.</p>
+<h2 id="ssh-plugins">SSH Plugins</h2>
+<p>Defines SSH Node Executor and SCP File Copier.</p>
+<ul>
+<li>See <a href="../../../manual/node-execution/ssh-node-execution.html">SSH Plugins</a></li>
+</ul>
+<p>File: <em>none</em> (built-in)</p>
+<h2 id="built-in-resource-model-sources">Built-in Resource Model Sources</h2>
+<p>Rundeck comes with four built-in Resource Model Source providers, see <a href="../../projects/resource-model-sources/built-in-plugins-file-directory-url-script.html">Resource Model Source Plugins</a>:</p>
+<ul>
+<li>File: Parses a file in one of the supported <a href="#built-in-resource-model-formats">Model Source Formats</a></li>
+<li>Directory: Scans all files in a directory in one of the supported formats</li>
+<li>URL: Loads a file from a URL in one of the supported formats</li>
+</ul>
+<p>File: <em>none</em> (built-in)</p>
+<h2 id="built-in-resource-model-formats">Built-in Resource Model Formats</h2>
+<p>Rundeck comes with three Resource Model Format plugins, see <a href="../../projects/resource-model-sources/built-in-plugins-file-directory-url-script.html#resource-model-document-formats">Resource Model Source Plugins</a>:</p>
+<ul>
+<li>XML: the <a href="../man5/resource-xml.html">resourcexml</a> format</li>
+<li>YAML: the <a href="../man5/resource-yaml.html">resourceyaml</a> format</li>
+<li>JSON: the <a href="../man5/resource-json.html">resourcejson</a> format</li>
+</ul>
+<p>File: <em>none</em> (built-in)</p>
+<h2 id="script-plugin">Script Plugin</h2>
+<p>Defines Script Node Executor and Script File Copier.</p>
+<p>For more detail see <a href="../../../manual/node-execution/script-node-execution.html">Script Plugin</a>.</p>
+<p>Executes an external script file to perform the command, useful for developing your own plugin with the <a href="../../../developer/plugin-development.html#script-plugin-development">Script Plugin Development</a> model.</p>
+<p>File: <code>rundeck-script-plugin-3.0.8-20180828.jar</code></p>
+<h2 id="stub-plugin">Stub Plugin</h2>
+<p>Provides a Node Executor, File Copier, and Resource Model Source. This plugin can be used for testing.</p>
+<p>The <code>stub-plugin</code> includes these providers:</p>
+<ul>
+<li><code>stub</code> for the NodeExecutor service</li>
+<li><code>stub</code> for the FileCopier service</li>
+<li><code>stub</code> for the ResourceModelSource service</li>
+</ul>
+<p>(Refer to <a href="configuring.html#node-execution">Configuring - Node Execution</a> to enable them.)</p>
+<p>This plugin does not actually perform any remote file copy or command execution, instead it simply echoes the command that was supposed to be executed, and pretends to have copied a file.</p>
+<p>This is intended for use in testing new Nodes, Jobs or Workflow sequences without affecting any actual runtime environment.</p>
+<p>You can also test some failure scenarios by configuring the following node attributes:</p>
+<dl>
+<dt><code>stub-exec-success</code>=“true/false”</dt>
+<dd><p>If set to false, the stub command execution will simulate command failure</p>
+</dd>
+<dt><code>stub-result-code</code></dt>
+<dd><p>Simulate the return result code from execution</p>
+</dd>
+</dl>
+<p>You could, for example, disable or test an entire project’s workflows or jobs by simply setting the <code>project.properties</code> node executor provider to <code>stub</code>.</p>
+<p>File: <code>rundeck-stub-plugin-3.0.8-20180828.jar</code></p>
+<h2 id="local-execution-plugin">Local Execution Plugin</h2>
+<p>A Node Step plugin which executes a command locally instead of on a target node.</p>
+<p>File: <code>rundeck-localexec-plugin-3.0.8-20180828.jar</code></p>
+<h2 id="job-state-plugin">Job State Plugin</h2>
+<p>Provides a Workflow Step:</p>
+<ul>
+<li>Job State Conditional: Can query and assert the state of another Job, such as running, succeeded, failed, etc, and optionally halt the current execution.</li>
+</ul>
+<p>File: <code>rundeck-job-state-plugin-3.0.8-20180828.jar</code></p>
+<h2 id="flow-control-plugin">Flow Control Plugin</h2>
+<p>Provides a Workflow Step:</p>
+<ul>
+<li>Flow Control: Can halt the execution with a custom status, useful as an Error handler.</li>
+</ul>
+<p>File: <code>rundeck-flow-control-plugin-3.0.8-20180828.jar</code></p>
+<h2 id="jasypt-encryption-plugin">Jasypt Encryption Plugin</h2>
+<p>Provides an encryption <a href="../storage-facility.html#storage-converters">storage converter</a> for the Storage facility. Can be used to encrypt the contents of Key Storage, and Project Configuration stored in the DB or on disk.</p>
+<p>This plugin provides password based encryption for storage contents.<br />
+It uses the <a href="http://jasypt.org">Jasypt</a> encryption library. The built in Java JCE is used unless another provider is specified, <a href="https://www.bouncycastle.org/">Bouncycastle</a> can be used by specifying the ‘BC’ provider name.</p>
+<p>Password, algorithm, provider, etc can be specified directly, or via environment variables (the <code>*EnvVarName</code> properties), or Java System properties (the <code>*SysPropName</code> properties).</p>
+<p>To enable it, see <a href="configuring.html#storage-converter-plugins">Configuring - Storage Converter Plugins</a>.</p>
+<p>See also: <a href="../../security/key-storage.html">Key Storage</a></p>
+<p>Provider type: <code>jasypt-encryption</code></p>
+<p>The following encryption properties marked with <code>*</code> can be set directly, using the property name shown, but they can all also be set dynamically using either an Environment variable, or a Java System Property.<br />
+Append either <code>EnvVarName</code> for the environment variable, or <code>SysPropName</code> to use the Java System Property.<br />
+If a System Property is specified: it is read in once and used by the initialization of the converter plugin, then the Java System Property is set to null so it cannot be read again.</p>
+<p>Configuration properties:</p>
+<dl>
+<dt><code>encryptorType</code></dt>
+<dd><p>Jasypt Encryptor to use. Either <code>basic</code>, <code>strong</code>, or <code>custom</code>. Default: ‘basic’.</p>
+<ul>
+<li><code>basic</code> uses algorithm <code>PBEWithMD5AndDES</code></li>
+<li><code>strong</code> requires use of the JCE Unlimited Strength policy files. (Algorithm: <code>PBEWithMD5AndTripleDES</code>)</li>
+<li><code>custom</code> is required to specify the algorithm.</li>
+</ul>
+</dd>
+<dt><code>password*</code></dt>
+<dd>the password.
+</dd>
+<dt><code>algorithm*</code></dt>
+<dd>the encryption algorithm.
+</dd>
+<dt><code>provider*</code></dt>
+<dd>the provider name. ‘BC’ indicates Bouncycastle.
+</dd>
+<dt><code>providerClassName*</code></dt>
+<dd>Java class name of the provider.
+</dd>
+<dt><code>keyObtentionIterations*</code></dt>
+<dd>Number of hashes to use for the password when generating the key, default is 1000.
+</dd>
+</dl>
+<p>Example configuration for the Key Storage facility:</p>
+<pre><code>rundeck.storage.converter.1.type=jasypt-encryption
+rundeck.storage.converter.1.path=keys
+rundeck.storage.converter.1.config.encryptorType=custom
+rundeck.storage.converter.1.config.passwordEnvVarName=ENC_PASSWORD
+rundeck.storage.converter.1.config.algorithm=PBEWITHSHA256AND128BITAES-CBC-BC
+rundeck.storage.converter.1.config.provider=BC</code></pre>
+<p>Example configuration for the Project Configuration storage facility:</p>
+<pre><code>rundeck.config.storage.converter.1.type=jasypt-encryption
+rundeck.config.storage.converter.1.path=/
+rundeck.config.storage.converter.1.config.password=sekrit
+rundeck.config.storage.converter.1.config.encryptorType=custom
+rundeck.config.storage.converter.1.config.algorithm=PBEWITHSHA256AND128BITAES-CBC-BC
+rundeck.config.storage.converter.1.config.provider=BC</code></pre>
+<p>File: <code>rundeck-jasypt-encryption-plugin-3.0.8-20180828.jar</code></p>
+<h2 id="git-plugin">Git Plugin</h2>
+<ul>
+<li>See <a href="../../../manual/scm/scm-git-plugin.html">SCM Git Plugin</a></li>
+</ul>
+<p>Provides SCM Export and SCM Import providers for Git.</p>
+<p>File: <code>rundeck-git-plugin-3.0.8-20180828.jar</code></p>
+<h2 id="copy-file-plugin">Copy File Plugin</h2>
+<p>Provides a Node Step that can copy a file to a node, using the Node’s File Copier.</p>
+<p>File: <code>rundeck-copyfile-plugin-3.0.8-20180828.jar</code></p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../../../index.html">Rundeck Documentation (3.0.8)</a></li>
+    
+        <li><a href="../../index.html">Administrator Guide</a></li>
+    
+        <li><a href="../index.html">Rundeck Configuration</a></li>
+    
+    
+    <li ><a href="index.html">Configuring Plugins</a></li>
+    <li class="active"><a href="bundled-plugins.html">Bundled Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="configuring.html"><i class="glyphicon glyphicon-arrow-left"></i> Configuring</a></li>
+      
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/configuration/plugins/bundled-plugins.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/configuration/plugins/bundled-plugins.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-10-30T00:34:13UTC">2018-10-30T00:34:13UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../../../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+</body>
+</html>
