@@ -97,6 +97,7 @@ jQuery(function(){
 <li><a href="#cli-log4j.properties">cli-log4j.properties</a></li>
 <li><a href="#profile">profile</a></li>
 <li><a href="#project.properties">project.properties</a><ul>
+<li><a href="#file-copier-destination-directory">File copier destination directory</a></li>
 <li><a href="#project-global-execution-variables">Project Global execution variables</a></li>
 </ul></li>
 <li><a href="#jaas-loginmodule.conf">jaas-loginmodule.conf</a></li>
@@ -208,7 +209,7 @@ username2: token_string2
 <h2 id="profile">profile</h2>
 <p>Shell environment variables used by the shell tools. This file contains several parameters needed during the startup of the shell tools like umask, Java home and classpath, and SSL options.</p>
 <h2 id="project.properties">project.properties</h2>
-<p>Rundeck project configuration file when using Filesystem based project definitions (see <a href="project-setup.html#project-definitions">Project Setup - Project Definitions</a>).</p>
+<p>Rundeck project configuration file when using Filesystem based project definitions (see <a href="https://rundeck.org/docs/administration/projects/configuration.html">Project Setup - Project Definitions</a>).</p>
 <p>One of these is generated at project setup time. Each project has a directory within the Rundeck projects directory, and the config file is within the <code>etc</code> subdirectory:</p>
 <pre><code>$RDECK_BASE/projects/[PROJECT-NAME]/etc/project.properties</code></pre>
 <table>
@@ -263,6 +264,8 @@ resources.source.2.type=url</code></pre>
 <pre><code>resources.source.3.config.directory=/var/rundeck/projects/${project.name}/site_nodes
 resources.source.3.type=directory</code></pre>
 <p>Additional sources increment the source number. You can reference the project name by using the <code>${project.name}</code> context variable.</p>
+<h3 id="file-copier-destination-directory">File copier destination directory</h3>
+<p>When executing a Script step, the destination file path to be used when copying the script can be set using Node, Project, or Framework configuration values. Please see the plugin <a href="https://rundeck.org/docs/administration/projects/node-execution/built-in-plugins.html#file-copier-destination-directory">documentation</a></p>
 <h3 id="project-global-execution-variables">Project Global execution variables</h3>
 <p>Project configuration entries of the form <code>project.globals.X=Y</code> Adds a variable <code>X</code> available in all execution contexts as <code>${globals.X}</code>, and overrides any global with the same name defined in <a href="#framework.properties"><code>framework.properties</code></a>.</p>
 <h2 id="jaas-loginmodule.conf">jaas-loginmodule.conf</h2>
@@ -479,7 +482,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-11-02T21:05:25UTC">2018-11-02T21:05:25UTC</span>
+<span class="generated-date" title="2018-11-02T21:06:34UTC">2018-11-02T21:06:34UTC</span>
 </p>
 </footer>
 </div>
