@@ -167,7 +167,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="#multiple-authentication-modules">Multiple Authentication Modules</a></li>
 </ul></li>
 <li><a href="#container-authentication-and-authorization">Container authentication and authorization</a></li>
-<li><a href="#preauthenticated-mode">Preauthenticated Mode</a></li>
+<li><a href="#preauthenticated-mode">Preauthenticated Mode</a><ul>
+<li><a href="#preauthenticated-mode-using-ajp-with-apache-and-tomcat">Preauthenticated Mode using AJP with apache and tomcat</a></li>
+<li><a href="#preauthenticated-mode-using-headers">Preauthenticated Mode using headers</a></li>
+<li><a href="#preauthenticated-mode-logout-redirection">Preauthenticated mode logout redirection</a></li>
+</ul></li>
 </ul>
 </div>
 </div>
@@ -677,6 +681,7 @@ user1: -,user,readonly</code></pre>
 <pre><code>rundeck.security.authorization.containerPrincipal.enabled=false
 rundeck.security.authorization.container.enabled=false</code></pre>
 <h1 id="preauthenticated-mode">Preauthenticated Mode</h1>
+<h2 id="preauthenticated-mode-using-ajp-with-apache-and-tomcat">Preauthenticated Mode using AJP with apache and tomcat</h2>
 <dl>
 <dt><code>preauthenticated</code></dt>
 <dd><p>“Preauthenticated” means that the Servlet Container (e.g. Tomcat) is not being used for authentication/authorization. The user name and role list are provided to Rundeck from another system, usually a reverse proxy set up “in front” of the Rundeck web application, such as Apache HTTPD. Rundeck accepts the “REMOTE_USER” as the username, and allows a configurable Request Attribute to contain the list of user roles.</p>
@@ -712,6 +717,21 @@ rundeck.security.authorization.preauthenticated.delimiter=:</code></pre>
 <p><strong>Note</strong>: <code>mod_proxy_ajp</code> requires prefixing the environment variable with “AJP_”, but <code>mod_jk</code> can pass the environment variable directly.</p>
 <p>Once authenticated via Apache, you should be able to access rundeck. You might see a page saying “You have no authorized access to projects”, and then “(User roles: role1, role2, …)” with a list of all of the user roles seen by Rundeck. This page just means that there are no aclpolicy files that match those roles, but the apache-&gt;tomcat authorization is still working correctly. At this point, move on to <a href="access-control-policy.html">Access Control Policy</a> to set up access control for the listed roles.</p>
 <p>If the “User roles:” part is blank, then it may not be working correctly.</p>
+<h2 id="preauthenticated-mode-using-headers">Preauthenticated Mode using headers</h2>
+<p>If you have a proxy sitting in front of your Rundeck installation that authenticates your users, you can send the authenticated user and groups to Rundeck via HTTP headers. Set the following properties in your <code>rundeck-config.properties</code> file.</p>
+<pre><code>rundeck.security.authorization.preauthenticated.enabled=true
+rundeck.security.authorization.preauthenticated.attributeName=REMOTE_USER_GROUPS
+rundeck.security.authorization.preauthenticated.delimiter=,
+rundeck.security.authorization.preauthenticated.userNameHeader=X-Forwarded-Uuid
+rundeck.security.authorization.preauthenticated.userRolesHeader=X-Forwarded-Roles</code></pre>
+<p>The <code>attributeName</code> property is the name of the request attribute which stores the user groups for the request. The forwarded headers will be put into this attribute. This attribute must be set for this method to work properly.</p>
+<p>The <code>userNameHeader</code> property is the name of the header from which to obtain the authenticated user name.</p>
+<p>The <code>userRolesHeader</code> property is the name of the header from which to obtain the list of user roles. The roles should be delimited by the delimiter specified in the <code>delimiter</code> property.</p>
+<h2 id="preauthenticated-mode-logout-redirection">Preauthenticated mode logout redirection</h2>
+<p>If you are running preauthenticated mode and wish to redirect to a custom logout url on user logout, set the following properties:</p>
+<pre><code># Redirect to upstream logout url
+rundeck.security.authorization.preauthenticated.redirectLogout=true
+rundeck.security.authorization.preauthenticated.redirectUrl=/customlogouturl</code></pre>
 </div>
 </div>
 </div>
@@ -770,7 +790,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-11-02T19:09:23UTC">2018-11-02T19:09:23UTC</span>
+<span class="generated-date" title="2018-11-02T21:05:25UTC">2018-11-02T21:05:25UTC</span>
 </p>
 </footer>
 </div>
