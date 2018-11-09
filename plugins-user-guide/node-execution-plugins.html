@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.8)</a></li>
+    
+    
+    <li ><a href="index.html">Plugins User Guide</a></li>
+    <li class="active"><a href="node-execution-plugins.html">Node Execution Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="workflow-step-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> Workflow Step Plugins</a></li>
+      <li class="next"><a href="resource-model-source-plugins.html">Resource Model Source Plugins <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#when-node-executors-are-invoked">When Node Executors are invoked</a></li>
+<li><a href="#file-copier-destination-directory">File Copier destination directory</a></li>
+<li><a href="#built-in-node-execution-plugins">Built-in Node Execution plugins</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<h2 id="when-node-executors-are-invoked"><a href="#when-node-executors-are-invoked">When Node Executors are invoked</a></h2>
+<p>Rundeck executes Command items on Nodes. The command may be part of a Workflow as defined in a Job, and it may be executed multiple times on different nodes.</p>
+<p>Several &quot;kinds&quot; of Command items can be specified in Workflows:</p>
+<ol style="list-style-type: decimal">
+<li>&quot;exec&quot; commands - simple system command strings.</li>
+<li>&quot;script&quot; commands - either embedded script content, or server-local script. files can be sent to the specified node and then executed with a set of input arguments.</li>
+<li>&quot;jobref&quot; commands - references to other Jobs by name that will be executed with a set of input arguments.</li>
+<li>custom - Users can use or create their own workflow step plugins.</li>
+</ol>
+<p>Rundeck uses the NodeExecutor and FileCopier services as part of the process of executing these command types.</p>
+<p>The procedure for executing an &quot;exec&quot; command is:</p>
+<ol style="list-style-type: decimal">
+<li>load the NodeExecutor provider for the node and context.</li>
+<li>call the NodeExecutor#executeCommand method.</li>
+</ol>
+<p>The procedure for executing a &quot;script&quot; command is:</p>
+<ol style="list-style-type: decimal">
+<li>load the FileCopier provider for the node and context.</li>
+<li>call the FileCopier#copy* method.</li>
+<li>load the NodeExecutor provider for the node and context.</li>
+<li>Possibly execute an intermediate command (such as &quot;chmod +x&quot; on the copied file).</li>
+<li>execute the NodeExecutor#executeCommand method, passing the filepath of the copied file, and any arguments to the script command.</li>
+</ol>
+<h2 id="file-copier-destination-directory"><a href="#file-copier-destination-directory">File Copier destination directory</a></h2>
+<p>When executing a Script step, the destination file path to be used when copying the script can be set using Node, Project, or Framework configuration values.</p>
+<p>Node Attributes:</p>
+<ul>
+<li><code>file-copy-destination-dir</code>: The directory on the remote node to copy the script file to before executing it. The default value is <code>C:/WINDOWS/TEMP/</code> on Windows nodes, and <code>/tmp</code> for other nodes.</li>
+<li><code>osFamily</code>: specify &quot;windows&quot; for windows nodes.</li>
+</ul>
+<p>The <code>file-copy-destination-dir</code> can be set at the project and framework level, and can have a default be specified depending on the osfamily as well:</p>
+<p>In <code>project.properties</code> file:</p>
+<ul>
+<li><code>project.file-copy-destination-dir</code> - default for all nodes in project</li>
+<li><code>project.file-copy-destination-dir.[osfamily]</code> - default for nodes in the project with specified osfamily</li>
+</ul>
+<p>In <code>framework.properties</code> file:</p>
+<ul>
+<li><code>framework.file-copy-destination-dir</code> - default for all nodes in framework</li>
+<li><code>framework.file-copy-destination-dir.[osfamily]</code> - default for nodes in the framework with specified osfamily</li>
+</ul>
+<p>The order to determine the value is:</p>
+<ol style="list-style-type: decimal">
+<li>node-specific</li>
+<li>project-os-specific</li>
+<li>project-specific</li>
+<li>framework-os-specific</li>
+<li>framework-specific</li>
+</ol>
+<h2 id="built-in-node-execution-plugins"><a href="#built-in-node-execution-plugins">Built-in Node Execution plugins</a></h2>
+<p>Rundeck includes the following node execution plugins.</p>
+<dl>
+<dt><code>local</code></dt>
+<dd><p>local execution of a command.</p>
+</dd>
+<dt><code>jsch-ssh</code></dt>
+<dd><p>remote execution of a command via SSH, requiring the &quot;hostname&quot;, and &quot;username&quot; attributes on a node.</p>
+</dd>
+</dl>
+<p>For FileCopier, these plugins:</p>
+<dl>
+<dt><code>local</code></dt>
+<dd><p>creates a local temp file for a script.</p>
+</dd>
+<dt><code>jsch-scp</code></dt>
+<dd><p>remote copy of a command via SCP, requiring the &quot;hostname&quot; and &quot;username&quot; attributes on a node.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.8)</a></li>
+    
+    
+    <li ><a href="index.html">Plugins User Guide</a></li>
+    <li class="active"><a href="node-execution-plugins.html">Node Execution Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="workflow-step-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> Workflow Step Plugins</a></li>
+      <li class="next"><a href="resource-model-source-plugins.html">Resource Model Source Plugins <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-11-09T21:12:17UTC">2018-11-09T21:12:17UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
