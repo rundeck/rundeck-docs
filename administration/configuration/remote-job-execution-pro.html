@@ -98,28 +98,28 @@ jQuery(function(){
 <p>Configure the following remote execution policy parameters in <code>rundeck-config.properties</code>.</p>
 <h4 id="policy">Policy</h4>
 <pre><code>rundeck.clusterMode.remoteExecution.policy = &lt;Policy&gt;</code></pre>
-<p>Choose from the following <Policy> settings:</p>
+<p>Choose from the following <code>&lt;Policy&gt;</code> settings:</p>
 <ul>
-<li>None - Default. Executes locally only</li>
-<li>Random - Executes randomly among allowed members</li>
-<li>RoundRobin - Executes round-robin style among allowed members</li>
-<li>Preset - Executes on one other preset member</li>
-<li>Load - Executes on a member based on load (Requires Pro Cluster 2.3.0 or a later release. See Enable Load Balanced Policy)</li>
+<li><code>None</code> - Default. Executes locally only</li>
+<li><code>Random</code> - Executes randomly among allowed members</li>
+<li><code>RoundRobin</code> - Executes round-robin style among allowed members</li>
+<li><code>Preset</code> - Executes on one other preset member</li>
+<li><code>Load</code> - Executes on a member based on load (Requires Pro Cluster 2.3.0 or a later release. See Enable Load Balanced Policy)</li>
 </ul>
 <h4 id="list-of-allowed-members">List of Allowed Members</h4>
 <pre><code>rundeck.clusterMode.remoteExecution.config.allowed = &lt;List of Allowed Members&gt;</code></pre>
-<p>The <List of Allowed Members> determines additional cluster members that the policy can execute on. Enter values separated by a comma:</p>
+<p>The <code>&lt;List of Allowed Members&gt;</code> determines additional cluster members that the policy can execute on. Enter values separated by a comma:</p>
 <ul>
-<li>Self - Execute locally</li>
-<li>Other - Any other member except this one</li>
-<li>UUID - A particular UUID</li>
-<li>/regex/ - A regular expression matching a UUID</li>
+<li><code>Self</code> - Execute locally</li>
+<li><code>Other</code> - Any other member except this one</li>
+<li><strong>UUID</strong> - A particular UUID</li>
+<li><code>/regex/</code> - A regular expression matching a UUID</li>
 </ul>
 <p><strong>Example</strong></p>
 <pre><code>rundeck.clusterMode.remoteExecution.config.allowed = self,/1C519C5A-4E78-4BE9-85EC-.+/</code></pre>
 <p>The example configuration shows Self and a regular expression combined.</p>
 <h4 id="list-of-member-tags">List of Member Tags</h4>
-<p>The <List of Member Tags> parameter allows you to restrict the remote Cluster Members by using tags. The tags are similar to Node Tags. The special tag, Self, is automatically only assigned to the <em>local</em> cluster node. Set tags for a cluster member in the framework.properties file.</p>
+<p>The <code>&lt;List of Member Tags&gt;</code> parameter allows you to restrict the remote Cluster Members by using tags. The tags are similar to Node Tags. The special tag, Self, is automatically only assigned to the <em>local</em> cluster node. Set tags for a cluster member in the framework.properties file.</p>
 <pre><code>rundeck.clusterMode.remoteExecution.config.allowedTags = &lt;List of Member Tags&gt;
 rundeck.clusterMode.remoteExecution.config.preferredTags = &lt;List of Member Tags&gt;
 rundeck.clusterMode.remoteExecution.config.activeOnly = true/false</code></pre>
@@ -219,7 +219,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-11-02T21:06:34UTC">2018-11-02T21:06:34UTC</span>
+<span class="generated-date" title="2018-11-09T18:50:41UTC">2018-11-09T18:50:41UTC</span>
 </p>
 </footer>
 </div>
