@@ -144,21 +144,21 @@ framework.server.url = http://localhost:8080/rundeck</code></pre>
 <h2 id="installation-on-windows">Installation on Windows</h2>
 <ul>
 <li>Install Tomcat on your environment, as a service or just using the binaries (as for this example).</li>
-<li><a href="https://rundeck.org/downloads.html">Download</a> the latest version of Rundeck war file and place it in tomcat.base as e.g. rundeck.war</li>
-<li>Create tomcat.base.bat</li>
+<li><a href="https://rundeck.org/downloads.html">Download</a> the latest version of Rundeck war file and place it in tomcat.base\webapps\ as e.g. rundeck.war</li>
+<li>Create tomcat.base\bin\setenv.bat</li>
 </ul>
 <pre><code>setenv.bat content:
    set &quot;JRE_HOME=C:\Program Files\Java\jre1.8.0_181&quot;
    set &quot;JAVA_OPTS=-XX:MaxPermSize=512m -Xmx2048m -Xms512m -server -Drdeck.base=C:\path\to\rundeck.base -Drundeck.config.location=C:\path\to\rundeck.base\server\config\rundeck-config.properties&quot;</code></pre>
 <ul>
-<li>Create C:.base</li>
+<li>Create C:\path\to\rundeck.base</li>
 <li>Start Tomcat</li>
 <li>Go to http://localhost:8080/rundeck, then at login screen: stop Tomcat</li>
-<li>Edit rdeck.base-config.properties to match Tomcat’s url:</li>
+<li>Edit rdeck.base\server\config\rundeck-config.properties to match Tomcat’s url:</li>
 </ul>
 <pre><code>grails.serverURL=http://localhost:8080/rundeck</code></pre>
 <ul>
-<li>Edit rdeck.base.properties to match Tomcat’s url:</li>
+<li>Edit rdeck.base\etc\framework.properties to match Tomcat’s url:</li>
 </ul>
 <pre><code>framework.server.name = localhost
 framework.server.hostname = localhost
@@ -347,7 +347,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-11-09T19:21:24UTC">2018-11-09T19:21:24UTC</span>
+<span class="generated-date" title="2018-11-15T15:40:17UTC">2018-11-15T15:40:17UTC</span>
 </p>
 </footer>
 </div>

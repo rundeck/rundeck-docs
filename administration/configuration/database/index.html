@@ -162,8 +162,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>dataSource.url</code> specifices the connection URL for the data source.</p>
 <p>If necessary, you may have to specify other dataSource properties, such as username and password, depending on the type of database. See the sections below for your specific Database type.</p>
 <h3 id="add-the-jdbc-driver">Add the JDBC Driver</h3>
-<p>Rundeck includes a JDBC driver for Mysql and H2. If you are using another database copy the appropriate JDBC driver, such as “ojdbc14.jar” for Oracle into the server <code>lib</code> dir:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="fu">cp</span> ojdbc14.jar <span class="va">$RDECK_BASE</span>/server/lib</a></code></pre></div>
+<p>Rundeck includes a JDBC driver for Mysql, MariaDB, Postgres, MSsql and H2. If you are using another database or if you want to use an updated driver, copy the appropriate JDBC driver, such as “ojdbc14.jar” for Oracle into the server <code>lib</code> dir:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="fu">cp</span> ojdbc14.jar <span class="va">$RDECK_BASE</span>/server/lib</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="ex">For</span> RPM and DEB you should create /var/lib/rundeck/lib folder and place the driver there.</a></code></pre></div>
 <h2 id="sections">Sections</h2>
 <ol type="1">
 <li><a href="mysql.html">Mysql</a></li>
@@ -232,7 +234,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-11-09T19:21:24UTC">2018-11-09T19:21:24UTC</span>
+<span class="generated-date" title="2018-11-15T15:40:17UTC">2018-11-15T15:40:17UTC</span>
 </p>
 </footer>
 </div>
