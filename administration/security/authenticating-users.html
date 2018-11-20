@@ -161,9 +161,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><a href="#pam">PAM</a><ul>
 <li><a href="#jettypamloginmodule">JettyPamLoginModule</a></li>
+</ul></li>
 <li><a href="#jettyrolepropertyfileloginmodule">JettyRolePropertyFileLoginModule</a></li>
 <li><a href="#jettyauthpropertyfileloginmodule">JettyAuthPropertyFileLoginModule</a></li>
-</ul></li>
 <li><a href="#multiple-authentication-modules">Multiple Authentication Modules</a></li>
 </ul></li>
 <li><a href="#container-authentication-and-authorization">Container authentication and authorization</a></li>
@@ -623,7 +623,7 @@ SSL-Session:
 <li><code>useUnixGroups</code> - true/false. If true, the unix Groups defined for the user will be included as authorization roles. Default: false.</li>
 <li><code>supplementalRoles</code> - a comma-separated list of additional user roles to add to any authenticated user. Example: ‘user,readonly’</li>
 </ul>
-<h3 id="jettyrolepropertyfileloginmodule">JettyRolePropertyFileLoginModule</h3>
+<h2 id="jettyrolepropertyfileloginmodule">JettyRolePropertyFileLoginModule</h2>
 <p>This module does not authenticate, and requires that <code>useFirstPass</code> or <code>tryFirstPass</code> is set to <code>true</code>, and that a previous module has <code>storePass</code> set to <code>true</code>.</p>
 <p>It then looks the username up in the Properties file, and applies any roles for the matching user, if found.</p>
 <p>Configuration properties:</p>
@@ -635,7 +635,7 @@ SSL-Session:
 <p>Example properties file with dummy passwords and roles:</p>
 <pre><code>admin: -,user,admin
 user1: -,user,readonly</code></pre>
-<h3 id="jettyauthpropertyfileloginmodule">JettyAuthPropertyFileLoginModule</h3>
+<h2 id="jettyauthpropertyfileloginmodule">JettyAuthPropertyFileLoginModule</h2>
 <p>This module provides authentication in the same way as the <a href="#PropertyFileLoginModule">realm.properties</a> mechanism, but does not use any of the role names found in the file. It can be combined with <code>JettyRolePropertyFileLoginModule</code> by using <code>storePass=true</code>.</p>
 <p>Configuration properties:</p>
 <ul>
@@ -806,7 +806,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-11-15T15:40:17UTC">2018-11-15T15:40:17UTC</span>
+<span class="generated-date" title="2018-11-20T00:34:17UTC">2018-11-20T00:34:17UTC</span>
 </p>
 </footer>
 </div>
