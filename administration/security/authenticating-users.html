@@ -166,6 +166,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="#jettyauthpropertyfileloginmodule">JettyAuthPropertyFileLoginModule</a></li>
 <li><a href="#multiple-authentication-modules">Multiple Authentication Modules</a></li>
 </ul></li>
+<li><a href="#jaas-authorization-testing">Jaas Authorization Testing</a></li>
 <li><a href="#container-authentication-and-authorization">Container authentication and authorization</a></li>
 <li><a href="#preauthenticated-mode">Preauthenticated Mode</a><ul>
 <li><a href="#preauthenticated-mode-using-ajp-with-apache-and-tomcat">Preauthenticated Mode using AJP with apache and tomcat</a></li>
@@ -683,6 +684,22 @@ user1: -,user,readonly</code></pre>
 <li>If auth succeeds, finish with successful authentication</li>
 <li>If auth fails, finish with failed authentication</li>
 </ol>
+<h1 id="jaas-authorization-testing">Jaas Authorization Testing</h1>
+<p>If you would like to test your Jaas configuration without restarting Rundeck every time you make a change to your Jaas configuration, you can execute the command:</p>
+<pre><code>$ java -jar -Drundeck.jaaslogin=true -Dloginmodule.name=$LOGIN_MODULE_NAME -Drdeck.base=$RD_BASE_DIR rundeck.war --testauth
+
+ex.
+
+$ java -jar -Drundeck.jaaslogin=true -Dloginmodule.name=RDpropertyfilelogin -Drdeck.base=/etc/rundeck rundeck.war --testauth
+$ Checking file: /etc/rundeck/server/config/jaas-loginmodule.conf
+$ Checking login module: RDpropertyfilelogin
+$ Enter user name: admin
+$ Enter password admin &lt;-- This is masked in actual use
+$ Login Succeeded!  </code></pre>
+<p>The Jaas configuration file you are testing against will be printed out, along with the name of the login module you are testing.<br />
+You will be prompted to enter a username and password. These will be compared against your current Jaas configuration.<br />
+If the login is successful you will see: <code>Login Succeeded!</code><br />
+If the login fails a stacktrace will be printed out which will contain the details about the failure.</p>
 <h1 id="container-authentication-and-authorization">Container authentication and authorization</h1>
 <p>Container Authentication provides the Servlet context used by Rundeck with a few mechanisms to determine what roles the user has.</p>
 <dl>
@@ -806,7 +823,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-11-20T00:34:17UTC">2018-11-20T00:34:17UTC</span>
+<span class="generated-date" title="2018-11-21T18:48:21UTC">2018-11-21T18:48:21UTC</span>
 </p>
 </footer>
 </div>
