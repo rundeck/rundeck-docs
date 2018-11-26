@@ -304,7 +304,8 @@ resources.source.3.type=directory</code></pre>
 <h3 id="security">Security</h3>
 <ul>
 <li><p><code>rundeck.security.useHMacRequestTokens</code> : <code>true/false</code>. Default: <code>true</code>. Switches between HMac based request tokens, and the default grails UUID tokens. HMac tokens have a timeout, which may cause submitted forms or actions to fail with a message like “Token has expired”.<br />
-If set to false, UUIDs will be used instead of HMac tokens, and they have no timeouts. The default timeout for tokens can be changed with the <code>-Dorg.rundeck.web.infosec.HMacSynchronizerTokensHolder.DEFAULT_DURATION=[timeout in ms]</code>.</p></li>
+If set to false, UUIDs will be used instead of HMac tokens, and they have no timeouts.<br />
+The default timeout for tokens can be changed with the java system property <code>-Dorg.rundeck.web.infosec.HMacSynchronizerTokensHolder.DEFAULT_DURATION=[timeout in ms]</code>.</p></li>
 <li><p><code>rundeck.security.apiCookieAccess.enabled</code>: <code>true/false</code>. Default: <code>true</code>.<br />
 Determines whether access to the API is allowed if the API client authenticates via session cookies (i.e. username and password login.) If set to <code>false</code>, the current CLI tools and API libraries will not operate correctly if they use username and password login.</p></li>
 <li><p><code>rundeck.api.tokens.duration.max</code>: Duration string indicating maximum lifetime of API Tokens. If unset, the value will be “30d” (30 days). Format: “##{ydhms}” (years, days, hours, minutes, seconds). If you want to disable the max expiration you can set it to 0 and create token with 0 duration that don’t expire.</p></li>
@@ -364,7 +365,7 @@ rundeck.execution.stats.retryDelay=5000</code></pre>
 <pre><code># capture metrics for requests via a filter
 rundeck.metrics.requestFilterEnabled=true/false
 
-# use JMX 
+# use JMX
 rundeck.metrics.jmxEnabled=true/false</code></pre>
 <h4 id="metrics-api-endpoints">Metrics API Endpoints</h4>
 <p>Rundeck exposes Metrics data via API endpoints, which are enabled by default.</p>
@@ -514,7 +515,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-11-21T23:57:34UTC">2018-11-21T23:57:34UTC</span>
+<span class="generated-date" title="2018-11-26T18:10:44UTC">2018-11-26T18:10:44UTC</span>
 </p>
 </footer>
 </div>
