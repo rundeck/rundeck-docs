@@ -103,8 +103,10 @@ jQuery(function(){
 <div class="nav">
 <ul>
 <li><a href="#executable-war">Executable War</a></li>
-<li><a href="#profile">Profile</a></li>
 <li><a href="#properties-reference">Properties Reference</a></li>
+<li><a href="#rpm-and-deb">RPM and DEB</a><ul>
+<li><a href="#environment-variables-defaults">Environment Variables Defaults</a></li>
+</ul></li>
 </ul>
 </div>
 </div>
@@ -117,14 +119,6 @@ jQuery(function(){
 <h2 id="executable-war">Executable War</h2>
 <p>If you are using <a href="../install/launcher.html" title="Administrator Guide - Installation - Launcher">Executable War</a> to start Rundeck, you would set the properties directly on the commandline, using the <code>-Dpropertyname=value</code> syntax. Add a <code>-D</code> for each property:</p>
 <pre><code>java -server -Dserver.session.timeout=3600 -Dserver.port=8080 -jar rundeck-3.0.5-20180828.war</code></pre>
-<h2 id="profile">Profile</h2>
-<p>For RPM or DEB installations, you can use environment variables set in a “defaults” file to add additional Java Sytem Properties.</p>
-<ul>
-<li>RPM install: <code>/etc/sysconfig/rundeckd</code></li>
-<li>DEB install: <code>/etc/default/rundeckd</code></li>
-</ul>
-<p>Within the <code>rundeckd</code> defaults file, declare a <code>RDECK_JVM_OPTS</code> variable:</p>
-<pre><code>RDECK_JVM_OPTS=&quot;-Dserver.session.timeout=3600 -Dserver.port=8080&quot;</code></pre>
 <h2 id="properties-reference">Properties Reference</h2>
 <ul>
 <li><code>server.port</code> The HTTP port to use for the server, default “4440”</li>
@@ -148,6 +142,18 @@ jQuery(function(){
 <li><code>rundeck.jetty.connector.ssl.includedCipherSuites</code> Comma-separated list of Cipher suites to enable. Default is based on available cipher suites. See <a href="../security/configuring-ssl.html#disabling-ssl-protocols">Disabling SSL Protocols</a>.</li>
 </ul>
 <p>For more information about using SSL, see <a href="../security/configuring-ssl.html">Configuring Rundeck for SSL</a>.</p>
+<h2 id="rpm-and-deb">RPM and DEB</h2>
+<p>You should <em>not</em> modify the <code>/etc/rundeck/profile</code> file directly, as it may be overwritten during upgrade, or any changes from the upgrade might not be applied.</p>
+<p>Instead, For RPM or DEB installations, you can use environment variables set in a “defaults” file to add additional Java Sytem Properties.</p>
+<ul>
+<li>RPM install: <code>/etc/sysconfig/rundeckd</code></li>
+<li>DEB install: <code>/etc/default/rundeckd</code></li>
+</ul>
+<p>Within the <code>rundeckd</code> defaults file, declare a <code>RDECK_JVM_OPTS</code> variable:</p>
+<pre><code>RDECK_JVM_OPTS=&quot;-Dserver.session.timeout=3600 -Dserver.port=8080&quot;</code></pre>
+<h3 id="environment-variables-defaults">Environment Variables Defaults</h3>
+<p>Here is a partial list of environment variables which are set in the <code>/etc/rundeck/profile</code>, and can be overridden in the <code>/etc/sysconfig/rundeckd</code> or <code>/etc/default/rundeckd</code> file.</p>
+<p>(from <code>/etc/rundeck/profile</code>) ~~<sub> RDECK_INSTALL=“<span class="math inline">${RDECK_INSTALL:-/var/lib/rundeck}&quot; RDECK_BASE=&quot;$</span>{RDECK_BASE:-/var/lib/rundeck}” RDECK_CONFIG=“<span class="math inline">${RDECK_CONFIG:-/etc/rundeck}&quot; RDECK_CONFIG_FILE=&quot;$</span>{RDECK_CONFIG_FILE:-<span class="math inline">$RDECK_CONFIG/rundeck-config.properties}&quot; RDECK_SERVER_BASE=&quot;$</span>{RDECK_SERVER_BASE:-<span class="math inline">$RDECK_BASE}&quot; RDECK_SERVER_CONFIG=&quot;$</span>{RDECK_SERVER_CONFIG:-<span class="math inline">$RDECK_CONFIG}&quot; RDECK_SERVER_DATA=&quot;$</span>{RDECK_SERVER_DATA:-<span class="math inline">$RDECK_BASE/data}&quot; RDECK_PROJECTS=&quot;$</span>{RDECK_PROJECTS:-<span class="math inline">$RDECK_BASE/projects}&quot; RUNDECK_TEMPDIR=&quot;$</span>{RUNDECK_TEMPDIR:-/tmp/rundeck}” RUNDECK_WORKDIR=“<span class="math inline">${RUNDECK_TEMPDIR:-$</span>RDECK_BASE/work}” RUNDECK_LOGDIR=“<span class="math inline">${RUNDECK_LOGDIR:-$</span>RDECK_BASE/logs}” RDECK_JVM_SETTINGS=“<span class="math inline">${RDECK_JVM_SETTINGS:- -Xmx1024m -Xms256m -XX:MaxMetaspaceSize=256m -server}&quot; RDECK_TRUSTSTORE_FILE=&quot;$</span>{RDECK_TRUSTSTORE_FILE:-<span class="math inline">$RDECK_CONFIG/ssl/truststore}&quot; RDECK_TRUSTSTORE_TYPE=&quot;$</span>{RDECK_TRUSTSTORE_TYPE:-jks}” JAAS_LOGIN=“<span class="math inline">${JAAS_LOGIN:-true}&quot; JAAS_CONF=&quot;$</span>{JAAS_CONF:-<span class="math inline">$RDECK_CONFIG/jaas-loginmodule.conf}&quot; LOGIN_MODULE=&quot;$</span>{LOGIN_MODULE:-RDpropertyfilelogin}” RDECK_HTTP_PORT=<span class="math inline"><em>R</em><em>D</em><em>E</em><em>C</em><em>K</em><sub><em>H</em></sub><em>T</em><em>T</em><em>P</em><sub><em>P</em></sub><em>O</em><em>R</em><em>T</em> :  − 4440<em>R</em><em>D</em><em>E</em><em>C</em><em>K</em><sub><em>H</em></sub><em>T</em><em>T</em><em>P</em><em>S</em><sub><em>P</em></sub><em>O</em><em>R</em><em>T</em>=</span>{RDECK_HTTPS_PORT:-4443} </sub>~~</p>
 </div>
 </div>
 </div>
@@ -220,7 +226,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-11-26T18:10:44UTC">2018-11-26T18:10:44UTC</span>
+<span class="generated-date" title="2018-11-27T00:22:51UTC">2018-11-27T00:22:51UTC</span>
 </p>
 </footer>
 </div>
