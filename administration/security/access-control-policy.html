@@ -686,6 +686,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Create Jobs (‘create’ action on a resource type with kind ‘job’)</li>
 <li>Delete Jobs (‘delete’ action on a resource type with kind ‘job’)</li>
+<li>Create or delete jobs using the SCM plugin only (‘scm_create’ and ‘scm_delete’ on a resource type with kind ‘job’)</li>
 <li>Read Node data (‘read’ action on a resource type with kind ‘node’)</li>
 <li>Update/Refresh node data (‘create’,‘update’,‘refresh’ action on a resource type with kind ‘node’)</li>
 <li>Read history events (‘read’ action on a resource type with kind ‘event’)</li>
@@ -717,6 +718,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td style="text-align: left;">&quot;</td>
 <td style="text-align: left;"><code>delete</code></td>
 <td style="text-align: left;">Delete jobs</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>scm_create</code></td>
+<td style="text-align: left;">Create a new job only using SCM import plugin</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>scm_delete</code></td>
+<td style="text-align: left;">Delete jobs only using SCM import plugin</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">&quot;</td>
@@ -864,12 +877,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td style="text-align: left;">Enable/disable the job for execution</td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>scm_create</code></td>
+<td style="text-align: left;">Create a Job only using SCM import plugin</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>scm_update</code></td>
+<td style="text-align: left;">Import changes to a job using SCM import plugin</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>scm_delete</code></td>
+<td style="text-align: left;">Delete a job only using SCM import plugin</td>
+</tr>
+<tr class="even">
 <td style="text-align: left;"><code>node</code></td>
 <td style="text-align: left;">“rundeck_server”, “nodename”, …</td>
 <td style="text-align: left;"><code>read</code></td>
 <td style="text-align: left;">View the node in the UI (see <a href="#node-resource-properties">Node resource properties</a>)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">&quot;</td>
 <td style="text-align: left;"></td>
 <td style="text-align: left;"><code>run</code></td>
@@ -1093,7 +1124,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-11-27T17:29:29UTC">2018-11-27T17:29:29UTC</span>
+<span class="generated-date" title="2018-11-27T17:32:22UTC">2018-11-27T17:32:22UTC</span>
 </p>
 </footer>
 </div>
