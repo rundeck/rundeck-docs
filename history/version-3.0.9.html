@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>edam8277965886565378421temp</title>
+  <title>Version 3.0.9</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="author" content="greg" />
+  <meta name="date" content="11/29/2018" />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -77,20 +79,20 @@ jQuery(function(){
     
     
     <li ><a href="index.html">Version History</a></li>
-    <li class="active"><a href="version-1.6.2.html">Version 1.6.2 (2013-09-19)</a></li>
+    <li class="active"><a href="version-3.0.9.html">Version 3.0.9 (2018-11-27)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
       
-      <li class="next"><a href="version-1.6.1.html">Version 1.6.1 (2013-08-24) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="next"><a href="version-3.0.8.html">Version 3.0.8 (2018-10-29) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
-    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+history/version-1.6.2.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-1.6.2.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+history/version-3.0.9.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-3.0.9.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
@@ -100,43 +102,99 @@ jQuery(function(){
 <div class="col-sm-3 toc-nav">
 <div class="nav">
 <ul>
-<li><a href="#release-1.6.2">Release 1.6.2</a></li>
+<li><a href="#release-3.0.9">Release 3.0.9</a><ul>
+<li><a href="#notes">Notes</a></li>
+<li><a href="#contributors">Contributors</a></li>
+<li><a href="#bug-reporters">Bug Reporters</a></li>
+<li><a href="#issues">Issues</a></li>
+</ul></li>
 </ul>
 </div>
 </div>
 <div class="col-sm-9">
-<h1 id="release-1.6.2">Release 1.6.2</h1>
-<p>Date: 2013-09-19</p>
-<p>Notable Changes:</p>
+<div class="page-header">
+<h1 class="title">Version 3.0.9</h1>
+</div>
+<h1 id="release-3.0.9">Release 3.0.9</h1>
+<p>Date: 2018-11-27</p>
+<p>Name: <span style="color: gold"><span class="glyphicon glyphicon-gift"></span> “jalapeño popper gold gift”</span></p>
+<h2 id="notes">Notes</h2>
+<p>Bug fixes and updates to the docker image.</p>
 <ul>
-<li>Bug fixes:
-<ul>
-<li>Job references could not be edited after upgrading from 1.6.0 to 1.6.1</li>
-<li>using node rank attribute with the same value on two nodes would skip nodes</li>
-<li>error running jobs with no options defined</li>
-<li>LDAPS certificate validation fixes</li>
-<li>Secure option data should not be echoed in DEBUG logs</li>
-</ul></li>
+<li>We have added new ACLs allowing access to Git/SCM import (job create, update, delete) without allowing normal GUI or API modifications.</li>
+<li>New: test JAAS login configuration from the commandline.</li>
 </ul>
-<p>Many thanks to Kim Ho for his contributions for this release!</p>
-<p>Contributors:</p>
+<h2 id="contributors">Contributors</h2>
 <ul>
-<li>Greg Schueler</li>
-<li>Kim Ho</li>
+<li>Dave Riseley (driseley)</li>
+<li>Greg Schueler (gschueler)</li>
+<li>Greg Zapp (ProTip)</li>
+<li>Jaime Tobar (jtobard)</li>
+<li>Jesse Marple (jessemarple)</li>
+<li>Luis Toledo (ltamaster)</li>
+<li>Petr (petrkle)</li>
+<li>Stefan Kirrmann (kirrmann)</li>
+<li>Stephen Joyner (sjrd218)</li>
+<li>miguelantonio</li>
 </ul>
-<p>Issues:</p>
+<h2 id="bug-reporters">Bug Reporters</h2>
 <ul>
-<li><a href="https://github.com/dtolabs/rundeck/issues/547">LDAP SSL CN validation checks fail to validate wildcard SSL cert names</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/pull/545">No stacktraces in logs when plugins throw exceptions</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/543">Improve execution page info when option variables are used in node filters</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/pull/542">Rundeck prints secure option data in DEBUG into execution logs</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/540">Java notification plugin Configuration map does not contain all values</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/539">Cannot edit job references if upgrading from 1.6.0 to 1.6.1</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/537">Can’t change current project if not authorized for last viewed project</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/535">using node rank attribute when dispatching will skip nodes if rank values are the same</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/534">Failed request: runJobInline . Result: Internal Server Error</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/531">rundeck does not remove remote dispatch files</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/pull/482">ldaps authentication CN validation fails when using alias providerUrl</a></li>
+<li>ProTip</li>
+<li>aparedero</li>
+<li>driseley</li>
+<li>gjvc</li>
+<li>gschueler</li>
+<li>gtsteffaniak</li>
+<li>jessemarple</li>
+<li>jplassnibatt</li>
+<li>jtobard</li>
+<li>kirrmann</li>
+<li>ltamaster</li>
+<li>miguelantonio</li>
+<li>mlamutt</li>
+<li>pchevallereau</li>
+<li>petrkle</li>
+<li>plambert</li>
+<li>sebastianbello</li>
+<li>sjrd218</li>
+<li>wilreichert</li>
+</ul>
+<h2 id="issues">Issues</h2>
+<p><a href="https://github.com/rundeck/rundeck/milestone/92">Milestone 3.0.9</a></p>
+<ul>
+<li><a href="https://github.com/rundeck/rundeck/pull/4253">Fix #4020 indent job groups in tree</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/4252">Remove extranious spaces from config</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/4251">Fix node display to use single line per node</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/4250">The nodes page each node takes up 2 lines</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/4248">Adds ID to tour list item</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/4244">Docker - Allow configurable MaxRAMFraction</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/4243">Disable toggle off of first run message</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/4241">Fix link to docs for Email notification help text</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/4235">Fix flow control status handling for job state conditional step</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/4233">Fixes #4141. Use combined shared context from the last step when executing the error handler</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/4228">Fixes ehcache warn message on bootstrap.</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/4227">3.0.8: WARNING message appearing at startup : n.s.ehcache.config.ConfigurationFactory : No configuration found</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/4222">Set an ID for the “first run message” div</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/4220">scm_update acl special permission</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/4216">Grails MaxUploadSize should be configurable for Docker</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/4207">Fix camelcase keys in remco template for docker image</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/4203">Docker image env variable RUNDECK_JAAS_LDAP_ROLEPREFIX doesn’t work</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/4202">Command line tester for checking Jaas auth setup.</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/4194">Fix #3452 and #3987 by adding a login module that can hot reload realm.properties</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/4189">rundeck-config.properties containing blankspaces</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/4181">Automatically generated server UUID in rundeck docker container breaks scheduled jobs</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/4180">Adding Services to the DynamicProperties interface</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/4178">job state conditional is not working since rundeck 2.9.x</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/4171">Fix for Rundeck #4167 - Null NotificationPlugin config</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/4167">Notification Plugins with no job level configuration fail in Rundeck 3.0.8</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/4141">Variables are not getting passed to a Workflow step’s error handler</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/4103">Referenced Job successOnEmptyNodeFilter</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/4077">“continue on empty node set” doesn’t work in a referenced job</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/4058">Allow GIT import from SCM without “update” access in the ACL</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/4020">Rundeck 3: jobs view should be tree-based, as in Rundeck 2.x</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3987">3.0.x and above no longer accepts “refreshInterval” in jaas-loginmodule.conf</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3452">When i add new user, it’s obligatory to restart Rundeck</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/391">improve JettyCachingLdapLoginModule</a></li>
 </ul>
 </div>
 </div>
@@ -167,20 +225,20 @@ jQuery(function(){
     
     
     <li ><a href="index.html">Version History</a></li>
-    <li class="active"><a href="version-1.6.2.html">Version 1.6.2 (2013-09-19)</a></li>
+    <li class="active"><a href="version-3.0.9.html">Version 3.0.9 (2018-11-27)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
       
-      <li class="next"><a href="version-1.6.1.html">Version 1.6.1 (2013-08-24) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="next"><a href="version-3.0.8.html">Version 3.0.8 (2018-10-29) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
-    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+history/version-1.6.2.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-1.6.2.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+history/version-3.0.9.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-3.0.9.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
