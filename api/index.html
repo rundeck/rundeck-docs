@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>API Reference | Version 27</title>
+  <title>API Reference | Version 28</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -145,7 +145,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     
     
     
-    <li class="active"><a href="index.html">API Reference | Version 27</a></li>
+    <li class="active"><a href="index.html">API Reference | Version 28</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
@@ -315,11 +315,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">API Reference | Version 27</h1>
+<h1 class="title">API Reference | Version 28</h1>
 </div>
 <p>Rundeck provides a Web API for use with your application.</p>
 <h2 id="api-version-number">API Version Number</h2>
-<p>The current API version is <code>27</code>.</p>
+<p>The current API version is <code>28</code>.</p>
 <p>For API endpoints described in this document, the <em>minimum</em> API version required for their use is indicated by the URL used, e.g.:</p>
 <pre><code>/api/2/system/info
 /api/1/projects</code></pre>
@@ -345,6 +345,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>View the <a href="#index">Index</a> listing API paths.</p>
 <h2 id="changes">Changes</h2>
 <p>Changes introduced by API Version number:</p>
+<p><strong>Version 28</strong>:</p>
+<ul>
+<li>Udated Endpoints:
+<ul>
+<li><a href="#project-archive-export"><code>GET /api/V/project/[PROJECT]/export</code></a> - exportScm parameter.</li>
+<li><a href="#project-archive-import"><code>PUT /api/V/project/[PROJECT]/import</code></a> - importScm parameter.</li>
+</ul></li>
+</ul>
 <p><strong>Version 27</strong>:</p>
 <ul>
 <li>Udated Endpoints:
@@ -4557,6 +4565,10 @@ key2=value</code></pre>
 <li><code>exportReadmes</code> true/false, include project readme/motd files</li>
 <li><code>exportAcls</code> true/false, include project ACL Policy files, if authorized</li>
 </ul>
+<p>In APIv28 or later:</p>
+<ul>
+<li><code>exportScm</code> true/false, include project SCM configuration, if authorized</li>
+</ul>
 <p>GET Examples:</p>
 <pre><code>GET /api/11/project/AlphaProject/export?executionIds=1,4,9
 GET /api/11/project/AlphaProject/export?executionIds=1&amp;executionIds=4&amp;executionIds=9</code></pre>
@@ -4593,13 +4605,14 @@ executionIds=1&amp;executionIds=4&amp;executionIds=9&amp;...</code></pre>
 <h3 id="project-archive-import">Project Archive Import</h3>
 <p><strong>Request:</strong></p>
 <p>Import a zip archive to the project. Requires <code>import</code> authorization for the project.</p>
-<pre><code>PUT /api/14/project/[PROJECT]/import{?jobUuidOption,importExecutions,importConfig,importACL}</code></pre>
+<pre><code>PUT /api/14/project/[PROJECT]/import{?jobUuidOption,importExecutions,importConfig,importACL,importScm}</code></pre>
 <p>Parameters:</p>
 <ul>
 <li><code>jobUuidOption</code> (optional, string, <code>preserve/remove</code>) … Option declaring how duplicate Job UUIDs should be handled. If <code>preserve</code> (default) then imported job UUIDs will not be modified, and may conflict with jobs in other projects. If <code>remove</code> then all job UUIDs will be removed before importing.</li>
 <li><code>importExecutions</code> (optional, boolean, <code>true/false</code>) … If true, import all executions and logs from the archive (default). If false, do not import executions or logs.</li>
 <li><code>importConfig</code> (optional,boolean,<code>true/false</code>) … If true, import the project configuration from the archive. If false, do not import the project configuration (default).</li>
 <li><code>importACL</code> (optional,boolean,<code>true/false</code>) … If true, import all of the ACL Policies from the archive. If false, do not import the ACL Policies (default).</li>
+<li><code>importScm</code> (optional,boolean,<code>true/false</code>) … If true, import SCM configuration from the archive. If false, do not import the SCM configuration (default).</li>
 </ul>
 <p>Expected Request Content:</p>
 <p><code>Content-Type: application/zip</code></p>
@@ -5938,7 +5951,7 @@ DELETE /api/13/project/[PROJECT]/motd.md</code></pre>
     
     
     
-    <li class="active"><a href="index.html">API Reference | Version 27</a></li>
+    <li class="active"><a href="index.html">API Reference | Version 28</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
@@ -5979,7 +5992,7 @@ Try Rundeck Pro
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-11-29T22:40:25UTC">2018-11-29T22:40:25UTC</span>
+<span class="generated-date" title="2018-12-06T01:04:54UTC">2018-12-06T01:04:54UTC</span>
 </p>
 </footer>
 </div>
