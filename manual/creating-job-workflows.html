@@ -110,8 +110,8 @@ jQuery(function(){
 <li><a href="#save-the-changes">Save the changes</a></li>
 <li><a href="#context-variables">Context Variables</a><ul>
 <li><a href="#context-variable-usage">Context Variable Usage</a></li>
+<li><a href="#command-line-tools-and-api-access">Command Line Tools and API access</a></li>
 </ul></li>
-<li><a href="#related-command-line-tools">Related Command Line Tools</a></li>
 </ul>
 </div>
 </div>
@@ -129,8 +129,8 @@ jQuery(function(){
 <li>XML: <a href="../man5/job-xml.html">job-xml</a></li>
 <li>YAML: <a href="../man5/job-yaml.html">job-yaml</a></li>
 </ul>
-<p>It is also possible to author Jobs inside the graphical console and then export the definition as a file using the <code>rd-jobs</code> shell tool (<a href="../man1/rd-jobs.html">rd-jobs</a>).</p>
-<p>See <a href="#exporting-job-definitions">Exporting Job definitions</a> and <a href="#importing-job-definitions">Importing Job definitions</a>.</p>
+<p>It is also possible to author Jobs inside the graphical console and then export the definition as a file using the <code>rd</code> CLI tool (<a href="https://rundeck.github.io/rundeck-cli">rd</a>), or via the API.</p>
+<p>See <a href="#command-line-tools-and-api-access">Command Line Tools and API Acccess</a>.</p>
 <h2 id="workflow-control-settings">Workflow control settings</h2>
 <p>Workflow execution is controlled by two important settings: <em>Keepgoing</em> and <em>Strategy</em>.</p>
 <figure>
@@ -343,21 +343,16 @@ jQuery(function(){
 </dl>
 <p>The syntax for Environment variables is that all letters become uppercase, punctuation is replaced with underscore, and the name is prefixed with <code>RD_</code>.</p>
 <blockquote>
-<p>Note, See the chapter <a href="node-execution/ssh-node-execution.html#passing-environment-variables-through-remote-command">Plugins - SSH - Passing Environment Variables Through Remote Commands</a> for information about requirements of the SSH server.</p>
+<p>Note, See the chapter <a href="../administration/projects/node-execution/ssh.html#configuring-remote-machine-for-ssh" title="Administrator Guide - Projects - Node Execution - SSH - Configuring Remote Machine For Ssh">Administrator Guide - Projects - Node Execution - SSH - Configuring Remote Machine For Ssh</a> for information about requirements of the SSH server.</p>
 </blockquote></li>
 </ul>
-<h2 id="related-command-line-tools">Related Command Line Tools</h2>
-<dl>
-<dt><a href="../man1/rd-jobs.html">rd-jobs</a></dt>
-<dd>List, load and delete job definitions.
-</dd>
-<dt><a href="../man1/rd-queue.html">rd-queue</a></dt>
-<dd>List, follow or kill currently running executions.
-</dd>
-<dt><a href="../man1/run.html">run</a></dt>
-<dd>Run a job.
-</dd>
-</dl>
+<h3 id="command-line-tools-and-api-access">Command Line Tools and API access</h3>
+<p>Jobs can be exported or imported in XML or Yaml format using the API or the <code>rd</code> CLI tool.</p>
+<ul>
+<li><a href="../api/index.html#exporting-jobs" title="API Reference | Version 28 - Exporting Jobs">API Reference | Version 28 - Exporting Jobs</a></li>
+<li><a href="../api/index.html#importing-jobs" title="API Reference | Version 28 - Importing Jobs">API Reference | Version 28 - Importing Jobs</a></li>
+<li><a href="https://rundeck.github.io/rundeck-cli">RD CLI Tool</a></li>
+</ul>
 </div>
 </div>
 </div>
@@ -428,7 +423,7 @@ Try Rundeck Enterprise
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-12-18T17:24:40UTC">2018-12-18T17:24:40UTC</span>
+<span class="generated-date" title="2018-12-18T17:28:48UTC">2018-12-18T17:28:48UTC</span>
 </p>
 </footer>
 </div>

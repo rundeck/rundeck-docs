@@ -124,13 +124,13 @@ jQuery(function(){
 <h2 id="essential-concepts">Essential Concepts</h2>
 <p>Several fundamental concepts underlie and drive the Rundeck system. If you are a new user, knowing about them will help you use or integrate Rundeck into your environment.</p>
 <ul>
-<li><strong>Role-based Access Control Policies</strong>: A Rundeck <em><a href="../administration/access-control-policy.html">access control policy</a></em> grants users and user groups certain privileges to perform actions against rundeck resources like projects, jobs, nodes, commands and API.</li>
-<li><strong>Projects</strong>: A <em><a href="../administration/project-setup.html">project</a></em> is a place to separate management activity. All Rundeck activities occur within the context of a project. Multiple projects can be maintained on the same Rundeck server.</li>
-<li><strong>Jobs</strong> : A <em><a href="jobs.html">job</a></em> encapsulate a sequence of steps, job options and nodes where the steps execute.</li>
+<li><strong>Role-based Access Control Policies</strong>: A Rundeck <em><a href="../administration/security/access-control-policy.html" title="Administrator Guide - Security - Access Control Policy">access control policy</a></em> grants users and user groups certain privileges to perform actions against rundeck resources like projects, jobs, nodes, commands and API.</li>
+<li><strong>Projects</strong>: A <em><a href="../administration/projects/index.html" title="Administrator Guide - Projects">project</a></em> is a place to separate management activity. All Rundeck activities occur within the context of a project. Multiple projects can be maintained on the same Rundeck server.</li>
+<li><strong>Jobs</strong> : A <em>job</em> encapsulate a sequence of steps, job options and nodes where the steps execute. See <a href="running-jobs.html" title="User Guide - Running Jobs">Running Jobs</a> and <a href="creating-jobs.html" title="User Guide - Creating Jobs">Creating Jobs</a>.</li>
 <li><strong>Nodes</strong>: A <em><a href="nodes.html">node</a></em> is a resource that is either a physical or virtual instance of a network accessible host. A <em>resource model</em> is a representation of Nodes in a project.</li>
 <li><strong>Commands</strong>: A <em><a href="commands.html">command</a></em> is a single executable string executed on a Node. Rundeck invokes commands on nodes via a <em>node executor</em> which evaluates the command string and executes it.</li>
 <li><strong>Executions</strong>: An <em><a href="executions.html">execution</a></em> is a representation of the activity of a running or completed command or job. The data about the execution is used in rundeck to monitor the progress of a job or command and later for reporting about what happened.</li>
-<li><strong>Plugins</strong>: Most of what Rundeck does is via one of its <em><a href="../plugins-user-guide/index.html">plugins</a></em>. Plugins exist to execute commands on nodes, perform steps in a job, send a notification about job status, gather information about the hosts in your network, copy a file to a remote server, store and stream logs, or talk to a user directory.</li>
+<li><strong>Plugins</strong>: Most of what Rundeck does is via one of its <em>plugins</em>. Plugins exist to execute commands on nodes, perform steps in a job, send a notification about job status, gather information about the hosts in your network, copy a file to a remote server, store and stream logs, or talk to a user directory. See <a href="job-plugins.html" title="User Guide - Job Plugins">Job Plugins</a> and <a href="../developer/index.html" title="Plugin Developer Guide">Plugin Developer Guide</a> and <a href="../plugins/index.html" title="Rundeck Plugins">Rundeck Plugins</a>.</li>
 </ul>
 <h2 id="download-and-installation">Download and Installation</h2>
 <p>If a running Rundeck instance isn’t already available to you, there are a couple ways you can try it.</p>
@@ -266,7 +266,7 @@ Try Rundeck Enterprise
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-12-18T17:24:40UTC">2018-12-18T17:24:40UTC</span>
+<span class="generated-date" title="2018-12-18T17:28:48UTC">2018-12-18T17:28:48UTC</span>
 </p>
 </footer>
 </div>
