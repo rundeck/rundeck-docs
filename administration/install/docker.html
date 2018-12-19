@@ -177,16 +177,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="page-header">
 <h1 class="title">Running Docker Images</h1>
 </div>
-<blockquote>
-<p>!!NOTICE!!: The docker images are currently incubating; they are unstable and unsupported. Full usage information can be found on the Docker Hub image pages.</p>
-</blockquote>
+<p>Full usage information can be found on the Docker Hub image pages.</p>
 <h2 id="open-source-rundeck">Open Source Rundeck</h2>
-<p><a href="https://hub.docker.com/r/rundeck/rundeck/">rundeck/rundeck:SNAPSHOT</a></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ex">docker</span> run --name some-rundeck -v data:/home/rundeck/server/data rundeck/rundeck:SNAPSHOT</a></code></pre></div>
+<p><a href="https://hub.docker.com/r/rundeck/rundeck/">rundeck/rundeck:3.0.x</a></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ex">docker</span> run --name some-rundeck -v data:/home/rundeck/server/data rundeck/rundeck:3.0.x</a></code></pre></div>
 <h2 id="rundeck-pro">Rundeck Pro</h2>
-<p><a href="https://hub.docker.com/r/rundeckpro/team/">rundeckpro/team:SNAPSHOT</a></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ex">docker</span> run --name some-rundeck -v data:/home/rundeck/server/data rundeckpro/team:SNAPSHOT</a></code></pre></div>
-<p><a href="https://hub.docker.com/r/rundeckpro/cluster/">rundeckpro/cluster:SNAPSHOT</a><br />
+<p><a href="https://hub.docker.com/r/rundeckpro/team/">rundeckpro/team:3.0.x</a></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ex">docker</span> run --name some-rundeck -v data:/home/rundeck/server/data rundeckpro/team:3.0.x</a></code></pre></div>
+<p><a href="https://hub.docker.com/r/rundeckpro/enterprise/">rundeckpro/enterprise:3.0.x</a><br />
 The following example invocation will require an accessible MySQL instance with a database, user, and the required privileges setup:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="ex">docker</span> run \</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">    --name some-rundeck \</a>
@@ -195,7 +193,7 @@ The following example invocation will require an accessible MySQL instance with 
 <a class="sourceLine" id="cb3-5" data-line-number="5">    <span class="ex">-e</span> RUNDECK_DATABASE_USERNAME=<span class="st">&quot;</span><span class="va">${DB_USERNAME}</span><span class="st">&quot;</span></a>
 <a class="sourceLine" id="cb3-6" data-line-number="6">    <span class="ex">-e</span> RUNDECK_DATABASE_PASSWPRD=<span class="st">&quot;</span><span class="va">${DB_PASSWORD}</span><span class="st">&quot;</span></a>
 <a class="sourceLine" id="cb3-7" data-line-number="7">    <span class="ex">-e</span> RUNDECK_DATABASE_URL=<span class="st">&quot;</span><span class="va">${DB_URL}</span><span class="st">&quot;</span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8">    <span class="ex">rundeckpro</span>/cluster:<span class="ex">SNAPSHOT</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-8" data-line-number="8">    <span class="ex">rundeckpro</span>/enterprise:<span class="ex">3.0.x</span></a></code></pre></div>
 <h2 id="example-configurations">Example Configurations</h2>
 <p>The <a href="https://github.com/rundeck/docker-zoo">Rundeck Docker Zoo</a> has many docker compose example projects. Check it out for use as a quick config reference and starting templates!</p>
 <ul>
@@ -278,7 +276,7 @@ Try Rundeck Enterprise
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-12-18T17:28:48UTC">2018-12-18T17:28:48UTC</span>
+<span class="generated-date" title="2018-12-19T17:58:15UTC">2018-12-19T17:58:15UTC</span>
 </p>
 </footer>
 </div>
