@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>edam2605761186286793612temp</title>
+  <title>OpenSSH Bastion Host Node Execution Plugins</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -77,24 +77,24 @@ jQuery(function(){
     
         <li><a href="../../index.html">Administrator Guide</a></li>
     
-        <li><a href="../index.html">Rundeck Configuration</a></li>
+        <li><a href="../index.html">Projects</a></li>
     
     
-    <li ><a href="index.html">Database</a></li>
-    <li class="active"><a href="postgres.html">Postgres</a></li>
+    <li ><a href="index.html">Node Execution</a></li>
+    <li class="active"><a href="basion-ssh.html">Basion SSH</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="oracle.html"><i class="glyphicon glyphicon-arrow-left"></i> Oracle</a></li>
-      
+      <li class="previous"><a href="powershell.html"><i class="glyphicon glyphicon-arrow-left"></i> Powershell</a></li>
+      <li class="next"><a href="openssh.html">OpenSSH <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
-    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/configuration/database/postgres.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/configuration/database/postgres.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/projects/node-execution/bastionssh.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/projects/node-execution/bastionssh.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
@@ -104,41 +104,84 @@ jQuery(function(){
 <div class="col-sm-3 toc-nav">
 <div class="nav">
 <ul>
-<li><a href="#using-postgres-as-a-database-backend">Using Postgres as a database backend</a><ul>
-<li><a href="#install-postgresql">Install PostgreSQL</a></li>
-<li><a href="#setup-rundeck-database">Setup Rundeck Database</a></li>
-<li><a href="#configure-rundeck">Configure Rundeck</a></li>
-</ul></li>
+<li><a href="#dry-run-mode">Dry run mode</a></li>
+<li><a href="#plugin-configuration-properties">Plugin Configuration Properties</a></li>
+<li><a href="#node-specific-key">Node Specific Key</a></li>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#docker-example">Docker Example</a></li>
 </ul>
 </div>
 </div>
 <div class="col-sm-9">
-<h1 id="using-postgres-as-a-database-backend">Using Postgres as a database backend</h1>
-<p>This is a simple guide for setting up PostgreSQL for use with Rundeck.</p>
-<h2 id="install-postgresql">Install PostgreSQL</h2>
-<p>You can “yum install” or “apt-get install” the server, or you can download rpms manually if you like. See <a href="https://wiki.postgresql.org/wiki/Detailed_installation_guides">PostgreSQL installation</a></p>
-<h2 id="setup-rundeck-database">Setup Rundeck Database</h2>
-<p>We have to create the database and user for Rundeck.</p>
-<p>If it is not running, start Postgres (with “service postgresql-<version> start” or similar).</p>
-<p>Switch to ‘postgres’ user and use the ‘psql’ commandline tool to access the db:</p>
-<pre><code>$ su postgres
-$ psql</code></pre>
-<p>Once you have the ‘postgres=#’’ prompt, enter the following commands to create the rundeck database:</p>
-<pre><code>postgres=# create database rundeck;</code></pre>
-<p>Now, create a user and grant privileges to connect to this DB.</p>
-<pre><code>postgres=# create user rundeckuser with password &#39;rundeckpassword&#39;;
-postgres=# grant ALL privileges on database rundeck to rundeckuser;</code></pre>
-<p>You can then exit the psql prompt.</p>
-<p>You may also have to add a pg_hba.conf entry for this user. See <a href="https://www.postgresql.org/docs/9.5/static/auth-pg-hba-conf.html">pg_hba.conf documentation</a></p>
-<h2 id="configure-rundeck">Configure Rundeck</h2>
-<p>Now you need to configure Rundeck to connect to this DB as described in: <a href="index.html#customize-the-datasource">Administrator Guide - Rundeck Configuration - Database - Customize the Datasource</a>.</p>
-<p>Update your <code>rundeck-config.properties</code> and configure the datasource:</p>
-<pre><code>dataSource.driverClassName = org.postgresql.Driver
-dataSource.url = jdbc:postgresql://myserver/rundeck
-dataSource.username=rundeckuser
-dataSource.password=rundeckpassword</code></pre>
-<p>With recent Rundeck versions, PostgreSQL connector is bundled.</p>
-<p>Now, you can start Rundeck.</p>
+<div class="page-header">
+<h1 class="title">OpenSSH Bastion Host Node Execution Plugins</h1>
+</div>
+<p>This plugin provides a node-executor and file-copier supporting ssh actions through a bastion host. Use this plugin if you must access remote servers via a jump host.</p>
+<h2 id="dry-run-mode">Dry run mode</h2>
+<p>You can configure the plugin to just print the invocation string to the console. This can be useful when defining the configuration properties.</p>
+<h2 id="plugin-configuration-properties">Plugin Configuration Properties</h2>
+<ul>
+<li>Bastion SSH Key Storage Path: Identity to use for the bastion host connection.</li>
+<li>SSH Options: Extra options to pass to the ssh command invocation</li>
+<li>ssh_conifig: Specify ProxyCommand and other flags. Consult the reference for <a href="https://linux.die.net/man/5/ssh_config">ssh_config(5)</a> to learn about posible settings.</li>
+<li>Dry run? If set true, just print the command invocation that would be used but do not execute the command. This is useful to preview.</li>
+</ul>
+<h2 id="node-specific-key">Node Specific Key</h2>
+<p>If the node is configured with the <code>ssh-key-storage-path</code> attribute, the ssh connection will use that to connect to the remote node.</p>
+<ul>
+<li>ssh-key-storage-path: Set to location in Rundeck Keystore</li>
+</ul>
+<h2 id="configuration">Configuration</h2>
+<p>The plugin can be configured as a default node executor and file copier for a Project. Use the Simple Conguration tab to see the configuration properties. The page has a form with inputs to configure the connection to the bastion host.</p>
+<p>You can also modify the project.properties or use the API/CLI to define the plugin configuration. The Plugin List page will describe the key names to set.</p>
+<h4 id="customize-the-ssh_config">Customize the ssh_config</h4>
+<p>You can define multiple lines using a trailing backslash and an indent on the following line.</p>
+<p>Here is an example that defines ssh_config file.</p>
+<pre><code>project.plugin.NodeExecutor.openssh-bastion-host.node-executor.ssh_config=Host * \
+  StrictHostKeyChecking no
+  Port 22
+  ProxyCommand ssh user@bastionhost -W %h\:%p
+  IdentityFile @plugin.config.identity_file@</code></pre>
+<p>Here ssh_options are set.</p>
+<pre><code>project.plugin.NodeExecutor.openssh-bastion-host.node-executor.ssh_options=&quot;-q -oClearAllForwardings=yes&quot;</code></pre>
+<p>Using Dry run, you might see output similar to this:</p>
+<pre><code>[dry-run] +------------------------------------------+
+[dry-run] | ssh_config                               |
+[dry-run] +------------------------------------------+
+[dry-run] | Host *
+[dry-run] |   StrictHostKeyChecking no
+[dry-run] |   Port 22
+[dry-run] |   ProxyCommand ssh user@bastion -W %h:%p
+[dry-run] |   IdentityFile /tmp/bastion.ssh-keyfile.prWLUyFU
+[dry-run] +------------------------------------------+
+[dry-run] ssh -q -oClearAllForwardings=yes -F /tmp/ssh_config.zTr9j5KK -i /tmp/host1234.ssh-keyfile.4cjnI2qL alexh@Targa.local whoami
+Begin copy 18 bytes to node host1234: /etc/motd -&gt; /tmp/motd
+[dry-run] +------------------------------------------+
+[dry-run] | ssh_config                               |
+[dry-run] +------------------------------------------+
+[dry-run] | Host *
+[dry-run] |   StrictHostKeyChecking no
+[dry-run] |   Port 22
+[dry-run] |   ProxyCommand ssh user@bastion -W %h:%p
+[dry-run] |   IdentityFile /tmp/bastion.ssh-keyfile.XXXXX.WAlpZLNb
+[dry-run] | 
+[dry-run] +------------------------------------------+
+[dry-run] scp -q -oClearAllForwardings=yes -F /tmp/ssh_config.XXXX.cosJ7xQ2 -i /tmp/host1234.ssh-keyfile.XXXXX.BOqYAKRu /etc/motd alexh@Targa.local:/tmp/motd
+/tmp/motd
+Copied: /tmp/motd</code></pre>
+<h1 id="docker-example">Docker Example</h1>
+<p>You can test the plugin on a docker environment on the plugin <a href="https://github.com/rundeck-plugins/openssh-bastion-node-execution">repo</a></p>
+<ul>
+<li>Run <code>./star-docker-example.sh</code></li>
+<li>Got to <code>http://localhost:8080</code></li>
+<li>User/Password =&gt; admin/admin</li>
+</ul>
+<p>The example has two networks:</p>
+<ul>
+<li>Network1: rundeck, bastion</li>
+<li>Network2: bastion, linux-1, linux-2</li>
+</ul>
+<p>The goal of this example is that Rundeck connects to the nodes linux-1 and linux-2 through the bastion container (Rundeck cannot see linux-X nodes)</p>
 </div>
 </div>
 </div>
@@ -168,24 +211,24 @@ dataSource.password=rundeckpassword</code></pre>
     
         <li><a href="../../index.html">Administrator Guide</a></li>
     
-        <li><a href="../index.html">Rundeck Configuration</a></li>
+        <li><a href="../index.html">Projects</a></li>
     
     
-    <li ><a href="index.html">Database</a></li>
-    <li class="active"><a href="postgres.html">Postgres</a></li>
+    <li ><a href="index.html">Node Execution</a></li>
+    <li class="active"><a href="basion-ssh.html">Basion SSH</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="oracle.html"><i class="glyphicon glyphicon-arrow-left"></i> Oracle</a></li>
-      
+      <li class="previous"><a href="powershell.html"><i class="glyphicon glyphicon-arrow-left"></i> Powershell</a></li>
+      <li class="next"><a href="openssh.html">OpenSSH <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
-    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/configuration/database/postgres.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/configuration/database/postgres.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/projects/node-execution/bastionssh.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/projects/node-execution/bastionssh.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>

@@ -1016,6 +1016,22 @@
                     }
                     ,
                 {
+                    "srcpath": "administration/projects/node-execution/bastionssh.md",
+                    "title": "Basion SSH",
+                    "outpath": "administration/projects/node-execution/basion-ssh.html",
+
+                        "alltitles": "Administrator Guide / Projects / Node Execution / Basion SSH"
+                    }
+                    ,
+                {
+                    "srcpath": "administration/projects/node-execution/openssh.md",
+                    "title": "OpenSSH",
+                    "outpath": "administration/projects/node-execution/openssh.html",
+
+                        "alltitles": "Administrator Guide / Projects / Node Execution / OpenSSH"
+                    }
+                    ,
+                {
                     "srcpath": "administration/projects/index.md",
                     "title": "Projects",
                     "outpath": "administration/projects/index.html",
