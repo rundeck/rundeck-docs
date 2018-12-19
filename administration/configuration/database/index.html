@@ -170,6 +170,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="page-header">
 <h1 class="title">Database</h1>
 </div>
+<h3 id="default-database">Default database</h3>
+<p>When you install the vanilla standalone rundeck configuration, it will use H2, an embedded database. It is convenient to have an embedded database when you are just trying Rundeck or using it for a non-critical purpose. Be aware though that using the H2 database is not considered safe for production because it not reslilient if Rundeck is not shutdown gracefully. When shutdown gracefully, Rundeck can write the data (kept in memory) to disk. If Rundeck is forcefully shutdown, the data can not be guaranteed to be written to file on disk and cause truncation and corruption.</p>
+<p>Don’t use the H2 embedded database for anything except testing and non-production.</p>
+<p>Use an external database service like Mariadb, Mysql, Posgres or Oracle.</p>
 <h3 id="customize-the-datasource">Customize the Datasource</h3>
 <p>The dataSource is configured in the <code>rundeck-config.properties</code> file.</p>
 <p>You specify the <code>dataSource.</code> configuration properties.</p>
@@ -266,7 +270,7 @@ Try Rundeck Enterprise
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-12-19T17:58:15UTC">2018-12-19T17:58:15UTC</span>
+<span class="generated-date" title="2018-12-19T22:24:57UTC">2018-12-19T22:24:57UTC</span>
 </p>
 </footer>
 </div>
