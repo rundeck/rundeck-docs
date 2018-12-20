@@ -207,11 +207,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="page-header">
 <h1 class="title">Plugin Development</h1>
 </div>
-<p>There are currently two ways to develop plugins:</p>
+<p>There are currently three ways to develop plugins:</p>
 <ol type="1">
 <li><a href="#java-plugin-development">Java plugin development</a>: Develop Java code that is distributed within a Jar file.</li>
 <li><a href="#script-plugin-development">Script Plugin Development</a>: Write shell/system scripts that implement your desired behavior and put them in a zip file with some metadata.</li>
-<li>Groovy Plugin Development: Write groovy scripts to implement Notification and Logging plugins.</li>
+<li><a href="#groovy-plugin-development">Groovy Plugin Development</a>: Write groovy scripts to implement Notification and Logging plugins.</li>
 </ol>
 <p>Either way, the resultant plugin archive file, either a .jar java archive, or a .zip file archive, will be placed in the plugin directory (Launcher: <code>$RDECK_BASE/libext</code>, RPM,DEB: <code>/var/lib/rundeck/libext</code>).</p>
 <h2 id="java-plugin-development">Java Plugin Development</h2>
@@ -374,7 +374,7 @@ lib/anotherjar-1.3.jar</code></pre>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="fu">rundeckPlugin</span>(NotificationPlugin){</a>
 <a class="sourceLine" id="cb6-3" data-line-number="3">    <span class="co">//plugin definition goes here...</span></a>
 <a class="sourceLine" id="cb6-4" data-line-number="4">}</a></code></pre></div>
-<p>In this case we use the same <code>NotificationPlugin</code> interface used for Java [Notfiication Plugins].</p>
+<p>In this case we use the same <code>NotificationPlugin</code> interface used for Java <a href="notification-plugin.html" title="Plugin Developer Guide - Notification Plugin">Notification Plugins</a>.</p>
 <p>However, for other plugin types you would specify the correct Java interface for the specific plugin type.</p>
 <p>Note: Be sure to <code>import</code> all necessary types used in the Groovy script.</p>
 <h4 id="definition">Definition</h4>
@@ -911,7 +911,7 @@ Try Rundeck Enterprise
 &copy;2018 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2018-12-20T00:05:28UTC">2018-12-20T00:05:28UTC</span>
+<span class="generated-date" title="2018-12-20T17:13:28UTC">2018-12-20T17:13:28UTC</span>
 </p>
 </footer>
 </div>
