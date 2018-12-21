@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RESOURCE-YAML</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="February 25, 2011" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="../jquery.hotkeys.js"></script>
+<script src="../jquery.autocomplete.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+window._pageRelpath="../";
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+<script src="../docs-autocomplete.js"></script>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control navquery" name="q" placeholder="Search" id="searchQuery">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbstop">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb top collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.10)</a></li>
+    
+    
+    <li ><a href="index.html">Document Format Reference</a></li>
+    <li class="active"><a href="resource-yaml.html">RESOURCE-YAML</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="resource-xml.html"><i class="glyphicon glyphicon-arrow-left"></i> RESOURCE-XML</a></li>
+      <li class="next"><a href="resource-json.html">RESOURCE-JSON <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manpages/man5/resource-yaml-v13.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manpages/man5/resource-yaml-v13.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#name">NAME</a><ul>
+<li><a href="#structure">Structure</a></li>
+<li><a href="#node-definition">Node Definition</a></li>
+<li><a href="#examples">Examples</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">RESOURCE-YAML</h1>
+</div>
+<h1 id="name">NAME</h1>
+<p>resource-yaml-v13 - describes the Rundeck resource model document Yaml format</p>
+<p>The <code>resource</code> YAML document declares a resource model used by a Rundeck Project to define the set of Nodes that are available.</p>
+<p>See <a href="http://yaml.org" class="uri">http://yaml.org</a> for more information about YAML.</p>
+<h2 id="structure">Structure</h2>
+<p>The resource format supports two structures: either a Yaml Sequence of <a href="#node-definition">Node definitions</a>, or a Yaml Map of node names with <a href="#node-definition">Node definitions</a> as values.</p>
+<p>Example:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">-</span> <span class="fu">somenode:</span><span class="at"> ...</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  ...</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">-</span> <span class="fu">somenode2:</span><span class="at"> ...</span></a></code></pre></div>
+<p>OR</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="fu">somenode:</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">   <span class="fu">hostname:</span><span class="at"> ...</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">   ...</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="fu">somenode2:</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">   <span class="fu">hostname:</span><span class="at"> ...</span></a></code></pre></div>
+<p>In the second case, the <code>nodename</code> entry is not required.</p>
+<h2 id="node-definition">Node Definition</h2>
+<p>A Node definition consists of a Map with some required and some optional entries.</p>
+<p>Required Entries:</p>
+<dl>
+<dt><code>nodename</code></dt>
+<dd><p>Name of the node, this must be a unique Identifier across nodes within a project</p>
+</dd>
+<dt><code>hostname</code></dt>
+<dd><p>Hostname of the node. This can be any IP Address or hostname to address the node. Since hostname is used to make SSH connections, it is possible to overload the value to include port number. (eg, hostname:port).</p>
+</dd>
+<dt><code>username</code></dt>
+<dd><p>User name to connect to the node via SSH.</p>
+</dd>
+</dl>
+<p>Optional Entries:</p>
+<dl>
+<dt><code>description</code></dt>
+<dd><p>A description of the Node</p>
+</dd>
+<dt><code>tags</code></dt>
+<dd><p>A literal with comma-separated tag strings, or a Sequence of literals. Tags are used for filtering nodes and often represent server role, environment, class, or group.</p>
+</dd>
+<dt><code>osFamily</code></dt>
+<dd><p>OS Family</p>
+</dd>
+<dt><code>osArch</code></dt>
+<dd><p>OS Architecture</p>
+</dd>
+<dt><code>osName</code></dt>
+<dd><p>OS Name</p>
+</dd>
+<dt><code>osVersion</code></dt>
+<dd><p>OS Version</p>
+</dd>
+<dt><code>editUrl</code></dt>
+<dd><p>URL to an external resource model service.</p>
+</dd>
+<dt><code>remoteUrl</code></dt>
+<dd><p>URL to an external resource model editor service.</p>
+</dd>
+<dt><em>Anything</em></dt>
+<dd><p>Specify any custom attributes about node using a string value.</p>
+</dd>
+</dl>
+<ul>
+<li>For more information about using the <code>editUrl</code>/<code>remoteUrl</code> see the <a href="../administration/managing-node-sources.html#resource-editor">Rundeck User Manual</a>.</li>
+</ul>
+<h2 id="examples">Examples</h2>
+<p>Here’s a node, Venkman.local, described with several of the required and optional attributes discussed above.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">Venkman.local:</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">  <span class="fu">description:</span><span class="at"> Rundeck server node</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="fu">hostname:</span><span class="at"> Venkman.local</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">  <span class="fu">nodename:</span><span class="at"> Venkman.local</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">  <span class="fu">osArch:</span><span class="at"> x86_64</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">  <span class="fu">osFamily:</span><span class="at"> unix</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">  <span class="fu">osName:</span><span class="at"> Mac OS X</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">  <span class="fu">osVersion:</span><span class="at"> 10.6.6</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">  <span class="fu">tags:</span><span class="at"> </span><span class="st">&#39;&#39;</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">  <span class="fu">username:</span><span class="at"> greg</span></a></code></pre></div>
+<p>Tags are very useful for node filtering and can be used to describe the role, environment, group, or class to which a node belongs. The Homestar.local example below describes a node that plays the role of a redis server in the production environment.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="fu">Homestar.local:</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">  <span class="fu">description:</span><span class="at"> The production redis server.</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">  <span class="fu">hostname:</span><span class="at"> Homestar.local</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">  <span class="fu">nodename:</span><span class="at"> Homestar.local</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">  <span class="fu">osArch:</span><span class="at"> x86_64</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">  <span class="fu">osFamily:</span><span class="at"> unix</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">  <span class="fu">osName:</span><span class="at"> Linux</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">  <span class="fu">tags:</span><span class="at"> </span><span class="st">&#39;redis_server,production&#39;</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">  <span class="fu">username:</span><span class="at"> greg</span></a></code></pre></div>
+<p>Here’s a node, bartholemew, that specifies some custom attributes (app-port, https-port):</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="fu">bartholemew:</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">  <span class="fu">description:</span><span class="at"> Webapp node</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">  <span class="fu">hostname:</span><span class="at"> bartholemew</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">  <span class="fu">nodename:</span><span class="at"> bartholemew</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">  <span class="fu">tags:</span><span class="at"> </span><span class="st">&#39;web,app&#39;</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">  <span class="fu">username:</span><span class="at"> greg</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">  <span class="fu">app-port:</span><span class="at"> 8080</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">  <span class="fu">https-port:</span><span class="at"> 8443</span></a></code></pre></div>
+<p>Here is the same two nodes but in the sequence style syntax:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">-</span> <span class="fu">Homestar.local:</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">  <span class="fu">description:</span><span class="at"> The production redis server.</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">  <span class="fu">hostname:</span><span class="at"> Homestar.local</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">  <span class="fu">nodename:</span><span class="at"> Homestar.local</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">  <span class="fu">tags:</span><span class="at"> </span><span class="st">&#39;redis_server,production&#39;</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">  <span class="fu">username:</span><span class="at"> greg</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="kw">-</span> <span class="fu">bartholemew:</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8">  <span class="fu">description:</span><span class="at"> Webapp node</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9">  <span class="fu">hostname:</span><span class="at"> bartholemew</span></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10">  <span class="fu">nodename:</span><span class="at"> bartholemew</span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11">  <span class="fu">tags:</span><span class="at"> </span><span class="st">&#39;web,app&#39;</span></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12">  <span class="fu">username:</span><span class="at"> greg</span></a>
+<a class="sourceLine" id="cb6-13" data-line-number="13">  <span class="fu">app-port:</span><span class="at"> 8080</span></a>
+<a class="sourceLine" id="cb6-14" data-line-number="14">  <span class="fu">https-port:</span><span class="at"> 8443</span></a></code></pre></div>
+<p>The Rundeck source code and all documentation may be downloaded from <a href="https://github.com/rundeck/rundeck/" class="uri">https://github.com/rundeck/rundeck/</a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbsbottom">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb bottom collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.10)</a></li>
+    
+    
+    <li ><a href="index.html">Document Format Reference</a></li>
+    <li class="active"><a href="resource-yaml.html">RESOURCE-YAML</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="resource-xml.html"><i class="glyphicon glyphicon-arrow-left"></i> RESOURCE-XML</a></li>
+      <li class="next"><a href="resource-json.html">RESOURCE-JSON <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manpages/man5/resource-yaml-v13.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manpages/man5/resource-yaml-v13.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Enterprise for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Enterprise
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://rundeck.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-12-21T02:07:57UTC">2018-12-21T02:07:57UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+</body>
+</html>

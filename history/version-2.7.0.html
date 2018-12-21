@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Version 2.7.0</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="greg" />
+  <meta name="date" content="11/30/2016" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="../jquery.hotkeys.js"></script>
+<script src="../jquery.autocomplete.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+window._pageRelpath="../";
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+<script src="../docs-autocomplete.js"></script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control navquery" name="q" placeholder="Search" id="searchQuery">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbstop">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb top collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.10)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-2.7.0.html">Version 2.7.0 (2016-11-30)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.6.11.html">Version 2.6.11 (2016-11-15) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+history/version-2.7.0.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-2.7.0.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#release-2.7.0">Release 2.7.0</a><ul>
+<li><a href="#upgrading-from-2.6">Upgrading from 2.6</a></li>
+<li><a href="#new-features">New Features</a></li>
+<li><a href="#contributors">Contributors</a></li>
+<li><a href="#bug-reporters">Bug Reporters</a></li>
+<li><a href="#issues">Issues</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Version 2.7.0</h1>
+</div>
+<h1 id="release-2.7.0">Release 2.7.0</h1>
+<p>Date: 2016-11-30</p>
+<p>Name: <span style="color: SlateBlue"><span class="glyphicon glyphicon-headphones"></span> “cafecito slateblue headphones”</span></p>
+<h2 id="upgrading-from-2.6">Upgrading from 2.6</h2>
+<ul>
+<li>See the <a href="../upgrading/index.html">Upgrading Guide</a></li>
+</ul>
+<h2 id="new-features">New Features</h2>
+<ul>
+<li>Date input type for Job Options</li>
+<li>Job reference node interesect</li>
+<li>Old CLI tools removed. You can separately install <a href="https://rundeck.github.io/rundeck-cli/">rd</a> to replace them.</li>
+<li>Jetty upgraded</li>
+<li>Filter activity by Node</li>
+<li>Override node filter at job execution time</li>
+</ul>
+<h2 id="contributors">Contributors</h2>
+<ul>
+<li>Andres Montalban (amontalban)</li>
+<li>David Schile</li>
+<li>Fabrice Bacchella</li>
+<li>GitHub (web-flow)</li>
+<li>Greg Schueler (gschueler)</li>
+<li>Jaime Tobar (jtobard)</li>
+<li>Jamie L. Penman-Smithson (jamieps)</li>
+<li>Pavol Gressa (pgressa)</li>
+<li>Rene Fragoso (ctrlrsf)</li>
+<li>ltamaster</li>
+</ul>
+<h2 id="bug-reporters">Bug Reporters</h2>
+<ul>
+<li>adrianshum</li>
+<li>ahonor</li>
+<li>bajacondor</li>
+<li>ctrlrsf</li>
+<li>grafjo</li>
+<li>gschueler</li>
+<li>jasonhensler</li>
+<li>jbguerraz</li>
+<li>jquick</li>
+<li>jtobard</li>
+<li>ltamaster</li>
+<li>mathieuchateau</li>
+<li>pgressa</li>
+<li>williamh</li>
+</ul>
+<h2 id="issues">Issues</h2>
+<p><a href="https://github.com/rundeck/rundeck/milestone/38">Milestone 2.7.0</a></p>
+<ul>
+<li><a href="https://github.com/rundeck/rundeck/pull/2210">Add executionType</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2209">allow <code>?opt.name=value&amp;opt.name2=value2</code> url params to set option values</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2205">New documentation about how to install the launcher on windows</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2199">Remove CLI tools for #2182</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2185">2.6.10: Inline script token expansion breaking perl</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2182">Remove old CLI tools</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2181">API: POST to key storage can create root file</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2180">Feature/jetty upgrade</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2179">Node filter override breaks jobs with “execute locally”</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2176">Takeover schedule API is timing out in rundeck 2.6.10</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2170">Align deb and rpm profile files</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2133">Upgrade jetty to latest stable, 7.6.x or newer</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2122">firefox GUI fix</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2115">Why is parallelWorkflowStrategy in incubator for more than 2 years?</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2110">Feature - override node filter (GUI enhancement)</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2104">Add support for job reference node intersect</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2081">rundeck CLI scripts naming</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2073">Issue with disable schedule job on cluster</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/2056">Feature/node filter enhancements</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1899">Replace old rundeck cli tools with modern version</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1896">“run” and “dispatch” launchers are named too generically</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1835">Add job.executionType context variable</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1762">Disable option substitution into scripts</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1754">Allow Node Filter to be provided on execution time</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1634">This adds dattepicker functionality.</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1315">2.5.1.1 - removing a step remove current one</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1305">lots of non-multiple execution jobs can block starting jobs</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1290">Feature Request: Filter activity by node</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1204">Upgrade h2 lib to 1.4.187</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbsbottom">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb bottom collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.10)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-2.7.0.html">Version 2.7.0 (2016-11-30)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.6.11.html">Version 2.6.11 (2016-11-15) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+history/version-2.7.0.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-2.7.0.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Enterprise for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Enterprise
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://rundeck.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2018 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2018-12-21T02:07:57UTC">2018-12-21T02:07:57UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+</body>
+</html>
