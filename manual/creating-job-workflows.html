@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Job Workflows</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="../jquery.hotkeys.js"></script>
+<script src="../jquery.autocomplete.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+window._pageRelpath="../";
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+<script src="../docs-autocomplete.js"></script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control navquery" name="q" placeholder="Search" id="searchQuery">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbstop">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb top collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.12)</a></li>
+    
+    
+    <li ><a href="index.html">User Guide</a></li>
+    <li class="active"><a href="creating-job-workflows.html">Creating Job Workflows</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="defining-job-options.html">Defining Job Options <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/job-workflows.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/job-workflows.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#workflow-definition">Workflow definition</a></li>
+<li><a href="#workflow-control-settings">Workflow control settings</a></li>
+<li><a href="#workflow-steps">Workflow steps</a></li>
+<li><a href="#reordering-steps">Reordering steps</a></li>
+<li><a href="#error-handlers">Error Handlers</a><ul>
+<li><a href="#context-information">Context information</a></li>
+</ul></li>
+<li><a href="#save-the-changes">Save the changes</a></li>
+<li><a href="#context-variables">Context Variables</a><ul>
+<li><a href="#context-variable-usage">Context Variable Usage</a></li>
+<li><a href="#command-line-tools-and-api-access">Command Line Tools and API access</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Job Workflows</h1>
+</div>
+<p>The Job’s most basic feature is its ability to execute one or more steps. This sequence of steps is called a <em>workflow</em>.</p>
+<p>The steps of the Job workflow are displayed when viewing a Job’s detail from a Job listing or within the Job editor form.</p>
+<h2 id="workflow-definition">Workflow definition</h2>
+<p>Workflows can be defined within the Rundeck graphical console or as an XML or YAML document that is loaded to the server.</p>
+<p>The graphical console provides an authoring environment where steps can be added, edited, removed or reordered.</p>
+<p>Users preferring to define Jobs in a text format should refer to the two format definitions:</p>
+<ul>
+<li>XML: <a href="../man5/job-xml.html">job-xml</a></li>
+<li>YAML: <a href="../man5/job-yaml.html">job-yaml</a></li>
+</ul>
+<p>It is also possible to author Jobs inside the graphical console and then export the definition as a file using the <code>rd</code> CLI tool (<a href="https://rundeck.github.io/rundeck-cli">rd</a>), or via the API.</p>
+<p>See <a href="#command-line-tools-and-api-access">Command Line Tools and API Acccess</a>.</p>
+<h2 id="workflow-control-settings">Workflow control settings</h2>
+<p>Workflow execution is controlled by two important settings: <em>Keepgoing</em> and <em>Strategy</em>.</p>
+<figure>
+<img src="../figures/fig0401.png" alt="Workflow controls" /><figcaption>Workflow controls</figcaption>
+</figure>
+<p><em>Keepgoing</em>: This manages what to do if a step incurs an error:</p>
+<ul>
+<li>Stop at the failed step: Fail immediately (default).</li>
+<li>Run remaining steps before failing: Continue to next steps and fail the job at the end.</li>
+</ul>
+<p>The default is to fail immediately but depending on the procedure at hand you can choose to have the execution continue.</p>
+<!--- Out of date? Node First, Parallel, Sequential, Ruleset Workflow Strategy --->
+<p><em>Strategy</em>: Controls the order of execution of steps and command dispatch to nodes: <em>Node-oriented</em> and <em>Step-oriented</em>.</p>
+<ul>
+<li><em>Node-oriented</em>: Executes the full workflow on each node before the next node. (default)</li>
+<li><em>Step-oriented</em>: Executes each step on all nodes before the next node.</li>
+</ul>
+<p>The following illustrations contrast the strategies showing how three steps proceed across two nodes.</p>
+<p>Node-oriented flow illustrated:</p>
+<pre><code>1.   NodeA    step#1
+2.     &quot;      step#2
+3.     &quot;      step#3
+4.   NodeB    step#1
+5.     &quot;      step#2
+6.     &quot;      step#3</code></pre>
+<p>Step-oriented flow illustrated:</p>
+<pre><code>1.   NodeA    step#1
+2.   NodeB      &quot;
+3.   NodeA    step#2
+4.   NodeB      &quot;
+5.   NodeA    step#1
+6.   NodeB      &quot;</code></pre>
+<p>The process you are automating will determine which strategy is correct, though the node-oriented flow is more commonplace.</p>
+<p>For more complex workflow strategy rules, see <a href="workflow-strategies/ruleset-workflow-strategy-plugin.html">Ruleset Workflow Strategy Plugin</a></p>
+<h2 id="workflow-steps">Workflow steps</h2>
+<p>The following sections describe how to construct a workflow as a set of steps of different types.</p>
+<p>When creating a new Job definition, the Workflow form will be set with defaults and have no workflow steps defined. The workflow editor will have a form open asking to choose a step type to add.</p>
+<figure>
+<img src="../figures/fig0402.png" alt="Add a step" /><figcaption>Add a step</figcaption>
+</figure>
+<p>To add new steps simply press the “Add a step” link inside the workflow editor form. This will prompt you with a dialog asking which kind of step you would like to add. Each kind of step has its own form. When you are done filling out the form, press “Save” to add it to the sequence. Pressing “Cancel” will close the form and leave the sequence unchanged.</p>
+<figure>
+<img src="../figures/fig0403.png" alt="Add a step form" /><figcaption>Add a step form</figcaption>
+</figure>
+<p>New steps are always added to the end of the sequence. See <a href="#reordering-steps">Reordering steps</a> for directions on moving steps into a new order.</p>
+<p>Each step can have a “Description” to give it a more logical name or description to be displayed in the Rundeck GUI.</p>
+<p>The next several sections describe the specification of each kind of workflow step.</p>
+<p><strong>Types of Steps</strong></p>
+<p>Steps in a workflow can be either <em>Node Steps</em> or <em>Workflow Steps</em>.</p>
+<ul>
+<li>Node Steps operate once on each Node, which could be multiple times within a workflow. For a full list of Node Steps, see <a href="job-plugins.html#node-steps">Job Plugins - Node Steps</a></li>
+<li>Workflow Steps operate only once in the workflow. For a full list of Workflow Steps, see <a href="job-plugins.html#workflow-steps">Workflow Steps</a></li>
+</ul>
+<h2 id="reordering-steps">Reordering steps</h2>
+<p>The order of the Workflow steps can be modified by hovering over any step and then clicking and dragging the double arrow icon to the desired position. A blue horizontal bar helps highlight the position where the Job will land.</p>
+<figure>
+<img src="../figures/fig0408.png" alt="Job step reorder" /><figcaption>Job step reorder</figcaption>
+</figure>
+<p>After releasing the select Job, it will land in the desired position and the step order will be updated.</p>
+<p>If you wish to Undo the step reordering, press the “Undo” link above the steps.</p>
+<p>The “Redo” button can be pressed to reapply the last undone change.</p>
+<p>Press the “Revert All Changes” button to go back to the original step order.</p>
+<h2 id="error-handlers">Error Handlers</h2>
+<p>Each step in a Workflow can have an associated “Error Handler” action. This handler is a secondary step of any of the available types that will execute if the Workflow step fails. Error Handler steps can be used to recover the workflow from failure, or simply to execute a secondary action.</p>
+<p>This provides a few different ways to deal with a step’s failure:</p>
+<ul>
+<li>Print additional information about a failure</li>
+<li>Roll back a change</li>
+<li>Recover the workflow from failure, and continue normally</li>
+</ul>
+<p>When a Workflow step has a failure, the behavior depends on whether it has an Error Handler or not, and the value of the “keepgoing” setting for the Workflow, and the value of the “keepgoingOnSuccess” for the Error Handler.</p>
+<ul>
+<li>When a step fails <strong>without an Error Handler</strong>
+<ol type="1">
+<li>the Workflow is marked as “failed”</li>
+<li>If <code>keepgoing=&quot;false&quot;</code>
+<ol type="1">
+<li>then the entire Workflow stops</li>
+</ol></li>
+<li>Otherwise, the remaining Workflow steps are executed in order</li>
+<li>the Workflow ends with a “failed” result status</li>
+</ol></li>
+</ul>
+<p>If you define an Error Handler for a step, then the behavior changes. The handler can recover the step’s failure by executing successfully, and a secondary option “keepgoingOnSuccess” will let you override the Workflow’s “keepgoing” value if it is false.</p>
+<ul>
+<li>When a step fails <strong>with an Error Handler</strong>
+<ol type="1">
+<li>The Error Handler is executed</li>
+<li>If the Error Handler was successful and has <code>keepgoingOnSuccess=&quot;true&quot;</code>
+<ol type="1">
+<li>The workflow <code>keepgoing</code> is ignored,</li>
+<li>The Workflow failure status is <em>not</em> marked, and it will continue to the next step</li>
+</ol></li>
+<li>Else if <code>keepgoing=&quot;false&quot;</code>
+<ol type="1">
+<li>The Workflow is marked as “failed”</li>
+<li>Then the entire Workflow stops</li>
+</ol></li>
+<li>Else if <code>keepgoing=&quot;true&quot;</code>
+<ol type="1">
+<li>If the Error Handler failed then the Workflow is marked as “failed”</li>
+<li>Otherwise, the Workflow is <em>not</em> additionally marked</li>
+</ol></li>
+<li>the remaining Workflow steps are executed in order (including other triggered Error Handlers)</li>
+<li>when the Workflow ends, its status depends on if it is marked</li>
+</ol></li>
+</ul>
+<p>Essentially, the result status of the Error Handler becomes the result status of its Step, if the Workflow has <code>keepgoing=&quot;true&quot;</code> or if the Error Handler overrides it with <code>keepgoingOnSuccess=&quot;true&quot;</code>. If the Error Handler succeeds, then the step is not considered to have failed. This includes scripts, commands, job references, etc. (Scripts and commands must have an exit status of <code>0</code> to return success.)</p>
+<p>It is a good practice, when you are defining Error Handlers, to <strong>always</strong> have them fail (e.g. scripts/commands return a non-zero exit-code), unless you specifically want them to be used for Recovery.</p>
+<blockquote>
+<p>Note, Error-handlers can be attached to either Node Steps or Workflow Steps, and the type of step and the Strategy of the Workflow determines what type of Error-handler steps can be attached to a step. The only restriction is in the case that the Workflow is “Node-oriented”, which means that the workflow is executed independently for each node. In this case, Node Steps can only have other Node steps as Error Handlers. In other cases, the Error Handler can be other Workflow steps.</p>
+</blockquote>
+<p>To add an error handler press the “+ error handler” button on the step you want to handle. The form presented includes the normal set of steps you can add to a workflow.</p>
+<figure>
+<img src="../figures/fig0410.png" alt="Adding an error handler" /><figcaption>Adding an error handler</figcaption>
+</figure>
+<p>The example below shows an error handler that calls a script by URL.</p>
+<figure>
+<img src="../figures/fig0411.png" alt="Example error handler" /><figcaption>Example error handler</figcaption>
+</figure>
+<h3 id="context-information">Context information</h3>
+<p>When the Error-handler step is executed, its execution context will contain some information about the nature of the failure that occurred for the original step.</p>
+<p>In the case where a Node Step has a Workflow Step as an Error Handler, then the failure data for multiple nodes is rolled up into a single failure reason to be used by the Workflow Step.</p>
+<p>See the section on <a href="#context-variables">Context Variables</a> for more information.</p>
+<h2 id="save-the-changes">Save the changes</h2>
+<p>Once the Workflow steps have been defined and order, changes are permanently saved after pressing the “Create” button if new or the “Update” button if the Job is being modified.</p>
+<h2 id="context-variables">Context Variables</h2>
+<p>When a Job step is executed, it has a set of “context” variables that you can access in the Job step. There are several sets of context variables, including: the Job context <code>job</code>, the Node context <code>node</code>, and the Option context <code>option</code>.</p>
+<p>Job context variables:</p>
+<ul>
+<li><code>job.name</code>: Name of the Job</li>
+<li><code>job.group</code>: Group of the Job</li>
+<li><code>job.id</code>: ID of the Job</li>
+<li><code>job.execid</code>: ID of the current Execution</li>
+<li><code>job.executionType</code> : Execution type, can be <code>user</code>, <code>scheduled</code> or <code>user-scheduled</code> for <code>Run Job Later</code> executions</li>
+<li><code>job.username</code>: Username of the user executing the Job</li>
+<li><code>job.project</code>: Project name</li>
+<li><code>job.loglevel</code>: Logging level, one of: ‘ERROR’,‘WARN’,‘INFO’,‘VERBOSE’,‘DEBUG’</li>
+<li><code>job.user.email</code>: Executing user’s email address set in <a href="user.html">User profile</a>.</li>
+<li><code>job.retryAttempt</code>: A number indicating the attempt, if this execution is a <a href="#retry">retry</a>.</li>
+<li><code>job.wasRetry</code>: <code>true</code> if this execution is a retry, otherwise <code>false</code>. See: <a href="#retry">retry</a>.</li>
+<li><code>job.threadcount</code>: Threadcount (number of nodes run at once) of the Job</li>
+<li><code>job.filter</code>: The filter used to select the nodes for this job (if applicable)</li>
+</ul>
+<p>Node context variables:</p>
+<ul>
+<li><code>node.name</code>: Name of the Node being executed on</li>
+<li><code>node.hostname</code>: Hostname of the Node</li>
+<li><code>node.username</code>: Username of the remote user</li>
+<li><code>node.description</code>: Description of the node</li>
+<li><code>node.tags</code>: Comma-separated list of tags</li>
+<li><code>node.os-*</code>: OS properties of the Node: <code>name</code>,<code>version</code>,<code>arch</code>,<code>family</code></li>
+<li><code>node.*</code>: All Node attributes defined on the Node.</li>
+</ul>
+<p>Additional Error-handler context variables:</p>
+<ul>
+<li><code>result.reason</code>: A code indicating the reason the step failed
+<ul>
+<li>Common reason code strings used by node execution of commands or scripts:
+<ul>
+<li><code>NonZeroResultCode</code> - the execution returned a non-zero code</li>
+<li><code>SSHProtocolFailure</code> - SSH protocol failure</li>
+<li><code>HostNotFound</code> - host not found</li>
+<li><code>ConnectionTimeout</code> - connection timeout</li>
+<li><code>ConnectionFailure</code> - connection failure (e.g. refused)</li>
+<li><code>IOFailure</code> - IO error</li>
+<li><code>AuthenticationFailure</code> - authentication was refused or incorrect</li>
+</ul></li>
+<li>Reason code strings used by Job references
+<ul>
+<li><code>JobFailed</code> - referenced Job workflow failed</li>
+<li><code>NotFound</code> - referenced Job not found</li>
+<li><code>Unauthorized</code> - referenced Job not authorized</li>
+<li><code>InvalidOptions</code> - referenced Job input options invalid</li>
+<li><code>NoMatchedNodes</code> - referenced Job node dispatch filters had no match</li>
+</ul></li>
+<li>Reason code used from a failed Node Step if the handler is a Workflow Step
+<ul>
+<li><code>NodeDispatchFailure</code> - one or more nodes failed the step</li>
+</ul></li>
+</ul></li>
+<li><code>result.message</code>: A string describing the failure</li>
+<li><code>result.resultCode</code>: Exit code from an execution (if available)</li>
+<li><code>result.failedNodes</code>: Comma-separated list of node names that failed for a <code>NodeDispatchFailure</code></li>
+</ul>
+<p>Option context variables are referred to as <code>option.NAME</code> (more about <a href="defining-job-options.html">Job Options</a>.)</p>
+<h3 id="context-variable-usage">Context Variable Usage</h3>
+<p>Context variables can be used in a few ways in a Job step, with slightly different syntaxes:</p>
+<ul>
+<li><dl>
+<dt>Commands, Script Arguments and Job Reference Arguments</dt>
+<dd><pre><code>`${ctx.name}`</code></pre>
+</dd>
+</dl></li>
+<li><dl>
+<dt>Inline Script Content (<em>see note</em>)</dt>
+<dd><pre><code>`@ctx.name@`</code></pre>
+</dd>
+</dl>
+<blockquote>
+<p>Note, The “Inline Script Content” variable expansion is <strong>not</strong> available for “Script File” steps. The Script File is not rewritten at all when used for execution.</p>
+</blockquote>
+<blockquote>
+<p>Note: This can be disabled, see <a href="../administration/configuration/configuration-file-reference.html#framework.properties">Administrator Guide &gt; Configuration File Reference &gt; framework.properties</a>.</p>
+</blockquote></li>
+<li><dl>
+<dt>Environment Variables (<em>see note</em>)</dt>
+<dd><pre><code>`$RD_CTX_NAME`</code></pre>
+</dd>
+</dl>
+<p>The syntax for Environment variables is that all letters become uppercase, punctuation is replaced with underscore, and the name is prefixed with <code>RD_</code>.</p>
+<blockquote>
+<p>Note, See the chapter <a href="../administration/projects/node-execution/ssh.html#configuring-remote-machine-for-ssh" title="Administrator Guide - Projects - Node Execution - SSH - Configuring Remote Machine For Ssh">Administrator Guide - Projects - Node Execution - SSH - Configuring Remote Machine For Ssh</a> for information about requirements of the SSH server.</p>
+</blockquote></li>
+</ul>
+<h3 id="command-line-tools-and-api-access">Command Line Tools and API access</h3>
+<p>Jobs can be exported or imported in XML or Yaml format using the API or the <code>rd</code> CLI tool.</p>
+<ul>
+<li><a href="../api/index.html#exporting-jobs" title="API Reference | Version 28 - Exporting Jobs">API Reference | Version 28 - Exporting Jobs</a></li>
+<li><a href="../api/index.html#importing-jobs" title="API Reference | Version 28 - Importing Jobs">API Reference | Version 28 - Importing Jobs</a></li>
+<li><a href="https://rundeck.github.io/rundeck-cli">RD CLI Tool</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbsbottom">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb bottom collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.12)</a></li>
+    
+    
+    <li ><a href="index.html">User Guide</a></li>
+    <li class="active"><a href="creating-job-workflows.html">Creating Job Workflows</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="defining-job-options.html">Defining Job Options <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/job-workflows.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/job-workflows.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Enterprise for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Enterprise
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://rundeck.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2019 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2019-01-14T23:57:51UTC">2019-01-14T23:57:51UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+
+<!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2768099.js"></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
