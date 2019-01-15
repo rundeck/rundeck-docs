@@ -184,7 +184,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Each Parser and Generator must declare the set of filename extensions (such as “xml” or “json”) that it supports, as well as the set of MIME types that it supports (such as “text/xml” or “application/json”). This lets other services retrieve the appropriate parser or generator when all that is known about the source or destination of serialized data is a filename or a MIME type.</p>
 <h2 id="java-plugin-type">Java Plugin Type</h2>
 <h3 id="resourceformatparser">ResourceFormatParser</h3>
-<p>For Parsers, your provider class must implement the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.12-20181221/com/dtolabs/rundeck/core/resources/format/ResourceFormatParser.html">ResourceFormatParser</a>:</p>
+<p>For Parsers, your provider class must implement the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.12-20190114/com/dtolabs/rundeck/core/resources/format/ResourceFormatParser.html">ResourceFormatParser</a>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">public</span> <span class="kw">interface</span> ResourceFormatParser {</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">    <span class="co">/**</span></a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">     <span class="co">*</span> Return the list of file extensions that this format parser can parse<span class="co">.</span></a>
@@ -208,7 +208,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1-21" data-line-number="21">    <span class="kw">public</span> INodeSet <span class="fu">parseDocument</span>(<span class="bu">InputStream</span> input) <span class="kw">throws</span> ResourceFormatParserException;</a>
 <a class="sourceLine" id="cb1-22" data-line-number="22">}</a></code></pre></div>
 <h3 id="resourceformatgenerator">ResourceFormatGenerator</h3>
-<p>For Generators, your provider class must implement the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.12-20181221/com/dtolabs/rundeck/core/resources/format/ResourceFormatGenerator.html">ResourceFormatGenerator</a>:</p>
+<p>For Generators, your provider class must implement the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.12-20190114/com/dtolabs/rundeck/core/resources/format/ResourceFormatGenerator.html">ResourceFormatGenerator</a>:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">public</span> <span class="kw">interface</span> ResourceFormatGenerator {</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb2-3" data-line-number="3">    <span class="co">/**</span></a>
@@ -299,7 +299,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-14T23:57:51UTC">2019-01-14T23:57:51UTC</span>
+<span class="generated-date" title="2019-01-15T03:05:51UTC">2019-01-15T03:05:51UTC</span>
 </p>
 </footer>
 </div>
