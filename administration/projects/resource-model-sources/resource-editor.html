@@ -184,7 +184,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This allows you to make use of the Resource Model Source in a more seamless way. Rundeck will load the Resource model from the third-party Provider system, and users of Rundeck can click straight to the Editor for those Nodes. The Provider and the Editor could be the same system, or they could both be custom CGI scripts that integrate with a third system.</p>
 <p>Some teams have acquired or developed tools to manage information about the hosts deployed in their networks. These tools have interfaces to not just view but also modify the data about these hosts. Though there is no widely used common standard adopted by users of these tools, it is possible to map the data to meet the needs of <a href="#resource-model-source">Rundeck resource models</a>.</p>
 <h3 id="definition">Definition</h3>
-<p>The <a href="../../../man5/resource.html">Rundeck resource model document format</a> and the <a href="../../../man5/resource-yaml.html">resource-yaml-v13</a> format provide two attributes that help connect the dots between the Rundeck UI and the editing interface provided by the external data management tool. They can use <code>editUrl</code> or <code>remoteUrl</code> attributes to specify the remote URL. The URLs can embed properties about the node to expand prior to being loaded, which allows you to e.g. submit query parameters using the node name.</p>
+<p>The <a href="../../../man5/resource-xml.html" title="Document Format Reference - RESOURCE-XML">Rundeck resource model document format</a> and the <a href="../../../man5/resource-yaml.html" title="Document Format Reference - RESOURCE-YAML">resource-yaml-v13</a> format provide two attributes that help connect the dots between the Rundeck UI and the editing interface provided by the external data management tool. They can use <code>editUrl</code> or <code>remoteUrl</code> attributes to specify the remote URL. The URLs can embed properties about the node to expand prior to being loaded, which allows you to e.g. submit query parameters using the node name.</p>
 <dl>
 <dt><code>editUrl</code></dt>
 <dd><p>Specifies a URL to a remote site which will allow editing of the Node. When specified, the Node resource will display an “Edit” link in the Rundeck GUI and clicking it will open a new browser page for the URL.</p>
@@ -311,6 +311,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul>
 <p>To complete the round-trip of editing a Node and then showing the results back in Rundeck, the ndbtest project would have to export XML formatted Resource data, and then your Rundeck project.properties file would have to point to the appropriate URL. (This is left as an exercise to the reader.)</p>
+<p><a href="../../../tutorials/index.html" title="Tutorials">Tutorial</a></p>
 </div>
 </div>
 </div>
@@ -385,7 +386,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>

@@ -898,14 +898,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Some endpoints also support using a <code>format</code> query parameter to specify the expected output format.</p>
 <h2 id="authentication">Authentication</h2>
 <p>Authentication can be done in two different ways, either with Token based authentication, or with a username and password.</p>
-<p>Note that in either case, <strong>it is recommended that you enable SSL Support for the Rundeck server</strong> so that communication is encrypted at all times. For more information about using SSL, see <a href="../administration/security/configuring-ssl.html">Security - Configuring Rundeck for SSL</a>.</p>
+<p>Note that in either case, <strong>it is recommended that you enable SSL Support for the Rundeck server</strong> so that communication is encrypted at all times. For more information about using SSL, see <a href="../administration/security/configuring-ssl.html" title="Administrator Guide - Security - Configuring SSL">Security - Configuring Rundeck for SSL</a>.</p>
 <h3 id="token-authentication">Token Authentication</h3>
 <p>Token Authentication consists of including a string known as an “API Token” with every request to the Rundeck API.</p>
 <p>To obtain an API Token, you must first log in to the Rundeck GUI using a user account. Click on your username in the header of the page, and you will be shown your User Profile page. From this page you can manage your API Tokens.</p>
-<p><strong>Note</strong>: You must have appropriate authorization to generate a token. See <a href="../administration/security/access-control-policy.html#api-token-authorization">API Token Authorization</a>.</p>
+<p><strong>Note</strong>: You must have appropriate authorization to generate a token. See <a href="../administration/security/access-control-policy.html#api-token-authorization" title="Administrator Guide - Security - Access Control Policy - Api Token Authorization">API Token Authorization</a>.</p>
 <p>Depending on what authorization level you have, you can generate a token with a certain set of <em>Authorization Roles</em> and an <em>Expiration Period</em>.</p>
 <p>Click “Generate API Token” to create a new one. The unique string that is shown is the API Token.</p>
-<p>Alternately you can define tokens in static file, by setting the <code>rundeck.tokens.file</code> in <a href="../administration/configuration/configuration-file-reference.html#framework.properties">framework.properties</a>.</p>
+<p>Alternately you can define tokens in static file, by setting the <code>rundeck.tokens.file</code> in <a href="../administration/configuration/configuration-file-reference.html#framework.properties" title="Administrator Guide - Rundeck Configuration - Configuration File Reference - Framework.properties">framework.properties</a>.</p>
 <p>You must include one of the following with every HTTP request to the API:</p>
 <ul>
 <li>HTTP Header <code>X-Rundeck-Auth-Token</code> set to the API Token string</li>
@@ -1429,13 +1429,13 @@ POST /api/11/tokens/[USER]</code></pre>
 </dl>
 <h3 id="metrics-links">Metrics Links</h3>
 <p>Several Metrics API endpoints are linked in the System Info response.</p>
-<p>See [GET /api/V/metrics][].</p>
+<p>See <a href="#list-metrics">GET /api/V/metrics</a>.</p>
 <h2 id="list-metrics">List Metrics</h2>
 <p>List enabled Metrics endpoints.</p>
 <p><em>Configuration</em></p>
-<p>The Metrics endpoints are enabled by default, but can be disabled based on application configuration. See: <a href="../administration/configuration/configuration-file-reference.html#metrics-api-endpoints">Administration &gt; Configuration File Reference</a>.</p>
+<p>The Metrics endpoints are enabled by default, but can be disabled based on application configuration. See: <a href="../administration/configuration/configuration-file-reference.html#metrics-api-endpoints" title="Administrator Guide - Rundeck Configuration - Configuration File Reference - Metrics Api Endpoints">Administration &gt; Configuration File Reference</a>.</p>
 <p><em>ACL Requirement</em></p>
-<p>They require <code>read</code> access to the <code>system</code> application scope resource. See: <a href="../administration/security/access-control-policy.html#application-scope-resources-and-actions">Access Control Policy &gt; Application Scope</a>.</p>
+<p>They require <code>read</code> access to the <code>system</code> application scope resource. See: <a href="../administration/security/access-control-policy.html#application-scope-resources-and-actions" title="Administrator Guide - Security - Access Control Policy - Application Scope Resources And Actions">Access Control Policy &gt; Application Scope</a>.</p>
 <p><strong>Request:</strong></p>
 <pre><code>GET /api/25/metrics</code></pre>
 <p><strong>Response:</strong></p>
@@ -2382,7 +2382,7 @@ Signal Dispatcher id=4 state=RUNNABLE
 <p>For more information about ACL Policies see:</p>
 <ul>
 <li><a href="../man5/aclpolicy.html">ACLPOLICY format</a></li>
-<li><a href="../administration/security/access-control-policy.html">Access Control Policy</a></li>
+<li><a href="../administration/security/access-control-policy.html" title="Administrator Guide - Security - Access Control Policy">Access Control Policy</a></li>
 </ul>
 <h3 id="list-system-acl-policies">List System ACL Policies</h3>
 <p><strong>Request:</strong></p>
@@ -2674,8 +2674,8 @@ POST /api/12/job/[ID]/executions</code></pre>
 <li><code>jobFilter</code>: specify a filter for the job Name</li>
 </ul>
 <p><strong>Response:</strong></p>
-<p>If you specify <code>format=xml</code>, then the output will be in <a href="../man5/job-xml.html">job-xml</a> format.</p>
-<p>If you specify <code>format=yaml</code>, then the output will be in <a href="../man5/job-yaml.html">job-yaml</a> format.</p>
+<p>If you specify <code>format=xml</code>, then the output will be in <a href="../man5/job-xml.html" title="Document Format Reference - JOB-XML">job-xml</a> format.</p>
+<p>If you specify <code>format=yaml</code>, then the output will be in <a href="../man5/job-yaml.html" title="Document Format Reference - JOB-YAML">job-yaml</a> format.</p>
 <p>If an error occurs, then the output will be in XML format, using the common <code>result</code> element described in the <a href="#xml-response-format">Response Format</a> section.</p>
 <h3 id="importing-jobs">Importing Jobs</h3>
 <p>Import job definitions in XML or YAML formats.</p>
@@ -2757,8 +2757,8 @@ POST /api/12/job/[ID]/executions</code></pre>
 <li><code>format</code> : can be “xml” or “yaml” to specify the output format. Default is “xml”</li>
 </ul>
 <p><strong>Response:</strong></p>
-<p>If you specify <code>format=xml</code>, then the output will be in <a href="../man5/job-xml.html">job-xml</a> format.</p>
-<p>If you specify <code>format=yaml</code>, then the output will be in <a href="../man5/job-yaml.html">job-yaml</a> format.</p>
+<p>If you specify <code>format=xml</code>, then the output will be in <a href="../man5/job-xml.html" title="Document Format Reference - JOB-XML">job-xml</a> format.</p>
+<p>If you specify <code>format=yaml</code>, then the output will be in <a href="../man5/job-yaml.html" title="Document Format Reference - JOB-YAML">job-yaml</a> format.</p>
 <p>If an error occurs, then the output will be in XML format, using the common <code>result</code> element described in the <a href="#xml-response-format">Response Format</a> section.</p>
 <h3 id="deleting-a-job-definition">Deleting a Job Definition</h3>
 <p>Delete a single job definition.</p>
@@ -3442,7 +3442,7 @@ Content-Type: application/json
 <p><code>204 No Content</code></p>
 <p><em>Authorization requirement</em>:</p>
 <ul>
-<li>Requires the <code>delete_execution</code> action allowed for a <code>project</code> in the <code>application</code> context. See: <a href="../administration/security/access-control-policy.html#application-scope-resources-and-actions">Administration - Access Control Policy - Application Scope Resources and Actions</a></li>
+<li>Requires the <code>delete_execution</code> action allowed for a <code>project</code> in the <code>application</code> context. See: <a href="../administration/security/access-control-policy.html#application-scope-resources-and-actions" title="Administrator Guide - Security - Access Control Policy - Application Scope Resources And Actions">Administration - Access Control Policy - Application Scope Resources and Actions</a></li>
 </ul>
 <h3 id="bulk-delete-executions">Bulk Delete Executions</h3>
 <p>Delete a set of Executions by their IDs.</p>
@@ -4261,7 +4261,7 @@ GET /api/14/project/[PROJECT]/run/url</code></pre>
 <a class="sourceLine" id="cb220-7" data-line-number="7">  <span class="fu">}</span></a>
 <a class="sourceLine" id="cb220-8" data-line-number="8"><span class="fu">}</span></a></code></pre></div>
 <h2 id="key-storage">Key Storage</h2>
-<p>Upload and manage public and private key files and passwords. For more information see the <a href="../administration/security/key-storage.html">Administration - Key Storage</a> document.</p>
+<p>Upload and manage public and private key files and passwords. For more information see the <a href="../administration/security/key-storage.html" title="Administrator Guide - Security - Key Storage">Administration - Key Storage</a> document.</p>
 <p>Keys are stored via Rundeck’s <em>Storage</em> facility. This is a path-based interface to manage files. The underlying storage may be on disk or in a database.</p>
 <p>The Storage facility manages “resources”, which may be files or directories. File resources can have metadata associated with them (such as MIME content type).</p>
 <p>Note: Private Keys and Passwords can be uploaded but not retrieved directly with this API. They can only be used internally by Rundeck.</p>
@@ -4771,7 +4771,7 @@ DELETE /api/13/project/[PROJECT]/motd.md</code></pre>
 <p>For more information about ACL Policies see:</p>
 <ul>
 <li><a href="../man5/aclpolicy.html">ACLPOLICY format</a></li>
-<li><a href="../administration/security/access-control-policy.html">Access Control Policy</a></li>
+<li><a href="../administration/security/access-control-policy.html" title="Administrator Guide - Security - Access Control Policy">Access Control Policy</a></li>
 </ul>
 <h4 id="list-project-acl-policies">List Project ACL Policies</h4>
 <p><strong>Request:</strong></p>
@@ -4909,7 +4909,7 @@ DELETE /api/13/project/[PROJECT]/motd.md</code></pre>
 <p>Specify a MIME type via the <code>Accept:</code> header to specify the requested format.</p>
 <p><strong>Note:</strong> If no query parameters are included, the result set will include all Node resources for the project.</p>
 <p><strong>Response:</strong></p>
-<p>Depending on the <code>format</code> parameter, a value of “xml” will return <a href="../man5/resource-xml.html">resource-xml</a> and “yaml” will return <a href="../man5/resource-yaml.html">resource-yaml</a>, and “json” will return <a href="../man5/resource-json.html">resource-json</a> formatted results. Any other supported format value will return content in the specified format.</p>
+<p>Depending on the <code>format</code> parameter, a value of “xml” will return <a href="../man5/resource-xml.html" title="Document Format Reference - RESOURCE-XML">resource-xml</a> and “yaml” will return <a href="../man5/resource-yaml.html" title="Document Format Reference - RESOURCE-YAML">resource-yaml</a>, and “json” will return <a href="../man5/resource-json.html" title="Document Format Reference - RESOURCE-JSON">resource-json</a> formatted results. Any other supported format value will return content in the specified format.</p>
 <h3 id="getting-resource-info">Getting Resource Info</h3>
 <p>Get a specific resource within a project.</p>
 <p><strong>Request:</strong></p>
@@ -4924,10 +4924,10 @@ DELETE /api/13/project/[PROJECT]/motd.md</code></pre>
 </ul></li>
 </ul>
 <p><strong>Response:</strong></p>
-<p>Depending on the <code>format</code> parameter, a value of “xml” will return <a href="../man5/resource-xml.html">resource-xml</a> and “yaml” will return <a href="../man5/resource-yaml.html">resource-yaml</a>, and “json” will return <a href="../man5/resource-json.html">resource-json</a> formatted results.</p>
+<p>Depending on the <code>format</code> parameter, a value of “xml” will return <a href="../man5/resource-xml.html" title="Document Format Reference - RESOURCE-XML">resource-xml</a> and “yaml” will return <a href="../man5/resource-yaml.html" title="Document Format Reference - RESOURCE-YAML">resource-yaml</a>, and “json” will return <a href="../man5/resource-json.html" title="Document Format Reference - RESOURCE-JSON">resource-json</a> formatted results.</p>
 <p>The result will contain a single item for the specified resource.</p>
 <h3 id="using-node-filters">Using Node Filters</h3>
-<p>Refer to the <a href="../manual/node-filters.html">User Guide - Node Filters</a> Documentation for information on the node filter syntax and usage.</p>
+<p>Refer to the <a href="../manual/node-filters.html" title="User Guide - Node Filters">User Guide - Node Filters</a> Documentation for information on the node filter syntax and usage.</p>
 <p>A basic node filter looks like:</p>
 <pre><code>attribute: value attribute2: value2</code></pre>
 <p>To specify a Node Filter string as a URL parameter for an API request, use a parameter named <code>filter</code>. Your HTTP client will have to correctly escape the value of the <code>filter</code> parameter. For example you can use <code>curl</code> like this;</p>
@@ -5992,7 +5992,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>

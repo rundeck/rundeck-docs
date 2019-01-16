@@ -239,7 +239,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>reports/index</code></li>
 </ul>
 <h2 id="zip-plugin-type">Zip Plugin Type</h2>
-<p>See the <a href="plugin-development.html#script-plugin-zip-structure">Plugin Development - Script plugin zip structure</a> for the basics of Zip plugin structure.</p>
+<p>See the <a href="plugin-development.html#script-plugin-zip-structure" title="Plugin Developer Guide - Plugin Development - Script Plugin Zip Structure">Plugin Development - Script plugin zip structure</a> for the basics of Zip plugin structure.</p>
 <p>The structure of the zip file is:</p>
 <pre><code>[name]-plugin.zip
 \- [name]-plugin/ -- root directory of zip contents, same name as zip file
@@ -294,12 +294,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>See <a href="#javascript-api">Javascript API</a> for additional Javascript information.</p>
 <h3 id="localization">Localization</h3>
-<p>For the basics of zip plugin localization see: <a href="plugin-development.html#internationalizationlocalization-for-zip-files">Plugin Development - Internationalization/Localization for Zip files</a>.</p>
+<p>For the basics of zip plugin localization see: <a href="plugin-development.html#internationalizationlocalization-for-zip-files" title="Plugin Developer Guide - Plugin Development - Internationalizationlocalization For Zip Files">Plugin Development - Internationalization/Localization for Zip files</a>.</p>
 <h3 id="icon">Icon</h3>
-<p>See <a href="plugin-development.html#plugin-icons">Plugin Icons</a>.</p>
+<p>See <a href="plugin-development.html#plugin-icons" title="Plugin Developer Guide - Plugin Development - Plugin Icons">Plugin Icons</a>.</p>
 <h2 id="java-plugin-type">Java Plugin Type</h2>
 <ul>
-<li><em>Note</em>: Refer to <a href="plugin-development.html#java-plugin-development">Java Development</a> for information about developing a Java plugin for Rundeck.</li>
+<li><em>Note</em>: Refer to <a href="plugin-development.html#java-plugin-development" title="Plugin Developer Guide - Plugin Development - Java Plugin Development">Java Development</a> for information about developing a Java plugin for Rundeck.</li>
 </ul>
 <p>The plugin interface is <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190114/com/dtolabs/rundeck/plugins/rundeck/UIPlugin.html">UIPlugin</a>.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb3-1" data-line-number="1"></a>
@@ -349,12 +349,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Resources should be included in your plugin Jar file under a <code>resources/</code> directory.</p>
 <h3 id="localization-1">Localization</h3>
-<p>For the basics of Java plugin localization see: <a href="plugin-development.html#plugin-localization">Plugin Development - Plugin Localization</a>.</p>
+<p>For the basics of Java plugin localization see: <a href="plugin-development.html#plugin-localization" title="Plugin Developer Guide - Plugin Development - Plugin Localization">Plugin Development - Plugin Localization</a></p>
 <h3 id="icon-1">Icon</h3>
-<p>See <a href="plugin-development.html#plugin-icons">Plugin Icons</a>.</p>
+<p>See <a href="plugin-development.html#plugin-icons" title="Plugin Developer Guide - Plugin Development - Plugin Icons">Plugin Icons</a>.</p>
 <h2 id="javascript-api">Javascript API</h2>
 <p>When loaded in a Rundeck GUI page, your Javascript code can use a simple Javascript API to get more information about the Rundeck application, and your plugin.</p>
-<p>Note: Rundeck makes use of <a href="http://knockoutjs.com/">Knockout</a> and [jQuery][] on all GUI pages, so they can be used by your plugins. Knockout is useful to understand when interacting with the JS already included on a Rundeck page.</p>
+<p>Note: Rundeck makes use of <a href="https://knockoutjs.com/">Knockout</a> and <a href="https://jquery.com/">jQuery</a> on all GUI pages, so they can be used by your plugins. Knockout is useful to understand when interacting with the JS already included on a Rundeck page.</p>
 <p>Rundeck creates a window object called <code>rundeckPage</code> with these methods:</p>
 <ul>
 <li><code>project()</code>: returns the name of the current project, if available</li>
@@ -378,7 +378,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb4-9" data-line-number="9"><span class="op">}</span></a></code></pre></div>
 <h3 id="loading-i18n-resources">Loading i18n Resources</h3>
 <p>The <code>rundeckPage.pluginBasei18nUrl(..)</code> method will return the base URL for loading i18n resources.</p>
-<p>Rundeck Plugin Localization/Internationalization uses java <code>.properties</code> formatted files. (See <a href="plugin-development.html#plugin-localization">Plugin Localization</a>). However, your i18n resources don’t have to be <code>.properties</code> files.</p>
+<p>Rundeck Plugin Localization/Internationalization uses java <code>.properties</code> formatted files. (See <a href="plugin-development.html#plugin-localization" title="Plugin Developer Guide - Plugin Development - Plugin Localization">Plugin Localization</a>). However, your i18n resources don’t have to be <code>.properties</code> files.</p>
 <p>Requesting resources via this URL provides two features to help with i18n:</p>
 <ol type="1">
 <li>Locale resolution. Requesting a path such as <code>rundeckPage.pluginBasei18nUrl('myprovider')+'/myfile.txt'</code>, will attempt to resolve the file by looking for a file based on the current User’s locale/language settings. E.g. if their language is set to Spanish (code <code>es_419</code>), the request will resolve to a file <code>i18n/myfile_es_419.txt</code> if it exists. It will fall back to the language (e.g. <code>es</code>), then any default locale (e.g. <code>en_us</code>), default language (e.g. <code>en</code>) and finally the original file path.</li>
@@ -481,7 +481,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>

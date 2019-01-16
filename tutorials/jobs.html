@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>edam6387435737656535824temp</title>
+  <title>edam4079505485839177996temp</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -287,7 +287,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <h2 id="job-definition">Job definition</h2>
 <p>With an understanding of the scripts and the option needed to control the restart operation, the final step is to compose the Job definitions.</p>
-<p>While each job can be defined graphically in Rundeck, each can succinctly be defined using an XML file conforming to the <a href="../man5/job-xml.html">job-xml</a> document format. This document contains a set of tags corresponding to the choices seen in the Rundeck GUI form.</p>
+<p>While each job can be defined graphically in Rundeck, each can succinctly be defined using an XML file conforming to the <a href="../man5/job-xml.html" title="Document Format Reference - JOB-XML">job-xml</a> document format. This document contains a set of tags corresponding to the choices seen in the Rundeck GUI form.</p>
 <p>Below are the XML definitions for the jobs. One or more jobs can be defined inside a single XML file but your convention will dictate how to organize the definitions. The files can be named any way desired and do not have to correspond to the Job name or its group.</p>
 <p>File listing: stop.xml</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource xml numberLines"><code class="sourceCode xml"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">&lt;joblist&gt;</span>   </a>
@@ -458,7 +458,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb8-32" data-line-number="32">   <span class="kw">&lt;/job&gt;</span>   </a>
 <a class="sourceLine" id="cb8-33" data-line-number="33"><span class="kw">&lt;/joblist&gt;</span></a></code></pre></div>
 <p>Note that we don’t define a <code>&lt;nodefilters&gt;</code> or <code>&lt;dispatch&gt;</code> section for Restart, because we only want this sequence to execute <strong>once</strong>, on the server node. The Job references will each be called once, and the “start”, “stop” and “status” Jobs will each be dispatched to the nodes they define.</p>
-<p>Saving the XML definitions files located on the Rundeck server, one can load them using the <a href="../man1/rd-jobs.html">rd-jobs</a> command.</p>
+<p>Saving the XML definitions files located on the Rundeck server, one can load them using the <a href="../man1/index.html" title="Command Line Tools">rd-jobs</a> command.</p>
 <p>Run the <code>rd-jobs load</code> command for each job definition file:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="ex">rd-jobs</span> load -p anvils -f start.xml   </a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="ex">rd-jobs</span> load -p anvils -f stop.xml    </a>
@@ -484,7 +484,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <img src="../figures/fig0608.png" alt="Restart run page" /><figcaption>Restart run page</figcaption>
 </figure>
 <h3 id="job-run-with-the-cli">Job run with the CLI</h3>
-<p>The jobs can also be started from the command line using the <a href="../man1/run.html">run</a> shell tool. The job group and name are specified using the “-j” parameter. Any options the Job supports are supplied after the “–” (double dash) parameter. (The “-p” parameter specifies the project, but it can be left out if there is only one project available.)</p>
+<p>The jobs can also be started from the command line using the <a href="../man1/index.html" title="Command Line Tools">run</a> shell tool. The job group and name are specified using the “-j” parameter. Any options the Job supports are supplied after the “–” (double dash) parameter. (The “-p” parameter specifies the project, but it can be left out if there is only one project available.)</p>
 <p>Run Restart specifying the method, “normal”:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="ex">run</span> -j <span class="st">&quot;web/Restart&quot;</span> -p anvils -- -method normal</a></code></pre></div>
 <p>Run Restart specifying the method, “force”:</p>
@@ -559,7 +559,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>

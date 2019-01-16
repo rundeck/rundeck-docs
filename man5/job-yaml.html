@@ -232,7 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </dd>
 </dl>
 <p>If the description contains more than one line of text, then the first line is used as the “short description” of the job, and rendered exactly as text. The remaining lines are the “extended description”, rendered using Markdown format as HTML in the Rundeck GUI. Markdown can also embed HTML directly if you like. See <a href="https://en.wikipedia.org/wiki/Markdown#Example">Wikipedia - Markdown</a>.</p>
-<p>The HTML is sanitized to remove disallowed tags before rendering to the browser (such as <code>&lt;script&gt;</code>, etc.). You can disable all extended description HTML rendering via a configuration flag. See <a href="../administration/gui-customization.html">GUI Customization</a>.</p>
+<p>The HTML is sanitized to remove disallowed tags before rendering to the browser (such as <code>&lt;script&gt;</code>, etc.). You can disable all extended description HTML rendering via a configuration flag. See <a href="../administration/configuration/gui-customization.html" title="Administrator Guide - Rundeck Configuration - GUI Customization">GUI Customization</a>.</p>
 <dl>
 <dt><a href="#sequence"><code>sequence</code></a></dt>
 <dd><p>The workflow sequence definition</p>
@@ -302,7 +302,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb8"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb8-1" data-line-number="1">  <span class="fu">retry:</span><span class="at"> ${option.retry}</span></a></code></pre></div>
 <dl>
 <dt><code>loglimit</code></dt>
-<dd><p>An optional logging limit. (See <a href="../manual/jobs.html#log-limit">Jobs - Log Limit</a>). Allowed values:</p>
+<dd><p>An optional logging limit. (See <a href="../manual/running-jobs.html#log-limit" title="User Guide - Running Jobs - Log Limit">Jobs - Log Limit</a>). Allowed values:</p>
 <ul>
 <li><code>###</code> If you specify a number, that is treated as the “Maximum total number of log lines”</li>
 <li><code>###/node</code> If you specify a number followed by <code>/node</code>, the number is treated as the “Maximum number of log lines for a single node”</li>
@@ -368,7 +368,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <dd><p>“true/false” - whether the sequence should keep going if an error occurs</p>
 </dd>
 <dt><code>strategy</code></dt>
-<dd><p>“node-first” or “step-first”. Determines the strategy for executing the sequence across a set of nodes. See the <a href="../manual/jobs.html#workflow-control-settings">Rundeck User Manual</a> for more info.</p>
+<dd><p>“node-first” or “step-first”. Determines the strategy for executing the sequence across a set of nodes. See the <a href="../manual/running-jobs.html#workflow-control-settings" title="User Guide - Running Jobs - Workflow Control Settings">Rundeck User Manual</a> for more info.</p>
 </dd>
 <dt><code>commands</code></dt>
 <dd><p>This is a Sequence of: * One or more <a href="#command">Command Definitions</a></p>
@@ -533,7 +533,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </dl>
 </dd>
 </dl>
-<p>The <code>nodefilters</code> should contain a <code>filter</code> entry. The value is a string defining a node filter. See <a href="../manual/node-filters.html">User Guide - Node Filters</a>.</p>
+<p>The <code>nodefilters</code> should contain a <code>filter</code> entry. The value is a string defining a node filter. See <a href="../manual/node-filters.html" title="User Guide - Node Filters">User Guide - Node Filters</a>.</p>
 <dl>
 <dt><code>filter</code></dt>
 <dd><p>A node filter string</p>
@@ -674,7 +674,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb25-4" data-line-number="4">  <span class="fu">{</span><span class="er">name</span><span class="fu">:</span><span class="st">&quot;A Label&quot;</span><span class="fu">,</span> <span class="er">value</span><span class="fu">:</span><span class="st">&quot;a value&quot;</span><span class="fu">}</span></a>
 <a class="sourceLine" id="cb25-5" data-line-number="5"><span class="ot">]</span> </a></code></pre></div>
 <ul>
-<li>See the <a href="../manual/jobs.html#remote-option-values">Jobs Guide</a> for more info.</li>
+<li>See the <a href="../manual/running-jobs.html#remote-option-values" title="User Guide - Running Jobs - Remote Option Values">Jobs Guide</a> for more info.</li>
 </ul>
 <h3 id="schedule">Schedule</h3>
 <p>Define a schedule for repeated execution of the Job. The schedule can be defined as a Crontab formatted string, or as individual components. The individual components support Crontab syntax.</p>
@@ -755,7 +755,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </dl>
 </dd>
 </dl>
-<p>The <code>nodefilters</code> should contain a <code>filter</code> entry. The value is a string defining a node filter. See <a href="../manual/node-filters.html">User Guide - Node Filters</a>.</p>
+<p>The <code>nodefilters</code> should contain a <code>filter</code> entry. The value is a string defining a node filter. See <a href="../manual/node-filters.html" title="User Guide - Node Filters">User Guide - Node Filters</a>.</p>
 <dl>
 <dt><code>filter</code></dt>
 <dd><p>A node filter string</p>
@@ -862,7 +862,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb31-28" data-line-number="28">        <span class="fu">configuration:</span><span class="at"> </span><span class="kw">{}</span></a>
 <a class="sourceLine" id="cb31-29" data-line-number="29">        <span class="fu">type:</span><span class="at"> MinimalNotificationPlugin</span></a></code></pre></div>
 <ul>
-<li>For more information about the Webhook mechanism used, see the chapter <a href="../manual/jobs.html#webhooks">Integration - Webhooks</a>.</li>
+<li>For more information about the Webhook mechanism used, see the chapter <a href="../manual/running-jobs.html#webhooks" title="User Guide - Running Jobs - Webhooks">Integration - Webhooks</a>.</li>
 </ul>
 <h4 id="plugin">plugin</h4>
 <p>Defines a plugin notification section, can contain a single Map, or a Sequence of Maps. Each such map must have these contents:</p>
@@ -875,7 +875,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </dd>
 </dl>
 <h1 id="see-also">SEE ALSO</h1>
-<p><a href="../man1/rd%20jobs.html">rd jobs</a></p>
+<p><a href="../manual/running-jobs.html" title="User Guide - Running Jobs">rd jobs</a></p>
 <p><a href="http://yaml.org/" class="uri">http://yaml.org/</a></p>
 <p>The Rundeck source code and all documentation may be downloaded from <a href="https://github.com/rundeck/rundeck/" class="uri">https://github.com/rundeck/rundeck/</a>.</p>
 </div>
@@ -948,7 +948,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>

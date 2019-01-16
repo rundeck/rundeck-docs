@@ -125,8 +125,10 @@ jQuery(function(){
 <h1 class="title">Commands</h1>
 </div>
 <p>A <em>command</em> is a single executable string executed on a Node. Rundeck invokes commands on nodes via a <em>node executor</em> which evaluates the command string and executes it. Node executors evaluate the command string in a data context containing information about the Node resource. Command strings can reference this data and thus avoid hard coding node or environment specific values.</p>
-<p>The Rundeck graphical console provides the ability to execute commands to a set of filtered Node resources. The Command page can accept any command string you might run via an SSH command or via the <a href="../man1/dispatch.html">dispatch</a> shell tool.</p>
+<p>The Rundeck graphical console provides the ability to execute commands to a set of filtered Node resources. The Command page can accept any command string you might run via an SSH command or via the <a href="https://rundeck.github.io/rundeck-cli/commands/#adhoc">rd adhoc</a> shell tool.</p>
+<blockquote>
 <p>Note, your ability to view Nodes and execute commands on them depends on your ACL policy.</p>
+</blockquote>
 <h2 id="commands-tab-overview">Commands tab overview</h2>
 <p>Navigate to this page by clicking on the “Commands” tab in the navigation bar. Alternatively, go to the Nodes tab and choose the “Node Actions” menu and select the “Run a command …” menu item.</p>
 <p><img src="../figures/fig0207.png" /></p>
@@ -225,10 +227,11 @@ jQuery(function(){
 <p>You can further search activity history by clicking the “Filter activity…” link.</p>
 <h2 id="related-command-line-tools">Related Command line tools</h2>
 <dl>
-<dt><a href="../man1/dispatch.html">dispatch</a></dt>
-<dd>Execute ad hoc commands and scripts. <a href="../man1/rd-queue.html">rd-queue</a>
+<dt><a href="https://rundeck.github.io/rundeck-cli/commands/#adhoc">rd adhoc</a></dt>
+<dd>Execute ad hoc commands and scripts to matching nodes.
 </dd>
-<dd>Query Rundeck for currently running Jobs and possibly kill them.
+<dt><a href="https://rundeck.github.io/rundeck-cli/commands/#executions">rd executions</a></dt>
+<dd>List running executions, attach and follow their output, or kill them.
 </dd>
 </dl>
 </div>
@@ -301,7 +304,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>

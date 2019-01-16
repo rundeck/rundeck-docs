@@ -181,7 +181,7 @@ $RDECK_BASE/server/config
 <h2 id="admin.aclpolicy">admin.aclpolicy</h2>
 <p>Administrator access control policy defined with a [aclpolicy] document.</p>
 <p>This file governs the access for the “admin” group and role.</p>
-<p>See <a href="../security/access-control-policy.html">role based access control</a> for information about setting up policy files for other user groups.</p>
+<p>See <a href="../security/access-control-policy.html" title="Administrator Guide - Security - Access Control Policy">role based access control</a> for information about setting up policy files for other user groups.</p>
 <h2 id="framework.properties">framework.properties</h2>
 <p>Configuration file used by shell tools and core Rundeck services. This file will be created for you at install time.</p>
 <p>Some important settings:</p>
@@ -216,7 +216,7 @@ $RDECK_BASE/server/config
 <pre><code>username: token_string
 username2: token_string2
 ...</code></pre>
-<p>The token_strings can be used as Authentication tokens to the <a href="../../api/index.html#token-authentication">API</a>.</p>
+<p>The token_strings can be used as Authentication tokens to the <a href="../../api/index.html#token-authentication" title="API Reference | Version 28 - Token Authentication">API</a>.</p>
 <h3 id="global-execution-variables">Global execution variables</h3>
 <p>Entries in <code>framework.properties</code> in the form <code>framework.globals.X=Y</code> Adds a variable <code>X</code> available in all execution contexts as <code>${globals.X}</code>.</p>
 <p>Global variables can be overridden in the <a href="#project.properties"><code>project.properties</code></a> by adding a line in the form of <code>project.globals.X=Y</code> and then accessing it as <code>${globals.X}</code>.</p>
@@ -260,7 +260,7 @@ username2: token_string2
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>resources.source.N...</code></td>
-<td style="text-align: left;">Defines a Resource model source see <a href="../administration/managing-node-sources.html">Resource Model Sources</a>.</td>
+<td style="text-align: left;">Defines a Resource model source see <a href="../../manual/configure.html#resource-model-sources-configuration" title="User Guide - Configure - Resource Model Sources Configuration">Resource Model Sources</a>.</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>project.globals.X</code></td>
@@ -299,7 +299,7 @@ resources.source.3.type=directory</code></pre>
 <p>See <a href="#server-settings">rundeck-config.properties &gt; Server Settings</a></p>
 <p>Or set <code>server.session.timeout</code> via <a href="system-properties-configuration.html" title="Administrator Guide - Rundeck Configuration - System Properties Configuration">System Properties Configuration</a>.</p>
 <h2 id="rundeck-config.properties">rundeck-config.properties</h2>
-<p>This is the primary Rundeck webapp configuration file. Defines default loglevel, datasource configuration, and <a href="gui-customization.html">GUI customization</a>.</p>
+<p>This is the primary Rundeck webapp configuration file. Defines default loglevel, datasource configuration, and <a href="gui-customization.html" title="Administrator Guide - Rundeck Configuration - GUI Customization">GUI customization</a>.</p>
 <p>The following sections describe configuration values for this file.</p>
 <h3 id="security">Security</h3>
 <ul>
@@ -332,20 +332,20 @@ Determines whether access to the API is allowed if the API client authenticates 
 </ul>
 <p>Setting Rundeck to <code>passive</code> mode prevents users from running anything on the system and is useful when managing Rundeck server clusters.</p>
 <h3 id="project-configuration-storage-settings">Project Configuration Storage settings</h3>
-<p>The <a href="project-setup.html#project-definitions">Project Setup - Project Definitions</a> mechanism is configured within this file, see:</p>
+<p>The <a href="../projects/create-new-project.html#project-definitions" title="Administrator Guide - Projects - Create new Project - Project Definitions">Project Setup - Project Definitions</a> mechanism is configured within this file, see:</p>
 <ul>
-<li><a href="storage-facility.html#project-storage">Project Storage</a></li>
+<li><a href="storage-facility.html#project-storage" title="Administrator Guide - Rundeck Configuration - Storage Facility - Project Storage">Project Storage</a></li>
 </ul>
 <h3 id="key-storage-settings">Key Storage settings</h3>
-<p>The <a href="../security/key-storage.html">Key storage</a> mechanism is configured within this file, see:</p>
+<p>The <a href="../security/key-storage.html" title="Administrator Guide - Security - Key Storage">Key storage</a> mechanism is configured within this file, see:</p>
 <ul>
-<li><a href="../plugins-user-guide/configuring.html#storage-plugins">Configuring Storage Plugins</a></li>
-<li><a href="../plugins-user-guide/configuring.html#storage-converter-plugins">Configuring Storage Converter Plugins</a></li>
+<li><a href="plugins/configuring.html#storage-plugins" title="Administrator Guide - Rundeck Configuration - Configuring Plugins - Configuring - Storage Plugins">Configuring Storage Plugins</a></li>
+<li><a href="plugins/configuring.html#storage-converter-plugins" title="Administrator Guide - Rundeck Configuration - Configuring Plugins - Configuring - Storage Converter Plugins">Configuring Storage Converter Plugins</a></li>
 </ul>
 <h3 id="notification-email-settings">Notification email settings</h3>
-<p>See <a href="email-settings.html#notification-email-settings">Email Settings: Notification email settings</a></p>
+<p>See <a href="email-settings.html#notification-email-settings" title="Administrator Guide - Rundeck Configuration - Email Settings - Notification Email Settings">Email Settings: Notification email settings</a></p>
 <h3 id="custom-email-templates">Custom Email Templates</h3>
-<p>See <a href="email-settings.html#custom-email-templates">Email Settings: Custom Email Templates</a></p>
+<p>See <a href="email-settings.html#custom-email-templates" title="Administrator Guide - Rundeck Configuration - Email Settings - Custom Email Templates">Email Settings: Custom Email Templates</a></p>
 <h3 id="execution-finalize-retry-settings">Execution finalize retry settings</h3>
 <p>If a sporadic DB connection failure happens when an execution finishes, Rundeck may fail to update the state of the execution in the database, causing the execution to appear is if it is still “running”.</p>
 <p>Rundeck now attempts to retry the update to correctly register the final state of the execution. You can tune how many times and how often this retry occurs with these config values:</p>
@@ -380,12 +380,12 @@ rundeck.metrics.jmxEnabled=true/false</code></pre>
 <li><code>ping</code></li>
 <li><code>healthcheck</code></li>
 </ul>
-<p>See: <a href="../api/index.html#list-metrics">API &gt; List Metrics</a>.</p>
+<p>See: <a href="../../api/index.html#list-metrics" title="API Reference | Version 28 - List Metrics">API &gt; List Metrics</a>.</p>
 <h3 id="pagination-defaults">Pagination defaults</h3>
 <p>Default paging size for the Activity page and results from execution API queries can be changed.</p>
 <pre><code>rundeck.pagination.default.max=20</code></pre>
 <h3 id="job-remote-option-url-connection-parameters">Job Remote Option URL connection parameters</h3>
-<p>Change the defaults for for <a href="../../manual/defining-job-options.html#remote-option-values">Job Remote Option Value URLs</a> loading.</p>
+<p>Change the defaults for for <a href="../../manual/defining-job-options.html#remote-option-values" title="User Guide - Defining Job Options - Remote Option Values">Job Remote Option Value URLs</a> loading.</p>
 <p><strong>Socket read timeout</strong></p>
 <p>Max wait time reading from socket.</p>
 <p>Default value: <code>10</code> (seconds)</p>
@@ -415,7 +415,7 @@ rundeck.fileUploadService.tempfile.expiration=600000</code></pre>
 <dd><p><code>rundeck.nodeService.nodeCache.enabled=true</code> If set to false, no caching is performed.</p>
 </dd>
 <dt>First Load Asynch: true/false</dt>
-<dd><code>rundeck.nodeService.nodeCache.firstLoadAsynch=false</code> The default for whether the first load of a project’s nodes should be performed synchronously or not. If set to <code>true</code>, and the <a href="project-setup.html#project-nodes">Project Nodes &gt; Synchronous First Load</a> value is unset, then the initial load of a Project’s nodes when the cache is empty will be done in the background asynchronously. Otherwise the initial load is done synchronously, possibly causing a delay at Rundeck startup or Job execution startup. A Project level configuration value will override this default.
+<dd><code>rundeck.nodeService.nodeCache.firstLoadAsynch=false</code> The default for whether the first load of a project’s nodes should be performed synchronously or not. If set to <code>true</code>, and the <a href="../projects/create-new-project.html#project-nodes" title="Administrator Guide - Projects - Create new Project - Project Nodes">Project Nodes &gt; Synchronous First Load</a> value is unset, then the initial load of a Project’s nodes when the cache is empty will be done in the background asynchronously. Otherwise the initial load is done synchronously, possibly causing a delay at Rundeck startup or Job execution startup. A Project level configuration value will override this default.
 </dd>
 </dl>
 <h3 id="groovy-config-format">Groovy config format</h3>
@@ -515,7 +515,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>

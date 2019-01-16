@@ -127,15 +127,15 @@ jQuery(function(){
 <li><strong>Role-based Access Control Policies</strong>: A Rundeck <em><a href="../administration/security/access-control-policy.html" title="Administrator Guide - Security - Access Control Policy">access control policy</a></em> grants users and user groups certain privileges to perform actions against rundeck resources like projects, jobs, nodes, commands and API.</li>
 <li><strong>Projects</strong>: A <em><a href="../administration/projects/index.html" title="Administrator Guide - Projects">project</a></em> is a place to separate management activity. All Rundeck activities occur within the context of a project. Multiple projects can be maintained on the same Rundeck server.</li>
 <li><strong>Jobs</strong> : A <em>job</em> encapsulate a sequence of steps, job options and nodes where the steps execute. See <a href="running-jobs.html" title="User Guide - Running Jobs">Running Jobs</a> and <a href="creating-jobs.html" title="User Guide - Creating Jobs">Creating Jobs</a>.</li>
-<li><strong>Nodes</strong>: A <em><a href="nodes.html">node</a></em> is a resource that is either a physical or virtual instance of a network accessible host. A <em>resource model</em> is a representation of Nodes in a project.</li>
-<li><strong>Commands</strong>: A <em><a href="commands.html">command</a></em> is a single executable string executed on a Node. Rundeck invokes commands on nodes via a <em>node executor</em> which evaluates the command string and executes it.</li>
-<li><strong>Executions</strong>: An <em><a href="executions.html">execution</a></em> is a representation of the activity of a running or completed command or job. The data about the execution is used in rundeck to monitor the progress of a job or command and later for reporting about what happened.</li>
+<li><strong>Nodes</strong>: A <em><a href="nodes.html" title="User Guide - Nodes">node</a></em> is a resource that is either a physical or virtual instance of a network accessible host. A <em>resource model</em> is a representation of Nodes in a project.</li>
+<li><strong>Commands</strong>: A <em><a href="commands.html" title="User Guide - Commands">command</a></em> is a single executable string executed on a Node. Rundeck invokes commands on nodes via a <em>node executor</em> which evaluates the command string and executes it.</li>
+<li><strong>Executions</strong>: An <em><a href="executions.html" title="User Guide - Executions">execution</a></em> is a representation of the activity of a running or completed command or job. The data about the execution is used in rundeck to monitor the progress of a job or command and later for reporting about what happened.</li>
 <li><strong>Plugins</strong>: Most of what Rundeck does is via one of its <em>plugins</em>. Plugins exist to execute commands on nodes, perform steps in a job, send a notification about job status, gather information about the hosts in your network, copy a file to a remote server, store and stream logs, or talk to a user directory. See <a href="job-plugins.html" title="User Guide - Job Plugins">Job Plugins</a> and <a href="../developer/index.html" title="Plugin Developer Guide">Plugin Developer Guide</a> and <a href="../plugins/index.html" title="Rundeck Plugins">Rundeck Plugins</a>.</li>
 </ul>
 <h2 id="download-and-installation">Download and Installation</h2>
 <p>If a running Rundeck instance isn’t already available to you, there are a couple ways you can try it.</p>
 <ul>
-<li>You can <a href="http://rundeck.org/downloads.html">download</a> and install the Rundeck software. There are several package formats. Choose the one that best suits your infrastructure. After installation, be sure Rundeck has been started. See <a href="../administration/maintenance/startup-and-shutdown.html">Startup</a> to learn how to startup and shutdown rundeck.</li>
+<li>You can <a href="http://rundeck.org/downloads.html">download</a> and install the Rundeck software. There are several package formats. Choose the one that best suits your infrastructure. After installation, be sure Rundeck has been started. See <a href="../administration/maintenance/startup-and-shutdown.html" title="Administrator Guide - Maintenance - Startup and Shutdown">Startup</a> to learn how to startup and shutdown rundeck.</li>
 <li>You can run the <a href="https://github.com/rundeck/anvils-demo">vagrant</a> demo. The demo contains a project with tagged nodes, example job workflows with dynamic options, and a set of users, each with varying degrees of privilege.</li>
 </ul>
 <p>The default port for the web interface is <code>4440</code>. If you installed Rundeck on your local machine, go to this URL: <a href="http://localhost:4440" class="uri">http://localhost:4440</a></p>
@@ -164,38 +164,38 @@ jQuery(function(){
 </dd>
 <dt>Jobs</dt>
 <dd><p>From the Jobs page, one can list, create and run Jobs. A configurable filter allows a user to limit the Job listing to those Jobs matching the filtering criteria. These filter settings can be saved to a Users profile. Only authorized jobs will be visible.</p>
-<p>See <a href="running-jobs.html">Jobs</a>.</p>
+<p>See <a href="running-jobs.html" title="User Guide - Running Jobs">Jobs</a>.</p>
 </dd>
 <dt>Nodes</dt>
 <dd><p>The Nodes page is used to browse your Nodes configured in your Project resource model. A filter control can be used to limit the listing to just the Node resources matching the filter criteria. Given the appropriate authorization you can also execute ad hoc commands to your filtered node set.</p>
-<p>See <a href="nodes.html">Nodes</a>.</p>
+<p>See <a href="nodes.html" title="User Guide - Nodes">Nodes</a>.</p>
 </dd>
 <dt>Commands</dt>
 <dd><p>The Commands page lets you execute arbitrary commands against the nodes that match the node filter.</p>
-<p>See <a href="commands.html">Commands</a>.</p>
+<p>See <a href="commands.html" title="User Guide - Commands">Commands</a>.</p>
 </dd>
 <dt>Activity</dt>
 <dd><p>From the Activity page, one can view currently executing commands and Jobs or browse execution history. The execution history can be filtered based on user selected parameters. Once the filter has been set, the matching history is displayed. The current filter settings also configure an RSS link, found in the top right of the page (see Rundeck Administration to enable RSS).</p>
-<p>See <a href="activity.html">Activity</a>.</p>
+<p>See <a href="activity.html" title="User Guide - Activity">Activity</a>.</p>
 </dd>
 <dt>System</dt>
 <dd><p>If your login belongs to the “admin” group and therefore granted “admin” privileges, a “System” icon will be displayed in the top navigation bar. From the System menu you can access the Key Storage, System Configuration, Access Control, System Report, Log Storage, List Plugins, Password Utility and Execution model.</p>
-<p>See <a href="configure.html">Configure</a></p>
+<p>See <a href="configure.html" title="User Guide - Configure">Configure</a></p>
 </dd>
 <dt>User</dt>
 <dd><p>The User menu lets you logout and view your profile page. Your user profile lists your group memberships and a form to list and generate API tokens.</p>
-<p>See <a href="user.html">User</a></p>
+<p>See <a href="user.html" title="User Guide - User">User</a></p>
 </dd>
 </dl>
 <h2 id="command-line-tools">Command Line Tools</h2>
 <p>Rundeck includes a number of shell tools to dispatch commands, load and run Job definitions and interact with the dispatcher queue. These command tools are an alternative to functions accessible in the graphical console.</p>
-<p>See the <a href="../man1/index.html">Command line tools</a>.</p>
+<p>See the <a href="../man1/index.html" title="Command Line Tools">Command line tools</a>.</p>
 <h2 id="api">API</h2>
 <p>You can also use the Web API to interface with all aspects of node and Job execution.</p>
-<p>See the <a href="../api/index.html">Rundeck API</a> page for a reference on the endpoints and examples.</p>
+<p>See the <a href="../api/index.html" title="API Reference | Version 28">Rundeck API</a> page for a reference on the endpoints and examples.</p>
 <h2 id="document-formats">Document Formats</h2>
 <p>If you prefer to manage job and resource definitions using text files you can do so using XML or YAML formats.</p>
-<p>See the <a href="../man5/index.html">Document Format Reference</a>.</p>
+<p>See the <a href="../man5/index.html" title="Document Format Reference">Document Format Reference</a>.</p>
 </div>
 </div>
 </div>
@@ -266,7 +266,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>

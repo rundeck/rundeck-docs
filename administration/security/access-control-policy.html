@@ -190,7 +190,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="page-header">
 <h1 class="title">Access Control Policy</h1>
 </div>
-<p>Based on the <a href="authenticating-users.html">Authentication</a> mechanism, the Container provides Rundeck with a list of “group” or “role” names that the user belongs to. Rundeck uses this list to determine what access rights the user has. (For more about the role list, refer to <a href="authenticating-users.html#container-authentication-and-authorization">Authenticating Users - Container authentication and authorization</a>.)</p>
+<p>Based on the <a href="authenticating-users.html" title="Administrator Guide - Security - Authenticating Users">Authentication</a> mechanism, the Container provides Rundeck with a list of “group” or “role” names that the user belongs to. Rundeck uses this list to determine what access rights the user has. (For more about the role list, refer to <a href="authenticating-users.html#container-authentication-and-authorization" title="Administrator Guide - Security - Authenticating Users - Container Authentication And Authorization">Authenticating Users - Container authentication and authorization</a>.)</p>
 <p>A Rundeck <em>access control policy</em> grants users and user groups certain privileges to perform actions against rundeck resources like projects, jobs, nodes, commands and API. Every action requested by a user is evaluated by the Rundeck authorization system and logged for reporting and auditing purposes.</p>
 <p>Since Rundeck respects the policy definition, you can define role-based authorization to restrict users to only a subset of actions. This enables a self-service type interface, where some users have access to a limited set of executable actions.</p>
 <p>Two dimensions of information dictate authorization inside Rundeck:</p>
@@ -204,15 +204,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Access to running or modifying Jobs is managed in an access control policy defined using the aclpolicy YAML document. This file contains a number of policy elements that describe what user group is allowed to perform which actions.</p>
 <p>Please read over this document for information on how to define it, and how to grant access for certain actions to certain resources:</p>
 <ul>
-<li><a href="../../man5/aclpolicy.html">aclpolicy</a></li>
+<li><a href="../../man5/aclpolicy.html" title="Document Format Reference - ACLPOLICY">aclpolicy</a></li>
 </ul>
 <p>Policies can be organized into more than one file to help organize access by group or pattern of use. The normal Rundeck install will have generated a policy for the “admin” group. Not all users will need to be given “admin” access level to control and modify all Jobs. More typically, a group of users will be given access to just a subset of Jobs.</p>
 <h3 id="policy-file-locations">Policy File Locations</h3>
 <p>Rundeck loads ACL Policy definitions from these locations:</p>
 <ul>
 <li>All <code>*.aclpolicy</code> files found in the rundeck <code>etc</code> dir, which is either <code>/etc/rundeck</code> (rpm and debian install defaults), or <code>$RDECK_BASE/etc</code> (launcher/war configuration).</li>
-<li>System level policies created via the <a href="../../api/index.html#acls">System ACLs API</a></li>
-<li>Project level policies created via the <a href="../../api/index.html#project-acls">Project ACLs API</a>, limited only to project context policies for a specific project.</li>
+<li>System level policies created via the <a href="../../api/index.html#acls" title="API Reference | Version 28 - Acls">System ACLs API</a></li>
+<li>Project level policies created via the <a href="../../api/index.html#project-acls" title="API Reference | Version 28 - Project Acls">Project ACLs API</a>, limited only to project context policies for a specific project.</li>
 </ul>
 <h3 id="lifecycle">Lifecycle</h3>
 <p>The Rundeck server does not need to be restarted for changes to aclpolicy files to take effect.</p>
@@ -220,7 +220,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>If an authorization request occurs in the context of a specific Project (e.g. “does a user have Run access for a specific Job in this project?”) then the Project-level policies created via the API area also used to evaluate the authorization request.</p>
 <p>Otherwise, only the policies on the filesystem, and uploaded to the System ACLs API are evaluated for the request.</p>
 <h3 id="rd-acl">rd-acl</h3>
-<p>Added in Rundeck 2.5, the <a href="../../man1/rd-acl.html">rd-acl</a> tool can help to create, test, and validate your policy files.</p>
+<p>Added in Rundeck 2.5, the <a href="../../man1/rd-acl.html" title="Command Line Tools - rd-acl">rd-acl</a> tool can help to create, test, and validate your policy files.</p>
 <h3 id="example">Example</h3>
 <p>File listing: admin.aclpolicy example</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource yaml numberLines"><code class="sourceCode yaml"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="fu">description:</span><span class="at"> Admin project level access control. Applies to resources within a specific project.</span></a>
@@ -282,7 +282,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Both <code>username</code> and <code>group</code> can use regular expressions to match multiple users or groups.</p>
 <p>Two separate policies define two levels of access control. The first is the “project” context, which allows access to actions on resources within a specific project. The second is the “application” level context, which allows access to things like creating projects, access to projects, managing users, and access to system information.</p>
 <h2 id="specific-resources-and-resource-types">Specific Resources and Resource Types</h2>
-<p>As described in the <a href="../../man5/aclpolicy.html">aclpolicy-v10(5)</a> definition, access is granted or denied to specific “resources”. Resources can take two forms:</p>
+<p>As described in the <a href="../../man5/aclpolicy.html" title="Document Format Reference - ACLPOLICY">ACL Policy)</a> definition, access is granted or denied to specific “resources”. Resources can take two forms:</p>
 <ul>
 <li>A specific resource, with a type and properties</li>
 <li>Resource types, which applies to all resources of a specific type or “kind”</li>
@@ -291,9 +291,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>You might also want to restrict who can create <em>new</em> jobs. Since a new job does not exist yet, you cannot create a rule for this action to apply to an existing job. Which means this corresponds to a generic resource with a “kind” called “job”.</p>
 <h2 id="api-token-authorization-roles">API Token Authorization Roles</h2>
 <p>In Rundeck 2.8.x and later, Authentication Tokens are given a set of <em>Authorization Roles</em> at generation time, so the access levels for the Token depend on how it was generated.</p>
-<p>See: <a href="../../api/index.html#token-authentication">API Token</a> usage instructions.</p>
+<p>See: <a href="../../api/index.html#token-authentication" title="API Reference | Version 28 - Token Authentication">API Token</a> usage instructions.</p>
 <p>See below: <a href="#api-token-authorization">API Token Authorization</a>.</p>
-<p>(<strong>Note:</strong> In Rundeck 2.7.x and earlier, clients of the <a href="../../api/index.html">Web API</a> may use the <a href="../../api/index.html#token-authentication">Token Authentication</a> method. These clients are placed in the special authorization group called <code>api_token_group</code>.)</p>
+<p>(<strong>Note:</strong> In Rundeck 2.7.x and earlier, clients of the <a href="../../api/index.html" title="API Reference | Version 28">Web API</a> may use the <a href="../../api/index.html#token-authentication" title="API Reference | Version 28 - Token Authentication">Token Authentication</a> method. These clients are placed in the special authorization group called <code>api_token_group</code>.)</p>
 <h2 id="rundeck-resource-authorizations">Rundeck resource authorizations</h2>
 <p>Rundeck declares a number of actions that can be referenced inside the access control policy document.</p>
 <p>The actions and resources are divided into project scope and application scope:</p>
@@ -910,7 +910,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 <p><em>Note</em>: see <a href="#node-resource-properties">Node resource properties</a> for more node resource properties for authorization.</p>
 <p><em>Note</em>: Jobs can be referenced using “name” and “group” or using “uuid”.</p>
-<p><em>Note</em>: <code>runAs</code> and <code>killAs</code> actions only apply to certain API endpoints, and allow running jobs or adhoc executions or killing executions to be performed with a different username attached as the author of the action. See <a href="../../api/index.html#running-a-job">Rundeck API - Running a Job</a>.</p>
+<p><em>Note</em>: <code>runAs</code> and <code>killAs</code> actions only apply to certain API endpoints, and allow running jobs or adhoc executions or killing executions to be performed with a different username attached as the author of the action. See <a href="../../api/index.html#running-a-job" title="API Reference | Version 28 - Running A Job">Rundeck API - Running a Job</a>.</p>
 <p><em>Note</em>: Job deletion requires allowing the ‘delete’ action both at the generic type and specific resource levels.</p>
 <p>Recall that defining rules for a generic resource type is done in this way:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="fu">for:</span></a>
@@ -1049,7 +1049,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol type="1">
 <li>The user’s group membership. This can be done by going to the user’s profile page in Rundeck. That page will list the groups the user is a member.</li>
 <li>Read the messages inside the <code>rundeck.audit.log</code> log file. The authorization facility generates fairly low level messages describing how the policy is matched to the user context.</li>
-<li>Use the <a href="../../man1/rd-acl.html">rd-acl</a> tool to test and validate your policy files</li>
+<li>Use the <a href="../../man1/rd-acl.html" title="Command Line Tools - rd-acl">rd-acl</a> tool to test and validate your policy files</li>
 </ol>
 <p>For each entry in the audit log, you’ll see all decisions leading up to either a AUTHORIZED or a REJECTED message. It’s not uncommon to see REJECTED messages followed by AUTHORIZED. The important thing is to look at the last decision made.</p>
 </div>
@@ -1124,7 +1124,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>

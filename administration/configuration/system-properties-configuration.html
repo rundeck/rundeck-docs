@@ -135,13 +135,13 @@ jQuery(function(){
 <li><code>loginmodule.conf.name</code> Name of a custom JAAS config file, located in the server’s config dir.</li>
 <li><code>rundeck.config.name</code> Name of a custom rundeck config file, located in the server’s config dir.</li>
 <li><code>rundeck.ssl.config</code> Path to the SSL config properties file to enable SSL. If not set, SSL is not enabled.</li>
-<li><code>rundeck.jetty.connector.forwarded</code> true/false. Set to true to enable support for “X-forwarded-*” headers which may be sent by a front-end proxy to the rundeck server. See <a href="../security/configuring-ssl.html#using-an-ssl-terminated-proxy">Using an SSL Terminated Proxy</a>.</li>
-<li><code>rundeck.jetty.connector.ssl.excludedProtocols</code> Comma-separated list of SSL protocols to disable. Default: ‘SSLv3’. See <a href="../security/configuring-ssl.html#disabling-ssl-protocols">Disabling SSL Protocols</a>.</li>
-<li><code>rundeck.jetty.connector.ssl.includedProtocols</code> Comma-separated list of SSL protocols to include. Default is based on available protocols. See <a href="../security/configuring-ssl.html#disabling-ssl-protocols">Disabling SSL Protocols</a>.</li>
-<li><code>rundeck.jetty.connector.ssl.excludedCipherSuites</code> Comma-separated list of Cipher suites to disable. No default. See <a href="../security/configuring-ssl.html#disabling-ssl-protocols">Disabling SSL Protocols</a>.</li>
-<li><code>rundeck.jetty.connector.ssl.includedCipherSuites</code> Comma-separated list of Cipher suites to enable. Default is based on available cipher suites. See <a href="../security/configuring-ssl.html#disabling-ssl-protocols">Disabling SSL Protocols</a>.</li>
+<li><code>rundeck.jetty.connector.forwarded</code> true/false. Set to true to enable support for “X-forwarded-*” headers which may be sent by a front-end proxy to the rundeck server. See <a href="../security/configuring-ssl.html#using-an-ssl-terminated-proxy" title="Administrator Guide - Security - Configuring SSL - Using An Ssl Terminated Proxy">Using an SSL Terminated Proxy</a>.</li>
+<li><code>rundeck.jetty.connector.ssl.excludedProtocols</code> Comma-separated list of SSL protocols to disable. Default: ‘SSLv3’. See <a href="../security/configuring-ssl.html#disabling-ssl-protocols" title="Administrator Guide - Security - Configuring SSL - Disabling Ssl Protocols">Disabling SSL Protocols</a>.</li>
+<li><code>rundeck.jetty.connector.ssl.includedProtocols</code> Comma-separated list of SSL protocols to include. Default is based on available protocols. See <a href="../security/configuring-ssl.html#disabling-ssl-protocols" title="Administrator Guide - Security - Configuring SSL - Disabling Ssl Protocols">Disabling SSL Protocols</a>.</li>
+<li><code>rundeck.jetty.connector.ssl.excludedCipherSuites</code> Comma-separated list of Cipher suites to disable. No default. See <a href="../security/configuring-ssl.html#disabling-ssl-protocols" title="Administrator Guide - Security - Configuring SSL - Disabling Ssl Protocols">Disabling SSL Protocols</a>.</li>
+<li><code>rundeck.jetty.connector.ssl.includedCipherSuites</code> Comma-separated list of Cipher suites to enable. Default is based on available cipher suites. See <a href="../security/configuring-ssl.html#disabling-ssl-protocols" title="Administrator Guide - Security - Configuring SSL - Disabling Ssl Protocols">Disabling SSL Protocols</a>.</li>
 </ul>
-<p>For more information about using SSL, see <a href="../security/configuring-ssl.html">Configuring Rundeck for SSL</a>.</p>
+<p>For more information about using SSL, see <a href="../security/configuring-ssl.html" title="Administrator Guide - Security - Configuring SSL">Configuring Rundeck for SSL</a>.</p>
 <h2 id="rpm-and-deb">RPM and DEB</h2>
 <p>You should <em>not</em> modify the <code>/etc/rundeck/profile</code> file directly, as it may be overwritten during upgrade, or any changes from the upgrade might not be applied.</p>
 <p>Instead, For RPM or DEB installations, you can use environment variables set in a “defaults” file to add additional Java Sytem Properties.</p>
@@ -245,7 +245,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>

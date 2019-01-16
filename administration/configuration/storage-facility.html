@@ -127,7 +127,7 @@ jQuery(function(){
 <p>Both containers use the same storage mechanisms, but they can be configured independently of each other, and have different APIs for modification.</p>
 <h2 id="key-storage">Key Storage</h2>
 <p>The Key Storage container allows storing public keys, private keys, and passwords securely. The contents of these files can be accessed by Node Execution plugins for authenticating to remote nodes. The contents can be written via the Rundeck API, but only public keys can be read via the API.</p>
-<p>See the chapter: <a href="../security/key-storage.html">Key Storage</a>.</p>
+<p>See the chapter: <a href="../security/key-storage.html" title="Administrator Guide - Security - Key Storage">Key Storage</a>.</p>
 <p>When configuring Key Storage providers, the configuration entries in <code>rundeck-config.properties</code> start with:</p>
 <pre><code>rundeck.storage.provider.[index]</code></pre>
 <p>And converter plugins start with:</p>
@@ -139,7 +139,7 @@ jQuery(function(){
 <li>contents of <code>readme.md</code> and <code>motd.md</code> - Readme and MOTD files</li>
 </ul>
 <p>Access to these contents can be made via the Rundeck API.</p>
-<p>See the chapter: <a href="../project-setup.html">Project Setup</a></p>
+<p>See the chapter: <a href="../projects/configuration.html" title="Administrator Guide - Projects - Configuration">Project Setup</a></p>
 <p>When configuring Project Storage providers, the configuration entries in <code>rundeck-config.properties</code> start with:</p>
 <pre><code>rundeck.config.storage.provider.[index]</code></pre>
 <p>And converter plugins start with:</p>
@@ -154,19 +154,19 @@ jQuery(function(){
 <p>It is highly recommended that you configure Rundeck to use a relational database instead of the default file-based data storage.</p>
 <p>For information on configuring Rundeck to use specific Databases, see:</p>
 <ul>
-<li><a href="database/index.html">Administor Guide &gt; Rundeck Configuration &gt; Database</a></li>
+<li><a href="database/index.html" title="Administrator Guide - Rundeck Configuration - Database">Administor Guide &gt; Rundeck Configuration &gt; Database</a></li>
 </ul>
 <p>To develop your own storage plugin, see:</p>
 <ul>
-<li><a href="../../developer/storage-plugin.html">Storage Plugin Development</a>.</li>
+<li><a href="../../developer/storage-plugin.html" title="Plugin Developer Guide - Storage Plugin">Storage Plugin Development</a>.</li>
 </ul>
 <h2 id="storage-converters">Storage Converters</h2>
-<p>Files can be encrypted in the storage backend by use of a <a href="../../developer/storage-converter-plugin.html">Storage Converter plugin</a>. A typical plugin would encrypt data at write time, and decrypt it at read time.</p>
+<p>Files can be encrypted in the storage backend by use of a <a href="../../developer/storage-converter-plugin.html" title="Plugin Developer Guide - Storage Converter Plugin">Storage Converter plugin</a>. A typical plugin would encrypt data at write time, and decrypt it at read time.</p>
 <p>The Storage Converter Plugin handles reading and writing the content for any matching resources. The subsequent data is stored in the storage backend (on-disk or in a database) alongside the metadata for the file.</p>
 <p>Converter plugins do not have to manage storing the data, that will be handled by the Storage backend.</p>
 <p>To develop your own storage converter plugin, see:</p>
 <ul>
-<li><a href="../../developer/storage-converter-plugin.html">Storage Converter Plugin Development</a>.</li>
+<li><a href="../../developer/storage-converter-plugin.html" title="Plugin Developer Guide - Storage Converter Plugin">Storage Converter Plugin Development</a>.</li>
 </ul>
 <h3 id="using-encryption">Using Encryption</h3>
 <p>Rundeck provides a bundled Storage Converter plugin implementation:</p>
@@ -245,7 +245,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>

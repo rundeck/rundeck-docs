@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>edam6639526996617160803temp</title>
+  <title>edam7154006956420107418temp</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -177,9 +177,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 id="planning-for-the-project">Planning for the project</h2>
 <p>The administrator decides to create a project called “anvils.” to manage the activities of the anvils restart. The anvils project will contain definitions about the nodes used by the anvils application, as well as, a set a jobs that reference these nodes. The administrator will use Rundeck access control policies to govern which teams have access to perform each of the procedures.</p>
 <p>The administrator decides to formalize the role of each node in the application stack by introducing tags. Tags will be used within the Jobs to target each kind of node rather than reference specific hosts names or IP addresses. This makes the jobs reusable across different environments.</p>
-<p>The administrator will also use the built in <a href="../manual/node-execution/ssh-node-execution.html">SSH node executor</a> for the project since SSH is already used to execute remote commands.</p>
+<p>The administrator will also use the built in <a href="../administration/projects/node-execution/ssh.html" title="Administrator Guide - Projects - Node Execution - SSH">SSH node executor</a> for the project since SSH is already used to execute remote commands.</p>
 <h2 id="create-the-project">Create the project</h2>
-<p>The administrator can create the project using the <a href="https://rundeck.github.io/rundeck-cli/">rd</a> command line tool. Logged in on the rundeck server as the user “rundeck”, the administrator executes:</p>
+<p>The administrator can create the project using the [rd] command line tool. Logged in on the rundeck server as the user “rundeck”, the administrator executes:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ex">rd</span> projects create -p anvils</a></code></pre></div>
 <p>This initializes the “anvils” project in Rundeck.</p>
 <p>Of course, the administrator could also create the project from the projects menu in the Rundeck GUI.</p>
@@ -188,7 +188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Modeling the anvils nodes deployed in the live environment is administrator’s next step.</p>
 <p>The anvils application environment has several components spread across different servers. Anvils is a three tier application and has web, application and database components, each component installed on a separate host.</p>
 <p>Additionally, the administrator decides to incorporate a recent convention to use different unix logins to execute commands to control each functional application component. Each component will run using under a separate unix login to help isolate each component at the system level.</p>
-<p>With this information in hand, the administrator prepares the project resource model using the <a href="../man5/resource-xml.html">resource-XML</a> document format. The file listing below contains the node definitions for the five nodes – www1, www2, app1, app2, db1:</p>
+<p>With this information in hand, the administrator prepares the project resource model using the [resource-XML] document format. The file listing below contains the node definitions for the five nodes – www1, www2, app1, app2, db1:</p>
 <p>File listing: /var/rundeck/projects/anvils/nodes/resources.xml</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource xml numberLines"><code class="sourceCode xml"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">&lt;?xml</span> version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;<span class="kw">?&gt;</span></a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">&lt;project&gt;</span></a>
@@ -230,10 +230,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Note, this tutorial is a trivial sized example so to conserve space (and VMs) the nodes are located on the same VM (each node uses the same hostname but a different username).</p>
 </blockquote>
 <p>A node in rundeck can model a single host on the network and represents a single management endpoint. In the end, the ssh node executor plugin formulates an ssh command string similar to: “ssh username@hostname command”. The ssh identity is resolved via configuration at run time. In this example, the project default is used as specified in the [project.properties] configuration file. (e.g., project.ssh-keypath=/var/lib/rundeck/.ssh/id_rsa).</p>
-<p>See <a href="../manual/node-execution/ssh-node-execution.html#configuring-remote-machine-for-ssh">ssh-plugins guide</a> to learn about configuring remote machines for ssh.</p>
+<p>See <a href="../administration/projects/node-execution/ssh.html#configuring-remote-machine-for-ssh" title="Administrator Guide - Projects - Node Execution - SSH - Configuring Remote Machine For Ssh">ssh-plugins guide</a> to learn about configuring remote machines for ssh.</p>
 <p>This example uses the built in ssh plugin but you are not restricted to using ssh. There are other node executor plugins that invoke remote actions via other tools (eg, salt, mcollective, winrm, chef knife, etc).</p>
 <h2 id="configure-the-model-source">Configure the model source</h2>
-<p>To make Rundeck aware of the new resource file containing the anvils nodes, the administrator modifies the <a href="../administration/configuration/configuration-file-reference.html#project.properties">project.properties</a> configuration file to declare a new resource model source.</p>
+<p>To make Rundeck aware of the new resource file containing the anvils nodes, the administrator modifies the <a href="../administration/configuration/configuration-file-reference.html#project.properties" title="Administrator Guide - Rundeck Configuration - Configuration File Reference - Project.properties">project.properties</a> configuration file to declare a new resource model source.</p>
 <p>Below a directory type source is configured:</p>
 <pre><code>resources.source.2.config.directory=/var/rundeck/projects/anvils/nodes
 resources.source.2.type=directory</code></pre>
@@ -243,7 +243,8 @@ resources.source.2.type=directory</code></pre>
 <img src="../figures/fig0609.png" alt="Anvils model sources" /><figcaption>Anvils model sources</figcaption>
 </figure>
 <h2 id="managing-node-sources">Managing Node Sources</h2>
-<p>See <a href="../administration/configuration/resource-model-sources/index.html">Managing Node Sources</a> to learn more about configuring Rundeck to read node data from external providers.</p>
+<p>See <a href="../administration/projects/resource-model-sources/index.html" title="Administrator Guide - Projects - Node Model Sources">Managing Node Sources</a> to learn more about configuring Rundeck to read node data from external providers.</p>
+<p><a href="../man5/resource-xml.html" title="Document Format Reference - RESOURCE-XML">resource-XML</a> [rd]: https://rundeck.github.io/rundeck-cli/ [tip1]: http://www.thegeekstuff.com/2008/11/3-steps-to-perform-ssh-login-without-password-using-ssh-keygen-ssh-copy-id/</p>
 </div>
 </div>
 </div>
@@ -314,7 +315,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>

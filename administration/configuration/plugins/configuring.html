@@ -295,7 +295,7 @@ resources.source.2.directory=/home/rundeck/projects/example/resources</code></pr
 <p>Resource Format Generators and Parsers define support for file formats that can be generated from or parsed into a set of Resource Node definitions.</p>
 <p>These are used by other parts of the system, such as the Resource Model Sources.</p>
 <p>There is no configuration necessary to use these providers, however the specific Provider Name that each generator and parser defines has to be known in order to make use of the provider. The specific Provider Name is used as the “format name” when you want to use the parser or generator.</p>
-<p>For example, to enable a particular Resource Format parser to be used by a File Resource Model Source (see <a href="../resource-model-sources/index.html#file-resource-model-source-configuration">File Resource Model Source Configuration</a>), you should specify the Provider Name for the parser as the format for the source:</p>
+<p>For example, to enable a particular Resource Format parser to be used by a File Resource Model Source (see <a href="../../projects/resource-model-sources/index.html#file-resource-model-source-configuration" title="Administrator Guide - Projects - Node Model Sources - File Resource Model Source Configuration">File Resource Model Source Configuration</a>), you should specify the Provider Name for the parser as the format for the source:</p>
 <pre><code>resources.source.1.format=myformat</code></pre>
 <p>This would specify the use of “myformat” provider.</p>
 <p>In other cases, the exact name of the provider may not be known (for example when loading content from a remote URL). Each Generator and Parser must define a list of MIME Type strings and file extensions that they support. These are used to determine which parser/generator is to be used.</p>
@@ -308,7 +308,7 @@ resources.source.2.directory=/home/rundeck/projects/example/resources</code></pr
 <li><code>onavgduration</code> - the Execution exceed the average duration of the Job</li>
 <li><code>onretryablefailure</code> - the Job failed but will be retried</li>
 </ul>
-<p>When you define the Job in the GUI or via <a href="../../../man5/job-xml.html#notification">XML</a> or <a href="../../../man5/job-yaml.html#notification">Yaml</a>, you can add any of the available Notification plugin types to happen for any of the possible triggers. Each Notification plugin type may have unique configuration properties that you can specify. Each combination of trigger and Notification type has a unique configuration.</p>
+<p>When you define the Job in the GUI or via <a href="../../../man5/job-xml.html#notification" title="Document Format Reference - JOB-XML - Notification">XML</a> or <a href="../../../man5/job-yaml.html#notification" title="Document Format Reference - JOB-YAML - Notification">Yaml</a>, you can add any of the available Notification plugin types to happen for any of the possible triggers. Each Notification plugin type may have unique configuration properties that you can specify. Each combination of trigger and Notification type has a unique configuration.</p>
 <p>When defining configuration values for a plugin, you can usually substitute any “Job context variables” that are listed under <a href="../../../manual/creating-job-workflows.html#context-variables" title="User Guide - Creating Job Workflows - Context Variables">User Guide - Creating Job Workflows - Context Variables</a>. (Note: Some configuration properties of a plugin may not support this feature.)</p>
 <p>In addition, you can also use these variables:</p>
 <ul>
@@ -422,7 +422,7 @@ resources.source.2.directory=/home/rundeck/projects/example/resources</code></pr
 </ul>
 <p><code>PROVIDER</code> is the provider name of the plugin.</p>
 <h3 id="storage-plugins">Storage Plugins</h3>
-<p>Storage plugins for the <a href="../storage/index.html">Storage Facility</a> are configured in the <code>rundeck-config.properties</code> file.</p>
+<p>Storage plugins for the <a href="../storage-facility.html" title="Administrator Guide - Rundeck Configuration - Storage Facility">Storage Facility</a> are configured in the <code>rundeck-config.properties</code> file.</p>
 <p>Two separate “containers” are used, one for Key Storage, and one for Project Definition Storage.</p>
 <ul>
 <li>Key Storage
@@ -586,7 +586,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>

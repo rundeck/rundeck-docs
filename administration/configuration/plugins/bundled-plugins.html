@@ -126,11 +126,11 @@ jQuery(function(){
 <h2 id="ssh-plugins">SSH Plugins</h2>
 <p>Defines SSH Node Executor and SCP File Copier.</p>
 <ul>
-<li>See <a href="../../../manual/node-execution/ssh-node-execution.html">SSH Plugins</a></li>
+<li>See <a href="../../projects/node-execution/ssh.html" title="Administrator Guide - Projects - Node Execution - SSH">SSH Plugins</a></li>
 </ul>
 <p>File: <em>none</em> (built-in)</p>
 <h2 id="built-in-resource-model-sources">Built-in Resource Model Sources</h2>
-<p>Rundeck comes with four built-in Resource Model Source providers, see <a href="../../projects/resource-model-sources/built-in-plugins-file-directory-url-script.html">Resource Model Source Plugins</a>:</p>
+<p>Rundeck comes with four built-in Resource Model Source providers, see <a href="../../projects/resource-model-sources/built-in-plugins-file-directory-url-script.html" title="Administrator Guide - Projects - Node Model Sources - Built in Plugins (File, Directory, URL, Script)">Resource Model Source Plugins</a>:</p>
 <ul>
 <li>File: Parses a file in one of the supported <a href="#built-in-resource-model-formats">Model Source Formats</a></li>
 <li>Directory: Scans all files in a directory in one of the supported formats</li>
@@ -138,17 +138,17 @@ jQuery(function(){
 </ul>
 <p>File: <em>none</em> (built-in)</p>
 <h2 id="built-in-resource-model-formats">Built-in Resource Model Formats</h2>
-<p>Rundeck comes with three Resource Model Format plugins, see <a href="../../projects/resource-model-sources/built-in-plugins-file-directory-url-script.html#resource-model-document-formats">Resource Model Source Plugins</a>:</p>
+<p>Rundeck comes with three Resource Model Format plugins, see <a href="../../projects/resource-model-sources/built-in-plugins-file-directory-url-script.html#resource-model-document-formats" title="Administrator Guide - Projects - Node Model Sources - Built in Plugins (File, Directory, URL, Script) - Resource Model Document Formats">Resource Model Source Plugins</a>:</p>
 <ul>
-<li>XML: the <a href="../man5/resource-xml.html">resourcexml</a> format</li>
-<li>YAML: the <a href="../man5/resource-yaml.html">resourceyaml</a> format</li>
-<li>JSON: the <a href="../man5/resource-json.html">resourcejson</a> format</li>
+<li>XML: the <a href="../../../man5/resource-xml.html" title="Document Format Reference - RESOURCE-XML">resourcexml</a> format</li>
+<li>YAML: the <a href="../../../man5/resource-yaml.html" title="Document Format Reference - RESOURCE-YAML">resourceyaml</a> format</li>
+<li>JSON: the <a href="../../../man5/resource-json.html" title="Document Format Reference - RESOURCE-JSON">resourcejson</a> format</li>
 </ul>
 <p>File: <em>none</em> (built-in)</p>
 <h2 id="script-plugin">Script Plugin</h2>
 <p>Defines Script Node Executor and Script File Copier.</p>
-<p>For more detail see <a href="../../../manual/node-execution/script-node-execution.html">Script Plugin</a>.</p>
-<p>Executes an external script file to perform the command, useful for developing your own plugin with the <a href="../../../developer/plugin-development.html#script-plugin-development">Script Plugin Development</a> model.</p>
+<p>For more detail see <a href="../../projects/node-execution/script.html" title="Administrator Guide - Projects - Node Execution - Script">Script Plugin</a>.</p>
+<p>Executes an external script file to perform the command, useful for developing your own plugin with the <a href="../../../developer/plugin-development.html#script-plugin-development" title="Plugin Developer Guide - Plugin Development - Script Plugin Development">Script Plugin Development</a> model.</p>
 <p>File: <code>rundeck-script-plugin-3.0.x-20190114.jar</code></p>
 <h2 id="stub-plugin">Stub Plugin</h2>
 <p>Provides a Node Executor, File Copier, and Resource Model Source. This plugin can be used for testing.</p>
@@ -158,7 +158,7 @@ jQuery(function(){
 <li><code>stub</code> for the FileCopier service</li>
 <li><code>stub</code> for the ResourceModelSource service</li>
 </ul>
-<p>(Refer to <a href="configuring.html#node-execution">Configuring - Node Execution</a> to enable them.)</p>
+<p>(Refer to <a href="configuring.html#node-execution" title="Administrator Guide - Rundeck Configuration - Configuring Plugins - Configuring - Node Execution">Configuring - Node Execution</a> to enable them.)</p>
 <p>This plugin does not actually perform any remote file copy or command execution, instead it simply echoes the command that was supposed to be executed, and pretends to have copied a file.</p>
 <p>This is intended for use in testing new Nodes, Jobs or Workflow sequences without affecting any actual runtime environment.</p>
 <p>You can also test some failure scenarios by configuring the following node attributes:</p>
@@ -188,12 +188,12 @@ jQuery(function(){
 </ul>
 <p>File: <code>rundeck-flow-control-plugin-3.0.x-20190114.jar</code></p>
 <h2 id="jasypt-encryption-plugin">Jasypt Encryption Plugin</h2>
-<p>Provides an encryption <a href="../storage-facility.html#storage-converters">storage converter</a> for the Storage facility. Can be used to encrypt the contents of Key Storage, and Project Configuration stored in the DB or on disk.</p>
+<p>Provides an encryption <a href="../storage-facility.html#storage-converters" title="Administrator Guide - Rundeck Configuration - Storage Facility - Storage Converters">storage converter</a> for the Storage facility. Can be used to encrypt the contents of Key Storage, and Project Configuration stored in the DB or on disk.</p>
 <p>This plugin provides password based encryption for storage contents.<br />
 It uses the <a href="http://jasypt.org">Jasypt</a> encryption library. The built in Java JCE is used unless another provider is specified, <a href="https://www.bouncycastle.org/">Bouncycastle</a> can be used by specifying the ‘BC’ provider name.</p>
 <p>Password, algorithm, provider, etc can be specified directly, or via environment variables (the <code>*EnvVarName</code> properties), or Java System properties (the <code>*SysPropName</code> properties).</p>
-<p>To enable it, see <a href="configuring.html#storage-converter-plugins">Configuring - Storage Converter Plugins</a>.</p>
-<p>See also: <a href="../../security/key-storage.html">Key Storage</a></p>
+<p>To enable it, see <a href="configuring.html#storage-converter-plugins" title="Administrator Guide - Rundeck Configuration - Configuring Plugins - Configuring - Storage Converter Plugins">Configuring - Storage Converter Plugins</a>.</p>
+<p>See also: <a href="../../security/key-storage.html" title="Administrator Guide - Security - Key Storage">Key Storage</a></p>
 <p>Provider type: <code>jasypt-encryption</code></p>
 <p>The following encryption properties marked with <code>*</code> can be set directly, using the property name shown, but they can all also be set dynamically using either an Environment variable, or a Java System Property.<br />
 Append either <code>EnvVarName</code> for the environment variable, or <code>SysPropName</code> to use the Java System Property.<br />
@@ -241,7 +241,7 @@ rundeck.config.storage.converter.1.config.provider=BC</code></pre>
 <p>File: <code>rundeck-jasypt-encryption-plugin-3.0.x-20190114.jar</code></p>
 <h2 id="git-plugin">Git Plugin</h2>
 <ul>
-<li>See <a href="../../../manual/scm/scm-git-plugin.html">SCM Git Plugin</a></li>
+<li>See <a href="../../projects/scm/git-plugin.html" title="Administrator Guide - Projects - SCM - Git Plugin">SCM Git Plugin</a></li>
 </ul>
 <p>Provides SCM Export and SCM Import providers for Git.</p>
 <p>File: <code>rundeck-git-plugin-3.0.x-20190114.jar</code></p>
@@ -322,7 +322,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>

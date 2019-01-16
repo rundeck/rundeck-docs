@@ -206,12 +206,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>(Note: Change between Rundeck 2.7 and 2.8: File copier plugins now require implementation of <code>FileCopier</code>. Previously the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190114/com/dtolabs/rundeck/core/execution/service/DestinationFileCopier.html"><code>DestinationFileCopier</code></a> was required. Older methods of FileCopier have been removed from the interface.)</p>
 <p>Optionally the plugin may implement <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190114/com/dtolabs/rundeck/core/execution/service/MultiFileCopier.html">MultiFileCopier</a> to more efficiently copy multiple files.</p>
 <h3 id="plugin-properties">Plugin properties</h3>
-<p>See <a href="plugin-development.html#plugin-descriptions">Plugin Development - Java Plugins - Descriptions</a> to learn how to create configuration properties for your plugin.</p>
+<p>See <a href="plugin-development.html#plugin-descriptions" title="Plugin Developer Guide - Plugin Development - Plugin Descriptions">Plugin Development - Java Plugins - Descriptions</a> to learn how to create configuration properties for your plugin.</p>
 <blockquote>
 <p>Note, the <code>destination</code> parameter may or may not be specified. If it is not null, it indicates that the file must be copied to the requested destination filepath. If it is null, it indicates that the copied file is likely a script file, and it should be copied to a temporary file location. In either case, the resulting file path must be returned as the result of the method call.</p>
 </blockquote>
 <h2 id="script-plugin-type">Script Plugin Type</h2>
-<p>See the <a href="plugin-development.html#script-plugin-development">Script Plugin Development</a> for the basics of developing script-based plugins for Rundeck.</p>
+<p>See the <a href="plugin-development.html#script-plugin-development" title="Plugin Developer Guide - Plugin Development - Script Plugin Development">Script Plugin Development</a> for the basics of developing script-based plugins for Rundeck.</p>
 <h3 id="additional-data-context-properties">Additional data context properties</h3>
 <p>The data context used in the script plugin definition can use these additional properties:</p>
 <dl>
@@ -301,7 +301,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>

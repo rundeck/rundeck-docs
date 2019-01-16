@@ -191,7 +191,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 id="behavior">Behavior</h2>
 <p>Content Converter plugins are applied automatically to Log Output when viewing it in the Rundeck GUI.</p>
 <p>However, the Log output must have certain metadata entries set for the Log Events. Plain log output will not be rendered in any special way (aside from ANSI Color rendering.)</p>
-<p>For this reason, usually a <a href="log-filter-plugins.html">Log Filter Plugin</a> is used to annotate the log output with the correct data type when used with Rundeck’s Command or Script steps, however custom Step plugins can add this metadata in the logs they emit.</p>
+<p>For this reason, usually a <a href="log-filter-plugins.html" title="Plugin Developer Guide - Log Filter Plugins">Log Filter Plugin</a> is used to annotate the log output with the correct data type when used with Rundeck’s Command or Script steps, however custom Step plugins can add this metadata in the logs they emit.</p>
 <h2 id="log-metadata">Log Metadata</h2>
 <p>Log events have Metadata (key/value strings) associated with them.</p>
 <p>If a Log event has a <code>content-data-type</code> metadata value, Rundeck will attempt to chain together up to two Content Converter Plugins to convert the specified data type into <code>text/html</code> for rendering in the GUI.</p>
@@ -212,7 +212,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="fu">rundeckPlugin</span>(ContentConverterPlugin){</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">    <span class="co">//plugin definition</span></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4">}</a></code></pre></div>
-<p>To define metadata about your plugin, see the <a href="plugin-development.html#groovy-plugin-development">Plugin Development - Groovy Plugin Development</a> chapter.</p>
+<p>To define metadata about your plugin, see the <a href="plugin-development.html#groovy-plugin-development" title="Plugin Developer Guide - Plugin Development - Groovy Plugin Development">Plugin Development - Groovy Plugin Development</a> chapter.</p>
 <p>The <code>ContentConverterPlugin</code> Groovy DSL supports defining conversions between data types.</p>
 <p>Data types are represented with the <code>DataType</code> class (internal to the groovy plugin builder), and can be created by calling the <code>dataType(Class,String)</code> method with a Java Class, and a data type string.</p>
 <p>The built-in <code>convert(DataType input, Datatype output, Closure closure)</code> method allows you to define conversions from one Data Type to another. Your closure will be called with the input data, and is expected to return the output data. Returning <code>null</code> will simply skip the conversion.</p>
@@ -262,7 +262,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb5-13" data-line-number="13">    <span class="kw">return</span> data.<span class="fu">generateHtml</span>()</a>
 <a class="sourceLine" id="cb5-14" data-line-number="14">}</a></code></pre></div>
 <h2 id="localization">Localization</h2>
-<p>For the basics of plugin localization see: <a href="plugin-development.html#plugin-localization">Plugin Development - Plugin Localization</a>.</p>
+<p>For the basics of plugin localization see: <a href="plugin-development.html#plugin-localization" title="Plugin Developer Guide - Plugin Development - Plugin Localization">Plugin Development - Plugin Localization</a>.</p>
 <h2 id="example">Example</h2>
 <p>Several built-in plugins are listed here:</p>
 <ul>
@@ -272,6 +272,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Your plugins can make use of this built-in plugin and therefore do not have to convert directly to HTML. See the <a href="https://github.com/rundeck/rundeck/blob/master/rundeckapp/src/groovy/com/dtolabs/rundeck/server/plugins/logs/JsonConverterPlugin.groovy">JsonConverterPlugin</a> for an example.</p>
 <h2 id="example-groovy-plugins">Example Groovy plugins</h2>
 <p>See <a href="https://github.com/rundeck/rundeck/tree/master/examples/example-groovy-content-converter-plugins" class="uri">https://github.com/rundeck/rundeck/tree/master/examples/example-groovy-content-converter-plugins</a>.</p>
+<p><a href="plugin-development.html#plugin-localization" title="Plugin Developer Guide - Plugin Development - Plugin Localization">Plugin Development - Plugin Localization</a></p>
 </div>
 </div>
 </div>
@@ -342,7 +343,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>

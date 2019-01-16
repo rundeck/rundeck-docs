@@ -388,7 +388,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 id="description">description</h2>
 <p>The job description is a sub-element of <a href="#job">job</a> and allows a short description of the job.</p>
 <p>If the description contains more than one line of text, then the first line is used as the “short description” of the job, and rendered exactly as text. The remaining lines are the “extended description”, rendered using Markdown format as HTML in the Rundeck GUI. Markdown can also embed HTML directly if you like. See <a href="https://en.wikipedia.org/wiki/Markdown#Example">Wikipedia - Markdown</a>.</p>
-<p>The HTML is sanitized to remove disallowed tags before rendering to the browser (such as <code>&lt;script&gt;</code>, etc.). You can disable all extended description HTML rendering via a configuration flag. See <a href="../administration/gui-customization.html">GUI Customization</a>.</p>
+<p>The HTML is sanitized to remove disallowed tags before rendering to the browser (such as <code>&lt;script&gt;</code>, etc.). You can disable all extended description HTML rendering via a configuration flag. See <a href="../administration/configuration/gui-customization.html" title="Administrator Guide - Rundeck Configuration - GUI Customization">GUI Customization</a>.</p>
 <p><strong>Note</strong>: To preserve formatting when defining the extended job description in XML, you should be sure to use a CDATA section. Wrap the contents in <code>&lt;![CDATA[</code> and <code>]]&gt;</code>.</p>
 <p><em>Example Extended description</em></p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">&lt;job&gt;</span></a>
@@ -463,7 +463,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb11-4" data-line-number="4">    <span class="kw">&lt;retry</span><span class="ot"> delay=</span><span class="st">&#39;1h1m1s&#39;</span><span class="kw">&gt;</span>${option.retry}<span class="kw">&lt;/retry&gt;</span></a>
 <a class="sourceLine" id="cb11-5" data-line-number="5"><span class="kw">&lt;/job&gt;</span></a></code></pre></div>
 <h2 id="logging">logging</h2>
-<p>An optional logging limit, and the action to perform if the limit is reached. (See <a href="../manual/jobs.html#log-limit">Jobs - Log Limit</a>).</p>
+<p>An optional logging limit, and the action to perform if the limit is reached. (See <a href="../manual/running-jobs.html#log-limit" title="User Guide - Running Jobs - Log Limit">Jobs - Log Limit</a>).</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">&lt;logging</span><span class="ot"> limit=</span><span class="st">&#39;1KB&#39;</span><span class="ot"> limitAction=</span><span class="st">&#39;halt&#39;</span><span class="ot"> status=</span><span class="st">&#39;aborted&#39;</span> <span class="kw">/&gt;</span></a></code></pre></div>
 <p>If no <code>limitAction</code> is set, it will default to a value of <code>halt</code> and a status of <code>failed</code>.</p>
 <p>The syntax for <code>limit</code> is:</p>
@@ -738,7 +738,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb24-3" data-line-number="3"><span class="kw">&lt;/nodefilters&gt;</span></a></code></pre></div>
 <h3 id="filter">filter</h3>
 <p>The filter string to select matching nodes.</p>
-<p>The content of this element is the full node filter string. See <a href="../manual/node-filters.html">User Guide - Node Filters</a>.</p>
+<p>The content of this element is the full node filter string. See <a href="../manual/node-filters.html" title="User Guide - Node Filters">User Guide - Node Filters</a>.</p>
 <h3 id="include">include</h3>
 <p>See <a href="#includeexclude-patterns">Include/exclude patterns</a></p>
 <h3 id="exclude">exclude</h3>
@@ -924,7 +924,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><em>Nested elements</em></p>
 <dl>
 <dt><a href="#filter">filter</a></dt>
-<dd><p>node filter string. See <a href="../manual/node-filters.html">User Guide - Node Filters</a>.</p>
+<dd><p>node filter string. See <a href="../manual/node-filters.html" title="User Guide - Node Filters">User Guide - Node Filters</a>.</p>
 </dd>
 </dl>
 <p>Example:</p>
@@ -1086,7 +1086,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><em>Example</em></p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="kw">&lt;webhook</span><span class="ot"> urls=</span><span class="st">&quot;http://server/callback?id=${execution.id}</span><span class="er">&amp;</span><span class="st">status=${execution.status}</span><span class="er">&amp;</span><span class="st">trigger=${notification.trigger}&quot;</span><span class="kw">/&gt;</span></a></code></pre></div>
 <ul>
-<li>For more information about the Webhook mechanism used, see the chapter <a href="../manual/jobs.html#webhooks">Integration - Webhooks</a>.</li>
+<li>For more information about the Webhook mechanism used, see the chapter <a href="../manual/running-jobs.html#webhooks" title="User Guide - Running Jobs - Webhooks">Integration - Webhooks</a>.</li>
 </ul>
 <h3 id="plugin">plugin</h3>
 <p>Defines a configuration for a plugin to perform a Notification, within <a href="#onsuccess">onsuccess</a>, <a href="#onfailure">onfailure</a>, <a href="#onstart">onstart</a>, <a href="#onavgduration">onavgduration</a>, or <a href="#onretryablefailure">onretryablefailure</a>.</p>
@@ -1129,7 +1129,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </dd>
 </dl>
 <h1 id="see-also">SEE ALSO</h1>
-<p><code>[rd-jobs](../man1/rd-jobs.html)</code></p>
+<p><code>[rd-jobs][page:manual/04-jobs.md]</code></p>
 <p>The Rundeck source code and all documentation may be downloaded from <a href="https://github.com/rundeck/rundeck/" class="uri">https://github.com/rundeck/rundeck/</a>.</p>
 </div>
 </div>
@@ -1201,7 +1201,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>

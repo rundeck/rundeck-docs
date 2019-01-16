@@ -220,8 +220,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <h2 id="java-plugin-type">Java Plugin Type</h2>
 <h2 id="define-a-plugin-provider-class">Define a plugin provider class</h2>
-<p>Refer to the <a href="plugin-development.html#java-plugin-development">Plugin Development - Java Plugins</a> section for information about correct definition of a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190114/com/dtolabs/rundeck/core/plugins/Plugin.html">Plugin</a> class, including packaging as a Jar and annotation.</p>
-<p>Be sure to use the <code>@Plugin</code> annotation on your provider implementation class to let it be recognized by Rundeck (See <a href="plugin-annotations.html">Plugin Annotations</a>).</p>
+<p>Refer to the <a href="plugin-development.html#java-plugin-development" title="Plugin Developer Guide - Plugin Development - Java Plugin Development">Plugin Development - Java Plugins</a> section for information about correct definition of a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190114/com/dtolabs/rundeck/core/plugins/Plugin.html">Plugin</a> class, including packaging as a Jar and annotation.</p>
+<p>Be sure to use the <code>@Plugin</code> annotation on your provider implementation class to let it be recognized by Rundeck (See <a href="plugin-annotations.html" title="Plugin Developer Guide - Plugin Annotations">Plugin Annotations</a>).</p>
 <p>Your <code>service</code> name should be one of the three listed below. The class <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190114/com/dtolabs/rundeck/plugins/ServiceNameConstants.html">ServiceNameConstants</a> contains static definitions of all Rundeck Service names.</p>
 <h2 id="workflow-step-types">Workflow Step Types</h2>
 <p>Your plugins can be one of three types.</p>
@@ -232,7 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Each plugin type has an associated Java interface.</p>
 <h3 id="plugin-properties">Plugin properties</h3>
-<p>See <a href="plugin-development.html#plugin-descriptions">Plugin Development - Java Plugins - Descriptions</a> to learn how to create configuration properties for your plugin using Java annotations.</p>
+<p>See <a href="plugin-development.html#plugin-descriptions" title="Plugin Developer Guide - Plugin Development - Plugin Descriptions">Plugin Development - Java Plugins - Descriptions</a> to learn how to create configuration properties for your plugin using Java annotations.</p>
 <h3 id="workflowstep-plugin">WorkflowStep Plugin</h3>
 <p>Annotate your class with <code>@Plugin</code> and use the service name <code>WorkflowStep</code>.</p>
 <p>Implement the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190114/com/dtolabs/rundeck/plugins/step/StepPlugin.html">StepPlugin</a>:</p>
@@ -336,19 +336,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Node Steps - the plugin will execute the script <em>locally</em> on the Rundeck server for each node</li>
 <li>Remote Script Node Steps - the plugin will execute the script <em>remotely</em> on each node</li>
 </ul>
-<p>See the <a href="plugin-development.html#script-plugin-development">Script Plugin Development</a> for the basics of developing script-based plugins for Rundeck.</p>
+<p>See the <a href="plugin-development.html#script-plugin-development" title="Plugin Developer Guide - Plugin Development - Script Plugin Development">Script Plugin Development</a> for the basics of developing script-based plugins for Rundeck.</p>
 <p>Use the service name for the plugin type:</p>
 <ul>
 <li><code>WorkflowNodeStep</code></li>
 <li><code>RemoteScriptNodeStep</code></li>
 </ul>
-<p>For configuration properties, see the <a href="model-format-parser-and-generator-plugin.html">Resource Model Source Plugin - Plugin Properties</a>.</p>
-<p>Two additional <a href="plugin-development.html#provider-metadata">provider metadata properties</a> are available for <code>RemoteScriptNodeStep</code> plugins:</p>
+<p>For configuration properties, see the <a href="model-format-parser-and-generator-plugin.html" title="Plugin Developer Guide - Model Format Parser and Generator Plugin">Resource Model Source Plugin - Plugin Properties</a>.</p>
+<p>Two additional <a href="plugin-development.html#provider-metadata" title="Plugin Developer Guide - Plugin Development - Provider Metadata">provider metadata properties</a> are available for <code>RemoteScriptNodeStep</code> plugins:</p>
 <ul>
 <li><code>use-original-extension</code> - (<code>true/false</code>, default <code>true</code>), whether to force the remotely copied script to have the same file extension as the original specified by <code>script-file</code>.</li>
 <li><code>script-file-extension</code> - A file extension to use for the remotely copied script.</li>
 </ul>
-<p>To define <a href="plugin-annotations.html#property-scopes">property scopes</a>, add a <code>scope</code> entry in the map for a configuration property:</p>
+<p>To define <a href="plugin-annotations.html#property-scopes" title="Plugin Developer Guide - Plugin Annotations - Property Scopes">property scopes</a>, add a <code>scope</code> entry in the map for a configuration property:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb6-1" data-line-number="1">  <span class="fu">config:</span></a>
 <a class="sourceLine" id="cb6-2" data-line-number="2">    <span class="kw">-</span> <span class="fu">type:</span><span class="at"> Integer</span></a>
 <a class="sourceLine" id="cb6-3" data-line-number="3">      <span class="fu">name:</span><span class="at"> count</span></a>
@@ -425,7 +425,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>

@@ -290,30 +290,30 @@ lib/anotherjar-1.3.jar</code></pre>
 <li><code>ResourceFormatParser</code> - parses a document into a set of Node resources <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190114/com/dtolabs/rundeck/core/resources/format/ResourceFormatParser.html">javadoc</a>.</li>
 <li><code>ResourceFormatGenerator</code> - generates a document from a set of Node resources <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190114/com/dtolabs/rundeck/core/resources/format/ResourceFormatGenerator.html">javadoc</a>.</li>
 </ul>
-<p>Workflow Step services (described in <a href="workflow-step-plugin.html">Workflow Step Plugin</a>):</p>
+<p>Workflow Step services (described in <a href="workflow-step-plugin.html" title="Plugin Developer Guide - Workflow Step Plugin">Workflow Step Plugin</a>):</p>
 <ul>
 <li><code>WorkflowStep</code> - runs a single step in a workflow.</li>
 <li><code>WorkflowNodeStep</code> - runs a single step for each node in a workflow.</li>
 <li><code>RemoteScriptNodeStep</code> - generates a script or command to execute remotely for each node in a workflow.</li>
 </ul>
-<p>Notification services (described in <a href="notification-plugin.html">Notification Plugin</a>):</p>
+<p>Notification services (described in <a href="notification-plugin.html" title="Plugin Developer Guide - Notification Plugin">Notification Plugin</a>):</p>
 <ul>
 <li><code>Notification</code> - performs an action after a Job state trigger.</li>
 </ul>
 <p>Storage services:</p>
 <ul>
-<li><code>Storage</code> - backend for storing data: <a href="storage-plugin.html">Storage Plugin</a></li>
-<li><code>StorageConverter</code> - modifies stored content or metadata: <a href="storage-converter-plugin.html">Storage Converter Plugin</a></li>
+<li><code>Storage</code> - backend for storing data: <a href="storage-plugin.html" title="Plugin Developer Guide - Storage Plugin">Storage Plugin</a></li>
+<li><code>StorageConverter</code> - modifies stored content or metadata: <a href="storage-converter-plugin.html" title="Plugin Developer Guide - Storage Converter Plugin">Storage Converter Plugin</a></li>
 </ul>
 <p>Logging services:</p>
 <ul>
-<li><code>ExecutionFileStorage</code> - stores and retrieves execution files to another location: <a href="logging-plugin.html">Execution File Storage Plugin</a></li>
-<li><code>StreamingLogWriter</code> - writes execution log events to a destination: <a href="logging-plugin.html">Streaming Log Writer Plugin</a></li>
-<li><code>StreamingLogReader</code> - reads execution log events from a destination: <a href="logging-plugin.html">Streaming Log Reader Plugin</a></li>
+<li><code>ExecutionFileStorage</code> - stores and retrieves execution files to another location: <a href="logging-plugin.html" title="Plugin Developer Guide - Logging Plugin">Execution File Storage Plugin</a></li>
+<li><code>StreamingLogWriter</code> - writes execution log events to a destination: <a href="logging-plugin.html" title="Plugin Developer Guide - Logging Plugin">Streaming Log Writer Plugin</a></li>
+<li><code>StreamingLogReader</code> - reads execution log events from a destination: <a href="logging-plugin.html" title="Plugin Developer Guide - Logging Plugin">Streaming Log Reader Plugin</a></li>
 </ul>
 <p>Orchestrator:</p>
 <ul>
-<li><code>Orchestrator</code> - orchestrates node dispatching: <a href="orchestrator-plugin.html">Orchestrator Plugin</a></li>
+<li><code>Orchestrator</code> - orchestrates node dispatching: <a href="orchestrator-plugin.html" title="Plugin Developer Guide - Orchestrator Plugin">Orchestrator Plugin</a></li>
 </ul>
 <h3 id="provider-classes">Provider Classes</h3>
 <p>A “Provider Class” is a java class that implements a particular interface and declares itself as a provider for a particular Rundeck “Service”.</p>
@@ -347,10 +347,10 @@ lib/anotherjar-1.3.jar</code></pre>
 <p><strong>Describable interface</strong></p>
 <p>If you want to build the Description object yourself, you can do so by implementing the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190114/com/dtolabs/rundeck/core/plugins/configuration/Describable.html">Describable</a> interface. Return a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190114/com/dtolabs/rundeck/core/plugins/configuration/Description.html">Description</a> instance. You can construct one by using the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190114/com/dtolabs/rundeck/plugins/util/DescriptionBuilder.html">DescriptionBuilder</a> builder class.</p>
 <p><strong>Description Annotations</strong></p>
-<p>Newer plugin types support using java annotations to create a Description object. See <a href="plugin-annotations.html">Plugin Annotations</a>.</p>
+<p>Newer plugin types support using java annotations to create a Description object. See <a href="plugin-annotations.html" title="Plugin Developer Guide - Plugin Annotations">Plugin Annotations</a>.</p>
 <h4 id="description-properties">Description Properties</h4>
 <p>Within a Description object you can define a set of Property objects, which represent the input properties for the plugin.</p>
-<p>Some plugin types support using Java Annotations to define properties, see <a href="plugin-annotations.html">Plugin Annotations</a>.</p>
+<p>Some plugin types support using Java Annotations to define properties, see <a href="plugin-annotations.html" title="Plugin Developer Guide - Plugin Annotations">Plugin Annotations</a>.</p>
 <p>For the remaining plugin types, the Properties must be defined using the other interfaces described above, typically with the use of a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190114/com/dtolabs/rundeck/plugins/util/PropertyBuilder.html">PropertyBuilder</a>.</p>
 <p><strong>Rendering Options</strong></p>
 <p>You can specify “rendering options” to affect the property being rendered in the Rundeck GUI. These affect Property type <em>String</em> only:</p>
@@ -422,7 +422,7 @@ lib/anotherjar-1.3.jar</code></pre>
 <li><code>description</code> - a string describing the property</li>
 <li><code>required</code> - whether the property is required to have a value</li>
 <li><code>defaultValue</code> - any default value for the property</li>
-<li><code>scope</code> - defines the scope for the property. Allowed values are described under the chapter <a href="plugin-annotations.html#property-scopes">Plugin Annotations - Property Scopes</a>. You may also simply use a String matching the name of the scope, e.g. “Instance”. The default scope if unspecified is “Instance”.</li>
+<li><code>scope</code> - defines the scope for the property. Allowed values are described under the chapter <a href="plugin-annotations.html#property-scopes" title="Plugin Developer Guide - Plugin Annotations - Property Scopes">Plugin Annotations - Property Scopes</a>. You may also simply use a String matching the name of the scope, e.g. “Instance”. The default scope if unspecified is “Instance”.</li>
 </ul>
 <p>In addition to these properties, for <code>Select</code> or <code>FreeSelect</code> type, you can define:</p>
 <ul>
@@ -447,14 +447,14 @@ lib/anotherjar-1.3.jar</code></pre>
 <p>Script plugins can provide the same services as Java plugins, but they do so with a script that is invoked in an external system processes by the JVM.</p>
 <p>These Services support Script Plugins:</p>
 <ul>
-<li><a href="node-executor-plugin.html#script-plugin-type">NodeExecutor</a></li>
-<li><a href="file-copier-plugin.html#script-plugin-type">FileCopier</a></li>
-<li><a href="resource-model-source-plugin.html#script-plugin-type">ResourceModelSource</a></li>
-<li><a href="workflow-step-plugin.html#script-plugin-type">WorkflowNodeStep</a> and RemoteScriptNodeStep</li>
+<li><a href="node-executor-plugin.html#script-plugin-type" title="Plugin Developer Guide - Node Executor Plugin - Script Plugin Type">NodeExecutor</a></li>
+<li><a href="file-copier-plugin.html#script-plugin-type" title="Plugin Developer Guide - File Copier Plugin - Script Plugin Type">FileCopier</a></li>
+<li><a href="resource-model-source-plugin.html#script-plugin-type" title="Plugin Developer Guide - Resource Model Source Plugin - Script Plugin Type">ResourceModelSource</a></li>
+<li><a href="workflow-step-plugin.html#script-plugin-type" title="Plugin Developer Guide - Workflow Step Plugin - Script Plugin Type">WorkflowNodeStep</a> and RemoteScriptNodeStep</li>
 </ul>
 <h3 id="ui-plugin-development">UI Plugin Development</h3>
 <p>UI Plugins are supported with a <code>ui</code> plugin type, which is similar to a Script Plugin.</p>
-<p>See: <a href="ui-plugins.html">UI Plugins</a>.</p>
+<p>See: <a href="ui-plugins.html" title="Plugin Developer Guide - UI Plugins">UI Plugins</a>.</p>
 <h3 id="script-plugin-zip-structure">Script plugin zip structure</h3>
 <p>You must create a zip file with the following structure:</p>
 <pre><code>[name]-plugin.zip
@@ -537,12 +537,12 @@ Archive:  example-1.0-plugin.zip
 <li><code>WorkflowNodeStep</code></li>
 <li><code>RemoteScriptNodeStep</code></li>
 </ul></li>
-<li><code>plugin-type</code> - must be <code>script</code> for these types (or <code>ui</code> for <a href="ui-plugins.html">UI Plugins</a>)</li>
+<li><code>plugin-type</code> - must be <code>script</code> for these types (or <code>ui</code> for <a href="ui-plugins.html" title="Plugin Developer Guide - UI Plugins">UI Plugins</a>)</li>
 <li><code>script-file</code> - must be the name of a file relative to the <code>contents</code> directory</li>
 </ul>
 <p>For <code>ResourceModelSource</code> service, this additional entry is required:</p>
 <ul>
-<li><code>resource-format</code> - Must be the name of one of the supported <a href="../administration/configuration/resource-model-sources/built-in-resource-model-source-plugins.html#resource-model-document-formats">Resource Model Document Formats</a>.</li>
+<li><code>resource-format</code> - Must be the name of one of the supported <a href="../administration/projects/resource-model-sources/built-in-plugins-file-directory-url-script.html#resource-model-document-formats" title="Administrator Guide - Projects - Node Model Sources - Built in Plugins (File, Directory, URL, Script) - Resource Model Document Formats">Resource Model Document Formats</a>.</li>
 </ul>
 <p>Optional entries:</p>
 <ul>
@@ -742,7 +742,7 @@ Archive:  example-1.0-plugin.zip
 </ul></li>
 <li><code>selectionAccessor</code>, values:
 <ul>
-<li><code>STORAGE_PATH</code> - display an additional input to select a Storage Path string from Rundeck’s <a href="../administration/security/key-storage.html">Key Storage Facility</a>.</li>
+<li><code>STORAGE_PATH</code> - display an additional input to select a Storage Path string from Rundeck’s <a href="../administration/security/key-storage.html" title="Administrator Guide - Security - Key Storage">Key Storage Facility</a>.</li>
 </ul></li>
 <li><code>storage-path-root</code>
 <ul>
@@ -813,7 +813,7 @@ Archive:  example-1.0-plugin.zip
 <li><code>property.NAME.title</code> Title for configuration property named “NAME”</li>
 <li><code>property.NAME.description</code> Description for configuration property named “NAME”</li>
 </ul>
-<p>(<em>Note</em>: SCM Plugins have additional message codes. See: <a href="scm-plugins.html#localization">SCM Plugins - Localization</a>).</p>
+<p>(<em>Note</em>: SCM Plugins have additional message codes. See: <a href="scm-plugins.html#localization" title="Plugin Developer Guide - SCM Plugins - Localization">SCM Plugins - Localization</a>).</p>
 <p>Additionally, if a property has a <a href="#property-rendering-options">Property Rendering Option</a> marking it as <code>STATIC_TEXT</code> normally the <code>defaultValue</code> of the property is used to render it as text or HTML. This value can be localized as well:</p>
 <ul>
 <li><code>plugin.NAME.defaultValue</code> Static text/html for a STATIC_TEXT property named “NAME”</li>
@@ -911,7 +911,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>

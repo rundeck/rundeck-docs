@@ -203,7 +203,7 @@ export RDECK_HTTPS_PORT=1234</code></pre></li>
 <pre><code>keytool -export -keystore etc/keystore -rfc -alias rundeck &gt; rundeck.server.pem</code></pre>
 <h2 id="using-an-ssl-terminated-proxy">Using an SSL Terminated Proxy</h2>
 <p>You can tell Jetty to honor <code>X-Forwarded-Proto</code>, <code>X-Forwarded-Host</code>, <code>X-Forwarded-Server</code> and <code>X-Forwarded-For</code> headers in two ways:</p>
-<p>In <a href="configuration-file-reference.html#rundeck-config.properties">rundeck-config.properties</a> you can set:</p>
+<p>In <a href="../configuration/configuration-file-reference.html#rundeck-config.properties" title="Administrator Guide - Rundeck Configuration - Configuration File Reference - Rundeck Config.properties">rundeck-config.properties</a> you can set:</p>
 <pre><code>server.useForwardHeaders=true</code></pre>
 <p>Or by declaring the following JVM property:</p>
 <ul>
@@ -213,7 +213,7 @@ export RDECK_HTTPS_PORT=1234</code></pre></li>
 <p>For RPM/DEB install you can export the <code>RDECK_JVM_OPTS</code> variable in the file <code>/etc/sysconfig/rundeckd</code> (RPM) or <code>/etc/default/rundeckd</code> (DEB) and add:</p>
 <pre><code>RDECK_JVM_OPTS=-Drundeck.jetty.connector.forwarded=true</code></pre>
 <p>This will enable Jetty to respond correctly when a forwarded request is first received.</p>
-<p><strong>Note:</strong> You will still need to modify the <code>grails.serverURL</code> value in <a href="configuration-file-reference.html#rundeck-config.properties">rundeck-config.properties</a> to let Rundeck know how to properly generate absolute URLs.</p>
+<p><strong>Note:</strong> You will still need to modify the <code>grails.serverURL</code> value in <a href="../configuration/configuration-file-reference.html#rundeck-config.properties" title="Administrator Guide - Rundeck Configuration - Configuration File Reference - Rundeck Config.properties">rundeck-config.properties</a> to let Rundeck know how to properly generate absolute URLs.</p>
 <h2 id="disabling-ssl-protocols">Disabling SSL Protocols</h2>
 <p>You can disable SSL protocols or cipher suites using these JVM variables:</p>
 <ul>
@@ -300,7 +300,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>

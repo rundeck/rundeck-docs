@@ -209,7 +209,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>For the default installation (Executable War, RPM, Deb), the Servlet Container is Jetty, and the default security mechanism is JAAS, so you are free to use what ever JAAS provider you feel is suitable for your environment. See <a href="https://en.wikipedia.org/wiki/Java_Authentication_and_Authorization_Service">JAAS</a> and specifically for Jetty, <a href="https://wiki.eclipse.org/Jetty/Feature/JAAS">JAAS for Jetty</a>.</p>
 <p>If you use the Rundeck war file with a different container, such as Tomcat, refer to <a href="#container-authentication-and-authorization">Container authentication and authorization</a> below.</p>
 <h1 id="single-sign-on">Single Sign On</h1>
-<p>See <a href="single-sign-on.html">Security &gt; Single Sign On</a>.</p>
+<p>See <a href="single-sign-on.html" title="Administrator Guide - Security - Single Sign On">Security &gt; Single Sign On</a>.</p>
 <h1 id="jetty-and-jaas-authentication">Jetty and JAAS authentication</h1>
 <p>Rundeck has three basic JAAS modules.</p>
 <ol type="1">
@@ -311,7 +311,7 @@ crypt: CRYPT:jsnDAc2Xk4W4o</code></pre>
 <div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="bu">export</span> <span class="va">RDECK_JVM=</span><span class="st">&quot;-Dloginmodule.conf.name=jaas-ldap.conf \</span></a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="st">    -Drundeck.jaaslogin=true \</span></a>
 <a class="sourceLine" id="cb10-3" data-line-number="3"><span class="st">    -Dloginmodule.name=ldap&quot;</span></a></code></pre></div>
-<p>Note: more information about using the Executable War and useful properties are under <a href="../install/launcher.html#launcher-options">Getting Started - Executable War Options</a>.</p>
+<p>Note: more information about using the Executable War and useful properties are under <a href="../install/launcher.html#launcher-options" title="Administrator Guide - Installation - Launcher - Launcher Options">Getting Started - Executable War Options</a>.</p>
 <p><strong>For the RPM/Deb installation</strong>: the absolute path to the JAAS config file must be specified with the <code>java.security.auth.login.config</code> property.</p>
 <p>Declare <code>RDECK_JVM_OPTS</code> in <code>/etc/sysconfig/rundeckd</code> (rpm) or <code>/etc/default/rundeckd</code> (deb):</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="va">RDECK_JVM_OPTS=</span><span class="st">&quot;-Drundeck.jaaslogin=true \</span></a>
@@ -769,7 +769,7 @@ rundeck.security.authorization.preauthenticated.delimiter=:</code></pre>
     Require valid-user
 &lt;/Location&gt;</code></pre>
 <p><strong>Note</strong>: <code>mod_proxy_ajp</code> requires prefixing the environment variable with “AJP_”, but <code>mod_jk</code> can pass the environment variable directly.</p>
-<p>Once authenticated via Apache, you should be able to access rundeck. You might see a page saying “You have no authorized access to projects”, and then “(User roles: role1, role2, …)” with a list of all of the user roles seen by Rundeck. This page just means that there are no aclpolicy files that match those roles, but the apache-&gt;tomcat authorization is still working correctly. At this point, move on to <a href="access-control-policy.html">Access Control Policy</a> to set up access control for the listed roles.</p>
+<p>Once authenticated via Apache, you should be able to access rundeck. You might see a page saying “You have no authorized access to projects”, and then “(User roles: role1, role2, …)” with a list of all of the user roles seen by Rundeck. This page just means that there are no aclpolicy files that match those roles, but the apache-&gt;tomcat authorization is still working correctly. At this point, move on to <a href="access-control-policy.html" title="Administrator Guide - Security - Access Control Policy">Access Control Policy</a> to set up access control for the listed roles.</p>
 <p>If the “User roles:” part is blank, then it may not be working correctly.</p>
 <h2 id="preauthenticated-mode-using-headers">Preauthenticated Mode using headers</h2>
 <p>If you have a proxy sitting in front of your Rundeck installation that authenticates your users, you can send the authenticated user and groups to Rundeck via HTTP headers. Set the following properties in your <code>rundeck-config.properties</code> file.</p>
@@ -858,7 +858,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>

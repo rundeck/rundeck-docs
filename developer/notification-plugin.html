@@ -213,7 +213,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 id="configuration-data">Configuration data</h3>
 <p>The Configuration data is fully custom depending on your plugin, and is described in the <a href="#plugin-configuration-properties">Plugin configuration properties</a> section.</p>
 <h4 id="property-references">Property References</h4>
-<p>The specific data values of the Configuration section are allowed to have embedded Property References as described in the <a href="../manual/creating-job-workflows.html#context-variables">Jobs - Context Variables</a> section.</p>
+<p>The specific data values of the Configuration section are allowed to have embedded Property References as described in the <a href="../manual/creating-job-workflows.html#context-variables" title="User Guide - Creating Job Workflows - Context Variables">Jobs - Context Variables</a> section.</p>
 <p>For example, when a user configures your plugin, they could embed an option value using: <code>${option.myoption}</code>. This value will be replaced with the runtime option value before being passed to your plugin.</p>
 <p>When defining Configuration properties that use custom Validation, keep in mind that the value set by a user may have such an embedded property reference and therefore may not pass the validation rules you have defined. If you want to allow these property references for a Configuration property, it must be a String type property, and any custom validation code should allow the embedded property references, for example by looking for a ‘${’ sequence and allowing the value.</p>
 <h3 id="execution-data">Execution data</h3>
@@ -247,7 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><code>job.project</code>: Project name</p>
 <p><code>job.description</code>: Job Description</p>
 <p><code>job.averageDuration</code>: Average job duration in Milliseconds, if available</p>
-<p><code>execution.context</code> - this is a map containing all of the context variables available to the execution when it ran or will run, such as <a href="../manual/creating-job-workflows.html#context-variables">Jobs - Context Variables</a>. The contents of this Map are the specific context namespaces and variables.</p>
+<p><code>execution.context</code> - this is a map containing all of the context variables available to the execution when it ran or will run, such as <a href="../manual/creating-job-workflows.html#context-variables" title="User Guide - Creating Job Workflows - Context Variables">Jobs - Context Variables</a>. The contents of this Map are the specific context namespaces and variables.</p>
 <p><code>execution.context.option</code>: a Map containing the Job Option keys/values.</p>
 <p><code>job</code>: a Map containing the Job context data, as provided to executions. This map will contain some duplicate information as the <code>execution.job</code> map previously described.</p>
 <p>In Groovy, you can simply reference any values in the Execution data maps using <a href="http://groovy-lang.org/processing-xml.html#_gpath">Groovy Gpath</a>, e.g.:</p>
@@ -272,7 +272,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>On github: <a href="https://github.com/rundeck/rundeck/tree/development/examples/example-java-notification-plugin">example-java-notification-plugin</a></li>
 </ul>
 <h2 id="java-plugin-type">Java Plugin Type</h2>
-<p>Java-based plugins can be developed just as any other Rundeck plugin, as described in the chapter <a href="plugin-development.html#java-plugin-development">Plugin Development - Java Plugin Development</a>.</p>
+<p>Java-based plugins can be developed just as any other Rundeck plugin, as described in the chapter <a href="plugin-development.html#java-plugin-development" title="Plugin Developer Guide - Plugin Development - Java Plugin Development">Plugin Development - Java Plugin Development</a>.</p>
 <p>These plugin classes should implement the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190114/com/dtolabs/rundeck/plugins/notification/NotificationPlugin.html">NotificationPlugin</a>:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">public</span> <span class="kw">interface</span> NotificationPlugin {</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">    <span class="co">/**</span></a>
@@ -283,8 +283,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb2-7" data-line-number="7">     <span class="co">*/</span></a>
 <a class="sourceLine" id="cb2-8" data-line-number="8">    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">postNotification</span>(<span class="bu">String</span> trigger,<span class="bu">Map</span> executionData,<span class="bu">Map</span> config);</a>
 <a class="sourceLine" id="cb2-9" data-line-number="9">}</a></code></pre></div>
-<p>To define configuration properties for your plugin, you use the same mechanisms as for Workflow Steps, described under the chapter <a href="plugin-development.html#plugin-descriptions">Plugin Development - Plugin Descriptions</a>.</p>
-<p>The simplest way to do this is to use <a href="plugin-annotations.html">Plugin Annotations</a>. Here is an example class annotated to describe it to the Rundeck GUI:</p>
+<p>To define configuration properties for your plugin, you use the same mechanisms as for Workflow Steps, described under the chapter <a href="plugin-development.html#plugin-descriptions" title="Plugin Developer Guide - Plugin Development - Plugin Descriptions">Plugin Development - Plugin Descriptions</a>.</p>
+<p>The simplest way to do this is to use <a href="plugin-annotations.html" title="Plugin Developer Guide - Plugin Annotations">Plugin Annotations</a>. Here is an example class annotated to describe it to the Rundeck GUI:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="at">@Plugin</span>(service=<span class="st">&quot;Notification&quot;</span>, name=<span class="st">&quot;example&quot;</span>)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="at">@PluginDescription</span>(title=<span class="st">&quot;Example Plugin&quot;</span>, description=<span class="st">&quot;An example Plugin for Rundeck Notifications.&quot;</span>)</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw">public</span> <span class="kw">class</span> ExampleNotificationPlugin <span class="kw">implements</span> NotificationPlugin{</a>
@@ -300,9 +300,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb3-13" data-line-number="13">}</a></code></pre></div>
 <h2 id="groovy-plugin-type">Groovy Plugin Type</h2>
 <p>Notification support the Groovy Plugin Type.</p>
-<p>To define metadata about your plugin, and configuration properties, see the <a href="plugin-development.html#groovy-plugin-development">Plugin Development - Groovy Plugin Development</a> chapter.</p>
+<p>To define metadata about your plugin, and configuration properties, see the <a href="plugin-development.html#groovy-plugin-development" title="Plugin Developer Guide - Plugin Development - Groovy Plugin Development">Plugin Development - Groovy Plugin Development</a> chapter.</p>
 <p>To create a Groovy based plugin, create a file named <code>MyNotificationPlugin.groovy</code> in the plugins directory for Rundeck.</p>
 <p>You must restart rundeck to make the plugin available the first time, but you can subsequently update the .groovy script without restarting Rundeck.</p>
+<p><a href="plugin-development.html#groovy-plugin-development" title="Plugin Developer Guide - Plugin Development - Groovy Plugin Development">Groovy Plugin Development</a></p>
 <h3 id="groovy-dsl">Groovy DSL</h3>
 <p>Within the Groovy script, you define your plugin by calling the <code>rundeckPlugin</code> method, and pass it both the Class of the type of plugin, and a Closure used to build the plugin object.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">import</span>  com.dtolabs.rundeck.plugins.notification.NotificationPlugin</a>
@@ -507,7 +508,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>

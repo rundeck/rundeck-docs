@@ -231,7 +231,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <h3 id="java">Java</h3>
 <p>Rundeck is a Java-Servlet based server and therefore requires the Java runtime.</p>
-<p>The install process requires that the latest version of Java 8 be installed. Both the <a href="http://openjdk.java.net/">Open JDK</a> and <a href="https://java.com/">Sun/Oracle</a> JVMs can be used. You must have the JAVA_HOME environment variable defined in your environment before running the launcher. The RPM will use the java found on your path. See <a href="../maintenance/startup-and-shutdown.html#setting-java_home">Setting JAVA_HOME</a> if you want to run a different version of java.</p>
+<p>The install process requires that the latest version of Java 8 be installed. Both the <a href="http://openjdk.java.net/">Open JDK</a> and <a href="https://java.com/">Sun/Oracle</a> JVMs can be used. You must have the JAVA_HOME environment variable defined in your environment before running the launcher. The RPM will use the java found on your path. See <a href="../maintenance/startup-and-shutdown.html#setting-java_home" title="Administrator Guide - Maintenance - Startup and Shutdown - Setting Java_home">Setting JAVA_HOME</a> if you want to run a different version of java.</p>
 <p>Verify your Java version to check it meets the requirement:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1">$ <span class="ex">java</span> -version</a></code></pre></div>
 <pre><code>java version &quot;1.8.0_131&quot;
@@ -249,7 +249,7 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.131-b11, mixed mode)</code></pre>
 <pre><code>tcp46      0      0  *.4440                 *.*                    LISTEN</code></pre>
 <p>The installation procedures describe how to choose different ports, if there is a conflict.</p>
 <p>In addition, TCP port 22 (by default) needs to be open on the clients for SSH.</p>
-<p>Clients should be set up to allow the Rundeck server user to connect to the clients using SSH via public-key authentication. It should not prompt for a password. See <a href="../../manual/node-execution/ssh-node-execution.html#configuring-remote-machine-for-ssh">Configure remote machine for SSH</a> in the Administration chapter.</p>
+<p>Clients should be set up to allow the Rundeck server user to connect to the clients using SSH via public-key authentication. It should not prompt for a password. See <a href="../projects/node-execution/ssh.html#configuring-remote-machine-for-ssh" title="Administrator Guide - Projects - Node Execution - SSH - Configuring Remote Machine For Ssh">Configure remote machine for SSH</a> in the Administration chapter.</p>
 <p>There are various ways for installing SSH on Windows; we recommend <a href="https://www.cygwin.com/">Cygwin</a>.</p>
 <h3 id="database">Database</h3>
 <p>When you install the vanilla standalone rundeck configuration, it will use H2, an embedded database. It is convenient to have an embedded database when you are just trying Rundeck or using it for a non-critical purpose. Be aware though that using the H2 database is not considered safe for production because it not reslilient if Rundeck is not shutdown gracefully. When shutdown gracefully, Rundeck can write the data (kept in memory) to disk. If Rundeck is forcefully shutdown, the data can not be guaranteed to be written to file on disk and cause truncation and corruption.</p>
@@ -332,7 +332,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>

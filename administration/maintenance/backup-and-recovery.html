@@ -188,7 +188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ex">rd</span> jobs list -f /path/to/backup/dir/project1/jobs.xml -p project1</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="ex">rd</span> jobs list -f /path/to/backup/dir/project2/jobs.xml -p project2</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"><span class="ex">...</span></a></code></pre></div></li>
-<li><p>Stop the server. See: <a href="startup-and-shutdown.html">startup and shutdown</a>. (Rundeck data file backup should only be done with the server down.)</p>
+<li><p>Stop the server. See: <a href="startup-and-shutdown.html" title="Administrator Guide - Maintenance - Startup and Shutdown">startup and shutdown</a>. (Rundeck data file backup should only be done with the server down.)</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ex">rundeckd</span> stop</a></code></pre></div></li>
 <li><p>Copy the data files. (Assumes file datastore configuration). The location of the data directory depends on the installation method:</p></li>
 </ol>
@@ -216,7 +216,7 @@ cp -r logs /path/to/backup/dir
 </ol>
 <h2 id="recovery">Recovery</h2>
 <ol type="1">
-<li><p>Stop the server. See: <a href="startup-and-shutdown.html">startup and shutdown</a>. (Rundeck recovery should only be done with the server down.)</p>
+<li><p>Stop the server. See: <a href="startup-and-shutdown.html" title="Administrator Guide - Maintenance - Startup and Shutdown">startup and shutdown</a>. (Rundeck recovery should only be done with the server down.)</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="ex">rundeckd</span> stop</a></code></pre></div></li>
 <li><p>Restore data/logs dir from backup (Refer to above for appropriate log/data path):</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="fu">cp</span> -r /path/to/backup/logs logspath</a>
@@ -337,7 +337,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>

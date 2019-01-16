@@ -189,17 +189,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>rundeck.projectsStorageType=filesystem</code></pre>
 <p>If you wish to use <em>filesystem</em> storage you must add this configuration entry.</p>
 <p>If you have existing filesystem-based projects, and you start Rundeck with the <code>db</code> storage type, those projects will be automatically imported to the Database. The import process copies the contents of <code>etc/project.properties</code>, <code>readme.md</code> and <code>motd.md</code> (if they exist). Finally, the <code>etc/project.properties</code> file will be renamed on disk to <code>etc/project.properties.imported</code>.</p>
-<p>The DB storage type also uses the Rundeck <strong>Storage Facility</strong> to store the file contents, which can be configured to use an Encryption plugin. See <a href="storage-facility.html#using-encryption">Storage Facility - Using Encryption</a>.</p>
+<p>The DB storage type also uses the Rundeck <strong>Storage Facility</strong> to store the file contents, which can be configured to use an Encryption plugin. See <a href="../configuration/storage-facility.html#using-encryption" title="Administrator Guide - Rundeck Configuration - Storage Facility - Using Encryption">Storage Facility - Using Encryption</a>.</p>
 <h2 id="graphical-interface">Graphical Interface</h2>
-<p>Under the Project Settings menu, select the “Edit Configuration” item. This page provides the same controls used when <a href="project-create.html">creating a project</a>.</p>
+<p>Under the Project Settings menu, select the “Edit Configuration” item. This page provides the same controls used when <a href="create-new-project.html" title="Administrator Guide - Projects - Create new Project">creating a project</a>.</p>
 <p>Alternatively, you may might want to edit the raw configuration keys. Click the “Edit Configuration File” button to open a text editor letting you view and change all property keys.</p>
 <h2 id="cli-usage">CLI Usage</h2>
 <p>The <code>rd projects configure set</code> command allows you to set configuration properties.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="ex">rd</span> projects configure set -p MyProject -- \</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">   --project.ssh-keypath<span class="st">&quot;:&quot;</span>/home/rundeck/.ssh/id_rsa</a></code></pre></div>
 <h2 id="api-usage">API Usage</h2>
-<p>Project configuration can be achieved via the <a href="../../api/index.html">API</a>.</p>
-<p><a href="../../api/index.html#project-configuration">Project configuration</a></p>
+<p>Project configuration can be achieved via the <a href="../../api/index.html" title="API Reference | Version 28">API</a>.</p>
+<p><a href="../../api/index.html#project-configuration" title="API Reference | Version 28 - Project Configuration">Project configuration</a></p>
 <pre><code>PUT /api/13/project/MyProject/config
 Content-Type: application/json
 
@@ -209,7 +209,7 @@ Content-Type: application/json
     &quot;resources.source.2.config.directory&quot;:&quot;/home/rundeck/projects/MyProject/resources.d&quot;
 }</code></pre>
 <h2 id="filesystem">Filesystem</h2>
-<p>When using <em>filesystem</em> storage type, each Project has a configuration file called <a href="configuration-file-reference.html#project.properties">project.properties</a>, located at this path:</p>
+<p>When using <em>filesystem</em> storage type, each Project has a configuration file called <a href="../configuration/configuration-file-reference.html#project.properties" title="Administrator Guide - Rundeck Configuration - Configuration File Reference - Project.properties">project.properties</a>, located at this path:</p>
 <ul>
 <li>rpm/deb: /var/rundeck/projects/<em>project</em>/etc/project.properties</li>
 <li>launcher: $RDECK_BASE/projects/<em>project</em>/etc/project.properties</li>
@@ -286,7 +286,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>

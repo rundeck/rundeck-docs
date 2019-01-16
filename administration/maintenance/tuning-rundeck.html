@@ -184,7 +184,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <h3 id="file-descriptors">File descriptors</h3>
 <p>The Rundeck server process opens a number of files during normal operation. These include system and java libraries, logs, and sockets. Your system restricts the number of open file handles per process but these limitations can be adjusted.</p>
-<p>If your installation attempts to exceed the limit, you will see an error like the one shown below in your <a href="logging.html">service.log</a> file.</p>
+<p>If your installation attempts to exceed the limit, you will see an error like the one shown below in your <a href="logging.html" title="Administrator Guide - Maintenance - Logging">service.log</a> file.</p>
 <pre><code>Too many open files</code></pre>
 <p><em>On Linux nodes</em></p>
 <p>List the current limit with the <a href="https://ss64.com/bash/ulimit.html">ulimit</a> command:</p>
@@ -199,14 +199,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="bu">echo</span> 65535 <span class="op">&gt;</span> /proc/sys/fs/file-max</a></code></pre></div>
 <p>In a new shell, run the ulimit command to set the new level:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="bu">ulimit</span> -n 65535</a></code></pre></div>
-<p>The ulimit setting can be set in the <a href="startup-and-shutdown.html#launcher">rundeckd</a> startup script, or <a href="../configuration/configuration-file-reference.html#profile">profile</a>.</p>
+<p>The ulimit setting can be set in the <a href="startup-and-shutdown.html#launcher" title="Administrator Guide - Maintenance - Startup and Shutdown - Launcher">rundeckd</a> startup script, or <a href="../configuration/configuration-file-reference.html#profile" title="Administrator Guide - Rundeck Configuration - Configuration File Reference - Profile">profile</a>.</p>
 <p>Restart Rundeck.</p>
 <h3 id="java-heap-size">Java heap size</h3>
 <p>The <code>rundeckd</code> startup script sets initial and maximum heap sizes for the server process. For many installations it will be sufficient.</p>
 <p>If the Rundeck JVM runs out of memory, the following error occurs:</p>
 <pre><code>Exception in thread &quot;main&quot; java.lang.OutOfMemoryError: Java heap space</code></pre>
 <p>Heap size is governed by the following startup parameters: <code>-Xms&lt;initial heap size&gt;</code> and <code>-Xmx&lt;maximum heap size&gt;</code></p>
-<p>You can increase these by updating the Rundeck <a href="../configuration/configuration-file-reference.html#profile">profile</a>. To see the current values, grep the <code>profile</code> for the Xmx and Xms patterns:</p>
+<p>You can increase these by updating the Rundeck <a href="../configuration/configuration-file-reference.html#profile" title="Administrator Guide - Rundeck Configuration - Configuration File Reference - Profile">profile</a>. To see the current values, grep the <code>profile</code> for the Xmx and Xms patterns:</p>
 <p><strong>Launcher installs:</strong></p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="fu">egrep</span> <span class="st">&#39;(Xmx|Xms)&#39;</span> <span class="va">$RDECK_BASE</span>/etc/profile</a></code></pre></div>
 <p><strong>RPM installs:</strong></p>
@@ -236,7 +236,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>You may wish to monitor the internal operation of your Rundeck server via JMX.</p>
 <p>JMX provides introspection on the JVM, the application server, and classes all through a consistent interface. These various components are exposed to the management console via JMX managed beans - MBeans for short.</p>
 <p><em>Note</em>: For more background information on JMX, see “<a href="https://www.ibm.com/developerworks/library/j-jtp09196/">Java theory and practice: Instrumenting applications with JMX.</a>”.</p>
-<p>Enable local JMX monitoring by adding the <code>com.sun.management.jmxremote</code> flag to the startup parameters in the <a href="../configuration/configuration-file-reference.html#profile">profile</a>.</p>
+<p>Enable local JMX monitoring by adding the <code>com.sun.management.jmxremote</code> flag to the startup parameters in the <a href="../configuration/configuration-file-reference.html#profile" title="Administrator Guide - Rundeck Configuration - Configuration File Reference - Profile">profile</a>.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="bu">export</span> <span class="va">RDECK_JVM=</span><span class="st">&quot;</span><span class="va">$RDECK_JVM</span><span class="st"> -Dcom.sun.management.jmxremote&quot;</span></a></code></pre></div>
 <p>You use a JMX client to monitor JMX agents. This can be a desktop GUI like JConsole run locally.</p>
 <pre><code>jconsole &lt;rundeck pid&gt;</code></pre>
@@ -244,13 +244,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 id="node-execution">Node execution</h3>
 <p>If you are executing commands across many hundreds or thousands of hosts, the bundled SSH node executor may not meet your performance requirements. Each SSH connection uses multiple threads and the encryption/decryption of messages uses CPU cycles and memory. Depending on your environment, you might choose another Node executor like MCollective, Salt or something similar. This essentially delegates remote execution to another tool designed for asynchronous fan out and thus relieving Rundeck of managing remote task execution.</p>
 <h3 id="built-in-ssh-plugins">Built in SSH plugins</h3>
-<p>If you are interested in using the built in <a href="../../manual/node-execution/ssh-node-execution.html">SSH plugins</a>, here are some details about how it performs when executing commands across very large numbers of nodes. For these tests, Rundeck was running on an 8 core, 32GB RAM m2.4xlarge AWS EC2 instance.</p>
+<p>If you are interested in using the built in <a href="../projects/node-execution/ssh.html" title="Administrator Guide - Projects - Node Execution - SSH">SSH plugins</a>, here are some details about how it performs when executing commands across very large numbers of nodes. For these tests, Rundeck was running on an 8 core, 32GB RAM m2.4xlarge AWS EC2 instance.</p>
 <p>We chose the <code>rpm -q</code> command which checks against the rpm database to see if a particular package was installed. For 1000 nodes we saw an average execution of 52 seconds. A 4000 node cluster took roughly 3.5 minutes, and 8000 node cluster about 7 minutes.</p>
 <p>The main limitation appears to be memory of the JVM instance relative to the number of concurrent requests. We tuned the max memory to be 12GB with a 1000 Concurrent Dispatch Threads to 1GB of Memory. GC appears to behave well during the runs given the “bursty” nature of them.</p>
 <h3 id="ssl-and-https-performance">SSL and HTTPS performance</h3>
 <p>It is possible to offload SSL connection processing by using an SSL termination proxy. This can be accomplished by setting up Apache httpd or <a href="https://en.wikipedia.org/wiki/Nginx">Nginx</a> as a frontend to your Rundeck instances.</p>
 <h3 id="resource-provider">Resource provider</h3>
-<p>Rundeck projects obtain information about nodes via a <a href="../configuration/resource-model-sources/index.html">resource provider</a>. If your resource provider is a long blocking process (due to slow responses from a backend service), it can slow down or even hang up Rundeck. Be sure to make your resource provider work asynchronously. Also, consider using caching when possible.</p>
+<p>Rundeck projects obtain information about nodes via a <a href="../projects/resource-model-sources/index.html" title="Administrator Guide - Projects - Node Model Sources">resource provider</a>. If your resource provider is a long blocking process (due to slow responses from a backend service), it can slow down or even hang up Rundeck. Be sure to make your resource provider work asynchronously. Also, consider using caching when possible.</p>
 </div>
 </div>
 </div>
@@ -323,7 +323,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>

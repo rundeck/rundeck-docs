@@ -126,10 +126,10 @@ jQuery(function(){
 <p>The graphical console provides an authoring environment where steps can be added, edited, removed or reordered.</p>
 <p>Users preferring to define Jobs in a text format should refer to the two format definitions:</p>
 <ul>
-<li>XML: <a href="../man5/job-xml.html">job-xml</a></li>
-<li>YAML: <a href="../man5/job-yaml.html">job-yaml</a></li>
+<li>XML: <a href="../man5/job-xml.html" title="Document Format Reference - JOB-XML">job-xml</a></li>
+<li>YAML: <a href="../man5/job-yaml.html" title="Document Format Reference - JOB-YAML">job-yaml</a></li>
 </ul>
-<p>It is also possible to author Jobs inside the graphical console and then export the definition as a file using the <code>rd</code> CLI tool (<a href="https://rundeck.github.io/rundeck-cli">rd</a>), or via the API.</p>
+<p>It is also possible to author Jobs inside the graphical console and then export the definition as a file using the <code>rd</code> CLI tool ([rd]), or via the API.</p>
 <p>See <a href="#command-line-tools-and-api-access">Command Line Tools and API Acccess</a>.</p>
 <h2 id="workflow-control-settings">Workflow control settings</h2>
 <p>Workflow execution is controlled by two important settings: <em>Keepgoing</em> and <em>Strategy</em>.</p>
@@ -164,7 +164,7 @@ jQuery(function(){
 5.   NodeA    step#1
 6.   NodeB      &quot;</code></pre>
 <p>The process you are automating will determine which strategy is correct, though the node-oriented flow is more commonplace.</p>
-<p>For more complex workflow strategy rules, see <a href="workflow-strategies/ruleset-workflow-strategy-plugin.html">Ruleset Workflow Strategy Plugin</a></p>
+<p>For more complex workflow strategy rules, see <a href="workflow-strategies/ruleset-workflow-strategy-plugin.html" title="User Guide - Workflow Strategies - Ruleset Workflow Strategy Plugin">Ruleset Workflow Strategy Plugin</a></p>
 <h2 id="workflow-steps">Workflow steps</h2>
 <p>The following sections describe how to construct a workflow as a set of steps of different types.</p>
 <p>When creating a new Job definition, the Workflow form will be set with defaults and have no workflow steps defined. The workflow editor will have a form open asking to choose a step type to add.</p>
@@ -181,8 +181,8 @@ jQuery(function(){
 <p><strong>Types of Steps</strong></p>
 <p>Steps in a workflow can be either <em>Node Steps</em> or <em>Workflow Steps</em>.</p>
 <ul>
-<li>Node Steps operate once on each Node, which could be multiple times within a workflow. For a full list of Node Steps, see <a href="job-plugins.html#node-steps">Job Plugins - Node Steps</a></li>
-<li>Workflow Steps operate only once in the workflow. For a full list of Workflow Steps, see <a href="job-plugins.html#workflow-steps">Workflow Steps</a></li>
+<li>Node Steps operate once on each Node, which could be multiple times within a workflow. For a full list of Node Steps, see <a href="job-plugins.html#node-steps" title="User Guide - Job Plugins - Node Steps">Job Plugins - Node Steps</a></li>
+<li>Workflow Steps operate only once in the workflow. For a full list of Workflow Steps, see <a href="job-plugins.html#workflow-steps" title="User Guide - Job Plugins - Workflow Steps">Workflow Steps</a></li>
 </ul>
 <h2 id="reordering-steps">Reordering steps</h2>
 <p>The order of the Workflow steps can be modified by hovering over any step and then clicking and dragging the double arrow icon to the desired position. A blue horizontal bar helps highlight the position where the Job will land.</p>
@@ -269,7 +269,7 @@ jQuery(function(){
 <li><code>job.username</code>: Username of the user executing the Job</li>
 <li><code>job.project</code>: Project name</li>
 <li><code>job.loglevel</code>: Logging level, one of: ‘ERROR’,‘WARN’,‘INFO’,‘VERBOSE’,‘DEBUG’</li>
-<li><code>job.user.email</code>: Executing user’s email address set in <a href="user.html">User profile</a>.</li>
+<li><code>job.user.email</code>: Executing user’s email address set in <a href="user.html" title="User Guide - User">User profile</a>.</li>
 <li><code>job.retryAttempt</code>: A number indicating the attempt, if this execution is a <a href="#retry">retry</a>.</li>
 <li><code>job.wasRetry</code>: <code>true</code> if this execution is a retry, otherwise <code>false</code>. See: <a href="#retry">retry</a>.</li>
 <li><code>job.threadcount</code>: Threadcount (number of nodes run at once) of the Job</li>
@@ -316,7 +316,7 @@ jQuery(function(){
 <li><code>result.resultCode</code>: Exit code from an execution (if available)</li>
 <li><code>result.failedNodes</code>: Comma-separated list of node names that failed for a <code>NodeDispatchFailure</code></li>
 </ul>
-<p>Option context variables are referred to as <code>option.NAME</code> (more about <a href="defining-job-options.html">Job Options</a>.)</p>
+<p>Option context variables are referred to as <code>option.NAME</code> (more about <a href="defining-job-options.html" title="User Guide - Defining Job Options">Job Options</a>.)</p>
 <h3 id="context-variable-usage">Context Variable Usage</h3>
 <p>Context variables can be used in a few ways in a Job step, with slightly different syntaxes:</p>
 <ul>
@@ -334,7 +334,7 @@ jQuery(function(){
 <p>Note, The “Inline Script Content” variable expansion is <strong>not</strong> available for “Script File” steps. The Script File is not rewritten at all when used for execution.</p>
 </blockquote>
 <blockquote>
-<p>Note: This can be disabled, see <a href="../administration/configuration/configuration-file-reference.html#framework.properties">Administrator Guide &gt; Configuration File Reference &gt; framework.properties</a>.</p>
+<p>Note: This can be disabled, see <a href="../administration/configuration/configuration-file-reference.html#framework.properties" title="Administrator Guide - Rundeck Configuration - Configuration File Reference - Framework.properties">Administrator Guide &gt; Configuration File Reference &gt; framework.properties</a>.</p>
 </blockquote></li>
 <li><dl>
 <dt>Environment Variables (<em>see note</em>)</dt>
@@ -423,7 +423,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>

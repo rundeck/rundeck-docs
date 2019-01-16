@@ -230,7 +230,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </figure>
 <p>The options editor displays an expanded summary for each defined option. Each option is listed with its usage summary, description, values list and any restrictions. Pressing the “Add an option” link will open a form to define a new parameter. Pressing the “Close” link will collapse the options editor and return back to the summary view.</p>
 <p>Moving the mouse over any row in the options editor reveals links to delete or edit the highlighted option. Pressing the remove icon will display a prompt confirming you want to delete that option from the Job. Clicking the “edit” link opens a new form that lets you modify all aspects of that option.</p>
-<p>Options can also be defined as part of a job definition and later loaded to the Rundeck server. See [job-xml] and [job-yaml] and [rd-jobs] pages if you prefer using an textual Job definition.</p>
+<p>Options can also be defined as part of a job definition and later loaded to the Rundeck server. See <a href="../man5/job-xml.html" title="Document Format Reference - JOB-XML">job-xml</a> and <a href="../man5/job-yaml.html" title="Document Format Reference - JOB-YAML">job-yaml</a> and [rd jobs][https://rundeck.github.io/rundeck-cli/commands/#jobs] pages if you prefer using an textual Job definition.</p>
 <h2 id="defining-an-option">Defining an option</h2>
 <p><strong>Text Options</strong></p>
 <p>New options can be defined by pressing the “Add an option” link while existing ones can be changed by pressing their “edit” link.</p>
@@ -399,13 +399,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Note, When passed as arguments to Job References, they can only be passed as the value of another Secure option. See <a href="#using-secure-options-with-job-references">Using Secure Options with Job References</a>.</p>
 </blockquote>
 <h3 id="secure-remote-authentication-options">Secure Remote Authentication Options</h3>
-<p>The built-in <a href="node-execution/ssh-node-execution.html">SSH Provider</a> for node execution allows using passwords for SSH and/or Sudo authentication mechanisms, and the passwords are supplied by Secure Remote Authentication Options defined in a Job.</p>
+<p>The built-in <a href="../administration/projects/node-execution/ssh.html" title="Administrator Guide - Projects - Node Execution - SSH">SSH Provider</a> for node execution allows using passwords for SSH and/or Sudo authentication mechanisms, and the passwords are supplied by Secure Remote Authentication Options defined in a Job.</p>
 <p>Secure Remote Authentication Options have some limitations compared to Plain and Secure options:</p>
 <ul>
 <li>The values entered by the user are not available for normal script and command option value expansion. This means that they can only be used for the purposes of the Remote Authentication.</li>
 </ul>
 <h3 id="using-secure-options-with-job-references">Using Secure Options with Job References</h3>
-<p>When you <a href="#job-reference-step">define a Job Reference step in a workflow</a>, you can specify the arguments that are passed to it. You can pass Secure Option values and Secure Remote Authentication Option values from a top-level job to a Job Reference, but option values <em>cannot be passed into another option of a different type</em>. So a parent job can only pass option values to the Job reference if the option type is the same between the jobs.</p>
+<p>When you <a href="node-steps/builtin-node-steps.html#job-reference-step" title="User Guide - Builtin Node Steps - Job Reference Step">define a Job Reference step in a workflow</a>, you can specify the arguments that are passed to it. You can pass Secure Option values and Secure Remote Authentication Option values from a top-level job to a Job Reference, but option values <em>cannot be passed into another option of a different type</em>. So a parent job can only pass option values to the Job reference if the option type is the same between the jobs.</p>
 <p>This constraint is to maintain the security design of these options:</p>
 <ol type="1">
 <li>Secure options should not to be stored in the Rundeck execution database, so must not be used as plain option values.</li>
@@ -438,7 +438,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Note, If you define arguments in the wrong manner, then the Secure and Secure Remote Authentication options will not be set when the Job reference is called. Plain options will behave the way they do in Command or Script arguments, and be left as-is as uninterpreted property references.</p>
 </blockquote>
 <h3 id="secure-options-using-key-storage">Secure Options using Key Storage</h3>
-<p>Secure options can specify a Storage Path in lieu of a default value. This path to the <a href="../administration/security/key-storage.html">Key Storage Facility</a> will be loaded as the option value when one is not supplied.</p>
+<p>Secure options can specify a Storage Path in lieu of a default value. This path to the <a href="../administration/security/key-storage.html" title="Administrator Guide - Security - Key Storage">Key Storage Facility</a> will be loaded as the option value when one is not supplied.</p>
 <p>The path must indicate a stored <code>password</code> entry in the storage facility.</p>
 <figure>
 <img src="../figures/jobs-options-secure-storage-path.png" alt="Storage Path for Secure Option" /><figcaption>Storage Path for Secure Option</figcaption>
@@ -469,7 +469,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>By default, the HTTP(S) response must include the <code>application/json</code> content type in the header. In case this cannot be controlled, the attribute <code>project.jobs.disableRemoteOptionJsonCheck</code> can be set to <code>true</code> in the project settings.</li>
 </ol>
 <h3 id="configuration">Configuration</h3>
-<p>Each Option entry for a Job can be configured to get the set of possible values from a remote URL. If you are authoring the Jobs via <a href="../man5/job-xml.html#option">job.xml file format</a>, simply add a <code>valuesUrl</code> attribute for the <code>&lt;option&gt;</code>. If you are modifying the Job in the Rundeck web GUI, you can entry a URL in the “Remote URL” field for the Option.</p>
+<p>Each Option entry for a Job can be configured to get the set of possible values from a remote URL. If you are authoring the Jobs via <a href="../man5/job-xml.html#option" title="Document Format Reference - JOB-XML - Option">job.xml file format</a>, simply add a <code>valuesUrl</code> attribute for the <code>&lt;option&gt;</code>. If you are modifying the Job in the Rundeck web GUI, you can entry a URL in the “Remote URL” field for the Option.</p>
 <p>e.g.:</p>
 <pre><code>&lt;option valuesUrl=&quot;http://site.example.com/values.json&quot; ... /&gt;</code></pre>
 <blockquote>
@@ -500,7 +500,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb16-4" data-line-number="4">  <span class="fu">{</span><span class="dt">&quot;name&quot;</span><span class="fu">:</span><span class="st">&quot;A Label&quot;</span><span class="fu">,</span> <span class="dt">&quot;value&quot;</span><span class="fu">:</span><span class="st">&quot;a value&quot;</span><span class="fu">,</span> <span class="dt">&quot;selected&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">}</span></a>
 <a class="sourceLine" id="cb16-5" data-line-number="5"><span class="ot">]</span> </a></code></pre></div>
 <h3 id="url-connection-parameters">URL connection parameters</h3>
-<p>You can configure timeouts globally as described in <a href="../administration/configuration/configuration-file-reference.html#rundeck-config.properties">Configuration - Job Remote Option URL connection parameters</a>.</p>
+<p>You can configure timeouts globally as described in <a href="../administration/configuration/configuration-file-reference.html#rundeck-config.properties" title="Administrator Guide - Rundeck Configuration - Configuration File Reference - Rundeck Config.properties">Configuration - Job Remote Option URL connection parameters</a>.</p>
 <p>You can also specify these connection parameters on a per-URL basis:</p>
 <dl>
 <dt><code>timeout</code></dt>
@@ -634,7 +634,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-15T02:39:19UTC">2019-01-15T02:39:19UTC</span>
+<span class="generated-date" title="2019-01-16T18:30:16UTC">2019-01-16T18:30:16UTC</span>
 </p>
 </footer>
 </div>
