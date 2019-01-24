@@ -760,6 +760,14 @@
                     }
                     ,
                 {
+                    "srcpath": "administration/security/webapp-http-headers.md",
+                    "title": "Webapp HTTP Headers",
+                    "outpath": "administration/security/webapp-http-headers.html",
+
+                        "alltitles": "Administrator Guide / Security / Webapp HTTP Headers"
+                    }
+                    ,
+                {
                     "srcpath": "administration/maintenance/toc.conf",
                     "title": "Maintenance",
                     "outpath": "administration/maintenance/index.html",
