@@ -185,7 +185,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 id="about">About</h2>
 <p>A File Copier provider copies a file or script to a remote or local node.</p>
 <h2 id="java-plugin-type">Java Plugin Type</h2>
-<p>Your provider class must implement the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190114/com/dtolabs/rundeck/core/execution/service/FileCopier.html">FileCopier</a>:</p>
+<p>Your provider class must implement the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190123/com/dtolabs/rundeck/core/execution/service/FileCopier.html">FileCopier</a>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">public</span> <span class="kw">interface</span> FileCopier {</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">    <span class="kw">public</span> <span class="bu">String</span> <span class="fu">copyFileStream</span>(ExecutionContext context,</a>
@@ -203,8 +203,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1-15" data-line-number="15">                                    INodeEntry node,</a>
 <a class="sourceLine" id="cb1-16" data-line-number="16">                                    <span class="bu">String</span> destination) <span class="kw">throws</span> FileCopierException;</a>
 <a class="sourceLine" id="cb1-17" data-line-number="17">}</a></code></pre></div>
-<p>(Note: Change between Rundeck 2.7 and 2.8: File copier plugins now require implementation of <code>FileCopier</code>. Previously the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190114/com/dtolabs/rundeck/core/execution/service/DestinationFileCopier.html"><code>DestinationFileCopier</code></a> was required. Older methods of FileCopier have been removed from the interface.)</p>
-<p>Optionally the plugin may implement <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190114/com/dtolabs/rundeck/core/execution/service/MultiFileCopier.html">MultiFileCopier</a> to more efficiently copy multiple files.</p>
+<p>(Note: Change between Rundeck 2.7 and 2.8: File copier plugins now require implementation of <code>FileCopier</code>. Previously the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190123/com/dtolabs/rundeck/core/execution/service/DestinationFileCopier.html"><code>DestinationFileCopier</code></a> was required. Older methods of FileCopier have been removed from the interface.)</p>
+<p>Optionally the plugin may implement <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190123/com/dtolabs/rundeck/core/execution/service/MultiFileCopier.html">MultiFileCopier</a> to more efficiently copy multiple files.</p>
 <h3 id="plugin-properties">Plugin properties</h3>
 <p>See <a href="plugin-development.html#plugin-descriptions" title="Plugin Developer Guide - Plugin Development - Plugin Descriptions">Plugin Development - Java Plugins - Descriptions</a> to learn how to create configuration properties for your plugin.</p>
 <blockquote>
@@ -301,7 +301,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-24T00:28:46UTC">2019-01-24T00:28:46UTC</span>
+<span class="generated-date" title="2019-01-24T02:45:32UTC">2019-01-24T02:45:32UTC</span>
 </p>
 </footer>
 </div>
