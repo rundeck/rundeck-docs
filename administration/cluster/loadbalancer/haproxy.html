@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Using HAProxy as a loadbalancer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="../../../jquery.hotkeys.js"></script>
+<script src="../../../jquery.autocomplete.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+window._pageRelpath="../../../";
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+<script src="../../../docs-autocomplete.js"></script>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control navquery" name="q" placeholder="Search" id="searchQuery">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbstop">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb top collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../../../index.html">Rundeck Documentation (3.0.13)</a></li>
+    
+        <li><a href="../../index.html">Administrator Guide</a></li>
+    
+        <li><a href="../index.html">Rundeck Pro Cluster</a></li>
+    
+    
+    <li ><a href="index.html">Loadbalancer</a></li>
+    <li class="active"><a href="haproxy.html">HAProxy</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="aws-elb.html"><i class="glyphicon glyphicon-arrow-left"></i> AWS ELB</a></li>
+      <li class="next"><a href="iis.html">IIS <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/cluster/loadbalancer/haproxy.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/cluster/loadbalancer/haproxy.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#enable-cgi-scripts-for-rundeck">Enable CGI Scripts for Rundeck</a></li>
+<li><a href="#create-the-health-check-script-on-each-instance">Create the health check script on each instance</a></li>
+<li><a href="#on-haproxy-add-the-following-settings">On HAProxy, add the following settings</a></li>
+<li><a href="#check-if-haproxy-redirect-to-the-active-instance">Check if HAProxy redirect to the active instance</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Using HAProxy as a loadbalancer</h1>
+</div>
+<!---
+Original:
+http://support.rundeck.com/customer/en/portal/articles/2894842-health-check-based-on-execution-mode-for-haproxy-lb
+http://support.rundeck.com/customer/en/portal/articles/2894840-enable-cgi-script-on-jetty
+--->
+<p>To avoid sending traffic to unavailable nodes, HAProxy can check the health of their downstream services via http or tcp. This document explains how to create a custom health check for Rundeck.</p>
+<h3 id="enable-cgi-scripts-for-rundeck">Enable CGI Scripts for Rundeck</h3>
+<p>The first step is to enable the CGI Script access on the embedded Jetty container.</p>
+<p>Note: These settings are valid for the rpm/deb or launcher install.</p>
+<h4 id="edit-the-web.xml">Edit the web.xml</h4>
+<p>In the launcher, the file <code>web.xml</code> is located on <code>$RDECK_BASE/server/exp/webapp/WEB-INF</code></p>
+<p>For deb/rpm installers, the <code>web.xml</code> is located in <code>/var/lib/rundeck/server/exp/webapp/WEB-INF</code></p>
+<p>Add the following attributes before the last “security-constraint” label (the one that contains the auth-constraint attribute). This will avoid the redirect to the login page if you are not logged in Rundeck.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">&lt;security-constraint&gt;</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">    <span class="kw">&lt;web-resource-collection&gt;</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">        <span class="kw">&lt;web-resource-name&gt;</span>cgi<span class="kw">&lt;/web-resource-name&gt;</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">        <span class="kw">&lt;url-pattern&gt;</span>/cgi-bin/*<span class="kw">&lt;/url-pattern&gt;</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">    <span class="kw">&lt;/web-resource-collection&gt;</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw">&lt;/security-constraint&gt;</span></a></code></pre></div>
+<p>After the last servlet attribute, add the following settings. A folder called <code>WEB-INF/cgi-bin</code> must be created (the name of the folder can be defined by the user)</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">&lt;servlet&gt;</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">    <span class="kw">&lt;servlet-name&gt;</span>CGI<span class="kw">&lt;/servlet-name&gt;</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">    <span class="kw">&lt;servlet-class&gt;</span>org.eclipse.jetty.servlets.CGI<span class="kw">&lt;/servlet-class&gt;</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">    <span class="kw">&lt;init-param&gt;</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">        <span class="kw">&lt;param-name&gt;</span>Path<span class="kw">&lt;/param-name&gt;</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">        <span class="kw">&lt;param-value&gt;</span>/bin:/usr/bin:/usr/local/bin<span class="kw">&lt;/param-value&gt;</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">    <span class="kw">&lt;/init-param&gt;</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">    <span class="kw">&lt;init-param&gt;</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">        <span class="kw">&lt;param-name&gt;</span>cgibinResourceBaseIsRelative<span class="kw">&lt;/param-name&gt;</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">        <span class="kw">&lt;param-value&gt;</span>true<span class="kw">&lt;/param-value&gt;</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">    <span class="kw">&lt;/init-param&gt;</span>      </a>
+<a class="sourceLine" id="cb2-12" data-line-number="12">    <span class="kw">&lt;init-param&gt;</span> </a>
+<a class="sourceLine" id="cb2-13" data-line-number="13">        <span class="kw">&lt;param-name&gt;</span>commandPrefix<span class="kw">&lt;/param-name&gt;</span> </a>
+<a class="sourceLine" id="cb2-14" data-line-number="14">        <span class="kw">&lt;param-value&gt;</span>/usr/bin/python<span class="kw">&lt;/param-value&gt;</span> </a>
+<a class="sourceLine" id="cb2-15" data-line-number="15">    <span class="kw">&lt;/init-param&gt;</span>         </a>
+<a class="sourceLine" id="cb2-16" data-line-number="16">    <span class="kw">&lt;init-param&gt;</span></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17">        <span class="kw">&lt;param-name&gt;</span>cgibinResourceBase<span class="kw">&lt;/param-name&gt;</span></a>
+<a class="sourceLine" id="cb2-18" data-line-number="18">        <span class="kw">&lt;param-value&gt;</span>WEB-INF/cgi-bin<span class="kw">&lt;/param-value&gt;</span></a>
+<a class="sourceLine" id="cb2-19" data-line-number="19">    <span class="kw">&lt;/init-param&gt;</span></a>
+<a class="sourceLine" id="cb2-20" data-line-number="20">    <span class="kw">&lt;async-supported&gt;</span>true<span class="kw">&lt;/async-supported&gt;</span></a>
+<a class="sourceLine" id="cb2-21" data-line-number="21">    <span class="kw">&lt;load-on-startup&gt;</span>1<span class="kw">&lt;/load-on-startup&gt;</span></a>
+<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="kw">&lt;/servlet&gt;</span></a>
+<a class="sourceLine" id="cb2-23" data-line-number="23">```</a></code></pre></div>
+<p>Add the following settings after the last “servlet-mapping” attribute. The “cgi-bin” name must match with the settings defined on the servlet.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">&lt;servlet-mapping&gt;</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">    <span class="kw">&lt;servlet-name&gt;</span>CGI<span class="kw">&lt;/servlet-name&gt;</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">    <span class="kw">&lt;url-pattern&gt;</span>/cgi-bin/*<span class="kw">&lt;/url-pattern&gt;</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="kw">&lt;/servlet-mapping&gt;</span></a></code></pre></div>
+<h4 id="run-the-script">Run the Script</h4>
+<p>With this settings, any script added to <code>$RDECK_BASE/server/exp/webapp/WEB-INF/cgi-bin</code>, can be called as an endpoint. For example, the URL: <code>http://localhost:4440/cgi-bin/somescript</code> will call the script <code>$RDECK_BASE/server/exp/webapp/WEB-INF/cgi-bin/somescript</code></p>
+<h3 id="create-the-health-check-script-on-each-instance">Create the health check script on each instance</h3>
+<p>The health check uses a Rundeck API to get system information. A health check could factor in other information like scheduler thread ratio, CPU load or memory utilization. For an active/standby configuration, the health check should check the execution mode. When the execution mode is set to “passive” the load balancer should route around it.</p>
+<p>The example below uses a python script to demonstrate this.</p>
+<p>Create the following script on <code>$RDECK_BASE/server/exp/webapp/WEB-INF/cgi-bin/status</code></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co">#!/usr/bin/python</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="im">import</span> sys</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="im">import</span> os</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="im">import</span> cgi</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="im">from</span> cgi <span class="im">import</span> escape</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="im">import</span> requests</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="im">import</span> json</a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11">form <span class="op">=</span> cgi.FieldStorage()</a>
+<a class="sourceLine" id="cb4-12" data-line-number="12">token <span class="op">=</span> form.getvalue(<span class="st">&quot;token&quot;</span>)</a>
+<a class="sourceLine" id="cb4-13" data-line-number="13">executionMode<span class="op">=</span> form.getvalue(<span class="st">&quot;executionMode&quot;</span>)</a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb4-15" data-line-number="15">url <span class="op">=</span> <span class="st">&#39;http://localhost:4440/api/20/system/info?format=json&amp;authtoken=&#39;</span> <span class="op">+</span> token</a>
+<a class="sourceLine" id="cb4-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb4-17" data-line-number="17">response <span class="op">=</span> requests.post(url)</a>
+<a class="sourceLine" id="cb4-18" data-line-number="18">info <span class="op">=</span> json.loads(response.text)</a>
+<a class="sourceLine" id="cb4-19" data-line-number="19">currentExecutionMode <span class="op">=</span> info[<span class="st">&quot;system&quot;</span>][<span class="st">&quot;executions&quot;</span>][<span class="st">&quot;executionMode&quot;</span>]</a>
+<a class="sourceLine" id="cb4-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb4-21" data-line-number="21"><span class="cf">if</span> currentExecutionMode <span class="op">==</span> executionMode:</a>
+<a class="sourceLine" id="cb4-22" data-line-number="22">    status <span class="op">=</span> <span class="st">&quot;200&quot;</span></a>
+<a class="sourceLine" id="cb4-23" data-line-number="23"><span class="cf">else</span>:</a>
+<a class="sourceLine" id="cb4-24" data-line-number="24">    status <span class="op">=</span> <span class="st">&quot;403&quot;</span></a>
+<a class="sourceLine" id="cb4-25" data-line-number="25"></a>
+<a class="sourceLine" id="cb4-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb4-27" data-line-number="27"><span class="bu">print</span> <span class="st">&quot;Content-type: text/html&quot;</span></a>
+<a class="sourceLine" id="cb4-28" data-line-number="28"><span class="bu">print</span> <span class="st">&#39;Status:&#39;</span> <span class="op">+</span> status <span class="op">+</span> <span class="st">&#39; &#39;</span></a>
+<a class="sourceLine" id="cb4-29" data-line-number="29"></a>
+<a class="sourceLine" id="cb4-30" data-line-number="30"><span class="bu">print</span></a>
+<a class="sourceLine" id="cb4-31" data-line-number="31"><span class="bu">print</span> <span class="st">&quot;&lt;!doctype html&gt;&quot;</span></a>
+<a class="sourceLine" id="cb4-32" data-line-number="32"><span class="bu">print</span> <span class="st">&quot;&lt;html&gt;&quot;</span></a>
+<a class="sourceLine" id="cb4-33" data-line-number="33"><span class="bu">print</span> <span class="st">&quot;&lt;body&gt;&quot;</span></a>
+<a class="sourceLine" id="cb4-34" data-line-number="34"></a>
+<a class="sourceLine" id="cb4-35" data-line-number="35"><span class="bu">print</span> <span class="st">&#39;Current Execution Mode:&#39;</span> <span class="op">+</span> currentExecutionMode</a>
+<a class="sourceLine" id="cb4-36" data-line-number="36"><span class="bu">print</span> <span class="st">&quot;&lt;br&gt;&quot;</span></a>
+<a class="sourceLine" id="cb4-37" data-line-number="37"><span class="bu">print</span> <span class="st">&#39;Expected Execution Mode:&#39;</span> <span class="op">+</span> executionMode</a>
+<a class="sourceLine" id="cb4-38" data-line-number="38"><span class="bu">print</span> <span class="st">&quot;&lt;/body&gt;&quot;</span></a>
+<a class="sourceLine" id="cb4-39" data-line-number="39"><span class="bu">print</span> <span class="st">&quot;&lt;/html&gt;&quot;</span></a></code></pre></div>
+<p>After the script has been deployed use your browser to visit the new health check page.</p>
+<p>The URL accepts a parameter called “executionMode” which takes one of two values: active or passive. If specified mode matches the actual mode the page will return HTTP response code 200 otherwise it will return 403.</p>
+<p>For example: <code>http://localhost:4440/cgi-bin/status?token=&lt;token&gt;&amp;executionMode=active</code></p>
+<figure>
+<img src="../../../figures/haproxy-health-check.png" alt="Example health check" /><figcaption>Example health check</figcaption>
+</figure>
+<h3 id="on-haproxy-add-the-following-settings">On HAProxy, add the following settings</h3>
+<p>The web load balancer serving traffic to the Rundeck instance should be configured with the health check.</p>
+<ul>
+<li>Add the “httpchk” with the URI of the health check. The token value and the execution mode that you want to use are needed.</li>
+<li>Add the “http-check” with the expected status (in this case 200)</li>
+</ul>
+<pre><code>backend default_service
+cookie JSESSIONID prefix nocache
+option httpchk get /cgi-bin/status?token=&lt;TOKEN_VALUE&gt;&amp;executionMode=active
+http-check expect status 200
+server rundeck1 192.168.0.1:4440 cookie rundeck1 check inter 2000 rise 2 fall 3
+server rundeck2 192.168.0.2:4440 cookie rundeck2 check inter 2000 rise 2 fall 3
+server rundeck3 192.168.0.3:4440 cookie rundeck3 check inter 2000 rise 2 fall 3</code></pre>
+<h3 id="check-if-haproxy-redirect-to-the-active-instance">Check if HAProxy redirect to the active instance</h3>
+<p>Once the web load balancer has been configured with the health check, any instance that is not in “active” mode will not be passed traffic.</p>
+<figure>
+<img src="../../../figures/haproxy-status.png" alt="HAProxy status" /><figcaption>HAProxy status</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbsbottom">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb bottom collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../../../index.html">Rundeck Documentation (3.0.13)</a></li>
+    
+        <li><a href="../../index.html">Administrator Guide</a></li>
+    
+        <li><a href="../index.html">Rundeck Pro Cluster</a></li>
+    
+    
+    <li ><a href="index.html">Loadbalancer</a></li>
+    <li class="active"><a href="haproxy.html">HAProxy</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="aws-elb.html"><i class="glyphicon glyphicon-arrow-left"></i> AWS ELB</a></li>
+      <li class="next"><a href="iis.html">IIS <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/cluster/loadbalancer/haproxy.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/cluster/loadbalancer/haproxy.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Enterprise for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Enterprise
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://rundeck.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2019 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2019-01-24T02:44:52UTC">2019-01-24T02:44:52UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../../../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+
+<!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2768099.js"></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>

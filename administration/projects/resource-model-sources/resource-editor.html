@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Resource Editor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="../../../jquery.hotkeys.js"></script>
+<script src="../../../jquery.autocomplete.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+window._pageRelpath="../../../";
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+<script src="../../../docs-autocomplete.js"></script>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control navquery" name="q" placeholder="Search" id="searchQuery">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbstop">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb top collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../../../index.html">Rundeck Documentation (3.0.13)</a></li>
+    
+        <li><a href="../../index.html">Administrator Guide</a></li>
+    
+        <li><a href="../index.html">Projects</a></li>
+    
+    
+    <li ><a href="index.html">Node Model Sources</a></li>
+    <li class="active"><a href="resource-editor.html">Resource Editor</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="service-now-cmdb.html"><i class="glyphicon glyphicon-arrow-left"></i> Service Now CMDB</a></li>
+      <li class="next"><a href="vmware-plugin.html">VMWare Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/projects/resource-model-sources/resource-editor.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/projects/resource-model-sources/resource-editor.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#definition">Definition</a></li>
+<li><a href="#using-properties">Using properties</a></li>
+<li><a href="#using-remoteurl">Using remoteUrl</a></li>
+<li><a href="#examples">Examples</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Resource Editor</h1>
+</div>
+<p>The Resource Editor integration is a way to link to a third-party system used for managing Node definitions from within Rundeck. Each Node entry in the resources.xml or resources.yaml can define a URL to provide an “Edit” link that will appear in the Rundeck Run page for that Node.</p>
+<p>This allows you to make use of the Resource Model Source in a more seamless way. Rundeck will load the Resource model from the third-party Provider system, and users of Rundeck can click straight to the Editor for those Nodes. The Provider and the Editor could be the same system, or they could both be custom CGI scripts that integrate with a third system.</p>
+<p>Some teams have acquired or developed tools to manage information about the hosts deployed in their networks. These tools have interfaces to not just view but also modify the data about these hosts. Though there is no widely used common standard adopted by users of these tools, it is possible to map the data to meet the needs of <a href="#resource-model-source">Rundeck resource models</a>.</p>
+<h3 id="definition">Definition</h3>
+<p>The <a href="../../../man5/resource-xml.html" title="Document Format Reference - RESOURCE-XML">Rundeck resource model document format</a> and the <a href="../../../man5/resource-yaml.html" title="Document Format Reference - RESOURCE-YAML">resource-yaml-v13</a> format provide two attributes that help connect the dots between the Rundeck UI and the editing interface provided by the external data management tool. They can use <code>editUrl</code> or <code>remoteUrl</code> attributes to specify the remote URL. The URLs can embed properties about the node to expand prior to being loaded, which allows you to e.g. submit query parameters using the node name.</p>
+<dl>
+<dt><code>editUrl</code></dt>
+<dd><p>Specifies a URL to a remote site which will allow editing of the Node. When specified, the Node resource will display an “Edit” link in the Rundeck GUI and clicking it will open a new browser page for the URL.</p>
+</dd>
+<dt><a href="#using-remoteurl"><code>remoteUrl</code></a></dt>
+<dd><p>Specifies a URL for a remote site which will be loaded in an iframe within a Rundeck page. Clicking the “Edit” link for the Node will load content from the site within the current Rundeck page, allow you to perform your edit at the remote site, and has optional JavaScript hooks to report the state of the editing process back to the Rundeck page for a more streamlined user interface.</p>
+</dd>
+</dl>
+<h3 id="using-properties">Using properties</h3>
+<p>Properties of the Node can be embedded in the URL and expanded prior to use. The syntax is:</p>
+<pre><code>${node.property}</code></pre>
+<p>Available properties are:</p>
+<p><code>name</code>, <code>hostname</code>, <code>os-name</code>, <code>os-version</code>, <code>os-family</code>, <code>os-arch</code>, <code>username</code>, <code>description</code>, <code>tags</code>, <code>project</code></p>
+<p>You can embed these properties within the url like this:</p>
+<pre><code>http://mycmdb:8080/node/edit?name=${node.name}</code></pre>
+<h3 id="using-remoteurl">Using remoteUrl</h3>
+<p>Using the <code>remoteUrl</code> lets you embed another site into an iframe within the Rundeck page, and optionally allows communication back to the Rundeck page about the state of the editing process.</p>
+<p>If you want to embed the remote site without having to make any changes to the remote page content, you can do so simply by specifying the <code>remoteUrl</code> to use. When the user clicks “Edit” the site will load within an iframe, and the user can perform whatever actions on the site are necessary. After they are done they will have to manually click the “Close” button on the Rundeck page to close the iframe.</p>
+<p>If you want the user interface in Rundeck to be more streamlined, you will have to be able to modify the web pages produced by the remote site to add simple Javascript calls to communicate back to the Rundeck page. The JavaScript hooks are designed to not add much burden to the developer of the remote site or system, so they are optional.</p>
+<h4 id="streamlining-the-interface">Streamlining the interface</h4>
+<p>If the remote site implements some Javascript messaging conforming to a simple optional protocol, then the user interface between Rundeck and the remote site can be made more seamless.</p>
+<p>Rundeck lets the remote site inform it when the following steps occur:</p>
+<ul>
+<li>The user begins editing a Node</li>
+<li>The user saves the Node changes successfully and is finished</li>
+<li>The user cancels the Node changes, or otherwise has finished without saving</li>
+<li>An error occurs and an error message should be shown.</li>
+</ul>
+<p>Due to web browser security restrictions, direct communication between different webpages can only be done through use of the <a href="https://html.spec.whatwg.org/#crossDocumentMessages">postMessage</a> method.</p>
+<p>The remote page can send these messages simply with this javascript:</p>
+<pre><code>&lt;script type=&quot;text/javascript&quot;&gt;
+    if(window.self!=window.parent){
+        window.parent.postMessage(&quot;...message...&quot;,&quot;http://rundeckserver:port&quot;);
+    }
+&lt;/script&gt;</code></pre>
+<p><code>window.parent</code> will be the enclosing browser window when the site is loaded within an iframe. This script simply checks whether the page is loaded in an iframe before sending the message.</p>
+<p>The first argument to <code>postMessage</code> is one of the message codes shown below. The second argument is the expected “origin”, meaning the URL scheme, server and port of the server receiving the message. You can specify &quot;*&quot; to include any site that may be loading the content, but you may want to restrict it to your Rundeck installation’s scheme, hostname and port.</p>
+<p>Rundeck can receive the following messages sent by the remote site:</p>
+<dl>
+<dt><code>rundeck:node:edit:started</code></dt>
+<dd>Sent as soon as the remote edit URL is loaded and indicates that the remote Site understands the messaging protocol and has loaded the correct edit page. You would probably send this on the “edit” or “form” page for the targeted node.
+</dd>
+<dt><code>rundeck:node:edit:error</code> or <code>rundeck:node:edit:error:An error message</code></dt>
+<dd>Sent if some error occurs. The remote editing form will close and the error message (if any) will be shown. You would probably send this on the “edit” or “view” page if there is an error locating the targeted Node or loading anything required for the edit process.
+</dd>
+</dl>
+<p>The next two messages are only valid after the “started” message has already been received:</p>
+<dl>
+<dt><code>rundeck:node:edit:finished:true</code></dt>
+<dd>Sent after the remote form has been saved without errors. This indicates that the editing process is done and has completed with saved changes. You would probably send this on the “view” or “show” page for the targeted node if the save operation was successful.
+</dd>
+<dt><code>rundeck:node:edit:finished:false</code></dt>
+<dd>Sent after the remote form has been either cancelled or discarded without changes. This indicates that the editing process is done but no changes were made. You would probably send this on the “view” or “show” for the targeted node (if your site simply shows the node view again) or “list” page (if your site goes back to a list of resources) if the user hits “cancel”.
+</dd>
+</dl>
+<p>Any message not shown here that is received by Rundeck after it has received the “started” message will be considered unexpected and the editing process will close the iframe.</p>
+<p>The user will also have the option to close and cancel the remote editing process at any time.</p>
+<p>Note that sending the “error” or “finished” message will close the editing session and all subsequent messages will be ignored.</p>
+<p>TODO: The JavaScript code to communicate back to Rundeck could be bundled into a simple widget script file for easier inclusion on remote sites.</p>
+<h3 id="examples">Examples</h3>
+<p>Here are some examples of using the <code>editUrl</code> and <code>remoteUrl</code> in a resources.xml/resources.yaml file:</p>
+<p>Specify a simple URL for editing, which will simply produce a link:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">&lt;node</span><span class="ot"> name=</span><span class="st">&quot;venkman&quot;</span><span class="ot"> editUrl=</span><span class="st">&quot;http://mycmdb:8080/node/edit&quot;</span> <span class="er">...</span> <span class="kw">/&gt;</span></a></code></pre></div>
+<p>Specify a URL for editing, with embedded “name” property as a parameter:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">&lt;node</span><span class="ot"> name=</span><span class="st">&quot;venkman&quot;</span><span class="ot"> editUrl=</span><span class="st">&quot;http://mycmdb:8080/node/edit?name=${node.name}&quot;</span> <span class="er">...</span> <span class="kw">/&gt;</span></a></code></pre></div>
+<p>Specify a remote URL with embedded “name” and “project” properties as parameters:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">&lt;node</span><span class="ot"> name=</span><span class="st">&quot;venkman&quot;</span><span class="ot"> remoteUrl=</span><span class="st">&quot;http://mycmdb:8080/node/edit?name=${node.name}</span><span class="dv">&amp;amp;</span><span class="st">project=${node.project}&quot;</span> <span class="er">...</span> <span class="kw">/&gt;</span></a></code></pre></div>
+<p>Specify a remote URL with embedded “name” property as part of the path:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">&lt;node</span><span class="ot"> name=</span><span class="st">&quot;venkman&quot;</span><span class="ot"> remoteUrl=</span><span class="st">&quot;http://mycmdb:8080/node/edit/${node.name}&quot;</span>  <span class="er">...</span> <span class="kw">/&gt;</span></a></code></pre></div>
+<p>In YAML, some examples:</p>
+<p>Specify a remote URL with embedded “name” and “project” properties as parameters:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="fu">venkman:</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">  <span class="fu">nodename:</span><span class="at"> venkman</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">  <span class="fu">remoteUrl:</span><span class="at"> http://mycmdb:8080/node/edit?name=${node.name}&amp;amp;project=${node.project}</span></a></code></pre></div>
+<p>Specify a remote URL with embedded “name” property as part of the path:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="fu">venkman:</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">  <span class="fu">nodename:</span><span class="at"> venkman</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">  <span class="fu">remoteUrl:</span><span class="at"> </span><span class="st">&quot;http://mycmdb:8080/node/edit/${node.name}</span></a></code></pre></div>
+<h4 id="simple-site-integration">Simple site integration</h4>
+<p>The <a href="https://github.com/gschueler/ndbtest">ndbtest</a> project on github provides an example of how the remote Resource Editor can integrate with Rundeck using JavaScript.</p>
+<p>This project is a simple <a href="https://grails.org">Grails</a> application which provides a database of Node data. The standard web-based user flow is:</p>
+<ul>
+<li>List all nodes.</li>
+<li>Edit a Node with the edit page. From here the User can:
+<ul>
+<li>Cancel the Node changes
+<ul>
+<li>Goes to the Node show page</li>
+</ul></li>
+<li>Save the Node changes
+<ul>
+<li>Result is successful
+<ul>
+<li>Goes to the Node show page</li>
+</ul></li>
+<li>Result fails, so display an Error message (either on the edit page or the list page)</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>We want the Node’s “edit” link in Rundeck to go directly to an edit page, so the <code>remoteUrl</code> for each Node entry then should be a URL to link to this page, for example:</p>
+<pre><code>remoteUrl=&quot;http://localhost:8080/node/edit?name=${node.name}&amp;amp;project=${node.project}&quot;</code></pre>
+<p>The code below shows that the <code>name</code> &amp; <code>project</code> are used to select the correct node from the database, even though the built-in identifier is an ID number:</p>
+<ul>
+<li><p><a href="https://github.com/gschueler/ndbtest/blob/master/grails-app/controllers/com/dtolabs/ndb/NodeController.groovy#L51">NodeController.groovy:51</a>.</p>
+<ul>
+<li>Note that if there is no Node found with the specified values, then the response will be to set an error message and then show the list page.</li>
+</ul></li>
+</ul>
+<p>So the JavaScript for integrating with Rundeck is then added to the following pages in this system:</p>
+<ul>
+<li><a href="https://github.com/gschueler/ndbtest/blob/master/grails-app/views/node/edit.gsp">node/edit.gsp</a>
+<ul>
+<li>If an error has occurred, it posts an error message starting on <a href="https://github.com/gschueler/ndbtest/blob/master/grails-app/views/node/edit.gsp#L27">Line 27</a></li>
+<li>Otherwise, it posts the <code>started</code> message starting <a href="https://github.com/gschueler/ndbtest/blob/master/grails-app/views/node/edit.gsp#L34">on line 34</a></li>
+</ul></li>
+<li><a href="https://github.com/gschueler/ndbtest/blob/master/grails-app/views/node/show.gsp">node/show.gsp</a>
+<ul>
+<li>If the node save was successful, send the <code>finished:true</code> message, starting at <a href="https://github.com/gschueler/ndbtest/blob/master/grails-app/views/node/show.gsp#L21">line 21</a>.</li>
+<li>Otherwise send the <code>finished:false</code> message starting at <a href="https://github.com/gschueler/ndbtest/blob/master/grails-app/views/node/show.gsp#L28">line 28</a>.</li>
+</ul></li>
+<li><a href="https://github.com/gschueler/ndbtest/blob/master/grails-app/views/node/list.gsp">node/list.gsp</a>
+<ul>
+<li>If an error has occurred, it posts an error message starting on <a href="https://github.com/gschueler/ndbtest/blob/master/grails-app/views/node/list.gsp#L20">line 20</a>.</li>
+</ul></li>
+</ul>
+<p>To complete the round-trip of editing a Node and then showing the results back in Rundeck, the ndbtest project would have to export XML formatted Resource data, and then your Rundeck project.properties file would have to point to the appropriate URL. (This is left as an exercise to the reader.)</p>
+<p><a href="../../../tutorials/index.html" title="Tutorials">Tutorial</a></p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbsbottom">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb bottom collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../../../index.html">Rundeck Documentation (3.0.13)</a></li>
+    
+        <li><a href="../../index.html">Administrator Guide</a></li>
+    
+        <li><a href="../index.html">Projects</a></li>
+    
+    
+    <li ><a href="index.html">Node Model Sources</a></li>
+    <li class="active"><a href="resource-editor.html">Resource Editor</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="service-now-cmdb.html"><i class="glyphicon glyphicon-arrow-left"></i> Service Now CMDB</a></li>
+      <li class="next"><a href="vmware-plugin.html">VMWare Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/projects/resource-model-sources/resource-editor.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/projects/resource-model-sources/resource-editor.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Enterprise for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Enterprise
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://rundeck.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2019 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2019-01-24T02:44:52UTC">2019-01-24T02:44:52UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../../../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+
+<!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2768099.js"></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
