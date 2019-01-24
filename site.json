@@ -456,6 +456,14 @@
                     }
                     ,
                 {
+                    "srcpath": "tutorials/java-plugin.md",
+                    "title": "Java Plugin",
+                    "outpath": "tutorials/java-plugin.html",
+
+                        "alltitles": "Tutorials / Java Plugin"
+                    }
+                    ,
+                {
                     "srcpath": "administration/overview/system-architecture.md",
                     "title": "System Architecture",
                     "outpath": "administration/overview/index.html",
