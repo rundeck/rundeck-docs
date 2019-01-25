@@ -300,12 +300,12 @@ userEmailAttribute=&quot;mail&quot;</code></pre>
 <li>RPM/Deb install: <code>/etc/rundeck/</code></li>
 <li>Executable War install: <code>$RDECK_BASE/server/config</code></li>
 </ul>
-<p>Make sure the name of your Login Module configuration is the same as you use in the next step. The Login Module configuration is defined like this:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb9-1" data-line-number="1">    myloginmodule {</a>
+<p>Make sure the name of your Login Module configuration is the same as you use in the next step. The Login Module configuration is defined like this (e.g. “jaas-ldap.conf” file):</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb9-1" data-line-number="1">    ldap {</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2">        <span class="co">// comment line</span></a>
 <a class="sourceLine" id="cb9-3" data-line-number="3">        ...</a>
 <a class="sourceLine" id="cb9-4" data-line-number="4">    }</a></code></pre></div>
-<p>Where “myloginmodule” is the name.</p>
+<p>Where “ldap” is the module name.</p>
 <h4 id="step-2-specify-login-module">Step 2: Specify login module</h4>
 <p>To override the default JAAS configuration file, you will need to supply the Rundeck server with the proper path to the new one, and a <code>loginmodule.name</code> Java system property to identify the new login module by name.</p>
 <p>The JAAS configuration file location is specified differently between the Executable War and the RPM/Deb.</p>
@@ -878,7 +878,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-25T22:31:13UTC">2019-01-25T22:31:13UTC</span>
+<span class="generated-date" title="2019-01-25T22:37:20UTC">2019-01-25T22:37:20UTC</span>
 </p>
 </footer>
 </div>
