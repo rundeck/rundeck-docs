@@ -820,7 +820,7 @@
                     "title": "Loadbalancer",
                     "outpath": "administration/cluster/loadbalancer/index.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Pro Cluster / Loadbalancer"
+                        "alltitles": "Administrator Guide / Rundeck Enterprise / Loadbalancer"
                     }
                     ,
                 {
@@ -828,7 +828,7 @@
                     "title": "AWS ELB",
                     "outpath": "administration/cluster/loadbalancer/aws-elb.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Pro Cluster / Loadbalancer / AWS ELB"
+                        "alltitles": "Administrator Guide / Rundeck Enterprise / Loadbalancer / AWS ELB"
                     }
                     ,
                 {
@@ -836,7 +836,7 @@
                     "title": "HAProxy",
                     "outpath": "administration/cluster/loadbalancer/haproxy.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Pro Cluster / Loadbalancer / HAProxy"
+                        "alltitles": "Administrator Guide / Rundeck Enterprise / Loadbalancer / HAProxy"
                     }
                     ,
                 {
@@ -844,7 +844,7 @@
                     "title": "IIS",
                     "outpath": "administration/cluster/loadbalancer/iis.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Pro Cluster / Loadbalancer / IIS"
+                        "alltitles": "Administrator Guide / Rundeck Enterprise / Loadbalancer / IIS"
                     }
                     ,
                 {
@@ -852,7 +852,7 @@
                     "title": "Autotakeover",
                     "outpath": "administration/cluster/autotakeover/index.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Pro Cluster / Autotakeover"
+                        "alltitles": "Administrator Guide / Rundeck Enterprise / Autotakeover"
                     }
                     ,
                 {
@@ -860,7 +860,7 @@
                     "title": "Logstore",
                     "outpath": "administration/cluster/logstore/index.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Pro Cluster / Logstore"
+                        "alltitles": "Administrator Guide / Rundeck Enterprise / Logstore"
                     }
                     ,
                 {
@@ -868,7 +868,7 @@
                     "title": "S3 Log Storage Plugin",
                     "outpath": "administration/cluster/logstore/s3-log-storage-plugin.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Pro Cluster / Logstore / S3 Log Storage Plugin"
+                        "alltitles": "Administrator Guide / Rundeck Enterprise / Logstore / S3 Log Storage Plugin"
                     }
                     ,
                 {
@@ -876,7 +876,7 @@
                     "title": "Azure Log Storage Plugin",
                     "outpath": "administration/cluster/logstore/azure-log-storage-plugin.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Pro Cluster / Logstore / Azure Log Storage Plugin"
+                        "alltitles": "Administrator Guide / Rundeck Enterprise / Logstore / Azure Log Storage Plugin"
                     }
                     ,
                 {
@@ -884,7 +884,7 @@
                     "title": "Rundeck Pro Replication",
                     "outpath": "administration/cluster/replication/index.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Pro Cluster / Rundeck Pro Replication"
+                        "alltitles": "Administrator Guide / Rundeck Enterprise / Rundeck Pro Replication"
                     }
                     ,
                 {
@@ -892,7 +892,7 @@
                     "title": "Cloud deployment",
                     "outpath": "administration/cluster/cloud/index.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Pro Cluster / Cloud deployment"
+                        "alltitles": "Administrator Guide / Rundeck Enterprise / Cloud deployment"
                     }
                     ,
                 {
@@ -900,15 +900,15 @@
                     "title": "AWS",
                     "outpath": "administration/cluster/cloud/aws.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Pro Cluster / Cloud deployment / AWS"
+                        "alltitles": "Administrator Guide / Rundeck Enterprise / Cloud deployment / AWS"
                     }
                     ,
                 {
                     "srcpath": "administration/cluster/index.md",
-                    "title": "Rundeck Pro Cluster",
+                    "title": "Rundeck Enterprise",
                     "outpath": "administration/cluster/index.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Pro Cluster"
+                        "alltitles": "Administrator Guide / Rundeck Enterprise"
                     }
                     ,
                 {

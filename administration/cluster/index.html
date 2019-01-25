@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Rundeck Pro Cluster</title>
+  <title>Rundeck Enterprise</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -79,7 +79,7 @@ jQuery(function(){
     
     
     
-    <li class="active"><a href="index.html">Rundeck Pro Cluster</a></li>
+    <li class="active"><a href="index.html">Rundeck Enterprise</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
@@ -101,8 +101,58 @@ jQuery(function(){
 <div class="row">
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">Rundeck Pro Cluster</h1>
+<h1 class="title">Rundeck Enterprise</h1>
 </div>
+<h2 id="rundeck-enterprise-architecture">Rundeck Enterprise Architecture</h2>
+<figure>
+<img src="../../figures/architecture.png" alt="Rundeck architecture" /><figcaption>Rundeck architecture</figcaption>
+</figure>
+<h2 id="installation">Installation</h2>
+<p>To install a Rundeck Pro Enterprise instance, download the lastest version from <a href="https://download.rundeck.com/versions.html">here</a>, and follow the steps in the <a href="../install/index.html" title="Administrator Guide - Installation">Installation Guide</a></p>
+<h2 id="requirements">Requirements</h2>
+<p>The Rundeck Enterprise environment needs the following shared resources:</p>
+<h3 id="database">Database</h3>
+<ul>
+<li><p>All the cluster members must share the same DB:</p>
+<p>See: <a href="../configuration/database/index.html" title="Administrator Guide - Rundeck Configuration - Database">Database Backends</a>.</p></li>
+<li><p>The keys and project data must be stored in the DB (enabled by default since 2.4.x):</p>
+<p>See: <a href="../configuration/storage-facility.html" title="Administrator Guide - Rundeck Configuration - Storage Facility">Storage Facility</a></p></li>
+</ul>
+<h3 id="load-balancer">Load Balancer</h3>
+<p>A loadbalancer allows you to achieve high availability in your Rundeck Pro installation by routing http traffic across several redundant Rundeck Pro instances.</p>
+<ul>
+<li><p>Set the <code>grails.serverURL</code> parameter of all cluster members (<code>rundeck-config.properties</code>) with the LB URL.</p></li>
+<li><p>Use Sticky session</p></li>
+</ul>
+<p>See: <a href="loadbalancer/index.html" title="Administrator Guide - Rundeck Enterprise - Loadbalancer">Loadbalancer</a></p>
+<h3 id="log-storage">Log Storage</h3>
+<p>All Cluster members must share the log storage.</p>
+<p>See: <a href="logstore/index.html" title="Administrator Guide - Rundeck Enterprise - Logstore">Logstore</a></p>
+<p><strong>Note</strong>: If you use the [S3 Log Storage Plugin][administration/cluster/logstore/s3.md] Be sure to use <code>com.rundeck.rundeckpro.amazon-s3</code> in place of <code>org.rundeck.amazon-s3</code>. It adds the additional feature:</p>
+<ul>
+<li><em>Checkpoint log storage</em>: This enables viewing the execution logs while the execution is running.</li>
+</ul>
+<h3 id="authentication">Authentication</h3>
+<p>The cluster environment needs a common authentication method. All the instances must have access to the same list of users/groups</p>
+<p>See: <a href="../security/authenticating-users.html" title="Administrator Guide - Security - Authenticating Users">Authenticating Users</a></p>
+<h3 id="resource-model">Resource Model</h3>
+<p>Projects need a common resource model that can be accessed from all cluster members. These are some of the alternatives to achieve this:</p>
+<ul>
+<li>A shared file system</li>
+<li>A script</li>
+<li>A REST endpoint</li>
+</ul>
+<p>See: <a href="../projects/resource-model-sources/index.html" title="Administrator Guide - Projects - Node Model Sources">Node Model Sources</a></p>
+<h2 id="features">Features:</h2>
+<h3 id="autotakeover">Autotakeover</h3>
+<p>Scheduled jobs are owned by the last cluster member who modified them. Jobs can also be controlled using Cluster Manager. If a cluster member goes down, all scheduled jobs on that cluster member must be moved to another cluster node. This process can be performed automatically using the heartbeat and Autotakeover features in Rundeck Pro version 2.1.0 and later releases.</p>
+<p>See: <a href="autotakeover/index.html" title="Administrator Guide - Rundeck Enterprise - Autotakeover">Autotakeover</a></p>
+<h3 id="cluster-remote-execution-policy">Cluster Remote Execution Policy</h3>
+<p>This feature allows Rundeck Pro cluster members to forward job executions to other cluster members based on a policy configuration.</p>
+<p>See: <a href="../configuration/remote-job-execution-pro.html" title="Administrator Guide - Rundeck Configuration - Remote Job Execution (Pro)">Remote Job Execution</a></p>
+<h3 id="rundeck-pro-replication">Rundeck Pro Replication</h3>
+<p>This plugin is used for an active/passive configuration. Each cluster member can have its own database.</p>
+<p>See <a href="replication/index.html" title="Administrator Guide - Rundeck Enterprise - Rundeck Pro Replication">Rundeck Pro Replication</a></p>
 <h2 id="sections">Sections</h2>
 <ol type="1">
 <li><a href="loadbalancer/index.html">Loadbalancer</a></li>
@@ -142,7 +192,7 @@ jQuery(function(){
     
     
     
-    <li class="active"><a href="index.html">Rundeck Pro Cluster</a></li>
+    <li class="active"><a href="index.html">Rundeck Enterprise</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
@@ -183,7 +233,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-01-24T03:06:32UTC">2019-01-24T03:06:32UTC</span>
+<span class="generated-date" title="2019-01-25T22:31:13UTC">2019-01-25T22:31:13UTC</span>
 </p>
 </footer>
 </div>
