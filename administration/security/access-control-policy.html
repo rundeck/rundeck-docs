@@ -211,8 +211,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Rundeck loads ACL Policy definitions from these locations:</p>
 <ul>
 <li>All <code>*.aclpolicy</code> files found in the rundeck <code>etc</code> dir, which is either <code>/etc/rundeck</code> (rpm and debian install defaults), or <code>$RDECK_BASE/etc</code> (launcher/war configuration).</li>
-<li>System level policies created via the <a href="../../api/index.html#acls" title="API Reference | Version 28 - Acls">System ACLs API</a></li>
-<li>Project level policies created via the <a href="../../api/index.html#project-acls" title="API Reference | Version 28 - Project Acls">Project ACLs API</a>, limited only to project context policies for a specific project.</li>
+<li>System level policies created via the <a href="../../api/index.html#acls" title="API Reference | Version 30 - Acls">System ACLs API</a></li>
+<li>Project level policies created via the <a href="../../api/index.html#project-acls" title="API Reference | Version 30 - Project Acls">Project ACLs API</a>, limited only to project context policies for a specific project.</li>
 </ul>
 <h3 id="lifecycle">Lifecycle</h3>
 <p>The Rundeck server does not need to be restarted for changes to aclpolicy files to take effect.</p>
@@ -291,9 +291,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>You might also want to restrict who can create <em>new</em> jobs. Since a new job does not exist yet, you cannot create a rule for this action to apply to an existing job. Which means this corresponds to a generic resource with a “kind” called “job”.</p>
 <h2 id="api-token-authorization-roles">API Token Authorization Roles</h2>
 <p>In Rundeck 2.8.x and later, Authentication Tokens are given a set of <em>Authorization Roles</em> at generation time, so the access levels for the Token depend on how it was generated.</p>
-<p>See: <a href="../../api/index.html#token-authentication" title="API Reference | Version 28 - Token Authentication">API Token</a> usage instructions.</p>
+<p>See: <a href="../../api/index.html#token-authentication" title="API Reference | Version 30 - Token Authentication">API Token</a> usage instructions.</p>
 <p>See below: <a href="#api-token-authorization">API Token Authorization</a>.</p>
-<p>(<strong>Note:</strong> In Rundeck 2.7.x and earlier, clients of the <a href="../../api/index.html" title="API Reference | Version 28">Web API</a> may use the <a href="../../api/index.html#token-authentication" title="API Reference | Version 28 - Token Authentication">Token Authentication</a> method. These clients are placed in the special authorization group called <code>api_token_group</code>.)</p>
+<p>(<strong>Note:</strong> In Rundeck 2.7.x and earlier, clients of the <a href="../../api/index.html" title="API Reference | Version 30">Web API</a> may use the <a href="../../api/index.html#token-authentication" title="API Reference | Version 30 - Token Authentication">Token Authentication</a> method. These clients are placed in the special authorization group called <code>api_token_group</code>.)</p>
 <h2 id="rundeck-resource-authorizations">Rundeck resource authorizations</h2>
 <p>Rundeck declares a number of actions that can be referenced inside the access control policy document.</p>
 <p>The actions and resources are divided into project scope and application scope:</p>
@@ -910,7 +910,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 <p><em>Note</em>: see <a href="#node-resource-properties">Node resource properties</a> for more node resource properties for authorization.</p>
 <p><em>Note</em>: Jobs can be referenced using “name” and “group” or using “uuid”.</p>
-<p><em>Note</em>: <code>runAs</code> and <code>killAs</code> actions only apply to certain API endpoints, and allow running jobs or adhoc executions or killing executions to be performed with a different username attached as the author of the action. See <a href="../../api/index.html#running-a-job" title="API Reference | Version 28 - Running A Job">Rundeck API - Running a Job</a>.</p>
+<p><em>Note</em>: <code>runAs</code> and <code>killAs</code> actions only apply to certain API endpoints, and allow running jobs or adhoc executions or killing executions to be performed with a different username attached as the author of the action. See <a href="../../api/index.html#running-a-job" title="API Reference | Version 30 - Running A Job">Rundeck API - Running a Job</a>.</p>
 <p><em>Note</em>: Job deletion requires allowing the ‘delete’ action both at the generic type and specific resource levels.</p>
 <p>Recall that defining rules for a generic resource type is done in this way:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="fu">for:</span></a>
@@ -1124,7 +1124,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-02-05T02:45:17UTC">2019-02-05T02:45:17UTC</span>
+<span class="generated-date" title="2019-02-06T23:37:53UTC">2019-02-06T23:37:53UTC</span>
 </p>
 </footer>
 </div>

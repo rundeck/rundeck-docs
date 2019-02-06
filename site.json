@@ -1281,10 +1281,10 @@
                     ,
                 {
                     "srcpath": "api/rundeck-api.md",
-                    "title": "API Reference | Version 28",
+                    "title": "API Reference | Version 30",
                     "outpath": "api/index.html",
 
-                        "alltitles": "API Reference | Version 28"
+                        "alltitles": "API Reference | Version 30"
                     }
                     ,
                 {
