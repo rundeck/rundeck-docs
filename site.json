@@ -1280,6 +1280,14 @@
                     }
                     ,
                 {
+                    "srcpath": "developer/12-option-values-plugins.md",
+                    "title": "Option Values Plugins",
+                    "outpath": "developer/option-values-plugins.html",
+
+                        "alltitles": "Plugin Developer Guide / Option Values Plugins"
+                    }
+                    ,
+                {
                     "srcpath": "api/rundeck-api.md",
                     "title": "API Reference | Version 30",
                     "outpath": "api/index.html",
