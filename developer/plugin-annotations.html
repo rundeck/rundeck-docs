@@ -169,6 +169,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><a href="#about">About</a></li>
 <li><a href="#plugin-description">Plugin Description</a></li>
+<li><a href="#plugin-provider-metadata">Plugin Provider Metadata</a></li>
 <li><a href="#plugin-properties">Plugin Properties</a></li>
 <li><a href="#property-scopes">Property Scopes</a></li>
 </ul>
@@ -197,6 +198,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1-4" data-line-number="4">    ...</a>
 <a class="sourceLine" id="cb1-5" data-line-number="5">}</a></code></pre></div>
 <p><em>Note:</em> If you do not add this annotation, the plugin display name will be the same as the provider name, and will have no descriptive text when displayed.</p>
+<h2 id="plugin-provider-metadata">Plugin Provider Metadata</h2>
+<p>You can supply additional metadata about the plugin implementation, using the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190123/com/dtolabs/rundeck/plugins/descriptions/PluginMetadata.html">@PluginMetadata</a> annotation. You can provide multiple metadata entries with a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190123/com/dtolabs/rundeck/plugins/descriptions/PluginMeta.html">@PluginMeta</a> annotation, which can contain multiple <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190123/com/dtolabs/rundeck/plugins/descriptions/PluginMetadata.html">@PluginMetadata</a> values.</p>
+<p>Example:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="at">@Plugin</span>(name=<span class="st">&quot;myplugin&quot;</span>, service=ServiceNameConstants.<span class="fu">WorkflowStep</span>)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="at">@PluginMetadata</span>(key=<span class="st">&quot;anykey&quot;</span>, value=<span class="st">&quot;anyvalue&quot;</span>)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">public</span> <span class="kw">class</span> MyPlugin <span class="kw">implements</span> StepPlugin{</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">    ...</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">}</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">// or with multiple entries:</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="at">@Plugin</span>(name=<span class="st">&quot;myplugin&quot;</span>, service=ServiceNameConstants.<span class="fu">WorkflowStep</span>)</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="at">@PluginMeta</span>(</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">    {</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">        <span class="at">@PluginMetadata</span>(key=<span class="st">&quot;anykey&quot;</span>, value=<span class="st">&quot;anyvalue&quot;</span>),</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">        <span class="at">@PluginMetadata</span>(key=<span class="st">&quot;otherkey&quot;</span>, value=<span class="st">&quot;othervalue&quot;</span>)</a>
+<a class="sourceLine" id="cb2-12" data-line-number="12">    }</a>
+<a class="sourceLine" id="cb2-13" data-line-number="13">)</a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="kw">public</span> <span class="kw">class</span> MyPlugin <span class="kw">implements</span> StepPlugin{</a>
+<a class="sourceLine" id="cb2-15" data-line-number="15">    ...</a>
+<a class="sourceLine" id="cb2-16" data-line-number="16">}</a></code></pre></div>
+<p>See <a href="plugin-development.html#provider-metadata-1" title="Plugin Developer Guide - Plugin Development - Provider Metadata 1">Provider Metadata</a> for information about what metadata keys may be used.</p>
 <h2 id="plugin-properties">Plugin Properties</h2>
 <p>You can annotate individual fields in your class to define the configuration properties of your class. These are the supported Java types for annotated fields:</p>
 <ul>
@@ -231,17 +252,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul>
 <p>Examples:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="at">@PluginProperty</span>(title = <span class="st">&quot;Name&quot;</span>, description = <span class="st">&quot;What is your name?&quot;</span>, required = <span class="kw">true</span>)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">private</span> <span class="bu">String</span> name;</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="at">@PluginProperty</span>(title = <span class="st">&quot;Age&quot;</span>, description = <span class="st">&quot;How old are you?&quot;</span>)</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw">private</span> <span class="dt">int</span> amount;</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="at">@PluginProperty</span>(title = <span class="st">&quot;Favorite Fruit&quot;</span>,</a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">                description = <span class="st">&quot;What is your favorite fruit?&quot;</span>,</a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">                defaultValue = <span class="st">&quot;banana&quot;</span>)</a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="at">@SelectValues</span>(values = {<span class="st">&quot;banana&quot;</span>, <span class="st">&quot;lemon&quot;</span>, <span class="st">&quot;orange&quot;</span>}, freeSelect = <span class="kw">true</span>)</a>
-<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="kw">private</span> <span class="bu">String</span> fruit;</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="at">@PluginProperty</span>(title = <span class="st">&quot;Name&quot;</span>, description = <span class="st">&quot;What is your name?&quot;</span>, required = <span class="kw">true</span>)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">private</span> <span class="bu">String</span> name;</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="at">@PluginProperty</span>(title = <span class="st">&quot;Age&quot;</span>, description = <span class="st">&quot;How old are you?&quot;</span>)</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="kw">private</span> <span class="dt">int</span> amount;</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="at">@PluginProperty</span>(title = <span class="st">&quot;Favorite Fruit&quot;</span>,</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">                description = <span class="st">&quot;What is your favorite fruit?&quot;</span>,</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">                defaultValue = <span class="st">&quot;banana&quot;</span>)</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="at">@SelectValues</span>(values = {<span class="st">&quot;banana&quot;</span>, <span class="st">&quot;lemon&quot;</span>, <span class="st">&quot;orange&quot;</span>}, freeSelect = <span class="kw">true</span>)</a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="kw">private</span> <span class="bu">String</span> fruit;</a></code></pre></div>
 <h2 id="property-scopes">Property Scopes</h2>
 <p>You can define the scope for a property by adding <code>scope</code> to the PluginProperty annotation. Refer to the class <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190123/com/dtolabs/rundeck/core/plugins/configuration/PropertyScope.html">PropertyScope</a>.</p>
 <p>The default effective scope if you do not specify it in the annotation is <code>InstanceOnly</code>.</p>
@@ -316,7 +337,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-02-15T19:35:35UTC">2019-02-15T19:35:35UTC</span>
+<span class="generated-date" title="2019-02-15T21:12:17UTC">2019-02-15T21:12:17UTC</span>
 </p>
 </footer>
 </div>

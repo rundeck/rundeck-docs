@@ -199,7 +199,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="#resolving-localization-message-files">Resolving Localization Message Files</a></li>
 <li><a href="#defining-plugin-localization-messages">Defining Plugin Localization Messages</a></li>
 </ul></li>
-<li><a href="#plugin-icons">Plugin Icons</a></li>
+<li><a href="#plugin-icons">Plugin Icons</a><ul>
+<li><a href="#icon-image-files">Icon Image Files</a></li>
+</ul></li>
+<li><a href="#provider-metadata-1">Provider Metadata</a></li>
 </ul>
 </div>
 </div>
@@ -348,6 +351,8 @@ lib/anotherjar-1.3.jar</code></pre>
 <p>If you want to build the Description object yourself, you can do so by implementing the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190123/com/dtolabs/rundeck/core/plugins/configuration/Describable.html">Describable</a> interface. Return a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190123/com/dtolabs/rundeck/core/plugins/configuration/Description.html">Description</a> instance. You can construct one by using the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190123/com/dtolabs/rundeck/plugins/util/DescriptionBuilder.html">DescriptionBuilder</a> builder class.</p>
 <p><strong>Description Annotations</strong></p>
 <p>Newer plugin types support using java annotations to create a Description object. See <a href="plugin-annotations.html" title="Plugin Developer Guide - Plugin Annotations">Plugin Annotations</a>.</p>
+<p><strong>Provider Metadata</strong></p>
+<p>See <a href="plugin-annotations.html#plugin-provider-metadata" title="Plugin Developer Guide - Plugin Annotations - Plugin Provider Metadata">Plugin Annotations - Plugin Provider Metadata</a>.</p>
 <h4 id="description-properties">Description Properties</h4>
 <p>Within a Description object you can define a set of Property objects, which represent the input properties for the plugin.</p>
 <p>Some plugin types support using Java Annotations to define properties, see <a href="plugin-annotations.html" title="Plugin Developer Guide - Plugin Annotations">Plugin Annotations</a>.</p>
@@ -385,7 +390,9 @@ lib/anotherjar-1.3.jar</code></pre>
 <a class="sourceLine" id="cb7-2" data-line-number="2">description=&#39;Does some action&#39;</a>
 <a class="sourceLine" id="cb7-3" data-line-number="3">version = <span class="st">&quot;0.0.1&quot;</span></a>
 <a class="sourceLine" id="cb7-4" data-line-number="4">url = <span class="st">&quot;http://example&quot;</span></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5">author = <span class="st">&quot;© 2018, me&quot;</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-5" data-line-number="5">author = <span class="st">&quot;© 2018, me&quot;</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">metadata = [:] <span class="co">//a map defining *Provider Metadata*</span></a></code></pre></div>
+<p>See <a href="#provider-metadata-1">Provider Metadata</a> for information about what metadata keys may be used.</p>
 <p><em>Configuration</em></p>
 <p>Use a <code>configuration</code> closure to define configuration properties:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb8-1" data-line-number="1">configuration{</a>
@@ -538,6 +545,7 @@ Archive:  example-1.0-plugin.zip
 <li><code>RemoteScriptNodeStep</code></li>
 </ul></li>
 <li><code>plugin-type</code> - must be <code>script</code> for these types (or <code>ui</code> for <a href="ui-plugins.html" title="Plugin Developer Guide - UI Plugins">UI Plugins</a>)</li>
+<li><code>plugin-meta</code> - an optional Map defining additional <a href="#provider-metadata-1">Provider Metadata</a> entries. (Since rundeck 3.0.14)</li>
 <li><code>script-file</code> - must be the name of a file relative to the <code>contents</code> directory</li>
 </ul>
 <p>For <code>ResourceModelSource</code> service, this additional entry is required:</p>
@@ -552,7 +560,7 @@ Archive:  example-1.0-plugin.zip
 <li><code>use-original-extension</code>: (<code>true/false</code>, default <code>true</code>), whether to force the remotely copied script to have the same file extension as the original specified by <code>script-file</code>. (Available for <code>RemoteScriptNodeStep</code> only.)</li>
 <li><code>script-file-extension</code>: A file extension to use for the remotely copied script. (Available for <code>RemoteScriptNodeStep</code> only.)</li>
 <li><code>mergeEnvironment</code> - boolean, if true (default for <code>rundeckPluginVersion: 1.1+</code>), when the script is executed the Environment variables from the Rundeck server will be merged with the context environment variables provided to the script. If false (default for <code>rundeckPluginVersion: 1.0</code>), then only the context environment variables will be provided.</li>
-<li><p><code>config</code> - a Map defining custom plugin properties (see below.)</p></li>
+<li><p><code>config</code> - a Map defining custom <a href="#plugin-properties">Plugin properties</a> (see below.)</p></li>
 </ul>
 <h3 id="plugin-properties">Plugin properties</h3>
 <p>Custom plugin properties are supported in script-based plugins for these plugin types:</p>
@@ -832,6 +840,8 @@ Archive:  example-1.0-plugin.zip
 provider2.plugin.title=My Provider 2</code></pre>
 <h2 id="plugin-icons">Plugin Icons</h2>
 <p>Since Rundeck Plugin Version 1.2 (Rundeck 2.6.10), Custom Icons can now be defined for your plugin.</p>
+<p>You can use an <a href="#icon-image-files">Icon Image Files</a>, or specify <a href="#provider-metadata-1">Provider Metadata</a> to use a CSS icon, such as Glyphicon or Font Awesome icon.</p>
+<h3 id="icon-image-files">Icon Image Files</h3>
 <p>Specify <code>rundeckPluginVersion: 1.2</code> in your plugin.yaml (script plugins) or <code>Rundeck-Plugin-Version: 1.2</code> in your jar Manifest (jar plugins) to enable custom icon support.</p>
 <p>Include a <code>resources/</code> directory in your jar/zip file with your icon file. The icon is resolved by looking for a file in the resources directory using the following search pattern:</p>
 <ol type="1">
@@ -841,6 +851,14 @@ provider2.plugin.title=My Provider 2</code></pre>
 <li><code>resources/icon.png</code></li>
 </ol>
 <p>You can define a custom icon for each Provider in your plugin file, or a single icon for all providers.</p>
+<h2 id="provider-metadata-1">Provider Metadata</h2>
+<p>(Since Rundeck 3.0.14)</p>
+<p>These metadata keys may be available:</p>
+<ul>
+<li><code>glyphicon</code> - name of a Glyphicon icon to use for the plugin, as alternative to providing an icon image resource.</li>
+<li><code>faicon</code> - name of a Font Awesome icon to use for the plugin.</li>
+<li><code>fabicon</code> - name of a Font Awesome “brand” icon to use</li>
+</ul>
 </div>
 </div>
 </div>
@@ -911,7 +929,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-02-15T19:35:35UTC">2019-02-15T19:35:35UTC</span>
+<span class="generated-date" title="2019-02-15T21:12:17UTC">2019-02-15T21:12:17UTC</span>
 </p>
 </footer>
 </div>
