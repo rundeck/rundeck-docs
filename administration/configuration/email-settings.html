@@ -169,6 +169,14 @@ rundeck.mail.template.log.formatted=true/false (if true, prefix log lines with c
 <li><code>notification.eventStatus</code>: A string indicating the combination of execution status, and notification trigger, suitable for an email subject line, such as “KILLED”, “FAILURE”, “STARTING”, “SUCCESS”.</li>
 <li><code>execution.projectHref</code>: URL to the Project within Rundeck.</li>
 </ul>
+<h4 id="custom-attached-log-output-file">Custom Attached Log Output file</h4>
+<p>When the log output is attached as a file, the file’s extension can be defined by adding new settings on rudeck-config.properties. For example:</p>
+<pre><code>rundeck.mail.template.log.extension=html
+rundeck.mail.template.log.contentType=text/html</code></pre>
+<pre><code>rundeck.mail.&lt;PROJECT&gt;.&lt;JOBNAME&gt;.template.log.extension=csv
+rundeck.mail.&lt;PROJECT&gt;.&lt;JOBNAME&gt;.template.log.contentType=text/csv</code></pre>
+<pre><code>rundeck.mail.&lt;TRIGGER&gt;.template.log.extension=html
+rundeck.mail.&lt;TRIGGER&gt;.template.log.contentType=text/html</code></pre>
 <h2 id="troubleshooting">Troubleshooting</h2>
 <p>See the <a href="../maintenance/logging.html#service.log" title="Administrator Guide - Maintenance - Logging - Service.log">service.log</a> for mail error messages.</p>
 </div>
@@ -243,7 +251,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-02-15T21:12:17UTC">2019-02-15T21:12:17UTC</span>
+<span class="generated-date" title="2019-02-19T20:59:05UTC">2019-02-19T20:59:05UTC</span>
 </p>
 </footer>
 </div>
