@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Content Converter Plugins</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="../../jquery.hotkeys.js"></script>
+<script src="../../jquery.autocomplete.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+window._pageRelpath="../../";
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+<script src="../../docs-autocomplete.js"></script>
+  <link rel="stylesheet" href="../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control navquery" name="q" placeholder="Search" id="searchQuery">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbstop">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb top collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.14)</a></li>
+    
+        <li><a href="../index.html">User Guide</a></li>
+    
+    
+    
+    <li class="active"><a href="index.html">Content Converter Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="html-table-view-converter.html">HTML Table View Converter <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/content-converters/index.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/content-converters/index.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Content Converter Plugins</h1>
+</div>
+<p>Content Converter Plugins allow Step Plugins and Log Filter plugins to output data that can be rendered as HTML into the Execution Log view of a Rundeck Job or Adhoc execution.</p>
+<blockquote>
+<p>Note: For more information in the operation of Content Converter plugins, and how to create them, see <a href="../../developer/content-converter-plugins.html" title="Plugin Developer Guide - Content Converter Plugins">Plugin Developer Guide - Content Converter Plugins</a>.</p>
+</blockquote>
+<p>For example, the <a href="../log-filters/render-formatted-data.html" title="User Guide - Render Formatted Data">Render Formatted Data</a> plugin allows you to simply mark content in your Log output as <code>html</code> or <code>markdown</code> and the appropriate Content Converter plugin(s) will be invoked to render the content correctly when you view it in the GUI. Rundeck also knows how to chain up to two plugins together to produce <code>text/html</code> output for the Log View. This allows some plugins to simply parse formatted data such as CSV, and another plugin to render it as HTML.</p>
+<pre class="diagram">
+
+ .----------------.      +----------------+   
+| input: text/json +---->| JSON converter |
+ '----------------'      +-------+--------+   
+                                 |
+                                 v
+                         .------------------.    +----------------------+
+                        | result: x-java-map +-->| HTML Table converter |
+                         '------------------'    +----------+-----------+
+                                                            |
+                                                            v
+                                                   .------------------.
+                                                  | result: text/html  |
+                                                   '------------------'
+
+</pre>
+<p>Normally Content Converters are not used directly. However, Step plugins can include metadata in their log output that will invoke Content Converters without needing to use Log Filters. Log Filters such as the Render Formatted Data plugin are useful with scripts, commands, or other step plugins that output data or content in plain text format and do not have a way to add their own metadata to the log output.</p>
+<h2 id="sanitized-html-output">Sanitized HTML Output</h2>
+<p>Normally, any HTML that Rundeck generates from user-content (such as log output) will be passed through an HTML Sanitizer, which strips potentially malicious content from the input HTML, such as <code>&lt;script&gt;</code> tags and certain attributes. If your HTML output is not rendering as you expect, this may be the reason why.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol type="1">
+<li><a href="html-table-view-converter.html">HTML Table View Converter</a></li>
+<li><a href="html-view-converter.html">HTML View Converter</a></li>
+<li><a href="json-data-converter.html">JSON Data Converter</a></li>
+<li><a href="markdown-converter.html">Markdown Converter</a></li>
+<li><a href="properties-converter.html">Properties Converter</a></li>
+<li><a href="tabular-data-converter.html">Tabular Data Converter</a></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbsbottom">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb bottom collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.14)</a></li>
+    
+        <li><a href="../index.html">User Guide</a></li>
+    
+    
+    
+    <li class="active"><a href="index.html">Content Converter Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="html-table-view-converter.html">HTML Table View Converter <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/content-converters/index.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/content-converters/index.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Enterprise for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Enterprise
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://rundeck.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2019 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2019-02-22T05:40:40UTC">2019-02-22T05:40:40UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+
+<!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2768099.js"></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>

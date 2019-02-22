@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Localization</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="../../jquery.hotkeys.js"></script>
+<script src="../../jquery.autocomplete.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+window._pageRelpath="../../";
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+<script src="../../docs-autocomplete.js"></script>
+  <link rel="stylesheet" href="../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control navquery" name="q" placeholder="Search" id="searchQuery">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbstop">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb top collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.14)</a></li>
+    
+        <li><a href="../index.html">Administrator Guide</a></li>
+    
+    
+    <li ><a href="index.html">Rundeck Configuration</a></li>
+    <li class="active"><a href="localization.html">Localization</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="gui-customization.html"><i class="glyphicon glyphicon-arrow-left"></i> GUI Customization</a></li>
+      <li class="next"><a href="configuration-file-reference.html">Configuration File Reference <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/configuration/localization.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/configuration/localization.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#messages-file">Messages file</a><ul>
+<li><a href="#testing-your-changes">Testing your changes</a></li>
+<li><a href="#missing-strings">Missing Strings</a></li>
+<li><a href="#submit-a-pull-request">Submit a Pull Request</a></li>
+</ul></li>
+<li><a href="#date-formats">Date formats</a></li>
+<li><a href="#gui-customization">GUI Customization</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Localization</h1>
+</div>
+<p>Rundeck customization and localization/internationalization.</p>
+<h2 id="messages-file">Messages file</h2>
+<p>Rundeck uses Grails, based on Spring, which provides localization/internationalization by means of a <code>messages</code> file.</p>
+<p>For reference, see <a href="https://docs.grails.org/latest/guide/i18n.html">Grails Internationalization</a>.</p>
+<p>In order to add or override the default localized messages, you can create a new file: <code>RDECK_BASE/i18n/messages.properties</code> and place your overrides in that file, according to the normal <code>messages.properties</code> format.</p>
+<p>To override messages for a language other than English, follow the normal process for supplying these messages by adding the appropriate locale qualifier to your <code>messages.properties</code> file. For example, the file name for Spanish strings would be: <code>messages_es_419.properties</code></p>
+<p>The Locale code you use is based on language code and country code.</p>
+<h3 id="testing-your-changes">Testing your changes</h3>
+<p>You can <a href="https://docs.grails.org/latest/guide/i18n.html#changingLocales">change the locale used in Rundeck</a> by appending a <code>?lang=XX</code> to the URL in your request.</p>
+<p>You may have to use the full locale code to activate your locale. For example, to activate simplified Chinese you will need to do so like this: <code>?lang=zh_cn</code></p>
+<h3 id="missing-strings">Missing Strings</h3>
+<p>Not all of the Rundeck GUI uses localized strings yet. If you find a page in Rundeck that doesn’t seem to use appropriate localization of English text, please <a href="https://github.com/rundeck/rundeck/issues/new?title=Missing%20i18n%20Text%3A%20___&amp;body=i18n%20support%20is%20missing%20on%20page%3A%20___%0A%0AText%3A%20___&amp;labels%5B%5D=i18n">Submit an issue report</a>.</p>
+<h3 id="submit-a-pull-request">Submit a Pull Request</h3>
+<p>If you would like to translate Rundeck to another language, please submit your new messages file as a Pull Request via Github, so that we can include it in the next Rundeck release.</p>
+<p>There is a page on the <a href="https://github.com/rundeck/rundeck/wiki/Internationalization">Rundeck wiki: Internationalization</a> that can help if you are new to git.</p>
+<h2 id="date-formats">Date formats</h2>
+<p>Changing the Date formats shown in the Activity page of Rundeck:</p>
+<p>These messages entries determine the formats shown:</p>
+<ul>
+<li><code>jobslist.date.format</code> default <code>M/d/yy h:mm a</code></li>
+<li><code>jobslist.date.format.ko</code> default <code>M/DD/YY h:mm a</code></li>
+<li><code>jobslist.running.format.ko</code> default <code>h:mm a</code></li>
+</ul>
+<p>The <code>jobslist.date.format</code> uses <a href="https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html?is-external=true">Java SimpleDateFormat</a>.</p>
+<p>The messages ending with <code>.ko</code> use the <a href="https://momentjs.com/docs/#/displaying/format/">moment.js format</a></p>
+<h2 id="gui-customization">GUI Customization</h2>
+<p>See <a href="gui-customization.html" title="Administrator Guide - Rundeck Configuration - GUI Customization">GUI Customization</a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbsbottom">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb bottom collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.14)</a></li>
+    
+        <li><a href="../index.html">Administrator Guide</a></li>
+    
+    
+    <li ><a href="index.html">Rundeck Configuration</a></li>
+    <li class="active"><a href="localization.html">Localization</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="gui-customization.html"><i class="glyphicon glyphicon-arrow-left"></i> GUI Customization</a></li>
+      <li class="next"><a href="configuration-file-reference.html">Configuration File Reference <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/configuration/localization.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/configuration/localization.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Enterprise for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Enterprise
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://rundeck.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2019 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2019-02-22T05:40:40UTC">2019-02-22T05:40:40UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+
+<!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2768099.js"></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
