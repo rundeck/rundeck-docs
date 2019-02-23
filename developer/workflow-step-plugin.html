@@ -220,9 +220,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <h2 id="java-plugin-type">Java Plugin Type</h2>
 <h2 id="define-a-plugin-provider-class">Define a plugin provider class</h2>
-<p>Refer to the <a href="plugin-development.html#java-plugin-development" title="Plugin Developer Guide - Plugin Development - Java Plugin Development">Plugin Development - Java Plugins</a> section for information about correct definition of a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.15-20190221/com/dtolabs/rundeck/core/plugins/Plugin.html">Plugin</a> class, including packaging as a Jar and annotation.</p>
+<p>Refer to the <a href="plugin-development.html#java-plugin-development" title="Plugin Developer Guide - Plugin Development - Java Plugin Development">Plugin Development - Java Plugins</a> section for information about correct definition of a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.15-20190222/com/dtolabs/rundeck/core/plugins/Plugin.html">Plugin</a> class, including packaging as a Jar and annotation.</p>
 <p>Be sure to use the <code>@Plugin</code> annotation on your provider implementation class to let it be recognized by Rundeck (See <a href="plugin-annotations.html" title="Plugin Developer Guide - Plugin Annotations">Plugin Annotations</a>).</p>
-<p>Your <code>service</code> name should be one of the three listed below. The class <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.15-20190221/com/dtolabs/rundeck/plugins/ServiceNameConstants.html">ServiceNameConstants</a> contains static definitions of all Rundeck Service names.</p>
+<p>Your <code>service</code> name should be one of the three listed below. The class <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.15-20190222/com/dtolabs/rundeck/plugins/ServiceNameConstants.html">ServiceNameConstants</a> contains static definitions of all Rundeck Service names.</p>
 <h2 id="workflow-step-types">Workflow Step Types</h2>
 <p>Your plugins can be one of three types.</p>
 <ul>
@@ -235,7 +235,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>See <a href="plugin-development.html#plugin-descriptions" title="Plugin Developer Guide - Plugin Development - Plugin Descriptions">Plugin Development - Java Plugins - Descriptions</a> to learn how to create configuration properties for your plugin using Java annotations.</p>
 <h3 id="workflowstep-plugin">WorkflowStep Plugin</h3>
 <p>Annotate your class with <code>@Plugin</code> and use the service name <code>WorkflowStep</code>.</p>
-<p>Implement the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.15-20190221/com/dtolabs/rundeck/plugins/step/StepPlugin.html">StepPlugin</a>:</p>
+<p>Implement the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.15-20190222/com/dtolabs/rundeck/plugins/step/StepPlugin.html">StepPlugin</a>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">/**</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="co">*</span> Execute the step<span class="co">.</span></a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="co">*</span></a>
@@ -246,10 +246,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1-8" data-line-number="8">  <span class="co">*/</span></a>
 <a class="sourceLine" id="cb1-9" data-line-number="9"><span class="kw">public</span> <span class="dt">void</span> <span class="fu">executeStep</span>(<span class="dt">final</span> PluginStepContext context, <span class="dt">final</span> <span class="bu">Map</span>&lt;<span class="bu">String</span>, <span class="bu">Object</span>&gt; configuration)</a>
 <a class="sourceLine" id="cb1-10" data-line-number="10">    <span class="kw">throws</span> StepException;</a></code></pre></div>
-<p>Your implementation should throw a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.15-20190221/com/dtolabs/rundeck/core/execution/workflow/steps/node/NodeStepException.html">StepException</a> if an error occurs.</p>
+<p>Your implementation should throw a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.15-20190222/com/dtolabs/rundeck/core/execution/workflow/steps/node/NodeStepException.html">StepException</a> if an error occurs.</p>
 <h3 id="workflownodestep-plugin">WorkflowNodeStep Plugin</h3>
 <p>Annotate your class with <code>@Plugin</code> and use the service name <code>WorkflowNodeStep</code>.</p>
-<p>Implement the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.15-20190221/com/dtolabs/rundeck/plugins/step/NodeStepPlugin.html">NodeStepPlugin</a>:</p>
+<p>Implement the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.15-20190222/com/dtolabs/rundeck/plugins/step/NodeStepPlugin.html">NodeStepPlugin</a>:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co">/**</span></a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"> <span class="co">*</span> Execute the plugin step logic for the given node<span class="co">.</span></a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"> <span class="co">*</span></a>
@@ -263,11 +263,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb2-11" data-line-number="11">                               <span class="dt">final</span> <span class="bu">Map</span>&lt;<span class="bu">String</span>, <span class="bu">Object</span>&gt; configuration,</a>
 <a class="sourceLine" id="cb2-12" data-line-number="12">                               <span class="dt">final</span> INodeEntry entry)</a>
 <a class="sourceLine" id="cb2-13" data-line-number="13">    <span class="kw">throws</span> NodeStepException;</a></code></pre></div>
-<p>Your implementation should throw a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.15-20190221/com/dtolabs/rundeck/core/execution/workflow/steps/node/NodeStepException.html">StepException</a> if an error occurs.</p>
+<p>Your implementation should throw a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.15-20190222/com/dtolabs/rundeck/core/execution/workflow/steps/node/NodeStepException.html">StepException</a> if an error occurs.</p>
 <h3 id="remotescriptnodestep-plugin">RemoteScriptNodeStep Plugin</h3>
 <p>These are a specialized use-case of the Node Step plugin. They allow you to simply define a command or a script that should be executed on the remote nodes, and Rundeck will handle the remote execution of the command/script via the appropriate services.</p>
 <p>Annotate your class with <code>@Plugin</code> and use the service name <code>RemoteScriptNodeStep</code></p>
-<p>Implement the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.15-20190221/com/dtolabs/rundeck/plugins/step/RemoteScriptNodeStepPlugin.html">RemoteScriptNodeStepPlugin</a>:</p>
+<p>Implement the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.15-20190222/com/dtolabs/rundeck/plugins/step/RemoteScriptNodeStepPlugin.html">RemoteScriptNodeStepPlugin</a>:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">/**</span></a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"> <span class="co">*</span> Generate a full script or command string to execute on the remote node</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"> <span class="co">*</span></a>
@@ -281,7 +281,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb3-11" data-line-number="11">                                      <span class="dt">final</span> <span class="bu">Map</span>&lt;<span class="bu">String</span>, <span class="bu">Object</span>&gt; configuration,</a>
 <a class="sourceLine" id="cb3-12" data-line-number="12">                                      <span class="dt">final</span> INodeEntry entry)</a>
 <a class="sourceLine" id="cb3-13" data-line-number="13">    <span class="kw">throws</span> NodeStepException;</a></code></pre></div>
-<p>Your implementation should return a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.15-20190221/com/dtolabs/rundeck/plugins/step/GeneratedScript.html">GeneratedScript</a> object. You can make use of the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.15-20190221/com/dtolabs/rundeck/plugins/step/GeneratedScriptBuilder.html">GeneratedScriptBuilder</a> class to generate the appropriate return type using these two factory methods:</p>
+<p>Your implementation should return a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.15-20190222/com/dtolabs/rundeck/plugins/step/GeneratedScript.html">GeneratedScript</a> object. You can make use of the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.15-20190222/com/dtolabs/rundeck/plugins/step/GeneratedScriptBuilder.html">GeneratedScriptBuilder</a> class to generate the appropriate return type using these two factory methods:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co">/**</span></a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"> <span class="co">*</span> Create a script</a>
 <a class="sourceLine" id="cb4-3" data-line-number="3"> <span class="co">*</span></a>
@@ -297,7 +297,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb4-13" data-line-number="13"> <span class="co">*/</span></a>
 <a class="sourceLine" id="cb4-14" data-line-number="14"><span class="kw">public</span> <span class="dt">static</span> GeneratedScript <span class="fu">command</span>(<span class="dt">final</span> <span class="bu">String</span><span class="kw">... </span>command);</a></code></pre></div>
 <h3 id="step-context-information">Step context information</h3>
-<p>Each plugin is passed a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.15-20190221/com/dtolabs/rundeck/plugins/step/PluginStepContext.html">PluginStepContext</a> instance that provides access to details about the step and its configuration:</p>
+<p>Each plugin is passed a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.15-20190222/com/dtolabs/rundeck/plugins/step/PluginStepContext.html">PluginStepContext</a> instance that provides access to details about the step and its configuration:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">public</span> <span class="kw">interface</span> PluginStepContext {</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">    <span class="co">/**</span></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3">     <span class="co">*</span> Return the logger</a>
@@ -425,7 +425,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-02-23T04:40:26UTC">2019-02-23T04:40:26UTC</span>
+<span class="generated-date" title="2019-02-23T05:31:16UTC">2019-02-23T05:31:16UTC</span>
 </p>
 </footer>
 </div>
