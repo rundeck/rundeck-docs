@@ -1409,10 +1409,18 @@
                     ,
                 {
                     "srcpath": "history/changelog.md",
-                    "title": "Changelog (2019-02-22)",
+                    "title": "Changelog (2019-02-24)",
                     "outpath": "history/changelog.html",
 
-                        "alltitles": "Version History / Changelog (2019-02-22)"
+                        "alltitles": "Version History / Changelog (2019-02-24)"
+                    }
+                    ,
+                {
+                    "srcpath": "history/version-3.0.16.md",
+                    "title": "Version 3.0.16 (2019-02-24)",
+                    "outpath": "history/version-3.0.16.html",
+
+                        "alltitles": "Version History / Version 3.0.16 (2019-02-24)"
                     }
                     ,
                 {
