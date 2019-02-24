@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JOB-XML</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Alex Honor" />
+  <meta name="date" content="November 20, 2010" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="../jquery.hotkeys.js"></script>
+<script src="../jquery.autocomplete.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+window._pageRelpath="../";
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+<script src="../docs-autocomplete.js"></script>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control navquery" name="q" placeholder="Search" id="searchQuery">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbstop">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb top collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.16)</a></li>
+    
+    
+    <li ><a href="index.html">Document Format Reference</a></li>
+    <li class="active"><a href="job-xml.html">JOB-XML</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="aclpolicy.html"><i class="glyphicon glyphicon-arrow-left"></i> ACLPOLICY</a></li>
+      <li class="next"><a href="job-yaml.html">JOB-YAML <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manpages/man5/job-v20.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manpages/man5/job-v20.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#name">NAME</a><ul>
+<li><a href="#loading-and-unloading">Loading and unloading</a></li>
+</ul></li>
+<li><a href="#joblist">joblist</a><ul>
+<li><a href="#job">job</a></li>
+<li><a href="#uuid">uuid</a></li>
+<li><a href="#name-1">name</a></li>
+<li><a href="#description">description</a></li>
+<li><a href="#group">group</a></li>
+<li><a href="#multipleexecutions">multipleExecutions</a></li>
+<li><a href="#timeout">timeout</a></li>
+<li><a href="#retry">retry</a></li>
+<li><a href="#logging">logging</a></li>
+<li><a href="#schedule">schedule</a><ul>
+<li><a href="#crontab">crontab</a></li>
+<li><a href="#time">time</a></li>
+<li><a href="#weekday">weekday</a></li>
+<li><a href="#month">month</a></li>
+<li><a href="#year">year</a></li>
+</ul></li>
+<li><a href="#context">context</a><ul>
+<li><a href="#project">project</a></li>
+<li><a href="#options">options</a></li>
+</ul></li>
+<li><a href="#dispatch">dispatch</a><ul>
+<li><a href="#threadcount">threadcount</a></li>
+<li><a href="#keepgoing">keepgoing</a></li>
+<li><a href="#rankattribute">rankAttribute</a></li>
+<li><a href="#rankorder">rankOrder</a></li>
+</ul></li>
+<li><a href="#loglevel">loglevel</a></li>
+<li><a href="#nodefilters">nodefilters</a><ul>
+<li><a href="#filter">filter</a></li>
+<li><a href="#include">include</a></li>
+<li><a href="#exclude">exclude</a></li>
+<li><a href="#includeexclude-patterns">Include/exclude patterns</a></li>
+</ul></li>
+<li><a href="#sequence">sequence</a><ul>
+<li><a href="#command">command</a></li>
+<li><a href="#errorhandler">errorhandler</a></li>
+<li><a href="#description-1">description</a></li>
+<li><a href="#script-sequence-step">Script sequence step</a></li>
+<li><a href="#job-sequence-step">Job sequence step</a></li>
+<li><a href="#plugin-step">Plugin step</a></li>
+</ul></li>
+<li><a href="#notification">notification</a><ul>
+<li><a href="#onsuccess">onsuccess</a></li>
+<li><a href="#onfailure">onfailure</a></li>
+<li><a href="#onstart">onstart</a></li>
+<li><a href="#onavgduration">onavgduration</a></li>
+<li><a href="#onretryablefailure">onretryablefailure</a></li>
+<li><a href="#email">email</a></li>
+<li><a href="#webhook">webhook</a></li>
+<li><a href="#plugin">plugin</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#see-also">SEE ALSO</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">JOB-XML</h1>
+</div>
+<h1 id="name">NAME</h1>
+<p>job-v21 - The ‘job’ XML file declares job entries for Rundeck.</p>
+<p>This is a demonstration document using all possible elements in the current Rundeck “jobs” XML.</p>
+<h2 id="loading-and-unloading">Loading and unloading</h2>
+<p>This file can be batch loaded via <a href="https://rundeck.github.io/rundeck-cli/">rd</a> jobs load command:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ex">rd</span> jobs load -p project --file /path/to/jobs.xml</a></code></pre></div>
+<p>Rundeck job definitions can be dumped and saved to a file via rd jobs list command:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="ex">rd</span> jobs list -p project --file /tmp/jobs.xml</a></code></pre></div>
+<h1 id="joblist">joblist</h1>
+<p>The root (aka “top-level”) element of the jobs XML file.</p>
+<p><em>Nested elements</em></p>
+<dl>
+<dt><a href="#job">job</a>*</dt>
+<dd><p>declares a single job</p>
+</dd>
+</dl>
+<p><em>Example</em></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">&lt;joblist&gt;</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">  <span class="kw">&lt;job&gt;</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">   ...</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">  <span class="kw">&lt;/job&gt;</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">  <span class="kw">&lt;job&gt;</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">   ...</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">  <span class="kw">&lt;/job&gt;</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="kw">&lt;/joblist&gt;</span></a></code></pre></div>
+<h2 id="job">job</h2>
+<p>The job element is a sub-element of <a href="#joblist">joblist</a> and defines a job executable in Rundeck.</p>
+<p>The following elements are used to describe the job. Only one of each element is allowed.</p>
+<p><em>Nested elements</em></p>
+<dl>
+<dt><a href="#uuid">uuid</a></dt>
+<dd><p>unique UUID to identify the job</p>
+</dd>
+<dt><a href="#name-1">name</a></dt>
+<dd><p>the job name</p>
+</dd>
+<dt><a href="#description">description</a></dt>
+<dd><p>the job description</p>
+</dd>
+<dt><a href="#group">group</a></dt>
+<dd><p>group name</p>
+</dd>
+<dt><a href="#multipleexecutions">multipleExecutions</a></dt>
+<dd><p>If the job can be executed multiple times simultaneously</p>
+</dd>
+<dt><a href="#context">context</a></dt>
+<dd><p>command context</p>
+</dd>
+<dt><a href="#dispatch">dispatch</a></dt>
+<dd><p>dispatch options</p>
+</dd>
+<dt><a href="#sequence">sequence</a></dt>
+<dd><p>workflow sequence</p>
+</dd>
+<dt><a href="#notification">notification</a></dt>
+<dd><p>notifications of execution success/failure, via email or webhook</p>
+</dd>
+<dt><a href="#nodefilters">nodefilters</a></dt>
+<dd><p>node filtering expressions</p>
+</dd>
+<dt><a href="#loglevel">loglevel</a></dt>
+<dd><p>the logging level</p>
+</dd>
+<dt><a href="#logging">logging</a></dt>
+<dd><p>limit on the amount of log output</p>
+</dd>
+</dl>
+<p><em>Job command modes</em></p>
+<p>Jobs execute a sequence of commands. Commands come in several styles:</p>
+<ul>
+<li>System command</li>
+<li>A script</li>
+<li>A script file or URL</li>
+<li>Another defined job</li>
+</ul>
+<p><em>Examples</em></p>
+<p>Execute the Unix ‘who’ command</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource xml numberLines"><code class="sourceCode xml"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">&lt;joblist&gt;</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">  <span class="kw">&lt;job&gt;</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">    <span class="kw">&lt;name&gt;</span>who&#39;s logged in?<span class="kw">&lt;/name&gt;</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">    <span class="kw">&lt;description&gt;</span>Runs the unix who command<span class="kw">&lt;/description&gt;</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">    <span class="kw">&lt;group&gt;</span>sysadm/users<span class="kw">&lt;/group&gt;</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">    <span class="kw">&lt;context&gt;</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">      <span class="kw">&lt;project&gt;</span>default<span class="kw">&lt;/project&gt;</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">    <span class="kw">&lt;/context&gt;</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">    <span class="kw">&lt;sequence&gt;</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">      <span class="kw">&lt;command&gt;</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11">        <span class="co">&lt;!-- the Unix &#39;who&#39; command --&gt;</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12">        <span class="kw">&lt;exec&gt;</span>who<span class="kw">&lt;/exec&gt;</span></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13">      <span class="kw">&lt;/command&gt;</span></a>
+<a class="sourceLine" id="cb4-14" data-line-number="14">     <span class="kw">&lt;/sequence&gt;</span></a>
+<a class="sourceLine" id="cb4-15" data-line-number="15">    <span class="kw">&lt;nodefilters</span><span class="ot"> excludeprecedence=</span><span class="st">&quot;true&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb4-16" data-line-number="16">      <span class="kw">&lt;include&gt;</span></a>
+<a class="sourceLine" id="cb4-17" data-line-number="17">        <span class="kw">&lt;os-family&gt;</span>unix<span class="kw">&lt;/os-family&gt;</span></a>
+<a class="sourceLine" id="cb4-18" data-line-number="18">      <span class="kw">&lt;/include&gt;</span></a>
+<a class="sourceLine" id="cb4-19" data-line-number="19">    <span class="kw">&lt;/nodefilters&gt;</span></a>
+<a class="sourceLine" id="cb4-20" data-line-number="20">    <span class="kw">&lt;dispatch&gt;</span></a>
+<a class="sourceLine" id="cb4-21" data-line-number="21">      <span class="kw">&lt;threadcount&gt;</span>1<span class="kw">&lt;/threadcount&gt;</span></a>
+<a class="sourceLine" id="cb4-22" data-line-number="22">      <span class="kw">&lt;keepgoing&gt;</span>true<span class="kw">&lt;/keepgoing&gt;</span></a>
+<a class="sourceLine" id="cb4-23" data-line-number="23">    <span class="kw">&lt;/dispatch&gt;</span></a>
+<a class="sourceLine" id="cb4-24" data-line-number="24">  <span class="kw">&lt;/job&gt;</span></a>
+<a class="sourceLine" id="cb4-25" data-line-number="25"><span class="kw">&lt;/joblist&gt;</span></a></code></pre></div>
+<p>Execute a Bash script</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource xml numberLines"><code class="sourceCode xml"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">&lt;joblist&gt;</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">  <span class="kw">&lt;job&gt;</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">    <span class="kw">&lt;name&gt;</span>a simple script<span class="kw">&lt;/name&gt;</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">    <span class="kw">&lt;description&gt;</span>Runs a trivial bash script<span class="kw">&lt;/description&gt;</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">    <span class="kw">&lt;group&gt;</span>sysadm/users<span class="kw">&lt;/group&gt;</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">    <span class="kw">&lt;context&gt;</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">      <span class="kw">&lt;project&gt;</span>default<span class="kw">&lt;/project&gt;</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">    <span class="kw">&lt;/context&gt;</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">    <span class="kw">&lt;sequence&gt;</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">      <span class="kw">&lt;command&gt;</span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11">        <span class="kw">&lt;script&gt;</span><span class="bn">&lt;![CDATA[</span>#!/bin/bash</a>
+<a class="sourceLine" id="cb5-12" data-line-number="12">echo this is an example job running on $(hostname)</a>
+<a class="sourceLine" id="cb5-13" data-line-number="13">echo whatever</a>
+<a class="sourceLine" id="cb5-14" data-line-number="14">exit 0 <span class="bn">]]&gt;</span><span class="kw">&lt;/script&gt;</span></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15">      <span class="kw">&lt;/command&gt;</span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16">     <span class="kw">&lt;/sequence&gt;</span></a>
+<a class="sourceLine" id="cb5-17" data-line-number="17">    <span class="kw">&lt;dispatch&gt;</span></a>
+<a class="sourceLine" id="cb5-18" data-line-number="18">      <span class="kw">&lt;threadcount&gt;</span>1<span class="kw">&lt;/threadcount&gt;</span></a>
+<a class="sourceLine" id="cb5-19" data-line-number="19">      <span class="kw">&lt;keepgoing&gt;</span>true<span class="kw">&lt;/keepgoing&gt;</span></a>
+<a class="sourceLine" id="cb5-20" data-line-number="20">    <span class="kw">&lt;/dispatch&gt;</span></a>
+<a class="sourceLine" id="cb5-21" data-line-number="21">  <span class="kw">&lt;/job&gt;</span></a>
+<a class="sourceLine" id="cb5-22" data-line-number="22"><span class="kw">&lt;/joblist&gt;</span></a></code></pre></div>
+<p>Execute a sequence of other commands, scripts and jobs:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource xml numberLines"><code class="sourceCode xml"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">&lt;joblist&gt;</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">  <span class="kw">&lt;job&gt;</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">    <span class="kw">&lt;name&gt;</span>test coreutils<span class="kw">&lt;/name&gt;</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">    <span class="kw">&lt;description/&gt;</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">    <span class="kw">&lt;context&gt;</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">      <span class="kw">&lt;project&gt;</span>default<span class="kw">&lt;/project&gt;</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">    <span class="kw">&lt;/context&gt;</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8">    <span class="kw">&lt;sequence&gt;</span>         </a>
+<a class="sourceLine" id="cb6-9" data-line-number="9">     <span class="co">&lt;!-- the Unix &#39;who&#39; command --&gt;</span></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10">     <span class="kw">&lt;command&gt;</span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11">        <span class="kw">&lt;exec&gt;</span>who<span class="kw">&lt;/exec&gt;</span></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12">     <span class="kw">&lt;/command&gt;</span></a>
+<a class="sourceLine" id="cb6-13" data-line-number="13">     <span class="co">&lt;!-- a Job named test/other tests --&gt;</span></a>
+<a class="sourceLine" id="cb6-14" data-line-number="14">     <span class="kw">&lt;command&gt;</span></a>
+<a class="sourceLine" id="cb6-15" data-line-number="15">        <span class="kw">&lt;jobref</span><span class="ot"> group=</span><span class="st">&quot;test&quot;</span><span class="ot"> name=</span><span class="st">&quot;other tests&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb6-16" data-line-number="16">     <span class="kw">&lt;/command&gt;</span></a>
+<a class="sourceLine" id="cb6-17" data-line-number="17">    <span class="kw">&lt;/sequence&gt;</span></a>
+<a class="sourceLine" id="cb6-18" data-line-number="18">    <span class="kw">&lt;dispatch&gt;</span></a>
+<a class="sourceLine" id="cb6-19" data-line-number="19">      <span class="kw">&lt;threadcount&gt;</span>1<span class="kw">&lt;/threadcount&gt;</span></a>
+<a class="sourceLine" id="cb6-20" data-line-number="20">      <span class="kw">&lt;keepgoing&gt;</span>false<span class="kw">&lt;/keepgoing&gt;</span></a>
+<a class="sourceLine" id="cb6-21" data-line-number="21">    <span class="kw">&lt;/dispatch&gt;</span></a>
+<a class="sourceLine" id="cb6-22" data-line-number="22">  <span class="kw">&lt;/job&gt;</span></a>
+<a class="sourceLine" id="cb6-23" data-line-number="23"><span class="kw">&lt;/joblist&gt;</span></a></code></pre></div>
+<h2 id="uuid">uuid</h2>
+<p>The UUID is a sub-element of <a href="#job">job</a>. This string can be set manually (if you are writing the job definition from scratch), or will be assigned at job creation time by the Rundeck server using a random UUID. This string should be as unique as possible if you set it manually.</p>
+<p>This identifier is used to uniquely identify jobs when ported between Rundeck instances.</p>
+<h2 id="name-1">name</h2>
+<p>The job name is a sub-element of <a href="#job">job</a>. The combination of ‘name’ and <a href="#group">group</a> and <a href="#project">project</a> must be unique if the <a href="#uuid">uuid</a> identifier is not included.</p>
+<h2 id="description">description</h2>
+<p>The job description is a sub-element of <a href="#job">job</a> and allows a short description of the job.</p>
+<p>If the description contains more than one line of text, then the first line is used as the “short description” of the job, and rendered exactly as text. The remaining lines are the “extended description”, rendered using Markdown format as HTML in the Rundeck GUI. Markdown can also embed HTML directly if you like. See <a href="https://en.wikipedia.org/wiki/Markdown#Example">Wikipedia - Markdown</a>.</p>
+<p>The HTML is sanitized to remove disallowed tags before rendering to the browser (such as <code>&lt;script&gt;</code>, etc.). You can disable all extended description HTML rendering via a configuration flag. See <a href="../administration/configuration/gui-customization.html" title="Administrator Guide - Rundeck Configuration - GUI Customization">GUI Customization</a>.</p>
+<p><strong>Note</strong>: To preserve formatting when defining the extended job description in XML, you should be sure to use a CDATA section. Wrap the contents in <code>&lt;![CDATA[</code> and <code>]]&gt;</code>.</p>
+<p><em>Example Extended description</em></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">&lt;job&gt;</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">    <span class="kw">&lt;name&gt;</span>My Job<span class="kw">&lt;/name&gt;</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">    <span class="kw">&lt;description&gt;</span><span class="bn">&lt;![CDATA[</span>Performs a service</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">This is &lt;b&gt;html&lt;/b&gt;</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">&lt;ul&gt;&lt;li&gt;bulleted list&lt;/li&gt;&lt;/ul&gt;</a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">&lt;a href=&quot;/&quot;&gt;Top&lt;/a&gt;</a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10">1. this is a markdown numbered list</a>
+<a class="sourceLine" id="cb7-11" data-line-number="11">2. second item</a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb7-13" data-line-number="13">[a link](http://example.com)</a>
+<a class="sourceLine" id="cb7-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb7-15" data-line-number="15"><span class="bn">]]&gt;</span><span class="kw">&lt;/description&gt;</span></a>
+<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="kw">&lt;/job&gt;</span></a></code></pre></div>
+<h2 id="group">group</h2>
+<p>The group is a sub-element of <a href="#job">job</a> and defines the job’s group identifier. This is a “/” (slash) separated string that mimics a directory structure.</p>
+<p><em>Example</em></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">&lt;job&gt;</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">    <span class="kw">&lt;name&gt;</span>who<span class="kw">&lt;/name&gt;</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">    <span class="kw">&lt;description&gt;</span>who is logged in?<span class="kw">&lt;/description&gt;</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">    <span class="kw">&lt;group&gt;</span>/sysadm/users<span class="kw">&lt;/group&gt;</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="kw">&lt;/job&gt;</span></a></code></pre></div>
+<h2 id="multipleexecutions">multipleExecutions</h2>
+<p>Boolean value: ‘true/false’. If ‘true’, then the job can be run multiple times at once. Otherwise, the Job can only have a single execution at a time.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">&lt;job&gt;</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">    <span class="kw">&lt;name&gt;</span>who<span class="kw">&lt;/name&gt;</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">    <span class="kw">&lt;description&gt;</span>who is logged in?<span class="kw">&lt;/description&gt;</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">    <span class="kw">&lt;group&gt;</span>/sysadm/users<span class="kw">&lt;/group&gt;</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5">    <span class="kw">&lt;multipleExecutions&gt;</span>true<span class="kw">&lt;/multipleExecutions&gt;</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="kw">&lt;/job&gt;</span></a></code></pre></div>
+<h2 id="timeout">timeout</h2>
+<p>Timeout string indicating the maximum allowed runtime for a job. After this time expires, the job will be aborted.</p>
+<p>The format is:</p>
+<ul>
+<li><code>123</code> a simple number, indicating seconds</li>
+<li><code>[number][unit]</code> where “number” is a valid decimal number, and “unit” is one of:
+<ul>
+<li><code>s</code> - seconds</li>
+<li><code>m</code> - minutes</li>
+<li><code>h</code> - hours</li>
+<li><code>d</code> - days</li>
+</ul></li>
+<li>Any sequence of <code>[number][unit]</code> pairs. The total time will be the added value of all the units. Any other text in the string is ignored, so the pairs can be separated by spaces or other descriptive text.</li>
+</ul>
+<p>These are all valid values:</p>
+<ul>
+<li><code>1d 6h</code> - 1 day and 6 hours</li>
+<li><code>120m</code> - 120 minutes</li>
+<li><code>${option.timeout}</code> reference to a job option value</li>
+</ul>
+<div class="sourceCode" id="cb10"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">&lt;job&gt;</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">    <span class="kw">&lt;name&gt;</span>who<span class="kw">&lt;/name&gt;</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">    <span class="kw">&lt;description&gt;</span>who is logged in?<span class="kw">&lt;/description&gt;</span></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">    <span class="kw">&lt;group&gt;</span>/sysadm/users<span class="kw">&lt;/group&gt;</span></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">    <span class="kw">&lt;timeout&gt;</span>1d 6h<span class="kw">&lt;/timeout&gt;</span></a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="kw">&lt;/job&gt;</span></a></code></pre></div>
+<h2 id="retry">retry</h2>
+<p>Retry count indicating the maximum number of times to retry the job if it fails or times out. You can also set a delay between retries.</p>
+<p>Allowed values:</p>
+<ul>
+<li>An integer number, indicating maximum number of retries</li>
+<li><code>${option.retry}</code> reference to a job option value</li>
+<li>Optional delay attribute, with the same format as <a href="#timeout">timeout</a></li>
+</ul>
+<div class="sourceCode" id="cb11"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">&lt;job&gt;</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">    <span class="kw">&lt;name&gt;</span>iffy job<span class="kw">&lt;/name&gt;</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">    <span class="kw">&lt;description&gt;</span>Job which might need to be retried<span class="kw">&lt;/description&gt;</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">    <span class="kw">&lt;retry</span><span class="ot"> delay=</span><span class="st">&#39;1h1m1s&#39;</span><span class="kw">&gt;</span>${option.retry}<span class="kw">&lt;/retry&gt;</span></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="kw">&lt;/job&gt;</span></a></code></pre></div>
+<h2 id="logging">logging</h2>
+<p>An optional logging limit, and the action to perform if the limit is reached. (See <a href="../manual/running-jobs.html#log-limit" title="User Guide - Running Jobs - Log Limit">Jobs - Log Limit</a>).</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">&lt;logging</span><span class="ot"> limit=</span><span class="st">&#39;1KB&#39;</span><span class="ot"> limitAction=</span><span class="st">&#39;halt&#39;</span><span class="ot"> status=</span><span class="st">&#39;aborted&#39;</span> <span class="kw">/&gt;</span></a></code></pre></div>
+<p>If no <code>limitAction</code> is set, it will default to a value of <code>halt</code> and a status of <code>failed</code>.</p>
+<p>The syntax for <code>limit</code> is:</p>
+<ul>
+<li><code>###</code> If you specify a number, that is treated as the “Maximum total number of log lines”</li>
+<li><code>###/node</code> If you specify a number followed by <code>/node</code>, the number is treated as the “Maximum number of log lines for a single node”</li>
+<li><code>###[GMK]B</code> If you specify a number followed by a filesize suffix, that is treated as the “total log file size”. The file size suffixes allowed are “GB” (gigabyte), “MB” (megabyte), “KB” (kilobyte) and “B” (byte).</li>
+</ul>
+<p>The allowed values for <code>limitAction</code> are:</p>
+<ul>
+<li><code>halt</code> - halt the job with an optional <code>status</code></li>
+<li><code>truncate</code> - do not halt the job, and truncate all further output</li>
+</ul>
+<p>The allowed values for <code>status</code> are any status string:</p>
+<ul>
+<li><code>failed</code> - halt and fail the job</li>
+<li><code>aborted</code> - halt and abort the job</li>
+<li><code>&lt;anything&gt;</code> - a custom status string</li>
+</ul>
+<h2 id="schedule">schedule</h2>
+<p><code>schedule</code> is a sub-element of <a href="#job">job</a> and specifies periodic job execution using the stated schedule. The schedule can be specified using embedded elements as shown below, or using a single <a href="#crontab">crontab</a> attribute to set a full crontab expression.</p>
+<p><em>Nested elements</em></p>
+<dl>
+<dt><a href="#time">time</a></dt>
+<dd><p>the hour and minute and seconds</p>
+</dd>
+<dt><a href="#weekday">weekday</a></dt>
+<dd><p>day(s) of week</p>
+</dd>
+<dt><a href="#month">month</a></dt>
+<dd><p>month(s)</p>
+</dd>
+<dt><a href="#year">year</a></dt>
+<dd><p>year</p>
+</dd>
+</dl>
+<p><em>Attributes</em></p>
+<dl>
+<dt><a href="#crontab">crontab</a></dt>
+<dd><p>a full crontab expression</p>
+</dd>
+</dl>
+<p><em>Example</em></p>
+<p>Run the job every morning at 6AM, 7AM and 8AM.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">&lt;schedule&gt;</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">  <span class="kw">&lt;time</span><span class="ot"> hour=</span><span class="st">&quot;06,07,08&quot;</span><span class="ot"> minute=</span><span class="st">&quot;00&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">  <span class="kw">&lt;weekday</span><span class="ot"> day=</span><span class="st">&quot;*&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">  <span class="kw">&lt;month</span><span class="ot"> month=</span><span class="st">&quot;*&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="kw">&lt;/schedule&gt;</span></a></code></pre></div>
+<p>Run the job every morning at 6:00:02AM, 7:00:02AM and 8:00:02AM only in the year 2010:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">&lt;schedule&gt;</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">  <span class="kw">&lt;time</span><span class="ot"> hour=</span><span class="st">&quot;06,07,08&quot;</span><span class="ot"> minute=</span><span class="st">&quot;00&quot;</span><span class="ot"> seconds=</span><span class="st">&quot;02&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">  <span class="kw">&lt;weekday</span><span class="ot"> day=</span><span class="st">&quot;*&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4">  <span class="kw">&lt;month</span><span class="ot"> month=</span><span class="st">&quot;*&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb14-5" data-line-number="5">  <span class="kw">&lt;year</span><span class="ot"> year=</span><span class="st">&quot;2010&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="kw">&lt;/schedule&gt;</span></a></code></pre></div>
+<p>Run the job every morning at 6:00:02AM, 7:00:02AM and 8:00:02AM only in the year 2010, using a single crontab attribute to express it:</p>
+<pre><code>&lt;schedule crontab=&quot;02 00 06,07,08 ? * * 2010&quot;/&gt;</code></pre>
+<p>For more information, see http://www.quartz-scheduler.org/documentation/quartz-2.2.x/tutorials/tutorial-lesson-06.html</p>
+<h3 id="crontab">crontab</h3>
+<p>Attribute of the <a href="#schedule">schedule</a>, sets the schedule with a full crontab string. For more information, see http://www.quartz-scheduler.org/documentation/quartz-2.2.x/tutorials/tutorial-lesson-06.html</p>
+<p>If specified, then the embedded schedule elements are not used.</p>
+<h3 id="time">time</h3>
+<p>The <a href="#schedule">schedule</a> time to run the job</p>
+<p><em>Attributes</em></p>
+<dl>
+<dt>hour</dt>
+<dd><p>values: 00-23</p>
+</dd>
+<dt>minute</dt>
+<dd><p>values: 00-59</p>
+</dd>
+</dl>
+<h3 id="weekday">weekday</h3>
+<p>The <a href="#schedule">schedule</a> weekday to run the job</p>
+<p><em>Attributes</em></p>
+<dl>
+<dt>day</dt>
+<dd><p>values: <code>*</code> - all ; <code>1-5</code> days “sun-sat” ; <code>1,2,3-5</code> - days “sun,mon,tue-thu”, etc</p>
+</dd>
+</dl>
+<h3 id="month">month</h3>
+<p>The <a href="#schedule">schedule</a> month to run the job</p>
+<p><em>Attributes</em></p>
+<dl>
+<dt>month</dt>
+<dd><p>values: * - all 1-10 - month jan-oct 1,2,3-5 - months jan,feb,mar-may, etc.</p>
+</dd>
+<dt>day</dt>
+<dd><p>day of the month: * - all; 1-31 specific days</p>
+</dd>
+</dl>
+<h3 id="year">year</h3>
+<p>The <a href="#schedule">schedule</a> year to run the job</p>
+<p><em>Attributes</em></p>
+<dl>
+<dt>year</dt>
+<dd><p>year: * - all; specific year</p>
+</dd>
+</dl>
+<h2 id="context">context</h2>
+<p>The <a href="#job">job</a> context.</p>
+<p><em>Nested elements</em></p>
+<dl>
+<dt><a href="#options">options</a></dt>
+<dd><p>job options. specifies one or more option elements</p>
+</dd>
+</dl>
+<h3 id="project">project</h3>
+<p>The <a href="#context">context</a> project name. Ignored. Project name must be specified at import time.</p>
+<h3 id="options">options</h3>
+<p>The <a href="#context">context</a> options for user input.</p>
+<dl>
+<dt>preserveOrder</dt>
+<dd><p>If set to “true”, then the order of the <a href="#option">option</a> elements will be preserved in the Rundeck GUI. Otherwise the options will be shown in alphabetical order.</p>
+</dd>
+</dl>
+<p><em>Nested elements</em></p>
+<dl>
+<dt><a href="#option">option</a></dt>
+<dd><p>an option element</p>
+</dd>
+</dl>
+<p><em>Example</em></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">&lt;options&gt;</span></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">    <span class="kw">&lt;option</span><span class="ot"> name=</span><span class="st">&quot;detail&quot;</span><span class="ot"> value=</span><span class="st">&quot;true&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="kw">&lt;/options&gt;</span></a></code></pre></div>
+<h4 id="option">option</h4>
+<p>Defines one option within the <a href="#options">options</a>.</p>
+<p><em>Attributes</em></p>
+<dl>
+<dt>name</dt>
+<dd><p>the option name</p>
+</dd>
+<dt>value</dt>
+<dd><p>the default value</p>
+</dd>
+<dt>values</dt>
+<dd><p>comma separated list of values</p>
+</dd>
+<dt>valuesUrl</dt>
+<dd><p>URL to a list of JSON values</p>
+</dd>
+<dt>enforcedvalues</dt>
+<dd><p>Boolean specifying that must pick from one of values</p>
+</dd>
+<dt>regex</dt>
+<dd><p>Regex pattern of acceptable value</p>
+</dd>
+<dt>description</dt>
+<dd><p>Description of the option, will be rendered as Markdown.</p>
+</dd>
+<dt>required</dt>
+<dd><p>Boolean specifying that the option is required</p>
+</dd>
+<dt>multivalued</dt>
+<dd><p>“true/false” - whether the option supports multiple input values</p>
+</dd>
+<dt>delimiter</dt>
+<dd><p>A string used to conjoin multiple input values. (Required if <code>multivalued</code> is “true”)</p>
+</dd>
+<dt>multivalueAllSelected</dt>
+<dd><p>“true/false” - whether all values should be selected by default</p>
+</dd>
+<dt>secure</dt>
+<dd><p>“true/false” - whether the option is a secure input option. Not compatible with “multivalued”</p>
+</dd>
+<dt>valueExposed</dt>
+<dd><p>“true/false” - whether a secure input option value is exposed to scripts or not. <code>false</code> means the option will be used only as a Secure Remote Authentication option. default: <code>false</code>.</p>
+</dd>
+<dt>storagePath</dt>
+<dd><p>for a secure option, a storage path to password value to use as default</p>
+</dd>
+<dt>isDate</dt>
+<dd><p>“true/false” - the option should display as a date/time input field</p>
+</dd>
+<dt>dateFormat</dt>
+<dd><p>The date/time format to use in the UI. Using the <a href="https://momentjs.com/docs/#/displaying/format/">momentjs format</a>.</p>
+</dd>
+</dl>
+<p><em>Example</em></p>
+<p>Define defaults for the “port” option, requiring regex match.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">&lt;option</span><span class="ot"> name=</span><span class="st">&quot;port&quot;</span><span class="ot"> value=</span><span class="st">&quot;80&quot;</span><span class="ot"> values=</span><span class="st">&quot;80,8080,8888&quot;</span><span class="ot"> regex=</span><span class="st">&quot;\d+&quot;</span><span class="kw">/&gt;</span></a></code></pre></div>
+<p>Define defaults for the “port” option, enforcing the values list.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">&lt;option</span><span class="ot"> name=</span><span class="st">&quot;port&quot;</span><span class="ot"> value=</span><span class="st">&quot;80&quot;</span><span class="ot"> values=</span><span class="st">&quot;80,8080,8888&quot;</span><span class="ot"> enforcedvalues=</span><span class="st">&quot;true&quot;</span> <span class="kw">/&gt;</span></a></code></pre></div>
+<p>Define defaults for the “ports” option, allowing multiple values separated by “,”.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">&lt;option</span><span class="ot"> name=</span><span class="st">&quot;port&quot;</span><span class="ot"> value=</span><span class="st">&quot;80&quot;</span><span class="ot"> values=</span><span class="st">&quot;80,8080,8888&quot;</span><span class="ot"> enforcedvalues=</span><span class="st">&quot;true&quot;</span> </a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="ot">        multivalued=</span><span class="st">&quot;true&quot;</span><span class="ot"> delimiter=</span><span class="st">&quot;,&quot;</span> <span class="kw">/&gt;</span></a></code></pre></div>
+<p>Use a multi-line description inside a CDATA section to preserve whitespace. Wrap the content in <code>&lt;![CDATA[</code> and <code>]]&gt;</code>:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">&lt;option</span><span class="ot"> name=</span><span class="st">&#39;example&#39;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">  <span class="kw">&lt;description&gt;</span><span class="bn">&lt;![CDATA[</span>example option description</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb20-4" data-line-number="4">* this content will be rendered</a>
+<a class="sourceLine" id="cb20-5" data-line-number="5">* as markdown<span class="bn">]]&gt;</span><span class="kw">&lt;/description&gt;</span></a>
+<a class="sourceLine" id="cb20-6" data-line-number="6"><span class="kw">&lt;/option&gt;</span></a></code></pre></div>
+<h4 id="valuesurl-json">valuesUrl JSON</h4>
+<p>The data returned from the valuesUrl can be formatted as a list of values:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="ot">[</span><span class="st">&quot;x value&quot;</span><span class="ot">,</span><span class="st">&quot;y value&quot;</span><span class="ot">]</span></a></code></pre></div>
+<p>or as Name-value list:</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource json numberLines"><code class="sourceCode json"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="ot">[</span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2">  <span class="fu">{</span><span class="er">name</span><span class="fu">:</span><span class="st">&quot;X Label&quot;</span><span class="fu">,</span> <span class="er">value</span><span class="fu">:</span><span class="st">&quot;x value&quot;</span><span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb22-3" data-line-number="3">  <span class="fu">{</span><span class="er">name</span><span class="fu">:</span><span class="st">&quot;Y Label&quot;</span><span class="fu">,</span> <span class="er">value</span><span class="fu">:</span><span class="st">&quot;y value&quot;</span><span class="fu">}</span><span class="ot">,</span></a>
+<a class="sourceLine" id="cb22-4" data-line-number="4">  <span class="fu">{</span><span class="er">name</span><span class="fu">:</span><span class="st">&quot;A Label&quot;</span><span class="fu">,</span> <span class="er">value</span><span class="fu">:</span><span class="st">&quot;a value&quot;</span><span class="fu">}</span></a>
+<a class="sourceLine" id="cb22-5" data-line-number="5"><span class="ot">]</span> </a></code></pre></div>
+<h2 id="dispatch">dispatch</h2>
+<p>The <a href="#job">job</a> dispatch options. See the [Dispatcher options] for general information.</p>
+<p><em>Nested elements</em></p>
+<dl>
+<dt><a href="#threadcount">threadcount</a></dt>
+<dd><p>dispatch up to threadcount</p>
+</dd>
+<dt><a href="#keepgoing">keepgoing</a></dt>
+<dd><p>keep going flag</p>
+</dd>
+<dt><a href="#rankattribute">rankAttribute</a></dt>
+<dd><p>Name of the Node attribute to use for ordering the sequence of nodes (default is “nodename”)</p>
+</dd>
+<dt><a href="#rankorder">rankOrder</a></dt>
+<dd><p>Order direction for node ranking. Either “ascending” or “descending” (default “ascending”)</p>
+</dd>
+</dl>
+<p><em>Example</em></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">&lt;dispatch&gt;</span></a>
+<a class="sourceLine" id="cb23-2" data-line-number="2">  <span class="kw">&lt;threadcount&gt;</span>1<span class="kw">&lt;/threadcount&gt;</span></a>
+<a class="sourceLine" id="cb23-3" data-line-number="3">  <span class="kw">&lt;keepgoing&gt;</span>false<span class="kw">&lt;/keepgoing&gt;</span></a>
+<a class="sourceLine" id="cb23-4" data-line-number="4">  <span class="kw">&lt;rankAttribute&gt;</span>nodename<span class="kw">&lt;/rankAttribute&gt;</span></a>
+<a class="sourceLine" id="cb23-5" data-line-number="5">  <span class="kw">&lt;rankOrder&gt;</span>descending<span class="kw">&lt;/rankOrder&gt;</span></a>
+<a class="sourceLine" id="cb23-6" data-line-number="6"><span class="kw">&lt;/dispatch&gt;</span></a></code></pre></div>
+<h3 id="threadcount">threadcount</h3>
+<p>Defines the number of threads to execute within <a href="#dispatch">dispatch</a>. Must be a positive integer.</p>
+<h3 id="keepgoing">keepgoing</h3>
+<p>Boolean describing if the <a href="#dispatch">dispatch</a> should continue of an error occurs (true/false). If true, continue if an error occurs.</p>
+<h3 id="rankattribute">rankAttribute</h3>
+<p>This is the name of a Node attribute that determines the order in which the Nodes are traversed. The default value of “nodename” will rank the nodes based on their names.</p>
+<p>This can be any attribute of a Node, even attributes that do not exist on some nodes. For example you can set it to “rank”, then any Nodes with a “rank” attribute will be ordered before any other nodes, and they will be used in the order of the rank attribute value.</p>
+<p>The values in the rank attribute are compared first numerically if they are valid integers, but otherwise they are compared alphanumerically. Nodes which do not have the specified rank attribute will be ordered by node name and treated as if they come after all nodes which do have the rank attribute (if in ascending order).</p>
+<h3 id="rankorder">rankOrder</h3>
+<p>This determines whether the rank attribute should be used to order the nodes in ascending or descending order.</p>
+<p>Possible values: “ascending”, or “descending”. The default if not specified is “ascending”.</p>
+<h2 id="loglevel">loglevel</h2>
+<p>The <a href="#job">job</a> logging level. The lower the more profuse the messages.</p>
+<ul>
+<li>DEBUG</li>
+<li>VERBOSE</li>
+<li>INFO</li>
+<li>WARN</li>
+<li>ERROR</li>
+</ul>
+<h2 id="nodefilters">nodefilters</h2>
+<p>The <a href="#job">job</a> nodefilters options.</p>
+<p><em>Attributes</em></p>
+<dl>
+<dt>excludeprecedence</dt>
+<dd><p>boolean value: true or false</p>
+</dd>
+</dl>
+<p><em>Nested elements</em></p>
+<dl>
+<dt><a href="#filter">filter</a></dt>
+<dd><p>node filter string</p>
+</dd>
+<dt><a href="#include">include</a></dt>
+<dd><p>include filter (deprecated)</p>
+</dd>
+<dt><a href="#exclude">exclude</a></dt>
+<dd><p>exclude filter (deprecated)</p>
+</dd>
+</dl>
+<p><em>Example</em></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">&lt;nodefilters</span><span class="ot"> excludeprecedence=</span><span class="st">&quot;true&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb24-2" data-line-number="2">  <span class="kw">&lt;filter&gt;</span>.*<span class="kw">&lt;/filter&gt;</span></a>
+<a class="sourceLine" id="cb24-3" data-line-number="3"><span class="kw">&lt;/nodefilters&gt;</span></a></code></pre></div>
+<h3 id="filter">filter</h3>
+<p>The filter string to select matching nodes.</p>
+<p>The content of this element is the full node filter string. See <a href="../manual/node-filters.html" title="User Guide - Node Filters">User Guide - Node Filters</a>.</p>
+<h3 id="include">include</h3>
+<p>See <a href="#includeexclude-patterns">Include/exclude patterns</a></p>
+<h3 id="exclude">exclude</h3>
+<p>See <a href="#includeexclude-patterns">Include/exclude patterns</a></p>
+<h3 id="includeexclude-patterns">Include/exclude patterns</h3>
+<p>The <a href="#nodefilters">nodefilters</a> include and exclude patterns.</p>
+<p><strong>Note:</strong> These elements are deprecated and will be removed in a later version of Rundeck. Use the <a href="#filter">filter</a> string.</p>
+<p><em>Nested elements</em></p>
+<dl>
+<dt>hostname</dt>
+<dd><p>node hostname</p>
+</dd>
+<dt>name</dt>
+<dd><p>node resource name</p>
+</dd>
+<dt>type</dt>
+<dd><p>node type</p>
+</dd>
+<dt>tags</dt>
+<dd><p>node tags. comma separated</p>
+</dd>
+<dt>os-name</dt>
+<dd><p>operating system name (eg, Linux, Mac OS X)</p>
+</dd>
+<dt>os-family</dt>
+<dd><p>operating system family (eg, unix, windows)</p>
+</dd>
+<dt>os-arch</dt>
+<dd><p>operating system architecture (eg i386,sparc)</p>
+</dd>
+<dt>os-version</dt>
+<dd><p>operating system version</p>
+</dd>
+</dl>
+<h2 id="sequence">sequence</h2>
+<p>The <a href="#job">job</a> workflow sequence.</p>
+<p><em>Attributes</em></p>
+<dl>
+<dt>keepgoing</dt>
+<dd><p>true/false. (default false). If true, the workflow sequence will continue even if there is a failure</p>
+</dd>
+<dt>strategy</dt>
+<dd><p>node-first/step-first. (default “node-first”). The strategy to use for executing the workflow across nodes.</p>
+</dd>
+</dl>
+<p>The strategy attribute determines the way that the workflow is executed. “node-first” means execute the full workflow on each node prior to the next. “step-first” means execute each step across all nodes prior to the next step.</p>
+<p><em>Nested elements</em></p>
+<dl>
+<dt><a href="#command">command</a></dt>
+<dd><p>a sequence step</p>
+</dd>
+</dl>
+<h3 id="command">command</h3>
+<p>Defines a step for a workflow <a href="#sequence">sequence</a>.</p>
+<p>The different types of sequence steps are defined in different ways.</p>
+<p>See:</p>
+<ul>
+<li><a href="#script-sequence-step">Script sequence step</a></li>
+<li><a href="#job-sequence-step">Job sequence step</a></li>
+<li><a href="#plugin-step">Plugin step</a></li>
+</ul>
+<p>A command can embed a <a href="#errorhandler">errorhandler</a> to define an action to run if the step fails.</p>
+<p>A command can have a <a href="#description">description</a> element to set the step description.</p>
+<h3 id="errorhandler">errorhandler</h3>
+<p>Defines an action to handle an error in a <a href="#command">command</a>.</p>
+<p>The contents of an <code>&lt;errorhandler&gt;</code> are exactly the same as for a <a href="#command">command</a> except it cannot contain any errorhandler itself.</p>
+<p>The different types of errorhandler steps are defined in different ways.</p>
+<p><em>Attributes</em></p>
+<dl>
+<dt><code>keepgoingOnSuccess</code></dt>
+<dd><p>true/false. (default false). If true, and the error handler succeeds, the workflow sequence will continue even if the workflow <code>keepgoing</code> is false.</p>
+</dd>
+</dl>
+<p>See:</p>
+<ul>
+<li><a href="#script-sequence-step">Script sequence step</a></li>
+<li><a href="#job-sequence-step">Job sequence step</a></li>
+<li><a href="#plugin-step">Plugin step</a></li>
+</ul>
+<p>Example:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">&lt;errorhandler&gt;</span></a>
+<a class="sourceLine" id="cb25-2" data-line-number="2">   <span class="kw">&lt;exec&gt;</span>echo this is a shell command<span class="kw">&lt;/exec&gt;</span></a>
+<a class="sourceLine" id="cb25-3" data-line-number="3"><span class="kw">&lt;/errorhandler&gt;</span></a></code></pre></div>
+<p>Inline script. Note that using CDATA section will preserve linebreaks in the script. Simply put the script within a <code>script</code> element:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">&lt;errorhandler&gt;</span></a>
+<a class="sourceLine" id="cb26-2" data-line-number="2">    <span class="kw">&lt;script&gt;</span><span class="bn">&lt;![CDATA[</span>#!/bin/bash</a>
+<a class="sourceLine" id="cb26-3" data-line-number="3">echo this is a test</a>
+<a class="sourceLine" id="cb26-4" data-line-number="4">echo whatever</a>
+<a class="sourceLine" id="cb26-5" data-line-number="5">exit 2 ]&gt;&lt;/script&gt;</a>
+<a class="sourceLine" id="cb26-6" data-line-number="6">&lt;/errorhandler&gt;</a></code></pre></div>
+<p>Script File:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">&lt;errorhandler&gt;</span></a>
+<a class="sourceLine" id="cb27-2" data-line-number="2">    <span class="kw">&lt;scriptfile&gt;</span>/path/to/a/script<span class="kw">&lt;/scriptfile&gt;</span></a>
+<a class="sourceLine" id="cb27-3" data-line-number="3">    <span class="kw">&lt;scriptargs&gt;</span>-whatever something<span class="kw">&lt;/scriptargs&gt;</span></a>
+<a class="sourceLine" id="cb27-4" data-line-number="4"><span class="kw">&lt;/errorhandler&gt;</span>      </a></code></pre></div>
+<p>Example job reference:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="kw">&lt;errorhandler</span> <span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb28-2" data-line-number="2">    <span class="kw">&lt;jobref</span><span class="ot"> group=</span><span class="st">&quot;My group&quot;</span><span class="ot"> name=</span><span class="st">&quot;My Job&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb28-3" data-line-number="3">       <span class="kw">&lt;arg</span><span class="ot"> line=</span><span class="st">&quot;-option value -option2 value2&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb28-4" data-line-number="4">    <span class="kw">&lt;/jobref&gt;</span></a>
+<a class="sourceLine" id="cb28-5" data-line-number="5"><span class="kw">&lt;/errorhandler&gt;</span>      </a></code></pre></div>
+<h3 id="description-1">description</h3>
+<p>Defines a description for a step.</p>
+<p>Example:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw">&lt;command&gt;</span></a>
+<a class="sourceLine" id="cb29-2" data-line-number="2">   <span class="kw">&lt;exec&gt;</span>echo this is a shell command<span class="kw">&lt;/exec&gt;</span></a>
+<a class="sourceLine" id="cb29-3" data-line-number="3">   <span class="kw">&lt;description&gt;</span>Demonstrate echo command<span class="kw">&lt;/description&gt;</span></a>
+<a class="sourceLine" id="cb29-4" data-line-number="4"><span class="kw">&lt;/command&gt;</span></a></code></pre></div>
+<h3 id="script-sequence-step">Script sequence step</h3>
+<p>Script steps can be defined in three ways within a command element:</p>
+<ul>
+<li>Simple shell command using <code>exec</code> element.</li>
+<li>Embedded script using <code>script</code> element.</li>
+<li>Script file using <code>scriptfile</code> and <code>scriptargs</code> elements.</li>
+</ul>
+<p>Example exec step:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw">&lt;command&gt;</span></a>
+<a class="sourceLine" id="cb30-2" data-line-number="2">   <span class="kw">&lt;exec&gt;</span>echo this is a shell command<span class="kw">&lt;/exec&gt;</span></a>
+<a class="sourceLine" id="cb30-3" data-line-number="3"><span class="kw">&lt;/command&gt;</span></a></code></pre></div>
+<p>Inline script. Note that using CDATA section will preserve linebreaks in the script. Simply put the script within a <code>script</code> element:</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw">&lt;command&gt;</span></a>
+<a class="sourceLine" id="cb31-2" data-line-number="2">    <span class="kw">&lt;script&gt;</span><span class="bn">&lt;![CDATA[</span>#!/bin/bash</a>
+<a class="sourceLine" id="cb31-3" data-line-number="3">echo this is a test</a>
+<a class="sourceLine" id="cb31-4" data-line-number="4">echo whatever</a>
+<a class="sourceLine" id="cb31-5" data-line-number="5">exit 2 ]&gt;&lt;/script&gt;</a>
+<a class="sourceLine" id="cb31-6" data-line-number="6">&lt;/command&gt;</a></code></pre></div>
+<p>Script File:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw">&lt;command</span> <span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb32-2" data-line-number="2">    <span class="kw">&lt;scriptfile&gt;</span>/path/to/a/script<span class="kw">&lt;/scriptfile&gt;</span></a>
+<a class="sourceLine" id="cb32-3" data-line-number="3">    <span class="kw">&lt;scriptargs&gt;</span>-whatever something<span class="kw">&lt;/scriptargs&gt;</span></a>
+<a class="sourceLine" id="cb32-4" data-line-number="4"><span class="kw">&lt;/command&gt;</span>      </a></code></pre></div>
+<p>Script URL:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">&lt;command</span> <span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb33-2" data-line-number="2">    <span class="kw">&lt;scripturl&gt;</span>http://example.com/path/to/a/script<span class="kw">&lt;/scripturl&gt;</span></a>
+<a class="sourceLine" id="cb33-3" data-line-number="3">    <span class="kw">&lt;scriptargs&gt;</span>-whatever something<span class="kw">&lt;/scriptargs&gt;</span></a>
+<a class="sourceLine" id="cb33-4" data-line-number="4"><span class="kw">&lt;/command&gt;</span>      </a></code></pre></div>
+<h4 id="script-interpreter">Script Interpreter</h4>
+<p>When using <code>&lt;script&gt;</code>, or <code>&lt;scriptfile&gt;</code>, you can declare an interpreter to use to execute the script and its args.</p>
+<p>Add <code>&lt;scriptinterpreter&gt;</code> to the <code>&lt;command&gt;</code>:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">&lt;command</span> <span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb34-2" data-line-number="2">    <span class="kw">&lt;scriptinterpreter&gt;</span>sudo -u usera<span class="kw">&lt;/scriptinterpreter&gt;</span></a>
+<a class="sourceLine" id="cb34-3" data-line-number="3">    <span class="kw">&lt;scripturl&gt;</span>http://example.com/path/to/a/script<span class="kw">&lt;/scripturl&gt;</span></a>
+<a class="sourceLine" id="cb34-4" data-line-number="4">    <span class="kw">&lt;scriptargs&gt;</span>-whatever something<span class="kw">&lt;/scriptargs&gt;</span></a>
+<a class="sourceLine" id="cb34-5" data-line-number="5"><span class="kw">&lt;/command&gt;</span></a></code></pre></div>
+<p>This will be executed effectively with this commandline:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="fu">sudo</span> -u usera script.sh -whatever something</a></code></pre></div>
+<p>If the filename and arguments need to be quoted when passed to the interpreter, you can declare <code>argsQuoted='true'</code>:</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw">&lt;command</span> <span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb36-2" data-line-number="2">    <span class="kw">&lt;scriptinterpreter</span><span class="ot"> argsquoted=</span><span class="st">&#39;true&#39;</span><span class="kw">&gt;</span>sudo -u usera sh -c <span class="kw">&lt;/scriptinterpreter&gt;</span></a>
+<a class="sourceLine" id="cb36-3" data-line-number="3">    <span class="kw">&lt;scripturl&gt;</span>http://example.com/path/to/a/script<span class="kw">&lt;/scripturl&gt;</span></a>
+<a class="sourceLine" id="cb36-4" data-line-number="4">    <span class="kw">&lt;scriptargs&gt;</span>-whatever something<span class="kw">&lt;/scriptargs&gt;</span></a>
+<a class="sourceLine" id="cb36-5" data-line-number="5"><span class="kw">&lt;/command&gt;</span></a></code></pre></div>
+<p>This will execute as:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="fu">sudo</span> -u usera sh -c <span class="st">&#39;script.sh -whatever something&#39;</span></a></code></pre></div>
+<h3 id="job-sequence-step">Job sequence step</h3>
+<p>Define a <a href="#jobref">jobref</a> element within the <a href="#command">command</a> element</p>
+<h4 id="jobref">jobref</h4>
+<p><em>Attributes</em></p>
+<dl>
+<dt>name</dt>
+<dd><p>the job name</p>
+</dd>
+<dt>group</dt>
+<dd><p>the group name</p>
+</dd>
+<dt>nodeStep</dt>
+<dd><p><code>true/false</code> whether the Job reference step should run for each node</p>
+</dd>
+</dl>
+<p><em>Nested elements</em></p>
+<p>Optional “arg” element can be embedded:</p>
+<h5 id="arg">arg</h5>
+<p>: option arguments to the script or job</p>
+<p>Example passing arguments to the job:</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">&lt;command</span> <span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb38-2" data-line-number="2">    <span class="kw">&lt;jobref</span><span class="ot"> group=</span><span class="st">&quot;My group&quot;</span><span class="ot"> name=</span><span class="st">&quot;My Job&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb38-3" data-line-number="3">       <span class="kw">&lt;arg</span><span class="ot"> line=</span><span class="st">&quot;-option value -option2 value2&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb38-4" data-line-number="4">    <span class="kw">&lt;/jobref&gt;</span></a>
+<a class="sourceLine" id="cb38-5" data-line-number="5"><span class="kw">&lt;/command&gt;</span>      </a></code></pre></div>
+<p>If <code>nodeStep</code> is set to “true”, then the Job Reference step will operate as a <em>Node Step</em> instead of the default. As a <em>Node Step</em> it will execute once for each matched node in the containing Job workflow, and can use node attribute variable expansion in the arguments to the job reference.</p>
+<h4 id="nodefilters-jobref">nodefilters (jobref)</h4>
+<p>The node filters to override for the <a href="#jobref">jobref</a>.</p>
+<p><em>Nested elements</em></p>
+<dl>
+<dt><a href="#filter">filter</a></dt>
+<dd><p>node filter string. See <a href="../manual/node-filters.html" title="User Guide - Node Filters">User Guide - Node Filters</a>.</p>
+</dd>
+</dl>
+<p>Example:</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="kw">&lt;jobref</span><span class="ot"> group=</span><span class="st">&quot;My group&quot;</span><span class="ot"> name=</span><span class="st">&quot;My Job&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb39-2" data-line-number="2">  <span class="kw">&lt;dispatch&gt;</span></a>
+<a class="sourceLine" id="cb39-3" data-line-number="3">    <span class="kw">&lt;threadcount&gt;</span>1<span class="kw">&lt;/threadcount&gt;</span></a>
+<a class="sourceLine" id="cb39-4" data-line-number="4">    <span class="kw">&lt;keepgoing&gt;</span>false<span class="kw">&lt;/keepgoing&gt;</span></a>
+<a class="sourceLine" id="cb39-5" data-line-number="5">    <span class="kw">&lt;rankAttribute&gt;</span>nodename<span class="kw">&lt;/rankAttribute&gt;</span></a>
+<a class="sourceLine" id="cb39-6" data-line-number="6">    <span class="kw">&lt;rankOrder&gt;</span>descending<span class="kw">&lt;/rankOrder&gt;</span></a>
+<a class="sourceLine" id="cb39-7" data-line-number="7">  <span class="kw">&lt;/dispatch&gt;</span></a>
+<a class="sourceLine" id="cb39-8" data-line-number="8">  <span class="kw">&lt;nodefilters&gt;</span></a>
+<a class="sourceLine" id="cb39-9" data-line-number="9">    <span class="kw">&lt;filter&gt;</span>tags: production+appserver<span class="kw">&lt;/filter&gt;</span></a>
+<a class="sourceLine" id="cb39-10" data-line-number="10">  <span class="kw">&lt;/nodefilters&gt;</span></a>
+<a class="sourceLine" id="cb39-11" data-line-number="11"><span class="kw">&lt;/jobref&gt;</span></a></code></pre></div>
+<h4 id="dispatch-jobref">dispatch (jobref)</h4>
+<p>The dispatch options to override for the <a href="#jobref">jobref</a>.</p>
+<p>The content is the same as for the <a href="#dispatch">job dispatch</a> section.</p>
+<h3 id="plugin-step">Plugin step</h3>
+<p>There are two types of plugin steps that can be defined: Node steps, and workflow steps.</p>
+<p>Define either one within the <a href="#command">command</a> element:</p>
+<ul>
+<li><a href="#node-step-plugin">node-step-plugin</a></li>
+<li><a href="#step-plugin">step-plugin</a></li>
+</ul>
+<p>Both have the following contents:</p>
+<p><em>Attributes</em></p>
+<dl>
+<dt>type</dt>
+<dd><p>The plugin provider type identifier</p>
+</dd>
+</dl>
+<p><em>Nested elements</em></p>
+<p>Optional ‘configuration’ can be embedded containing a list of ‘entry’ key/value pairs:</p>
+<dl>
+<dt><a href="#configuration">configuration</a></dt>
+<dd><p>Defines plugin configuration entries</p>
+</dd>
+<dt><a href="#entry">entry</a></dt>
+<dd><p>Defines a key/value pair for the configuration.</p>
+</dd>
+</dl>
+<p>Example node step plugin definition:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw">&lt;command&gt;</span></a>
+<a class="sourceLine" id="cb40-2" data-line-number="2">    <span class="kw">&lt;node-step-plugin</span><span class="ot"> type=</span><span class="st">&quot;my-node-step-plugin&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb40-3" data-line-number="3">       <span class="kw">&lt;configuration&gt;</span></a>
+<a class="sourceLine" id="cb40-4" data-line-number="4">        <span class="kw">&lt;entry</span><span class="ot"> key=</span><span class="st">&quot;someconfig&quot;</span><span class="ot"> value=</span><span class="st">&quot;a value&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb40-5" data-line-number="5">        <span class="kw">&lt;entry</span><span class="ot"> key=</span><span class="st">&quot;timout&quot;</span><span class="ot"> value=</span><span class="st">&quot;2000&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb40-6" data-line-number="6">       <span class="kw">&lt;/configuration&gt;</span></a>
+<a class="sourceLine" id="cb40-7" data-line-number="7">    <span class="kw">&lt;/node-step-plugin&gt;</span></a>
+<a class="sourceLine" id="cb40-8" data-line-number="8"><span class="kw">&lt;/command&gt;</span> </a></code></pre></div>
+<p>Example workflow step plugin definition:</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">&lt;command&gt;</span></a>
+<a class="sourceLine" id="cb41-2" data-line-number="2">    <span class="kw">&lt;step-plugin</span><span class="ot"> type=</span><span class="st">&quot;my-step-plugin&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb41-3" data-line-number="3">       <span class="kw">&lt;configuration&gt;</span></a>
+<a class="sourceLine" id="cb41-4" data-line-number="4">        <span class="kw">&lt;entry</span><span class="ot"> key=</span><span class="st">&quot;repeat&quot;</span><span class="ot"> value=</span><span class="st">&quot;12&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb41-5" data-line-number="5">        <span class="kw">&lt;entry</span><span class="ot"> key=</span><span class="st">&quot;debug&quot;</span><span class="ot"> value=</span><span class="st">&quot;true&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb41-6" data-line-number="6">       <span class="kw">&lt;/configuration&gt;</span></a>
+<a class="sourceLine" id="cb41-7" data-line-number="7">    <span class="kw">&lt;/step-plugin&gt;</span></a>
+<a class="sourceLine" id="cb41-8" data-line-number="8"><span class="kw">&lt;/command&gt;</span>     </a></code></pre></div>
+<h4 id="node-step-plugin">node-step-plugin</h4>
+<p>Defines a plugin step that executes for each node.</p>
+<h4 id="step-plugin">step-plugin</h4>
+<p>Defines a plugin step that executes once in a workflow.</p>
+<h4 id="configuration">configuration</h4>
+<p>Contains the key/value pair entries for plugin configuration, within a <a href="#node-step-plugin">node-step-plugin</a> or <a href="#step-plugin">step-plugin</a>.</p>
+<h4 id="entry">entry</h4>
+<p>Defines a key/value pair within a <a href="#configuration">configuration</a>.</p>
+<p><em>Attributes</em>:</p>
+<dl>
+<dt>key</dt>
+<dd><p>Key for the pair</p>
+</dd>
+<dt>value</dt>
+<dd><p>Textual value</p>
+</dd>
+</dl>
+<h2 id="notification">notification</h2>
+<p>Defines email, webhook or plugin notifications for Job success and failure, with in a <a href="#job">job</a> definition.</p>
+<p><em>Nested elements</em></p>
+<dl>
+<dt><a href="#onsuccess">onsuccess</a></dt>
+<dd><p>define notifications for success result</p>
+</dd>
+<dt><a href="#onfailure">onfailure</a></dt>
+<dd><p>define notifications for failure/kill result</p>
+</dd>
+<dt><a href="#onstart">onstart</a></dt>
+<dd><p>define notifications for job start</p>
+</dd>
+<dt><a href="#onavgduration">onavgduration</a></dt>
+<dd><p>define notifications when exceed average duration</p>
+</dd>
+<dt><a href="#onretryablefailure">onretryablefailure</a></dt>
+<dd><p>define notifications when job fails but will be retried</p>
+</dd>
+</dl>
+<p><em>Example</em></p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="kw">&lt;notification&gt;</span></a>
+<a class="sourceLine" id="cb42-2" data-line-number="2">    <span class="kw">&lt;onfailure&gt;</span></a>
+<a class="sourceLine" id="cb42-3" data-line-number="3">        <span class="kw">&lt;email</span><span class="ot"> recipients=</span><span class="st">&quot;test@example.com,foo@example.com&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb42-4" data-line-number="4">    <span class="kw">&lt;/onfailure&gt;</span></a>
+<a class="sourceLine" id="cb42-5" data-line-number="5">    <span class="kw">&lt;onsuccess&gt;</span></a>
+<a class="sourceLine" id="cb42-6" data-line-number="6">        <span class="kw">&lt;email</span><span class="ot"> recipients=</span><span class="st">&quot;test@example.com&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb42-7" data-line-number="7">        <span class="kw">&lt;webhook</span><span class="ot"> urls=</span><span class="st">&quot;http://example.com?id=${execution.id}&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb42-8" data-line-number="8">   <span class="kw">&lt;/onsuccess&gt;</span></a>
+<a class="sourceLine" id="cb42-9" data-line-number="9">    <span class="kw">&lt;onstart&gt;</span></a>
+<a class="sourceLine" id="cb42-10" data-line-number="10">        <span class="kw">&lt;plugin</span><span class="ot"> type=</span><span class="st">&quot;MyPlugin&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb42-11" data-line-number="11">          <span class="kw">&lt;configuration&gt;</span></a>
+<a class="sourceLine" id="cb42-12" data-line-number="12">            <span class="kw">&lt;entry</span><span class="ot"> key=</span><span class="st">&quot;customkey&quot;</span><span class="ot"> value=</span><span class="st">&quot;customvalue&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb42-13" data-line-number="13">          <span class="kw">&lt;/configuration&gt;</span></a>
+<a class="sourceLine" id="cb42-14" data-line-number="14">        <span class="kw">&lt;/plugin&gt;</span></a>
+<a class="sourceLine" id="cb42-15" data-line-number="15">   <span class="kw">&lt;/onstart&gt;</span></a>
+<a class="sourceLine" id="cb42-16" data-line-number="16">   <span class="kw">&lt;onavgduration&gt;</span></a>
+<a class="sourceLine" id="cb42-17" data-line-number="17">        <span class="kw">&lt;email</span><span class="ot"> recipients=</span><span class="st">&#39;test@example.com&#39;</span><span class="ot"> subject=</span><span class="st">&#39;Job Exceeded average duration&#39;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb42-18" data-line-number="18">        <span class="kw">&lt;plugin</span><span class="ot"> type=</span><span class="st">&#39;MinimalNotificationPlugin&#39;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb42-19" data-line-number="19">      <span class="kw">&lt;/onavgduration&gt;</span></a>
+<a class="sourceLine" id="cb42-20" data-line-number="20">    <span class="kw">&lt;onfailure&gt;</span></a>
+<a class="sourceLine" id="cb42-21" data-line-number="21">        <span class="kw">&lt;email</span><span class="ot"> recipients=</span><span class="st">&quot;test@example.com,foo@example.com&quot;</span><span class="ot"> subject=</span><span class="st">&#39;Job will be retried&#39;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb42-22" data-line-number="22">    <span class="kw">&lt;/onfailure&gt;</span></a>
+<a class="sourceLine" id="cb42-23" data-line-number="23"><span class="kw">&lt;/notification&gt;</span>      </a></code></pre></div>
+<h3 id="onsuccess">onsuccess</h3>
+<p>Embed an <a href="#email">email</a> element to send email on success, within <a href="#notification">notification</a>.</p>
+<p>Embed an <a href="#webhook">webhook</a> element to perform a HTTP POST to some URLs, within <a href="#notification">notification</a>.</p>
+<p>Embed an <a href="#plugin">plugin</a> element to perform a custom action, within <a href="#notification">notification</a>.</p>
+<h3 id="onfailure">onfailure</h3>
+<p>Embed an <a href="#email">email</a> element to send email on failure or kill, within <a href="#notification">notification</a>.</p>
+<p>Embed an <a href="#webhook">webhook</a> element to perform a HTTP POST to some URLs, within <a href="#notification">notification</a>.</p>
+<p>Embed an <a href="#plugin">plugin</a> element to perform a custom action, within <a href="#notification">notification</a>.</p>
+<h3 id="onstart">onstart</h3>
+<p>Embed an <a href="#email">email</a> element to send email on failure or kill, within <a href="#notification">notification</a>.</p>
+<p>Embed an <a href="#webhook">webhook</a> element to perform a HTTP POST to some URLs, within <a href="#notification">notification</a>.</p>
+<p>Embed an <a href="#plugin">plugin</a> element to perform a custom action, within <a href="#notification">notification</a>.</p>
+<h3 id="onavgduration">onavgduration</h3>
+<p>Embed an <a href="#email">email</a> element to send email on success, within <a href="#notification">notification</a>.</p>
+<p>Embed an <a href="#webhook">webhook</a> element to perform a HTTP POST to some URLs, within <a href="#notification">notification</a>.</p>
+<p>Embed an <a href="#plugin">plugin</a> element to perform a custom action, within <a href="#notification">notification</a>.</p>
+<h3 id="onretryablefailure">onretryablefailure</h3>
+<p>Embed an <a href="#email">email</a> element to send email on failure with retries scheduled, within <a href="#notification">notification</a>.</p>
+<p>Embed an <a href="#webhook">webhook</a> element to perform a HTTP POST to some URLs, within <a href="#notification">notification</a>.</p>
+<p>Embed an <a href="#plugin">plugin</a> element to perform a custom action, within <a href="#notification">notification</a>.</p>
+<h3 id="email">email</h3>
+<p>Define email recipients for Job execution result, within <a href="#onsuccess">onsuccess</a>, <a href="#onfailure">onfailure</a>, <a href="#onstart">onstart</a>, <a href="#onavgduration">onavgduration</a>, or <a href="#onretryablefailure">onretryablefailure</a>.</p>
+<p><em>Attributes</em></p>
+<dl>
+<dt>recipients</dt>
+<dd><p>comma-separated list of email addresses</p>
+</dd>
+</dl>
+<p><em>Example</em></p>
+<pre><code>        &lt;email recipients=&quot;test@example.com,dev@example.com&quot; /&gt;</code></pre>
+<h3 id="webhook">webhook</h3>
+<p>Define URLs to submit a HTTP POST to containing the job execution result, within <a href="#onsuccess">onsuccess</a>, <a href="#onfailure">onfailure</a>, <a href="#onstart">onstart</a>, <a href="#onavgduration">onavgduration</a>, or <a href="#onretryablefailure">onretryablefailure</a>.</p>
+<p><em>Attributes</em></p>
+<dl>
+<dt>urls</dt>
+<dd><p>comma-separated list of URLs</p>
+</dd>
+</dl>
+<p><em>Example</em></p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="kw">&lt;webhook</span><span class="ot"> urls=</span><span class="st">&quot;http://server/callback?id=${execution.id}</span><span class="er">&amp;</span><span class="st">status=${execution.status}</span><span class="er">&amp;</span><span class="st">trigger=${notification.trigger}&quot;</span><span class="kw">/&gt;</span></a></code></pre></div>
+<ul>
+<li>For more information about the Webhook mechanism used, see the chapter <a href="../manual/running-jobs.html#webhooks" title="User Guide - Running Jobs - Webhooks">Integration - Webhooks</a>.</li>
+</ul>
+<h3 id="plugin">plugin</h3>
+<p>Defines a configuration for a plugin to perform a Notification, within <a href="#onsuccess">onsuccess</a>, <a href="#onfailure">onfailure</a>, <a href="#onstart">onstart</a>, <a href="#onavgduration">onavgduration</a>, or <a href="#onretryablefailure">onretryablefailure</a>.</p>
+<p><em>Attributes</em></p>
+<dl>
+<dt>type</dt>
+<dd><p>The plugin provider type identifier</p>
+</dd>
+</dl>
+<p><em>Nested elements</em></p>
+<p>Optional ‘configuration’ can be embedded containing a list of ‘entry’ key/value pairs:</p>
+<dl>
+<dt><a href="#configuration-1">configuration</a></dt>
+<dd><p>Defines plugin configuration entries</p>
+</dd>
+<dt><a href="#entry-1">entry</a></dt>
+<dd><p>Defines a key/value pair for the configuration.</p>
+</dd>
+</dl>
+<p>Example notification plugin definition:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">&lt;onstart&gt;</span></a>
+<a class="sourceLine" id="cb45-2" data-line-number="2">    <span class="kw">&lt;plugin</span><span class="ot"> type=</span><span class="st">&quot;my-notification-plugin&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb45-3" data-line-number="3">       <span class="kw">&lt;configuration&gt;</span></a>
+<a class="sourceLine" id="cb45-4" data-line-number="4">        <span class="kw">&lt;entry</span><span class="ot"> key=</span><span class="st">&quot;someconfig&quot;</span><span class="ot"> value=</span><span class="st">&quot;a value&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb45-5" data-line-number="5">        <span class="kw">&lt;entry</span><span class="ot"> key=</span><span class="st">&quot;timout&quot;</span><span class="ot"> value=</span><span class="st">&quot;2000&quot;</span><span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb45-6" data-line-number="6">       <span class="kw">&lt;/configuration&gt;</span></a>
+<a class="sourceLine" id="cb45-7" data-line-number="7">    <span class="kw">&lt;/plugin&gt;</span></a>
+<a class="sourceLine" id="cb45-8" data-line-number="8"><span class="kw">&lt;/onstart&gt;</span> </a></code></pre></div>
+<h4 id="configuration-1">configuration</h4>
+<p>Contains the key/value pair entries for plugin configuration, within a <a href="#plugin">plugin</a> notification definition.</p>
+<h4 id="entry-1">entry</h4>
+<p>Defines a key/value pair within a <a href="#configuration-1">configuration</a>.</p>
+<p><em>Attributes</em>:</p>
+<dl>
+<dt>key</dt>
+<dd><p>Key for the pair</p>
+</dd>
+<dt>value</dt>
+<dd><p>Textual value</p>
+</dd>
+</dl>
+<h1 id="see-also">SEE ALSO</h1>
+<p><code>[rd-jobs][page:manual/04-jobs.md]</code></p>
+<p>The Rundeck source code and all documentation may be downloaded from <a href="https://github.com/rundeck/rundeck/" class="uri">https://github.com/rundeck/rundeck/</a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbsbottom">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb bottom collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.16)</a></li>
+    
+    
+    <li ><a href="index.html">Document Format Reference</a></li>
+    <li class="active"><a href="job-xml.html">JOB-XML</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="aclpolicy.html"><i class="glyphicon glyphicon-arrow-left"></i> ACLPOLICY</a></li>
+      <li class="next"><a href="job-yaml.html">JOB-YAML <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manpages/man5/job-v20.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manpages/man5/job-v20.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Enterprise for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Enterprise
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://rundeck.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2019 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2019-02-24T09:00:15UTC">2019-02-24T09:00:15UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+
+<!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2768099.js"></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>

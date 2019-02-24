@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>File Transfer Plugins</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="../../jquery.hotkeys.js"></script>
+<script src="../../jquery.autocomplete.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+window._pageRelpath="../../";
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+<script src="../../docs-autocomplete.js"></script>
+  <link rel="stylesheet" href="../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control navquery" name="q" placeholder="Search" id="searchQuery">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbstop">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb top collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.16)</a></li>
+    
+        <li><a href="../index.html">User Guide</a></li>
+    
+    
+    
+    <li class="active"><a href="file-transfer-plugins.html">File Transfer Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="jira-workflow-step-plugins-pro.html"><i class="glyphicon glyphicon-arrow-left"></i> Jira Workflow Step Plugins (Pro)</a></li>
+      
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/workflow-steps/file-transfer.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/workflow-steps/file-transfer.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#ssh-keys-settings">SSH Keys settings</a><ul>
+<li><a href="#sftp-host-keys-setup.">SFTP Host Keys setup.</a></li>
+<li><a href="#installing-a-host-key.">Installing a host key.</a></li>
+<li><a href="#what-if-my-rundeck-server-is-a-windows-server">What if my Rundeck server is a windows server?</a></li>
+</ul></li>
+<li><a href="#examples">Examples</a><ul>
+<li><a href="#copy-from-sftp-to-local">Copy from SFTP to Local</a></li>
+<li><a href="#copy-from-local-to-ftp">Copy from Local to FTP</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">File Transfer Plugins</h1>
+</div>
+<!---
+Original: 
+http://download.rundeck.com/plugins/file-transfer-plugin.html
+--->
+<p>This plugin provides FTP/SFTP/HTTP file transfers via Workflow Steps. It is available since 2.1.0 (Rundeck PRO Version History)</p>
+<h2 id="configuration">Configuration</h2>
+<p><strong>Source</strong></p>
+<ul>
+<li><p><strong>URL (required)</strong>: URL for the source host. Supported protocols are: file, ftp, sftp, http, https.</p></li>
+<li><p><strong>Username</strong>: Username for the source server. Required only if the protocol is not <code>file://</code>.</p></li>
+<li><p><strong>Authentication Type</strong>: Source Authentication Type. Required only if the protocol is not <code>file://</code> (Key authentication just enable for SFTP protocol)</p></li>
+<li><p><strong>Password</strong>: Password for the source FTP client. Required only if the protocol is not <code>file://</code>.</p></li>
+<li><p><strong>Private Key</strong>: Private Key path for the source FTP client (Just for SFTP protocol).</p></li>
+</ul>
+<p><strong>Destination</strong></p>
+<ul>
+<li><p><strong>URL (required)</strong>: URL for the destination file. Supported protocols are: file, ftp, sftp.</p></li>
+<li><p><strong>Username</strong>: Username for the destination server. Required only if the protocol is not <code>file://</code>.</p></li>
+<li><p><strong>Authentication Type</strong>: Destination Authentication Type. Required only if the protocol is not <code>file://</code> (Key authentication just enable for SFTP protocol)</p></li>
+<li><p><strong>Password</strong>: Password for the source FTP client. Required only if the protocol is not <code>file://</code>.</p></li>
+<li><p><strong>Private Key</strong>: Private Key path for the destination (Just for SFTP protocol).</p></li>
+</ul>
+<p><strong>Options</strong></p>
+<ul>
+<li><p><strong>BackUp on Destination file exists?</strong>: Should back up on the Destination file if already exits?.</p></li>
+<li><p><strong>BackUp on Source?</strong>: Should back up on the Source?.</p></li>
+<li><p><strong>Backup on Source Path</strong>: Will use the same protocol, host, and credentials than the source.</p></li>
+<li><p><strong>Delete file after operation?</strong>: Should the file be deleted after complete the operation?.</p></li>
+</ul>
+<h2 id="ssh-keys-settings">SSH Keys settings</h2>
+<h3 id="sftp-host-keys-setup.">SFTP Host Keys setup.</h3>
+<p>The SFTP endpoint of this plugin uses the SSH protocol for communication, which needs a trusted base of keys for identifying each host. This key base is commonly known in the Linux world as the <code>$HOME/.ssh/known_hosts</code> file.</p>
+<p>This plugin uses the same file format to search for the host’s keys, searching them at the <code>$RDECK_BASE/.ssh/known_hosts</code> file. If a server is not specified in this file, SFTP communication will not work. In this case, you will see an error like this in the log:</p>
+<pre><code>Error [JSchException] creating SFTP endpoint: UnknownHostKey: 10.10.10.4. RSA key fingerprint is 23:7a:96:8f:02:b5:0d:ad:ee:ec:69:ad:b8:c3:1b:30</code></pre>
+<h3 id="installing-a-host-key.">Installing a host key.</h3>
+<p>To install a host key you need to retrieve the key first. This is easily done on a Linux server using the following command:</p>
+<pre><code>ssh-keyscan -t rsa &lt;SERVER ADDRESS&gt;</code></pre>
+<p>This command will output a text line.</p>
+<p>For example, the command <code>ssh-keyscan -t rsa 10.10.10.4</code> should output:</p>
+<pre><code>10.10.10.4 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDR8LIJso4j+8l5p5Kx4Vm3gZEFzeChihD2nRqJvXZqjpo64bs6AjT8ismwTjAlzJVeFTiRW5/Kj/HAk2ipVTaNbqdwSrKBKewu0BwSWuY84VWZGC4V1R2QUS6+nMeXdi+A0BJFW3rM6uyhb+EgtyOd4ZnwKAoF01FW76zvdY3O0erwcxLZHP8y92C/Qgy+2ii8xfVGrmUNkX+neoNisMllyr+UOXzpPWFmPgyCE7r7Cptishj66XFfQI+xh5HiVL4sbnGP3jX8fC3C802znZ9XgGVENxdwIZqWfc8JzsjfHF6HD7lY/zgS5r/JcxX5Zt4gGjmzy0inJRogWCwXI1+r</code></pre>
+<p>Copy this line entirely (be very careful to copy all characters) and paste it into the <code>$RDECK_BASE/.ssh/known_hosts</code> file. Ensure each hostkey text is one single line on the file. If the address reported at this text does not match the IP you need on your Rundeck server, you can change the IP address manually. You must be careful to not modify any text character besides the server address.</p>
+<h3 id="what-if-my-rundeck-server-is-a-windows-server">What if my Rundeck server is a windows server?</h3>
+<p>If Rundeck is running in a windows server, you have a few options:</p>
+<p>You can run the above command on a Linux server (even the destination server is useful) and copy the text to your Rundeck’s known_hosts file. Be sure to set the correct address at the start of the line.</p>
+<p>You can a windows SSH client to retrieve the hostkey. Be sure to retrieve the key in the correct “known_hosts” format. You can install OpenSSH on Windows to provide the <code>sh-keyscan</code> command. Known Issues When using SFTP protocol, JSCH will search for the host key at <code>%RDECK_BASE%/.ssh/known_hosts</code> file, however, the Java JVM and JSCH do not provide the default encryption algorithms used by OpenSSH (ecdsa-sha2-nistp256 as of 07-2016) resulting in failure on finding the server key even if the server is present in the known_hosts file.</p>
+<p>As a workaround, be sure to extract the hostkey using the <code>-t rsa</code> parameter for <code>sh-keyscan</code>:</p>
+<pre><code>ssh-keyscan -t rsa &lt;SERVER ADDRESS&gt;</code></pre>
+<p>If you DO need the use of strongest encryption methods (like ecdsa), you must install the Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files on your JVM.</p>
+<p>More info on this issue <a href="http://stackoverflow.com/questions/30846076/jsch-algorithm-negotiation-fail">here</a></p>
+<h2 id="examples">Examples</h2>
+<h3 id="copy-from-sftp-to-local">Copy from SFTP to Local</h3>
+<p>This job copy a file from remote machine to the Rundeck server using SFTP</p>
+<pre><code>- defaultTab: summary
+  description: &#39;Copy a file from SFTP server to rundeck&#39;
+  executionEnabled: true
+  group: FileTransfer
+  loglevel: INFO
+  name: FileTransferSftp
+  nodeFilterEditable: false
+  scheduleEnabled: true
+  sequence:
+    commands:
+    - configuration:
+        backupDestinationFile: &#39;false&#39;
+        backupSourceFile: &#39;false&#39;
+        deleteFile: &#39;false&#39;
+        destURLString: file:///var/lib/rundeck/
+        sourceAuthentication: password
+        sourcePassword: keys/node/user.password
+        sourceURLString: sftp://stfp-sever:/home/user/somefile.dat
+        sourceUsername: user
+      nodeStep: true
+      type: filetransfer
+    keepgoing: false
+    strategy: node-first</code></pre>
+<h3 id="copy-from-local-to-ftp">Copy from Local to FTP</h3>
+<p>This job copy a file from the Rundeck server to a remote machine using FTP</p>
+<pre><code>- defaultTab: summary
+  description: &#39;Copy a file from local to a FTP server&#39;
+  executionEnabled: true
+  group: FileTransfer
+  loglevel: INFO
+  name: FileTransferFtp
+  nodeFilterEditable: false
+  scheduleEnabled: true
+  sequence:
+    commands:
+    - configuration:
+        backupDestinationFile: &#39;false&#39;
+        backupSourceFile: &#39;false&#39;
+        deleteFile: &#39;false&#39;
+        destAuthentication: password
+        destPassword: keys/node/windows.password
+        destURLString: ftp://windows-server/tmp/
+        destUsername: Administrator
+        sourceURLString: file:///var/lib/rundeck/test.txt
+      nodeStep: true
+      type: filetransfer
+    keepgoing: false
+    strategy: node-first
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbsbottom">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb bottom collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.16)</a></li>
+    
+        <li><a href="../index.html">User Guide</a></li>
+    
+    
+    
+    <li class="active"><a href="file-transfer-plugins.html">File Transfer Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="jira-workflow-step-plugins-pro.html"><i class="glyphicon glyphicon-arrow-left"></i> Jira Workflow Step Plugins (Pro)</a></li>
+      
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/workflow-steps/file-transfer.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/workflow-steps/file-transfer.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Enterprise for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Enterprise
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://rundeck.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2019 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2019-02-24T09:00:15UTC">2019-02-24T09:00:15UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+
+<!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2768099.js"></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
