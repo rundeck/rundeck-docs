@@ -122,7 +122,7 @@ jQuery(function(){
 <li><p>In case you have customs plugins on <code>libext</code> folder, backup them. For example, you can move the full <code>libext</code>:</p>
 <pre><code>mv $RDECK_BASE/libext $RDECK_BASE/libext.2-11</code></pre></li>
 <li><p>Remove previous “source” folders:</p>
-<pre><code>rm -rf server/exp/ server/lib/ server/sbin</code></pre></li>
+<pre><code>rm -rf $RDECK_BASE/server/exp/ $RDECK_BASE/server/lib/ $RDECK_BASE/server/sbin/ $RDECK_BASE/tools/</code></pre></li>
 <li><p>Copy the new war file to <code>$RDECK_BASE</code> and install it:</p>
 <pre><code>java -jar rundeck-3.X.war --installonly</code></pre></li>
 <li><p>Add the following attribute to <code>$RDECK_BASE/server/config/rundeck-config.properties</code></p>
@@ -276,7 +276,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-02-24T09:00:31UTC">2019-02-24T09:00:31UTC</span>
+<span class="generated-date" title="2019-03-07T21:36:19UTC">2019-03-07T21:36:19UTC</span>
 </p>
 </footer>
 </div>
