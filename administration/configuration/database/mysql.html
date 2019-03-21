@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>edam7582936753960636626temp</title>
+  <title>edam632695865029820741temp</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -105,7 +105,8 @@ jQuery(function(){
 <div class="nav">
 <ul>
 <li><a href="#using-mysql-as-a-database-backend">Using MySQL as a database backend</a><ul>
-<li><a href="#install-mysql">Install Mysql</a></li>
+<li><a href="#install-mysql">Install MySQL</a></li>
+<li><a href="#configure-mysql">Configure MySQL</a></li>
 <li><a href="#setup-rundeck-database">Setup Rundeck Database</a></li>
 <li><a href="#configure-rundeck">Configure Rundeck</a></li>
 </ul></li>
@@ -126,9 +127,11 @@ jQuery(function(){
 <div class="col-sm-9">
 <h1 id="using-mysql-as-a-database-backend">Using MySQL as a database backend</h1>
 <p>This is a simple guide for setting up Mysql for use with Rundeck.</p>
-<h2 id="install-mysql">Install Mysql</h2>
+<h2 id="install-mysql">Install MySQL</h2>
 <p>You can “yum install” or “apt-get install” the server, you can find installation guides for other OS <a href="https://dev.mysql.com/doc/refman/5.7/en/installing.html">here</a></p>
+<h2 id="configure-mysql">Configure MySQL</h2>
 <p>After install, run the <a href="https://dev.mysql.com/doc/refman/5.7/en/mysql-secure-installation.html">mysql_secure_installation script</a>. This will let prompt you to set the root password for mysql, as well as disable anonymous access.</p>
+<p>Set an appropriate <a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-buffer-pool-resize.html">innodb_buffer_pool_size</a>. MySQL, like many databases, manages its own page cache and the buffer pool size determines how much RAM it can use! Setting this to 80% of the system memory is the common wisdom for dedicated servers, however you may want go higher if your server has more than 32G of RAM.</p>
 <h2 id="setup-rundeck-database">Setup Rundeck Database</h2>
 <p>Now you want to create a database and user access for the Rundeck server.</p>
 <p>If it is not running, start mysqld with “service mysqld start”</p>
@@ -310,7 +313,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-03-14T16:14:27UTC">2019-03-14T16:14:27UTC</span>
+<span class="generated-date" title="2019-03-21T23:32:34UTC">2019-03-21T23:32:34UTC</span>
 </p>
 </footer>
 </div>
