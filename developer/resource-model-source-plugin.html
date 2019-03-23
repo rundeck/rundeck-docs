@@ -187,10 +187,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 id="about">About</h2>
 <p>Resource Model Sources provide the means to retrieve Node resources for a Project. You can implement a Resource Model Source using a <a href="#java-plugin-type">Java Plugin Type</a> or a <a href="#script-plugin-type">Script Plugin Type</a>.</p>
 <h2 id="plugin-configuration">Plugin configuration</h2>
-<p>The <code>ResourceModelSource</code> <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190311/com/dtolabs/rundeck/core/resources/ResourceModelSource.html">(javadoc)</a> service allows the plugins to be configured via the Rundeck Web GUI. You are thus able to declare configuration properties for your plugin, which will be displayed as a web form when the Project is configured, or can be manually configured in the <code>project.properties</code> file.</p>
+<p>The <code>ResourceModelSource</code> <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190322/com/dtolabs/rundeck/core/resources/ResourceModelSource.html">(javadoc)</a> service allows the plugins to be configured via the Rundeck Web GUI. You are thus able to declare configuration properties for your plugin, which will be displayed as a web form when the Project is configured, or can be manually configured in the <code>project.properties</code> file.</p>
 <h2 id="java-plugin-type">Java Plugin Type</h2>
 <p>A ResourceModelSource provider is actually a Factory class. An instance of your ResourceModelSource provider will be re-used, so each time a new ResourceModelSource with a new configuration is required, your Factory class will be invoked to produce it.</p>
-<p>Your provider class must implement the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190311/com/dtolabs/rundeck/core/resources/ResourceModelSourceFactory.html">ResourceModelSourceFactory</a>:</p>
+<p>Your provider class must implement the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190322/com/dtolabs/rundeck/core/resources/ResourceModelSourceFactory.html">ResourceModelSourceFactory</a>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">public</span> <span class="kw">interface</span> ResourceModelSourceFactory {</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">    <span class="co">/**</span></a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">     <span class="co">*</span> Return a resource model source for the given configuration</a>
@@ -329,7 +329,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-03-23T02:52:42UTC">2019-03-23T02:52:42UTC</span>
+<span class="generated-date" title="2019-03-23T02:53:55UTC">2019-03-23T02:53:55UTC</span>
 </p>
 </footer>
 </div>

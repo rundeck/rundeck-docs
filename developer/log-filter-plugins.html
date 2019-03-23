@@ -184,7 +184,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <h2 id="about">About</h2>
 <p>Log Filter plugins provide a way to process logging output from commands, scripts and other workflow step types. They can filter the output (remove, add, modify), or they can be used to capture or convert the output. They can also add metadata to the logs, or emit new log data.</p>
-<p>Log Filter plugins implement the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190311/com/dtolabs/rundeck/plugins/logging/LogFilterPlugin.html">LogFilterPlugin</a> interface, and provider the <code>LogFilter</code> service.</p>
+<p>Log Filter plugins implement the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190322/com/dtolabs/rundeck/plugins/logging/LogFilterPlugin.html">LogFilterPlugin</a> interface, and provider the <code>LogFilter</code> service.</p>
 <h2 id="behavior">Behavior</h2>
 <p>Users creating Workflows can configure Log Filter plugins within their workflow in two ways:</p>
 <ol type="1">
@@ -195,9 +195,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><em>Note</em>: Refer to <a href="plugin-development.html#java-plugin-development" title="Plugin Developer Guide - Plugin Development - Java Plugin Development">Java Development</a> for information about developing a Java plugin for Rundeck.</li>
 </ul>
-<p>The plugin interface is <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190311/com/dtolabs/rundeck/plugins/logging/LogFilterPlugin.html">LogFilterPlugin</a>. You can use the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190311/com/dtolabs/rundeck/core/logging/PluginLoggingContext.html">PluginLoggingContext</a> to get the data context and add data to it via the Output context.</p>
+<p>The plugin interface is <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190322/com/dtolabs/rundeck/plugins/logging/LogFilterPlugin.html">LogFilterPlugin</a>. You can use the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190322/com/dtolabs/rundeck/core/logging/PluginLoggingContext.html">PluginLoggingContext</a> to get the data context and add data to it via the Output context.</p>
 <p>When the top level, or step level is ready, all configured Log Filter plugins will be initialized using the optional <code>init</code> method.</p>
-<p>For each log event emitted within the configured level, each configured Log Filter plugin will have its <code>handleEvent</code> method called, in order, with a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190311/com/dtolabs/rundeck/core/logging/LogEventControl.html">LogEventControl</a> instance. The LogEventControl can be used to get or modify the content of the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190311/com/dtolabs/rundeck/core/logging/LogEvent.html">LogEvent</a> (message, type, level, metadata). It can also control how the log event is handled:</p>
+<p>For each log event emitted within the configured level, each configured Log Filter plugin will have its <code>handleEvent</code> method called, in order, with a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190322/com/dtolabs/rundeck/core/logging/LogEventControl.html">LogEventControl</a> instance. The LogEventControl can be used to get or modify the content of the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190322/com/dtolabs/rundeck/core/logging/LogEvent.html">LogEvent</a> (message, type, level, metadata). It can also control how the log event is handled:</p>
 <ul>
 <li><code>emit</code>: the log should be emitted</li>
 <li><code>quell</code>: the log should be futher processed, but not emitted in the final log</li>
@@ -318,7 +318,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-03-23T02:52:42UTC">2019-03-23T02:52:42UTC</span>
+<span class="generated-date" title="2019-03-23T02:53:55UTC">2019-03-23T02:53:55UTC</span>
 </p>
 </footer>
 </div>
