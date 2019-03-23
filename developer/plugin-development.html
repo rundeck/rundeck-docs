@@ -242,21 +242,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><code>rundeck-core</code> is the primary build dependency for most plugin types
 <ul>
-<li><a href="https://search.maven.org/artifact/org.rundeck/rundeck-core/3.0.18-20190311/jar">org.rundeck:rundeck-core:3.0.18-20190311</a></li>
+<li><a href="https://search.maven.org/artifact/org.rundeck/rundeck-core/3.0.18-20190322/jar">org.rundeck:rundeck-core:3.0.18-20190322</a></li>
 </ul></li>
 <li><code>rundeck-storage-api</code> is also required for <a href="storage-plugin.html" title="Plugin Developer Guide - Storage Plugin">Storage Plugin</a>.
 <ul>
-<li><a href="https://search.maven.org/artifact/org.rundeck/rundeck-storage-api/3.0.18-20190311/jar">org.rundeck:rundeck-storage-api:3.0.18-20190311</a></li>
+<li><a href="https://search.maven.org/artifact/org.rundeck/rundeck-storage-api/3.0.18-20190322/jar">org.rundeck:rundeck-storage-api:3.0.18-20190322</a></li>
 </ul></li>
 </ul>
 <p>For gradle, use:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="fu">compile</span>(group:&#39;org.<span class="fu">rundeck</span>&#39;, name: &#39;rundeck-core&#39;, version: &#39;<span class="dv">3</span>.<span class="fl">0.18</span><span class="dv">-20190311</span>&#39;)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="fu">compile</span>(group:&#39;org.<span class="fu">rundeck</span>&#39;, name: &#39;rundeck-core&#39;, version: &#39;<span class="dv">3</span>.<span class="fl">0.18</span><span class="dv">-20190322</span>&#39;)</a></code></pre></div>
 <p>For maven use:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">&lt;dependencies&gt;</span></a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">   <span class="kw">&lt;dependency&gt;</span></a>
 <a class="sourceLine" id="cb2-3" data-line-number="3">      <span class="kw">&lt;groupId&gt;</span>org.rundeck<span class="kw">&lt;/groupId&gt;</span></a>
 <a class="sourceLine" id="cb2-4" data-line-number="4">      <span class="kw">&lt;artifactId&gt;</span>rundeck-core<span class="kw">&lt;/artifactId&gt;</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">      <span class="kw">&lt;version&gt;</span>3.0.18-20190311<span class="kw">&lt;/version&gt;</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">      <span class="kw">&lt;version&gt;</span>3.0.18-20190322<span class="kw">&lt;/version&gt;</span></a>
 <a class="sourceLine" id="cb2-6" data-line-number="6">      <span class="kw">&lt;scope&gt;</span>compile<span class="kw">&lt;/scope&gt;</span></a>
 <a class="sourceLine" id="cb2-7" data-line-number="7">   <span class="kw">&lt;/dependency&gt;</span></a>
 <a class="sourceLine" id="cb2-8" data-line-number="8"><span class="kw">&lt;/dependencies&gt;</span></a></code></pre></div>
@@ -284,14 +284,14 @@ lib/anotherjar-1.3.jar</code></pre>
 <p>Plugins can contain one or more Service Provider implementations. Each plugin file could contain multiple Providers for different types of services, however typically each plugin file would contain only providers related in some fashion.</p>
 <p>Node Execution services:</p>
 <ul>
-<li><code>NodeExecutor</code> - executes a command on a node <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190311/com/dtolabs/rundeck/core/execution/service/NodeExecutor.html">javadoc</a>.</li>
-<li><code>FileCopier</code> - copies a file to a node <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190311/com/dtolabs/rundeck/core/execution/service/FileCopier.html">javadoc</a>.</li>
+<li><code>NodeExecutor</code> - executes a command on a node <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190322/com/dtolabs/rundeck/core/execution/service/NodeExecutor.html">javadoc</a>.</li>
+<li><code>FileCopier</code> - copies a file to a node <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190322/com/dtolabs/rundeck/core/execution/service/FileCopier.html">javadoc</a>.</li>
 </ul>
 <p>Resource model services:</p>
 <ul>
-<li><code>ResourceModelSource</code> - produces a set of Node definitions for a project <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190311/com/dtolabs/rundeck/core/resources/ResourceModelSource.html">javadoc</a>.</li>
-<li><code>ResourceFormatParser</code> - parses a document into a set of Node resources <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190311/com/dtolabs/rundeck/core/resources/format/ResourceFormatParser.html">javadoc</a>.</li>
-<li><code>ResourceFormatGenerator</code> - generates a document from a set of Node resources <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190311/com/dtolabs/rundeck/core/resources/format/ResourceFormatGenerator.html">javadoc</a>.</li>
+<li><code>ResourceModelSource</code> - produces a set of Node definitions for a project <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190322/com/dtolabs/rundeck/core/resources/ResourceModelSource.html">javadoc</a>.</li>
+<li><code>ResourceFormatParser</code> - parses a document into a set of Node resources <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190322/com/dtolabs/rundeck/core/resources/format/ResourceFormatParser.html">javadoc</a>.</li>
+<li><code>ResourceFormatGenerator</code> - generates a document from a set of Node resources <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190322/com/dtolabs/rundeck/core/resources/format/ResourceFormatGenerator.html">javadoc</a>.</li>
 </ul>
 <p>Workflow Step services (described in <a href="workflow-step-plugin.html" title="Plugin Developer Guide - Workflow Step Plugin">Workflow Step Plugin</a>):</p>
 <ul>
@@ -322,33 +322,33 @@ lib/anotherjar-1.3.jar</code></pre>
 <p>A “Provider Class” is a java class that implements a particular interface and declares itself as a provider for a particular Rundeck “Service”.</p>
 <p>Each plugin also defines a “Name” that identifies it for use in Rundeck. The Name of a plugin is also referred to as a “Provider Name”, as the plugin class is a provider of a particular service.</p>
 <p>You should choose a unique but simple name for your provider.</p>
-<p>Each plugin class must have the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190311/com/dtolabs/rundeck/core/plugins/Plugin.html">Plugin</a> annotation applied to it.</p>
+<p>Each plugin class must have the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190322/com/dtolabs/rundeck/core/plugins/Plugin.html">Plugin</a> annotation applied to it.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="at">@Plugin</span>(name=<span class="st">&quot;myprovider&quot;</span>, service=<span class="st">&quot;NodeExecutor&quot;</span>)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">public</span> <span class="kw">class</span> MyProvider <span class="kw">implements</span> NodeExecutor {</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3">...</a>
 <a class="sourceLine" id="cb5-4" data-line-number="4">}</a></code></pre></div>
 <p>Your provider class must have at least a zero-argument constructor, and optionally can have a single-argument constructor with a <code>com.dtolabs.rundeck.core.common.Framework</code> parameter, in which case your class will be constructed with this constructor and passed the Framework instance.</p>
-<p>You may log messages to the ExecutionListener available via <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190311/com/dtolabs/rundeck/core/execution/ExecutionContext.html">ExecutionContext#getExecutionListener()</a> method.</p>
+<p>You may log messages to the ExecutionListener available via <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190322/com/dtolabs/rundeck/core/execution/ExecutionContext.html">ExecutionContext#getExecutionListener()</a> method.</p>
 <p>You can also send output to <code>System.err</code> and <code>System.out</code> and it will be captured as output of the execution.</p>
 <h3 id="provider-lifecycle">Provider Lifecycle</h3>
 <p>Provider classes are instantiated when needed by the Framework object, and the instance is retained within the Service for future reuse. The Framework object may exist across multiple executions, and the provider instance may be reused.</p>
 <p>Provider instances may also be used by multiple threads.</p>
 <p>Your provider class should not use any instance fields and should be careful not to use un-threadsafe operations.</p>
 <h3 id="plugin-failure-results">Plugin failure results</h3>
-<p>Some plugin methods return a “Result” interface which indicates the result status of the call to the plugin class. If there is an error, some plugins allow an Exception to be thrown or for the error to be included in the Result class. In both cases, there is a “FailureReason” that must be specified. See the javadoc: <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190311/com/dtolabs/rundeck/core/execution/workflow/steps/FailureReason.html">FailureReason</a>.</p>
+<p>Some plugin methods return a “Result” interface which indicates the result status of the call to the plugin class. If there is an error, some plugins allow an Exception to be thrown or for the error to be included in the Result class. In both cases, there is a “FailureReason” that must be specified. See the javadoc: <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190322/com/dtolabs/rundeck/core/execution/workflow/steps/FailureReason.html">FailureReason</a>.</p>
 <p>This can be any implementation of the FailureReason interface, and this object’s <code>toString()</code> method will be used to return the reason value (for example, it is passed to Error Handler steps in a Workflow as the “result.reason” string). The mechanism used internally is to provide an Enum implementation of the FailureReason interface, and to enumerate the possible reasons for failure within the enum.</p>
 <p>You are encouraged to re-use existing FailureReasons as much as possible as they provide some basic failure causes. Existing classes:</p>
 <ul>
-<li><a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190311/com/dtolabs/rundeck/core/execution/workflow/steps/node/NodeStepFailureReason.html">NodeStepFailureReason</a></li>
-<li><a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190311/com/dtolabs/rundeck/core/execution/workflow/steps/StepFailureReason.html">StepFailureReason</a></li>
+<li><a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190322/com/dtolabs/rundeck/core/execution/workflow/steps/node/NodeStepFailureReason.html">NodeStepFailureReason</a></li>
+<li><a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190322/com/dtolabs/rundeck/core/execution/workflow/steps/StepFailureReason.html">StepFailureReason</a></li>
 </ul>
 <h3 id="plugin-descriptions">Plugin Descriptions</h3>
 <p>To define a plugin that presents custom GUI configuration properties and/or uses Project/Framework level configuration, you need to provide a Description of your plugin. The Description defines metadata about the plugin, such as the display name and descriptive text, as well as the list of all configuration Properties that it supports.</p>
 <p>There are several ways to declare your plugin’s Description:</p>
 <p><strong>Collaborator interface</strong></p>
-<p>Implement the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190311/com/dtolabs/rundeck/plugins/util/DescriptionBuilder.Collaborator.html">DescriptionBuilder.Collaborator</a> interface in your plugin class, and it will be given an opportunity to perform actions on the Builder object before it finally constructs a Description.</p>
+<p>Implement the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190322/com/dtolabs/rundeck/plugins/util/DescriptionBuilder.Collaborator.html">DescriptionBuilder.Collaborator</a> interface in your plugin class, and it will be given an opportunity to perform actions on the Builder object before it finally constructs a Description.</p>
 <p><strong>Describable interface</strong></p>
-<p>If you want to build the Description object yourself, you can do so by implementing the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190311/com/dtolabs/rundeck/core/plugins/configuration/Describable.html">Describable</a> interface. Return a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190311/com/dtolabs/rundeck/core/plugins/configuration/Description.html">Description</a> instance. You can construct one by using the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190311/com/dtolabs/rundeck/plugins/util/DescriptionBuilder.html">DescriptionBuilder</a> builder class.</p>
+<p>If you want to build the Description object yourself, you can do so by implementing the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190322/com/dtolabs/rundeck/core/plugins/configuration/Describable.html">Describable</a> interface. Return a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190322/com/dtolabs/rundeck/core/plugins/configuration/Description.html">Description</a> instance. You can construct one by using the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190322/com/dtolabs/rundeck/plugins/util/DescriptionBuilder.html">DescriptionBuilder</a> builder class.</p>
 <p><strong>Description Annotations</strong></p>
 <p>Newer plugin types support using java annotations to create a Description object. See <a href="plugin-annotations.html" title="Plugin Developer Guide - Plugin Annotations">Plugin Annotations</a>.</p>
 <p><strong>Provider Metadata</strong></p>
@@ -356,7 +356,7 @@ lib/anotherjar-1.3.jar</code></pre>
 <h4 id="description-properties">Description Properties</h4>
 <p>Within a Description object you can define a set of Property objects, which represent the input properties for the plugin.</p>
 <p>Some plugin types support using Java Annotations to define properties, see <a href="plugin-annotations.html" title="Plugin Developer Guide - Plugin Annotations">Plugin Annotations</a>.</p>
-<p>For the remaining plugin types, the Properties must be defined using the other interfaces described above, typically with the use of a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190311/com/dtolabs/rundeck/plugins/util/PropertyBuilder.html">PropertyBuilder</a>.</p>
+<p>For the remaining plugin types, the Properties must be defined using the other interfaces described above, typically with the use of a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190322/com/dtolabs/rundeck/plugins/util/PropertyBuilder.html">PropertyBuilder</a>.</p>
 <p><strong>Rendering Options</strong></p>
 <p>You can specify “rendering options” to affect the property being rendered in the Rundeck GUI. These affect Property type <em>String</em> only:</p>
 <ul>
@@ -364,7 +364,7 @@ lib/anotherjar-1.3.jar</code></pre>
 <li>Password: renders the input as a password input.</li>
 </ul>
 <p>For more information see the options under <a href="#property-rendering-options">Property Rendering options</a>.</p>
-<p>A set of constants for the supported rendering option keys and some values are provided in the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190311/com/dtolabs/rundeck/core/plugins/configuration/StringRenderingConstants.html">StringRenderingConstants</a>.</p>
+<p>A set of constants for the supported rendering option keys and some values are provided in the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.18-20190322/com/dtolabs/rundeck/core/plugins/configuration/StringRenderingConstants.html">StringRenderingConstants</a>.</p>
 <h3 id="internationalizationlocalization-for-jar-files">Internationalization/Localization for Jar files</h3>
 <p>Since Rundeck 2.6.10, Plugins support Internationalization (“i18n”) using Java properties files.</p>
 <p>Include a <code>resources/i18n</code> directory in your jar file, with localized versions of your Plugin messages.</p>
@@ -929,7 +929,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-03-23T02:52:35UTC">2019-03-23T02:52:35UTC</span>
+<span class="generated-date" title="2019-03-23T02:54:31UTC">2019-03-23T02:54:31UTC</span>
 </p>
 </footer>
 </div>
