@@ -102,31 +102,48 @@ jQuery(function(){
 <div class="col-sm-3 toc-nav">
 <div class="nav">
 <ul>
-<li><a href="#change-case-state-workflowstep">Change case state Workflowstep</a><ul>
+<li><a href="#service-now-incident-update-state">Service Now / Incident / Update State</a><ul>
 <li><a href="#configuration">Configuration</a></li>
 <li><a href="#usage">Usage</a></li>
+<li><a href="#adding-dynamic-list-data">Adding dynamic list data</a></li>
 </ul></li>
-<li><a href="#check-assigned-cases-workflowstep">Check assigned cases Workflowstep</a><ul>
+<li><a href="#service-now-incident-check-assigned">Service Now / Incident / Check Assigned</a><ul>
 <li><a href="#configuration-1">Configuration</a></li>
 <li><a href="#usage-1">Usage</a></li>
 </ul></li>
-<li><a href="#check-case-state-workflowstep">Check case state Workflowstep</a><ul>
+<li><a href="#service-now-incident-check-state">Service Now / Incident / Check State</a><ul>
 <li><a href="#configuration-2">Configuration</a></li>
 <li><a href="#usage-2">Usage</a></li>
+<li><a href="#adding-dynamic-list-data-1">Adding dynamic list data</a></li>
 </ul></li>
-<li><a href="#comment-case-workflowstep">Comment case Workflowstep</a><ul>
+<li><a href="#service-now-incident-comment">Service Now / Incident / Comment</a><ul>
 <li><a href="#configuration-3">Configuration</a></li>
 </ul></li>
-<li><a href="#create-case-workflowstep">Create case Workflowstep</a><ul>
+<li><a href="#service-now-incident-create">Service Now / Incident / Create</a><ul>
 <li><a href="#configuration-4">Configuration</a></li>
 <li><a href="#usage-3">Usage</a></li>
+<li><a href="#adding-dynamic-list-data-2">Adding dynamic list data</a></li>
 </ul></li>
-<li><a href="#comment-case-notification">Comment case Notification</a><ul>
+<li><a href="#service-now-incident-edit">Service Now / Incident / Edit</a><ul>
 <li><a href="#configuration-5">Configuration</a></li>
-</ul></li>
-<li><a href="#create-case-notification">Create case Notification</a><ul>
-<li><a href="#configuration-6">Configuration</a></li>
 <li><a href="#usage-4">Usage</a></li>
+<li><a href="#adding-dynamic-list-data-3">Adding dynamic list data</a></li>
+</ul></li>
+<li><a href="#service-now-incident-view">Service Now / Incident / View</a><ul>
+<li><a href="#configuration-6">Configuration</a></li>
+<li><a href="#usage-5">Usage</a></li>
+</ul></li>
+<li><a href="#service-now-change-check-state">Service Now / Change / Check State</a><ul>
+<li><a href="#configuration-7">Configuration</a></li>
+<li><a href="#usage-6">Usage</a></li>
+</ul></li>
+<li><a href="#service-now-change-update-state">Service Now / Change / Update State</a><ul>
+<li><a href="#configuration-8">Configuration</a></li>
+<li><a href="#usage-7">Usage</a></li>
+</ul></li>
+<li><a href="#service-now-change-create">Service Now / Change / Create</a><ul>
+<li><a href="#configuration-9">Configuration</a></li>
+<li><a href="#usage-8">Usage</a></li>
 </ul></li>
 </ul>
 </div>
@@ -139,7 +156,7 @@ jQuery(function(){
 Original: 
 http://support.rundeck.com/customer/en/portal/articles/2915300-servicenow-plugins)
 --->
-<h2 id="change-case-state-workflowstep">Change case state Workflowstep</h2>
+<h2 id="service-now-incident-update-state">Service Now / Incident / Update State</h2>
 <p>Rundeck workflow step that changes an incident state</p>
 <h3 id="configuration">Configuration</h3>
 <p>The Service Now connection credentials are set in the project.properties file for your project. Password it’s a keystorage path to the password.</p>
@@ -151,12 +168,18 @@ project.plugin.WorkflowStep.Service-Now-Incident-Change-State.password-key-stora
 servicenow.login=user
 servicenow.password-key-storage-path=keys/servicenow/pass</code></pre>
 <h3 id="usage">Usage</h3>
-<p>To use the plugin, configure the follow mandatory inputs.</p>
+<p>To use the plugin, configure the following mandatory inputs.</p>
 <ul>
 <li>number: The Incident number to be updated.</li>
 <li>newState: The new state of the Incident. It can be the number of the state or the description.</li>
 </ul>
-<h2 id="check-assigned-cases-workflowstep">Check assigned cases Workflowstep</h2>
+<h3 id="adding-dynamic-list-data">Adding dynamic list data</h3>
+<p>With these settings, at project level, the field <code>state</code> can be loaded dynamically (calling SN API), for example:</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Incident-Change-State.url=https://server.service-now.com
+project.plugin.WorkflowStep.Service-Now-Incident-Change-State.login=user
+project.plugin.WorkflowStep.Service-Now-Incident-Change-State.password-key-storage-path=keys/servicenow/pass
+</code></pre>
+<h2 id="service-now-incident-check-assigned">Service Now / Incident / Check Assigned</h2>
 <p>Rundeck workflow step that checks assigned incidents</p>
 <h3 id="configuration-1">Configuration</h3>
 <p>The Service Now connection credentials are set in the project.properties file for your project. Password it’s a keystorage path to the password.</p>
@@ -168,15 +191,15 @@ project.plugin.WorkflowStep.Service-Now-Incident-Check-Assigned.url=https://serv
 servicenow.login=user
 servicenow.password-key-storage-path=keys/servicenow/pass</code></pre>
 <h3 id="usage-1">Usage</h3>
-<p>To use the plugin, configure the follow mandatory inputs.</p>
+<p>To use the plugin, configure the following mandatory inputs.</p>
 <ul>
 <li>caller: the username of the Caller field on the Incident.</li>
 </ul>
-<p>This inputs is optional</p>
+<p>This input is optional</p>
 <ul>
 <li>state: If you want you can enter a state number or description to add to the search, this way the incidents assigned to the caller only on this state are going to be considered.</li>
 </ul>
-<h2 id="check-case-state-workflowstep">Check case state Workflowstep</h2>
+<h2 id="service-now-incident-check-state">Service Now / Incident / Check State</h2>
 <p>Rundeck workflow step that checks an incident state</p>
 <h3 id="configuration-2">Configuration</h3>
 <p>The Service Now connection credentials are set in the project.properties file for your project. Password it’s a keystorage path to the password.</p>
@@ -188,12 +211,18 @@ project.plugin.WorkflowStep.Service-Now-Incident-Check-State.url=https://server.
 servicenow.login=user
 servicenow.password-key-storage-path=keys/servicenow/pass</code></pre>
 <h3 id="usage-2">Usage</h3>
-<p>To use the plugin, configure the follow mandatory inputs.</p>
+<p>To use the plugin, configure the following mandatory inputs.</p>
 <ul>
 <li>number: The Incident number to be checked.</li>
 <li>state: The state to be checked. It can be the number of the state or the description.</li>
 </ul>
-<h2 id="comment-case-workflowstep">Comment case Workflowstep</h2>
+<h3 id="adding-dynamic-list-data-1">Adding dynamic list data</h3>
+<p>With these settings, at project level, the field <code>state</code> can be loaded dynamically (calling SN API), for example:</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Incident-Check-State.login=user
+project.plugin.WorkflowStep.Service-Now-Incident-Check-State.password-key-storage-path=keys/servicenow/pass
+project.plugin.WorkflowStep.Service-Now-Incident-Check-State.url=https://server.service-now.com
+</code></pre>
+<h2 id="service-now-incident-comment">Service Now / Incident / Comment</h2>
 <p>Rundeck workflow step that comments an incident</p>
 <h3 id="configuration-3">Configuration</h3>
 <p>The Service Now connection credentials are set in the project.properties file for your project. Password it’s a keystorage path to the password.</p>
@@ -204,7 +233,7 @@ project.plugin.WorkflowStep.Service-Now-Comment.url=https://server.service-now.c
 <pre><code>servicenow.url=https://server.service-now.com
 servicenow.login=user
 servicenow.password-key-storage-path=keys/servicenow/pass</code></pre>
-<h2 id="create-case-workflowstep">Create case Workflowstep</h2>
+<h2 id="service-now-incident-create">Service Now / Incident / Create</h2>
 <p>Rundeck workflow step that creates an incident</p>
 <h3 id="configuration-4">Configuration</h3>
 <p>The Service Now connection credentials are set in the project.properties file for your project. Password it’s a keystorage path to the password.</p>
@@ -216,41 +245,131 @@ project.plugin.WorkflowStep.Service-Now-Incident-Create.url=https://server.servi
 servicenow.login=user
 servicenow.password-key-storage-path=keys/servicenow/pass</code></pre>
 <h3 id="usage-3">Usage</h3>
-<p>To use the plugin, configure the follow mandatory inputs.</p>
+<p>To use the plugin, configure the following mandatory inputs.</p>
 <ul>
 <li>caller: the username of the assigned Caller field of the Incident.</li>
-<li>description: Short Description of the Incident</li>
+<li>Short Description: Short Description of the Incident</li>
 </ul>
-<p>These inputs are optional and if leave empty the default value of Service now it’s going to be used</p>
+<p>These inputs are optional and if left empty the default value of Service now it’s going to be used</p>
 <ul>
-<li>urgency: A number representing the urgency of the incident (usually being 1 the most urgent)</li>
-<li>impact: A number representing the impact of the incident (usually being 1 the higher urgent)</li>
-<li>priority: A number representing the priority of the incident (calculated from urgency and impact)</li>
+<li>urgency: A number representing the urgency of the incident (usually being 1 the most urgent). The list can be dynamically loaded using project settings (see settings below)</li>
+<li>impact: A number representing the impact of the incident (usually being 1 the higher urgent). The list can be dynamically loaded using project settings (see settings below)</li>
+<li>priority: A number representing the priority of the incident (calculated from urgency and impact).The list can be dynamically loaded using project settings (see settings below)</li>
+<li>Assignment Group: list assigned groups. To populate the list dynamically, credentials need to be passed at the project level (see settings below)</li>
+<li>Description: Full description of the incident</li>
 </ul>
-<h2 id="comment-case-notification">Comment case Notification</h2>
-<p>Rundeck workflow step that coments an incident</p>
+<h3 id="adding-dynamic-list-data-2">Adding dynamic list data</h3>
+<p>With these settings, at project level, the fields urgency, impact, priority and Assignment Group can be loaded dynamically, for example:</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Incident-Create.login=admin
+project.plugin.WorkflowStep.Service-Now-Incident-Create.password-key-storage-path=keys/somepath/pass
+project.plugin.WorkflowStep.Service-Now-Incident-Create.select-impact-list={&quot;1&quot;\:&quot;1 - High&quot;,&quot;2&quot;\:&quot;2 - Medium&quot;,&quot;3&quot;\:&quot;3 - Low&quot;}
+project.plugin.WorkflowStep.Service-Now-Incident-Create.select-priority-list={&quot;1&quot;\:&quot;1 - Critical&quot;,&quot;2&quot;\:&quot;2 - High&quot;,&quot;3&quot;\:&quot;3 - Moderate&quot;,&quot;4&quot;\:&quot;4 - Low&quot;,&quot;5&quot;\:&quot;5 - Planning&quot;}
+project.plugin.WorkflowStep.Service-Now-Incident-Create.select-urgency-list={&quot;1&quot;\:&quot;1 - High&quot;,&quot;2&quot;\:&quot;2 - Medium&quot;,&quot;3&quot;\:&quot;3 - Low&quot;}
+project.plugin.WorkflowStep.Service-Now-Incident-Create.url=https\://XXX.service-now.com
+</code></pre>
+<p>For <code>Assignment Group</code> the list is loaded with an SN API call.</p>
+<h2 id="service-now-incident-edit">Service Now / Incident / Edit</h2>
+<p>Rundeck workflow step that edits an incident</p>
 <h3 id="configuration-5">Configuration</h3>
-<p>The Service Now connection credentials are set in the project.properties file for your project.</p>
-<pre><code>project.plugin.Notification.Service-Now-Notification.login=user
-project.plugin.Notification.Service-Now-Notification.password=s3cret
-project.plugin.Notification.Service-Now-Notification.url=https://server.service-now.com</code></pre>
-<h2 id="create-case-notification">Create case Notification</h2>
-<p>Rundeck workflow step that creates an incident</p>
-<h3 id="configuration-6">Configuration</h3>
-<p>The Service Now connection credentials are set in the project.properties file for your project.</p>
-<pre><code>project.plugin.Notification.Service-Now-Notification.login=user
-project.plugin.Notification.Service-Now-Notification.password=s3cret
-project.plugin.Notification.Service-Now-Notification.url=https://server.service-now.com</code></pre>
+<p>The Service Now connection credentials are set in the project.properties file for your project. Password it’s a keystorage path to the password.</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Incident-Edit.login=admin
+project.plugin.WorkflowStep.Service-Now-Incident-Edit.password-key-storage-path=keys/servicenow/pass
+project.plugin.WorkflowStep.Service-Now-Incident-Edit.url=https\://dev63229.service-now.com</code></pre>
+<p>or in <code>framework.properties</code></p>
+<pre><code>servicenow.url=https://server.service-now.com
+servicenow.login=user
+servicenow.password-key-storage-path=keys/servicenow/pass</code></pre>
 <h3 id="usage-4">Usage</h3>
-<p>To use the plugin, configure this mandatory input:</p>
+<p>To use the plugin, configure the following mandatory inputs.</p>
 <ul>
-<li>caller: the username of the assigned Caller field of the Incident.</li>
+<li>Incident Number: Incident number to be updated</li>
+<li>Comment: Comment on incident</li>
 </ul>
-<p>These inputs are optional and if leave empty the default value of Service now it’s going to be used</p>
+<p>These inputs are optional and if left empty the default value of Service now it’s going to be used</p>
 <ul>
-<li>urgency: A number representing the urgency of the incident (usually being 1 the most urgent)</li>
-<li>impact: A number representing the impact of the incident (usually being 1 the higher urgent)</li>
-<li>priority: A number representing the priority of the incident (calculated from urgency and impact)</li>
+<li>state: State code. If not set, the change will be in New status. The list can be dynamically loaded using project settings (see settings below)</li>
+<li>urgency: A number representing the urgency of the incident (usually being 1 the most urgent). The list can be dynamically loaded using project settings (see settings below)</li>
+<li>impact: A number representing the impact of the incident (usually being 1 the higher urgent). The list can be dynamically loaded using project settings (see settings below)</li>
+<li>priority: A number representing the priority of the incident (calculated from urgency and impact).The list can be dynamically loaded using project settings (see settings below)</li>
+<li>Assignment Group: list assigned groups. To populate the list dynamically, credentials need to be passed at the project level (see settings below)</li>
+</ul>
+<h3 id="adding-dynamic-list-data-3">Adding dynamic list data</h3>
+<p>With these settings, at project level, the fields urgency, impact, priority , Assignment Group, state can be loaded dynamically, for example:</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Incident-Edit.login=admin
+project.plugin.WorkflowStep.Service-Now-Incident-Edit.password-key-storage-path=keys/servicenow/pass
+project.plugin.WorkflowStep.Service-Now-Incident-Edit.select-impact-list={&quot;1&quot;\:&quot;1 - High&quot;,&quot;2&quot;\:&quot;2 - Medium&quot;,&quot;3&quot;\:&quot;3 - Low&quot;}
+project.plugin.WorkflowStep.Service-Now-Incident-Edit.select-priority-list={&quot;1&quot;\:&quot;1 - Critical&quot;,&quot;2&quot;\:&quot;2 - High&quot;,&quot;3&quot;\:&quot;3 - Moderate&quot;,&quot;4&quot;\:&quot;4 - Low&quot;,&quot;5&quot;\:&quot;5 - Planning&quot;}
+project.plugin.WorkflowStep.Service-Now-Incident-Edit.select-urgency-list={&quot;1&quot;\:&quot;1 - High&quot;,&quot;2&quot;\:&quot;2 - Medium&quot;,&quot;3&quot;\:&quot;3 - Low&quot;}
+project.plugin.WorkflowStep.Service-Now-Incident-Edit.url=https\://dev63229.service-now.com
+</code></pre>
+<p>For <code>Assignment Group</code> and <code>state</code> the list is loaded with SN API call.</p>
+<h2 id="service-now-incident-view">Service Now / Incident / View</h2>
+<p>Rundeck workflow step that views an incident</p>
+<h3 id="configuration-6">Configuration</h3>
+<p>The Service Now connection credentials are set in the project.properties file for your project. Password it’s a keystorage path to the password.</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Incident-View.login=admin
+project.plugin.WorkflowStep.Service-Now-Incident-View.password=keys/servicenow/pass
+project.plugin.WorkflowStep.Service-Now-Incident-View.url=https\://dev63229.service-now.com</code></pre>
+<p>or in <code>framework.properties</code></p>
+<pre><code>servicenow.url=https://server.service-now.com
+servicenow.login=user
+servicenow.password-key-storage-path=keys/servicenow/pass</code></pre>
+<h3 id="usage-5">Usage</h3>
+<p>To use the plugin, configure the following mandatory inputs.</p>
+<ul>
+<li>Incident Number: Incident number to be updated</li>
+</ul>
+<h2 id="service-now-change-check-state">Service Now / Change / Check State</h2>
+<p>Rundeck workflow step that checks the state of a change request</p>
+<h3 id="configuration-7">Configuration</h3>
+<p>The Service Now connection credentials are set in the project.properties file for your project. Password it’s a keystorage path to the password.</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Change-Check-State.url=https://server.service-now.com
+project.plugin.WorkflowStep.Service-Now-Change-Check-State.login=user
+project.plugin.WorkflowStep.Service-Now-Change-Check-State.password-key-storage-path=keys/servicenow/pass</code></pre>
+<p>or in <code>framework.properties</code></p>
+<pre><code>servicenow.url=https://server.service-now.com
+servicenow.login=user
+servicenow.password-key-storage-path=keys/servicenow/pass</code></pre>
+<h3 id="usage-6">Usage</h3>
+<p>To use the plugin, configure the following mandatory inputs.</p>
+<ul>
+<li>number: Number of the change.</li>
+<li>State: State to be checked.</li>
+</ul>
+<h2 id="service-now-change-update-state">Service Now / Change / Update State</h2>
+<p>Rundeck workflow step that updates the state of a change request</p>
+<h3 id="configuration-8">Configuration</h3>
+<p>The Service Now connection credentials are set in the project.properties file for your project. Password it’s a keystorage path to the password.</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Change-Update-State.url=https://server.service-now.com
+project.plugin.WorkflowStep.Service-Now-Change-Update-State.login=user
+project.plugin.WorkflowStep.Service-Now-Change-Update-State.password-key-storage-path=keys/servicenow/pass</code></pre>
+<p>or in <code>framework.properties</code></p>
+<pre><code>servicenow.url=https://server.service-now.com
+servicenow.login=user
+servicenow.password-key-storage-path=keys/servicenow/pass</code></pre>
+<h3 id="usage-7">Usage</h3>
+<p>To use the plugin, configure the following mandatory inputs.</p>
+<ul>
+<li>number: Number of the change.</li>
+<li>New State: New State State to be used.</li>
+</ul>
+<h2 id="service-now-change-create">Service Now / Change / Create</h2>
+<p>Rundeck workflow step that creates a change on Service Now</p>
+<h3 id="configuration-9">Configuration</h3>
+<p>The Service Now connection credentials are set in the project.properties file for your project. Password it’s a keystorage path to the password.</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Change-Create.url=https://server.service-now.com
+project.plugin.WorkflowStep.Service-Now-Change-Create.login=user
+project.plugin.WorkflowStep.Service-Now-Change-Create.password-key-storage-path=keys/servicenow/pass</code></pre>
+<p>or in <code>framework.properties</code></p>
+<pre><code>servicenow.url=https://server.service-now.com
+servicenow.login=user
+servicenow.password-key-storage-path=keys/servicenow/pass</code></pre>
+<h3 id="usage-8">Usage</h3>
+<p>To use the plugin, configure the following mandatory inputs.</p>
+<ul>
+<li>assignment group: The assignment group name or Id to assign.</li>
+<li>Description: Short description to be used.</li>
+<li>state: State code. If not set, the change will be in New status.</li>
 </ul>
 </div>
 </div>
@@ -324,7 +443,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-03-28T01:51:45UTC">2019-03-28T01:51:45UTC</span>
+<span class="generated-date" title="2019-03-28T20:13:50UTC">2019-03-28T20:13:50UTC</span>
 </p>
 </footer>
 </div>
