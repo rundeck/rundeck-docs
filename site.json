@@ -176,6 +176,14 @@
                     }
                     ,
                 {
+                    "srcpath": "manual/notifications/servicenow.md",
+                    "title": "ServiceNow Notification Plugins",
+                    "outpath": "manual/notifications/servicenow-notification-plugins.html",
+
+                        "alltitles": "User Guide / ServiceNow Notification Plugins"
+                    }
+                    ,
+                {
                     "srcpath": "manual/notifications/email.md",
                     "title": "Email",
                     "outpath": "manual/notifications/email.html",

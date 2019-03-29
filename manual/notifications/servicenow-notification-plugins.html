@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Version 2.0.3</title>
+  <title>ServiceNow Notification Plugins</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
-  <meta name="author" content="greg" />
-  <meta name="date" content="03/24/2014" />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -14,19 +12,19 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script src="../jquery.hotkeys.js"></script>
-<script src="../jquery.autocomplete.min.js"></script>
+<script src="../../jquery.hotkeys.js"></script>
+<script src="../../jquery.autocomplete.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-window._pageRelpath="../";
+window._pageRelpath="../../";
 jQuery(function(){
   jQuery('table').addClass('table table-condensed table-responsive'); 
   jQuery('[data-toggle="popover"]').popover();
 });
 </script>
-<script src="../docs-autocomplete.js"></script>
-  <link rel="stylesheet" href="../style.css" type="text/css" />
+<script src="../../docs-autocomplete.js"></script>
+  <link rel="stylesheet" href="../../style.css" type="text/css" />
 </head>
 <body data-spy="scroll" data-target=".toc-nav">
 <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -75,24 +73,26 @@ jQuery(function(){
     </li>
 
     
-        <li><a href="../index.html">Rundeck Documentation (3.0.19)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (3.0.19)</a></li>
+    
+        <li><a href="../index.html">User Guide</a></li>
     
     
-    <li ><a href="index.html">Version History</a></li>
-    <li class="active"><a href="version-2.0.3.html">Version 2.0.3 (2014-03-24)</a></li>
+    
+    <li class="active"><a href="servicenow-notification-plugins.html">ServiceNow Notification Plugins</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
       
-      <li class="next"><a href="version-2.0.2.html">Version 2.0.2 (2014-03-13) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="next"><a href="email.html">Email <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
-    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+history/version-2.0.3.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-2.0.3.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/notifications/servicenow.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/notifications/servicenow.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
@@ -102,40 +102,74 @@ jQuery(function(){
 <div class="col-sm-3 toc-nav">
 <div class="nav">
 <ul>
-<li><a href="#release-2.0.3">Release 2.0.3</a><ul>
-<li><a href="#contributors">Contributors</a></li>
-<li><a href="#issues">Issues</a></li>
+<li><a href="#service-now-incident-comment">Service Now / Incident / Comment</a><ul>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#usage">Usage</a></li>
+</ul></li>
+<li><a href="#service-now-incident-create">Service Now / Incident / Create</a><ul>
+<li><a href="#configuration-1">Configuration</a></li>
+<li><a href="#usage-1">Usage</a></li>
+</ul></li>
+<li><a href="#service-now-change-create">Service Now / Change / Create</a><ul>
+<li><a href="#configuration-2">Configuration</a></li>
+<li><a href="#usage-2">Usage</a></li>
 </ul></li>
 </ul>
 </div>
 </div>
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">Version 2.0.3</h1>
+<h1 class="title">ServiceNow Notification Plugins</h1>
 </div>
-<h1 id="release-2.0.3">Release 2.0.3</h1>
-<p>Date: 2014-03-24</p>
-<p>This is a bugfix release (see Issues.)</p>
-<p><em>Important Upgrade Note</em>: This bug <a href="https://github.com/rundeck/rundeck/issues/661">Issue 661</a> is caused by the VARCHAR length being too small for a database column. Unfortunately grails won’t automatically update the VARCHAR size when you upgrade.</p>
+<!---
+Original: 
+http://support.rundeck.com/customer/en/portal/articles/2915300-servicenow-plugins)
+--->
+<h2 id="service-now-incident-comment">Service Now / Incident / Comment</h2>
+<p>Rundeck Notification plugin to comment an incident</p>
+<h3 id="configuration">Configuration</h3>
+<p>The Service Now connection credentials are set in the project.properties file for your project.</p>
+<pre><code>project.plugin.Notification.Service-Now-Notification.login=user
+project.plugin.Notification.Service-Now-Notification.password=s3cret
+project.plugin.Notification.Service-Now-Notification.url=https://server.service-now.com</code></pre>
+<h3 id="usage">Usage</h3>
+<p>To use the plugin, configure this mandatory input:</p>
 <ul>
-<li>If you are using a different database (mysql, etc.), you will have to update your schema manually.</li>
-<li><p>If you are using H2, you can use this script to update your database:</p>
-<ol type="1">
-<li>Shutdown rundeck</li>
-<li>Run <a href="https://gist.github.com/gschueler/9534814#file-rundeck-2-0-2-h2-upgrade-sh">rundeck-2.0.2-h2-upgrade.sh</a></li>
-<li>Start rundeck</li>
-</ol></li>
+<li>incident key: Service Now incident ID.</li>
+<li>Comment: Comment to add.</li>
 </ul>
-<h2 id="contributors">Contributors</h2>
+<h2 id="service-now-incident-create">Service Now / Incident / Create</h2>
+<p>Rundeck Notification plugin that creates an incident</p>
+<h3 id="configuration-1">Configuration</h3>
+<p>The Service Now connection credentials are set in the project.properties file for your project.</p>
+<pre><code>project.plugin.Notification.Service-Now-Notification-Create.login=user
+project.plugin.Notification.Service-Now-Notification-Create.password=s3cret
+project.plugin.Notification.Service-Now-Notification-Create.url=value=https://server.service-now.com</code></pre>
+<h3 id="usage-1">Usage</h3>
+<p>To use the plugin, configure this mandatory input:</p>
 <ul>
-<li>David Petzel</li>
-<li>Greg Schueler (gschueler)</li>
-<li>Alex Honor (ahonor)</li>
+<li>caller: the username of the assigned Caller field of the Incident.</li>
 </ul>
-<h2 id="issues">Issues</h2>
+<p>These inputs are optional and if left empty the default value of Service now it’s going to be used</p>
 <ul>
-<li><a href="https://github.com/rundeck/rundeck/issues/707">Create from execution is broken [2.0.2]</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/682">Service fails to start on RHEL5</a></li>
+<li>urgency: A number representing the urgency of the incident (usually being 1 the most urgent)</li>
+<li>impact: A number representing the impact of the incident (usually being 1 the higher urgent)</li>
+<li>priority: A number representing the priority of the incident (calculated from urgency and impact)</li>
+<li>Assignment Group: Assignment Group. If not set, no value will be sent</li>
+<li>Description: Description to be used</li>
+</ul>
+<h2 id="service-now-change-create">Service Now / Change / Create</h2>
+<p>Rundeck Notification plugin to create a Service Now Change</p>
+<h3 id="configuration-2">Configuration</h3>
+<p>The Service Now connection credentials are set in the project.properties file for your project.</p>
+<pre><code>project.plugin.Notification.Service-Now-Notification-Change-Create.login=user
+project.plugin.Notification.Service-Now-Notification-Change-Create.password=s3cret
+project.plugin.Notification.Service-Now-Notification-Change-Create.url=https://server.service-now.com</code></pre>
+<h3 id="usage-2">Usage</h3>
+<p>To use the plugin, configure this mandatory input:</p>
+<ul>
+<li>assignment group: Service Now incident ID.</li>
+<li>state: State code. If not set, the change will be in New status.</li>
 </ul>
 </div>
 </div>
@@ -162,24 +196,26 @@ jQuery(function(){
     </li>
 
     
-        <li><a href="../index.html">Rundeck Documentation (3.0.19)</a></li>
+        <li><a href="../../index.html">Rundeck Documentation (3.0.19)</a></li>
+    
+        <li><a href="../index.html">User Guide</a></li>
     
     
-    <li ><a href="index.html">Version History</a></li>
-    <li class="active"><a href="version-2.0.3.html">Version 2.0.3 (2014-03-24)</a></li>
+    
+    <li class="active"><a href="servicenow-notification-plugins.html">ServiceNow Notification Plugins</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
       
-      <li class="next"><a href="version-2.0.2.html">Version 2.0.2 (2014-03-13) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="next"><a href="email.html">Email <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
-    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+history/version-2.0.3.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-2.0.3.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/notifications/servicenow.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/notifications/servicenow.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
@@ -226,7 +262,7 @@ Try Rundeck Enterprise
   </script>
 
 <script>window.markdeepOptions={mode:'html'};</script>
-<!-- Markdeep: --><script src="../markdeep.min.js"></script>
+<!-- Markdeep: --><script src="../../markdeep.min.js"></script>
 <!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
 
 <!-- Start of HubSpot Embed Code -->
