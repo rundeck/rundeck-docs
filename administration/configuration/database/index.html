@@ -170,6 +170,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="page-header">
 <h1 class="title">Database</h1>
 </div>
+<ul>
+<li><a href="mysql.html" title="Administrator Guide - Rundeck Configuration - Database - Mysql">MySQL</a></li>
+<li><a href="postgres.html" title="Administrator Guide - Rundeck Configuration - Database - Postgres">PostgreSQL</a></li>
+<li><a href="oracle.html" title="Administrator Guide - Rundeck Configuration - Database - Oracle">Oracle</a></li>
+<li><a href="ms-sql-server.html" title="Administrator Guide - Rundeck Configuration - Database - MS SQL Server">MS SQL Server</a></li>
+<li><a href="security-mode-for-ms-sql-server.html" title="Administrator Guide - Rundeck Configuration - Database - Security Mode for MS SQL Server">Security Mode for MS SQL Server</a></li>
+</ul>
 <h3 id="default-database">Default database</h3>
 <p>When you install the vanilla standalone rundeck configuration, it will use H2, an embedded database. It is convenient to have an embedded database when you are just trying Rundeck or using it for a non-critical purpose. Be aware though that using the H2 database is not considered safe for production because it not reslilient if Rundeck is not shutdown gracefully. When shutdown gracefully, Rundeck can write the data (kept in memory) to disk. If Rundeck is forcefully shutdown, the data can not be guaranteed to be written to file on disk and cause truncation and corruption.</p>
 <p>Don’t use the H2 embedded database for anything except testing and non-production.</p>
@@ -188,14 +195,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="fu">cp</span> ojdbc14.jar <span class="va">$RDECK_BASE</span>/server/lib</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"><span class="ex">For</span> RPM and DEB you should create /var/lib/rundeck/lib folder and place the driver there.</a></code></pre></div>
-<h2 id="sections">Sections</h2>
-<ol type="1">
-<li><a href="mysql.html">Mysql</a></li>
-<li><a href="ms-sql-server.html">MS SQL Server</a></li>
-<li><a href="security-mode-for-ms-sql-server.html">Security Mode for MS SQL Server</a></li>
-<li><a href="oracle.html">Oracle</a></li>
-<li><a href="postgres.html">Postgres</a></li>
-</ol>
 </div>
 </div>
 </div>
@@ -270,7 +269,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-04-08T16:13:19UTC">2019-04-08T16:13:19UTC</span>
+<span class="generated-date" title="2019-04-08T16:13:54UTC">2019-04-08T16:13:54UTC</span>
 </p>
 </footer>
 </div>

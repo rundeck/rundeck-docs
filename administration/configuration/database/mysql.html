@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>edam883584381852800618temp</title>
+  <title>edam3129166031374824013temp</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -106,7 +106,9 @@ jQuery(function(){
 <ul>
 <li><a href="#using-mysql-as-a-database-backend">Using MySQL as a database backend</a><ul>
 <li><a href="#install-mysql">Install MySQL</a></li>
-<li><a href="#configure-mysql">Configure MySQL</a></li>
+<li><a href="#configure-mysql">Configure MySQL</a><ul>
+<li><a href="#mysql-5.6">MySQL 5.6</a></li>
+</ul></li>
 <li><a href="#setup-rundeck-database">Setup Rundeck Database</a></li>
 <li><a href="#configure-rundeck">Configure Rundeck</a></li>
 </ul></li>
@@ -126,12 +128,26 @@ jQuery(function(){
 </div>
 <div class="col-sm-9">
 <h1 id="using-mysql-as-a-database-backend">Using MySQL as a database backend</h1>
-<p>This is a simple guide for setting up Mysql for use with Rundeck.</p>
+<blockquote>
+<p>MySQL 5.7 or greater is recommended This is a simple guide for setting up Mysql for use with Rundeck.</p>
+</blockquote>
 <h2 id="install-mysql">Install MySQL</h2>
 <p>You can “yum install” or “apt-get install” the server, you can find installation guides for other OS <a href="https://dev.mysql.com/doc/refman/5.7/en/installing.html">here</a></p>
 <h2 id="configure-mysql">Configure MySQL</h2>
 <p>After install, run the <a href="https://dev.mysql.com/doc/refman/5.7/en/mysql-secure-installation.html">mysql_secure_installation script</a>. This will let prompt you to set the root password for mysql, as well as disable anonymous access.</p>
 <p>Set an appropriate <a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-buffer-pool-resize.html">innodb_buffer_pool_size</a>. MySQL, like many databases, manages its own page cache and the buffer pool size determines how much RAM it can use! Setting this to 80% of the system memory is the common wisdom for dedicated servers, however you may want go higher if your server has more than 32G of RAM.</p>
+<h3 id="mysql-5.6">MySQL 5.6</h3>
+<p><code>5.6.3</code> or greater is required if using <code>utf8mb4</code> character set as the server default, and upgrading or installation may require an extra step.</p>
+<p>Configuration:</p>
+<pre><code>innodb_file_format=barracuda
+innodb_file_per_table=true
+innodb_large_prefix=true</code></pre>
+<p>After first Rundeck start run the following SQL queries:</p>
+<pre><code>use &lt;rundeck_database&gt;;
+ALTER TABLE `event_subscription` ROW_FORMAT=dynamic;
+ALTER TABLE `reaction` ROW_FORMAT=dynamic;
+ALTER TABLE `reaction_event` ROW_FORMAT=dynamic;</code></pre>
+<p>Restart Rundeck!</p>
 <h2 id="setup-rundeck-database">Setup Rundeck Database</h2>
 <p>Now you want to create a database and user access for the Rundeck server.</p>
 <p>If it is not running, start mysqld with “service mysqld start”</p>
@@ -313,7 +329,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-04-08T16:13:19UTC">2019-04-08T16:13:19UTC</span>
+<span class="generated-date" title="2019-04-08T16:13:54UTC">2019-04-08T16:13:54UTC</span>
 </p>
 </footer>
 </div>
