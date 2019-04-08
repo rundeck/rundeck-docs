@@ -272,6 +272,7 @@ $RDECK_BASE/server/config
 <ul>
 <li><code>framework.log.dispatch.console.format</code>: Default format for non-terse node execution logging run by the <code>dispatch</code> CLI tool.</li>
 <li><code>execution.script.tokenexpansion.enabled</code>: Whether inline script token expansion is enabled, default <code>true</code>. If <code>false</code>, the “Inline Script Content” syntax described in <a href="../../manual/creating-job-workflows.html#context-variables" title="User Guide - Creating Job Workflows - Context Variables">User Guide - Creating Job Workflows - Context Variables</a> is disabled.</li>
+<li><code>communityNews.disabled</code>: Default is not set, or false. Disables the external polling of Community News feed. Link will persist but will not poll, and clicking this link will open a new browser tab and navigate to the web-based version of Community News.</li>
 </ul>
 <p>Static authentication tokens for API access:</p>
 <p>You can define the location of a .properties file in framework.properties:</p>
@@ -369,11 +370,8 @@ resources.source.3.type=directory</code></pre>
 <p>The following sections describe configuration values for this file.</p>
 <h3 id="security">Security</h3>
 <ul>
-<li><p><code>rundeck.security.useHMacRequestTokens</code> : <code>true/false</code>. Default: <code>true</code>. Switches between HMac based request tokens, and the default grails UUID tokens. HMac tokens have a timeout, which may cause submitted forms or actions to fail with a message like “Token has expired”.<br />
-If set to false, UUIDs will be used instead of HMac tokens, and they have no timeouts.<br />
-The default timeout for tokens can be changed with the java system property <code>-Dorg.rundeck.web.infosec.HMacSynchronizerTokensHolder.DEFAULT_DURATION=[timeout in ms]</code>.</p></li>
-<li><p><code>rundeck.security.apiCookieAccess.enabled</code>: <code>true/false</code>. Default: <code>true</code>.<br />
-Determines whether access to the API is allowed if the API client authenticates via session cookies (i.e. username and password login.) If set to <code>false</code>, the current CLI tools and API libraries will not operate correctly if they use username and password login.</p></li>
+<li><p><code>rundeck.security.useHMacRequestTokens</code> : <code>true/false</code>. Default: <code>true</code>. Switches between HMac based request tokens, and the default grails UUID tokens. HMac tokens have a timeout, which may cause submitted forms or actions to fail with a message like “Token has expired”. If set to false, UUIDs will be used instead of HMac tokens, and they have no timeouts. The default timeout for tokens can be changed with the java system property <code>-Dorg.rundeck.web.infosec.HMacSynchronizerTokensHolder.DEFAULT_DURATION=[timeout in ms]</code>.</p></li>
+<li><p><code>rundeck.security.apiCookieAccess.enabled</code>: <code>true/false</code>. Default: <code>true</code>. Determines whether access to the API is allowed if the API client authenticates via session cookies (i.e. username and password login.) If set to <code>false</code>, the current CLI tools and API libraries will not operate correctly if they use username and password login.</p></li>
 <li><p><code>rundeck.api.tokens.duration.max</code>: Duration string indicating maximum lifetime of API Tokens. If unset, the value will be “30d” (30 days). Format: “##{ydhms}” (years, days, hours, minutes, seconds). If you want to disable the max expiration you can set it to 0 and create token with 0 duration that don’t expire.</p></li>
 <li><p><code>rundeck.security.csrf.referer.filterMethod</code>:<code>NONE|POST|*</code>. Set HTTP Method to filter based on Referer header. Can be POST, or &quot;*&quot; for all methods. Default: NONE (disabled)</p></li>
 <li><p><code>rundeck.security.csrf.referer.allowApi</code>: <code>true|false</code>. Allow /api/* requests without requiring matching Referer header. Default: true.</p></li>
@@ -462,10 +460,10 @@ rundeck.security.httpHeaders.provider.csp.config.form-action=self
 
 #######
 # enable any custom additional headers (default: false)
-# 
+#
 # rundeck.security.httpHeaders.provider.custom.enabled=true
 # rundeck.security.httpHeaders.provider.custom.config.name=X-Other-Security-Policy
-# rundeck.security.httpHeaders.provider.custom.config.value=default-src &#39;none&#39;; 
+# rundeck.security.httpHeaders.provider.custom.config.value=default-src &#39;none&#39;;
 # rundeck.security.httpHeaders.provider.custom.config.name2=X-other-header
 # rundeck.security.httpHeaders.provider.custom.config.value2=some value</code></pre>
 <p>References:</p>
@@ -674,7 +672,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-04-08T16:13:54UTC">2019-04-08T16:13:54UTC</span>
+<span class="generated-date" title="2019-04-08T16:20:24UTC">2019-04-08T16:20:24UTC</span>
 </p>
 </footer>
 </div>
