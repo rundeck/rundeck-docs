@@ -1296,6 +1296,14 @@
                     }
                     ,
                 {
+                    "srcpath": "developer/13-user-group-source-plugin.md",
+                    "title": "User Group Source Plugins",
+                    "outpath": "developer/user-group-source-plugins.html",
+
+                        "alltitles": "Plugin Developer Guide / User Group Source Plugins"
+                    }
+                    ,
+                {
                     "srcpath": "api/rundeck-api.md",
                     "title": "API Reference | Version 30",
                     "outpath": "api/index.html",

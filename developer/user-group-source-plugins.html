@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Project Configuration</title>
+  <title>User Group Source Plugins</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="author" content="Stephen Joyner" />
+  <meta name="date" content="April 15, 2019" />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -12,18 +14,18 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script src="../../jquery.hotkeys.js"></script>
-<script src="../../jquery.autocomplete.min.js"></script>
+<script src="../jquery.hotkeys.js"></script>
+<script src="../jquery.autocomplete.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-window._pageRelpath="../../";
+window._pageRelpath="../";
 jQuery(function(){
   jQuery('table').addClass('table table-condensed table-responsive'); 
   jQuery('[data-toggle="popover"]').popover();
 });
 </script>
-<script src="../../docs-autocomplete.js"></script>
+<script src="../docs-autocomplete.js"></script>
   <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
@@ -89,7 +91,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../style.css" type="text/css" />
+  <link rel="stylesheet" href="../style.css" type="text/css" />
 </head>
 <body data-spy="scroll" data-target=".toc-nav">
 <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -138,26 +140,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </li>
 
     
-        <li><a href="../../index.html">Rundeck Documentation (3.0.x)</a></li>
-    
-        <li><a href="../index.html">Administrator Guide</a></li>
+        <li><a href="../index.html">Rundeck Documentation (3.0.x)</a></li>
     
     
-    <li ><a href="index.html">Projects</a></li>
-    <li class="active"><a href="configuration.html">Configuration</a></li>
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="user-group-source-plugins.html">User Group Source Plugins</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="create-new-project.html"><i class="glyphicon glyphicon-arrow-left"></i> Create new Project</a></li>
-      <li class="next"><a href="project-readme.html">Project Readme <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="previous"><a href="option-values-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> Option Values Plugins</a></li>
+      
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
-    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/projects/configuration.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/projects/configuration.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+developer/13-user-group-source-plugin.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/developer/13-user-group-source-plugin.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
@@ -167,53 +167,68 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="col-sm-3 toc-nav">
 <div class="nav">
 <ul>
-<li><a href="#storage-types">Storage types</a></li>
-<li><a href="#graphical-interface">Graphical Interface</a></li>
-<li><a href="#cli-usage">CLI Usage</a></li>
-<li><a href="#api-usage">API Usage</a></li>
-<li><a href="#filesystem">Filesystem</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#use">Use</a></li>
+<li><a href="#configuring">Configuring</a></li>
+<li><a href="#java-plugin-type">Java Plugin Type</a></li>
+<li><a href="#script-plugin-type">Script Plugin Type</a></li>
 </ul>
 </div>
 </div>
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">Project Configuration</h1>
+<h1 class="title">User Group Source Plugins</h1>
 </div>
-<h2 id="storage-types">Storage types</h2>
-<p>In Rundeck 2.4 and earlier, all project definitions and configuration files were stored on the filesystem.</p>
-<p>Starting in Rundeck 2.5, you have the option to store project definitions and configuration files in the database.</p>
-<p>Starting in Rundeck 2.11, the default storage mechanism is the database.</p>
-<p>The storage type can be changed by a configuration flag in the <code>rundeck-config.properties</code> file:</p>
-<pre><code>rundeck.projectsStorageType=db</code></pre>
-<p>or</p>
-<pre><code>rundeck.projectsStorageType=filesystem</code></pre>
-<p>If you wish to use <em>filesystem</em> storage you must add this configuration entry.</p>
-<p>If you have existing filesystem-based projects, and you start Rundeck with the <code>db</code> storage type, those projects will be automatically imported to the Database. The import process copies the contents of <code>etc/project.properties</code>, <code>readme.md</code> and <code>motd.md</code> (if they exist). Finally, the <code>etc/project.properties</code> file will be renamed on disk to <code>etc/project.properties.imported</code>.</p>
-<p>The DB storage type also uses the Rundeck <strong>Storage Facility</strong> to store the file contents, which can be configured to use an Encryption plugin. See <a href="../configuration/storage-facility.html#using-encryption" title="Administrator Guide - Rundeck Configuration - Storage Facility - Using Encryption">Storage Facility - Using Encryption</a>.</p>
-<h2 id="graphical-interface">Graphical Interface</h2>
-<p>Under the Project Settings menu, select the “Edit Configuration” item. This page provides the same controls used when <a href="create-new-project.html" title="Administrator Guide - Projects - Create new Project">creating a project</a>.</p>
-<p>Alternatively, you may might want to edit the raw configuration keys. Click the “Edit Configuration File” button to open a text editor letting you view and change all property keys.</p>
-<h2 id="cli-usage">CLI Usage</h2>
-<p>The <code>rd projects configure set</code> command allows you to set configuration properties.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="ex">rd</span> projects configure set -p MyProject -- \</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">   --project.ssh-keypath<span class="st">&quot;:&quot;</span>/home/rundeck/.ssh/id_rsa</a></code></pre></div>
-<h2 id="api-usage">API Usage</h2>
-<p>Project configuration can be achieved via the <a href="../../api/index.html" title="API Reference | Version 30">API</a>.</p>
-<p><a href="../../api/index.html#project-configuration" title="API Reference | Version 30 - Project Configuration">Project configuration</a></p>
-<pre><code>PUT /api/13/project/MyProject/config
-Content-Type: application/json
+<h2 id="about">About</h2>
+<p>User Group Source plugins allow you to add roles to a user when the user logs in.</p>
+<h2 id="use">Use</h2>
+<p>Create a user group source plugin and install it like other Rundeck plugins.<br />
+When a user logs in, your plugin will be called with the user's username and will add any roles you have designated to the user.</p>
+<h2 id="configuring">Configuring</h2>
+<p>To configure your plugin you can add configuration values to the framework scope.</p>
+<p><em>Framework scope property definition in <code>framework.properties</code></em></p>
+<pre><code>framework.plugin.UserGroupSource.[your_plugin_name].[property]=value</code></pre>
+<p>Please note you cannot configure this plugin at a project level because it executes before any project information is applicable.</p>
+<h2 id="java-plugin-type">Java Plugin Type</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">package</span><span class="im"> example;</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">import</span><span class="im"> com.dtolabs.rundeck.core.plugins.Plugin;</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw">import</span><span class="im"> com.dtolabs.rundeck.plugins.ServiceNameConstants;</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw">import</span><span class="im"> com.dtolabs.rundeck.plugins.user.groups.UserGroupSourcePlugin;</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="kw">import</span><span class="im"> java.util.ArrayList;</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="kw">import</span><span class="im"> java.util.List;</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="kw">import</span><span class="im"> java.util.Map;</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="at">@Plugin</span>(name = <span class="st">&quot;example-user-group-source-plugin&quot;</span>,service= ServiceNameConstants.<span class="fu">UserGroupSource</span>)</a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="kw">public</span> <span class="kw">class</span> ExampleUserGroupSourcePlugin <span class="kw">implements</span> UserGroupSourcePlugin {</a>
+<a class="sourceLine" id="cb2-13" data-line-number="13">    <span class="bu">List</span>&lt;<span class="bu">String</span>&gt; groups = <span class="kw">new</span> <span class="bu">ArrayList</span>&lt;&gt;();</a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15">    <span class="kw">public</span> <span class="fu">ExampleUserGroupSourcePlugin</span>() {</a>
+<a class="sourceLine" id="cb2-16" data-line-number="16">        groups.<span class="fu">add</span>(<span class="st">&quot;RUNDECK_USER&quot;</span>); <span class="co">//This group would get added to all users</span></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17">    }</a>
+<a class="sourceLine" id="cb2-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb2-19" data-line-number="19">    <span class="at">@Override</span></a>
+<a class="sourceLine" id="cb2-20" data-line-number="20">    <span class="kw">public</span> <span class="bu">List</span>&lt;<span class="bu">String</span>&gt; <span class="fu">getGroups</span>(<span class="dt">final</span> <span class="bu">String</span> username, <span class="dt">final</span> <span class="bu">Map</span>&lt;<span class="bu">String</span>, <span class="bu">Object</span>&gt; config) {</a>
+<a class="sourceLine" id="cb2-21" data-line-number="21">        <span class="co">//Check username and add groups from your datasource</span></a>
+<a class="sourceLine" id="cb2-22" data-line-number="22">        <span class="kw">if</span>(username.<span class="fu">equals</span>(<span class="st">&quot;bob&quot;</span>)) {</a>
+<a class="sourceLine" id="cb2-23" data-line-number="23">            groups.<span class="fu">add</span>(<span class="st">&quot;PROJECT_MANAGER&quot;</span>);</a>
+<a class="sourceLine" id="cb2-24" data-line-number="24">        } <span class="kw">else</span> <span class="kw">if</span>(username.<span class="fu">equals</span>(<span class="st">&quot;alice&quot;</span>)) {</a>
+<a class="sourceLine" id="cb2-25" data-line-number="25">            groups.<span class="fu">add</span>(<span class="st">&quot;ENGINEERING&quot;</span>);</a>
+<a class="sourceLine" id="cb2-26" data-line-number="26">        }</a>
+<a class="sourceLine" id="cb2-27" data-line-number="27">        <span class="kw">return</span> groups;</a>
+<a class="sourceLine" id="cb2-28" data-line-number="28">    }</a>
+<a class="sourceLine" id="cb2-29" data-line-number="29">}</a></code></pre></div>
+<h2 id="script-plugin-type">Script Plugin Type</h2>
+<p>Roles will be picked up from the script between the markers <code>==START_GROUPS==</code> and <code>==END_GROUPS==</code>.<br />
+Echo one role name per line.</p>
+<pre><code>#!/usr/bin/env bash
 
-{
-    &quot;project.ssh-keypath&quot;:&quot;/home/rundeck/.ssh/id_rsa&quot;,
-    &quot;resources.source.2.type&quot;:&quot;directory&quot;,
-    &quot;resources.source.2.config.directory&quot;:&quot;/home/rundeck/projects/MyProject/resources.d&quot;
-}</code></pre>
-<h2 id="filesystem">Filesystem</h2>
-<p>When using <em>filesystem</em> storage type, each Project has a configuration file called <a href="../configuration/configuration-file-reference.html#project.properties" title="Administrator Guide - Rundeck Configuration - Configuration File Reference - Project.properties">project.properties</a>, located at this path:</p>
-<ul>
-<li>rpm/deb: /var/rundeck/projects/<em>project</em>/etc/project.properties</li>
-<li>launcher: $RDECK_BASE/projects/<em>project</em>/etc/project.properties</li>
-</ul>
+echo &quot;==START_GROUPS==&quot;
+echo &quot;role1&quot;
+echo &quot;role2&quot;
+echo &quot;==END_GROUPS==&quot;
+</code></pre>
 </div>
 </div>
 </div>
@@ -239,26 +254,24 @@ Content-Type: application/json
     </li>
 
     
-        <li><a href="../../index.html">Rundeck Documentation (3.0.x)</a></li>
-    
-        <li><a href="../index.html">Administrator Guide</a></li>
+        <li><a href="../index.html">Rundeck Documentation (3.0.x)</a></li>
     
     
-    <li ><a href="index.html">Projects</a></li>
-    <li class="active"><a href="configuration.html">Configuration</a></li>
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="user-group-source-plugins.html">User Group Source Plugins</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="create-new-project.html"><i class="glyphicon glyphicon-arrow-left"></i> Create new Project</a></li>
-      <li class="next"><a href="project-readme.html">Project Readme <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="previous"><a href="option-values-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> Option Values Plugins</a></li>
+      
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
-    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/projects/configuration.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/projects/configuration.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+developer/13-user-group-source-plugin.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/developer/13-user-group-source-plugin.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
@@ -305,7 +318,7 @@ Try Rundeck Enterprise
   </script>
 
 <script>window.markdeepOptions={mode:'html'};</script>
-<!-- Markdeep: --><script src="../../markdeep.min.js"></script>
+<!-- Markdeep: --><script src="../markdeep.min.js"></script>
 <!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
 
 <!-- Start of HubSpot Embed Code -->
