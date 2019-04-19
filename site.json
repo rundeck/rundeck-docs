@@ -1305,10 +1305,10 @@
                     ,
                 {
                     "srcpath": "api/rundeck-api.md",
-                    "title": "API Reference | Version 30",
+                    "title": "API Reference | Version 31",
                     "outpath": "api/index.html",
 
-                        "alltitles": "API Reference | Version 30"
+                        "alltitles": "API Reference | Version 31"
                     }
                     ,
                 {
