@@ -189,6 +189,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="#rundeck-config.properties">rundeck-config.properties</a><ul>
 <li><a href="#security">Security</a></li>
 <li><a href="#security-http-headers">Security HTTP Headers</a></li>
+<li><a href="#local-login-form-visibility">Local Login Form Visibility</a></li>
 <li><a href="#server-settings">Server Settings</a></li>
 <li><a href="#execution-mode">Execution Mode</a></li>
 <li><a href="#project-configuration-storage-settings">Project Configuration Storage settings</a></li>
@@ -471,6 +472,11 @@ rundeck.security.httpHeaders.provider.csp.config.form-action=self
 <li><a href="https://www.owasp.org/index.php/OWASP_Secure_Headers_Project" class="uri">https://www.owasp.org/index.php/OWASP_Secure_Headers_Project</a></li>
 <li><a href="https://content-security-policy.com" class="uri">https://content-security-policy.com</a></li>
 </ul>
+<h3 id="local-login-form-visibility">Local Login Form Visibility</h3>
+<ul>
+<li><code>rundeck.login.localLogin.enabled</code>:<code>true/false</code>. Default <code>true</code></li>
+</ul>
+<p>If you have Single Sign On enabled(Enterprise only) and you want to prevent the ability for your users to login with the non-SSO form, you can set this property to false and it will suppress the non-SSO login form.</p>
 <h3 id="server-settings">Server Settings</h3>
 <ul>
 <li><code>server.session.timeout</code>: timeout in seconds.</li>
@@ -672,7 +678,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-04-19T21:46:12UTC">2019-04-19T21:46:12UTC</span>
+<span class="generated-date" title="2019-04-22T16:31:49UTC">2019-04-22T16:31:49UTC</span>
 </p>
 </footer>
 </div>
