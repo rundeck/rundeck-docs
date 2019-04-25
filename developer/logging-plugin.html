@@ -254,9 +254,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 id="types-of-logging-plugins">Types of Logging Plugins</h2>
 <p>There are three types of plugins that can be created:</p>
 <ul>
-<li><a href="#streaminglogwriter">StreamingLogWriter</a> - provides a stream-like mechanism for writing log events (<a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190408/com/dtolabs/rundeck/core/logging/StreamingLogWriter.html">javadoc</a>).</li>
-<li><a href="#streaminglogreader">StreamingLogReader</a> - provides a stream-like mechanism for reading log events (<a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190408/com/dtolabs/rundeck/core/logging/StreamingLogReader.html">javadoc</a>).</li>
-<li><a href="#executionfilestorage">ExecutionFileStorage</a> - provides a way to both store and retrieve entire log files and execution state files (<a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190408/com/dtolabs/rundeck/core/logging/ExecutionFileStorage.html">javadoc</a>).</li>
+<li><a href="#streaminglogwriter">StreamingLogWriter</a> - provides a stream-like mechanism for writing log events (<a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190424/com/dtolabs/rundeck/core/logging/StreamingLogWriter.html">javadoc</a>).</li>
+<li><a href="#streaminglogreader">StreamingLogReader</a> - provides a stream-like mechanism for reading log events (<a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190424/com/dtolabs/rundeck/core/logging/StreamingLogReader.html">javadoc</a>).</li>
+<li><a href="#executionfilestorage">ExecutionFileStorage</a> - provides a way to both store and retrieve entire log files and execution state files (<a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190424/com/dtolabs/rundeck/core/logging/ExecutionFileStorage.html">javadoc</a>).</li>
 </ul>
 <h2 id="configuration">Configuration</h2>
 <p>See the chapter <a href="../administration/configuration/plugins/configuring.html#logging-plugin-configuration" title="Administrator Guide - Rundeck Configuration - Configuring Plugins - Configuring - Logging Plugin Configuration">Plugins User Guide - Configuring - Logging</a>.</p>
@@ -301,9 +301,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Note that the Map keys will not start with <code>job.</code>, simply use the variable name, such as <code>execid</code>.</p>
 <p>In addition, for ExecutionFileStorage plugins, another map entry named <code>filetype</code> will be specified, which indicates which type of file is being stored. You need to use this filetype as part of the identifier for storing or retrieving the file.</p>
 <h2 id="streaminglogwriter">StreamingLogWriter</h2>
-<p>The <code>StreamingLogWriter</code> (<a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190408/com/dtolabs/rundeck/core/logging/StreamingLogWriter.html">javadoc</a>) system receives log events from an execution and writes them somewhere.</p>
+<p>The <code>StreamingLogWriter</code> (<a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190424/com/dtolabs/rundeck/core/logging/StreamingLogWriter.html">javadoc</a>) system receives log events from an execution and writes them somewhere.</p>
 <h3 id="java-streaminglogwriter">Java StreamingLogWriter</h3>
-<p>Create a Java class that implements the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190408/com/dtolabs/rundeck/plugins/logging/StreamingLogWriterPlugin.html">StreamingLogWriterPlugin</a>:</p>
+<p>Create a Java class that implements the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190424/com/dtolabs/rundeck/plugins/logging/StreamingLogWriterPlugin.html">StreamingLogWriterPlugin</a>:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co">/**</span></a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"> <span class="co">*</span> Plugin interface for streaming log writers</a>
 <a class="sourceLine" id="cb2-3" data-line-number="3"> <span class="co">*/</span></a>
@@ -397,7 +397,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The <code>StreamingLogReader</code> system reads log events from somewhere for a specific execution and returns them in an iterator-like fashion. Readers must also support an “offset”, allowing the event stream to resume from some index within the stream. These offset indices can be opaque to Rundeck (they could correspond to bytes, or event number, it is up to the plugin). The plugin is expected to report an offset value when reading events, and be able to resume from a previously reported offset value.</p>
 <p>Additionally, these plugins should be able to report a <code>totalSize</code> (in an opaque manner), and a <code>lastModified</code> timestamp, indicating the last log event timestamp that was received.</p>
 <h3 id="java-streaminglogreader">Java StreamingLogReader</h3>
-<p>Create a Java class that implements the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190408/com/dtolabs/rundeck/plugins/logging/StreamingLogReaderPlugin.html">StreamingLogReaderPlugin</a>:</p>
+<p>Create a Java class that implements the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190424/com/dtolabs/rundeck/plugins/logging/StreamingLogReaderPlugin.html">StreamingLogReaderPlugin</a>:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co">/**</span></a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"> <span class="co">*</span> Plugin interface for streaming log readers</a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"> <span class="co">*/</span></a>
@@ -413,7 +413,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb8-13" data-line-number="13">    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">initialize</span>(<span class="bu">Map</span>&lt;<span class="bu">String</span>, ? <span class="kw">extends</span> <span class="bu">Object</span>&gt; context);</a>
 <a class="sourceLine" id="cb8-14" data-line-number="14"></a>
 <a class="sourceLine" id="cb8-15" data-line-number="15">}</a></code></pre></div>
-<p>This extends the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190408/com/dtolabs/rundeck/core/logging/StreamingLogReader.html">StreamingLogReader</a>:</p>
+<p>This extends the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190424/com/dtolabs/rundeck/core/logging/StreamingLogReader.html">StreamingLogReader</a>:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co">/**</span></a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"> <span class="co">*</span>  Reads log events in a streaming manner<span class="co">,</span> and supports resuming from a specified offset<span class="co">.</span></a>
 <a class="sourceLine" id="cb9-3" data-line-number="3"> <span class="co">*</span></a>
@@ -566,11 +566,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <h2 id="executionfilestorage">ExecutionFileStorage</h2>
 <p>The <code>ExecutionFileStorage</code> system is asked to store and retrieve entire log files and state files for a specific execution.</p>
-<p>The Java interface for these plugins is <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190408/com/dtolabs/rundeck/plugins/logging/ExecutionFileStoragePlugin.html">ExecutionFileStoragePlugin</a>.</p>
+<p>The Java interface for these plugins is <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190424/com/dtolabs/rundeck/plugins/logging/ExecutionFileStoragePlugin.html">ExecutionFileStoragePlugin</a>.</p>
 <p>Additional optional interfaces provide extended behaviors that your plugin can adopt:</p>
 <ul>
-<li><a href="#executionmultifilestorage">ExecutionMultiFileStorage</a> - adds a method to store all available files in one method call (<a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190408/com/dtolabs/rundeck/core/logging/ExecutionMultiFileStorage.html">javadoc</a>).</li>
-<li><a href="#executionfilestorageoptions">ExecutionFileStorageOptions</a> - define whether both retrieve and store are supported (<a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190408/com/dtolabs/rundeck/core/logging/ExecutionFileStorageOptions.html">javadoc</a>).</li>
+<li><a href="#executionmultifilestorage">ExecutionMultiFileStorage</a> - adds a method to store all available files in one method call (<a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190424/com/dtolabs/rundeck/core/logging/ExecutionMultiFileStorage.html">javadoc</a>).</li>
+<li><a href="#executionfilestorageoptions">ExecutionFileStorageOptions</a> - define whether both retrieve and store are supported (<a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190424/com/dtolabs/rundeck/core/logging/ExecutionFileStorageOptions.html">javadoc</a>).</li>
 </ul>
 <p>Execution file storage allows Rundeck to store the files elsewhere, in case local file storage is not suitable for long-term retention.</p>
 <p>The ExecutionFileStorage service is used by two aspects of the Rundeck server currently.</p>
@@ -602,19 +602,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 id="executionmultifilestorage">ExecutionMultiFileStorage</h3>
 <p>This optional interface for you Java plugin indicates that <code>store</code> requests should all be made at once via the <code>storeMultiple</code> method.</p>
 <ul>
-<li><a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190408/com/dtolabs/rundeck/core/logging/ExecutionMultiFileStorage.html">ExecutionMultiFileStorage javadoc</a></li>
+<li><a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190424/com/dtolabs/rundeck/core/logging/ExecutionMultiFileStorage.html">ExecutionMultiFileStorage javadoc</a></li>
 </ul>
-<p><code>storeMultiple</code> will be passed a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190408/com/dtolabs/rundeck/core/logging/MultiFileStorageRequest.html">MultiFileStorageRequest</a> allowing access to the available file data, and a callback method for your plugin to use to indicate the success/failure for storage of each file type. Your plugin must call <code>storageResultForFiletype(filetype, boolean)</code> for each filetype provided in the <code>MultiFileStorageRequest</code>.</p>
+<p><code>storeMultiple</code> will be passed a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190424/com/dtolabs/rundeck/core/logging/MultiFileStorageRequest.html">MultiFileStorageRequest</a> allowing access to the available file data, and a callback method for your plugin to use to indicate the success/failure for storage of each file type. Your plugin must call <code>storageResultForFiletype(filetype, boolean)</code> for each filetype provided in the <code>MultiFileStorageRequest</code>.</p>
 <p>If storage for a filetype is not successful, it will be retried at a later point.</p>
 <p>If your plugin requires access to all available filetypes at once, you should indicate <code>false</code> for the success status for all filetypes if you want them all to be retried at once.</p>
 <p>In addition to the <em>Log file</em> and <em>State files</em> (‘rdlog’, and ‘state.json’ filetypes), an ExecutionMultiFileStorage will be given access to a <code>execution.xml</code> filetype. This file is the XML serialized version of the Execution itself, in the format used by the Project Archive contents.</p>
 <h3 id="executionfilestorageoptions">ExecutionFileStorageOptions</h3>
 <p>This optional interface allows your plugin to indicate whether both <code>store</code> and <code>retrieve</code> operations are available. The default if you do not implement this is that both operations are available.</p>
 <ul>
-<li><a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190408/com/dtolabs/rundeck/core/logging/ExecutionFileStorageOptions.html">ExecutionFileStorageOptions javadoc</a></li>
+<li><a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190424/com/dtolabs/rundeck/core/logging/ExecutionFileStorageOptions.html">ExecutionFileStorageOptions javadoc</a></li>
 </ul>
 <h3 id="java-executionfilestorage">Java ExecutionFileStorage</h3>
-<p>Create a Java class that implements the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190408/com/dtolabs/rundeck/plugins/logging/ExecutionFileStoragePlugin.html">ExecutionFileStoragePlugin</a>:</p>
+<p>Create a Java class that implements the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190424/com/dtolabs/rundeck/plugins/logging/ExecutionFileStoragePlugin.html">ExecutionFileStoragePlugin</a>:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="co">/**</span></a>
 <a class="sourceLine" id="cb16-2" data-line-number="2"> <span class="co">*</span> Plugin to implement <span class="kw">{@link </span>com<span class="kw">.</span>dtolabs<span class="kw">.</span>rundeck<span class="kw">.</span>core<span class="kw">.</span>logging<span class="kw">.</span>ExecutionFileStorage<span class="kw">}</span></a>
 <a class="sourceLine" id="cb16-3" data-line-number="3"> <span class="co">*/</span></a>
@@ -640,7 +640,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb16-23" data-line-number="23">     <span class="co">*/</span></a>
 <a class="sourceLine" id="cb16-24" data-line-number="24">    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">isAvailable</span>(<span class="bu">String</span> filetype) <span class="kw">throws</span> ExecutionFileStorageException;</a>
 <a class="sourceLine" id="cb16-25" data-line-number="25">}</a></code></pre></div>
-<p>This extends the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190408/com/dtolabs/rundeck/core/logging/ExecutionFileStorage.html">ExecutionFileStorage</a>:</p>
+<p>This extends the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190424/com/dtolabs/rundeck/core/logging/ExecutionFileStorage.html">ExecutionFileStorage</a>:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co">/**</span></a>
 <a class="sourceLine" id="cb17-2" data-line-number="2"> <span class="co">*</span> Handles storage and retrieval of typed files for an execution<span class="co">,</span> the filetype is specified in the <span class="kw">{@link #</span>store<span class="kw">(</span>String<span class="kw">,</span></a>
 <a class="sourceLine" id="cb17-3" data-line-number="3"> <span class="kw">*</span> java<span class="kw">.</span>io<span class="kw">.</span>InputStream<span class="kw">,</span> long<span class="kw">,</span> java<span class="kw">.</span>util<span class="kw">.</span>Date<span class="kw">)}</span> and <span class="kw">{@link #</span>retrieve<span class="kw">(</span>String<span class="kw">,</span> java<span class="kw">.</span>io<span class="kw">.</span>OutputStream<span class="kw">)}</span> methods<span class="co">,</span> and more</a>
@@ -764,7 +764,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li>If <code>storeMultiple</code> is defined:
 <ul>
-<li>The <code>storeMultiple</code> closure is called when files needs to be stored, with the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190408/com/dtolabs/rundeck/core/logging/MultiFileStorageRequest.html">MultiFileStorageRequest</a>, the <a href="#execution-context-data">contextual data</a>, and configuration Map.</li>
+<li>The <code>storeMultiple</code> closure is called when files needs to be stored, with the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190424/com/dtolabs/rundeck/core/logging/MultiFileStorageRequest.html">MultiFileStorageRequest</a>, the <a href="#execution-context-data">contextual data</a>, and configuration Map.</li>
 </ul></li>
 <li>Else if <code>store</code> is defined:
 <ul>
@@ -841,7 +841,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-04-24T18:28:03UTC">2019-04-24T18:28:03UTC</span>
+<span class="generated-date" title="2019-04-25T00:31:06UTC">2019-04-25T00:31:06UTC</span>
 </p>
 </footer>
 </div>
