@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Logging Plugin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="June 5, 2013" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="../jquery.hotkeys.js"></script>
+<script src="../jquery.autocomplete.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+window._pageRelpath="../";
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+<script src="../docs-autocomplete.js"></script>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control navquery" name="q" placeholder="Search" id="searchQuery">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbstop">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb top collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.21)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="logging-plugin.html">Logging Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="notification-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> Notification Plugin</a></li>
+      <li class="next"><a href="storage-plugin.html">Storage Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+developer/06-logging-plugins.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/developer/06-logging-plugins.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#about">About</a><ul>
+<li><a href="#about-rundeck-logging">About Rundeck Logging</a></li>
+</ul></li>
+<li><a href="#changes-since-rundeck-1.6">Changes since Rundeck 1.6</a></li>
+<li><a href="#changes-in-rundeck-2.6">Changes in Rundeck 2.6</a></li>
+<li><a href="#types-of-logging-plugins">Types of Logging Plugins</a></li>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#plugin-development">Plugin Development</a><ul>
+<li><a href="#java-plugin-type">Java plugin type</a></li>
+<li><a href="#groovy-plugin-type">Groovy plugin type</a></li>
+</ul></li>
+<li><a href="#example-code">Example code</a></li>
+<li><a href="#execution-context-data">Execution Context Data</a></li>
+<li><a href="#streaminglogwriter">StreamingLogWriter</a><ul>
+<li><a href="#java-streaminglogwriter">Java StreamingLogWriter</a></li>
+<li><a href="#groovy-streaminglogwriter">Groovy StreamingLogWriter</a></li>
+</ul></li>
+<li><a href="#streaminglogreader">StreamingLogReader</a><ul>
+<li><a href="#java-streaminglogreader">Java StreamingLogReader</a></li>
+<li><a href="#groovy-streaminglogreader">Groovy StreamingLogReader</a></li>
+</ul></li>
+<li><a href="#executionfilestorage">ExecutionFileStorage</a><ul>
+<li><a href="#storage-behavior">Storage behavior</a></li>
+<li><a href="#retrieval-behavior">Retrieval behavior</a></li>
+<li><a href="#execution-file-availability">Execution File Availability</a></li>
+<li><a href="#executionmultifilestorage">ExecutionMultiFileStorage</a></li>
+<li><a href="#executionfilestorageoptions">ExecutionFileStorageOptions</a></li>
+<li><a href="#java-executionfilestorage">Java ExecutionFileStorage</a></li>
+<li><a href="#groovy-executionfilestorage">Groovy ExecutionFileStorage</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Logging Plugin</h1>
+</div>
+<h2 id="about">About</h2>
+<p>A Logging provider stores or forwards execution log data.</p>
+<h3 id="about-rundeck-logging">About Rundeck Logging</h3>
+<p>When Rundeck executes a Job or adhoc execution, it runs workflow steps across multiple nodes and channels all output from these steps into a log for the execution. This log contains the output from each step, as well as metadata about the context that the event occurred in, such as the node name, date stamp, and contextual data about the step being executed.</p>
+<p>This logging system consists of these components:</p>
+<ul>
+<li><em>Streaming Log Writers</em> - One or more outputs for the log data</li>
+<li><em>Streaming Log Reader</em> - One input for reading the log data</li>
+</ul>
+<p>When an execution starts, it writes log events to all outputs until it is done. When a user views the execution log in the Rundeck GUI, or accesses it via the API, the input component is used to read the log events for the specific Execution.</p>
+<p>Rundeck provides a built-in Reader and Writer, by writing the log output to a formatted file on disk, stored in the <code>var/logs</code> directory. This is the <em>Local File Log</em>.</p>
+<p>In addition, in Rundeck 2.0+, each execution generates a <em>state</em> file, which contains information about how each step and node executed. This file is also stored on disk.</p>
+<p>However local storage of log files is not always ideal, such as when deploying of Rundeck in a cloud environment where local disk storage could be ephemeral, or when clustering multiple Rundeck servers. In those cases, it would be useful to have a way to store the log file and state file somewhere else, and retrieve them when necessary.</p>
+<p>Rundeck has another component:</p>
+<ul>
+<li><em>Execution File Storage</em> - A way of storing and retrieving file data in an external system</li>
+</ul>
+<p>Rundeck has a plugin mechanism for all three of these components, allowing the logging system and file storage system to be adapted to different needs.</p>
+<p>Log Events are written to all configured Writer plugins, as well as the <strong>Local File Log</strong> if not disabled:</p>
+<figure>
+<img src="../figures/log%20storage1.png" alt="Writer plugins" /><figcaption>Writer plugins</figcaption>
+</figure>
+<p>Events are read from either a Reader plugin, or the <strong>Local File Log</strong>:</p>
+<figure>
+<img src="../figures/log%20storage2.png" alt="Reader plugins" /><figcaption>Reader plugins</figcaption>
+</figure>
+<p>When the <strong>Local File Log</strong> is used, the logs can be asynchronously stored to a Storage plugin after they are completed. Later, the logs can be asynchronously retrieved via the Storage plugin to be used by the <strong>Local File Log</strong>:</p>
+<figure>
+<img src="../figures/log%20storage3.png" alt="Storage plugins" /><figcaption>Storage plugins</figcaption>
+</figure>
+<p>Here are some examples of how it can be used:</p>
+<ul>
+<li>replace the <strong>Local File Log</strong> entirely with another Reader and set of Writers</li>
+<li>duplicate all log output somewhere, in addition to using the <strong>Local File Log</strong></li>
+<li>Supplement the <strong>Local File Log</strong> with a secondary log file storage system, so that local files can be removed and restored as needed</li>
+</ul>
+<h2 id="changes-since-rundeck-1.6">Changes since Rundeck 1.6</h2>
+<p>In Rundeck 1.6, there was an <code>LogFileStorage</code> service and plugin system. In Rundeck 2.0+, this has been replaced by the <code>ExecutionFileStorage</code> service and plugin system.</p>
+<p>Any plugins written for Rundeck 1.6 will <em>not</em> work in Rundeck 2.0, and need to be updated to use the new mechanism.</p>
+<h2 id="changes-in-rundeck-2.6">Changes in Rundeck 2.6</h2>
+<p>The <code>ExecutionFileStorage</code> behavior has been extended to allow use of two new optional interfaces:</p>
+<ul>
+<li><a href="#executionmultifilestorage">ExecutionMultiFileStorage</a></li>
+<li><a href="#executionfilestorageoptions">ExecutionFileStorageOptions</a></li>
+</ul>
+<p>The groovy-script based DSL for this plugin type has been modified to support these features automatically.</p>
+<p>Previous plugin implementations will work without modification.</p>
+<h2 id="types-of-logging-plugins">Types of Logging Plugins</h2>
+<p>There are three types of plugins that can be created:</p>
+<ul>
+<li><a href="#streaminglogwriter">StreamingLogWriter</a> - provides a stream-like mechanism for writing log events (<a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.21-20190424/com/dtolabs/rundeck/core/logging/StreamingLogWriter.html">javadoc</a>).</li>
+<li><a href="#streaminglogreader">StreamingLogReader</a> - provides a stream-like mechanism for reading log events (<a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.21-20190424/com/dtolabs/rundeck/core/logging/StreamingLogReader.html">javadoc</a>).</li>
+<li><a href="#executionfilestorage">ExecutionFileStorage</a> - provides a way to both store and retrieve entire log files and execution state files (<a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.21-20190424/com/dtolabs/rundeck/core/logging/ExecutionFileStorage.html">javadoc</a>).</li>
+</ul>
+<h2 id="configuration">Configuration</h2>
+<p>See the chapter <a href="../administration/configuration/plugins/configuring.html#logging-plugin-configuration" title="Administrator Guide - Rundeck Configuration - Configuring Plugins - Configuring - Logging Plugin Configuration">Plugins User Guide - Configuring - Logging</a>.</p>
+<h2 id="plugin-development">Plugin Development</h2>
+<p>Rundeck supports two development modes for Logging plugins:</p>
+<ol type="1">
+<li>Java-based development deployed as a Jar file.</li>
+<li>Groovy-based deployed as a single <code>.groovy</code> script.</li>
+</ol>
+<blockquote>
+<p>Note, “script-based” plugins (shell scripts, that is) are not supported.</p>
+</blockquote>
+<h3 id="java-plugin-type">Java plugin type</h3>
+<p>Java-based plugins can be developed just as any other Rundeck plugin, as described in the chapter <a href="plugin-development.html#java-plugin-development" title="Plugin Developer Guide - Plugin Development - Java Plugin Development">Plugin Development - Java Plugin Development</a>.</p>
+<p>Your plugin class should implement the appropriate Java interface as described in the section for that plugin:</p>
+<ul>
+<li><a href="#streaminglogwriter">StreamingLogWriter</a></li>
+<li><a href="#streaminglogreader">StreamingLogReader</a></li>
+<li><a href="#executionfilestorage">ExecutionFileStorage</a></li>
+</ul>
+<p>To define configuration properties for your plugin, you use the same mechanisms as for Workflow Steps, described under the chapter <a href="plugin-annotations.html#plugin-description" title="Plugin Developer Guide - Plugin Annotations - Plugin Description">Plugin Annotations - Plugin Descriptions</a>.</p>
+<p>The simplest way to do this is to use <a href="plugin-annotations.html#plugin-properties" title="Plugin Developer Guide - Plugin Annotations - Plugin Properties">Plugin Annotations - Plugin Properties</a>.</p>
+<h3 id="groovy-plugin-type">Groovy plugin type</h3>
+<p>For info about the Groovy plugin development method see the <a href="plugin-development.html#groovy-plugin-development" title="Plugin Developer Guide - Plugin Development - Groovy Plugin Development">Plugin Development - Groovy Plugin Development</a> chapter.</p>
+<p>Create a Groovy script, and define your plugin by calling the <code>rundeckPlugin</code> method, and pass it both the Class of the type of plugin, and a Closure used to build the plugin object.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">import</span> com.dtolabs.rundeck.plugins.logging.StreamingLogWriterPlugin</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="fu">rundeckPlugin</span>(StreamingLogWriterPlugin){</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">    <span class="co">//plugin definition goes here...</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">}</a></code></pre></div>
+<h2 id="example-code">Example code</h2>
+<p>See the source directory <code>examples/example-groovy-log-plugins</code> for examples of all three provider types written in Groovy.</p>
+<ul>
+<li>On github: <a href="https://github.com/rundeck/rundeck/tree/development/examples/example-groovy-log-plugins">example-groovy-log-plugins</a></li>
+</ul>
+<p>See the source directory <code>examples/example-java-logging-plugins</code> for Java examples.</p>
+<ul>
+<li>On github: <a href="https://github.com/rundeck/rundeck/tree/development/examples/example-java-logging-plugins">example-java-logging-plugins</a></li>
+</ul>
+<h2 id="execution-context-data">Execution Context Data</h2>
+<p>All three plugin types are given a Map of Execution “context data”. This is a dataset with information about the Execution that produced the log events.</p>
+<p>This data map is the same as the “Job context variables” available when you execute a job or adhoc script, as described in the chapter <a href="../manual/creating-job-workflows.html#context-variables" title="User Guide - Creating Job Workflows - Context Variables">Job Workflows - Context Variables</a>.</p>
+<p>Note that the Map keys will not start with <code>job.</code>, simply use the variable name, such as <code>execid</code>.</p>
+<p>In addition, for ExecutionFileStorage plugins, another map entry named <code>filetype</code> will be specified, which indicates which type of file is being stored. You need to use this filetype as part of the identifier for storing or retrieving the file.</p>
+<h2 id="streaminglogwriter">StreamingLogWriter</h2>
+<p>The <code>StreamingLogWriter</code> (<a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.21-20190424/com/dtolabs/rundeck/core/logging/StreamingLogWriter.html">javadoc</a>) system receives log events from an execution and writes them somewhere.</p>
+<h3 id="java-streaminglogwriter">Java StreamingLogWriter</h3>
+<p>Create a Java class that implements the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.21-20190424/com/dtolabs/rundeck/plugins/logging/StreamingLogWriterPlugin.html">StreamingLogWriterPlugin</a>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co">/**</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"> <span class="co">*</span> Plugin interface for streaming log writers</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"> <span class="co">*/</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw">public</span> <span class="kw">interface</span> StreamingLogWriterPlugin <span class="kw">extends</span> StreamingLogWriter {</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">    <span class="co">/**</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">     <span class="co">*</span> Sets the execution context information for the log information</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">     <span class="co">*</span> being written<span class="co">,</span> will be called prior to other</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">     <span class="co">*</span> methods <span class="kw">{@link #</span>openStream<span class="kw">()}</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">     <span class="co">*</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">     <span class="co">* </span><span class="kw">@param context</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">     <span class="co">*/</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12">    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">initialize</span>(<span class="bu">Map</span>&lt;<span class="bu">String</span>, ? <span class="kw">extends</span> <span class="bu">Object</span>&gt; context);</a>
+<a class="sourceLine" id="cb2-13" data-line-number="13">}</a></code></pre></div>
+<p>This extends <code>StreamingLogWriter</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">/**</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"> <span class="co">*</span> writes log entries in a streaming manner</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"> <span class="co">*/</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="kw">public</span> <span class="kw">interface</span> StreamingLogWriter {</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">    <span class="co">/**</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">     <span class="co">*</span> Open a stream<span class="co">,</span> called before addEvent is called</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">     <span class="co">*/</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">    <span class="dt">void</span> <span class="fu">openStream</span>() <span class="kw">throws</span> <span class="bu">IOException</span>;</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">    <span class="co">/**</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">     <span class="co">*</span> Add a new event</a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">     <span class="co">* </span><span class="kw">@param event</span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">     <span class="co">*/</span></a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">    <span class="dt">void</span> <span class="fu">addEvent</span>(LogEvent event);</a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16">    <span class="co">/**</span></a>
+<a class="sourceLine" id="cb3-17" data-line-number="17">     <span class="co">*</span> Close the stream<span class="co">.</span></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18">     <span class="co">*/</span></a>
+<a class="sourceLine" id="cb3-19" data-line-number="19">    <span class="dt">void</span> <span class="fu">close</span>();</a>
+<a class="sourceLine" id="cb3-20" data-line-number="20">}</a></code></pre></div>
+<p>The plugin is used in this manner:</p>
+<ol type="1">
+<li>When the plugin is instantiated, any configuration properties defined that have values to be resolved are set on the plugin instance</li>
+<li>the <code>initialize</code> method is called with a map of <a href="#execution-context-data">contextual data</a> about the execution</li>
+<li>When an execution starts, the <code>openStream</code> method is called</li>
+<li>For every log event that is emitted by the execution, each plugin’s <code>addEvent</code> is called with the event</li>
+<li>After execution finishes, <code>close</code> is called.</li>
+</ol>
+<h3 id="groovy-streaminglogwriter">Groovy StreamingLogWriter</h3>
+<p>Create a groovy script that calls the <code>rundeckPlugin</code> method and passes the <code>StreamingLogWriterPlugin</code> as the type of plugin:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">import</span> com.dtolabs.rundeck.plugins.logging.StreamingLogWriterPlugin</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="fu">rundeckPlugin</span>(StreamingLogWriterPlugin){</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">    <span class="co">//plugin definition</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">}</a></code></pre></div>
+<p>To define metadata about your plugin, and configuration properties, see the <a href="plugin-development.html#groovy-plugin-development" title="Plugin Developer Guide - Plugin Development - Groovy Plugin Development">Plugin Development - Groovy Plugin Development</a> chapter.</p>
+<p>Define these closures inside your definition:</p>
+<p><code>open</code></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co">/**</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"> <span class="co">*</span> The <span class="co">&quot;</span>open<span class="co">&quot;</span> closure is called to open the stream for writing events<span class="co">.</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"> <span class="co">*</span> It is passed two map arguments<span class="co">,</span> the execution data<span class="co">,</span> and the plugin configuration data<span class="co">.</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"> <span class="co">*</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"> <span class="co">*</span> It should return a Map containing the stream context<span class="co">,</span> which will be passed back for later</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"> <span class="co">*</span> calls to the <span class="co">&quot;</span>addEvent<span class="co">&quot;</span> closure<span class="co">.</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"> <span class="co">*/</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">open { <span class="bu">Map</span> execution, <span class="bu">Map</span> config -&gt;</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">    <span class="co">//open a stream for writing</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">    <span class="co">//return a map containing any context you want to maintain</span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11">    [mycounter: ..., mystream: <span class="kw">... </span>]</a>
+<a class="sourceLine" id="cb5-12" data-line-number="12">}</a></code></pre></div>
+<p><code>addEvent</code></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co">/**</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"> <span class="co">*</span> <span class="co">&quot;</span>addEvent<span class="co">&quot;</span> closure is called to append a new event to the stream<span class="co">.</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"> <span class="co">*</span> It is passed the Map of stream context created in the <span class="co">&quot;</span>open<span class="co">&quot;</span> closure<span class="co">,</span> and a LogEvent</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"> <span class="co">*</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"> <span class="co">*/</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">addEvent { <span class="bu">Map</span> context, LogEvent event-&gt;</a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">   <span class="co">// write the event to my stream</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8">}</a></code></pre></div>
+<p><code>close</code></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co">/**</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"> <span class="co">*</span> <span class="co">&quot;</span>close<span class="co">&quot;</span> closure is called to end writing to the stream<span class="co">.</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"> <span class="co">*</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"> <span class="co">*</span> In this example we don<span class="co">&#39;</span>t declare any arguments<span class="co">,</span> but an implicit</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"> <span class="co">*</span> <span class="co">&#39;</span>context<span class="co">&#39;</span> variable is available with the stream context data<span class="co">.</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"> <span class="co">*</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"> <span class="co">*/</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">close { <span class="bu">Map</span> context -&gt;</a>
+<a class="sourceLine" id="cb7-9" data-line-number="9">    <span class="co">// close my stream</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10">}</a></code></pre></div>
+<p>The plugin is used in this manner:</p>
+<ol type="1">
+<li>When an execution starts, the <code>open</code> closure is called with both the <a href="#execution-context-data">contextual data</a> about the execution, and any configuration property values. The returned context map is kept to pass to later calls</li>
+<li>For every log event that is emitted by the execution, each plugin’s <code>addEvent</code> is called with the event and the context map created by <code>open</code></li>
+<li>After execution finishes, <code>close</code> is called with the context map.</li>
+</ol>
+<h2 id="streaminglogreader">StreamingLogReader</h2>
+<p>The <code>StreamingLogReader</code> system reads log events from somewhere for a specific execution and returns them in an iterator-like fashion. Readers must also support an “offset”, allowing the event stream to resume from some index within the stream. These offset indices can be opaque to Rundeck (they could correspond to bytes, or event number, it is up to the plugin). The plugin is expected to report an offset value when reading events, and be able to resume from a previously reported offset value.</p>
+<p>Additionally, these plugins should be able to report a <code>totalSize</code> (in an opaque manner), and a <code>lastModified</code> timestamp, indicating the last log event timestamp that was received.</p>
+<h3 id="java-streaminglogreader">Java StreamingLogReader</h3>
+<p>Create a Java class that implements the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.21-20190424/com/dtolabs/rundeck/plugins/logging/StreamingLogReaderPlugin.html">StreamingLogReaderPlugin</a>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co">/**</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"> <span class="co">*</span> Plugin interface for streaming log readers</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"> <span class="co">*/</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="kw">public</span> <span class="kw">interface</span> StreamingLogReaderPlugin <span class="kw">extends</span> StreamingLogReader {</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">    <span class="co">/**</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">     <span class="co">*</span> Sets the execution context information for the log information</a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">     <span class="co">*</span> being requested<span class="co">,</span> will be called</a>
+<a class="sourceLine" id="cb8-8" data-line-number="8">     <span class="co">*</span> prior to other methods <span class="kw">{@link #</span>openStream<span class="kw">(</span>Long<span class="kw">)}</span><span class="co">,</span> and must return</a>
+<a class="sourceLine" id="cb8-9" data-line-number="9">     <span class="co">*</span> true to indicate the stream is ready to be open<span class="co">,</span> false otherwise<span class="co">.</span></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10">     <span class="co">*</span> <span class="kw">@param context </span>execution context data</a>
+<a class="sourceLine" id="cb8-11" data-line-number="11">     <span class="co">*</span> <span class="kw">@return </span>true if the stream is ready to open</a>
+<a class="sourceLine" id="cb8-12" data-line-number="12">     <span class="co">*/</span></a>
+<a class="sourceLine" id="cb8-13" data-line-number="13">    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">initialize</span>(<span class="bu">Map</span>&lt;<span class="bu">String</span>, ? <span class="kw">extends</span> <span class="bu">Object</span>&gt; context);</a>
+<a class="sourceLine" id="cb8-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb8-15" data-line-number="15">}</a></code></pre></div>
+<p>This extends the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.21-20190424/com/dtolabs/rundeck/core/logging/StreamingLogReader.html">StreamingLogReader</a>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co">/**</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"> <span class="co">*</span>  Reads log events in a streaming manner<span class="co">,</span> and supports resuming from a specified offset<span class="co">.</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"> <span class="co">*</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"> <span class="co">*</span>  <span class="kw">@see </span>LogEventIterator</a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"> <span class="co">*</span>  <span class="kw">@see </span>OffsetIterator</a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"> <span class="co">*</span>  <span class="kw">@see </span>Closeable</a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"> <span class="co">*</span>  <span class="kw">@see </span>CompletableIterator</a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"> <span class="co">*/</span></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="kw">public</span> <span class="kw">interface</span> StreamingLogReader <span class="kw">extends</span> LogEventIterator, <span class="bu">Closeable</span> {</a>
+<a class="sourceLine" id="cb9-10" data-line-number="10">    <span class="co">/**</span></a>
+<a class="sourceLine" id="cb9-11" data-line-number="11">     <span class="co">*</span> Read log entries starting at the specified offset</a>
+<a class="sourceLine" id="cb9-12" data-line-number="12">     <span class="co">*</span></a>
+<a class="sourceLine" id="cb9-13" data-line-number="13">     <span class="co">* </span><span class="kw">@param offset</span></a>
+<a class="sourceLine" id="cb9-14" data-line-number="14">     <span class="co">*</span></a>
+<a class="sourceLine" id="cb9-15" data-line-number="15">     <span class="co">*</span> <span class="co">@</span>return</a>
+<a class="sourceLine" id="cb9-16" data-line-number="16">     <span class="co">*/</span></a>
+<a class="sourceLine" id="cb9-17" data-line-number="17">    <span class="dt">void</span> <span class="fu">openStream</span>(<span class="bu">Long</span> offset) <span class="kw">throws</span> <span class="bu">IOException</span>;</a>
+<a class="sourceLine" id="cb9-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb9-19" data-line-number="19">    <span class="co">/**</span></a>
+<a class="sourceLine" id="cb9-20" data-line-number="20">     <span class="co">*</span> Return the total size</a>
+<a class="sourceLine" id="cb9-21" data-line-number="21">     <span class="co">*</span></a>
+<a class="sourceLine" id="cb9-22" data-line-number="22">     <span class="co">* @</span>return</a>
+<a class="sourceLine" id="cb9-23" data-line-number="23">     <span class="co">*/</span></a>
+<a class="sourceLine" id="cb9-24" data-line-number="24">    <span class="dt">long</span> <span class="fu">getTotalSize</span>();</a>
+<a class="sourceLine" id="cb9-25" data-line-number="25"></a>
+<a class="sourceLine" id="cb9-26" data-line-number="26">    <span class="co">/**</span></a>
+<a class="sourceLine" id="cb9-27" data-line-number="27">     <span class="co">*</span> Return the last modification time of the log</a>
+<a class="sourceLine" id="cb9-28" data-line-number="28">     <span class="co">*</span> <span class="co">(</span>e<span class="co">.</span>g<span class="co">.</span> last log entry time<span class="co">,</span> or null if not modified<span class="co">)</span></a>
+<a class="sourceLine" id="cb9-29" data-line-number="29">     <span class="co">*</span></a>
+<a class="sourceLine" id="cb9-30" data-line-number="30">     <span class="co">* @</span>return</a>
+<a class="sourceLine" id="cb9-31" data-line-number="31">     <span class="co">*/</span></a>
+<a class="sourceLine" id="cb9-32" data-line-number="32">    <span class="bu">Date</span> <span class="fu">getLastModified</span>();</a>
+<a class="sourceLine" id="cb9-33" data-line-number="33">}</a></code></pre></div>
+<p>Additional methods that must be implemented from super-interfaces:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co">//from LogEventIterator</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">LogEvent <span class="fu">next</span>();</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="dt">boolean</span> <span class="fu">hasNext</span>();</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="dt">void</span> <span class="fu">remove</span>(); <span class="co">//unused</span></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">/**</span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"> <span class="co">*</span> Returns the current opaque offset within the underlying data stream</a>
+<a class="sourceLine" id="cb10-8" data-line-number="8"> <span class="co">*</span></a>
+<a class="sourceLine" id="cb10-9" data-line-number="9"> <span class="co">* @</span>return</a>
+<a class="sourceLine" id="cb10-10" data-line-number="10"> <span class="co">*/</span></a>
+<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="dt">long</span> <span class="fu">getOffset</span>(); <span class="co">//from OffsetIterator</span></a>
+<a class="sourceLine" id="cb10-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb10-13" data-line-number="13"><span class="co">/**</span></a>
+<a class="sourceLine" id="cb10-14" data-line-number="14"> <span class="co">*</span> Return true if the underlying source is completely exhausted<span class="co">,</span> whether</a>
+<a class="sourceLine" id="cb10-15" data-line-number="15"> <span class="co">*</span> or not there are any items to produce <span class="co">(</span>may return false even if <span class="kw">{@link </span>Iterator<span class="kw">#</span>hasNext<span class="kw">()}</span> returns false<span class="co">).</span></a>
+<a class="sourceLine" id="cb10-16" data-line-number="16"> <span class="co">*</span> <span class="kw">@return </span>true if underlying iteration source is exhasuted</a>
+<a class="sourceLine" id="cb10-17" data-line-number="17"> <span class="co">*/</span></a>
+<a class="sourceLine" id="cb10-18" data-line-number="18"><span class="dt">boolean</span> <span class="fu">isComplete</span>(); <span class="co">//from CompletableIterator</span></a></code></pre></div>
+<p>The plugin is used in this manner:</p>
+<ol type="1">
+<li>When the plugin is instantiated, any configuration properties defined that have values to be resolved are set on the plugin instance</li>
+<li>the <code>initialize</code> method is called with a map of <a href="#execution-context-data">contextual data</a> about the execution, if the method returns false, then clients are told that the log stream is pending.</li>
+<li>the <code>getLastModified</code> method may be called, to determine if there are new events since a read sequence</li>
+<li>The <code>openStream</code> method is called, possibly with an offset larger than 0, which indicates the event stream should begin at the specified offset</li>
+<li>The <code>java.util.Iterator</code> methods will be called to iterate all available LogEvents</li>
+<li>The <code>isComplete</code> method will be called to determine if the log output is complete, or may contain more entries later.</li>
+<li>The <code>getOffset</code> method will be called to record the last offset read.</li>
+<li>Finally, <code>close</code> is called.</li>
+</ol>
+<p>Rundeck uses this interface to read the log events to display in the GUI, or send out via its API. It uses the <code>offset</code>, as well as <code>lastModified</code>, to resume reading the log from a certain point, and to check whether there is more data since the last time it was read.</p>
+<p>The implementation of the <code>isComplete</code> method is important, because it signals to Rundeck that all log events for the stream have been read and no more are expected to be available. To be clear, this differs from the <code>java.util.Iterator#hasNext()</code> method, which returns true if any events are actually available. <code>isComplete</code> should return false until no more events will ever be available.</p>
+<p>If you are developing a <code>StreamingLogWriter</code> in conjunction with a <code>StreamingLogReader</code>, keep in mind that the writer’s <code>close</code> method will be called to indicate the end of the stream, which would be reflected on the reader side by <code>isComplete</code> returning true.</p>
+<h3 id="groovy-streaminglogreader">Groovy StreamingLogReader</h3>
+<p>Create a groovy script that calls the <code>rundeckPlugin</code> method and passes the <code>StreamingLogReaderPlugin</code> as the type of plugin:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">import</span> com.dtolabs.rundeck.plugins.logging.StreamingLogReaderPlugin</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="fu">rundeckPlugin</span>(StreamingLogReaderPlugin){</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">    <span class="co">//plugin definition</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">}</a></code></pre></div>
+<p>To define metadata about your plugin, and configuration properties, see the <a href="plugin-development.html#groovy-plugin-development" title="Plugin Developer Guide - Plugin Development - Groovy Plugin Development">Plugin Development - Groovy Plugin Development</a> chapter.</p>
+<p>Define these closures inside your definition:</p>
+<p><code>info</code></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co">/**</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"> <span class="co">*</span> The <span class="co">&#39;</span>info<span class="co">&#39;</span> closure is called to retrieve some metadata about the stream<span class="co">,</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"> <span class="co">*</span> such as whether it is available to read<span class="co">,</span> totalSize of the content<span class="co">,</span> and last</a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"> <span class="co">*</span>  modification time</a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"> <span class="co">*</span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"> <span class="co">*</span> It should return a Map containing these two entries<span class="co">:</span></a>
+<a class="sourceLine" id="cb12-7" data-line-number="7"> <span class="co">*</span>  <span class="co">`</span>ready<span class="co">`</span> <span class="co">:</span> a boolean indicating whether <span class="co">&#39;</span>open<span class="co">&#39;</span> will work</a>
+<a class="sourceLine" id="cb12-8" data-line-number="8"> <span class="co">*</span> <span class="co">`</span>lastModified<span class="co">`:</span> Long <span class="co">(</span>unix epoch<span class="co">)</span> or Date indicating last modification of the log</a>
+<a class="sourceLine" id="cb12-9" data-line-number="9"> <span class="co">*</span> <span class="co">`</span>totalSize<span class="co">`:</span> Long indicating total size of the log<span class="co">,</span> it doesn<span class="co">&#39;</span>t have to indicate bytes<span class="co">,</span></a>
+<a class="sourceLine" id="cb12-10" data-line-number="10"> <span class="co">*</span>     merely a measurement of total data size</a>
+<a class="sourceLine" id="cb12-11" data-line-number="11"> <span class="co">*/</span></a>
+<a class="sourceLine" id="cb12-12" data-line-number="12">info {<span class="bu">Map</span> execution, <span class="bu">Map</span> configuration-&gt;</a>
+<a class="sourceLine" id="cb12-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb12-14" data-line-number="14">    <span class="co">//return map containing metadata about the stream</span></a>
+<a class="sourceLine" id="cb12-15" data-line-number="15">    <span class="co">// it SHOULD contain these two elements:</span></a>
+<a class="sourceLine" id="cb12-16" data-line-number="16">    [</a>
+<a class="sourceLine" id="cb12-17" data-line-number="17">        lastModified: <span class="fu">determineLastModified</span>(),</a>
+<a class="sourceLine" id="cb12-18" data-line-number="18">        totalSize: <span class="fu">determineDataSize</span>(),</a>
+<a class="sourceLine" id="cb12-19" data-line-number="19">        ready: <span class="fu">isReady</span>()</a>
+<a class="sourceLine" id="cb12-20" data-line-number="20">    ]</a>
+<a class="sourceLine" id="cb12-21" data-line-number="21">}</a></code></pre></div>
+<p><code>open</code></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="co">/**</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"> <span class="co">*</span> The <span class="co">`</span>open<span class="co">`</span> closure is called to begin reading events from the stream<span class="co">.</span></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"> <span class="co">*</span> It is passed the execution data<span class="co">,</span> the plugin configuration<span class="co">,</span> and an offset<span class="co">.</span></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"> <span class="co">*</span> It should return a Map containing any context to store between calls<span class="co">.</span></a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"> <span class="co">*/</span></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6">open { <span class="bu">Map</span> execution, <span class="bu">Map</span> configuration, <span class="dt">long</span> offset -&gt;</a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8">    <span class="co">//return map of context data for your plugin to reuse later,</span></a>
+<a class="sourceLine" id="cb13-9" data-line-number="9">    [</a>
+<a class="sourceLine" id="cb13-10" data-line-number="10">        myfile: ...,</a>
+<a class="sourceLine" id="cb13-11" data-line-number="11">        mycounter:...</a>
+<a class="sourceLine" id="cb13-12" data-line-number="12">    ]</a>
+<a class="sourceLine" id="cb13-13" data-line-number="13">}</a></code></pre></div>
+<p><code>next</code></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="co">/**</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"> <span class="co">*</span> Next is called to produce the next event<span class="co">,</span> it should return a Map</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"> <span class="co">*</span> containing<span class="co">:</span> <span class="co">[</span>event<span class="co">:</span> <span class="co">(</span>event data<span class="co">),</span> offset<span class="co">:</span> <span class="co">(</span>next offset<span class="co">),</span> complete<span class="co">:</span> <span class="co">(</span>true<span class="co">/</span>false<span class="co">)].</span></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"> <span class="co">*</span> The event data can be a LogEvent<span class="co">,</span> or a Map containing<span class="co">:</span></a>
+<a class="sourceLine" id="cb14-5" data-line-number="5"> <span class="co">*</span> <span class="co">[</span></a>
+<a class="sourceLine" id="cb14-6" data-line-number="6"> <span class="co">*</span> message<span class="co">:</span> <span class="co">(</span>String<span class="co">),</span></a>
+<a class="sourceLine" id="cb14-7" data-line-number="7"> <span class="co">*</span> loglevel<span class="co">:</span> <span class="co">(</span>String or LogLevel<span class="co">),</span></a>
+<a class="sourceLine" id="cb14-8" data-line-number="8"> <span class="co">*</span> datetime<span class="co">:</span> <span class="co">(</span>long or Date<span class="co">),</span></a>
+<a class="sourceLine" id="cb14-9" data-line-number="9"> <span class="co">*</span> eventType<span class="co">:</span> <span class="co">(</span>String<span class="co">),</span></a>
+<a class="sourceLine" id="cb14-10" data-line-number="10"> <span class="co">*</span> metadata<span class="co">:</span> <span class="co">(</span>Map<span class="co">),</span></a>
+<a class="sourceLine" id="cb14-11" data-line-number="11"> <span class="co">*</span> <span class="co">]</span></a>
+<a class="sourceLine" id="cb14-12" data-line-number="12"> <span class="co">*</span> <span class="co">`</span>complete<span class="co">`</span> should be true if no more events will ever be available<span class="co">.</span></a>
+<a class="sourceLine" id="cb14-13" data-line-number="13"> <span class="co">*/</span></a>
+<a class="sourceLine" id="cb14-14" data-line-number="14">next { <span class="bu">Map</span> context-&gt;</a>
+<a class="sourceLine" id="cb14-15" data-line-number="15">    <span class="bu">Map</span> value=<span class="kw">null</span></a>
+<a class="sourceLine" id="cb14-16" data-line-number="16">    <span class="dt">boolean</span> complete=<span class="kw">false</span></a>
+<a class="sourceLine" id="cb14-17" data-line-number="17">    <span class="dt">long</span> offset=...</a>
+<a class="sourceLine" id="cb14-18" data-line-number="18">    <span class="kw">try</span>{</a>
+<a class="sourceLine" id="cb14-19" data-line-number="19">        value = <span class="fu">readNextValue</span>(...)</a>
+<a class="sourceLine" id="cb14-20" data-line-number="20">        complete = <span class="fu">isComplete</span>(..)</a>
+<a class="sourceLine" id="cb14-21" data-line-number="21">    }<span class="kw">catch</span> (SomeException e){</a>
+<a class="sourceLine" id="cb14-22" data-line-number="22">    }</a>
+<a class="sourceLine" id="cb14-23" data-line-number="23">    <span class="co">//event can be a Map, or a LogEvent</span></a>
+<a class="sourceLine" id="cb14-24" data-line-number="24">    <span class="kw">return</span> [event:event, offset:offset, complete:complete]</a>
+<a class="sourceLine" id="cb14-25" data-line-number="25">}</a></code></pre></div>
+<p><code>close</code></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="co">/**</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"> <span class="co">*</span> Close is called to finish the read stream</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"> <span class="co">*/</span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4">close{ <span class="bu">Map</span> context-&gt;</a>
+<a class="sourceLine" id="cb15-5" data-line-number="5">    <span class="co">//perform any close action</span></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6">}</a></code></pre></div>
+<p>The plugin is used in this manner:</p>
+<ol type="1">
+<li>The <code>info</code> closure is called to determine the <code>lastModified</code> and <code>totalSize</code>.</li>
+<li>The <code>open</code> closure is called with both the <a href="#execution-context-data">contextual data</a> about the execution, and any configuration property values, and the expected read offset</li>
+<li>The <code>next</code> closure is called repeatedly, until the result <code>event</code> entry is null, or <code>complete</code> is true. The <code>offset</code> value is reported to the client.</li>
+<li>The <code>close</code> closure is called with the context map.</li>
+</ol>
+<h2 id="executionfilestorage">ExecutionFileStorage</h2>
+<p>The <code>ExecutionFileStorage</code> system is asked to store and retrieve entire log files and state files for a specific execution.</p>
+<p>The Java interface for these plugins is <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.21-20190424/com/dtolabs/rundeck/plugins/logging/ExecutionFileStoragePlugin.html">ExecutionFileStoragePlugin</a>.</p>
+<p>Additional optional interfaces provide extended behaviors that your plugin can adopt:</p>
+<ul>
+<li><a href="#executionmultifilestorage">ExecutionMultiFileStorage</a> - adds a method to store all available files in one method call (<a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.21-20190424/com/dtolabs/rundeck/core/logging/ExecutionMultiFileStorage.html">javadoc</a>).</li>
+<li><a href="#executionfilestorageoptions">ExecutionFileStorageOptions</a> - define whether both retrieve and store are supported (<a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.21-20190424/com/dtolabs/rundeck/core/logging/ExecutionFileStorageOptions.html">javadoc</a>).</li>
+</ul>
+<p>Execution file storage allows Rundeck to store the files elsewhere, in case local file storage is not suitable for long-term retention.</p>
+<p>The ExecutionFileStorage service is used by two aspects of the Rundeck server currently.</p>
+<ol type="1">
+<li>Execution Log file - a data file containing all of the output for an execution</li>
+<li>Execution state files - a data file containing all of the workflow step and node state information for an execution</li>
+</ol>
+<h3 id="storage-behavior">Storage behavior</h3>
+<p>If an ExecutionFileStoragePlugin is installed and configured to be enabled, and supports <code>store</code>, Rundeck will use it in this way after an Execution completes:</p>
+<p>Rundeck will place a <em>Storage Request</em> in an asynchronous queue for that Execution to store the Log file and the State file.</p>
+<p>When triggered, the <em>Storage Request</em> will use the configured ExecutionFileStorage plugin and invoke <code>store</code>:</p>
+<ul>
+<li>If it is unsuccessful, Rundeck may re-queue the request to retry it after a delay (configurable)</li>
+<li>The <code>store</code> method will be invoked for each file to store.</li>
+<li>(Optional) if your plugin implements <a href="#executionmultifilestorage">ExecutionMultiFileStorage</a>, then only a single method <code>storeMultiple</code> will be called. This is useful if you want access to all files for an execution at once.</li>
+</ul>
+<h3 id="retrieval-behavior">Retrieval behavior</h3>
+<p>When a client requests a log stream to read via the <strong>Local File Log</strong>, or requests to read the <strong>Execution Workflow State</strong>, Rundeck determines if the file(s) are available locally. If they are not available, it will start a <em>Retrieval Request</em> asynchronously for each missing file, and tell the client that the file is in a “pending” state. (If an ExecutionFileStorage plugin is configured and it supports <code>retireve</code>. If your plugin does not support <code>retrieve</code>, implement <a href="#executionmultifilestorage">ExecutionMultiFileStorage</a> to declare available methods.)</p>
+<p>The <em>Retrieval Request</em> will use the configured ExecutionFileStorage plugin, and invoke <code>retrieve</code>.</p>
+<p>If successful, the client requests to read the <strong>Local File Log</strong> or <strong>Execution Workflow State</strong> should find the file available locally. If unsuccessful, the result may be cached for a period of time to report to the client. After that time, a new <em>Retrieval Request</em> may be started if requested by a client. After a certain number of attempts fail, further attempts will be disabled and return the cached status. The retry delay and number of attempts can be configured.</p>
+<h3 id="execution-file-availability">Execution File Availability</h3>
+<p>Your plugin will be asked if a file of a specific type is ‘available’, and should report back one of:</p>
+<ul>
+<li><code>true</code> - the plugin can retrieve the file of the specified type</li>
+<li><code>false</code> - the plugin cannot retrieve the file of the specified type</li>
+</ul>
+<p>Only if <code>true</code> is reported will a <em>Retrieval Request</em> be created.</p>
+<p>If there is an error discovering availability, your plugin should throw an Exception with the error message to report.</p>
+<h3 id="executionmultifilestorage">ExecutionMultiFileStorage</h3>
+<p>This optional interface for you Java plugin indicates that <code>store</code> requests should all be made at once via the <code>storeMultiple</code> method.</p>
+<ul>
+<li><a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.21-20190424/com/dtolabs/rundeck/core/logging/ExecutionMultiFileStorage.html">ExecutionMultiFileStorage javadoc</a></li>
+</ul>
+<p><code>storeMultiple</code> will be passed a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.21-20190424/com/dtolabs/rundeck/core/logging/MultiFileStorageRequest.html">MultiFileStorageRequest</a> allowing access to the available file data, and a callback method for your plugin to use to indicate the success/failure for storage of each file type. Your plugin must call <code>storageResultForFiletype(filetype, boolean)</code> for each filetype provided in the <code>MultiFileStorageRequest</code>.</p>
+<p>If storage for a filetype is not successful, it will be retried at a later point.</p>
+<p>If your plugin requires access to all available filetypes at once, you should indicate <code>false</code> for the success status for all filetypes if you want them all to be retried at once.</p>
+<p>In addition to the <em>Log file</em> and <em>State files</em> (‘rdlog’, and ‘state.json’ filetypes), an ExecutionMultiFileStorage will be given access to a <code>execution.xml</code> filetype. This file is the XML serialized version of the Execution itself, in the format used by the Project Archive contents.</p>
+<h3 id="executionfilestorageoptions">ExecutionFileStorageOptions</h3>
+<p>This optional interface allows your plugin to indicate whether both <code>store</code> and <code>retrieve</code> operations are available. The default if you do not implement this is that both operations are available.</p>
+<ul>
+<li><a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.21-20190424/com/dtolabs/rundeck/core/logging/ExecutionFileStorageOptions.html">ExecutionFileStorageOptions javadoc</a></li>
+</ul>
+<h3 id="java-executionfilestorage">Java ExecutionFileStorage</h3>
+<p>Create a Java class that implements the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.21-20190424/com/dtolabs/rundeck/plugins/logging/ExecutionFileStoragePlugin.html">ExecutionFileStoragePlugin</a>:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="co">/**</span></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"> <span class="co">*</span> Plugin to implement <span class="kw">{@link </span>com<span class="kw">.</span>dtolabs<span class="kw">.</span>rundeck<span class="kw">.</span>core<span class="kw">.</span>logging<span class="kw">.</span>ExecutionFileStorage<span class="kw">}</span></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"> <span class="co">*/</span></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="kw">public</span> <span class="kw">interface</span> ExecutionFileStoragePlugin <span class="kw">extends</span> ExecutionFileStorage {</a>
+<a class="sourceLine" id="cb16-5" data-line-number="5">    <span class="co">/**</span></a>
+<a class="sourceLine" id="cb16-6" data-line-number="6">     <span class="co">*</span> Initializes the plugin with contextual data</a>
+<a class="sourceLine" id="cb16-7" data-line-number="7">     <span class="co">*</span></a>
+<a class="sourceLine" id="cb16-8" data-line-number="8">     <span class="co">* </span><span class="kw">@param context</span></a>
+<a class="sourceLine" id="cb16-9" data-line-number="9">     <span class="co">*/</span></a>
+<a class="sourceLine" id="cb16-10" data-line-number="10">    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">initialize</span>(<span class="bu">Map</span>&lt;<span class="bu">String</span>, ? <span class="kw">extends</span> <span class="bu">Object</span>&gt; context);</a>
+<a class="sourceLine" id="cb16-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb16-12" data-line-number="12">    <span class="co">/**</span></a>
+<a class="sourceLine" id="cb16-13" data-line-number="13">     <span class="co">*</span> Returns true if the file for the context and the given filetype</a>
+<a class="sourceLine" id="cb16-14" data-line-number="14">     <span class="co">*</span> is available<span class="co">,</span> false otherwise</a>
+<a class="sourceLine" id="cb16-15" data-line-number="15">     <span class="co">*</span></a>
+<a class="sourceLine" id="cb16-16" data-line-number="16">     <span class="co">* </span><span class="kw">@param filetype </span>file type or extension of the file to check</a>
+<a class="sourceLine" id="cb16-17" data-line-number="17">     <span class="co">*</span></a>
+<a class="sourceLine" id="cb16-18" data-line-number="18">     <span class="co">*</span> <span class="kw">@return </span>true if a file with the given filetype is available</a>
+<a class="sourceLine" id="cb16-19" data-line-number="19">     <span class="co">*</span> for the context</a>
+<a class="sourceLine" id="cb16-20" data-line-number="20">     <span class="co">*</span></a>
+<a class="sourceLine" id="cb16-21" data-line-number="21">     <span class="co">*</span> <span class="kw">@throws com.dtolabs.rundeck.core.logging.ExecutionFileStorageException</span></a>
+<a class="sourceLine" id="cb16-22" data-line-number="22">     <span class="co">*</span>          if there is an error determining the availability</a>
+<a class="sourceLine" id="cb16-23" data-line-number="23">     <span class="co">*/</span></a>
+<a class="sourceLine" id="cb16-24" data-line-number="24">    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">isAvailable</span>(<span class="bu">String</span> filetype) <span class="kw">throws</span> ExecutionFileStorageException;</a>
+<a class="sourceLine" id="cb16-25" data-line-number="25">}</a></code></pre></div>
+<p>This extends the interface <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.21-20190424/com/dtolabs/rundeck/core/logging/ExecutionFileStorage.html">ExecutionFileStorage</a>:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co">/**</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"> <span class="co">*</span> Handles storage and retrieval of typed files for an execution<span class="co">,</span> the filetype is specified in the <span class="kw">{@link #</span>store<span class="kw">(</span>String<span class="kw">,</span></a>
+<a class="sourceLine" id="cb17-3" data-line-number="3"> <span class="kw">*</span> java<span class="kw">.</span>io<span class="kw">.</span>InputStream<span class="kw">,</span> long<span class="kw">,</span> java<span class="kw">.</span>util<span class="kw">.</span>Date<span class="kw">)}</span> and <span class="kw">{@link #</span>retrieve<span class="kw">(</span>String<span class="kw">,</span> java<span class="kw">.</span>io<span class="kw">.</span>OutputStream<span class="kw">)}</span> methods<span class="co">,</span> and more</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"> <span class="co">*</span> than one filetype may be stored or retrieved for the same execution<span class="co">.</span></a>
+<a class="sourceLine" id="cb17-5" data-line-number="5"> <span class="co">*/</span></a>
+<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="kw">public</span> <span class="kw">interface</span> ExecutionFileStorage {</a>
+<a class="sourceLine" id="cb17-7" data-line-number="7">    <span class="co">/**</span></a>
+<a class="sourceLine" id="cb17-8" data-line-number="8">     <span class="co">*</span> Stores a file of the given file type<span class="co">,</span> read from the given stream</a>
+<a class="sourceLine" id="cb17-9" data-line-number="9">     <span class="co">*</span></a>
+<a class="sourceLine" id="cb17-10" data-line-number="10">     <span class="co">* </span><span class="kw">@param filetype </span>    filetype or extension of the file to store</a>
+<a class="sourceLine" id="cb17-11" data-line-number="11">     <span class="co">*</span> <span class="kw">@param stream </span>      the input stream</a>
+<a class="sourceLine" id="cb17-12" data-line-number="12">     <span class="co">*</span> <span class="kw">@param length </span>      the file length</a>
+<a class="sourceLine" id="cb17-13" data-line-number="13">     <span class="co">*</span> <span class="kw">@param lastModified </span>the file modification time</a>
+<a class="sourceLine" id="cb17-14" data-line-number="14">     <span class="co">*</span></a>
+<a class="sourceLine" id="cb17-15" data-line-number="15">     <span class="co">*</span> <span class="kw">@return </span>true if successful</a>
+<a class="sourceLine" id="cb17-16" data-line-number="16">     <span class="co">*</span></a>
+<a class="sourceLine" id="cb17-17" data-line-number="17">     <span class="co">*</span> <span class="kw">@throws java.io.IOException</span></a>
+<a class="sourceLine" id="cb17-18" data-line-number="18">     <span class="co">*/</span></a>
+<a class="sourceLine" id="cb17-19" data-line-number="19">    <span class="dt">boolean</span> <span class="fu">store</span>(<span class="bu">String</span> filetype, <span class="bu">InputStream</span> stream,</a>
+<a class="sourceLine" id="cb17-20" data-line-number="20">                  <span class="dt">long</span> length, <span class="bu">Date</span> lastModified)</a>
+<a class="sourceLine" id="cb17-21" data-line-number="21">          <span class="kw">throws</span> <span class="bu">IOException</span>, ExecutionFileStorageException;</a>
+<a class="sourceLine" id="cb17-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb17-23" data-line-number="23">    <span class="co">/**</span></a>
+<a class="sourceLine" id="cb17-24" data-line-number="24">     <span class="co">*</span> Write a file of the given file type to the given stream</a>
+<a class="sourceLine" id="cb17-25" data-line-number="25">     <span class="co">*</span></a>
+<a class="sourceLine" id="cb17-26" data-line-number="26">     <span class="co">* </span><span class="kw">@param filetype </span>key to identify stored file</a>
+<a class="sourceLine" id="cb17-27" data-line-number="27">     <span class="co">*</span> <span class="kw">@param stream </span>  the output stream</a>
+<a class="sourceLine" id="cb17-28" data-line-number="28">     <span class="co">*</span></a>
+<a class="sourceLine" id="cb17-29" data-line-number="29">     <span class="co">*</span> <span class="kw">@return </span>true if successful</a>
+<a class="sourceLine" id="cb17-30" data-line-number="30">     <span class="co">*</span></a>
+<a class="sourceLine" id="cb17-31" data-line-number="31">     <span class="co">*</span> <span class="kw">@throws IOException</span></a>
+<a class="sourceLine" id="cb17-32" data-line-number="32">     <span class="co">*/</span></a>
+<a class="sourceLine" id="cb17-33" data-line-number="33">    <span class="dt">boolean</span> <span class="fu">retrieve</span>(<span class="bu">String</span> filetype, <span class="bu">OutputStream</span> stream)</a>
+<a class="sourceLine" id="cb17-34" data-line-number="34">       <span class="kw">throws</span> <span class="bu">IOException</span>, ExecutionFileStorageException;</a>
+<a class="sourceLine" id="cb17-35" data-line-number="35">}</a></code></pre></div>
+<p>The plugin is used in these two conditions:</p>
+<ul>
+<li>A log or state file needs to be stored via the plugin</li>
+<li>A log or state file needs to be retrieved via the plugin</li>
+</ul>
+<ol type="1">
+<li>When the plugin is instantiated, any configuration properties defined that have values to be resolved are set on the plugin instance</li>
+<li>The <code>initialize</code> method is called with a map of <a href="#execution-context-data">contextual data</a> about the execution.</li>
+</ol>
+<p>When <code>retrieval</code> is needed:</p>
+<ol type="1">
+<li>The <code>isAvailable</code> method is called to determine if the plugin can retrieve the file, and the filetype is specified</li>
+<li>If the method returns true, then <code>retrieve</code> method is called with the same filetype.</li>
+</ol>
+<p>When <code>storage</code> is needed:</p>
+<ol type="1">
+<li>The <code>store</code> method is called with the filetype to store.</li>
+</ol>
+<h3 id="groovy-executionfilestorage">Groovy ExecutionFileStorage</h3>
+<p>Create a groovy script that calls the <code>rundeckPlugin</code> method and passes the <code>ExecutionFileStoragePlugin</code> as the type of plugin:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">import</span> com.dtolabs.rundeck.plugins.logging.ExecutionFileStoragePlugin</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="fu">rundeckPlugin</span>(ExecutionFileStoragePlugin){</a>
+<a class="sourceLine" id="cb18-3" data-line-number="3">    <span class="co">//plugin definition</span></a>
+<a class="sourceLine" id="cb18-4" data-line-number="4">}</a></code></pre></div>
+<p>To define metadata about your plugin, and configuration properties, see the <a href="plugin-development.html#groovy-plugin-development" title="Plugin Developer Guide - Plugin Development - Groovy Plugin Development">Plugin Development - Groovy Plugin Development</a> chapter.</p>
+<p>Define these closures inside your definition:</p>
+<p><code>store</code></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="co">/**</span></a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"> <span class="co">*</span> Called to store a log file<span class="co">,</span> called with the execution data<span class="co">,</span> configuration properties<span class="co">,</span> and an InputStream<span class="co">. </span> Additionally <span class="co">`</span>length<span class="co">`</span> and <span class="co">`</span>lastModified<span class="co">`</span> properties are in the closure binding<span class="co">,</span> providing the file length<span class="co">,</span> and last modification Date<span class="co">.</span></a>
+<a class="sourceLine" id="cb19-3" data-line-number="3"> <span class="co">*</span> Return true to indicate success<span class="co">.</span></a>
+<a class="sourceLine" id="cb19-4" data-line-number="4"> <span class="co">*/</span></a>
+<a class="sourceLine" id="cb19-5" data-line-number="5">store { <span class="bu">String</span> filetype, <span class="bu">Map</span> execution, <span class="bu">Map</span> configuration, <span class="bu">InputStream</span> source-&gt;</a>
+<a class="sourceLine" id="cb19-6" data-line-number="6">    <span class="co">//store output</span></a>
+<a class="sourceLine" id="cb19-7" data-line-number="7">    source.<span class="fu">withReader</span> { reader -&gt;</a>
+<a class="sourceLine" id="cb19-8" data-line-number="8">        <span class="co">//...write somewhere</span></a>
+<a class="sourceLine" id="cb19-9" data-line-number="9">    }</a>
+<a class="sourceLine" id="cb19-10" data-line-number="10">    source.<span class="fu">close</span>()</a>
+<a class="sourceLine" id="cb19-11" data-line-number="11">    <span class="co">//return true if successful</span></a>
+<a class="sourceLine" id="cb19-12" data-line-number="12">    <span class="kw">true</span></a>
+<a class="sourceLine" id="cb19-13" data-line-number="13">}</a></code></pre></div>
+<p><code>storeMultiple</code> is an alternative to <code>store</code>, see <a href="#executionmultifilestorage">ExecutionMultiFileStorage</a>.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">import</span> com.dtolabs.rundeck.plugins.logging.MultiFileStorageRequest</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">...</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3"><span class="co">/**</span></a>
+<a class="sourceLine" id="cb20-4" data-line-number="4"> <span class="co">*</span> Called to store multiple files<span class="co">,</span> called with a MultiFileStorageRequest<span class="co">,</span> the execution data<span class="co">,</span> and configuration properties</a>
+<a class="sourceLine" id="cb20-5" data-line-number="5"> <span class="co">*</span> Call the <span class="co">`</span>files<span class="co">.</span>storageResultForFiletype<span class="co">(</span>type<span class="co">,</span>boolan<span class="co">)`</span> method to indicate success<span class="co">/</span>failure for each filetype</a>
+<a class="sourceLine" id="cb20-6" data-line-number="6"> <span class="co">*/</span></a>
+<a class="sourceLine" id="cb20-7" data-line-number="7">storeMultiple { MultiFileStorageRequest files, <span class="bu">Map</span> execution, <span class="bu">Map</span> configuration -&gt;</a>
+<a class="sourceLine" id="cb20-8" data-line-number="8">    <span class="co">//store all the files</span></a>
+<a class="sourceLine" id="cb20-9" data-line-number="9">    files.<span class="fu">availableFileTypes</span>.<span class="fu">each</span>{ filetype-&gt;</a>
+<a class="sourceLine" id="cb20-10" data-line-number="10">        <span class="co">//...write somewhere</span></a>
+<a class="sourceLine" id="cb20-11" data-line-number="11">        def filedata=files.<span class="fu">getStorageFile</span>(filetype)</a>
+<a class="sourceLine" id="cb20-12" data-line-number="12">        def inputStream = filedata.<span class="fu">inputStream</span></a>
+<a class="sourceLine" id="cb20-13" data-line-number="13">        <span class="dt">boolean</span> isSuccess=...</a>
+<a class="sourceLine" id="cb20-14" data-line-number="14">        files.<span class="fu">storageResultForFiletype</span>(filetype,isSuccess)</a>
+<a class="sourceLine" id="cb20-15" data-line-number="15">    }</a>
+<a class="sourceLine" id="cb20-16" data-line-number="16">}</a></code></pre></div>
+<p>If <code>store</code> or <code>storeMultiple</code> are not defined, then this is the equivalent of using <a href="#executionfilestorageoptions">ExecutionFileStorageOptions</a> to declare that <code>store</code> operations are not supported.</p>
+<p><code>available</code> (optional)</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="co">/**</span></a>
+<a class="sourceLine" id="cb21-2" data-line-number="2"> <span class="co">*</span> Called to determine the file availability<span class="co">,</span> return true to indicate it is available<span class="co">,</span></a>
+<a class="sourceLine" id="cb21-3" data-line-number="3"> <span class="co">*</span> false to indicate it is not available<span class="co">. </span>An exception indicates an error<span class="co">.</span></a>
+<a class="sourceLine" id="cb21-4" data-line-number="4"> <span class="co">*/</span></a>
+<a class="sourceLine" id="cb21-5" data-line-number="5">available { <span class="bu">String</span> filetype, <span class="bu">Map</span> execution, <span class="bu">Map</span> configuration-&gt;</a>
+<a class="sourceLine" id="cb21-6" data-line-number="6">    <span class="co">//determine state</span></a>
+<a class="sourceLine" id="cb21-7" data-line-number="7">    <span class="kw">return</span> <span class="fu">isAvailable</span>()</a>
+<a class="sourceLine" id="cb21-8" data-line-number="8">}</a></code></pre></div>
+<p><code>retrieve</code></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="co">/**</span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"> <span class="co">*</span> Called to retrieve a log file<span class="co">,</span> called with the execution data<span class="co">,</span> configuration properties<span class="co">,</span> and an OutputStream<span class="co">.</span></a>
+<a class="sourceLine" id="cb22-3" data-line-number="3"> <span class="co">*</span> Return true to indicate success<span class="co">.</span></a>
+<a class="sourceLine" id="cb22-4" data-line-number="4"> <span class="co">*/</span></a>
+<a class="sourceLine" id="cb22-5" data-line-number="5">retrieve {  <span class="bu">String</span> filetype, <span class="bu">Map</span> execution, <span class="bu">Map</span> configuration, <span class="bu">OutputStream</span> out-&gt;</a>
+<a class="sourceLine" id="cb22-6" data-line-number="6">    <span class="co">//get log file contents and write to output stream</span></a>
+<a class="sourceLine" id="cb22-7" data-line-number="7">    out &lt;&lt; <span class="fu">retrieveIt</span>()</a>
+<a class="sourceLine" id="cb22-8" data-line-number="8">    <span class="co">//return true to indicate success</span></a>
+<a class="sourceLine" id="cb22-9" data-line-number="9">    <span class="kw">true</span></a>
+<a class="sourceLine" id="cb22-10" data-line-number="10">}</a></code></pre></div>
+<p>If <code>retrieve</code> and <code>available</code> are not defined, then this is the equivalent of using <a href="#executionfilestorageoptions">ExecutionFileStorageOptions</a> to declare that <code>retrieve</code> operations are not supported.</p>
+<p>The plugin is used in this manner:</p>
+<ol type="1">
+<li>If <code>retrieve</code> is supported (both <code>available</code> and <code>retrieve</code> are defined)
+<ul>
+<li>The <code>available</code> closure is called before retrieving the file, to determine if it is available, passing the filetype</li>
+<li>The <code>retrieve</code> closure is called when a file needs to be retrieved, with the <a href="#execution-context-data">contextual data</a>, configuration Map, and OutputStream to write the log file content</li>
+</ul></li>
+<li>If <code>storeMultiple</code> is defined:
+<ul>
+<li>The <code>storeMultiple</code> closure is called when files needs to be stored, with the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.21-20190424/com/dtolabs/rundeck/core/logging/MultiFileStorageRequest.html">MultiFileStorageRequest</a>, the <a href="#execution-context-data">contextual data</a>, and configuration Map.</li>
+</ul></li>
+<li>Else if <code>store</code> is defined:
+<ul>
+<li>The <code>store</code> closure is called when a file needs to be stored, with the filetype, the <a href="#execution-context-data">contextual data</a>, configuration Map, and InputStream which will produce the log data. Additionally <code>length</code> and <code>lastModified</code> properties are in the closure binding, providing the file length, and last modification Date.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbsbottom">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb bottom collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.21)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="logging-plugin.html">Logging Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="notification-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> Notification Plugin</a></li>
+      <li class="next"><a href="storage-plugin.html">Storage Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+developer/06-logging-plugins.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/developer/06-logging-plugins.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Enterprise for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Enterprise
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://rundeck.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2019 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2019-04-25T00:30:39UTC">2019-04-25T00:30:39UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+
+<!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2768099.js"></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
