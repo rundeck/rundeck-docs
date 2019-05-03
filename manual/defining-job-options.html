@@ -188,6 +188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="#variable-expansion-in-remote-urls">Variable expansion in remote URLs</a></li>
 <li><a href="#remote-request-failures">Remote request failures</a></li>
 </ul></li>
+<li><a href="#linking-to-jobs-and-providing-option-values">Linking to Jobs and providing option values</a></li>
 </ul>
 </div>
 </div>
@@ -564,6 +565,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>If the request for the remote option values fails, then the GUI form will display a warning message:</p>
 <p><img src="../figures/fig0901.png" /></p>
 <p>In this case, the option will be allowed to use a textfield to set the value.</p>
+<h2 id="linking-to-jobs-and-providing-option-values">Linking to Jobs and providing option values</h2>
+<p>You can create a URL to link to a specific Job, and pre-fill some of the option values by adding URL query parameters to the Job’s URL.</p>
+<p>Query Parameters format for options:</p>
+<ul>
+<li><code>opt.NAME</code> : provide a value for an option named <code>NAME</code></li>
+</ul>
+<p>For example, if the URL for the Job is:</p>
+<pre><code>http://rundeck:4440/project/MyProject/job/show/ab698597-9753-4e98-bdab-90ebf395b0d0</code></pre>
+<p>Then you can pre-fill the values for <code>myopt1</code> and <code>myotheropt</code> by appending this to the URL:</p>
+<pre><code>?opt.myopt1=some+value&amp;opt.myotheropt=another+value</code></pre>
+<p>The result would be:</p>
+<pre><code>http://rundeck:4440/project/MyProject/job/show/ab698597-9753-4e98-bdab-90ebf395b0d0?opt.myopt1=some+value&amp;opt.myotheropt=another+value</code></pre>
+<p>Note: be sure to properly escape the strings for option values, and if necessary for the option names as well.</p>
 </div>
 </div>
 </div>
@@ -634,7 +648,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-04-30T17:45:36UTC">2019-04-30T17:45:36UTC</span>
+<span class="generated-date" title="2019-05-03T23:11:24UTC">2019-05-03T23:11:24UTC</span>
 </p>
 </footer>
 </div>
