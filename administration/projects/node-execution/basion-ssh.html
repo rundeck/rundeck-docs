@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OpenSSH Bastion Host Node Execution Plugins</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="../../../jquery.hotkeys.js"></script>
+<script src="../../../jquery.autocomplete.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+window._pageRelpath="../../../";
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+<script src="../../../docs-autocomplete.js"></script>
+  <link rel="stylesheet" href="../../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control navquery" name="q" placeholder="Search" id="searchQuery">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbstop">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb top collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../../../index.html">Rundeck Documentation (3.0.22)</a></li>
+    
+        <li><a href="../../index.html">Administrator Guide</a></li>
+    
+        <li><a href="../index.html">Projects</a></li>
+    
+    
+    <li ><a href="index.html">Node Execution</a></li>
+    <li class="active"><a href="basion-ssh.html">Basion SSH</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="powershell.html"><i class="glyphicon glyphicon-arrow-left"></i> Powershell</a></li>
+      <li class="next"><a href="openssh.html">OpenSSH <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/projects/node-execution/bastionssh.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/projects/node-execution/bastionssh.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#dry-run-mode">Dry run mode</a></li>
+<li><a href="#plugin-configuration-properties">Plugin Configuration Properties</a></li>
+<li><a href="#node-specific-key">Node Specific Key</a></li>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#docker-example">Docker Example</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">OpenSSH Bastion Host Node Execution Plugins</h1>
+</div>
+<p>This plugin provides a node-executor and file-copier supporting ssh actions through a bastion host. Use this plugin if you must access remote servers via a jump host.</p>
+<h2 id="dry-run-mode">Dry run mode</h2>
+<p>You can configure the plugin to just print the invocation string to the console. This can be useful when defining the configuration properties.</p>
+<h2 id="plugin-configuration-properties">Plugin Configuration Properties</h2>
+<ul>
+<li>Bastion SSH Key Storage Path: Identity to use for the bastion host connection.</li>
+<li>SSH Options: Extra options to pass to the ssh command invocation</li>
+<li>ssh_conifig: Specify ProxyCommand and other flags. Consult the reference for <a href="https://linux.die.net/man/5/ssh_config">ssh_config(5)</a> to learn about posible settings.</li>
+<li>Dry run? If set true, just print the command invocation that would be used but do not execute the command. This is useful to preview.</li>
+</ul>
+<h2 id="node-specific-key">Node Specific Key</h2>
+<p>If the node is configured with the <code>ssh-key-storage-path</code> attribute, the ssh connection will use that to connect to the remote node.</p>
+<ul>
+<li>ssh-key-storage-path: Set to location in Rundeck Keystore</li>
+</ul>
+<h2 id="configuration">Configuration</h2>
+<p>The plugin can be configured as a default node executor and file copier for a Project. Use the Simple Conguration tab to see the configuration properties. The page has a form with inputs to configure the connection to the bastion host.</p>
+<p>You can also modify the project.properties or use the API/CLI to define the plugin configuration. The Plugin List page will describe the key names to set.</p>
+<h4 id="customize-the-ssh_config">Customize the ssh_config</h4>
+<p>You can define multiple lines using a trailing backslash and an indent on the following line.</p>
+<p>Here is an example that defines ssh_config file.</p>
+<pre><code>project.plugin.NodeExecutor.openssh-bastion-host.node-executor.ssh_config=Host * \
+  StrictHostKeyChecking no
+  Port 22
+  ProxyCommand ssh user@bastionhost -W %h\:%p
+  IdentityFile @plugin.config.identity_file@</code></pre>
+<p>Here ssh_options are set.</p>
+<pre><code>project.plugin.NodeExecutor.openssh-bastion-host.node-executor.ssh_options=&quot;-q -oClearAllForwardings=yes&quot;</code></pre>
+<p>Using Dry run, you might see output similar to this:</p>
+<pre><code>[dry-run] +------------------------------------------+
+[dry-run] | ssh_config                               |
+[dry-run] +------------------------------------------+
+[dry-run] | Host *
+[dry-run] |   StrictHostKeyChecking no
+[dry-run] |   Port 22
+[dry-run] |   ProxyCommand ssh user@bastion -W %h:%p
+[dry-run] |   IdentityFile /tmp/bastion.ssh-keyfile.prWLUyFU
+[dry-run] +------------------------------------------+
+[dry-run] ssh -q -oClearAllForwardings=yes -F /tmp/ssh_config.zTr9j5KK -i /tmp/host1234.ssh-keyfile.4cjnI2qL alexh@Targa.local whoami
+Begin copy 18 bytes to node host1234: /etc/motd -&gt; /tmp/motd
+[dry-run] +------------------------------------------+
+[dry-run] | ssh_config                               |
+[dry-run] +------------------------------------------+
+[dry-run] | Host *
+[dry-run] |   StrictHostKeyChecking no
+[dry-run] |   Port 22
+[dry-run] |   ProxyCommand ssh user@bastion -W %h:%p
+[dry-run] |   IdentityFile /tmp/bastion.ssh-keyfile.XXXXX.WAlpZLNb
+[dry-run] | 
+[dry-run] +------------------------------------------+
+[dry-run] scp -q -oClearAllForwardings=yes -F /tmp/ssh_config.XXXX.cosJ7xQ2 -i /tmp/host1234.ssh-keyfile.XXXXX.BOqYAKRu /etc/motd alexh@Targa.local:/tmp/motd
+/tmp/motd
+Copied: /tmp/motd</code></pre>
+<h1 id="docker-example">Docker Example</h1>
+<p>You can test the plugin on a docker environment on the plugin <a href="https://github.com/rundeck-plugins/openssh-bastion-node-execution">repo</a></p>
+<ul>
+<li>Run <code>./star-docker-example.sh</code></li>
+<li>Got to <code>http://localhost:8080</code></li>
+<li>User/Password =&gt; admin/admin</li>
+</ul>
+<p>The example has two networks:</p>
+<ul>
+<li>Network1: rundeck, bastion</li>
+<li>Network2: bastion, linux-1, linux-2</li>
+</ul>
+<p>The goal of this example is that Rundeck connects to the nodes linux-1 and linux-2 through the bastion container (Rundeck cannot see linux-X nodes)</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbsbottom">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb bottom collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../../../index.html">Rundeck Documentation (3.0.22)</a></li>
+    
+        <li><a href="../../index.html">Administrator Guide</a></li>
+    
+        <li><a href="../index.html">Projects</a></li>
+    
+    
+    <li ><a href="index.html">Node Execution</a></li>
+    <li class="active"><a href="basion-ssh.html">Basion SSH</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="powershell.html"><i class="glyphicon glyphicon-arrow-left"></i> Powershell</a></li>
+      <li class="next"><a href="openssh.html">OpenSSH <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/projects/node-execution/bastionssh.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/projects/node-execution/bastionssh.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Enterprise for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Enterprise
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://rundeck.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2019 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2019-05-13T18:47:14UTC">2019-05-13T18:47:14UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../../../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+
+<!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2768099.js"></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
