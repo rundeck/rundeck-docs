@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Developing a custom Rundeck script plugin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="../jquery.hotkeys.js"></script>
+<script src="../jquery.autocomplete.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+window._pageRelpath="../";
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+<script src="../docs-autocomplete.js"></script>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control navquery" name="q" placeholder="Search" id="searchQuery">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbstop">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb top collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.1.x)</a></li>
+    
+    
+    <li ><a href="index.html">Tutorials</a></li>
+    <li class="active"><a href="custom-script-plugin---hello-world.html">Custom Script Plugin - Hello World</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="option-provider.html"><i class="glyphicon glyphicon-arrow-left"></i> Option Provider</a></li>
+      <li class="next"><a href="custom-script-plugin---db-credential-rotation.html">Custom Script Plugin - DB Credential Rotation <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+tutorials/custom-script-plugin-hello-world.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/tutorials/custom-script-plugin-hello-world.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#why-create-your-own-script-plugin">Why create your own script plugin?</a><ul>
+<li><a href="#encapsulate-and-reuse-functionality-across-projects-and-jobs">Encapsulate and reuse functionality across projects and jobs</a></li>
+<li><a href="#expose-script-parameters-to-the-ui-with-descriptions-types-and-defaults">Expose script parameters to the UI with descriptions, types and defaults</a></li>
+<li><a href="#securely-access-secrets-stored-in-key-storage">Securely access secrets stored in Key Storage</a></li>
+</ul></li>
+<li><a href="#how-to-create-a-simple-workflow-step-script-plugin">How to create a simple workflow step script plugin</a><ul>
+<li><a href="#script-to-wrap">Script to wrap</a></li>
+<li><a href="#basic-plugin-structure">Basic plugin structure</a></li>
+<li><a href="#setting-up-the-plugin-environment">Setting up the plugin environment</a></li>
+<li><a href="#pushing-configuration-to-rundeck">Pushing configuration to Rundeck</a></li>
+<li><a href="#running-the-hello-world-job">Running the Hello World job</a></li>
+</ul></li>
+<li><a href="#next-a-real-world-use-case">Next: a real world use case</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Developing a custom Rundeck script plugin</h1>
+</div>
+<p>In this tutorial we’ll learn:</p>
+<ul>
+<li>Why you might benefit from a custom Rundeck script plugin</li>
+<li>How to create a basic script plugin</li>
+<li>How to deploy the necessary Rundeck configuration to use it</li>
+</ul>
+<p>The end result of this tutorial as well as a Docker environment to run it in can be found on <a href="https://github.com/clofresh/rundeck-playground">GitHub</a>.</p>
+<h2 id="why-create-your-own-script-plugin">Why create your own script plugin?</h2>
+<p>Rundeck is an open source ops automation platform that comes with a lot of functionality out of the box, like running script commands on your nodes with a command step. If you can already run commands with the default functionality, why would you want to write a new plugin to do that?</p>
+<p>Several reasons:</p>
+<ul>
+<li>To encapsulate and reuse functionality across projects and jobs</li>
+<li>To expose script parameters to the UI with descriptions, types and defaults</li>
+<li>To securely access secrets stored in Key Storage</li>
+</ul>
+<h3 id="encapsulate-and-reuse-functionality-across-projects-and-jobs">Encapsulate and reuse functionality across projects and jobs</h3>
+<p>Command defined as a command step are specific to a job. If you need to reuse the script in several jobs in the same or different projects, you would have to copy-paste it each time which can get to be cumbersome and error-prone.</p>
+<p>Using a custom plugin encapsulates the script so that job writers across any projects can use the script’s functionality. When the plugin author uploads a new version the plugin, all jobs automatically use the latest version.</p>
+<h3 id="expose-script-parameters-to-the-ui-with-descriptions-types-and-defaults">Expose script parameters to the UI with descriptions, types and defaults</h3>
+<p>Command line scripts can come with many parameters. When running them from command line, if you’re lucky, you are able to get the help text from them. Some scripts may not have help on their parameters. When creating a custom script plugin, you can define, document and provide default values that make sense in the context of your organization for the parameters of your script. Conversely, you can also leave out parameters to a script that you don’t want job authors to have access to.</p>
+<p>All the parameters defined in the plugin will show up in the Rundeck job editting UI, providing the job authors with afforances to guide them in using the script.</p>
+<h3 id="securely-access-secrets-stored-in-key-storage">Securely access secrets stored in Key Storage</h3>
+<p>Many scripts require some type of secret to authorize the script to do its work so the job user needs to know the secret to use the script. This increases the risk of that secret getting exposed depending how your share secrets in your organization.</p>
+<p>A more secure solution would be to authorize the job user to use the secret without them actually know its value. Plugins can access secrets by referring to paths in the Rundeck Key Storage. Rundeck will evaluate the value of the secret into the execution without the job user ever knowing the value. This reduces the scope of who needs to know the secret to the Rundeck administrator populating the Key Storage. It also lets the administrator rotate the secrets transparent to the job user.</p>
+<h2 id="how-to-create-a-simple-workflow-step-script-plugin">How to create a simple workflow step script plugin</h2>
+<p>Now that we see the value in creating our own workflow step script plugin, we can walk through a simple Hello World example.</p>
+<h3 id="script-to-wrap">Script to wrap</h3>
+<p>We’re going to wrap a simple bash script called helloworld.sh:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">#!/bin/bash</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="bu">echo</span> <span class="st">&quot;Hello world from </span><span class="va">$(</span><span class="fu">hostname</span><span class="va">)</span><span class="st">! I am a </span><span class="va">$1</span><span class="st">. Don&#39;t tell anyone that the secret is </span><span class="dt">\&quot;</span><span class="va">$2</span><span class="dt">\&quot;</span><span class="st">&quot;</span></a></code></pre></div>
+<p>It prints the hostname it’s called on and the first and second parameters passed to it. We can wrap a script from any scripting language as long as the intepreter is already deployed on the remote nodes.</p>
+<h3 id="basic-plugin-structure">Basic plugin structure</h3>
+<p>A Rundeck plugin is a zipped directory with the following structure:</p>
+<pre><code>helloworld-plugin.zip
+helloworld-plugin      -- root directory of zip contents, same name as zip file
+├── plugin.yaml        -- plugin metadata file
+└── contents           -- where to put your scripts
+    └── helloworld.sh</code></pre>
+<p><code>plugin.yaml</code> is the only required file in the zip. This is the <code>plugin.yaml</code> for our Hello World plugin:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">name:</span><span class="at"> Hello World</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="fu">version:</span><span class="at"> 1</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="fu">rundeckPluginVersion:</span><span class="at"> 1.2</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="fu">author:</span><span class="at"> Carlo Cabanilla</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="fu">date:</span><span class="at"> 2018-07-20</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="fu">url:</span><span class="at"> http://rundeck.org/</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="fu">providers:</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">  <span class="kw">-</span> <span class="fu">name:</span><span class="at"> HelloBash</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">    <span class="fu">service:</span><span class="at"> RemoteScriptNodeStep</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">    <span class="fu">plugin-type:</span><span class="at"> script</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">    <span class="fu">script-interpreter:</span><span class="at"> /bin/bash</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">    <span class="fu">script-file:</span><span class="at"> helloworld.sh</span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">    <span class="fu">script-args:</span><span class="at"> ${config.who_i_am} ${config.secret_secret}</span></a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">    <span class="fu">config:</span></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15">      <span class="kw">-</span> <span class="fu">name:</span><span class="at"> who_i_am</span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16">        <span class="fu">type:</span><span class="at"> Select</span></a>
+<a class="sourceLine" id="cb3-17" data-line-number="17">        <span class="fu">title:</span><span class="at"> Who I Am</span></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18">        <span class="fu">description:</span><span class="at"> Provide a predefined list of options</span></a>
+<a class="sourceLine" id="cb3-19" data-line-number="19">        <span class="fu">values:</span><span class="at"> machine, mannequin</span></a>
+<a class="sourceLine" id="cb3-20" data-line-number="20">        <span class="fu">default:</span><span class="at"> machine</span></a>
+<a class="sourceLine" id="cb3-21" data-line-number="21">      <span class="kw">-</span> <span class="fu">name:</span><span class="at"> secret_secret</span></a>
+<a class="sourceLine" id="cb3-22" data-line-number="22">        <span class="fu">type:</span><span class="at"> String</span></a>
+<a class="sourceLine" id="cb3-23" data-line-number="23">        <span class="fu">title:</span><span class="at"> My Secret</span></a>
+<a class="sourceLine" id="cb3-24" data-line-number="24">        <span class="fu">description:</span><span class="at"> Securely pass this to the script</span></a>
+<a class="sourceLine" id="cb3-25" data-line-number="25">        <span class="fu">renderingOptions:</span></a>
+<a class="sourceLine" id="cb3-26" data-line-number="26">          <span class="fu">valueConversion:</span><span class="at"> </span><span class="st">&quot;STORAGE_PATH_AUTOMATIC_READ&quot;</span></a></code></pre></div>
+<p>The significant section is the item in the <code>providers</code> array. It says we’re creating a RemoteScriptNodeStep named HelloBash. A RemoteScriptNodeStep means the script will run on the remote nodes, as opposed to a WorkflowNodeStep, which runs on the Rundeck server itself and receives the nodes as parameters.</p>
+<h4 id="script-invokation">Script invokation</h4>
+<p>The values for <code>script-interpreter</code>, <code>script-file</code>, and <code>script-args</code> are invoked on the remote node as follows:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="ex">/bin/bash</span> helloworld.sh <span class="va">${job</span><span class="er">.name</span><span class="va">}</span></a></code></pre></div>
+<p><code>helloworld.sh</code> only needs to be bundled in the plugin zip contents directory and Rundeck takes care of copying it to the remote nodes that it runs on.</p>
+<p>The <code>script-args</code> value we pass to the script, <code>${job.name}</code> is one of many context variables that Rundeck sets.</p>
+<h4 id="script-parameters">Script parameters</h4>
+<p>The <code>config</code> key defines the inputs to the script, their types, defaults and how they’re rendered in the UI.</p>
+<p>The <code>who_i_am</code> item describes a select box with predefined values of <code>machine</code> or <code>mannequin</code>, defaulting to <code>machine</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb5-1" data-line-number="1">      <span class="kw">-</span> <span class="fu">name:</span><span class="at"> who_i_am</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">        <span class="fu">type:</span><span class="at"> Select</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">        <span class="fu">title:</span><span class="at"> Who I Am</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">        <span class="fu">description:</span><span class="at"> Provide a predefined list of options</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">        <span class="fu">values:</span><span class="at"> machine, mannequin</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">        <span class="fu">default:</span><span class="at"> machine</span></a></code></pre></div>
+<p>The <code>secret_secret</code> item is a string value but the <code>valueConversion: &quot;STORAGE_PATH_AUTOMATIC_READ&quot;</code> tells Rundeck to interpret that string as a path in Key Storage and pass the value of that key to the script. This is how we can securely reference secrets without exposing them to the job users.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb6-1" data-line-number="1">      <span class="kw">-</span> <span class="fu">name:</span><span class="at"> secret_secret</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">        <span class="fu">type:</span><span class="at"> String</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">        <span class="fu">title:</span><span class="at"> My Secret</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">        <span class="fu">description:</span><span class="at"> Securely pass this to the script</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">        <span class="fu">renderingOptions:</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">          <span class="fu">valueConversion:</span><span class="at"> </span><span class="st">&quot;STORAGE_PATH_AUTOMATIC_READ&quot;</span></a></code></pre></div>
+<h3 id="setting-up-the-plugin-environment">Setting up the plugin environment</h3>
+<p>How can we actually see this plugin in action? Rundeck is designed for real world multi-node environments but we don’t want the hassle of actually spinning one up, so we use Docker to simulate a multi-node environment right on our workstation.</p>
+<p>The environment setup can be downloaded at <a href="https://github.com/clofresh/rundeck-playground" class="uri">https://github.com/clofresh/rundeck-playground</a></p>
+<p>To build and start the Docker environment, run:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="fu">make</span> compose</a></code></pre></div>
+<p>This make command is specific to this tutorial. It will do several things:</p>
+<ol type="1">
+<li>Zip the plugin source files into the proper zip structure and save it in the Rundeck image’s build directory</li>
+<li>Run Docker Compose to build all the images specified in <code>docker-compose.yml</code> and run containers from those images. Docker Compose will run the containers in the foreground, outputting all their logs to your terminal.</li>
+</ol>
+<p>The containers in our environment are:</p>
+<ul>
+<li>rundeck: The Rundeck server. The Dockerfile copies the zipped plugin into the image’s <code>libext</code> directory where Rundeck will watch for new plugins.</li>
+<li>rundeck-cli: The Rundeck command line client. This image doesn’t run as a service but instead we invoke it from command line to push configuration and invoke jobs on the Rundeck server.</li>
+<li>web_1 &amp; web_2: Containers that simulate your application nodes. They run both an ssh daemon and a sample web app. These are the nodes that Rundeck will execute our plugin on.</li>
+</ul>
+<h3 id="pushing-configuration-to-rundeck">Pushing configuration to Rundeck</h3>
+<p>Once our Docker environment is up and the Rundeck server is listening for requests, we can push a sample project and job that will use our plugin. We do that from a separate terminal that our <code>make compose</code> command:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="fu">make</span> rd-config</a></code></pre></div>
+<p>This will:</p>
+<ul>
+<li>Check for changes in our plugin source files, and if so, copy a new plugin zip into the running Rundeck container.</li>
+<li>Push all the Rundeck yaml config in <code>rundeck-project</code> to the running Rundeck server.</li>
+<li>Push the keys in <code>rundeck-project/key-storage</code> to the Key Storage.</li>
+</ul>
+<p>With this command, you can iterate on your plugin or job configuration without having to stop and start the Docker environment. Additionally, it will only push config that has changed.</p>
+<p>The configuration we’re pushing defines the nodes, project and job that use our plugin.</p>
+<p>If you just want to run the job, you can skip ahead to <em>Running the Hello World job</em>, otherwise we walk through the config involved in the sections below.</p>
+<h4 id="nodes">Nodes</h4>
+<p>In order for Rundeck to know which nodes exist in your environment and how to connect to them, we provide a resource source yaml file:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="fu">web_1:</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">  <span class="fu">hostname:</span><span class="at"> web_1</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">  <span class="fu">tags:</span><span class="at"> web</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="fu">web_2:</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6">  <span class="fu">hostname:</span><span class="at"> web_2</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7">  <span class="fu">tags:</span><span class="at"> web</span></a></code></pre></div>
+<h4 id="project">Project</h4>
+<p>To use the above defined resource source file, we set the following properties on the project:</p>
+<pre class="properties"><code>project.ssh.user=root
+project.ssh-keypath=/home/rundeck/.ssh/rundeck-playground
+resources.source.1.config.file=/home/rundeck/nodes.yaml
+resources.source.1.config.generateFileAutomatically=false
+resources.source.1.config.includeServerNode=true
+resources.source.1.type=file</code></pre>
+<p><code>project.ssh.user</code> and <code>project.ssh-keypath</code> configure the ssh user and private key to use when connecting to any node with this project. It’s up to you to properly distribute the ssh keys to your nodes. In our playground environment, we’ve bundled the keys into the Docker images.</p>
+<p><code>resources.source.1.config.file</code> points to the <code>nodes.yaml</code> file we created previously.</p>
+<p>Both the ssh private key and the <code>nodes.yaml</code> file need to be deployed to the Rundeck server and be readable by the rundeck user.</p>
+<h4 id="job">Job</h4>
+<p>To define our job, we create another yaml file, <code>rundeck-project/hello_test_job.yaml</code>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">-</span> <span class="fu">name:</span><span class="at"> Hello Test Job</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">  <span class="fu">description:</span><span class="at"> </span><span class="st">&#39;A job to test our hello world plugin&#39;</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">  <span class="fu">nodefilters:</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">    <span class="fu">filter:</span><span class="at"> web_.*</span></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">  <span class="fu">sequence:</span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6">    <span class="fu">commands:</span></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">    <span class="kw">-</span> <span class="fu">nodeStep:</span><span class="at"> true</span></a>
+<a class="sourceLine" id="cb11-8" data-line-number="8">      <span class="fu">type:</span><span class="at"> HelloBash</span></a>
+<a class="sourceLine" id="cb11-9" data-line-number="9">      <span class="fu">configuration:</span></a>
+<a class="sourceLine" id="cb11-10" data-line-number="10">        <span class="fu">secret_secret:</span><span class="at"> keys/projects/hello-project/mysecret</span></a></code></pre></div>
+<p>Some values to note:</p>
+<ul>
+<li>The <code>nodefilters</code> key is letting us specify a regex to match the tags of the nodes we want to run this job on. In our case, any of the web nodes.</li>
+<li>The <code>sequence</code> key defines what the job should run. In our case, we’re running one command, a node step of our HelloBash script from our custom plugin.</li>
+<li>The <code>configuration</code> key of the node step is how we pass configuration into our script. Note that we’re passing in a Key Storage path instead of an actual value.</li>
+</ul>
+<h3 id="running-the-hello-world-job">Running the Hello World job</h3>
+<p>Now that we’ve spun up a Rundeck environment and defined a job that uses our plugin, we can run it using the <code>rd</code> command line client. If you had the <code>rd</code> client installed natively, it would be as simple as:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="bu">export</span> <span class="va">RD_PROJECT=</span>hello-project</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="ex">rd</span> run -f --job <span class="st">&#39;Hello Test Job&#39;</span></a></code></pre></div>
+<p>But since we’re running <code>rd</code> from a Docker container, we need some extra commands to get it to run:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="bu">alias</span> rd=<span class="st">&#39;docker run --network rundeck-playground_default --mount type=bind,source=&quot;$(pwd)&quot;,target=/root -e RD_PROJECT=hello-project playground-rundeck-cli &#39;</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="ex">rd</span> run -f --job <span class="st">&#39;Hello Test Job&#39;</span></a></code></pre></div>
+<p>The <code>rd</code> alias we’ve created lets us type less and use the <code>rd</code> command as if it were running natively on our workstation.</p>
+<p>All this is encapsulated in a make command:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="fu">make</span> rd-run-job</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="co"># Found matching job: 7fd65208-4482-456b-9d76-aa099171938e Hello Test Job</span></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="co"># Execution started: [3] 7fd65208-4482-456b-9d76-aa099171938e /Hello Test Job &lt;http://127.0.0.1:4440/project/hello-project/execution/show/3&gt;</span></a>
+<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="ex">Hello</span> world from abee114adea5! Don<span class="st">&#39;t tell anyone that the secret is &quot;I&#39;</span>m Kilroy!<span class="st">&quot;</span></a>
+<a class="sourceLine" id="cb14-6" data-line-number="6"><span class="st">Hello world from 9964ad40468a! Don&#39;t tell anyone that the secret is &quot;</span>I<span class="st">&#39;m Kilroy!&quot;</span></a></code></pre></div>
+<p>The script outputs the hostnames it’s running on, which will most likely be different but similar to the above, as well as the secret “I’m Kilroy!”. Remember that we passed in a Key Storage path value <code>keys/projects/hello-project/mysecret</code> for that parameter. To double check that that’s the correct value, you can cat the value on disk that we pushed to the Rundeck server:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="fu">cat</span> rundeck-project/key-storage/keys/projects/hello-project/mysecret</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="ex">I</span><span class="st">&#39;m Kilroy!</span></a></code></pre></div>
+<p>Another thing to notice is that even though we’ve securely passed the secret to the script plugin, once the script plugin has it, they can do whatever with the value, including expose it in the logs, so the script writer needs to be cautious about that.</p>
+<h2 id="next-a-real-world-use-case">Next: a real world use case</h2>
+<p>Now that we understand the basics of how a custom script plugin works, we can use it to solve a real world use case: <a href="custom-script-plugin---db-credential-rotation.html" title="Tutorials - Custom Script Plugin - DB Credential Rotation">rotating database credentials</a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbsbottom">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb bottom collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.1.x)</a></li>
+    
+    
+    <li ><a href="index.html">Tutorials</a></li>
+    <li class="active"><a href="custom-script-plugin---hello-world.html">Custom Script Plugin - Hello World</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="option-provider.html"><i class="glyphicon glyphicon-arrow-left"></i> Option Provider</a></li>
+      <li class="next"><a href="custom-script-plugin---db-credential-rotation.html">Custom Script Plugin - DB Credential Rotation <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+tutorials/custom-script-plugin-hello-world.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/tutorials/custom-script-plugin-hello-world.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Enterprise for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Enterprise
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://rundeck.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2019 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2019-05-20T22:05:09UTC">2019-05-20T22:05:09UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+
+<!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2768099.js"></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
