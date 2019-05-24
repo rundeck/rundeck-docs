@@ -3656,14 +3656,10 @@ So a value of <code>2w</code> would return executions that completed within the 
 <pre><code>GET /api/29/executions/metrics
 GET /api/29/project/[PROJECT]/executions/metrics</code></pre>
 <p>To narrow down the result set over which the metrics will be calculated, you can use the same parameters as <a href="#execution-query">Execution Query</a>.</p>
-<p>Paging parameters will affect the result by limiting the executions that will be considered on the calculation:</p>
-<ul>
-<li><code>max</code>: maximum number of results to include in calculation. (default: unlimited)</li>
-<li><code>offset</code>: offset for first result to include. (default: 0)</li>
-</ul>
+<p>Paging parameters <code>max</code> and <code>offset</code> will have no effect on the result.</p>
 <p><strong>Response</strong></p>
 <p><code>Content-Type: application/xml</code></p>
-<p>A single result element with <code>&lt;duration&gt;</code> containing duration info, <code>&lt;total&gt;</code> with total count, and a <code>&lt;status&gt;</code> element with per-status counts, containing one entry for each available status. If no entry exists for a given status, then the value is 0 for that status:</p>
+<p>A single result element with <code>&lt;duration&gt;</code> containing duration info, and <code>&lt;total&gt;</code> with total count.</p>
 <div class="sourceCode" id="cb198"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb198-1" data-line-number="1"><span class="kw">&lt;result&gt;</span></a>
 <a class="sourceLine" id="cb198-2" data-line-number="2">  <span class="kw">&lt;duration&gt;</span></a>
 <a class="sourceLine" id="cb198-3" data-line-number="3">    <span class="kw">&lt;average&gt;</span>0s<span class="kw">&lt;/average&gt;</span></a>
@@ -3671,19 +3667,9 @@ GET /api/29/project/[PROJECT]/executions/metrics</code></pre>
 <a class="sourceLine" id="cb198-5" data-line-number="5">    <span class="kw">&lt;max&gt;</span>39s<span class="kw">&lt;/max&gt;</span></a>
 <a class="sourceLine" id="cb198-6" data-line-number="6">  <span class="kw">&lt;/duration&gt;</span></a>
 <a class="sourceLine" id="cb198-7" data-line-number="7">  <span class="kw">&lt;total&gt;</span>1325<span class="kw">&lt;/total&gt;</span></a>
-<a class="sourceLine" id="cb198-8" data-line-number="8">  <span class="kw">&lt;status&gt;</span></a>
-<a class="sourceLine" id="cb198-9" data-line-number="9">      <span class="kw">&lt;running&gt;</span>1<span class="kw">&lt;/running&gt;</span></a>
-<a class="sourceLine" id="cb198-10" data-line-number="10">      <span class="kw">&lt;other&gt;</span>4<span class="kw">&lt;/other&gt;</span></a>
-<a class="sourceLine" id="cb198-11" data-line-number="11">      <span class="kw">&lt;aborted&gt;</span>21<span class="kw">&lt;/aborted&gt;</span></a>
-<a class="sourceLine" id="cb198-12" data-line-number="12">      <span class="kw">&lt;failed&gt;</span>88<span class="kw">&lt;/failed&gt;</span></a>
-<a class="sourceLine" id="cb198-13" data-line-number="13">      <span class="kw">&lt;succeeded&gt;</span>1208<span class="kw">&lt;/succeeded&gt;</span></a>
-<a class="sourceLine" id="cb198-14" data-line-number="14">      <span class="kw">&lt;timedout&gt;</span>1<span class="kw">&lt;/timedout&gt;</span></a>
-<a class="sourceLine" id="cb198-15" data-line-number="15">      <span class="kw">&lt;failed-with-retry&gt;</span>1<span class="kw">&lt;/failed-with-retry&gt;</span></a>
-<a class="sourceLine" id="cb198-16" data-line-number="16">      <span class="kw">&lt;scheduled&gt;</span>1<span class="kw">&lt;/scheduled&gt;</span></a>
-<a class="sourceLine" id="cb198-17" data-line-number="17">  <span class="kw">&lt;/status&gt;</span></a>
-<a class="sourceLine" id="cb198-18" data-line-number="18"><span class="kw">&lt;/result&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb198-8" data-line-number="8"><span class="kw">&lt;/result&gt;</span></a></code></pre></div>
 <p><code>Content-Type: application/json</code></p>
-<p>An object with <code>duration</code> entry containing duration stats, <code>total</code> with total executions, <code>status</code> entry with per-status counts.</p>
+<p>An object with <code>duration</code> entry containing duration stats, and a <code>total</code> entry with total executions.</p>
 <div class="sourceCode" id="cb199"><pre class="sourceCode json"><code class="sourceCode json"><a class="sourceLine" id="cb199-1" data-line-number="1"><span class="fu">{</span></a>
 <a class="sourceLine" id="cb199-2" data-line-number="2">    <span class="dt">&quot;duration&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
 <a class="sourceLine" id="cb199-3" data-line-number="3">        <span class="dt">&quot;average&quot;</span><span class="fu">:</span> <span class="st">&quot;0s&quot;</span><span class="fu">,</span></a>
@@ -3691,19 +3677,7 @@ GET /api/29/project/[PROJECT]/executions/metrics</code></pre>
 <a class="sourceLine" id="cb199-5" data-line-number="5">        <span class="dt">&quot;max&quot;</span><span class="fu">:</span> <span class="st">&quot;39s&quot;</span></a>
 <a class="sourceLine" id="cb199-6" data-line-number="6">    <span class="fu">},</span></a>
 <a class="sourceLine" id="cb199-7" data-line-number="7">    <span class="dt">&quot;total&quot;</span><span class="fu">:</span> <span class="dv">1325</span><span class="fu">,</span></a>
-<a class="sourceLine" id="cb199-8" data-line-number="8">    <span class="dt">&quot;status&quot;</span><span class="fu">:</span> <span class="fu">{</span></a>
-<a class="sourceLine" id="cb199-9" data-line-number="9">        <span class="dt">&quot;running&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></a>
-<a class="sourceLine" id="cb199-10" data-line-number="10">        <span class="dt">&quot;other&quot;</span><span class="fu">:</span> <span class="dv">4</span><span class="fu">,</span></a>
-<a class="sourceLine" id="cb199-11" data-line-number="11">        <span class="dt">&quot;aborted&quot;</span><span class="fu">:</span> <span class="dv">21</span><span class="fu">,</span></a>
-<a class="sourceLine" id="cb199-12" data-line-number="12">        <span class="dt">&quot;failed&quot;</span><span class="fu">:</span> <span class="dv">88</span><span class="fu">,</span></a>
-<a class="sourceLine" id="cb199-13" data-line-number="13">        <span class="dt">&quot;succeeded&quot;</span><span class="fu">:</span> <span class="dv">1208</span><span class="fu">,</span></a>
-<a class="sourceLine" id="cb199-14" data-line-number="14">        <span class="dt">&quot;timedout&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></a>
-<a class="sourceLine" id="cb199-15" data-line-number="15">        <span class="dt">&quot;failed-with-retry&quot;</span><span class="fu">:</span><span class="dv">1</span><span class="fu">,</span></a>
-<a class="sourceLine" id="cb199-16" data-line-number="16">        <span class="dt">&quot;scheduled&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></a>
-<a class="sourceLine" id="cb199-17" data-line-number="17">    <span class="fu">}</span></a>
-<a class="sourceLine" id="cb199-18" data-line-number="18"><span class="fu">}</span></a></code></pre></div>
-<p>Note that any status count with a value of 0 will be omitted in both json and xml versions.</p>
-<p>Possible execution status values are listed under <a href="#listing-running-executions">Listing Running Executions</a>.</p>
+<a class="sourceLine" id="cb199-8" data-line-number="8"><span class="fu">}</span></a></code></pre></div>
 <h3 id="execution-state">Execution State</h3>
 <p>Get detail about the node and step state of an execution by ID. The execution can be currently running or completed.</p>
 <p><strong>Request:</strong></p>
@@ -6149,7 +6123,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-05-20T22:05:09UTC">2019-05-20T22:05:09UTC</span>
+<span class="generated-date" title="2019-05-24T00:07:44UTC">2019-05-24T00:07:44UTC</span>
 </p>
 </footer>
 </div>
