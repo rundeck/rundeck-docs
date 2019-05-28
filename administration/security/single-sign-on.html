@@ -105,6 +105,7 @@ jQuery(function(){
 <li><a href="#okta-application-configuration">Okta Application Configuration</a></li>
 <li><a href="#rundeck-configuration">Rundeck configuration</a></li>
 <li><a href="#sso-login">SSO Login</a></li>
+<li><a href="#okta-group-plugin">Okta Group Plugin</a></li>
 </ul>
 </div>
 </div>
@@ -161,6 +162,22 @@ rundeck.sso.loginButton.url=oauth/okta</code></pre>
 <h3 id="sso-login">SSO Login</h3>
 <p>If you have successfully configured Okta and Rundeck you will see a new button on the rundeck login page that says <em>Login with Okta</em>. By clicking this button you will be redirected to an Okta Login form that will be used to collect the user credentials. Once you have logged in with your Okta credentials you will be redirected back to the home menu page in Rundeck.</p>
 <p>Congratulations, you now have a working Okta/Rundeck SSO setup.</p>
+<h3 id="okta-group-plugin">Okta Group Plugin</h3>
+<p>If you have Active Directory integrated into your Okta system, the setup for groups described above may not work. In this case you may configure the Okta user group plugin that is packaged with Rundeck, to pull the user’s group information from Okta via the Okta API.</p>
+<p>First, you will need to create an API key in Okta that you can use to make API requests.</p>
+<p>Then you will need to add the following properties to your <code>framework.properties</code> file.</p>
+<pre class="properties"><code>framework.plugin.UserGroupSource.OktaGroupSource.apiToken=&lt;api key&gt;
+
+framework.plugin.UserGroupSource.OktaGroupSource.oktaHostName=&lt;okta host name&gt;
+#example:
+#framework.plugin.UserGroupSource.OktaGroupSource.oktaHostName=dev-877856.oktapreview.com
+
+framework.plugin.UserGroupSource.OktaGroupSource.includedGroupTypes=APP_GROUP
+#APP_GROUP is the way Okta denotes AD groups, if you want to also include Okta groups
+#you could do the following:
+#framework.plugin.UserGroupSource.OktaGroupSource.includedGroupTypes=APP_GROUP,OKTA_GROUP
+framework.plugin.UserGroupSource.OktaGroupSource.enabled=true</code></pre>
+<p>If the plugin is enabled, when the user logs in, it will attempt to use the Okta user id out of the SSO token to pull that user’s groups from Okta.</p>
 </div>
 </div>
 </div>
@@ -233,7 +250,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-05-24T00:07:44UTC">2019-05-24T00:07:44UTC</span>
+<span class="generated-date" title="2019-05-28T03:27:07UTC">2019-05-28T03:27:07UTC</span>
 </p>
 </footer>
 </div>
