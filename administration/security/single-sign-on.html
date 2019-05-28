@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Rundeck SSO Security (Pro Only)</title>
+  <title>Rundeck SSO Security (Enterprise Only)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -102,18 +102,25 @@ jQuery(function(){
 <div class="col-sm-3 toc-nav">
 <div class="nav">
 <ul>
+<li><a href="#okta">Okta</a><ul>
 <li><a href="#okta-application-configuration">Okta Application Configuration</a></li>
 <li><a href="#rundeck-configuration">Rundeck configuration</a></li>
 <li><a href="#sso-login">SSO Login</a></li>
 <li><a href="#okta-group-plugin">Okta Group Plugin</a></li>
+</ul></li>
+<li><a href="#ping">Ping</a><ul>
+<li><a href="#ping-configuration">Ping Configuration</a></li>
+<li><a href="#rundeck-configuration-1">Rundeck Configuration</a></li>
+</ul></li>
 </ul>
 </div>
 </div>
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">Rundeck SSO Security (Pro Only)</h1>
+<h1 class="title">Rundeck SSO Security (Enterprise Only)</h1>
 </div>
-<p>Rundeck PRO can be configured to work with the Okta security platfom.</p>
+<h2 id="okta">Okta</h2>
+<p>Rundeck Enterprise can be configured to work with the Okta security platfom.</p>
 <p>To configure the Okta SSO plugin for your Rundeck installation you will need to add a new application to your Okta Applications, and then add some properties to your rundeck-config.properties file.</p>
 <h3 id="okta-application-configuration">Okta Application Configuration</h3>
 <p>Log into your Okta web portal and configure a new application.</p>
@@ -178,6 +185,49 @@ framework.plugin.UserGroupSource.OktaGroupSource.includedGroupTypes=APP_GROUP
 #framework.plugin.UserGroupSource.OktaGroupSource.includedGroupTypes=APP_GROUP,OKTA_GROUP
 framework.plugin.UserGroupSource.OktaGroupSource.enabled=true</code></pre>
 <p>If the plugin is enabled, when the user logs in, it will attempt to use the Okta user id out of the SSO token to pull that user’s groups from Okta.</p>
+<h2 id="ping">Ping</h2>
+<p>Rundeck can be configured to work with Ping Identity services.</p>
+<h3 id="ping-configuration">Ping Configuration</h3>
+<p>You will need to refer to the Ping documentation to set up an OpenId Connect(OIDC) application in your Ping Environment.<br />
+The Ping products you have purchased will determine how the application is set up inside Ping.</p>
+<h4 id="ping-oidc-application-setup">Ping OIDC Application Setup</h4>
+<p>When setting up the OIDC Application be sure to choose to generate a client secret, and choose the grant type: Authorization Code.<br />
+The Redirect callback url will be: <code>https://{your-rundeck-host}/user/oauth/ping</code> (Ping requires this to be an https endpoint)<br />
+Specify the <code>openid</code>, <code>profile</code>, and <code>email</code> scopes for the application.</p>
+<p><em>Note:</em> The following Attribute Mappings must be set up in Ping on your OIDC Application.</p>
+<ul>
+<li>The <code>sub</code> property needs to map to the value that will be used to identify the user in Rundeck.<br />
+</li>
+<li>You will need to define a property mapping that will map the Ping user’s groups to an attribute that is sent in the oauth token.</li>
+</ul>
+<p>After you have set up the OIDC application in Ping you will need the following properties when you set up the Rundeck side of the SSO:</p>
+<ul>
+<li>Client Id<br />
+</li>
+<li>Client Secret</li>
+</ul>
+<h3 id="rundeck-configuration-1">Rundeck Configuration</h3>
+<p>From the values you recorded above populate your <code>rundeck-config.properties</code> file.</p>
+<p>Example:</p>
+<pre class="properties"><code>#Enable the OAuth SSO feature
+rundeck.security.oauth.enabled=true
+
+rundeck.security.oauth.ping.clientId = YOUR_CLIENT_ID_HERE
+rundeck.security.oauth.ping.clientSecret = YOUR_CLIENT_SECRET_HERE
+rundeck.security.oauth.ping.accessTokenUri =    https://sso.connect.pingidentity.com/sso/as/token.oauth2
+rundeck.security.oauth.ping.userAuthorizationUri = https://sso.connect.pingidentity.com/sso/as/authorization.oauth2
+rundeck.security.oauth.ping.userInfoUri =   https://sso.connect.pingidentity.com/sso/idp/userinfo.openid
+rundeck.security.oauth.ping.clientAuthenticationScheme = header
+rundeck.security.oauth.ping.scope = openid profile email
+rundeck.security.oauth.ping.principleKeys=sub
+#The name of the attribute that hold&#39;s the users groups
+rundeck.security.oauth.ping.authorityProperty = YOUR_MAPPED_GROUPS_ATTRIBUTE
+
+#These properties control the appearance and url of the SSO login button on the login page
+rundeck.sso.loginButton.enabled=true
+rundeck.sso.loginButton.title=Login with Ping
+rundeck.sso.loginButton.url=oauth/ping</code></pre>
+<p>After completing the configuration, restart Rundeck and attempt to login with Ping.</p>
 </div>
 </div>
 </div>
@@ -250,7 +300,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-05-28T03:27:07UTC">2019-05-28T03:27:07UTC</span>
+<span class="generated-date" title="2019-05-28T13:21:57UTC">2019-05-28T13:21:57UTC</span>
 </p>
 </footer>
 </div>
