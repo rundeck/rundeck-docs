@@ -79,12 +79,12 @@ jQuery(function(){
     
     
     <li ><a href="index.html">Rundeck Configuration</a></li>
-    <li class="active"><a href="remote-job-execution-pro.html">Remote Job Execution (Pro)</a></li>
+    <li class="active"><a href="remote-job-execution-enterprise.html">Remote Job Execution (Enterprise)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="license-pro.html"><i class="glyphicon glyphicon-arrow-left"></i> License (Pro)</a></li>
+      <li class="previous"><a href="license-enterprise.html"><i class="glyphicon glyphicon-arrow-left"></i> License (Enterprise)</a></li>
       <li class="next"><a href="email-settings.html">Email Settings <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
@@ -112,7 +112,7 @@ jQuery(function(){
 <h1 class="title">Remote Job Execution</h1>
 </div>
 <h3 id="cluster-remote-execution">Cluster Remote Execution</h3>
-<p>This feature allows Rundeck Pro cluster members to forward job executions to other cluster members based on a policy configuration. By default, each member of the cluster executes jobs locally and does not forward them. You can define multiple profiles and assign different projects to different profiles. If a job is executed in a project which is not assigned to a specific profile, the default policy is used.</p>
+<p>This feature allows Rundeck Enterprise cluster members to forward job executions to other cluster members based on a policy configuration. By default, each member of the cluster executes jobs locally and does not forward them. You can define multiple profiles and assign different projects to different profiles. If a job is executed in a project which is not assigned to a specific profile, the default policy is used.</p>
 <p>Configure the following remote execution policy parameters in <code>rundeck-config.properties</code>.</p>
 <h4 id="policy">Policy</h4>
 <pre><code>rundeck.clusterMode.remoteExecution.policy = &lt;Policy&gt;</code></pre>
@@ -122,7 +122,7 @@ jQuery(function(){
 <li><code>Random</code> - Executes randomly among allowed members</li>
 <li><code>RoundRobin</code> - Executes round-robin style among allowed members</li>
 <li><code>Preset</code> - Executes on one other preset member</li>
-<li><code>Load</code> - Executes on a member based on load (Requires Pro Cluster 2.3.0 or a later release. See Enable Load Balanced Policy)</li>
+<li><code>Load</code> - Executes on a member based on load (Requires Enterprise Cluster 2.3.0 or a later release. See Enable Load Balanced Policy)</li>
 </ul>
 <h4 id="list-of-allowed-members">List of Allowed Members</h4>
 <pre><code>rundeck.clusterMode.remoteExecution.config.allowed = &lt;List of Allowed Members&gt;</code></pre>
@@ -169,8 +169,8 @@ rundeck.clusterMode.remoteExecution.profile.profile1.config.allowedTags = &lt;Li
 rundeck.clusterMode.remoteExecution.profile.profile1.config.preferredTags = &lt;List of Member Tags&gt;
 rundeck.clusterMode.remoteExecution.profile.profile1.config.activeOnly = true/false</code></pre>
 <h3 id="load-balanced-execution-policy">Load Balanced Execution Policy</h3>
-<p>This feature allows Rundeck Pro cluster members to forward job executions to other cluster members based on statistics calculated by the heartbeat process of each cluster member. Load is calculated for each member based on thread ratio and the percentage of CPU.</p>
-<p>Note: You must be running Rundeck Pro 2.3.1 or a later release to use this feature.</p>
+<p>This feature allows Rundeck Enterprise cluster members to forward job executions to other cluster members based on statistics calculated by the heartbeat process of each cluster member. Load is calculated for each member based on thread ratio and the percentage of CPU.</p>
+<p>Note: You must be running Rundeck Enterprise 2.3.1 or a later release to use this feature.</p>
 <p><strong>Example</strong></p>
 <pre><code>rundeck.clusterMode.remoteExecution.config.criteria = threadRatio,load</code></pre>
 <p>Each criteria can be weighted using a relative value:</p>
@@ -210,12 +210,12 @@ rundeck.clusterMode.remoteExecution.profile.profile1.config.activeOnly = true/fa
     
     
     <li ><a href="index.html">Rundeck Configuration</a></li>
-    <li class="active"><a href="remote-job-execution-pro.html">Remote Job Execution (Pro)</a></li>
+    <li class="active"><a href="remote-job-execution-enterprise.html">Remote Job Execution (Enterprise)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="license-pro.html"><i class="glyphicon glyphicon-arrow-left"></i> License (Pro)</a></li>
+      <li class="previous"><a href="license-enterprise.html"><i class="glyphicon glyphicon-arrow-left"></i> License (Enterprise)</a></li>
       <li class="next"><a href="email-settings.html">Email Settings <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
@@ -251,7 +251,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-05-28T13:21:57UTC">2019-05-28T13:21:57UTC</span>
+<span class="generated-date" title="2019-05-30T16:52:54UTC">2019-05-30T16:52:54UTC</span>
 </p>
 </footer>
 </div>

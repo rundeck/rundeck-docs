@@ -108,7 +108,7 @@ jQuery(function(){
 <img src="../../figures/architecture.png" alt="Rundeck architecture" /><figcaption>Rundeck architecture</figcaption>
 </figure>
 <h2 id="installation">Installation</h2>
-<p>To install a Rundeck Pro Enterprise instance, download the lastest version from <a href="https://download.rundeck.com/versions.html">here</a>, and follow the steps in the <a href="../install/index.html" title="Administrator Guide - Installation">Installation Guide</a></p>
+<p>To install a Rundeck Enterprise Enterprise instance, download the lastest version from <a href="https://download.rundeck.com/versions.html">here</a>, and follow the steps in the <a href="../install/index.html" title="Administrator Guide - Installation">Installation Guide</a></p>
 <h2 id="requirements">Requirements</h2>
 <p>The Rundeck Enterprise environment needs the following shared resources:</p>
 <h3 id="database">Database</h3>
@@ -119,7 +119,7 @@ jQuery(function(){
 <p>See: <a href="../configuration/storage-facility.html" title="Administrator Guide - Rundeck Configuration - Storage Facility">Storage Facility</a></p></li>
 </ul>
 <h3 id="load-balancer">Load Balancer</h3>
-<p>A loadbalancer allows you to achieve high availability in your Rundeck Pro installation by routing http traffic across several redundant Rundeck Pro instances.</p>
+<p>A loadbalancer allows you to achieve high availability in your Rundeck Enterprise installation by routing http traffic across several redundant Rundeck Enterprise instances.</p>
 <ul>
 <li><p>Set the <code>grails.serverURL</code> parameter of all cluster members (<code>rundeck-config.properties</code>) with the LB URL.</p></li>
 <li><p>Use Sticky session</p></li>
@@ -145,20 +145,20 @@ jQuery(function(){
 <p>See: <a href="../projects/resource-model-sources/index.html" title="Administrator Guide - Projects - Node Model Sources">Node Model Sources</a></p>
 <h2 id="features">Features:</h2>
 <h3 id="autotakeover">Autotakeover</h3>
-<p>Scheduled jobs are owned by the last cluster member who modified them. Jobs can also be controlled using Cluster Manager. If a cluster member goes down, all scheduled jobs on that cluster member must be moved to another cluster node. This process can be performed automatically using the heartbeat and Autotakeover features in Rundeck Pro version 2.1.0 and later releases.</p>
+<p>Scheduled jobs are owned by the last cluster member who modified them. Jobs can also be controlled using Cluster Manager. If a cluster member goes down, all scheduled jobs on that cluster member must be moved to another cluster node. This process can be performed automatically using the heartbeat and Autotakeover features in Rundeck Enterprise version 2.1.0 and later releases.</p>
 <p>See: <a href="autotakeover/index.html" title="Administrator Guide - Rundeck Enterprise - Autotakeover">Autotakeover</a></p>
 <h3 id="cluster-remote-execution-policy">Cluster Remote Execution Policy</h3>
-<p>This feature allows Rundeck Pro cluster members to forward job executions to other cluster members based on a policy configuration.</p>
-<p>See: <a href="../configuration/remote-job-execution-pro.html" title="Administrator Guide - Rundeck Configuration - Remote Job Execution (Pro)">Remote Job Execution</a></p>
-<h3 id="rundeck-pro-replication">Rundeck Pro Replication</h3>
+<p>This feature allows Rundeck Enterprise cluster members to forward job executions to other cluster members based on a policy configuration.</p>
+<p>See: <a href="../configuration/remote-job-execution-enterprise.html" title="Administrator Guide - Rundeck Configuration - Remote Job Execution (Enterprise)">Remote Job Execution</a></p>
+<h3 id="rundeck-enterprise-replication">Rundeck Enterprise Replication</h3>
 <p>This plugin is used for an active/passive configuration. Each cluster member can have its own database.</p>
-<p>See <a href="replication/index.html" title="Administrator Guide - Rundeck Enterprise - Rundeck Pro Replication">Rundeck Pro Replication</a></p>
+<p>See <a href="replication/index.html" title="Administrator Guide - Rundeck Enterprise - Rundeck Enterprise Replication">Rundeck Enterprise Replication</a></p>
 <h2 id="sections">Sections</h2>
 <ol type="1">
 <li><a href="loadbalancer/index.html">Loadbalancer</a></li>
 <li><a href="autotakeover/index.html">Autotakeover</a></li>
 <li><a href="logstore/index.html">Logstore</a></li>
-<li><a href="replication/index.html">Rundeck Pro Replication</a></li>
+<li><a href="replication/index.html">Rundeck Enterprise Replication</a></li>
 <li><a href="cloud/index.html">Cloud deployment</a></li>
 </ol>
 </div>
@@ -233,7 +233,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-05-28T13:21:57UTC">2019-05-28T13:21:57UTC</span>
+<span class="generated-date" title="2019-05-30T16:52:54UTC">2019-05-30T16:52:54UTC</span>
 </p>
 </footer>
 </div>

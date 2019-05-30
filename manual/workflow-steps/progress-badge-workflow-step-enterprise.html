@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>VMWare Operations Node Step Plugin (Pro)</title>
+  <title>Progress Badge Workflow Step (Enterprise)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -79,41 +79,53 @@ jQuery(function(){
     
     
     
-    <li class="active"><a href="vmware-operations-node-step-plugin-pro.html">VMWare Operations Node Step Plugin (Pro)</a></li>
+    <li class="active"><a href="progress-badge-workflow-step-enterprise.html">Progress Badge Workflow Step (Enterprise)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="sqlrunner-plugin-pro.html"><i class="glyphicon glyphicon-arrow-left"></i> SQLRunner Plugin (Pro)</a></li>
-      <li class="next"><a href="builtin-node-steps.html">Builtin Node Steps <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="previous"><a href="servicenow-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> ServiceNow Plugins</a></li>
+      <li class="next"><a href="vmware-step-plugins-enterprise.html">VMWare Step Plugins (Enterprise) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
-    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/node-steps/vmware.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/node-steps/vmware.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/workflow-steps/progress-badge.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/workflow-steps/progress-badge.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
 <div id="docbody">
 <div class="container">
 <div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#emoji-support">Emoji Support</a></li>
+<li><a href="#advanced-render-options">Advanced render options</a></li>
+</ul>
+</div>
+</div>
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">VMWare Operations Node Step Plugin (Pro)</h1>
+<h1 class="title">Progress Badge Workflow Step (Enterprise)</h1>
 </div>
-<p>Allows users to Power-Off/Power-On/Restart/Suspend/Stand-By a VM. This plugin is a workflow node step, so you need dispatch this step to the nodes that you want to apply the operation.</p>
-<p>Configuration</p>
+<p>The Progress Badge Plugin included with Rundeck Enterprise can create graphic badges to be rendered on the Log Output tab.</p>
+<p>See also: <a href="../log-filters/progress-badge-log-filter-enterprise.html" title="User Guide - Progress Badge Log Filter (Enterprise)">Progress Badge Log Filter (Enterprise)</a>.</p>
+<p>Render a single badge using input options:</p>
 <ul>
-<li><strong>Operation</strong>: “reboot”, “poweron”,“poweroff”,“standby”,“suspend”</li>
+<li>Text to be displayed inside the badge. Supports emoticons (see below).</li>
+<li>Status of the Badge, ok (green badge), error (red badge) or neutral (grey badge). Can be a variable from option o key-value data.</li>
 </ul>
-<p>Authentication Options</p>
+<h2 id="emoji-support">Emoji Support</h2>
+<p>To use some emoji inside the text, must input the alias of the emoji between colon: <code>:smile: Successfull job! :100:</code> Display as:</p>
+<p><code>😄 Successfull job! 💯</code></p>
+<p>A full list of supported emoji are listed here: <a href="https://github.com/vdurmont/emoji-java">vdurmont/emoji-java</a></p>
+<h2 id="advanced-render-options">Advanced render options</h2>
 <ul>
-<li><strong>URL Server</strong>: URL of the Server, eg: https://vmware-server</li>
-<li><strong>Username</strong>: Login Username</li>
-<li><strong>Password</strong>: Username Password</li>
-<li><strong>Ignore SSL certificate</strong>: Connecting with the server ignoring the SSL certificate. If this is false, you will need to add the certificate to the truststore (<a href="../../administration/projects/resource-model-sources/vmware-plugin.html#connecting-using-certificate" title="Administrator Guide - Projects - Node Model Sources - VMWare Plugin - Connecting Using Certificate">see here</a>).</li>
+<li>Specify typeface and font size</li>
+<li>Select for background color of the badge. O can enter a hexadecimal color value in the format #ffff00</li>
 </ul>
 </div>
 </div>
@@ -146,20 +158,20 @@ jQuery(function(){
     
     
     
-    <li class="active"><a href="vmware-operations-node-step-plugin-pro.html">VMWare Operations Node Step Plugin (Pro)</a></li>
+    <li class="active"><a href="progress-badge-workflow-step-enterprise.html">Progress Badge Workflow Step (Enterprise)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="sqlrunner-plugin-pro.html"><i class="glyphicon glyphicon-arrow-left"></i> SQLRunner Plugin (Pro)</a></li>
-      <li class="next"><a href="builtin-node-steps.html">Builtin Node Steps <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="previous"><a href="servicenow-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> ServiceNow Plugins</a></li>
+      <li class="next"><a href="vmware-step-plugins-enterprise.html">VMWare Step Plugins (Enterprise) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
-    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/node-steps/vmware.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/node-steps/vmware.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/workflow-steps/progress-badge.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/workflow-steps/progress-badge.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
@@ -187,7 +199,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-05-28T13:21:57UTC">2019-05-28T13:21:57UTC</span>
+<span class="generated-date" title="2019-05-30T16:52:54UTC">2019-05-30T16:52:54UTC</span>
 </p>
 </footer>
 </div>
