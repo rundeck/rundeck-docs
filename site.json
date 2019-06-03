@@ -9,18 +9,18 @@
                     ,
                 {
                     "srcpath": "manual/workflow-steps/progress-badge.md",
-                    "title": "Progress Badge Workflow Step (Pro)",
-                    "outpath": "manual/workflow-steps/progress-badge-workflow-step-pro.html",
+                    "title": "Progress Badge Workflow Step (Enterprise)",
+                    "outpath": "manual/workflow-steps/progress-badge-workflow-step-enterprise.html",
 
-                        "alltitles": "User Guide / Progress Badge Workflow Step (Pro)"
+                        "alltitles": "User Guide / Progress Badge Workflow Step (Enterprise)"
                     }
                     ,
                 {
                     "srcpath": "manual/workflow-steps/vmware.md",
-                    "title": "VMWare Step Plugins (Pro)",
-                    "outpath": "manual/workflow-steps/vmware-step-plugins-pro.html",
+                    "title": "VMWare Step Plugins (Enterprise)",
+                    "outpath": "manual/workflow-steps/vmware-step-plugins-enterprise.html",
 
-                        "alltitles": "User Guide / VMWare Step Plugins (Pro)"
+                        "alltitles": "User Guide / VMWare Step Plugins (Enterprise)"
                     }
                     ,
                 {
@@ -33,18 +33,18 @@
                     ,
                 {
                     "srcpath": "manual/workflow-steps/github.md",
-                    "title": "Github Script Plugin (Pro)",
-                    "outpath": "manual/workflow-steps/github-script-plugin-pro.html",
+                    "title": "Github Script Plugin (Enterprise)",
+                    "outpath": "manual/workflow-steps/github-script-plugin-enterprise.html",
 
-                        "alltitles": "User Guide / Github Script Plugin (Pro)"
+                        "alltitles": "User Guide / Github Script Plugin (Enterprise)"
                     }
                     ,
                 {
                     "srcpath": "manual/workflow-steps/jira.md",
-                    "title": "Jira Workflow Step Plugins (Pro)",
-                    "outpath": "manual/workflow-steps/jira-workflow-step-plugins-pro.html",
+                    "title": "Jira Workflow Step Plugins (Enterprise)",
+                    "outpath": "manual/workflow-steps/jira-workflow-step-plugins-enterprise.html",
 
-                        "alltitles": "User Guide / Jira Workflow Step Plugins (Pro)"
+                        "alltitles": "User Guide / Jira Workflow Step Plugins (Enterprise)"
                     }
                     ,
                 {
@@ -65,10 +65,10 @@
                     ,
                 {
                     "srcpath": "manual/orchestrator-plugins/highest-lowest.md",
-                    "title": "Highest/Lowest Attribute Value (Pro)",
-                    "outpath": "manual/orchestrator-plugins/highestlowest-attribute-value-pro.html",
+                    "title": "Highest/Lowest Attribute Value (Enterprise)",
+                    "outpath": "manual/orchestrator-plugins/highestlowest-attribute-value-enterprise.html",
 
-                        "alltitles": "User Guide / Highest/Lowest Attribute Value (Pro)"
+                        "alltitles": "User Guide / Highest/Lowest Attribute Value (Enterprise)"
                     }
                     ,
                 {
@@ -137,10 +137,10 @@
                     ,
                 {
                     "srcpath": "manual/log-filters/progress-badge.md",
-                    "title": "Progress Badge Log Filter (Pro)",
-                    "outpath": "manual/log-filters/progress-badge-log-filter-pro.html",
+                    "title": "Progress Badge Log Filter (Enterprise)",
+                    "outpath": "manual/log-filters/progress-badge-log-filter-enterprise.html",
 
-                        "alltitles": "User Guide / Progress Badge Log Filter (Pro)"
+                        "alltitles": "User Guide / Progress Badge Log Filter (Enterprise)"
                     }
                     ,
                 {
@@ -201,10 +201,10 @@
                     ,
                 {
                     "srcpath": "manual/notifications/jira.md",
-                    "title": "Jira Notification Plugins (Pro)",
-                    "outpath": "manual/notifications/jira-notification-plugins-pro.html",
+                    "title": "Jira Notification Plugins (Enterprise)",
+                    "outpath": "manual/notifications/jira-notification-plugins-enterprise.html",
 
-                        "alltitles": "User Guide / Jira Notification Plugins (Pro)"
+                        "alltitles": "User Guide / Jira Notification Plugins (Enterprise)"
                     }
                     ,
                 {
@@ -225,18 +225,18 @@
                     ,
                 {
                     "srcpath": "manual/node-steps/sqlrunner.md",
-                    "title": "SQLRunner Plugin (Pro)",
-                    "outpath": "manual/node-steps/sqlrunner-plugin-pro.html",
+                    "title": "SQLRunner Plugin (Enterprise)",
+                    "outpath": "manual/node-steps/sqlrunner-plugin-enterprise.html",
 
-                        "alltitles": "User Guide / SQLRunner Plugin (Pro)"
+                        "alltitles": "User Guide / SQLRunner Plugin (Enterprise)"
                     }
                     ,
                 {
                     "srcpath": "manual/node-steps/vmware.md",
-                    "title": "VMWare Operations Node Step Plugin (Pro)",
-                    "outpath": "manual/node-steps/vmware-operations-node-step-plugin-pro.html",
+                    "title": "VMWare Operations Node Step Plugin (Enterprise)",
+                    "outpath": "manual/node-steps/vmware-operations-node-step-plugin-enterprise.html",
 
-                        "alltitles": "User Guide / VMWare Operations Node Step Plugin (Pro)"
+                        "alltitles": "User Guide / VMWare Operations Node Step Plugin (Enterprise)"
                     }
                     ,
                 {
@@ -249,10 +249,10 @@
                     ,
                 {
                     "srcpath": "manual/node-steps/jira.md",
-                    "title": "Jira Node Step Plugins (Pro)",
-                    "outpath": "manual/node-steps/jira-node-step-plugins-pro.html",
+                    "title": "Jira Node Step Plugins (Enterprise)",
+                    "outpath": "manual/node-steps/jira-node-step-plugins-enterprise.html",
 
-                        "alltitles": "User Guide / Jira Node Step Plugins (Pro)"
+                        "alltitles": "User Guide / Jira Node Step Plugins (Enterprise)"
                     }
                     ,
                 {
@@ -649,18 +649,18 @@
                     ,
                 {
                     "srcpath": "administration/configuration/license.md",
-                    "title": "License (Pro)",
-                    "outpath": "administration/configuration/license-pro.html",
+                    "title": "License (Enterprise)",
+                    "outpath": "administration/configuration/license-enterprise.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Configuration / License (Pro)"
+                        "alltitles": "Administrator Guide / Rundeck Configuration / License (Enterprise)"
                     }
                     ,
                 {
                     "srcpath": "administration/configuration/remote-job-execution.md",
-                    "title": "Remote Job Execution (Pro)",
-                    "outpath": "administration/configuration/remote-job-execution-pro.html",
+                    "title": "Remote Job Execution (Enterprise)",
+                    "outpath": "administration/configuration/remote-job-execution-enterprise.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Configuration / Remote Job Execution (Pro)"
+                        "alltitles": "Administrator Guide / Rundeck Configuration / Remote Job Execution (Enterprise)"
                     }
                     ,
                 {
@@ -705,10 +705,10 @@
                     ,
                 {
                     "srcpath": "administration/configuration/encryptable-properties.md",
-                    "title": "Encryptable Config Properties (Pro)",
-                    "outpath": "administration/configuration/encryptable-config-properties-pro.html",
+                    "title": "Encryptable Config Properties (Enterprise)",
+                    "outpath": "administration/configuration/encryptable-config-properties-enterprise.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Configuration / Encryptable Config Properties (Pro)"
+                        "alltitles": "Administrator Guide / Rundeck Configuration / Encryptable Config Properties (Enterprise)"
                     }
                     ,
                 {
@@ -889,10 +889,10 @@
                     ,
                 {
                     "srcpath": "administration/cluster/replication/index.md",
-                    "title": "Rundeck Pro Replication",
+                    "title": "Rundeck Enterprise Replication",
                     "outpath": "administration/cluster/replication/index.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Enterprise / Rundeck Pro Replication"
+                        "alltitles": "Administrator Guide / Rundeck Enterprise / Rundeck Enterprise Replication"
                     }
                     ,
                 {
@@ -929,10 +929,10 @@
                     ,
                 {
                     "srcpath": "administration/projects/scm/job-replication.md",
-                    "title": "Job Replication (Pro)",
-                    "outpath": "administration/projects/scm/job-replication-pro.html",
+                    "title": "Job Replication (Enterprise)",
+                    "outpath": "administration/projects/scm/job-replication-enterprise.html",
 
-                        "alltitles": "Administrator Guide / Projects / SCM / Job Replication (Pro)"
+                        "alltitles": "Administrator Guide / Projects / SCM / Job Replication (Enterprise)"
                     }
                     ,
                 {
@@ -1129,10 +1129,10 @@
                     ,
                 {
                     "srcpath": "pro/index.md",
-                    "title": "Rundeck Pro",
+                    "title": "Rundeck Enterprise",
                     "outpath": "pro/index.html",
 
-                        "alltitles": "Rundeck Pro"
+                        "alltitles": "Rundeck Enterprise"
                     }
                     ,
                 {
@@ -1140,7 +1140,7 @@
                     "title": "Quickstart",
                     "outpath": "pro/quickstart.html",
 
-                        "alltitles": "Rundeck Pro / Quickstart"
+                        "alltitles": "Rundeck Enterprise / Quickstart"
                     }
                     ,
                 {

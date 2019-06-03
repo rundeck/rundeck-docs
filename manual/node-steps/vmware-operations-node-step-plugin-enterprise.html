@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>VMWare Step Plugins (Pro)</title>
+  <title>VMWare Operations Node Step Plugin (Enterprise)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -79,93 +79,34 @@ jQuery(function(){
     
     
     
-    <li class="active"><a href="vmware-step-plugins-pro.html">VMWare Step Plugins (Pro)</a></li>
+    <li class="active"><a href="vmware-operations-node-step-plugin-enterprise.html">VMWare Operations Node Step Plugin (Enterprise)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="progress-badge-workflow-step-pro.html"><i class="glyphicon glyphicon-arrow-left"></i> Progress Badge Workflow Step (Pro)</a></li>
-      <li class="next"><a href="builtin-workflow-steps.html">Builtin Workflow Steps <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="previous"><a href="sqlrunner-plugin-enterprise.html"><i class="glyphicon glyphicon-arrow-left"></i> SQLRunner Plugin (Enterprise)</a></li>
+      <li class="next"><a href="builtin-node-steps.html">Builtin Node Steps <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
-    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/workflow-steps/vmware.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/workflow-steps/vmware.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/node-steps/vmware.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/node-steps/vmware.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
 <div id="docbody">
 <div class="container">
 <div class="row">
-<div class="col-sm-3 toc-nav">
-<div class="nav">
-<ul>
-<li><a href="#clone-vm-workflow-step">Clone VM Workflow Step</a></li>
-<li><a href="#create-vm-workflow-step">Create VM Workflow Step</a></li>
-<li><a href="#re-config-vm-workflow-step">Re-Config VM Workflow Step</a></li>
-</ul>
-</div>
-</div>
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">VMWare Step Plugins (Pro)</h1>
+<h1 class="title">VMWare Operations Node Step Plugin (Enterprise)</h1>
 </div>
-<h2 id="clone-vm-workflow-step">Clone VM Workflow Step</h2>
-<p>This workflow step plugin clones existing VMs.</p>
+<p>Allows users to Power-Off/Power-On/Restart/Suspend/Stand-By a VM. This plugin is a workflow node step, so you need dispatch this step to the nodes that you want to apply the operation.</p>
 <p>Configuration</p>
 <ul>
-<li><strong>Source VM Name</strong>: VM Name that will be clone</li>
-<li><strong>New VM Name</strong>: Destination VM Name</li>
-<li><strong>DataCenter</strong>: DataCenter Name. If the DataCenter is not set, the VM will be searching on the root folder</li>
-</ul>
-<p>Authentication Options</p>
-<ul>
-<li><strong>URL Server</strong>: URL of the Server, eg: https://vmware-server</li>
-<li><strong>Username</strong>: Login Username</li>
-<li><strong>Password</strong>: Username Password</li>
-<li><strong>Ignore SSL certificate</strong>: Connecting with the server ignoring the SSL certificate. If this is false, you will need to add the certificate to the truststore (<a href="../../administration/projects/resource-model-sources/vmware-plugin.html#connecting-using-certificate" title="Administrator Guide - Projects - Node Model Sources - VMWare Plugin - Connecting Using Certificate">see here</a>).</li>
-</ul>
-<h2 id="create-vm-workflow-step">Create VM Workflow Step</h2>
-<p>This workflow step plugin creates a new VM.</p>
-<p>Configuration</p>
-<ul>
-<li><strong>Source VM Name</strong>: VM Name that will be clone</li>
-<li><strong>DataCenter Name</strong>: DataCenter name where the new VM will be created</li>
-<li><strong>VMWare Host</strong>: (Optional) If the host is not defined, it will take the first on the DataCenter</li>
-<li><strong>DataStore Name</strong>: (Optional) If DataStore, it will take one from the host</li>
-<li><strong>Network Name</strong>: Network name of the new VM</li>
-<li><strong>NIC Name</strong>: NIC Name of the new VM</li>
-<li><strong>Memory Size (MB)</strong>: Memory Size of the new VM</li>
-<li><strong>Number CPU</strong>: Number CPU of the new VM</li>
-<li><strong>Guest OS ID</strong>: Guest OS ID of the new VM</li>
-<li><strong>Disk Type</strong>: Disk Type (persistent, independent_persistent)</li>
-<li><strong>Disk Size (MB)</strong>: Size of the new disk (MB)</li>
-<li><strong>ISO file</strong>: (Optional) If this field is defined, the VM will mount this disk (format “[datastore] path”)</li>
-<li><strong>Power ON</strong>: Power ON after the VM is created</li>
-</ul>
-<p>Authentication Options</p>
-<ul>
-<li><strong>URL Server</strong>: URL of the Server, eg: https://vmware-server</li>
-<li><strong>Username</strong>: Login Username</li>
-<li><strong>Password</strong>: Username Password</li>
-<li><strong>Ignore SSL certificate</strong>: Connecting with the server ignoring the SSL certificate. If this is false, you will need to add the certificate to the truststore (<a href="../../administration/projects/resource-model-sources/vmware-plugin.html#connecting-using-certificate" title="Administrator Guide - Projects - Node Model Sources - VMWare Plugin - Connecting Using Certificate">see here</a>).</li>
-</ul>
-<h2 id="re-config-vm-workflow-step">Re-Config VM Workflow Step</h2>
-<p>This workflow step plugin re-config a VM.</p>
-<p>Configuration</p>
-<ul>
-<li><strong>Source VM Name</strong>: VM Name that will be modify</li>
-<li><strong>DataCenter Name</strong>: DataCenter Name. If the DataCenter is not set, the VM will be searching on the root folder</li>
-<li><strong>Memory Size (MB)</strong>: new Memory Size</li>
-<li><strong>Number CPU</strong>: new CPU number</li>
-<li><strong>Network Operation</strong>: Add or Remove network device</li>
-<li><strong>Network Name</strong>: Network Name to add or remove</li>
-<li><strong>Disk Operation</strong>: Add or Remove disk device</li>
-<li><strong>Disk Name</strong>: Disk Name to add or remove</li>
-<li><strong>Disk Type</strong>: Disk Type of the new disk</li>
-<li><strong>Disk Size</strong>: Disk Size (MB) of the new disk</li>
+<li><strong>Operation</strong>: “reboot”, “poweron”,“poweroff”,“standby”,“suspend”</li>
 </ul>
 <p>Authentication Options</p>
 <ul>
@@ -205,20 +146,20 @@ jQuery(function(){
     
     
     
-    <li class="active"><a href="vmware-step-plugins-pro.html">VMWare Step Plugins (Pro)</a></li>
+    <li class="active"><a href="vmware-operations-node-step-plugin-enterprise.html">VMWare Operations Node Step Plugin (Enterprise)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="progress-badge-workflow-step-pro.html"><i class="glyphicon glyphicon-arrow-left"></i> Progress Badge Workflow Step (Pro)</a></li>
-      <li class="next"><a href="builtin-workflow-steps.html">Builtin Workflow Steps <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="previous"><a href="sqlrunner-plugin-enterprise.html"><i class="glyphicon glyphicon-arrow-left"></i> SQLRunner Plugin (Enterprise)</a></li>
+      <li class="next"><a href="builtin-node-steps.html">Builtin Node Steps <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
-    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/workflow-steps/vmware.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/workflow-steps/vmware.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/node-steps/vmware.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/node-steps/vmware.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
@@ -246,7 +187,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-05-13T18:47:33UTC">2019-05-13T18:47:33UTC</span>
+<span class="generated-date" title="2019-06-03T18:56:51UTC">2019-06-03T18:56:51UTC</span>
 </p>
 </footer>
 </div>

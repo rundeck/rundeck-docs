@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Jira Workflow Step Plugins (Pro)</title>
+  <title>VMWare Step Plugins (Enterprise)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -79,20 +79,20 @@ jQuery(function(){
     
     
     
-    <li class="active"><a href="jira-workflow-step-plugins-pro.html">Jira Workflow Step Plugins (Pro)</a></li>
+    <li class="active"><a href="vmware-step-plugins-enterprise.html">VMWare Step Plugins (Enterprise)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="github-script-plugin-pro.html"><i class="glyphicon glyphicon-arrow-left"></i> Github Script Plugin (Pro)</a></li>
-      <li class="next"><a href="file-transfer-plugins.html">File Transfer Plugins <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="previous"><a href="progress-badge-workflow-step-enterprise.html"><i class="glyphicon glyphicon-arrow-left"></i> Progress Badge Workflow Step (Enterprise)</a></li>
+      <li class="next"><a href="builtin-workflow-steps.html">Builtin Workflow Steps <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
-    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/workflow-steps/jira.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/workflow-steps/jira.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/workflow-steps/vmware.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/workflow-steps/vmware.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
@@ -102,107 +102,77 @@ jQuery(function(){
 <div class="col-sm-3 toc-nav">
 <div class="nav">
 <ul>
-<li><a href="#jira-issue-assigned">Jira / Issue / Assigned</a><ul>
-<li><a href="#configuration">Configuration</a></li>
-<li><a href="#usage">Usage</a></li>
-</ul></li>
-<li><a href="#jira-issue-check-exist">Jira / Issue / Check Exist</a><ul>
-<li><a href="#configuration-1">Configuration</a></li>
-<li><a href="#usage-1">Usage</a></li>
-</ul></li>
-<li><a href="#jira-issue-comment">Jira / Issue / Comment</a><ul>
-<li><a href="#configuration-2">Configuration</a></li>
-<li><a href="#usage-2">Usage</a></li>
-</ul></li>
-<li><a href="#jira-issue-create">Jira / Issue / Create</a><ul>
-<li><a href="#configuration-3">Configuration</a></li>
-<li><a href="#usage-3">Usage</a></li>
-</ul></li>
-<li><a href="#jira-issue-update">Jira / Issue / Update</a><ul>
-<li><a href="#configuration-4">Configuration</a></li>
-<li><a href="#usage-4">Usage</a></li>
-</ul></li>
+<li><a href="#clone-vm-workflow-step">Clone VM Workflow Step</a></li>
+<li><a href="#create-vm-workflow-step">Create VM Workflow Step</a></li>
+<li><a href="#re-config-vm-workflow-step">Re-Config VM Workflow Step</a></li>
 </ul>
 </div>
 </div>
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">Jira Workflow Step Plugins (Pro)</h1>
+<h1 class="title">VMWare Step Plugins (Enterprise)</h1>
 </div>
-<h2 id="jira-issue-assigned">Jira / Issue / Assigned</h2>
-<p>Search assigned issues by user.</p>
-<h3 id="configuration">Configuration</h3>
-<p>The Jira connection credentials are set in the <code>project.properties</code> file for your project. Password it’s a keystorage path to the password.</p>
-<pre><code>project.plugin.WorkflowStep.jira-assigned-issue.login=admin@instance.com
-project.plugin.WorkflowStep.jira-assigned-issue.password=keys/jira/password
-project.plugin.WorkflowStep.jira-assigned-issue.url=https://instance.atlassian.net</code></pre>
-<h3 id="usage">Usage</h3>
-<p>To use the plugin, configure the mandatory inputs.</p>
+<h2 id="clone-vm-workflow-step">Clone VM Workflow Step</h2>
+<p>This workflow step plugin clones existing VMs.</p>
+<p>Configuration</p>
 <ul>
-<li>assignee: Issue assignee.</li>
-<li>fail: true to fail if there’s no assigned issues.</li>
+<li><strong>Source VM Name</strong>: VM Name that will be clone</li>
+<li><strong>New VM Name</strong>: Destination VM Name</li>
+<li><strong>DataCenter</strong>: DataCenter Name. If the DataCenter is not set, the VM will be searching on the root folder</li>
 </ul>
-<h2 id="jira-issue-check-exist">Jira / Issue / Check Exist</h2>
-<p>Check if the Jira Issue exist by key.</p>
-<h3 id="configuration-1">Configuration</h3>
-<p>The Jira connection credentials are set in the <code>project.properties</code> file for your project. Password it’s a keystorage path to the password.</p>
-<pre><code>project.plugin.WorkflowStep.jira-check-issue.login=admin@instance.com
-project.plugin.WorkflowStep.jira-check-issue.password=keys/jira/password
-project.plugin.WorkflowStep.jira-check-issue.url=https://instance.atlassian.net</code></pre>
-<h3 id="usage-1">Usage</h3>
-<p>To use the plugin, configure the mandatory input.</p>
+<p>Authentication Options</p>
 <ul>
-<li>key: Jira issue ID.</li>
+<li><strong>URL Server</strong>: URL of the Server, eg: https://vmware-server</li>
+<li><strong>Username</strong>: Login Username</li>
+<li><strong>Password</strong>: Username Password</li>
+<li><strong>Ignore SSL certificate</strong>: Connecting with the server ignoring the SSL certificate. If this is false, you will need to add the certificate to the truststore (<a href="../../administration/projects/resource-model-sources/vmware-plugin.html#connecting-using-certificate" title="Administrator Guide - Projects - Node Model Sources - VMWare Plugin - Connecting Using Certificate">see here</a>).</li>
 </ul>
-<h2 id="jira-issue-comment">Jira / Issue / Comment</h2>
-<p>Append notification messages to a Jira issue.</p>
-<h3 id="configuration-2">Configuration</h3>
-<p>The Jira connection credentials are set in the <code>project.properties</code> file for your project. Password it’s a keystorage path to the password.</p>
-<pre><code>project.plugin.WorkflowStep.jira-comment-issue-step.login=admin@instance.com
-project.plugin.WorkflowStep.jira-comment-issue-step.password=keys/jira/password
-project.plugin.WorkflowStep.jira-comment-issue-step.url=https://instance.atlassian.net</code></pre>
-<h3 id="usage-2">Usage</h3>
-<p>To use the plugin, configure the mandatory input.</p>
+<h2 id="create-vm-workflow-step">Create VM Workflow Step</h2>
+<p>This workflow step plugin creates a new VM.</p>
+<p>Configuration</p>
 <ul>
-<li>key: The Jira issue ID.</li>
-<li>message: Message to append, can include variables.</li>
+<li><strong>Source VM Name</strong>: VM Name that will be clone</li>
+<li><strong>DataCenter Name</strong>: DataCenter name where the new VM will be created</li>
+<li><strong>VMWare Host</strong>: (Optional) If the host is not defined, it will take the first on the DataCenter</li>
+<li><strong>DataStore Name</strong>: (Optional) If DataStore, it will take one from the host</li>
+<li><strong>Network Name</strong>: Network name of the new VM</li>
+<li><strong>NIC Name</strong>: NIC Name of the new VM</li>
+<li><strong>Memory Size (MB)</strong>: Memory Size of the new VM</li>
+<li><strong>Number CPU</strong>: Number CPU of the new VM</li>
+<li><strong>Guest OS ID</strong>: Guest OS ID of the new VM</li>
+<li><strong>Disk Type</strong>: Disk Type (persistent, independent_persistent)</li>
+<li><strong>Disk Size (MB)</strong>: Size of the new disk (MB)</li>
+<li><strong>ISO file</strong>: (Optional) If this field is defined, the VM will mount this disk (format “[datastore] path”)</li>
+<li><strong>Power ON</strong>: Power ON after the VM is created</li>
 </ul>
-<h2 id="jira-issue-create">Jira / Issue / Create</h2>
-<p>Creates a new Jira issue.</p>
-<h3 id="configuration-3">Configuration</h3>
-<p>The Jira connection credentials are set in the <code>project.properties</code> file for your project. Password it’s a keystorage path to the password.</p>
-<pre><code>project.plugin.WorkflowStep.jira-create-issue.login=admin@instance.com
-project.plugin.WorkflowStep.jira-create-issue.password=keys/jira/password
-project.plugin.WorkflowStep.jira-create-issue.url=https://instance.atlassian.net</code></pre>
-<h3 id="usage-3">Usage</h3>
-<p>To use the plugin, configure the mandatory inputs.</p>
+<p>Authentication Options</p>
 <ul>
-<li>project: Jira Project ID.</li>
-<li>type: Type of the issue, default Incident</li>
-<li>summary: Issue summary</li>
-<li>description: Issue description</li>
+<li><strong>URL Server</strong>: URL of the Server, eg: https://vmware-server</li>
+<li><strong>Username</strong>: Login Username</li>
+<li><strong>Password</strong>: Username Password</li>
+<li><strong>Ignore SSL certificate</strong>: Connecting with the server ignoring the SSL certificate. If this is false, you will need to add the certificate to the truststore (<a href="../../administration/projects/resource-model-sources/vmware-plugin.html#connecting-using-certificate" title="Administrator Guide - Projects - Node Model Sources - VMWare Plugin - Connecting Using Certificate">see here</a>).</li>
 </ul>
-<p>Optional inputs:</p>
+<h2 id="re-config-vm-workflow-step">Re-Config VM Workflow Step</h2>
+<p>This workflow step plugin re-config a VM.</p>
+<p>Configuration</p>
 <ul>
-<li>assignee: Issue assignee</li>
-<li>reporter: Issue reporter</li>
+<li><strong>Source VM Name</strong>: VM Name that will be modify</li>
+<li><strong>DataCenter Name</strong>: DataCenter Name. If the DataCenter is not set, the VM will be searching on the root folder</li>
+<li><strong>Memory Size (MB)</strong>: new Memory Size</li>
+<li><strong>Number CPU</strong>: new CPU number</li>
+<li><strong>Network Operation</strong>: Add or Remove network device</li>
+<li><strong>Network Name</strong>: Network Name to add or remove</li>
+<li><strong>Disk Operation</strong>: Add or Remove disk device</li>
+<li><strong>Disk Name</strong>: Disk Name to add or remove</li>
+<li><strong>Disk Type</strong>: Disk Type of the new disk</li>
+<li><strong>Disk Size</strong>: Disk Size (MB) of the new disk</li>
 </ul>
-<h2 id="jira-issue-update">Jira / Issue / Update</h2>
-<p>Updates a Jira Issue.</p>
-<h3 id="configuration-4">Configuration</h3>
-<p>The Jira connection credentials are set in the <code>project.properties</code> file for your project. Password it’s a keystorage path to the password.</p>
-<pre><code>project.plugin.WorkflowStep.jira-update-issue.login=admin@instance.com
-project.plugin.WorkflowStep.jira-update-issue.password=keys/jira/password
-project.plugin.WorkflowStep.jira-update-issue.url=https://instance.atlassian.net</code></pre>
-<h3 id="usage-4">Usage</h3>
-<p>To use the plugin, configure the mandatory inputs.</p>
+<p>Authentication Options</p>
 <ul>
-<li>issue key: Jira Issue ID.</li>
-<li>transition: Transition name, in the case of Incidents these value can be Investigate, Pending, Resolve, Cancel or Close</li>
-</ul>
-<p>Optional input:</p>
-<ul>
-<li>resolution: Resolution, only needed to Close or Resolve an Incident</li>
+<li><strong>URL Server</strong>: URL of the Server, eg: https://vmware-server</li>
+<li><strong>Username</strong>: Login Username</li>
+<li><strong>Password</strong>: Username Password</li>
+<li><strong>Ignore SSL certificate</strong>: Connecting with the server ignoring the SSL certificate. If this is false, you will need to add the certificate to the truststore (<a href="../../administration/projects/resource-model-sources/vmware-plugin.html#connecting-using-certificate" title="Administrator Guide - Projects - Node Model Sources - VMWare Plugin - Connecting Using Certificate">see here</a>).</li>
 </ul>
 </div>
 </div>
@@ -235,20 +205,20 @@ project.plugin.WorkflowStep.jira-update-issue.url=https://instance.atlassian.net
     
     
     
-    <li class="active"><a href="jira-workflow-step-plugins-pro.html">Jira Workflow Step Plugins (Pro)</a></li>
+    <li class="active"><a href="vmware-step-plugins-enterprise.html">VMWare Step Plugins (Enterprise)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="github-script-plugin-pro.html"><i class="glyphicon glyphicon-arrow-left"></i> Github Script Plugin (Pro)</a></li>
-      <li class="next"><a href="file-transfer-plugins.html">File Transfer Plugins <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="previous"><a href="progress-badge-workflow-step-enterprise.html"><i class="glyphicon glyphicon-arrow-left"></i> Progress Badge Workflow Step (Enterprise)</a></li>
+      <li class="next"><a href="builtin-workflow-steps.html">Builtin Workflow Steps <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
-    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/workflow-steps/jira.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/workflow-steps/jira.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/workflow-steps/vmware.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/workflow-steps/vmware.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
@@ -276,7 +246,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-05-13T18:47:33UTC">2019-05-13T18:47:33UTC</span>
+<span class="generated-date" title="2019-06-03T18:56:51UTC">2019-06-03T18:56:51UTC</span>
 </p>
 </footer>
 </div>

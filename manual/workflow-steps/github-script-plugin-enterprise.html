@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Rundeck Enterprise Licensing and Support</title>
+  <title>Github Script Plugin (Enterprise)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -75,24 +75,24 @@ jQuery(function(){
     
         <li><a href="../../index.html">Rundeck Documentation (3.0.x)</a></li>
     
-        <li><a href="../index.html">Administrator Guide</a></li>
+        <li><a href="../index.html">User Guide</a></li>
     
     
-    <li ><a href="index.html">Rundeck Configuration</a></li>
-    <li class="active"><a href="license-pro.html">License (Pro)</a></li>
+    
+    <li class="active"><a href="github-script-plugin-enterprise.html">Github Script Plugin (Enterprise)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      
-      <li class="next"><a href="remote-job-execution-pro.html">Remote Job Execution (Pro) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="previous"><a href="builtin-workflow-steps.html"><i class="glyphicon glyphicon-arrow-left"></i> Builtin Workflow Steps</a></li>
+      <li class="next"><a href="jira-workflow-step-plugins-enterprise.html">Jira Workflow Step Plugins (Enterprise) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
-    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/configuration/license.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/configuration/license.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/workflow-steps/github.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/workflow-steps/github.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
@@ -102,50 +102,25 @@ jQuery(function(){
 <div class="col-sm-3 toc-nav">
 <div class="nav">
 <ul>
-<li><a href="#licensing">Licensing</a></li>
-<li><a href="#license-key-installation">License key installation</a><ul>
-<li><a href="#via-gui">Via GUI</a></li>
-<li><a href="#via-filesystem">Via filesystem</a></li>
-</ul></li>
+<li><a href="#configuration">Configuration</a></li>
 </ul>
 </div>
 </div>
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">Rundeck Enterprise Licensing and Support</h1>
+<h1 class="title">Github Script Plugin (Enterprise)</h1>
 </div>
-<h2 id="licensing">Licensing</h2>
-<p>While Rundeck is an open source project maintained by Rundeck Inc, Rundeck Enterprise is commercial software for which you can purchase a license from Rundeck Inc. Rundeck Enterprise provides a tested, supported, and enterprise-ready distribution of Rundeck with additional features and capabilities for enterprise scale use. Also, a Rundeck Enterprise subscription license is the only way to receive professional support from Rundeck and the core Rundeck team.</p>
-<p>Rundeck Enterprise is available under an annual subscription license and comes bundled with support. You can renew the right to use the software and receive access to support on an annual basis. Multi-year subscription purchases can also be made.</p>
-<p>Rundeck Enterprise is licensed per Rundeck Enterprise server instance. There are no restrictions on the number of users, projects, nodes, or jobs run.</p>
-<p>No software with GPL or other “copyleft” licenses are used in Rundeck Enterprise. All license rights for using Rundeck Enterprise are contained within the single Rundeck Enterprise license.</p>
-<p>Rundeck Inc. guarantees that Rundeck Enterprise does not infringe on any patents, copyrights or misappropriates any trade secrets. Rundeck will defend licensees against such claims. For details, see <a href="http://support.rundeck.com/customer/portal/articles/2723878-rundeckpro-license">Rundeck Enterprise Master Software License Agreement</a>.</p>
-<h2 id="license-key-installation">License key installation</h2>
-<p>Ask for the license key to the support team. Then install the license key via the gui or on the filesystem directly.</p>
-<h3 id="via-gui">Via GUI</h3>
-<p>Upload the license key using the GUI:</p>
-<figure>
-<img src="../../figures/license-key-gui-1.png" alt="Upload the license key using the GUI" /><figcaption>Upload the license key using the GUI</figcaption>
-</figure>
-<p>Click on “No License Key File is installed”</p>
-<figure>
-<img src="../../figures/license-key-gui-2.png" alt="Click on “No License Key File is installed”" /><figcaption>Click on “No License Key File is installed”</figcaption>
-</figure>
-<p>Click on “Upload License File”</p>
-<figure>
-<img src="../../figures/license-key-gui-3.png" alt="Click on “Upload License File”" /><figcaption>Click on “Upload License File”</figcaption>
-</figure>
-<p>Select the license key file and press “Upload License File”</p>
-<figure>
-<img src="../../figures/license-key-gui-4.png" alt="Select the license key file and press “Upload License File”" /><figcaption>Select the license key file and press “Upload License File”</figcaption>
-</figure>
-<h3 id="via-filesystem">Via filesystem</h3>
-<p>Copy the license file to the correct directory depending of the kind of installation.</p>
-<p>License file name : rundeckpro-license.key ( don’t change to a different name )</p>
-<p>File location</p>
-<p>Rundeck package RPM(Redhat/centos) or DEB (debian/ubuntu) /etc/rundeck/</p>
-<p>Rundeck Launcher $RD_BASE/etc/</p>
-<p>Rundeck + Tomcat $RDECK_BASE/etc/</p>
+<p>The Github script plugin is a Workflow Step plugin included with Rundeck Enterprise that runs a command located on a GitHub repo.</p>
+<h2 id="configuration">Configuration</h2>
+<ul>
+<li><strong>Github Path</strong>: The path of the repo, with the format <code>owner/repo</code></li>
+<li><strong>File Name</strong>: The script to run</li>
+<li><strong>Script Executable</strong>: The executable that will run the script</li>
+<li><strong>Execution Timeout</strong>: The execution timeout, leave it empty if the timeout is not needed</li>
+<li><strong>Username</strong>: Github username</li>
+<li><strong>Password</strong>: Github password</li>
+</ul>
+<p>If Username and password are not provided, the library looks at ~/.github property file (check <a href="http://github-api.kohsuke.org" class="uri">http://github-api.kohsuke.org</a>)</p>
 </div>
 </div>
 </div>
@@ -173,24 +148,24 @@ jQuery(function(){
     
         <li><a href="../../index.html">Rundeck Documentation (3.0.x)</a></li>
     
-        <li><a href="../index.html">Administrator Guide</a></li>
+        <li><a href="../index.html">User Guide</a></li>
     
     
-    <li ><a href="index.html">Rundeck Configuration</a></li>
-    <li class="active"><a href="license-pro.html">License (Pro)</a></li>
+    
+    <li class="active"><a href="github-script-plugin-enterprise.html">Github Script Plugin (Enterprise)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      
-      <li class="next"><a href="remote-job-execution-pro.html">Remote Job Execution (Pro) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="previous"><a href="builtin-workflow-steps.html"><i class="glyphicon glyphicon-arrow-left"></i> Builtin Workflow Steps</a></li>
+      <li class="next"><a href="jira-workflow-step-plugins-enterprise.html">Jira Workflow Step Plugins (Enterprise) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
-    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/configuration/license.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/configuration/license.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/workflow-steps/github.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/workflow-steps/github.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
@@ -218,7 +193,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-05-13T18:47:33UTC">2019-05-13T18:47:33UTC</span>
+<span class="generated-date" title="2019-06-03T18:56:51UTC">2019-06-03T18:56:51UTC</span>
 </p>
 </footer>
 </div>

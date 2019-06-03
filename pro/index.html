@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Rundeck Pro</title>
+  <title>Rundeck Enterprise</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -77,7 +77,7 @@ jQuery(function(){
     
     
     
-    <li class="active"><a href="index.html">Rundeck Pro</a></li>
+    <li class="active"><a href="index.html">Rundeck Enterprise</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
@@ -99,7 +99,7 @@ jQuery(function(){
 <div class="row">
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">Rundeck Pro</h1>
+<h1 class="title">Rundeck Enterprise</h1>
 </div>
 <h2 id="overview">Overview</h2>
 <p>Rundeck is a server application you host on a system you designate a central administrative control point. Internally, Rundeck stores job definitions and execution history in a relational database. Output from command and job executions is saved on disk but can be forwarded to remote stores like S3 or Logstash.</p>
@@ -110,28 +110,28 @@ jQuery(function(){
 <p>The Rundeck application itself is a Java-based webapp. The application provides both graphical interface and network interfaces used by the Rundeck shell tools.</p>
 <p>Access to the Rundeck application requires a login and password. The default Rundeck installation uses a flat file user directory containing a set of default logins. Logins are defined in terms of a username and password as well as one or more user groups. An alternative configuration to the flat file user directory, is LDAP (e.g., ActiveDirectory) but Rundeck authentication and authorization is customizable via <a href="http://en.wikipedia.org/wiki/Java_Authentication_and_Authorization_Service">JAAS</a>. Users must also be authorized to perform actions like define a job or execute one. This is controlled by an access control facility that reads policy files defined by the Rundeck administrator. Privilege is granted if a user’s group membership meets the requirements of the policy.</p>
 <h2 id="license">License</h2>
-<p>See: <a href="../administration/configuration/license-pro.html" title="Administrator Guide - Rundeck Configuration - License (Pro)">Rundeck Pro Licensing and Support</a></p>
+<p>See: <a href="../administration/configuration/license-enterprise.html" title="Administrator Guide - Rundeck Configuration - License (Enterprise)">Rundeck Enterprise Licensing and Support</a></p>
 <h2 id="general-configuration">General configuration</h2>
-<p>Rundeck Pro supports all properties described in the <a href="../administration/configuration/configuration-file-reference.html" title="Administrator Guide - Rundeck Configuration - Configuration File Reference">OSS version</a>.</p>
+<p>Rundeck Enterprise supports all properties described in the <a href="../administration/configuration/configuration-file-reference.html" title="Administrator Guide - Rundeck Configuration - Configuration File Reference">OSS version</a>.</p>
 <h2 id="node-model-sources">Node Model Sources</h2>
-<p>Node Sources allow you to import metadata about the nodes you want to run Rundeck jobs on. Node Sources are configured on Rundeck Pro in the same was as the OSS version, described in <a href="../administration/projects/resource-model-sources/index.html" title="Administrator Guide - Projects - Node Model Sources">Node Model Sources</a>.</p>
+<p>Node Sources allow you to import metadata about the nodes you want to run Rundeck jobs on. Node Sources are configured on Rundeck Enterprise in the same was as the OSS version, described in <a href="../administration/projects/resource-model-sources/index.html" title="Administrator Guide - Projects - Node Model Sources">Node Model Sources</a>.</p>
 <h2 id="authentication">Authentication</h2>
-<p>Similar to OSS Rundeck, Rundeck Pro uses Servlet Container Authentication to determine the logged in user name and the user’s authorized roles.</p>
+<p>Similar to OSS Rundeck, Rundeck Enterprise uses Servlet Container Authentication to determine the logged in user name and the user’s authorized roles.</p>
 <p>For more details, see <a href="../administration/security/authenticating-users.html" title="Administrator Guide - Security - Authenticating Users">Authenticating Users</a></p>
 <h2 id="key-storage">Key storage</h2>
-<p>Similar to OSS Rundeck, Rundeck Pro can securely store private keys that the Rundeck Node Executor and use for sessions.</p>
+<p>Similar to OSS Rundeck, Rundeck Enterprise can securely store private keys that the Rundeck Node Executor and use for sessions.</p>
 <p>For momre details, see <a href="../administration/security/key-storage.html" title="Administrator Guide - Security - Key Storage">Key Storage</a></p>
 <h2 id="remote-job-execution">Remote job execution</h2>
-<p>This feature allows Rundeck Pro cluster members to forward job executions to other cluster members based on a policy configuration. By default, each member of the cluster executes jobs locally and does not forward them. You can define multiple profiles and assign different projects to different profiles. If a job is executed in a project which is not assigned to a specific profile, the default policy is used.</p>
-<p>For more details, see <a href="../administration/configuration/remote-job-execution-pro.html" title="Administrator Guide - Rundeck Configuration - Remote Job Execution (Pro)">Remote Job Execution</a></p>
+<p>This feature allows Rundeck Enterprise cluster members to forward job executions to other cluster members based on a policy configuration. By default, each member of the cluster executes jobs locally and does not forward them. You can define multiple profiles and assign different projects to different profiles. If a job is executed in a project which is not assigned to a specific profile, the default policy is used.</p>
+<p>For more details, see <a href="../administration/configuration/remote-job-execution-enterprise.html" title="Administrator Guide - Rundeck Configuration - Remote Job Execution (Enterprise)">Remote Job Execution</a></p>
 <h2 id="high-availability">High availability</h2>
 <h3 id="database">Database</h3>
 <p>See: <a href="../administration/configuration/database/index.html" title="Administrator Guide - Rundeck Configuration - Database">Database Backends</a>.</p>
 <h3 id="loadbalancer">Loadbalancer</h3>
-<p>A loadbalancer allows you to achieve high availability in your Rundeck Pro installation by routing http traffic across several redundant Rundeck Pro instances.</p>
-<p>To learn how to set up a loadbalancer for Rundeck Pro, see <a href="../administration/cluster/loadbalancer/index.html" title="Administrator Guide - Rundeck Enterprise - Loadbalancer">Loadbalancer</a></p>
+<p>A loadbalancer allows you to achieve high availability in your Rundeck Enterprise installation by routing http traffic across several redundant Rundeck Enterprise instances.</p>
+<p>To learn how to set up a loadbalancer for Rundeck Enterprise, see <a href="../administration/cluster/loadbalancer/index.html" title="Administrator Guide - Rundeck Enterprise - Loadbalancer">Loadbalancer</a></p>
 <h3 id="autotakeover">Autotakeover</h3>
-<p>If a cluster member goes down, all scheduled jobs on that cluster member must be moved to another cluster node. This process can be performed automatically using the heartbeat and Autotakeover features in Rundeck Pro version 2.1.0 and later releases.</p>
+<p>If a cluster member goes down, all scheduled jobs on that cluster member must be moved to another cluster node. This process can be performed automatically using the heartbeat and Autotakeover features in Rundeck Enterprise version 2.1.0 and later releases.</p>
 <p>To learn how to set up Autotakeover, see <a href="../administration/cluster/autotakeover/index.html" title="Administrator Guide - Rundeck Enterprise - Autotakeover">Autotakeover</a></p>
 <h3 id="logstore">Logstore</h3>
 <p>All Cluster members must share the same log storage, this can be achieved in two ways:</p>
@@ -140,7 +140,7 @@ jQuery(function(){
 <li>Plugins: Using an Execution log storage plugin.</li>
 </ul>
 <p>Some plugins that can be used:</p>
-<h4 id="rundeck-pro-s3-log-storage-plugin">Rundeck Pro S3 Log Storage Plugin</h4>
+<h4 id="rundeck-enterprise-s3-log-storage-plugin">Rundeck Enterprise S3 Log Storage Plugin</h4>
 <p>This plugin provides Log Storage via Amazon AWS S3, or any storage compatible with AWS S3 API, eg: S3, <a href="https://minio.io/">Minio</a>, etc.</p>
 <p>It is based on the open source <a href="https://github.com/rundeck-plugins/rundeck-s3-log-plugin">Rundeck S3 Log Storage Plugin</a>.</p>
 <p>It adds the additional feature:</p>
@@ -189,7 +189,7 @@ jQuery(function(){
     
     
     
-    <li class="active"><a href="index.html">Rundeck Pro</a></li>
+    <li class="active"><a href="index.html">Rundeck Enterprise</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
@@ -230,7 +230,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-05-13T18:47:33UTC">2019-05-13T18:47:33UTC</span>
+<span class="generated-date" title="2019-06-03T18:56:51UTC">2019-06-03T18:56:51UTC</span>
 </p>
 </footer>
 </div>

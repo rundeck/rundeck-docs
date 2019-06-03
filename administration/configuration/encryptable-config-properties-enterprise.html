@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Rundeck PRO Config Property Encryption</title>
+  <title>Rundeck Enterprise Config Property Encryption</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -79,7 +79,7 @@ jQuery(function(){
     
     
     <li ><a href="index.html">Rundeck Configuration</a></li>
-    <li class="active"><a href="encryptable-config-properties-pro.html">Encryptable Config Properties (Pro)</a></li>
+    <li class="active"><a href="encryptable-config-properties-enterprise.html">Encryptable Config Properties (Enterprise)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
@@ -111,14 +111,14 @@ jQuery(function(){
 </div>
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">Rundeck PRO Config Property Encryption</h1>
+<h1 class="title">Rundeck Enterprise Config Property Encryption</h1>
 </div>
-<p>All Rundeck PRO bundles come with a feature that allows you to encrypt the values in the rundeck-config.properties file.</p>
+<p>All Rundeck Enterprise bundles come with a feature that allows you to encrypt the values in the rundeck-config.properties file.</p>
 <h3 id="approach">Approach</h3>
 <p>To use encrypted properties in Rundeck you will have a master password that will be used to encrypt and decrypt the other passwords you wish to use in the rundeck-config.properties file.</p>
 <p>For instance you might want to encrypt the bind password to your LDAP server. Let’s say your LDAP bind password is <code>binder123</code>. You will need a master password to encrypt this value. We will use <code>1PwdToBindThem$</code> for the master password.</p>
 <h3 id="encrypting-property-values">Encrypting Property values</h3>
-<p>Rundeck Pro has a feature to allow you to generate encrypted passwords using the Jasypt encryption library. The following instructions show how to encrypt a password with this utility from the command line.</p>
+<p>Rundeck Enterprise has a feature to allow you to generate encrypted passwords using the Jasypt encryption library. The following instructions show how to encrypt a password with this utility from the command line.</p>
 <p>cd into the directory where your rundeck.war is located<br />
 run: <code>java -jar rundeck.war --encryptpwd Jasypt</code><br />
 You will receive prompts for information that look like the following:</p>
@@ -136,7 +136,7 @@ encrypted: bbnJmDtx82/NOeUc9ahULGVAH+RdSLG5</code></pre>
 <code>rundeck.security.ldap.bindPassword=ENC(bbnJmDtx82/NOeUc9ahULGVAH+RdSLG5)</code></p>
 <h3 id="decrypting-rundeck-config.properties">Decrypting rundeck-config.properties</h3>
 <p>To decrypt the encrypted properties in your rundeck-config.properties file you will need to set the environment variable <code>RUNDECK_PROP_DECRYPTER_PWD</code> with the value of your master password before starting Rundeck.</p>
-<p>In our example we would do: <code>export RUNDECK_PROP_DECRYPTER_PWD=1PwdToBindThem$</code> then we would start our Rundeck PRO installation. After the application has completed the bootstrap process and is responding to requests, the environment variable can be unset for security purposes.</p>
+<p>In our example we would do: <code>export RUNDECK_PROP_DECRYPTER_PWD=1PwdToBindThem$</code> then we would start our Rundeck Enterprise installation. After the application has completed the bootstrap process and is responding to requests, the environment variable can be unset for security purposes.</p>
 <h3 id="advanced-usage">Advanced Usage</h3>
 <p>If you wish to customize the algorithm, provider, or keyObtentions the Jasypt encryptor will use to encrypt the password, you can do this by passing those values as system properties when you launch the encryption utility.</p>
 <p>For example, if you wish to use the <code>PBEWITHSHA256AND256BITAES-CBC-BC</code> algorithm to encrypt your password, you could do it like this:</p>
@@ -193,7 +193,7 @@ and config settings can be supplied like:<br />
     
     
     <li ><a href="index.html">Rundeck Configuration</a></li>
-    <li class="active"><a href="encryptable-config-properties-pro.html">Encryptable Config Properties (Pro)</a></li>
+    <li class="active"><a href="encryptable-config-properties-enterprise.html">Encryptable Config Properties (Enterprise)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
@@ -234,7 +234,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-05-13T18:47:33UTC">2019-05-13T18:47:33UTC</span>
+<span class="generated-date" title="2019-06-03T18:56:51UTC">2019-06-03T18:56:51UTC</span>
 </p>
 </footer>
 </div>
