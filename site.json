@@ -1304,6 +1304,14 @@
                     }
                     ,
                 {
+                    "srcpath": "developer/14-file-upload-plugins.md",
+                    "title": "File Upload Plugins",
+                    "outpath": "developer/file-upload-plugins.html",
+
+                        "alltitles": "Plugin Developer Guide / File Upload Plugins"
+                    }
+                    ,
+                {
                     "srcpath": "api/rundeck-api.md",
                     "title": "API Reference | Version 31",
                     "outpath": "api/index.html",

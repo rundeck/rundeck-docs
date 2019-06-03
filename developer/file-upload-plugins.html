@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>RD: Rundeck Client CLI Tool</title>
+  <title>File Upload Plugins</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="May 21, 2019" />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -76,32 +78,71 @@ jQuery(function(){
         <li><a href="../index.html">Rundeck Documentation (3.1.x)</a></li>
     
     
-    <li ><a href="index.html">Command Line Tools</a></li>
-    <li class="active"><a href="rd-rundeck-client-cli-tool.html">RD: Rundeck Client CLI Tool</a></li>
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="file-upload-plugins.html">File Upload Plugins</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="rd-acl.html"><i class="glyphicon glyphicon-arrow-left"></i> rd-acl</a></li>
+      <li class="previous"><a href="user-group-source-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> User Group Source Plugins</a></li>
       
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
-    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manpages/man1/rd.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manpages/man1/rd.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+developer/14-file-upload-plugins.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/developer/14-file-upload-plugins.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
 <div id="docbody">
 <div class="container">
 <div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#behavior">Behavior</a></li>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#java-plugin-type">Java Plugin Type</a></li>
+</ul>
+</div>
+</div>
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">RD: Rundeck Client CLI Tool</h1>
+<h1 class="title">File Upload Plugins</h1>
 </div>
-<p>Rundeck has a separately installable CLI client tool called <a href="https://rundeck.github.io/rundeck-cli">rd</a>.</p>
+<h2 id="about">About</h2>
+<p>File Upload plugins are used to receive uploaded files for Job Options that are of type File, store them, and retrieve them when needed by a running Execution.</p>
+<p>Each uploaded file is recorded with a “refid”, a unique ID that identifies the file.</p>
+<h2 id="behavior">Behavior</h2>
+<p>A File Upload Plugin is configured globally. The default plugin implementation stores received files on the local disk only.</p>
+<p>When a user uploads a file to a Job Option value, or the Job File Upload API is called, the plugin is initialized, and the <code>uploadFile</code> method is called. Rundeck creates an internal record for the file with the SHA hash of the contents, and generates the unique “refid” for the uploaded file.</p>
+<p>The plugin is expected to “retain” the uploaded file until a state transition occurs. The file might be used in an execution, or it might simply be deleted, for example if the execution fails to start due to invalid input, or if a timeout occurs.</p>
+<p>If the timeout occurs before an execution uses the file, the <code>transitionState</code> method will be called with an state of <code>Unused</code>. The plugin has the option of deleting the stored file, and should return the new Internal state of the file, which can be <code>Deleted</code> or <code>Retained</code>.</p>
+<p>When the execution that uses the file starts, first the internal record for the file is “attached” to the execution. This means it cannot be used again for another execution, the removal timeout is cancelled, and it has an internal state of “retained”.</p>
+<p>Then the plugin’s <code>retrieveLocalFile</code> method will be called. If the plugin has a local copy of the file, it should be returned, otherwise <code>null</code> is expected. If the local file is not available, the <code>hasFile</code> method is called to determine if the plugin is able to retrieve the file. Finally the <code>retrieveFile(String,OutputStream)</code> method is called to copy the contents to a local temp file, and to verify the SHA checksum. The local file path, file name, and SHA are added to the Execution’s context variables.</p>
+<p>The execution then runs. After the Execution completes, the <code>transitionState</code> method will be called with an state of <code>Used</code>, allowing the plugin to retain or delete the file.</p>
+<p>If an Execution, Job, or Project is deleted, all file records associated with the given entity are also deleted, and the plugin <code>transitionState</code> method is called with a state of <code>Deleted</code>.</p>
+<h2 id="configuration">Configuration</h2>
+<p>To enable the plugin, The plugin provider is specified in <a href="../administration/configuration/configuration-file-reference.html#rundeck-config.properties" title="Administrator Guide - Rundeck Configuration - Configuration File Reference - Rundeck Config.properties">rundeck-config.properties</a>:</p>
+<pre><code>rundeck.fileupload.plugin.type=[provider]</code></pre>
+<p>“Instance” scoped plugin properties will be configured on each File Option in a Job, and the property values will be pased to the <code>uploadFile</code> method.</p>
+<p>(Note: currently “Project” scoped properties are not supported.)</p>
+<p>“Framework” scoped properties of the plugin you can add configuration values to the framework scope are set in <a href="../administration/configuration/configuration-file-reference.html#framework.properties" title="Administrator Guide - Rundeck Configuration - Configuration File Reference - Framework.properties">framework.properties</a></p>
+<pre><code>framework.plugin.FileUpload.[provider].[property]=value</code></pre>
+<h2 id="java-plugin-type">Java Plugin Type</h2>
+<p>Plugins must implement the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.1.x-20190512/com/dtolabs/rundeck/plugins/file/FileUploadPlugin.html">FileUploadPlugin</a> interface, and declare as a provider of service <code>FileUpload</code>.</p>
+<p>Methods:</p>
+<ul>
+<li><code>void initialize();</code>: Initialize the plugin.</li>
+<li><code>String uploadFile(final InputStream content,final long length,final String refid,Map&lt;String, String&gt; config)</code>: upload a file for a job option, specifies the refid, and instance configuration properties.</li>
+<li><code>boolean hasFile(String ref)</code>: return true if the file with given refid can be retrieved</li>
+<li><code>void retrieveFile(String ref, OutputStream out)</code>: retrieve the file content to the output stream</li>
+<li><code>removeFile(String refid)</code>: (unused) may be called to remove the file</li>
+<li><code>InternalState transitionState(String reference, ExternalState state)</code>: plugin should retain or delete the file</li>
+</ul>
 </div>
 </div>
 </div>
@@ -130,21 +171,21 @@ jQuery(function(){
         <li><a href="../index.html">Rundeck Documentation (3.1.x)</a></li>
     
     
-    <li ><a href="index.html">Command Line Tools</a></li>
-    <li class="active"><a href="rd-rundeck-client-cli-tool.html">RD: Rundeck Client CLI Tool</a></li>
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="file-upload-plugins.html">File Upload Plugins</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
-      <li class="previous"><a href="rd-acl.html"><i class="glyphicon glyphicon-arrow-left"></i> rd-acl</a></li>
+      <li class="previous"><a href="user-group-source-plugins.html"><i class="glyphicon glyphicon-arrow-left"></i> User Group Source Plugins</a></li>
       
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
-    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manpages/man1/rd.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manpages/man1/rd.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+developer/14-file-upload-plugins.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/developer/14-file-upload-plugins.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
