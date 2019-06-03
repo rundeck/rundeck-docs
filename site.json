@@ -720,6 +720,14 @@
                     }
                     ,
                 {
+                    "srcpath": "administration/configuration/repository.md",
+                    "title": "Repository",
+                    "outpath": "administration/configuration/repository.html",
+
+                        "alltitles": "Administrator Guide / Rundeck Configuration / Repository"
+                    }
+                    ,
+                {
                     "srcpath": "administration/security/toc.conf",
                     "title": "Security",
                     "outpath": "administration/security/index.html",
