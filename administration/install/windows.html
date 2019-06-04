@@ -102,9 +102,14 @@ jQuery(function(){
 <div class="col-sm-3 toc-nav">
 <div class="nav">
 <ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#installing-rundeck-on-windows-based-systems-and-first-run">Installing Rundeck on Windows based systems and first run</a></li>
+<li><a href="#folder-structure">Folder Structure</a><ul>
+<li><a href="#configuring-rundeck">Configuring Rundeck</a></li>
 <li><a href="#login-to-the-gui">Login to the GUI</a></li>
+<li><a href="#run-rundeck-as-a-service">Run rundeck as a Service</a></li>
 <li><a href="#start-stop-instances">Start-Stop instances</a></li>
-<li><a href="#folder-structure">Folder Structure</a></li>
+</ul></li>
 </ul>
 </div>
 </div>
@@ -112,106 +117,108 @@ jQuery(function(){
 <div class="page-header">
 <h1 class="title">Installing on Windows</h1>
 </div>
-<!---
-Originals:
-http://support.rundeck.com/customer/en/portal/articles/2885088-installing-a-single-instance-of-rundeck-pro-cluster-on-windows
-http://support.rundeck.com/customer/en/portal/articles/2819414-install-rundeck-pro-team-launcher-on-windows
-http://support.rundeck.com/customer/en/portal/articles/2522223-enable-credssp-authentication-windows-
---->
-<p>This guide will install Rundeck Enterprise or Open Source as a Service on a Windows Server. It uses the Rundeck executable war installer.</p>
-<ul>
-<li>Download the latest Rundeck war <a href="http://rundeck.org/downloads.html">OSS</a> or <a href="http://download.rundeck.com/versions.html">Enterprise</a><br />
-</li>
-<li>Choose a root directory (e.g. C:). This will be your <code>%RDECK_BASE%</code></li>
-<li>Place <code>rundeckpro-[edition]-X.X.X.war</code> in that directory</li>
-<li>Go to the <code>%RDECK_BASE%</code> (e.g. `C:) folder and launch the installation of rundeck.</li>
-</ul>
-<pre><code>set RDECK_BASE=C:\rundeck
-cd %RDECK_BASE%
-java -jar rundeckpro-[edition]-X.X.X.war</code></pre>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>Before proceeding to install Rundeck, check all hardware <a href="https://docs.rundeck.com/docs/administration/install/system-requirements.html">requirements</a> to make sure that our machine can be run Rundeck, also, make sure that the Windows user profile has the sufficient rights to install software in the Operating System.</p>
+<p>Also, the main dependency is Java Development Kit 1.8 (JDK 8), you can download it from Oracle <a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">website</a>.</p>
+<h3 id="installing-rundeck-on-windows-based-systems-and-first-run">Installing Rundeck on Windows based systems and first run</h3>
+<p>The first step is to download Rundeck WAR file and save it on the main work directory, e.g. <code>C:\rundeck</code>, you can download <a href="https://www.rundeck.com/open-source/download">Community</a> version or <a href="https://download.rundeck.com/">Enterprise</a> and save it on <code>C:\rundeck</code> folder, now you will set Rundeck path environment variable, for that set it on a Powershell window and :</p>
+<pre><code>set RDECK_BASE=C:\rundeck</code></pre>
+<p>Next, we need launch Rundeck the first time to generate the configuration files and folders structure, for that you can open a Powershell, go to <code>c:\rundeck</code> and execute <code>java -jar rundeck-3.0.X.war</code> (in community case) or <code>java -jar rundeckpro-[edition]-3.0.X.war</code> for Enterprise; depending of your system the process can take some time, when Rundeck is ready you can see that on Powershell window:</p>
 <figure>
 <img src="../../figures/windows-launcher.png" alt="Windows launcher" /><figcaption>Windows launcher</figcaption>
 </figure>
-<ul>
-<li>After Rundeck started, stop the process.</li>
-<li>Create a bat file (e.g. start_rundeck.bat) and place it under <code>%RDECK_BASE%</code></li>
-</ul>
-<pre><code>set CURDIR=%~dp0
-call %CURDIR%etc\profile.bat
-java %RDECK_CLI_OPTS% %RDECK_SSL_OPTS% -jar rundeckpro-[edition]-X.X.X.war --skipinstall -d  &gt;&gt; %CURDIR%\var\logs\service.log  2&gt;&amp;1</code></pre>
-<ul>
-<li>Download <a href="http://nssm.cc/">nssm.exe</a></li>
-<li>Place the executable under <code>%RDECK_BASE%</code> (you can place it elsewhere, but for the sake of the example let’s use always the root dir)</li>
-<li>Open a prompt and issue these commands (Administrator mode required to install a service)</li>
-</ul>
-<pre><code>    cd C:\rundeck
-    nssm.exe install RUNDECK</code></pre>
-<ul>
-<li>the GUI pops up, set “path” as <code>%RDECK_BASE%\start_rundeck.bat</code> , startup directory as <code>%RDECK_BASE%</code> (optionally set “low” on the process tab, under priority, to avoid server cpu spike when starting rundeck)</li>
-</ul>
-<figure>
-<img src="../../figures/nssm-installer.png" alt="NSSM Installer" /><figcaption>NSSM Installer</figcaption>
-</figure>
-<ul>
-<li>Go to the service management console (services.msc) and you’ll find RUNDECK listed as a service. Starting it will start the rundeck process.</li>
-</ul>
-<figure>
-<img src="../../figures/service-management-console.png" alt="Service Management Console" /><figcaption>Service Management Console</figcaption>
-</figure>
-<ul>
-<li>set JVM memory heap on <code>%RDECK_BASE%\etc\profile.bat</code>. Replace the <code>RDECK_CLI_OPTS</code> variable with the amount of memory that you need, for example:</li>
-</ul>
-<pre><code>....
-
-set RDECK_CLI_OPTS=-Xms512m -Xmx2048m
-set RD_LIBDIR=%RDECK_BASE%\tools\lib</code></pre>
-<h3 id="login-to-the-gui">Login to the GUI</h3>
-<p>By default, Rundeck will be installed in port 4440. To access Rundeck, go to the following URL: <code>ttp://servername:4440</code>.</p>
-<p>Normally, it is necessary to modify the <code>grails.serverURL</code> property in <code>%RDECK_BASE%\server\config\rundeck-config.properties</code> to access the GUI. Change <code>grails.serverURL</code> to the server name or IP. You will need to restart the Rundeck service for the change to take effect.</p>
-<p>After the restart, you can access the GUI at <code>http://servername:4440/</code></p>
-<figure>
-<img src="../../figures/login-page.png" alt="Login page" /><figcaption>Login page</figcaption>
-</figure>
-<p>The default username and password is “admin”</p>
-<h3 id="start-stop-instances">Start-Stop instances</h3>
-<p>Use the Service Windows GUI to start/stop/restart the instance</p>
+<p>At this point, all Rundeck structure is ready and you can stop the process with <code>&lt;Crtl+C&gt;</code> keyboard combination to proceed to configure.</p>
 <h2 id="folder-structure">Folder Structure</h2>
 <pre><code>+---etc
-|       admin.aclpolicy =&gt; Administrator access control policy defined with a [aclpolicy] document
-|       apitoken.aclpolicy =&gt; Default API ACL policies
+|       admin.aclpolicy =&gt; Administrator access control policy defined with a [aclpolicy] document.
+|       apitoken.aclpolicy =&gt; Default API ACL policies.
 |       cli-log4j.properties =&gt; This file defines the logging configuration for the Commandline tools.
-|       framework.properties =&gt; Configuration file used by shell tools and core Rundeck services
+|       framework.properties =&gt; Configuration file used by shell tools and core Rundeck services.
 |       preferences.properties
 |       profile
-|       profile.bat =&gt; Shell environment variables used by the shell tools
+|       profile.bat =&gt; Shell environment variables used by the shell tools.
 |       project.properties =&gt;Rundeck project configuration file when using Filsystem based project defintions.
-+---libext =&gt; Plugin folder
++---libext =&gt; Plugin folder.
 +---projects =&gt; Projects data (eg: resource files, project properties, etc)
 +---server
 |   +---config
 |   |       jaas-loginmodule.conf
 |   |       log4j.properties =&gt; This file defines the logging configuration for rundeck.
-|   |       realm.properties =&gt; Property file user directory when PropertyFileLoginModule is used
+|   |       realm.properties =&gt; Property file user directory when PropertyFileLoginModule is used.
 |   |       rundeck-config.properties =&gt; This is the primary Rundeck webapp configuration file. Defines default loglevel, datasource configuration, and GUI customization.
-|   |       ssl.properties =&gt; To enable SSL access to rundeck
-|   +---data =&gt; H2 database
+|   |       ssl.properties =&gt; To enable SSL access to rundeck.
+|   +---data =&gt; H2 default database
 |   |       grailsdb.mv.db
 |   +---lib
-|   |       rundeck-core-3.0.x.jar =&gt; rundeck core 
+|   |       rundeck-core-3.0.X.jar =&gt; rundeck core 
 |   +---logs =&gt; Rundeck logging 
-|   |       rundeck.access.log =&gt; access to rundeck
-|   |       rundeck.api.log =&gt; Api calls
-|   |       rundeck.audit.log =&gt; Authorization messages pertaining to aclpolicy
-|   |       rundeck.executions.log =&gt; Logs of all executions
-|   |       rundeck.jobs.log =&gt; Log of all job definition changes
-|   |       rundeck.log=&gt; General Rundeck application messages
-|   |       rundeck.options.log=&gt; Logs remote HTTP requests for Options JSON data
+|   |       rundeck.access.log =&gt; access to rundeck.
+|   |       rundeck.api.log =&gt; API calls
+|   |       rundeck.audit.log =&gt; Authorization messages pertaining to aclpolicy.
+|   |       rundeck.executions.log =&gt; Logs of all executions.
+|   |       rundeck.jobs.log =&gt; Log of all job definition changes.
+|   |       rundeck.log=&gt; General Rundeck application messages.
+|   |       rundeck.options.log=&gt; Logs remote HTTP requests for Options JSON data.
 |   |       rundeck.project.log
-|   |       rundeck.storage.log=&gt; Standard input and output generated during runtime
+|   |       rundeck.storage.log=&gt; Standard input and output generated during runtime.
 |   +---sbin
 |   \---work
-+---tools=&gt; rd-acl client (to manage ACL validation)
-\---var   =&gt; Executions Logs folder</code></pre>
++---tools=&gt; rd-acl client (to manage ACL validation).
+\---var   =&gt; Executions Logs folder.</code></pre>
+<h3 id="configuring-rundeck">Configuring Rundeck</h3>
+<p>After installing Rundeck, the first run and know the files/folders structure, you need to configure it, basically publish Rundeck to be available in the network and generate a .bat script to launch Rundeck and use some parameters depending on our needs.</p>
+<p>To publish Rundeck to be available in your network, open <code>C:\rundeck\server\config\rundeck-config.properties</code> with your favorite text editor and change this line:</p>
+<pre><code>server.address=yourhostname</code></pre>
+<p>by:</p>
+<pre><code>server.address=0.0.0.0</code></pre>
+<p>Save the file it and now is time to create a .bat script that launch rundeck properly. For that create a file called <code>start_rundeck.bat</code> with your favorite text editor and put this in the for Rundeck Community version:</p>
+<pre><code>set CURDIR=%~dp0
+call %CURDIR%etc\profile.bat
+java %RDECK_CLI_OPTS% %RDECK_SSL_OPTS% -jar rundeck-3.0.X.war --skipinstall -d  &gt;&gt; %CURDIR%\var\logs\service.log  2&gt;&amp;1</code></pre>
+<p>Or for Rundeck Enterprise version:</p>
+<pre><code>set CURDIR=%~dp0
+call %CURDIR%etc\profile.bat
+java %RDECK_CLI_OPTS% %RDECK_SSL_OPTS% -jar rundeckpro-[edition]-3.0.X.war --skipinstall -d  &gt;&gt; %CURDIR%\var\logs\service.log  2&gt;&amp;1</code></pre>
+<p>To launch, execute start_rundeck.bat at Powershell session, to stop Rundeck you can press <code>&lt;Crtl+C&gt;</code> keyboard combination.</p>
+<h3 id="login-to-the-gui">Login to the GUI</h3>
+<p>By default, Rundeck will be installed in TCP port 4440. To access, go to the following URL using your web browser: <code>http://servername:4440</code> (when “servername” is the name of your Windows host).</p>
+<figure>
+<img src="../../figures/login-page.png" alt="Login page" /><figcaption>Login page</figcaption>
+</figure>
+<p>The default username and password is “admin” with password “admin”.</p>
+<h3 id="run-rundeck-as-a-service">Run rundeck as a Service</h3>
+<p>This section will install Rundeck Community or Enterprise as a Service on a Windows based systems.</p>
+<ul>
+<li><a href="#installing-rundeck-on-windows-systems-and-first-run">Install</a> Rundeck.</li>
+<li>Download <a href="http://nssm.cc/">nssm.exe</a></li>
+<li>Place the executable under <code>%RDECK_BASE%</code> (you can place it elsewhere, but for the sake of the example let’s use always the root dir)</li>
+<li>Open a prompt and issue these commands (Administrator user profile is required to install a service)</li>
+</ul>
+<pre><code>    cd C:\rundeck
+    nssm.exe install RUNDECK</code></pre>
+<ul>
+<li>The GUI pops up, set “path” as <code>%RDECK_BASE%\start_rundeck.bat</code>, startup directory as <code>%RDECK_BASE%</code> (optionally set “low” on the process tab, under priority, to avoid server CPU spike when starting Rundeck)</li>
+</ul>
+<figure>
+<img src="../../figures/nssm-installer.png" alt="NSSM Installer" /><figcaption>NSSM Installer</figcaption>
+</figure>
+<ul>
+<li>Go to the Service Management Console (services.msc) and you’ll find <code>rundeck</code> listed as a service. Starting it will start the <code>rundeck</code> process.</li>
+</ul>
+<figure>
+<img src="../../figures/service-management-console.png" alt="Service Management Console" /><figcaption>Service Management Console</figcaption>
+</figure>
+<ul>
+<li>set JVM memory heap on <code>%RDECK_BASE%\etc\profile.bat</code>.</li>
+</ul>
+<p>Replace the <code>RDECK_CLI_OPTS</code> variable with the amount of memory that you need, for example:</p>
+<pre><code>....
+
+set RDECK_CLI_OPTS=-Xms1024m -Xmx4096m
+set RD_LIBDIR=%RDECK_BASE%\tools\lib</code></pre>
+<p>Now, Rundeck is configured as a Service and can be launch it at the moment of start Windows.</p>
+<h3 id="start-stop-instances">Start-Stop instances</h3>
+<p>Go to the Service Management Console (services.msc) and you’ll find Rundeck listed as a service. You can start, stop or restart <code>rundeck</code> service.</p>
 </div>
 </div>
 </div>
@@ -284,7 +291,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-06-03T21:33:23UTC">2019-06-03T21:33:23UTC</span>
+<span class="generated-date" title="2019-06-04T05:02:17UTC">2019-06-04T05:02:17UTC</span>
 </p>
 </footer>
 </div>
