@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Access Control Policy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="../../jquery.hotkeys.js"></script>
+<script src="../../jquery.autocomplete.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+window._pageRelpath="../../";
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+<script src="../../docs-autocomplete.js"></script>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control navquery" name="q" placeholder="Search" id="searchQuery">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbstop">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb top collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.1.0-rc1)</a></li>
+    
+        <li><a href="../index.html">Administrator Guide</a></li>
+    
+    
+    <li ><a href="index.html">Security</a></li>
+    <li class="active"><a href="access-control-policy.html">Access Control Policy</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="authenticating-users.html"><i class="glyphicon glyphicon-arrow-left"></i> Authenticating Users</a></li>
+      <li class="next"><a href="configuring-ssl.html">Configuring SSL <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/security/authorization.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/security/authorization.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#access-control-policy">Access control policy</a><ul>
+<li><a href="#policy-file-locations">Policy File Locations</a></li>
+<li><a href="#lifecycle">Lifecycle</a></li>
+<li><a href="#rd-acl">rd-acl</a></li>
+<li><a href="#example">Example</a></li>
+</ul></li>
+<li><a href="#specific-resources-and-resource-types">Specific Resources and Resource Types</a></li>
+<li><a href="#api-token-authorization-roles">API Token Authorization Roles</a></li>
+<li><a href="#rundeck-resource-authorizations">Rundeck resource authorizations</a><ul>
+<li><a href="#application-scope-resources-and-actions">Application Scope Resources and Actions</a></li>
+<li><a href="#project-scope-resources-and-actions">Project Scope Resources and Actions</a></li>
+<li><a href="#node-resource-properties">Node resource properties</a></li>
+<li><a href="#access-control-policy-actions-example">Access control policy actions example</a></li>
+</ul></li>
+<li><a href="#prevent-local-execution-on-the-rundeck-server">Prevent Local Execution on the Rundeck Server</a></li>
+<li><a href="#troubleshooting-access-control-policy">Troubleshooting access control policy</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Access Control Policy</h1>
+</div>
+<p>Based on the <a href="authenticating-users.html" title="Administrator Guide - Security - Authenticating Users">Authentication</a> mechanism, the Container provides Rundeck with a list of “group” or “role” names that the user belongs to. Rundeck uses this list to determine what access rights the user has. (For more about the role list, refer to <a href="authenticating-users.html#container-authentication-and-authorization" title="Administrator Guide - Security - Authenticating Users - Container Authentication And Authorization">Authenticating Users - Container authentication and authorization</a>.)</p>
+<p>A Rundeck <em>access control policy</em> grants users and user groups certain privileges to perform actions against rundeck resources like projects, jobs, nodes, commands and API. Every action requested by a user is evaluated by the Rundeck authorization system and logged for reporting and auditing purposes.</p>
+<p>Since Rundeck respects the policy definition, you can define role-based authorization to restrict users to only a subset of actions. This enables a self-service type interface, where some users have access to a limited set of executable actions.</p>
+<p>Two dimensions of information dictate authorization inside Rundeck:</p>
+<ul>
+<li><em>group</em> memberships assigned to a <em>user</em> login.<br />
+</li>
+<li>access control policy that grants access to one or more <em>policy action</em>s to a <em>group</em> or <em>user</em>.</li>
+</ul>
+<p>The remainder of this section will describe how to use the access control policy.</p>
+<h2 id="access-control-policy">Access control policy</h2>
+<p>Access to running or modifying Jobs is managed in an access control policy defined using the aclpolicy YAML document. This file contains a number of policy elements that describe what user group is allowed to perform which actions.</p>
+<p>Please read over this document for information on how to define it, and how to grant access for certain actions to certain resources:</p>
+<ul>
+<li><a href="../../man5/aclpolicy.html" title="Document Format Reference - ACLPOLICY">aclpolicy</a></li>
+</ul>
+<p>Policies can be organized into more than one file to help organize access by group or pattern of use. The normal Rundeck install will have generated a policy for the “admin” group. Not all users will need to be given “admin” access level to control and modify all Jobs. More typically, a group of users will be given access to just a subset of Jobs.</p>
+<h3 id="policy-file-locations">Policy File Locations</h3>
+<p>Rundeck loads ACL Policy definitions from these locations:</p>
+<ul>
+<li>All <code>*.aclpolicy</code> files found in the rundeck <code>etc</code> dir, which is either <code>/etc/rundeck</code> (rpm and debian install defaults), or <code>$RDECK_BASE/etc</code> (launcher/war configuration).</li>
+<li>System level policies created via the <a href="../../api/index.html#acls" title="API Reference | Version 31 - Acls">System ACLs API</a></li>
+<li>Project level policies created via the <a href="../../api/index.html#project-acls" title="API Reference | Version 31 - Project Acls">Project ACLs API</a>, limited only to project context policies for a specific project.</li>
+</ul>
+<h3 id="lifecycle">Lifecycle</h3>
+<p>The Rundeck server does not need to be restarted for changes to aclpolicy files to take effect.</p>
+<p>The files are loaded at startup and are cached. When an authorization request occurs, the policies may be reloaded if the file was modified. A file’s contents are cached for at least 60 seconds before checking if they need to be reloaded. Also, the etc directory is only re-scanned for new/removed files after a 60 second delay.</p>
+<p>If an authorization request occurs in the context of a specific Project (e.g. “does a user have Run access for a specific Job in this project?”) then the Project-level policies created via the API area also used to evaluate the authorization request.</p>
+<p>Otherwise, only the policies on the filesystem, and uploaded to the System ACLs API are evaluated for the request.</p>
+<h3 id="rd-acl">rd-acl</h3>
+<p>Added in Rundeck 2.5, the <a href="../../man1/rd-acl.html" title="Command Line Tools - rd-acl">rd-acl</a> tool can help to create, test, and validate your policy files.</p>
+<h3 id="example">Example</h3>
+<p>File listing: admin.aclpolicy example</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource yaml numberLines"><code class="sourceCode yaml"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="fu">description:</span><span class="at"> Admin project level access control. Applies to resources within a specific project.</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="fu">context:</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="fu">project:</span><span class="at"> </span><span class="st">&#39;.*&#39;</span><span class="er"> # all projects</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="fu">for:</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  <span class="fu">resource:</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">    <span class="kw">-</span> <span class="fu">equals:</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">        <span class="fu">kind:</span><span class="at"> job</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">      <span class="fu">allow:</span><span class="at"> </span><span class="kw">[</span>create<span class="kw">]</span><span class="at"> </span><span class="co"># allow create jobs</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">    <span class="kw">-</span> <span class="fu">equals:</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">        <span class="fu">kind:</span><span class="at"> node</span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">      <span class="fu">allow:</span><span class="at"> </span><span class="kw">[</span>read<span class="kw">,</span>create<span class="kw">,</span>update<span class="kw">,</span>refresh<span class="kw">]</span><span class="at"> </span><span class="co"># allow refresh node sources</span></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">    <span class="kw">-</span> <span class="fu">equals:</span></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">        <span class="fu">kind:</span><span class="at"> event</span></a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">      <span class="fu">allow:</span><span class="at"> </span><span class="kw">[</span>read<span class="kw">,</span>create<span class="kw">]</span><span class="at"> </span><span class="co"># allow read/create events</span></a>
+<a class="sourceLine" id="cb1-15" data-line-number="15">  <span class="fu">adhoc:</span></a>
+<a class="sourceLine" id="cb1-16" data-line-number="16">    <span class="kw">-</span> <span class="fu">allow:</span><span class="at"> </span><span class="kw">[</span>read<span class="kw">,</span>run<span class="kw">,</span>runAs<span class="kw">,</span>kill<span class="kw">,</span>killAs<span class="kw">]</span><span class="at"> </span><span class="co"># allow running/killing adhoc jobs</span></a>
+<a class="sourceLine" id="cb1-17" data-line-number="17">  <span class="fu">job:</span></a>
+<a class="sourceLine" id="cb1-18" data-line-number="18">    <span class="kw">-</span> <span class="fu">allow:</span><span class="at"> </span><span class="kw">[</span>create<span class="kw">,</span>read<span class="kw">,</span>update<span class="kw">,</span>delete<span class="kw">,</span>run<span class="kw">,</span>runAs<span class="kw">,</span>kill<span class="kw">,</span>killAs<span class="kw">]</span><span class="at"> </span><span class="co"># allow create/read/write/delete/run/kill of all jobs</span></a>
+<a class="sourceLine" id="cb1-19" data-line-number="19">  <span class="fu">node:</span></a>
+<a class="sourceLine" id="cb1-20" data-line-number="20">    <span class="kw">-</span> <span class="fu">allow:</span><span class="at"> </span><span class="kw">[</span>read<span class="kw">,</span>run<span class="kw">]</span><span class="at"> </span><span class="co"># allow read/run for nodes</span></a>
+<a class="sourceLine" id="cb1-21" data-line-number="21"><span class="fu">by:</span></a>
+<a class="sourceLine" id="cb1-22" data-line-number="22">  <span class="fu">group:</span><span class="at"> admin</span></a>
+<a class="sourceLine" id="cb1-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb1-24" data-line-number="24"><span class="ot">---</span></a>
+<a class="sourceLine" id="cb1-25" data-line-number="25"></a>
+<a class="sourceLine" id="cb1-26" data-line-number="26"><span class="fu">description:</span><span class="at"> Admin Application level access control, applies to creating/deleting projects, admin of user profiles, viewing projects and reading system information.</span></a>
+<a class="sourceLine" id="cb1-27" data-line-number="27"><span class="fu">context:</span></a>
+<a class="sourceLine" id="cb1-28" data-line-number="28">  <span class="fu">application:</span><span class="at"> </span><span class="st">&#39;rundeck&#39;</span></a>
+<a class="sourceLine" id="cb1-29" data-line-number="29"><span class="fu">for:</span></a>
+<a class="sourceLine" id="cb1-30" data-line-number="30">  <span class="fu">resource:</span></a>
+<a class="sourceLine" id="cb1-31" data-line-number="31">    <span class="kw">-</span> <span class="fu">equals:</span></a>
+<a class="sourceLine" id="cb1-32" data-line-number="32">        <span class="fu">kind:</span><span class="at"> project</span></a>
+<a class="sourceLine" id="cb1-33" data-line-number="33">      <span class="fu">allow:</span><span class="at"> </span><span class="kw">[</span>create<span class="kw">]</span><span class="at"> </span><span class="co"># allow create of projects</span></a>
+<a class="sourceLine" id="cb1-34" data-line-number="34">    <span class="kw">-</span> <span class="fu">equals:</span></a>
+<a class="sourceLine" id="cb1-35" data-line-number="35">        <span class="fu">kind:</span><span class="at"> system</span></a>
+<a class="sourceLine" id="cb1-36" data-line-number="36">      <span class="fu">allow:</span><span class="at"> </span><span class="kw">[</span>read<span class="kw">,</span>enable_executions<span class="kw">,</span>disable_executions<span class="kw">,</span>admin<span class="kw">]</span><span class="at"> </span><span class="co"># allow read of system info, enable/disable all executions</span></a>
+<a class="sourceLine" id="cb1-37" data-line-number="37">    <span class="kw">-</span> <span class="fu">equals:</span></a>
+<a class="sourceLine" id="cb1-38" data-line-number="38">        <span class="fu">kind:</span><span class="at"> system_acl</span></a>
+<a class="sourceLine" id="cb1-39" data-line-number="39">      <span class="fu">allow:</span><span class="at"> </span><span class="kw">[</span>read<span class="kw">,</span>create<span class="kw">,</span>update<span class="kw">,</span>delete<span class="kw">,</span>admin<span class="kw">]</span><span class="at"> </span><span class="co"># allow modifying system ACL files</span></a>
+<a class="sourceLine" id="cb1-40" data-line-number="40">    <span class="kw">-</span> <span class="fu">equals:</span></a>
+<a class="sourceLine" id="cb1-41" data-line-number="41">        <span class="fu">kind:</span><span class="at"> user</span></a>
+<a class="sourceLine" id="cb1-42" data-line-number="42">      <span class="fu">allow:</span><span class="at"> </span><span class="kw">[</span>admin<span class="kw">]</span><span class="at"> </span><span class="co"># allow modify user profiles</span></a>
+<a class="sourceLine" id="cb1-43" data-line-number="43">  <span class="fu">project:</span></a>
+<a class="sourceLine" id="cb1-44" data-line-number="44">    <span class="kw">-</span> <span class="fu">match:</span></a>
+<a class="sourceLine" id="cb1-45" data-line-number="45">        <span class="fu">name:</span><span class="at"> </span><span class="st">&#39;.*&#39;</span></a>
+<a class="sourceLine" id="cb1-46" data-line-number="46">      <span class="fu">allow:</span><span class="at"> </span><span class="kw">[</span>read<span class="kw">,</span>import<span class="kw">,</span>export<span class="kw">,</span>configure<span class="kw">,</span>delete<span class="kw">,</span>promote<span class="kw">,</span>admin<span class="kw">]</span><span class="at"> </span><span class="co"># allow full access of all projects or use &#39;admin&#39;</span></a>
+<a class="sourceLine" id="cb1-47" data-line-number="47">  <span class="fu">project_acl:</span></a>
+<a class="sourceLine" id="cb1-48" data-line-number="48">    <span class="kw">-</span> <span class="fu">match:</span></a>
+<a class="sourceLine" id="cb1-49" data-line-number="49">        <span class="fu">name:</span><span class="at"> </span><span class="st">&#39;.*&#39;</span></a>
+<a class="sourceLine" id="cb1-50" data-line-number="50">      <span class="fu">allow:</span><span class="at"> </span><span class="kw">[</span>read<span class="kw">,</span>create<span class="kw">,</span>update<span class="kw">,</span>delete<span class="kw">,</span>admin<span class="kw">]</span><span class="at"> </span><span class="co"># allow modifying project-specific ACL files</span></a>
+<a class="sourceLine" id="cb1-51" data-line-number="51">  <span class="fu">storage:</span></a>
+<a class="sourceLine" id="cb1-52" data-line-number="52">    <span class="kw">-</span> <span class="fu">allow:</span><span class="at"> </span><span class="kw">[</span>read<span class="kw">,</span>create<span class="kw">,</span>update<span class="kw">,</span>delete<span class="kw">]</span><span class="at"> </span><span class="co"># allow access for /ssh-key/* storage content</span></a>
+<a class="sourceLine" id="cb1-53" data-line-number="53"></a>
+<a class="sourceLine" id="cb1-54" data-line-number="54"><span class="fu">by:</span></a>
+<a class="sourceLine" id="cb1-55" data-line-number="55">  <span class="fu">group:</span><span class="at"> admin</span></a></code></pre></div>
+<p>The example policy document above demonstrates the access granted to the users in group “admin”.</p>
+<p>Both <code>username</code> and <code>group</code> can use regular expressions to match multiple users or groups.</p>
+<p>Two separate policies define two levels of access control. The first is the “project” context, which allows access to actions on resources within a specific project. The second is the “application” level context, which allows access to things like creating projects, access to projects, managing users, and access to system information.</p>
+<h2 id="specific-resources-and-resource-types">Specific Resources and Resource Types</h2>
+<p>As described in the <a href="../../man5/aclpolicy.html" title="Document Format Reference - ACLPOLICY">ACL Policy)</a> definition, access is granted or denied to specific “resources”. Resources can take two forms:</p>
+<ul>
+<li>A specific resource, with a type and properties</li>
+<li>Resource types, which applies to all resources of a specific type or “kind”</li>
+</ul>
+<p>For example, you might want to restrict access to a job or jobs within a certain group. This corresponds to specific “job” resources with a “group” property matching a certain pattern.</p>
+<p>You might also want to restrict who can create <em>new</em> jobs. Since a new job does not exist yet, you cannot create a rule for this action to apply to an existing job. Which means this corresponds to a generic resource with a “kind” called “job”.</p>
+<h2 id="api-token-authorization-roles">API Token Authorization Roles</h2>
+<p>In Rundeck 2.8.x and later, Authentication Tokens are given a set of <em>Authorization Roles</em> at generation time, so the access levels for the Token depend on how it was generated.</p>
+<p>See: <a href="../../api/index.html#token-authentication" title="API Reference | Version 31 - Token Authentication">API Token</a> usage instructions.</p>
+<p>See below: <a href="#api-token-authorization">API Token Authorization</a>.</p>
+<p>(<strong>Note:</strong> In Rundeck 2.7.x and earlier, clients of the <a href="../../api/index.html" title="API Reference | Version 31">Web API</a> may use the <a href="../../api/index.html#token-authentication" title="API Reference | Version 31 - Token Authentication">Token Authentication</a> method. These clients are placed in the special authorization group called <code>api_token_group</code>.)</p>
+<h2 id="rundeck-resource-authorizations">Rundeck resource authorizations</h2>
+<p>Rundeck declares a number of actions that can be referenced inside the access control policy document.</p>
+<p>The actions and resources are divided into project scope and application scope:</p>
+<h3 id="application-scope-resources-and-actions">Application Scope Resources and Actions</h3>
+<p>You define application scope rules in the aclpolicy, by declaring this context:</p>
+<pre><code>context:
+  application: &#39;rundeck&#39;</code></pre>
+<p>These are the Application scope actions that can be allowed or denied via the aclpolicy:</p>
+<ul>
+<li>Creating Projects (<code>create</code> action on a resource type with kind ‘project’)</li>
+<li>Reading system information (<code>read</code> action on a resource type with kind ‘system’)</li>
+<li>Managing System level ACL Policies (actions on a resource type with kind ‘system_acl’)
+<ul>
+<li>Reading <code>read</code></li>
+<li>Creating <code>create</code></li>
+<li>Updating <code>update</code></li>
+<li>Deleting <code>delete</code></li>
+<li>Full access <code>admin</code></li>
+</ul></li>
+<li>Disabling executions (<code>disable_executions</code> action on a resource type with kind ‘system’)</li>
+<li>Managing executions
+<ul>
+<li>Enabling executions (<code>enable_executions</code> action on a resource type with kind ‘system’)</li>
+<li>Disabling executions (<code>disable_executions</code> action on a resource type with kind ‘system’)</li>
+<li>Full control (<code>admin</code> action on a resource type with kind ‘system’)</li>
+</ul></li>
+<li>Administering user profiles (<code>admin</code> action on a resource type of kind ‘user’)</li>
+<li>Accessing SSH Keys (<code>create</code>,<code>update</code>,<code>read</code>, or <code>delete</code> action on a specific path within the storage ‘storage’ type)</li>
+<li>Actions on specific projects by name (actions on a <code>project</code> type)
+<ul>
+<li>Reading <code>read</code></li>
+<li>Deleting <code>delete</code></li>
+<li>Configuring <code>configure</code></li>
+<li>Importing archives <code>import</code></li>
+<li>Exporting archives <code>export</code></li>
+<li>Deleting executions <code>delete_execution</code></li>
+<li>Export project to another Rundeck instance <code>promote</code></li>
+<li>Full access <code>admin</code></li>
+</ul></li>
+<li>Managing Project level ACL Policies on specific projects by name (actions on a <code>project_acl</code> type)
+<ul>
+<li>Reading <code>read</code></li>
+<li>Creating <code>create</code></li>
+<li>Updating <code>update</code></li>
+<li>Deleting <code>delete</code></li>
+<li>Full access <code>admin</code></li>
+</ul></li>
+<li>Generating API Tokens (actions on a resource type of kind <code>apitoken</code>)
+<ul>
+<li>Creating User tokens <code>generate_user_token</code></li>
+<li>Creating Service tokens <code>generate_service_token</code></li>
+<li>Full access <code>admin</code></li>
+</ul></li>
+<li>Create Service Tokens with specified Roles (actions on a <code>apitoken</code> type)
+<ul>
+<li>Creating Service tokens <code>create</code></li>
+</ul></li>
+<li>Managing plugins (actions on resource with kind ‘plugin’)
+<ul>
+<li>Listing installed and available plugins <code>read</code></li>
+<li>Installing plugins <code>install</code></li>
+<li>Uninstalling plugins <code>uninstall</code></li>
+<li>Full access <code>admin</code></li>
+</ul></li>
+</ul>
+<p>The following table summarizes the generic and specific resources and the actions you can restrict in the application scope:</p>
+<table>
+<caption>Application scope generic type actions</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Resource Kind</th>
+<th style="text-align: left;">Properties</th>
+<th style="text-align: left;">Actions</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>resource</code></td>
+<td style="text-align: left;"><code>project</code></td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;"><code>create</code></td>
+<td style="text-align: left;">Create a new project</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>system</code></td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;"><code>read</code></td>
+<td style="text-align: left;">Read system information</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;"><code>enable_executions</code></td>
+<td style="text-align: left;">Enable executions</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;"><code>disable_executions</code></td>
+<td style="text-align: left;">Disable executions</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;"><code>admin</code></td>
+<td style="text-align: left;">Enable or disable executions</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>system_acl</code></td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;"><code>read</code></td>
+<td style="text-align: left;">Read system ACL policy files</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;"><code>create</code></td>
+<td style="text-align: left;">Create system ACL policy files</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;"><code>update</code></td>
+<td style="text-align: left;">Update system ACL policy files</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;"><code>delete</code></td>
+<td style="text-align: left;">Delete system ACL policy files</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;"><code>admin</code></td>
+<td style="text-align: left;">All access to system ACL policy files</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>user</code></td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;"><code>admin</code></td>
+<td style="text-align: left;">Modify user profiles</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>job</code></td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;"><code>admin</code></td>
+<td style="text-align: left;">Manage job schedules</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>apitoken</code></td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;"><code>generate_user_token</code></td>
+<td style="text-align: left;">Create a “user” token</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;"><code>generate_service_token</code></td>
+<td style="text-align: left;">Create a “service” token</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;"><code>admin</code></td>
+<td style="text-align: left;">Full access</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>plugin</code></td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;"><code>read</code></td>
+<td style="text-align: left;">List installed and available plugins</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;"><code>install</code></td>
+<td style="text-align: left;">Install plugins</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;"><code>uninstall</code></td>
+<td style="text-align: left;">Uninstall plugins</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">none</td>
+<td style="text-align: left;"><code>admin</code></td>
+<td style="text-align: left;">Full access</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Application scope specific resource actions</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Properties</th>
+<th style="text-align: left;">Actions</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>project</code></td>
+<td style="text-align: left;">“name”</td>
+<td style="text-align: left;"><code>read</code></td>
+<td style="text-align: left;">View a project in the project list</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>configure</code></td>
+<td style="text-align: left;">View and modify project configuration</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>delete</code></td>
+<td style="text-align: left;">Delete project</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>import</code></td>
+<td style="text-align: left;">Import archive contents to the project</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>export</code></td>
+<td style="text-align: left;">Export the project as an archive</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>delete_execution</code></td>
+<td style="text-align: left;">Delete executions</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>admin</code></td>
+<td style="text-align: left;">Full access to project</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>project_acl</code></td>
+<td style="text-align: left;">“name”</td>
+<td style="text-align: left;"><code>read</code></td>
+<td style="text-align: left;">Read project ACL Policy files</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>create</code></td>
+<td style="text-align: left;">Create project ACL Policy files</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>update</code></td>
+<td style="text-align: left;">Update project ACL Policy files</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>delete</code></td>
+<td style="text-align: left;">Delete project ACL Policy files</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>admin</code></td>
+<td style="text-align: left;">All access to project ACL Policy files</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>storage</code></td>
+<td style="text-align: left;">“path”,“name”</td>
+<td style="text-align: left;"><code>create</code></td>
+<td style="text-align: left;">Create files in the storage facility</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>update</code></td>
+<td style="text-align: left;">Modify files in the storage facility</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>read</code></td>
+<td style="text-align: left;">Read files and list directories in the storage facility</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>delete</code></td>
+<td style="text-align: left;">Delete files in the storage facility</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>apitoken</code></td>
+<td style="text-align: left;">“username”,“roles”</td>
+<td style="text-align: left;"><code>create</code></td>
+<td style="text-align: left;">Create an API Token with specified roles or username</td>
+</tr>
+</tbody>
+</table>
+<h4 id="api-token-authorization">API Token Authorization</h4>
+<p>API Tokens can be generated if the user has the appropriate authorization on the <code>apitoken</code> generic resource type.</p>
+<dl>
+<dt>“User Token”</dt>
+<dd>An API Token with the owner’s username, and a subset of the owner’s authorization roles.
+</dd>
+<dt>“Service Token”</dt>
+<dd>An API Token which may have a different username than the owner, and may have a different set of authorization roles.
+</dd>
+</dl>
+<p>This distinction allows administrators to let some users generate API Tokens which cannot increase their access levels (User Tokens), and other users to generate API Tokens with different access levels in a controlled way.</p>
+<p>The authorizations levels are:</p>
+<ul>
+<li><code>generate_user_token</code>: allows the user to generate a User Token.</li>
+<li><code>generate_service_token</code>: allows a user to generate a Service Token (see below).</li>
+<li><code>admin</code>: allows the user to generate a Token with any username and roles.</li>
+</ul>
+<p>Example to generate a User Token:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">description:</span><span class="at"> Allow &quot;ops_team&quot; members to generate User Tokens</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="fu">for:</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="fu">resource:</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">  <span class="kw">-</span> <span class="fu">equals:</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">      <span class="fu">kind:</span><span class="at"> apitoken</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">    <span class="fu">allow:</span><span class="at"> generate_user_token</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="fu">context:</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">  <span class="fu">application:</span><span class="at"> rundeck</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="fu">by:</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">  <span class="fu">group:</span><span class="at"> ops_team</span></a></code></pre></div>
+<p>To specify what roles and usernames are allowed for a Service Token, the user must <em>also</em> be authorized to <code>create</code> an <code>apitoken</code> resource type for a declared set of usernames and roles.</p>
+<p>Example to generate a Service Token:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="fu">description:</span><span class="at"> Allow &quot;sec_ops&quot; members to generate Service Tokens, for specific usernames and additional roles</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="fu">for:</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">  <span class="fu">resource:</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">  <span class="kw">-</span> <span class="fu">equals:</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">      <span class="fu">kind:</span><span class="at"> apitoken</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">    <span class="fu">allow:</span><span class="at"> generate_service_token</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">  <span class="fu">apitoken:</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">  <span class="kw">-</span> <span class="fu">allow:</span><span class="at"> create</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11">    <span class="fu">match:</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12">      <span class="fu">username:</span><span class="at"> </span><span class="st">&#39;(mysql|myservice)&#39;</span></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13">    <span class="fu">subset:</span></a>
+<a class="sourceLine" id="cb4-14" data-line-number="14">      <span class="fu">roles:</span></a>
+<a class="sourceLine" id="cb4-15" data-line-number="15">      <span class="kw">-</span> mysql_api_access</a>
+<a class="sourceLine" id="cb4-16" data-line-number="16">      <span class="kw">-</span> myservice_api_access</a>
+<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="fu">context:</span></a>
+<a class="sourceLine" id="cb4-18" data-line-number="18">  <span class="fu">application:</span><span class="at"> rundeck</span></a>
+<a class="sourceLine" id="cb4-19" data-line-number="19"><span class="fu">by:</span></a>
+<a class="sourceLine" id="cb4-20" data-line-number="20">  <span class="fu">group:</span><span class="at"> sec_ops</span></a></code></pre></div>
+<p>Service Tokens implicitly allow a subset of the user’s own authorization roles and username (<code>generate_service_token</code> implies <code>generate_user_token</code>), so the usernames and roles authorized in the ACL Policy must specify any <em>extra</em> roles. When a Service Token is generated, any requested roles not already allowed by <code>generate_user_token</code> will be checked against the ACL Policy. However, it is best to be explicit in the list of roles you want to allow.</p>
+<p><strong>Important:</strong></p>
+<p>The <code>subset:</code> match for <code>roles:</code> declares that <em>extra</em> roles for the Service Token may only come from this list, but doesn’t require the token to have all of the roles. (If you used <code>contains:</code> it would be the inverse, and grant access only if the extra Service Token roles contained all of those in the <code>roles:</code> list, i.e. a superset vs. a subset.)</p>
+<h3 id="project-scope-resources-and-actions">Project Scope Resources and Actions</h3>
+<p>You define project scope rules in the aclpolicy by declaring this context:</p>
+<pre><code>context:
+  project: &quot;(regex)&quot;</code></pre>
+<p>The regex can match all projects using &quot;.*&quot;, or you can simply put the project name.</p>
+<p>Note that for projects not matched by an aclpolicy, <em>no</em> actions will be granted to users.</p>
+<p>Also note that to hide projects completely from users, you would need to grant or deny the “read” access to the project in the <a href="#application-scope-resources-and-actions">Application Scope</a>.</p>
+<p>These are the Project scope actions that can be allowed or denied via the aclpolicy:</p>
+<ul>
+<li>Create Jobs (‘create’ action on a resource type with kind ‘job’)</li>
+<li>Delete Jobs (‘delete’ action on a resource type with kind ‘job’)</li>
+<li>Create or delete jobs using the SCM plugin only (‘scm_create’ and ‘scm_delete’ on a resource type with kind ‘job’)</li>
+<li>Read Node data (‘read’ action on a resource type with kind ‘node’)</li>
+<li>Update/Refresh node data (‘create’,‘update’,‘refresh’ action on a resource type with kind ‘node’)</li>
+<li>Read history events (‘read’ action on a resource type with kind ‘event’)</li>
+<li>Create history events (‘create’ action on a resource type with kind ‘event’)</li>
+<li>Run adhoc jobs (‘run’ action on ‘adhoc’ resources)</li>
+<li>Kill adhoc jobs (‘kill’ action on ‘adhoc’ resources)</li>
+<li>Any Action on Jobs (actions on ‘job’ resources, see below)</li>
+</ul>
+<p>The following table summarizes the generic and specific resources and the actions you can restrict in the project scope:</p>
+<table>
+<caption>Project scope generic type actions</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Resource Kind</th>
+<th style="text-align: left;">Actions</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>resource</code></td>
+<td style="text-align: left;"><code>job</code></td>
+<td style="text-align: left;"><code>create</code></td>
+<td style="text-align: left;">Create a new Job</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>delete</code></td>
+<td style="text-align: left;">Delete jobs</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>scm_create</code></td>
+<td style="text-align: left;">Create a new job only using SCM import plugin</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>scm_delete</code></td>
+<td style="text-align: left;">Delete jobs only using SCM import plugin</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>node</code></td>
+<td style="text-align: left;"><code>read</code></td>
+<td style="text-align: left;">Read node information</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>create</code></td>
+<td style="text-align: left;">Create new node entries</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>update</code></td>
+<td style="text-align: left;">Modify node entries</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>refresh</code></td>
+<td style="text-align: left;">Refresh node entry from a URL</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>event</code></td>
+<td style="text-align: left;"><code>read</code></td>
+<td style="text-align: left;">Read history event information</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"><code>create</code></td>
+<td style="text-align: left;">Create arbitrary history event entries</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Project scope specific resource actions</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Properties</th>
+<th style="text-align: left;">Actions</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>adhoc</code></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>read</code></td>
+<td style="text-align: left;">Read adhoc execution output</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>run</code></td>
+<td style="text-align: left;">Run an adhoc execution</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>runAs</code></td>
+<td style="text-align: left;">Run an adhoc execution as another user</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>kill</code></td>
+<td style="text-align: left;">Kill an adhoc execution</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>killAs</code></td>
+<td style="text-align: left;">Kill an adhoc execution as another user</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>job</code></td>
+<td style="text-align: left;">“name”,“group”,“uuid”</td>
+<td style="text-align: left;"><code>read</code></td>
+<td style="text-align: left;">View a Job, its executions, and read its definition</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>view</code></td>
+<td style="text-align: left;">View a Job and its executions</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>update</code></td>
+<td style="text-align: left;">Modify a job</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>delete</code></td>
+<td style="text-align: left;">Delete a job</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>run</code></td>
+<td style="text-align: left;">Run a job</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>runAs</code></td>
+<td style="text-align: left;">Run a job as another user</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>kill</code></td>
+<td style="text-align: left;">Kill a running job</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>killAs</code></td>
+<td style="text-align: left;">Kill a running job as another user</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>create</code></td>
+<td style="text-align: left;">Create the matching job</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>toggle_schedule</code></td>
+<td style="text-align: left;">Enable/disable the job’s schedule</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>toggle_execution</code></td>
+<td style="text-align: left;">Enable/disable the job for execution</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>scm_create</code></td>
+<td style="text-align: left;">Create a Job only using SCM import plugin</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>scm_update</code></td>
+<td style="text-align: left;">Import changes to a job using SCM import plugin</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>scm_delete</code></td>
+<td style="text-align: left;">Delete a job only using SCM import plugin</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>node</code></td>
+<td style="text-align: left;">“rundeck_server”, “nodename”, …</td>
+<td style="text-align: left;"><code>read</code></td>
+<td style="text-align: left;">View the node in the UI (see <a href="#node-resource-properties">Node resource properties</a>)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">&quot;</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>run</code></td>
+<td style="text-align: left;">Run jobs/adhoc on the node</td>
+</tr>
+</tbody>
+</table>
+<p><em>Note</em>: see <a href="#node-resource-properties">Node resource properties</a> for more node resource properties for authorization.</p>
+<p><em>Note</em>: Jobs can be referenced using “name” and “group” or using “uuid”.</p>
+<p><em>Note</em>: <code>runAs</code> and <code>killAs</code> actions only apply to certain API endpoints, and allow running jobs or adhoc executions or killing executions to be performed with a different username attached as the author of the action. See <a href="../../api/index.html#running-a-job" title="API Reference | Version 31 - Running A Job">Rundeck API - Running a Job</a>.</p>
+<p><em>Note</em>: Job deletion requires allowing the ‘delete’ action both at the generic type and specific resource levels.</p>
+<p>Recall that defining rules for a generic resource type is done in this way:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="fu">for:</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">  <span class="fu">resource:</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">    <span class="kw">-</span> <span class="fu">equals:</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">        <span class="fu">kind:</span><span class="at"> </span><span class="st">&#39;project&#39;</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">      <span class="fu">allow:</span><span class="at"> </span><span class="kw">[</span>create<span class="kw">]</span></a></code></pre></div>
+<p>Whereas defining rules for specific resources of a certain type is done in this way:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="fu">for:</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">  <span class="fu">job:</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">    <span class="kw">-</span> <span class="fu">equals:</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">        <span class="fu">name:</span><span class="at"> bob</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">      <span class="fu">allow:</span><span class="at"> </span><span class="kw">[</span>run<span class="kw">]</span></a></code></pre></div>
+<p>Or</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="fu">for:</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">  <span class="fu">job:</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">    <span class="kw">-</span> <span class="fu">equals:</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">        <span class="fu">uuid:</span><span class="at"> baad57ad-1e0b-4452-b1e3-0cbcd10a7bec</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">      <span class="fu">allow:</span><span class="at"> </span><span class="kw">[</span>run<span class="kw">]</span></a></code></pre></div>
+<h3 id="node-resource-properties">Node resource properties</h3>
+<p>The properties available are the attributes that are defined on the node, so you can apply authorizations based on tag, osName, hostname, etc. The special <code>rundeck_server</code> property will be set to “true” for the Rundeck server node only, and “false” for all other nodes.</p>
+<p>Any custom attributes can be used as well.</p>
+<table>
+<caption>Pre-defined Node resource properties for authorization filters</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>nodename</code></td>
+<td>Name of the node</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>username</code></td>
+<td>Authentication username</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>hostname</code></td>
+<td>Hostname of the node</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>description</code></td>
+<td>Description of the node</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>tags</code></td>
+<td>Set of tags. Can use with the <code>contains:</code> filter.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>osName</code></td>
+<td>Operating System name</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>osFamily</code></td>
+<td>Operating System family, e.g. “unix” or “windows”</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>osVersion</code></td>
+<td>Operating System version</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>osArch</code></td>
+<td>Operating System architecture</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>rundeck_server</code></td>
+<td>A value set to “true” if the node is the Rundeck server node</td>
+</tr>
+</tbody>
+</table>
+<h3 id="access-control-policy-actions-example">Access control policy actions example</h3>
+<p>Below is an example policy document demonstrating policy actions to create limited access for a group of users. Users in the group “restart_user”, are allowed to run three jobs in the “adm” group, Restart, stop and start. By allowing <code>run</code> but not <code>read</code>, the “stop” and “start” jobs will not be visible. Allowing <code>view</code> for the ‘Restart’ job, but not <code>read</code>, means that the users can view the job, but not its workflow definition, nor can they download the Job definition file.</p>
+<p>File listing: restart_user.aclpolicy example</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource yaml numberLines"><code class="sourceCode yaml"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="fu">description:</span><span class="at"> Limited user access for adm restart action</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="fu">context:</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">  <span class="fu">project:</span><span class="at"> </span><span class="st">&#39;.*&#39;</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="fu">for:</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5">  <span class="fu">job:</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6">    <span class="kw">-</span> <span class="fu">equals:</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7">        <span class="fu">group:</span><span class="at"> </span><span class="st">&#39;adm&#39;</span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8">        <span class="fu">name:</span><span class="at"> </span><span class="st">&#39;Restart&#39;</span></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9">      <span class="fu">allow:</span><span class="at"> </span><span class="kw">[</span>run<span class="kw">,</span>view<span class="kw">]</span></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10">    <span class="kw">-</span> <span class="fu">equals:</span></a>
+<a class="sourceLine" id="cb9-11" data-line-number="11">        <span class="fu">group:</span><span class="at"> </span><span class="st">&#39;adm&#39;</span></a>
+<a class="sourceLine" id="cb9-12" data-line-number="12">        <span class="fu">name:</span><span class="at"> </span><span class="st">&#39;stop&#39;</span></a>
+<a class="sourceLine" id="cb9-13" data-line-number="13">      <span class="fu">allow:</span><span class="at"> </span><span class="kw">[</span>run<span class="kw">]</span></a>
+<a class="sourceLine" id="cb9-14" data-line-number="14">    <span class="kw">-</span> <span class="fu">equals:</span></a>
+<a class="sourceLine" id="cb9-15" data-line-number="15">        <span class="fu">group:</span><span class="at"> </span><span class="st">&#39;adm&#39;</span></a>
+<a class="sourceLine" id="cb9-16" data-line-number="16">        <span class="fu">name:</span><span class="at"> </span><span class="st">&#39;start&#39;</span></a>
+<a class="sourceLine" id="cb9-17" data-line-number="17">      <span class="fu">allow:</span><span class="at"> </span><span class="kw">[</span>run<span class="kw">]</span></a>
+<a class="sourceLine" id="cb9-18" data-line-number="18"><span class="fu">by:</span></a>
+<a class="sourceLine" id="cb9-19" data-line-number="19">  <span class="fu">group:</span><span class="at"> </span><span class="kw">[</span>restart_user<span class="kw">]</span></a>
+<a class="sourceLine" id="cb9-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb9-21" data-line-number="21"><span class="ot">---</span></a>
+<a class="sourceLine" id="cb9-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb9-23" data-line-number="23"><span class="fu">description:</span><span class="at"> Limited user access for adm restart action.</span></a>
+<a class="sourceLine" id="cb9-24" data-line-number="24"><span class="fu">context:</span></a>
+<a class="sourceLine" id="cb9-25" data-line-number="25">  <span class="fu">application:</span><span class="at"> </span><span class="st">&#39;rundeck&#39;</span></a>
+<a class="sourceLine" id="cb9-26" data-line-number="26"><span class="fu">for:</span></a>
+<a class="sourceLine" id="cb9-27" data-line-number="27">  <span class="fu">resource:</span></a>
+<a class="sourceLine" id="cb9-28" data-line-number="28">    <span class="kw">-</span> <span class="fu">equals:</span></a>
+<a class="sourceLine" id="cb9-29" data-line-number="29">        <span class="fu">kind:</span><span class="at"> system</span></a>
+<a class="sourceLine" id="cb9-30" data-line-number="30">      <span class="fu">allow:</span><span class="at"> </span><span class="kw">[</span>read<span class="kw">]</span><span class="at"> </span><span class="co"># allow read of system info</span></a>
+<a class="sourceLine" id="cb9-31" data-line-number="31">  <span class="fu">project:</span></a>
+<a class="sourceLine" id="cb9-32" data-line-number="32">    <span class="kw">-</span> <span class="fu">match:</span></a>
+<a class="sourceLine" id="cb9-33" data-line-number="33">        <span class="fu">name:</span><span class="at"> </span><span class="st">&#39;.*&#39;</span></a>
+<a class="sourceLine" id="cb9-34" data-line-number="34">      <span class="fu">allow:</span><span class="at"> </span><span class="kw">[</span>read<span class="kw">]</span><span class="at"> </span><span class="co"># allow view of all projects</span></a>
+<a class="sourceLine" id="cb9-35" data-line-number="35"><span class="fu">by:</span></a>
+<a class="sourceLine" id="cb9-36" data-line-number="36">  <span class="fu">group:</span><span class="at"> </span><span class="kw">[</span>restart_user<span class="kw">]</span></a></code></pre></div>
+<h2 id="prevent-local-execution-on-the-rundeck-server">Prevent Local Execution on the Rundeck Server</h2>
+<p>Below is an example policy to prevent any user on the “remote” group to execute any command or job on the local rundeck server.</p>
+<p>If a job is tried to be executed locally, it will fail. Also, the local rundeck server will not appear on the node filter list.</p>
+<p>File listing: remote.aclpolicy</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource yaml numberLines"><code class="sourceCode yaml"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="fu">description:</span><span class="at"> Acess for users on remote group</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="fu">context:</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">  <span class="fu">project:</span><span class="at"> </span><span class="st">&#39;.*&#39;</span></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="fu">for:</span></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">  <span class="fu">resource:</span></a>
+<a class="sourceLine" id="cb10-6" data-line-number="6">    <span class="kw">-</span> <span class="fu">allow:</span><span class="at"> </span><span class="st">&#39;*&#39;</span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7">  <span class="fu">job:</span></a>
+<a class="sourceLine" id="cb10-8" data-line-number="8">    <span class="kw">-</span> <span class="fu">allow:</span><span class="at"> </span><span class="st">&#39;*&#39;</span></a>
+<a class="sourceLine" id="cb10-9" data-line-number="9">  <span class="fu">adhoc:</span></a>
+<a class="sourceLine" id="cb10-10" data-line-number="10">    <span class="kw">-</span> <span class="fu">allow:</span><span class="at"> </span><span class="st">&#39;*&#39;</span></a>
+<a class="sourceLine" id="cb10-11" data-line-number="11">  <span class="fu">node:</span></a>
+<a class="sourceLine" id="cb10-12" data-line-number="12">    <span class="kw">-</span> <span class="fu">equals:</span></a>
+<a class="sourceLine" id="cb10-13" data-line-number="13">        <span class="fu">rundeck_server:</span><span class="at"> </span><span class="st">&#39;false&#39;</span></a>
+<a class="sourceLine" id="cb10-14" data-line-number="14">      <span class="fu">allow:</span><span class="at"> </span><span class="kw">[</span>read<span class="kw">,</span> run<span class="kw">]</span></a>
+<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="fu">by:</span></a>
+<a class="sourceLine" id="cb10-16" data-line-number="16">  <span class="fu">group:</span><span class="at"> remote</span></a></code></pre></div>
+<h2 id="troubleshooting-access-control-policy">Troubleshooting access control policy</h2>
+<p>After defining an aclpolicy file to grant access to a particular group of users, you may find them getting “unauthorized” messages or complaints that certain actions are not possible.</p>
+<p>To diagnose this, begin by checking two bits:</p>
+<ol type="1">
+<li>The user’s group membership. This can be done by going to the user’s profile page in Rundeck. That page will list the groups the user is a member.</li>
+<li>Read the messages inside the <code>rundeck.audit.log</code> log file. The authorization facility generates fairly low level messages describing how the policy is matched to the user context.</li>
+<li>Use the <a href="../../man1/rd-acl.html" title="Command Line Tools - rd-acl">rd-acl</a> tool to test and validate your policy files</li>
+</ol>
+<p>For each entry in the audit log, you’ll see all decisions leading up to either a AUTHORIZED or a REJECTED message. It’s not uncommon to see REJECTED messages followed by AUTHORIZED. The important thing is to look at the last decision made.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbsbottom">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb bottom collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.1.0-rc1)</a></li>
+    
+        <li><a href="../index.html">Administrator Guide</a></li>
+    
+    
+    <li ><a href="index.html">Security</a></li>
+    <li class="active"><a href="access-control-policy.html">Access Control Policy</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="authenticating-users.html"><i class="glyphicon glyphicon-arrow-left"></i> Authenticating Users</a></li>
+      <li class="next"><a href="configuring-ssl.html">Configuring SSL <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/security/authorization.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/security/authorization.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Enterprise for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Enterprise
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://rundeck.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2019 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2019-06-10T20:57:54UTC">2019-06-10T20:57:54UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+
+<!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2768099.js"></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
