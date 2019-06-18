@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>API Reference | Version 31</title>
+  <title>API Reference | Version 32</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
@@ -164,7 +164,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
                     
                 
                 
-                <li class="active"><a href="index.html">API Reference | Version 31</a></li>
+                <li class="active"><a href="index.html">API Reference | Version 32</a></li>
             </ul>
             </div>
             <div class="column">
@@ -339,11 +339,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="column">
 <section class="section content">
 <div class="page-header">
-<h1 class="title">API Reference | Version 31</h1>
+<h1 class="title">API Reference | Version 32</h1>
 </div>
 <p>Rundeck provides a Web API for use with your application.</p>
 <h2 id="api-version-number">API Version Number</h2>
-<p>The current API version is <code>31</code>.</p>
+<p>The current API version is <code>32</code>.</p>
 <p>For API endpoints described in this document, the <em>minimum</em> API version required for their use is indicated by the URL used, e.g.:</p>
 <pre><code>/api/2/system/info
 /api/1/projects</code></pre>
@@ -369,6 +369,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>View the <a href="#index">Index</a> listing API paths.</p>
 <h2 id="changes">Changes</h2>
 <p>Changes introduced by API Version number:</p>
+<p><strong>Version 32</strong>:</p>
+<ul>
+<li>Updated Endpoints:
+<ul>
+<li><a href="#listing-running-executions"><code>GET /api/V/project/[PROJECT*]/executions/running</code></a> - Added <code>jobIdFilter</code> parameter to return running executions for a specific job.</li>
+</ul></li>
+</ul>
 <p><strong>Version 31</strong>:</p>
 <ul>
 <li>New Endpoint:
@@ -3326,7 +3333,11 @@ Content-Type: application/json
 <p><strong>Request:</strong></p>
 <pre><code>GET /api/14/project/[PROJECT]/executions/running</code></pre>
 <p>(<strong>Deprecated URL</strong>: <code>/api/14/executions/running</code>, required URL parameter <code>project</code>.)</p>
-<p>Note: <code>PROJECT</code> is the project name, or ’*’ for all projects.</p>
+<p>Note: <code>PROJECT</code> is the project name, or use <code>*</code> for all projects.</p>
+<p>Optional Query Parameters:</p>
+<ul>
+<li><code>jobIdFilter</code>: Specifies a Job ID, the results will only contain running executions for the given job. <strong>Since API v32</strong></li>
+</ul>
 <p>Response with <code>Content-Type: application/xml</code>: An <code>&lt;executions&gt;</code> element containing multiple <code>&lt;execution&gt;</code> elements.</p>
 <div class="sourceCode" id="cb180"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb180-1" data-line-number="1"><span class="kw">&lt;executions</span><span class="ot"> count=</span><span class="st">&quot;[count]&quot;</span><span class="ot"> offset=</span><span class="st">&quot;[offset]&quot;</span><span class="ot"> max=</span><span class="st">&quot;[max]&quot;</span><span class="ot"> total=</span><span class="st">&quot;[total]&quot;</span><span class="kw">&gt;</span></a>
 <a class="sourceLine" id="cb180-2" data-line-number="2">    <span class="kw">&lt;execution...&gt;</span>...<span class="kw">&lt;/execution&gt;</span></a>
@@ -6090,7 +6101,7 @@ DELETE /api/13/project/[PROJECT]/motd.md</code></pre>
                     
                 
                 
-                <li class="active"><a href="index.html">API Reference | Version 31</a></li>
+                <li class="active"><a href="index.html">API Reference | Version 32</a></li>
             </ul>
             </div>
             <div class="column">
@@ -6148,7 +6159,7 @@ DELETE /api/13/project/[PROJECT]/motd.md</code></pre>
             <span class="copyright-text" style="font-weight:500;font-size:14px">©2019 Rundeck.
               All Rights Reserved.</span> 
               <br />
-              <span class="generated-date" title="2019-06-11T17:25:27UTC">2019-06-11T17:25:27UTC</span>
+              <span class="generated-date" title="2019-06-18T18:00:35UTC">2019-06-18T18:00:35UTC</span>
           </div>
         </div>
       </div>
