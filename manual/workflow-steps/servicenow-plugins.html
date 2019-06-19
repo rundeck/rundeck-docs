@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ServiceNow Plugins</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="../../jquery.hotkeys.js"></script>
+<script src="../../jquery.autocomplete.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+window._pageRelpath="../../";
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+<script src="../../docs-autocomplete.js"></script>
+  <link rel="stylesheet" href="../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control navquery" name="q" placeholder="Search" id="searchQuery">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbstop">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb top collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.23)</a></li>
+    
+        <li><a href="../index.html">User Guide</a></li>
+    
+    
+    
+    <li class="active"><a href="servicenow-plugins.html">ServiceNow Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="builtin-workflow-steps.html">Builtin Workflow Steps <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/workflow-steps/servicenow.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/workflow-steps/servicenow.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#service-now-incident-update-state">Service Now / Incident / Update State</a><ul>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#adding-dynamic-list-data">Adding dynamic list data</a></li>
+</ul></li>
+<li><a href="#service-now-incident-check-assigned">Service Now / Incident / Check Assigned</a><ul>
+<li><a href="#configuration-1">Configuration</a></li>
+<li><a href="#usage-1">Usage</a></li>
+</ul></li>
+<li><a href="#service-now-incident-check-state">Service Now / Incident / Check State</a><ul>
+<li><a href="#configuration-2">Configuration</a></li>
+<li><a href="#usage-2">Usage</a></li>
+<li><a href="#adding-dynamic-list-data-1">Adding dynamic list data</a></li>
+</ul></li>
+<li><a href="#service-now-incident-comment">Service Now / Incident / Comment</a><ul>
+<li><a href="#configuration-3">Configuration</a></li>
+</ul></li>
+<li><a href="#service-now-incident-create">Service Now / Incident / Create</a><ul>
+<li><a href="#configuration-4">Configuration</a></li>
+<li><a href="#usage-3">Usage</a></li>
+<li><a href="#adding-dynamic-list-data-2">Adding dynamic list data</a></li>
+</ul></li>
+<li><a href="#service-now-incident-edit">Service Now / Incident / Edit</a><ul>
+<li><a href="#configuration-5">Configuration</a></li>
+<li><a href="#usage-4">Usage</a></li>
+<li><a href="#adding-dynamic-list-data-3">Adding dynamic list data</a></li>
+</ul></li>
+<li><a href="#service-now-incident-view">Service Now / Incident / View</a><ul>
+<li><a href="#configuration-6">Configuration</a></li>
+<li><a href="#usage-5">Usage</a></li>
+</ul></li>
+<li><a href="#service-now-change-check-state">Service Now / Change / Check State</a><ul>
+<li><a href="#configuration-7">Configuration</a></li>
+<li><a href="#usage-6">Usage</a></li>
+</ul></li>
+<li><a href="#service-now-change-update-state">Service Now / Change / Update State</a><ul>
+<li><a href="#configuration-8">Configuration</a></li>
+<li><a href="#usage-7">Usage</a></li>
+</ul></li>
+<li><a href="#service-now-change-create">Service Now / Change / Create</a><ul>
+<li><a href="#configuration-9">Configuration</a></li>
+<li><a href="#usage-8">Usage</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">ServiceNow Plugins</h1>
+</div>
+<!---
+Original: 
+http://support.rundeck.com/customer/en/portal/articles/2915300-servicenow-plugins)
+--->
+<h2 id="service-now-incident-update-state">Service Now / Incident / Update State</h2>
+<p>Rundeck workflow step that changes an incident state</p>
+<h3 id="configuration">Configuration</h3>
+<p>The Service Now connection credentials are set in the project.properties file for your project. Password it’s a keystorage path to the password.</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Incident-Change-State.url=https://server.service-now.com
+project.plugin.WorkflowStep.Service-Now-Incident-Change-State.login=user
+project.plugin.WorkflowStep.Service-Now-Incident-Change-State.password-key-storage-path=keys/servicenow/pass</code></pre>
+<p>or in <code>framework.properties</code></p>
+<pre><code>servicenow.url=https://server.service-now.com
+servicenow.login=user
+servicenow.password-key-storage-path=keys/servicenow/pass</code></pre>
+<h3 id="usage">Usage</h3>
+<p>To use the plugin, configure the following mandatory inputs.</p>
+<ul>
+<li>number: The Incident number to be updated.</li>
+<li>newState: The new state of the Incident. It can be the number of the state or the description.</li>
+</ul>
+<h3 id="adding-dynamic-list-data">Adding dynamic list data</h3>
+<p>With these settings, at project level, the field <code>state</code> can be loaded dynamically (calling SN API), for example:</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Incident-Change-State.url=https://server.service-now.com
+project.plugin.WorkflowStep.Service-Now-Incident-Change-State.login=user
+project.plugin.WorkflowStep.Service-Now-Incident-Change-State.password-key-storage-path=keys/servicenow/pass
+</code></pre>
+<h2 id="service-now-incident-check-assigned">Service Now / Incident / Check Assigned</h2>
+<p>Rundeck workflow step that checks assigned incidents</p>
+<h3 id="configuration-1">Configuration</h3>
+<p>The Service Now connection credentials are set in the project.properties file for your project. Password it’s a keystorage path to the password.</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Incident-Check-Assigned.login=user
+project.plugin.WorkflowStep.Service-Now-Incident-Check-Assigned.password-key-storage-path=keys/servicenow/pass
+project.plugin.WorkflowStep.Service-Now-Incident-Check-Assigned.url=https://server.service-now.com</code></pre>
+<p>or in <code>framework.properties</code></p>
+<pre><code>servicenow.url=https://server.service-now.com
+servicenow.login=user
+servicenow.password-key-storage-path=keys/servicenow/pass</code></pre>
+<h3 id="usage-1">Usage</h3>
+<p>To use the plugin, configure the following mandatory inputs.</p>
+<ul>
+<li>caller: the username of the Caller field on the Incident.</li>
+</ul>
+<p>This input is optional</p>
+<ul>
+<li>state: If you want you can enter a state number or description to add to the search, this way the incidents assigned to the caller only on this state are going to be considered.</li>
+</ul>
+<h2 id="service-now-incident-check-state">Service Now / Incident / Check State</h2>
+<p>Rundeck workflow step that checks an incident state</p>
+<h3 id="configuration-2">Configuration</h3>
+<p>The Service Now connection credentials are set in the project.properties file for your project. Password it’s a keystorage path to the password.</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Incident-Check-State.login=user
+project.plugin.WorkflowStep.Service-Now-Incident-Check-State.password-key-storage-path=keys/servicenow/pass
+project.plugin.WorkflowStep.Service-Now-Incident-Check-State.url=https://server.service-now.com</code></pre>
+<p>or in <code>framework.properties</code></p>
+<pre><code>servicenow.url=https://server.service-now.com
+servicenow.login=user
+servicenow.password-key-storage-path=keys/servicenow/pass</code></pre>
+<h3 id="usage-2">Usage</h3>
+<p>To use the plugin, configure the following mandatory inputs.</p>
+<ul>
+<li>number: The Incident number to be checked.</li>
+<li>state: The state to be checked. It can be the number of the state or the description.</li>
+</ul>
+<h3 id="adding-dynamic-list-data-1">Adding dynamic list data</h3>
+<p>With these settings, at project level, the field <code>state</code> can be loaded dynamically (calling SN API), for example:</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Incident-Check-State.login=user
+project.plugin.WorkflowStep.Service-Now-Incident-Check-State.password-key-storage-path=keys/servicenow/pass
+project.plugin.WorkflowStep.Service-Now-Incident-Check-State.url=https://server.service-now.com
+</code></pre>
+<h2 id="service-now-incident-comment">Service Now / Incident / Comment</h2>
+<p>Rundeck workflow step that comments an incident</p>
+<h3 id="configuration-3">Configuration</h3>
+<p>The Service Now connection credentials are set in the project.properties file for your project. Password it’s a keystorage path to the password.</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Comment.login=user
+project.plugin.WorkflowStep.Service-Now-Comment.password-key-storage-path=keys/servicenow/pass
+project.plugin.WorkflowStep.Service-Now-Comment.url=https://server.service-now.com</code></pre>
+<p>or in <code>framework.properties</code></p>
+<pre><code>servicenow.url=https://server.service-now.com
+servicenow.login=user
+servicenow.password-key-storage-path=keys/servicenow/pass</code></pre>
+<h2 id="service-now-incident-create">Service Now / Incident / Create</h2>
+<p>Rundeck workflow step that creates an incident</p>
+<h3 id="configuration-4">Configuration</h3>
+<p>The Service Now connection credentials are set in the project.properties file for your project. Password it’s a keystorage path to the password.</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Incident-Create.login=user
+project.plugin.WorkflowStep.Service-Now-Incident-Create.password-key-storage-path=keys/servicenow/pass
+project.plugin.WorkflowStep.Service-Now-Incident-Create.url=https://server.service-now.com</code></pre>
+<p>or in <code>framework.properties</code></p>
+<pre><code>servicenow.url=https://server.service-now.com
+servicenow.login=user
+servicenow.password-key-storage-path=keys/servicenow/pass</code></pre>
+<h3 id="usage-3">Usage</h3>
+<p>To use the plugin, configure the following mandatory inputs.</p>
+<ul>
+<li>caller: the username of the assigned Caller field of the Incident.</li>
+<li>Short Description: Short Description of the Incident</li>
+</ul>
+<p>These inputs are optional and if left empty the default value of Service now it’s going to be used</p>
+<ul>
+<li>urgency: A number representing the urgency of the incident (usually being 1 the most urgent). The list can be dynamically loaded using project settings (see settings below)</li>
+<li>impact: A number representing the impact of the incident (usually being 1 the higher urgent). The list can be dynamically loaded using project settings (see settings below)</li>
+<li>priority: A number representing the priority of the incident (calculated from urgency and impact).The list can be dynamically loaded using project settings (see settings below)</li>
+<li>Assignment Group: list assigned groups. To populate the list dynamically, credentials need to be passed at the project level (see settings below)</li>
+<li>Description: Full description of the incident</li>
+</ul>
+<h3 id="adding-dynamic-list-data-2">Adding dynamic list data</h3>
+<p>With these settings, at project level, the fields urgency, impact, priority and Assignment Group can be loaded dynamically, for example:</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Incident-Create.login=admin
+project.plugin.WorkflowStep.Service-Now-Incident-Create.password-key-storage-path=keys/somepath/pass
+project.plugin.WorkflowStep.Service-Now-Incident-Create.select-impact-list={&quot;1&quot;\:&quot;1 - High&quot;,&quot;2&quot;\:&quot;2 - Medium&quot;,&quot;3&quot;\:&quot;3 - Low&quot;}
+project.plugin.WorkflowStep.Service-Now-Incident-Create.select-priority-list={&quot;1&quot;\:&quot;1 - Critical&quot;,&quot;2&quot;\:&quot;2 - High&quot;,&quot;3&quot;\:&quot;3 - Moderate&quot;,&quot;4&quot;\:&quot;4 - Low&quot;,&quot;5&quot;\:&quot;5 - Planning&quot;}
+project.plugin.WorkflowStep.Service-Now-Incident-Create.select-urgency-list={&quot;1&quot;\:&quot;1 - High&quot;,&quot;2&quot;\:&quot;2 - Medium&quot;,&quot;3&quot;\:&quot;3 - Low&quot;}
+project.plugin.WorkflowStep.Service-Now-Incident-Create.url=https\://XXX.service-now.com
+</code></pre>
+<p>For <code>Assignment Group</code> the list is loaded with an SN API call.</p>
+<h2 id="service-now-incident-edit">Service Now / Incident / Edit</h2>
+<p>Rundeck workflow step that edits an incident</p>
+<h3 id="configuration-5">Configuration</h3>
+<p>The Service Now connection credentials are set in the project.properties file for your project. Password it’s a keystorage path to the password.</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Incident-Edit.login=admin
+project.plugin.WorkflowStep.Service-Now-Incident-Edit.password-key-storage-path=keys/servicenow/pass
+project.plugin.WorkflowStep.Service-Now-Incident-Edit.url=https\://dev63229.service-now.com</code></pre>
+<p>or in <code>framework.properties</code></p>
+<pre><code>servicenow.url=https://server.service-now.com
+servicenow.login=user
+servicenow.password-key-storage-path=keys/servicenow/pass</code></pre>
+<h3 id="usage-4">Usage</h3>
+<p>To use the plugin, configure the following mandatory inputs.</p>
+<ul>
+<li>Incident Number: Incident number to be updated</li>
+<li>Comment: Comment on incident</li>
+</ul>
+<p>These inputs are optional and if left empty the default value of Service now it’s going to be used</p>
+<ul>
+<li>state: State code. If not set, the change will be in New status. The list can be dynamically loaded using project settings (see settings below)</li>
+<li>urgency: A number representing the urgency of the incident (usually being 1 the most urgent). The list can be dynamically loaded using project settings (see settings below)</li>
+<li>impact: A number representing the impact of the incident (usually being 1 the higher urgent). The list can be dynamically loaded using project settings (see settings below)</li>
+<li>priority: A number representing the priority of the incident (calculated from urgency and impact).The list can be dynamically loaded using project settings (see settings below)</li>
+<li>Assignment Group: list assigned groups. To populate the list dynamically, credentials need to be passed at the project level (see settings below)</li>
+</ul>
+<h3 id="adding-dynamic-list-data-3">Adding dynamic list data</h3>
+<p>With these settings, at project level, the fields urgency, impact, priority , Assignment Group, state can be loaded dynamically, for example:</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Incident-Edit.login=admin
+project.plugin.WorkflowStep.Service-Now-Incident-Edit.password-key-storage-path=keys/servicenow/pass
+project.plugin.WorkflowStep.Service-Now-Incident-Edit.select-impact-list={&quot;1&quot;\:&quot;1 - High&quot;,&quot;2&quot;\:&quot;2 - Medium&quot;,&quot;3&quot;\:&quot;3 - Low&quot;}
+project.plugin.WorkflowStep.Service-Now-Incident-Edit.select-priority-list={&quot;1&quot;\:&quot;1 - Critical&quot;,&quot;2&quot;\:&quot;2 - High&quot;,&quot;3&quot;\:&quot;3 - Moderate&quot;,&quot;4&quot;\:&quot;4 - Low&quot;,&quot;5&quot;\:&quot;5 - Planning&quot;}
+project.plugin.WorkflowStep.Service-Now-Incident-Edit.select-urgency-list={&quot;1&quot;\:&quot;1 - High&quot;,&quot;2&quot;\:&quot;2 - Medium&quot;,&quot;3&quot;\:&quot;3 - Low&quot;}
+project.plugin.WorkflowStep.Service-Now-Incident-Edit.url=https\://dev63229.service-now.com
+</code></pre>
+<p>For <code>Assignment Group</code> and <code>state</code> the list is loaded with SN API call.</p>
+<h2 id="service-now-incident-view">Service Now / Incident / View</h2>
+<p>Rundeck workflow step that views an incident</p>
+<h3 id="configuration-6">Configuration</h3>
+<p>The Service Now connection credentials are set in the project.properties file for your project. Password it’s a keystorage path to the password.</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Incident-View.login=admin
+project.plugin.WorkflowStep.Service-Now-Incident-View.password=keys/servicenow/pass
+project.plugin.WorkflowStep.Service-Now-Incident-View.url=https\://dev63229.service-now.com</code></pre>
+<p>or in <code>framework.properties</code></p>
+<pre><code>servicenow.url=https://server.service-now.com
+servicenow.login=user
+servicenow.password-key-storage-path=keys/servicenow/pass</code></pre>
+<h3 id="usage-5">Usage</h3>
+<p>To use the plugin, configure the following mandatory inputs.</p>
+<ul>
+<li>Incident Number: Incident number to be updated</li>
+</ul>
+<h2 id="service-now-change-check-state">Service Now / Change / Check State</h2>
+<p>Rundeck workflow step that checks the state of a change request</p>
+<h3 id="configuration-7">Configuration</h3>
+<p>The Service Now connection credentials are set in the project.properties file for your project. Password it’s a keystorage path to the password.</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Change-Check-State.url=https://server.service-now.com
+project.plugin.WorkflowStep.Service-Now-Change-Check-State.login=user
+project.plugin.WorkflowStep.Service-Now-Change-Check-State.password-key-storage-path=keys/servicenow/pass</code></pre>
+<p>or in <code>framework.properties</code></p>
+<pre><code>servicenow.url=https://server.service-now.com
+servicenow.login=user
+servicenow.password-key-storage-path=keys/servicenow/pass</code></pre>
+<h3 id="usage-6">Usage</h3>
+<p>To use the plugin, configure the following mandatory inputs.</p>
+<ul>
+<li>number: Number of the change.</li>
+<li>State: State to be checked.</li>
+</ul>
+<h2 id="service-now-change-update-state">Service Now / Change / Update State</h2>
+<p>Rundeck workflow step that updates the state of a change request</p>
+<h3 id="configuration-8">Configuration</h3>
+<p>The Service Now connection credentials are set in the project.properties file for your project. Password it’s a keystorage path to the password.</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Change-Update-State.url=https://server.service-now.com
+project.plugin.WorkflowStep.Service-Now-Change-Update-State.login=user
+project.plugin.WorkflowStep.Service-Now-Change-Update-State.password-key-storage-path=keys/servicenow/pass</code></pre>
+<p>or in <code>framework.properties</code></p>
+<pre><code>servicenow.url=https://server.service-now.com
+servicenow.login=user
+servicenow.password-key-storage-path=keys/servicenow/pass</code></pre>
+<h3 id="usage-7">Usage</h3>
+<p>To use the plugin, configure the following mandatory inputs.</p>
+<ul>
+<li>number: Number of the change.</li>
+<li>New State: New State State to be used.</li>
+</ul>
+<h2 id="service-now-change-create">Service Now / Change / Create</h2>
+<p>Rundeck workflow step that creates a change on Service Now</p>
+<h3 id="configuration-9">Configuration</h3>
+<p>The Service Now connection credentials are set in the project.properties file for your project. Password it’s a keystorage path to the password.</p>
+<pre><code>project.plugin.WorkflowStep.Service-Now-Change-Create.url=https://server.service-now.com
+project.plugin.WorkflowStep.Service-Now-Change-Create.login=user
+project.plugin.WorkflowStep.Service-Now-Change-Create.password-key-storage-path=keys/servicenow/pass</code></pre>
+<p>or in <code>framework.properties</code></p>
+<pre><code>servicenow.url=https://server.service-now.com
+servicenow.login=user
+servicenow.password-key-storage-path=keys/servicenow/pass</code></pre>
+<h3 id="usage-8">Usage</h3>
+<p>To use the plugin, configure the following mandatory inputs.</p>
+<ul>
+<li>assignment group: The assignment group name or Id to assign.</li>
+<li>Description: Short description to be used.</li>
+<li>state: State code. If not set, the change will be in New status.</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbsbottom">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb bottom collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.23)</a></li>
+    
+        <li><a href="../index.html">User Guide</a></li>
+    
+    
+    
+    <li class="active"><a href="servicenow-plugins.html">ServiceNow Plugins</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="builtin-workflow-steps.html">Builtin Workflow Steps <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/workflow-steps/servicenow.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/workflow-steps/servicenow.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Enterprise for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Enterprise
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://rundeck.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2019 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2019-06-19T20:15:13UTC">2019-06-19T20:15:13UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+
+<!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2768099.js"></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
