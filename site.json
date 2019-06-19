@@ -1,26 +1,58 @@
 [
                 {
+                    "srcpath": "manual/notifications/webhooks.md",
+                    "title": "Webhooks",
+                    "outpath": "manual/notifications/webhooks.html",
+
+                        "alltitles": "User Guide / Webhooks"
+                    }
+                    ,
+                {
+                    "srcpath": "manual/notifications/servicenow.md",
+                    "title": "ServiceNow Notification Plugins",
+                    "outpath": "manual/notifications/servicenow-notification-plugins.html",
+
+                        "alltitles": "User Guide / ServiceNow Notification Plugins"
+                    }
+                    ,
+                {
+                    "srcpath": "manual/notifications/email.md",
+                    "title": "Email",
+                    "outpath": "manual/notifications/email.html",
+
+                        "alltitles": "User Guide / Email"
+                    }
+                    ,
+                {
+                    "srcpath": "manual/notifications/jira.md",
+                    "title": "Jira Notification Plugins (Enterprise)",
+                    "outpath": "manual/notifications/jira-notification-plugins-enterprise.html",
+
+                        "alltitles": "User Guide / Jira Notification Plugins (Enterprise)"
+                    }
+                    ,
+                {
+                    "srcpath": "manual/workflow-strategies/index.md",
+                    "title": "Workflow Strategies",
+                    "outpath": "manual/workflow-strategies/index.html",
+
+                        "alltitles": "User Guide / Workflow Strategies"
+                    }
+                    ,
+                {
+                    "srcpath": "manual/workflow-strategies/ruleset.md",
+                    "title": "Ruleset Workflow Strategy Plugin",
+                    "outpath": "manual/workflow-strategies/ruleset-workflow-strategy-plugin.html",
+
+                        "alltitles": "User Guide / Workflow Strategies / Ruleset Workflow Strategy Plugin"
+                    }
+                    ,
+                {
                     "srcpath": "manual/workflow-steps/servicenow.md",
                     "title": "ServiceNow Plugins",
                     "outpath": "manual/workflow-steps/servicenow-plugins.html",
 
                         "alltitles": "User Guide / ServiceNow Plugins"
-                    }
-                    ,
-                {
-                    "srcpath": "manual/workflow-steps/progress-badge.md",
-                    "title": "Progress Badge Workflow Step (Enterprise)",
-                    "outpath": "manual/workflow-steps/progress-badge-workflow-step-enterprise.html",
-
-                        "alltitles": "User Guide / Progress Badge Workflow Step (Enterprise)"
-                    }
-                    ,
-                {
-                    "srcpath": "manual/workflow-steps/vmware.md",
-                    "title": "VMWare Step Plugins (Enterprise)",
-                    "outpath": "manual/workflow-steps/vmware-step-plugins-enterprise.html",
-
-                        "alltitles": "User Guide / VMWare Step Plugins (Enterprise)"
                     }
                     ,
                 {
@@ -32,11 +64,19 @@
                     }
                     ,
                 {
-                    "srcpath": "manual/workflow-steps/github.md",
-                    "title": "Github Script Plugin (Enterprise)",
-                    "outpath": "manual/workflow-steps/github-script-plugin-enterprise.html",
+                    "srcpath": "manual/workflow-steps/file-transfer.md",
+                    "title": "File Transfer Plugins",
+                    "outpath": "manual/workflow-steps/file-transfer-plugins.html",
 
-                        "alltitles": "User Guide / Github Script Plugin (Enterprise)"
+                        "alltitles": "User Guide / File Transfer Plugins"
+                    }
+                    ,
+                {
+                    "srcpath": "manual/workflow-steps/vmware.md",
+                    "title": "VMWare Step Plugins (Enterprise)",
+                    "outpath": "manual/workflow-steps/vmware-step-plugins-enterprise.html",
+
+                        "alltitles": "User Guide / VMWare Step Plugins (Enterprise)"
                     }
                     ,
                 {
@@ -48,27 +88,19 @@
                     }
                     ,
                 {
-                    "srcpath": "manual/workflow-steps/file-transfer.md",
-                    "title": "File Transfer Plugins",
-                    "outpath": "manual/workflow-steps/file-transfer-plugins.html",
+                    "srcpath": "manual/workflow-steps/github.md",
+                    "title": "Github Script Plugin (Enterprise)",
+                    "outpath": "manual/workflow-steps/github-script-plugin-enterprise.html",
 
-                        "alltitles": "User Guide / File Transfer Plugins"
+                        "alltitles": "User Guide / Github Script Plugin (Enterprise)"
                     }
                     ,
                 {
-                    "srcpath": "manual/orchestrator-plugins/bundled.md",
-                    "title": "Bundled Orchestrator Plugins",
-                    "outpath": "manual/orchestrator-plugins/bundled-orchestrator-plugins.html",
+                    "srcpath": "manual/workflow-steps/progress-badge.md",
+                    "title": "Progress Badge Workflow Step (Enterprise)",
+                    "outpath": "manual/workflow-steps/progress-badge-workflow-step-enterprise.html",
 
-                        "alltitles": "User Guide / Bundled Orchestrator Plugins"
-                    }
-                    ,
-                {
-                    "srcpath": "manual/orchestrator-plugins/highest-lowest.md",
-                    "title": "Highest/Lowest Attribute Value (Enterprise)",
-                    "outpath": "manual/orchestrator-plugins/highestlowest-attribute-value-enterprise.html",
-
-                        "alltitles": "User Guide / Highest/Lowest Attribute Value (Enterprise)"
+                        "alltitles": "User Guide / Progress Badge Workflow Step (Enterprise)"
                     }
                     ,
                 {
@@ -128,19 +160,11 @@
                     }
                     ,
                 {
-                    "srcpath": "manual/log-filters/quiet-output.md",
-                    "title": "Quiet Output",
-                    "outpath": "manual/log-filters/quiet-output.html",
+                    "srcpath": "manual/log-filters/render-formatted-data.md",
+                    "title": "Render Formatted Data",
+                    "outpath": "manual/log-filters/render-formatted-data.html",
 
-                        "alltitles": "User Guide / Quiet Output"
-                    }
-                    ,
-                {
-                    "srcpath": "manual/log-filters/progress-badge.md",
-                    "title": "Progress Badge Log Filter (Enterprise)",
-                    "outpath": "manual/log-filters/progress-badge-log-filter-enterprise.html",
-
-                        "alltitles": "User Guide / Progress Badge Log Filter (Enterprise)"
+                        "alltitles": "User Guide / Render Formatted Data"
                     }
                     ,
                 {
@@ -152,19 +176,11 @@
                     }
                     ,
                 {
-                    "srcpath": "manual/log-filters/render-formatted-data.md",
-                    "title": "Render Formatted Data",
-                    "outpath": "manual/log-filters/render-formatted-data.html",
+                    "srcpath": "manual/log-filters/quiet-output.md",
+                    "title": "Quiet Output",
+                    "outpath": "manual/log-filters/quiet-output.html",
 
-                        "alltitles": "User Guide / Render Formatted Data"
-                    }
-                    ,
-                {
-                    "srcpath": "manual/log-filters/mask-passwords.md",
-                    "title": "Mask Passwords",
-                    "outpath": "manual/log-filters/mask-passwords.html",
-
-                        "alltitles": "User Guide / Mask Passwords"
+                        "alltitles": "User Guide / Quiet Output"
                     }
                     ,
                 {
@@ -176,51 +192,35 @@
                     }
                     ,
                 {
-                    "srcpath": "manual/notifications/servicenow.md",
-                    "title": "ServiceNow Notification Plugins",
-                    "outpath": "manual/notifications/servicenow-notification-plugins.html",
+                    "srcpath": "manual/log-filters/progress-badge.md",
+                    "title": "Progress Badge Log Filter (Enterprise)",
+                    "outpath": "manual/log-filters/progress-badge-log-filter-enterprise.html",
 
-                        "alltitles": "User Guide / ServiceNow Notification Plugins"
+                        "alltitles": "User Guide / Progress Badge Log Filter (Enterprise)"
                     }
                     ,
                 {
-                    "srcpath": "manual/notifications/email.md",
-                    "title": "Email",
-                    "outpath": "manual/notifications/email.html",
+                    "srcpath": "manual/log-filters/mask-passwords.md",
+                    "title": "Mask Passwords",
+                    "outpath": "manual/log-filters/mask-passwords.html",
 
-                        "alltitles": "User Guide / Email"
+                        "alltitles": "User Guide / Mask Passwords"
                     }
                     ,
                 {
-                    "srcpath": "manual/notifications/webhooks.md",
-                    "title": "Webhooks",
-                    "outpath": "manual/notifications/webhooks.html",
+                    "srcpath": "manual/orchestrator-plugins/highest-lowest.md",
+                    "title": "Highest/Lowest Attribute Value (Enterprise)",
+                    "outpath": "manual/orchestrator-plugins/highestlowest-attribute-value-enterprise.html",
 
-                        "alltitles": "User Guide / Webhooks"
+                        "alltitles": "User Guide / Highest/Lowest Attribute Value (Enterprise)"
                     }
                     ,
                 {
-                    "srcpath": "manual/notifications/jira.md",
-                    "title": "Jira Notification Plugins (Enterprise)",
-                    "outpath": "manual/notifications/jira-notification-plugins-enterprise.html",
+                    "srcpath": "manual/orchestrator-plugins/bundled.md",
+                    "title": "Bundled Orchestrator Plugins",
+                    "outpath": "manual/orchestrator-plugins/bundled-orchestrator-plugins.html",
 
-                        "alltitles": "User Guide / Jira Notification Plugins (Enterprise)"
-                    }
-                    ,
-                {
-                    "srcpath": "manual/workflow-strategies/index.md",
-                    "title": "Workflow Strategies",
-                    "outpath": "manual/workflow-strategies/index.html",
-
-                        "alltitles": "User Guide / Workflow Strategies"
-                    }
-                    ,
-                {
-                    "srcpath": "manual/workflow-strategies/ruleset.md",
-                    "title": "Ruleset Workflow Strategy Plugin",
-                    "outpath": "manual/workflow-strategies/ruleset-workflow-strategy-plugin.html",
-
-                        "alltitles": "User Guide / Workflow Strategies / Ruleset Workflow Strategy Plugin"
+                        "alltitles": "User Guide / Bundled Orchestrator Plugins"
                     }
                     ,
                 {
@@ -232,19 +232,19 @@
                     }
                     ,
                 {
-                    "srcpath": "manual/node-steps/vmware.md",
-                    "title": "VMWare Operations Node Step Plugin (Enterprise)",
-                    "outpath": "manual/node-steps/vmware-operations-node-step-plugin-enterprise.html",
-
-                        "alltitles": "User Guide / VMWare Operations Node Step Plugin (Enterprise)"
-                    }
-                    ,
-                {
                     "srcpath": "manual/node-steps/builtin.md",
                     "title": "Builtin Node Steps",
                     "outpath": "manual/node-steps/builtin-node-steps.html",
 
                         "alltitles": "User Guide / Builtin Node Steps"
+                    }
+                    ,
+                {
+                    "srcpath": "manual/node-steps/vmware.md",
+                    "title": "VMWare Operations Node Step Plugin (Enterprise)",
+                    "outpath": "manual/node-steps/vmware-operations-node-step-plugin-enterprise.html",
+
+                        "alltitles": "User Guide / VMWare Operations Node Step Plugin (Enterprise)"
                     }
                     ,
                 {
@@ -928,19 +928,19 @@
                     }
                     ,
                 {
-                    "srcpath": "administration/projects/scm/job-replication.md",
-                    "title": "Job Replication (Enterprise)",
-                    "outpath": "administration/projects/scm/job-replication-enterprise.html",
-
-                        "alltitles": "Administrator Guide / Projects / SCM / Job Replication (Enterprise)"
-                    }
-                    ,
-                {
                     "srcpath": "administration/projects/scm/git.md",
                     "title": "Git Plugin",
                     "outpath": "administration/projects/scm/git-plugin.html",
 
                         "alltitles": "Administrator Guide / Projects / SCM / Git Plugin"
+                    }
+                    ,
+                {
+                    "srcpath": "administration/projects/scm/job-replication.md",
+                    "title": "Job Replication (Enterprise)",
+                    "outpath": "administration/projects/scm/job-replication-enterprise.html",
+
+                        "alltitles": "Administrator Guide / Projects / SCM / Job Replication (Enterprise)"
                     }
                     ,
                 {
@@ -1425,10 +1425,18 @@
                     ,
                 {
                     "srcpath": "history/changelog.md",
-                    "title": "Changelog (2019-05-13)",
+                    "title": "Changelog (2019-06-19)",
                     "outpath": "history/changelog.html",
 
-                        "alltitles": "Version History / Changelog (2019-05-13)"
+                        "alltitles": "Version History / Changelog (2019-06-19)"
+                    }
+                    ,
+                {
+                    "srcpath": "history/version-3.0.23.md",
+                    "title": "Version 3.0.23 (2019-06-19)",
+                    "outpath": "history/version-3.0.23.html",
+
+                        "alltitles": "Version History / Version 3.0.23 (2019-06-19)"
                     }
                     ,
                 {
