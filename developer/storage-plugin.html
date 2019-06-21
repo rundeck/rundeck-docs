@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Storage Plugin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="March 29, 2014" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.11)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="storage-plugin.html">Storage Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="logging-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> Logging Plugin</a></li>
+      <li class="next"><a href="storage-converter-plugin.html">Storage Converter Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#configuring">Configuring</a></li>
+<li><a href="#java-plugin-type">Java Plugin Type</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Storage Plugin</h1>
+</div>
+<h2 id="about"><a href="#about">About</a></h2>
+<p>Storage plugins provide the backend for storing file contents uploaded to the <a href="../administration/key-storage.html">Key Storage</a> via the <a href="../api/index.html#key-storage">Key Storage API</a>.</p>
+<p>The Storage facility stores <strong>Resources</strong> in a <strong>Path-oriented</strong> tree structure. Each <strong>Resource</strong> has a set of key-value <em>metadata</em>, and a stream of binary data (the <em>content</em>).</p>
+<p>Rundeck provides two built-in providers, <code>db</code> and <code>file</code>, which store the contents in the database or on the filesystem.</p>
+<p>When installed, Storage Plugins can be configured to apply to all storage, or for everything below a certain Path.</p>
+<h2 id="configuring"><a href="#configuring">Configuring</a></h2>
+<p>See: <a href="../administration/key-storage.html#configuring-the-storage-plugins">Configuring the Storage Plugins</a>.</p>
+<h2 id="java-plugin-type"><a href="#java-plugin-type">Java Plugin Type</a></h2>
+<ul>
+<li><em>Note</em>: Refer to <a href="plugin-development.html#java-plugin-development">Java Development</a> for information about developing a Java plugin for Rundeck.</li>
+</ul>
+<p>The plugin interface is <a href="../javadoc/com/dtolabs/rundeck/plugins/storage/StoragePlugin.html">StoragePlugin</a>. This simply extends <a href="../javadoc/org/rundeck/storage/api/Tree.html">Tree</a> to store resource of type <a href="../javadoc/com/dtolabs/rundeck/core/storage/ResourceMeta.html">ResourceMeta</a>.</p>
+<p>Refer to the <a href="../javadoc/org/rundeck/storage/api/package-frame.html">Rundeck Storage API javadocs</a> for more information about the underlying storage API.</p>
+<p>The service name is <a href="../javadoc/com/dtolabs/rundeck/plugins/ServiceNameConstants.html#Storage"><code>Storage</code></a>.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.11)</a></li>
+    
+    
+    <li ><a href="index.html">Plugin Developer Guide</a></li>
+    <li class="active"><a href="storage-plugin.html">Storage Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="logging-plugin.html"><i class="glyphicon glyphicon-arrow-left"></i> Logging Plugin</a></li>
+      <li class="next"><a href="storage-converter-plugin.html">Storage Converter Plugin <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2019 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2019-06-21T01:01:25UTC">2019-06-21T01:01:25UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
