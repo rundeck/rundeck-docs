@@ -379,6 +379,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Updated Endpoints:
 <ul>
 <li><a href="#listing-running-executions"><code>GET /api/V/project/[PROJECT*]/executions/running</code></a> - Added <code>jobIdFilter</code> parameter to return running executions for a specific job.</li>
+<li><a href="#get-job-forecast"><code>GET /api/V/job/[ID]/forecast</code></a> - Added <code>past</code> parameter to return inverse forecast.</li>
 </ul></li>
 </ul>
 <p><strong>Version 31</strong>:</p>
@@ -3290,6 +3291,7 @@ Content-Type: application/json
 <li><code>y</code>: year</li>
 </ul></li>
 <li><code>max</code>: Maximum number of items to return (default: no limit).</li>
+<li><code>past</code>: <code>true</code> to return an inverse forecast, that is, considering the current scheduler, when it should have run. Note this forecast is only referential, since it will not take into account if the job could have been disabled or not yet been created. <strong>Since API v32</strong></li>
 </ul>
 <p><strong>Response:</strong></p>
 <p><code>Content-Type: application/xml</code>: A single job element with the array <code>futureScheduledExecutions</code>:</p>
@@ -6181,7 +6183,7 @@ DELETE /api/13/project/[PROJECT]/motd.md</code></pre>
             <span class="copyright-text" style="font-weight:500;font-size:14px">©2019 Rundeck.
               All Rights Reserved.</span> 
               <br />
-              <span class="generated-date" title="2019-07-10T17:14:43UTC">2019-07-10T17:14:43UTC</span>
+              <span class="generated-date" title="2019-07-10T18:08:52UTC">2019-07-10T18:08:52UTC</span>
           </div>
         </div>
       </div>
