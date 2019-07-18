@@ -243,6 +243,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The list of roles can be accepted as-is (default), or you can add a prefix to them using the following config in rundeck-config.properties:</p>
 <pre><code>rundeck.security.jaasRolePrefix=PREFIX_</code></pre>
 <h2 id="propertyfileloginmodule">PropertyFileLoginModule</h2>
+<p><em>NOTE: The <code>org.eclipse.jetty.jaas.spi.PropertyFileLoginModule</code> JAAS module will automatically add the username as a role to the login credentials.<br />
+If you do not want this behavior please use the <code>org.rundeck.jaas.jetty.ReloadablePropertyFileLoginModule</code> module.</em></p>
 <p>These instructions explain how to manage user credentials for Rundeck using a text file containing usernames, passwords and role definitions. Usually this file is called <code>realm.properties</code>.</p>
 <p>The default Rundeck installation handles user authentication via JAAS using the realm.properties file. This file is created at the time that you install the server.</p>
 <p>Location:</p>
@@ -903,7 +905,7 @@ rundeck.security.authorization.preauthenticated.redirectUrl=/customlogouturl</co
             <span class="copyright-text" style="font-weight:500;font-size:14px">©2019 Rundeck.
               All Rights Reserved.</span> 
               <br />
-              <span class="generated-date" title="2019-07-10T18:08:52UTC">2019-07-10T18:08:52UTC</span>
+              <span class="generated-date" title="2019-07-18T20:22:17UTC">2019-07-18T20:22:17UTC</span>
           </div>
         </div>
       </div>
