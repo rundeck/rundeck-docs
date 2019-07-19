@@ -250,9 +250,10 @@ See <a href="creating-job-workflows.html#context-variables" title="User Guide - 
 <p>You can change the order in which nodes are executed on by setting the “Rank Attribute” and “Rank Order”. By default nodes are ordered by name (“nodename” attribute) in ascending order. You can change the node attribute to sort on by entering it here, for example “rank”, and you can change the order to descending to sort in reverse.</p>
 <p>If the attribute you use has an integer number value, then the nodes will be sorted numerically by that attribute, rather than lexically. Otherwise the sort is based on the string value rather than the integer value.</p>
 <p>Any nodes without the specified attribute will then be sorted by their names.</p>
-<h4 id="keepgoing">Keepgoing</h4>
-<p>If you set “Keep going on error?” to “Yes”, then if any node dispatches fail for any reason, the rest will continue to be executed until all have been executed. At the end of the workflow for all nodes, the Job Execution will fail if any of the nodes had failed.</p>
-<p>If you leave it at the default value of “No”, then if any node dispatches fail for any reason, no further dispatches will be executed and the Job Execution will fail immediately.</p>
+<h4 id="if-a-node-fails">If a node fails</h4>
+<p>This setting determines how to continue if one of the nodes has a failure.</p>
+<p>The option “Fail the step without running on any remaining nodes”, will cause no further dispatches to be executed and the Job Execution will fail immediately.</p>
+<p>The option “Continue running on any remaining nodes before failing the step” will allow the remaining nodes to continue to be executed until all have been executed. At the end of the workflow for all nodes, the Job Execution will fail if any of the nodes had failed.</p>
 <h4 id="dynamic-node-filters">Dynamic node filters</h4>
 <p>In addition to entering static values that match the nodes, you can also use more dynamic values.</p>
 <p>If you have defined Options for the Job (see <a href="defining-job-options.html" title="User Guide - Defining Job Options">Job Options</a>), you can use the values submitted by the user when the job is executed as part of the node filtering.</p>
@@ -424,7 +425,7 @@ See <a href="creating-job-workflows.html#context-variables" title="User Guide - 
             <span class="copyright-text" style="font-weight:500;font-size:14px">©2019 Rundeck.
               All Rights Reserved.</span> 
               <br />
-              <span class="generated-date" title="2019-07-18T21:45:23UTC">2019-07-18T21:45:23UTC</span>
+              <span class="generated-date" title="2019-07-19T19:23:32UTC">2019-07-19T19:23:32UTC</span>
           </div>
         </div>
       </div>
