@@ -188,7 +188,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><a href="#usage">Usage</a></li>
 <li><a href="#configuration">Configuration</a></li>
+<li><a href="#usage-of-variables">Usage of variables</a></li>
 <li><a href="#example-job-xml">Example Job XML</a></li>
+<li><a href="#example-job-xml-using-variables">Example Job XML using variables</a></li>
 </ul>
 </div>
 </div>
@@ -205,12 +207,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 id="configuration">Configuration</h2>
 <ul>
 <li><em>SQL script path</em>: Path to the sql script</li>
+<li><em>SQL inline script</em>: Alternative to sql script path.</li>
+<li><em>Variables</em>: comma separated list of variables values too be used as Prepared Statement.</li>
 <li><em>JDBC Driver class name</em>: e.g. <code>com.mysql.jdbc.Driver</code></li>
 <li><em>JDBC url</em>: full JDBC url to use for connections</li>
 <li><em>Database username</em> connection username</li>
 <li><em>Database password</em> connection password</li>
 <li><em>Auto commit flag</em>: if true, a <code>Connection::commit()</code> will be called after the script.</li>
 </ul>
+<h2 id="usage-of-variables">Usage of variables</h2>
+<p>the variable text field can receive a comma separated list of variables values too be used as Prepared Statement, this is, replacing a <code>?</code> variable in the script. The list of variables can be a list of values comma separated or using the format <code>type:value</code>. If you omit the type, it’s going to be passed as generic object to the JDBC connector, this works only on some cases.</p>
 <h2 id="example-job-xml">Example Job XML</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">&lt;joblist&gt;</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="kw">&lt;job&gt;</span></a>
@@ -237,6 +243,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1-23" data-line-number="23">    <span class="kw">&lt;uuid&gt;</span>c9704ff9-c34f-455e-aa4b-8f98eae9ed5b<span class="kw">&lt;/uuid&gt;</span></a>
 <a class="sourceLine" id="cb1-24" data-line-number="24">  <span class="kw">&lt;/job&gt;</span></a>
 <a class="sourceLine" id="cb1-25" data-line-number="25"><span class="kw">&lt;/joblist&gt;</span></a></code></pre></div>
+<h2 id="example-job-xml-using-variables">Example Job XML using variables</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">&lt;joblist&gt;</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">   <span class="kw">&lt;job&gt;</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">      <span class="kw">&lt;description</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">      <span class="kw">&lt;context&gt;</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">         <span class="kw">&lt;options</span><span class="ot"> preserveOrder=</span><span class="st">&quot;true&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">            <span class="kw">&lt;option</span><span class="ot"> name=</span><span class="st">&quot;name&quot;</span><span class="ot"> required=</span><span class="st">&quot;true&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">         <span class="kw">&lt;/options&gt;</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">      <span class="kw">&lt;/context&gt;</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">      <span class="kw">&lt;executionEnabled&gt;</span>true<span class="kw">&lt;/executionEnabled&gt;</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">      <span class="kw">&lt;id&gt;</span>2d782a36-c06b-47fa-8ceb-7fcc9ff9fab7<span class="kw">&lt;/id&gt;</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">      <span class="kw">&lt;loglevel&gt;</span>INFO<span class="kw">&lt;/loglevel&gt;</span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12">      <span class="kw">&lt;name&gt;</span>SQL_test<span class="kw">&lt;/name&gt;</span>v</a>
+<a class="sourceLine" id="cb2-13" data-line-number="13">      <span class="kw">&lt;scheduleEnabled&gt;</span>true<span class="kw">&lt;/scheduleEnabled&gt;</span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14">      <span class="kw">&lt;sequence</span><span class="ot"> keepgoing=</span><span class="st">&quot;false&quot;</span><span class="ot"> strategy=</span><span class="st">&quot;node-first&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15">         <span class="kw">&lt;command&gt;</span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16">            <span class="kw">&lt;node-step-plugin</span><span class="ot"> type=</span><span class="st">&quot;org.rundeck.sqlrunner.SQLRunnerNodeStepPlugin&quot;</span><span class="kw">&gt;</span></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17">               <span class="kw">&lt;configuration&gt;</span></a>
+<a class="sourceLine" id="cb2-18" data-line-number="18">                  <span class="kw">&lt;entry</span><span class="ot"> key=</span><span class="st">&quot;commit&quot;</span><span class="ot"> value=</span><span class="st">&quot;true&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb2-19" data-line-number="19">                  <span class="kw">&lt;entry</span><span class="ot"> key=</span><span class="st">&quot;jdbcDriver&quot;</span><span class="ot"> value=</span><span class="st">&quot;org.postgresql.Driver&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb2-20" data-line-number="20">                  <span class="kw">&lt;entry</span><span class="ot"> key=</span><span class="st">&quot;jdbcUrl&quot;</span><span class="ot"> value=</span><span class="st">&quot;jdbc:postgresql://wintermute/rundeck&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb2-21" data-line-number="21">                  <span class="kw">&lt;entry</span><span class="ot"> key=</span><span class="st">&quot;password&quot;</span><span class="ot"> value=</span><span class="st">&quot;rundeck&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb2-22" data-line-number="22">                  <span class="kw">&lt;entry</span><span class="ot"> key=</span><span class="st">&quot;scriptBody&quot;</span><span class="ot"> value=</span><span class="st">&quot;INSERT INTO test (id, version, args, date) VALUES(0, ?, ?, now());&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb2-23" data-line-number="23">                  <span class="kw">&lt;entry</span><span class="ot"> key=</span><span class="st">&quot;user&quot;</span><span class="ot"> value=</span><span class="st">&quot;rundeck&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb2-24" data-line-number="24">                  <span class="kw">&lt;entry</span><span class="ot"> key=</span><span class="st">&quot;variables&quot;</span><span class="ot"> value=</span><span class="st">&quot;int:0,string:${option.name}&quot;</span> <span class="kw">/&gt;</span></a>
+<a class="sourceLine" id="cb2-25" data-line-number="25">               <span class="kw">&lt;/configuration&gt;</span></a>
+<a class="sourceLine" id="cb2-26" data-line-number="26">            <span class="kw">&lt;/node-step-plugin&gt;</span></a>
+<a class="sourceLine" id="cb2-27" data-line-number="27">         <span class="kw">&lt;/command&gt;</span></a>
+<a class="sourceLine" id="cb2-28" data-line-number="28">      <span class="kw">&lt;/sequence&gt;</span></a>
+<a class="sourceLine" id="cb2-29" data-line-number="29">      <span class="kw">&lt;uuid&gt;</span>2d782a36-c06b-47fa-8ceb-7fcc9ff9fab7<span class="kw">&lt;/uuid&gt;</span></a>
+<a class="sourceLine" id="cb2-30" data-line-number="30">   <span class="kw">&lt;/job&gt;</span></a>
+<a class="sourceLine" id="cb2-31" data-line-number="31"><span class="kw">&lt;/joblist&gt;</span></a></code></pre></div>
 </section>
 </div>
 </div>
@@ -313,7 +351,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <span class="copyright-text" style="font-weight:500;font-size:14px">©2019 Rundeck.
               All Rights Reserved.</span> 
               <br />
-              <span class="generated-date" title="2019-07-19T19:23:32UTC">2019-07-19T19:23:32UTC</span>
+              <span class="generated-date" title="2019-07-19T19:36:28UTC">2019-07-19T19:36:28UTC</span>
           </div>
         </div>
       </div>
