@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.12)</a></li>
+    
+    
+    <li ><a href="index.html">Tutorials</a></li>
+    <li class="active"><a href="commands.html">Commands</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="jobs.html"><i class="glyphicon glyphicon-arrow-left"></i> Jobs</a></li>
+      <li class="next"><a href="access-control.html">Access Control <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#commands">Commands</a></li>
+<li><a href="#using-the-gui">Using the GUI</a><ul>
+<li><a href="#filter-nodes">Filter nodes</a></li>
+<li><a href="#execute-command">Execute command</a></li>
+</ul></li>
+<li><a href="#using-the-cli">Using the CLI</a><ul>
+<li><a href="#filter-nodes-1">Filter nodes</a></li>
+<li><a href="#execute-command-1">Execute command</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<h2 id="commands"><a href="#commands">Commands</a></h2>
+<p>Sometimes the need to execute an arbitrary command comes up. You might need to check a bunch of systems to find out if they are running correctly, see their load, check resources or perhaps collect information.</p>
+<p>You can execute commands via the GUI or using rundeck command line interface.</p>
+<h2 id="using-the-gui"><a href="#using-the-gui">Using the GUI</a></h2>
+<p>First go to the <a href="../manual/commands.html">Commands page</a>.</p>
+<h3 id="filter-nodes"><a href="#filter-nodes">Filter nodes</a></h3>
+<p>To filter the nodes type in an expression or choose a saved filter. Below, the nodes tagged &quot;www&quot; are filtered:</p>
+<div class="figure">
+<img src="../figures/fig0602.png" alt="Anvils filtered list" /><p class="caption">Anvils filtered list</p>
+</div>
+<p>Filtering with tags provides an abstraction over hostnames and lets the administrator think about command execution using formalized classifications. New nodes can be added, others decommissioned while others given new purpose, and the procedures stay unchanged because they are bound to the filtering criteria. With tags that describe application role, commands can be targeted to specific sub sets of nodes without hard coding any hostnames.</p>
+<p>This simple classification scheme will allow the developers and administrators to share a common vocabulary when talking about the kinds of nodes supporting the Anvils application.</p>
+<h3 id="execute-command"><a href="#execute-command">Execute command</a></h3>
+<p>To execute a command, type in the command string in text field labeled &quot;Command&quot;:</p>
+<div class="figure">
+<img src="../figures/fig0610.png" alt="Command page" /><p class="caption">Command page</p>
+</div>
+<p>The output will appear below:</p>
+<div class="figure">
+<img src="../figures/fig0611.png" alt="Command output" /><p class="caption">Command output</p>
+</div>
+<h2 id="using-the-cli"><a href="#using-the-cli">Using the CLI</a></h2>
+<p>The <a href="https://rundeck.github.io/rundeck-cli/">rd adhoc</a> command provides a command line interface to run commands.</p>
+<h3 id="filter-nodes-1"><a href="#filter-nodes-1">Filter nodes</a></h3>
+<p>First, you must filter the nodes. The <code>rd nodes</code> command uses filter flag: <code>-F</code>.</p>
+<p>Here, the <code>tags</code> keyword is used to include nodes tagged 'www':</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rd</span> nodes -p anvils -F tags=www</code></pre>
+<pre><code>www1.anvils.com www2.anvils.com</code></pre>
+<p>List the nodes tagged &quot;app&quot;:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rd</span> nodes -p anvils -F tags=app</code></pre>
+<pre><code>app1.anvils.com app2.anvils.com</code></pre>
+<p>Use the <code>+</code> (AND) operator to list the web and app nodes:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rd</span> nodes -p anvils -F tags=www+app</code></pre>
+<pre><code>www1.anvils.com www2.anvils.com app1.anvils.com app2.anvils.com</code></pre>
+<p>Exclude the web and app nodes:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rd</span> nodes -p anvils -F <span class="st">&#39;!tags=www+app&#39;</span></code></pre>
+<pre><code>db1.anvils.com</code></pre>
+<h3 id="execute-command-1"><a href="#execute-command-1">Execute command</a></h3>
+<p>Use <code>rd adhoc</code> to execute adhoc commands and scripts.</p>
+<p>Specify the command string you wish to execute on the filtered node set after the <code>--</code>. Below the <code>id</code> command is dispatched:</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rd</span> adhoc -p anvils -F tags=www -- id</code></pre>
+<pre><code># Immediate execution scheduled (148)
+148 running 2016-11-3017:21:10-0800 - http://madmartigan.local:4440/project/deps/execution/show/148 adhoc whoami</code></pre>
+<p>Typically, you will want to see the output from the running command. Add the --follow flag to see the output.</p>
+<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">rd</span> adhoc -p anvils --follow -F tags=www -- whoami</code></pre>
+<pre><code># Started execution 147 running 2016-11-3017:20:43-0800 - http://madmartigan.local:4440/project/deps/execution/show/147 adhoc whoami
+greg</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.12)</a></li>
+    
+    
+    <li ><a href="index.html">Tutorials</a></li>
+    <li class="active"><a href="commands.html">Commands</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="jobs.html"><i class="glyphicon glyphicon-arrow-left"></i> Jobs</a></li>
+      <li class="next"><a href="access-control.html">Access Control <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2019 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2019-07-20T00:45:18UTC">2019-07-20T00:45:18UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
