@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Developing a custom Rundeck Java plugin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="../jquery.hotkeys.js"></script>
+<script src="../jquery.autocomplete.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+window._pageRelpath="../";
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+<script src="../docs-autocomplete.js"></script>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control navquery" name="q" placeholder="Search" id="searchQuery">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbstop">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb top collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.24)</a></li>
+    
+    
+    <li ><a href="index.html">Tutorials</a></li>
+    <li class="active"><a href="java-plugin.html">Java Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="log-filters.html"><i class="glyphicon glyphicon-arrow-left"></i> Log Filters</a></li>
+      
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+tutorials/java-plugin.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/tutorials/java-plugin.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#why-create-a-rundeck-plugin-in-java">Why create a Rundeck plugin in Java?</a><ul>
+<li><a href="#fully-crossplatform">Fully crossplatform</a></li>
+<li><a href="#all-code-dependencies-can-be-packaged-with-the-plugin">All code dependencies can be packaged with the plugin</a></li>
+<li><a href="#robust-access-to-rundeck-context-data">Robust access to Rundeck context data</a></li>
+<li><a href="#testability">Testability</a></li>
+<li><a href="#use-any-jvm-language">Use any JVM language</a></li>
+</ul></li>
+<li><a href="#how-to-create-a-simple-workflow-step-java-plugin">How to create a simple workflow step Java plugin</a><ul>
+<li><a href="#setting-up-your-development-environment">Setting up your development environment</a></li>
+<li><a href="#bootstrapping-the-plugin-project-structure">Bootstrapping the plugin project structure</a></li>
+<li><a href="#verify-that-we-can-deploy-the-plugin">Verify that we can deploy the plugin</a></li>
+<li><a href="#verify-that-we-can-modify-the-plugin">Verify that we can modify the plugin</a></li>
+</ul></li>
+<li><a href="#references">References</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Developing a custom Rundeck Java plugin</h1>
+</div>
+<p>In this tutorial we’ll learn:</p>
+<ul>
+<li>Why you might benefit from a custom Rundeck Java plugin</li>
+<li>How to set up your development environment to write, build and test Rundeck Java plugins</li>
+</ul>
+<h2 id="why-create-a-rundeck-plugin-in-java">Why create a Rundeck plugin in Java?</h2>
+<p>Rundeck is an open source ops automation platform that comes with a lot of functionality out of the box, like running script commands on your nodes with a command step. If you can already run commands with the default functionality, why would you want to write a new plugin to do that?</p>
+<p>Several reasons:</p>
+<ul>
+<li>To encapsulate and reuse functionality across projects and jobs</li>
+<li>To expose parameters to the UI with descriptions, types and defaults</li>
+<li>To securely access secrets stored in Key Storage</li>
+</ul>
+<p>These benefits apply to both script plugins and Java plugins. Additional benefits of writing a Java plugin would be:</p>
+<ul>
+<li>Fully crossplatform</li>
+<li>All code dependencies can be packaged with the plugin</li>
+<li>Robust access to Rundeck context data</li>
+<li>Testability</li>
+<li>Use any JVM language</li>
+</ul>
+<h3 id="fully-crossplatform">Fully crossplatform</h3>
+<p>Script plugins depend on a script interpreter like bash or powershell deployed on the node running your plugin. If you run a heterogeneous environment with nodes of different operating systems or different versions of the same operating system, you can avoid those inconsistencies using a Java plugin. Since Java can run on essential any platform, our plugin logic will run the same way regardless of what operating system it runs on.</p>
+<h3 id="all-code-dependencies-can-be-packaged-with-the-plugin">All code dependencies can be packaged with the plugin</h3>
+<p>Many scripts rely on external tools like awk, jq or your cloud provider’s command line tool, requiring you to ensure that those tools are deployed everywhere your plugin will run, and are the correct version that your script expects. A Java plugin would be packaged into a single jar file that can also bundle any necessary third party library dependencies you might need alongside your plugin code so your dependencies are deployed atomically with your plugin logic.</p>
+<h3 id="robust-access-to-rundeck-context-data">Robust access to Rundeck context data</h3>
+<p>Java step plugins can read data from the job context that previous jobs have written or write data to the job context so that other jobs have access to it. Accessing the job context data is exposed as a Java object, which is easier and less error prone than how script plugins read context data as environment variables and write context data via log capture parsing.</p>
+<h3 id="testability">Testability</h3>
+<p>Java plugins are testable in the same way any Java app is. You can use familiar libraries like JUnit and jMock to ensure that your plugin can be well-tested before being deployed. Tested code give developers who are new to the project more confidence in fixing bugs or adding features in the future.</p>
+<h3 id="use-any-jvm-language">Use any JVM language</h3>
+<p>You can write Java plugins in more languages than just Java the language. You can use any JVM language to write your plugin, like Groovy, Scala or Kotlin.</p>
+<h2 id="how-to-create-a-simple-workflow-step-java-plugin">How to create a simple workflow step Java plugin</h2>
+<p>Now that we see the value in creating our own workflow step Java plugin, we can walk through a simple Hello World example. We will:</p>
+<ul>
+<li>Set up a simple Java development environment</li>
+<li>Create the plugin project structure</li>
+<li>Test that we can make changes to the plugin and see them take effect in a Rundeck instance</li>
+</ul>
+<h3 id="setting-up-your-development-environment">Setting up your development environment</h3>
+<p>If you’re not a Java programmer by trade, the thought of setting up a Java development environment might seem a little daunting. I’ll try to walk you through a simple setup that may not have all the bells &amp; whistles that a fully Java IDE might have, but will get you up and running quickly while still understanding each of the tools you’re working with.</p>
+<p>Our ultimate goal is to build an archive file of Java bytecode-compiled files that we can easily ship off to a Rundeck server instance. The archive file is a .jar file which is just a .zip file with extra metadata. The bytecode is compiled and packaged with Gradle, a DSL for building Java applications. We need to be able to write code and run the compiler to check that it compiles. Any other IDE features are icing on the cake.</p>
+<h4 id="installing-the-development-dependencies">Installing the development dependencies</h4>
+<p>The easiest way to install all the dependencies on macOS is with <a href="https://brew.sh/">Homebrew</a>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ex">brew</span> cask install java visual-studio-code docker</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="ex">brew</span> install gradle docker-compose make git</a></code></pre></div>
+<p>Otherwise you can install the dependencies manually:</p>
+<ul>
+<li><a href="https://www.java.com/en/download/">Java</a></li>
+<li><a href="https://code.visualstudio.com/docs/setup/setup-overview">Visual Studio Code</a></li>
+<li><a href="https://docs.docker.com/install/">Docker</a></li>
+<li><a href="https://docs.gradle.org/current/userguide/installation.html">Gradle</a></li>
+<li><a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">Git</a></li>
+</ul>
+<h4 id="install-visual-studio-codes-java-extension-pack">Install Visual Studio Code’s Java Extension Pack</h4>
+<p>The editor we’ll be using in this tutorial Visual Studio Code (vscode for short) has an extensible architecture to add support for whatever language or framework you need to work with. To get Java functionality, install the Java Extension Pack by pressing <code>cmd+p</code> then entering <code>ext install vscjava.vscode-java-pack</code> in the prompt.</p>
+<h3 id="bootstrapping-the-plugin-project-structure">Bootstrapping the plugin project structure</h3>
+<h4 id="download-the-rundeck-playground-environment">Download the rundeck-playground environment</h4>
+<p>If you don’t already have the rundeck-playground project checked out, clone it now:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="fu">git</span> clone https://github.com/clofresh/rundeck-playground.git</a></code></pre></div>
+<p>This project provides a sample Rundeck environment running in Docker on your workstation.</p>
+<h4 id="build-and-configure-the-rundeck-plugin-bootstrap-tool">Build and configure the rundeck-plugin bootstrap tool</h4>
+<p>Now that you have the rundeck-playground project, you can build the rundeck-plugin-bootstrap tool and make it executable in your environment:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">make</span> tools</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="bu">eval</span> <span class="va">$(</span><span class="fu">make</span> env<span class="va">)</span></a></code></pre></div>
+<p>To confirm that you have the bootstrap tool, run:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="ex">rundeck-plugin-bootstrap</span> -h</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="ex">Create</span> a Verb artifact</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="ex">The</span> options available are:</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">        <span class="ex">--destinationDirectory</span> -d value : The directory in which the artifact directory will be generated</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">        <span class="ex">--pluginName</span> -n value : Plugin Name</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">        <span class="ex">--pluginType</span> -t value : Plugin Type</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">        <span class="ex">--serviceType</span> -s value : Rundeck Service Type</a></code></pre></div>
+<h4 id="generate-the-java-plugin-project-structure">Generate the Java plugin project structure</h4>
+<p>Now we’re ready to generate the Java plugin project structure using the <code>rundeck-plugin-bootstrap</code> tool.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="ex">rundeck-plugin-bootstrap</span> -d rundeck-plugins/ -n hellojava -t java -s WorkflowStep</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="ex">Plugin</span> generated at: rundeck-plugins/hellojava</a></code></pre></div>
+<p>Then we initialize the Gradle build script.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="bu">cd</span> rundeck-plugins/hellojava</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="ex">gradle</span> wrapper</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="ex">BUILD</span> SUCCESSFUL in 1s</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="ex">1</span> actionable task: 1 executed</a></code></pre></div>
+<h3 id="verify-that-we-can-deploy-the-plugin">Verify that we can deploy the plugin</h3>
+<h4 id="running-the-example-tests">Running the example tests</h4>
+<p>To verify that our environment is set up correctly, we can run the plugin tests that the bootstrap tool generated:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="ex">./gradlew</span> test</a></code></pre></div>
+<p>Gradle knows to download the plugin dependencies and compile the plugin code before trying to run the tests. We can check that the plugin was compiled by looking in the <code>build</code> where Gradle puts the compiled bytecode files:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="fu">ls</span> -lah build/classes/java/main/com/plugin/hellojava/</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="ex">total</span> 20K</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="ex">drwxr-xr-x</span> 2 carlo carlo 4.0K Dec 26 11:38  .</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="ex">drwxr-xr-x</span> 3 carlo carlo 4.0K Dec 26 11:38  ..</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="ex">-rw-r--r--</span> 1 carlo carlo 1.2K Dec 26 11:38 <span class="st">&#39;Hellojava$Reason.class&#39;</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="ex">-rw-r--r--</span> 1 carlo carlo 4.2K Dec 26 11:38  Hellojava.class</a></code></pre></div>
+<p>To package up the compiled files into a single .jar file that we can easily deploy, run:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="ex">./gradlew</span> build</a></code></pre></div>
+<p>Now the <code>build</code> directory should have a .jar file:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="fu">ls</span> build/libs/</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="ex">hellojava-0.1.0.jar</span></a></code></pre></div>
+<p>We can view the contents of the .jar file to verify that our bytecode files got packaged correctly:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="ex">jar</span> tf build/libs/hellojava-0.1.0.jar</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="ex">META-INF/</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="ex">META-INF/MANIFEST.MF</span></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="ex">com/</span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="ex">com/plugin/</span></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="ex">com/plugin/hellojava/</span></a>
+<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="ex">com/plugin/hellojava/Hellojava</span><span class="va">$Reason</span><span class="ex">.class</span></a>
+<a class="sourceLine" id="cb11-9" data-line-number="9"><span class="ex">com/plugin/hellojava/Hellojava.class</span></a>
+<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="ex">resources/</span></a>
+<a class="sourceLine" id="cb11-11" data-line-number="11"><span class="ex">resources/icon.png</span></a></code></pre></div>
+<p>You can even extract the files from .jar to inspect them manually:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="fu">mkdir</span> tmp</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="ex">jar</span> xf ../build/libs/hellojava-0.1.0.jar</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="fu">diff</span> ./com/plugin/hellojava/Hellojava.class ../build/classes/java/main/com/plugin/hellojava/Hellojava.class</a></code></pre></div>
+<h4 id="deploying-the-plugin-to-a-local-environment">Deploying the plugin to a local environment</h4>
+<p>Now we can deploy the new plugin to the rundeck-playground Rundeck server to see it in action.</p>
+<p>First, ensure that the rundeck-playground is up and running. This step may take a while to download if it’s the first time you’ve run it.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="bu">cd</span> /path/to/rundeck-playground</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="fu">make</span> compose</a></code></pre></div>
+<p>Then once the Rundeck server is up, in a separate terminal, push all the relevant Rundeck configuration, including your new plugin, by running:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="bu">cd</span> /path/to/rundeck-playground</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="fu">make</span> rd-config</a></code></pre></div>
+<p>The rd-config Make task will see your new Java plugin and run the Gradle build and upload the plugin jar to the Rundeck server. It’s smart enough to only do this if the plugin’s source files have changed.</p>
+<h4 id="creating-a-job-to-use-our-plugin">Creating a job to use our plugin</h4>
+<p>Now that we’ve deployed our plugin, we want to make sure that we can use it in a job. Log into the local Rundeck at <a href="http://127.0.0.1:4440/" class="uri">http://127.0.0.1:4440/</a> with the default user <code>admin</code> and password <code>admin</code>. Then create a new job in the <code>hello-project</code> project:</p>
+<figure>
+<img src="../figures/create-job.png" alt="Create a new job" /><figcaption>Create a new job</figcaption>
+</figure>
+<p>In the job creation screen, fill in some name like “My Java Plugin job” in Job Name. Then scroll to the “Add a Step” section, type “hellojava” in the search box and click the “Workflow Steps” tab to find the hellojava plugin.</p>
+<figure>
+<img src="../figures/add-step-hellojava.png" alt="Add hellojava step" /><figcaption>Add hellojava step</figcaption>
+</figure>
+<p>Click the hellojava plugin, fill in some text in the Example string parameter field, then click Save to add the step to the job. Then scroll to the very bottom and click Create to finish creating the job. On the next screen, click Run Job Now to trigger the job. Clicking the Log Output tab should show some sample log output from the plugin.</p>
+<figure>
+<img src="../figures/hellojava-log-output-1.png" alt="Plugin log output" /><figcaption>Plugin log output</figcaption>
+</figure>
+<p>If the job succeeded with some output similar to the screenshot, then your Java plugin is working correctly!</p>
+<h3 id="verify-that-we-can-modify-the-plugin">Verify that we can modify the plugin</h3>
+<p>Now we want to make changes to the plugin and see them take effect so we know how to iterate on the plugin. Open up <code>Hellojava.java</code> in vscode by pressing <code>cmd+p</code> and entering <code>Hellojava.java</code> in the prompt. This is the plugin class that the plugin bootstrap script generated. Some things to note:</p>
+<ul>
+<li>The <code>@PluginDescription</code> annotation sets the title and description of the plugin as it should appear in Rundeck.</li>
+<li>The <code>getDescription()</code> method describes the parameters to the plugin that Rundeck will render as Rundeck GUI elements.</li>
+<li>The <code>executeStep()</code> method is where the plugin logic happens.</li>
+</ul>
+<p>Let’s update <code>executeStep()</code> to list the files in the current directory. Update <code>Hellojava.java</code> to the following:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">package</span><span class="im"> com.plugin.hellojava;</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="kw">import</span><span class="im"> com.dtolabs.rundeck.core.execution.workflow.steps.StepException;</span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="kw">import</span><span class="im"> com.dtolabs.rundeck.core.plugins.Plugin;</span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="kw">import</span><span class="im"> com.dtolabs.rundeck.plugins.descriptions.PluginDescription;</span></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="kw">import</span><span class="im"> com.dtolabs.rundeck.plugins.{PluginLogger, ServiceNameConstants};</span></a>
+<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="kw">import</span><span class="im"> com.dtolabs.rundeck.plugins.step.{PluginStepContext, StepPlugin};</span></a>
+<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="kw">import</span><span class="im"> java.io.File;</span></a>
+<a class="sourceLine" id="cb15-9" data-line-number="9"><span class="kw">import</span><span class="im"> java.util.Map;</span></a>
+<a class="sourceLine" id="cb15-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb15-11" data-line-number="11"><span class="at">@Plugin</span>(service=ServiceNameConstants.<span class="fu">WorkflowStep</span>,name=<span class="st">&quot;hellojava&quot;</span>)</a>
+<a class="sourceLine" id="cb15-12" data-line-number="12"><span class="at">@PluginDescription</span>(title=<span class="st">&quot;hellojava&quot;</span>, description=<span class="st">&quot;My WorkflowStep plugin description&quot;</span>)</a>
+<a class="sourceLine" id="cb15-13" data-line-number="13"><span class="kw">public</span> <span class="kw">class</span> Hellojava <span class="kw">implements</span> StepPlugin {</a>
+<a class="sourceLine" id="cb15-14" data-line-number="14">   <span class="at">@Override</span></a>
+<a class="sourceLine" id="cb15-15" data-line-number="15">   <span class="kw">public</span> <span class="dt">void</span> <span class="fu">executeStep</span>(<span class="dt">final</span> PluginStepContext context, <span class="dt">final</span> <span class="bu">Map</span>&lt;<span class="bu">String</span>, <span class="bu">Object</span>&gt; configuration)</a>
+<a class="sourceLine" id="cb15-16" data-line-number="16">   <span class="kw">throws</span> StepException {</a>
+<a class="sourceLine" id="cb15-17" data-line-number="17">        PluginLogger logger = context.<span class="fu">getLogger</span>();</a>
+<a class="sourceLine" id="cb15-18" data-line-number="18">        <span class="bu">File</span> dir = <span class="kw">new</span> <span class="bu">File</span>(<span class="st">&quot;.&quot;</span>);</a>
+<a class="sourceLine" id="cb15-19" data-line-number="19">        <span class="bu">File</span>[] filesList = dir.<span class="fu">listFiles</span>();</a>
+<a class="sourceLine" id="cb15-20" data-line-number="20">        <span class="kw">for</span>(<span class="bu">File</span> f : filesList) {</a>
+<a class="sourceLine" id="cb15-21" data-line-number="21">            logger.<span class="fu">log</span>(<span class="dv">2</span>, <span class="st">&quot;File: &quot;</span> + f.<span class="fu">getName</span>());</a>
+<a class="sourceLine" id="cb15-22" data-line-number="22">        }</a>
+<a class="sourceLine" id="cb15-23" data-line-number="23">    }</a>
+<a class="sourceLine" id="cb15-24" data-line-number="24">}</a></code></pre></div>
+<p>We’ve replaced the sample code with some code to log the files in the current directory. Note that since we’re using Java libraries to list the files, the plugin is platform-independent, unlike a script plugin that would rely on OS-specific tools like <code>ls</code>.</p>
+<p>Then we can compile and deploy our plugin:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="fu">make</span> rd-config</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="op">&gt;</span> <span class="ex">Task</span> :test FAILED</a>
+<a class="sourceLine" id="cb16-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5"><span class="ex">com.plugin.hellojava.HellojavaSpec</span> <span class="op">&gt;</span> check Boolean parameter FAILED</a>
+<a class="sourceLine" id="cb16-6" data-line-number="6">    <span class="ex">org.spockframework.runtime.WrongExceptionThrownError</span> at HellojavaSpec.groovy:28</a>
+<a class="sourceLine" id="cb16-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb16-8" data-line-number="8"><span class="ex">com.plugin.hellojava.HellojavaSpec</span> <span class="op">&gt;</span> run OK FAILED</a>
+<a class="sourceLine" id="cb16-9" data-line-number="9">    <span class="ex">org.spockframework.mock.TooFewInvocationsError</span> at HellojavaSpec.groovy:41</a>
+<a class="sourceLine" id="cb16-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb16-11" data-line-number="11"><span class="ex">2</span> tests completed, 2 failed</a>
+<a class="sourceLine" id="cb16-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb16-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb16-14" data-line-number="14"><span class="ex">FAILURE</span>: Build failed with an exception.</a></code></pre></div>
+<p>Whoops! Looks like the plugin bootstrap generated some sample tests, and we deleted the sample code that was making them pass. Lets find the tests and remove them. The fastest way to navigate to them is with <code>cmd+p</code> and entering <code>HellojavaSpec.groovy</code>, the file referenced in the errors above.</p>
+<p>This test file is written in Groovy, a JVM-based dynamic language that’s a little more lightweight than Java making it ideal for writing tests. For now, since the tests don’t apply anymore, let’s remove them by deleting the <code>def &quot;check Boolean parameter&quot;()</code> and <code>def &quot;run OK&quot;()</code> code blocks. <code>HellojavaSpec.groovy</code> should look like:</p>
+<pre class="groovy"><code>package com.plugin.hellojava
+
+import com.dtolabs.rundeck.plugins.step.PluginStepContext
+import com.dtolabs.rundeck.core.execution.workflow.steps.StepException
+import com.dtolabs.rundeck.plugins.PluginLogger
+import spock.lang.Specification
+
+class HellojavaSpec extends Specification {
+    def getContext(PluginLogger logger){
+        Mock(PluginStepContext){
+            getLogger()&gt;&gt;logger
+        }
+    }
+}</code></pre>
+<p>We’ll leave the <code>getContext()</code> helper method there so we can mock the context when writing tests later. But for now, we’re ready to compile and deploy:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="fu">make</span> rd-config</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3">====[<span class="ex">hellojava</span> Java plugin] ERROR: Version 0.1.0 already exists. Update plugin version in rundeck-plugins/hellojava/build.gradle</a></code></pre></div>
+<p>Oops, there’s one last step to remember: incrementing the plugin version number. The Rundeck server considers plugin versions to be immutable, so we need to increment the version number to be able to upload a new version of the plugin. The plugin version is in the <code>rundeck-plugins/hellojava/build.gradle</code> file referenced in the error message.</p>
+<p>The <code>build.gradle</code> is also written in Groovy and describes how the plugin should get compiled. There’s a lot going on here, but for now all you need to do is increment the version variable on the first line from 0.1.0 to 0.1.1.</p>
+<p>At last, we can deploy without an error:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="fu">make</span> rd-config</a></code></pre></div>
+<p>Then re-run the job from the Rundeck GUI and you should see it print out a list of files.</p>
+<figure>
+<img src="../figures/hellojava-log-output-2.png" alt="Updated plugin log output" /><figcaption>Updated plugin log output</figcaption>
+</figure>
+<p>Success!</p>
+<p>If you want to try your plugin on your live Rundeck server instead of on your workstation, see <a href="../administration/configuration/plugins/installing.html" title="Administrator Guide - Rundeck Configuration - Configuring Plugins - Installing">Installing plugins</a></p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="../developer/workflow-step-plugin.html" title="Plugin Developer Guide - Workflow Step Plugin">Workflow Step Plugin Developer Guide</a></li>
+<li><a href="../administration/configuration/plugins/installing.html" title="Administrator Guide - Rundeck Configuration - Configuring Plugins - Installing">Installing plugins</a></li>
+<li><a href="https://github.com/clofresh/rundeck-playground">Rundeck Playground</a></li>
+<li><a href="https://github.com/rundeck/plugin-bootstrap">Rundeck Plugin Bootstrap</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbsbottom">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb bottom collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.24)</a></li>
+    
+    
+    <li ><a href="index.html">Tutorials</a></li>
+    <li class="active"><a href="java-plugin.html">Java Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="log-filters.html"><i class="glyphicon glyphicon-arrow-left"></i> Log Filters</a></li>
+      
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+tutorials/java-plugin.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/tutorials/java-plugin.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Enterprise for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Enterprise
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://rundeck.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2019 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2019-07-20T01:30:30UTC">2019-07-20T01:30:30UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+
+<!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2768099.js"></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>

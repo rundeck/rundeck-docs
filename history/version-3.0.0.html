@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Version 3.0.0</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="greg" />
+  <meta name="date" content="07/27/2018" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="../jquery.hotkeys.js"></script>
+<script src="../jquery.autocomplete.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+window._pageRelpath="../";
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+<script src="../docs-autocomplete.js"></script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control navquery" name="q" placeholder="Search" id="searchQuery">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbstop">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb top collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.24)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-3.0.0.html">Version 3.0.0 (2018-07-27)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.11.5.html">Version 2.11.5 (2018-07-06) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+history/version-3.0.0.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-3.0.0.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#release-3.0.0">Release 3.0.0</a><ul>
+<li><a href="#notes">Notes</a></li>
+<li><a href="#documentation">Documentation</a></li>
+<li><a href="#changes">Changes</a></li>
+<li><a href="#thanks">Thanks</a></li>
+<li><a href="#known-issues-and-limitations">Known Issues and Limitations</a></li>
+<li><a href="#upgrading">Upgrading</a></li>
+<li><a href="#additional-enhancements-since-rundeck-2.11">Additional Enhancements since Rundeck 2.11:</a></li>
+<li><a href="#contributors">Contributors</a></li>
+<li><a href="#bug-reporters">Bug Reporters</a></li>
+<li><a href="#issues">Issues</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Version 3.0.0</h1>
+</div>
+<h1 id="release-3.0.0">Release 3.0.0</h1>
+<p>Date: 2018-07-27</p>
+<p>Name: <span style="color: aquamarine"><span class="glyphicon glyphicon-apple"></span> “jalapeño popper aquamarine apple”</span></p>
+<h2 id="notes">Notes</h2>
+<p>Welcome to Rundeck 3.0, which consists of both under-the-hood changes (upgrading the underlying application framework) and visual changes (a revamped UI).</p>
+<p>The application framework upgrade from Grails 2 to Grails 3 gets a lot of technical debt off of our plate, and enables some long-asked-for features, such as SSO.</p>
+<p>Our new UI is just the first step on a path towards improved usability and flexibility, and we have big plans for more in the future.</p>
+<p>Changes in open-source Rundeck (aka “Rundeck Core”) also carry over into <a href="https://www.rundeck.com">Rundeck Pro</a>.</p>
+<p>We are also synchronizing our Rundeck Pro and Rundeck Core release versions to make it simpler. However, not every release of Rundeck Pro will go in our “supported” channel. We will continue to work on the 3.0.x development line of Rundeck Core, leading towards a supported Rundeck Pro 3.0 release to come later. If you are interested in trying Rundeck Pro 3.0, please visit <a href="https://www.rundeck.com">Rundeck Pro</a>.</p>
+<h2 id="documentation">Documentation</h2>
+<p>Documentation is available at <a href="http://rundeck.org/docs" class="uri">http://rundeck.org/docs</a>.</p>
+<p>Our documentation project is ongoing, and we want your feedback: corrections, comments, and contributions. Please let us know how we can improve it: <a href="https://github.com/rundeck/docs" class="uri">https://github.com/rundeck/docs</a>.</p>
+<h2 id="changes">Changes</h2>
+<p><strong>Interface</strong></p>
+<p><em>New “Jalapeño Popper” UI</em></p>
+<p>The new 3.0 UI is an aesthetic update with an eye towards what comes next. Based on a new Rundeck UI Style Guide, the entire application has been reviewed and updated with more consistent interfaces that make it easier to use, enable easier enhancements and modifications, and improve cross-browser compatibility.</p>
+<p>We are still working on this: please give us feedback!</p>
+<p><strong>Installation</strong></p>
+<p><em>Executable war</em></p>
+<p>The “launcher jar” for Rundeck 2 is gone (long live the launcher jar). However the .war file now operates the same way. Just use the .war in the same way as the previous launcher jar, or deploy it as a webapp.</p>
+<p><em>Official Docker Image</em></p>
+<p>Still “incubating”, we have published an offical docker image. Please give us your feedback on this development effort.</p>
+<ul>
+<li><a href="https://hub.docker.com/r/rundeck/rundeck/">Official docker image</a></li>
+</ul>
+<p><strong>Authentication</strong></p>
+<p>We no longer rely on “container-based” security/authentication (i.e. web.xml auth constraints, coupled with Jetty/Tomcat authentication setup.) We now use “Spring Security” for Grails, which moves the authentication checks into Rundeck itself. This enables SSO, Oauth, and other types of authentication which was difficult/impossible to implement before.</p>
+<p>The default JAAS authentication method still works, so existing JAAS based configuration should operate as expected.</p>
+<p>Pre-authentication modes should work as they did before.</p>
+<p><em>SSO Integration</em></p>
+<p>Okta integration is included in Rundeck Pro. See <a href="../administration/security/single-sign-on.html" title="Administrator Guide - Security - Single Sign On">Rundeck SSO</a></p>
+<h2 id="thanks">Thanks</h2>
+<p>A lot of work went into the Grails 3 upgrade, many thanks especially to:</p>
+<ul>
+<li>Alberto Hormazabal</li>
+<li>Stephen Joyner</li>
+</ul>
+<p>👏👏👏</p>
+<h2 id="known-issues-and-limitations">Known Issues and Limitations</h2>
+<p><em>Startup error about log4j</em></p>
+<p>If you update and get an error about Log4j configuration, add a line to your rundeck-config file: <code>rundeck.log4j.config.file=/.../server/config/log4j.properties</code> and specify the correct path to a log4j.properties file.</p>
+<p><em>Customizing web.xml is no longer possible</em></p>
+<p>The <code>web.xml</code> file is no longer available. If you were modifying this after install before, let us know how/for what reason. (Typically modifying session timeout or auth constraints). Also, please see Authentication Changes section.</p>
+<p>Note that the <a href="https://github.com/rundeck/rundeck/issues/590">required role customization</a> is no longer necessary</p>
+<p><em>Must define JDBC driver class name</em></p>
+<p>If using Mysql/other DBs which require a JDBC driver, be sure to specify it explicitly in the rundeck-config file, e.g. <code>dataSource.driverClassName=com.mysql.jdbc.Driver</code></p>
+<p><em>Oracle and other relational DB Support</em></p>
+<p>Support for Oracle is still considered experimental. We have confirmed that it works with oracle 12c and 11g, however we would like your feedback.</p>
+<p><em>Tomcat War deployment</em></p>
+<p>Due to changes in authentication, <code>tomcat-users.xml</code> and other Tomcat authentication modules no longer work. More information about upgrading with Tomcat will be posted on <a href="https://github.com/rundeck/rundeck/issues/3754">this github issue</a>.</p>
+<h2 id="upgrading">Upgrading</h2>
+<p>For the most part, Rundeck 3.0 is drop-in compatible with existing Rundeck 2.11 installations.</p>
+<p>We recommend doing a fresh install of 3.0.0 and copying your Jobs/projects into it for testing.</p>
+<p>If you are upgrading in-place, <em>Be sure to backup import data/configs before upgrading.</em></p>
+<p>If you are using the rundeck Launcher jar, replace it with the <code>.war</code> artifact, which can be renamed with a <code>.jar</code> extension if needed.</p>
+<p>See the <em>Known Issues and Limitations</em> notes above.</p>
+<h2 id="additional-enhancements-since-rundeck-2.11">Additional Enhancements since Rundeck 2.11:</h2>
+<ul>
+<li>Limit multiple executions of a job</li>
+<li>Encrypt passwords stored in configuration files</li>
+<li>API additions: Retry a job based on previous execution, access metrics information</li>
+</ul>
+<h2 id="contributors">Contributors</h2>
+<ul>
+<li>Alberto Hormazabal (ahormazabal)</li>
+<li>Davy Gabard (Kaldor37)</li>
+<li>Greg Schueler (gschueler)</li>
+<li>Jaime Tobar (jtobard)</li>
+<li>Jijo Varghese</li>
+<li>Jocelyn Thode</li>
+<li>Joseph Price (PriceChild)</li>
+<li>OmriShiv</li>
+<li>ProTip</li>
+<li>Stephen Joyner (sjrd218)</li>
+<li>carlos (carlosrfranco)</li>
+<li>scollector65</li>
+</ul>
+<h2 id="bug-reporters">Bug Reporters</h2>
+<ul>
+<li>Kaldor37</li>
+<li>Nomekrax</li>
+<li>PriceChild</li>
+<li>ahonor</li>
+<li>ahormazabal</li>
+<li>cwaltherf</li>
+<li>diranged</li>
+<li>gschueler</li>
+<li>jijojv</li>
+<li>jquick</li>
+<li>jtobard</li>
+<li>kino71</li>
+<li>ls-initiatives</li>
+<li>ltamaster</li>
+<li>reno-oner</li>
+<li>sebastianbello</li>
+<li>sjrd218</li>
+<li>turlubullu</li>
+<li>wcliff</li>
+</ul>
+<h2 id="issues">Issues</h2>
+<p><a href="https://github.com/rundeck/rundeck/milestone/76">Milestone 3.0.0</a></p>
+<ul>
+<li><a href="https://github.com/rundeck/rundeck/issues/3740">Can’t save node filter</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3733">Fix use of Oracle backend</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3728">Enable file option on scheduled jobs</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3714">Create new branch on git-export</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3705">Fix Error message: ORA-01795 (rd3)</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3692">Add metrics to API, update to APIv25</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3683">Limit user interactive sessions</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3675">First exec/job run of a new project can fail with “no matched nodes”</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3652">NPE on referenced Job</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3623">Problem wth scm+cluster using https</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3598">Show current API version in System Report page</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3579">getUserRoles ldap search attributes filter</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3561">Feature switch to enable job pagination</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3511">“Not found” when pressing cancel on job edit view in French</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3483">Git plugin setup page does not preserve current values in Select fields</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3477">Set a max file size of 25mb configurable</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3476">Error 400 importing projects over 128kb</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3471">Security Advisory: Zip Slip directory traversal vulnerability</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3458">Fixed various french translations</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3456">ACL for uuid</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3430">Fixed various french translations</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3429">importOptions missplaced in yaml/xml export.</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3423">Create project via API with invalid project name does not return error</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3421">BUG: Job Options not appearing in Duplicated Jobs</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3420">Using variable in Storage path job options</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3410">Default UI language set to En ignored - revert to browser preferred value</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3384">duplicate jobs page doesn’t show options</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3379">rundeck access log contains “Ljava.lang.String;” instead of project</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/3290">Grails 3 Update</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/3185">resources.xml not created</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2598">Can’t pass option type file to a jobref</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2092">Using variable in Storage path job options</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/2062">Encrypt passwords stored in configuration files</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/1873">Don’t allow starting rundeckd multiple times.</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1812">ACL based on a job’s UUID</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/1387">Limit Multiple Executions</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/590">Make the “required role” in web.xml configurable</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbsbottom">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb bottom collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../index.html">Rundeck Documentation (3.0.24)</a></li>
+    
+    
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-3.0.0.html">Version 3.0.0 (2018-07-27)</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      
+      <li class="next"><a href="version-2.11.5.html">Version 2.11.5 (2018-07-06) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+history/version-3.0.0.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-3.0.0.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Enterprise for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Enterprise
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://rundeck.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2019 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2019-07-20T01:30:30UTC">2019-07-20T01:30:30UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+
+<!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2768099.js"></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>

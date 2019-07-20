@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>VMWare Plugin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="../../../jquery.hotkeys.js"></script>
+<script src="../../../jquery.autocomplete.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+window._pageRelpath="../../../";
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+<script src="../../../docs-autocomplete.js"></script>
+  <link rel="stylesheet" href="../../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control navquery" name="q" placeholder="Search" id="searchQuery">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbstop">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb top collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../../../index.html">Rundeck Documentation (3.0.24)</a></li>
+    
+        <li><a href="../../index.html">Administrator Guide</a></li>
+    
+        <li><a href="../index.html">Projects</a></li>
+    
+    
+    <li ><a href="index.html">Node Model Sources</a></li>
+    <li class="active"><a href="vmware-plugin.html">VMWare Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="resource-editor.html"><i class="glyphicon glyphicon-arrow-left"></i> Resource Editor</a></li>
+      
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/projects/resource-model-sources/vmware.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/projects/resource-model-sources/vmware.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#configuration-options">Configuration Options:</a></li>
+<li><a href="#authentication-options">Authentication Options:</a></li>
+<li><a href="#connecting-using-certificate">Connecting using Certificate</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">VMWare Plugin</h1>
+</div>
+<p>The VMWare resource model plugin gets the VMs from a VSphere ESXi server or VCenter Server as Rundeck Nodes.</p>
+<h3 id="configuration-options">Configuration Options:</h3>
+<ul>
+<li><strong>Custom Mapping</strong>:</li>
+</ul>
+<p>The custom mapping option allows you to get custom/default node attribute based on Vmware API values. Add custom mappings in the form <code>attributeName.selector=vmAttribute</code> or <code>attributeName.default=value</code>, separated by new line.</p>
+<p>For example, to add a <code>status</code> attribute based on a VM’s attribute, you can use <code>status.selector=guest.guestState</code></p>
+<p>To create an attribute based on concatenated fields, used comma to concatenated them: <code>nodename.selector=vm.name,vm.dataCenter</code></p>
+<p>Custom tags can be added based on VM’s attributes, for example <code>tags.selector=guest.guestState,guest.toolsStatus</code></p>
+<p>Default values can be added using <code>attributeName.default=format</code>.</p>
+<p>Also, the default values can be used per <code>osFamily</code> value, for example: <code>username.windows.default=Administrator</code>, <code>username.linux.default=root</code></p>
+<p>Example of a custom mapping:</p>
+<pre><code>username.default=rundeck
+username.windows.default=Administrator
+username.linux.default=root
+node-executor.windows.default=WinRMPython
+file-copier.windows.default=WinRMcpPython
+winrm-password-storage-path.windows.default=keys/vwmare/windows.password
+nodename.selector=vm.name,vm.dataCenter</code></pre>
+<p>In case you work on multiples Data-Center environment, you can use the Data-Center name as part of the node name, to avoid duplicate nodes from VMs that has the same name. For example, add this on the custom mapping: <code>nodename.selector=vm.name,vm.dataCenter</code></p>
+<ul>
+<li><strong>Just Running VMs.</strong>: Filter by running vms</li>
+<li><strong>DataCenter</strong>: (Optional) filter by DataCenter. Leave it blank for all DataCenters</li>
+<li><strong>Display attribute with subgroups</strong>: Display node attribute with subgroups (format group.subgroup)</li>
+<li><strong>Attributes group</strong>: List attributes group to display of the VMs. Options are: Guest,Config,Runtime,Summary</li>
+</ul>
+<h3 id="authentication-options">Authentication Options:</h3>
+<ul>
+<li><strong>URL Server</strong>: URL of the Server, eg: https://vmware-server</li>
+<li><strong>Username</strong>: Login Username</li>
+<li><strong>Password</strong>: Username Password</li>
+<li><strong>Ignore SSL certificate</strong>: Connecting with the server ignoring the SSL certificate. If this is false, you will need to add the certificate to the truststore.</li>
+</ul>
+<h3 id="connecting-using-certificate">Connecting using Certificate</h3>
+<p>For now, to verify the certificate you need to add it to the truststore of Rundeck or Java:</p>
+<ul>
+<li>get the certificate from VSphere/VCenter Server:</li>
+</ul>
+<pre><code>openssl s_client -showcerts -connect server:443</code></pre>
+<ul>
+<li>put the certificate on a file, for example: <code>vmware-vm.cert</code></li>
+</ul>
+<p>Certificates are PEM encoded and start with <code>-BEGIN CERTIFICATE--</code> end with <code>--END CERTIFICATE--</code> inclusive.</p>
+<ul>
+<li>Add the certificate to the truststore</li>
+</ul>
+<pre><code>keytool -import -alias WmWare-cert -file vmware-vm.cert -keystore  $RDECK_BASE/etc/truststore -storepass adminadmin
+</code></pre>
+<p>For Rundeck launcher, the truststore file will be located on <code>$RDECK_BASE/etc/</code>, for deb/rpm package will be located on <code>/etc/rundeck/ssl/</code></p>
+<ul>
+<li>(Optional) You can also add the certificate to the JVM</li>
+</ul>
+<pre><code>keytool -import -alias WmWare-cert -file vmware-vm.cert -keystore $JAVA_HOME/lib/security/cacerts -storepass changeit
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbsbottom">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb bottom collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../../../index.html">Rundeck Documentation (3.0.24)</a></li>
+    
+        <li><a href="../../index.html">Administrator Guide</a></li>
+    
+        <li><a href="../index.html">Projects</a></li>
+    
+    
+    <li ><a href="index.html">Node Model Sources</a></li>
+    <li class="active"><a href="vmware-plugin.html">VMWare Plugin</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="resource-editor.html"><i class="glyphicon glyphicon-arrow-left"></i> Resource Editor</a></li>
+      
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/projects/resource-model-sources/vmware.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/projects/resource-model-sources/vmware.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Enterprise for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Enterprise
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://rundeck.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2019 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2019-07-20T01:30:30UTC">2019-07-20T01:30:30UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../../../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+
+<!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2768099.js"></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
