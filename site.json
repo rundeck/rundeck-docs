@@ -1456,6 +1456,22 @@
                     }
                     ,
                 {
+                    "srcpath": "history/version-3.0.24.md",
+                    "title": "Version 3.0.24 (2019-07-19)",
+                    "outpath": "history/version-3.0.24.html",
+
+                        "alltitles": "Version History / Version 3.0.24 (2019-07-19)"
+                    }
+                    ,
+                {
+                    "srcpath": "history/version-3.0.23.md",
+                    "title": "Version 3.0.23 (2019-06-19)",
+                    "outpath": "history/version-3.0.23.html",
+
+                        "alltitles": "Version History / Version 3.0.23 (2019-06-19)"
+                    }
+                    ,
+                {
                     "srcpath": "history/version-3.0.22.md",
                     "title": "Version 3.0.22 (2019-05-13)",
                     "outpath": "history/version-3.0.22.html",
