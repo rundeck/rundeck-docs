@@ -1416,6 +1416,14 @@
                     }
                     ,
                 {
+                    "srcpath": "upgrading/upgrading-to-rundeck-3.1.md",
+                    "title": "Upgrade to Rundeck 3.1",
+                    "outpath": "upgrading/upgrade-to-rundeck-3.1.html",
+
+                        "alltitles": "Upgrading / Upgrade to Rundeck 3.1"
+                    }
+                    ,
+                {
                     "srcpath": "upgrading/upgrading-to-rundeck3.md",
                     "title": "Upgrade to Rundeck 3.X",
                     "outpath": "upgrading/upgrade-to-rundeck-3.x.html",
