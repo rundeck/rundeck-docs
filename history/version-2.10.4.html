@@ -8,42 +8,21 @@
   <meta name="author" content="greg" />
   <meta name="date" content="01/18/2018" />
 <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i" rel="stylesheet">
-<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-
-<!-- Latest compiled and minified JavaScript -->
-
-<script type="text/javascript">
-var jq = jQuery.noConflict();
-jq(document).ready(function(){
-  jq('.navbar-burger').click(function(){
-    jq('.navbar-menu').toggle();
-  });
-})
-jq(window).scroll(function() {
-    if (jq(this).scrollTop() > 50 ) {
-        jq('.scrolltop:hidden').stop(true, true).fadeIn();
-    } else {
-        jq('.scrolltop').stop(true, true).fadeOut();
-    }
-});
-jq(function(){jq(".scrollitem").click(function(){jq("html,body").animate({scrollTop:jq("body").offset().top},"1000");return false})})
-jq(window).scroll(function() {    
-    var scroll = jq(window).scrollTop();
-    if (scroll >= 250) {
-      jq(".navbar").addClass("has-shadow");
-    } else {
-      jq(".navbar").removeClass("has-shadow");
-    }
-}); //missing );
-
+<script>
 window._pageRelpath="../";
-jQuery(function(){
-  jQuery('table').addClass('table table-condensed table-responsive'); 
-  // jQuery('[data-toggle="popover"]').popover();
-});
 </script>
-
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<script
+src="https://code.jquery.com/jquery-2.2.4.min.js"
+integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+crossorigin="anonymous"></script>
+<script
+src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"
+integrity="sha256-xI/qyl9vpwWFOXz7+x/9WkG5j/SVnSw21viy8fWwbeE="
+crossorigin="anonymous"></script>
+<script src="../jquery.autocomplete.min.js"></script>
+<script src="../docs-autocomplete.js"></script>
+<!-- Latest compiled and minified JavaScript -->
   <link rel="stylesheet" href="../styles.css" type="text/css" />
 </head>
 <body data-spy="scroll" data-target=".toc-nav" class="navbar-is-fixed-top">
@@ -73,7 +52,7 @@ jQuery(function(){
         <form role="search"  action="/search/">
           <div class="field has-addons">
             <div class="control">
-              <input class="input" type="text" placeholder="Keyword">
+              <input type="text" class="input form-control navquery" name="q" placeholder="Search" id="searchQuery" autocomplete="off">
             </div>
             <div class="control">
               <button type="submit" class="button red-button">
@@ -240,7 +219,7 @@ jQuery(function(){
             <span class="copyright-text" style="font-weight:500;font-size:14px">©2019 Rundeck.
               All Rights Reserved.</span> 
               <br />
-              <span class="generated-date" title="2019-07-31T17:53:40UTC">2019-07-31T17:53:40UTC</span>
+              <span class="generated-date" title="2019-08-01T00:58:21UTC">2019-08-01T00:58:21UTC</span>
           </div>
         </div>
       </div>
