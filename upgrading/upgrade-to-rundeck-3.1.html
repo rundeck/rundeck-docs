@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Version 2.4.1</title>
+  <title>Upgrading to Rundeck 3.1</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
-  <meta name="author" content="greg" />
-  <meta name="date" content="01/30/2015" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="May 21, 2019" />
 <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i" rel="stylesheet">
 <script>
 window._pageRelpath="../";
@@ -76,21 +76,21 @@ crossorigin="anonymous"></script>
                         <li><a href="../index.html">Rundeck Documentation (3.1.0-rc2)</a></li>
                     
                 
-                <li ><a href="index.html">Version History</a></li>
-                <li class="active"><a href="version-2.4.1.html">Version 2.4.1 (2015-01-30)</a></li>
+                <li ><a href="index.html">Upgrading</a></li>
+                <li class="active"><a href="upgrade-to-rundeck-3.1.html">Upgrade to Rundeck 3.1</a></li>
             </ul>
             </div>
             <div class="column">
             <ul>
                 
-                <li class="next"><a href="version-2.4.0.html">Version 2.4.0 (2014-12-16) <i class="fas fa-arrow-right"></i></a></li>
+                <li class="next"><a href="upgrade-to-rundeck-3.x.html">Upgrade to Rundeck 3.X <i class="fas fa-arrow-right"></i></a></li>
             </ul>
             </div>
         </div>
     </nav>
     <div class="breadcrumb-footer">
-        <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+history/version-2.4.1.md&template=documentation-bug.md"> <i class="fas fa-flag"></i> Report a problem </a>
-        <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-2.4.1.md"><i class="fas fa-pencil-alt"></i> Edit this page</a>
+        <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+upgrading/upgrading-to-rundeck-3.1.md&template=documentation-bug.md"> <i class="fas fa-flag"></i> Report a problem </a>
+        <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/upgrading/upgrading-to-rundeck-3.1.md"><i class="fas fa-pencil-alt"></i> Edit this page</a>
     </div>
 </div>
 <div id="docbody">
@@ -100,12 +100,8 @@ crossorigin="anonymous"></script>
 <section class="section sticky-toc">
 <div class="nav">
 <ul>
-<li><a href="#release-2.4.1">Release 2.4.1</a><ul>
-<li><a href="#compatibility-notes">Compatibility notes</a></li>
-<li><a href="#contributors">Contributors</a></li>
-<li><a href="#bug-reporters">Bug Reporters</a></li>
-<li><a href="#issues">Issues</a></li>
-</ul></li>
+<li><a href="#rpm-package">RPM package</a></li>
+<li><a href="#docker-using-openshift">Docker using OpenShift</a></li>
 </ul>
 </div>
 </div>
@@ -113,53 +109,21 @@ crossorigin="anonymous"></script>
 <div class="column">
 <section class="section content">
 <div class="page-header">
-<h1 class="title">Version 2.4.1</h1>
+<h1 class="title">Upgrading to Rundeck 3.1</h1>
 </div>
-<h1 id="release-2.4.1">Release 2.4.1</h1>
-<p>Date: 2015-01-30</p>
-<p>Name: <span style="color: limegreen"><span class="glyphicon glyphicon-bullhorn"></span> “americano limegreen bullhorn”</span></p>
-<p>This release has bug fixes.</p>
-<h2 id="compatibility-notes">Compatibility notes</h2>
-<p>See the <a href="http://rundeck.org/2.4.0/history/version-2.4.0.html">release notes for v2.4.0</a></p>
-<h2 id="contributors">Contributors</h2>
+<h2 id="rpm-package">RPM package</h2>
 <ul>
-<li>ETAI Opérations</li>
-<li>Greg Schueler (gschueler)</li>
-<li>Mark Bidewell (mbidewell)</li>
+<li>There is now only a single RPM package required (no rundeck-config anymore)</li>
 </ul>
-<h2 id="bug-reporters">Bug Reporters</h2>
+<p>Otherwise there should be no problem upgrading from Rundeck 3.0 to Rundeck 3.1</p>
+<p>If you are upgrading from an older version, please review the Upgrade Guide for the specific version.</p>
+<h2 id="docker-using-openshift">Docker using OpenShift</h2>
+<p>Some changes to the Docker image were added to support OpenShift, see <a href="https://github.com/rundeck/rundeck/pull/4826">#4826</a>.</p>
 <ul>
-<li>Farzy</li>
-<li>bdmorin</li>
-<li>gschueler</li>
-<li>jedblack</li>
-<li>mbidewell</li>
-<li>mezbiderli</li>
-<li>mgsococo</li>
-<li>mika</li>
-<li>richiereynolds</li>
-<li>russellballestrini</li>
-<li>smithtimamy</li>
-</ul>
-<h2 id="issues">Issues</h2>
-<ul>
-<li><a href="https://github.com/rundeck/rundeck/pull/1093">Fix ssh-agent variable names in documentation</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1091">Activity page/tabs: events for deleted jobs appear incorrectly, options for other jobs hidden</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1086">Run again with multi-valued enforced option doesn’t select values</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1084">Enter &lt;cr&gt; does not work under the activity view for a project</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1082">SSH plugin appends ^M to scripts, failing jobs to fail</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1079">timeout in job; rundeck doesn’t retry</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1078">User domain login field has too restrictive regex</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1066">2.4.0: upload jobs page: after uploading, action menus for new jobs are empty</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1065">2.4.0: job upload form radio buttons in wrong location</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1064">ERROR FrameworkProject - Cannot get nodes from [DirectoryResourceModelSource]</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1060">2.4.0 script plugin support ignoring the output of the file copier provider script</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1059">Script plugin no longer works after upgrading from 2.2.3 to 2.4.0</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/1058">As an end user, I would like specific error messages when job imports fail</a></li>
-<li><a href="https://github.com/rundeck/rundeck/pull/1057">Add destfilename expansion which contains the destinitation filename</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/991">Number of nodes wrong on “Run Again” in 2.2.1, even more wrong in 2.2.3!</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/990">Cascaded Options Don’t Display Value on “Run Again” in v2.2.3, was fine in 2.2.1</a></li>
-<li><a href="https://github.com/rundeck/rundeck/issues/937">/tmp/rundeck has wrong permissions (Debian package)</a></li>
+<li>The <code>rundeck</code> user’s default group needs to be <code>root(0)</code></li>
+<li>Any files and directories Rundeck uses need to have the appropriate <code>root</code> group and permissions set</li>
+<li>Use <code>chown=rundeck:root</code> in Dockerfile with <code>ADD</code> and <code>COPY</code></li>
+<li>Use <code>chmod 0775</code> on directories and files as appropriate</li>
 </ul>
 </section>
 </div>
@@ -176,21 +140,21 @@ crossorigin="anonymous"></script>
                         <li><a href="../index.html">Rundeck Documentation (3.1.0-rc2)</a></li>
                     
                 
-                <li ><a href="index.html">Version History</a></li>
-                <li class="active"><a href="version-2.4.1.html">Version 2.4.1 (2015-01-30)</a></li>
+                <li ><a href="index.html">Upgrading</a></li>
+                <li class="active"><a href="upgrade-to-rundeck-3.1.html">Upgrade to Rundeck 3.1</a></li>
             </ul>
             </div>
             <div class="column">
             <ul>
                 
-                <li class="next"><a href="version-2.4.0.html">Version 2.4.0 (2014-12-16) <i class="fas fa-arrow-right"></i></a></li>
+                <li class="next"><a href="upgrade-to-rundeck-3.x.html">Upgrade to Rundeck 3.X <i class="fas fa-arrow-right"></i></a></li>
             </ul>
             </div>
         </div>
     </nav>
     <div class="breadcrumb-footer">
-        <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+history/version-2.4.1.md&template=documentation-bug.md"> <i class="fas fa-flag"></i> Report a problem </a>
-        <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-2.4.1.md"><i class="fas fa-pencil-alt"></i> Edit this page</a>
+        <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+upgrading/upgrading-to-rundeck-3.1.md&template=documentation-bug.md"> <i class="fas fa-flag"></i> Report a problem </a>
+        <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/upgrading/upgrading-to-rundeck-3.1.md"><i class="fas fa-pencil-alt"></i> Edit this page</a>
     </div>
 </div>
 <footer class="brand-footer">

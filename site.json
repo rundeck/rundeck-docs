@@ -1416,6 +1416,14 @@
                     }
                     ,
                 {
+                    "srcpath": "upgrading/upgrading-to-rundeck-3.1.md",
+                    "title": "Upgrade to Rundeck 3.1",
+                    "outpath": "upgrading/upgrade-to-rundeck-3.1.html",
+
+                        "alltitles": "Upgrading / Upgrade to Rundeck 3.1"
+                    }
+                    ,
+                {
                     "srcpath": "upgrading/upgrading-to-rundeck3.md",
                     "title": "Upgrade to Rundeck 3.X",
                     "outpath": "upgrading/upgrade-to-rundeck-3.x.html",
@@ -1453,6 +1461,22 @@
                     "outpath": "history/version-3.1.0-rc2.html",
 
                         "alltitles": "Version History / Version 3.1.0-rc2 (2019-07-19)"
+                    }
+                    ,
+                {
+                    "srcpath": "history/version-3.0.24.md",
+                    "title": "Version 3.0.24 (2019-07-19)",
+                    "outpath": "history/version-3.0.24.html",
+
+                        "alltitles": "Version History / Version 3.0.24 (2019-07-19)"
+                    }
+                    ,
+                {
+                    "srcpath": "history/version-3.0.23.md",
+                    "title": "Version 3.0.23 (2019-06-19)",
+                    "outpath": "history/version-3.0.23.html",
+
+                        "alltitles": "Version History / Version 3.0.23 (2019-06-19)"
                     }
                     ,
                 {
