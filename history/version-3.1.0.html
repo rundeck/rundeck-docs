@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Version 3.1.0-rc2</title>
+  <title>Version 3.1.0</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="greg" />
-  <meta name="date" content="07/19/2019" />
+  <meta name="date" content="08/01/2019" />
 <link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i" rel="stylesheet">
 <script>
 window._pageRelpath="../";
@@ -77,20 +77,20 @@ crossorigin="anonymous"></script>
                     
                 
                 <li ><a href="index.html">Version History</a></li>
-                <li class="active"><a href="version-3.1.0-rc2.html">Version 3.1.0-rc2 (2019-07-19)</a></li>
+                <li class="active"><a href="version-3.1.0.html">Version 3.1.0 (2019-08-01)</a></li>
             </ul>
             </div>
             <div class="column">
             <ul>
                 
-                <li class="next"><a href="version-3.0.24.html">Version 3.0.24 (2019-07-19) <i class="fas fa-arrow-right"></i></a></li>
+                <li class="next"><a href="version-3.1.0-rc2.html">Version 3.1.0-rc2 (2019-07-19) <i class="fas fa-arrow-right"></i></a></li>
             </ul>
             </div>
         </div>
     </nav>
     <div class="breadcrumb-footer">
-        <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+history/version-3.1.0-rc2.md&template=documentation-bug.md"> <i class="fas fa-flag"></i> Report a problem </a>
-        <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-3.1.0-rc2.md"><i class="fas fa-pencil-alt"></i> Edit this page</a>
+        <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+history/version-3.1.0.md&template=documentation-bug.md"> <i class="fas fa-flag"></i> Report a problem </a>
+        <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-3.1.0.md"><i class="fas fa-pencil-alt"></i> Edit this page</a>
     </div>
 </div>
 <div id="docbody">
@@ -100,14 +100,18 @@ crossorigin="anonymous"></script>
 <section class="section sticky-toc">
 <div class="nav">
 <ul>
-<li><a href="#release-3.1.0-rc2">Release 3.1.0-rc2</a><ul>
-<li><a href="#notes">Notes</a><ul>
-<li><a href="#enhancements">Enhancements</a></li>
+<li><a href="#release-3.1.0">Release 3.1.0</a><ul>
+<li><a href="#upgrading">Upgrading</a></li>
+<li><a href="#enhancements">Enhancements</a><ul>
+<li><a href="#rundeck-plugin-repository">Rundeck Plugin Repository</a></li>
+<li><a href="#execution-cleaner">Execution Cleaner</a></li>
+<li><a href="#user-interface-enhancements">User Interface Enhancements</a></li>
+<li><a href="#misc">Misc</a></li>
+</ul></li>
 <li><a href="#bug-fixes">Bug Fixes</a></li>
 <li><a href="#security">Security</a></li>
 <li><a href="#plugins">Plugins</a></li>
 <li><a href="#docker">Docker</a></li>
-</ul></li>
 <li><a href="#issues">Issues</a></li>
 <li><a href="#contributors">Contributors</a></li>
 <li><a href="#bug-reporters">Bug Reporters</a></li>
@@ -119,21 +123,59 @@ crossorigin="anonymous"></script>
 <div class="column">
 <section class="section content">
 <div class="page-header">
-<h1 class="title">Version 3.1.0-rc2</h1>
+<h1 class="title">Version 3.1.0</h1>
 </div>
-<h1 id="release-3.1.0-rc2">Release 3.1.0-rc2</h1>
-<p>Date: 2019-07-19</p>
+<h1 id="release-3.1.0">Release 3.1.0</h1>
+<p>Date: 2019-07-31</p>
 <p>Name: <span style="color: peru"><span class="glyphicon glyphicon-piggy-bank"></span> “mozzarella stick peru piggy-bank”</span></p>
-<h2 id="notes">Notes</h2>
-<h3 id="enhancements">Enhancements</h3>
+<h2 id="upgrading">Upgrading</h2>
+<p>See the upgrade documentation <a href="https://docs.rundeck.com/3.1.0-rc2/upgrading/upgrade-to-rundeck-3.1.html">here</a>.</p>
+<h2 id="enhancements">Enhancements</h2>
+<h3 id="rundeck-plugin-repository">Rundeck Plugin Repository</h3>
+<p>It is now easier than ever to discover and install plugins with the new plugin management system! This is enabled by default on new installations, however you may need to update the config for <code>deb</code> and <code>rpm</code> installations. Documentation can be found <a href="https://docs.rundeck.com/3.1.0/administration/configuration/repository.html">here</a>.</p>
+<figure>
+<img src="https://docs.rundeck.com/assets/releases/3_1_0/feature_repo_rainbow_small.gif" title="Taste the Rainbow!" alt="Taste the rainbow!" /><figcaption>Taste the rainbow!</figcaption>
+</figure>
+<h3 id="execution-cleaner">Execution Cleaner</h3>
+<p>Make manual execution cleanup a thing of the past! Configure the execution cleaner to your retention policy and let it handle the rest.</p>
+<p><img src="https://docs.rundeck.com/assets/releases/3_1_0/execution_cleanup_small.gif" /></p>
+<h3 id="user-interface-enhancements">User Interface Enhancements</h3>
+<p>Rundeck 3.1 has received numerous UI enhancements to streamline resource creation workflows and get more of the important information you need on the screen at the same time. Here are a few highlights:</p>
+<p><strong>Execution view</strong><br />
+<img src="https://docs.rundeck.com/assets/releases/3_1_0/execution_view.png" /></p>
+<p><strong>Activity view</strong><br />
+<img src="https://docs.rundeck.com/assets/releases/3_1_0/activity_view.png" /></p>
+<p><strong>Job Editor</strong><br />
+<img src="https://docs.rundeck.com/assets/releases/3_1_0/create_job.png" /></p>
+<p><strong>Create Project</strong><br />
+<img src="https://docs.rundeck.com/assets/releases/3_1_0/create_project.png" /></p>
+<p><strong>Project List</strong><br />
+<img src="https://docs.rundeck.com/assets/releases/3_1_0/project_list.png" /></p>
+<p><strong>Job list</strong><br />
+<img src="https://docs.rundeck.com/assets/releases/3_1_0/job_list.png" /></p>
+<h3 id="misc">Misc</h3>
 <ul>
-<li>More UI Improvements</li>
-<li>API: scheduler takeover endpoint can specify multiple job IDs</li>
+<li>Options <a href="https://github.com/rundeck/rundeck/pull/4599">#4599</a>:
+<ul>
+<li>Preserve allowed value list order (sort is now optional)</li>
+<li>Specify multi-value delimiter</li>
+</ul></li>
+<li>Authentication and authorization:
+<ul>
+<li>Ability to require a role for Rundeck access <a href="https://github.com/rundeck/rundeck/pull/4820">#4820</a>.</li>
+<li>ACLs can use “notBy” instead of “by” to deny access to non matching groups/users <a href="https://github.com/rundeck/rundeck/pull/4769">#4769</a></li>
+</ul></li>
+<li>Jobs:
+<ul>
+<li>Add default Log filters at the project/framework level. For example, use the Mask Passwords plugin for all jobs in a project. <a href="https://github.com/rundeck/rundeck/pull/4806">#4806</a></li>
+<li>Configuration to allow unsantized html in log output. <a href="https://github.com/rundeck/rundeck/pull/4784">#4784</a></li>
+</ul></li>
+<li>API: Scheduler takeover endpoint can specify multiple job IDs</li>
 <li>Added option to Enable/Disable notifications for Referenced Jobs <a href="https://github.com/rundeck/rundeck/pull/5026">#5026</a></li>
-<li>(Enterprise) License key can be shared among cluster members using</li>
+<li>(Enterprise) License key can be shared among cluster members using database storage</li>
 <li>(Enterprise) Execution cleanup process can clean up executions from dead cluster members</li>
 </ul>
-<h3 id="bug-fixes">Bug Fixes</h3>
+<h2 id="bug-fixes">Bug Fixes</h2>
 <ul>
 <li>Project List page correctly loads project controls</li>
 <li>Remote Option values using allowed values was not validating correctly</li>
@@ -142,24 +184,43 @@ crossorigin="anonymous"></script>
 <li>Admin view of user Profile page with lots of API tokens will load correctly</li>
 <li>(Enterprise) Cluster manager: can select all orphan jobs to reassign scheduler owner</li>
 </ul>
-<h3 id="security">Security</h3>
+<h2 id="security">Security</h2>
 <ul>
 <li>Updated dependencies flagged due to CVEs <a href="https://github.com/rundeck/rundeck/pull/5047">#5047</a></li>
 </ul>
-<h3 id="plugins">Plugins</h3>
+<h2 id="plugins">Plugins</h2>
 <ul>
-<li>Added “Attribute Match Node Enhancer” plugin: customize node icons, or inject new node attributes based on other attributes</li>
+<li>Added “Attribute Match Node Enhancer” plugin for customizing node icons and injecting new node attributes based on other attributes</li>
 <li>(Enterprise) Ruleset workflow strategy can use variables on both sides of conditional comparisons</li>
 <li>(Enterprise) SQL Runner can use inline SQL script</li>
-<li>(Enterprise) File Transfer source should allow wildcards</li>
+<li>(Enterprise) File Transfer source allows wildcards</li>
 </ul>
-<h3 id="docker">Docker</h3>
+<h2 id="docker">Docker</h2>
 <ul>
+<li>Images are OpenShift compatible <a href="https://github.com/rundeck/rundeck/pull/4826">#4826</a></li>
 <li>Sync Rundeck profile from LDAP user attributes config option <a href="https://github.com/rundeck/rundeck/pull/4995">#4995</a></li>
 <li>Template added for plugin repository feature <a href="https://github.com/rundeck/rundeck/pull/5040">#5040</a></li>
 <li>(Enterprise) Updated cluster config defaults so that clustering works more naturally OOTB</li>
 </ul>
 <h2 id="issues">Issues</h2>
+<p><a href="https://github.com/rundeck/rundeck/milestone/113">Milestone 3.1.0</a></p>
+<ul>
+<li><a href="https://github.com/rundeck/rundeck/pull/5112">Fix: empty project list shows white box on home page</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/5111">Updating transitive dependencies used in plugins</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/5110">Address library vulnerabilities</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/5106">Issue #5077 - Dependency updates for CVEs: bouncycastle, spring, c3p0, moment.js</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/5103">Restores Previous and Next in Execution page #5102</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/5102">missing “previous” and “next” execution buttons in rd3rc2</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/5098">Fix #5080 by sending the chosen file copier plugin type even if it has no config properties.</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/5095">Convert projectStorageType key to lowercase</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/5091">Support quartz.threadPool.threadCount parameter in Docker image</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/5089">on cluster environment , the job scheduled should respect the remote exec policies</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/5084">Referenced Job resolve variables on timeout field #5046</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/5080">Error 500 “provider name was null for Service: FileCopier” at the moment of define “stub” on file copier while creating a new Project</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/5077">Dependency updates for CVEs: bouncycastle, spring, c3p0, moment.js</a></li>
+<li><a href="https://github.com/rundeck/rundeck/issues/5046">Job Timeout using an Option Value is not honored when a Job is Referenced</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/5041">fix #4781 Options from URL not filled when job is scheduled</a></li>
+</ul>
 <p><a href="https://github.com/rundeck/rundeck/milestone/109">Milestone 3.1.0-RC2</a></p>
 <ul>
 <li><a href="https://github.com/rundeck/rundeck/pull/5076">Change in the async call for SCM gui #4998</a></li>
@@ -241,10 +302,14 @@ crossorigin="anonymous"></script>
 <li><a href="https://github.com/rundeck/rundeck/issues/4149">RD3 GUI: When displaying overview page with a big amount of projects ( over 15 ) the last ones may not load “configure” and “create job” buttons correctly</a></li>
 <li><a href="https://github.com/rundeck/rundeck/issues/3518">Tooltip always shows the wrong time (unless timezone is equal to Zulu/UTC)</a></li>
 </ul>
+<p><a href="https://github.com/rundeck/rundeck/milestone/80">Milestone 3.1.0-RC1</a> * <a href="https://github.com/rundeck/rundeck/pull/4826">Update Docker images to be compatible with OpenShift</a> * <a href="https://github.com/rundeck/rundeck/pull/4523">Making the translation of messages to Brazilian Portuguese</a> * <a href="https://github.com/rundeck/rundeck/pull/4521">Misc nodes page UI updates</a> * <a href="https://github.com/rundeck/rundeck/pull/4516">removed UUID validation of jobRef</a> * <a href="https://github.com/rundeck/rundeck/pull/4515">Improvement for audit.log file size</a> * <a href="https://github.com/rundeck/rundeck/pull/4509">Add secondary node filter for jobs: Exclude filter</a> * <a href="https://github.com/rundeck/rundeck/pull/4508">Node status UI attributes</a> * <a href="https://github.com/rundeck/rundeck/issues/4504">Update copyright</a> * <a href="https://github.com/rundeck/rundeck/pull/4503">Fix #4488. Help Grails write output stream correctly on Tomcat 7.</a> * <a href="https://github.com/rundeck/rundeck/pull/4500">Render the SSO login button in a more sensible way.</a> * <a href="https://github.com/rundeck/rundeck/pull/4495">Update repository version.</a> * <a href="https://github.com/rundeck/rundeck/issues/4488">API job import fails on WriteListener error</a> * <a href="https://github.com/rundeck/rundeck/pull/4485">Feature/community news component</a> * <a href="https://github.com/rundeck/rundeck/pull/4482">New scheduled execution stats table</a> * <a href="https://github.com/rundeck/rundeck/pull/4476">Fix project/framework prop resolution</a> * <a href="https://github.com/rundeck/rundeck/issues/4475">Some framework/project plugin property resolution is not correct</a> * <a href="https://github.com/rundeck/rundeck/pull/4474">Notification email template with log output: use blank when not included</a> * <a href="https://github.com/rundeck/rundeck/pull/4472">Job options hidden1</a> * <a href="https://github.com/rundeck/rundeck/issues/4471">UUID validation of jobRef breaks bulk import of jobs in clean instance of RunDeck</a> * <a href="https://github.com/rundeck/rundeck/pull/4468">Disable JobStats because it produces a deadlock on mssql.</a> * <a href="https://github.com/rundeck/rundeck/pull/4461">Updates the Copyright date in the footer and licenses page</a> * <a href="https://github.com/rundeck/rundeck/pull/4460">Feature/version notification</a> * <a href="https://github.com/rundeck/rundeck/pull/4457">Cleanup: orchestrator node processor logging</a> * <a href="https://github.com/rundeck/rundeck/pull/4455">Fix #4454 resume correct step context after handler</a> * <a href="https://github.com/rundeck/rundeck/issues/4454">Wrong step id logged in rdlog when error handler executed</a> * <a href="https://github.com/rundeck/rundeck/pull/4453">Fix race condition/workflow state bug</a> * <a href="https://github.com/rundeck/rundeck/pull/4452">Remove extraneous login module config</a> * <a href="https://github.com/rundeck/rundeck/pull/4446">Docker - Fix key for project storage type</a> * <a href="https://github.com/rundeck/rundeck/issues/4445">Docker - Unable to set project storage type</a> * <a href="https://github.com/rundeck/rundeck/pull/4444">Fix rd-acl tool in Docker image</a> * <a href="https://github.com/rundeck/rundeck/issues/4443">Notification email template with log output: use blank when not included</a> * <a href="https://github.com/rundeck/rundeck/pull/4441">Add API endpoint that allows a user to list their roles</a> * <a href="https://github.com/rundeck/rundeck/issues/4436">rd-acl not running on docker version: /home/greg/.sdkman/candidates/java/8.0.172-zulu/jre/bin/java: No such file or directory</a> * <a href="https://github.com/rundeck/rundeck/issues/4435">Very large Rundeck.audit.log</a> * <a href="https://github.com/rundeck/rundeck/pull/4433">Add tomcat api tests</a> * <a href="https://github.com/rundeck/rundeck/pull/4432">Fix #4179 kill job reference thread when parent is killed</a> * <a href="https://github.com/rundeck/rundeck/pull/4431">Job detail in execution xml for log storage</a> * <a href="https://github.com/rundeck/rundeck/issues/4430">loginmodule unnecessary overwritten in Docker instance ignoring file</a> * <a href="https://github.com/rundeck/rundeck/pull/4424">Docker CSP config: Ensure newlines are added when options are rendered</a> * <a href="https://github.com/rundeck/rundeck/issues/4423">Docker - CSP config overrides on same line</a> * <a href="https://github.com/rundeck/rundeck/issues/4414">Job detail in execution xml for log storage</a> * <a href="https://github.com/rundeck/rundeck/pull/4393">Adds Plugin provider metadata</a> * <a href="https://github.com/rundeck/rundeck/pull/4344">Add option values plugin type. Fixes issue 77</a> * <a href="https://github.com/rundeck/rundeck/issues/4179">Killing parent job doesn’t kill running child jobs ( in 3.0.x , not able to kill parent job )</a> * <a href="https://github.com/rundeck/rundeck/issues/4135">Feature request : hide unmodifyable job options, such as secrets</a> * <a href="https://github.com/rundeck/rundeck/issues/3443">Job step skipped for no apparent reason</a> * <a href="https://github.com/rundeck/rundeck/issues/77">Local script option provider</a></p>
 <h2 id="contributors">Contributors</h2>
 <ul>
-<li>Alberto Hormazabal</li>
+<li>Alberto Hormazabal (ahormazabal)</li>
 <li>Alex Honor (ahonor)</li>
+<li>Antoine Leroyer (aleroyer)</li>
+<li>Can Hanhan (finarfin)</li>
+<li>carlos (carlosrfranco)</li>
 <li>Diego Queiroz (DiegoQueiroz)</li>
 <li>Evan Farrell (moosilauke18)</li>
 <li>Greg Schueler (gschueler)</li>
@@ -252,25 +317,36 @@ crossorigin="anonymous"></script>
 <li>Jaime Tobar (jtobard)</li>
 <li>Jesse Marple (jessemarple)</li>
 <li>Luis Toledo (ltamaster)</li>
+<li>Stefan Kirrmann (kirrmann)</li>
 <li>Stephen Joyner (sjrd218)</li>
-<li>carlos (carlosrfranco)</li>
 </ul>
 <h2 id="bug-reporters">Bug Reporters</h2>
 <ul>
-<li>DiegoQueiroz</li>
 <li>ahormazabal</li>
+<li>aleroyer</li>
+<li>am312</li>
 <li>boudekerk</li>
 <li>carlosrfranco</li>
 <li>cwaltherf</li>
+<li>DiegoQueiroz</li>
+<li>finarfin</li>
 <li>gschueler</li>
+<li>hs-hub-world</li>
+<li>jairov4</li>
 <li>javiergoni</li>
+<li>jbanda15</li>
 <li>jessemarple</li>
+<li>JPst</li>
 <li>jtobard</li>
+<li>kirrmann</li>
 <li>ltamaster</li>
 <li>marcbejerano</li>
+<li>MegaDrive68k</li>
 <li>menathor</li>
 <li>moosilauke18</li>
 <li>nmamn</li>
+<li>ProTip</li>
+<li>RolandVExp</li>
 <li>sebastianbello</li>
 <li>sjrd218</li>
 <li>tintranvan</li>
@@ -291,20 +367,20 @@ crossorigin="anonymous"></script>
                     
                 
                 <li ><a href="index.html">Version History</a></li>
-                <li class="active"><a href="version-3.1.0-rc2.html">Version 3.1.0-rc2 (2019-07-19)</a></li>
+                <li class="active"><a href="version-3.1.0.html">Version 3.1.0 (2019-08-01)</a></li>
             </ul>
             </div>
             <div class="column">
             <ul>
                 
-                <li class="next"><a href="version-3.0.24.html">Version 3.0.24 (2019-07-19) <i class="fas fa-arrow-right"></i></a></li>
+                <li class="next"><a href="version-3.1.0-rc2.html">Version 3.1.0-rc2 (2019-07-19) <i class="fas fa-arrow-right"></i></a></li>
             </ul>
             </div>
         </div>
     </nav>
     <div class="breadcrumb-footer">
-        <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+history/version-3.1.0-rc2.md&template=documentation-bug.md"> <i class="fas fa-flag"></i> Report a problem </a>
-        <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-3.1.0-rc2.md"><i class="fas fa-pencil-alt"></i> Edit this page</a>
+        <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+history/version-3.1.0.md&template=documentation-bug.md"> <i class="fas fa-flag"></i> Report a problem </a>
+        <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-3.1.0.md"><i class="fas fa-pencil-alt"></i> Edit this page</a>
     </div>
 </div>
 <footer class="brand-footer">

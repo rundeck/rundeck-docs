@@ -1449,10 +1449,18 @@
                     ,
                 {
                     "srcpath": "history/changelog.md",
-                    "title": "Changelog (2019-07-19)",
+                    "title": "Changelog (2019-08-01)",
                     "outpath": "history/changelog.html",
 
-                        "alltitles": "Version History / Changelog (2019-07-19)"
+                        "alltitles": "Version History / Changelog (2019-08-01)"
+                    }
+                    ,
+                {
+                    "srcpath": "history/version-3.1.0.md",
+                    "title": "Version 3.1.0 (2019-08-01)",
+                    "outpath": "history/version-3.1.0.html",
+
+                        "alltitles": "Version History / Version 3.1.0 (2019-08-01)"
                     }
                     ,
                 {
