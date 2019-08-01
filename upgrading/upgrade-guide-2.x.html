@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Upgrade Guide</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Greg Schueler" />
+  <meta name="date" content="April 15, 2015" />
+<link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i" rel="stylesheet">
+<script>
+window._pageRelpath="../";
+</script>
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<script
+src="https://code.jquery.com/jquery-2.2.4.min.js"
+integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+crossorigin="anonymous"></script>
+<script
+src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"
+integrity="sha256-xI/qyl9vpwWFOXz7+x/9WkG5j/SVnSw21viy8fWwbeE="
+crossorigin="anonymous"></script>
+<script src="../jquery.autocomplete.min.js"></script>
+<script src="../docs-autocomplete.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../styles.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav" class="navbar-is-fixed-top">
+<nav role="navigation" aria-label="main navigation" class="navbar is-fixed-top">
+  <div class="container">
+    <div class="navbar-brand"><a href="https://www.rundeck.com/open-source" class="navbar-item logo"><span
+          data-v-ddc5174c=""><svg width="159" height="23" viewBox="0 0 159 23" xmlns="http://www.w3.org/2000/svg"
+            class="logo-image" data-v-ddc5174c="">
+            <g class="logo-type" fill="none" fill-rule="evenodd" data-v-ddc5174c="">
+              <path
+                d="M36.133 10.399v-6.26h1.073c2.78 0 4.17 1.01 4.17 3.028 0 2.155-1.43 3.232-4.285 3.232h-.959zm6.963.332c.813-1.005 1.219-2.206 1.219-3.603 0-1.788-.648-3.227-1.942-4.317-1.174-.98-3.081-1.47-5.722-1.47h-3.535v19.725h3.017v-8.074h.542l5.71 8.074h3.69l-6.189-8.407c1.33-.28 2.4-.923 3.21-1.928zM60.561 13.222c0 1.72-.28 2.96-.842 3.716-.836 1.134-2.02 1.7-3.547 1.7-1.52 0-2.697-.566-3.534-1.7-.56-.783-.84-2.021-.84-3.716V1.341H48.78V14.04c0 2.077.656 3.789 1.968 5.135 1.467 1.499 3.276 2.247 5.424 2.247 2.15 0 3.961-.748 5.438-2.247 1.312-1.346 1.967-3.058 1.967-5.135V1.341h-3.016v11.881zM82.944 15.048L68.367 0v21.065h3.016V7.256l14.577 15.01V1.341h-3.016zM100.938 16.428a6.872 6.872 0 0 1-2.434 1.418c-.897.282-2.024.422-3.379.422h-1.359V4.138h1.36c2.571 0 4.518.602 5.838 1.802 1.468 1.346 2.201 3.1 2.201 5.264 0 2.146-.742 3.887-2.227 5.224m2.175-12.544c-1.019-.92-2.153-1.571-3.404-1.955-1.166-.392-2.753-.588-4.764-.588H90.75v19.724h4.142c2.028 0 3.595-.183 4.7-.55 1.182-.365 2.312-1.017 3.391-1.954 2.15-1.873 3.224-4.325 3.224-7.357 0-3.024-1.03-5.463-3.094-7.32M110.001 21.065h11.03v-2.797h-8.014v-6.592h7.78V8.878h-7.78V4.14h8.014V1.341h-11.03zM126.52 4.574c-1.684 1.966-2.526 4.206-2.526 6.72 0 2.8 1.006 5.194 3.017 7.177 2.02 1.968 4.458 2.951 7.314 2.951 1.9 0 3.711-.48 5.437-1.442v-3.59c-.49.409-.96.758-1.404 1.047-.445.29-.873.52-1.288.69-.743.34-1.644.512-2.706.512-2.054 0-3.789-.712-5.205-2.133-1.415-1.424-2.122-3.17-2.122-5.24 0-2.094.707-3.864 2.122-5.313 1.407-1.457 3.138-2.184 5.192-2.184 1.865 0 3.668.72 5.411 2.159V2.402c-1.674-.963-3.408-1.444-5.204-1.444-3.288 0-5.967 1.205-8.039 3.615M149.912 10.27l9.037-8.928h-4.027l-7.78 7.869V1.34h-3.016v19.724h3.016v-8.163l.62-.613 7.199 8.776H159z"
+                fill="#000" data-v-ddc5174c=""></path>
+              <g class="logo-arrow" fill="#F7403A" data-v-ddc5174c="">
+                <path
+                  d="M0 21.065h13.404l2.501-3.945H2.501zM15.905 5.286L13.404 1.34H0l2.501 3.945zM18.406 9.23H5.002l1.25 1.973-1.25 1.973h13.404l1.25-1.973z"
+                  data-v-ddc5174c=""></path>
+              </g>
+            </g>
+          </svg></span></a> <a role="button" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample"
+        class="navbar-burger burger"><span aria-hidden="true"></span> <span aria-hidden="true"></span> <span
+          aria-hidden="true"></span></a></div>
+    <div class="navbar-menu">
+      <div class="navbar-start">
+      </div>
+      <div class="navbar-end">
+        <div class="navbar-item">
+        <form role="search"  action="/search/">
+          <div class="field has-addons">
+            <div class="control">
+              <input type="text" class="input form-control navquery" name="q" placeholder="Search" id="searchQuery" autocomplete="off">
+            </div>
+            <div class="control">
+              <button type="submit" class="button red-button">
+                Search
+              </button>
+            </div>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="container">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+        <div class="columns">
+            <div class="column is-two-thirds">
+            <ul>
+                
+                    
+                        <li><a href="../index.html">Rundeck Documentation (3.1.0)</a></li>
+                    
+                
+                <li ><a href="index.html">Upgrading</a></li>
+                <li class="active"><a href="upgrade-guide-2.x.html">Upgrade Guide (2.x)</a></li>
+            </ul>
+            </div>
+            <div class="column">
+            <ul>
+                
+                
+            </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="breadcrumb-footer">
+        <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+upgrading/upgrading.md&template=documentation-bug.md"> <i class="fas fa-flag"></i> Report a problem </a>
+        <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/upgrading/upgrading.md"><i class="fas fa-pencil-alt"></i> Edit this page</a>
+    </div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="columns">
+<div class="column is-one-quarter toc-nav">
+<section class="section sticky-toc">
+<div class="nav">
+<ul>
+<li><a href="#upgrading-to-rundeck-2.11">Upgrading to Rundeck 2.11</a></li>
+<li><a href="#upgrading-to-rundeck-2.8.1-from-2.8.0">Upgrading to Rundeck 2.8.1 from 2.8.0</a><ul>
+<li><a href="#important-note">Important Note</a></li>
+</ul></li>
+<li><a href="#upgrading-to-rundeck-2.8-from-earlier-versions">Upgrading to Rundeck 2.8 from earlier versions</a><ul>
+<li><a href="#java-8-is-required">Java 8 is required</a></li>
+</ul></li>
+<li><a href="#upgrading-to-rundeck-2.7-from-2.6.x">Upgrading to Rundeck 2.7 from 2.6.x</a><ul>
+<li><a href="#java-8-is-required-1">Java 8 is required</a></li>
+<li><a href="#default-database-h2-upgraded-to-1.4.x">Default database (H2) upgraded to 1.4.x</a></li>
+<li><a href="#cli-tools-are-gone">CLI tools are gone</a></li>
+<li><a href="#debianrpm-startup-script-changes">Debian/RPM startup script changes</a></li>
+<li><a href="#inline-script-token-expansion-changes">Inline script token expansion changes</a></li>
+<li><a href="#jetty-embedded-server-was-upgraded-to-9.0.x">Jetty embedded server was upgraded to 9.0.x</a></li>
+</ul></li>
+<li><a href="#upgrading-to-rundeck-2.5">Upgrading to Rundeck 2.5</a><ul>
+<li><a href="#java-7-required">Java 7 required</a></li>
+<li><a href="#scheduled-jobs-with-required-option-default-values">Scheduled Jobs with required option default values</a></li>
+<li><a href="#rd-project-create-of-existing-project">rd-project create of existing project</a></li>
+<li><a href="#database-schema">Database schema</a></li>
+<li><a href="#project-definitions-stored-in-db">Project definitions stored in DB</a></li>
+<li><a href="#web.xml-changes">web.xml changes</a></li>
+</ul></li>
+<li><a href="#upgrading-to-rundeck-2.1">Upgrading to Rundeck 2.1</a><ul>
+<li><a href="#database-schema-1">Database schema</a></li>
+<li><a href="#acl-policy-additions">ACL policy additions</a></li>
+</ul></li>
+<li><a href="#upgrading-to-rundeck-2.0-from-1.6.x">Upgrading to Rundeck 2.0 from 1.6.x</a></li>
+<li><a href="#clean-install">Clean install</a></li>
+<li><a href="#upgrading-jaas-properties-file">Upgrading JAAS properties file</a></li>
+<li><a href="#upgrading-an-existing-h2-database">Upgrading an existing H2 Database</a></li>
+<li><a href="#upgrading-an-existing-mysql-or-other-database">Upgrading an existing Mysql or other Database</a></li>
+</ul>
+</div>
+</div>
+</section>
+<div class="column">
+<section class="section content">
+<div class="page-header">
+<h1 class="title">Upgrade Guide</h1>
+</div>
+<h2 id="upgrading-to-rundeck-2.11">Upgrading to Rundeck 2.11</h2>
+<p>(If you are upgrading from a version earlier than 2.10.x, please peruse the rest of this document for any other issues regarding intermediate versions.)</p>
+<p>Potentially breaking changes:</p>
+<p><strong>RPM spec:</strong></p>
+<p>The <code>rundeck</code> user/group is now created within system UID ranges <a href="https://github.com/rundeck/rundeck/pull/3195">#3195</a>.</p>
+<p><strong>ACLs: Edit Project Configuration/Nodes GUI access level requirements changed:</strong></p>
+<p>Previously: GUI actions “Project &gt; Edit Configuration” and “Project &gt; Edit Nodes” required <code>admin</code> project access. Now: only <code>configure</code> level access is required.</p>
+<p>NOTE: API behavior was always this way, so this change simply aligns the access requirements.</p>
+<p>Potential security implications:</p>
+<ul>
+<li>users/roles granted <code>configure</code> access to a project will now be able to modify Project Nodes or Configuration via the GUI</li>
+<li>the same users/roles would already have this access if using the API</li>
+</ul>
+<p>See: <a href="https://github.com/rundeck/rundeck/pull/3084">#3084</a></p>
+<p><strong>ACLs: Job Definition visibility</strong></p>
+<p>A new ACL access level <code>view</code> is a subset of the <code>read</code> access level for jobs, and does not allow users to view the “Definition” tab of a Job, or download the XML/YAML definitions.</p>
+<p>ACLs which allow <code>read</code> to Jobs, will work as before. To disallow Job Definition viewing/downloading, you should change your ACLs to only allow <code>view</code> access.</p>
+<p><strong>Project Storage Type is now <code>db</code> by default:</strong></p>
+<p>If you want to continue using filesystem storage for project config/readme/motd files, you will need to set this in your <code>rundeck-config.properties</code> before upgrading:</p>
+<pre><code>rundeck.projectsStorageType=filesystem</code></pre>
+<p>Upgrading an existing <code>filesystem</code> configuration to <code>db</code> is automatic, and project configs/readme/motd will be loaded into DB storage at system startup.</p>
+<p>To encrypt the DB storage, you will need to <a href="../administration/configuration/plugins/bundled-plugins.html#jasypt-encryption-plugin" title="Administrator Guide - Rundeck Configuration - Configuring Plugins - Bundled Plugins - Jasypt Encryption Plugin">enable encryption for the “Project Configuration” storage layer</a>.</p>
+<h2 id="upgrading-to-rundeck-2.8.1-from-2.8.0">Upgrading to Rundeck 2.8.1 from 2.8.0</h2>
+<h3 id="important-note">Important Note</h3>
+<p>If you have previously installed Rundeck 2.8.0, using Mysql or H2 database, the 2.8.1 update will not work correctly. A DB schema change was required to fix a bug with Postgres and other databases: (<code>user</code> is a reserved word).</p>
+<p>If you upgrade from 2.7.x to 2.8.1 (skipping 2.8.0), or install 2.8.1 from scratch, you will <em>not</em> encounter this problem.</p>
+<p>Use the following methods to update your DB schema for Mysql or H2 if you are upgrading from 2.8.0 to 2.8.1:</p>
+<h4 id="mysql-upgrade-to-2.8.1-from-2.8.0">Mysql upgrade to 2.8.1 from 2.8.0</h4>
+<ol type="1">
+<li>Stop Rundeck</li>
+<li>Run the following SQL script, to rename the <code>user</code> column in the <code>job_file_record</code> table to <code>rduser</code>.</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql"><code class="sourceCode sql"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">use</span> rundeck;</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">alter</span> <span class="kw">table</span> job_file_record <span class="kw">change</span> <span class="kw">column</span> <span class="fu">user</span> rduser <span class="dt">varchar</span>(<span class="dv">255</span>) <span class="kw">not</span> <span class="kw">null</span>;</a></code></pre></div>
+<p>After running this script, you can proceed with the 2.8.1 upgrade.</p>
+<h4 id="h2-upgrade-to-2.8.1-from-2.8.0">H2 upgrade to 2.8.1 from 2.8.0</h4>
+<p>For H2, you will need to do the following:</p>
+<ol type="1">
+<li>Shut down Rundeck.</li>
+<li>(backup your H2 database contents, see <a href="../administration/maintenance/backup-and-recovery.html" title="Administrator Guide - Maintenance - Backup and Recovery">Backup and Recovery</a>.</li>
+<li>Use the h2 <a href="http://h2database.com/javadoc/org/h2/tools/RunScript.html"><code>RunScript</code></a> command to run the following SQL script.</li>
+</ol>
+<p>To run the script you will need:</p>
+<ul>
+<li><p>URL defining the location of your H2 database. This is the same as the <code>dataSource.url</code> defined in your <code>rundeck-config.properties</code>.</p>
+<ul>
+<li>For RPM/DEB installs it is <code>jdbc:h2:file:/var/lib/rundeck/data/rundeckdb</code>.</li>
+<li>For a Launcher install, it will include your <code>$RDECK_BASE</code> path. It can be relative to your current working directory, such as <code>jdbc:h2:file:$RDECK_BASE/server/data/grailsdb</code>.</li>
+</ul></li>
+<li>File path to the <code>h2-1.4.x.jar</code> jar file, which is in the expanded war contents of the Rundeck install.
+<ul>
+<li>For RPM/DEB installs it is <code>/var/lib/rundeck/exp/webapp/WEB-INF/lib/h2-1.4.193.jar</code>.</li>
+<li>For launcher install it will under your <code>$RDECK_BASE</code>, such as: <code>$RDECK_BASE/server/exp/webapp/WEB-INF/lib/h2-1.4.193.jar</code></li>
+</ul></li>
+</ul>
+<p>Save this into a file <code>upgrade-2.8.1.sql</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql"><code class="sourceCode sql"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">alter</span> <span class="kw">table</span> job_file_record <span class="kw">rename</span> <span class="kw">column</span> <span class="fu">user</span> <span class="kw">to</span> rduser;</a></code></pre></div>
+<p>Run this command:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="va">H2_JAR_FILE=</span>... <span class="co">#jar file location</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="va">H2_URL=</span>...      #<span class="ex">jdbc</span> URL</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="ex">java</span> -cp <span class="va">$H2_JAR_FILE</span> org.h2.tools.RunScript  \</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">  -url <span class="va">$H2_URL</span> \</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">  -user sa \</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">  -script upgrade-2.8.1.sql</a></code></pre></div>
+<p>This command should complete with a 0 exit code (and no output).</p>
+<p>You can now upgrade to 2.8.1.</p>
+<p><strong>Error output</strong></p>
+<p>If you see output containing <code>Column &quot;USER&quot; not found;</code> then you have already run this script successfully.</p>
+<p>If you see output containing <code>Table &quot;JOB_FILE_RECORD&quot; not found</code>, then you probably did not have 2.8.0 installed, you should be able to upgrade from 2.7 without a problem.</p>
+<h2 id="upgrading-to-rundeck-2.8-from-earlier-versions">Upgrading to Rundeck 2.8 from earlier versions</h2>
+<h3 id="java-8-is-required">Java 8 is required</h3>
+<p>Rundeck server now requires Java 8.</p>
+<h2 id="upgrading-to-rundeck-2.7-from-2.6.x">Upgrading to Rundeck 2.7 from 2.6.x</h2>
+<h3 id="java-8-is-required-1">Java 8 is required</h3>
+<p>Well, not technically <em>required</em> for Rundeck server so much as heavily frowned upon. You should upgrade, consider Java 7 no longer supported. We may switch to actually requiring it soon.</p>
+<h3 id="default-database-h2-upgraded-to-1.4.x">Default database (H2) upgraded to 1.4.x</h3>
+<p>The new version uses a different storage format (“mv_store”) so switching back to 2.6 after creating a DB with 2.7 may not work.</p>
+<p>In-place upgrade with the old storage format do seem to work, however if necessary to keep compatibility with an existing older h2 database, you can update your dataSource.url in rundeck-config.properties to add <code>;mv_store=false</code></p>
+<pre><code>dataSource.url = jdbc:h2:file:/path;MVCC=true;mv_store=false</code></pre>
+<ul>
+<li>You can remove <code>;TRACE_LEVEL_FILE=4</code> from the dataSource.url in rundeck-config.properties</li>
+</ul>
+<h3 id="cli-tools-are-gone">CLI tools are gone</h3>
+<p>We have removed the &quot;rd-*&quot; and “dispatch” and “run” tools from the install, although the “rd-acl” tool is still available.</p>
+<p>You should use the new “rd” tool available separately, see <a href="https://rundeck.github.io/rundeck-cli/" class="uri">https://rundeck.github.io/rundeck-cli/</a>.</p>
+<p>However, <code>rd</code> <em>does</em> require Java 8. (See, gotcha.)</p>
+<h3 id="debianrpm-startup-script-changes">Debian/RPM startup script changes</h3>
+<p>The file <code>/etc/rundeck/profile</code> was modified and will probably not work with your existing install. (This change was snafu’d into 2.6.10 and reverted in 2.6.11)</p>
+<p>If you have customized <code>/etc/rundeck/profile</code>, look at the new contents and move your custom env var changes to a file in <code>/etc/sysconfig/rundeckd</code>.</p>
+<h3 id="inline-script-token-expansion-changes">Inline script token expansion changes</h3>
+<p>(This is another change tha had some hiccups in the 2.6.10 release.)</p>
+<p>You must now use <code>@@</code> (two at-signs) to produce a literal <code>@</code> in an inline script when it might be interpreted as a token, i.e. <code>@word@</code> looks like a token, but <code>@word space@</code> is ok.</p>
+<p>You can globally disable inline script token expansion, see <a href="../administration/configuration/configuration-file-reference.html#framework.properties" title="Administrator Guide - Rundeck Configuration - Configuration File Reference - Framework.properties">framework.properties</a>.</p>
+<h3 id="jetty-embedded-server-was-upgraded-to-9.0.x">Jetty embedded server was upgraded to 9.0.x</h3>
+<p>If you are using the default “realm.properties” login mechanism, the default JAAS configuration for file-based authentication will need to be modified to use correct class name in your <code>jaas-loginmodule.conf</code>:</p>
+<ul>
+<li><strong>old value</strong>: <code>org.eclipse.jetty.plus.jaas.spi.PropertyFileLoginModule</code></li>
+<li>Replace with: <code>org.eclipse.jetty.jaas.spi.PropertyFileLoginModule</code></li>
+</ul>
+<h2 id="upgrading-to-rundeck-2.5">Upgrading to Rundeck 2.5</h2>
+<h3 id="java-7-required">Java 7 required</h3>
+<p>Java 7 is now required for Rundeck 2.5, and Java 8 can be used. Java 6 will not work.</p>
+<h3 id="scheduled-jobs-with-required-option-default-values">Scheduled Jobs with required option default values</h3>
+<p>A bug in Rundeck previously allowed Jobs to saved with a schedule even if an Option marked “required” did not have a default value. The result was that the scheduler would fail to execute the job silently.</p>
+<p>In Rundeck 2.5 this is now considered a validation error when creating or importing the job definition, so any scheduled jobs with required options need to have a default value set.</p>
+<h3 id="rd-project-create-of-existing-project">rd-project create of existing project</h3>
+<p>If <code>rd-project -a create -p projectname</code> is executed for an existing project, this will now fail.</p>
+<h3 id="database-schema">Database schema</h3>
+<p>This release adds some new DB tables but does not alter the schema of other tables.</p>
+<h3 id="project-definitions-stored-in-db">Project definitions stored in DB</h3>
+<p>Rundeck 2.4 and earlier used the filesystem to store Projects and their configuration. Rundeck 2.5 can now use the DB to store project definition and configuration, but this is not enabled by default.</p>
+<p>If you have projects that exist on the filesystem, when you upgrade to Rundeck 2.5, these projects and their configuration files can be automatically imported into the DB. This means that the contents of <code>project.properties</code> will be copied to the DB, using Rundeck’s <a href="../administration/configuration/storage-facility.html" title="Administrator Guide - Rundeck Configuration - Storage Facility">Storage Facility</a>.</p>
+<p>In addition, there is <em>no encryption by default</em>, if you want the contents of your project.properties to be encrypted in the DB, you must configure <a href="../administration/configuration/plugins/configuring.html#storage-converter-plugins" title="Administrator Guide - Rundeck Configuration - Configuring Plugins - Configuring - Storage Converter Plugins">Storage Converter Plugins</a> to use an encryption plugin. There is now a <a href="../administration/configuration/plugins/bundled-plugins.html#jasypt-encryption-plugin" title="Administrator Guide - Rundeck Configuration - Configuring Plugins - Bundled Plugins - Jasypt Encryption Plugin">Jasypt Encryption Plugin</a> included with Rundeck which can be used.</p>
+<p><strong>Enable project DB storage</strong>:</p>
+<p>You can configure Rundeck to use the Database by adding the following to <code>rundeck-config.properties</code> before starting it up:</p>
+<pre><code>rundeck.projectsStorageType=db</code></pre>
+<p>When importing previously created filesystem projects, the contents of these files are imported to the DB:</p>
+<ul>
+<li><code>etc/project.properties</code></li>
+<li><code>readme.md</code></li>
+<li><code>motd.md</code></li>
+</ul>
+<p>In addition, after importing, the <code>project.properties</code> file will be renamed to <code>project.properties.imported</code>.</p>
+<p>If desired, you can switch back to using filesystem projects by doing this:</p>
+<ol type="1">
+<li>set <code>rundeck.projectsStorageType=filesystem</code> in <code>rundeck-config.properties</code></li>
+<li>rename each <code>project.properties.imported</code> file back to <code>project.properties</code></li>
+</ol>
+<h3 id="web.xml-changes">web.xml changes</h3>
+<p>The <code>web.xml</code> file has changed significantly from 2.4.x to Rundeck 2.5.x.</p>
+<p>For this reason, if you have modified your <code>web.xml</code> file, located at <code>/var/lib/rundeck/exp/webapp/WEB-INF/web.xml</code>, for example to change the <code>&lt;security-role&gt;&lt;role-name&gt;user&lt;/role-name&gt;&lt;security-role&gt;</code>, then you may need to back it up, and re-apply the changes you made after upgrading to 2.5.x.</p>
+<p>If you receive a “Service Unavailable” error on startup, and the service.log file contains this message:</p>
+<pre><code>java.lang.ClassNotFoundException: org.codehaus.groovy.grails.web.sitemesh.GrailsPageFilter</code></pre>
+<p>Then that means your web.xml file is out of date. Replace it with the one from 2.5 installation, then re-apply your changes to <code>&lt;role-name&gt;</code>.</p>
+<h2 id="upgrading-to-rundeck-2.1">Upgrading to Rundeck 2.1</h2>
+<h3 id="database-schema-1">Database schema</h3>
+<p>If you are upgrading from 2.0.x, be sure to perform backups prior to upgrading. This release adds a new DB table but does not alter the schema of other tables.</p>
+<h3 id="acl-policy-additions">ACL policy additions</h3>
+<p>Project access via API has been improved, and new authorizations are now required for project access. See <a href="../administration/security/access-control-policy.html#application-scope-resources-and-actions" title="Administrator Guide - Security - Access Control Policy - Application Scope Resources And Actions">Adminstration - Access Control Policy</a>.</p>
+<ul>
+<li>project access adds <code>configure</code>,<code>delete</code>,<code>import</code>,<code>export</code> actions</li>
+<li><code>admin</code> access still allows all actions</li>
+</ul>
+<p>Example allowing explicit actions:</p>
+<pre><code>context:
+  application: &#39;rundeck&#39;
+for:
+  resource:
+    - equals:
+        kind: &#39;project&#39;
+      allow: [create] # allow creating new projects
+  project:
+    - equals:
+        name: &#39;myproject&#39;
+      allow: [read,configure,delete,import,export,admin] # access to &#39;myproject&#39;
+by:
+  group: admin</code></pre>
+<p>The storage facility for uploading public/private keys requires authorization to use. The default <code>admin.aclpolicy</code> and <code>apitoken.aclpolicy</code> provide this access, but if you have custom policies you may want to allow access to these actions.</p>
+<ul>
+<li><code>storage</code> can allow <code>create</code>,<code>update</code>,<code>read</code>, or <code>delete</code></li>
+<li>you can match on <code>path</code> or <code>name</code> to narrow the access</li>
+</ul>
+<p>The default apitoken aclpolicy file allows this access:</p>
+<pre><code>context:
+  application: &#39;rundeck&#39;
+for:
+  storage:
+    - match:
+        path: &#39;(keys|keys/.*)&#39;
+      allow: &#39;*&#39; # allow all access to manage stored keys
+by:
+  group: api_token_group</code></pre>
+<h2 id="upgrading-to-rundeck-2.0-from-1.6.x">Upgrading to Rundeck 2.0 from 1.6.x</h2>
+<p>Rundeck 2.0 has some under-the-hood changes, so please follow this guide when upgrading from Rundeck 1.6.x.</p>
+<p>The first step is always to make a backup of all important data for your existing Rundeck installation. Refer to the <a href="../administration/maintenance/backup-and-recovery.html" title="Administrator Guide - Maintenance - Backup and Recovery">Administration - Backup and Recovery</a> section.</p>
+<h2 id="clean-install">Clean install</h2>
+<p>The most direct upgrade method is to use the project export/import method and a clean install of Rundeck 2.0.</p>
+<p>Before shutting down your 1.6.x installation, perform <strong>Project Export</strong> for each project you wish to migrate:</p>
+<ol type="1">
+<li>Select your project</li>
+<li>Click the <em>Configure</em> tab in the header.</li>
+<li>Click the link under <em>Export Project Archive</em> to save it to your local disk.</li>
+<li>Make a copy of all project files under the projects directory for the project, e.g. <code>$RDECK_BASE/projects/NAME</code> (launcher) or <code>/var/rundeck/projects/NAME</code> (RPM/Deb). This includes the project.properties configuration as well as resources files.</li>
+</ol>
+<p>Perform a <em>clean</em> install Rundeck 2.0 (no cheating!).</p>
+<p>Then Import the projects you exported:</p>
+<ol type="1">
+<li>Create a new project, or select an existing project.</li>
+<li>Click the <em>gear icon</em> for the Configure page in the header.</li>
+<li>Click the <em>Import Archive</em> Tab</li>
+<li>Under <em>Choose a Rundeck Archive</em> pick the archive file you downloaded earlier</li>
+<li>Click <em>Import</em></li>
+</ol>
+<p>Finally, restore the project files for the imported project.</p>
+<h2 id="upgrading-jaas-properties-file">Upgrading JAAS properties file</h2>
+<p>If you are not doing a clean install, and you want to maintain your JAAS login module configuration, you may have to change your jaas.conf file.</p>
+<p>The default jaas-loginmodule.conf file included with Rundeck 1.6.x uses the <code>org.mortbay.jetty.plus.jaas.spi.PropertyFileLoginModule</code> class. You will have to change your file to specify <code>org.eclipse.jetty.jaas.spi.PropertyFileLoginModule</code> (“org.eclipse”).</p>
+<p>Modify the <code>$RDECK_BASE/server/config/jaas-loginmodule.conf</code> (launcher install) or <code>/etc/rundeck/jaas-loginmodule.conf</code> (RPM/Deb install).</p>
+<h2 id="upgrading-an-existing-h2-database">Upgrading an existing H2 Database</h2>
+<p>If you want to migrate your existing H2 Database, you will have to download an additional jar file to enable upgrading to the newer H2 version used in Rundeck 2.0.</p>
+<p>Download the <code>h2mig_pagestore_addon.jar</code> file linked on this page:</p>
+<ul>
+<li><a href="http://www.h2database.com/html/advanced.html#database_upgrade">H2 Database Upgrade</a></li>
+<li>Direct link: <a href="http://h2database.com/h2mig_pagestore_addon.jar" class="uri">http://h2database.com/h2mig_pagestore_addon.jar</a></li>
+</ul>
+<p>Copy the file to <code>$RDECK_BASE/server/lib</code> (launcher jar) or <code>/var/lib/rundeck/bootstrap</code> (RPM/Deb install).</p>
+<h2 id="upgrading-an-existing-mysql-or-other-database">Upgrading an existing Mysql or other Database</h2>
+<p>Rundeck 2.0 will add some columns to the existing tables, but should allow in-place migration of the mysql database.</p>
+<p>However, make sure you take appropriate backups of your data prior to upgrading.</p>
+</section>
+</div>
+</div>
+</div>
+</div>
+<div class="container">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+        <div class="columns">
+            <div class="column is-two-thirds">
+            <ul>
+                
+                    
+                        <li><a href="../index.html">Rundeck Documentation (3.1.0)</a></li>
+                    
+                
+                <li ><a href="index.html">Upgrading</a></li>
+                <li class="active"><a href="upgrade-guide-2.x.html">Upgrade Guide (2.x)</a></li>
+            </ul>
+            </div>
+            <div class="column">
+            <ul>
+                
+                
+            </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="breadcrumb-footer">
+        <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+upgrading/upgrading.md&template=documentation-bug.md"> <i class="fas fa-flag"></i> Report a problem </a>
+        <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/upgrading/upgrading.md"><i class="fas fa-pencil-alt"></i> Edit this page</a>
+    </div>
+</div>
+<footer class="brand-footer">
+  <div class="container">
+    <div class="columns" style="margin-bottom:0;padding-top:5em;padding-bottom:5em">
+      <div class="column is-1" style="padding-top:1.3em"><span><svg width="39" height="40" viewBox="0 0 39 40"
+            xmlns="http://www.w3.org/2000/svg">
+            <g fill="#F7403A" fill-rule="evenodd">
+              <path
+                d="M0 39.175h26.17l4.883-7.702H4.883zM31.053 8.368L26.17.665H0l4.883 7.703zM35.936 16.07H9.766l2.44 3.85-2.44 3.851h26.17l2.44-3.852z">
+              </path>
+            </g>
+          </svg></span></div>
+      <div class="column is-4">
+        <div class="contact"><a href="tel:8336774376" class="phone is-size-3 has-text-weight-bold">(833) OPS-HERO</a>
+          <div class="address address has-text-weight-bold is-size-5" style="margin-top:1em">2317
+            Broadway, Suite 130
+            <br>Redwood City, CA 94063
+          </div>
+          <div>
+            <ul class="social-links">
+              <li class="social-link"><a href="https://www.linkedin.com/company/17928739" role="menuitem"
+                  target="_blank" aria-label="Linkedin" class="button social-link__icon"><svg aria-hidden="true"
+                    focusable="false" data-prefix="fab" data-icon="linkedin" role="img"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
+                    class="svg-inline--fa fa-linkedin fa-w-14">
+                    <path fill="currentColor"
+                      d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"
+                      class=""></path>
+                  </svg></a></li>
+              <li class="social-link"><a href="https://twitter.com/rundeck" role="menuitem" target="_blank"
+                  aria-label="Twitter" class="button social-link__icon"><svg aria-hidden="true" focusable="false"
+                    data-prefix="fab" data-icon="twitter" role="img" xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 512 512" class="svg-inline--fa fa-twitter fa-w-16">
+                    <path fill="currentColor"
+                      d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"
+                      class=""></path>
+                  </svg></a></li>
+            </ul>
+          </div>
+          <div class="copyright">
+            <span class="copyright-text" style="font-weight:500;font-size:14px">©2019 Rundeck.
+              All Rights Reserved.</span> 
+              <br />
+              <span class="generated-date" title="2019-08-01T06:04:00UTC">2019-08-01T06:04:00UTC</span>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <ul class="marketing-site-nav is-size-5 has-text-weight-semibold">
+          <li><a href="https://www.rundeck.com/about" role="menuitem">About</a>
+          </li>
+          <li><a href="https://www.rundeck.com/about/team" role="menuitem">Team</a></li>
+          <li><a href="https://www.rundeck.com/careers" role="menuitem">Careers</a></li>
+          <li><a href="https://www.rundeck.com/news" role="menuitem">News</a>
+          </li>
+          <li><a href="https://www.rundeck.com/events" role="menuitem">Events</a>
+          </li>
+          <li><a href="https://www.rundeck.com/privacy-policy" role="menuitem">Privacy Policy</a></li>
+          <li><a href="https://www.rundeck.com/terms" role="menuitem">Terms of
+              Use</a></li>
+          <li><a href="https://www.rundeck.com/contact" role="menuitem">Contact</a></li>
+          <li><a href="https://www.rundeck.com/demo" role="menuitem">Request a
+              Demo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="creative-commons">
+      <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://rundeck.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License. </a>
+    </div>
+  </div>
+</footer>
+
+<script type="text/javascript">
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+
+<!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2768099.js"></script>
+<!-- End of HubSpot Embed Code -->
+<div class='scrolltop'>
+<div class='scrollitem icon'>
+<i class="fas fa-chevron-up" ></i>
+</div>
+</div>
+</body>
+</html>
