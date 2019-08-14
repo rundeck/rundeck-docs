@@ -95,7 +95,7 @@ jQuery(function(){
 		setupAutocomplete(site);		
 	});
 	jQuery("#searchQuery").expandable({
-	    		width: 300,
+	    		width: 500,
 	    		duration: 300
 	    	});
 	
