@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>edam5778237162267341959temp</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="../../../jquery.hotkeys.js"></script>
+<script src="../../../jquery.autocomplete.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+window._pageRelpath="../../../";
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+<script src="../../../docs-autocomplete.js"></script>
+  <link rel="stylesheet" href="../../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control navquery" name="q" placeholder="Search" id="searchQuery">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbstop">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb top collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../../../index.html">Rundeck Documentation (3.0.25)</a></li>
+    
+        <li><a href="../../index.html">Administrator Guide</a></li>
+    
+        <li><a href="../index.html">Rundeck Configuration</a></li>
+    
+    
+    <li ><a href="index.html">Configuring Plugins</a></li>
+    <li class="active"><a href="plugin-types.html">Plugin Types</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="installing.html"><i class="glyphicon glyphicon-arrow-left"></i> Installing</a></li>
+      <li class="next"><a href="configuring.html">Configuring <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/configuration/plugins/plugin-types.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/configuration/plugins/plugin-types.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#types-of-plugins">Types of Plugins</a></li>
+<li><a href="#about-services-and-providers">About Services and Providers</a></li>
+<li><a href="#service-categories">Service Categories</a></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<h2 id="types-of-plugins">Types of Plugins</h2>
+<p>Plugins are files that contain one or more Service Provider implementations. Each plugin file could contain multiple Providers for different types of services, however typically each plugin file would contain only providers related in some fashion.</p>
+<p>Rundeck includes a number of “built-in” providers, as well as a few “included” plugin files.</p>
+<p>In this document “plugin” and “provider” are used somewhat interchangeably. When referring to an actual file containing the provider implementations we will say “plugin file”.</p>
+<figure>
+<img src="../../../figures/fig1102.png" alt="Rundeck Providers and Plugin Files" /><figcaption>Rundeck Providers and Plugin Files</figcaption>
+</figure>
+<p>Rundeck supports several different types of plugins to perform different kinds of services:</p>
+<ul>
+<li><a href="../../../manual/job-plugins.html#workflow-steps" title="User Guide - Job Plugins - Workflow Steps">Workflow Step</a> - defines an action that can be a distinct step within a workflow, either for an individual Node or a set of Nodes</li>
+<li><a href="../../projects/node-execution/index.html" title="Administrator Guide - Projects - Node Execution">Node Execution</a> - defines a mechanism to connect to a remote Node and execute a command</li>
+<li><a href="../../projects/node-execution/index.html" title="Administrator Guide - Projects - Node Execution">File Copier</a> - defines a mechanism to copy a file to a remote node</li>
+<li><a href="../../projects/resource-model-sources/index.html" title="Administrator Guide - Projects - Node Model Sources">Resource Model Source</a> - defines a mechanism to retrieve Resource Model data (Node definitions) for use by a Rundeck project</li>
+<li><a href="../../../developer/model-format-parser-and-generator-plugin.html" title="Plugin Developer Guide - Model Format Parser and Generator Plugin">Resource Format</a> - defines a data format for Resource Models</li>
+<li><a href="../../../manual/job-plugins.html#notifications" title="User Guide - Job Plugins - Notifications">Notification</a> - defines a mechanism for notification that can be triggered when a Job starts or finishes</li>
+<li><a href="../../maintenance/logging.html#streaming-log-plugins" title="Administrator Guide - Maintenance - Logging - Streaming Log Plugins">Streaming Logging</a> - defines a mechanism for reading and writing log events</li>
+<li><a href="../../maintenance/logging.html#execution-file-storage" title="Administrator Guide - Maintenance - Logging - Execution File Storage">Execution File Storage</a> - defines a mechanism for storage of log files</li>
+<li><a href="../storage-facility.html" title="Administrator Guide - Rundeck Configuration - Storage Facility">Storage Facility</a> - defines storage backends and content conversion</li>
+<li><a href="../../../manual/job-plugins.html#node-orchestrator" title="User Guide - Job Plugins - Node Orchestrator">Orchestrator</a> - defines a mechanism for orchestrating nodes when performing dispatched commands</li>
+<li><a href="../../../manual/job-plugins.html#log-filters" title="User Guide - Job Plugins - Log Filters">Log Filters</a> - can capture data from, or modify, the log output from a workflow</li>
+</ul>
+<h2 id="about-services-and-providers">About Services and Providers</h2>
+<p>The Rundeck core makes use of several different “Services” that provide functionality for the different steps necessary to execute workflows, jobs, and commands across multiple nodes.</p>
+<p>Each Service makes use of “Providers”. Each Provider has a unique “Provider Name” that is used to identify it, and most Services have default Providers unless you specify different ones to use.</p>
+<p><img src="../../../figures/fig1101.png" alt="Rundeck Services and Providers" /> <img src="../../../figures/fig1101_2.png" alt="Rundeck Services and Providers" /> <img src="../../../figures/fig1101_3.png" alt="Rundeck Services and Providers" /></p>
+<p>Rundeck Plugin Files can contain more than one Provider.</p>
+<h2 id="service-categories">Service Categories</h2>
+<p>Services fall into different categories, which determine how and where they are used.</p>
+<ol type="1">
+<li><p><strong>Node Execution services</strong> - providers of these services operate in the context of a single Node definition, and can be configured at Node scope or higher:</p>
+<ol type="1">
+<li>Node Executor - these providers define ways of executing a command on a Node (local or remote)</li>
+<li>File Copier - these providers define ways of copying files to a Node.</li>
+</ol></li>
+<li><p><strong>Project services</strong></p>
+<ol type="1">
+<li>Resource Model Source - (aka “Resource Providers”) these define ways of retrieving Node resources for a Project</li>
+</ol></li>
+<li><p><strong>Global services</strong> (framework level)</p>
+<ol type="1">
+<li>Resource Format Parser - these define document format parsers</li>
+<li>Resource Format Generators - these define document format generators</li>
+<li>Storage Facility - these define storage backends and converters</li>
+<li>Logging - these define log file storage and log streaming input and output</li>
+</ol></li>
+<li><p><strong>Workflow services</strong></p>
+<ol type="1">
+<li>Workflow Step - providers define behavior for all nodes</li>
+<li>Workflow Node Step - providers define behavior for a single node</li>
+<li>Remote Script Node Step - a specific use-case for Node Step providers</li>
+<li>Orchestrator - providers define how nodes are iterated over during node dispatch steps</li>
+</ol></li>
+<li><p><strong>Notification services</strong></p>
+<ol type="1">
+<li>Notifications - external actions that are triggered when a Job starts or finishes.</li>
+</ol></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbsbottom">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb bottom collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../../../index.html">Rundeck Documentation (3.0.25)</a></li>
+    
+        <li><a href="../../index.html">Administrator Guide</a></li>
+    
+        <li><a href="../index.html">Rundeck Configuration</a></li>
+    
+    
+    <li ><a href="index.html">Configuring Plugins</a></li>
+    <li class="active"><a href="plugin-types.html">Plugin Types</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="installing.html"><i class="glyphicon glyphicon-arrow-left"></i> Installing</a></li>
+      <li class="next"><a href="configuring.html">Configuring <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/configuration/plugins/plugin-types.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/configuration/plugins/plugin-types.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Enterprise for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Enterprise
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://rundeck.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2019 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2019-08-14T20:39:16UTC">2019-08-14T20:39:16UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../../../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+
+<!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2768099.js"></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
