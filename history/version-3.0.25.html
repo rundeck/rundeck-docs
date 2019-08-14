@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Version 1.5.2</title>
+  <title>Version 3.0.25</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="greg" />
-  <meta name="date" content="05/06/2013" />
+  <meta name="date" content="08/14/2019" />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -79,20 +79,20 @@ jQuery(function(){
     
     
     <li ><a href="index.html">Version History</a></li>
-    <li class="active"><a href="version-1.5.2.html">Version 1.5.2 (2013-05-06)</a></li>
+    <li class="active"><a href="version-3.0.25.html">Version 3.0.25 (2019-08-14)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
       
-      <li class="next"><a href="version-1.5.1.html">Version 1.5.1 (2013-04-30) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="next"><a href="version-3.0.24.html">Version 3.0.24 (2019-07-19) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
-    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+history/version-1.5.2.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-1.5.2.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+history/version-3.0.25.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-3.0.25.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
@@ -102,70 +102,44 @@ jQuery(function(){
 <div class="col-sm-3 toc-nav">
 <div class="nav">
 <ul>
-<li><a href="#release-1.5.2">Release 1.5.2</a></li>
+<li><a href="#release-3.0.25">Release 3.0.25</a><ul>
+<li><a href="#notes">Notes</a><ul>
+<li><a href="#bug-fixes">Bug Fixes</a></li>
+</ul></li>
+<li><a href="#issues">Issues</a></li>
+<li><a href="#contributors">Contributors</a></li>
+<li><a href="#bug-reporters">Bug Reporters</a></li>
+</ul></li>
 </ul>
 </div>
 </div>
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">Version 1.5.2</h1>
+<h1 class="title">Version 3.0.25</h1>
 </div>
-<h1 id="release-1.5.2">Release 1.5.2</h1>
-<p>Date: 2013-05-06</p>
-<p><strong>Note: the 1.5.2 release fixes a packaging issue with rpm/debian installations. 1.5.1 release notes follow.</strong></p>
-<p>Notable Changes:</p>
+<h1 id="release-3.0.25">Release 3.0.25</h1>
+<p>Date: 2019-08-14</p>
+<p>Name: <span style="color: red"><span class="glyphicon glyphicon-tower"></span> “jalapeño popper red tower”</span></p>
+<h2 id="notes">Notes</h2>
+<h3 id="bug-fixes">Bug Fixes</h3>
 <ul>
-<li>Bug fixes</li>
-<li>Job Notification Plugins
-<ul>
-<li>Jobs can now trigger notification plugins in addition to the built-in email and webhook</li>
-<li>plugins can be developed in Java or with a new Groovy DSL</li>
-<li>See the <a href="../developer/plugin-development.html" title="Plugin Developer Guide - Plugin Development">Notification Plugin Development</a> Chapter.</li>
-<li>Example code at <a href="https://github.com/dtolabs/rundeck/tree/development/examples">dtolabs/rundeck/examples</a></li>
-</ul></li>
-<li>Notification ‘onstart’ trigger
-<ul>
-<li>Jobs can now cause a notification trigger when started via the ‘onstart’ trigger</li>
-</ul></li>
-<li>Notifications can now use the email address of the user who executed a job, as <code>${job.user.email}</code>. (You can set an email for your account in the Profile page.)</li>
+<li>Fixed error when triggering average duration notification in referenced job <a href="https://github.com/rundeck/rundeck/pull/5152">#5152</a></li>
+<li>Fixed race condition causing premature workflow exits <a href="https://github.com/rundeck/rundeck/pull/5148">#5148</a></li>
 </ul>
-<p>Contributors:</p>
+<h2 id="issues">Issues</h2>
+<p><a href="https://github.com/rundeck/rundeck/milestone/114">Milestone 3.0.25</a></p>
 <ul>
-<li>Alex Honor</li>
-<li>Charles Duffy</li>
-<li>Greg Schueler</li>
-<li>John Burbridge</li>
-<li>Jonathan Li</li>
-<li>Kim Ho</li>
+<li><a href="https://github.com/rundeck/rundeck/pull/5152">Fix proxy initialization exception for avg duration notifications</a></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/5148">Backport : fix #5023 wfengine premature exit due to race condition</a></li>
 </ul>
-<p>Issues:</p>
+<h2 id="contributors">Contributors</h2>
 <ul>
-<li><a href="https://github.com/dtolabs/rundeck/issues/361">Add static ordering to job options instead of always sorted by name</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/360">Add job notification plugins</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/356">Big number as option default causes exception on load job from xml</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/353">Job XML parse fails if “false” value in an command step</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/351">Local error handling command lost on export / import</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/350">error handler has exception when attempting to handle No Matched Nodes failure for a job reference</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/346">Multi-value options not pre-populated when doing a “run again”</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/341">API: add “asUser” feature for running/killing jobs and executions</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/338">init script doesn’t work on CentOS (one-line fix provided)</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/330">job group changes before authorization check in 1.5</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/328">Many ACL policy files can slow down the Project drop down menu</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/327">Unable to generate an api-token on rundeck 1.5</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/325">Cannot send notification email using 1.5</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/320">Long description for Option causes Job import failure in 1.5 for jobs exported from 1.4</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/316">1.5: GUI regression: Success rate % in job popup always shows 0%</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/315">1.5: GUI regression: Job execution follow page: progress meter stuck</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/313">Invalid XML char in log output breaks CLI output follow mode.</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/312">1.5: html and ajax errors about “Timeout trying to lock table”</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/311">sudo responder hangs</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/298">CLIUtils.generateArgline does not quote IFS characters other than space</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/280">documentation: upgrade guide “admin” aclpolicy doesn’t allow all permissions</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/250">Add Job Notification/webhook on job start</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/209">projects folder under version control - .svn folder treated as project</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/206">incorrect aclpolicy yaml structure can cause NPE</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/201">Options are not passed correctly to programs</a></li>
-<li><a href="https://github.com/dtolabs/rundeck/issues/165">Allow Email Address substitution in notification recipients list</a></li>
+<li>Greg Schueler (gschueler)</li>
+<li>Greg Zapp (ProTip)</li>
+</ul>
+<h2 id="bug-reporters">Bug Reporters</h2>
+<ul>
+<li>ProTip</li>
 </ul>
 </div>
 </div>
@@ -196,20 +170,20 @@ jQuery(function(){
     
     
     <li ><a href="index.html">Version History</a></li>
-    <li class="active"><a href="version-1.5.2.html">Version 1.5.2 (2013-05-06)</a></li>
+    <li class="active"><a href="version-3.0.25.html">Version 3.0.25 (2019-08-14)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
       
-      <li class="next"><a href="version-1.5.1.html">Version 1.5.1 (2013-04-30) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="next"><a href="version-3.0.24.html">Version 3.0.24 (2019-07-19) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
-    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+history/version-1.5.2.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-1.5.2.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+history/version-3.0.25.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-3.0.25.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
