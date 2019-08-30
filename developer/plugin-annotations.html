@@ -185,7 +185,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Note, ResourceModelSource, NodeExecutor and FileCopier plugins currently do not support description annotations.</p>
 </blockquote>
 <h2 id="plugin-description">Plugin Description</h2>
-<p>You can define the display name, and descriptive text about your plugin by adding a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190814/com/dtolabs/rundeck/plugins/descriptions/PluginDescription.html">PluginDescription</a> annotation to your plugin class.</p>
+<p>You can define the display name, and descriptive text about your plugin by adding a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190829/com/dtolabs/rundeck/plugins/descriptions/PluginDescription.html">PluginDescription</a> annotation to your plugin class.</p>
 <p>Attributes of <code>@PluginDescription</code>:</p>
 <ul>
 <li><code>title</code> - the display name for your plugin</li>
@@ -199,7 +199,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1-5" data-line-number="5">}</a></code></pre></div>
 <p><em>Note:</em> If you do not add this annotation, the plugin display name will be the same as the provider name, and will have no descriptive text when displayed.</p>
 <h2 id="plugin-provider-metadata">Plugin Provider Metadata</h2>
-<p>You can supply additional metadata about the plugin implementation, using the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190814/com/dtolabs/rundeck/plugins/descriptions/PluginMetadata.html">@PluginMetadata</a> annotation. You can provide multiple metadata entries with a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190814/com/dtolabs/rundeck/plugins/descriptions/PluginMeta.html">@PluginMeta</a> annotation, which can contain multiple <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190814/com/dtolabs/rundeck/plugins/descriptions/PluginMetadata.html">@PluginMetadata</a> values.</p>
+<p>You can supply additional metadata about the plugin implementation, using the <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190829/com/dtolabs/rundeck/plugins/descriptions/PluginMetadata.html">@PluginMetadata</a> annotation. You can provide multiple metadata entries with a <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190829/com/dtolabs/rundeck/plugins/descriptions/PluginMeta.html">@PluginMeta</a> annotation, which can contain multiple <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190829/com/dtolabs/rundeck/plugins/descriptions/PluginMetadata.html">@PluginMetadata</a> values.</p>
 <p>Example:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="at">@Plugin</span>(name=<span class="st">&quot;myplugin&quot;</span>, service=ServiceNameConstants.<span class="fu">WorkflowStep</span>)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="at">@PluginMetadata</span>(key=<span class="st">&quot;anykey&quot;</span>, value=<span class="st">&quot;anyvalue&quot;</span>)</a>
@@ -229,9 +229,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>When your plugin is executed, the fields will be set to the appropriate values based on their default value, scope, and any value set by the user in the workflow configuration.</p>
 <p>These annotation classes are used:</p>
 <ul>
-<li><a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190814/com/dtolabs/rundeck/plugins/descriptions/PluginProperty.html">PluginProperty</a> - Declares a class field as a plugin configuration property</li>
-<li><a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190814/com/dtolabs/rundeck/plugins/descriptions/SelectValues.html">SelectValues</a> - Declares a String property to be a “Select” property, which defines a set of input values that can be chosen from a list. Can be used with <code>multiOption</code> attribute to declare a <code>Set</code>, <code>List</code> or <code>String[]</code> and allow multiple values to be chosen. If <code>multiOption</code> is used with a String, the value will be the values joined with a <code>,</code> (comma).</li>
-<li><a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190814/com/dtolabs/rundeck/plugins/descriptions/TextArea.html">TextArea</a> - Declares a String property to be rendered as a multi-line text area in the Rundeck GUI.</li>
+<li><a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190829/com/dtolabs/rundeck/plugins/descriptions/PluginProperty.html">PluginProperty</a> - Declares a class field as a plugin configuration property</li>
+<li><a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190829/com/dtolabs/rundeck/plugins/descriptions/SelectValues.html">SelectValues</a> - Declares a String property to be a “Select” property, which defines a set of input values that can be chosen from a list. Can be used with <code>multiOption</code> attribute to declare a <code>Set</code>, <code>List</code> or <code>String[]</code> and allow multiple values to be chosen. If <code>multiOption</code> is used with a String, the value will be the values joined with a <code>,</code> (comma).</li>
+<li><a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190829/com/dtolabs/rundeck/plugins/descriptions/TextArea.html">TextArea</a> - Declares a String property to be rendered as a multi-line text area in the Rundeck GUI.</li>
 </ul>
 <p>Attributes:</p>
 <ul>
@@ -264,7 +264,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb3-10" data-line-number="10"><span class="at">@SelectValues</span>(values = {<span class="st">&quot;banana&quot;</span>, <span class="st">&quot;lemon&quot;</span>, <span class="st">&quot;orange&quot;</span>}, freeSelect = <span class="kw">true</span>)</a>
 <a class="sourceLine" id="cb3-11" data-line-number="11"><span class="kw">private</span> <span class="bu">String</span> fruit;</a></code></pre></div>
 <h2 id="property-scopes">Property Scopes</h2>
-<p>You can define the scope for a property by adding <code>scope</code> to the PluginProperty annotation. Refer to the class <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190814/com/dtolabs/rundeck/core/plugins/configuration/PropertyScope.html">PropertyScope</a>.</p>
+<p>You can define the scope for a property by adding <code>scope</code> to the PluginProperty annotation. Refer to the class <a href="https://javadoc.io/page/org.rundeck/rundeck-core/3.0.x-20190829/com/dtolabs/rundeck/core/plugins/configuration/PropertyScope.html">PropertyScope</a>.</p>
 <p>The default effective scope if you do not specify it in the annotation is <code>InstanceOnly</code>.</p>
 <p>For more information see <a href="plugin-development.html#property-scopes" title="Plugin Developer Guide - Plugin Development - Property Scopes">Property Scopes</a>.</p>
 </div>
@@ -337,7 +337,7 @@ Try Rundeck Enterprise
 &copy;2019 <a href="http://rundeck.com">Rundeck</a>
 </p>
 <p>
-<span class="generated-date" title="2019-08-14T20:00:17UTC">2019-08-14T20:00:17UTC</span>
+<span class="generated-date" title="2019-08-30T01:29:05UTC">2019-08-30T01:29:05UTC</span>
 </p>
 </footer>
 </div>

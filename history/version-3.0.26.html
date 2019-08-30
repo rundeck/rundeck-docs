@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>HTML Table View Converter</title>
+  <title>Version 3.0.26</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="pandoc" />
-  <meta name="author" content="Greg Schueler" />
+  <meta name="author" content="greg" />
+  <meta name="date" content="08/29/2019" />
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -13,19 +14,19 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script src="../../jquery.hotkeys.js"></script>
-<script src="../../jquery.autocomplete.min.js"></script>
+<script src="../jquery.hotkeys.js"></script>
+<script src="../jquery.autocomplete.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-window._pageRelpath="../../";
+window._pageRelpath="../";
 jQuery(function(){
   jQuery('table').addClass('table table-condensed table-responsive'); 
   jQuery('[data-toggle="popover"]').popover();
 });
 </script>
-<script src="../../docs-autocomplete.js"></script>
-  <link rel="stylesheet" href="../../style.css" type="text/css" />
+<script src="../docs-autocomplete.js"></script>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
 </head>
 <body data-spy="scroll" data-target=".toc-nav">
 <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -74,26 +75,24 @@ jQuery(function(){
     </li>
 
     
-        <li><a href="../../index.html">Rundeck Documentation (3.0.x)</a></li>
-    
-        <li><a href="../index.html">User Guide</a></li>
+        <li><a href="../index.html">Rundeck Documentation (3.0.x)</a></li>
     
     
-    <li ><a href="index.html">Content Converter Plugins</a></li>
-    <li class="active"><a href="html-table-view-converter.html">HTML Table View Converter</a></li>
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-3.0.26.html">Version 3.0.26 (2019-08-29)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
       
-      <li class="next"><a href="html-view-converter.html">HTML View Converter <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="next"><a href="version-3.0.25.html">Version 3.0.25 (2019-08-14) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
-    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/content-converters/html-table-view.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/content-converters/html-table-view.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+history/version-3.0.26.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-3.0.26.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
@@ -103,59 +102,33 @@ jQuery(function(){
 <div class="col-sm-3 toc-nav">
 <div class="nav">
 <ul>
-<li><a href="#input-data-types">Input Data Types</a></li>
-<li><a href="#output-data-types">Output Data Types</a></li>
-<li><a href="#options">Options</a></li>
-<li><a href="#related-plugins">Related Plugins</a></li>
+<li><a href="#release-3.0.26">Release 3.0.26</a><ul>
+<li><a href="#issues">Issues</a></li>
+<li><a href="#contributors">Contributors</a></li>
+<li><a href="#bug-reporters">Bug Reporters</a></li>
+</ul></li>
 </ul>
 </div>
 </div>
 <div class="col-sm-9">
 <div class="page-header">
-<h1 class="title">HTML Table View Converter</h1>
+<h1 class="title">Version 3.0.26</h1>
 </div>
-<p>Note: this plugin accepts Intermediate data types and produces <code>text/html</code></p>
-<p>Renders structured data as a Table in HTML. The input should be a List or Map. If the List contains Maps, the first item’s keys will be the table headers.</p>
-<p>See: <a href="index.html#sanitized-html-output" title="User Guide - Content Converter Plugins - Sanitized Html Output">- Sanitized Html Output</a>.</p>
-<h2 id="input-data-types">Input Data Types</h2>
-<p>These are Intermediate data types, such as Java Collection types. These types are produced by other plugins, see <a href="#related-plugins">Related Plugins</a>.</p>
+<h1 id="release-3.0.26">Release 3.0.26</h1>
+<p>Date: 2019-08-29</p>
+<p>Name: <span style="color: rosybrown"><span class="glyphicon glyphicon-apple"></span> “jalapeño popper rosybrown apple”</span></p>
+<h2 id="issues">Issues</h2>
+<p><a href="https://github.com/rundeck/rundeck/milestone/118">Milestone 3.0.26</a></p>
 <ul>
-<li><code>application/x-java-map-list</code> + <code>List&lt;Map&gt;</code>
-<ul>
-<li>Renders a Table, using the keys of the first Map in the list as the Table headers.</li>
-</ul></li>
-<li><code>application/x-java-col-list</code> + <code>List</code>
-<ul>
-<li>Renders a Table, using the first item in the list as a list of Table headers. Each subsequent item is a row, as a Collection of objects, and each object will be rendered in a table cell, recursively if it is a List or Map.</li>
-</ul></li>
-<li><code>application/x-java-map</code> + <code>Map</code>
-<ul>
-<li>Renders a table with <code>Key</code> and <code>Value</code> headers, where each map entry is a row. Recursively renders values that are List or Map type.</li>
-</ul></li>
-<li><code>application/x-java-list</code> + <code>List</code>
-<ul>
-<li>Renders a table without headers, with a row for each item. The first column indicates the numeric index, and the second column renders the item, recursively for List or Map types.</li>
-</ul></li>
-<li><code>application/x-java-map-or-list</code> + <code>Map</code> or <code>List</code>
-<ul>
-<li>Used to accept an input type that could be either a List or Map.</li>
-</ul></li>
+<li><a href="https://github.com/rundeck/rundeck/pull/5165">Backport - Dedupe steps on stepctx</a></li>
 </ul>
-<h2 id="output-data-types">Output Data Types</h2>
+<h2 id="contributors">Contributors</h2>
 <ul>
-<li><code>text/html</code> - <code>String</code></li>
+<li>ProTip</li>
 </ul>
-<h2 id="options">Options</h2>
-<p>These metadata values can be set in the Log metadata with a prefix of <code>content-meta:</code>:</p>
+<h2 id="bug-reporters">Bug Reporters</h2>
 <ul>
-<li><code>css-class</code> - CSS class to use for Table</li>
-<li><code>table-title</code> - Title to use for Table</li>
-</ul>
-<h2 id="related-plugins">Related Plugins</h2>
-<ul>
-<li><a href="json-data-converter.html" title="User Guide - Content Converter Plugins - JSON Data Converter">JSON Data Converter</a></li>
-<li><a href="properties-converter.html" title="User Guide - Content Converter Plugins - Properties Converter">Properties Converter</a></li>
-<li><a href="tabular-data-converter.html" title="User Guide - Content Converter Plugins - Tabular Data Converter">Tabular Data Converter</a></li>
+<li>ProTip</li>
 </ul>
 </div>
 </div>
@@ -182,26 +155,24 @@ jQuery(function(){
     </li>
 
     
-        <li><a href="../../index.html">Rundeck Documentation (3.0.x)</a></li>
-    
-        <li><a href="../index.html">User Guide</a></li>
+        <li><a href="../index.html">Rundeck Documentation (3.0.x)</a></li>
     
     
-    <li ><a href="index.html">Content Converter Plugins</a></li>
-    <li class="active"><a href="html-table-view-converter.html">HTML Table View Converter</a></li>
+    <li ><a href="index.html">Version History</a></li>
+    <li class="active"><a href="version-3.0.26.html">Version 3.0.26 (2019-08-29)</a></li>
 </ol>
 </div>
 <div class="col-sm-6">
     <ul class="pager">
       
-      <li class="next"><a href="html-view-converter.html">HTML View Converter <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+      <li class="next"><a href="version-3.0.25.html">Version 3.0.25 (2019-08-14) <i class="glyphicon glyphicon-arrow-right"></i></a></li>
     </ul>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12 text-right">
-    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+manual/content-converters/html-table-view.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
-    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/manual/content-converters/html-table-view.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+history/version-3.0.26.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/history/version-3.0.26.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
 </div>
 </div>
 </div>
@@ -248,7 +219,7 @@ Try Rundeck Enterprise
   </script>
 
 <script>window.markdeepOptions={mode:'html'};</script>
-<!-- Markdeep: --><script src="../../markdeep.min.js"></script>
+<!-- Markdeep: --><script src="../markdeep.min.js"></script>
 <!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
 
 <!-- Start of HubSpot Embed Code -->
