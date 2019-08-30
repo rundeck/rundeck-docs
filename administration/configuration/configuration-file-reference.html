@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Configuration</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="../../jquery.hotkeys.js"></script>
+<script src="../../jquery.autocomplete.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+window._pageRelpath="../../";
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+<script src="../../docs-autocomplete.js"></script>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control navquery" name="q" placeholder="Search" id="searchQuery">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbstop">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb top collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.26)</a></li>
+    
+        <li><a href="../index.html">Administrator Guide</a></li>
+    
+    
+    <li ><a href="index.html">Rundeck Configuration</a></li>
+    <li class="active"><a href="configuration-file-reference.html">Configuration File Reference</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="localization.html"><i class="glyphicon glyphicon-arrow-left"></i> Localization</a></li>
+      <li class="next"><a href="system-properties-configuration.html">System Properties Configuration <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/configuration/config-file-reference.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/configuration/config-file-reference.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#configuration-layout">Configuration layout</a><ul>
+<li><a href="#rpm-layout">RPM layout</a></li>
+<li><a href="#launcher-layout">Launcher layout</a></li>
+</ul></li>
+<li><a href="#configuration-files">Configuration files</a><ul>
+<li><a href="#admin.aclpolicy">admin.aclpolicy</a></li>
+<li><a href="#framework.properties">framework.properties</a><ul>
+<li><a href="#global-execution-variables">Global execution variables</a></li>
+</ul></li>
+<li><a href="#log4j.properties">log4j.properties</a></li>
+<li><a href="#cli-log4j.properties">cli-log4j.properties</a></li>
+<li><a href="#profile">profile</a></li>
+<li><a href="#project.properties">project.properties</a><ul>
+<li><a href="#file-copier-destination-directory">File copier destination directory</a></li>
+<li><a href="#project-global-execution-variables">Project Global execution variables</a></li>
+</ul></li>
+<li><a href="#jaas-loginmodule.conf">jaas-loginmodule.conf</a></li>
+<li><a href="#realm.properties">realm.properties</a></li>
+<li><a href="#session-timeout">Session timeout</a></li>
+<li><a href="#rundeck-config.properties">rundeck-config.properties</a><ul>
+<li><a href="#security">Security</a></li>
+<li><a href="#security-http-headers">Security HTTP Headers</a></li>
+<li><a href="#local-login-form-visibility">Local Login Form Visibility</a></li>
+<li><a href="#logout-behaviors">Logout behaviors</a></li>
+<li><a href="#server-settings">Server Settings</a></li>
+<li><a href="#execution-mode">Execution Mode</a></li>
+<li><a href="#project-configuration-storage-settings">Project Configuration Storage settings</a></li>
+<li><a href="#key-storage-settings">Key Storage settings</a></li>
+<li><a href="#notification-email-settings">Notification email settings</a></li>
+<li><a href="#custom-email-templates">Custom Email Templates</a></li>
+<li><a href="#execution-finalize-retry-settings">Execution finalize retry settings</a></li>
+<li><a href="#metrics-capturing">Metrics Capturing</a></li>
+<li><a href="#pagination-defaults">Pagination defaults</a></li>
+<li><a href="#job-remote-option-url-connection-parameters">Job Remote Option URL connection parameters</a></li>
+<li><a href="#job-file-option-uploads">Job File Option Uploads</a></li>
+<li><a href="#node-cache">Node Cache</a></li>
+<li><a href="#groovy-config-format">Groovy config format</a></li>
+<li><a href="#specify-config-file-location">Specify config file location</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Configuration</h1>
+</div>
+<h1 id="configuration-layout">Configuration layout</h1>
+<p>Configuration file layout differs between the RPM and Launcher installation methods.</p>
+<h2 id="rpm-layout">RPM layout</h2>
+<pre><code>/etc/rundeck
+|-- admin.aclpolicy
+|-- framework.properties
+|-- log4j.properties
+|-- profile
+|-- project.properties
+|-- jaas-loginmodule.conf
+|-- log4j.properties
+|-- realm.properties
+|-- rundeck-config.properties
+`-- ssl
+    |-- ssl.properties
+    |-- keystore (not packaged)
+    `-- truststore (not packaged)
+/var/lib/rundeck/exp/webapp/WEB-INF/web.xml</code></pre>
+<h2 id="launcher-layout">Launcher layout</h2>
+<pre><code>$RDECK_BASE/etc
+|-- admin.aclpolicy
+|-- framework.properties
+|-- log4j.properties
+|-- profile
+`-- project.properties
+$RDECK_BASE/server/config
+|-- jaas-loginmodule.conf
+|-- realm.properties
+`-- rundeck-config.properties</code></pre>
+<h1 id="configuration-files">Configuration files</h1>
+<p>Configuration is specified in a number of standard Rundeck configuration files generated during the installation process.</p>
+<p>The purpose of each configuration file is described in its own section.</p>
+<h2 id="admin.aclpolicy">admin.aclpolicy</h2>
+<p>Administrator access control policy defined with a [aclpolicy] document.</p>
+<p>This file governs the access for the “admin” group and role.</p>
+<p>See <a href="../security/access-control-policy.html" title="Administrator Guide - Security - Access Control Policy">role based access control</a> for information about setting up policy files for other user groups.</p>
+<h2 id="framework.properties">framework.properties</h2>
+<p>Configuration file used by shell tools and core Rundeck services. This file will be created for you at install time.</p>
+<p>Some important settings:</p>
+<ul>
+<li><code>framework.server.hostname</code>: Hostname of the Rundeck server node</li>
+<li><code>framework.server.name</code>: Name (identity) of the Rundeck server node</li>
+<li><code>framework.projects.dir</code>: Path to the directory containing Rundeck Project directories. Default is <code>$RDECK_BASE/projects</code>.</li>
+<li><code>framework.var.dir</code>: Base directory for output and temp files used by the server and CLI tools. Default is <code>$RDECK_BASE/var</code>.</li>
+<li><code>framework.logs.dir</code>: Directory for log files written by core services and Rundeck Server’s Job executions. Default is <code>$RDECK_BASE/var/logs</code></li>
+<li><code>framework.server.username</code>: Username for connection to the Rundeck server</li>
+<li><code>framework.server.password</code>: Password for connection to the Rundeck server</li>
+<li><code>framework.rundeck.url</code>: Base URL for Rundeck server.</li>
+</ul>
+<p>SSH Connection settings (See <a href="../projects/node-execution/ssh.html" title="Administrator Guide - Projects - Node Execution - SSH">Projects - Node Execution - SSH</a>):</p>
+<ul>
+<li><code>framework.ssh.keypath</code>: Path to the SSH private key file used for SSH connections</li>
+<li><code>framework.ssh.user</code>: Default username for SSH Connections, if not overridden by Node specific value.</li>
+<li><code>framework.ssh-connection-timeout</code>: timeout in milliseconds for SSH connections. The default is “0” (no timeout). You can modify this to change the connect/socket timeout. (Deprecated: <code>framework.ssh.timeout</code>.)</li>
+<li><code>framework.ssh-command-timeout</code>: timeout in milliseconds for SSH commands. The default is “0” (no timeout). You can modify this to change the maximum time allowed for SSH commands to run.</li>
+</ul>
+<p>Other settings:</p>
+<ul>
+<li><code>framework.log.dispatch.console.format</code>: Default format for non-terse node execution logging run by the <code>dispatch</code> CLI tool.</li>
+<li><code>execution.script.tokenexpansion.enabled</code>: Whether inline script token expansion is enabled, default <code>true</code>. If <code>false</code>, the “Inline Script Content” syntax described in <a href="../../manual/creating-job-workflows.html#context-variables" title="User Guide - Creating Job Workflows - Context Variables">User Guide - Creating Job Workflows - Context Variables</a> is disabled.</li>
+<li><code>communityNews.disabled</code>: Default is not set, or false. Disables the external polling of Community News feed. Link will persist but will not poll, and clicking this link will open a new browser tab and navigate to the web-based version of Community News.</li>
+</ul>
+<p>Static authentication tokens for API access:</p>
+<p>You can define the location of a .properties file in framework.properties:</p>
+<ul>
+<li><code>rundeck.tokens.file=/etc/rundeck/tokens.properties</code></li>
+</ul>
+<p>The <code>tokens.properties</code> file should contain static authentication tokens you wish to use, keyed by the associated username:</p>
+<pre><code>username: token_string
+username2: token_string2
+...</code></pre>
+<p>The token_strings can be used as Authentication tokens to the <a href="../../api/index.html#token-authentication" title="API Reference | Version 31 - Token Authentication">API</a>.</p>
+<h3 id="global-execution-variables">Global execution variables</h3>
+<p>Entries in <code>framework.properties</code> in the form <code>framework.globals.X=Y</code> Adds a variable <code>X</code> available in all execution contexts as <code>${globals.X}</code>.</p>
+<p>Global variables can be overridden in the <a href="#project.properties"><code>project.properties</code></a> by adding a line in the form of <code>project.globals.X=Y</code> and then accessing it as <code>${globals.X}</code>.</p>
+<h2 id="log4j.properties">log4j.properties</h2>
+<p>Rundeck uses <a href="https://logging.apache.org/log4j/2.x/">log4j</a> as its application logging facility. This file defines the logging configuration for the Rundeck server.</p>
+<h2 id="cli-log4j.properties">cli-log4j.properties</h2>
+<p>This file defines the logging configuration for the Commandline tools.</p>
+<h2 id="profile">profile</h2>
+<p>Shell environment variables used by the shell tools. This file contains several parameters needed during the startup of the shell tools like umask, Java home and classpath, and SSL options.</p>
+<h2 id="project.properties">project.properties</h2>
+<p>Rundeck project configuration file when using Filesystem based project definitions (see <a href="https://rundeck.org/docs/administration/projects/configuration.html">Project Setup - Project Definitions</a>).</p>
+<p>One of these is generated at project setup time. Each project has a directory within the Rundeck projects directory, and the config file is within the <code>etc</code> subdirectory:</p>
+<pre><code>$RDECK_BASE/projects/[PROJECT-NAME]/etc/project.properties</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Property</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>project.name</code></td>
+<td style="text-align: left;">Declare the project name.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>project.ssh-authentication</code></td>
+<td style="text-align: left;">SSH authentication type (eg, privateKey).</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>project.ssh-keypath</code></td>
+<td style="text-align: left;">SSH identify file.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>service.FileCopier.default.provider</code></td>
+<td style="text-align: left;">Default script file copier plugin.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>service.NodeExecutor.default.provider</code></td>
+<td style="text-align: left;">Default node executor plugin.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>resources.source.N...</code></td>
+<td style="text-align: left;">Defines a Resource model source see <a href="../../manual/configure.html#resource-model-sources-configuration" title="User Guide - Configure - Resource Model Sources Configuration">Resource Model Sources</a>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>project.globals.X</code></td>
+<td style="text-align: left;"><a href="#project-global-execution-variables">Defines a Project Global variable</a></td>
+</tr>
+</tbody>
+</table>
+<p>Here’s an example that configures a File source:</p>
+<pre><code>resources.source.1.config.file=/var/rundeck/projects/${project.name}/etc/resources.xml
+resources.source.1.config.generateFileAutomatically=true
+resources.source.1.config.includeServerNode=true
+resources.source.1.type=file</code></pre>
+<p>Another that configures a URL source:</p>
+<pre><code>resources.source.2.config.cache=true
+resources.source.2.config.timeout=30
+resources.source.2.config.url=http\://example.com/nodes
+resources.source.2.type=url</code></pre>
+<p>And one that configures a Directory source:</p>
+<pre><code>resources.source.3.config.directory=/var/rundeck/projects/${project.name}/site_nodes
+resources.source.3.type=directory</code></pre>
+<p>Additional sources increment the source number. You can reference the project name by using the <code>${project.name}</code> context variable.</p>
+<h3 id="file-copier-destination-directory">File copier destination directory</h3>
+<p>When executing a Script step, the destination file path to be used when copying the script can be set using Node, Project, or Framework configuration values. Please see the plugin <a href="https://rundeck.org/docs/administration/projects/node-execution/built-in-plugins.html#file-copier-destination-directory">documentation</a></p>
+<h3 id="project-global-execution-variables">Project Global execution variables</h3>
+<p>Project configuration entries of the form <code>project.globals.X=Y</code> Adds a variable <code>X</code> available in all execution contexts as <code>${globals.X}</code>, and overrides any global with the same name defined in <a href="#framework.properties"><code>framework.properties</code></a>.</p>
+<h2 id="jaas-loginmodule.conf">jaas-loginmodule.conf</h2>
+<p><a href="https://wiki.eclipse.org/Jetty/Feature/JAAS">JAAS</a> configuration for the Rundeck server. The listing below shows the file content for a normal RPM installation. One can see it specifies the use of the PropertyFileLoginModule:</p>
+<pre><code>RDpropertyfilelogin {
+  org.eclipse.jetty.plus.jaas.spi.PropertyFileLoginModule required
+  debug=&quot;true&quot;
+  file=&quot;/etc/rundeck/realm.properties&quot;;
+};</code></pre>
+<h2 id="realm.properties">realm.properties</h2>
+<p>Property file user directory when PropertyFileLoginModule is used. Specified from <a href="#jaas-loginmodule.conf">jaas-loginmodule.conf</a>.</p>
+<h2 id="session-timeout">Session timeout</h2>
+<p>See <a href="#server-settings">rundeck-config.properties &gt; Server Settings</a></p>
+<p>Or set <code>server.session.timeout</code> via <a href="system-properties-configuration.html" title="Administrator Guide - Rundeck Configuration - System Properties Configuration">System Properties Configuration</a>.</p>
+<h2 id="rundeck-config.properties">rundeck-config.properties</h2>
+<p>This is the primary Rundeck webapp configuration file. Defines default loglevel, datasource configuration, and <a href="gui-customization.html" title="Administrator Guide - Rundeck Configuration - GUI Customization">GUI customization</a>.</p>
+<p>The following sections describe configuration values for this file.</p>
+<h3 id="security">Security</h3>
+<ul>
+<li><p><code>rundeck.security.useHMacRequestTokens</code> : <code>true/false</code>. Default: <code>true</code>. Switches between HMac based request tokens, and the default grails UUID tokens. HMac tokens have a timeout, which may cause submitted forms or actions to fail with a message like “Token has expired”. If set to false, UUIDs will be used instead of HMac tokens, and they have no timeouts. The default timeout for tokens can be changed with the java system property <code>-Dorg.rundeck.web.infosec.HMacSynchronizerTokensHolder.DEFAULT_DURATION=[timeout in ms]</code>.</p></li>
+<li><p><code>rundeck.security.apiCookieAccess.enabled</code>: <code>true/false</code>. Default: <code>true</code>. Determines whether access to the API is allowed if the API client authenticates via session cookies (i.e. username and password login.) If set to <code>false</code>, the current CLI tools and API libraries will not operate correctly if they use username and password login.</p></li>
+<li><p><code>rundeck.api.tokens.duration.max</code>: Duration string indicating maximum lifetime of API Tokens. If unset, the value will be “30d” (30 days). Format: “##{ydhms}” (years, days, hours, minutes, seconds). If you want to disable the max expiration you can set it to 0 and create token with 0 duration that don’t expire.</p></li>
+<li><p><code>rundeck.security.csrf.referer.filterMethod</code>:<code>NONE|POST|*</code>. Set HTTP Method to filter based on Referer header. Can be POST, or &quot;*&quot; for all methods. Default: NONE (disabled)</p></li>
+<li><p><code>rundeck.security.csrf.referer.allowApi</code>: <code>true|false</code>. Allow /api/* requests without requiring matching Referer header. Default: true.</p></li>
+<li><p><code>rundeck.security.csrf.referer.requireHttps</code>: <code>true|false</code>. If server URL is HTTPS, Require referer header to be from HTTPS version of server URL, if false allow HTTP as well. Default: true.</p></li>
+<li><p><code>rundeck.security.enforceMaxSessions</code>: <code>true|false</code>. Only allow users to log in a configured number of times. Oldest sessions are automatically logged out. <code>Default: false</code>.</p>
+<p>Note: If you use the rd tool with the RD_USERNAME/RD_PASSWORD authentication this will use an active session each time your run the command. If you log into the user interface then execute rd commands you could be logged out of your web session. If you have multiple long running rd commands and you exceed the maxSessions limit, you may experience unexpected behavior. If you use api tokens with the rd tool it will not log out your interactive session. If you enable this setting and also use the rd tool, it is recommended that you use api tokens with the rd tool.</p></li>
+<li><p><code>rundeck.security.maxSessions</code>: If enforceMaxSessions is true, this setting controls the number of active sessions a user is allowed to have. <code>Default: 1</code></p></li>
+<li><p><code>rundeck.security.jaasRolePrefix</code>: Prefix string to add to each <em>role</em> determined via <a href="../security/authenticating-users.html#jetty-and-jaas-authentication" title="Administrator Guide - Security - Authenticating Users - Jetty And Jaas Authentication">JAAS Authentication</a>. Default: none.</p></li>
+</ul>
+<h3 id="security-http-headers">Security HTTP Headers</h3>
+<p>Rundeck adds some HTTP headers for XSS prevention and other security reasons, as described below.</p>
+<p>By default, these headers are enabled, but they can be individually disabled, or reconfigured.</p>
+<p>Additionally, custom headers can be enabled if required.</p>
+<pre class=".properties"><code># enable security headers filter to add these headers (default: true)
+rundeck.security.httpHeaders.enabled=true
+
+#########
+# enable x-content-type-options: nosniff  (default: true)
+rundeck.security.httpHeaders.provider.xcto.enabled=true
+
+#########
+# enable x-xss-protection: 1  (default: true)
+
+rundeck.security.httpHeaders.provider.xxssp.enabled=true
+
+# Alternates for x-xss-protection:
+#
+# use x-xss-protection: 1; mode=block
+#
+
+# rundeck.security.httpHeaders.provider.xxssp.config.block=true
+
+#
+# use x-xss-protection: 1; report=https://some-uri
+
+# rundeck.security.httpHeaders.provider.xxssp.config.report=https://some-uri
+
+########
+# enable x-frame-options: deny  (default: true)
+
+rundeck.security.httpHeaders.provider.xfo.enabled=true
+
+# Alternate settings for x-frame-options:
+#
+# use x-frame-options: sameorigin
+
+# rundeck.security.httpHeaders.provider.xfo.config.sameorigin=true
+
+#
+# use x-frame-options: allow-from: src
+
+# rundeck.security.httpHeaders.provider.xfo.config.allowFrom=src
+
+#######
+# enable Content-Security-Policy header (default:true)
+
+rundeck.security.httpHeaders.provider.csp.enabled=true
+
+# You can enable the `X-` variants of Content-Security-Policy if desired, but they are disabled by default:
+#
+# This enables the X-Content-Security-Policy header name
+
+# rundeck.security.httpHeaders.provider.csp.config.include-xcsp-header=true
+
+#
+# This enables the X-WebKit-CSP header name
+
+# rundeck.security.httpHeaders.provider.csp.config.include-xwkcsp-header=true
+
+# You can specify an explicit policy, which will override directives declared below
+#
+
+# rundeck.security.httpHeaders.provider.csp.config.policy=default-src &#39;none&#39;; connect-src &#39;self&#39; ; style-src &#39;self&#39; &#39;unsafe-inline&#39;; script-src &#39;self&#39; &#39;unsafe-inline&#39; &#39;unsafe-eval&#39;; font-src &#39;self&#39; data: ; img-src &#39;self&#39; https://media.rundeck.org ; form-action &#39;self&#39; ;
+
+#
+# Or you can specify individual directives:
+#
+
+rundeck.security.httpHeaders.provider.csp.config.default-src=none
+rundeck.security.httpHeaders.provider.csp.config.connect-src=self
+rundeck.security.httpHeaders.provider.csp.config.style-src=self unsafe-inline
+rundeck.security.httpHeaders.provider.csp.config.script-src=self unsafe-inline unsafe-eval
+rundeck.security.httpHeaders.provider.csp.config.font-src=self data:
+rundeck.security.httpHeaders.provider.csp.config.img-src=self https://media.rundeck.org
+rundeck.security.httpHeaders.provider.csp.config.form-action=self
+
+#######
+# enable any custom additional headers (default: false)
+#
+# rundeck.security.httpHeaders.provider.custom.enabled=true
+# rundeck.security.httpHeaders.provider.custom.config.name=X-Other-Security-Policy
+# rundeck.security.httpHeaders.provider.custom.config.value=default-src &#39;none&#39;;
+# rundeck.security.httpHeaders.provider.custom.config.name2=X-other-header
+# rundeck.security.httpHeaders.provider.custom.config.value2=some value</code></pre>
+<p>References:</p>
+<ul>
+<li><a href="https://www.owasp.org/index.php/OWASP_Secure_Headers_Project" class="uri">https://www.owasp.org/index.php/OWASP_Secure_Headers_Project</a></li>
+<li><a href="https://content-security-policy.com" class="uri">https://content-security-policy.com</a></li>
+</ul>
+<h3 id="local-login-form-visibility">Local Login Form Visibility</h3>
+<ul>
+<li><code>rundeck.login.localLogin.enabled</code>:<code>true/false</code>. Default <code>true</code></li>
+</ul>
+<p>If you have Single Sign On enabled(Enterprise only) and you want to prevent the ability for your users to login with the non-SSO form, you can set this property to false and it will suppress the non-SSO login form.</p>
+<h3 id="logout-behaviors">Logout behaviors</h3>
+<ul>
+<li><p><code>rundeck.logout.expire.cookies</code>: comma separated list of cookie names to expire on logout</p></li>
+<li><p><code>rundeck.logout.redirect.url</code>: Redirect to this url after logout. This can either be a fully qualified url or a relative path.</p></li>
+</ul>
+<h3 id="server-settings">Server Settings</h3>
+<ul>
+<li><code>server.session.timeout</code>: timeout in seconds.</li>
+</ul>
+<p>Note: This setting applies <em>only</em> to the embedded Jetty server, which is used for standalone war launcher, rpm or deb installs. It does not work for Tomcat installation.</p>
+<p>If you are deploying the Rundeck war file to Tomcat, you can manage the session timeout setting in the <code>$TomcatBase/conf/web.xml</code> file. The setting is in minutes.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode xml"><code class="sourceCode xml"><a class="sourceLine" id="cb10-1" data-line-number="1">    <span class="kw">&lt;session-config&gt;</span> <span class="kw">&lt;session-timeout&gt;</span>30<span class="kw">&lt;/session-timeout&gt;</span> <span class="kw">&lt;/session-config&gt;</span></a></code></pre></div>
+<h3 id="execution-mode">Execution Mode</h3>
+<ul>
+<li><code>rundeck.executionMode</code>:<code>active/passive</code>. Default <code>active</code>. Set the Execution Mode for the Rundeck server.</li>
+</ul>
+<p>Rundeck can be in <code>active</code> or <code>passive</code> execution mode.</p>
+<ul>
+<li><code>active</code> mode: Jobs, scheduled Jobs, and adhoc executions can be run.</li>
+<li><code>passive</code> mode: No Jobs or adhoc executions can be run.</li>
+</ul>
+<p>Setting Rundeck to <code>passive</code> mode prevents users from running anything on the system and is useful when managing Rundeck server clusters.</p>
+<h3 id="project-configuration-storage-settings">Project Configuration Storage settings</h3>
+<p>The <a href="../projects/create-new-project.html#project-definitions" title="Administrator Guide - Projects - Create new Project - Project Definitions">Project Setup - Project Definitions</a> mechanism is configured within this file, see:</p>
+<ul>
+<li><a href="storage-facility.html#project-storage" title="Administrator Guide - Rundeck Configuration - Storage Facility - Project Storage">Project Storage</a></li>
+</ul>
+<h3 id="key-storage-settings">Key Storage settings</h3>
+<p>The <a href="../security/key-storage.html" title="Administrator Guide - Security - Key Storage">Key storage</a> mechanism is configured within this file, see:</p>
+<ul>
+<li><a href="plugins/configuring.html#storage-plugins" title="Administrator Guide - Rundeck Configuration - Configuring Plugins - Configuring - Storage Plugins">Configuring Storage Plugins</a></li>
+<li><a href="plugins/configuring.html#storage-converter-plugins" title="Administrator Guide - Rundeck Configuration - Configuring Plugins - Configuring - Storage Converter Plugins">Configuring Storage Converter Plugins</a></li>
+</ul>
+<h3 id="notification-email-settings">Notification email settings</h3>
+<p>See <a href="email-settings.html#notification-email-settings" title="Administrator Guide - Rundeck Configuration - Email Settings - Notification Email Settings">Email Settings: Notification email settings</a></p>
+<h3 id="custom-email-templates">Custom Email Templates</h3>
+<p>See <a href="email-settings.html#custom-email-templates" title="Administrator Guide - Rundeck Configuration - Email Settings - Custom Email Templates">Email Settings: Custom Email Templates</a></p>
+<h3 id="execution-finalize-retry-settings">Execution finalize retry settings</h3>
+<p>If a sporadic DB connection failure happens when an execution finishes, Rundeck may fail to update the state of the execution in the database, causing the execution to appear is if it is still “running”.</p>
+<p>Rundeck now attempts to retry the update to correctly register the final state of the execution. You can tune how many times and how often this retry occurs with these config values:</p>
+<pre><code># attempt to retry the final state update
+rundeck.execution.finalize.retryMax=10
+rundeck.execution.finalize.retryDelay=5000
+
+# attempt to retry updating job statistics after execution finishes
+rundeck.execution.stats.retryMax=3
+rundeck.execution.stats.retryDelay=5000</code></pre>
+<p>Delay is in milliseconds. If a max is set to <code>-1</code>, then retries will happen indefinitely.</p>
+<h3 id="metrics-capturing">Metrics Capturing</h3>
+<p>Rundeck captures metrics using the <a href="http://metrics.dropwizard.io/3.0.2/">Metrics</a> library.</p>
+<p>You can disable all metrics capturing with:</p>
+<pre><code>rundeck.metrics.enabled=true/false</code></pre>
+<p>Additional configuration for metrics:</p>
+<pre><code># capture metrics for requests via a filter
+rundeck.metrics.requestFilterEnabled=true/false
+
+# use JMX
+rundeck.metrics.jmxEnabled=true/false</code></pre>
+<h4 id="metrics-api-endpoints">Metrics API Endpoints</h4>
+<p>Rundeck exposes Metrics data via API endpoints, which are enabled by default.</p>
+<p>You can disable all metrics API endpoints with:</p>
+<pre><code>rundeck.metrics.api.enabled=true/false</code></pre>
+<p>You can also selectively disable each endpoing by setting these config values:</p>
+<pre><code>rundeck.metrics.api.[name].enabled=true/false</code></pre>
+<p>Metrics names are:</p>
+<ul>
+<li><code>metrics</code></li>
+<li><code>threads</code></li>
+<li><code>ping</code></li>
+<li><code>healthcheck</code></li>
+</ul>
+<p>See: <a href="../../api/index.html#list-metrics" title="API Reference | Version 31 - List Metrics">API &gt; List Metrics</a>.</p>
+<h3 id="pagination-defaults">Pagination defaults</h3>
+<p>Default paging size for the Activity page and results from execution API queries can be changed.</p>
+<pre><code>rundeck.pagination.default.max=20</code></pre>
+<h3 id="job-remote-option-url-connection-parameters">Job Remote Option URL connection parameters</h3>
+<p>Change the defaults for for <a href="../../manual/defining-job-options.html#remote-option-values" title="User Guide - Defining Job Options - Remote Option Values">Job Remote Option Value URLs</a> loading.</p>
+<p><strong>Socket read timeout</strong></p>
+<p>Max wait time reading from socket.</p>
+<p>Default value: <code>10</code> (seconds)</p>
+<p>Change this by setting:</p>
+<pre><code>rundeck.jobs.options.remoteUrlTimeout=[seconds]</code></pre>
+<p><strong>Connection timeout</strong></p>
+<p>Max wait time attempting to make the connection.</p>
+<p>Default value: (no timeout)</p>
+<p>Change this by setting:</p>
+<pre><code>rundeck.jobs.options.remoteUrlConnectionTimeout=[seconds]</code></pre>
+<p><strong>No response retry</strong></p>
+<p>If the request is sent, but the server disconnects without a response (e.g. server is overloaded), retry the request this many times.</p>
+<p>Default value: 3</p>
+<p>Change this by setting:</p>
+<pre><code>rundeck.jobs.options.remoteUrlRetry=[total]</code></pre>
+<h3 id="job-file-option-uploads">Job File Option Uploads</h3>
+<p>Values to configure file uploads for File type Job options:</p>
+<p>Max temp file size. File size in bytes or with a suffix of <code>k</code>,<code>m</code>,<code>g</code>,<code>t</code> (kilo,mega,giga,tera).</p>
+<pre><code>rundeck.fileUploadService.tempfile.maxsize=200M</code></pre>
+<p>Max temp file expiration (duration in milliseconds). The uploaded file will be removed if not used as a job option within ths time period. (This primarily affects Job executions performed via API because the File Upload and Job Run are performed as separate steps.)</p>
+<pre><code># default is 10 minutes
+rundeck.fileUploadService.tempfile.expiration=600000</code></pre>
+<h3 id="node-cache">Node Cache</h3>
+<p>Defaults for the Node caches</p>
+<dl>
+<dt>Enabled: true/false (default true).</dt>
+<dd><p><code>rundeck.nodeService.nodeCache.enabled=true</code> If set to false, no caching is performed.</p>
+</dd>
+<dt>First Load Asynch: true/false</dt>
+<dd><code>rundeck.nodeService.nodeCache.firstLoadAsynch=false</code> The default for whether the first load of a project’s nodes should be performed synchronously or not. If set to <code>true</code>, and the <a href="../projects/create-new-project.html#project-nodes" title="Administrator Guide - Projects - Create new Project - Project Nodes">Project Nodes &gt; Synchronous First Load</a> value is unset, then the initial load of a Project’s nodes when the cache is empty will be done in the background asynchronously. Otherwise the initial load is done synchronously, possibly causing a delay at Rundeck startup or Job execution startup. A Project level configuration value will override this default.
+</dd>
+</dl>
+<h3 id="groovy-config-format">Groovy config format</h3>
+<p>You can change you rundeck-config.properties to a rundeck-config.groovy.</p>
+<p>The groovy format is a java-like language, and it is not the same as properties.</p>
+<p>Make sure you put quotes around all string values, but it is not necessary for true/false or numbers.</p>
+<p>java properties format:</p>
+<pre class="properties"><code>some.property=value</code></pre>
+<p>groovy format:</p>
+<pre class="groovy"><code>some.property=&quot;value&quot;</code></pre>
+<p>You can also use nested values using curly brackets, or use dot-notation “a.b.c”, but since it is not simple text properties, strings have to be quoted.</p>
+<p>E.g. : a.b.c=“blah” is the same as:</p>
+<pre class="groovy"><code>a{
+    b{
+        c=&quot;blah&quot;
+    }
+}</code></pre>
+<h3 id="specify-config-file-location">Specify config file location</h3>
+<p>You will need to point rundeck at the new filename when you start up rundeck:</p>
+<ul>
+<li><p>Launcher:</p>
+<pre><code>  java -jar -Drundeck.config.name=rundeck-config.groovy rundeck-launcher.jar</code></pre></li>
+</ul>
+<p>RPM: Add this to the <code>/etc/sysconfig/rundeckd</code> file:</p>
+<pre><code>    export RDECK_CONFIG_FILE=&quot;/etc/rundeck/rundeck-config.groovy&quot;</code></pre>
+<p>RPM/DEB: Add this to the <code>/etc/default/rundeckd</code> file:</p>
+<pre><code>    export RDECK_CONFIG_FILE=&quot;/etc/rundeck/rundeck-config.groovy&quot;</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbsbottom">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb bottom collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.26)</a></li>
+    
+        <li><a href="../index.html">Administrator Guide</a></li>
+    
+    
+    <li ><a href="index.html">Rundeck Configuration</a></li>
+    <li class="active"><a href="configuration-file-reference.html">Configuration File Reference</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="localization.html"><i class="glyphicon glyphicon-arrow-left"></i> Localization</a></li>
+      <li class="next"><a href="system-properties-configuration.html">System Properties Configuration <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/configuration/config-file-reference.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/configuration/config-file-reference.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Enterprise for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Enterprise
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://rundeck.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2019 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2019-08-30T01:35:08UTC">2019-08-30T01:35:08UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+
+<!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2768099.js"></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
