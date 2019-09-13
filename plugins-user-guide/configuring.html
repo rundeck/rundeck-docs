@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Configuring</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="http://rundeck.org/search/">
+      <div class="form-group">
+        <input type="text" class="form-control" name="q" placeholder="Search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb top">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.14)</a></li>
+    
+    
+    <li ><a href="index.html">Plugins User Guide</a></li>
+    <li class="active"><a href="configuring.html">Configuring</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="installing.html"><i class="glyphicon glyphicon-arrow-left"></i> Installing</a></li>
+      <li class="next"><a href="bundled-plugins.html">Bundled Plugins <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#configuring-plugins-for-use">Configuring Plugins for Use</a><ul>
+<li><a href="#workflow-steps">Workflow Steps</a></li>
+<li><a href="#node-execution">Node Execution</a></li>
+<li><a href="#resource-model-sources">Resource Model Sources</a></li>
+<li><a href="#resource-format-generators-and-parsers">Resource Format Generators and Parsers</a></li>
+<li><a href="#notifications">Notifications</a></li>
+<li><a href="#logging">Logging</a></li>
+<li><a href="#storage-plugins">Storage Plugins</a></li>
+<li><a href="#storage-converter-plugins">Storage Converter Plugins</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Configuring</h1>
+</div>
+<h2 id="configuring-plugins-for-use"><a href="#configuring-plugins-for-use">Configuring Plugins for Use</a></h2>
+<h3 id="workflow-steps"><a href="#workflow-steps">Workflow Steps</a></h3>
+<p>Workflow Step and Workflow Node Step providers are used to define custom steps that can be performed in Workflows.</p>
+<p>You can select a step plugin in the GUI when adding a new step to a Workflow. You will be prompted to enter any configuration properties for the step, and can save those configuration values into your workflow.</p>
+<p>If you are defining a workflow in an XML/Yaml-formatted file, you can specify the configuration properties there.</p>
+<p>Each configuration property has a &quot;scope&quot; defined by the provider. Scoped properties allow default values to be specified at Framework (application) or Project level configuration properties. Properties can also be defined to only exist at Framework or Project levels.</p>
+<ol style="list-style-type: decimal">
+<li>Instance (Job) scope: the property values defined in the Job definition</li>
+<li>Project scope: property values defined in the Project's <em>project.properties</em> file</li>
+<li>Framework (Application) scope: property values defined in Rundeck's <em>framework.properties</em> file.</li>
+</ol>
+<p>When determining the property value to use, Rundeck will evaluate the most-specific scope first (Instance level), and then widen the scope to Project, then Framework definitions.</p>
+<p>When you create a Job in the Rundeck GUI, you will be shown the Instance-scope properties as part of the GUI Workflow Builder for any plugin step that you add to your workflow.</p>
+<p>When a property can be configured at the framework/project level, you will be able to define it like this:</p>
+<p><em>Framework scope property definition in <code>framework.properties</code></em></p>
+<pre><code>framework.plugin.[ServiceName].[providerName].[property]=value</code></pre>
+<p><em>Project scope property definition in <code>project.properties</code></em></p>
+<pre><code>project.plugin.[ServiceName].[providerName].[property]=value</code></pre>
+<h3 id="node-execution"><a href="#node-execution">Node Execution</a></h3>
+<p>The two <em>Node services</em>, Node Executor and File Copier, are both configured similarly. They are configured for particular nodes on a node-specific basis, or set as a default provider for a project or for the system.</p>
+<p>If multiple providers are defined the most specific definition takes precedence in this order:</p>
+<ol style="list-style-type: decimal">
+<li>Node specific</li>
+<li>Project scope</li>
+<li>Framework scope</li>
+</ol>
+<h4 id="node-specific"><a href="#node-specific">Node Specific</a></h4>
+<p>To enable a provider for a node, add an attribute to the node definition.</p>
+<p><em>Node Executor provider attributes</em>:</p>
+<dl>
+<dt><code>node-executor</code></dt>
+<dd><p>specifies the provider name for a non-local node.</p>
+</dd>
+<dt><code>local-node-executor</code></dt>
+<dd><p>specifies the provider name for the local (server) node.</p>
+</dd>
+</dl>
+<p><em>FileCopier provider attributes</em>:</p>
+<dl>
+<dt><code>file-copier</code></dt>
+<dd><p>specifies the provider by name for a non-local node.</p>
+</dd>
+<dt><code>local-file-copier</code></dt>
+<dd><p>specifies the provider by name for the local (server) node.</p>
+</dd>
+</dl>
+<p>Example Node in YAML specifying <code>stub</code> NodeExecutor and FileCopier:</p>
+<pre class="sourceCode yaml"><code class="sourceCode yaml"><span class="fu">remotehost:</span>
+    <span class="fu">hostname:</span> remotehost
+    <span class="fu">node-executor:</span> stub
+    <span class="fu">file-copier:</span> stub</code></pre>
+<h4 id="project-or-framework-scope"><a href="#project-or-framework-scope">Project or Framework Scope</a></h4>
+<p><em>Node Executor</em></p>
+<p>You can define the default connection providers to use for nodes at either the Project or Framework scope (or both). To do so, configure any of the following properties in the <code>project.properties</code> or the <code>framework.properties</code> files.</p>
+<dl>
+<dt><code>service.NodeExecutor.default.provider</code></dt>
+<dd><p>Specifies the default NodeExecutor provider for remote nodes</p>
+</dd>
+<dt><code>service.NodeExecutor.default.local.provider</code></dt>
+<dd><p>Specifies the default Node Executor provider for the local node.</p>
+</dd>
+</dl>
+<p><em>File Copier</em></p>
+<dl>
+<dt><code>service.FileCopier.default.provider</code></dt>
+<dd><p>Specifies the default File Copier provider for remote nodes.</p>
+</dd>
+<dt><code>service.FileCopier.default.local.provider</code></dt>
+<dd><p>Specifies the default File Copier provider for the local node.</p>
+</dd>
+</dl>
+<p>Example <code>project.properties</code> to set default local providers to <code>stub</code>:</p>
+<pre><code>service.NodeExecutor.default.local.provider=stub
+service.FileCopier.default.local.provider=stub</code></pre>
+<h3 id="resource-model-sources"><a href="#resource-model-sources">Resource Model Sources</a></h3>
+<p>The <em>Resource Model Sources</em> providers can be configured for a single project in the <code>project.properties</code> file.</p>
+<p>You can define multiple Resource Model Sources for the project, and can mix and match the specific providers depending on your needs.</p>
+<p>When you define multiple Source providers in a project, then the resulting set of Nodes will effectively be a merge of all the sources, in the order in which they are declared. This means that if two or more Sources provide a definition of a node with the same name, then the definition from lowest Source in the list will be used.</p>
+<p>The order that the providers are loaded (and thus the nodes are merged) is:</p>
+<ol style="list-style-type: decimal">
+<li><code>project.resources.file</code>: A File Model Source with default configuration.</li>
+<li><code>project.resources.url</code>: A URL Model Source with default configuration. (optional)</li>
+<li>All <code>resources.source.N</code> configurations in order starting at 1</li>
+</ol>
+<h4 id="resource-model-source-configuration"><a href="#resource-model-source-configuration">Resource Model Source configuration</a></h4>
+<p>The <code>project.properties</code> file for each project allows you to configure the Resource Model Sources in these ways:</p>
+<ul>
+<li>Define <code>project.resources.file</code> - this file path is used as a File Source path, with <em>autogeneration</em> and <em>includeServerNode</em> both true.</li>
+<li>Define <code>project.resources.url</code> - this URL is used as a URL Source url, with caching enabled</li>
+</ul>
+<p>You may also define a list of more sources in this way:</p>
+<p>Starting at index <code>1</code>, define these properties for your Source numbered <code>N</code>:</p>
+<pre><code>resources.source.N.type=&lt;provider-name&gt;
+resources.source.N.config.&lt;property&gt;=&lt;value&gt;
+resources.source.N.config.&lt;property2&gt;=&lt;value2&gt;
+...</code></pre>
+<p>Using one of the available Resource Model Source provider names for the <code>&lt;provider-name&gt;</code> value. For each Resource Model Source provider, you can specify the configuration properties for the source.</p>
+<p>Example project.properties configuration of a default File provider, and two other providers:</p>
+<pre><code>project.resources.file=/home/rundeck/projects/example/etc/resources.xml
+
+resources.source.1.type=url
+resources.source.1.url=http://server/nodes.yaml
+
+resources.source.2.type=directory
+resources.source.2.directory=/home/rundeck/projects/example/resources</code></pre>
+<h3 id="resource-format-generators-and-parsers"><a href="#resource-format-generators-and-parsers">Resource Format Generators and Parsers</a></h3>
+<p>Resource Format Generators and Parsers define support for file formats that can be generated from or parsed into a set of Resource Node definitions.</p>
+<p>These are used by other parts of the system, such as the Resource Model Sources.</p>
+<p>There is no configuration necessary to use these providers, however the specific Provider Name that each generator and parser defines has to be known in order to make use of the provider. The specific Provider Name is used as the &quot;format name&quot; when you want to use the parser or generator.</p>
+<p>For example, to enable a particular Resource Format parser to be used by a File Resource Model Source (see <a href="resource-model-source-plugins.html#file-resource-model-source-configuration">File Resource Model Source Configuration</a>), you should specify the Provider Name for the parser as the format for the source:</p>
+<pre><code>resources.source.1.format=myformat</code></pre>
+<p>This would specify the use of &quot;myformat&quot; provider.</p>
+<p>In other cases, the exact name of the provider may not be known (for example when loading content from a remote URL). Each Generator and Parser must define a list of MIME Type strings and file extensions that they support. These are used to determine which parser/generator is to be used.</p>
+<h3 id="notifications"><a href="#notifications">Notifications</a></h3>
+<p>Notifications can be configured for Jobs, and can be triggered when certain conditions occur. These conditions are called &quot;triggers&quot;, these are the currently available triggers:</p>
+<ul>
+<li><code>onstart</code> - the Job started</li>
+<li><code>onsuccess</code> - the Job succeeded</li>
+<li><code>onfailure</code> - the Job failed</li>
+<li><code>onavgduration</code> - the Execution exceed the average duration of the Job</li>
+<li><code>onretryablefailure</code> - the Job failed but will be retried</li>
+</ul>
+<p>When you define the Job in the GUI or via <a href="../man5/job-v20.html#notification">XML</a> or <a href="../man5/job-yaml-v12.html#notification">Yaml</a>, you can add any of the available Notification plugin types to happen for any of the possible triggers. Each Notification plugin type may have unique configuration properties that you can specify. Each combination of trigger and Notification type has a unique configuration.</p>
+<p>When defining configuration values for a plugin, you can usually substitute any &quot;Job context variables&quot; that are listed under <a href="../manual/jobs.html#context-variables">User Guide - Jobs - Context Variables</a>. (Note: Some configuration properties of a plugin may not support this feature.)</p>
+<p>In addition, you can also use these variables:</p>
+<ul>
+<li><code>${job.user.name}</code> - the user who executed the job</li>
+<li><code>${job.user.email}</code> - the email of the executing user if set in their user profile</li>
+<li><code>${job.user.firstName}</code> - the first name of the executing user if set in their user profile</li>
+<li><code>${job.user.lastName}</code> - the first name of the executing user if set in their user profile</li>
+</ul>
+<h3 id="logging"><a href="#logging">Logging</a></h3>
+<p>Logging plugins consist of Readers and Writers, and Log File Storage. Rundeck has a built-in Reader/Writer called the <strong>Local File Log</strong> that is used by default.</p>
+<p>Logging plugins are enabled in the <code>rundeck-config</code> file. You should add an entry identifying the plugin by its &quot;provider name&quot;. For Java plugins, this provider name is defined in the Java code. For Groovy plugins, the provider name is usually just the name of the Groovy script file, such as &quot;MyStreamingLogWriterPlugin&quot;.</p>
+<p>To add StreamingLogWriter plugins, add a comma separated list to this entry, note that this will enable these plugins in addition to the <strong>Local File Log Writer</strong>:</p>
+<ul>
+<li><code>rundeck.execution.logs.streamingWriterPlugins</code>
+<ul>
+<li>example value: <code>MyStreamingLogWriterPlugin,otherPlugin</code></li>
+</ul></li>
+</ul>
+<p>To change the StreamingLogReader plugin. Note that this will replace the <strong>Local File Log Reader</strong>, but will not disable the <strong>Local File Log Writer</strong>:</p>
+<ul>
+<li><code>rundeck.execution.logs.streamingReaderPlugin</code>
+<ul>
+<li>example value: <code>MyStreamingLogReaderPlugin</code></li>
+</ul></li>
+</ul>
+<p>To disable the <strong>Local File Log Writer</strong>:</p>
+<ul>
+<li><code>rundeck.execution.logs.localFileStorageEnabled</code>
+<ul>
+<li>value: <code>false</code></li>
+</ul></li>
+</ul>
+<p>To configure a ExecutionFileStorage plugin:</p>
+<ul>
+<li><code>rundeck.execution.logs.fileStoragePlugin</code>
+<ul>
+<li>example value: <code>MyFileStoragePlugin</code></li>
+</ul></li>
+</ul>
+<p>Also, if <code>localFileStorageEnabled</code> is <code>false</code>, but no <code>streamingReaderPlugin</code> is enabled, then Rundeck will still default to using the <strong>Local File Log Writer</strong>.</p>
+<p>The ExecutionFileStorage plugins also have some associated configuration values that can be used to tune the behavior of the plugins:</p>
+<ul>
+<li><code>rundeck.execution.logs.fileStorage.storageRetryCount</code>
+<ul>
+<li>The number of <code>store</code> attempts to try before giving up for a single log file</li>
+<li>default value: <code>1</code></li>
+</ul></li>
+<li><code>rundeck.execution.logs.fileStorage.storageRetryDelay</code>
+<ul>
+<li>Time to wait between retry attempts</li>
+<li>default value: <code>60</code> (seconds)</li>
+</ul></li>
+<li><code>rundeck.execution.logs.fileStorage.retrievalRetryCount</code>
+<ul>
+<li>The number of <code>retrieve</code> attempts to try before giving up for a single log file</li>
+<li>default value: <code>3</code></li>
+</ul></li>
+<li><code>rundeck.execution.logs.fileStorage.retrievalRetryDelay</code>
+<ul>
+<li>Time to wait between retry attempts</li>
+<li>default value: <code>60</code> (seconds)</li>
+</ul></li>
+<li><code>rundeck.execution.logs.fileStorage.remotePendingDelay</code>
+<ul>
+<li>Grace time to allow after an execution finishes. Clients will see a &quot;pending&quot; message within this period after an execution finishes, even if the storage plugin is unable to find the log file. After this time period, they will see a &quot;not found&quot; message if the plugin is unable to find the log file.</li>
+<li>default value: <code>120</code> (seconds)</li>
+</ul></li>
+<li><code>rundeck.execution.logs.fileStorage.retrievalTasks.concurrencyLimit</code>
+<ul>
+<li>concurrency for retrieval tasks</li>
+<li>default: 5</li>
+</ul></li>
+<li><code>rundeck.execution.logs.fileStorage.storageTasks.concurrencyLimit</code>
+<ul>
+<li>concurrency for storage tasks</li>
+<li>default: 10</li>
+</ul></li>
+<li><code>rundeck.execution.logs.fileStorage.scheduledTasks.poolSize</code>
+<ul>
+<li>threadpool size for log storage retry scheduling (retries)</li>
+<li>default: 5</li>
+</ul></li>
+</ul>
+<p>For plugins that support Partial/Checkpoint log storage, these additional configuration properties can be set:</p>
+<ul>
+<li><code>rundeck.execution.logs.fileStorage.checkpoint.time.interval</code> default: <code>30s</code> (30 seconds)
+<ul>
+<li>This is the time interval between submitting a new partial log storage request</li>
+</ul></li>
+<li><code>rundeck.execution.logs.fileStorage.checkpoint.time.minimum</code> default: <code>30s</code> (30 seconds)
+<ul>
+<li>This is the minimum time to wait until the first partial log storage request</li>
+</ul></li>
+<li><code>rundeck.execution.logs.fileStorage.checkpoint.fileSize.minimum</code> default: <code>0</code> (no minimum)
+<ul>
+<li>This is the minimum file size before the first partial log storage request</li>
+</ul></li>
+<li><code>rundeck.execution.logs.fileStorage.checkpoint.fileSize.increment</code> default: <code>0</code> (no minimum increment)
+<ul>
+<li>this is the file size change increment required before submitting another partial log storage request</li>
+</ul></li>
+</ul>
+<h4 id="logging-plugin-configuration"><a href="#logging-plugin-configuration">Logging Plugin Configuration</a></h4>
+<p>Logging plugins can define configuration properties, which can be set in the <code>framework.properties</code> (system-wide) or <code>project.properties</code> (project-wide). Project-level properties override system-level properties.</p>
+<p>To add a configuration property, add a value to the appropriate file in the following format:</p>
+<p><code>SCOPE.plugin.TYPE.PROVIDER.PROPERTY=value</code></p>
+<p><code>SCOPE</code> is either <code>framework</code> or <code>project</code>.</p>
+<p>The <code>TYPE</code> is one of:</p>
+<ul>
+<li><code>StreamingLogReader</code>, <code>StreamingLogWriter</code>, or <code>ExecutionFileStorage</code></li>
+</ul>
+<p><code>PROVIDER</code> is the provider name of the plugin.</p>
+<h3 id="storage-plugins"><a href="#storage-plugins">Storage Plugins</a></h3>
+<p>Storage plugins for the <a href="../administration/storage-facility.html">Storage Facility</a> are configured in the <code>rundeck-config.properties</code> file.</p>
+<p>Two separate &quot;containers&quot; are used, one for Key Storage, and one for Project Definition Storage.</p>
+<ul>
+<li>Key Storage
+<ul>
+<li>uses a configuration prefix of <code>rundeck.storage.provider</code></li>
+<li>uses <code>file</code> provider by default, stored at the <code>${framework.var.dir}/storage</code> path</li>
+<li>stores all content under the <code>/keys</code> top-level path</li>
+</ul></li>
+<li>Project Definition Storage
+<ul>
+<li>uses a configuration prefix of <code>rundeck.config.storage.provider</code></li>
+<li>uses <code>db</code> provider by default</li>
+<li>stores all content under the <code>/projects</code> top-level path</li>
+</ul></li>
+</ul>
+<p>To configure a different Storage Plugin Provider for either <strong>Key Storage</strong> or <strong>Project Definition Storage</strong>, modify your <code>rundeck-config.properties</code> file:</p>
+<p>To use the <code>db</code> storage:</p>
+<pre><code>[prefix].1.type=db
+[prefix].1.path=/</code></pre>
+<p>To use the <code>file</code> storage:</p>
+<pre><code>[prefix].1.type=file
+[prefix].1.path=/
+[prefix].1.config.baseDir=${framework.var.dir}/storage</code></pre>
+<p>Each Storage Plugin defines its own configuration properties, so if you are using a third-party plugin refer to its documentation. You can set the configuration properties via <code>[prefix].#.config.PROPERTY</code>.</p>
+<p>For the builtin <code>file</code> implementation, these are the configuration properties:</p>
+<ul>
+<li><code>baseDir</code> - Local filepath to store files and metadata. Default is <code>${framework.var.dir}/storage</code></li>
+</ul>
+<p>The <code>db</code> implementation has no configuration properties.</p>
+<h3 id="storage-converter-plugins"><a href="#storage-converter-plugins">Storage Converter Plugins</a></h3>
+<p>Storage Converter plugins are configured in the <code>rundeck-config.properties</code> file.</p>
+<p>Two separate &quot;containers&quot; are used, one for Key Storage, and one for Project Definition Storage.</p>
+<ul>
+<li>Key Storage
+<ul>
+<li>uses a configuration prefix of <code>rundeck.storage.converter</code></li>
+</ul></li>
+<li>Project Definition Storage
+<ul>
+<li>uses a configuration prefix of <code>rundeck.config.storage.converter</code></li>
+</ul></li>
+</ul>
+<p>Add an entry in your <code>rundeck-config.properties</code> file declaring the converter plugin which will handle content in subpath of the storage container.</p>
+<pre><code>[prefix].1.type=my-encryption-plugin
+[prefix].1.path=/keys
+[prefix].1.config.foo=my config value</code></pre>
+<ul>
+<li><code>type</code> - specifies the plugin provider name</li>
+<li><code>path</code> - specifies the storage path the converter will apply to</li>
+<li><code>resourceSelector</code> - specifies a metadata selector to choose which resources to apply the converter to</li>
+<li><code>config.PROP</code> - specifies a plugin configuration property</li>
+</ul>
+<p>The <code>resourceSelector</code> allows applying the converter to only resources which have the matching metadata. The format for the value is:</p>
+<pre><code>key OP value [; key OP value]*</code></pre>
+<p>Available metadata keys:</p>
+<ul>
+<li><code>Rundeck-content-type</code>: the Content type of the stored file</li>
+<li><code>Rundeck-key-type</code>: a value of <code>public</code> or <code>private</code> for Keys.</li>
+</ul>
+<p><code>OP</code> can be <code>=</code> for exact match, or <code>=~</code> for regular expression match.</p>
+<p>For example, this will apply only to private key files:</p>
+<pre><code>rundeck.storage.converter.1.resourceSelector = Rundeck-key-type=private</code></pre>
+<p>If a value for <code>resourceSelector</code> is not specified, the converter plugin will apply to all files in the matching path.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6">
+<ol class="breadcrumb bottom">
+
+    
+        <li><a href="../index.html">Rundeck Documentation (2.11.14)</a></li>
+    
+    
+    <li ><a href="index.html">Plugins User Guide</a></li>
+    <li class="active"><a href="configuring.html">Configuring</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="installing.html"><i class="glyphicon glyphicon-arrow-left"></i> Installing</a></li>
+      <li class="next"><a href="bundled-plugins.html">Bundled Plugins <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Pro for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Pro
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://simplifyops.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2019 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2019-09-13T03:37:52UTC">2019-09-13T03:37:52UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+<!-- Start of HubSpot Embed Code -->
+<script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/2768099.js”></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
