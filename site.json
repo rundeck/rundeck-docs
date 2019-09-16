@@ -8,14 +8,6 @@
                     }
                     ,
                 {
-                    "srcpath": "manual/notifications/servicenow.md",
-                    "title": "ServiceNow Notification Plugins",
-                    "outpath": "manual/notifications/servicenow-notification-plugins.html",
-
-                        "alltitles": "User Guide / ServiceNow Notification Plugins"
-                    }
-                    ,
-                {
                     "srcpath": "manual/notifications/email.md",
                     "title": "Email",
                     "outpath": "manual/notifications/email.html",
@@ -25,10 +17,10 @@
                     ,
                 {
                     "srcpath": "manual/notifications/jira.md",
-                    "title": "Jira Notification Plugins (Enterprise)",
-                    "outpath": "manual/notifications/jira-notification-plugins-enterprise.html",
+                    "title": "Jira Notification Plugins (Pro)",
+                    "outpath": "manual/notifications/jira-notification-plugins-pro.html",
 
-                        "alltitles": "User Guide / Jira Notification Plugins (Enterprise)"
+                        "alltitles": "User Guide / Jira Notification Plugins (Pro)"
                     }
                     ,
                 {
@@ -73,34 +65,34 @@
                     ,
                 {
                     "srcpath": "manual/workflow-steps/vmware.md",
-                    "title": "VMWare Step Plugins (Enterprise)",
-                    "outpath": "manual/workflow-steps/vmware-step-plugins-enterprise.html",
+                    "title": "VMWare Step Plugins (Pro)",
+                    "outpath": "manual/workflow-steps/vmware-step-plugins-pro.html",
 
-                        "alltitles": "User Guide / VMWare Step Plugins (Enterprise)"
+                        "alltitles": "User Guide / VMWare Step Plugins (Pro)"
                     }
                     ,
                 {
                     "srcpath": "manual/workflow-steps/jira.md",
-                    "title": "Jira Workflow Step Plugins (Enterprise)",
-                    "outpath": "manual/workflow-steps/jira-workflow-step-plugins-enterprise.html",
+                    "title": "Jira Workflow Step Plugins (Pro)",
+                    "outpath": "manual/workflow-steps/jira-workflow-step-plugins-pro.html",
 
-                        "alltitles": "User Guide / Jira Workflow Step Plugins (Enterprise)"
+                        "alltitles": "User Guide / Jira Workflow Step Plugins (Pro)"
                     }
                     ,
                 {
                     "srcpath": "manual/workflow-steps/github.md",
-                    "title": "Github Script Plugin (Enterprise)",
-                    "outpath": "manual/workflow-steps/github-script-plugin-enterprise.html",
+                    "title": "Github Script Plugin (Pro)",
+                    "outpath": "manual/workflow-steps/github-script-plugin-pro.html",
 
-                        "alltitles": "User Guide / Github Script Plugin (Enterprise)"
+                        "alltitles": "User Guide / Github Script Plugin (Pro)"
                     }
                     ,
                 {
                     "srcpath": "manual/workflow-steps/progress-badge.md",
-                    "title": "Progress Badge Workflow Step (Enterprise)",
-                    "outpath": "manual/workflow-steps/progress-badge-workflow-step-enterprise.html",
+                    "title": "Progress Badge Workflow Step (Pro)",
+                    "outpath": "manual/workflow-steps/progress-badge-workflow-step-pro.html",
 
-                        "alltitles": "User Guide / Progress Badge Workflow Step (Enterprise)"
+                        "alltitles": "User Guide / Progress Badge Workflow Step (Pro)"
                     }
                     ,
                 {
@@ -193,10 +185,10 @@
                     ,
                 {
                     "srcpath": "manual/log-filters/progress-badge.md",
-                    "title": "Progress Badge Log Filter (Enterprise)",
-                    "outpath": "manual/log-filters/progress-badge-log-filter-enterprise.html",
+                    "title": "Progress Badge Log Filter (Pro)",
+                    "outpath": "manual/log-filters/progress-badge-log-filter-pro.html",
 
-                        "alltitles": "User Guide / Progress Badge Log Filter (Enterprise)"
+                        "alltitles": "User Guide / Progress Badge Log Filter (Pro)"
                     }
                     ,
                 {
@@ -209,10 +201,10 @@
                     ,
                 {
                     "srcpath": "manual/orchestrator-plugins/highest-lowest.md",
-                    "title": "Highest/Lowest Attribute Value (Enterprise)",
-                    "outpath": "manual/orchestrator-plugins/highestlowest-attribute-value-enterprise.html",
+                    "title": "Highest/Lowest Attribute Value (Pro)",
+                    "outpath": "manual/orchestrator-plugins/highestlowest-attribute-value-pro.html",
 
-                        "alltitles": "User Guide / Highest/Lowest Attribute Value (Enterprise)"
+                        "alltitles": "User Guide / Highest/Lowest Attribute Value (Pro)"
                     }
                     ,
                 {
@@ -225,10 +217,10 @@
                     ,
                 {
                     "srcpath": "manual/node-steps/sqlrunner.md",
-                    "title": "SQLRunner Plugin (Enterprise)",
-                    "outpath": "manual/node-steps/sqlrunner-plugin-enterprise.html",
+                    "title": "SQLRunner Plugin (Pro)",
+                    "outpath": "manual/node-steps/sqlrunner-plugin-pro.html",
 
-                        "alltitles": "User Guide / SQLRunner Plugin (Enterprise)"
+                        "alltitles": "User Guide / SQLRunner Plugin (Pro)"
                     }
                     ,
                 {
@@ -241,18 +233,18 @@
                     ,
                 {
                     "srcpath": "manual/node-steps/vmware.md",
-                    "title": "VMWare Operations Node Step Plugin (Enterprise)",
-                    "outpath": "manual/node-steps/vmware-operations-node-step-plugin-enterprise.html",
+                    "title": "VMWare Operations Node Step Plugin (Pro)",
+                    "outpath": "manual/node-steps/vmware-operations-node-step-plugin-pro.html",
 
-                        "alltitles": "User Guide / VMWare Operations Node Step Plugin (Enterprise)"
+                        "alltitles": "User Guide / VMWare Operations Node Step Plugin (Pro)"
                     }
                     ,
                 {
                     "srcpath": "manual/node-steps/jira.md",
-                    "title": "Jira Node Step Plugins (Enterprise)",
-                    "outpath": "manual/node-steps/jira-node-step-plugins-enterprise.html",
+                    "title": "Jira Node Step Plugins (Pro)",
+                    "outpath": "manual/node-steps/jira-node-step-plugins-pro.html",
 
-                        "alltitles": "User Guide / Jira Node Step Plugins (Enterprise)"
+                        "alltitles": "User Guide / Jira Node Step Plugins (Pro)"
                     }
                     ,
                 {
@@ -464,14 +456,6 @@
                     }
                     ,
                 {
-                    "srcpath": "tutorials/java-plugin.md",
-                    "title": "Java Plugin",
-                    "outpath": "tutorials/java-plugin.html",
-
-                        "alltitles": "Tutorials / Java Plugin"
-                    }
-                    ,
-                {
                     "srcpath": "administration/overview/system-architecture.md",
                     "title": "System Architecture",
                     "outpath": "administration/overview/index.html",
@@ -649,18 +633,18 @@
                     ,
                 {
                     "srcpath": "administration/configuration/license.md",
-                    "title": "License (Enterprise)",
-                    "outpath": "administration/configuration/license-enterprise.html",
+                    "title": "License (Pro)",
+                    "outpath": "administration/configuration/license-pro.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Configuration / License (Enterprise)"
+                        "alltitles": "Administrator Guide / Rundeck Configuration / License (Pro)"
                     }
                     ,
                 {
                     "srcpath": "administration/configuration/remote-job-execution.md",
-                    "title": "Remote Job Execution (Enterprise)",
-                    "outpath": "administration/configuration/remote-job-execution-enterprise.html",
+                    "title": "Remote Job Execution (Pro)",
+                    "outpath": "administration/configuration/remote-job-execution-pro.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Configuration / Remote Job Execution (Enterprise)"
+                        "alltitles": "Administrator Guide / Rundeck Configuration / Remote Job Execution (Pro)"
                     }
                     ,
                 {
@@ -705,10 +689,10 @@
                     ,
                 {
                     "srcpath": "administration/configuration/encryptable-properties.md",
-                    "title": "Encryptable Config Properties (Enterprise)",
-                    "outpath": "administration/configuration/encryptable-config-properties-enterprise.html",
+                    "title": "Encryptable Config Properties (Pro)",
+                    "outpath": "administration/configuration/encryptable-config-properties-pro.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Configuration / Encryptable Config Properties (Enterprise)"
+                        "alltitles": "Administrator Guide / Rundeck Configuration / Encryptable Config Properties (Pro)"
                     }
                     ,
                 {
@@ -717,14 +701,6 @@
                     "outpath": "administration/configuration/storage-facility.html",
 
                         "alltitles": "Administrator Guide / Rundeck Configuration / Storage Facility"
-                    }
-                    ,
-                {
-                    "srcpath": "administration/configuration/repository.md",
-                    "title": "Repository",
-                    "outpath": "administration/configuration/repository.html",
-
-                        "alltitles": "Administrator Guide / Rundeck Configuration / Repository"
                     }
                     ,
                 {
@@ -784,14 +760,6 @@
                     }
                     ,
                 {
-                    "srcpath": "administration/security/webapp-http-headers.md",
-                    "title": "Webapp HTTP Headers",
-                    "outpath": "administration/security/webapp-http-headers.html",
-
-                        "alltitles": "Administrator Guide / Security / Webapp HTTP Headers"
-                    }
-                    ,
-                {
                     "srcpath": "administration/maintenance/toc.conf",
                     "title": "Maintenance",
                     "outpath": "administration/maintenance/index.html",
@@ -836,7 +804,7 @@
                     "title": "Loadbalancer",
                     "outpath": "administration/cluster/loadbalancer/index.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Enterprise / Loadbalancer"
+                        "alltitles": "Administrator Guide / Rundeck Pro Cluster / Loadbalancer"
                     }
                     ,
                 {
@@ -844,7 +812,7 @@
                     "title": "AWS ELB",
                     "outpath": "administration/cluster/loadbalancer/aws-elb.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Enterprise / Loadbalancer / AWS ELB"
+                        "alltitles": "Administrator Guide / Rundeck Pro Cluster / Loadbalancer / AWS ELB"
                     }
                     ,
                 {
@@ -852,7 +820,7 @@
                     "title": "HAProxy",
                     "outpath": "administration/cluster/loadbalancer/haproxy.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Enterprise / Loadbalancer / HAProxy"
+                        "alltitles": "Administrator Guide / Rundeck Pro Cluster / Loadbalancer / HAProxy"
                     }
                     ,
                 {
@@ -860,7 +828,7 @@
                     "title": "IIS",
                     "outpath": "administration/cluster/loadbalancer/iis.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Enterprise / Loadbalancer / IIS"
+                        "alltitles": "Administrator Guide / Rundeck Pro Cluster / Loadbalancer / IIS"
                     }
                     ,
                 {
@@ -868,7 +836,7 @@
                     "title": "Autotakeover",
                     "outpath": "administration/cluster/autotakeover/index.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Enterprise / Autotakeover"
+                        "alltitles": "Administrator Guide / Rundeck Pro Cluster / Autotakeover"
                     }
                     ,
                 {
@@ -876,7 +844,7 @@
                     "title": "Logstore",
                     "outpath": "administration/cluster/logstore/index.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Enterprise / Logstore"
+                        "alltitles": "Administrator Guide / Rundeck Pro Cluster / Logstore"
                     }
                     ,
                 {
@@ -884,7 +852,7 @@
                     "title": "S3 Log Storage Plugin",
                     "outpath": "administration/cluster/logstore/s3-log-storage-plugin.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Enterprise / Logstore / S3 Log Storage Plugin"
+                        "alltitles": "Administrator Guide / Rundeck Pro Cluster / Logstore / S3 Log Storage Plugin"
                     }
                     ,
                 {
@@ -892,15 +860,15 @@
                     "title": "Azure Log Storage Plugin",
                     "outpath": "administration/cluster/logstore/azure-log-storage-plugin.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Enterprise / Logstore / Azure Log Storage Plugin"
+                        "alltitles": "Administrator Guide / Rundeck Pro Cluster / Logstore / Azure Log Storage Plugin"
                     }
                     ,
                 {
                     "srcpath": "administration/cluster/replication/index.md",
-                    "title": "Rundeck Enterprise Replication",
+                    "title": "Rundeck Pro Replication",
                     "outpath": "administration/cluster/replication/index.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Enterprise / Rundeck Enterprise Replication"
+                        "alltitles": "Administrator Guide / Rundeck Pro Cluster / Rundeck Pro Replication"
                     }
                     ,
                 {
@@ -908,7 +876,7 @@
                     "title": "Cloud deployment",
                     "outpath": "administration/cluster/cloud/index.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Enterprise / Cloud deployment"
+                        "alltitles": "Administrator Guide / Rundeck Pro Cluster / Cloud deployment"
                     }
                     ,
                 {
@@ -916,15 +884,15 @@
                     "title": "AWS",
                     "outpath": "administration/cluster/cloud/aws.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Enterprise / Cloud deployment / AWS"
+                        "alltitles": "Administrator Guide / Rundeck Pro Cluster / Cloud deployment / AWS"
                     }
                     ,
                 {
                     "srcpath": "administration/cluster/index.md",
-                    "title": "Rundeck Enterprise",
+                    "title": "Rundeck Pro Cluster",
                     "outpath": "administration/cluster/index.html",
 
-                        "alltitles": "Administrator Guide / Rundeck Enterprise"
+                        "alltitles": "Administrator Guide / Rundeck Pro Cluster"
                     }
                     ,
                 {
@@ -945,10 +913,10 @@
                     ,
                 {
                     "srcpath": "administration/projects/scm/job-replication.md",
-                    "title": "Job Replication (Enterprise)",
-                    "outpath": "administration/projects/scm/job-replication-enterprise.html",
+                    "title": "Job Replication (Pro)",
+                    "outpath": "administration/projects/scm/job-replication-pro.html",
 
-                        "alltitles": "Administrator Guide / Projects / SCM / Job Replication (Enterprise)"
+                        "alltitles": "Administrator Guide / Projects / SCM / Job Replication (Pro)"
                     }
                     ,
                 {
@@ -1048,22 +1016,6 @@
                     }
                     ,
                 {
-                    "srcpath": "administration/projects/node-execution/bastionssh.md",
-                    "title": "Basion SSH",
-                    "outpath": "administration/projects/node-execution/basion-ssh.html",
-
-                        "alltitles": "Administrator Guide / Projects / Node Execution / Basion SSH"
-                    }
-                    ,
-                {
-                    "srcpath": "administration/projects/node-execution/openssh.md",
-                    "title": "OpenSSH",
-                    "outpath": "administration/projects/node-execution/openssh.html",
-
-                        "alltitles": "Administrator Guide / Projects / Node Execution / OpenSSH"
-                    }
-                    ,
-                {
                     "srcpath": "administration/projects/index.md",
                     "title": "Projects",
                     "outpath": "administration/projects/index.html",
@@ -1137,10 +1089,10 @@
                     ,
                 {
                     "srcpath": "pro/index.md",
-                    "title": "Rundeck Enterprise",
+                    "title": "Rundeck Pro",
                     "outpath": "pro/index.html",
 
-                        "alltitles": "Rundeck Enterprise"
+                        "alltitles": "Rundeck Pro"
                     }
                     ,
                 {
@@ -1148,7 +1100,7 @@
                     "title": "Quickstart",
                     "outpath": "pro/quickstart.html",
 
-                        "alltitles": "Rundeck Enterprise / Quickstart"
+                        "alltitles": "Rundeck Pro / Quickstart"
                     }
                     ,
                 {
@@ -1296,35 +1248,11 @@
                     }
                     ,
                 {
-                    "srcpath": "developer/12-option-values-plugins.md",
-                    "title": "Option Values Plugins",
-                    "outpath": "developer/option-values-plugins.html",
-
-                        "alltitles": "Plugin Developer Guide / Option Values Plugins"
-                    }
-                    ,
-                {
-                    "srcpath": "developer/13-user-group-source-plugin.md",
-                    "title": "User Group Source Plugins",
-                    "outpath": "developer/user-group-source-plugins.html",
-
-                        "alltitles": "Plugin Developer Guide / User Group Source Plugins"
-                    }
-                    ,
-                {
-                    "srcpath": "developer/14-file-upload-plugins.md",
-                    "title": "File Upload Plugins",
-                    "outpath": "developer/file-upload-plugins.html",
-
-                        "alltitles": "Plugin Developer Guide / File Upload Plugins"
-                    }
-                    ,
-                {
                     "srcpath": "api/rundeck-api.md",
-                    "title": "API Reference | Version 32",
+                    "title": "API Reference | Version 28",
                     "outpath": "api/index.html",
 
-                        "alltitles": "API Reference | Version 32"
+                        "alltitles": "API Reference | Version 28"
                     }
                     ,
                 {
@@ -1416,14 +1344,6 @@
                     }
                     ,
                 {
-                    "srcpath": "upgrading/upgrading-to-rundeck-3.1.md",
-                    "title": "Upgrade to Rundeck 3.1",
-                    "outpath": "upgrading/upgrade-to-rundeck-3.1.html",
-
-                        "alltitles": "Upgrading / Upgrade to Rundeck 3.1"
-                    }
-                    ,
-                {
                     "srcpath": "upgrading/upgrading-to-rundeck3.md",
                     "title": "Upgrade to Rundeck 3.X",
                     "outpath": "upgrading/upgrade-to-rundeck-3.x.html",
@@ -1449,146 +1369,10 @@
                     ,
                 {
                     "srcpath": "history/changelog.md",
-                    "title": "Changelog (2019-08-01)",
+                    "title": "Changelog (2018-11-29)",
                     "outpath": "history/changelog.html",
 
-                        "alltitles": "Version History / Changelog (2019-08-01)"
-                    }
-                    ,
-                {
-                    "srcpath": "history/version-3.1.0.md",
-                    "title": "Version 3.1.0 (2019-08-01)",
-                    "outpath": "history/version-3.1.0.html",
-
-                        "alltitles": "Version History / Version 3.1.0 (2019-08-01)"
-                    }
-                    ,
-                {
-                    "srcpath": "history/version-3.1.0-rc2.md",
-                    "title": "Version 3.1.0-rc2 (2019-07-19)",
-                    "outpath": "history/version-3.1.0-rc2.html",
-
-                        "alltitles": "Version History / Version 3.1.0-rc2 (2019-07-19)"
-                    }
-                    ,
-                {
-                    "srcpath": "history/version-3.0.24.md",
-                    "title": "Version 3.0.24 (2019-07-19)",
-                    "outpath": "history/version-3.0.24.html",
-
-                        "alltitles": "Version History / Version 3.0.24 (2019-07-19)"
-                    }
-                    ,
-                {
-                    "srcpath": "history/version-3.0.23.md",
-                    "title": "Version 3.0.23 (2019-06-19)",
-                    "outpath": "history/version-3.0.23.html",
-
-                        "alltitles": "Version History / Version 3.0.23 (2019-06-19)"
-                    }
-                    ,
-                {
-                    "srcpath": "history/version-3.0.22.md",
-                    "title": "Version 3.0.22 (2019-05-13)",
-                    "outpath": "history/version-3.0.22.html",
-
-                        "alltitles": "Version History / Version 3.0.22 (2019-05-13)"
-                    }
-                    ,
-                {
-                    "srcpath": "history/version-3.0.21.md",
-                    "title": "Version 3.0.21 (2019-04-24)",
-                    "outpath": "history/version-3.0.21.html",
-
-                        "alltitles": "Version History / Version 3.0.21 (2019-04-24)"
-                    }
-                    ,
-                {
-                    "srcpath": "history/version-3.0.20.md",
-                    "title": "Version 3.0.20 (2019-04-08)",
-                    "outpath": "history/version-3.0.20.html",
-
-                        "alltitles": "Version History / Version 3.0.20 (2019-04-08)"
-                    }
-                    ,
-                {
-                    "srcpath": "history/version-3.0.19.md",
-                    "title": "Version 3.0.19 (2019-03-27)",
-                    "outpath": "history/version-3.0.19.html",
-
-                        "alltitles": "Version History / Version 3.0.19 (2019-03-27)"
-                    }
-                    ,
-                {
-                    "srcpath": "history/version-3.0.18.md",
-                    "title": "Version 3.0.18 (2019-03-22)",
-                    "outpath": "history/version-3.0.18.html",
-
-                        "alltitles": "Version History / Version 3.0.18 (2019-03-22)"
-                    }
-                    ,
-                {
-                    "srcpath": "history/version-3.0.17.md",
-                    "title": "Version 3.0.17 (2019-03-11)",
-                    "outpath": "history/version-3.0.17.html",
-
-                        "alltitles": "Version History / Version 3.0.17 (2019-03-11)"
-                    }
-                    ,
-                {
-                    "srcpath": "history/version-3.0.16.md",
-                    "title": "Version 3.0.16 (2019-02-24)",
-                    "outpath": "history/version-3.0.16.html",
-
-                        "alltitles": "Version History / Version 3.0.16 (2019-02-24)"
-                    }
-                    ,
-                {
-                    "srcpath": "history/version-3.0.15.md",
-                    "title": "Version 3.0.15 (2019-02-22)",
-                    "outpath": "history/version-3.0.15.html",
-
-                        "alltitles": "Version History / Version 3.0.15 (2019-02-22)"
-                    }
-                    ,
-                {
-                    "srcpath": "history/version-3.0.14.md",
-                    "title": "Version 3.0.14 (2019-02-21)",
-                    "outpath": "history/version-3.0.14.html",
-
-                        "alltitles": "Version History / Version 3.0.14 (2019-02-21)"
-                    }
-                    ,
-                {
-                    "srcpath": "history/version-3.0.13.md",
-                    "title": "Version 3.0.13 (2019-01-23)",
-                    "outpath": "history/version-3.0.13.html",
-
-                        "alltitles": "Version History / Version 3.0.13 (2019-01-23)"
-                    }
-                    ,
-                {
-                    "srcpath": "history/version-3.0.12.md",
-                    "title": "Version 3.0.12 (2019-01-14)",
-                    "outpath": "history/version-3.0.12.html",
-
-                        "alltitles": "Version History / Version 3.0.12 (2019-01-14)"
-                    }
-                    ,
-                {
-                    "srcpath": "history/version-3.0.11.md",
-                    "title": "Version 3.0.11 (2018-12-21)",
-                    "outpath": "history/version-3.0.11.html",
-
-                        "alltitles": "Version History / Version 3.0.11 (2018-12-21)"
-                    }
-                    ,
-                {
-                    "srcpath": "history/version-3.0.10.md",
-                    "title": "Version 3.0.10 (2018-12-20)",
-                    "outpath": "history/version-3.0.10.html",
-
-                        "alltitles": "Version History / Version 3.0.10 (2018-12-20)"
+                        "alltitles": "Version History / Changelog (2018-11-29)"
                     }
                     ,
                 {
