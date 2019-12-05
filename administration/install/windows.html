@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Installing on Windows</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="../../jquery.hotkeys.js"></script>
+<script src="../../jquery.autocomplete.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+window._pageRelpath="../../";
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+<script src="../../docs-autocomplete.js"></script>
+  <link rel="stylesheet" href="../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control navquery" name="q" placeholder="Search" id="searchQuery">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbstop">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb top collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.27)</a></li>
+    
+        <li><a href="../index.html">Administrator Guide</a></li>
+    
+    
+    <li ><a href="index.html">Installation</a></li>
+    <li class="active"><a href="windows.html">Windows</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="tomcat.html"><i class="glyphicon glyphicon-arrow-left"></i> Tomcat</a></li>
+      <li class="next"><a href="source.html">Source <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/install/windows.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/install/windows.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#installing-rundeck-on-windows-based-systems-and-first-run">Installing Rundeck on Windows based systems and first run</a></li>
+<li><a href="#folder-structure">Folder Structure</a><ul>
+<li><a href="#configuring-rundeck">Configuring Rundeck</a></li>
+<li><a href="#login-to-the-gui">Login to the GUI</a></li>
+<li><a href="#run-rundeck-as-a-service">Run rundeck as a Service</a></li>
+<li><a href="#start-stop-instances">Start-Stop instances</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Installing on Windows</h1>
+</div>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>Before proceeding to install Rundeck, check all hardware <a href="https://docs.rundeck.com/docs/administration/install/system-requirements.html">requirements</a> to make sure that our machine can be run Rundeck, also, make sure that the Windows user profile has the sufficient rights to install software in the Operating System.</p>
+<p>Also, the main dependency is Java Development Kit 1.8 (JDK 8), you can download it from Oracle <a href="https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">website</a>.</p>
+<h3 id="installing-rundeck-on-windows-based-systems-and-first-run">Installing Rundeck on Windows based systems and first run</h3>
+<p>The first step is to download Rundeck WAR file and save it on the main work directory, e.g. <code>C:\rundeck</code>, you can download <a href="https://www.rundeck.com/open-source/download">Community</a> version or <a href="https://download.rundeck.com/">Enterprise</a> and save it on <code>C:\rundeck</code> folder, now you will set Rundeck path environment variable, for that set it on a Powershell window and :</p>
+<pre><code>set RDECK_BASE=C:\rundeck</code></pre>
+<p>Next, we need launch Rundeck the first time to generate the configuration files and folders structure, for that you can open a Powershell, go to <code>c:\rundeck</code> and execute <code>java -jar rundeck-3.0.X.war</code> (in community case) or <code>java -jar rundeckpro-[edition]-3.0.X.war</code> for Enterprise; depending of your system the process can take some time, when Rundeck is ready you can see that on Powershell window:</p>
+<figure>
+<img src="../../figures/windows-launcher.png" alt="Windows launcher" /><figcaption>Windows launcher</figcaption>
+</figure>
+<p>At this point, all Rundeck structure is ready and you can stop the process with <code>&lt;Crtl+C&gt;</code> keyboard combination to proceed to configure.</p>
+<h2 id="folder-structure">Folder Structure</h2>
+<pre><code>+---etc
+|       admin.aclpolicy =&gt; Administrator access control policy defined with a [aclpolicy] document.
+|       apitoken.aclpolicy =&gt; Default API ACL policies.
+|       cli-log4j.properties =&gt; This file defines the logging configuration for the Commandline tools.
+|       framework.properties =&gt; Configuration file used by shell tools and core Rundeck services.
+|       preferences.properties
+|       profile
+|       profile.bat =&gt; Shell environment variables used by the shell tools.
+|       project.properties =&gt;Rundeck project configuration file when using Filsystem based project defintions.
++---libext =&gt; Plugin folder.
++---projects =&gt; Projects data (eg: resource files, project properties, etc)
++---server
+|   +---config
+|   |       jaas-loginmodule.conf
+|   |       log4j.properties =&gt; This file defines the logging configuration for rundeck.
+|   |       realm.properties =&gt; Property file user directory when PropertyFileLoginModule is used.
+|   |       rundeck-config.properties =&gt; This is the primary Rundeck webapp configuration file. Defines default loglevel, datasource configuration, and GUI customization.
+|   |       ssl.properties =&gt; To enable SSL access to rundeck.
+|   +---data =&gt; H2 default database
+|   |       grailsdb.mv.db
+|   +---lib
+|   |       rundeck-core-3.0.X.jar =&gt; rundeck core 
+|   +---logs =&gt; Rundeck logging 
+|   |       rundeck.access.log =&gt; access to rundeck.
+|   |       rundeck.api.log =&gt; API calls
+|   |       rundeck.audit.log =&gt; Authorization messages pertaining to aclpolicy.
+|   |       rundeck.executions.log =&gt; Logs of all executions.
+|   |       rundeck.jobs.log =&gt; Log of all job definition changes.
+|   |       rundeck.log=&gt; General Rundeck application messages.
+|   |       rundeck.options.log=&gt; Logs remote HTTP requests for Options JSON data.
+|   |       rundeck.project.log
+|   |       rundeck.storage.log=&gt; Standard input and output generated during runtime.
+|   +---sbin
+|   \---work
++---tools=&gt; rd-acl client (to manage ACL validation).
+\---var   =&gt; Executions Logs folder.</code></pre>
+<h3 id="configuring-rundeck">Configuring Rundeck</h3>
+<p>After installing Rundeck, the first run and know the files/folders structure, you need to configure it, basically publish Rundeck to be available in the network and generate a .bat script to launch Rundeck and use some parameters depending on our needs.</p>
+<p>To publish Rundeck to be available in your network, open <code>C:\rundeck\server\config\rundeck-config.properties</code> with your favorite text editor and change this line:</p>
+<pre><code>server.address=yourhostname</code></pre>
+<p>by:</p>
+<pre><code>server.address=0.0.0.0</code></pre>
+<p>Save the file it and now is time to create a .bat script that launch rundeck properly. For that create a file called <code>start_rundeck.bat</code> with your favorite text editor and put this in the for Rundeck Community version:</p>
+<pre><code>set CURDIR=%~dp0
+call %CURDIR%etc\profile.bat
+java %RDECK_CLI_OPTS% %RDECK_SSL_OPTS% -jar rundeck-3.0.X.war --skipinstall -d  &gt;&gt; %CURDIR%\var\logs\service.log  2&gt;&amp;1</code></pre>
+<p>Or for Rundeck Enterprise version:</p>
+<pre><code>set CURDIR=%~dp0
+call %CURDIR%etc\profile.bat
+java %RDECK_CLI_OPTS% %RDECK_SSL_OPTS% -jar rundeckpro-[edition]-3.0.X.war --skipinstall -d  &gt;&gt; %CURDIR%\var\logs\service.log  2&gt;&amp;1</code></pre>
+<p>To launch, execute start_rundeck.bat at Powershell session, to stop Rundeck you can press <code>&lt;Crtl+C&gt;</code> keyboard combination.</p>
+<h3 id="login-to-the-gui">Login to the GUI</h3>
+<p>By default, Rundeck will be installed in TCP port 4440. To access, go to the following URL using your web browser: <code>http://servername:4440</code> (when “servername” is the name of your Windows host).</p>
+<figure>
+<img src="../../figures/login-page.png" alt="Login page" /><figcaption>Login page</figcaption>
+</figure>
+<p>The default username and password is “admin” with password “admin”.</p>
+<h3 id="run-rundeck-as-a-service">Run rundeck as a Service</h3>
+<p>This section will install Rundeck Community or Enterprise as a Service on a Windows based systems.</p>
+<ul>
+<li><a href="#installing-rundeck-on-windows-systems-and-first-run">Install</a> Rundeck.</li>
+<li>Download <a href="http://nssm.cc/">nssm.exe</a></li>
+<li>Place the executable under <code>%RDECK_BASE%</code> (you can place it elsewhere, but for the sake of the example let’s use always the root dir)</li>
+<li>Open a prompt and issue these commands (Administrator user profile is required to install a service)</li>
+</ul>
+<pre><code>    cd C:\rundeck
+    nssm.exe install RUNDECK</code></pre>
+<ul>
+<li>The GUI pops up, set “path” as <code>%RDECK_BASE%\start_rundeck.bat</code>, startup directory as <code>%RDECK_BASE%</code> (optionally set “low” on the process tab, under priority, to avoid server CPU spike when starting Rundeck)</li>
+</ul>
+<figure>
+<img src="../../figures/nssm-installer.png" alt="NSSM Installer" /><figcaption>NSSM Installer</figcaption>
+</figure>
+<ul>
+<li>Go to the Service Management Console (services.msc) and you’ll find <code>rundeck</code> listed as a service. Starting it will start the <code>rundeck</code> process.</li>
+</ul>
+<figure>
+<img src="../../figures/service-management-console.png" alt="Service Management Console" /><figcaption>Service Management Console</figcaption>
+</figure>
+<ul>
+<li>set JVM memory heap on <code>%RDECK_BASE%\etc\profile.bat</code>.</li>
+</ul>
+<p>Replace the <code>RDECK_CLI_OPTS</code> variable with the amount of memory that you need, for example:</p>
+<pre><code>....
+
+set RDECK_CLI_OPTS=-Xms1024m -Xmx4096m
+set RD_LIBDIR=%RDECK_BASE%\tools\lib</code></pre>
+<p>Now, Rundeck is configured as a Service and can be launch it at the moment of start Windows.</p>
+<h3 id="start-stop-instances">Start-Stop instances</h3>
+<p>Go to the Service Management Console (services.msc) and you’ll find Rundeck listed as a service. You can start, stop or restart <code>rundeck</code> service.</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbsbottom">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb bottom collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.27)</a></li>
+    
+        <li><a href="../index.html">Administrator Guide</a></li>
+    
+    
+    <li ><a href="index.html">Installation</a></li>
+    <li class="active"><a href="windows.html">Windows</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="tomcat.html"><i class="glyphicon glyphicon-arrow-left"></i> Tomcat</a></li>
+      <li class="next"><a href="source.html">Source <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/install/windows.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/install/windows.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Enterprise for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Enterprise
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://rundeck.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2019 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2019-12-05T19:58:21UTC">2019-12-05T19:58:21UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+
+<!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2768099.js"></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>

@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Authenticating Users</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="generator" content="pandoc" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="../../jquery.hotkeys.js"></script>
+<script src="../../jquery.autocomplete.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+window._pageRelpath="../../";
+jQuery(function(){
+  jQuery('table').addClass('table table-condensed table-responsive'); 
+  jQuery('[data-toggle="popover"]').popover();
+});
+</script>
+<script src="../../docs-autocomplete.js"></script>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../../style.css" type="text/css" />
+</head>
+<body data-spy="scroll" data-target=".toc-nav">
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="https://www.rundeck.com/open-source">
+      Rundeck
+      <p class="small rd_version">← Return to Rundeck Project</p>
+    </a>
+  </div>
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <form class="navbar-form navbar-right" role="search"  action="/search/">
+      <div class="form-group">
+        <input type="text" class="form-control navquery" name="q" placeholder="Search" id="searchQuery">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<div class="container top breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbstop">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb top collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbstop">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.27)</a></li>
+    
+        <li><a href="../index.html">Administrator Guide</a></li>
+    
+    
+    <li ><a href="index.html">Security</a></li>
+    <li class="active"><a href="authenticating-users.html">Authenticating Users</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="default-users.html"><i class="glyphicon glyphicon-arrow-left"></i> Default Users</a></li>
+      <li class="next"><a href="access-control-policy.html">Access Control Policy <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link top" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/security/authentication.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link top btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/security/authentication.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div id="docbody">
+<div class="container">
+<div class="row">
+<div class="col-sm-3 toc-nav">
+<div class="nav">
+<ul>
+<li><a href="#single-sign-on">Single Sign On</a></li>
+<li><a href="#jetty-and-jaas-authentication">Jetty and JAAS authentication</a><ul>
+<li><a href="#propertyfileloginmodule">PropertyFileLoginModule</a></li>
+<li><a href="#ldap">LDAP</a><ul>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#login-module-configuration">Login module configuration</a></li>
+<li><a href="#combining-ldap-with-other-modules">Combining LDAP with other modules</a></li>
+<li><a href="#active-directory">Active Directory</a></li>
+<li><a href="#communicating-over-secure-ldap-ldaps">Communicating over secure ldap (ldaps://)</a></li>
+</ul></li>
+<li><a href="#pam">PAM</a><ul>
+<li><a href="#jettypamloginmodule">JettyPamLoginModule</a></li>
+</ul></li>
+<li><a href="#jettyrolepropertyfileloginmodule">JettyRolePropertyFileLoginModule</a></li>
+<li><a href="#jettyauthpropertyfileloginmodule">JettyAuthPropertyFileLoginModule</a></li>
+<li><a href="#multiple-authentication-modules">Multiple Authentication Modules</a></li>
+</ul></li>
+<li><a href="#jaas-authorization-testing">Jaas Authorization Testing</a></li>
+<li><a href="#container-authentication-and-authorization">Container authentication and authorization</a></li>
+<li><a href="#preauthenticated-mode">Preauthenticated Mode</a><ul>
+<li><a href="#preauthenticated-mode-using-ajp-with-apache-and-tomcat">Preauthenticated Mode using AJP with apache and tomcat</a></li>
+<li><a href="#preauthenticated-mode-using-headers">Preauthenticated Mode using headers</a></li>
+<li><a href="#preauthenticated-mode-logout-redirection">Preauthenticated mode logout redirection</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div class="col-sm-9">
+<div class="page-header">
+<h1 class="title">Authenticating Users</h1>
+</div>
+<p>Rundeck can be configured to use several mechanisms to authenticate a user, and determine the user’s authorized roles.</p>
+<p>Primarily these are:</p>
+<ul>
+<li><a href="#single-sign-on">Single Sign On</a></li>
+<li><a href="#jetty-and-jaas-authentication">JAAS</a></li>
+<li><a href="#container-authentication-and-authorization">Container Authentication</a></li>
+<li><a href="#preauthenticated-mode">Preauthenticated Mode</a></li>
+</ul>
+<p>For the default installation (Executable War, RPM, Deb), the Servlet Container is Jetty, and the default security mechanism is JAAS, so you are free to use what ever JAAS provider you feel is suitable for your environment. See <a href="https://en.wikipedia.org/wiki/Java_Authentication_and_Authorization_Service">JAAS</a> and specifically for Jetty, <a href="https://wiki.eclipse.org/Jetty/Feature/JAAS">JAAS for Jetty</a>.</p>
+<p>If you use the Rundeck war file with a different container, such as Tomcat, refer to <a href="#container-authentication-and-authorization">Container authentication and authorization</a> below.</p>
+<h1 id="single-sign-on">Single Sign On</h1>
+<p>See <a href="single-sign-on.html" title="Administrator Guide - Security - Single Sign On">Security &gt; Single Sign On</a>.</p>
+<h1 id="jetty-and-jaas-authentication">Jetty and JAAS authentication</h1>
+<p>Rundeck has three basic JAAS modules.</p>
+<ol type="1">
+<li><a href="#propertyfileloginmodule">PropertyFileLoginModule</a></li>
+<li><a href="#ldap">LDAP</a></li>
+<li><a href="#pam">PAM</a></li>
+</ol>
+<p>By default a new installation uses the realm.properties method.</p>
+<p>Each method determines whether the user is authenticated, and what <em>roles</em> they have.</p>
+<p>The list of roles can be accepted as-is (default), or you can add a prefix to them using the following config in rundeck-config.properties:</p>
+<pre><code>rundeck.security.jaasRolePrefix=PREFIX_</code></pre>
+<h2 id="propertyfileloginmodule">PropertyFileLoginModule</h2>
+<p>These instructions explain how to manage user credentials for Rundeck using a text file containing usernames, passwords and role definitions. Usually this file is called <code>realm.properties</code>.</p>
+<p>The default Rundeck installation handles user authentication via JAAS using the realm.properties file. This file is created at the time that you install the server.</p>
+<p>Location:</p>
+<ul>
+<li>Executable War: <code>$RDECK_BASE/server/config/realm.properties</code></li>
+<li>RPM/DEB: <code>/etc/rundeck/realm.properties</code></li>
+</ul>
+<p>Assuming it wasn’t modified, your realm.properties file will probably look something like this:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash numberLines"><code class="sourceCode bash"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co">#</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co"># This file defines users passwords and roles for a HashUserRealm</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co"># The format is</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#  &lt;username&gt;: &lt;password&gt;[,&lt;rolename&gt; ...]</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co"># Passwords may be clear text, obfuscated or checksummed.  </span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co"># This sets the default user accounts for the Rundeck apps</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">#</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="ex">admin</span>:admin,user,admin</a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="ex">user</span>:user,user</a></code></pre></div>
+<p><em>Adding additional users</em></p>
+<p>You may wish to have additional users with various privileges rather than giving out role accounts to groups. You may also want to avoid having the passwords in plaintext within the configuration file.</p>
+<p>To accomplish this, you’ll need a properly hashed or encrypted password to use in the config. Rundeck has a built in command line utility to encrypt passwords. The default encryption service is the Jetty password utility.</p>
+<p>In this example, we’ll setup a new user named “jsmith”, with a password of “mypass”:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1">$ <span class="ex">java</span> -jar rundeck-3.0.0.war --encryptpwd Jetty</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="ex">Required</span> values are marked with: *</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="ex">Username</span> (Optional, but necessary for Crypt encoding)<span class="bu">:</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="ex">jsmith</span>    <span class="op">&lt;</span>-----Type this value</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="ex">*Value</span> To Encrypt (The text you want to encrypt)<span class="bu">:</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="ex">mypass</span>    <span class="op">&lt;</span>-----Type this value</a></code></pre></div>
+<pre><code>obfuscate: OBF:1xfd1zt11uha1ugg1zsp1xfp
+md5: MD5:a029d0df84eb5549c641e04a9ef389e5
+crypt: CRYPT:jsnDAc2Xk4W4o</code></pre>
+<p>Then add this to the <code>realm.properties</code> file with a line like so:</p>
+<pre><code>jsmith: MD5:a029d0df84eb5549c641e04a9ef389e5,user,admin</code></pre>
+<p>Then restart Rundeck to ensure it picks up the change and you’re done.</p>
+<p>There is also a password encrypter utility user interface in the Rundeck application that can be used to generate encrypted passwords. Click the gear icon and then “Password Utility” to use that interface.</p>
+<h4 id="hot-reloading-the-realm.properties-file">Hot Reloading the <code>realm.properties</code> file</h4>
+<p>If you want your changes to the <code>realm.properties</code> file to be picked up without having to restart Rundeck change the module specified in the JAAS config file from <code>org.eclipse.jetty.jaas.spi.PropertyFileLoginModule</code> to <code>org.rundeck.jaas.jetty.ReloadablePropertyFileLoginModule</code></p>
+<p>The refresh interval for checking the file is 5 seconds. This is not configurable.</p>
+<p>For example, the following configuration uses the non-reloadable <code>realm.properties</code></p>
+<pre><code>RDpropertyfilelogin {
+    org.eclipse.jetty.jaas.spi.PropertyFileLoginModule required
+    debug=&quot;true&quot;
+    file=&quot;/etc/rundeck/server/config/realm.properties&quot;;
+};</code></pre>
+<p>This configuration would enable hot reloading:</p>
+<pre><code>RDpropertyfilelogin {
+    org.rundeck.jaas.jetty.ReloadablePropertyFileLoginModule required
+    debug=&quot;true&quot;
+    file=&quot;/etc/rundeck/server/config/realm.properties&quot;;
+};</code></pre>
+<h2 id="ldap">LDAP</h2>
+<p>LDAP and Active Directory configurations are created in the same way, but your LDAP structure may be different than Active Directory’s structure.</p>
+<p>Rundeck includes two JAAS login modules you can use for LDAP directory authentication:</p>
+<ul>
+<li><code>JettyCachingLdapLoginModule</code> Performs LDAP authentication and looks up user roles based on LDAP group membership</li>
+<li><code>JettyCombinedLdapLoginModule</code> Performs LDAP authentication, and can use “shared authentication credentials” to allow another module to provide authorization lookup for user roles. See <a href="#login-module-configuration">Login module configuration</a> and <a href="#jettyrolepropertyfileloginmodule">JettyRolePropertyFileLoginModule</a> and <a href="#multiple-authentication-modules">Multiple Authentication Modules</a> below.</li>
+</ul>
+<p>These are an enhanced version of the default Jetty JAAS Ldap login module that caches authorization results for a period of time.</p>
+<p>JAAS supports evaluating <code>MD5</code> and <code>CRYPT</code> password hashes.</p>
+<p>You must change some configuration values to change the authentication module to use.</p>
+<h3 id="configuration">Configuration</h3>
+<p>Configuring LDAP consists of defining a JAAS config file (e.g. “jaas-ldap.conf”), and changing the server startup script to use this file and use the correct Login Module configuration inside it.</p>
+<h4 id="sync-rundeck-profile-from-ldap-user-attributes">Sync Rundeck profile from LDAP user attributes</h4>
+<p>You can use LDAP user attributes to update the email, first name, and last name properties of your Rundeck users. To enable this feature, add the property: <code>rundeck.security.syncLdapUser=true</code> to your <code>rundeck-config.properties</code> file.</p>
+<p>In your JAAS LDAP login module you can specify the ldap user attributes used to source the email, and name properties.<br />
+The properties are:</p>
+<pre><code>userLastNameAttribute=&quot;sn&quot;
+userFirstNameAttribute=&quot;givenName&quot;
+userEmailAttribute=&quot;mail&quot;</code></pre>
+<p>These LDAP attributes will be checked when a user logs in, and their Rundeck user profile will be updated from them.</p>
+<h4 id="step-1-setup-the-ldap-login-module-configuration-file">Step 1: Setup the LDAP login module configuration file</h4>
+<p>Create a <code>jaas-ldap.conf</code> file in the same directory as the <code>jaas-loginmodule.conf</code> file.</p>
+<ul>
+<li>RPM/Deb install: <code>/etc/rundeck/</code></li>
+<li>Executable War install: <code>$RDECK_BASE/server/config</code></li>
+</ul>
+<p>Make sure the name of your Login Module configuration is the same as you use in the next step. The Login Module configuration is defined like this (e.g. “jaas-ldap.conf” file):</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb9-1" data-line-number="1">    ldap {</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">        <span class="co">// comment line</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">        ...</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">    }</a></code></pre></div>
+<p>Where “ldap” is the module name.</p>
+<h4 id="step-2-specify-login-module">Step 2: Specify login module</h4>
+<p>To override the default JAAS configuration file, you will need to supply the Rundeck server with the proper path to the new one, and a <code>loginmodule.name</code> Java system property to identify the new login module by name.</p>
+<p>The JAAS configuration file location is specified differently between the Executable War and the RPM/Deb.</p>
+<p><strong>For the Executable War</strong>: the <code>loginmodule.conf.name</code> Java system property is used to identify the <em>name</em> of the config file, which must be located in the <code>$RDECK_BASE/server/config</code> dir.</p>
+<p>You can simply specify the system properties on the java commandline:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="ex">java</span> -Drundeck.jaaslogin=true \</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">     -Dloginmodule.conf.name=jaas-ldap.conf \</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">     -Dloginmodule.name=ldap \</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">     -jar rundeck-x.x.war</a></code></pre></div>
+<p>Otherwise, if you are starting the Executable War via the supplied <code>rundeckd</code> script, you can modify the <code>RDECK_JVM</code> value in the <code>$RDECK_BASE/etc/profile</code> file to add two JVM arguments:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="bu">export</span> <span class="va">RDECK_JVM=</span><span class="st">&quot;-Dloginmodule.conf.name=jaas-ldap.conf \</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="st">    -Drundeck.jaaslogin=true \</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="st">    -Dloginmodule.name=ldap&quot;</span></a></code></pre></div>
+<p>Note: more information about using the Executable War and useful properties are under <a href="../install/launcher.html#launcher-options" title="Administrator Guide - Installation - Launcher - Launcher Options">Getting Started - Executable War Options</a>.</p>
+<p><strong>For the RPM/Deb installation</strong>: the absolute path to the JAAS config file must be specified with the <code>java.security.auth.login.config</code> property.</p>
+<p>Declare <code>RDECK_JVM_OPTS</code> in <code>/etc/sysconfig/rundeckd</code> (rpm) or <code>/etc/default/rundeckd</code> (deb):</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="va">RDECK_JVM_OPTS=</span><span class="st">&quot;-Drundeck.jaaslogin=true \</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="st">       -Djava.security.auth.login.config=/etc/rundeck/jaas-ldap.conf \</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="st">       -Dloginmodule.name=ldap&quot;</span></a></code></pre></div>
+<h4 id="step-3-restart-rundeckd">Step 3: Restart rundeckd</h4>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="fu">sudo</span> /etc/init.d/rundeckd restart</a></code></pre></div>
+<h4 id="step-4-attempt-to-logon">Step 4: Attempt to logon</h4>
+<p>If everything was configured correctly, you will be able to access Rundeck using your AD credentials. If something did not go smoothly, look at <code>/var/log/rundeck/service.log</code> for stack traces that may indicate what is wrong. To make troubleshooting easier, you may want to add the <code>-Dcom.dtolabs.rundeck.jetty.jaas.LEVEL=DEBUG</code> Java system property to the <code>RDECK_JVM</code> environment variable above, to have enable DEBUG logging for the authentication module.</p>
+<h3 id="login-module-configuration">Login module configuration</h3>
+<p>Here is an example configuration file for the <code>JettyCachingLdapLoginModule</code>:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource c numberLines"><code class="sourceCode c"><a class="sourceLine" id="cb14-1" data-line-number="1">ldap {</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">    com.dtolabs.rundeck.jetty.jaas.JettyCachingLdapLoginModule required</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">      debug=<span class="st">&quot;true&quot;</span></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4">      contextFactory=<span class="st">&quot;com.sun.jndi.ldap.LdapCtxFactory&quot;</span></a>
+<a class="sourceLine" id="cb14-5" data-line-number="5">      providerUrl=<span class="st">&quot;ldap://server:389&quot;</span></a>
+<a class="sourceLine" id="cb14-6" data-line-number="6">      bindDn=<span class="st">&quot;cn=Manager,dc=example,dc=com&quot;</span></a>
+<a class="sourceLine" id="cb14-7" data-line-number="7">      bindPassword=<span class="st">&quot;secrent&quot;</span></a>
+<a class="sourceLine" id="cb14-8" data-line-number="8">      authenticationMethod=<span class="st">&quot;simple&quot;</span></a>
+<a class="sourceLine" id="cb14-9" data-line-number="9">      forceBindingLogin=<span class="st">&quot;false&quot;</span></a>
+<a class="sourceLine" id="cb14-10" data-line-number="10">      userBaseDn=<span class="st">&quot;ou=People,dc=test1,dc=example,dc=com&quot;</span></a>
+<a class="sourceLine" id="cb14-11" data-line-number="11">      userRdnAttribute=<span class="st">&quot;uid&quot;</span></a>
+<a class="sourceLine" id="cb14-12" data-line-number="12">      userIdAttribute=<span class="st">&quot;uid&quot;</span></a>
+<a class="sourceLine" id="cb14-13" data-line-number="13">      userPasswordAttribute=<span class="st">&quot;userPassword&quot;</span></a>
+<a class="sourceLine" id="cb14-14" data-line-number="14">      userObjectClass=<span class="st">&quot;account&quot;</span></a>
+<a class="sourceLine" id="cb14-15" data-line-number="15">      userLastNameAttribute=<span class="st">&quot;sn&quot;</span></a>
+<a class="sourceLine" id="cb14-16" data-line-number="16">      userFirstNameAttribute=<span class="st">&quot;givenName&quot;</span></a>
+<a class="sourceLine" id="cb14-17" data-line-number="17">      userEmailAttribute=<span class="st">&quot;mail&quot;</span></a>
+<a class="sourceLine" id="cb14-18" data-line-number="18">      roleBaseDn=<span class="st">&quot;ou=Groups,dc=test1,dc=example,dc=com&quot;</span></a>
+<a class="sourceLine" id="cb14-19" data-line-number="19">      roleNameAttribute=<span class="st">&quot;cn&quot;</span></a>
+<a class="sourceLine" id="cb14-20" data-line-number="20">      roleUsernameMemberAttribute=<span class="st">&quot;memberUid&quot;</span></a>
+<a class="sourceLine" id="cb14-21" data-line-number="21">      roleMemberAttribute=<span class="st">&quot;memberUid&quot;</span></a>
+<a class="sourceLine" id="cb14-22" data-line-number="22">      roleObjectClass=<span class="st">&quot;posixGroup&quot;</span></a>
+<a class="sourceLine" id="cb14-23" data-line-number="23">      cacheDurationMillis=<span class="st">&quot;300000&quot;</span></a>
+<a class="sourceLine" id="cb14-24" data-line-number="24">      supplementalRoles=<span class="st">&quot;user&quot;</span></a>
+<a class="sourceLine" id="cb14-25" data-line-number="25">      reportStatistics=<span class="st">&quot;true&quot;</span></a>
+<a class="sourceLine" id="cb14-26" data-line-number="26">      timeoutRead=<span class="st">&quot;10000&quot;</span></a>
+<a class="sourceLine" id="cb14-27" data-line-number="27">      timeoutConnect=<span class="st">&quot;20000&quot;</span></a>
+<a class="sourceLine" id="cb14-28" data-line-number="28">      nestedGroups=<span class="st">&quot;false&quot;</span>;</a>
+<a class="sourceLine" id="cb14-29" data-line-number="29">};</a></code></pre></div>
+<p>The <code>JettyCachingLdapLoginModule</code> has these configuration properties:</p>
+<dl>
+<dt><code>debug</code></dt>
+<dd>“true/false” - turn on or off debug output
+</dd>
+<dt><code>contextFactory</code></dt>
+<dd>The LDAP context factory class, e.g. “com.sun.jndi.ldap.LdapCtxFactory”
+</dd>
+<dt><code>providerUrl</code></dt>
+<dd>ldap URL for the server, e.g. “ldap://server:389”
+</dd>
+<dt><code>bindDn</code></dt>
+<dd>Optional. If not using “binding” authentication, set this to the root DN that should bind, e.g. “cn=Manager,dc=example,dc=com”
+</dd>
+<dt><code>bindPassword</code></dt>
+<dd>password for root DN. <strong>Note</strong>: The <code>bindDn</code> and <code>bindPassword</code> must escape any special characters with <code>\</code> character. Special characters include <code>\</code> (backslash), as well as <code>!</code> (exclamation).
+</dd>
+<dt><code>authenticationMethod</code></dt>
+<dd>Authentication method, e.g. “simple”
+</dd>
+<dt><code>forceBindingLogin</code></dt>
+<dd>“true/false” - if true, bind as the user that is authenticating, otherwise bind as the manager and perform a search to verify user password. NOTE: This module can only verify passwords hashed with <code>MD5</code> or <code>CRYPT</code>. If your LDAP directory contains other hashes you’ll likely need to set this to true to be able to authenticate.
+</dd>
+<dt><code>forceBindingLoginUseRootContextForRoles</code></dt>
+<dd>“true/false” - if true and forceBindingLogin is true, then role membership searches will be performed in the root context, rather than in the bound user context.
+</dd>
+<dt><code>userBaseDn</code></dt>
+<dd>base DN to search for users, example: “ou=People,dc=test1,dc=example,dc=com”
+</dd>
+<dt><code>userRdnAttribute</code></dt>
+<dd>Attribute name for username, used when searching for user role membership by DN, default “uid”.
+</dd>
+<dt><code>userIdAttribute</code></dt>
+<dd>Attribute name to identify user by username, default “cn”.
+</dd>
+<dt><code>userPasswordAttribute</code></dt>
+<dd>Attribute name for user password, default “userPassword”.
+</dd>
+<dt><code>userObjectClass</code></dt>
+<dd>Attribute name for user object class, default “inetOrgPerson”.
+</dd>
+<dt><code>userLastNameAttribute</code></dt>
+<dd>Attribute name for user’s last name, default “sn”.
+</dd>
+<dt><code>userFirstNameAttribute</code></dt>
+<dd>Attribute name for user’s first name, default “givenName”.
+</dd>
+<dt><code>userEmailAttribute</code></dt>
+<dd>Attribute name for user’s email address, default “mail”.
+</dd>
+<dt><code>roleBaseDn</code></dt>
+<dd>Base DN for role membership search, e.g. “ou=Groups,dc=test1,dc=example,dc=com”.
+</dd>
+<dt><code>roleNameAttribute</code></dt>
+<dd>Attribute name for role name, default “roleName”.
+</dd>
+<dt><code>roleMemberAttribute</code></dt>
+<dd>Attribute name for a role that would contain a user’s DN, default “uniqueMember”.
+</dd>
+<dt><code>roleUsernameMemberAttribute</code></dt>
+<dd>Attribute name for a role that would contain a user’s username. If set, this overrides the <code>roleMemberAttribute</code> behavior.
+</dd>
+<dt><code>roleObjectClass</code></dt>
+<dd>Object class for role, default “groupOfUniqueNames”.
+</dd>
+<dt><code>rolePrefix</code></dt>
+<dd>Prefix string to remove from role names before returning to the application, e.g. “rundeck_”.
+</dd>
+<dt><code>cacheDurationMillis</code></dt>
+<dd>Duration that authorization should be cached, in milliseconds. Default “0”. A value of “0” indicates no caching should be used.
+</dd>
+<dt><code>reportStatistics</code></dt>
+<dd>“true/false” - if true, output cache statistics to the log.
+</dd>
+<dt><code>supplementalRoles</code></dt>
+<dd>Comma-separated list of role names. All of the given role names will be automatically added to authenticated users. You can use this to provide a “default” role or roles for all users.
+</dd>
+<dt><code>timeoutRead</code></dt>
+<dd>Read timeout value (ms). Default: 0 (no timeout)
+</dd>
+<dt><code>timeoutConnect</code></dt>
+<dd>Connect timeout value (ms). Default: 0 (no timeout)
+</dd>
+<dt><code>nestedGroups</code></dt>
+<dd>“true/false” - Default: false. If true, will resolve all nested groups for authenticated users. For the first user to login after a fresh start it will take a couple of seconds longer, this is when the cache of all nested groups is built. This will happen as often as the cache is refreshed. Uses the cacheDurationMillis for cache timeout.
+</dd>
+</dl>
+<p>The <code>JettyCombinedLdapLoginModule</code> is extends the previous module, so is configured in almost exactly the same way, but adds these additional configuration options:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource c numberLines"><code class="sourceCode c"><a class="sourceLine" id="cb15-1" data-line-number="1">ldap {</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">    com.dtolabs.rundeck.jetty.jaas.JettyCombinedLdapLoginModule required</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">      ...</a>
+<a class="sourceLine" id="cb15-4" data-line-number="4">      ignoreRoles=<span class="st">&quot;true&quot;</span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5">      storePass=<span class="st">&quot;true&quot;</span></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6">      clearPass=<span class="st">&quot;true&quot;</span></a>
+<a class="sourceLine" id="cb15-7" data-line-number="7">      useFirstPass=<span class="st">&quot;false&quot;</span></a>
+<a class="sourceLine" id="cb15-8" data-line-number="8">      tryFirstPass=<span class="st">&quot;false&quot;</span>;</a>
+<a class="sourceLine" id="cb15-9" data-line-number="9">};</a></code></pre></div>
+<dl>
+<dt><code>ignoreRoles</code></dt>
+<dd>Do not look up role membership via LDAP. May be used with <code>storePass</code> and combined with another login module for authorization roles. (See <a href="#jettyrolepropertyfileloginmodule">JettyRolePropertyFileLoginModule</a>)
+</dd>
+<dt><code>storePass</code></dt>
+<dd>Store the user/password for use by subsequent login module.
+</dd>
+<dt><code>clearPass</code></dt>
+<dd>Clear the user/password that was stored after login is successful. (This would prevent any subsequent login modules from re-using the stored credentials. Set it to <code>false</code> if you want to continue using the credentials.)
+</dd>
+<dt><code>useFirstPass</code></dt>
+<dd>Use the stored user/password for authentication, and do not attempt to use other mechanism (e.g. login callback).
+</dd>
+<dt><code>tryFirstPass</code></dt>
+<dd>Try to use the stored user/password for authentication, if it fails then proceed with normal mechanism.
+</dd>
+</dl>
+<h3 id="combining-ldap-with-other-modules">Combining LDAP with other modules</h3>
+<p>Use the <code>JettyCombinedLdapLoginModule</code> to do LDAP authentication, then combine it with the <a href="#jettyrolepropertyfileloginmodule">JettyRolePropertyFileLoginModule</a> (or some other module) to supply the authorization roles.</p>
+<p>The first module should set <code>storePass=&quot;true&quot;</code>, and the second module should set <code>useFirstPass=&quot;true&quot;</code> or <code>tryFirstPass=&quot;true&quot;</code>.</p>
+<p>Finally, see the section <a href="#multiple-authentication-modules">Multiple Authentication Modules</a> about the appropriate configuration Flag to use.</p>
+<p>The <a href="#pam">PAM</a> section is a useful comparison as it uses the same method to combine modules.</p>
+<h3 id="active-directory">Active Directory</h3>
+<p>Here is an example configuration for Active Directory. The string <em>sAMAccountName</em> refers to the short user name and is valid in a default Active Directory installation, but may vary in some environments.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource c numberLines"><code class="sourceCode c"><a class="sourceLine" id="cb16-1" data-line-number="1">activedirectory {</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">    com.dtolabs.rundeck.jetty.jaas.JettyCachingLdapLoginModule required</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">    debug=<span class="st">&quot;true&quot;</span></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4">    contextFactory=<span class="st">&quot;com.sun.jndi.ldap.LdapCtxFactory&quot;</span></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5">    providerUrl=<span class="st">&quot;ldap://localhost:389&quot;</span></a>
+<a class="sourceLine" id="cb16-6" data-line-number="6">    bindDn=<span class="st">&quot;cn=Manager,dc=rundeck,dc=com&quot;</span></a>
+<a class="sourceLine" id="cb16-7" data-line-number="7">    bindPassword=<span class="st">&quot;secret&quot;</span></a>
+<a class="sourceLine" id="cb16-8" data-line-number="8">    authenticationMethod=<span class="st">&quot;simple&quot;</span></a>
+<a class="sourceLine" id="cb16-9" data-line-number="9">    forceBindingLogin=<span class="st">&quot;true&quot;</span></a>
+<a class="sourceLine" id="cb16-10" data-line-number="10">    userBaseDn=<span class="st">&quot;ou=users,dc=rundeck,dc=com&quot;</span></a>
+<a class="sourceLine" id="cb16-11" data-line-number="11">    userRdnAttribute=<span class="st">&quot;sAMAccountName&quot;</span></a>
+<a class="sourceLine" id="cb16-12" data-line-number="12">    userIdAttribute=<span class="st">&quot;sAMAccountName&quot;</span></a>
+<a class="sourceLine" id="cb16-13" data-line-number="13">    userPasswordAttribute=<span class="st">&quot;unicodePwd&quot;</span></a>
+<a class="sourceLine" id="cb16-14" data-line-number="14">    userObjectClass=<span class="st">&quot;user&quot;</span></a>
+<a class="sourceLine" id="cb16-15" data-line-number="15">    roleBaseDn=<span class="st">&quot;ou=roles,dc=rundeck,dc=com&quot;</span></a>
+<a class="sourceLine" id="cb16-16" data-line-number="16">    roleNameAttribute=<span class="st">&quot;cn&quot;</span></a>
+<a class="sourceLine" id="cb16-17" data-line-number="17">    roleMemberAttribute=<span class="st">&quot;member&quot;</span></a>
+<a class="sourceLine" id="cb16-18" data-line-number="18">    roleObjectClass=<span class="st">&quot;group&quot;</span></a>
+<a class="sourceLine" id="cb16-19" data-line-number="19">    cacheDurationMillis=<span class="st">&quot;300000&quot;</span></a>
+<a class="sourceLine" id="cb16-20" data-line-number="20">    reportStatistics=<span class="st">&quot;true&quot;</span>;</a>
+<a class="sourceLine" id="cb16-21" data-line-number="21">};</a></code></pre></div>
+<h3 id="communicating-over-secure-ldap-ldaps">Communicating over secure ldap (ldaps://)</h3>
+<p>The default port for communicating with active directory is 389, which is insecure. The secure port is 636, but the LoginModule describe above requires that the AD certificate or organizations CA certificate be placed in a truststore. The truststore provided with rundeck <code>/etc/rundeck/ssl/truststore</code> is used for the local communication between the cli tools and the rundeck server.</p>
+<p>Before you can establish trust, you need to get the CA certificate. Typically, this would require a request to the organization’s security officer to have them send you the certificate. It’s also often found publicly if your organization does secure transactions.</p>
+<p>Another option is to interrogate the secure ldap endpoint with openssl. The example below shows a connection to paypal.com on port 443. The first certificate is the machine and that last is the CA. Pick the last certificate.</p>
+<p><em>note</em> that for Active Directory, the host would be the Active Directory server and port 636. <em>note</em> Certificates are PEM encoded and start with —–BEGIN CERTIFICATE—– end with —–END CERTIFICATE—– inclusive.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb17-1" data-line-number="1">$ <span class="ex">openssl</span> s_client -showcerts -connect paypal.com:443</a></code></pre></div>
+<pre><code>CONNECTED(00000003)
+depth=1 C = US, O = &quot;VeriSign, Inc.&quot;, OU = VeriSign Trust Network, OU = Terms of use at https://www.verisign.com/rpa (c)09, CN = VeriSign Class 3 Secure Server CA - G2
+verify error:num=20:unable to get local issuer certificate
+verify return:0
+---
+Certificate chain
+ 0 s:/C=US/ST=California/L=San Jose/O=PayPal, Inc./OU=Information Systems/CN=paypal.com
+   i:/C=US/O=VeriSign, Inc./OU=VeriSign Trust Network/OU=Terms of use at https://www.verisign.com/rpa (c)09/CN=VeriSign Class 3 Secure Server CA - G2
+-----BEGIN CERTIFICATE-----
+MIIFDjCCA/agAwIBAgIQL0NdM6l74HplIwrcygDcCTANBgkqhkiG9w0BAQUFADCB
+tTELMAkGA1UEBhMCVVMxFzAVBgNVBAoTDlZlcmlTaWduLCBJbmMuMR8wHQYDVQQL
+ExZWZXJpU2lnbiBUcnVzdCBOZXR3b3JrMTswOQYDVQQLEzJUZXJtcyBvZiB1c2Ug
+YXQgaHR0cHM6Ly93d3cudmVyaXNpZ24uY29tL3JwYSAoYykwOTEvMC0GA1UEAxMm
+VmVyaVNpZ24gQ2xhc3MgMyBTZWN1cmUgU2VydmVyIENBIC0gRzIwHhcNMTAwNTAz
+MDAwMDAwWhcNMTIwNjExMjM1OTU5WjB/MQswCQYDVQQGEwJVUzETMBEGA1UECBMK
+Q2FsaWZvcm5pYTERMA8GA1UEBxQIU2FuIEpvc2UxFTATBgNVBAoUDFBheVBhbCwg
+SW5jLjEcMBoGA1UECxQTSW5mb3JtYXRpb24gU3lzdGVtczETMBEGA1UEAxQKcGF5
+cGFsLmNvbTCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEArlvu+86iVb4RXdX+
+8MjmGynNSl+Hu2/ZJ7nU1sj5O2jASWwFH7PFUv10qlRtL+gi3Rjw+zFN958iUetz
+ef4CxQYf52PA7Uj9YlFEzLz7f8UDotu4WNLM3QGbLrqS28pPb2qKyyOQDvwNpI1c
+Jt4JDa0ofVnCdICZEnf+cJB121MCAwEAAaOCAdEwggHNMAkGA1UdEwQCMAAwCwYD
+VR0PBAQDAgWgMEUGA1UdHwQ+MDwwOqA4oDaGNGh0dHA6Ly9TVlJTZWN1cmUtRzIt
+Y3JsLnZlcmlzaWduLmNvbS9TVlJTZWN1cmVHMi5jcmwwRAYDVR0gBD0wOzA5Bgtg
+hkgBhvhFAQcXAzAqMCgGCCsGAQUFBwIBFhxodHRwczovL3d3dy52ZXJpc2lnbi5j
+b20vcnBhMB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjAfBgNVHSMEGDAW
+gBSl7wsRzsBBA6NKZZBIshzgVy19RzB2BggrBgEFBQcBAQRqMGgwJAYIKwYBBQUH
+MAGGGGh0dHA6Ly9vY3NwLnZlcmlzaWduLmNvbTBABggrBgEFBQcwAoY0aHR0cDov
+L1NWUlNlY3VyZS1HMi1haWEudmVyaXNpZ24uY29tL1NWUlNlY3VyZUcyLmNlcjBu
+BggrBgEFBQcBDARiMGChXqBcMFowWDBWFglpbWFnZS9naWYwITAfMAcGBSsOAwIa
+BBRLa7kolgYMu9BSOJsprEsHiyEFGDAmFiRodHRwOi8vbG9nby52ZXJpc2lnbi5j
+b20vdnNsb2dvMS5naWYwDQYJKoZIhvcNAQEFBQADggEBADbOGDkzZy22y+fW4OR7
+wkx+1E3BxnRMZYx89OOykzTEUt2UV5DVuccUbqxTxg9/4pKMYJLywYn9UIOPHpwx
+fbvMQNpdqV3JSuGMTwpROrMvC3bT13aCxxDnozeCjd/lH74m6G5ef2EUd3m5Y+iC
+fMPo2NMrVyQYOCtpJurh9Tre1gQFHUYAXw8ty0YxfMoR/7FwYbd4spiZJwL2Mvfn
+9gn24dWuKY7JaFutomwOM78rGzBDZZ/spEx9rcNa3OuVHcqBamnnXQZlZJilj4LE
+buMBx8ti5Oqy4z1u1vzA8HalseiZerqFtBGOIakXdto8qLnwYEHQvVa/ih5iTsi3
+Ja8=
+-----END CERTIFICATE-----
+ 1 s:/C=US/O=VeriSign, Inc./OU=VeriSign Trust Network/OU=Terms of use at https://www.verisign.com/rpa (c)09/CN=VeriSign Class 3 Secure Server CA - G2
+   i:/C=US/O=VeriSign, Inc./OU=Class 3 Public Primary Certification Authority - G2/OU=(c) 1998 VeriSign, Inc. - For authorized use only/OU=VeriSign Trust Network
+-----BEGIN CERTIFICATE-----
+MIIGLDCCBZWgAwIBAgIQbk/6s8XmacTRZ8mSq+hYxDANBgkqhkiG9w0BAQUFADCB
+wTELMAkGA1UEBhMCVVMxFzAVBgNVBAoTDlZlcmlTaWduLCBJbmMuMTwwOgYDVQQL
+EzNDbGFzcyAzIFB1YmxpYyBQcmltYXJ5IENlcnRpZmljYXRpb24gQXV0aG9yaXR5
+IC0gRzIxOjA4BgNVBAsTMShjKSAxOTk4IFZlcmlTaWduLCBJbmMuIC0gRm9yIGF1
+dGhvcml6ZWQgdXNlIG9ubHkxHzAdBgNVBAsTFlZlcmlTaWduIFRydXN0IE5ldHdv
+cmswHhcNMDkwMzI1MDAwMDAwWhcNMTkwMzI0MjM1OTU5WjCBtTELMAkGA1UEBhMC
+VVMxFzAVBgNVBAoTDlZlcmlTaWduLCBJbmMuMR8wHQYDVQQLExZWZXJpU2lnbiBU
+cnVzdCBOZXR3b3JrMTswOQYDVQQLEzJUZXJtcyBvZiB1c2UgYXQgaHR0cHM6Ly93
+d3cudmVyaXNpZ24uY29tL3JwYSAoYykwOTEvMC0GA1UEAxMmVmVyaVNpZ24gQ2xh
+c3MgMyBTZWN1cmUgU2VydmVyIENBIC0gRzIwggEiMA0GCSqGSIb3DQEBAQUAA4IB
+DwAwggEKAoIBAQDUVo9XOzcopkBj0pXVBXTatRlqltZxVy/iwDSMoJWzjOE3JPMu
+7UNFBY6J1/raSrX4Po1Ox/lJUEU3QJ90qqBRVWHxYISJpZ6AjS+wIapFgsTPtBR/
+RxUgKIKwaBLArlwH1/ZZzMtiVlxNSf8miKtUUTovStoOmOKJcrn892g8xB85essX
+gfMMrQ/cYWIbEAsEHikYcV5iy0PevjG6cQIZTiapUdqMZGkD3pz9ff17Ybz8hHyI
+XLTDe+1fK0YS8f0AAZqLW+mjBS6PLlve8xt4+GaRCMBeztWwNsrUqHugffkwer/4
+3RlRKyC6/qfPoU6wZ/WAqiuDLtKOVImOHikLAgMBAAGjggKpMIICpTA0BggrBgEF
+BQcBAQQoMCYwJAYIKwYBBQUHMAGGGGh0dHA6Ly9vY3NwLnZlcmlzaWduLmNvbTAS
+BgNVHRMBAf8ECDAGAQH/AgEAMHAGA1UdIARpMGcwZQYLYIZIAYb4RQEHFwMwVjAo
+BggrBgEFBQcCARYcaHR0cHM6Ly93d3cudmVyaXNpZ24uY29tL2NwczAqBggrBgEF
+BQcCAjAeGhxodHRwczovL3d3dy52ZXJpc2lnbi5jb20vcnBhMDQGA1UdHwQtMCsw
+KaAnoCWGI2h0dHA6Ly9jcmwudmVyaXNpZ24uY29tL3BjYTMtZzIuY3JsMA4GA1Ud
+DwEB/wQEAwIBBjBtBggrBgEFBQcBDARhMF+hXaBbMFkwVzBVFglpbWFnZS9naWYw
+ITAfMAcGBSsOAwIaBBSP5dMahqyNjmvDz4Bq1EgYLHsZLjAlFiNodHRwOi8vbG9n
+by52ZXJpc2lnbi5jb20vdnNsb2dvLmdpZjApBgNVHREEIjAgpB4wHDEaMBgGA1UE
+AxMRQ2xhc3MzQ0EyMDQ4LTEtNTIwHQYDVR0OBBYEFKXvCxHOwEEDo0plkEiyHOBX
+LX1HMIHnBgNVHSMEgd8wgdyhgcekgcQwgcExCzAJBgNVBAYTAlVTMRcwFQYDVQQK
+Ew5WZXJpU2lnbiwgSW5jLjE8MDoGA1UECxMzQ2xhc3MgMyBQdWJsaWMgUHJpbWFy
+eSBDZXJ0aWZpY2F0aW9uIEF1dGhvcml0eSAtIEcyMTowOAYDVQQLEzEoYykgMTk5
+OCBWZXJpU2lnbiwgSW5jLiAtIEZvciBhdXRob3JpemVkIHVzZSBvbmx5MR8wHQYD
+VQQLExZWZXJpU2lnbiBUcnVzdCBOZXR3b3JrghB92f4Hz6getxB5Z/uniTTGMA0G
+CSqGSIb3DQEBBQUAA4GBAGN0Lz1Tqi+X7CYRZhr+8d5BJxnSf9jBHPniOFY6H5Cu
+OcUgdav4bC1nHynCIdcUiGNLsJsnY5H48KMBJLb7j+M9AgtvVP7UzNvWhb98lR5e
+YhHB2QmcQrmy1KotmDojYMyimvFu6M+O0Ro8XhnF15s1sAIjJOUFuNWI4+D6ufRf
+-----END CERTIFICATE-----
+---
+Server certificate
+subject=/C=US/ST=California/L=San Jose/O=PayPal, Inc./OU=Information Systems/CN=paypal.com
+issuer=/C=US/O=VeriSign, Inc./OU=VeriSign Trust Network/OU=Terms of use at https://www.verisign.com/rpa (c)09/CN=VeriSign Class 3 Secure Server CA - G2
+---
+No client certificate CA names sent
+---
+SSL handshake has read 3039 bytes and written 401 bytes
+---
+New, TLSv1/SSLv3, Cipher is DES-CBC3-SHA
+Server public key is 1024 bit
+Secure Renegotiation IS NOT supported
+Compression: NONE
+Expansion: NONE
+SSL-Session:
+    Protocol  : TLSv1
+    Cipher    : DES-CBC3-SHA
+    Session-ID: A8AAA4F22E9A4B3F12F76303464643525178846D96CA0BC0B81F35368BF55B89
+    Session-ID-ctx:
+    Master-Key: 9F767B91FC2450E291CBB21E3438CA9A73FE8D5B825AD98F821F5EB912C088DFB66FCBF2D53591E2D1ED77E9B6A22504
+    Key-Arg   : None
+    PSK identity: None
+    PSK identity hint: None
+    Start Time: 1295242116
+    Timeout   : 300 (sec)
+    Verify return code: 20 (unable to get local issuer certificate)
+---
+^C</code></pre>
+<p>Once a certificate has been obtained. There are two options for adding the certificate. The first involves updating the truststore for the JRE. If that is not possible or not desirable, then one can set the truststore to be used by the jvm, using any arbitrary truststore that contains the appropriate certificate.</p>
+<p>Both options require importing a certificate. The following would import a certificate called, AD.cert into the <code>/etc/rundeck/ssl/truststore</code>.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="ex">keytool</span> -import -alias CompanyAD -file AD.cert -keystore  /etc/rundeck/ssl/truststore -storepass adminadmin</a></code></pre></div>
+<p>To add the certificate to the JRE, locate the file $JAVA_HOME/lib/security/cacerts and run</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="ex">keytool</span> -import -alias CompanyAD -file AD.cert -keystore <span class="va">$JAVA_HOME</span>/lib/security/cacerts -storepass changeit</a></code></pre></div>
+<p>To verify your CA has been added, run keytool list and look for CompanyAD in the output.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="ex">keytool</span> -list -keystore <span class="va">$JAVA_HOME</span>/lib/security/cacerts -storepass changeit</a></code></pre></div>
+<p>Refer to: https://docs.oracle.com/javase/1.5.0/docs/tooldocs/solaris/keytool.html for more information how how to import a certificate.</p>
+<p>Finally, in your <code>ldap-activedirectory.conf</code> be sure to change the <em>providerUrl</em> to be <code>ldaps://ad-server</code>. Including the port is optional as the default is 686.</p>
+<h2 id="pam">PAM</h2>
+<p>Rundeck includes a <a href="https://en.wikipedia.org/wiki/Pluggable_authentication_module">PAM</a> JAAS login module, which uses <a href="https://github.com/kohsuke/libpam4j">libpam4j</a> to authenticate.</p>
+<p>In order for Rundeck to have the necessary permissions to check user credentials, the user that runs the Rundeck process must be in the <code>shadow</code> group.<br />
+This can be done with the command:</p>
+<pre><code>$ sudo addgroup rundeck shadow</code></pre>
+<p>On debian based systems you need to install libpam4j :</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="ex">apt</span> install libpam4j-java</a></code></pre></div>
+<p>This module can work with existing properties-file based authorization roles by enabling shared credentials between the modules, and introducing a Property file module that can be used only for authorization.</p>
+<p>Modules:</p>
+<ul>
+<li><code>org.rundeck.jaas.jetty.JettyPamLoginModule</code> authenticates via PAM, can add a default set of roles to authenticated users, and can use local unix group membership for role info.</li>
+<li><code>org.rundeck.jaas.jetty.JettyAuthPropertyFileLoginModule</code> authenticates via property file, but does not supply user authorization information.</li>
+<li><code>org.rundeck.jaas.jetty.JettyRolePropertyFileLoginModule</code> does not authenticate and only uses authorization roles from a property file. Can be combined with previous modules.</li>
+</ul>
+<p>sample jaas config:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource c numberLines"><code class="sourceCode c"><a class="sourceLine" id="cb24-1" data-line-number="1">RDpropertyfilelogin {</a>
+<a class="sourceLine" id="cb24-2" data-line-number="2">  org.rundeck.jaas.jetty.JettyPamLoginModule requisite</a>
+<a class="sourceLine" id="cb24-3" data-line-number="3">        debug=<span class="st">&quot;true&quot;</span></a>
+<a class="sourceLine" id="cb24-4" data-line-number="4">        service=<span class="st">&quot;sshd&quot;</span></a>
+<a class="sourceLine" id="cb24-5" data-line-number="5">        supplementalRoles=<span class="st">&quot;readonly&quot;</span></a>
+<a class="sourceLine" id="cb24-6" data-line-number="6">        storePass=<span class="st">&quot;true&quot;</span>;</a>
+<a class="sourceLine" id="cb24-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb24-8" data-line-number="8">    org.rundeck.jaas.jetty.JettyRolePropertyFileLoginModule required</a>
+<a class="sourceLine" id="cb24-9" data-line-number="9">        debug=<span class="st">&quot;true&quot;</span></a>
+<a class="sourceLine" id="cb24-10" data-line-number="10">        useFirstPass=<span class="st">&quot;true&quot;</span></a>
+<a class="sourceLine" id="cb24-11" data-line-number="11">        file=<span class="st">&quot;/etc/rundeck/realm.properties&quot;</span>;</a>
+<a class="sourceLine" id="cb24-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb24-13" data-line-number="13">};</a></code></pre></div>
+<p>When combining the two login modules, note that the <code>storePass</code> and <code>useFirstPass</code> are set to true, allowing the two modules to share the user information necessary for the second module to load the user roles.</p>
+<p><strong>Common configuration properties:</strong></p>
+<p>These JAAS configuration properties are used by all of the Jetty PAM modules:</p>
+<ul>
+<li><code>useFirstPass</code></li>
+<li><code>tryFirstPass</code></li>
+<li><code>storePass</code></li>
+<li><code>clearPass</code></li>
+<li><code>debug</code></li>
+</ul>
+<h3 id="jettypamloginmodule">JettyPamLoginModule</h3>
+<p>Configuration properties:</p>
+<ul>
+<li><code>serviceName</code> - name of the PAM service configuration to use. (Required). Example: “sshd”.</li>
+<li><code>useUnixGroups</code> - true/false. If true, the unix Groups defined for the user will be included as authorization roles. Default: false.</li>
+<li><code>supplementalRoles</code> - a comma-separated list of additional user roles to add to any authenticated user. Example: ‘user,readonly’</li>
+</ul>
+<h2 id="jettyrolepropertyfileloginmodule">JettyRolePropertyFileLoginModule</h2>
+<p>This module does not authenticate, and requires that <code>useFirstPass</code> or <code>tryFirstPass</code> is set to <code>true</code>, and that a previous module has <code>storePass</code> set to <code>true</code>.</p>
+<p>It then looks the username up in the Properties file, and applies any roles for the matching user, if found.</p>
+<p>Configuration properties:</p>
+<ul>
+<li><code>file</code> - path to a Java Property formatted file in the format defined under <a href="#PropertyFileLoginModule">realm.properties</a></li>
+<li><code>caseInsensitive</code> - true/false. If true, usernames are converted to lowercase before being looked up in the property file, otherwise they are compared as entered. Default: true.</li>
+</ul>
+<p>Note that since the user password is not used for authentication, you can have a dummy value in the password field of the file, but <em>some value is required</em> in that position.</p>
+<p>Example properties file with dummy passwords and roles:</p>
+<pre><code>admin: -,user,admin
+user1: -,user,readonly</code></pre>
+<h2 id="jettyauthpropertyfileloginmodule">JettyAuthPropertyFileLoginModule</h2>
+<p>This module provides authentication in the same way as the <a href="#PropertyFileLoginModule">realm.properties</a> mechanism, but does not use any of the role names found in the file. It can be combined with <code>JettyRolePropertyFileLoginModule</code> by using <code>storePass=true</code>.</p>
+<p>Configuration properties:</p>
+<ul>
+<li><code>hotReload</code> - <code>hotReload=&quot;true&quot;</code> enables the ability to modify the user list specified by <code>file</code> without having to restart Rundeck. The refresh interval for checking the file is 5 seconds. This is not configurable.</li>
+<li><code>file</code> - path to a Java Property formatted file in the format defined under <a href="#realm.properties">realm.properties</a></li>
+</ul>
+<h2 id="multiple-authentication-modules">Multiple Authentication Modules</h2>
+<p>JAAS configurations can contain multiple LoginModule definitions, which are processed in order and according to the logic of the configuration Flag.</p>
+<p>In your config file, separate the LoginModule definitions with a <code>;</code> and be sure to select the appropriate Flag for the module, one of <code>required</code>, <code>requisite</code>, <code>sufficient</code>, or <code>optional</code>.</p>
+<p>The full syntax and the description of how these Flags work is described in more detail under the <a href="https://docs.oracle.com/javase/6/docs/api/javax/security/auth/login/Configuration.html">JAAS Configuration Documentation</a>.</p>
+<p>Here is an example combining an LDAP module flagged as <code>sufficient</code>, and a flat file realm.properties config flagged as <code>required</code>:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource c numberLines"><code class="sourceCode c"><a class="sourceLine" id="cb26-1" data-line-number="1">multiauth {</a>
+<a class="sourceLine" id="cb26-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb26-3" data-line-number="3">  com.dtolabs.rundeck.jetty.jaas.JettyCachingLdapLoginModule sufficient</a>
+<a class="sourceLine" id="cb26-4" data-line-number="4">    debug=<span class="st">&quot;true&quot;</span></a>
+<a class="sourceLine" id="cb26-5" data-line-number="5">    contextFactory=<span class="st">&quot;com.sun.jndi.ldap.LdapCtxFactory&quot;</span></a>
+<a class="sourceLine" id="cb26-6" data-line-number="6">    providerUrl=<span class="st">&quot;ldap://server:389&quot;</span></a>
+<a class="sourceLine" id="cb26-7" data-line-number="7">    bindDn=<span class="st">&quot;cn=Manager,dc=example,dc=com&quot;</span></a>
+<a class="sourceLine" id="cb26-8" data-line-number="8">    bindPassword=<span class="st">&quot;secrent&quot;</span></a>
+<a class="sourceLine" id="cb26-9" data-line-number="9">    authenticationMethod=<span class="st">&quot;simple&quot;</span></a>
+<a class="sourceLine" id="cb26-10" data-line-number="10">    forceBindingLogin=<span class="st">&quot;false&quot;</span></a>
+<a class="sourceLine" id="cb26-11" data-line-number="11">    userBaseDn=<span class="st">&quot;ou=People,dc=test1,dc=example,dc=com&quot;</span></a>
+<a class="sourceLine" id="cb26-12" data-line-number="12">    userRdnAttribute=<span class="st">&quot;uid&quot;</span></a>
+<a class="sourceLine" id="cb26-13" data-line-number="13">    userIdAttribute=<span class="st">&quot;uid&quot;</span></a>
+<a class="sourceLine" id="cb26-14" data-line-number="14">    userPasswordAttribute=<span class="st">&quot;userPassword&quot;</span></a>
+<a class="sourceLine" id="cb26-15" data-line-number="15">    userObjectClass=<span class="st">&quot;account&quot;</span></a>
+<a class="sourceLine" id="cb26-16" data-line-number="16">    roleBaseDn=<span class="st">&quot;ou=Groups,dc=test1,dc=example,dc=com&quot;</span></a>
+<a class="sourceLine" id="cb26-17" data-line-number="17">    roleNameAttribute=<span class="st">&quot;cn&quot;</span></a>
+<a class="sourceLine" id="cb26-18" data-line-number="18">    roleUsernameMemberAttribute=<span class="st">&quot;memberUid&quot;</span></a>
+<a class="sourceLine" id="cb26-19" data-line-number="19">    roleMemberAttribute=<span class="st">&quot;memberUid&quot;</span></a>
+<a class="sourceLine" id="cb26-20" data-line-number="20">    roleObjectClass=<span class="st">&quot;posixGroup&quot;</span></a>
+<a class="sourceLine" id="cb26-21" data-line-number="21">    cacheDurationMillis=<span class="st">&quot;300000&quot;</span></a>
+<a class="sourceLine" id="cb26-22" data-line-number="22">    reportStatistics=<span class="st">&quot;true&quot;</span>;</a>
+<a class="sourceLine" id="cb26-23" data-line-number="23"></a>
+<a class="sourceLine" id="cb26-24" data-line-number="24">  org.eclipse.jetty.jaas.spi.PropertyFileLoginModule required</a>
+<a class="sourceLine" id="cb26-25" data-line-number="25">    debug=<span class="st">&quot;true&quot;</span></a>
+<a class="sourceLine" id="cb26-26" data-line-number="26">    file=<span class="st">&quot;/etc/rundeck/realm.properties&quot;</span>;</a>
+<a class="sourceLine" id="cb26-27" data-line-number="27">};</a></code></pre></div>
+<p>Based on the flags, JAAS would attempt the following for authentication:</p>
+<ol type="1">
+<li>Check username/pass against LDAP</li>
+<li>If auth succeeds, finish with successful authentication</li>
+<li>If auth fails, continue to the next module</li>
+<li>Check username/pass against the properties file</li>
+<li>If auth succeeds, finish with successful authentication</li>
+<li>If auth fails, finish with failed authentication</li>
+</ol>
+<h1 id="jaas-authorization-testing">Jaas Authorization Testing</h1>
+<p>If you would like to test your Jaas configuration without restarting Rundeck every time you make a change to your Jaas configuration, you can execute the command:</p>
+<pre><code>$ java -jar -Drundeck.jaaslogin=true -Dloginmodule.name=$LOGIN_MODULE_NAME -Drdeck.base=$RD_BASE_DIR rundeck.war --testauth
+
+ex.
+
+$ java -jar -Drundeck.jaaslogin=true -Dloginmodule.name=RDpropertyfilelogin -Drdeck.base=/etc/rundeck rundeck.war --testauth
+$ Checking file: /etc/rundeck/server/config/jaas-loginmodule.conf
+$ Checking login module: RDpropertyfilelogin
+$ Enter user name: admin
+$ Enter password admin &lt;-- This is masked in actual use
+$ Login Succeeded!  </code></pre>
+<p>The Jaas configuration file you are testing against will be printed out, along with the name of the login module you are testing.<br />
+You will be prompted to enter a username and password. These will be compared against your current Jaas configuration.<br />
+If the login is successful you will see: <code>Login Succeeded!</code><br />
+If the login fails a stacktrace will be printed out which will contain the details about the failure.</p>
+<h1 id="container-authentication-and-authorization">Container authentication and authorization</h1>
+<p>Container Authentication provides the Servlet context used by Rundeck with a few mechanisms to determine what roles the user has.</p>
+<dl>
+<dt><code>containerPrincipal</code></dt>
+<dd><p>JAAS authentication modules define a “Principal” that represents the authenticated user, and which can list the “roles” the user has.</p>
+</dd>
+<dt><code>container</code></dt>
+<dd>The Container also provides a query mechanism <code>isUserInRole</code>.
+</dd>
+</dl>
+<p>Both of these methods are used by default, although they can be disabled with the following configuration flags in <code>rundeck-config.properties</code>:</p>
+<pre><code>rundeck.security.authorization.containerPrincipal.enabled=false
+rundeck.security.authorization.container.enabled=false</code></pre>
+<h1 id="preauthenticated-mode">Preauthenticated Mode</h1>
+<h2 id="preauthenticated-mode-using-ajp-with-apache-and-tomcat">Preauthenticated Mode using AJP with apache and tomcat</h2>
+<dl>
+<dt><code>preauthenticated</code></dt>
+<dd><p>“Preauthenticated” means that the Servlet Container (e.g. Tomcat) is not being used for authentication/authorization. The user name and role list are provided to Rundeck from another system, usually a reverse proxy set up “in front” of the Rundeck web application, such as Apache HTTPD. Rundeck accepts the “REMOTE_USER” as the username, and allows a configurable Request Attribute to contain the list of user roles.</p>
+</dd>
+</dl>
+<p><strong>Note</strong>: If you use this method, make sure that <em>only</em> your proxy has direct access to the ports Rundeck is listening on (e.g. firewall them), otherwise you are opening access to rundeck without requiring authentication.</p>
+<p>This method can be enabled with this config in <code>rundeck-config.properties</code>:</p>
+<pre><code>rundeck.security.authorization.preauthenticated.enabled=true
+rundeck.security.authorization.preauthenticated.attributeName=REMOTE_USER_GROUPS
+rundeck.security.authorization.preauthenticated.delimiter=:</code></pre>
+<p>This configuration requires some additional setup to enable:</p>
+<ol type="1">
+<li>Apache HTTPD and Tomcat must be configured to communicate so that a list of User Roles is sent to Tomcat as a request Attribute with the given “attributeName”.</li>
+</ol>
+<p>For Tomcat and Apache HTTPd with <code>mod_proxy_ajp</code>, here are some additional instructions:</p>
+<ol type="1">
+<li><p>Modify the tomcat server.xml, and make sure to set <code>tomcatAuthentication=&quot;false&quot;</code> on the AJP connector:</p>
+<pre><code> &lt;Connector port=&quot;8009&quot; protocol=&quot;AJP/1.3&quot; redirectPort=&quot;4440&quot; tomcatAuthentication=&quot;false&quot;/&gt;</code></pre></li>
+<li><p>Configure Apache to perform the necessary authentication, and to pass an environment variable named “REMOTE_USER_GROUPS”, the value should be all colon-separated e.g.: “user:admin:ops” (or using the <code>delimiter</code> you have configured.)</p></li>
+</ol>
+<p>Here is an example using just <code>mod_proxy_ajp</code>, and passing a static list of roles. A real solution should use <a href="https://www.adelton.com/apache/mod_lookup_identity/">mod_lookup_identity</a>:</p>
+<pre><code>&lt;Location /rundeck&gt;
+    ProxyPass  ajp://localhost:8009/rundeck
+
+    AuthType basic
+    AuthName &quot;private area&quot;
+    AuthBasicProvider file
+
+    AuthUserFile /etc/httpd/users.htpasswd
+    SetEnv AJP_REMOTE_USER_GROUPS &quot;admin:testrole1:testrole2&quot;
+    Require valid-user
+&lt;/Location&gt;</code></pre>
+<p><strong>Note</strong>: <code>mod_proxy_ajp</code> requires prefixing the environment variable with “AJP_”, but <code>mod_jk</code> can pass the environment variable directly.</p>
+<p>Once authenticated via Apache, you should be able to access rundeck. You might see a page saying “You have no authorized access to projects”, and then “(User roles: role1, role2, …)” with a list of all of the user roles seen by Rundeck. This page just means that there are no aclpolicy files that match those roles, but the apache-&gt;tomcat authorization is still working correctly. At this point, move on to <a href="access-control-policy.html" title="Administrator Guide - Security - Access Control Policy">Access Control Policy</a> to set up access control for the listed roles.</p>
+<p>If the “User roles:” part is blank, then it may not be working correctly.</p>
+<h2 id="preauthenticated-mode-using-headers">Preauthenticated Mode using headers</h2>
+<p>If you have a proxy sitting in front of your Rundeck installation that authenticates your users, you can send the authenticated user and groups to Rundeck via HTTP headers. Set the following properties in your <code>rundeck-config.properties</code> file.</p>
+<pre><code>rundeck.security.authorization.preauthenticated.enabled=true
+rundeck.security.authorization.preauthenticated.attributeName=REMOTE_USER_GROUPS
+rundeck.security.authorization.preauthenticated.delimiter=,
+rundeck.security.authorization.preauthenticated.userNameHeader=X-Forwarded-Uuid
+rundeck.security.authorization.preauthenticated.userRolesHeader=X-Forwarded-Roles</code></pre>
+<p>The <code>attributeName</code> property is the name of the request attribute which stores the user groups for the request. The forwarded headers will be put into this attribute. This attribute must be set for this method to work properly.</p>
+<p>The <code>userNameHeader</code> property is the name of the header from which to obtain the authenticated user name.</p>
+<p>The <code>userRolesHeader</code> property is the name of the header from which to obtain the list of user roles. The roles should be delimited by the delimiter specified in the <code>delimiter</code> property.</p>
+<h2 id="preauthenticated-mode-logout-redirection">Preauthenticated mode logout redirection</h2>
+<p>If you are running preauthenticated mode and wish to redirect to a custom logout url on user logout, set the following properties:</p>
+<pre><code># Redirect to upstream logout url
+rundeck.security.authorization.preauthenticated.redirectLogout=true
+rundeck.security.authorization.preauthenticated.redirectUrl=/customlogouturl</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container bottom breadcrumb_holder">
+<div class="row">
+<div class="col-sm-6" id="#breadcrumbsbottom">
+
+<div class="navquerytoggle collapse" aria-expanded="false">
+<div class="input-group ">
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-search"></i></a>
+    <input type="text" class="form-control navquery  " name="q" placeholder="Search" autofocus="true">    
+    <a class="input-group-addon btn btn-xs" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom"><i class="glyphicon glyphicon-remove"></i></a>
+</div>
+</div>
+
+<ol class="breadcrumb bottom collapse in navquerytoggle" aria-expanded="true">
+    <li class="navquerytrigger collapse" title="Find a page by name. (Keyboard shortcut: q)" data-toggle="tooltip" data-container="body">
+        <a class="btn btn-xs btn-link" data-toggle="collapse" data-target=".navquerytoggle"  data-parent="#breadcrumbsbottom">
+            <i class="glyphicon glyphicon-search"></i>
+        </a>
+    </li>
+
+    
+        <li><a href="../../index.html">Rundeck Documentation (3.0.27)</a></li>
+    
+        <li><a href="../index.html">Administrator Guide</a></li>
+    
+    
+    <li ><a href="index.html">Security</a></li>
+    <li class="active"><a href="authenticating-users.html">Authenticating Users</a></li>
+</ol>
+</div>
+<div class="col-sm-6">
+    <ul class="pager">
+      <li class="previous"><a href="default-users.html"><i class="glyphicon glyphicon-arrow-left"></i> Default Users</a></li>
+      <li class="next"><a href="access-control-policy.html">Access Control Policy <i class="glyphicon glyphicon-arrow-right"></i></a></li>
+    </ul>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12 text-right">
+    <a class="btn btn-link bottom" href="https://github.com/rundeck/docs/issues/new?labels=bug&title=Documentation+bug+in+file+administration/security/authentication.md&template=documentation-bug.md"><i class="glyphicon glyphicon-flag"></i> Report a problem</a>
+    <a class="btn btn-link bottom btn-edit-this-page" href="https://github.com/rundeck/docs/edit/3.0.x/en/administration/security/authentication.md"><i class="glyphicon glyphicon-pencil"></i>  Edit this page</a>
+</div>
+</div>
+</div>
+<div class='container footer'>
+
+<div class="row">
+	<footer class="copy col-sm-12 text-muted">
+
+<p>
+<a class="btn btn-info btn-try-rundeck-pro" href="http://rundeck.com/" data-toggle="popover" data-trigger="hover" 
+data-content="<ul class=&quot;list-unstyled&quot;>
+	<li><i class=&quot;glyphicon glyphicon-gift&quot;></i> Try Rundeck Enterprise for Free</li>
+	<li><i class=&quot;glyphicon glyphicon-flash&quot;></i> Get Exclusive Features</li>
+	<li><i class=&quot;glyphicon glyphicon-briefcase&quot;></i> Get Professional Support</li>
+	<li><i class=&quot;glyphicon glyphicon-heart&quot;></i> Support Open-source Development</li>
+	<li><i class=&quot;glyphicon glyphicon-thumbs-up&quot;></i> Get home by 5 </li>
+</ul>" data-html="true">
+<i class="glyphicon glyphicon-hand-right"></i>
+Try Rundeck Enterprise
+</a>
+</p>
+
+<span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">Rundeck Documentation</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="http://rundeck.com" property="cc:attributionName" rel="cc:attributionURL">Rundeck, Inc</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.
+<p>
+&copy;2019 <a href="http://rundeck.com">Rundeck</a>
+</p>
+<p>
+<span class="generated-date" title="2019-12-05T19:58:21UTC">2019-12-05T19:58:21UTC</span>
+</p>
+</footer>
+</div>
+</div>
+<script type="text/javascript">
+  
+
+   var _gaq = [['_setAccount', 'UA-529275-13'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script>
+
+<script>window.markdeepOptions={mode:'html'};</script>
+<!-- Markdeep: --><script src="../../markdeep.min.js"></script>
+<!-- <script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script> -->
+
+<!-- Start of HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/2768099.js"></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>
